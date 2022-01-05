@@ -15,6 +15,7 @@
 package v20190319
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -70,6 +71,23 @@ func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *Descr
     if request == nil {
         request = NewDescribeEventsRequest()
     }
+    
+    response = NewDescribeEventsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeEvents
+// This API is used to query CloudAudit logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeEventsWithContext(ctx context.Context, request *DescribeEventsRequest) (response *DescribeEventsResponse, err error) {
+    if request == nil {
+        request = NewDescribeEventsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeEventsResponse()
     err = c.Send(request, response)

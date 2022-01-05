@@ -15,6 +15,7 @@
 package v20180801
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -93,6 +94,40 @@ func (c *Client) AddDelayLiveStream(request *AddDelayLiveStreamRequest) (respons
     return
 }
 
+// AddDelayLiveStream
+// This API is used to set a delay in playing the images of large live streaming events, in case of emergencies.
+//
+// 
+//
+// Note: if you are to set the delay before stream push, set it at least 5 minutes before the push. This API supports configuration only by stream.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) AddDelayLiveStreamWithContext(ctx context.Context, request *AddDelayLiveStreamRequest) (response *AddDelayLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewAddDelayLiveStreamRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddDelayLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddLiveDomainRequest() (request *AddLiveDomainRequest) {
     request = &AddLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -152,6 +187,49 @@ func (c *Client) AddLiveDomain(request *AddLiveDomainRequest) (response *AddLive
     return
 }
 
+// AddLiveDomain
+// This API is used to add a domain name. Only one domain name can be submitted at a time, and it must have an ICP filing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
+//  FAILEDOPERATION_HOSTOUTLIMIT = "FailedOperation.HostOutLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHINESECHARACTERDETECTED = "InternalError.ChineseCharacterDetected"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DOMAINALREADYEXIST = "InternalError.DomainAlreadyExist"
+//  INTERNALERROR_DOMAINFORMATERROR = "InternalError.DomainFormatError"
+//  INTERNALERROR_DOMAINGSLBFAIL = "InternalError.DomainGslbFail"
+//  INTERNALERROR_DOMAINISFAMOUS = "InternalError.DomainIsFamous"
+//  INTERNALERROR_DOMAINISLIMITED = "InternalError.DomainIsLimited"
+//  INTERNALERROR_DOMAINNORECORD = "InternalError.DomainNoRecord"
+//  INTERNALERROR_DOMAINTOOLONG = "InternalError.DomainTooLong"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_INVALIDUSER = "InternalError.InvalidUser"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER_DOMAINALREADYEXIST = "InvalidParameter.DomainAlreadyExist"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
+//  INVALIDPARAMETER_DOMAINISFAMOUS = "InvalidParameter.DomainIsFamous"
+//  INVALIDPARAMETER_DOMAINISLIMITED = "InvalidParameter.DomainIsLimited"
+//  INVALIDPARAMETER_DOMAINTOOLONG = "InvalidParameter.DomainTooLong"
+//  INVALIDPARAMETER_MPHOSTDELETE = "InvalidParameter.MpHostDelete"
+//  INVALIDPARAMETER_MPPLUGINNOUSE = "InvalidParameter.MpPluginNoUse"
+//  RESOURCENOTFOUND_DOMAINNORECORD = "ResourceNotFound.DomainNoRecord"
+//  RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+func (c *Client) AddLiveDomainWithContext(ctx context.Context, request *AddLiveDomainRequest) (response *AddLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewAddLiveDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddLiveWatermarkRequest() (request *AddLiveWatermarkRequest) {
     request = &AddLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -184,6 +262,28 @@ func (c *Client) AddLiveWatermark(request *AddLiveWatermarkRequest) (response *A
     if request == nil {
         request = NewAddLiveWatermarkRequest()
     }
+    
+    response = NewAddLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AddLiveWatermark
+// After a watermark is added and a watermark ID is successfully returned, you need to call the [CreateLiveWatermarkRule](https://intl.cloud.tencent.com/document/product/267/32629?from_cn_redirect=1) API to bind the watermark ID to a stream.
+//
+// After the number of watermarks exceeds the upper limit of 100, to add a new watermark, you must delete an old one first.
+//
+// error code that may be returned:
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_WATERMARKADDERROR = "InternalError.WatermarkAddError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_USERNOTFOUNT = "ResourceNotFound.UserNotFount"
+func (c *Client) AddLiveWatermarkWithContext(ctx context.Context, request *AddLiveWatermarkRequest) (response *AddLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewAddLiveWatermarkRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAddLiveWatermarkResponse()
     err = c.Send(request, response)
@@ -230,6 +330,30 @@ func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (respons
     return
 }
 
+// BindLiveDomainCert
+// This API is used to bind a domain name certificate.
+//
+// Note: you need to call the `CreateLiveCert` API first to add a certificate. After getting the certificate ID, call this API for binding.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
+//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+func (c *Client) BindLiveDomainCertWithContext(ctx context.Context, request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewBindLiveDomainCertRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBindLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelCommonMixStreamRequest() (request *CancelCommonMixStreamRequest) {
     request = &CancelCommonMixStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -263,6 +387,29 @@ func (c *Client) CancelCommonMixStream(request *CancelCommonMixStreamRequest) (r
     if request == nil {
         request = NewCancelCommonMixStreamRequest()
     }
+    
+    response = NewCancelCommonMixStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CancelCommonMixStream
+// This API is used to cancel a stream mix. It can be used basically in the same way as `mix_streamv2.cancel_mix_stream`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRERROR = "FailedOperation.CallOtherSvrError"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_CANCELSESSIONNOTEXIST = "FailedOperation.CancelSessionNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CANCELSESSIONNOTEXIST = "InvalidParameter.CancelSessionNotExist"
+//  INVALIDPARAMETER_OTHERERROR = "InvalidParameter.OtherError"
+func (c *Client) CancelCommonMixStreamWithContext(ctx context.Context, request *CancelCommonMixStreamRequest) (response *CancelCommonMixStreamResponse, err error) {
+    if request == nil {
+        request = NewCancelCommonMixStreamRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCancelCommonMixStreamResponse()
     err = c.Send(request, response)
@@ -327,6 +474,48 @@ func (c *Client) CreateCommonMixStream(request *CreateCommonMixStreamRequest) (r
     return
 }
 
+// CreateCommonMixStream
+// This API is used to create a general stream mix. It can be used basically in the same way as the legacy `mix_streamv2.start_mix_stream_advanced` API.
+//
+// Note: currently, up to 16 streams can be mixed.
+//
+// Best practice: https://intl.cloud.tencent.com/document/product/267/45566?from_cn_redirect=1
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRERROR = "FailedOperation.CallOtherSvrError"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_GETPICTUREURLERROR = "FailedOperation.GetPictureUrlError"
+//  FAILEDOPERATION_GETSTREAMRESOLUTIONERROR = "FailedOperation.GetStreamResolutionError"
+//  FAILEDOPERATION_PROCESSMIXERROR = "FailedOperation.ProcessMixError"
+//  FAILEDOPERATION_STREAMNOTEXIST = "FailedOperation.StreamNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_JIFEIOTHERERROR = "InternalError.JiFeiOtherError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CANCELSESSIONNOTEXIST = "InvalidParameter.CancelSessionNotExist"
+//  INVALIDPARAMETER_INPUTNUMLIMITEXCEEDED = "InvalidParameter.InputNumLimitExceeded"
+//  INVALIDPARAMETER_INVALIDBACKGROUDRESOLUTION = "InvalidParameter.InvalidBackgroudResolution"
+//  INVALIDPARAMETER_INVALIDBITRATE = "InvalidParameter.InvalidBitrate"
+//  INVALIDPARAMETER_INVALIDCROPPARAM = "InvalidParameter.InvalidCropParam"
+//  INVALIDPARAMETER_INVALIDLAYERPARAM = "InvalidParameter.InvalidLayerParam"
+//  INVALIDPARAMETER_INVALIDOUTPUTSTREAMID = "InvalidParameter.InvalidOutputStreamID"
+//  INVALIDPARAMETER_INVALIDOUTPUTTYPE = "InvalidParameter.InvalidOutputType"
+//  INVALIDPARAMETER_INVALIDPICTUREID = "InvalidParameter.InvalidPictureID"
+//  INVALIDPARAMETER_INVALIDROUNDRECTRADIUS = "InvalidParameter.InvalidRoundRectRadius"
+//  INVALIDPARAMETER_OTHERERROR = "InvalidParameter.OtherError"
+//  INVALIDPARAMETER_SESSIONOUTPUTSTREAMCHANGED = "InvalidParameter.SessionOutputStreamChanged"
+//  INVALIDPARAMETER_TEMPLATENOTMATCHINPUTNUM = "InvalidParameter.TemplateNotMatchInputNum"
+func (c *Client) CreateCommonMixStreamWithContext(ctx context.Context, request *CreateCommonMixStreamRequest) (response *CreateCommonMixStreamResponse, err error) {
+    if request == nil {
+        request = NewCreateCommonMixStreamRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateCommonMixStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveCallbackRuleRequest() (request *CreateLiveCallbackRuleRequest) {
     request = &CreateLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -361,6 +550,30 @@ func (c *Client) CreateLiveCallbackRule(request *CreateLiveCallbackRuleRequest) 
     if request == nil {
         request = NewCreateLiveCallbackRuleRequest()
     }
+    
+    response = NewCreateLiveCallbackRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveCallbackRule
+// To create a callback rule, you need to first call the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API to create a callback template and bind the returned template ID to the domain name/path.
+//
+// <br>Callback protocol-related document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveCallbackRuleWithContext(ctx context.Context, request *CreateLiveCallbackRuleRequest) (response *CreateLiveCallbackRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCallbackRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveCallbackRuleResponse()
     err = c.Send(request, response)
@@ -422,6 +635,45 @@ func (c *Client) CreateLiveCallbackTemplate(request *CreateLiveCallbackTemplateR
     return
 }
 
+// CreateLiveCallbackTemplate
+// After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](https://intl.cloud.tencent.com/document/product/267/32638?from_cn_redirect=1) API and bind the template ID to the domain name/path.
+//
+// <br>Callback protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+//
+// Note: at least enter one callback URL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETER_URLNOTSAFE = "InvalidParameter.UrlNotSafe"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveCallbackTemplateWithContext(ctx context.Context, request *CreateLiveCallbackTemplateRequest) (response *CreateLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCallbackTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveCertRequest() (request *CreateLiveCertRequest) {
     request = &CreateLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -462,6 +714,36 @@ func (c *Client) CreateLiveCert(request *CreateLiveCertRequest) (response *Creat
     if request == nil {
         request = NewCreateLiveCertRequest()
     }
+    
+    response = NewCreateLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveCert
+// This API is used to add a certificate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
+//  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
+//  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLOUDCRTIDERROR = "InvalidParameter.CloudCrtIdError"
+//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
+//  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
+//  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
+//  INVALIDPARAMETER_CRTORKEYNOTEXIST = "InvalidParameter.CrtOrKeyNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateLiveCertWithContext(ctx context.Context, request *CreateLiveCertRequest) (response *CreateLiveCertResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveCertRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveCertResponse()
     err = c.Send(request, response)
@@ -539,6 +821,61 @@ func (c *Client) CreateLiveRecord(request *CreateLiveRecordRequest) (response *C
     return
 }
 
+// CreateLiveRecord
+// - Prerequisites
+//
+//   1. Recording files are stored on the VOD platform, so if you need to use the recording feature, you must first activate the VOD service.
+//
+//   2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing mode. For more information, please see the [corresponding document](https://intl.cloud.tencent.com/document/product/266/2838?from_cn_redirect=1).
+//
+// 
+//
+// - Mode description
+//
+//   This API supports two recording modes:
+//
+//   1. Scheduled recording mode **(default mode)**.
+//
+//     The start time and end time need to be passed in, according to which the recording task will start and end automatically. Before the set end time expires (provided that `StopLiveRecord` is not called to terminate the task prematurely), the recording task is valid and will be started even after the push is interrupted and restarted multiple times.
+//
+//   2. Real-time video recording mode.
+//
+//     The start time passed in will be ignored, and recording will be started immediately after the recording task is created. The recording duration can be up to 30 minutes. If the end time passed in is more than 30 minutes after the current time, it will be counted as 30 minutes. Real-time video recording is mainly used for recording highlight scenes, and you are recommended to keep the duration within 5 minutes.
+//
+// 
+//
+// - Precautions
+//
+//   1. The API call timeout period should be set to more than 3 seconds; otherwise, retries and calls by different start/end time values may result in repeated recording tasks and thus incur additional recording fees.
+//
+//   2. Subject to the audio and video file formats (FLV/MP4/HLS), the video codec of H.264 and audio codec of AAC are supported.
+//
+//   3. In order to avoid malicious or unintended frequent API requests, the maximum number of tasks that can be created in scheduled recording mode is limited: up to 4,000 tasks can be created per day (excluding deleted ones), and up to 400 ones can run concurrently. If you need a higher upper limit, please submit a ticket for application.
+//
+//   4. This calling method does not support recording streams outside Mainland China for the time being.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_MAXIMUMRUNNINGTASK = "LimitExceeded.MaximumRunningTask"
+//  LIMITEXCEEDED_MAXIMUMTASK = "LimitExceeded.MaximumTask"
+//  RESOURCENOTFOUND_CHANNELNOTEXIST = "ResourceNotFound.ChannelNotExist"
+//  RESOURCEUNAVAILABLE_INVALIDVODSTATUS = "ResourceUnavailable.InvalidVodStatus"
+//  RESOURCEUNAVAILABLE_STREAMNOTEXIST = "ResourceUnavailable.StreamNotExist"
+func (c *Client) CreateLiveRecordWithContext(ctx context.Context, request *CreateLiveRecordRequest) (response *CreateLiveRecordResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveRecordRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLiveRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveRecordRuleRequest() (request *CreateLiveRecordRuleRequest) {
     request = &CreateLiveRecordRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -579,6 +916,36 @@ func (c *Client) CreateLiveRecordRule(request *CreateLiveRecordRuleRequest) (res
     if request == nil {
         request = NewCreateLiveRecordRuleRequest()
     }
+    
+    response = NewCreateLiveRecordRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveRecordRule
+// To create a recording rule, you need to first call the [CreateLiveRecordTemplate](https://intl.cloud.tencent.com/document/product/267/32614?from_cn_redirect=1) API to create a recording template and bind the returned template ID to the stream.
+//
+// <br>Recording-related document: [LVB Recording](https://intl.cloud.tencent.com/document/product/267/32739?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateLiveRecordRuleWithContext(ctx context.Context, request *CreateLiveRecordRuleRequest) (response *CreateLiveRecordRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveRecordRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveRecordRuleResponse()
     err = c.Send(request, response)
@@ -634,6 +1001,39 @@ func (c *Client) CreateLiveRecordTemplate(request *CreateLiveRecordTemplateReque
     return
 }
 
+// CreateLiveRecordTemplate
+// After a recording template is created and a template ID is successfully returned, you need to call the [CreateLiveRecordRule](https://intl.cloud.tencent.com/document/product/267/32615?from_cn_redirect=1) API and bind the template ID to the stream.
+//
+// <br>Recording-related document: [LVB Recording](https://intl.cloud.tencent.com/document/product/267/32739?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveRecordTemplateWithContext(ctx context.Context, request *CreateLiveRecordTemplateRequest) (response *CreateLiveRecordTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveRecordTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLiveRecordTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveSnapshotRuleRequest() (request *CreateLiveSnapshotRuleRequest) {
     request = &CreateLiveSnapshotRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -677,6 +1077,39 @@ func (c *Client) CreateLiveSnapshotRule(request *CreateLiveSnapshotRuleRequest) 
     if request == nil {
         request = NewCreateLiveSnapshotRuleRequest()
     }
+    
+    response = NewCreateLiveSnapshotRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveSnapshotRule
+// This API is used to create a screencapturing rule. You need to first call the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API to create a screencapturing template to bind the returned template ID to the stream.
+//
+// <br>Screencapturing document: [LVB Screencapturing](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
+//
+// Note: only one screencapturing template can be associated with one domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateLiveSnapshotRuleWithContext(ctx context.Context, request *CreateLiveSnapshotRuleRequest) (response *CreateLiveSnapshotRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveSnapshotRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveSnapshotRuleResponse()
     err = c.Send(request, response)
@@ -731,6 +1164,38 @@ func (c *Client) CreateLiveSnapshotTemplate(request *CreateLiveSnapshotTemplateR
     return
 }
 
+// CreateLiveSnapshotTemplate
+// After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API and bind the template ID to the stream.
+//
+// <br>Screencapturing-related document: [LVB Screencapturing](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveSnapshotTemplateWithContext(ctx context.Context, request *CreateLiveSnapshotTemplateRequest) (response *CreateLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveTranscodeRuleRequest() (request *CreateLiveTranscodeRuleRequest) {
     request = &CreateLiveTranscodeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -774,6 +1239,39 @@ func (c *Client) CreateLiveTranscodeRule(request *CreateLiveTranscodeRuleRequest
     if request == nil {
         request = NewCreateLiveTranscodeRuleRequest()
     }
+    
+    response = NewCreateLiveTranscodeRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveTranscodeRule
+// To create a transcoding rule, you need to first call the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API to create a transcoding template and bind the returned template ID to the stream.
+//
+// <br>Transcoding-related document: [LVB Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INTERNALERROR_RULEOUTLIMIT = "InternalError.RuleOutLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveTranscodeRuleWithContext(ctx context.Context, request *CreateLiveTranscodeRuleRequest) (response *CreateLiveTranscodeRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveTranscodeRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveTranscodeRuleResponse()
     err = c.Send(request, response)
@@ -830,6 +1328,40 @@ func (c *Client) CreateLiveTranscodeTemplate(request *CreateLiveTranscodeTemplat
     return
 }
 
+// CreateLiveTranscodeTemplate
+// After a transcoding template is created and a template ID is successfully returned, you need to call the [CreateLiveTranscodeRule](https://intl.cloud.tencent.com/document/product/267/32647?from_cn_redirect=1) API and bind the returned template ID to the stream.
+//
+// <br>Transcoding-related document: [LVB Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AITRANSCODEOPTIONFAIL = "FailedOperation.AiTranscodeOptionFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_PROCESSORALREADYEXIST = "InternalError.ProcessorAlreadyExist"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveTranscodeTemplateWithContext(ctx context.Context, request *CreateLiveTranscodeTemplateRequest) (response *CreateLiveTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLiveTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLiveWatermarkRuleRequest() (request *CreateLiveWatermarkRuleRequest) {
     request = &CreateLiveWatermarkRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -870,6 +1402,36 @@ func (c *Client) CreateLiveWatermarkRule(request *CreateLiveWatermarkRuleRequest
     if request == nil {
         request = NewCreateLiveWatermarkRuleRequest()
     }
+    
+    response = NewCreateLiveWatermarkRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLiveWatermarkRule
+// To create a watermarking rule, you need to first call the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API to add a watermark and bind the returned watermark ID to the stream.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) CreateLiveWatermarkRuleWithContext(ctx context.Context, request *CreateLiveWatermarkRuleRequest) (response *CreateLiveWatermarkRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateLiveWatermarkRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLiveWatermarkRuleResponse()
     err = c.Send(request, response)
@@ -932,6 +1494,46 @@ func (c *Client) CreateRecordTask(request *CreateRecordTaskRequest) (response *C
     return
 }
 
+// CreateRecordTask
+// This API is used to create a recording task that starts and ends at specified times and records by using the configuration corresponding to a specified recording template ID.
+//
+// - Prerequisites
+//
+// 1. Recording files are stored on the VOD platform, so if you need to use the recording feature, you must first activate the VOD service.
+//
+// 2. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) are charged according to the VOD billing method. For details, see the [corresponding document](https://intl.cloud.tencent.com/document/product/266/2837?from_cn_redirect=1).
+//
+// - Precautions
+//
+// 1. An interruption will end the current recording and generate a recording file. The task will still be valid before the end time expires, and the stream will be recorded within this period as long as it is pushed, regardless of whether the push is interrupted or restarted multiple times.
+//
+// 2. Avoid creating recording tasks with overlapping time periods. If there are multiple tasks with overlapping time periods for the same stream, the system will start three recording tasks at most to avoid repeated recording.
+//
+// 3. The record of a created recording task will be retained for 3 months on the platform.
+//
+// 4. The current recording task management APIs (CreateRecordTask/StopRecordTask/DeleteRecordTask) are not compatible with the legacy APIs (CreateLiveRecord/StopLiveRecord/DeleteLiveRecord), and they cannot be used together.
+//
+// 5. Do not create recording tasks and push streams at the same time, or recording tasks might not take effect and be delayed. Wait at least 3 seconds between each action.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_MAXIMUMRUNNINGTASK = "LimitExceeded.MaximumRunningTask"
+//  RESOURCEUNAVAILABLE_INVALIDVODSTATUS = "ResourceUnavailable.InvalidVodStatus"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateRecordTaskWithContext(ctx context.Context, request *CreateRecordTaskRequest) (response *CreateRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRecordTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveCallbackRuleRequest() (request *DeleteLiveCallbackRuleRequest) {
     request = &DeleteLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -963,6 +1565,27 @@ func (c *Client) DeleteLiveCallbackRule(request *DeleteLiveCallbackRuleRequest) 
     if request == nil {
         request = NewDeleteLiveCallbackRuleRequest()
     }
+    
+    response = NewDeleteLiveCallbackRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveCallbackRule
+// This API is used to delete a callback rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveCallbackRuleWithContext(ctx context.Context, request *DeleteLiveCallbackRuleRequest) (response *DeleteLiveCallbackRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCallbackRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveCallbackRuleResponse()
     err = c.Send(request, response)
@@ -1016,6 +1639,37 @@ func (c *Client) DeleteLiveCallbackTemplate(request *DeleteLiveCallbackTemplateR
     return
 }
 
+// DeleteLiveCallbackTemplate
+// This API deletes a callback template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveCallbackTemplateWithContext(ctx context.Context, request *DeleteLiveCallbackTemplateRequest) (response *DeleteLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCallbackTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveCertRequest() (request *DeleteLiveCertRequest) {
     request = &DeleteLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1049,6 +1703,29 @@ func (c *Client) DeleteLiveCert(request *DeleteLiveCertRequest) (response *Delet
     if request == nil {
         request = NewDeleteLiveCertRequest()
     }
+    
+    response = NewDeleteLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveCert
+// This API is used to delete a certificate corresponding to the domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
+//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
+//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
+func (c *Client) DeleteLiveCertWithContext(ctx context.Context, request *DeleteLiveCertRequest) (response *DeleteLiveCertResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveCertRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveCertResponse()
     err = c.Send(request, response)
@@ -1095,6 +1772,30 @@ func (c *Client) DeleteLiveDomain(request *DeleteLiveDomainRequest) (response *D
     return
 }
 
+// DeleteLiveDomain
+// This API is used to delete an added LVB domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
+//  FAILEDOPERATION_JIFEINOENOUGHFUND = "FailedOperation.JiFeiNoEnoughFund"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_DOMAINISLIMITED = "InvalidParameter.DomainIsLimited"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+func (c *Client) DeleteLiveDomainWithContext(ctx context.Context, request *DeleteLiveDomainRequest) (response *DeleteLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveRecordRequest() (request *DeleteLiveRecordRequest) {
     request = &DeleteLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1129,6 +1830,30 @@ func (c *Client) DeleteLiveRecord(request *DeleteLiveRecordRequest) (response *D
     if request == nil {
         request = NewDeleteLiveRecordRequest()
     }
+    
+    response = NewDeleteLiveRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveRecord
+// Note: The `DeleteLiveRecord` API is only used to delete the record of recording tasks but not stop recording or deleting an ongoing recording task. If you need to stop a recording task, please use the [StopLiveRecord](https://intl.cloud.tencent.com/document/product/267/30146?from_cn_redirect=1) API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ALTERTASKSTATE = "FailedOperation.AlterTaskState"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CHANNELNOTEXIST = "ResourceNotFound.ChannelNotExist"
+//  RESOURCENOTFOUND_TASKID = "ResourceNotFound.TaskId"
+func (c *Client) DeleteLiveRecordWithContext(ctx context.Context, request *DeleteLiveRecordRequest) (response *DeleteLiveRecordResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveRecordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveRecordResponse()
     err = c.Send(request, response)
@@ -1180,6 +1905,35 @@ func (c *Client) DeleteLiveRecordRule(request *DeleteLiveRecordRuleRequest) (res
     return
 }
 
+// DeleteLiveRecordRule
+// This API is used to delete a recording rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveRecordRuleWithContext(ctx context.Context, request *DeleteLiveRecordRuleRequest) (response *DeleteLiveRecordRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveRecordRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveRecordRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveRecordTemplateRequest() (request *DeleteLiveRecordTemplateRequest) {
     request = &DeleteLiveRecordTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1218,6 +1972,34 @@ func (c *Client) DeleteLiveRecordTemplate(request *DeleteLiveRecordTemplateReque
     if request == nil {
         request = NewDeleteLiveRecordTemplateRequest()
     }
+    
+    response = NewDeleteLiveRecordTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveRecordTemplate
+// This API is used to delete a recording template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveRecordTemplateWithContext(ctx context.Context, request *DeleteLiveRecordTemplateRequest) (response *DeleteLiveRecordTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveRecordTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveRecordTemplateResponse()
     err = c.Send(request, response)
@@ -1269,6 +2051,35 @@ func (c *Client) DeleteLiveSnapshotRule(request *DeleteLiveSnapshotRuleRequest) 
     return
 }
 
+// DeleteLiveSnapshotRule
+// This API is used to delete a screencapturing rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveSnapshotRuleWithContext(ctx context.Context, request *DeleteLiveSnapshotRuleRequest) (response *DeleteLiveSnapshotRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveSnapshotRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveSnapshotRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveSnapshotTemplateRequest() (request *DeleteLiveSnapshotTemplateRequest) {
     request = &DeleteLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1307,6 +2118,34 @@ func (c *Client) DeleteLiveSnapshotTemplate(request *DeleteLiveSnapshotTemplateR
     if request == nil {
         request = NewDeleteLiveSnapshotTemplateRequest()
     }
+    
+    response = NewDeleteLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveSnapshotTemplate
+// This API is used to delete a screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveSnapshotTemplateWithContext(ctx context.Context, request *DeleteLiveSnapshotTemplateRequest) (response *DeleteLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveSnapshotTemplateResponse()
     err = c.Send(request, response)
@@ -1360,6 +2199,37 @@ func (c *Client) DeleteLiveTranscodeRule(request *DeleteLiveTranscodeRuleRequest
     return
 }
 
+// DeleteLiveTranscodeRule
+// This API is used to delete a transcoding rule.
+//
+// `DomainName+AppName+StreamName+TemplateId` uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. `TemplateId` is required. Even if other parameters are empty, you still need to pass in an empty string to make a strong match.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveTranscodeRuleWithContext(ctx context.Context, request *DeleteLiveTranscodeRuleRequest) (response *DeleteLiveTranscodeRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveTranscodeRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveTranscodeRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveTranscodeTemplateRequest() (request *DeleteLiveTranscodeTemplateRequest) {
     request = &DeleteLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1406,6 +2276,36 @@ func (c *Client) DeleteLiveTranscodeTemplate(request *DeleteLiveTranscodeTemplat
     return
 }
 
+// DeleteLiveTranscodeTemplate
+// This API is used to delete a transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AITRANSCODEOPTIONFAIL = "FailedOperation.AiTranscodeOptionFail"
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveTranscodeTemplateWithContext(ctx context.Context, request *DeleteLiveTranscodeTemplateRequest) (response *DeleteLiveTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLiveWatermarkRequest() (request *DeleteLiveWatermarkRequest) {
     request = &DeleteLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1437,6 +2337,27 @@ func (c *Client) DeleteLiveWatermark(request *DeleteLiveWatermarkRequest) (respo
     if request == nil {
         request = NewDeleteLiveWatermarkRequest()
     }
+    
+    response = NewDeleteLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLiveWatermark
+// This API is used to delete a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETWATERMARKERROR = "InternalError.GetWatermarkError"
+//  INTERNALERROR_WATERMARKNOTEXIST = "InternalError.WatermarkNotExist"
+//  RESOURCENOTFOUND_WATERMARKNOTEXIST = "ResourceNotFound.WatermarkNotExist"
+func (c *Client) DeleteLiveWatermarkWithContext(ctx context.Context, request *DeleteLiveWatermarkRequest) (response *DeleteLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveWatermarkRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLiveWatermarkResponse()
     err = c.Send(request, response)
@@ -1488,6 +2409,35 @@ func (c *Client) DeleteLiveWatermarkRule(request *DeleteLiveWatermarkRuleRequest
     return
 }
 
+// DeleteLiveWatermarkRule
+// This API is used to delete a watermarking rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteLiveWatermarkRuleWithContext(ctx context.Context, request *DeleteLiveWatermarkRuleRequest) (response *DeleteLiveWatermarkRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLiveWatermarkRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLiveWatermarkRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRecordTaskRequest() (request *DeleteRecordTaskRequest) {
     request = &DeleteRecordTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1519,6 +2469,27 @@ func (c *Client) DeleteRecordTask(request *DeleteRecordTaskRequest) (response *D
     if request == nil {
         request = NewDeleteRecordTaskRequest()
     }
+    
+    response = NewDeleteRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteRecordTask
+// This API is used to delete a recording task configuration. The deletion does not affect running tasks and takes effect only for new pushes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_INVALIDVODSTATUS = "ResourceUnavailable.InvalidVodStatus"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRecordTaskWithContext(ctx context.Context, request *DeleteRecordTaskRequest) (response *DeleteRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteRecordTaskResponse()
     err = c.Send(request, response)
@@ -1560,6 +2531,25 @@ func (c *Client) DescribeAllStreamPlayInfoList(request *DescribeAllStreamPlayInf
     return
 }
 
+// DescribeAllStreamPlayInfoList
+// This API is used to query the downstream information of all streams at a specified point in time (at a 1-minute granularity).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAllStreamPlayInfoListWithContext(ctx context.Context, request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllStreamPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAreaBillBandwidthAndFluxListRequest() (request *DescribeAreaBillBandwidthAndFluxListRequest) {
     request = &DescribeAreaBillBandwidthAndFluxListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1594,6 +2584,24 @@ func (c *Client) DescribeAreaBillBandwidthAndFluxList(request *DescribeAreaBillB
     return
 }
 
+// DescribeAreaBillBandwidthAndFluxList
+// This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeAreaBillBandwidthAndFluxListWithContext(ctx context.Context, request *DescribeAreaBillBandwidthAndFluxListRequest) (response *DescribeAreaBillBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAreaBillBandwidthAndFluxListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAreaBillBandwidthAndFluxListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillBandwidthAndFluxListRequest() (request *DescribeBillBandwidthAndFluxListRequest) {
     request = &DescribeBillBandwidthAndFluxListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1622,6 +2630,24 @@ func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidth
     if request == nil {
         request = NewDescribeBillBandwidthAndFluxListRequest()
     }
+    
+    response = NewDescribeBillBandwidthAndFluxListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBillBandwidthAndFluxList
+// This API is used to query the data of billable LVB bandwidth and traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeBillBandwidthAndFluxListWithContext(ctx context.Context, request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillBandwidthAndFluxListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBillBandwidthAndFluxListResponse()
     err = c.Send(request, response)
@@ -1663,6 +2689,25 @@ func (c *Client) DescribeConcurrentRecordStreamNum(request *DescribeConcurrentRe
     return
 }
 
+// DescribeConcurrentRecordStreamNum
+// This API is used to query the number of concurrent recording channels, which is applicable to LCB and LVB.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeConcurrentRecordStreamNumWithContext(ctx context.Context, request *DescribeConcurrentRecordStreamNumRequest) (response *DescribeConcurrentRecordStreamNumResponse, err error) {
+    if request == nil {
+        request = NewDescribeConcurrentRecordStreamNumRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeConcurrentRecordStreamNumResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDeliverBandwidthListRequest() (request *DescribeDeliverBandwidthListRequest) {
     request = &DescribeDeliverBandwidthListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1698,6 +2743,25 @@ func (c *Client) DescribeDeliverBandwidthList(request *DescribeDeliverBandwidthL
     return
 }
 
+// DescribeDeliverBandwidthList
+// This API is used to query the billable bandwidth of live stream relaying in the last 3 months. The query period is up to 31 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDeliverBandwidthListWithContext(ctx context.Context, request *DescribeDeliverBandwidthListRequest) (response *DescribeDeliverBandwidthListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeliverBandwidthListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeliverBandwidthListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGroupProIspPlayInfoListRequest() (request *DescribeGroupProIspPlayInfoListRequest) {
     request = &DescribeGroupProIspPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1727,6 +2791,25 @@ func (c *Client) DescribeGroupProIspPlayInfoList(request *DescribeGroupProIspPla
     if request == nil {
         request = NewDescribeGroupProIspPlayInfoListRequest()
     }
+    
+    response = NewDescribeGroupProIspPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeGroupProIspPlayInfoList
+// This API is used to query the downstream playback data by district and ISP.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupProIspPlayInfoListWithContext(ctx context.Context, request *DescribeGroupProIspPlayInfoListRequest) (response *DescribeGroupProIspPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupProIspPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeGroupProIspPlayInfoListResponse()
     err = c.Send(request, response)
@@ -1769,6 +2852,26 @@ func (c *Client) DescribeHttpStatusInfoList(request *DescribeHttpStatusInfoListR
     return
 }
 
+// DescribeHttpStatusInfoList
+// This API is used to query the number of each playback HTTP status code at a 5-minute granularity in a certain period of time.
+//
+// Note: data can be queried one hour after it is generated. For example, data between 10:00 and 10:59 cannot be queried until 12:00.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeHttpStatusInfoListWithContext(ctx context.Context, request *DescribeHttpStatusInfoListRequest) (response *DescribeHttpStatusInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeHttpStatusInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeHttpStatusInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveCallbackRulesRequest() (request *DescribeLiveCallbackRulesRequest) {
     request = &DescribeLiveCallbackRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1799,6 +2902,26 @@ func (c *Client) DescribeLiveCallbackRules(request *DescribeLiveCallbackRulesReq
     if request == nil {
         request = NewDescribeLiveCallbackRulesRequest()
     }
+    
+    response = NewDescribeLiveCallbackRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveCallbackRules
+// This API is used to get the callback rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) DescribeLiveCallbackRulesWithContext(ctx context.Context, request *DescribeLiveCallbackRulesRequest) (response *DescribeLiveCallbackRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveCallbackRulesResponse()
     err = c.Send(request, response)
@@ -1854,6 +2977,39 @@ func (c *Client) DescribeLiveCallbackTemplate(request *DescribeLiveCallbackTempl
     return
 }
 
+// DescribeLiveCallbackTemplate
+// This API is used to get a single callback template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INTERNALERROR_RULEOUTLIMIT = "InternalError.RuleOutLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveCallbackTemplateWithContext(ctx context.Context, request *DescribeLiveCallbackTemplateRequest) (response *DescribeLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveCallbackTemplatesRequest() (request *DescribeLiveCallbackTemplatesRequest) {
     request = &DescribeLiveCallbackTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1902,6 +3058,38 @@ func (c *Client) DescribeLiveCallbackTemplates(request *DescribeLiveCallbackTemp
     return
 }
 
+// DescribeLiveCallbackTemplates
+// This API is used to get the callback template list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) DescribeLiveCallbackTemplatesWithContext(ctx context.Context, request *DescribeLiveCallbackTemplatesRequest) (response *DescribeLiveCallbackTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCallbackTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveCallbackTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveCertRequest() (request *DescribeLiveCertRequest) {
     request = &DescribeLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1933,6 +3121,27 @@ func (c *Client) DescribeLiveCert(request *DescribeLiveCertRequest) (response *D
     if request == nil {
         request = NewDescribeLiveCertRequest()
     }
+    
+    response = NewDescribeLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveCert
+// This API is used to get certificate information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+func (c *Client) DescribeLiveCertWithContext(ctx context.Context, request *DescribeLiveCertRequest) (response *DescribeLiveCertResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCertRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveCertResponse()
     err = c.Send(request, response)
@@ -1976,6 +3185,27 @@ func (c *Client) DescribeLiveCerts(request *DescribeLiveCertsRequest) (response 
     return
 }
 
+// DescribeLiveCerts
+// This API is used to get the certificate information list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+func (c *Client) DescribeLiveCertsWithContext(ctx context.Context, request *DescribeLiveCertsRequest) (response *DescribeLiveCertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveCertsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveCertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDelayInfoListRequest() (request *DescribeLiveDelayInfoListRequest) {
     request = &DescribeLiveDelayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2006,6 +3236,26 @@ func (c *Client) DescribeLiveDelayInfoList(request *DescribeLiveDelayInfoListReq
     if request == nil {
         request = NewDescribeLiveDelayInfoListRequest()
     }
+    
+    response = NewDescribeLiveDelayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveDelayInfoList
+// This API is used to get the list of delayed playbacks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveDelayInfoListWithContext(ctx context.Context, request *DescribeLiveDelayInfoListRequest) (response *DescribeLiveDelayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDelayInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveDelayInfoListResponse()
     err = c.Send(request, response)
@@ -2051,6 +3301,29 @@ func (c *Client) DescribeLiveDomain(request *DescribeLiveDomainRequest) (respons
     return
 }
 
+// DescribeLiveDomain
+// This API is used to query the LVB domain name information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DOMAINNOTEXIST = "InternalError.DomainNotExist"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+func (c *Client) DescribeLiveDomainWithContext(ctx context.Context, request *DescribeLiveDomainRequest) (response *DescribeLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDomainCertRequest() (request *DescribeLiveDomainCertRequest) {
     request = &DescribeLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2088,6 +3361,27 @@ func (c *Client) DescribeLiveDomainCert(request *DescribeLiveDomainCertRequest) 
     return
 }
 
+// DescribeLiveDomainCert
+// This API is used to get the domain name certificate information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+func (c *Client) DescribeLiveDomainCertWithContext(ctx context.Context, request *DescribeLiveDomainCertRequest) (response *DescribeLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainCertRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDomainPlayInfoListRequest() (request *DescribeLiveDomainPlayInfoListRequest) {
     request = &DescribeLiveDomainPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2116,6 +3410,24 @@ func (c *Client) DescribeLiveDomainPlayInfoList(request *DescribeLiveDomainPlayI
     if request == nil {
         request = NewDescribeLiveDomainPlayInfoListRequest()
     }
+    
+    response = NewDescribeLiveDomainPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveDomainPlayInfoList
+// This API is used to query the real-time downstream playback data at the domain name level. As it takes certain time to process data, the API queries quasi-real-time data generated 4 minutes ago by default.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeLiveDomainPlayInfoListWithContext(ctx context.Context, request *DescribeLiveDomainPlayInfoListRequest) (response *DescribeLiveDomainPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveDomainPlayInfoListResponse()
     err = c.Send(request, response)
@@ -2163,6 +3475,31 @@ func (c *Client) DescribeLiveDomainReferer(request *DescribeLiveDomainRefererReq
     return
 }
 
+// DescribeLiveDomainReferer
+// This API is used to query referer allowlist/blocklist configuration of a live streaming domain name.
+//
+// Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DOMAINNOTEXIST = "InternalError.DomainNotExist"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+func (c *Client) DescribeLiveDomainRefererWithContext(ctx context.Context, request *DescribeLiveDomainRefererRequest) (response *DescribeLiveDomainRefererResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainRefererRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveDomainRefererResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveDomainsRequest() (request *DescribeLiveDomainsRequest) {
     request = &DescribeLiveDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2193,6 +3530,26 @@ func (c *Client) DescribeLiveDomains(request *DescribeLiveDomainsRequest) (respo
     if request == nil {
         request = NewDescribeLiveDomainsRequest()
     }
+    
+    response = NewDescribeLiveDomainsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveDomains
+// This API is used to query domain names by domain name status and type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
+func (c *Client) DescribeLiveDomainsWithContext(ctx context.Context, request *DescribeLiveDomainsRequest) (response *DescribeLiveDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveDomainsResponse()
     err = c.Send(request, response)
@@ -2240,6 +3597,31 @@ func (c *Client) DescribeLiveForbidStreamList(request *DescribeLiveForbidStreamL
     return
 }
 
+// DescribeLiveForbidStreamList
+// This API is used to get the list of disabled streams.
+//
+// 
+//
+// Note: this API is used for query only and should not be relied too much upon in important business scenarios.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveForbidStreamListWithContext(ctx context.Context, request *DescribeLiveForbidStreamListRequest) (response *DescribeLiveForbidStreamListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveForbidStreamListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveForbidStreamListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLivePlayAuthKeyRequest() (request *DescribeLivePlayAuthKeyRequest) {
     request = &DescribeLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2273,6 +3655,29 @@ func (c *Client) DescribeLivePlayAuthKey(request *DescribeLivePlayAuthKeyRequest
     if request == nil {
         request = NewDescribeLivePlayAuthKeyRequest()
     }
+    
+    response = NewDescribeLivePlayAuthKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLivePlayAuthKey
+// This API is used to query the playback authentication key.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_PLAYDOMAINNORECORD = "InternalError.PlayDomainNoRecord"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_PLAYDOMAINNORECORD = "ResourceNotFound.PlayDomainNoRecord"
+func (c *Client) DescribeLivePlayAuthKeyWithContext(ctx context.Context, request *DescribeLivePlayAuthKeyRequest) (response *DescribeLivePlayAuthKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeLivePlayAuthKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLivePlayAuthKeyResponse()
     err = c.Send(request, response)
@@ -2318,6 +3723,29 @@ func (c *Client) DescribeLivePushAuthKey(request *DescribeLivePushAuthKeyRequest
     return
 }
 
+// DescribeLivePushAuthKey
+// This API is used to query the LVB push authentication key.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_PUSHDOMAINNORECORD = "InternalError.PushDomainNoRecord"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_PUSHDOMAINNORECORD = "ResourceNotFound.PushDomainNoRecord"
+func (c *Client) DescribeLivePushAuthKeyWithContext(ctx context.Context, request *DescribeLivePushAuthKeyRequest) (response *DescribeLivePushAuthKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeLivePushAuthKeyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLivePushAuthKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveRecordRulesRequest() (request *DescribeLiveRecordRulesRequest) {
     request = &DescribeLiveRecordRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2355,6 +3783,33 @@ func (c *Client) DescribeLiveRecordRules(request *DescribeLiveRecordRulesRequest
     if request == nil {
         request = NewDescribeLiveRecordRulesRequest()
     }
+    
+    response = NewDescribeLiveRecordRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveRecordRules
+// This API is used to get the list of recording rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveRecordRulesWithContext(ctx context.Context, request *DescribeLiveRecordRulesRequest) (response *DescribeLiveRecordRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveRecordRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveRecordRulesResponse()
     err = c.Send(request, response)
@@ -2405,6 +3860,34 @@ func (c *Client) DescribeLiveRecordTemplate(request *DescribeLiveRecordTemplateR
     return
 }
 
+// DescribeLiveRecordTemplate
+// This API is used to get a single recording template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveRecordTemplateWithContext(ctx context.Context, request *DescribeLiveRecordTemplateRequest) (response *DescribeLiveRecordTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveRecordTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveRecordTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveRecordTemplatesRequest() (request *DescribeLiveRecordTemplatesRequest) {
     request = &DescribeLiveRecordTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2448,6 +3931,33 @@ func (c *Client) DescribeLiveRecordTemplates(request *DescribeLiveRecordTemplate
     return
 }
 
+// DescribeLiveRecordTemplates
+// This API is used to get the recording template list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveRecordTemplatesWithContext(ctx context.Context, request *DescribeLiveRecordTemplatesRequest) (response *DescribeLiveRecordTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveRecordTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveRecordTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveSnapshotRulesRequest() (request *DescribeLiveSnapshotRulesRequest) {
     request = &DescribeLiveSnapshotRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2485,6 +3995,33 @@ func (c *Client) DescribeLiveSnapshotRules(request *DescribeLiveSnapshotRulesReq
     if request == nil {
         request = NewDescribeLiveSnapshotRulesRequest()
     }
+    
+    response = NewDescribeLiveSnapshotRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveSnapshotRules
+// This API is used to get the screencapturing rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveSnapshotRulesWithContext(ctx context.Context, request *DescribeLiveSnapshotRulesRequest) (response *DescribeLiveSnapshotRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveSnapshotRulesResponse()
     err = c.Send(request, response)
@@ -2537,6 +4074,36 @@ func (c *Client) DescribeLiveSnapshotTemplate(request *DescribeLiveSnapshotTempl
     return
 }
 
+// DescribeLiveSnapshotTemplate
+// This API is used to get a single screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INTERNALERROR_RULEOUTLIMIT = "InternalError.RuleOutLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveSnapshotTemplateWithContext(ctx context.Context, request *DescribeLiveSnapshotTemplateRequest) (response *DescribeLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveSnapshotTemplatesRequest() (request *DescribeLiveSnapshotTemplatesRequest) {
     request = &DescribeLiveSnapshotTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2575,6 +4142,34 @@ func (c *Client) DescribeLiveSnapshotTemplates(request *DescribeLiveSnapshotTemp
     if request == nil {
         request = NewDescribeLiveSnapshotTemplatesRequest()
     }
+    
+    response = NewDescribeLiveSnapshotTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveSnapshotTemplates
+// This API is used to get the screencapturing template list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) DescribeLiveSnapshotTemplatesWithContext(ctx context.Context, request *DescribeLiveSnapshotTemplatesRequest) (response *DescribeLiveSnapshotTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveSnapshotTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveSnapshotTemplatesResponse()
     err = c.Send(request, response)
@@ -2620,6 +4215,35 @@ func (c *Client) DescribeLiveStreamEventList(request *DescribeLiveStreamEventLis
     if request == nil {
         request = NewDescribeLiveStreamEventListRequest()
     }
+    
+    response = NewDescribeLiveStreamEventListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveStreamEventList
+// This API is used to query stream push/interruption events.<br>
+//
+// 
+//
+// Notes:
+//
+// 1. This API is used to query stream push/interruption records, and should not be relied too much upon in important business scenarios.
+//
+// 2. You can use the `IsFilter` parameter of this API to filter and get required push records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveStreamEventListWithContext(ctx context.Context, request *DescribeLiveStreamEventListRequest) (response *DescribeLiveStreamEventListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamEventListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveStreamEventListResponse()
     err = c.Send(request, response)
@@ -2679,6 +4303,43 @@ func (c *Client) DescribeLiveStreamOnlineList(request *DescribeLiveStreamOnlineL
     return
 }
 
+// DescribeLiveStreamOnlineList
+// This API is used to get the list of ongoing live streams. It queries the information of live streams after they are pushed successfully. 
+//
+// 
+//
+// Notes:
+//
+// 1. This API is used to query the list of active live streams only, and should not be relied too much upon in important business scenarios.
+//
+// 2. This API can query up to 20,000 streams. To query more streams, please contact our after-sales service team.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveStreamOnlineListWithContext(ctx context.Context, request *DescribeLiveStreamOnlineListRequest) (response *DescribeLiveStreamOnlineListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamOnlineListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveStreamOnlineListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveStreamPublishedListRequest() (request *DescribeLiveStreamPublishedListRequest) {
     request = &DescribeLiveStreamPublishedListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2727,6 +4388,38 @@ func (c *Client) DescribeLiveStreamPublishedList(request *DescribeLiveStreamPubl
     return
 }
 
+// DescribeLiveStreamPublishedList
+// This API is used to return the list of pushed streams. <br>
+//
+// Note: Up to 10,000 entries can be queried per page. More data can be obtained by adjusting the query time range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveStreamPublishedListWithContext(ctx context.Context, request *DescribeLiveStreamPublishedListRequest) (response *DescribeLiveStreamPublishedListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamPublishedListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveStreamPublishedListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveStreamPushInfoListRequest() (request *DescribeLiveStreamPushInfoListRequest) {
     request = &DescribeLiveStreamPushInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2760,6 +4453,29 @@ func (c *Client) DescribeLiveStreamPushInfoList(request *DescribeLiveStreamPushI
     if request == nil {
         request = NewDescribeLiveStreamPushInfoListRequest()
     }
+    
+    response = NewDescribeLiveStreamPushInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveStreamPushInfoList
+// This API is used to query the push information of all real-time streams, including client IP, server IP, frame rate, bitrate, domain name, and push start time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_HASNOTLIVINGSTREAM = "FailedOperation.HasNotLivingStream"
+//  FAILEDOPERATION_QUERYUPLOADINFOFAILED = "FailedOperation.QueryUploadInfoFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INVALIDREQUEST = "InternalError.InvalidRequest"
+//  INTERNALERROR_QUERYPROISPPLAYINFOERROR = "InternalError.QueryProIspPlayInfoError"
+//  INTERNALERROR_QUERYUPLOADINFOFAILED = "InternalError.QueryUploadInfoFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveStreamPushInfoListWithContext(ctx context.Context, request *DescribeLiveStreamPushInfoListRequest) (response *DescribeLiveStreamPushInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamPushInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveStreamPushInfoListResponse()
     err = c.Send(request, response)
@@ -2828,6 +4544,52 @@ func (c *Client) DescribeLiveStreamState(request *DescribeLiveStreamStateRequest
     return
 }
 
+// DescribeLiveStreamState
+// This API is used to get the stream status, such as active, inactive, or disabled.
+//
+// Note: this API is used to query the stream status, and should not be relied too much upon in important business scenarios.
+//
+// 
+//
+// Notes:
+//
+// 1. You should not rely on the results returned by this API to initiate/interrupt live streams.
+//
+// 2. The application can get and store the status of live rooms via [Stream Push and Interruption Event Notification](https://intl.cloud.tencent.com/document/product/267/47025?from_cn_redirect=1).
+//
+// 3. You can use the [DescribeLiveStreamOnlineList](https://intl.cloud.tencent.com/document/product/267/20472?from_cn_redirect=1) API to regularly (with the interval larger than 1 minute) check the status of live rooms monitored by the application.
+//
+// 4. If you find that a stream is inactive using the stream status query API, you can use other above-mentioned methods to check its status.
+//
+// 5. If access or resolution errors occur when you use the API to query, you can regard the stream as active, and do not perform operations on the application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeLiveStreamStateWithContext(ctx context.Context, request *DescribeLiveStreamStateRequest) (response *DescribeLiveStreamStateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveStreamStateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveStreamStateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveTranscodeDetailInfoRequest() (request *DescribeLiveTranscodeDetailInfoRequest) {
     request = &DescribeLiveTranscodeDetailInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2856,6 +4618,24 @@ func (c *Client) DescribeLiveTranscodeDetailInfo(request *DescribeLiveTranscodeD
     if request == nil {
         request = NewDescribeLiveTranscodeDetailInfoRequest()
     }
+    
+    response = NewDescribeLiveTranscodeDetailInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveTranscodeDetailInfo
+// This API is used to query the details of transcoding on a specified day or in a specified period of time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeLiveTranscodeDetailInfoWithContext(ctx context.Context, request *DescribeLiveTranscodeDetailInfoRequest) (response *DescribeLiveTranscodeDetailInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeDetailInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveTranscodeDetailInfoResponse()
     err = c.Send(request, response)
@@ -2899,6 +4679,33 @@ func (c *Client) DescribeLiveTranscodeRules(request *DescribeLiveTranscodeRulesR
     if request == nil {
         request = NewDescribeLiveTranscodeRulesRequest()
     }
+    
+    response = NewDescribeLiveTranscodeRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveTranscodeRules
+// This API is used to get the list of transcoding rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveTranscodeRulesWithContext(ctx context.Context, request *DescribeLiveTranscodeRulesRequest) (response *DescribeLiveTranscodeRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveTranscodeRulesResponse()
     err = c.Send(request, response)
@@ -2950,6 +4757,35 @@ func (c *Client) DescribeLiveTranscodeTemplate(request *DescribeLiveTranscodeTem
     return
 }
 
+// DescribeLiveTranscodeTemplate
+// This API is used to get a single transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) DescribeLiveTranscodeTemplateWithContext(ctx context.Context, request *DescribeLiveTranscodeTemplateRequest) (response *DescribeLiveTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveTranscodeTemplatesRequest() (request *DescribeLiveTranscodeTemplatesRequest) {
     request = &DescribeLiveTranscodeTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2988,6 +4824,34 @@ func (c *Client) DescribeLiveTranscodeTemplates(request *DescribeLiveTranscodeTe
     if request == nil {
         request = NewDescribeLiveTranscodeTemplatesRequest()
     }
+    
+    response = NewDescribeLiveTranscodeTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveTranscodeTemplates
+// This API is used to get the transcoding template list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) DescribeLiveTranscodeTemplatesWithContext(ctx context.Context, request *DescribeLiveTranscodeTemplatesRequest) (response *DescribeLiveTranscodeTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveTranscodeTemplatesResponse()
     err = c.Send(request, response)
@@ -3038,6 +4902,34 @@ func (c *Client) DescribeLiveWatermark(request *DescribeLiveWatermarkRequest) (r
     return
 }
 
+// DescribeLiveWatermark
+// This API is used to get the information of a single watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveWatermarkWithContext(ctx context.Context, request *DescribeLiveWatermarkRequest) (response *DescribeLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarkRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveWatermarkRulesRequest() (request *DescribeLiveWatermarkRulesRequest) {
     request = &DescribeLiveWatermarkRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3075,6 +4967,33 @@ func (c *Client) DescribeLiveWatermarkRules(request *DescribeLiveWatermarkRulesR
     if request == nil {
         request = NewDescribeLiveWatermarkRulesRequest()
     }
+    
+    response = NewDescribeLiveWatermarkRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveWatermarkRules
+// This API is used to get the watermarking rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveWatermarkRulesWithContext(ctx context.Context, request *DescribeLiveWatermarkRulesRequest) (response *DescribeLiveWatermarkRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarkRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLiveWatermarkRulesResponse()
     err = c.Send(request, response)
@@ -3124,6 +5043,33 @@ func (c *Client) DescribeLiveWatermarks(request *DescribeLiveWatermarksRequest) 
     return
 }
 
+// DescribeLiveWatermarks
+// This API is used to query the watermark list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveWatermarksWithContext(ctx context.Context, request *DescribeLiveWatermarksRequest) (response *DescribeLiveWatermarksResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveWatermarksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveWatermarksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePlayErrorCodeDetailInfoListRequest() (request *DescribePlayErrorCodeDetailInfoListRequest) {
     request = &DescribePlayErrorCodeDetailInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3154,6 +5100,26 @@ func (c *Client) DescribePlayErrorCodeDetailInfoList(request *DescribePlayErrorC
     if request == nil {
         request = NewDescribePlayErrorCodeDetailInfoListRequest()
     }
+    
+    response = NewDescribePlayErrorCodeDetailInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribePlayErrorCodeDetailInfoList
+// This API is used to query the information of downstream playback error codes, i.e., the occurrences of each HTTP error code (4xx and 5xx) at a 1-minute granularity in a certain period of time.
+//
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePlayErrorCodeDetailInfoListWithContext(ctx context.Context, request *DescribePlayErrorCodeDetailInfoListRequest) (response *DescribePlayErrorCodeDetailInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribePlayErrorCodeDetailInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribePlayErrorCodeDetailInfoListResponse()
     err = c.Send(request, response)
@@ -3194,6 +5160,24 @@ func (c *Client) DescribePlayErrorCodeSumInfoList(request *DescribePlayErrorCode
     return
 }
 
+// DescribePlayErrorCodeSumInfoList
+// This API is used to query the information of downstream playback error codes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePlayErrorCodeSumInfoListWithContext(ctx context.Context, request *DescribePlayErrorCodeSumInfoListRequest) (response *DescribePlayErrorCodeSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribePlayErrorCodeSumInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribePlayErrorCodeSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProIspPlaySumInfoListRequest() (request *DescribeProIspPlaySumInfoListRequest) {
     request = &DescribeProIspPlaySumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3222,6 +5206,24 @@ func (c *Client) DescribeProIspPlaySumInfoList(request *DescribeProIspPlaySumInf
     if request == nil {
         request = NewDescribeProIspPlaySumInfoListRequest()
     }
+    
+    response = NewDescribeProIspPlaySumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProIspPlaySumInfoList
+// This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProIspPlaySumInfoListWithContext(ctx context.Context, request *DescribeProIspPlaySumInfoListRequest) (response *DescribeProIspPlaySumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProIspPlaySumInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProIspPlaySumInfoListResponse()
     err = c.Send(request, response)
@@ -3267,6 +5269,29 @@ func (c *Client) DescribeProvinceIspPlayInfoList(request *DescribeProvinceIspPla
     return
 }
 
+// DescribeProvinceIspPlayInfoList
+// This API is used to query the downstream playback data of a specified ISP in a specified district, including bandwidth, traffic, number of requests, and number of concurrent connections.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_HASNOTLIVINGSTREAM = "InternalError.HasNotLivingStream"
+//  INTERNALERROR_INVALIDREQUEST = "InternalError.InvalidRequest"
+//  INTERNALERROR_QUERYPROISPPLAYINFOERROR = "InternalError.QueryProIspPlayInfoError"
+//  INTERNALERROR_QUERYUPLOADINFOFAILED = "InternalError.QueryUploadInfoFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProvinceIspPlayInfoListWithContext(ctx context.Context, request *DescribeProvinceIspPlayInfoListRequest) (response *DescribeProvinceIspPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProvinceIspPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeProvinceIspPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScreenShotSheetNumListRequest() (request *DescribeScreenShotSheetNumListRequest) {
     request = &DescribeScreenShotSheetNumListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3303,6 +5328,26 @@ func (c *Client) DescribeScreenShotSheetNumList(request *DescribeScreenShotSheet
     return
 }
 
+// DescribeScreenShotSheetNumList
+// The API is used to query the number of screenshots as an LVB value-added service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeScreenShotSheetNumListWithContext(ctx context.Context, request *DescribeScreenShotSheetNumListRequest) (response *DescribeScreenShotSheetNumListResponse, err error) {
+    if request == nil {
+        request = NewDescribeScreenShotSheetNumListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeScreenShotSheetNumListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamDayPlayInfoListRequest() (request *DescribeStreamDayPlayInfoListRequest) {
     request = &DescribeStreamDayPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3332,6 +5377,25 @@ func (c *Client) DescribeStreamDayPlayInfoList(request *DescribeStreamDayPlayInf
     if request == nil {
         request = NewDescribeStreamDayPlayInfoListRequest()
     }
+    
+    response = NewDescribeStreamDayPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamDayPlayInfoList
+// This API is used to query the playback data of each stream at the day level, including the total traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeStreamDayPlayInfoListWithContext(ctx context.Context, request *DescribeStreamDayPlayInfoListRequest) (response *DescribeStreamDayPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamDayPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamDayPlayInfoListResponse()
     err = c.Send(request, response)
@@ -3376,6 +5440,28 @@ func (c *Client) DescribeStreamPlayInfoList(request *DescribeStreamPlayInfoListR
     return
 }
 
+// DescribeStreamPlayInfoList
+// This API is used to query the playback data. It supports querying the playback details by stream name and aggregated data by playback domain name. Data in the last 4 minutes or so cannot be queried due to delay.
+//
+// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeStreamPlayInfoListWithContext(ctx context.Context, request *DescribeStreamPlayInfoListRequest) (response *DescribeStreamPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPlayInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamPushInfoListRequest() (request *DescribeStreamPushInfoListRequest) {
     request = &DescribeStreamPushInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3404,6 +5490,24 @@ func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListR
     if request == nil {
         request = NewDescribeStreamPushInfoListRequest()
     }
+    
+    response = NewDescribeStreamPushInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamPushInfoList
+// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeStreamPushInfoListWithContext(ctx context.Context, request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPushInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamPushInfoListResponse()
     err = c.Send(request, response)
@@ -3444,6 +5548,24 @@ func (c *Client) DescribeTopClientIpSumInfoList(request *DescribeTopClientIpSumI
     return
 }
 
+// DescribeTopClientIpSumInfoList
+// This API is used to query the information of the top n client IPs in a certain period of time (top 1,000 is supported currently).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeTopClientIpSumInfoListWithContext(ctx context.Context, request *DescribeTopClientIpSumInfoListRequest) (response *DescribeTopClientIpSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopClientIpSumInfoListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopClientIpSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUploadStreamNumsRequest() (request *DescribeUploadStreamNumsRequest) {
     request = &DescribeUploadStreamNumsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3472,6 +5594,24 @@ func (c *Client) DescribeUploadStreamNums(request *DescribeUploadStreamNumsReque
     if request == nil {
         request = NewDescribeUploadStreamNumsRequest()
     }
+    
+    response = NewDescribeUploadStreamNumsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeUploadStreamNums
+// This API is used to query the number of LVB upstream channels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeUploadStreamNumsWithContext(ctx context.Context, request *DescribeUploadStreamNumsRequest) (response *DescribeUploadStreamNumsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadStreamNumsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeUploadStreamNumsResponse()
     err = c.Send(request, response)
@@ -3507,6 +5647,25 @@ func (c *Client) DescribeVisitTopSumInfoList(request *DescribeVisitTopSumInfoLis
     if request == nil {
         request = NewDescribeVisitTopSumInfoListRequest()
     }
+    
+    response = NewDescribeVisitTopSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeVisitTopSumInfoList
+// This API is used to query the information of the top n domain names or stream IDs in a certain period of time (top 1,000 is supported currently).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeVisitTopSumInfoListWithContext(ctx context.Context, request *DescribeVisitTopSumInfoListRequest) (response *DescribeVisitTopSumInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeVisitTopSumInfoListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeVisitTopSumInfoListResponse()
     err = c.Send(request, response)
@@ -3560,6 +5719,37 @@ func (c *Client) DropLiveStream(request *DropLiveStreamRequest) (response *DropL
     return
 }
 
+// DropLiveStream
+// This API is used to disconnect the push connection, which can be resumed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_STREAMNOTALIVE = "ResourceNotFound.StreamNotAlive"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DropLiveStreamWithContext(ctx context.Context, request *DropLiveStreamRequest) (response *DropLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewDropLiveStreamRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDropLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableLiveDomainRequest() (request *EnableLiveDomainRequest) {
     request = &EnableLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3599,6 +5789,29 @@ func (c *Client) EnableLiveDomain(request *EnableLiveDomainRequest) (response *E
     return
 }
 
+// EnableLiveDomain
+// This API is used to enable a disabled LVB domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SDKNOPACKAGE = "FailedOperation.SdkNoPackage"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_CLOUDDOMAINISSTOP = "InvalidParameter.CloudDomainIsStop"
+//  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
+func (c *Client) EnableLiveDomainWithContext(ctx context.Context, request *EnableLiveDomainRequest) (response *EnableLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewEnableLiveDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewEnableLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewForbidLiveDomainRequest() (request *ForbidLiveDomainRequest) {
     request = &ForbidLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3628,6 +5841,25 @@ func (c *Client) ForbidLiveDomain(request *ForbidLiveDomainRequest) (response *F
     if request == nil {
         request = NewForbidLiveDomainRequest()
     }
+    
+    response = NewForbidLiveDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ForbidLiveDomain
+// This API is used to disable an LVB domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ForbidLiveDomainWithContext(ctx context.Context, request *ForbidLiveDomainRequest) (response *ForbidLiveDomainResponse, err error) {
+    if request == nil {
+        request = NewForbidLiveDomainRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewForbidLiveDomainResponse()
     err = c.Send(request, response)
@@ -3674,6 +5906,36 @@ func (c *Client) ForbidLiveStream(request *ForbidLiveStreamRequest) (response *F
     if request == nil {
         request = NewForbidLiveStreamRequest()
     }
+    
+    response = NewForbidLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ForbidLiveStream
+// This API is used to forbid the push of a specific stream. You can preset a time point to resume the stream.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ForbidLiveStreamWithContext(ctx context.Context, request *ForbidLiveStreamRequest) (response *ForbidLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewForbidLiveStreamRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewForbidLiveStreamResponse()
     err = c.Send(request, response)
@@ -3730,6 +5992,40 @@ func (c *Client) ModifyLiveCallbackTemplate(request *ModifyLiveCallbackTemplateR
     return
 }
 
+// ModifyLiveCallbackTemplate
+// This API is used to modify a callback template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETER_URLNOTSAFE = "InvalidParameter.UrlNotSafe"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
+func (c *Client) ModifyLiveCallbackTemplateWithContext(ctx context.Context, request *ModifyLiveCallbackTemplateRequest) (response *ModifyLiveCallbackTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveCallbackTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLiveCallbackTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLiveCertRequest() (request *ModifyLiveCertRequest) {
     request = &ModifyLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3771,6 +6067,31 @@ func (c *Client) ModifyLiveCert(request *ModifyLiveCertRequest) (response *Modif
     return
 }
 
+// ModifyLiveCert
+// This API is used to modify a certificate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
+//  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
+//  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
+//  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
+//  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
+func (c *Client) ModifyLiveCertWithContext(ctx context.Context, request *ModifyLiveCertRequest) (response *ModifyLiveCertResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveCertRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLiveCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLiveDomainCertRequest() (request *ModifyLiveDomainCertRequest) {
     request = &ModifyLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3804,6 +6125,29 @@ func (c *Client) ModifyLiveDomainCert(request *ModifyLiveDomainCertRequest) (res
     if request == nil {
         request = NewModifyLiveDomainCertRequest()
     }
+    
+    response = NewModifyLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLiveDomainCert
+// This API is used to modify the domain name and certificate binding information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
+//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+func (c *Client) ModifyLiveDomainCertWithContext(ctx context.Context, request *ModifyLiveDomainCertRequest) (response *ModifyLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveDomainCertRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLiveDomainCertResponse()
     err = c.Send(request, response)
@@ -3851,6 +6195,31 @@ func (c *Client) ModifyLiveDomainReferer(request *ModifyLiveDomainRefererRequest
     return
 }
 
+// ModifyLiveDomainReferer
+// This API is used to configure referer allowlist/blocklist of a live streaming domain name.
+//
+// Referer information is included in HTTP requests. After you enable referer configuration, live streams using RTMP or WebRTC for playback will not authenticate the referer and can be played back normally. To make the referer configuration effective, the HTTP-FLV or HLS protocol is recommended for playback.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DOMAINNOTEXIST = "InternalError.DomainNotExist"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+func (c *Client) ModifyLiveDomainRefererWithContext(ctx context.Context, request *ModifyLiveDomainRefererRequest) (response *ModifyLiveDomainRefererResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveDomainRefererRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLiveDomainRefererResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLivePlayAuthKeyRequest() (request *ModifyLivePlayAuthKeyRequest) {
     request = &ModifyLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3882,6 +6251,27 @@ func (c *Client) ModifyLivePlayAuthKey(request *ModifyLivePlayAuthKeyRequest) (r
     if request == nil {
         request = NewModifyLivePlayAuthKeyRequest()
     }
+    
+    response = NewModifyLivePlayAuthKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLivePlayAuthKey
+// This API is used to modify the playback authentication key.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PLAYDOMAINNORECORD = "InternalError.PlayDomainNoRecord"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_PLAYDOMAINNORECORD = "ResourceNotFound.PlayDomainNoRecord"
+func (c *Client) ModifyLivePlayAuthKeyWithContext(ctx context.Context, request *ModifyLivePlayAuthKeyRequest) (response *ModifyLivePlayAuthKeyResponse, err error) {
+    if request == nil {
+        request = NewModifyLivePlayAuthKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLivePlayAuthKeyResponse()
     err = c.Send(request, response)
@@ -3927,6 +6317,29 @@ func (c *Client) ModifyLivePlayDomain(request *ModifyLivePlayDomainRequest) (res
     return
 }
 
+// ModifyLivePlayDomain
+// This API is used to modify a playback domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOMAINNORECORD = "ResourceNotFound.DomainNoRecord"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+func (c *Client) ModifyLivePlayDomainWithContext(ctx context.Context, request *ModifyLivePlayDomainRequest) (response *ModifyLivePlayDomainResponse, err error) {
+    if request == nil {
+        request = NewModifyLivePlayDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLivePlayDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLivePushAuthKeyRequest() (request *ModifyLivePushAuthKeyRequest) {
     request = &ModifyLivePushAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3960,6 +6373,29 @@ func (c *Client) ModifyLivePushAuthKey(request *ModifyLivePushAuthKeyRequest) (r
     if request == nil {
         request = NewModifyLivePushAuthKeyRequest()
     }
+    
+    response = NewModifyLivePushAuthKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLivePushAuthKey
+// This API is used to modify the LVB push authentication key.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_PUSHDOMAINNORECORD = "InternalError.PushDomainNoRecord"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_PUSHDOMAINNORECORD = "ResourceNotFound.PushDomainNoRecord"
+func (c *Client) ModifyLivePushAuthKeyWithContext(ctx context.Context, request *ModifyLivePushAuthKeyRequest) (response *ModifyLivePushAuthKeyResponse, err error) {
+    if request == nil {
+        request = NewModifyLivePushAuthKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLivePushAuthKeyResponse()
     err = c.Send(request, response)
@@ -4011,6 +6447,35 @@ func (c *Client) ModifyLiveRecordTemplate(request *ModifyLiveRecordTemplateReque
     return
 }
 
+// ModifyLiveRecordTemplate
+// This API is used to modify the recording template configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyLiveRecordTemplateWithContext(ctx context.Context, request *ModifyLiveRecordTemplateRequest) (response *ModifyLiveRecordTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveRecordTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLiveRecordTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLiveSnapshotTemplateRequest() (request *ModifyLiveSnapshotTemplateRequest) {
     request = &ModifyLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4056,6 +6521,35 @@ func (c *Client) ModifyLiveSnapshotTemplate(request *ModifyLiveSnapshotTemplateR
     return
 }
 
+// ModifyLiveSnapshotTemplate
+// This API is used to modify the screencapturing template configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyLiveSnapshotTemplateWithContext(ctx context.Context, request *ModifyLiveSnapshotTemplateRequest) (response *ModifyLiveSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLiveSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLiveTranscodeTemplateRequest() (request *ModifyLiveTranscodeTemplateRequest) {
     request = &ModifyLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4095,6 +6589,35 @@ func (c *Client) ModifyLiveTranscodeTemplate(request *ModifyLiveTranscodeTemplat
     if request == nil {
         request = NewModifyLiveTranscodeTemplateRequest()
     }
+    
+    response = NewModifyLiveTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLiveTranscodeTemplate
+// This API is used to modify the transcoding template configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AITRANSCODEOPTIONFAIL = "FailedOperation.AiTranscodeOptionFail"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
+//  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
+//  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
+//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
+//  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
+//  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
+//  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyLiveTranscodeTemplateWithContext(ctx context.Context, request *ModifyLiveTranscodeTemplateRequest) (response *ModifyLiveTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyLiveTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLiveTranscodeTemplateResponse()
     err = c.Send(request, response)
@@ -4154,6 +6677,43 @@ func (c *Client) ResumeDelayLiveStream(request *ResumeDelayLiveStreamRequest) (r
     return
 }
 
+// ResumeDelayLiveStream
+// This API is used to cancel the delay setting and recover the real-time display of the live streaming image.
+//
+// error code that may be returned:
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ResumeDelayLiveStreamWithContext(ctx context.Context, request *ResumeDelayLiveStreamRequest) (response *ResumeDelayLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewResumeDelayLiveStreamRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewResumeDelayLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResumeLiveStreamRequest() (request *ResumeLiveStreamRequest) {
     request = &ResumeLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4200,6 +6760,36 @@ func (c *Client) ResumeLiveStream(request *ResumeLiveStreamRequest) (response *R
     return
 }
 
+// ResumeLiveStream
+// This API is used to resume the push of a specific stream.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
+//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
+//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
+//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
+//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
+//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) ResumeLiveStreamWithContext(ctx context.Context, request *ResumeLiveStreamRequest) (response *ResumeLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewResumeLiveStreamRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewResumeLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopLiveRecordRequest() (request *StopLiveRecordRequest) {
     request = &StopLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4233,6 +6823,29 @@ func (c *Client) StopLiveRecord(request *StopLiveRecordRequest) (response *StopL
     if request == nil {
         request = NewStopLiveRecordRequest()
     }
+    
+    response = NewStopLiveRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopLiveRecord
+// Note: Recording files are stored on the VOD platform. To use the recording feature, you need to activate a VOD account and ensure that it is available. After the recording files are stored, applicable fees (including storage fees and downstream playback traffic fees) will be charged according to the VOD billing method. For more information, please see the corresponding document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CHANNELNOTEXIST = "ResourceNotFound.ChannelNotExist"
+//  RESOURCENOTFOUND_TASKID = "ResourceNotFound.TaskId"
+func (c *Client) StopLiveRecordWithContext(ctx context.Context, request *StopLiveRecordRequest) (response *StopLiveRecordResponse, err error) {
+    if request == nil {
+        request = NewStopLiveRecordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStopLiveRecordResponse()
     err = c.Send(request, response)
@@ -4277,6 +6890,28 @@ func (c *Client) StopRecordTask(request *StopRecordTaskRequest) (response *StopR
     return
 }
 
+// StopRecordTask
+// This API is used to end a recording prematurely and terminate an ongoing recording task. After the task is successfully terminated, it will not restart.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_INVALIDVODSTATUS = "ResourceUnavailable.InvalidVodStatus"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) StopRecordTaskWithContext(ctx context.Context, request *StopRecordTaskRequest) (response *StopRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewStopRecordTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStopRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnBindLiveDomainCertRequest() (request *UnBindLiveDomainCertRequest) {
     request = &UnBindLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4306,6 +6941,25 @@ func (c *Client) UnBindLiveDomainCert(request *UnBindLiveDomainCertRequest) (res
     if request == nil {
         request = NewUnBindLiveDomainCertRequest()
     }
+    
+    response = NewUnBindLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UnBindLiveDomainCert
+// This API is used to unbind a domain name certificate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UnBindLiveDomainCertWithContext(ctx context.Context, request *UnBindLiveDomainCertRequest) (response *UnBindLiveDomainCertResponse, err error) {
+    if request == nil {
+        request = NewUnBindLiveDomainCertRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUnBindLiveDomainCertResponse()
     err = c.Send(request, response)
@@ -4343,6 +6997,27 @@ func (c *Client) UpdateLiveWatermark(request *UpdateLiveWatermarkRequest) (respo
     if request == nil {
         request = NewUpdateLiveWatermarkRequest()
     }
+    
+    response = NewUpdateLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateLiveWatermark
+// This API is used to update a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
+//  INTERNALERROR_WATERMARKEDITERROR = "InternalError.WatermarkEditError"
+//  INTERNALERROR_WATERMARKNOTEXIST = "InternalError.WatermarkNotExist"
+//  RESOURCENOTFOUND_WATERMARKNOTEXIST = "ResourceNotFound.WatermarkNotExist"
+func (c *Client) UpdateLiveWatermarkWithContext(ctx context.Context, request *UpdateLiveWatermarkRequest) (response *UpdateLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewUpdateLiveWatermarkRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateLiveWatermarkResponse()
     err = c.Send(request, response)

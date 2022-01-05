@@ -15,6 +15,7 @@
 package v20201016
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -85,6 +86,32 @@ func (c *Client) ApplyConfigToMachineGroup(request *ApplyConfigToMachineGroupReq
     return
 }
 
+// ApplyConfigToMachineGroup
+// This API is used to apply the collection configuration to the specified machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, request *ApplyConfigToMachineGroupRequest) (response *ApplyConfigToMachineGroupResponse, err error) {
+    if request == nil {
+        request = NewApplyConfigToMachineGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewApplyConfigToMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAlarmRequest() (request *CreateAlarmRequest) {
     request = &CreateAlarmRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -128,6 +155,33 @@ func (c *Client) CreateAlarm(request *CreateAlarmRequest) (response *CreateAlarm
     return
 }
 
+// CreateAlarm
+// This API is used to create an alarm policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_ALARMNOTSUPPORTFORSEARCHLOW = "OperationDenied.AlarmNotSupportForSearchLow"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateAlarmWithContext(ctx context.Context, request *CreateAlarmRequest) (response *CreateAlarmResponse, err error) {
+    if request == nil {
+        request = NewCreateAlarmRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAlarmResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAlarmNoticeRequest() (request *CreateAlarmNoticeRequest) {
     request = &CreateAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -146,7 +200,7 @@ func NewCreateAlarmNoticeResponse() (response *CreateAlarmNoticeResponse) {
 }
 
 // CreateAlarmNotice
-// This API is used to create an alarm notification template.
+// This API is used to create a notification group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -161,6 +215,29 @@ func (c *Client) CreateAlarmNotice(request *CreateAlarmNoticeRequest) (response 
     if request == nil {
         request = NewCreateAlarmNoticeRequest()
     }
+    
+    response = NewCreateAlarmNoticeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateAlarmNotice
+// This API is used to create a notification group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateAlarmNoticeWithContext(ctx context.Context, request *CreateAlarmNoticeRequest) (response *CreateAlarmNoticeResponse, err error) {
+    if request == nil {
+        request = NewCreateAlarmNoticeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateAlarmNoticeResponse()
     err = c.Send(request, response)
@@ -207,6 +284,30 @@ func (c *Client) CreateAsyncContextTask(request *CreateAsyncContextTaskRequest) 
     return
 }
 
+// CreateAsyncContextTask
+// This API is used to create an offline context search task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
+//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
+//  LIMITEXCEEDED_ASYNCTASK = "LimitExceeded.AsyncTask"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateAsyncContextTaskWithContext(ctx context.Context, request *CreateAsyncContextTaskRequest) (response *CreateAsyncContextTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAsyncContextTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAsyncContextTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAsyncSearchTaskRequest() (request *CreateAsyncSearchTaskRequest) {
     request = &CreateAsyncSearchTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -242,6 +343,31 @@ func (c *Client) CreateAsyncSearchTask(request *CreateAsyncSearchTaskRequest) (r
     if request == nil {
         request = NewCreateAsyncSearchTaskRequest()
     }
+    
+    response = NewCreateAsyncSearchTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateAsyncSearchTask
+// This API is used to create an offline search task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_ASYNCSEARCHTASK = "LimitExceeded.AsyncSearchTask"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateAsyncSearchTaskWithContext(ctx context.Context, request *CreateAsyncSearchTaskRequest) (response *CreateAsyncSearchTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAsyncSearchTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateAsyncSearchTaskResponse()
     err = c.Send(request, response)
@@ -292,6 +418,100 @@ func (c *Client) CreateConfig(request *CreateConfigRequest) (response *CreateCon
     return
 }
 
+// CreateConfig
+// This API is used to create a collection rule configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONFIGCONFLICT = "InvalidParameter.ConfigConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_CONFIG = "LimitExceeded.Config"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateConfigWithContext(ctx context.Context, request *CreateConfigRequest) (response *CreateConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateConsumerRequest() (request *CreateConsumerRequest) {
+    request = &CreateConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "CreateConsumer")
+    
+    
+    return
+}
+
+func NewCreateConsumerResponse() (response *CreateConsumerResponse) {
+    response = &CreateConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateConsumer
+// This API is used to create a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsumer(request *CreateConsumerRequest) (response *CreateConsumerResponse, err error) {
+    if request == nil {
+        request = NewCreateConsumerRequest()
+    }
+    
+    response = NewCreateConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateConsumer
+// This API is used to create a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateConsumerRequest) (response *CreateConsumerResponse, err error) {
+    if request == nil {
+        request = NewCreateConsumerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateExportRequest() (request *CreateExportRequest) {
     request = &CreateExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -327,6 +547,31 @@ func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExp
     if request == nil {
         request = NewCreateExportRequest()
     }
+    
+    response = NewCreateExportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateExport
+// This API is used to create a log download task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_EXPORT = "LimitExceeded.Export"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateExportWithContext(ctx context.Context, request *CreateExportRequest) (response *CreateExportResponse, err error) {
+    if request == nil {
+        request = NewCreateExportRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateExportResponse()
     err = c.Send(request, response)
@@ -376,6 +621,33 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
     return
 }
 
+// CreateIndex
+// This API is used to create an index.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
+    if request == nil {
+        request = NewCreateIndexRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLogsetRequest() (request *CreateLogsetRequest) {
     request = &CreateLogsetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -414,6 +686,34 @@ func (c *Client) CreateLogset(request *CreateLogsetRequest) (response *CreateLog
     if request == nil {
         request = NewCreateLogsetRequest()
     }
+    
+    response = NewCreateLogsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLogset
+// This API is used to create a logset. The ID of the created logset is returned.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LOGSETCONFLICT = "FailedOperation.LogsetConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_LOGSETCONFLICT = "InvalidParameter.LogsetConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateLogsetWithContext(ctx context.Context, request *CreateLogsetRequest) (response *CreateLogsetResponse, err error) {
+    if request == nil {
+        request = NewCreateLogsetRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLogsetResponse()
     err = c.Send(request, response)
@@ -466,6 +766,36 @@ func (c *Client) CreateMachineGroup(request *CreateMachineGroupRequest) (respons
     return
 }
 
+// CreateMachineGroup
+// This API is used to create a machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_MACHINEGROUP = "LimitExceeded.MachineGroup"
+//  LIMITEXCEEDED_MACHINEGROUPIP = "LimitExceeded.MachineGroupIp"
+//  LIMITEXCEEDED_MACHINEGROUPLABELS = "LimitExceeded.MachineGroupLabels"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *CreateMachineGroupRequest) (response *CreateMachineGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateMachineGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateShipperRequest() (request *CreateShipperRequest) {
     request = &CreateShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -505,6 +835,35 @@ func (c *Client) CreateShipper(request *CreateShipperRequest) (response *CreateS
     if request == nil {
         request = NewCreateShipperRequest()
     }
+    
+    response = NewCreateShipperResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateShipper
+// This API is used to create a shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_SHIPPER = "LimitExceeded.Shipper"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateShipperWithContext(ctx context.Context, request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
+    if request == nil {
+        request = NewCreateShipperRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateShipperResponse()
     err = c.Send(request, response)
@@ -556,6 +915,35 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
     return
 }
 
+// CreateTopic
+// This API is used to create a log topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
+//  LIMITEXCEEDED_TOPIC = "LimitExceeded.Topic"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
+    if request == nil {
+        request = NewCreateTopicRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAlarmRequest() (request *DeleteAlarmRequest) {
     request = &DeleteAlarmRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -595,6 +983,29 @@ func (c *Client) DeleteAlarm(request *DeleteAlarmRequest) (response *DeleteAlarm
     return
 }
 
+// DeleteAlarm
+// This API is used to delete an alarm policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+func (c *Client) DeleteAlarmWithContext(ctx context.Context, request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
+    if request == nil {
+        request = NewDeleteAlarmRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteAlarmResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAlarmNoticeRequest() (request *DeleteAlarmNoticeRequest) {
     request = &DeleteAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -613,7 +1024,7 @@ func NewDeleteAlarmNoticeResponse() (response *DeleteAlarmNoticeResponse) {
 }
 
 // DeleteAlarmNotice
-// This API is used to delete an alarm notification template.
+// This API is used to delete a notification group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -630,6 +1041,31 @@ func (c *Client) DeleteAlarmNotice(request *DeleteAlarmNoticeRequest) (response 
     if request == nil {
         request = NewDeleteAlarmNoticeRequest()
     }
+    
+    response = NewDeleteAlarmNoticeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteAlarmNotice
+// This API is used to delete a notification group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) DeleteAlarmNoticeWithContext(ctx context.Context, request *DeleteAlarmNoticeRequest) (response *DeleteAlarmNoticeResponse, err error) {
+    if request == nil {
+        request = NewDeleteAlarmNoticeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteAlarmNoticeResponse()
     err = c.Send(request, response)
@@ -672,6 +1108,26 @@ func (c *Client) DeleteAsyncContextTask(request *DeleteAsyncContextTaskRequest) 
     return
 }
 
+// DeleteAsyncContextTask
+// This API is used to delete an offline context search task.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteAsyncContextTaskWithContext(ctx context.Context, request *DeleteAsyncContextTaskRequest) (response *DeleteAsyncContextTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteAsyncContextTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteAsyncContextTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAsyncSearchTaskRequest() (request *DeleteAsyncSearchTaskRequest) {
     request = &DeleteAsyncSearchTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -704,6 +1160,28 @@ func (c *Client) DeleteAsyncSearchTask(request *DeleteAsyncSearchTaskRequest) (r
     if request == nil {
         request = NewDeleteAsyncSearchTaskRequest()
     }
+    
+    response = NewDeleteAsyncSearchTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteAsyncSearchTask
+// This API is used to delete an offline search task.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
+//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteAsyncSearchTaskWithContext(ctx context.Context, request *DeleteAsyncSearchTaskRequest) (response *DeleteAsyncSearchTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteAsyncSearchTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteAsyncSearchTaskResponse()
     err = c.Send(request, response)
@@ -753,6 +1231,33 @@ func (c *Client) DeleteConfig(request *DeleteConfigRequest) (response *DeleteCon
     return
 }
 
+// DeleteConfig
+// This API is used to delete a collection rule configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+func (c *Client) DeleteConfigWithContext(ctx context.Context, request *DeleteConfigRequest) (response *DeleteConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteConfigFromMachineGroupRequest() (request *DeleteConfigFromMachineGroupRequest) {
     request = &DeleteConfigFromMachineGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -795,6 +1300,96 @@ func (c *Client) DeleteConfigFromMachineGroup(request *DeleteConfigFromMachineGr
     return
 }
 
+// DeleteConfigFromMachineGroup
+// This API is used to delete the collection configuration applied to a machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) DeleteConfigFromMachineGroupWithContext(ctx context.Context, request *DeleteConfigFromMachineGroupRequest) (response *DeleteConfigFromMachineGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteConfigFromMachineGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteConfigFromMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteConsumerRequest() (request *DeleteConsumerRequest) {
+    request = &DeleteConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteConsumer")
+    
+    
+    return
+}
+
+func NewDeleteConsumerResponse() (response *DeleteConsumerResponse) {
+    response = &DeleteConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteConsumer
+// This API is used to delete a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteConsumer(request *DeleteConsumerRequest) (response *DeleteConsumerResponse, err error) {
+    if request == nil {
+        request = NewDeleteConsumerRequest()
+    }
+    
+    response = NewDeleteConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteConsumer
+// This API is used to delete a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteConsumerWithContext(ctx context.Context, request *DeleteConsumerRequest) (response *DeleteConsumerResponse, err error) {
+    if request == nil {
+        request = NewDeleteConsumerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteExportRequest() (request *DeleteExportRequest) {
     request = &DeleteExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -829,6 +1424,30 @@ func (c *Client) DeleteExport(request *DeleteExportRequest) (response *DeleteExp
     if request == nil {
         request = NewDeleteExportRequest()
     }
+    
+    response = NewDeleteExportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteExport
+// This API is used to delete a log download task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
+func (c *Client) DeleteExportWithContext(ctx context.Context, request *DeleteExportRequest) (response *DeleteExportResponse, err error) {
+    if request == nil {
+        request = NewDeleteExportRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteExportResponse()
     err = c.Send(request, response)
@@ -877,6 +1496,32 @@ func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndex
     return
 }
 
+// DeleteIndex
+// This API is used to delete the index configuration of a log topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteIndexWithContext(ctx context.Context, request *DeleteIndexRequest) (response *DeleteIndexResponse, err error) {
+    if request == nil {
+        request = NewDeleteIndexRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLogsetRequest() (request *DeleteLogsetRequest) {
     request = &DeleteLogsetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -919,6 +1564,32 @@ func (c *Client) DeleteLogset(request *DeleteLogsetRequest) (response *DeleteLog
     return
 }
 
+// DeleteLogset
+// This API is used to delete a logset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LOGSETNOTEMPTY = "FailedOperation.LogsetNotEmpty"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+func (c *Client) DeleteLogsetWithContext(ctx context.Context, request *DeleteLogsetRequest) (response *DeleteLogsetResponse, err error) {
+    if request == nil {
+        request = NewDeleteLogsetRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLogsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteMachineGroupRequest() (request *DeleteMachineGroupRequest) {
     request = &DeleteMachineGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -955,6 +1626,32 @@ func (c *Client) DeleteMachineGroup(request *DeleteMachineGroupRequest) (respons
     if request == nil {
         request = NewDeleteMachineGroupRequest()
     }
+    
+    response = NewDeleteMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteMachineGroup
+// This API is used to delete a machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) DeleteMachineGroupWithContext(ctx context.Context, request *DeleteMachineGroupRequest) (response *DeleteMachineGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteMachineGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteMachineGroupResponse()
     err = c.Send(request, response)
@@ -1004,6 +1701,33 @@ func (c *Client) DeleteShipper(request *DeleteShipperRequest) (response *DeleteS
     return
 }
 
+// DeleteShipper
+// This API is used to delete a shipping rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
+func (c *Client) DeleteShipperWithContext(ctx context.Context, request *DeleteShipperRequest) (response *DeleteShipperResponse, err error) {
+    if request == nil {
+        request = NewDeleteShipperRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteShipperResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteTopicRequest() (request *DeleteTopicRequest) {
     request = &DeleteTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1046,6 +1770,32 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
     return
 }
 
+// DeleteTopic
+// This API is used to delete a log topic.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_TOPICHASDATAFORMTASK = "OperationDenied.TopicHasDataFormTask"
+//  OPERATIONDENIED_TOPICHASDELIVERFUNCTION = "OperationDenied.TopicHasDeliverFunction"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
+    if request == nil {
+        request = NewDeleteTopicRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAlarmNoticesRequest() (request *DescribeAlarmNoticesRequest) {
     request = &DescribeAlarmNoticesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1064,7 +1814,7 @@ func NewDescribeAlarmNoticesResponse() (response *DescribeAlarmNoticesResponse) 
 }
 
 // DescribeAlarmNotices
-// This API is used to get the list of alarm notification templates.
+// This API is used to get the notification group list.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1079,6 +1829,29 @@ func (c *Client) DescribeAlarmNotices(request *DescribeAlarmNoticesRequest) (res
     if request == nil {
         request = NewDescribeAlarmNoticesRequest()
     }
+    
+    response = NewDescribeAlarmNoticesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAlarmNotices
+// This API is used to get the notification group list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeAlarmNoticesWithContext(ctx context.Context, request *DescribeAlarmNoticesRequest) (response *DescribeAlarmNoticesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlarmNoticesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAlarmNoticesResponse()
     err = c.Send(request, response)
@@ -1103,7 +1876,7 @@ func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
 }
 
 // DescribeAlarms
-// This API is used to get the list of alarm policies.
+// This API is used to get the alarm policy list.
 //
 // error code that may be returned:
 //  OPERATIONDENIED = "OperationDenied"
@@ -1114,6 +1887,25 @@ func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *Descr
     if request == nil {
         request = NewDescribeAlarmsRequest()
     }
+    
+    response = NewDescribeAlarmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAlarms
+// This API is used to get the alarm policy list.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlarmsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAlarmsResponse()
     err = c.Send(request, response)
@@ -1159,6 +1951,29 @@ func (c *Client) DescribeAsyncContextResult(request *DescribeAsyncContextResultR
     return
 }
 
+// DescribeAsyncContextResult
+// This API is used to get the result of an offline context search task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
+//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
+//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
+func (c *Client) DescribeAsyncContextResultWithContext(ctx context.Context, request *DescribeAsyncContextResultRequest) (response *DescribeAsyncContextResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncContextResultRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAsyncContextResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAsyncContextTasksRequest() (request *DescribeAsyncContextTasksRequest) {
     request = &DescribeAsyncContextTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1188,6 +2003,25 @@ func (c *Client) DescribeAsyncContextTasks(request *DescribeAsyncContextTasksReq
     if request == nil {
         request = NewDescribeAsyncContextTasksRequest()
     }
+    
+    response = NewDescribeAsyncContextTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAsyncContextTasks
+// This API is used to get the list of offline context search tasks.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeAsyncContextTasksWithContext(ctx context.Context, request *DescribeAsyncContextTasksRequest) (response *DescribeAsyncContextTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncContextTasksRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAsyncContextTasksResponse()
     err = c.Send(request, response)
@@ -1233,6 +2067,29 @@ func (c *Client) DescribeAsyncSearchResult(request *DescribeAsyncSearchResultReq
     return
 }
 
+// DescribeAsyncSearchResult
+// This API is used to get the result of an offline search task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
+//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
+//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
+func (c *Client) DescribeAsyncSearchResultWithContext(ctx context.Context, request *DescribeAsyncSearchResultRequest) (response *DescribeAsyncSearchResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncSearchResultRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAsyncSearchResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAsyncSearchTasksRequest() (request *DescribeAsyncSearchTasksRequest) {
     request = &DescribeAsyncSearchTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1263,6 +2120,26 @@ func (c *Client) DescribeAsyncSearchTasks(request *DescribeAsyncSearchTasksReque
     if request == nil {
         request = NewDescribeAsyncSearchTasksRequest()
     }
+    
+    response = NewDescribeAsyncSearchTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAsyncSearchTasks
+// This API is used to get the list of offline search tasks.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+func (c *Client) DescribeAsyncSearchTasksWithContext(ctx context.Context, request *DescribeAsyncSearchTasksRequest) (response *DescribeAsyncSearchTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncSearchTasksRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAsyncSearchTasksResponse()
     err = c.Send(request, response)
@@ -1312,6 +2189,33 @@ func (c *Client) DescribeConfigMachineGroups(request *DescribeConfigMachineGroup
     return
 }
 
+// DescribeConfigMachineGroups
+// This API is used to get the machine group bound to a collection rule configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+func (c *Client) DescribeConfigMachineGroupsWithContext(ctx context.Context, request *DescribeConfigMachineGroupsRequest) (response *DescribeConfigMachineGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeConfigMachineGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeConfigMachineGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConfigsRequest() (request *DescribeConfigsRequest) {
     request = &DescribeConfigsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1349,6 +2253,95 @@ func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *Des
     }
     
     response = NewDescribeConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeConfigs
+// This API is used to get a collection rule configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConfigsWithContext(ctx context.Context, request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeConfigsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumerRequest() (request *DescribeConsumerRequest) {
+    request = &DescribeConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsumer")
+    
+    
+    return
+}
+
+func NewDescribeConsumerResponse() (response *DescribeConsumerResponse) {
+    response = &DescribeConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeConsumer
+// This API is used to query a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumer(request *DescribeConsumerRequest) (response *DescribeConsumerResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerRequest()
+    }
+    
+    response = NewDescribeConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeConsumer
+// This API is used to query a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumerWithContext(ctx context.Context, request *DescribeConsumerRequest) (response *DescribeConsumerResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumerResponse()
     err = c.Send(request, response)
     return
 }
@@ -1394,6 +2387,31 @@ func (c *Client) DescribeExports(request *DescribeExportsRequest) (response *Des
     return
 }
 
+// DescribeExports
+// This API is used to get the list of log download tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeExportsWithContext(ctx context.Context, request *DescribeExportsRequest) (response *DescribeExportsResponse, err error) {
+    if request == nil {
+        request = NewDescribeExportsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeExportsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIndexRequest() (request *DescribeIndexRequest) {
     request = &DescribeIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1431,6 +2449,33 @@ func (c *Client) DescribeIndex(request *DescribeIndexRequest) (response *Describ
     if request == nil {
         request = NewDescribeIndexRequest()
     }
+    
+    response = NewDescribeIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeIndex
+// This API is used to get the index configuration information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeIndexWithContext(ctx context.Context, request *DescribeIndexRequest) (response *DescribeIndexResponse, err error) {
+    if request == nil {
+        request = NewDescribeIndexRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeIndexResponse()
     err = c.Send(request, response)
@@ -1482,6 +2527,35 @@ func (c *Client) DescribeLogContext(request *DescribeLogContextRequest) (respons
     return
 }
 
+// DescribeLogContext
+// This API is used to search for content in the log context.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDCONTEXT = "FailedOperation.InvalidContext"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeLogContextWithContext(ctx context.Context, request *DescribeLogContextRequest) (response *DescribeLogContextResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogContextRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogContextResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLogsetsRequest() (request *DescribeLogsetsRequest) {
     request = &DescribeLogsetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1518,6 +2592,32 @@ func (c *Client) DescribeLogsets(request *DescribeLogsetsRequest) (response *Des
     if request == nil {
         request = NewDescribeLogsetsRequest()
     }
+    
+    response = NewDescribeLogsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLogsets
+// This API is used to get the list of logsets.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeLogsetsWithContext(ctx context.Context, request *DescribeLogsetsRequest) (response *DescribeLogsetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogsetsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLogsetsResponse()
     err = c.Send(request, response)
@@ -1565,6 +2665,31 @@ func (c *Client) DescribeMachineGroupConfigs(request *DescribeMachineGroupConfig
     return
 }
 
+// DescribeMachineGroupConfigs
+// This API is used to get the collection rule configuration bound to a machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) DescribeMachineGroupConfigsWithContext(ctx context.Context, request *DescribeMachineGroupConfigsRequest) (response *DescribeMachineGroupConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMachineGroupConfigsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeMachineGroupConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMachineGroupsRequest() (request *DescribeMachineGroupsRequest) {
     request = &DescribeMachineGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1599,6 +2724,30 @@ func (c *Client) DescribeMachineGroups(request *DescribeMachineGroupsRequest) (r
     if request == nil {
         request = NewDescribeMachineGroupsRequest()
     }
+    
+    response = NewDescribeMachineGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeMachineGroups
+// This API is used to get the list of machine groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeMachineGroupsWithContext(ctx context.Context, request *DescribeMachineGroupsRequest) (response *DescribeMachineGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMachineGroupsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeMachineGroupsResponse()
     err = c.Send(request, response)
@@ -1648,6 +2797,33 @@ func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *D
     return
 }
 
+// DescribeMachines
+// This API is used to get the machine status in the specified machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_AGENTVERSIONNOTEXIST = "ResourceNotFound.AgentVersionNotExist"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) DescribeMachinesWithContext(ctx context.Context, request *DescribeMachinesRequest) (response *DescribeMachinesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMachinesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeMachinesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePartitionsRequest() (request *DescribePartitionsRequest) {
     request = &DescribePartitionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1684,6 +2860,32 @@ func (c *Client) DescribePartitions(request *DescribePartitionsRequest) (respons
     if request == nil {
         request = NewDescribePartitionsRequest()
     }
+    
+    response = NewDescribePartitionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribePartitions
+// This API is used to get the list of topic partitions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribePartitionsWithContext(ctx context.Context, request *DescribePartitionsRequest) (response *DescribePartitionsResponse, err error) {
+    if request == nil {
+        request = NewDescribePartitionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribePartitionsResponse()
     err = c.Send(request, response)
@@ -1733,6 +2935,33 @@ func (c *Client) DescribeShipperTasks(request *DescribeShipperTasksRequest) (res
     return
 }
 
+// DescribeShipperTasks
+// This API is used to get the list of shipping tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
+func (c *Client) DescribeShipperTasksWithContext(ctx context.Context, request *DescribeShipperTasksRequest) (response *DescribeShipperTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeShipperTasksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeShipperTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeShippersRequest() (request *DescribeShippersRequest) {
     request = &DescribeShippersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1776,6 +3005,33 @@ func (c *Client) DescribeShippers(request *DescribeShippersRequest) (response *D
     return
 }
 
+// DescribeShippers
+// This API is used to get the list of shipping rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeShippersWithContext(ctx context.Context, request *DescribeShippersRequest) (response *DescribeShippersResponse, err error) {
+    if request == nil {
+        request = NewDescribeShippersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeShippersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTopicsRequest() (request *DescribeTopicsRequest) {
     request = &DescribeTopicsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1812,6 +3068,32 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
     if request == nil {
         request = NewDescribeTopicsRequest()
     }
+    
+    response = NewDescribeTopicsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTopics
+//  This API is used to get the list of log topics and supports pagination.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
+func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopicsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTopicsResponse()
     err = c.Send(request, response)
@@ -1865,6 +3147,37 @@ func (c *Client) GetAlarmLog(request *GetAlarmLogRequest) (response *GetAlarmLog
     return
 }
 
+// GetAlarmLog
+// This API is used to get the records of alarm tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETLOGREACHLIMIT = "FailedOperation.GetlogReachLimit"
+//  FAILEDOPERATION_INVALIDCONTEXT = "FailedOperation.InvalidContext"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) GetAlarmLogWithContext(ctx context.Context, request *GetAlarmLogRequest) (response *GetAlarmLogResponse, err error) {
+    if request == nil {
+        request = NewGetAlarmLogRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetAlarmLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewMergePartitionRequest() (request *MergePartitionRequest) {
     request = &MergePartitionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1903,6 +3216,34 @@ func (c *Client) MergePartition(request *MergePartitionRequest) (response *Merge
     if request == nil {
         request = NewMergePartitionRequest()
     }
+    
+    response = NewMergePartitionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// MergePartition
+// This API is used to merge a topic partition in read/write state. During merge, a topic partition ID can be specified, and CLS will automatically merge the partition adjacent to the right of the range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_PARTITION = "LimitExceeded.Partition"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) MergePartitionWithContext(ctx context.Context, request *MergePartitionRequest) (response *MergePartitionResponse, err error) {
+    if request == nil {
+        request = NewMergePartitionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewMergePartitionResponse()
     err = c.Send(request, response)
@@ -1953,6 +3294,34 @@ func (c *Client) ModifyAlarm(request *ModifyAlarmRequest) (response *ModifyAlarm
     return
 }
 
+// ModifyAlarm
+// This API is used to modify an alarm policy. At least one valid configuration item needs to be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDALARM = "FailedOperation.InvalidAlarm"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_ALARMNOTSUPPORTFORSEARCHLOW = "OperationDenied.AlarmNotSupportForSearchLow"
+//  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyAlarmWithContext(ctx context.Context, request *ModifyAlarmRequest) (response *ModifyAlarmResponse, err error) {
+    if request == nil {
+        request = NewModifyAlarmRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAlarmResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAlarmNoticeRequest() (request *ModifyAlarmNoticeRequest) {
     request = &ModifyAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1971,7 +3340,7 @@ func NewModifyAlarmNoticeResponse() (response *ModifyAlarmNoticeResponse) {
 }
 
 // ModifyAlarmNotice
-// This API is used to modify an alarm notification template.
+// This API is used to modify a notification group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1989,6 +3358,32 @@ func (c *Client) ModifyAlarmNotice(request *ModifyAlarmNoticeRequest) (response 
     if request == nil {
         request = NewModifyAlarmNoticeRequest()
     }
+    
+    response = NewModifyAlarmNoticeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAlarmNotice
+// This API is used to modify a notification group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) ModifyAlarmNoticeWithContext(ctx context.Context, request *ModifyAlarmNoticeRequest) (response *ModifyAlarmNoticeResponse, err error) {
+    if request == nil {
+        request = NewModifyAlarmNoticeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAlarmNoticeResponse()
     err = c.Send(request, response)
@@ -2039,6 +3434,98 @@ func (c *Client) ModifyConfig(request *ModifyConfigRequest) (response *ModifyCon
     return
 }
 
+// ModifyConfig
+// This API is used to modify a collection rule configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONFIGCONFLICT = "InvalidParameter.ConfigConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+func (c *Client) ModifyConfigWithContext(ctx context.Context, request *ModifyConfigRequest) (response *ModifyConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyConsumerRequest() (request *ModifyConsumerRequest) {
+    request = &ModifyConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyConsumer")
+    
+    
+    return
+}
+
+func NewModifyConsumerResponse() (response *ModifyConsumerResponse) {
+    response = &ModifyConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyConsumer
+// This API is used to modify a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyConsumer(request *ModifyConsumerRequest) (response *ModifyConsumerResponse, err error) {
+    if request == nil {
+        request = NewModifyConsumerRequest()
+    }
+    
+    response = NewModifyConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyConsumer
+// This API is used to modify a shipping task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyConsumerWithContext(ctx context.Context, request *ModifyConsumerRequest) (response *ModifyConsumerResponse, err error) {
+    if request == nil {
+        request = NewModifyConsumerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyIndexRequest() (request *ModifyIndexRequest) {
     request = &ModifyIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2076,6 +3563,33 @@ func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndex
     if request == nil {
         request = NewModifyIndexRequest()
     }
+    
+    response = NewModifyIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyIndex
+// This API is used to modify the index configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyIndexWithContext(ctx context.Context, request *ModifyIndexRequest) (response *ModifyIndexResponse, err error) {
+    if request == nil {
+        request = NewModifyIndexRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyIndexResponse()
     err = c.Send(request, response)
@@ -2120,6 +3634,34 @@ func (c *Client) ModifyLogset(request *ModifyLogsetRequest) (response *ModifyLog
     if request == nil {
         request = NewModifyLogsetRequest()
     }
+    
+    response = NewModifyLogsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLogset
+// This API is used to modify a logset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PERIODMODIFYFORBIDDEN = "FailedOperation.PeriodModifyForbidden"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_LOGSETCONFLICT = "InvalidParameter.LogsetConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+func (c *Client) ModifyLogsetWithContext(ctx context.Context, request *ModifyLogsetRequest) (response *ModifyLogsetResponse, err error) {
+    if request == nil {
+        request = NewModifyLogsetRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLogsetResponse()
     err = c.Send(request, response)
@@ -2171,6 +3713,35 @@ func (c *Client) ModifyMachineGroup(request *ModifyMachineGroupRequest) (respons
     return
 }
 
+// ModifyMachineGroup
+// This API is used to modify a machine group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_MACHINEGROUPIP = "LimitExceeded.MachineGroupIp"
+//  LIMITEXCEEDED_MACHINEGROUPLABELS = "LimitExceeded.MachineGroupLabels"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
+func (c *Client) ModifyMachineGroupWithContext(ctx context.Context, request *ModifyMachineGroupRequest) (response *ModifyMachineGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyMachineGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyShipperRequest() (request *ModifyShipperRequest) {
     request = &ModifyShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2207,6 +3778,32 @@ func (c *Client) ModifyShipper(request *ModifyShipperRequest) (response *ModifyS
     if request == nil {
         request = NewModifyShipperRequest()
     }
+    
+    response = NewModifyShipperResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyShipper
+// This API is used to modify an existing shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
+func (c *Client) ModifyShipperWithContext(ctx context.Context, request *ModifyShipperRequest) (response *ModifyShipperResponse, err error) {
+    if request == nil {
+        request = NewModifyShipperRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyShipperResponse()
     err = c.Send(request, response)
@@ -2259,6 +3856,36 @@ func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopic
     return
 }
 
+// ModifyTopic
+// This API is used to modify a log topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
+    if request == nil {
+        request = NewModifyTopicRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRetryShipperTaskRequest() (request *RetryShipperTaskRequest) {
     request = &RetryShipperTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2304,6 +3931,35 @@ func (c *Client) RetryShipperTask(request *RetryShipperTaskRequest) (response *R
     return
 }
 
+// RetryShipperTask
+// This API is used to retry a failed shipping task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHIPPERTASKNOTTORETRY = "FailedOperation.ShipperTaskNotToRetry"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
+//  RESOURCENOTFOUND_SHIPPERTASKNOTEXIST = "ResourceNotFound.ShipperTaskNotExist"
+func (c *Client) RetryShipperTaskWithContext(ctx context.Context, request *RetryShipperTaskRequest) (response *RetryShipperTaskResponse, err error) {
+    if request == nil {
+        request = NewRetryShipperTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRetryShipperTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchLogRequest() (request *SearchLogRequest) {
     request = &SearchLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2322,7 +3978,7 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 }
 
 // SearchLog
-// This API is used to search for logs.
+// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2344,6 +4000,36 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
     if request == nil {
         request = NewSearchLogRequest()
     }
+    
+    response = NewSearchLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SearchLog
+// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDCONTEXT = "FailedOperation.InvalidContext"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) SearchLogWithContext(ctx context.Context, request *SearchLogRequest) (response *SearchLogResponse, err error) {
+    if request == nil {
+        request = NewSearchLogRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSearchLogResponse()
     err = c.Send(request, response)
@@ -2391,6 +4077,37 @@ func (c *Client) SplitPartition(request *SplitPartitionRequest) (response *Split
     if request == nil {
         request = NewSplitPartitionRequest()
     }
+    
+    response = NewSplitPartitionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SplitPartition
+// This API is used to split a topic partition.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_PARTITION = "LimitExceeded.Partition"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) SplitPartitionWithContext(ctx context.Context, request *SplitPartitionRequest) (response *SplitPartitionResponse, err error) {
+    if request == nil {
+        request = NewSplitPartitionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSplitPartitionResponse()
     err = c.Send(request, response)
@@ -2738,6 +4455,337 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
     if request == nil {
         request = NewUploadLogRequest()
     }
+    request.SetBody(data)
+    response = NewUploadLogResponse()
+    err = c.SendOctetStream(request, response)
+    return
+}
+
+// UploadLog
+// ## Feature Description
+//
+// 
+//
+// This API is used to write logs to a specified log topic.
+//
+// 
+//
+// CLS provides the following two modes:
+//
+// 
+//
+// #### Load balancing mode
+//
+// 
+//
+// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where the sequential consumption is not needed.
+//
+// 
+//
+// #### Hash routing mode
+//
+// 
+//
+// In this mode, data will be written to a target partition that meets the range requirements based on the hash value (`X-CLS-HashKey`) carried by data. For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
+//
+// 
+//
+// In addition, CLS allows you to upload logs in the following two modes:
+//
+//                  
+//
+// 
+//
+// #### Input parameters (pb binary streams in `body`)
+//
+// 
+//
+// | Parameter | Type | Location | Required | Description |
+//
+// | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
+//
+// | logGroupList | message | pb    | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to 5 `logGroup` values.                     |
+//
+// 
+//
+// `LogGroup` description:
+//
+// 
+//
+// | Parameter     | Required | Description                                                         |
+//
+// | ----------- | -------- | ------------------------------------------------------------ |
+//
+// | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
+//
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+//
+// | filename    | No       | Log filename                                                   |
+//
+// | source      | No       | Log source, which is generally the machine IP                           |
+//
+// | logTags     | No       | Tag list of logs                                               |
+//
+// 
+//
+// `Log` description:
+//
+// 
+//
+// | Parameter | Required | Description |
+//
+// | -------- | -------- | ------------------------------------------------------------ |
+//
+// | time | Yes | Unix timestamp of log time in seconds or milliseconds (recommended) |
+//
+// | contents | No | Log content in key-value format. A log can contain multiple key-value pairs. |
+//
+// 
+//
+// `Content` description:
+//
+// 
+//
+// | Parameter | Required | Description |
+//
+// | ------ | -------- | ------------------------------------------------------------ |
+//
+// | key    | Yes       | Key of a field group in one log, which cannot start with `_`.                 |
+//
+// | value  | Yes       | Value of a field group. The `value` of one log cannot exceed 1 MB and the total `value` in `LogGroup` cannot exceed 5 MB. |
+//
+// 
+//
+// `LogTag` description:
+//
+// 
+//
+// | Parameter     | Required | Description                                                         |
+//
+// | ------ | -------- | -------------------------------- |
+//
+// | key    | Yes       | Key of a custom tag             |
+//
+// | value  | Yes       | Value corresponding to the custom tag key |
+//
+// 
+//
+// ## pb Compilation Sample
+//
+// 
+//
+// This sample describes how to use the protoc compiler to compile the pb description file into a log upload API in C++.
+//
+// 
+//
+// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+//
+// 
+//
+// #### 1. Install Protocol Buffers
+//
+// 
+//
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
+//
+// 
+//
+// ```
+//
+// tar -zxvf protobuf-2.6.1.tar.gz -C /usr/local/ && cd /usr/local/protobuf-2.6.1
+//
+// ```
+//
+// 
+//
+// Run the following commands to start compilation and installation, and configure the environment variables:
+//
+// 
+//
+// ```
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# ./configure 
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# make && make install
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# export PATH=$PATH:/usr/local/protobuf-2.6.1/bin
+//
+// ```
+//
+// 
+//
+// After the compilation succeeds, run the following command to check the version:
+//
+// 
+//
+// ```
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# protoc --version
+//
+// liprotoc 2.6.1
+//
+// ```
+//
+// 
+//
+// #### 2. Create a pb description file
+//
+// 
+//
+// A pb description file is an agreed-on data interchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+//
+// 
+//
+// Create a pb message description file `cls.proto` based on the pb data format content specified by CLS.
+//
+// 
+//
+// > !The pb description file content cannot be modified, and the filename must end with `.proto`.
+//
+// 
+//
+// The content of `cls.proto` (pb description file) is as follows:
+//
+// 
+//
+// ```
+//
+// package cls;
+//
+// 
+//
+// message Log
+//
+// {
+//
+//     message Content
+//
+//     {
+//
+//         required string key   = 1; // Key of each field group
+//
+//         required string value = 2; // Value of each field group
+//
+//     }
+//
+//     required int64   time     = 1; // Unix timestamp
+//
+//     repeated Content contents = 2; // Multiple key-value pairs in one log
+//
+// }
+//
+// 
+//
+// message LogTag
+//
+// {
+//
+//     required string key       = 1;
+//
+//     required string value     = 2;
+//
+// }
+//
+// 
+//
+// message LogGroup
+//
+// {
+//
+//     repeated Log    logs        = 1; // Log array consisting of multiple logs
+//
+//     optional string contextFlow = 2; // This parameter does not take effect currently
+//
+//     optional string filename    = 3; // Log filename
+//
+//     optional string source      = 4; // Log source, which is generally the machine IP
+//
+//     repeated LogTag logTags     = 5;
+//
+// }
+//
+// 
+//
+// message LogGroupList
+//
+// {
+//
+//     repeated LogGroup logGroupList = 1; // Log group list
+//
+// }
+//
+// ```
+//
+// 
+//
+// #### 3. Compile and generate the API
+//
+// 
+//
+// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation commands:
+//
+// 
+//
+// ```
+//
+// protoc --cpp_out=./ ./cls.proto 
+//
+// ```
+//
+// 
+//
+// > ?`--cpp_out=./ ` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
+//
+// 
+//
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and `cls.pb.cc` code implementation file as shown below:
+//
+// 
+//
+// ```
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# protoc --cpp_out=./ ./cls.proto
+//
+// [root@VM_0_8_centos protobuf-2.6.1]# ls
+//
+// cls.pb.cc cls.pb.h cls.proto
+//
+// ```
+//
+// 
+//
+// #### 4. Call the API
+//
+// 
+//
+// Import the generated `cls.pb.h` header file into the code and call the API for data encapsulation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MISSINGCONTENT = "FailedOperation.MissingContent"
+//  FAILEDOPERATION_READQPSLIMIT = "FailedOperation.ReadQpsLimit"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  FAILEDOPERATION_WRITEQPSLIMIT = "FailedOperation.WriteQpsLimit"
+//  FAILEDOPERATION_WRITETRAFFICLIMIT = "FailedOperation.WriteTrafficLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  LIMITEXCEEDED_LOGSIZE = "LimitExceeded.LogSize"
+//  LIMITEXCEEDED_TAG = "LimitExceeded.Tag"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) UploadLogWithContext(ctx context.Context, request *UploadLogRequest, data []byte) (response *UploadLogResponse, err error) {
+    if request == nil {
+        request = NewUploadLogRequest()
+    }
+    request.SetContext(ctx)
     request.SetBody(data)
     response = NewUploadLogResponse()
     err = c.SendOctetStream(request, response)

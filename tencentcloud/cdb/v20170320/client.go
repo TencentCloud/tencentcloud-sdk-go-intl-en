@@ -15,6 +15,7 @@
 package v20170320
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,6 +78,24 @@ func (c *Client) AddTimeWindow(request *AddTimeWindowRequest) (response *AddTime
     return
 }
 
+// AddTimeWindow
+// This API (AddTimeWindow) is used to add a maintenance time window for a TencentDB instance, so as to specify when the instance can automatically perform access switch operations.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+func (c *Client) AddTimeWindowWithContext(ctx context.Context, request *AddTimeWindowRequest) (response *AddTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewAddTimeWindowRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsRequest) {
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -109,6 +128,28 @@ func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest
     if request == nil {
         request = NewAssociateSecurityGroupsRequest()
     }
+    
+    response = NewAssociateSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AssociateSecurityGroups
+// This API (AssociateSecurityGroups) is used to bind security groups to instances in batches.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_RESOURCENOTMATCH = "InternalError.ResourceNotMatch"
+//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) AssociateSecurityGroupsWithContext(ctx context.Context, request *AssociateSecurityGroupsRequest) (response *AssociateSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewAssociateSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAssociateSecurityGroupsResponse()
     err = c.Send(request, response)
@@ -151,6 +192,26 @@ func (c *Client) BalanceRoGroupLoad(request *BalanceRoGroupLoadRequest) (respons
     return
 }
 
+// BalanceRoGroupLoad
+// This API is used to rebalance the loads of instances in an RO group. Please note that the database connections to those instances will be interrupted transiently; therefore, you should ensure that your application can reconnect to the databases. This operation should be performed with caution.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) BalanceRoGroupLoadWithContext(ctx context.Context, request *BalanceRoGroupLoadRequest) (response *BalanceRoGroupLoadResponse, err error) {
+    if request == nil {
+        request = NewBalanceRoGroupLoadRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBalanceRoGroupLoadResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseWanServiceRequest() (request *CloseWanServiceRequest) {
     request = &CloseWanServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -182,6 +243,27 @@ func (c *Client) CloseWanService(request *CloseWanServiceRequest) (response *Clo
     if request == nil {
         request = NewCloseWanServiceRequest()
     }
+    
+    response = NewCloseWanServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CloseWanService
+// This API (CloseWanService) is used to disable public network access for TencentDB instance, which will make public IP addresses inaccessible.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) CloseWanServiceWithContext(ctx context.Context, request *CloseWanServiceRequest) (response *CloseWanServiceResponse, err error) {
+    if request == nil {
+        request = NewCloseWanServiceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCloseWanServiceResponse()
     err = c.Send(request, response)
@@ -244,6 +326,52 @@ func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *Creat
     if request == nil {
         request = NewCreateAccountsRequest()
     }
+    
+    response = NewCreateAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateAccounts
+// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) CreateAccountsWithContext(ctx context.Context, request *CreateAccountsRequest) (response *CreateAccountsResponse, err error) {
+    if request == nil {
+        request = NewCreateAccountsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateAccountsResponse()
     err = c.Send(request, response)
@@ -313,6 +441,53 @@ func (c *Client) CreateAuditPolicy(request *CreateAuditPolicyRequest) (response 
     return
 }
 
+// CreateAuditPolicy
+// This API is used to create an audit policy for a TencentDB instance by associating an audit rule with the TencentDB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
+//  FAILEDOPERATION_TYPEINCONFLICT = "FailedOperation.TypeInConflict"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_AUDITOSSLOGICERROR = "InternalError.AuditOssLogicError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_SERVICEERROR = "InternalError.ServiceError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_AUDITPOLICYCONFLICTERROR = "OperationDenied.AuditPolicyConflictError"
+//  OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
+//  OPERATIONDENIED_AUDITRULEHASBIND = "OperationDenied.AuditRuleHasBind"
+//  OPERATIONDENIED_AUDITRULENOTEXISTERROR = "OperationDenied.AuditRuleNotExistError"
+//  OPERATIONDENIED_AUDITSTATUSERROR = "OperationDenied.AuditStatusError"
+//  OPERATIONDENIED_AUDITTASKCONFLICTERROR = "OperationDenied.AuditTaskConflictError"
+//  OPERATIONDENIED_DBBRAINPOLICYCONFLICT = "OperationDenied.DBBrainPolicyConflict"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateAuditPolicyWithContext(ctx context.Context, request *CreateAuditPolicyRequest) (response *CreateAuditPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateAuditPolicyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAuditPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBackupRequest() (request *CreateBackupRequest) {
     request = &CreateBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -349,6 +524,32 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
     if request == nil {
         request = NewCreateBackupRequest()
     }
+    
+    response = NewCreateBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateBackup
+// This API (CreateBackup) is used to create a TencentDB instance backup.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OVERQUOTA = "OverQuota"
+func (c *Client) CreateBackupWithContext(ctx context.Context, request *CreateBackupRequest) (response *CreateBackupResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateBackupResponse()
     err = c.Send(request, response)
@@ -395,6 +596,30 @@ func (c *Client) CreateCloneInstance(request *CreateCloneInstanceRequest) (respo
     return
 }
 
+// CreateCloneInstance
+// This API is used to create a clone of a specific instance, and roll back the clone by using a physical backup file of the instance or roll back the clone to a point in time.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) CreateCloneInstanceWithContext(ctx context.Context, request *CreateCloneInstanceRequest) (response *CreateCloneInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateCloneInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateCloneInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBImportJobRequest() (request *CreateDBImportJobRequest) {
     request = &CreateDBImportJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -433,6 +658,34 @@ func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response 
     if request == nil {
         request = NewCreateDBImportJobRequest()
     }
+    
+    response = NewCreateDBImportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateDBImportJob
+// This API (CreateDBImportJob) is used to create a data import task for a TencentDB instance.
+//
+// 
+//
+// Note that the files for a data import task must be uploaded to Tencent Cloud in advance. You need to do so in the console.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  CDBERROR_IMPORTERROR = "CdbError.ImportError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) CreateDBImportJobWithContext(ctx context.Context, request *CreateDBImportJobRequest) (response *CreateDBImportJobResponse, err error) {
+    if request == nil {
+        request = NewCreateDBImportJobRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateDBImportJobResponse()
     err = c.Send(request, response)
@@ -499,6 +752,50 @@ func (c *Client) CreateDBInstanceHour(request *CreateDBInstanceHourRequest) (res
     return
 }
 
+// CreateDBInstanceHour
+// This API is used to create pay-as-you-go TencentDB instances (which can be source instances, disaster recovery instances, or read-only replicas) by passing in information such as instance specifications, MySQL version number, and instance quantity.
+//
+// 
+//
+// This is an asynchronous API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query instance details. If the output parameter `Status` is `1` and the output parameter `TaskStatus` is `0`, the instances have been successfully delivered.
+//
+// 
+//
+// 1. Use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances;
+//
+// 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months;
+//
+// 3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported;
+//
+// 4. Source instances, disaster recovery instances, and read-only replicas can be created;
+//
+// 5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+func (c *Client) CreateDBInstanceHourWithContext(ctx context.Context, request *CreateDBInstanceHourRequest) (response *CreateDBInstanceHourResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceHourRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstanceHourResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDeployGroupRequest() (request *CreateDeployGroupRequest) {
     request = &CreateDeployGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -537,6 +834,28 @@ func (c *Client) CreateDeployGroup(request *CreateDeployGroupRequest) (response 
     return
 }
 
+// CreateDeployGroup
+// This API is used to create a placement group for placing instances.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
+//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+func (c *Client) CreateDeployGroupWithContext(ctx context.Context, request *CreateDeployGroupRequest) (response *CreateDeployGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateDeployGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateDeployGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateParamTemplateRequest() (request *CreateParamTemplateRequest) {
     request = &CreateParamTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -569,6 +888,28 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
     if request == nil {
         request = NewCreateParamTemplateRequest()
     }
+    
+    response = NewCreateParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateParamTemplate
+// This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDNAME = "InvalidParameter.InvalidName"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) CreateParamTemplateWithContext(ctx context.Context, request *CreateParamTemplateRequest) (response *CreateParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateParamTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateParamTemplateResponse()
     err = c.Send(request, response)
@@ -614,6 +955,35 @@ func (c *Client) CreateRoInstanceIp(request *CreateRoInstanceIpRequest) (respons
     if request == nil {
         request = NewCreateRoInstanceIpRequest()
     }
+    
+    response = NewCreateRoInstanceIpResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateRoInstanceIp
+// This API is used to create a VIP exclusive to a TencentDB read-only instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_CREATEROVIPERROR = "FailedOperation.CreateRoVipError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) CreateRoInstanceIpWithContext(ctx context.Context, request *CreateRoInstanceIpRequest) (response *CreateRoInstanceIpResponse, err error) {
+    if request == nil {
+        request = NewCreateRoInstanceIpRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateRoInstanceIpResponse()
     err = c.Send(request, response)
@@ -679,6 +1049,49 @@ func (c *Client) DeleteAccounts(request *DeleteAccountsRequest) (response *Delet
     return
 }
 
+// DeleteAccounts
+// This API (DeleteAccounts) is used to delete TencentDB accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) DeleteAccountsWithContext(ctx context.Context, request *DeleteAccountsRequest) (response *DeleteAccountsResponse, err error) {
+    if request == nil {
+        request = NewDeleteAccountsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBackupRequest() (request *DeleteBackupRequest) {
     request = &DeleteBackupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -710,6 +1123,27 @@ func (c *Client) DeleteBackup(request *DeleteBackupRequest) (response *DeleteBac
     if request == nil {
         request = NewDeleteBackupRequest()
     }
+    
+    response = NewDeleteBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteBackup
+// This API is used to delete a database backup. It can only delete manually initiated backups.
+//
+// error code that may be returned:
+//  CDBERROR_BACKUPERROR = "CdbError.BackupError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DeleteBackupWithContext(ctx context.Context, request *DeleteBackupRequest) (response *DeleteBackupResponse, err error) {
+    if request == nil {
+        request = NewDeleteBackupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteBackupResponse()
     err = c.Send(request, response)
@@ -753,6 +1187,27 @@ func (c *Client) DeleteDeployGroups(request *DeleteDeployGroupsRequest) (respons
     return
 }
 
+// DeleteDeployGroups
+// This API is used to delete placement groups by placement group ID (a placement group cannot be deleted if it contains resources).
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
+//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) DeleteDeployGroupsWithContext(ctx context.Context, request *DeleteDeployGroupsRequest) (response *DeleteDeployGroupsResponse, err error) {
+    if request == nil {
+        request = NewDeleteDeployGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteDeployGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteParamTemplateRequest() (request *DeleteParamTemplateRequest) {
     request = &DeleteParamTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -786,6 +1241,23 @@ func (c *Client) DeleteParamTemplate(request *DeleteParamTemplateRequest) (respo
     return
 }
 
+// DeleteParamTemplate
+// This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteParamTemplateWithContext(ctx context.Context, request *DeleteParamTemplateRequest) (response *DeleteParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteParamTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteTimeWindowRequest() (request *DeleteTimeWindowRequest) {
     request = &DeleteTimeWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -813,6 +1285,23 @@ func (c *Client) DeleteTimeWindow(request *DeleteTimeWindowRequest) (response *D
     if request == nil {
         request = NewDeleteTimeWindowRequest()
     }
+    
+    response = NewDeleteTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteTimeWindow
+// This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DeleteTimeWindowWithContext(ctx context.Context, request *DeleteTimeWindowRequest) (response *DeleteTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewDeleteTimeWindowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteTimeWindowResponse()
     err = c.Send(request, response)
@@ -875,6 +1364,52 @@ func (c *Client) DescribeAccountPrivileges(request *DescribeAccountPrivilegesReq
     if request == nil {
         request = NewDescribeAccountPrivilegesRequest()
     }
+    
+    response = NewDescribeAccountPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAccountPrivileges
+// This API (DescribeAccountPrivileges) is used to query the information of TencentDB account permissions.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) DescribeAccountPrivilegesWithContext(ctx context.Context, request *DescribeAccountPrivilegesRequest) (response *DescribeAccountPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccountPrivilegesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAccountPrivilegesResponse()
     err = c.Send(request, response)
@@ -945,6 +1480,54 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
     return
 }
 
+// DescribeAccounts
+// This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccountsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequest) {
     request = &DescribeAsyncRequestInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -977,6 +1560,28 @@ func (c *Client) DescribeAsyncRequestInfo(request *DescribeAsyncRequestInfoReque
     if request == nil {
         request = NewDescribeAsyncRequestInfoRequest()
     }
+    
+    response = NewDescribeAsyncRequestInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAsyncRequestInfo
+// This API (DescribeAsyncRequestInfo) is used to query the async task execution result of a TencentDB instance.
+//
+// error code that may be returned:
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDASYNCREQUESTID = "InvalidParameter.InvalidAsyncRequestId"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, request *DescribeAsyncRequestInfoRequest) (response *DescribeAsyncRequestInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeAsyncRequestInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAsyncRequestInfoResponse()
     err = c.Send(request, response)
@@ -1022,6 +1627,29 @@ func (c *Client) DescribeBackupConfig(request *DescribeBackupConfigRequest) (res
     return
 }
 
+// DescribeBackupConfig
+// This API (DescribeBackupConfig) is used to query the configuration information of a TencentDB instance backup.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeBackupConfigWithContext(ctx context.Context, request *DescribeBackupConfigRequest) (response *DescribeBackupConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupDownloadRestrictionRequest() (request *DescribeBackupDownloadRestrictionRequest) {
     request = &DescribeBackupDownloadRestrictionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1049,6 +1677,23 @@ func (c *Client) DescribeBackupDownloadRestriction(request *DescribeBackupDownlo
     if request == nil {
         request = NewDescribeBackupDownloadRestrictionRequest()
     }
+    
+    response = NewDescribeBackupDownloadRestrictionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBackupDownloadRestriction
+// This API is used to query the restrictions of downloading backups in a region.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) DescribeBackupDownloadRestrictionWithContext(ctx context.Context, request *DescribeBackupDownloadRestrictionRequest) (response *DescribeBackupDownloadRestrictionResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupDownloadRestrictionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBackupDownloadRestrictionResponse()
     err = c.Send(request, response)
@@ -1089,6 +1734,24 @@ func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) 
     return
 }
 
+// DescribeBackupOverview
+// This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeBackupOverviewWithContext(ctx context.Context, request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupOverviewRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupSummariesRequest() (request *DescribeBackupSummariesRequest) {
     request = &DescribeBackupSummariesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1118,6 +1781,25 @@ func (c *Client) DescribeBackupSummaries(request *DescribeBackupSummariesRequest
     if request == nil {
         request = NewDescribeBackupSummariesRequest()
     }
+    
+    response = NewDescribeBackupSummariesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBackupSummaries
+// This API is used to query the statistics of backups. It will return the capacity used by backups at the instance level and the number and used capacity of data backups and log backups of each instance (all capacity values are in bytes).
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
+func (c *Client) DescribeBackupSummariesWithContext(ctx context.Context, request *DescribeBackupSummariesRequest) (response *DescribeBackupSummariesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupSummariesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBackupSummariesResponse()
     err = c.Send(request, response)
@@ -1164,6 +1846,30 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
     return
 }
 
+// DescribeBackups
+// This API (DescribeBackups) is used to query the backups of a TencentDB instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) DescribeBackupsWithContext(ctx context.Context, request *DescribeBackupsRequest) (response *DescribeBackupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBinlogBackupOverviewRequest() (request *DescribeBinlogBackupOverviewRequest) {
     request = &DescribeBinlogBackupOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1192,6 +1898,24 @@ func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverv
     if request == nil {
         request = NewDescribeBinlogBackupOverviewRequest()
     }
+    
+    response = NewDescribeBinlogBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBinlogBackupOverview
+// This API is used to query the log backup overview of a user in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
+func (c *Client) DescribeBinlogBackupOverviewWithContext(ctx context.Context, request *DescribeBinlogBackupOverviewRequest) (response *DescribeBinlogBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBinlogBackupOverviewRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBinlogBackupOverviewResponse()
     err = c.Send(request, response)
@@ -1234,6 +1958,26 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
     return
 }
 
+// DescribeBinlogs
+// This API is used to query the list of binlog files of a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeBinlogsWithContext(ctx context.Context, request *DescribeBinlogsRequest) (response *DescribeBinlogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBinlogsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBinlogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCloneListRequest() (request *DescribeCloneListRequest) {
     request = &DescribeCloneListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1261,6 +2005,23 @@ func (c *Client) DescribeCloneList(request *DescribeCloneListRequest) (response 
     if request == nil {
         request = NewDescribeCloneListRequest()
     }
+    
+    response = NewDescribeCloneListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCloneList
+// This API is used to query the clone task list of an instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+func (c *Client) DescribeCloneListWithContext(ctx context.Context, request *DescribeCloneListRequest) (response *DescribeCloneListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloneListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCloneListResponse()
     err = c.Send(request, response)
@@ -1295,6 +2056,24 @@ func (c *Client) DescribeDBImportRecords(request *DescribeDBImportRecordsRequest
     if request == nil {
         request = NewDescribeDBImportRecordsRequest()
     }
+    
+    response = NewDescribeDBImportRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBImportRecords
+// This API (DescribeDBImportRecords) is used to query the records of import tasks in a TencentDB instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_INVALIDASYNCREQUESTID = "InvalidParameter.InvalidAsyncRequestId"
+func (c *Client) DescribeDBImportRecordsWithContext(ctx context.Context, request *DescribeDBImportRecordsRequest) (response *DescribeDBImportRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBImportRecordsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBImportRecordsResponse()
     err = c.Send(request, response)
@@ -1340,6 +2119,29 @@ func (c *Client) DescribeDBInstanceCharset(request *DescribeDBInstanceCharsetReq
     return
 }
 
+// DescribeDBInstanceCharset
+// This API (DescribeDBInstanceCharset) is used to query the character set and its name of a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_EXESQLERROR = "InternalError.ExeSqlError"
+//  INTERNALERROR_OSSERROR = "InternalError.OssError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDBInstanceCharsetWithContext(ctx context.Context, request *DescribeDBInstanceCharsetRequest) (response *DescribeDBInstanceCharsetResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceCharsetRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceCharsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstanceConfigRequest() (request *DescribeDBInstanceConfigRequest) {
     request = &DescribeDBInstanceConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1373,6 +2175,29 @@ func (c *Client) DescribeDBInstanceConfig(request *DescribeDBInstanceConfigReque
     if request == nil {
         request = NewDescribeDBInstanceConfigRequest()
     }
+    
+    response = NewDescribeDBInstanceConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBInstanceConfig
+// This API (DescribeDBInstanceConfig) is used to query the configuration information of a TencentDB instance, such as its synchronization mode and deployment mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDBInstanceConfigWithContext(ctx context.Context, request *DescribeDBInstanceConfigRequest) (response *DescribeDBInstanceConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceConfigRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBInstanceConfigResponse()
     err = c.Send(request, response)
@@ -1415,6 +2240,26 @@ func (c *Client) DescribeDBInstanceGTID(request *DescribeDBInstanceGTIDRequest) 
     return
 }
 
+// DescribeDBInstanceGTID
+// This API (DescribeDBInstanceGTID) is used to query whether GTID is activated for a TencentDB instance. Instances on or below version 5.5 are not supported.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSERROR = "InternalError.OssError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDBInstanceGTIDWithContext(ctx context.Context, request *DescribeDBInstanceGTIDRequest) (response *DescribeDBInstanceGTIDResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceGTIDRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceGTIDResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstanceInfoRequest() (request *DescribeDBInstanceInfoRequest) {
     request = &DescribeDBInstanceInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1448,6 +2293,23 @@ func (c *Client) DescribeDBInstanceInfo(request *DescribeDBInstanceInfoRequest) 
     return
 }
 
+// DescribeDBInstanceInfo
+// This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
+func (c *Client) DescribeDBInstanceInfoWithContext(ctx context.Context, request *DescribeDBInstanceInfoRequest) (response *DescribeDBInstanceInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstanceRebootTimeRequest() (request *DescribeDBInstanceRebootTimeRequest) {
     request = &DescribeDBInstanceRebootTimeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1474,6 +2336,22 @@ func (c *Client) DescribeDBInstanceRebootTime(request *DescribeDBInstanceRebootT
     if request == nil {
         request = NewDescribeDBInstanceRebootTimeRequest()
     }
+    
+    response = NewDescribeDBInstanceRebootTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBInstanceRebootTime
+// This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDBInstanceRebootTimeWithContext(ctx context.Context, request *DescribeDBInstanceRebootTimeRequest) (response *DescribeDBInstanceRebootTimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceRebootTimeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBInstanceRebootTimeResponse()
     err = c.Send(request, response)
@@ -1525,6 +2403,35 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
     return
 }
 
+// DescribeDBInstances
+// This API (DescribeDBInstances) is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, access address, and instance status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSecurityGroupsRequest() (request *DescribeDBSecurityGroupsRequest) {
     request = &DescribeDBSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1567,6 +2474,32 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
     return
 }
 
+// DescribeDBSecurityGroups
+// This API (DescribeDBSecurityGroups) is used to query the security group details of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
+//  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
+//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSwitchRecordsRequest() (request *DescribeDBSwitchRecordsRequest) {
     request = &DescribeDBSwitchRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1595,6 +2528,24 @@ func (c *Client) DescribeDBSwitchRecords(request *DescribeDBSwitchRecordsRequest
     if request == nil {
         request = NewDescribeDBSwitchRecordsRequest()
     }
+    
+    response = NewDescribeDBSwitchRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBSwitchRecords
+// This API (DescribeDBSwitchRecords) is used to query the instance switch records.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDBSwitchRecordsWithContext(ctx context.Context, request *DescribeDBSwitchRecordsRequest) (response *DescribeDBSwitchRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSwitchRecordsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBSwitchRecordsResponse()
     err = c.Send(request, response)
@@ -1635,6 +2586,24 @@ func (c *Client) DescribeDBZoneConfig(request *DescribeDBZoneConfigRequest) (res
     return
 }
 
+// DescribeDBZoneConfig
+// This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDBZoneConfigWithContext(ctx context.Context, request *DescribeDBZoneConfigRequest) (response *DescribeDBZoneConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBZoneConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBZoneConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataBackupOverviewRequest() (request *DescribeDataBackupOverviewRequest) {
     request = &DescribeDataBackupOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1662,6 +2631,23 @@ func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewR
     if request == nil {
         request = NewDescribeDataBackupOverviewRequest()
     }
+    
+    response = NewDescribeDataBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDataBackupOverview
+// This API is used to query the data backup overview of a user in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) DescribeDataBackupOverviewWithContext(ctx context.Context, request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataBackupOverviewRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDataBackupOverviewResponse()
     err = c.Send(request, response)
@@ -1709,6 +2695,31 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
     return
 }
 
+// DescribeDatabases
+// This API is used to query the information of databases in a TencentDB instance which must be a source or disaster recovery instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_EXESQLERROR = "InternalError.ExeSqlError"
+//  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *DescribeDatabasesRequest) (response *DescribeDatabasesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabasesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatabasesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDefaultParamsRequest() (request *DescribeDefaultParamsRequest) {
     request = &DescribeDefaultParamsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1739,6 +2750,26 @@ func (c *Client) DescribeDefaultParams(request *DescribeDefaultParamsRequest) (r
     if request == nil {
         request = NewDescribeDefaultParamsRequest()
     }
+    
+    response = NewDescribeDefaultParamsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDefaultParams
+// This API (DescribeDefaultParams) is used to query the list of default configurable parameters.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDefaultParamsWithContext(ctx context.Context, request *DescribeDefaultParamsRequest) (response *DescribeDefaultParamsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDefaultParamsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDefaultParamsResponse()
     err = c.Send(request, response)
@@ -1783,6 +2814,28 @@ func (c *Client) DescribeDeployGroupList(request *DescribeDeployGroupListRequest
     return
 }
 
+// DescribeDeployGroupList
+// This API is used to query the list of placement groups of a user. You can specify the placement group ID or name.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
+//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+func (c *Client) DescribeDeployGroupListWithContext(ctx context.Context, request *DescribeDeployGroupListRequest) (response *DescribeDeployGroupListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeployGroupListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeployGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDeviceMonitorInfoRequest() (request *DescribeDeviceMonitorInfoRequest) {
     request = &DescribeDeviceMonitorInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1820,6 +2873,33 @@ func (c *Client) DescribeDeviceMonitorInfo(request *DescribeDeviceMonitorInfoReq
     if request == nil {
         request = NewDescribeDeviceMonitorInfoRequest()
     }
+    
+    response = NewDescribeDeviceMonitorInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDeviceMonitorInfo
+// This API (DescribeDeviceMonitorInfo) is used to query the monitoring information of a TencentDB physical machine on the day. Currently, it only supports instances with 488 GB memory and 6 TB disk.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_FUNCTIONDENIED = "OperationDenied.FunctionDenied"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) DescribeDeviceMonitorInfoWithContext(ctx context.Context, request *DescribeDeviceMonitorInfoRequest) (response *DescribeDeviceMonitorInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeviceMonitorInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDeviceMonitorInfoResponse()
     err = c.Send(request, response)
@@ -1871,6 +2951,35 @@ func (c *Client) DescribeErrorLogData(request *DescribeErrorLogDataRequest) (res
     return
 }
 
+// DescribeErrorLogData
+// This API is used to query the error logs of an instance over the past month by search criteria.
+//
+// Note: the HTTP response packet will be very large if it contain a single large error log, which causes the API call to time out. If this happens, we recommend you lower the value of the input parameter `Limit` to reduce the packet size so that the API can respond timely.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_RESULTOVERLIMIT = "OperationDenied.ResultOverLimit"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) DescribeErrorLogDataWithContext(ctx context.Context, request *DescribeErrorLogDataRequest) (response *DescribeErrorLogDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeErrorLogDataRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeErrorLogDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceParamRecordsRequest() (request *DescribeInstanceParamRecordsRequest) {
     request = &DescribeInstanceParamRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1900,6 +3009,25 @@ func (c *Client) DescribeInstanceParamRecords(request *DescribeInstanceParamReco
     if request == nil {
         request = NewDescribeInstanceParamRecordsRequest()
     }
+    
+    response = NewDescribeInstanceParamRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstanceParamRecords
+// This API (DescribeInstanceParamRecords) is used to query the parameter modification records of an instance.
+//
+// error code that may be returned:
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENAMENOTFOUND = "InvalidParameter.InstanceNameNotFound"
+func (c *Client) DescribeInstanceParamRecordsWithContext(ctx context.Context, request *DescribeInstanceParamRecordsRequest) (response *DescribeInstanceParamRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceParamRecordsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstanceParamRecordsResponse()
     err = c.Send(request, response)
@@ -1942,6 +3070,26 @@ func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) 
     return
 }
 
+// DescribeInstanceParams
+// This API (DescribeInstanceParams) is used to query the list of parameters for an instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request *DescribeInstanceParamsRequest) (response *DescribeInstanceParamsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceParamsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceParamsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeParamTemplateInfoRequest() (request *DescribeParamTemplateInfoRequest) {
     request = &DescribeParamTemplateInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1971,6 +3119,25 @@ func (c *Client) DescribeParamTemplateInfo(request *DescribeParamTemplateInfoReq
     if request == nil {
         request = NewDescribeParamTemplateInfoRequest()
     }
+    
+    response = NewDescribeParamTemplateInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeParamTemplateInfo
+// This API is used to query parameter template details. The common request parameter `Region` can only be set to `ap-guangzhou`.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeParamTemplateInfoWithContext(ctx context.Context, request *DescribeParamTemplateInfoRequest) (response *DescribeParamTemplateInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeParamTemplateInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeParamTemplateInfoResponse()
     err = c.Send(request, response)
@@ -2011,6 +3178,24 @@ func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) 
     return
 }
 
+// DescribeParamTemplates
+// This API (DescribeParamTemplates) is used to query the list of parameter templates
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeParamTemplatesWithContext(ctx context.Context, request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeParamTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeParamTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProjectSecurityGroupsRequest() (request *DescribeProjectSecurityGroupsRequest) {
     request = &DescribeProjectSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2042,6 +3227,27 @@ func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityG
     if request == nil {
         request = NewDescribeProjectSecurityGroupsRequest()
     }
+    
+    response = NewDescribeProjectSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProjectSecurityGroups
+// This API (DescribeProjectSecurityGroups) is used to query the security group details of a project.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
+//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, request *DescribeProjectSecurityGroupsRequest) (response *DescribeProjectSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProjectSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProjectSecurityGroupsResponse()
     err = c.Send(request, response)
@@ -2087,6 +3293,29 @@ func (c *Client) DescribeRoGroups(request *DescribeRoGroupsRequest) (response *D
     return
 }
 
+// DescribeRoGroups
+// This API is used to query the information of all RO groups of a TencentDB instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+func (c *Client) DescribeRoGroupsWithContext(ctx context.Context, request *DescribeRoGroupsRequest) (response *DescribeRoGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRoGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRoMinScaleRequest() (request *DescribeRoMinScaleRequest) {
     request = &DescribeRoMinScaleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2116,6 +3345,25 @@ func (c *Client) DescribeRoMinScale(request *DescribeRoMinScaleRequest) (respons
     if request == nil {
         request = NewDescribeRoMinScaleRequest()
     }
+    
+    response = NewDescribeRoMinScaleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRoMinScale
+// This API is used to query the minimum specification of a read-only instance that can be purchased or upgraded to.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+func (c *Client) DescribeRoMinScaleWithContext(ctx context.Context, request *DescribeRoMinScaleRequest) (response *DescribeRoMinScaleResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoMinScaleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRoMinScaleResponse()
     err = c.Send(request, response)
@@ -2157,6 +3405,25 @@ func (c *Client) DescribeRollbackRangeTime(request *DescribeRollbackRangeTimeReq
     return
 }
 
+// DescribeRollbackRangeTime
+// This API (DescribeRollbackRangeTime) is used to query the time range available for instance rollback.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeRollbackRangeTimeWithContext(ctx context.Context, request *DescribeRollbackRangeTimeRequest) (response *DescribeRollbackRangeTimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeRollbackRangeTimeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRollbackRangeTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRollbackTaskDetailRequest() (request *DescribeRollbackTaskDetailRequest) {
     request = &DescribeRollbackTaskDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2186,6 +3453,25 @@ func (c *Client) DescribeRollbackTaskDetail(request *DescribeRollbackTaskDetailR
     if request == nil {
         request = NewDescribeRollbackTaskDetailRequest()
     }
+    
+    response = NewDescribeRollbackTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRollbackTaskDetail
+// This API is used to query the details of a TencentDB instance rollback task.
+//
+// error code that may be returned:
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeRollbackTaskDetailWithContext(ctx context.Context, request *DescribeRollbackTaskDetailRequest) (response *DescribeRollbackTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeRollbackTaskDetailRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRollbackTaskDetailResponse()
     err = c.Send(request, response)
@@ -2238,6 +3524,36 @@ func (c *Client) DescribeSlowLogData(request *DescribeSlowLogDataRequest) (respo
     return
 }
 
+// DescribeSlowLogData
+// This API is used to query the slow logs of an instance over the past month by search criteria.
+//
+// Note: the HTTP response packet will be very large if it contain a single large slow log, which causes the API call to time out. If this happens, we recommend you lower the value of the input parameter `Limit` to reduce the packet size so that the API can respond timely.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_NOTSUPPORTBASIC = "OperationDenied.NotSupportBasic"
+//  OPERATIONDENIED_RESULTOVERLIMIT = "OperationDenied.ResultOverLimit"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) DescribeSlowLogDataWithContext(ctx context.Context, request *DescribeSlowLogDataRequest) (response *DescribeSlowLogDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogDataRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSlowLogDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSlowLogsRequest() (request *DescribeSlowLogsRequest) {
     request = &DescribeSlowLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2272,6 +3588,30 @@ func (c *Client) DescribeSlowLogs(request *DescribeSlowLogsRequest) (response *D
     if request == nil {
         request = NewDescribeSlowLogsRequest()
     }
+    
+    response = NewDescribeSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSlowLogs
+// This API (DescribeSlowLogs) is used to query the slow logs of a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) DescribeSlowLogsWithContext(ctx context.Context, request *DescribeSlowLogsRequest) (response *DescribeSlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSlowLogsResponse()
     err = c.Send(request, response)
@@ -2335,6 +3675,47 @@ func (c *Client) DescribeSupportedPrivileges(request *DescribeSupportedPrivilege
     return
 }
 
+// DescribeSupportedPrivileges
+// This API (DescribeSupportedPrivileges) is used to query the information of TencentDB account permissions, including global permissions, database permissions, table permissions, and column permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) DescribeSupportedPrivilegesWithContext(ctx context.Context, request *DescribeSupportedPrivilegesRequest) (response *DescribeSupportedPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSupportedPrivilegesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSupportedPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTablesRequest() (request *DescribeTablesRequest) {
     request = &DescribeTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2365,6 +3746,26 @@ func (c *Client) DescribeTables(request *DescribeTablesRequest) (response *Descr
     if request == nil {
         request = NewDescribeTablesRequest()
     }
+    
+    response = NewDescribeTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTables
+// This API is used to query the information of database tables in a TencentDB instance. It only supports source or disaster recovery instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeTablesWithContext(ctx context.Context, request *DescribeTablesRequest) (response *DescribeTablesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTablesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTablesResponse()
     err = c.Send(request, response)
@@ -2411,6 +3812,30 @@ func (c *Client) DescribeTagsOfInstanceIds(request *DescribeTagsOfInstanceIdsReq
     return
 }
 
+// DescribeTagsOfInstanceIds
+// This API (DescribeTagsOfInstanceIds) is used to query the tag information of a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_TASKERROR = "InternalError.TaskError"
+//  INTERNALERROR_TIMEWINDOWERROR = "InternalError.TimeWindowError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeTagsOfInstanceIdsWithContext(ctx context.Context, request *DescribeTagsOfInstanceIdsRequest) (response *DescribeTagsOfInstanceIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagsOfInstanceIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagsOfInstanceIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
     request = &DescribeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2451,6 +3876,30 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
     return
 }
 
+// DescribeTasks
+// This API (DescribeTasks) is used to query the list of tasks for a TencentDB instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) DescribeTasksWithContext(ctx context.Context, request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeTasksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimeWindowRequest() (request *DescribeTimeWindowRequest) {
     request = &DescribeTimeWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2484,6 +3933,23 @@ func (c *Client) DescribeTimeWindow(request *DescribeTimeWindowRequest) (respons
     return
 }
 
+// DescribeTimeWindow
+// This API (DescribeTimeWindow) is used to query the maintenance time window of a TencentDB instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DescribeTimeWindowWithContext(ctx context.Context, request *DescribeTimeWindowRequest) (response *DescribeTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewDescribeTimeWindowRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUploadedFilesRequest() (request *DescribeUploadedFilesRequest) {
     request = &DescribeUploadedFilesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2511,6 +3977,23 @@ func (c *Client) DescribeUploadedFiles(request *DescribeUploadedFilesRequest) (r
     if request == nil {
         request = NewDescribeUploadedFilesRequest()
     }
+    
+    response = NewDescribeUploadedFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeUploadedFiles
+// This API is used to query the list of user-imported SQL files.
+//
+// error code that may be returned:
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeUploadedFilesWithContext(ctx context.Context, request *DescribeUploadedFilesRequest) (response *DescribeUploadedFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadedFilesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeUploadedFilesResponse()
     err = c.Send(request, response)
@@ -2553,6 +4036,26 @@ func (c *Client) DisassociateSecurityGroups(request *DisassociateSecurityGroupsR
     return
 }
 
+// DisassociateSecurityGroups
+// This API (DisassociateSecurityGroups) is used to unbind security groups from instances in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_RESOURCENOTMATCH = "InternalError.ResourceNotMatch"
+//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DisassociateSecurityGroupsWithContext(ctx context.Context, request *DisassociateSecurityGroupsRequest) (response *DisassociateSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDisassociateSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInitDBInstancesRequest() (request *InitDBInstancesRequest) {
     request = &InitDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2582,6 +4085,25 @@ func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *Ini
     if request == nil {
         request = NewInitDBInstancesRequest()
     }
+    
+    response = NewInitDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InitDBInstances
+// This API (InitDBInstances) is used to initialize instances, including their password, default character set, and instance port number.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+func (c *Client) InitDBInstancesWithContext(ctx context.Context, request *InitDBInstancesRequest) (response *InitDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewInitDBInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewInitDBInstancesResponse()
     err = c.Send(request, response)
@@ -2628,6 +4150,36 @@ func (c *Client) IsolateDBInstance(request *IsolateDBInstanceRequest) (response 
     if request == nil {
         request = NewIsolateDBInstanceRequest()
     }
+    
+    response = NewIsolateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// IsolateDBInstance
+// This API is used to isolate a TencentDB instance, which will no longer be accessible via IP and port. The isolated instance can be started up in the recycle bin. If it is isolated due to arrears, please top up your account as soon as possible.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CDBINSTANCELOCKFAILERROR = "FailedOperation.CdbInstanceLockFailError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_INSTANCELOCKERCONFLICT = "OperationDenied.InstanceLockerConflict"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_UNSUPPORTREFUNDERROR = "OperationDenied.UnSupportRefundError"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *IsolateDBInstanceRequest) (response *IsolateDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewIsolateDBInstanceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewIsolateDBInstanceResponse()
     err = c.Send(request, response)
@@ -2693,6 +4245,49 @@ func (c *Client) ModifyAccountDescription(request *ModifyAccountDescriptionReque
     return
 }
 
+// ModifyAccountDescription
+// This API (ModifyAccountDescription) is used to modify the remarks of a TencentDB instance account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) ModifyAccountDescriptionWithContext(ctx context.Context, request *ModifyAccountDescriptionRequest) (response *ModifyAccountDescriptionResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountDescriptionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAccountDescriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAccountMaxUserConnectionsRequest() (request *ModifyAccountMaxUserConnectionsRequest) {
     request = &ModifyAccountMaxUserConnectionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2722,6 +4317,25 @@ func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserCo
     if request == nil {
         request = NewModifyAccountMaxUserConnectionsRequest()
     }
+    
+    response = NewModifyAccountMaxUserConnectionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAccountMaxUserConnections
+// This API is used to modify the maximum connections of one or more TencentDB instance accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCTASKSTATUSERROR = "FailedOperation.AsyncTaskStatusError"
+//  FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) ModifyAccountMaxUserConnectionsWithContext(ctx context.Context, request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountMaxUserConnectionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAccountMaxUserConnectionsResponse()
     err = c.Send(request, response)
@@ -2783,6 +4397,51 @@ func (c *Client) ModifyAccountPassword(request *ModifyAccountPasswordRequest) (r
     if request == nil {
         request = NewModifyAccountPasswordRequest()
     }
+    
+    response = NewModifyAccountPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAccountPassword
+// This API (ModifyAccountPassword) is used to modify the password of a TencentDB instance account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) ModifyAccountPasswordWithContext(ctx context.Context, request *ModifyAccountPasswordRequest) (response *ModifyAccountPasswordResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountPasswordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAccountPasswordResponse()
     err = c.Send(request, response)
@@ -2856,6 +4515,57 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
     return
 }
 
+// ModifyAccountPrivileges
+// This API is used to modify the permissions of a TencentDB instance account.
+//
+// 
+//
+// Note that when modifying account permissions, you need to pass in the full permission information of the account. You can [query the account permission information
+//
+// ](https://intl.cloud.tencent.com/document/api/236/17500?from_cn_redirect=1) first before modifying permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
+//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
+//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
+//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
+//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
+//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
+//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
+func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request *ModifyAccountPrivilegesRequest) (response *ModifyAccountPrivilegesResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountPrivilegesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAccountPrivilegesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAutoRenewFlagRequest() (request *ModifyAutoRenewFlagRequest) {
     request = &ModifyAutoRenewFlagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2884,6 +4594,24 @@ func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (respo
     if request == nil {
         request = NewModifyAutoRenewFlagRequest()
     }
+    
+    response = NewModifyAutoRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAutoRenewFlag
+// This API is used to modify the auto-renewal flag of a TencentDB instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyAutoRenewFlagWithContext(ctx context.Context, request *ModifyAutoRenewFlagRequest) (response *ModifyAutoRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyAutoRenewFlagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAutoRenewFlagResponse()
     err = c.Send(request, response)
@@ -2926,6 +4654,26 @@ func (c *Client) ModifyBackupConfig(request *ModifyBackupConfigRequest) (respons
     return
 }
 
+// ModifyBackupConfig
+// This API (ModifyBackupConfig) is used to modify the database backup configuration.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) ModifyBackupConfigWithContext(ctx context.Context, request *ModifyBackupConfigRequest) (response *ModifyBackupConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyBackupConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyBackupDownloadRestrictionRequest() (request *ModifyBackupDownloadRestrictionRequest) {
     request = &ModifyBackupDownloadRestrictionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2953,6 +4701,23 @@ func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRe
     if request == nil {
         request = NewModifyBackupDownloadRestrictionRequest()
     }
+    
+    response = NewModifyBackupDownloadRestrictionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyBackupDownloadRestriction
+// This API is used to modify the restrictions of downloading backups in a region. You can specify which types of networks (private, or both private and public), VPCs, and IPs to download backups.
+//
+// error code that may be returned:
+//  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+func (c *Client) ModifyBackupDownloadRestrictionWithContext(ctx context.Context, request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupDownloadRestrictionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyBackupDownloadRestrictionResponse()
     err = c.Send(request, response)
@@ -2994,6 +4759,25 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
     return
 }
 
+// ModifyDBInstanceName
+// This API (ModifyDBInstanceName) is used to rename a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) ModifyDBInstanceNameWithContext(ctx context.Context, request *ModifyDBInstanceNameRequest) (response *ModifyDBInstanceNameResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceNameRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceProjectRequest() (request *ModifyDBInstanceProjectRequest) {
     request = &ModifyDBInstanceProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3022,6 +4806,24 @@ func (c *Client) ModifyDBInstanceProject(request *ModifyDBInstanceProjectRequest
     if request == nil {
         request = NewModifyDBInstanceProjectRequest()
     }
+    
+    response = NewModifyDBInstanceProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDBInstanceProject
+// This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
+//
+// error code that may be returned:
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) ModifyDBInstanceProjectWithContext(ctx context.Context, request *ModifyDBInstanceProjectRequest) (response *ModifyDBInstanceProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceProjectRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyDBInstanceProjectResponse()
     err = c.Send(request, response)
@@ -3064,6 +4866,26 @@ func (c *Client) ModifyDBInstanceSecurityGroups(request *ModifyDBInstanceSecurit
     return
 }
 
+// ModifyDBInstanceSecurityGroups
+// This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
+//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) ModifyDBInstanceSecurityGroupsWithContext(ctx context.Context, request *ModifyDBInstanceSecurityGroupsRequest) (response *ModifyDBInstanceSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceVipVportRequest() (request *ModifyDBInstanceVipVportRequest) {
     request = &ModifyDBInstanceVipVportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3093,6 +4915,25 @@ func (c *Client) ModifyDBInstanceVipVport(request *ModifyDBInstanceVipVportReque
     if request == nil {
         request = NewModifyDBInstanceVipVportRequest()
     }
+    
+    response = NewModifyDBInstanceVipVportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDBInstanceVipVport
+// This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyDBInstanceVipVportWithContext(ctx context.Context, request *ModifyDBInstanceVipVportRequest) (response *ModifyDBInstanceVipVportResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceVipVportRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyDBInstanceVipVportResponse()
     err = c.Send(request, response)
@@ -3132,6 +4973,29 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
     if request == nil {
         request = NewModifyInstanceParamRequest()
     }
+    
+    response = NewModifyInstanceParamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyInstanceParam
+// This API (ModifyInstanceParam) is used to modify instance parameters.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) ModifyInstanceParamWithContext(ctx context.Context, request *ModifyInstanceParamRequest) (response *ModifyInstanceParamResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceParamRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyInstanceParamResponse()
     err = c.Send(request, response)
@@ -3183,6 +5047,35 @@ func (c *Client) ModifyInstanceTag(request *ModifyInstanceTagRequest) (response 
     return
 }
 
+// ModifyInstanceTag
+// This API (ModifyInstanceTag) is used to add, modify, or delete an instance tag.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  CDBERROR = "CdbError"
+//  CDBERROR_BACKUPERROR = "CdbError.BackupError"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  CDBERROR_IMPORTERROR = "CdbError.ImportError"
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  INTERNALERROR_COSERROR = "InternalError.CosError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
+func (c *Client) ModifyInstanceTagWithContext(ctx context.Context, request *ModifyInstanceTagRequest) (response *ModifyInstanceTagResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceTagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNameOrDescByDpIdRequest() (request *ModifyNameOrDescByDpIdRequest) {
     request = &ModifyNameOrDescByDpIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3220,6 +5113,27 @@ func (c *Client) ModifyNameOrDescByDpId(request *ModifyNameOrDescByDpIdRequest) 
     return
 }
 
+// ModifyNameOrDescByDpId
+// This API is used to modify the name or description of a placement group.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
+//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) ModifyNameOrDescByDpIdWithContext(ctx context.Context, request *ModifyNameOrDescByDpIdRequest) (response *ModifyNameOrDescByDpIdResponse, err error) {
+    if request == nil {
+        request = NewModifyNameOrDescByDpIdRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyNameOrDescByDpIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyParamTemplateRequest() (request *ModifyParamTemplateRequest) {
     request = &ModifyParamTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3250,6 +5164,26 @@ func (c *Client) ModifyParamTemplate(request *ModifyParamTemplateRequest) (respo
     if request == nil {
         request = NewModifyParamTemplateRequest()
     }
+    
+    response = NewModifyParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyParamTemplate
+// This API is used to modify a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
+//
+// error code that may be returned:
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
+func (c *Client) ModifyParamTemplateWithContext(ctx context.Context, request *ModifyParamTemplateRequest) (response *ModifyParamTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyParamTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyParamTemplateResponse()
     err = c.Send(request, response)
@@ -3296,6 +5230,30 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
     return
 }
 
+// ModifyRoGroupInfo
+// This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+func (c *Client) ModifyRoGroupInfoWithContext(ctx context.Context, request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyRoGroupInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyRoGroupInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyRoReplicationDelayRequest() (request *ModifyRoReplicationDelayRequest) {
     request = &ModifyRoReplicationDelayRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3335,6 +5293,29 @@ func (c *Client) ModifyRoReplicationDelay(request *ModifyRoReplicationDelayReque
     return
 }
 
+// ModifyRoReplicationDelay
+// This API is used to modify the replication delay of a delayed RO replica.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
+//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
+//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
+//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
+//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
+func (c *Client) ModifyRoReplicationDelayWithContext(ctx context.Context, request *ModifyRoReplicationDelayRequest) (response *ModifyRoReplicationDelayResponse, err error) {
+    if request == nil {
+        request = NewModifyRoReplicationDelayRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyRoReplicationDelayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTimeWindowRequest() (request *ModifyTimeWindowRequest) {
     request = &ModifyTimeWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3366,6 +5347,27 @@ func (c *Client) ModifyTimeWindow(request *ModifyTimeWindowRequest) (response *M
     if request == nil {
         request = NewModifyTimeWindowRequest()
     }
+    
+    response = NewModifyTimeWindowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyTimeWindow
+// This API (ModifyTimeWindow) is used to update the maintenance time window of a TencentDB instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyTimeWindowWithContext(ctx context.Context, request *ModifyTimeWindowRequest) (response *ModifyTimeWindowResponse, err error) {
+    if request == nil {
+        request = NewModifyTimeWindowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyTimeWindowResponse()
     err = c.Send(request, response)
@@ -3413,6 +5415,31 @@ func (c *Client) OfflineIsolatedInstances(request *OfflineIsolatedInstancesReque
     return
 }
 
+// OfflineIsolatedInstances
+// This API (OfflineIsolatedInstances) is used to deactivate isolated TencentDB instances immediately. The instances must be in isolated status, i.e., their `Status` value is 5 in the return of the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1).
+//
+// 
+//
+// This is an asynchronous API. There may be a delay in repossessing some resources. You can query the details by using the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) and specifying the InstanceId and the `Status` value as [5, 6, 7]. If the returned instance is empty, then all its resources have been released.
+//
+// 
+//
+// Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) OfflineIsolatedInstancesWithContext(ctx context.Context, request *OfflineIsolatedInstancesRequest) (response *OfflineIsolatedInstancesResponse, err error) {
+    if request == nil {
+        request = NewOfflineIsolatedInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewOfflineIsolatedInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenDBInstanceGTIDRequest() (request *OpenDBInstanceGTIDRequest) {
     request = &OpenDBInstanceGTIDRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3441,6 +5468,24 @@ func (c *Client) OpenDBInstanceGTID(request *OpenDBInstanceGTIDRequest) (respons
     if request == nil {
         request = NewOpenDBInstanceGTIDRequest()
     }
+    
+    response = NewOpenDBInstanceGTIDResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// OpenDBInstanceGTID
+// This API (OpenDBInstanceGTID) is used to enable GTID for a TencentDB instance. Only instances on or above version 5.6 are supported.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) OpenDBInstanceGTIDWithContext(ctx context.Context, request *OpenDBInstanceGTIDRequest) (response *OpenDBInstanceGTIDResponse, err error) {
+    if request == nil {
+        request = NewOpenDBInstanceGTIDRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewOpenDBInstanceGTIDResponse()
     err = c.Send(request, response)
@@ -3489,6 +5534,32 @@ func (c *Client) OpenWanService(request *OpenWanServiceRequest) (response *OpenW
     return
 }
 
+// OpenWanService
+// This API (OpenWanService) is used to enable public network access for an instance.
+//
+// 
+//
+// Note that before enabling public network access, you need to first [initialize the instance](https://intl.cloud.tencent.com/document/api/236/15873?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) OpenWanServiceWithContext(ctx context.Context, request *OpenWanServiceRequest) (response *OpenWanServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenWanServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewOpenWanServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReleaseIsolatedDBInstancesRequest() (request *ReleaseIsolatedDBInstancesRequest) {
     request = &ReleaseIsolatedDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3520,6 +5591,27 @@ func (c *Client) ReleaseIsolatedDBInstances(request *ReleaseIsolatedDBInstancesR
     if request == nil {
         request = NewReleaseIsolatedDBInstancesRequest()
     }
+    
+    response = NewReleaseIsolatedDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ReleaseIsolatedDBInstances
+// This API is used to deisolate an isolated TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) ReleaseIsolatedDBInstancesWithContext(ctx context.Context, request *ReleaseIsolatedDBInstancesRequest) (response *ReleaseIsolatedDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewReleaseIsolatedDBInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewReleaseIsolatedDBInstancesResponse()
     err = c.Send(request, response)
@@ -3572,6 +5664,36 @@ func (c *Client) RestartDBInstances(request *RestartDBInstancesRequest) (respons
     return
 }
 
+// RestartDBInstances
+// This API (RestartDBInstances) is used to restart TencentDB instances.
+//
+// 
+//
+// Note:
+//
+// 1. This API only supports restarting primary instances.
+//
+// 2. The instance status must be normal, and no other async tasks are in progress.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) RestartDBInstancesWithContext(ctx context.Context, request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewRestartDBInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRestartDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartBatchRollbackRequest() (request *StartBatchRollbackRequest) {
     request = &StartBatchRollbackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3605,6 +5727,29 @@ func (c *Client) StartBatchRollback(request *StartBatchRollbackRequest) (respons
     if request == nil {
         request = NewStartBatchRollbackRequest()
     }
+    
+    response = NewStartBatchRollbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StartBatchRollback
+// This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
+//
+// error code that may be returned:
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+//  OVERQUOTA = "OverQuota"
+func (c *Client) StartBatchRollbackWithContext(ctx context.Context, request *StartBatchRollbackRequest) (response *StartBatchRollbackResponse, err error) {
+    if request == nil {
+        request = NewStartBatchRollbackRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStartBatchRollbackResponse()
     err = c.Send(request, response)
@@ -3651,6 +5796,30 @@ func (c *Client) StartDelayReplication(request *StartDelayReplicationRequest) (r
     return
 }
 
+// StartDelayReplication
+// This API is used to start delayed replication on a delayed RO replica.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
+//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
+//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
+//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
+//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) StartDelayReplicationWithContext(ctx context.Context, request *StartDelayReplicationRequest) (response *StartDelayReplicationResponse, err error) {
+    if request == nil {
+        request = NewStartDelayReplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStartDelayReplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopDBImportJobRequest() (request *StopDBImportJobRequest) {
     request = &StopDBImportJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3680,6 +5849,25 @@ func (c *Client) StopDBImportJob(request *StopDBImportJobRequest) (response *Sto
     if request == nil {
         request = NewStopDBImportJobRequest()
     }
+    
+    response = NewStopDBImportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopDBImportJob
+// This API (StopDBImportJob) is used to stop a data import task.
+//
+// error code that may be returned:
+//  CDBERROR_IMPORTERROR = "CdbError.ImportError"
+//  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDASYNCREQUESTID = "InvalidParameter.InvalidAsyncRequestId"
+func (c *Client) StopDBImportJobWithContext(ctx context.Context, request *StopDBImportJobRequest) (response *StopDBImportJobResponse, err error) {
+    if request == nil {
+        request = NewStopDBImportJobRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStopDBImportJobResponse()
     err = c.Send(request, response)
@@ -3725,6 +5913,29 @@ func (c *Client) StopDelayReplication(request *StopDelayReplicationRequest) (res
     return
 }
 
+// StopDelayReplication
+// This API is used to stop delayed replication on a delayed RO replica.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
+//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
+//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
+//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
+//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
+func (c *Client) StopDelayReplicationWithContext(ctx context.Context, request *StopDelayReplicationRequest) (response *StopDelayReplicationResponse, err error) {
+    if request == nil {
+        request = NewStopDelayReplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStopDelayReplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopRollbackRequest() (request *StopRollbackRequest) {
     request = &StopRollbackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3757,6 +5968,28 @@ func (c *Client) StopRollback(request *StopRollbackRequest) (response *StopRollb
     if request == nil {
         request = NewStopRollbackRequest()
     }
+    
+    response = NewStopRollbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopRollback
+// This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  CDBERROR_TASKERROR = "CdbError.TaskError"
+//  INTERNALERROR_ASYNCREQUESTERROR = "InternalError.AsyncRequestError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DESERROR = "InternalError.DesError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) StopRollbackWithContext(ctx context.Context, request *StopRollbackRequest) (response *StopRollbackResponse, err error) {
+    if request == nil {
+        request = NewStopRollbackRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStopRollbackResponse()
     err = c.Send(request, response)
@@ -3802,6 +6035,29 @@ func (c *Client) SwitchDBInstanceMasterSlave(request *SwitchDBInstanceMasterSlav
     return
 }
 
+// SwitchDBInstanceMasterSlave
+// This API is used for source-to-replica switch.
+//
+// error code that may be returned:
+//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_INSTANCEUNSUPPORTEDOPERATEERROR = "OperationDenied.InstanceUnsupportedOperateError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) SwitchDBInstanceMasterSlaveWithContext(ctx context.Context, request *SwitchDBInstanceMasterSlaveRequest) (response *SwitchDBInstanceMasterSlaveResponse, err error) {
+    if request == nil {
+        request = NewSwitchDBInstanceMasterSlaveRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSwitchDBInstanceMasterSlaveResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSwitchDrInstanceToMasterRequest() (request *SwitchDrInstanceToMasterRequest) {
     request = &SwitchDrInstanceToMasterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3837,6 +6093,25 @@ func (c *Client) SwitchDrInstanceToMaster(request *SwitchDrInstanceToMasterReque
     return
 }
 
+// SwitchDrInstanceToMaster
+// This API is used to promote a disaster recovery instance to source instance. The request parameter `Region` must be the region of the disaster recovery instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
+func (c *Client) SwitchDrInstanceToMasterWithContext(ctx context.Context, request *SwitchDrInstanceToMasterRequest) (response *SwitchDrInstanceToMasterResponse, err error) {
+    if request == nil {
+        request = NewSwitchDrInstanceToMasterRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSwitchDrInstanceToMasterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSwitchForUpgradeRequest() (request *SwitchForUpgradeRequest) {
     request = &SwitchForUpgradeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3866,6 +6141,25 @@ func (c *Client) SwitchForUpgrade(request *SwitchForUpgradeRequest) (response *S
     if request == nil {
         request = NewSwitchForUpgradeRequest()
     }
+    
+    response = NewSwitchForUpgradeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SwitchForUpgrade
+// This API (SwitchForUpgrade) is used to switch to a new instance. You can initiate this process when the primary instance being upgraded is pending switch.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) SwitchForUpgradeWithContext(ctx context.Context, request *SwitchForUpgradeRequest) (response *SwitchForUpgradeResponse, err error) {
+    if request == nil {
+        request = NewSwitchForUpgradeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSwitchForUpgradeResponse()
     err = c.Send(request, response)
@@ -3911,6 +6205,29 @@ func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response 
     return
 }
 
+// UpgradeDBInstance
+// This API is used to upgrade or downgrade a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) UpgradeDBInstanceWithContext(ctx context.Context, request *UpgradeDBInstanceRequest) (response *UpgradeDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpgradeDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpgradeDBInstanceEngineVersionRequest() (request *UpgradeDBInstanceEngineVersionRequest) {
     request = &UpgradeDBInstanceEngineVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3942,6 +6259,27 @@ func (c *Client) UpgradeDBInstanceEngineVersion(request *UpgradeDBInstanceEngine
     if request == nil {
         request = NewUpgradeDBInstanceEngineVersionRequest()
     }
+    
+    response = NewUpgradeDBInstanceEngineVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpgradeDBInstanceEngineVersion
+// This API (UpgradeDBInstanceEngineVersion) is used to upgrade the version of a TencentDB instance, which can be a primary instance, disaster recovery instance, or read-only instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) UpgradeDBInstanceEngineVersionWithContext(ctx context.Context, request *UpgradeDBInstanceEngineVersionRequest) (response *UpgradeDBInstanceEngineVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceEngineVersionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpgradeDBInstanceEngineVersionResponse()
     err = c.Send(request, response)

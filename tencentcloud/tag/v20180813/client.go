@@ -15,6 +15,7 @@
 package v20180813
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -82,6 +83,29 @@ func (c *Client) AddResourceTag(request *AddResourceTagRequest) (response *AddRe
     return
 }
 
+// AddResourceTag
+// This API is used to associate resources with tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+//  RESOURCEINUSE_TAGKEYATTACHED = "ResourceInUse.TagKeyAttached"
+func (c *Client) AddResourceTagWithContext(ctx context.Context, request *AddResourceTagRequest) (response *AddResourceTagResponse, err error) {
+    if request == nil {
+        request = NewAddResourceTagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddResourceTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAttachResourcesTagRequest() (request *AttachResourcesTagRequest) {
     request = &AttachResourcesTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -120,6 +144,34 @@ func (c *Client) AttachResourcesTag(request *AttachResourcesTagRequest) (respons
     if request == nil {
         request = NewAttachResourcesTagRequest()
     }
+    
+    response = NewAttachResourcesTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AttachResourcesTag
+// This API is used to associate a tag with multiple resources.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE_TAGKEYATTACHED = "ResourceInUse.TagKeyAttached"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) AttachResourcesTagWithContext(ctx context.Context, request *AttachResourcesTagRequest) (response *AttachResourcesTagResponse, err error) {
+    if request == nil {
+        request = NewAttachResourcesTagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAttachResourcesTagResponse()
     err = c.Send(request, response)
@@ -167,6 +219,31 @@ func (c *Client) CreateTag(request *CreateTagRequest) (response *CreateTagRespon
     return
 }
 
+// CreateTag
+// This API is used to create a tag key and tag value pair.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+//  RESOURCEINUSE_TAGDUPLICATE = "ResourceInUse.TagDuplicate"
+func (c *Client) CreateTagWithContext(ctx context.Context, request *CreateTagRequest) (response *CreateTagResponse, err error) {
+    if request == nil {
+        request = NewCreateTagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteResourceTagRequest() (request *DeleteResourceTagRequest) {
     request = &DeleteResourceTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -196,6 +273,25 @@ func (c *Client) DeleteResourceTag(request *DeleteResourceTagRequest) (response 
     if request == nil {
         request = NewDeleteResourceTagRequest()
     }
+    
+    response = NewDeleteResourceTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteResourceTag
+// This API is used to unassociate tags and resources.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
+func (c *Client) DeleteResourceTagWithContext(ctx context.Context, request *DeleteResourceTagRequest) (response *DeleteResourceTagResponse, err error) {
+    if request == nil {
+        request = NewDeleteResourceTagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteResourceTagResponse()
     err = c.Send(request, response)
@@ -235,6 +331,23 @@ func (c *Client) DeleteTag(request *DeleteTagRequest) (response *DeleteTagRespon
     return
 }
 
+// DeleteTag
+// This API is used to delete a tag key and tag value pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) DeleteTagWithContext(ctx context.Context, request *DeleteTagRequest) (response *DeleteTagResponse, err error) {
+    if request == nil {
+        request = NewDeleteTagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceTagsRequest() (request *DescribeResourceTagsRequest) {
     request = &DescribeResourceTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -262,6 +375,23 @@ func (c *Client) DescribeResourceTags(request *DescribeResourceTagsRequest) (res
     if request == nil {
         request = NewDescribeResourceTagsRequest()
     }
+    
+    response = NewDescribeResourceTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeResourceTags
+// This API is used to query the tags associated with a resource.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) DescribeResourceTagsWithContext(ctx context.Context, request *DescribeResourceTagsRequest) (response *DescribeResourceTagsResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeResourceTagsResponse()
     err = c.Send(request, response)
@@ -304,6 +434,26 @@ func (c *Client) DescribeResourceTagsByResourceIds(request *DescribeResourceTags
     return
 }
 
+// DescribeResourceTagsByResourceIds
+// This API is used to query tag key and value pairs for existing resources.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeResourceTagsByResourceIdsWithContext(ctx context.Context, request *DescribeResourceTagsByResourceIdsRequest) (response *DescribeResourceTagsByResourceIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsByResourceIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourceTagsByResourceIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceTagsByResourceIdsSeqRequest() (request *DescribeResourceTagsByResourceIdsSeqRequest) {
     request = &DescribeResourceTagsByResourceIdsSeqRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -335,6 +485,27 @@ func (c *Client) DescribeResourceTagsByResourceIdsSeq(request *DescribeResourceT
     if request == nil {
         request = NewDescribeResourceTagsByResourceIdsSeqRequest()
     }
+    
+    response = NewDescribeResourceTagsByResourceIdsSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeResourceTagsByResourceIdsSeq
+// This API is used to view the tags associated with a resource in sequence.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_OFFSETINVALID = "InvalidParameterValue.OffsetInvalid"
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeResourceTagsByResourceIdsSeqWithContext(ctx context.Context, request *DescribeResourceTagsByResourceIdsSeqRequest) (response *DescribeResourceTagsByResourceIdsSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsByResourceIdsSeqRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeResourceTagsByResourceIdsSeqResponse()
     err = c.Send(request, response)
@@ -379,6 +550,28 @@ func (c *Client) DescribeResourceTagsByTagKeys(request *DescribeResourceTagsByTa
     return
 }
 
+// DescribeResourceTagsByTagKeys
+// This API is used to get resource tags based on tag keys.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+func (c *Client) DescribeResourceTagsByTagKeysWithContext(ctx context.Context, request *DescribeResourceTagsByTagKeysRequest) (response *DescribeResourceTagsByTagKeysResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceTagsByTagKeysRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourceTagsByTagKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourcesByTagsRequest() (request *DescribeResourcesByTagsRequest) {
     request = &DescribeResourcesByTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -407,6 +600,24 @@ func (c *Client) DescribeResourcesByTags(request *DescribeResourcesByTagsRequest
     if request == nil {
         request = NewDescribeResourcesByTagsRequest()
     }
+    
+    response = NewDescribeResourcesByTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeResourcesByTags
+// This API is used to query resources by tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
+//  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeResourcesByTagsWithContext(ctx context.Context, request *DescribeResourcesByTagsRequest) (response *DescribeResourcesByTagsResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourcesByTagsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeResourcesByTagsResponse()
     err = c.Send(request, response)
@@ -447,6 +658,24 @@ func (c *Client) DescribeResourcesByTagsUnion(request *DescribeResourcesByTagsUn
     return
 }
 
+// DescribeResourcesByTagsUnion
+// This API is used to query resource list by tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
+//  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeResourcesByTagsUnionWithContext(ctx context.Context, request *DescribeResourcesByTagsUnionRequest) (response *DescribeResourcesByTagsUnionResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourcesByTagsUnionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourcesByTagsUnionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagKeysRequest() (request *DescribeTagKeysRequest) {
     request = &DescribeTagKeysRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -479,6 +708,22 @@ func (c *Client) DescribeTagKeys(request *DescribeTagKeysRequest) (response *Des
     return
 }
 
+// DescribeTagKeys
+// This API is used to query tag keys in an existing tag list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeTagKeysWithContext(ctx context.Context, request *DescribeTagKeysRequest) (response *DescribeTagKeysResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagKeysRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagValuesRequest() (request *DescribeTagValuesRequest) {
     request = &DescribeTagValuesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -505,6 +750,22 @@ func (c *Client) DescribeTagValues(request *DescribeTagValuesRequest) (response 
     if request == nil {
         request = NewDescribeTagValuesRequest()
     }
+    
+    response = NewDescribeTagValuesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTagValues
+// This API is used to query tag values in an existing tag list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeTagValuesWithContext(ctx context.Context, request *DescribeTagValuesRequest) (response *DescribeTagValuesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagValuesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTagValuesResponse()
     err = c.Send(request, response)
@@ -544,6 +805,23 @@ func (c *Client) DescribeTagValuesSeq(request *DescribeTagValuesSeqRequest) (res
     return
 }
 
+// DescribeTagValuesSeq
+// This API is used to query tag values in a created tag list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_OFFSETINVALID = "InvalidParameterValue.OffsetInvalid"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeTagValuesSeqWithContext(ctx context.Context, request *DescribeTagValuesSeqRequest) (response *DescribeTagValuesSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagValuesSeqRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagValuesSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagsRequest() (request *DescribeTagsRequest) {
     request = &DescribeTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -570,6 +848,22 @@ func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeT
     if request == nil {
         request = NewDescribeTagsRequest()
     }
+    
+    response = NewDescribeTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTags
+// This API is used to query existing tag lists.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeTagsWithContext(ctx context.Context, request *DescribeTagsRequest) (response *DescribeTagsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTagsResponse()
     err = c.Send(request, response)
@@ -603,6 +897,23 @@ func (c *Client) DescribeTagsSeq(request *DescribeTagsSeqRequest) (response *Des
     if request == nil {
         request = NewDescribeTagsSeqRequest()
     }
+    
+    response = NewDescribeTagsSeqResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTagsSeq
+// This API is used to query the created tag lists.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_OFFSETINVALID = "InvalidParameterValue.OffsetInvalid"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
+func (c *Client) DescribeTagsSeqWithContext(ctx context.Context, request *DescribeTagsSeqRequest) (response *DescribeTagsSeqResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagsSeqRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTagsSeqResponse()
     err = c.Send(request, response)
@@ -643,6 +954,30 @@ func (c *Client) DetachResourcesTag(request *DetachResourcesTagRequest) (respons
     if request == nil {
         request = NewDetachResourcesTagRequest()
     }
+    
+    response = NewDetachResourcesTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DetachResourcesTag
+// This API is used to unbind a tag from multiple resources.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
+func (c *Client) DetachResourcesTagWithContext(ctx context.Context, request *DetachResourcesTagRequest) (response *DetachResourcesTagResponse, err error) {
+    if request == nil {
+        request = NewDetachResourcesTagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDetachResourcesTagResponse()
     err = c.Send(request, response)
@@ -692,6 +1027,33 @@ func (c *Client) ModifyResourceTags(request *ModifyResourceTagsRequest) (respons
     return
 }
 
+// ModifyResourceTags
+// This API is used to modify all tags associated with a resource.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_DELETETAGSPARAMERROR = "InvalidParameterValue.DeleteTagsParamError"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
+//  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+func (c *Client) ModifyResourceTagsWithContext(ctx context.Context, request *ModifyResourceTagsRequest) (response *ModifyResourceTagsResponse, err error) {
+    if request == nil {
+        request = NewModifyResourceTagsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyResourceTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyResourcesTagValueRequest() (request *ModifyResourcesTagValueRequest) {
     request = &ModifyResourcesTagValueRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -734,6 +1096,32 @@ func (c *Client) ModifyResourcesTagValue(request *ModifyResourcesTagValueRequest
     return
 }
 
+// ModifyResourcesTagValue
+// This API is used to modify the tag value corresponding to a tag key associated with multiple resources.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
+//  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) ModifyResourcesTagValueWithContext(ctx context.Context, request *ModifyResourcesTagValueRequest) (response *ModifyResourcesTagValueResponse, err error) {
+    if request == nil {
+        request = NewModifyResourcesTagValueRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyResourcesTagValueResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateResourceTagValueRequest() (request *UpdateResourceTagValueRequest) {
     request = &UpdateResourceTagValueRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -765,6 +1153,27 @@ func (c *Client) UpdateResourceTagValue(request *UpdateResourceTagValueRequest) 
     if request == nil {
         request = NewUpdateResourceTagValueRequest()
     }
+    
+    response = NewUpdateResourceTagValueResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateResourceTagValue
+// This API is used to modify the values of tags associated with a resource (the tag key does not change).
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
+func (c *Client) UpdateResourceTagValueWithContext(ctx context.Context, request *UpdateResourceTagValueRequest) (response *UpdateResourceTagValueResponse, err error) {
+    if request == nil {
+        request = NewUpdateResourceTagValueRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateResourceTagValueResponse()
     err = c.Send(request, response)

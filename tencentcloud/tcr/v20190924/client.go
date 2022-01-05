@@ -15,6 +15,7 @@
 package v20190924
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -89,6 +90,36 @@ func (c *Client) CheckInstance(request *CheckInstanceRequest) (response *CheckIn
     return
 }
 
+// CheckInstance
+// This API is used to verify the information of the Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CheckInstanceWithContext(ctx context.Context, request *CheckInstanceRequest) (response *CheckInstanceResponse, err error) {
+    if request == nil {
+        request = NewCheckInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCheckInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesRequest) {
     request = &CreateImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -120,6 +151,27 @@ func (c *Client) CreateImmutableTagRules(request *CreateImmutableTagRulesRequest
     if request == nil {
         request = NewCreateImmutableTagRulesRequest()
     }
+    
+    response = NewCreateImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateImmutableTagRules
+// This API is used to create the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+func (c *Client) CreateImmutableTagRulesWithContext(ctx context.Context, request *CreateImmutableTagRulesRequest) (response *CreateImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewCreateImmutableTagRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateImmutableTagRulesResponse()
     err = c.Send(request, response)
@@ -158,6 +210,28 @@ func (c *Client) CreateMultipleSecurityPolicy(request *CreateMultipleSecurityPol
     if request == nil {
         request = NewCreateMultipleSecurityPolicyRequest()
     }
+    
+    response = NewCreateMultipleSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateMultipleSecurityPolicy
+// This API is used to create multiple public network access allowlist policies of the TCR instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateMultipleSecurityPolicyWithContext(ctx context.Context, request *CreateMultipleSecurityPolicyRequest) (response *CreateMultipleSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateMultipleSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateMultipleSecurityPolicyResponse()
     err = c.Send(request, response)
@@ -207,6 +281,33 @@ func (c *Client) CreateReplicationInstance(request *CreateReplicationInstanceReq
     return
 }
 
+// CreateReplicationInstance
+// This API is used to create a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateReplicationInstanceWithContext(ctx context.Context, request *CreateReplicationInstanceRequest) (response *CreateReplicationInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateReplicationInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateReplicationInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesRequest) {
     request = &DeleteImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -237,6 +338,26 @@ func (c *Client) DeleteImmutableTagRules(request *DeleteImmutableTagRulesRequest
     if request == nil {
         request = NewDeleteImmutableTagRulesRequest()
     }
+    
+    response = NewDeleteImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteImmutableTagRules
+//  This API is used to delete the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteImmutableTagRulesWithContext(ctx context.Context, request *DeleteImmutableTagRulesRequest) (response *DeleteImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteImmutableTagRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteImmutableTagRulesResponse()
     err = c.Send(request, response)
@@ -281,6 +402,28 @@ func (c *Client) DeleteMultipleSecurityPolicy(request *DeleteMultipleSecurityPol
     return
 }
 
+// DeleteMultipleSecurityPolicy
+// This API is used to delete multiple public network access allowlist policies of the instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteMultipleSecurityPolicyWithContext(ctx context.Context, request *DeleteMultipleSecurityPolicyRequest) (response *DeleteMultipleSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteMultipleSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteMultipleSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRequest) {
     request = &DescribeImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -313,6 +456,28 @@ func (c *Client) DescribeImmutableTagRules(request *DescribeImmutableTagRulesReq
     if request == nil {
         request = NewDescribeImmutableTagRulesRequest()
     }
+    
+    response = NewDescribeImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeImmutableTagRules
+// This API is used to list the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeImmutableTagRulesWithContext(ctx context.Context, request *DescribeImmutableTagRulesRequest) (response *DescribeImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImmutableTagRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeImmutableTagRulesResponse()
     err = c.Send(request, response)
@@ -357,6 +522,28 @@ func (c *Client) DescribeReplicationInstanceCreateTasks(request *DescribeReplica
     return
 }
 
+// DescribeReplicationInstanceCreateTasks
+// This API is used to query the task status of creating a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstanceCreateTasksWithContext(ctx context.Context, request *DescribeReplicationInstanceCreateTasksRequest) (response *DescribeReplicationInstanceCreateTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstanceCreateTasksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeReplicationInstanceCreateTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeReplicationInstanceSyncStatusRequest() (request *DescribeReplicationInstanceSyncStatusRequest) {
     request = &DescribeReplicationInstanceSyncStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -389,6 +576,28 @@ func (c *Client) DescribeReplicationInstanceSyncStatus(request *DescribeReplicat
     if request == nil {
         request = NewDescribeReplicationInstanceSyncStatusRequest()
     }
+    
+    response = NewDescribeReplicationInstanceSyncStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeReplicationInstanceSyncStatus
+// This API is used to query the synchronization status of a replication instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstanceSyncStatusWithContext(ctx context.Context, request *DescribeReplicationInstanceSyncStatusRequest) (response *DescribeReplicationInstanceSyncStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstanceSyncStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeReplicationInstanceSyncStatusResponse()
     err = c.Send(request, response)
@@ -429,6 +638,30 @@ func (c *Client) DescribeReplicationInstances(request *DescribeReplicationInstan
     if request == nil {
         request = NewDescribeReplicationInstancesRequest()
     }
+    
+    response = NewDescribeReplicationInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeReplicationInstances
+// This API is used to query the list of replication instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeReplicationInstancesWithContext(ctx context.Context, request *DescribeReplicationInstancesRequest) (response *DescribeReplicationInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeReplicationInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeReplicationInstancesResponse()
     err = c.Send(request, response)
@@ -480,6 +713,35 @@ func (c *Client) ManageReplication(request *ManageReplicationRequest) (response 
     return
 }
 
+// ManageReplication
+// This API is used to manage the instance synchronization rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageReplicationWithContext(ctx context.Context, request *ManageReplicationRequest) (response *ManageReplicationResponse, err error) {
+    if request == nil {
+        request = NewManageReplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewManageReplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesRequest) {
     request = &ModifyImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -511,6 +773,27 @@ func (c *Client) ModifyImmutableTagRules(request *ModifyImmutableTagRulesRequest
     if request == nil {
         request = NewModifyImmutableTagRulesRequest()
     }
+    
+    response = NewModifyImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyImmutableTagRules
+// This API is used to update the tag immutability rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+func (c *Client) ModifyImmutableTagRulesWithContext(ctx context.Context, request *ModifyImmutableTagRulesRequest) (response *ModifyImmutableTagRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyImmutableTagRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyImmutableTagRulesResponse()
     err = c.Send(request, response)
@@ -552,6 +835,31 @@ func (c *Client) ModifyInstance(request *ModifyInstanceRequest) (response *Modif
     if request == nil {
         request = NewModifyInstanceRequest()
     }
+    
+    response = NewModifyInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyInstance
+// This API is used to update instance information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceWithContext(ctx context.Context, request *ModifyInstanceRequest) (response *ModifyInstanceResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyInstanceResponse()
     err = c.Send(request, response)

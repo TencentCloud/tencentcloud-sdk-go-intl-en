@@ -15,6 +15,7 @@
 package v20190612
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -85,6 +86,32 @@ func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateReque
     return
 }
 
+// CreateAIAnalysisTemplate
+// This API is used to create a custom content analysis template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateAIAnalysisTemplateWithContext(ctx context.Context, request *CreateAIAnalysisTemplateRequest) (response *CreateAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAIAnalysisTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAIRecognitionTemplateRequest() (request *CreateAIRecognitionTemplateRequest) {
     request = &CreateAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -124,6 +151,35 @@ func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplat
     if request == nil {
         request = NewCreateAIRecognitionTemplateRequest()
     }
+    
+    response = NewCreateAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateAIRecognitionTemplate
+// This API is used to create a custom content recognition template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFAULTLIBRARYLABELSET = "InvalidParameterValue.DefaultLibraryLabelSet"
+//  INVALIDPARAMETERVALUE_FACELIBRARY = "InvalidParameterValue.FaceLibrary"
+//  INVALIDPARAMETERVALUE_FACESCORE = "InvalidParameterValue.FaceScore"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateAIRecognitionTemplateWithContext(ctx context.Context, request *CreateAIRecognitionTemplateRequest) (response *CreateAIRecognitionTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAIRecognitionTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateAIRecognitionTemplateResponse()
     err = c.Send(request, response)
@@ -180,6 +236,40 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveD
     return
 }
 
+// CreateAdaptiveDynamicStreamingTemplate
+// This API is used to create an adaptive bitrate streaming template. Up up to 100 such templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.Context, request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAnimatedGraphicsTemplateRequest() (request *CreateAnimatedGraphicsTemplateRequest) {
     request = &CreateAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -222,6 +312,32 @@ func (c *Client) CreateAnimatedGraphicsTemplate(request *CreateAnimatedGraphicsT
     return
 }
 
+// CreateAnimatedGraphicsTemplate
+// This API is used to create a custom animated image generating template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FORMATWEBPLACKWIDTHANDHEIGHT = "InvalidParameterValue.FormatWebpLackWidthAndHeight"
+//  INVALIDPARAMETERVALUE_FORMATWEBPWIDTHANDHEIGHTBOTHZERO = "InvalidParameterValue.FormatWebpWidthAndHeightBothZero"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_QUALITY = "InvalidParameterValue.Quality"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateAnimatedGraphicsTemplateWithContext(ctx context.Context, request *CreateAnimatedGraphicsTemplateRequest) (response *CreateAnimatedGraphicsTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateAnimatedGraphicsTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTemplateRequest) {
     request = &CreateContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -257,6 +373,31 @@ func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplat
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
     }
+    
+    response = NewCreateContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateContentReviewTemplate
+// This API is used to create a custom template for intelligent content recognition. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateContentReviewTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateContentReviewTemplateResponse()
     err = c.Send(request, response)
@@ -305,6 +446,32 @@ func (c *Client) CreateImageSpriteTemplate(request *CreateImageSpriteTemplateReq
     return
 }
 
+// CreateImageSpriteTemplate
+// This API is used to create a custom image sprite generating template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateImageSpriteTemplateWithContext(ctx context.Context, request *CreateImageSpriteTemplateRequest) (response *CreateImageSpriteTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateImageSpriteTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
     request = &CreatePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -335,6 +502,26 @@ func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (respons
     if request == nil {
         request = NewCreatePersonSampleRequest()
     }
+    
+    response = NewCreatePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreatePersonSample
+// This API is used to create image samples for video processing operations such as content recognition and inappropriate information detection with the help of technologies such as facial feature positioning.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+func (c *Client) CreatePersonSampleWithContext(ctx context.Context, request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
+    if request == nil {
+        request = NewCreatePersonSampleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreatePersonSampleResponse()
     err = c.Send(request, response)
@@ -383,6 +570,32 @@ func (c *Client) CreateSampleSnapshotTemplate(request *CreateSampleSnapshotTempl
     return
 }
 
+// CreateSampleSnapshotTemplate
+// This API is used to create a custom sampled screencapturing template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateSampleSnapshotTemplateWithContext(ctx context.Context, request *CreateSampleSnapshotTemplateRequest) (response *CreateSampleSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateSampleSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateSampleSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSnapshotByTimeOffsetTemplateRequest() (request *CreateSnapshotByTimeOffsetTemplateRequest) {
     request = &CreateSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -417,6 +630,30 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplate(request *CreateSnapshotByTim
     if request == nil {
         request = NewCreateSnapshotByTimeOffsetTemplateRequest()
     }
+    
+    response = NewCreateSnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateSnapshotByTimeOffsetTemplate
+// This API is used to create a custom time point screencapturing template. Up to 16 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateSnapshotByTimeOffsetTemplateWithContext(ctx context.Context, request *CreateSnapshotByTimeOffsetTemplateRequest) (response *CreateSnapshotByTimeOffsetTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateSnapshotByTimeOffsetTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateSnapshotByTimeOffsetTemplateResponse()
     err = c.Send(request, response)
@@ -466,6 +703,39 @@ func (c *Client) CreateTranscodeTemplate(request *CreateTranscodeTemplateRequest
     if request == nil {
         request = NewCreateTranscodeTemplateRequest()
     }
+    
+    response = NewCreateTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateTranscodeTemplate
+// This API is used to create a custom transcoding template. Up to 1,000 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateTranscodeTemplateWithContext(ctx context.Context, request *CreateTranscodeTemplateRequest) (response *CreateTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateTranscodeTemplateResponse()
     err = c.Send(request, response)
@@ -524,6 +794,42 @@ func (c *Client) CreateWatermarkTemplate(request *CreateWatermarkTemplateRequest
     return
 }
 
+// CreateWatermarkTemplate
+// This API is used to create a custom watermarking template. Up to 1,000 templates can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INTERNALERROR_UPLOADWATERMARKERROR = "InternalError.UploadWatermarkError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COORDINATEORIGIN = "InvalidParameterValue.CoordinateOrigin"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_IMAGECONTENT = "InvalidParameterValue.ImageContent"
+//  INVALIDPARAMETERVALUE_IMAGETEMPLATE = "InvalidParameterValue.ImageTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REPEATTYPE = "InvalidParameterValue.RepeatType"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATE = "InvalidParameterValue.SvgTemplate"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEHEIGHT = "InvalidParameterValue.SvgTemplateHeight"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEWIDTH = "InvalidParameterValue.SvgTemplateWidth"
+//  INVALIDPARAMETERVALUE_TEXTALPHA = "InvalidParameterValue.TextAlpha"
+//  INVALIDPARAMETERVALUE_TEXTTEMPLATE = "InvalidParameterValue.TextTemplate"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  INVALIDPARAMETERVALUE_XPOS = "InvalidParameterValue.XPos"
+//  INVALIDPARAMETERVALUE_YPOS = "InvalidParameterValue.YPos"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateWatermarkTemplateWithContext(ctx context.Context, request *CreateWatermarkTemplateRequest) (response *CreateWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateWatermarkTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateWordSamplesRequest() (request *CreateWordSamplesRequest) {
     request = &CreateWordSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -552,6 +858,24 @@ func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response 
     if request == nil {
         request = NewCreateWordSamplesRequest()
     }
+    
+    response = NewCreateWordSamplesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateWordSamples
+// This API is used to create keyword samples in batches for video processing operations such as content recognition and inappropriate information detection with the help of the OCR and ASR technologies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateWordSamplesWithContext(ctx context.Context, request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewCreateWordSamplesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateWordSamplesResponse()
     err = c.Send(request, response)
@@ -616,6 +940,48 @@ func (c *Client) CreateWorkflow(request *CreateWorkflowRequest) (response *Creat
     return
 }
 
+// CreateWorkflow
+// This API is used to set a processing rule for media files uploaded to the specified directory of a COS bucket, including:
+//
+// 1. Video transcoding (with watermark);
+//
+// 2. Animated image generating;
+//
+// 3. Time point screencapturing;
+//
+// 4. Sampled screencapturing;
+//
+// 5. Image sprite generating;
+//
+// 6. Video conversion to adaptive bitrate streaming;
+//
+// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+//
+// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+//
+// 
+//
+// Note: Once successfully created, a workflow is disabled by default and needs to be enabled manually.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+func (c *Client) CreateWorkflowWithContext(ctx context.Context, request *CreateWorkflowRequest) (response *CreateWorkflowResponse, err error) {
+    if request == nil {
+        request = NewCreateWorkflowRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAIAnalysisTemplateRequest() (request *DeleteAIAnalysisTemplateRequest) {
     request = &DeleteAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -649,6 +1015,29 @@ func (c *Client) DeleteAIAnalysisTemplate(request *DeleteAIAnalysisTemplateReque
     if request == nil {
         request = NewDeleteAIAnalysisTemplateRequest()
     }
+    
+    response = NewDeleteAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteAIAnalysisTemplate
+// This API is used to delete a custom content analysis template.
+//
+// 
+//
+// Note: templates with an ID below 10000 are preset and cannot be deleted.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteAIAnalysisTemplateWithContext(ctx context.Context, request *DeleteAIAnalysisTemplateRequest) (response *DeleteAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAIAnalysisTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteAIAnalysisTemplateResponse()
     err = c.Send(request, response)
@@ -691,6 +1080,26 @@ func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplat
     return
 }
 
+// DeleteAIRecognitionTemplate
+// This API is used to delete a custom content recognition template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteAIRecognitionTemplateWithContext(ctx context.Context, request *DeleteAIRecognitionTemplateRequest) (response *DeleteAIRecognitionTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAIRecognitionTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAdaptiveDynamicStreamingTemplateRequest() (request *DeleteAdaptiveDynamicStreamingTemplateRequest) {
     request = &DeleteAdaptiveDynamicStreamingTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -725,6 +1134,24 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveD
     return
 }
 
+// DeleteAdaptiveDynamicStreamingTemplate
+// This API is used to delete an adaptive bitrate streaming template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteAdaptiveDynamicStreamingTemplateWithContext(ctx context.Context, request *DeleteAdaptiveDynamicStreamingTemplateRequest) (response *DeleteAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAnimatedGraphicsTemplateRequest() (request *DeleteAnimatedGraphicsTemplateRequest) {
     request = &DeleteAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -753,6 +1180,24 @@ func (c *Client) DeleteAnimatedGraphicsTemplate(request *DeleteAnimatedGraphicsT
     if request == nil {
         request = NewDeleteAnimatedGraphicsTemplateRequest()
     }
+    
+    response = NewDeleteAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteAnimatedGraphicsTemplate
+// This API is used to delete a custom animated image generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteAnimatedGraphicsTemplateWithContext(ctx context.Context, request *DeleteAnimatedGraphicsTemplateRequest) (response *DeleteAnimatedGraphicsTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteAnimatedGraphicsTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteAnimatedGraphicsTemplateResponse()
     err = c.Send(request, response)
@@ -794,6 +1239,25 @@ func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplat
     return
 }
 
+// DeleteContentReviewTemplate
+// This API is used to delete a custom intelligent content recognition template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteContentReviewTemplateWithContext(ctx context.Context, request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteContentReviewTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteImageSpriteTemplateRequest() (request *DeleteImageSpriteTemplateRequest) {
     request = &DeleteImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -828,6 +1292,24 @@ func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateReq
     return
 }
 
+// DeleteImageSpriteTemplate
+// This API is used to delete an image sprite generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteImageSpriteTemplateWithContext(ctx context.Context, request *DeleteImageSpriteTemplateRequest) (response *DeleteImageSpriteTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteImageSpriteTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeletePersonSampleRequest() (request *DeletePersonSampleRequest) {
     request = &DeletePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -855,6 +1337,23 @@ func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (respons
     if request == nil {
         request = NewDeletePersonSampleRequest()
     }
+    
+    response = NewDeletePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeletePersonSample
+// This API is used to delete image samples by image ID.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
+    if request == nil {
+        request = NewDeletePersonSampleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeletePersonSampleResponse()
     err = c.Send(request, response)
@@ -895,6 +1394,24 @@ func (c *Client) DeleteSampleSnapshotTemplate(request *DeleteSampleSnapshotTempl
     return
 }
 
+// DeleteSampleSnapshotTemplate
+// This API is used to delete a custom sampled screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSampleSnapshotTemplateWithContext(ctx context.Context, request *DeleteSampleSnapshotTemplateRequest) (response *DeleteSampleSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteSampleSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteSampleSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteSnapshotByTimeOffsetTemplateRequest() (request *DeleteSnapshotByTimeOffsetTemplateRequest) {
     request = &DeleteSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -923,6 +1440,24 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTim
     if request == nil {
         request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
     }
+    
+    response = NewDeleteSnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteSnapshotByTimeOffsetTemplate
+// This API is used to delete a custom time point screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSnapshotByTimeOffsetTemplateWithContext(ctx context.Context, request *DeleteSnapshotByTimeOffsetTemplateRequest) (response *DeleteSnapshotByTimeOffsetTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteSnapshotByTimeOffsetTemplateResponse()
     err = c.Send(request, response)
@@ -964,6 +1499,25 @@ func (c *Client) DeleteTranscodeTemplate(request *DeleteTranscodeTemplateRequest
     return
 }
 
+// DeleteTranscodeTemplate
+// This API is used to delete a custom transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteTranscodeTemplateWithContext(ctx context.Context, request *DeleteTranscodeTemplateRequest) (response *DeleteTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteWatermarkTemplateRequest() (request *DeleteWatermarkTemplateRequest) {
     request = &DeleteWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -993,6 +1547,25 @@ func (c *Client) DeleteWatermarkTemplate(request *DeleteWatermarkTemplateRequest
     if request == nil {
         request = NewDeleteWatermarkTemplateRequest()
     }
+    
+    response = NewDeleteWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteWatermarkTemplate
+// This API is used to delete a custom watermarking template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteWatermarkTemplateWithContext(ctx context.Context, request *DeleteWatermarkTemplateRequest) (response *DeleteWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteWatermarkTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteWatermarkTemplateResponse()
     err = c.Send(request, response)
@@ -1032,6 +1605,23 @@ func (c *Client) DeleteWordSamples(request *DeleteWordSamplesRequest) (response 
     return
 }
 
+// DeleteWordSamples
+// This API is used to delete keyword samples in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DeleteWordSamplesWithContext(ctx context.Context, request *DeleteWordSamplesRequest) (response *DeleteWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewDeleteWordSamplesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteWordSamplesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteWorkflowRequest() (request *DeleteWorkflowRequest) {
     request = &DeleteWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1061,6 +1651,25 @@ func (c *Client) DeleteWorkflow(request *DeleteWorkflowRequest) (response *Delet
     if request == nil {
         request = NewDeleteWorkflowRequest()
     }
+    
+    response = NewDeleteWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteWorkflow
+// This API is used to delete a workflow. An enabled workflow must be disabled before it can be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteWorkflowWithContext(ctx context.Context, request *DeleteWorkflowRequest) (response *DeleteWorkflowResponse, err error) {
+    if request == nil {
+        request = NewDeleteWorkflowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteWorkflowResponse()
     err = c.Send(request, response)
@@ -1104,6 +1713,27 @@ func (c *Client) DescribeAIAnalysisTemplates(request *DescribeAIAnalysisTemplate
     return
 }
 
+// DescribeAIAnalysisTemplates
+// This API is used to get the list of content analysis templates based on unique template ID. The returned result includes all eligible custom and preset video content analysis templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeAIAnalysisTemplatesWithContext(ctx context.Context, request *DescribeAIAnalysisTemplatesRequest) (response *DescribeAIAnalysisTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIAnalysisTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAIAnalysisTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAIRecognitionTemplatesRequest() (request *DescribeAIRecognitionTemplatesRequest) {
     request = &DescribeAIRecognitionTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1135,6 +1765,27 @@ func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTe
     if request == nil {
         request = NewDescribeAIRecognitionTemplatesRequest()
     }
+    
+    response = NewDescribeAIRecognitionTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAIRecognitionTemplates
+// This API is used to get the list of content recognition templates based on unique template ID. The return result includes all eligible custom and preset content recognition templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeAIRecognitionTemplatesWithContext(ctx context.Context, request *DescribeAIRecognitionTemplatesRequest) (response *DescribeAIRecognitionTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIRecognitionTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAIRecognitionTemplatesResponse()
     err = c.Send(request, response)
@@ -1178,6 +1829,27 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplates(request *DescribeAdap
     return
 }
 
+// DescribeAdaptiveDynamicStreamingTemplates
+// This API is used to query the list of adaptive bitrate streaming templates and supports paginated queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAdaptiveDynamicStreamingTemplatesWithContext(ctx context.Context, request *DescribeAdaptiveDynamicStreamingTemplatesRequest) (response *DescribeAdaptiveDynamicStreamingTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAdaptiveDynamicStreamingTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAnimatedGraphicsTemplatesRequest() (request *DescribeAnimatedGraphicsTemplatesRequest) {
     request = &DescribeAnimatedGraphicsTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1206,6 +1878,24 @@ func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGrap
     if request == nil {
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
     }
+    
+    response = NewDescribeAnimatedGraphicsTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAnimatedGraphicsTemplates
+// This API is used to query the list of animated image generating templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Context, request *DescribeAnimatedGraphicsTemplatesRequest) (response *DescribeAnimatedGraphicsTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAnimatedGraphicsTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAnimatedGraphicsTemplatesResponse()
     err = c.Send(request, response)
@@ -1249,6 +1939,27 @@ func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTe
     return
 }
 
+// DescribeContentReviewTemplates
+// This API is used to get the list of intelligent content recognition templates using their unique ID. The returned result includes all custom templates that meet the conditions as well as preset intelligent content recognition templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeContentReviewTemplatesWithContext(ctx context.Context, request *DescribeContentReviewTemplatesRequest) (response *DescribeContentReviewTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeContentReviewTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeContentReviewTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImageSpriteTemplatesRequest() (request *DescribeImageSpriteTemplatesRequest) {
     request = &DescribeImageSpriteTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1277,6 +1988,24 @@ func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTempla
     if request == nil {
         request = NewDescribeImageSpriteTemplatesRequest()
     }
+    
+    response = NewDescribeImageSpriteTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeImageSpriteTemplates
+// This API is used to query the list of image sprite generating templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, request *DescribeImageSpriteTemplatesRequest) (response *DescribeImageSpriteTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageSpriteTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeImageSpriteTemplatesResponse()
     err = c.Send(request, response)
@@ -1318,6 +2047,25 @@ func (c *Client) DescribeMediaMetaData(request *DescribeMediaMetaDataRequest) (r
     return
 }
 
+// DescribeMediaMetaData
+// This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SRCFILE = "InvalidParameterValue.SrcFile"
+func (c *Client) DescribeMediaMetaDataWithContext(ctx context.Context, request *DescribeMediaMetaDataRequest) (response *DescribeMediaMetaDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaMetaDataRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeMediaMetaDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePersonSamplesRequest() (request *DescribePersonSamplesRequest) {
     request = &DescribePersonSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1346,6 +2094,24 @@ func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (r
     if request == nil {
         request = NewDescribePersonSamplesRequest()
     }
+    
+    response = NewDescribePersonSamplesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribePersonSamples
+// This API is used to query the information of image samples. It supports paginated queries by image ID, name, and tag.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribePersonSamplesWithContext(ctx context.Context, request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
+    if request == nil {
+        request = NewDescribePersonSamplesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribePersonSamplesResponse()
     err = c.Send(request, response)
@@ -1386,6 +2152,24 @@ func (c *Client) DescribeSampleSnapshotTemplates(request *DescribeSampleSnapshot
     return
 }
 
+// DescribeSampleSnapshotTemplates
+// This API is used to query the list of sampled screencapturing templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeSampleSnapshotTemplatesWithContext(ctx context.Context, request *DescribeSampleSnapshotTemplatesRequest) (response *DescribeSampleSnapshotTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSampleSnapshotTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSampleSnapshotTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSnapshotByTimeOffsetTemplatesRequest() (request *DescribeSnapshotByTimeOffsetTemplatesRequest) {
     request = &DescribeSnapshotByTimeOffsetTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1414,6 +2198,24 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshot
     if request == nil {
         request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
     }
+    
+    response = NewDescribeSnapshotByTimeOffsetTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSnapshotByTimeOffsetTemplates
+// This API is used to query the list of time point screencapturing templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeSnapshotByTimeOffsetTemplatesWithContext(ctx context.Context, request *DescribeSnapshotByTimeOffsetTemplatesRequest) (response *DescribeSnapshotByTimeOffsetTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSnapshotByTimeOffsetTemplatesResponse()
     err = c.Send(request, response)
@@ -1456,6 +2258,26 @@ func (c *Client) DescribeTaskDetail(request *DescribeTaskDetailRequest) (respons
     return
 }
 
+// DescribeTaskDetail
+// This API is used to query the details of execution status and result of a task submitted in the last 3 days by task ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTaskDetailWithContext(ctx context.Context, request *DescribeTaskDetailRequest) (response *DescribeTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeTaskDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
     request = &DescribeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1488,6 +2310,28 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
     if request == nil {
         request = NewDescribeTasksRequest()
     }
+    
+    response = NewDescribeTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTasks
+// * This API is used to query the task list;
+//
+// * If there are many data entries in the list, one single call of the API may not be able to pull the entire list. The `ScrollToken` parameter can be used to pull the list in batches;
+//
+// * Only tasks in the last three days (72 hours) can be queried.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeTasksWithContext(ctx context.Context, request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeTasksRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTasksResponse()
     err = c.Send(request, response)
@@ -1533,6 +2377,29 @@ func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesR
     return
 }
 
+// DescribeTranscodeTemplates
+// This API is used to get the list of transcoding templates based on unique template ID. The return result includes all eligible custom and [preset transcoding templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CONTAINERTYPE = "InvalidParameterValue.ContainerType"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeTranscodeTemplatesWithContext(ctx context.Context, request *DescribeTranscodeTemplatesRequest) (response *DescribeTranscodeTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTranscodeTemplatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTranscodeTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplatesRequest) {
     request = &DescribeWatermarkTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1564,6 +2431,27 @@ func (c *Client) DescribeWatermarkTemplates(request *DescribeWatermarkTemplatesR
     if request == nil {
         request = NewDescribeWatermarkTemplatesRequest()
     }
+    
+    response = NewDescribeWatermarkTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeWatermarkTemplates
+// This API is used to query custom watermarking templates and supports paged queries by filters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeWatermarkTemplatesWithContext(ctx context.Context, request *DescribeWatermarkTemplatesRequest) (response *DescribeWatermarkTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeWatermarkTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeWatermarkTemplatesResponse()
     err = c.Send(request, response)
@@ -1604,6 +2492,24 @@ func (c *Client) DescribeWordSamples(request *DescribeWordSamplesRequest) (respo
     return
 }
 
+// DescribeWordSamples
+// This API is used to perform paged queries of keyword sample information by use case, keyword, and tag.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *DescribeWordSamplesRequest) (response *DescribeWordSamplesResponse, err error) {
+    if request == nil {
+        request = NewDescribeWordSamplesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeWordSamplesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWorkflowsRequest() (request *DescribeWorkflowsRequest) {
     request = &DescribeWorkflowsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1632,6 +2538,24 @@ func (c *Client) DescribeWorkflows(request *DescribeWorkflowsRequest) (response 
     if request == nil {
         request = NewDescribeWorkflowsRequest()
     }
+    
+    response = NewDescribeWorkflowsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeWorkflows
+// This API is used to get the list of workflow details by workflow ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeWorkflowsWithContext(ctx context.Context, request *DescribeWorkflowsRequest) (response *DescribeWorkflowsResponse, err error) {
+    if request == nil {
+        request = NewDescribeWorkflowsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeWorkflowsResponse()
     err = c.Send(request, response)
@@ -1670,6 +2594,28 @@ func (c *Client) DisableWorkflow(request *DisableWorkflowRequest) (response *Dis
     if request == nil {
         request = NewDisableWorkflowRequest()
     }
+    
+    response = NewDisableWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DisableWorkflow
+// This API is used to disable a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DisableWorkflowWithContext(ctx context.Context, request *DisableWorkflowRequest) (response *DisableWorkflowResponse, err error) {
+    if request == nil {
+        request = NewDisableWorkflowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDisableWorkflowResponse()
     err = c.Send(request, response)
@@ -1718,6 +2664,32 @@ func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaRespon
     return
 }
 
+// EditMedia
+// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+//
+// 
+//
+// 1. Clipping a file to generate a new video;
+//
+// 2. Splicing multiple files to generate a new video;
+//
+// 3. Clipping multiple files and then splicing the clips to generate a new video.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    if request == nil {
+        request = NewEditMediaRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableWorkflowRequest() (request *EnableWorkflowRequest) {
     request = &EnableWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1751,6 +2723,29 @@ func (c *Client) EnableWorkflow(request *EnableWorkflowRequest) (response *Enabl
     if request == nil {
         request = NewEnableWorkflowRequest()
     }
+    
+    response = NewEnableWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// EnableWorkflow
+// This API is used to enable a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) EnableWorkflowWithContext(ctx context.Context, request *EnableWorkflowRequest) (response *EnableWorkflowResponse, err error) {
+    if request == nil {
+        request = NewEnableWorkflowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewEnableWorkflowResponse()
     err = c.Send(request, response)
@@ -1793,6 +2788,26 @@ func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *Exe
     return
 }
 
+// ExecuteFunction
+// This API is only used in unique custom development scenarios. Unless requested by Media Processing Service customer service, please do not call it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *ExecuteFunctionRequest) (response *ExecuteFunctionResponse, err error) {
+    if request == nil {
+        request = NewExecuteFunctionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewExecuteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewManageTaskRequest() (request *ManageTaskRequest) {
     request = &ManageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1824,6 +2839,27 @@ func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskRes
     if request == nil {
         request = NewManageTaskRequest()
     }
+    
+    response = NewManageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ManageTask
+// This API is used to manage initiated tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDOPERATIONTYPE = "InvalidParameterValue.InvalidOperationType"
+//  INVALIDPARAMETERVALUE_NOTPROCESSINGTASK = "InvalidParameterValue.NotProcessingTask"
+//  INVALIDPARAMETERVALUE_TASKID = "InvalidParameterValue.TaskId"
+func (c *Client) ManageTaskWithContext(ctx context.Context, request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
+    if request == nil {
+        request = NewManageTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewManageTaskResponse()
     err = c.Send(request, response)
@@ -1875,6 +2911,35 @@ func (c *Client) ModifyAIAnalysisTemplate(request *ModifyAIAnalysisTemplateReque
     return
 }
 
+// ModifyAIAnalysisTemplate
+// This API is used to modify a custom content analysis template.
+//
+// 
+//
+// Note: templates with an ID below 10000 are preset and cannot be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_CLASSIFCATIONCONFIGURE = "InvalidParameterValue.ClassifcationConfigure"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COVERCONFIGURE = "InvalidParameterValue.CoverConfigure"
+//  INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TAGCONFIGURE = "InvalidParameterValue.TagConfigure"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyAIAnalysisTemplateWithContext(ctx context.Context, request *ModifyAIAnalysisTemplateRequest) (response *ModifyAIAnalysisTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAIAnalysisTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAIAnalysisTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAIRecognitionTemplateRequest() (request *ModifyAIRecognitionTemplateRequest) {
     request = &ModifyAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1915,6 +2980,36 @@ func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplat
     if request == nil {
         request = NewModifyAIRecognitionTemplateRequest()
     }
+    
+    response = NewModifyAIRecognitionTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAIRecognitionTemplate
+// This API is used to modify a custom content recognition template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFAULTLIBRARYLABELSET = "InvalidParameterValue.DefaultLibraryLabelSet"
+//  INVALIDPARAMETERVALUE_FACELIBRARY = "InvalidParameterValue.FaceLibrary"
+//  INVALIDPARAMETERVALUE_FACESCORE = "InvalidParameterValue.FaceScore"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyAIRecognitionTemplateWithContext(ctx context.Context, request *ModifyAIRecognitionTemplateRequest) (response *ModifyAIRecognitionTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAIRecognitionTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAIRecognitionTemplateResponse()
     err = c.Send(request, response)
@@ -1977,6 +3072,46 @@ func (c *Client) ModifyAdaptiveDynamicStreamingTemplate(request *ModifyAdaptiveD
     return
 }
 
+// ModifyAdaptiveDynamicStreamingTemplate
+// This API is used to modify an adaptive bitrate streaming template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_BITRATE = "InvalidParameterValue.Bitrate"
+//  INVALIDPARAMETERVALUE_CODEC = "InvalidParameterValue.Codec"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEOBITRATE = "InvalidParameterValue.DisableHigherVideoBitrate"
+//  INVALIDPARAMETERVALUE_DISABLEHIGHERVIDEORESOLUTION = "InvalidParameterValue.DisableHigherVideoResolution"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_GOP = "InvalidParameterValue.Gop"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_SOUNDSYSTEM = "InvalidParameterValue.SoundSystem"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+func (c *Client) ModifyAdaptiveDynamicStreamingTemplateWithContext(ctx context.Context, request *ModifyAdaptiveDynamicStreamingTemplateRequest) (response *ModifyAdaptiveDynamicStreamingTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAnimatedGraphicsTemplateRequest() (request *ModifyAnimatedGraphicsTemplateRequest) {
     request = &ModifyAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2019,6 +3154,32 @@ func (c *Client) ModifyAnimatedGraphicsTemplate(request *ModifyAnimatedGraphicsT
     return
 }
 
+// ModifyAnimatedGraphicsTemplate
+// This API is used to modify a custom animated image generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_FORMATWEBPLACKWIDTHANDHEIGHT = "InvalidParameterValue.FormatWebpLackWidthAndHeight"
+//  INVALIDPARAMETERVALUE_FORMATWEBPWIDTHANDHEIGHTBOTHZERO = "InvalidParameterValue.FormatWebpWidthAndHeightBothZero"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_QUALITY = "InvalidParameterValue.Quality"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyAnimatedGraphicsTemplateWithContext(ctx context.Context, request *ModifyAnimatedGraphicsTemplateRequest) (response *ModifyAnimatedGraphicsTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyAnimatedGraphicsTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyContentReviewTemplateRequest() (request *ModifyContentReviewTemplateRequest) {
     request = &ModifyContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2053,6 +3214,30 @@ func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplat
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
     }
+    
+    response = NewModifyContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyContentReviewTemplate
+// This API is used to modify a custom intelligent content recognition template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyContentReviewTemplateWithContext(ctx context.Context, request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyContentReviewTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyContentReviewTemplateResponse()
     err = c.Send(request, response)
@@ -2100,6 +3285,31 @@ func (c *Client) ModifyImageSpriteTemplate(request *ModifyImageSpriteTemplateReq
     return
 }
 
+// ModifyImageSpriteTemplate
+// This API is used to modify a custom image sprite generating template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyImageSpriteTemplateWithContext(ctx context.Context, request *ModifyImageSpriteTemplateRequest) (response *ModifyImageSpriteTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyImageSpriteTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyImageSpriteTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyPersonSampleRequest() (request *ModifyPersonSampleRequest) {
     request = &ModifyPersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2131,6 +3341,27 @@ func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (respons
     if request == nil {
         request = NewModifyPersonSampleRequest()
     }
+    
+    response = NewModifyPersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyPersonSample
+// This API is used to modify image samples by image ID. You can use it to modify the name and description of an image sample and add/delete/reset facial features or tags. There must be at least one image left after the deletion of facial features; otherwise, please reset instead of delete the facial features.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
+    if request == nil {
+        request = NewModifyPersonSampleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyPersonSampleResponse()
     err = c.Send(request, response)
@@ -2178,6 +3409,31 @@ func (c *Client) ModifySampleSnapshotTemplate(request *ModifySampleSnapshotTempl
     return
 }
 
+// ModifySampleSnapshotTemplate
+// This API is used to modify a custom sampled screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
+//  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySampleSnapshotTemplateWithContext(ctx context.Context, request *ModifySampleSnapshotTemplateRequest) (response *ModifySampleSnapshotTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifySampleSnapshotTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifySampleSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySnapshotByTimeOffsetTemplateRequest() (request *ModifySnapshotByTimeOffsetTemplateRequest) {
     request = &ModifySnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2211,6 +3467,29 @@ func (c *Client) ModifySnapshotByTimeOffsetTemplate(request *ModifySnapshotByTim
     if request == nil {
         request = NewModifySnapshotByTimeOffsetTemplateRequest()
     }
+    
+    response = NewModifySnapshotByTimeOffsetTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifySnapshotByTimeOffsetTemplate
+// This API is used to modify a custom time point screencapturing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySnapshotByTimeOffsetTemplateWithContext(ctx context.Context, request *ModifySnapshotByTimeOffsetTemplateRequest) (response *ModifySnapshotByTimeOffsetTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifySnapshotByTimeOffsetTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifySnapshotByTimeOffsetTemplateResponse()
     err = c.Send(request, response)
@@ -2266,6 +3545,39 @@ func (c *Client) ModifyTranscodeTemplate(request *ModifyTranscodeTemplateRequest
     return
 }
 
+// ModifyTranscodeTemplate
+// This API is used to modify a custom transcoding template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_RESOLUTIONADAPTIVE = "InvalidParameterValue.ResolutionAdaptive"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyTranscodeTemplateWithContext(ctx context.Context, request *ModifyTranscodeTemplateRequest) (response *ModifyTranscodeTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyTranscodeTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyWatermarkTemplateRequest() (request *ModifyWatermarkTemplateRequest) {
     request = &ModifyWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2314,6 +3626,38 @@ func (c *Client) ModifyWatermarkTemplate(request *ModifyWatermarkTemplateRequest
     return
 }
 
+// ModifyWatermarkTemplate
+// This API is used to modify a custom watermarking template. The watermark type cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UPLOADWATERMARKERROR = "InternalError.UploadWatermarkError"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_COORDINATEORIGIN = "InvalidParameterValue.CoordinateOrigin"
+//  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
+//  INVALIDPARAMETERVALUE_IMAGECONTENT = "InvalidParameterValue.ImageContent"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REPEATTYPE = "InvalidParameterValue.RepeatType"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEHEIGHT = "InvalidParameterValue.SvgTemplateHeight"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATEWIDTH = "InvalidParameterValue.SvgTemplateWidth"
+//  INVALIDPARAMETERVALUE_TEXTALPHA = "InvalidParameterValue.TextAlpha"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
+//  INVALIDPARAMETERVALUE_XPOS = "InvalidParameterValue.XPos"
+//  INVALIDPARAMETERVALUE_YPOS = "InvalidParameterValue.YPos"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyWatermarkTemplateWithContext(ctx context.Context, request *ModifyWatermarkTemplateRequest) (response *ModifyWatermarkTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyWatermarkTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyWatermarkTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyWordSampleRequest() (request *ModifyWordSampleRequest) {
     request = &ModifyWordSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2343,6 +3687,25 @@ func (c *Client) ModifyWordSample(request *ModifyWordSampleRequest) (response *M
     if request == nil {
         request = NewModifyWordSampleRequest()
     }
+    
+    response = NewModifyWordSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyWordSample
+// This API is used to modify the use case and tag of a keyword. The keyword itself cannot be modified, but you can delete it and create another one if needed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_WORD = "ResourceNotFound.Word"
+func (c *Client) ModifyWordSampleWithContext(ctx context.Context, request *ModifyWordSampleRequest) (response *ModifyWordSampleResponse, err error) {
+    if request == nil {
+        request = NewModifyWordSampleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyWordSampleResponse()
     err = c.Send(request, response)
@@ -2384,6 +3747,25 @@ func (c *Client) ParseLiveStreamProcessNotification(request *ParseLiveStreamProc
     return
 }
 
+// ParseLiveStreamProcessNotification
+// This API is used to parse the content of an MPS live stream processing event notification from the `msgBody` field in the message received from CMQ.
+//
+// Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INVALIDPARAMETERVALUE_INVALIDCONTENT = "InvalidParameterValue.InvalidContent"
+func (c *Client) ParseLiveStreamProcessNotificationWithContext(ctx context.Context, request *ParseLiveStreamProcessNotificationRequest) (response *ParseLiveStreamProcessNotificationResponse, err error) {
+    if request == nil {
+        request = NewParseLiveStreamProcessNotificationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewParseLiveStreamProcessNotificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewParseNotificationRequest() (request *ParseNotificationRequest) {
     request = &ParseNotificationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2415,6 +3797,27 @@ func (c *Client) ParseNotification(request *ParseNotificationRequest) (response 
     if request == nil {
         request = NewParseNotificationRequest()
     }
+    
+    response = NewParseNotificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ParseNotification
+// This API is used to parse the content of an MPS event notification from the `msgBody` field in the message received from CMQ.
+//
+// Instead of initiating a video processing task, this API is used to help generate SDKs for various programming languages. You can parse the event notification based on the analytic function of the SDKs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDCONTENT = "InvalidParameterValue.InvalidContent"
+func (c *Client) ParseNotificationWithContext(ctx context.Context, request *ParseNotificationRequest) (response *ParseNotificationResponse, err error) {
+    if request == nil {
+        request = NewParseNotificationRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewParseNotificationResponse()
     err = c.Send(request, response)
@@ -2462,6 +3865,37 @@ func (c *Client) ProcessLiveStream(request *ProcessLiveStreamRequest) (response 
     if request == nil {
         request = NewProcessLiveStreamRequest()
     }
+    
+    response = NewProcessLiveStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ProcessLiveStream
+// This API is used to initiate tasks to process live streaming media files. Such tasks include:
+//
+// 
+//
+// * Intelligent content moderation (detecting porn, terrorism, and politically sensitive information in image and porn information in speech)
+//
+// * Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+//
+// 
+//
+// Live stream processing event notifications are written into specified CMQ queues in real time. Users need to obtain event notification results from such CMQ queues. Output files of the processing tasks are written into destination buckets specified by users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+func (c *Client) ProcessLiveStreamWithContext(ctx context.Context, request *ProcessLiveStreamRequest) (response *ProcessLiveStreamResponse, err error) {
+    if request == nil {
+        request = NewProcessLiveStreamRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewProcessLiveStreamResponse()
     err = c.Send(request, response)
@@ -2521,6 +3955,43 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
     return
 }
 
+// ProcessMedia
+// This API is used to initiate a processing task for media files in COS, including:
+//
+// 1. Video transcoding (with watermark);
+//
+// 2. Animated image generating;
+//
+// 3. Time point screencapturing;
+//
+// 4. Sampled screencapturing;
+//
+// 5. Image sprite generating;
+//
+// 6. Video conversion to adaptive bitrate streaming;
+//
+// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+//
+// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
+    if request == nil {
+        request = NewProcessMediaRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewProcessMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetWorkflowRequest() (request *ResetWorkflowRequest) {
     request = &ResetWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2550,6 +4021,25 @@ func (c *Client) ResetWorkflow(request *ResetWorkflowRequest) (response *ResetWo
     if request == nil {
         request = NewResetWorkflowRequest()
     }
+    
+    response = NewResetWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ResetWorkflow
+// This API is used to reset an existing workflow that is disabled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ResetWorkflowWithContext(ctx context.Context, request *ResetWorkflowRequest) (response *ResetWorkflowResponse, err error) {
+    if request == nil {
+        request = NewResetWorkflowRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewResetWorkflowResponse()
     err = c.Send(request, response)

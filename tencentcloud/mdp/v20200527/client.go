@@ -15,6 +15,7 @@
 package v20200527
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -76,6 +77,23 @@ func (c *Client) BindNewLVBDomainWithChannel(request *BindNewLVBDomainWithChanne
     return
 }
 
+// BindNewLVBDomainWithChannel
+// This API is used to bind an LVB domain name to a channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_LVBDOMAIN = "InvalidParameter.LvbDomain"
+func (c *Client) BindNewLVBDomainWithChannelWithContext(ctx context.Context, request *BindNewLVBDomainWithChannelRequest) (response *BindNewLVBDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewBindNewLVBDomainWithChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBindNewLVBDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannelRequest) {
     request = &CreateStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -106,6 +124,26 @@ func (c *Client) CreateStreamPackageChannel(request *CreateStreamPackageChannelR
     if request == nil {
         request = NewCreateStreamPackageChannelRequest()
     }
+    
+    response = NewCreateStreamPackageChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateStreamPackageChannel
+// This API is used to create a StreamPackage channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageChannelWithContext(ctx context.Context, request *CreateStreamPackageChannelRequest) (response *CreateStreamPackageChannelResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageChannelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateStreamPackageChannelResponse()
     err = c.Send(request, response)
@@ -149,6 +187,27 @@ func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackage
     return
 }
 
+// CreateStreamPackageChannelEndpoint
+// This API is used to create an endpoint on a StreamPackage channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) CreateStreamPackageChannelEndpointWithContext(ctx context.Context, request *CreateStreamPackageChannelEndpointRequest) (response *CreateStreamPackageChannelEndpointResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageChannelEndpointRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageChannelEndpointResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPackageChannelEndpointsRequest) {
     request = &DeleteStreamPackageChannelEndpointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -178,6 +237,25 @@ func (c *Client) DeleteStreamPackageChannelEndpoints(request *DeleteStreamPackag
     if request == nil {
         request = NewDeleteStreamPackageChannelEndpointsRequest()
     }
+    
+    response = NewDeleteStreamPackageChannelEndpointsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteStreamPackageChannelEndpoints
+// This API is used to delete endpoints from a StreamPackage channel in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageChannelEndpointsWithContext(ctx context.Context, request *DeleteStreamPackageChannelEndpointsRequest) (response *DeleteStreamPackageChannelEndpointsResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageChannelEndpointsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteStreamPackageChannelEndpointsResponse()
     err = c.Send(request, response)
@@ -219,6 +297,25 @@ func (c *Client) DeleteStreamPackageChannels(request *DeleteStreamPackageChannel
     return
 }
 
+// DeleteStreamPackageChannels
+// This API is used to delete StreamPackage channels in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DeleteStreamPackageChannelsWithContext(ctx context.Context, request *DeleteStreamPackageChannelsRequest) (response *DeleteStreamPackageChannelsResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageChannelsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamPackageChannelRequest() (request *DescribeStreamPackageChannelRequest) {
     request = &DescribeStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -247,6 +344,24 @@ func (c *Client) DescribeStreamPackageChannel(request *DescribeStreamPackageChan
     if request == nil {
         request = NewDescribeStreamPackageChannelRequest()
     }
+    
+    response = NewDescribeStreamPackageChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamPackageChannel
+// This API is used to query the information of a StreamPackage channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageChannelWithContext(ctx context.Context, request *DescribeStreamPackageChannelRequest) (response *DescribeStreamPackageChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageChannelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamPackageChannelResponse()
     err = c.Send(request, response)
@@ -290,6 +405,27 @@ func (c *Client) DescribeStreamPackageChannels(request *DescribeStreamPackageCha
     return
 }
 
+// DescribeStreamPackageChannels
+// This API is used to query the information of multiple StreamPackage channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageChannelsWithContext(ctx context.Context, request *DescribeStreamPackageChannelsRequest) (response *DescribeStreamPackageChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageChannelsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannelRequest) {
     request = &ModifyStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -320,6 +456,26 @@ func (c *Client) ModifyStreamPackageChannel(request *ModifyStreamPackageChannelR
     if request == nil {
         request = NewModifyStreamPackageChannelRequest()
     }
+    
+    response = NewModifyStreamPackageChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyStreamPackageChannel
+// This API is used to modify a StreamPackage channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageChannelWithContext(ctx context.Context, request *ModifyStreamPackageChannelRequest) (response *ModifyStreamPackageChannelResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageChannelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyStreamPackageChannelResponse()
     err = c.Send(request, response)
@@ -363,6 +519,27 @@ func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackage
     return
 }
 
+// ModifyStreamPackageChannelEndpoint
+// This API is used to modify an endpoint of a StreamPackage channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) ModifyStreamPackageChannelEndpointWithContext(ctx context.Context, request *ModifyStreamPackageChannelEndpointRequest) (response *ModifyStreamPackageChannelEndpointResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageChannelEndpointRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageChannelEndpointResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamPackageChannelInputAuthInfoRequest() (request *ModifyStreamPackageChannelInputAuthInfoRequest) {
     request = &ModifyStreamPackageChannelInputAuthInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -398,6 +575,25 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfo(request *ModifyStreamPa
     return
 }
 
+// ModifyStreamPackageChannelInputAuthInfo
+// This API is used to modify the input authentication information of a StreamPackage channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ACTIONTYPE = "InvalidParameter.ActionType"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) ModifyStreamPackageChannelInputAuthInfoWithContext(ctx context.Context, request *ModifyStreamPackageChannelInputAuthInfoRequest) (response *ModifyStreamPackageChannelInputAuthInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageChannelInputAuthInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageChannelInputAuthInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnbindCdnDomainWithChannelRequest() (request *UnbindCdnDomainWithChannelRequest) {
     request = &UnbindCdnDomainWithChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -427,6 +623,25 @@ func (c *Client) UnbindCdnDomainWithChannel(request *UnbindCdnDomainWithChannelR
     if request == nil {
         request = NewUnbindCdnDomainWithChannelRequest()
     }
+    
+    response = NewUnbindCdnDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UnbindCdnDomainWithChannel
+// This API is used to unbind a CDN playback domain name from a channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindCdnDomainWithChannelWithContext(ctx context.Context, request *UnbindCdnDomainWithChannelRequest) (response *UnbindCdnDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewUnbindCdnDomainWithChannelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUnbindCdnDomainWithChannelResponse()
     err = c.Send(request, response)

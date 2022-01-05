@@ -15,6 +15,7 @@
 package v20180529
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -86,6 +87,33 @@ func (c *Client) AddRealServers(request *AddRealServersRequest) (response *AddRe
     return
 }
 
+// AddRealServers
+// This API is used to add the information of the origin server (server), which supports IP or the domain name.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATERS = "InvalidParameterValue.DuplicateRS"
+//  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) AddRealServersWithContext(ctx context.Context, request *AddRealServersRequest) (response *AddRealServersResponse, err error) {
+    if request == nil {
+        request = NewAddRealServersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindListenerRealServersRequest() (request *BindListenerRealServersRequest) {
     request = &BindListenerRealServersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -127,6 +155,37 @@ func (c *Client) BindListenerRealServers(request *BindListenerRealServersRequest
     if request == nil {
         request = NewBindListenerRealServersRequest()
     }
+    
+    response = NewBindListenerRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BindListenerRealServers
+// This API (BindListenerRealServers) is used for the TCP/UDP listener to bind/unbind the origin server.
+//
+// Note: This API unbinds the previously bound origin servers, and binds the origin servers selected for this call. For example, the previously bound origin servers are A, B and C, and the origin servers selected for this call are C, D and E, then the origin servers bound after this call will be C, D and E.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITREALSERVERNUM = "FailedOperation.LimitRealServerNum"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_REALSERVERNOTBELONG = "InvalidParameterValue.RealServerNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BindListenerRealServersWithContext(ctx context.Context, request *BindListenerRealServersRequest) (response *BindListenerRealServersResponse, err error) {
+    if request == nil {
+        request = NewBindListenerRealServersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBindListenerRealServersResponse()
     err = c.Send(request, response)
@@ -180,6 +239,37 @@ func (c *Client) BindRuleRealServers(request *BindRuleRealServersRequest) (respo
     return
 }
 
+// BindRuleRealServers
+// This API is used to bind an origin server to the forwarding rules of layer-7 listeners. Note: This API unbinds all previously bound origin servers before binding those selected.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_REALSERVERNOTBELONG = "InvalidParameterValue.RealServerNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BindRuleRealServersWithContext(ctx context.Context, request *BindRuleRealServersRequest) (response *BindRuleRealServersResponse, err error) {
+    if request == nil {
+        request = NewBindRuleRealServersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBindRuleRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckProxyCreateRequest() (request *CheckProxyCreateRequest) {
     request = &CheckProxyCreateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -215,6 +305,31 @@ func (c *Client) CheckProxyCreate(request *CheckProxyCreateRequest) (response *C
     if request == nil {
         request = NewCheckProxyCreateRequest()
     }
+    
+    response = NewCheckProxyCreateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CheckProxyCreate
+// This API (CheckProxyCreate) is used to query whether an acceleration connection with the specified configuration can be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDBANDWIDTH = "InvalidParameterValue.InvalidBandwidth"
+//  INVALIDPARAMETERVALUE_INVALIDCONCURRENCY = "InvalidParameterValue.InvalidConcurrency"
+//  INVALIDPARAMETERVALUE_UNKNOWNACCESSREGION = "InvalidParameterValue.UnknownAccessRegion"
+//  INVALIDPARAMETERVALUE_UNKNOWNDESTREGION = "InvalidParameterValue.UnknownDestRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) CheckProxyCreateWithContext(ctx context.Context, request *CheckProxyCreateRequest) (response *CheckProxyCreateResponse, err error) {
+    if request == nil {
+        request = NewCheckProxyCreateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCheckProxyCreateResponse()
     err = c.Send(request, response)
@@ -265,6 +380,34 @@ func (c *Client) CloseProxies(request *CloseProxiesRequest) (response *CloseProx
     return
 }
 
+// CloseProxies
+// This API (CloseProxies) is used to disable connections. If disabled, no traffic will be generated, but the basic configuration fee will still be incurred.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CloseProxiesWithContext(ctx context.Context, request *CloseProxiesRequest) (response *CloseProxiesResponse, err error) {
+    if request == nil {
+        request = NewCloseProxiesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCloseProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseProxyGroupRequest() (request *CloseProxyGroupRequest) {
     request = &CloseProxyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -301,6 +444,32 @@ func (c *Client) CloseProxyGroup(request *CloseProxyGroupRequest) (response *Clo
     if request == nil {
         request = NewCloseProxyGroupRequest()
     }
+    
+    response = NewCloseProxyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CloseProxyGroup
+// This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CloseProxyGroupWithContext(ctx context.Context, request *CloseProxyGroupRequest) (response *CloseProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewCloseProxyGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCloseProxyGroupResponse()
     err = c.Send(request, response)
@@ -350,6 +519,33 @@ func (c *Client) CloseSecurityPolicy(request *CloseSecurityPolicyRequest) (respo
     return
 }
 
+// CloseSecurityPolicy
+// This API is used to disable security policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_PROXYSECURITYALREADYCLOSE = "FailedOperation.ProxySecurityAlreadyClose"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CloseSecurityPolicyWithContext(ctx context.Context, request *CloseSecurityPolicyRequest) (response *CloseSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewCloseSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCloseSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCertificateRequest() (request *CreateCertificateRequest) {
     request = &CreateCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -392,6 +588,32 @@ func (c *Client) CreateCertificate(request *CreateCertificateRequest) (response 
     return
 }
 
+// CreateCertificate
+// This API (CreateCertificate) is used to create the GAAP certificates and configuration files, including basic authentication configuration files, client CA certificates, server SSL certificates, GAAP SSL certificates, and origin server CA certificates.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDCERTIFICATECONTENT = "InvalidParameterValue.InvalidCertificateContent"
+//  INVALIDPARAMETERVALUE_INVALIDCERTIFICATEKEY = "InvalidParameterValue.InvalidCertificateKey"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCertificateWithContext(ctx context.Context, request *CreateCertificateRequest) (response *CreateCertificateResponse, err error) {
+    if request == nil {
+        request = NewCreateCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCustomHeaderRequest() (request *CreateCustomHeaderRequest) {
     request = &CreateCustomHeaderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -428,6 +650,32 @@ func (c *Client) CreateCustomHeader(request *CreateCustomHeaderRequest) (respons
     if request == nil {
         request = NewCreateCustomHeaderRequest()
     }
+    
+    response = NewCreateCustomHeaderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateCustomHeader
+// This API is used to create a custom header of the HTTP/HTTPS listener. When client requests reach the listener, they will be forwarded to the origin with this custom hearer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_HITBLACKLIST = "InvalidParameterValue.HitBlacklist"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) CreateCustomHeaderWithContext(ctx context.Context, request *CreateCustomHeaderRequest) (response *CreateCustomHeaderResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomHeaderRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateCustomHeaderResponse()
     err = c.Send(request, response)
@@ -481,6 +729,37 @@ func (c *Client) CreateDomain(request *CreateDomainRequest) (response *CreateDom
     return
 }
 
+// CreateDomain
+// This API (CreateDomain) is used to create the access domain name for the HTTP/HTTPS listener. Clients request the backend data by accessing this domain.
+//
+// This API only supports connections of version 3.0.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DOMAININICPBLACKLIST = "InvalidParameterValue.DomainInIcpBlacklist"
+//  INVALIDPARAMETERVALUE_DOMAINNOTREGISTER = "InvalidParameterValue.DomainNotRegister"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) CreateDomainWithContext(ctx context.Context, request *CreateDomainRequest) (response *CreateDomainResponse, err error) {
+    if request == nil {
+        request = NewCreateDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDomainErrorPageInfoRequest() (request *CreateDomainErrorPageInfoRequest) {
     request = &CreateDomainErrorPageInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -517,6 +796,32 @@ func (c *Client) CreateDomainErrorPageInfo(request *CreateDomainErrorPageInfoReq
     if request == nil {
         request = NewCreateDomainErrorPageInfoRequest()
     }
+    
+    response = NewCreateDomainErrorPageInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateDomainErrorPageInfo
+// This API is used to customize the error code of an error response to the specified domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateDomainErrorPageInfoWithContext(ctx context.Context, request *CreateDomainErrorPageInfoRequest) (response *CreateDomainErrorPageInfoResponse, err error) {
+    if request == nil {
+        request = NewCreateDomainErrorPageInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateDomainErrorPageInfoResponse()
     err = c.Send(request, response)
@@ -570,6 +875,37 @@ func (c *Client) CreateHTTPListener(request *CreateHTTPListenerRequest) (respons
     return
 }
 
+// CreateHTTPListener
+// This API (CreateHTTPListener) is used to create an HTTP listener in the connection instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATEDLISTENERPORT = "InvalidParameterValue.DuplicatedListenerPort"
+//  INVALIDPARAMETERVALUE_INVALIDLISTENERPORT = "InvalidParameterValue.InvalidListenerPort"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateHTTPListenerWithContext(ctx context.Context, request *CreateHTTPListenerRequest) (response *CreateHTTPListenerResponse, err error) {
+    if request == nil {
+        request = NewCreateHTTPListenerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateHTTPListenerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateHTTPSListenerRequest() (request *CreateHTTPSListenerRequest) {
     request = &CreateHTTPSListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -611,6 +947,37 @@ func (c *Client) CreateHTTPSListener(request *CreateHTTPSListenerRequest) (respo
     if request == nil {
         request = NewCreateHTTPSListenerRequest()
     }
+    
+    response = NewCreateHTTPSListenerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateHTTPSListener
+// This API (CreateHTTPListener) is used to create an HTTPS listener in the connection instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATEDLISTENERPORT = "InvalidParameterValue.DuplicatedListenerPort"
+//  INVALIDPARAMETERVALUE_INVALIDCERTIFICATEID = "InvalidParameterValue.InvalidCertificateId"
+//  INVALIDPARAMETERVALUE_INVALIDLISTENERPORT = "InvalidParameterValue.InvalidListenerPort"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateHTTPSListenerWithContext(ctx context.Context, request *CreateHTTPSListenerRequest) (response *CreateHTTPSListenerResponse, err error) {
+    if request == nil {
+        request = NewCreateHTTPSListenerRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateHTTPSListenerResponse()
     err = c.Send(request, response)
@@ -667,6 +1034,40 @@ func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxy
     return
 }
 
+// CreateProxy
+// This API (CreateProxy) is used to create an acceleration connection with specified configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
+//  FAILEDOPERATION_PROXYSELLOUT = "FailedOperation.ProxySellOut"
+//  FAILEDOPERATION_USERNOTAUTHENTICATED = "FailedOperation.UserNotAuthenticated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDBANDWIDTH = "InvalidParameterValue.InvalidBandwidth"
+//  INVALIDPARAMETERVALUE_INVALIDCONCURRENCY = "InvalidParameterValue.InvalidConcurrency"
+//  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateProxyWithContext(ctx context.Context, request *CreateProxyRequest) (response *CreateProxyResponse, err error) {
+    if request == nil {
+        request = NewCreateProxyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateProxyGroupRequest() (request *CreateProxyGroupRequest) {
     request = &CreateProxyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -710,6 +1111,33 @@ func (c *Client) CreateProxyGroup(request *CreateProxyGroupRequest) (response *C
     return
 }
 
+// CreateProxyGroup
+// This API (CreateProxyGroup) is used to create a connection group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LIMITNUMOFPROXIESINGROUP = "FailedOperation.LimitNumofProxiesInGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateProxyGroupWithContext(ctx context.Context, request *CreateProxyGroupRequest) (response *CreateProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateProxyGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateProxyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateProxyGroupDomainRequest() (request *CreateProxyGroupDomainRequest) {
     request = &CreateProxyGroupDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -745,6 +1173,31 @@ func (c *Client) CreateProxyGroupDomain(request *CreateProxyGroupDomainRequest) 
     if request == nil {
         request = NewCreateProxyGroupDomainRequest()
     }
+    
+    response = NewCreateProxyGroupDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateProxyGroupDomain
+// This API (CreateProxyGroupDomain) is used to create the connection group domain name, and enable the domain name resolution.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateProxyGroupDomainWithContext(ctx context.Context, request *CreateProxyGroupDomainRequest) (response *CreateProxyGroupDomainResponse, err error) {
+    if request == nil {
+        request = NewCreateProxyGroupDomainRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateProxyGroupDomainResponse()
     err = c.Send(request, response)
@@ -798,6 +1251,37 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
     return
 }
 
+// CreateRule
+// This API (CreateRule) is used to create the forwarding rules of HTTP/HTTPS listeners.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITNUMOFRULES = "FailedOperation.LimitNumofRules"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSecurityPolicyRequest() (request *CreateSecurityPolicyRequest) {
     request = &CreateSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -834,6 +1318,32 @@ func (c *Client) CreateSecurityPolicy(request *CreateSecurityPolicyRequest) (res
     if request == nil {
         request = NewCreateSecurityPolicyRequest()
     }
+    
+    response = NewCreateSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateSecurityPolicy
+// This API is used to create security policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYEXISTED = "FailedOperation.ProxySecurityPolicyExisted"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateSecurityPolicyWithContext(ctx context.Context, request *CreateSecurityPolicyRequest) (response *CreateSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateSecurityPolicyResponse()
     err = c.Send(request, response)
@@ -877,6 +1387,33 @@ func (c *Client) CreateSecurityRules(request *CreateSecurityRulesRequest) (respo
     if request == nil {
         request = NewCreateSecurityRulesRequest()
     }
+    
+    response = NewCreateSecurityRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateSecurityRules
+// This API is used to add security policy rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateSecurityRulesWithContext(ctx context.Context, request *CreateSecurityRulesRequest) (response *CreateSecurityRulesResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateSecurityRulesResponse()
     err = c.Send(request, response)
@@ -933,6 +1470,40 @@ func (c *Client) CreateTCPListeners(request *CreateTCPListenersRequest) (respons
     return
 }
 
+// CreateTCPListeners
+// This API (CreateTCPListeners) is used to batch create TCP listeners of single connections or connection groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATEDLISTENERPORT = "InvalidParameterValue.DuplicatedListenerPort"
+//  INVALIDPARAMETERVALUE_INVALIDLISTENERPORT = "InvalidParameterValue.InvalidListenerPort"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) CreateTCPListenersWithContext(ctx context.Context, request *CreateTCPListenersRequest) (response *CreateTCPListenersResponse, err error) {
+    if request == nil {
+        request = NewCreateTCPListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateTCPListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUDPListenersRequest() (request *CreateUDPListenersRequest) {
     request = &CreateUDPListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -979,6 +1550,36 @@ func (c *Client) CreateUDPListeners(request *CreateUDPListenersRequest) (respons
     return
 }
 
+// CreateUDPListeners
+// This API (CreateTCPListeners) is used to batch create UDP listeners of single connections or connection groups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATEDLISTENERPORT = "InvalidParameterValue.DuplicatedListenerPort"
+//  INVALIDPARAMETERVALUE_INVALIDLISTENERPORT = "InvalidParameterValue.InvalidListenerPort"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateUDPListenersWithContext(ctx context.Context, request *CreateUDPListenersRequest) (response *CreateUDPListenersResponse, err error) {
+    if request == nil {
+        request = NewCreateUDPListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateUDPListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCertificateRequest() (request *DeleteCertificateRequest) {
     request = &DeleteCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1014,6 +1615,31 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
     if request == nil {
         request = NewDeleteCertificateRequest()
     }
+    
+    response = NewDeleteCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteCertificate
+// This API (DeleteCertificate) is used to delete certificates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCertificateWithContext(ctx context.Context, request *DeleteCertificateRequest) (response *DeleteCertificateResponse, err error) {
+    if request == nil {
+        request = NewDeleteCertificateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteCertificateResponse()
     err = c.Send(request, response)
@@ -1064,6 +1690,34 @@ func (c *Client) DeleteDomain(request *DeleteDomainRequest) (response *DeleteDom
     return
 }
 
+// DeleteDomain
+// This API (DeleteDomain) is only applicable to layer-7 listeners. It is used to delete the domain names of this listener, and all the rules under the domain name. All rules bound to the origin server are unbound automatically.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteDomainWithContext(ctx context.Context, request *DeleteDomainRequest) (response *DeleteDomainResponse, err error) {
+    if request == nil {
+        request = NewDeleteDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDomainErrorPageInfoRequest() (request *DeleteDomainErrorPageInfoRequest) {
     request = &DeleteDomainErrorPageInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1099,6 +1753,31 @@ func (c *Client) DeleteDomainErrorPageInfo(request *DeleteDomainErrorPageInfoReq
     if request == nil {
         request = NewDeleteDomainErrorPageInfoRequest()
     }
+    
+    response = NewDeleteDomainErrorPageInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteDomainErrorPageInfo
+// This API is used to delete a custom error code for a domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DeleteDomainErrorPageInfoWithContext(ctx context.Context, request *DeleteDomainErrorPageInfoRequest) (response *DeleteDomainErrorPageInfoResponse, err error) {
+    if request == nil {
+        request = NewDeleteDomainErrorPageInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteDomainErrorPageInfoResponse()
     err = c.Send(request, response)
@@ -1148,6 +1827,33 @@ func (c *Client) DeleteListeners(request *DeleteListenersRequest) (response *Del
     return
 }
 
+// DeleteListeners
+// This API (DeleteListeners) is used to batch delete the listeners of a connection or connection group, including layer-4/7 listeners.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteListenersWithContext(ctx context.Context, request *DeleteListenersRequest) (response *DeleteListenersResponse, err error) {
+    if request == nil {
+        request = NewDeleteListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteProxyGroupRequest() (request *DeleteProxyGroupRequest) {
     request = &DeleteProxyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1185,6 +1891,33 @@ func (c *Client) DeleteProxyGroup(request *DeleteProxyGroupRequest) (response *D
     if request == nil {
         request = NewDeleteProxyGroupRequest()
     }
+    
+    response = NewDeleteProxyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteProxyGroup
+// This API (DeleteProxyGroup) is used to delete a connection group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETEPROXYGROUPPROXYREMAINED = "FailedOperation.DeleteProxyGroupProxyRemained"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteProxyGroupWithContext(ctx context.Context, request *DeleteProxyGroupRequest) (response *DeleteProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteProxyGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteProxyGroupResponse()
     err = c.Send(request, response)
@@ -1235,6 +1968,34 @@ func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleRes
     return
 }
 
+// DeleteRule
+// This API (DeleteRule) is used to delete the forwarding rules of HTTP/HTTPS listeners.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleRequest) (response *DeleteRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteSecurityPolicyRequest() (request *DeleteSecurityPolicyRequest) {
     request = &DeleteSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1271,6 +2032,32 @@ func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (res
     if request == nil {
         request = NewDeleteSecurityPolicyRequest()
     }
+    
+    response = NewDeleteSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteSecurityPolicy
+// This API is used to delete security policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSecurityPolicyWithContext(ctx context.Context, request *DeleteSecurityPolicyRequest) (response *DeleteSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteSecurityPolicyResponse()
     err = c.Send(request, response)
@@ -1318,6 +2105,31 @@ func (c *Client) DeleteSecurityRules(request *DeleteSecurityRulesRequest) (respo
     return
 }
 
+// DeleteSecurityRules
+// This API is used to delete security policy rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteSecurityRulesWithContext(ctx context.Context, request *DeleteSecurityRulesRequest) (response *DeleteSecurityRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteSecurityRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteSecurityRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccessRegionsRequest() (request *DescribeAccessRegionsRequest) {
     request = &DescribeAccessRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1353,6 +2165,31 @@ func (c *Client) DescribeAccessRegions(request *DescribeAccessRegionsRequest) (r
     if request == nil {
         request = NewDescribeAccessRegionsRequest()
     }
+    
+    response = NewDescribeAccessRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAccessRegions
+// This API (DescribeAccessRegions) is used to query acceleration region (client access region).
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAccessRegionsWithContext(ctx context.Context, request *DescribeAccessRegionsRequest) (response *DescribeAccessRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessRegionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAccessRegionsResponse()
     err = c.Send(request, response)
@@ -1399,6 +2236,30 @@ func (c *Client) DescribeAccessRegionsByDestRegion(request *DescribeAccessRegion
     return
 }
 
+// DescribeAccessRegionsByDestRegion
+// This API (DescribeAccessRegionsByDestRegion) is used to query the list of the available acceleration regions based on the origin server region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_UNKNOWNDESTREGION = "InvalidParameterValue.UnknownDestRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAccessRegionsByDestRegionWithContext(ctx context.Context, request *DescribeAccessRegionsByDestRegionRequest) (response *DescribeAccessRegionsByDestRegionResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessRegionsByDestRegionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccessRegionsByDestRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlackHeaderRequest() (request *DescribeBlackHeaderRequest) {
     request = &DescribeBlackHeaderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1433,6 +2294,30 @@ func (c *Client) DescribeBlackHeader(request *DescribeBlackHeaderRequest) (respo
     if request == nil {
         request = NewDescribeBlackHeaderRequest()
     }
+    
+    response = NewDescribeBlackHeaderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBlackHeader
+// This API is used to query names of blocked custom headers.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeBlackHeaderWithContext(ctx context.Context, request *DescribeBlackHeaderRequest) (response *DescribeBlackHeaderResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlackHeaderRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBlackHeaderResponse()
     err = c.Send(request, response)
@@ -1480,6 +2365,31 @@ func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailReq
     return
 }
 
+// DescribeCertificateDetail
+// This API (DescribeCertificateDetail) is used to query certificate details, including the certificate ID, name, type, content, key, and other information.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCertificateDetailWithContext(ctx context.Context, request *DescribeCertificateDetailRequest) (response *DescribeCertificateDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificateDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertificatesRequest() (request *DescribeCertificatesRequest) {
     request = &DescribeCertificatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1515,6 +2425,31 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
     if request == nil {
         request = NewDescribeCertificatesRequest()
     }
+    
+    response = NewDescribeCertificatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCertificates
+// This API (DescribeCertificates) is used to query the list of available certificates.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCertificatesResponse()
     err = c.Send(request, response)
@@ -1563,6 +2498,32 @@ func (c *Client) DescribeCountryAreaMapping(request *DescribeCountryAreaMappingR
     return
 }
 
+// DescribeCountryAreaMapping
+// This API (DescribeCountryAreaMapping) is used to obtain the country/region code mapping table.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeCountryAreaMappingWithContext(ctx context.Context, request *DescribeCountryAreaMappingRequest) (response *DescribeCountryAreaMappingResponse, err error) {
+    if request == nil {
+        request = NewDescribeCountryAreaMappingRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCountryAreaMappingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomHeaderRequest() (request *DescribeCustomHeaderRequest) {
     request = &DescribeCustomHeaderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1597,6 +2558,30 @@ func (c *Client) DescribeCustomHeader(request *DescribeCustomHeaderRequest) (res
     if request == nil {
         request = NewDescribeCustomHeaderRequest()
     }
+    
+    response = NewDescribeCustomHeaderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCustomHeader
+// This API is used to query the list of custom headers.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeCustomHeaderWithContext(ctx context.Context, request *DescribeCustomHeaderRequest) (response *DescribeCustomHeaderResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomHeaderRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCustomHeaderResponse()
     err = c.Send(request, response)
@@ -1643,6 +2628,30 @@ func (c *Client) DescribeDestRegions(request *DescribeDestRegionsRequest) (respo
     return
 }
 
+// DescribeDestRegions
+// This API (DescribeDestRegions) is used to query an origin server region (i.e., the region in which the origin server locates).
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeDestRegionsWithContext(ctx context.Context, request *DescribeDestRegionsRequest) (response *DescribeDestRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDestRegionsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDestRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDomainErrorPageInfoRequest() (request *DescribeDomainErrorPageInfoRequest) {
     request = &DescribeDomainErrorPageInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1674,6 +2683,27 @@ func (c *Client) DescribeDomainErrorPageInfo(request *DescribeDomainErrorPageInf
     if request == nil {
         request = NewDescribeDomainErrorPageInfoRequest()
     }
+    
+    response = NewDescribeDomainErrorPageInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDomainErrorPageInfo
+// This API is used to query the custom error response to a domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeDomainErrorPageInfoWithContext(ctx context.Context, request *DescribeDomainErrorPageInfoRequest) (response *DescribeDomainErrorPageInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeDomainErrorPageInfoRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDomainErrorPageInfoResponse()
     err = c.Send(request, response)
@@ -1717,6 +2747,27 @@ func (c *Client) DescribeDomainErrorPageInfoByIds(request *DescribeDomainErrorPa
     return
 }
 
+// DescribeDomainErrorPageInfoByIds
+// This API is used to query the corresponding error response by a custom error ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeDomainErrorPageInfoByIdsWithContext(ctx context.Context, request *DescribeDomainErrorPageInfoByIdsRequest) (response *DescribeDomainErrorPageInfoByIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDomainErrorPageInfoByIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDomainErrorPageInfoByIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGroupAndStatisticsProxyRequest() (request *DescribeGroupAndStatisticsProxyRequest) {
     request = &DescribeGroupAndStatisticsProxyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1751,6 +2802,30 @@ func (c *Client) DescribeGroupAndStatisticsProxy(request *DescribeGroupAndStatis
     if request == nil {
         request = NewDescribeGroupAndStatisticsProxyRequest()
     }
+    
+    response = NewDescribeGroupAndStatisticsProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeGroupAndStatisticsProxy
+// This is an internal API. It is used to query the information of connections and connection groups from which the statistics can be derived.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeGroupAndStatisticsProxyWithContext(ctx context.Context, request *DescribeGroupAndStatisticsProxyRequest) (response *DescribeGroupAndStatisticsProxyResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupAndStatisticsProxyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeGroupAndStatisticsProxyResponse()
     err = c.Send(request, response)
@@ -1800,6 +2875,33 @@ func (c *Client) DescribeGroupDomainConfig(request *DescribeGroupDomainConfigReq
     return
 }
 
+// DescribeGroupDomainConfig
+// This API (DescribeGroupDomainConfig) is used to obtain the domain name resolution configuration details of a connection group.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeGroupDomainConfigWithContext(ctx context.Context, request *DescribeGroupDomainConfigRequest) (response *DescribeGroupDomainConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupDomainConfigRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeGroupDomainConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeHTTPListenersRequest() (request *DescribeHTTPListenersRequest) {
     request = &DescribeHTTPListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1836,6 +2938,32 @@ func (c *Client) DescribeHTTPListeners(request *DescribeHTTPListenersRequest) (r
     if request == nil {
         request = NewDescribeHTTPListenersRequest()
     }
+    
+    response = NewDescribeHTTPListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeHTTPListeners
+// This API (DescribeHTTPListeners) is used to query HTTP listener information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeHTTPListenersWithContext(ctx context.Context, request *DescribeHTTPListenersRequest) (response *DescribeHTTPListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeHTTPListenersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeHTTPListenersResponse()
     err = c.Send(request, response)
@@ -1884,6 +3012,32 @@ func (c *Client) DescribeHTTPSListeners(request *DescribeHTTPSListenersRequest) 
     return
 }
 
+// DescribeHTTPSListeners
+// This API (DescribeHTTPSListeners) is used to query HTTPS listener information.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeHTTPSListenersWithContext(ctx context.Context, request *DescribeHTTPSListenersRequest) (response *DescribeHTTPSListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeHTTPSListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeHTTPSListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeListenerRealServersRequest() (request *DescribeListenerRealServersRequest) {
     request = &DescribeListenerRealServersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1918,6 +3072,30 @@ func (c *Client) DescribeListenerRealServers(request *DescribeListenerRealServer
     if request == nil {
         request = NewDescribeListenerRealServersRequest()
     }
+    
+    response = NewDescribeListenerRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeListenerRealServers
+// This API (DescribeListenerRealServers) is used to query the origin server list of TCP/UDP listeners, including the list of bound origin servers and origin servers that can be bound.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeListenerRealServersWithContext(ctx context.Context, request *DescribeListenerRealServersRequest) (response *DescribeListenerRealServersResponse, err error) {
+    if request == nil {
+        request = NewDescribeListenerRealServersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeListenerRealServersResponse()
     err = c.Send(request, response)
@@ -1965,6 +3143,31 @@ func (c *Client) DescribeListenerStatistics(request *DescribeListenerStatisticsR
     return
 }
 
+// DescribeListenerStatistics
+// This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeListenerStatisticsWithContext(ctx context.Context, request *DescribeListenerStatisticsRequest) (response *DescribeListenerStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeListenerStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeListenerStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProxiesRequest() (request *DescribeProxiesRequest) {
     request = &DescribeProxiesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2000,6 +3203,31 @@ func (c *Client) DescribeProxies(request *DescribeProxiesRequest) (response *Des
     if request == nil {
         request = NewDescribeProxiesRequest()
     }
+    
+    response = NewDescribeProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProxies
+// This API (DescribeProxies) is used to query the connection instance list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeProxiesWithContext(ctx context.Context, request *DescribeProxiesRequest) (response *DescribeProxiesResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxiesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProxiesResponse()
     err = c.Send(request, response)
@@ -2048,6 +3276,32 @@ func (c *Client) DescribeProxiesStatus(request *DescribeProxiesStatusRequest) (r
     return
 }
 
+// DescribeProxiesStatus
+// This API (DescribeProxiesStatus) is used to query the connection status list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeProxiesStatusWithContext(ctx context.Context, request *DescribeProxiesStatusRequest) (response *DescribeProxiesStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxiesStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxiesStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProxyAndStatisticsListenersRequest() (request *DescribeProxyAndStatisticsListenersRequest) {
     request = &DescribeProxyAndStatisticsListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2081,6 +3335,29 @@ func (c *Client) DescribeProxyAndStatisticsListeners(request *DescribeProxyAndSt
     if request == nil {
         request = NewDescribeProxyAndStatisticsListenersRequest()
     }
+    
+    response = NewDescribeProxyAndStatisticsListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProxyAndStatisticsListeners
+// This is an internal API. It is used to query the information of connections and listeners from which the statistics can be derived.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeProxyAndStatisticsListenersWithContext(ctx context.Context, request *DescribeProxyAndStatisticsListenersRequest) (response *DescribeProxyAndStatisticsListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyAndStatisticsListenersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProxyAndStatisticsListenersResponse()
     err = c.Send(request, response)
@@ -2132,6 +3409,35 @@ func (c *Client) DescribeProxyDetail(request *DescribeProxyDetailRequest) (respo
     return
 }
 
+// DescribeProxyDetail
+// This API (DescribeProxyDetail) is used to query connection details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeProxyDetailWithContext(ctx context.Context, request *DescribeProxyDetailRequest) (response *DescribeProxyDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxyDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProxyGroupDetailsRequest() (request *DescribeProxyGroupDetailsRequest) {
     request = &DescribeProxyGroupDetailsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2168,6 +3474,32 @@ func (c *Client) DescribeProxyGroupDetails(request *DescribeProxyGroupDetailsReq
     if request == nil {
         request = NewDescribeProxyGroupDetailsRequest()
     }
+    
+    response = NewDescribeProxyGroupDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProxyGroupDetails
+// This API (DescribeProxyGroupDetails) is used to query connection group details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeProxyGroupDetailsWithContext(ctx context.Context, request *DescribeProxyGroupDetailsRequest) (response *DescribeProxyGroupDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyGroupDetailsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProxyGroupDetailsResponse()
     err = c.Send(request, response)
@@ -2216,6 +3548,32 @@ func (c *Client) DescribeProxyGroupList(request *DescribeProxyGroupListRequest) 
     return
 }
 
+// DescribeProxyGroupList
+// This API (DescribeProxyGroupList) is used to pull the list of connection groups and the basic information of each connection group.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeProxyGroupListWithContext(ctx context.Context, request *DescribeProxyGroupListRequest) (response *DescribeProxyGroupListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyGroupListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxyGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeProxyGroupStatisticsRequest() (request *DescribeProxyGroupStatisticsRequest) {
     request = &DescribeProxyGroupStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2250,6 +3608,30 @@ func (c *Client) DescribeProxyGroupStatistics(request *DescribeProxyGroupStatist
     if request == nil {
         request = NewDescribeProxyGroupStatisticsRequest()
     }
+    
+    response = NewDescribeProxyGroupStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeProxyGroupStatistics
+// This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeProxyGroupStatisticsWithContext(ctx context.Context, request *DescribeProxyGroupStatisticsRequest) (response *DescribeProxyGroupStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyGroupStatisticsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeProxyGroupStatisticsResponse()
     err = c.Send(request, response)
@@ -2296,6 +3678,30 @@ func (c *Client) DescribeProxyStatistics(request *DescribeProxyStatisticsRequest
     return
 }
 
+// DescribeProxyStatistics
+// This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, concurrence, packet loss, and latency data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeProxyStatisticsWithContext(ctx context.Context, request *DescribeProxyStatisticsRequest) (response *DescribeProxyStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxyStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRealServerStatisticsRequest() (request *DescribeRealServerStatisticsRequest) {
     request = &DescribeRealServerStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2328,6 +3734,28 @@ func (c *Client) DescribeRealServerStatistics(request *DescribeRealServerStatist
     if request == nil {
         request = NewDescribeRealServerStatisticsRequest()
     }
+    
+    response = NewDescribeRealServerStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRealServerStatistics
+// This API is used to query the statistics of an origin server's health check results. Origin server status is displayed as 1 (normal) or 0 (exceptional). The queried origin server must be bound to a listener or rule, and the ID of the bound listener or rule must be specified for the query. This API supports displaying origin server status statistics at a 1-minute granularity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeRealServerStatisticsWithContext(ctx context.Context, request *DescribeRealServerStatisticsRequest) (response *DescribeRealServerStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealServerStatisticsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRealServerStatisticsResponse()
     err = c.Send(request, response)
@@ -2374,6 +3802,30 @@ func (c *Client) DescribeRealServers(request *DescribeRealServersRequest) (respo
     return
 }
 
+// DescribeRealServers
+// This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeRealServersWithContext(ctx context.Context, request *DescribeRealServersRequest) (response *DescribeRealServersResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealServersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRealServersStatusRequest() (request *DescribeRealServersStatusRequest) {
     request = &DescribeRealServersStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2408,6 +3860,30 @@ func (c *Client) DescribeRealServersStatus(request *DescribeRealServersStatusReq
     if request == nil {
         request = NewDescribeRealServersStatusRequest()
     }
+    
+    response = NewDescribeRealServersStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRealServersStatus
+// This API (DescribeRealServersStatus) is used to query whether an origin server has been bound to a rule or listener.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REALSERVERNOTINPROJECT = "FailedOperation.RealServerNotInProject"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_REALSERVERNOTBELONG = "InvalidParameterValue.RealServerNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeRealServersStatusWithContext(ctx context.Context, request *DescribeRealServersStatusRequest) (response *DescribeRealServersStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeRealServersStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRealServersStatusResponse()
     err = c.Send(request, response)
@@ -2454,6 +3930,30 @@ func (c *Client) DescribeRegionAndPrice(request *DescribeRegionAndPriceRequest) 
     return
 }
 
+// DescribeRegionAndPrice
+// This API (DescribeRegionAndPrice) is used to obtain the origin server regions and the bandwidth price gradient.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRegionAndPriceWithContext(ctx context.Context, request *DescribeRegionAndPriceRequest) (response *DescribeRegionAndPriceResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionAndPriceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRegionAndPriceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourcesByTagRequest() (request *DescribeResourcesByTagRequest) {
     request = &DescribeResourcesByTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2488,6 +3988,30 @@ func (c *Client) DescribeResourcesByTag(request *DescribeResourcesByTagRequest) 
     if request == nil {
         request = NewDescribeResourcesByTagRequest()
     }
+    
+    response = NewDescribeResourcesByTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeResourcesByTag
+// This API (DescribeResourcesByTag) is used to query corresponding resource information by tags, including connection, connection group, and origin server.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeResourcesByTagWithContext(ctx context.Context, request *DescribeResourcesByTagRequest) (response *DescribeResourcesByTagResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourcesByTagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeResourcesByTagResponse()
     err = c.Send(request, response)
@@ -2534,6 +4058,30 @@ func (c *Client) DescribeRuleRealServers(request *DescribeRuleRealServersRequest
     return
 }
 
+// DescribeRuleRealServers
+// This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) DescribeRuleRealServersWithContext(ctx context.Context, request *DescribeRuleRealServersRequest) (response *DescribeRuleRealServersResponse, err error) {
+    if request == nil {
+        request = NewDescribeRuleRealServersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRuleRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRulesRequest() (request *DescribeRulesRequest) {
     request = &DescribeRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2568,6 +4116,30 @@ func (c *Client) DescribeRules(request *DescribeRulesRequest) (response *Describ
     if request == nil {
         request = NewDescribeRulesRequest()
     }
+    
+    response = NewDescribeRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRules
+// This API (DescribeRules) is used to query all rule information of a listener, including the domain names, paths, and list of bound origin servers. For version 3.0 connections, this API returns the advanced authentication configuration information of the domain name.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRulesWithContext(ctx context.Context, request *DescribeRulesRequest) (response *DescribeRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRulesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRulesResponse()
     err = c.Send(request, response)
@@ -2617,6 +4189,33 @@ func (c *Client) DescribeRulesByRuleIds(request *DescribeRulesByRuleIdsRequest) 
     return
 }
 
+// DescribeRulesByRuleIds
+// This API is used to pull the list of rules based on rule ID. It supports pulling 1 to 10 rules at a time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRulesByRuleIdsWithContext(ctx context.Context, request *DescribeRulesByRuleIdsRequest) (response *DescribeRulesByRuleIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRulesByRuleIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRulesByRuleIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSecurityPolicyDetailRequest() (request *DescribeSecurityPolicyDetailRequest) {
     request = &DescribeSecurityPolicyDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2653,6 +4252,32 @@ func (c *Client) DescribeSecurityPolicyDetail(request *DescribeSecurityPolicyDet
     if request == nil {
         request = NewDescribeSecurityPolicyDetailRequest()
     }
+    
+    response = NewDescribeSecurityPolicyDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSecurityPolicyDetail
+// This API is used to obtain security policy details.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeSecurityPolicyDetailWithContext(ctx context.Context, request *DescribeSecurityPolicyDetailRequest) (response *DescribeSecurityPolicyDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityPolicyDetailRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSecurityPolicyDetailResponse()
     err = c.Send(request, response)
@@ -2702,6 +4327,33 @@ func (c *Client) DescribeSecurityRules(request *DescribeSecurityRulesRequest) (r
     return
 }
 
+// DescribeSecurityRules
+// This API is used to query the list of security rules based on security rule ID. It supports querying 1 to 20 security rules at a time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSecurityRulesWithContext(ctx context.Context, request *DescribeSecurityRulesRequest) (response *DescribeSecurityRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTCPListenersRequest() (request *DescribeTCPListenersRequest) {
     request = &DescribeTCPListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2743,6 +4395,31 @@ func (c *Client) DescribeTCPListeners(request *DescribeTCPListenersRequest) (res
     return
 }
 
+// DescribeTCPListeners
+// This API (DescribeTCPListeners) is used to query the TCP listener information of a single connection or connection group.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeTCPListenersWithContext(ctx context.Context, request *DescribeTCPListenersRequest) (response *DescribeTCPListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeTCPListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTCPListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUDPListenersRequest() (request *DescribeUDPListenersRequest) {
     request = &DescribeUDPListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2777,6 +4454,30 @@ func (c *Client) DescribeUDPListeners(request *DescribeUDPListenersRequest) (res
     if request == nil {
         request = NewDescribeUDPListenersRequest()
     }
+    
+    response = NewDescribeUDPListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeUDPListeners
+// This API (DescribeUDPListeners) is used to query the UDP listener information of a single connection or connection group.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeUDPListenersWithContext(ctx context.Context, request *DescribeUDPListenersRequest) (response *DescribeUDPListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeUDPListenersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeUDPListenersResponse()
     err = c.Send(request, response)
@@ -2830,6 +4531,37 @@ func (c *Client) DestroyProxies(request *DestroyProxiesRequest) (response *Destr
     return
 }
 
+// DestroyProxies
+// This API (DestroyProxies) is used to terminate a connection. If terminated, no fees will be incurred.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_BELONGDIFFERENTGROUP = "FailedOperation.BelongDifferentGroup"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DestroyProxiesWithContext(ctx context.Context, request *DestroyProxiesRequest) (response *DestroyProxiesResponse, err error) {
+    if request == nil {
+        request = NewDestroyProxiesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDestroyProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquiryPriceCreateProxyRequest() (request *InquiryPriceCreateProxyRequest) {
     request = &InquiryPriceCreateProxyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2870,6 +4602,36 @@ func (c *Client) InquiryPriceCreateProxy(request *InquiryPriceCreateProxyRequest
     if request == nil {
         request = NewInquiryPriceCreateProxyRequest()
     }
+    
+    response = NewInquiryPriceCreateProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InquiryPriceCreateProxy
+// This API (InquiryPriceCreateProxy) is used to create the price inquiries of acceleration connections.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDBANDWIDTH = "InvalidParameterValue.InvalidBandwidth"
+//  INVALIDPARAMETERVALUE_INVALIDCONCURRENCY = "InvalidParameterValue.InvalidConcurrency"
+//  INVALIDPARAMETERVALUE_UNKNOWNACCESSREGION = "InvalidParameterValue.UnknownAccessRegion"
+//  INVALIDPARAMETERVALUE_UNKNOWNDESTREGION = "InvalidParameterValue.UnknownDestRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) InquiryPriceCreateProxyWithContext(ctx context.Context, request *InquiryPriceCreateProxyRequest) (response *InquiryPriceCreateProxyResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceCreateProxyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewInquiryPriceCreateProxyResponse()
     err = c.Send(request, response)
@@ -2921,6 +4683,35 @@ func (c *Client) ModifyCertificate(request *ModifyCertificateRequest) (response 
     return
 }
 
+// ModifyCertificate
+// This API (ModifyCertificate) is used to modify a domain name certificate of a listener. domain name certificate. This API is only applicable to connections of version 3.0.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CERTIFICATENOTMATCHDOMAIN = "InvalidParameterValue.CertificateNotMatchDomain"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyCertificateWithContext(ctx context.Context, request *ModifyCertificateRequest) (response *ModifyCertificateResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCertificateAttributesRequest() (request *ModifyCertificateAttributesRequest) {
     request = &ModifyCertificateAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2956,6 +4747,31 @@ func (c *Client) ModifyCertificateAttributes(request *ModifyCertificateAttribute
     if request == nil {
         request = NewModifyCertificateAttributesRequest()
     }
+    
+    response = NewModifyCertificateAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyCertificateAttributes
+// This API is used to modify certificate name and content.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCertificateAttributesWithContext(ctx context.Context, request *ModifyCertificateAttributesRequest) (response *ModifyCertificateAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificateAttributesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyCertificateAttributesResponse()
     err = c.Send(request, response)
@@ -3009,6 +4825,37 @@ func (c *Client) ModifyDomain(request *ModifyDomainRequest) (response *ModifyDom
     return
 }
 
+// ModifyDomain
+// This API (ModifyDomain) is used to modify domain names of listeners. For connections of version 3.0, it supports modifying certificates of the domain names.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
+//  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CERTIFICATENOTMATCHDOMAIN = "InvalidParameterValue.CertificateNotMatchDomain"
+//  INVALIDPARAMETERVALUE_DOMAININICPBLACKLIST = "InvalidParameterValue.DomainInIcpBlacklist"
+//  INVALIDPARAMETERVALUE_DOMAINNOTREGISTER = "InvalidParameterValue.DomainNotRegister"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyDomainWithContext(ctx context.Context, request *ModifyDomainRequest) (response *ModifyDomainResponse, err error) {
+    if request == nil {
+        request = NewModifyDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyGroupDomainConfigRequest() (request *ModifyGroupDomainConfigRequest) {
     request = &ModifyGroupDomainConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3044,6 +4891,31 @@ func (c *Client) ModifyGroupDomainConfig(request *ModifyGroupDomainConfigRequest
     if request == nil {
         request = NewModifyGroupDomainConfigRequest()
     }
+    
+    response = NewModifyGroupDomainConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyGroupDomainConfig
+// This API (ModifyGroupDomainConfig) is used to configure the nearest access domain name of a connection group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyGroupDomainConfigWithContext(ctx context.Context, request *ModifyGroupDomainConfigRequest) (response *ModifyGroupDomainConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyGroupDomainConfigRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyGroupDomainConfigResponse()
     err = c.Send(request, response)
@@ -3093,6 +4965,33 @@ func (c *Client) ModifyHTTPListenerAttribute(request *ModifyHTTPListenerAttribut
     return
 }
 
+// ModifyHTTPListenerAttribute
+// This API (ModifyHTTPListenerAttribute) is used to modify the HTTP listener configuration information of a connection. Currently only supports modifying listener name.
+//
+// Note: Grouped connections currently do not support HTTP/HTTPS listeners.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+func (c *Client) ModifyHTTPListenerAttributeWithContext(ctx context.Context, request *ModifyHTTPListenerAttributeRequest) (response *ModifyHTTPListenerAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyHTTPListenerAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyHTTPListenerAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyHTTPSListenerAttributeRequest() (request *ModifyHTTPSListenerAttributeRequest) {
     request = &ModifyHTTPSListenerAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3130,6 +5029,33 @@ func (c *Client) ModifyHTTPSListenerAttribute(request *ModifyHTTPSListenerAttrib
     if request == nil {
         request = NewModifyHTTPSListenerAttributeRequest()
     }
+    
+    response = NewModifyHTTPSListenerAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyHTTPSListenerAttribute
+// This API (ModifyHTTPSListenerAttribute) is used to modify HTTPS listener configurations. It currently do not support connection groups and connections of version 1.0.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyHTTPSListenerAttributeWithContext(ctx context.Context, request *ModifyHTTPSListenerAttributeRequest) (response *ModifyHTTPSListenerAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyHTTPSListenerAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyHTTPSListenerAttributeResponse()
     err = c.Send(request, response)
@@ -3180,6 +5106,34 @@ func (c *Client) ModifyProxiesAttribute(request *ModifyProxiesAttributeRequest) 
     return
 }
 
+// ModifyProxiesAttribute
+// This API (ModifyProxiesAttribute) is used to modify instance attributes (currently only supports modifying connection name).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyProxiesAttributeWithContext(ctx context.Context, request *ModifyProxiesAttributeRequest) (response *ModifyProxiesAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyProxiesAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyProxiesAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyProxiesProjectRequest() (request *ModifyProxiesProjectRequest) {
     request = &ModifyProxiesProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3218,6 +5172,34 @@ func (c *Client) ModifyProxiesProject(request *ModifyProxiesProjectRequest) (res
     if request == nil {
         request = NewModifyProxiesProjectRequest()
     }
+    
+    response = NewModifyProxiesProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyProxiesProject
+// This API (ModifyProxiesProject) is used to modify the project to which a connection belongs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyProxiesProjectWithContext(ctx context.Context, request *ModifyProxiesProjectRequest) (response *ModifyProxiesProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyProxiesProjectRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyProxiesProjectResponse()
     err = c.Send(request, response)
@@ -3269,6 +5251,35 @@ func (c *Client) ModifyProxyConfiguration(request *ModifyProxyConfigurationReque
     return
 }
 
+// ModifyProxyConfiguration
+// This API (ModifyProxyConfiguration) is used to modify connection configurations. You can expand or reduce the capacity based on current business requirements. It only supports connections with a Scalarable of 1. Scalarable can be obtained via DescribeProxies API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NOTSUPPORTSCALAR = "FailedOperation.NotSupportScalar"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyProxyConfigurationWithContext(ctx context.Context, request *ModifyProxyConfigurationRequest) (response *ModifyProxyConfigurationResponse, err error) {
+    if request == nil {
+        request = NewModifyProxyConfigurationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyProxyConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyProxyGroupAttributeRequest() (request *ModifyProxyGroupAttributeRequest) {
     request = &ModifyProxyGroupAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3304,6 +5315,31 @@ func (c *Client) ModifyProxyGroupAttribute(request *ModifyProxyGroupAttributeReq
     if request == nil {
         request = NewModifyProxyGroupAttributeRequest()
     }
+    
+    response = NewModifyProxyGroupAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyProxyGroupAttribute
+// This API (ModifyProxyGroupAttribute) is used to modify connection group attributes. It currently only supports modifying connection group name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyProxyGroupAttributeWithContext(ctx context.Context, request *ModifyProxyGroupAttributeRequest) (response *ModifyProxyGroupAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyProxyGroupAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyProxyGroupAttributeResponse()
     err = c.Send(request, response)
@@ -3349,6 +5385,29 @@ func (c *Client) ModifyRealServerName(request *ModifyRealServerNameRequest) (res
     return
 }
 
+// ModifyRealServerName
+// This API (ModifyRealServerName) is used to modify origin server names.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyRealServerNameWithContext(ctx context.Context, request *ModifyRealServerNameRequest) (response *ModifyRealServerNameResponse, err error) {
+    if request == nil {
+        request = NewModifyRealServerNameRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyRealServerNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyRuleAttributeRequest() (request *ModifyRuleAttributeRequest) {
     request = &ModifyRuleAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3384,6 +5443,31 @@ func (c *Client) ModifyRuleAttribute(request *ModifyRuleAttributeRequest) (respo
     if request == nil {
         request = NewModifyRuleAttributeRequest()
     }
+    
+    response = NewModifyRuleAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyRuleAttribute
+// This API (ModifyRuleAttribute) is used to modify forwarding rule information, including health check configuration and forwarding policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyRuleAttributeWithContext(ctx context.Context, request *ModifyRuleAttributeRequest) (response *ModifyRuleAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyRuleAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyRuleAttributeResponse()
     err = c.Send(request, response)
@@ -3433,6 +5517,33 @@ func (c *Client) ModifySecurityRule(request *ModifySecurityRuleRequest) (respons
     return
 }
 
+// ModifySecurityRule
+// This API is used to modify security policy rule names.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifySecurityRuleWithContext(ctx context.Context, request *ModifySecurityRuleRequest) (response *ModifySecurityRuleResponse, err error) {
+    if request == nil {
+        request = NewModifySecurityRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifySecurityRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTCPListenerAttributeRequest() (request *ModifyTCPListenerAttributeRequest) {
     request = &ModifyTCPListenerAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3476,6 +5587,33 @@ func (c *Client) ModifyTCPListenerAttribute(request *ModifyTCPListenerAttributeR
     return
 }
 
+// ModifyTCPListenerAttribute
+// This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTCPListenerAttributeWithContext(ctx context.Context, request *ModifyTCPListenerAttributeRequest) (response *ModifyTCPListenerAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyTCPListenerAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTCPListenerAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyUDPListenerAttributeRequest() (request *ModifyUDPListenerAttributeRequest) {
     request = &ModifyUDPListenerAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3513,6 +5651,33 @@ func (c *Client) ModifyUDPListenerAttribute(request *ModifyUDPListenerAttributeR
     if request == nil {
         request = NewModifyUDPListenerAttributeRequest()
     }
+    
+    response = NewModifyUDPListenerAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyUDPListenerAttribute
+// This API (ModifyUDPListenerAttribute) is used to modify the UDP listener configuration of a connection instance, including modification of listener names and scheduling policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
+//  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyUDPListenerAttributeWithContext(ctx context.Context, request *ModifyUDPListenerAttributeRequest) (response *ModifyUDPListenerAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyUDPListenerAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyUDPListenerAttributeResponse()
     err = c.Send(request, response)
@@ -3563,6 +5728,34 @@ func (c *Client) OpenProxies(request *OpenProxiesRequest) (response *OpenProxies
     return
 }
 
+// OpenProxies
+// This API (OpenProxies) is used to enable one or more connections.
+//
+// error code that may be returned:
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) OpenProxiesWithContext(ctx context.Context, request *OpenProxiesRequest) (response *OpenProxiesResponse, err error) {
+    if request == nil {
+        request = NewOpenProxiesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewOpenProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenProxyGroupRequest() (request *OpenProxyGroupRequest) {
     request = &OpenProxyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3598,6 +5791,31 @@ func (c *Client) OpenProxyGroup(request *OpenProxyGroupRequest) (response *OpenP
     if request == nil {
         request = NewOpenProxyGroupRequest()
     }
+    
+    response = NewOpenProxyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// OpenProxyGroup
+// This API is used to enable all connections in a connection group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
+//  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) OpenProxyGroupWithContext(ctx context.Context, request *OpenProxyGroupRequest) (response *OpenProxyGroupResponse, err error) {
+    if request == nil {
+        request = NewOpenProxyGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewOpenProxyGroupResponse()
     err = c.Send(request, response)
@@ -3647,6 +5865,33 @@ func (c *Client) OpenSecurityPolicy(request *OpenSecurityPolicyRequest) (respons
     return
 }
 
+// OpenSecurityPolicy
+// This API is used to enable security policies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_PROXYSECURITYALREADYOPEN = "FailedOperation.ProxySecurityAlreadyOpen"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) OpenSecurityPolicyWithContext(ctx context.Context, request *OpenSecurityPolicyRequest) (response *OpenSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewOpenSecurityPolicyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewOpenSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRemoveRealServersRequest() (request *RemoveRealServersRequest) {
     request = &RemoveRealServersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3682,6 +5927,31 @@ func (c *Client) RemoveRealServers(request *RemoveRealServersRequest) (response 
     if request == nil {
         request = NewRemoveRealServersRequest()
     }
+    
+    response = NewRemoveRealServersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RemoveRealServers
+// This API is used to delete the added origin server (server) IP or domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RemoveRealServersWithContext(ctx context.Context, request *RemoveRealServersRequest) (response *RemoveRealServersResponse, err error) {
+    if request == nil {
+        request = NewRemoveRealServersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRemoveRealServersResponse()
     err = c.Send(request, response)
@@ -3729,6 +5999,37 @@ func (c *Client) SetAuthentication(request *SetAuthenticationRequest) (response 
     if request == nil {
         request = NewSetAuthenticationRequest()
     }
+    
+    response = NewSetAuthenticationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SetAuthentication
+// This API (SetAuthentication) is used for the advanced authentication configuration of connections, including authentication methods and their certificates. If only supports connections of version 3.0.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
+//  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
+//  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDCERTIFICATEID = "InvalidParameterValue.InvalidCertificateId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) SetAuthenticationWithContext(ctx context.Context, request *SetAuthenticationRequest) (response *SetAuthenticationResponse, err error) {
+    if request == nil {
+        request = NewSetAuthenticationRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSetAuthenticationResponse()
     err = c.Send(request, response)

@@ -15,6 +15,7 @@
 package v20191205
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -92,6 +93,39 @@ func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *A
     return
 }
 
+// ApplyCertificate
+// This API is used to apply for a free certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ApplyCertificateWithContext(ctx context.Context, request *ApplyCertificateRequest) (response *ApplyCertificateResponse, err error) {
+    if request == nil {
+        request = NewApplyCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewApplyCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelCertificateOrderRequest() (request *CancelCertificateOrderRequest) {
     request = &CancelCertificateOrderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -125,6 +159,29 @@ func (c *Client) CancelCertificateOrder(request *CancelCertificateOrderRequest) 
     if request == nil {
         request = NewCancelCertificateOrderRequest()
     }
+    
+    response = NewCancelCertificateOrderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CancelCertificateOrder
+// This API is used to cancel a certificate order.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) CancelCertificateOrderWithContext(ctx context.Context, request *CancelCertificateOrderRequest) (response *CancelCertificateOrderResponse, err error) {
+    if request == nil {
+        request = NewCancelCertificateOrderRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCancelCertificateOrderResponse()
     err = c.Send(request, response)
@@ -165,6 +222,30 @@ func (c *Client) CommitCertificateInformation(request *CommitCertificateInformat
     if request == nil {
         request = NewCommitCertificateInformationRequest()
     }
+    
+    response = NewCommitCertificateInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CommitCertificateInformation
+// This API is used to submit a certificate order.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) CommitCertificateInformationWithContext(ctx context.Context, request *CommitCertificateInformationRequest) (response *CommitCertificateInformationResponse, err error) {
+    if request == nil {
+        request = NewCommitCertificateInformationRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCommitCertificateInformationResponse()
     err = c.Send(request, response)
@@ -213,6 +294,38 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
     if request == nil {
         request = NewDeleteCertificateRequest()
     }
+    
+    response = NewDeleteCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteCertificate
+// This API is used to delete a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DeleteCertificateWithContext(ctx context.Context, request *DeleteCertificateRequest) (response *DeleteCertificateResponse, err error) {
+    if request == nil {
+        request = NewDeleteCertificateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteCertificateResponse()
     err = c.Send(request, response)
@@ -268,6 +381,39 @@ func (c *Client) DescribeCertificate(request *DescribeCertificateRequest) (respo
     return
 }
 
+// DescribeCertificate
+// This API is used to get certificate information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCertificateWithContext(ctx context.Context, request *DescribeCertificateRequest) (response *DescribeCertificateResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertificateDetailRequest() (request *DescribeCertificateDetailRequest) {
     request = &DescribeCertificateDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -306,6 +452,28 @@ func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailReq
     return
 }
 
+// DescribeCertificateDetail
+// This API is used to get certificate details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCertificateDetailWithContext(ctx context.Context, request *DescribeCertificateDetailRequest) (response *DescribeCertificateDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificateDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertificateOperateLogsRequest() (request *DescribeCertificateOperateLogsRequest) {
     request = &DescribeCertificateOperateLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -336,6 +504,26 @@ func (c *Client) DescribeCertificateOperateLogs(request *DescribeCertificateOper
     if request == nil {
         request = NewDescribeCertificateOperateLogsRequest()
     }
+    
+    response = NewDescribeCertificateOperateLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCertificateOperateLogs
+// This API is used to get certificate operation logs in the current account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCertificateOperateLogsWithContext(ctx context.Context, request *DescribeCertificateOperateLogsRequest) (response *DescribeCertificateOperateLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateOperateLogsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCertificateOperateLogsResponse()
     err = c.Send(request, response)
@@ -390,6 +578,38 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
     return
 }
 
+// DescribeCertificates
+// This API is used to get the certificate list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificatesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCertificateRequest() (request *DownloadCertificateRequest) {
     request = &DownloadCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -438,6 +658,38 @@ func (c *Client) DownloadCertificate(request *DownloadCertificateRequest) (respo
     return
 }
 
+// DownloadCertificate
+// This API is used to download a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DownloadCertificateWithContext(ctx context.Context, request *DownloadCertificateRequest) (response *DownloadCertificateResponse, err error) {
+    if request == nil {
+        request = NewDownloadCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDownloadCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCertificateAliasRequest() (request *ModifyCertificateAliasRequest) {
     request = &ModifyCertificateAliasRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -475,6 +727,27 @@ func (c *Client) ModifyCertificateAlias(request *ModifyCertificateAliasRequest) 
     return
 }
 
+// ModifyCertificateAlias
+// This API is used to modify a certificate alias by passing in the certificate ID and new alias.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyCertificateAliasWithContext(ctx context.Context, request *ModifyCertificateAliasRequest) (response *ModifyCertificateAliasResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificateAliasRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyCertificateAliasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCertificateProjectRequest() (request *ModifyCertificateProjectRequest) {
     request = &ModifyCertificateProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -505,6 +778,26 @@ func (c *Client) ModifyCertificateProject(request *ModifyCertificateProjectReque
     if request == nil {
         request = NewModifyCertificateProjectRequest()
     }
+    
+    response = NewModifyCertificateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyCertificateProject
+// This API is used to modify the projects of multiple certificates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyCertificateProjectWithContext(ctx context.Context, request *ModifyCertificateProjectRequest) (response *ModifyCertificateProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificateProjectRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyCertificateProjectResponse()
     err = c.Send(request, response)
@@ -559,6 +852,38 @@ func (c *Client) ReplaceCertificate(request *ReplaceCertificateRequest) (respons
     return
 }
 
+// ReplaceCertificate
+// This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ReplaceCertificateWithContext(ctx context.Context, request *ReplaceCertificateRequest) (response *ReplaceCertificateResponse, err error) {
+    if request == nil {
+        request = NewReplaceCertificateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewReplaceCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSubmitCertificateInformationRequest() (request *SubmitCertificateInformationRequest) {
     request = &SubmitCertificateInformationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -592,6 +917,29 @@ func (c *Client) SubmitCertificateInformation(request *SubmitCertificateInformat
     if request == nil {
         request = NewSubmitCertificateInformationRequest()
     }
+    
+    response = NewSubmitCertificateInformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SubmitCertificateInformation
+// This API is used to submit certificate information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+func (c *Client) SubmitCertificateInformationWithContext(ctx context.Context, request *SubmitCertificateInformationRequest) (response *SubmitCertificateInformationResponse, err error) {
+    if request == nil {
+        request = NewSubmitCertificateInformationRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSubmitCertificateInformationResponse()
     err = c.Send(request, response)
@@ -641,6 +989,39 @@ func (c *Client) UploadCertificate(request *UploadCertificateRequest) (response 
     if request == nil {
         request = NewUploadCertificateRequest()
     }
+    
+    response = NewUploadCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UploadCertificate
+// This API is used to upload a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
+//  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  INTERNALERROR = "InternalError"
+func (c *Client) UploadCertificateWithContext(ctx context.Context, request *UploadCertificateRequest) (response *UploadCertificateResponse, err error) {
+    if request == nil {
+        request = NewUploadCertificateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUploadCertificateResponse()
     err = c.Send(request, response)

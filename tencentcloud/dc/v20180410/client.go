@@ -15,6 +15,7 @@
 package v20180410
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -80,6 +81,27 @@ func (c *Client) AcceptDirectConnectTunnel(request *AcceptDirectConnectTunnelReq
     return
 }
 
+// AcceptDirectConnectTunnel
+// This API is used to accept an application for a dedicated tunnel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) AcceptDirectConnectTunnelWithContext(ctx context.Context, request *AcceptDirectConnectTunnelRequest) (response *AcceptDirectConnectTunnelResponse, err error) {
+    if request == nil {
+        request = NewAcceptDirectConnectTunnelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAcceptDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewApplyInternetAddressRequest() (request *ApplyInternetAddressRequest) {
     request = &ApplyInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -106,6 +128,22 @@ func (c *Client) ApplyInternetAddress(request *ApplyInternetAddressRequest) (res
     if request == nil {
         request = NewApplyInternetAddressRequest()
     }
+    
+    response = NewApplyInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ApplyInternetAddress
+// This API is used to apply for an internet tunnel’s CIDR block.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) ApplyInternetAddressWithContext(ctx context.Context, request *ApplyInternetAddressRequest) (response *ApplyInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewApplyInternetAddressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewApplyInternetAddressResponse()
     err = c.Send(request, response)
@@ -149,6 +187,33 @@ func (c *Client) CreateDirectConnect(request *CreateDirectConnectRequest) (respo
     if request == nil {
         request = NewCreateDirectConnectRequest()
     }
+    
+    response = NewCreateDirectConnectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateDirectConnect
+// This API is used to apply for a connection.
+//
+// When calling this API, please note that:
+//
+// You need to complete identity verification for your account; otherwise, you cannot apply for a connection;
+//
+// If there is any connection in arrears under your account, you cannot apply for more connections.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_DIRECTCONNECTLIMITEXCEEDED = "LimitExceeded.DirectConnectLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateDirectConnectWithContext(ctx context.Context, request *CreateDirectConnectRequest) (response *CreateDirectConnectResponse, err error) {
+    if request == nil {
+        request = NewCreateDirectConnectRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateDirectConnectResponse()
     err = c.Send(request, response)
@@ -202,6 +267,37 @@ func (c *Client) CreateDirectConnectTunnel(request *CreateDirectConnectTunnelReq
     return
 }
 
+// CreateDirectConnectTunnel
+// This API is used to create a dedicated tunnel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ADDRESSERROR = "InvalidParameter.AddressError"
+//  INVALIDPARAMETER_DIRECTCONNECTIDISNOTUIN = "InvalidParameter.DirectConnectIdIsNotUin"
+//  INVALIDPARAMETER_UINISNOTEXIST = "InvalidParameter.UinIsNotExist"
+//  INVALIDPARAMETER_VLANCONFLICT = "InvalidParameter.VlanConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_VLANCONFLICT = "InvalidParameterValue.VlanConfLict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_DIRECTCONNECTLIMITEXCEEDED = "LimitExceeded.DirectConnectLimitExceeded"
+//  LIMITEXCEEDED_DIRECTCONNECTTUNNELLIMITEXCEEDED = "LimitExceeded.DirectConnectTunnelLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_DCVPCISEXIST = "ResourceInUse.DcVpcIsExist"
+//  RESOURCEUNAVAILABLE_INSUFFICIENTBALANCE = "ResourceUnavailable.InsufficientBalance"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CROSSBORDERDIRECTCONNECTTUNNEL = "UnsupportedOperation.CrossBorderDirectConnectTunnel"
+func (c *Client) CreateDirectConnectTunnelWithContext(ctx context.Context, request *CreateDirectConnectTunnelRequest) (response *CreateDirectConnectTunnelResponse, err error) {
+    if request == nil {
+        request = NewCreateDirectConnectTunnelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDirectConnectRequest() (request *DeleteDirectConnectRequest) {
     request = &DeleteDirectConnectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -244,6 +340,32 @@ func (c *Client) DeleteDirectConnect(request *DeleteDirectConnectRequest) (respo
     return
 }
 
+// DeleteDirectConnect
+// This API is used to delete a connection.
+//
+// Only connected connections can be deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DIRECTCONNECTIDISNOTUIN = "InvalidParameter.DirectConnectIdIsNotUin"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) DeleteDirectConnectWithContext(ctx context.Context, request *DeleteDirectConnectRequest) (response *DeleteDirectConnectResponse, err error) {
+    if request == nil {
+        request = NewDeleteDirectConnectRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteDirectConnectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDirectConnectTunnelRequest() (request *DeleteDirectConnectTunnelRequest) {
     request = &DeleteDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -275,6 +397,27 @@ func (c *Client) DeleteDirectConnectTunnel(request *DeleteDirectConnectTunnelReq
     if request == nil {
         request = NewDeleteDirectConnectTunnelRequest()
     }
+    
+    response = NewDeleteDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteDirectConnectTunnel
+// This API is used to delete a dedicated tunnel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) DeleteDirectConnectTunnelWithContext(ctx context.Context, request *DeleteDirectConnectTunnelRequest) (response *DeleteDirectConnectTunnelResponse, err error) {
+    if request == nil {
+        request = NewDeleteDirectConnectTunnelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteDirectConnectTunnelResponse()
     err = c.Send(request, response)
@@ -320,6 +463,29 @@ func (c *Client) DescribeAccessPoints(request *DescribeAccessPointsRequest) (res
     return
 }
 
+// DescribeAccessPoints
+// This API is used to query connection access points.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAccessPointsWithContext(ctx context.Context, request *DescribeAccessPointsRequest) (response *DescribeAccessPointsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessPointsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccessPointsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDirectConnectTunnelsRequest() (request *DescribeDirectConnectTunnelsRequest) {
     request = &DescribeDirectConnectTunnelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -350,6 +516,26 @@ func (c *Client) DescribeDirectConnectTunnels(request *DescribeDirectConnectTunn
     if request == nil {
         request = NewDescribeDirectConnectTunnelsRequest()
     }
+    
+    response = NewDescribeDirectConnectTunnelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDirectConnectTunnels
+// This API is used to query the list of dedicated tunnels.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+func (c *Client) DescribeDirectConnectTunnelsWithContext(ctx context.Context, request *DescribeDirectConnectTunnelsRequest) (response *DescribeDirectConnectTunnelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDirectConnectTunnelsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDirectConnectTunnelsResponse()
     err = c.Send(request, response)
@@ -393,6 +579,27 @@ func (c *Client) DescribeDirectConnects(request *DescribeDirectConnectsRequest) 
     return
 }
 
+// DescribeDirectConnects
+// This API is used to query the list of connections.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDirectConnectsWithContext(ctx context.Context, request *DescribeDirectConnectsRequest) (response *DescribeDirectConnectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDirectConnectsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDirectConnectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInternetAddressRequest() (request *DescribeInternetAddressRequest) {
     request = &DescribeInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -424,6 +631,27 @@ func (c *Client) DescribeInternetAddress(request *DescribeInternetAddressRequest
     if request == nil {
         request = NewDescribeInternetAddressRequest()
     }
+    
+    response = NewDescribeInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInternetAddress
+// This API is used to obtain the public IP address of an internet tunnel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInternetAddressWithContext(ctx context.Context, request *DescribeInternetAddressRequest) (response *DescribeInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInternetAddressResponse()
     err = c.Send(request, response)
@@ -467,6 +695,27 @@ func (c *Client) DescribeInternetAddressQuota(request *DescribeInternetAddressQu
     return
 }
 
+// DescribeInternetAddressQuota
+// This API is used to obtain the public IP quota of internet tunnels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInternetAddressQuotaWithContext(ctx context.Context, request *DescribeInternetAddressQuotaRequest) (response *DescribeInternetAddressQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressQuotaRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInternetAddressQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInternetAddressStatisticsRequest() (request *DescribeInternetAddressStatisticsRequest) {
     request = &DescribeInternetAddressStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -498,6 +747,27 @@ func (c *Client) DescribeInternetAddressStatistics(request *DescribeInternetAddr
     if request == nil {
         request = NewDescribeInternetAddressStatisticsRequest()
     }
+    
+    response = NewDescribeInternetAddressStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInternetAddressStatistics
+// This API is used to obtain the public IP address assignment statistics of internet tunnels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInternetAddressStatisticsWithContext(ctx context.Context, request *DescribeInternetAddressStatisticsRequest) (response *DescribeInternetAddressStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternetAddressStatisticsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInternetAddressStatisticsResponse()
     err = c.Send(request, response)
@@ -541,6 +811,27 @@ func (c *Client) DisableInternetAddress(request *DisableInternetAddressRequest) 
     return
 }
 
+// DisableInternetAddress
+// This API is used to disable a public IP address of internet tunnels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DisableInternetAddressWithContext(ctx context.Context, request *DisableInternetAddressRequest) (response *DisableInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewDisableInternetAddressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDisableInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableInternetAddressRequest() (request *EnableInternetAddressRequest) {
     request = &EnableInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -572,6 +863,27 @@ func (c *Client) EnableInternetAddress(request *EnableInternetAddressRequest) (r
     if request == nil {
         request = NewEnableInternetAddressRequest()
     }
+    
+    response = NewEnableInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// EnableInternetAddress
+// This API is used to enable a public IP address for internet tunnels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) EnableInternetAddressWithContext(ctx context.Context, request *EnableInternetAddressRequest) (response *EnableInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewEnableInternetAddressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewEnableInternetAddressResponse()
     err = c.Send(request, response)
@@ -617,6 +929,29 @@ func (c *Client) ModifyDirectConnectAttribute(request *ModifyDirectConnectAttrib
     return
 }
 
+// ModifyDirectConnectAttribute
+// This API is used to modify connection attributes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DIRECTCONNECTIDISNOTUIN = "InvalidParameter.DirectConnectIdIsNotUin"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_INSUFFICIENTBALANCE = "ResourceUnavailable.InsufficientBalance"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyDirectConnectAttributeWithContext(ctx context.Context, request *ModifyDirectConnectAttributeRequest) (response *ModifyDirectConnectAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDirectConnectAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDirectConnectAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDirectConnectTunnelAttributeRequest() (request *ModifyDirectConnectTunnelAttributeRequest) {
     request = &ModifyDirectConnectTunnelAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -648,6 +983,27 @@ func (c *Client) ModifyDirectConnectTunnelAttribute(request *ModifyDirectConnect
     if request == nil {
         request = NewModifyDirectConnectTunnelAttributeRequest()
     }
+    
+    response = NewModifyDirectConnectTunnelAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDirectConnectTunnelAttribute
+// This API is used to modify the dedicated tunnel attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) ModifyDirectConnectTunnelAttributeWithContext(ctx context.Context, request *ModifyDirectConnectTunnelAttributeRequest) (response *ModifyDirectConnectTunnelAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDirectConnectTunnelAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyDirectConnectTunnelAttributeResponse()
     err = c.Send(request, response)
@@ -690,6 +1046,26 @@ func (c *Client) RejectDirectConnectTunnel(request *RejectDirectConnectTunnelReq
     return
 }
 
+// RejectDirectConnectTunnel
+// This API is used to reject an application for a dedicated tunnel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) RejectDirectConnectTunnelWithContext(ctx context.Context, request *RejectDirectConnectTunnelRequest) (response *RejectDirectConnectTunnelResponse, err error) {
+    if request == nil {
+        request = NewRejectDirectConnectTunnelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRejectDirectConnectTunnelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReleaseInternetAddressRequest() (request *ReleaseInternetAddressRequest) {
     request = &ReleaseInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -720,6 +1096,26 @@ func (c *Client) ReleaseInternetAddress(request *ReleaseInternetAddressRequest) 
     if request == nil {
         request = NewReleaseInternetAddressRequest()
     }
+    
+    response = NewReleaseInternetAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ReleaseInternetAddress
+// This API is used to release an IP address of internet tunnels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_DIRECTCONNECTTUNNELIDISNOTEXIST = "ResourceNotFound.DirectConnectTunnelIdIsNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_STATECONFLICT = "UnsupportedOperation.StateConfLict"
+func (c *Client) ReleaseInternetAddressWithContext(ctx context.Context, request *ReleaseInternetAddressRequest) (response *ReleaseInternetAddressResponse, err error) {
+    if request == nil {
+        request = NewReleaseInternetAddressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewReleaseInternetAddressResponse()
     err = c.Send(request, response)

@@ -15,6 +15,7 @@
 package v20180317
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -82,6 +83,29 @@ func (c *Client) AssociateTargetGroups(request *AssociateTargetGroupsRequest) (r
     return
 }
 
+// AssociateTargetGroups
+// This API is used to bind target groups to CLB listeners (layer-4 protocol) or forwarding rules (layer-7 protocol).
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AssociateTargetGroupsWithContext(ctx context.Context, request *AssociateTargetGroupsRequest) (response *AssociateTargetGroupsResponse, err error) {
+    if request == nil {
+        request = NewAssociateTargetGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAssociateTargetGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAutoRewriteRequest() (request *AutoRewriteRequest) {
     request = &AutoRewriteRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -123,6 +147,37 @@ func (c *Client) AutoRewrite(request *AutoRewriteRequest) (response *AutoRewrite
     if request == nil {
         request = NewAutoRewriteRequest()
     }
+    
+    response = NewAutoRewriteResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AutoRewrite
+// An HTTPS:443 listener needs to be created first, along with a forwarding rule. When this API is called, an HTTP:80 listener will be created automatically if it did not exist and a forwarding rule corresponding to `Domains` (specified in the input parameter) under the HTTPS:443 listener will also be created. After successful creation, access requests to an HTTP:80 address will be redirected to an HTTPS:443 address automatically.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
+//  INVALIDPARAMETER_PROTOCOLCHECKFAILED = "InvalidParameter.ProtocolCheckFailed"
+//  INVALIDPARAMETER_REWRITEALREADYEXIST = "InvalidParameter.RewriteAlreadyExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AutoRewriteWithContext(ctx context.Context, request *AutoRewriteRequest) (response *AutoRewriteResponse, err error) {
+    if request == nil {
+        request = NewAutoRewriteRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAutoRewriteResponse()
     err = c.Send(request, response)
@@ -177,6 +232,38 @@ func (c *Client) BatchDeregisterTargets(request *BatchDeregisterTargetsRequest) 
     return
 }
 
+// BatchDeregisterTargets
+// This API is used to unbind layer-4 and layer-7 real servers in batches. Up to 500 servers can be unbound in a batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
+//  INVALIDPARAMETER_PROTOCOLCHECKFAILED = "InvalidParameter.ProtocolCheckFailed"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BatchDeregisterTargetsWithContext(ctx context.Context, request *BatchDeregisterTargetsRequest) (response *BatchDeregisterTargetsResponse, err error) {
+    if request == nil {
+        request = NewBatchDeregisterTargetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBatchDeregisterTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBatchModifyTargetWeightRequest() (request *BatchModifyTargetWeightRequest) {
     request = &BatchModifyTargetWeightRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -209,6 +296,28 @@ func (c *Client) BatchModifyTargetWeight(request *BatchModifyTargetWeightRequest
     if request == nil {
         request = NewBatchModifyTargetWeightRequest()
     }
+    
+    response = NewBatchModifyTargetWeightResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BatchModifyTargetWeight
+// This API is used to modify forwarding weights of real servers bound to CLB listeners in batches. Up to 500 servers can be unbound in a batch. As this API is async, you should check whether the task is successful by passing the RequestId returned to the API call `DescribeTaskStatus`.<br/> This API is supported by CLB layer-4 and layer-7 listeners, but not Classis CLB counterparts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BatchModifyTargetWeightWithContext(ctx context.Context, request *BatchModifyTargetWeightRequest) (response *BatchModifyTargetWeightResponse, err error) {
+    if request == nil {
+        request = NewBatchModifyTargetWeightRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBatchModifyTargetWeightResponse()
     err = c.Send(request, response)
@@ -262,6 +371,37 @@ func (c *Client) BatchRegisterTargets(request *BatchRegisterTargetsRequest) (res
     return
 }
 
+// BatchRegisterTargets
+// This API is used to bind CVM instances or ENIs in batches. Up to 500 servers can be bound in a batch. It supports cross-region binding, and layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
+//  INVALIDPARAMETER_PROTOCOLCHECKFAILED = "InvalidParameter.ProtocolCheckFailed"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BatchRegisterTargetsWithContext(ctx context.Context, request *BatchRegisterTargetsRequest) (response *BatchRegisterTargetsResponse, err error) {
+    if request == nil {
+        request = NewBatchRegisterTargetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBatchRegisterTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClsLogSetRequest() (request *CreateClsLogSetRequest) {
     request = &CreateClsLogSetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -296,6 +436,30 @@ func (c *Client) CreateClsLogSet(request *CreateClsLogSetRequest) (response *Cre
     if request == nil {
         request = NewCreateClsLogSetRequest()
     }
+    
+    response = NewCreateClsLogSetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateClsLogSet
+// This API is used to create a CLB exclusive logset for storing CLB logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateClsLogSetWithContext(ctx context.Context, request *CreateClsLogSetRequest) (response *CreateClsLogSetResponse, err error) {
+    if request == nil {
+        request = NewCreateClsLogSetRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateClsLogSetResponse()
     err = c.Send(request, response)
@@ -339,6 +503,33 @@ func (c *Client) CreateListener(request *CreateListenerRequest) (response *Creat
     if request == nil {
         request = NewCreateListenerRequest()
     }
+    
+    response = NewCreateListenerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateListener
+// This API is used to create a listener for a CLB instance.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateListenerWithContext(ctx context.Context, request *CreateListenerRequest) (response *CreateListenerResponse, err error) {
+    if request == nil {
+        request = NewCreateListenerRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateListenerResponse()
     err = c.Send(request, response)
@@ -391,6 +582,36 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
     return
 }
 
+// CreateLoadBalancer
+// This API (CreateLoadBalancer) is used to create a CLB instance. To use the CLB service, you first need to purchase one or more instances. After this API is called successfully, a unique instance ID will be returned. There are two types of instances: public network and private network. For more information, see the product types in the product documentation.
+//
+// Note: (1) To apply for a CLB instance in the specified AZ and cross-AZ disaster recovery, please [submit a ticket](https://console.cloud.tencent.com/workorder/category); (2) Currently, IPv6 is supported only in Beijing, Shanghai, and Guangzhou regions.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeLoadBalancers API to query the status of the instance (such as creating and normal) to check whether it is successfully created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateLoadBalancerWithContext(ctx context.Context, request *CreateLoadBalancerRequest) (response *CreateLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewCreateLoadBalancerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLoadBalancerSnatIpsRequest() (request *CreateLoadBalancerSnatIpsRequest) {
     request = &CreateLoadBalancerSnatIpsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -424,6 +645,29 @@ func (c *Client) CreateLoadBalancerSnatIps(request *CreateLoadBalancerSnatIpsReq
     if request == nil {
         request = NewCreateLoadBalancerSnatIpsRequest()
     }
+    
+    response = NewCreateLoadBalancerSnatIpsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateLoadBalancerSnatIps
+// This API is used to add an SNAT IP for an SnatPro CLB instance. If SnatPro is not enabled for CLB, it will be automatically enabled after the SNAT IP is added.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) CreateLoadBalancerSnatIpsWithContext(ctx context.Context, request *CreateLoadBalancerSnatIpsRequest) (response *CreateLoadBalancerSnatIpsResponse, err error) {
+    if request == nil {
+        request = NewCreateLoadBalancerSnatIpsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateLoadBalancerSnatIpsResponse()
     err = c.Send(request, response)
@@ -473,6 +717,33 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
     return
 }
 
+// CreateRule
+// This API (CreateRule) is used to create a forwarding rule under an existing layer-7 CLB listener, where real servers must be bound to the rule instead of the listener.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTargetGroupRequest() (request *CreateTargetGroupRequest) {
     request = &CreateTargetGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -504,6 +775,27 @@ func (c *Client) CreateTargetGroup(request *CreateTargetGroupRequest) (response 
     if request == nil {
         request = NewCreateTargetGroupRequest()
     }
+    
+    response = NewCreateTargetGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateTargetGroup
+// This API is used to create a target group. This feature is in beta test, if you want to try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateTargetGroupWithContext(ctx context.Context, request *CreateTargetGroupRequest) (response *CreateTargetGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateTargetGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateTargetGroupResponse()
     err = c.Send(request, response)
@@ -553,6 +845,33 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
     return
 }
 
+// CreateTopic
+// This API is used to create a topic with the full-text index and key-value index enabled by default. The creation will fail if there is no CLB exclusive logset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
+    if request == nil {
+        request = NewCreateTopicRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteListenerRequest() (request *DeleteListenerRequest) {
     request = &DeleteListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -587,6 +906,30 @@ func (c *Client) DeleteListener(request *DeleteListenerRequest) (response *Delet
     if request == nil {
         request = NewDeleteListenerRequest()
     }
+    
+    response = NewDeleteListenerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteListener
+// This API is used to delete a listener from a CLB instance (layer-4 or layer-7).
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteListenerWithContext(ctx context.Context, request *DeleteListenerRequest) (response *DeleteListenerResponse, err error) {
+    if request == nil {
+        request = NewDeleteListenerRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteListenerResponse()
     err = c.Send(request, response)
@@ -636,6 +979,33 @@ func (c *Client) DeleteLoadBalancer(request *DeleteLoadBalancerRequest) (respons
     return
 }
 
+// DeleteLoadBalancer
+// This API (DeleteLoadBalancer) is used to delete one or more specified CLB instances.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteLoadBalancerWithContext(ctx context.Context, request *DeleteLoadBalancerRequest) (response *DeleteLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoadBalancerRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLoadBalancerListenersRequest() (request *DeleteLoadBalancerListenersRequest) {
     request = &DeleteLoadBalancerListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -677,6 +1047,31 @@ func (c *Client) DeleteLoadBalancerListeners(request *DeleteLoadBalancerListener
     return
 }
 
+// DeleteLoadBalancerListeners
+// This API is used to delete multiple listeners of a CLB instance.
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteLoadBalancerListenersWithContext(ctx context.Context, request *DeleteLoadBalancerListenersRequest) (response *DeleteLoadBalancerListenersResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoadBalancerListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteLoadBalancerListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLoadBalancerSnatIpsRequest() (request *DeleteLoadBalancerSnatIpsRequest) {
     request = &DeleteLoadBalancerSnatIpsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -709,6 +1104,28 @@ func (c *Client) DeleteLoadBalancerSnatIps(request *DeleteLoadBalancerSnatIpsReq
     if request == nil {
         request = NewDeleteLoadBalancerSnatIpsRequest()
     }
+    
+    response = NewDeleteLoadBalancerSnatIpsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteLoadBalancerSnatIps
+// This API is used to delete the SNAT IP for an SnatPro CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) DeleteLoadBalancerSnatIpsWithContext(ctx context.Context, request *DeleteLoadBalancerSnatIpsRequest) (response *DeleteLoadBalancerSnatIpsResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoadBalancerSnatIpsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteLoadBalancerSnatIpsResponse()
     err = c.Send(request, response)
@@ -758,6 +1175,33 @@ func (c *Client) DeleteRewrite(request *DeleteRewriteRequest) (response *DeleteR
     return
 }
 
+// DeleteRewrite
+// This API (DeleteRewrite) is used to delete the redirection relationship between the specified forwarding rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_SOMEREWRITENOTFOUND = "InvalidParameter.SomeRewriteNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteRewriteWithContext(ctx context.Context, request *DeleteRewriteRequest) (response *DeleteRewriteResponse, err error) {
+    if request == nil {
+        request = NewDeleteRewriteRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteRewriteResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRuleRequest() (request *DeleteRuleRequest) {
     request = &DeleteRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -792,6 +1236,30 @@ func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleRes
     if request == nil {
         request = NewDeleteRuleRequest()
     }
+    
+    response = NewDeleteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteRule
+// This API (DeleteRule) is used to delete a forwarding rule under a layer-7 CLB instance listener
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleRequest) (response *DeleteRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteRuleRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteRuleResponse()
     err = c.Send(request, response)
@@ -834,6 +1302,26 @@ func (c *Client) DeleteTargetGroups(request *DeleteTargetGroupsRequest) (respons
     return
 }
 
+// DeleteTargetGroups
+// This API is used to delete a target group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteTargetGroupsWithContext(ctx context.Context, request *DeleteTargetGroupsRequest) (response *DeleteTargetGroupsResponse, err error) {
+    if request == nil {
+        request = NewDeleteTargetGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteTargetGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeregisterTargetGroupInstancesRequest() (request *DeregisterTargetGroupInstancesRequest) {
     request = &DeregisterTargetGroupInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -866,6 +1354,28 @@ func (c *Client) DeregisterTargetGroupInstances(request *DeregisterTargetGroupIn
     if request == nil {
         request = NewDeregisterTargetGroupInstancesRequest()
     }
+    
+    response = NewDeregisterTargetGroupInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeregisterTargetGroupInstances
+// This API is used to unbind a server from a target group.
+//
+// This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeregisterTargetGroupInstancesWithContext(ctx context.Context, request *DeregisterTargetGroupInstancesRequest) (response *DeregisterTargetGroupInstancesResponse, err error) {
+    if request == nil {
+        request = NewDeregisterTargetGroupInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeregisterTargetGroupInstancesResponse()
     err = c.Send(request, response)
@@ -914,6 +1424,32 @@ func (c *Client) DeregisterTargets(request *DeregisterTargetsRequest) (response 
     return
 }
 
+// DeregisterTargets
+// This API (DeregisterTargets) is used to unbind one or more real servers from a CLB listener or forwarding rule. For layer-4 listeners, only the listener ID needs to be specified. For layer-7 listeners, the forwarding rule also needs to be specified through LocationId or Domain+Url.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeregisterTargetsWithContext(ctx context.Context, request *DeregisterTargetsRequest) (response *DeregisterTargetsResponse, err error) {
+    if request == nil {
+        request = NewDeregisterTargetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeregisterTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeregisterTargetsFromClassicalLBRequest() (request *DeregisterTargetsFromClassicalLBRequest) {
     request = &DeregisterTargetsFromClassicalLBRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -948,6 +1484,30 @@ func (c *Client) DeregisterTargetsFromClassicalLB(request *DeregisterTargetsFrom
     if request == nil {
         request = NewDeregisterTargetsFromClassicalLBRequest()
     }
+    
+    response = NewDeregisterTargetsFromClassicalLBResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeregisterTargetsFromClassicalLB
+// This API is used to unbind a CLB real server. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeregisterTargetsFromClassicalLBWithContext(ctx context.Context, request *DeregisterTargetsFromClassicalLBRequest) (response *DeregisterTargetsFromClassicalLBResponse, err error) {
+    if request == nil {
+        request = NewDeregisterTargetsFromClassicalLBRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeregisterTargetsFromClassicalLBResponse()
     err = c.Send(request, response)
@@ -992,6 +1552,28 @@ func (c *Client) DescribeBlockIPList(request *DescribeBlockIPListRequest) (respo
     return
 }
 
+// DescribeBlockIPList
+// This API is used to query the list of blocked IPs (blocklist) of a CLB instance. (This API is in beta test. To use it, please submit a ticket.)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeBlockIPListWithContext(ctx context.Context, request *DescribeBlockIPListRequest) (response *DescribeBlockIPListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlockIPListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBlockIPListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlockIPTaskRequest() (request *DescribeBlockIPTaskRequest) {
     request = &DescribeBlockIPTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1019,6 +1601,23 @@ func (c *Client) DescribeBlockIPTask(request *DescribeBlockIPTaskRequest) (respo
     if request == nil {
         request = NewDescribeBlockIPTaskRequest()
     }
+    
+    response = NewDescribeBlockIPTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBlockIPTask
+// This API is used to query the execution status of an async IP blocking (blocklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBlockIPTaskWithContext(ctx context.Context, request *DescribeBlockIPTaskRequest) (response *DescribeBlockIPTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlockIPTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBlockIPTaskResponse()
     err = c.Send(request, response)
@@ -1065,6 +1664,30 @@ func (c *Client) DescribeClassicalLBByInstanceId(request *DescribeClassicalLBByI
     return
 }
 
+// DescribeClassicalLBByInstanceId
+// This API is used to get the list of classic CLB instance IDs through a real server ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClassicalLBByInstanceIdWithContext(ctx context.Context, request *DescribeClassicalLBByInstanceIdRequest) (response *DescribeClassicalLBByInstanceIdResponse, err error) {
+    if request == nil {
+        request = NewDescribeClassicalLBByInstanceIdRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeClassicalLBByInstanceIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClassicalLBHealthStatusRequest() (request *DescribeClassicalLBHealthStatusRequest) {
     request = &DescribeClassicalLBHealthStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1099,6 +1722,30 @@ func (c *Client) DescribeClassicalLBHealthStatus(request *DescribeClassicalLBHea
     if request == nil {
         request = NewDescribeClassicalLBHealthStatusRequest()
     }
+    
+    response = NewDescribeClassicalLBHealthStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeClassicalLBHealthStatus
+// This API (DescribeClassicalLBHealthStatus) is used to get the real server health status of a classic CLB
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClassicalLBHealthStatusWithContext(ctx context.Context, request *DescribeClassicalLBHealthStatusRequest) (response *DescribeClassicalLBHealthStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeClassicalLBHealthStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeClassicalLBHealthStatusResponse()
     err = c.Send(request, response)
@@ -1145,6 +1792,30 @@ func (c *Client) DescribeClassicalLBListeners(request *DescribeClassicalLBListen
     return
 }
 
+// DescribeClassicalLBListeners
+// This API (DescribeClassicalLBListeners) is used to get the listener information of a classic CLB.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClassicalLBListenersWithContext(ctx context.Context, request *DescribeClassicalLBListenersRequest) (response *DescribeClassicalLBListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeClassicalLBListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeClassicalLBListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClassicalLBTargetsRequest() (request *DescribeClassicalLBTargetsRequest) {
     request = &DescribeClassicalLBTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1179,6 +1850,30 @@ func (c *Client) DescribeClassicalLBTargets(request *DescribeClassicalLBTargetsR
     if request == nil {
         request = NewDescribeClassicalLBTargetsRequest()
     }
+    
+    response = NewDescribeClassicalLBTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeClassicalLBTargets
+// This API is used to get the real servers bound to a classic CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClassicalLBTargetsWithContext(ctx context.Context, request *DescribeClassicalLBTargetsRequest) (response *DescribeClassicalLBTargetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClassicalLBTargetsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeClassicalLBTargetsResponse()
     err = c.Send(request, response)
@@ -1220,6 +1915,25 @@ func (c *Client) DescribeClsLogSet(request *DescribeClsLogSetRequest) (response 
     return
 }
 
+// DescribeClsLogSet
+// This API is used to get the CLB exclusive logset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClsLogSetWithContext(ctx context.Context, request *DescribeClsLogSetRequest) (response *DescribeClsLogSetResponse, err error) {
+    if request == nil {
+        request = NewDescribeClsLogSetRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeClsLogSetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomizedConfigAssociateListRequest() (request *DescribeCustomizedConfigAssociateListRequest) {
     request = &DescribeCustomizedConfigAssociateListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1253,6 +1967,29 @@ func (c *Client) DescribeCustomizedConfigAssociateList(request *DescribeCustomiz
     if request == nil {
         request = NewDescribeCustomizedConfigAssociateListRequest()
     }
+    
+    response = NewDescribeCustomizedConfigAssociateListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCustomizedConfigAssociateList
+// This API is used to query the configured location, bound server or bound CLB instance. If there are domain names, the result will be filtered by domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCustomizedConfigAssociateListWithContext(ctx context.Context, request *DescribeCustomizedConfigAssociateListRequest) (response *DescribeCustomizedConfigAssociateListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomizedConfigAssociateListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCustomizedConfigAssociateListResponse()
     err = c.Send(request, response)
@@ -1309,6 +2046,40 @@ func (c *Client) DescribeCustomizedConfigList(request *DescribeCustomizedConfigL
     return
 }
 
+// DescribeCustomizedConfigList
+// This API is used to pull custom configuration lists to return the user configuration of `AppId`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
+//  INVALIDPARAMETER_PROTOCOLCHECKFAILED = "InvalidParameter.ProtocolCheckFailed"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETER_REWRITEALREADYEXIST = "InvalidParameter.RewriteAlreadyExist"
+//  INVALIDPARAMETER_SOMEREWRITENOTFOUND = "InvalidParameter.SomeRewriteNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCustomizedConfigListWithContext(ctx context.Context, request *DescribeCustomizedConfigListRequest) (response *DescribeCustomizedConfigListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomizedConfigListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomizedConfigListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLBListenersRequest() (request *DescribeLBListenersRequest) {
     request = &DescribeLBListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1343,6 +2114,30 @@ func (c *Client) DescribeLBListeners(request *DescribeLBListenersRequest) (respo
     if request == nil {
         request = NewDescribeLBListenersRequest()
     }
+    
+    response = NewDescribeLBListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLBListeners
+// This API is used to query CLB instances bound to the CVM or ENI.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLBListenersWithContext(ctx context.Context, request *DescribeLBListenersRequest) (response *DescribeLBListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeLBListenersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLBListenersResponse()
     err = c.Send(request, response)
@@ -1388,6 +2183,29 @@ func (c *Client) DescribeListeners(request *DescribeListenersRequest) (response 
     return
 }
 
+// DescribeListeners
+// This API is used to get the list of listeners by CLB ID, listener protocol, or listener port. If no filter is specified, all listeners for the CLB instance will be returned.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeListenersWithContext(ctx context.Context, request *DescribeListenersRequest) (response *DescribeListenersResponse, err error) {
+    if request == nil {
+        request = NewDescribeListenersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeListenersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLoadBalancerListByCertIdRequest() (request *DescribeLoadBalancerListByCertIdRequest) {
     request = &DescribeLoadBalancerListByCertIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1426,6 +2244,28 @@ func (c *Client) DescribeLoadBalancerListByCertId(request *DescribeLoadBalancerL
     return
 }
 
+// DescribeLoadBalancerListByCertId
+// This API is used to query the list of CLB instances associated with a certificate in a region by certificate ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLoadBalancerListByCertIdWithContext(ctx context.Context, request *DescribeLoadBalancerListByCertIdRequest) (response *DescribeLoadBalancerListByCertIdResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancerListByCertIdRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoadBalancerListByCertIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLoadBalancerTrafficRequest() (request *DescribeLoadBalancerTrafficRequest) {
     request = &DescribeLoadBalancerTrafficRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1456,6 +2296,26 @@ func (c *Client) DescribeLoadBalancerTraffic(request *DescribeLoadBalancerTraffi
     if request == nil {
         request = NewDescribeLoadBalancerTrafficRequest()
     }
+    
+    response = NewDescribeLoadBalancerTrafficResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLoadBalancerTraffic
+// This API is used to query CLB instances with high traffic under the current account, and return the top 10 results. For queries using a sub-account, only the CLB instances authorized to the sub-account will be returned.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+func (c *Client) DescribeLoadBalancerTrafficWithContext(ctx context.Context, request *DescribeLoadBalancerTrafficRequest) (response *DescribeLoadBalancerTrafficResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancerTrafficRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLoadBalancerTrafficResponse()
     err = c.Send(request, response)
@@ -1502,6 +2362,30 @@ func (c *Client) DescribeLoadBalancers(request *DescribeLoadBalancersRequest) (r
     return
 }
 
+// DescribeLoadBalancers
+// This API is used to query the list of CLB instances in a region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLoadBalancersWithContext(ctx context.Context, request *DescribeLoadBalancersRequest) (response *DescribeLoadBalancersResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLoadBalancersDetailRequest() (request *DescribeLoadBalancersDetailRequest) {
     request = &DescribeLoadBalancersDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1542,6 +2426,30 @@ func (c *Client) DescribeLoadBalancersDetail(request *DescribeLoadBalancersDetai
     return
 }
 
+// DescribeLoadBalancersDetail
+// This API is used to query CLB instance details, including listener, rules, and target real servers.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeLoadBalancersDetailWithContext(ctx context.Context, request *DescribeLoadBalancersDetailRequest) (response *DescribeLoadBalancersDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoadBalancersDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoadBalancersDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeQuotaRequest() (request *DescribeQuotaRequest) {
     request = &DescribeQuotaRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1568,6 +2476,22 @@ func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *Describ
     if request == nil {
         request = NewDescribeQuotaRequest()
     }
+    
+    response = NewDescribeQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeQuota
+// This API is used to query various quotas in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeQuotaWithContext(ctx context.Context, request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
+    if request == nil {
+        request = NewDescribeQuotaRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeQuotaResponse()
     err = c.Send(request, response)
@@ -1616,6 +2540,32 @@ func (c *Client) DescribeRewrite(request *DescribeRewriteRequest) (response *Des
     return
 }
 
+// DescribeRewrite
+// This API (DescribeRewrite) is used to query the redirection relationship between the forwarding rules of a CLB instance by instance ID. If no listener ID or forwarding rule ID is specified, all redirection relationships in the instance will be returned.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRewriteWithContext(ctx context.Context, request *DescribeRewriteRequest) (response *DescribeRewriteResponse, err error) {
+    if request == nil {
+        request = NewDescribeRewriteRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRewriteResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTargetGroupInstancesRequest() (request *DescribeTargetGroupInstancesRequest) {
     request = &DescribeTargetGroupInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1646,6 +2596,26 @@ func (c *Client) DescribeTargetGroupInstances(request *DescribeTargetGroupInstan
     if request == nil {
         request = NewDescribeTargetGroupInstancesRequest()
     }
+    
+    response = NewDescribeTargetGroupInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTargetGroupInstances
+// This API is used to get the information of servers bound to a target group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTargetGroupInstancesWithContext(ctx context.Context, request *DescribeTargetGroupInstancesRequest) (response *DescribeTargetGroupInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTargetGroupInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTargetGroupInstancesResponse()
     err = c.Send(request, response)
@@ -1688,6 +2658,26 @@ func (c *Client) DescribeTargetGroupList(request *DescribeTargetGroupListRequest
     return
 }
 
+// DescribeTargetGroupList
+// This API is used to get the target group list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTargetGroupListWithContext(ctx context.Context, request *DescribeTargetGroupListRequest) (response *DescribeTargetGroupListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTargetGroupListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTargetGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTargetGroupsRequest() (request *DescribeTargetGroupsRequest) {
     request = &DescribeTargetGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1718,6 +2708,26 @@ func (c *Client) DescribeTargetGroups(request *DescribeTargetGroupsRequest) (res
     if request == nil {
         request = NewDescribeTargetGroupsRequest()
     }
+    
+    response = NewDescribeTargetGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTargetGroups
+// This API is used to query the target group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTargetGroupsWithContext(ctx context.Context, request *DescribeTargetGroupsRequest) (response *DescribeTargetGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTargetGroupsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTargetGroupsResponse()
     err = c.Send(request, response)
@@ -1763,6 +2773,29 @@ func (c *Client) DescribeTargetHealth(request *DescribeTargetHealthRequest) (res
     return
 }
 
+// DescribeTargetHealth
+// This API (DescribeTargetHealth) is used to query the health check result of a real server of a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTargetHealthWithContext(ctx context.Context, request *DescribeTargetHealthRequest) (response *DescribeTargetHealthResponse, err error) {
+    if request == nil {
+        request = NewDescribeTargetHealthRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTargetHealthResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTargetsRequest() (request *DescribeTargetsRequest) {
     request = &DescribeTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1796,6 +2829,29 @@ func (c *Client) DescribeTargets(request *DescribeTargetsRequest) (response *Des
     if request == nil {
         request = NewDescribeTargetsRequest()
     }
+    
+    response = NewDescribeTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTargets
+// This API (DescribeTargets) is used to query the list of real servers bound to some listeners of a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTargetsWithContext(ctx context.Context, request *DescribeTargetsRequest) (response *DescribeTargetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTargetsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTargetsResponse()
     err = c.Send(request, response)
@@ -1836,6 +2892,24 @@ func (c *Client) DescribeTaskStatus(request *DescribeTaskStatusRequest) (respons
     return
 }
 
+// DescribeTaskStatus
+// This API is used to query the execution status of an async task. After non-query APIs (used to create/delete CLB instances, listeners, or rules or to bind/unbind real servers) are called successfully, this API needs to be used to query whether the task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTaskStatusWithContext(ctx context.Context, request *DescribeTaskStatusRequest) (response *DescribeTaskStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeTaskStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTaskStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateTargetGroupsRequest() (request *DisassociateTargetGroupsRequest) {
     request = &DisassociateTargetGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1868,6 +2942,28 @@ func (c *Client) DisassociateTargetGroups(request *DisassociateTargetGroupsReque
     if request == nil {
         request = NewDisassociateTargetGroupsRequest()
     }
+    
+    response = NewDisassociateTargetGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DisassociateTargetGroups
+// This API is used to unbind target groups from a rule.
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DisassociateTargetGroupsWithContext(ctx context.Context, request *DisassociateTargetGroupsRequest) (response *DisassociateTargetGroupsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateTargetGroupsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDisassociateTargetGroupsResponse()
     err = c.Send(request, response)
@@ -1921,6 +3017,37 @@ func (c *Client) ManualRewrite(request *ManualRewriteRequest) (response *ManualR
     return
 }
 
+// ManualRewrite
+// After the original access address and the address to be redirected are configured manually, the system will automatically redirect requests made to the original access address to the target address of the corresponding path. Multiple paths can be configured as a redirection policy under one domain name to achieve automatic redirection between HTTP and HTTPS. A redirection policy should meet the following rules: if A has already been redirected to B, then it cannot be redirected to C (unless the original redirection relationship is deleted and a new one is created), and B cannot be redirected to any other addresses.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETER_LOCATIONNOTFOUND = "InvalidParameter.LocationNotFound"
+//  INVALIDPARAMETER_PROTOCOLCHECKFAILED = "InvalidParameter.ProtocolCheckFailed"
+//  INVALIDPARAMETER_REWRITEALREADYEXIST = "InvalidParameter.RewriteAlreadyExist"
+//  INVALIDPARAMETER_SOMEREWRITENOTFOUND = "InvalidParameter.SomeRewriteNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ManualRewriteWithContext(ctx context.Context, request *ManualRewriteRequest) (response *ManualRewriteResponse, err error) {
+    if request == nil {
+        request = NewManualRewriteRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewManualRewriteResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyBlockIPListRequest() (request *ModifyBlockIPListRequest) {
     request = &ModifyBlockIPListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1962,6 +3089,31 @@ func (c *Client) ModifyBlockIPList(request *ModifyBlockIPListRequest) (response 
     return
 }
 
+// ModifyBlockIPList
+// This API is used to modify the client IP blocklist of a CLB instance. One forwarding rule supports blocking up to 2,000,000 IPs. One blocklist can contain up to 2,000,000 entries.
+//
+// (This API is in beta test. To use it, please submit a ticket.)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyBlockIPListWithContext(ctx context.Context, request *ModifyBlockIPListRequest) (response *ModifyBlockIPListResponse, err error) {
+    if request == nil {
+        request = NewModifyBlockIPListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyBlockIPListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDomainRequest() (request *ModifyDomainRequest) {
     request = &ModifyDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1996,6 +3148,30 @@ func (c *Client) ModifyDomain(request *ModifyDomainRequest) (response *ModifyDom
     if request == nil {
         request = NewModifyDomainRequest()
     }
+    
+    response = NewModifyDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDomain
+// This API (ModifyDomain) is used to modify a domain name under a layer-7 CLB listener.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyDomainWithContext(ctx context.Context, request *ModifyDomainRequest) (response *ModifyDomainResponse, err error) {
+    if request == nil {
+        request = NewModifyDomainRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyDomainResponse()
     err = c.Send(request, response)
@@ -2043,6 +3219,31 @@ func (c *Client) ModifyDomainAttributes(request *ModifyDomainAttributesRequest) 
     return
 }
 
+// ModifyDomainAttributes
+// This API is used to modify the domain name-level attributes of a layer-7 listener's forwarding rule, such as modifying the domain name, changing the DefaultServer, enabling/disabling HTTP/2, and modifying certificates.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyDomainAttributesWithContext(ctx context.Context, request *ModifyDomainAttributesRequest) (response *ModifyDomainAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyDomainAttributesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDomainAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyListenerRequest() (request *ModifyListenerRequest) {
     request = &ModifyListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2078,6 +3279,31 @@ func (c *Client) ModifyListener(request *ModifyListenerRequest) (response *Modif
     if request == nil {
         request = NewModifyListenerRequest()
     }
+    
+    response = NewModifyListenerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyListener
+// This API (ModifyListener) is used to modify the attributes of a CLB listener, such as listener name, health check parameter, certificate information, and forwarding policy.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyListenerWithContext(ctx context.Context, request *ModifyListenerRequest) (response *ModifyListenerResponse, err error) {
+    if request == nil {
+        request = NewModifyListenerRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyListenerResponse()
     err = c.Send(request, response)
@@ -2128,6 +3354,34 @@ func (c *Client) ModifyLoadBalancerAttributes(request *ModifyLoadBalancerAttribu
     return
 }
 
+// ModifyLoadBalancerAttributes
+// This API is used to modify the attributes of a CLB instance such as name and cross-region attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyLoadBalancerAttributesWithContext(ctx context.Context, request *ModifyLoadBalancerAttributesRequest) (response *ModifyLoadBalancerAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyLoadBalancerAttributesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyLoadBalancerAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLoadBalancerSlaRequest() (request *ModifyLoadBalancerSlaRequest) {
     request = &ModifyLoadBalancerSlaRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2161,6 +3415,29 @@ func (c *Client) ModifyLoadBalancerSla(request *ModifyLoadBalancerSlaRequest) (r
     if request == nil {
         request = NewModifyLoadBalancerSlaRequest()
     }
+    
+    response = NewModifyLoadBalancerSlaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyLoadBalancerSla
+// This API is used to upgrade shared CLB instances to LCU-supported CLB instances (downgrade is not allowed) and upgrade/downgrade the specification of LCU-supported instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyLoadBalancerSlaWithContext(ctx context.Context, request *ModifyLoadBalancerSlaRequest) (response *ModifyLoadBalancerSlaResponse, err error) {
+    if request == nil {
+        request = NewModifyLoadBalancerSlaRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyLoadBalancerSlaResponse()
     err = c.Send(request, response)
@@ -2208,6 +3485,31 @@ func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleRes
     return
 }
 
+// ModifyRule
+// This API (ModifyRule) is used to modify the attributes of a forwarding rule under a layer-7 CLB listener, such as forwarding path, health check attribute, and forwarding policy.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyRuleWithContext(ctx context.Context, request *ModifyRuleRequest) (response *ModifyRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyRuleRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTargetGroupAttributeRequest() (request *ModifyTargetGroupAttributeRequest) {
     request = &ModifyTargetGroupAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2238,6 +3540,26 @@ func (c *Client) ModifyTargetGroupAttribute(request *ModifyTargetGroupAttributeR
     if request == nil {
         request = NewModifyTargetGroupAttributeRequest()
     }
+    
+    response = NewModifyTargetGroupAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyTargetGroupAttribute
+// This API is used to rename a target group or modify its default port attribute.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTargetGroupAttributeWithContext(ctx context.Context, request *ModifyTargetGroupAttributeRequest) (response *ModifyTargetGroupAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyTargetGroupAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyTargetGroupAttributeResponse()
     err = c.Send(request, response)
@@ -2283,6 +3605,29 @@ func (c *Client) ModifyTargetGroupInstancesPort(request *ModifyTargetGroupInstan
     return
 }
 
+// ModifyTargetGroupInstancesPort
+// This API is used to modify server ports of a target group in batches.
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTargetGroupInstancesPortWithContext(ctx context.Context, request *ModifyTargetGroupInstancesPortRequest) (response *ModifyTargetGroupInstancesPortResponse, err error) {
+    if request == nil {
+        request = NewModifyTargetGroupInstancesPortRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTargetGroupInstancesPortResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTargetGroupInstancesWeightRequest() (request *ModifyTargetGroupInstancesWeightRequest) {
     request = &ModifyTargetGroupInstancesWeightRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2315,6 +3660,28 @@ func (c *Client) ModifyTargetGroupInstancesWeight(request *ModifyTargetGroupInst
     if request == nil {
         request = NewModifyTargetGroupInstancesWeightRequest()
     }
+    
+    response = NewModifyTargetGroupInstancesWeightResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyTargetGroupInstancesWeight
+// This API is used to modify server weights of a target group in batches.
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTargetGroupInstancesWeightWithContext(ctx context.Context, request *ModifyTargetGroupInstancesWeightRequest) (response *ModifyTargetGroupInstancesWeightResponse, err error) {
+    if request == nil {
+        request = NewModifyTargetGroupInstancesWeightRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyTargetGroupInstancesWeightResponse()
     err = c.Send(request, response)
@@ -2362,6 +3729,31 @@ func (c *Client) ModifyTargetPort(request *ModifyTargetPortRequest) (response *M
     return
 }
 
+// ModifyTargetPort
+// This API (ModifyTargetPort) is used to modify the port of a real server bound to a listener.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTargetPortWithContext(ctx context.Context, request *ModifyTargetPortRequest) (response *ModifyTargetPortResponse, err error) {
+    if request == nil {
+        request = NewModifyTargetPortRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTargetPortResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTargetWeightRequest() (request *ModifyTargetWeightRequest) {
     request = &ModifyTargetWeightRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2403,6 +3795,31 @@ func (c *Client) ModifyTargetWeight(request *ModifyTargetWeightRequest) (respons
     return
 }
 
+// ModifyTargetWeight
+// This API (ModifyTargetWeight) is used to modify the forwarding weight of a real server bound to a CLB instance.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyTargetWeightWithContext(ctx context.Context, request *ModifyTargetWeightRequest) (response *ModifyTargetWeightResponse, err error) {
+    if request == nil {
+        request = NewModifyTargetWeightRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyTargetWeightResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRegisterTargetGroupInstancesRequest() (request *RegisterTargetGroupInstancesRequest) {
     request = &RegisterTargetGroupInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2436,6 +3853,29 @@ func (c *Client) RegisterTargetGroupInstances(request *RegisterTargetGroupInstan
     if request == nil {
         request = NewRegisterTargetGroupInstancesRequest()
     }
+    
+    response = NewRegisterTargetGroupInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RegisterTargetGroupInstances
+// This API is used to register servers to a target group.
+//
+// This is an async API. After it is returned successfully, you can call the `DescribeTaskStatus` API with the returned `RequestID` as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) RegisterTargetGroupInstancesWithContext(ctx context.Context, request *RegisterTargetGroupInstancesRequest) (response *RegisterTargetGroupInstancesResponse, err error) {
+    if request == nil {
+        request = NewRegisterTargetGroupInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRegisterTargetGroupInstancesResponse()
     err = c.Send(request, response)
@@ -2486,6 +3926,34 @@ func (c *Client) RegisterTargets(request *RegisterTargetsRequest) (response *Reg
     return
 }
 
+// RegisterTargets
+// This API (RegisterTargets) is used to bind one or more real servers to a CLB listener or layer-7 forwarding rule. Before using this API, you need to create relevant layer-4 listeners or layer-7 forwarding rules. For the former (TCP/UDP), only the listener ID needs to be specified, while for the latter (HTTP/HTTPS), the forwarding rule also needs to be specified through LocationId or Domain+Url.
+//
+// This is an async API. After it is returned successfully, you can call the DescribeTaskStatus API with the returned RequestID as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) RegisterTargetsWithContext(ctx context.Context, request *RegisterTargetsRequest) (response *RegisterTargetsResponse, err error) {
+    if request == nil {
+        request = NewRegisterTargetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRegisterTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRegisterTargetsWithClassicalLBRequest() (request *RegisterTargetsWithClassicalLBRequest) {
     request = &RegisterTargetsWithClassicalLBRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2520,6 +3988,30 @@ func (c *Client) RegisterTargetsWithClassicalLB(request *RegisterTargetsWithClas
     if request == nil {
         request = NewRegisterTargetsWithClassicalLBRequest()
     }
+    
+    response = NewRegisterTargetsWithClassicalLBResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RegisterTargetsWithClassicalLB
+// This API is used to bind a real server with a classic CLB instance. This is an async API. After it is returned successfully, you can call the API `DescribeTaskStatus` with the returned RequestId as an input parameter to check whether this task is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) RegisterTargetsWithClassicalLBWithContext(ctx context.Context, request *RegisterTargetsWithClassicalLBRequest) (response *RegisterTargetsWithClassicalLBResponse, err error) {
+    if request == nil {
+        request = NewRegisterTargetsWithClassicalLBRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRegisterTargetsWithClassicalLBResponse()
     err = c.Send(request, response)
@@ -2569,6 +4061,33 @@ func (c *Client) ReplaceCertForLoadBalancers(request *ReplaceCertForLoadBalancer
     return
 }
 
+// ReplaceCertForLoadBalancers
+// This API (ReplaceCertForLoadBalancers) is used to replace the certificate associated with a CLB instance. A new certificates can be associated with a CLB only after the original certificate is disassociated from it.
+//
+// This API supports replacing server certificates and client certificates.
+//
+// The new certificate to be used can be specified by passing in the certificate ID. If no certificate ID is specified, relevant information such as certificate content must be passed in to create a new certificate and bind it to the CLB.
+//
+// Note: This API can only be called in the Guangzhou region; for other regions, an error will occur due to domain name resolution problems.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+func (c *Client) ReplaceCertForLoadBalancersWithContext(ctx context.Context, request *ReplaceCertForLoadBalancersRequest) (response *ReplaceCertForLoadBalancersResponse, err error) {
+    if request == nil {
+        request = NewReplaceCertForLoadBalancersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewReplaceCertForLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetLoadBalancerClsLogRequest() (request *SetLoadBalancerClsLogRequest) {
     request = &SetLoadBalancerClsLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2603,6 +4122,30 @@ func (c *Client) SetLoadBalancerClsLog(request *SetLoadBalancerClsLogRequest) (r
     if request == nil {
         request = NewSetLoadBalancerClsLogRequest()
     }
+    
+    response = NewSetLoadBalancerClsLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SetLoadBalancerClsLog
+// This API is used to add, delete, and update the CLS topic of a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETER_REGIONNOTFOUND = "InvalidParameter.RegionNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetLoadBalancerClsLogWithContext(ctx context.Context, request *SetLoadBalancerClsLogRequest) (response *SetLoadBalancerClsLogResponse, err error) {
+    if request == nil {
+        request = NewSetLoadBalancerClsLogRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSetLoadBalancerClsLogResponse()
     err = c.Send(request, response)
@@ -2651,6 +4194,32 @@ func (c *Client) SetLoadBalancerSecurityGroups(request *SetLoadBalancerSecurityG
     return
 }
 
+// SetLoadBalancerSecurityGroups
+// This API (SetLoadBalancerSecurityGroups) is used to bind/unbind security groups for a public network CLB instance. You can use the DescribeLoadBalancers API to query the security groups bound to a CLB instance. This API uses `set` semantics.
+//
+// During a binding operation, the input parameters need to be all security groups to be bound to the CLB instance (including those already bound ones and new ones).
+//
+// During an unbinding operation, the input parameters need to be all the security groups still bound to the CLB instance after the unbinding operation. To unbind all security groups, you can leave this parameter empty or pass in an empty array. Note: Private network CLB do not support binding security groups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetLoadBalancerSecurityGroupsWithContext(ctx context.Context, request *SetLoadBalancerSecurityGroupsRequest) (response *SetLoadBalancerSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewSetLoadBalancerSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSetLoadBalancerSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetSecurityGroupForLoadbalancersRequest() (request *SetSecurityGroupForLoadbalancersRequest) {
     request = &SetSecurityGroupForLoadbalancersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2684,6 +4253,29 @@ func (c *Client) SetSecurityGroupForLoadbalancers(request *SetSecurityGroupForLo
     if request == nil {
         request = NewSetSecurityGroupForLoadbalancersRequest()
     }
+    
+    response = NewSetSecurityGroupForLoadbalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SetSecurityGroupForLoadbalancers
+// This API is used to bind or unbind a security group for multiple public network CLB instances. Note: Private network CLB do not support binding security groups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetSecurityGroupForLoadbalancersWithContext(ctx context.Context, request *SetSecurityGroupForLoadbalancersRequest) (response *SetSecurityGroupForLoadbalancersResponse, err error) {
+    if request == nil {
+        request = NewSetSecurityGroupForLoadbalancersRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSetSecurityGroupForLoadbalancersResponse()
     err = c.Send(request, response)

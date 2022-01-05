@@ -304,6 +304,27 @@ type CallBackInfo struct {
 	Headers []*string `json:"Headers,omitempty" name:"Headers"`
 }
 
+type Ckafka struct {
+
+	// CKafka VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// CKafka Vport
+	Vport *string `json:"Vport,omitempty" name:"Vport"`
+
+	// CKafka instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// CKafka instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// CKafka topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// CKafka topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
 type Column struct {
 
 	// Column name
@@ -357,6 +378,17 @@ type ConfigInfo struct {
 	// Custom parsing string
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UserDefineRule *string `json:"UserDefineRule,omitempty" name:"UserDefineRule"`
+}
+
+type ConsumerContent struct {
+
+	// Whether to ship tag information
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
+
+	// List of metadata to ship. Currently, only __SOURCE__, __FILENAME__, and __TIMESTAMP__ are supported.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
 }
 
 type ContentInfo struct {
@@ -731,6 +763,64 @@ func (r *CreateConfigResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID to bind
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Whether to ship log metadata. Default value: `true`
+	NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+	// Metadata to ship if `NeedContent` is `true`
+	Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+	// CKafka information
+	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+}
+
+func (r *CreateConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "NeedContent")
+	delete(f, "Content")
+	delete(f, "Ckafka")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1456,6 +1546,52 @@ func (r *DeleteConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteExportRequest struct {
 	*tchttp.BaseRequest
 
@@ -1828,35 +1964,37 @@ type DescribeAlarmsRequest struct {
 
 	// <br><li> name
 	// 
-	// Filter by **alarm policy name**.
-	// Type: String
+	// Filter by **alarm policy name**
+	// Type: string
 	// 
 	// Required: no
 	// 
 	// <br><li> alarmId
 	// 
-	// Filter by **alarm policy ID**.
-	// Type: String
+	// Filter by **alarm policy ID**
+	// Type: string
 	// 
 	// Required: no
 	// 
 	// <br><li> topicId
 	// 
-	// Filter by **log topic ID of monitoring object**.
+	// Filter by **log topic ID**
 	// 
-	// Type: String
+	// Type: string
 	// 
 	// Required: no
 	// 
 	// <br><li> enable
 	// 
-	// Filter by **enablement status**.
+	// Filter by **enablement status**
 	// 
-	// Type: String
+	// Type: string
+	// 
+	// Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an “invalid parameter” error will be returned.
 	// 
 	// Required: no
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -2339,6 +2477,65 @@ func (r *DescribeConfigsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
+func (r *DescribeConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Whether the shipping task is effective
+		Effective *bool `json:"Effective,omitempty" name:"Effective"`
+
+		// Whether log metadata is shipped
+		NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+		// Metadata shipped if `NeedContent` is `true`
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+		// CKafka information
+		Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3821,6 +4018,68 @@ func (r *ModifyConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Whether to enable the shipping task
+	Effective *bool `json:"Effective,omitempty" name:"Effective"`
+
+	// Whether to ship metadata. Default value: `false`
+	NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+	// Metadata to ship if `NeedContent` is `true`
+	Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+	// CKafka information
+	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+}
+
+func (r *ModifyConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Effective")
+	delete(f, "NeedContent")
+	delete(f, "Content")
+	delete(f, "Ckafka")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyIndexRequest struct {
 	*tchttp.BaseRequest
 
@@ -4321,7 +4580,7 @@ type SearchLogRequest struct {
 	// Number of raw logs returned in a single query. Maximum value: 100. If the query statement (Query) contains an SQL query, you need to specify the number of SQL query results in `Query`. For more information, please visit https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// This field is used to load more logs. Pass through the last `Context` value returned to get more log content. It will expire after 1 hour.
+	// This parameter is used to load more logs. Pass through the last `Context` value returned to get more log content. Up to 10,000 raw logs can be obtained in total. This parameter expires in 1 hour.
 	Context *string `json:"Context,omitempty" name:"Context"`
 
 	// Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`

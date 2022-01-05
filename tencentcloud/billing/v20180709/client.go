@@ -15,6 +15,7 @@
 package v20180709
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -79,6 +80,26 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
     return
 }
 
+// DescribeBillDetail
+// This API is used to query bill details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *DescribeBillDetailRequest) (response *DescribeBillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillResourceSummaryRequest() (request *DescribeBillResourceSummaryRequest) {
     request = &DescribeBillResourceSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -106,6 +127,23 @@ func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummar
     if request == nil {
         request = NewDescribeBillResourceSummaryRequest()
     }
+    
+    response = NewDescribeBillResourceSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBillResourceSummary
+// This API is used to query bill resources summary. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, request *DescribeBillResourceSummaryRequest) (response *DescribeBillResourceSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillResourceSummaryRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBillResourceSummaryResponse()
     err = c.Send(request, response)
@@ -141,6 +179,25 @@ func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayM
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
     }
+    
+    response = NewDescribeBillSummaryByPayModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBillSummaryByPayMode
+// Gets the bill summarized according to billing mode
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByPayModeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByPayModeResponse()
     err = c.Send(request, response)
@@ -183,6 +240,26 @@ func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProd
     return
 }
 
+// DescribeBillSummaryByProduct
+// Gets the bill summarized according to product
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByProductRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryByProductResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillSummaryByProjectRequest() (request *DescribeBillSummaryByProjectRequest) {
     request = &DescribeBillSummaryByProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -212,6 +289,25 @@ func (c *Client) DescribeBillSummaryByProject(request *DescribeBillSummaryByProj
     if request == nil {
         request = NewDescribeBillSummaryByProjectRequest()
     }
+    
+    response = NewDescribeBillSummaryByProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBillSummaryByProject
+// Gets the bill summarized according to project
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryByProjectWithContext(ctx context.Context, request *DescribeBillSummaryByProjectRequest) (response *DescribeBillSummaryByProjectResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByProjectRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByProjectResponse()
     err = c.Send(request, response)
@@ -253,6 +349,25 @@ func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegio
     return
 }
 
+// DescribeBillSummaryByRegion
+// Gets the bill summarized according to region
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByRegionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryByRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillSummaryByTagRequest() (request *DescribeBillSummaryByTagRequest) {
     request = &DescribeBillSummaryByTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -283,6 +398,26 @@ func (c *Client) DescribeBillSummaryByTag(request *DescribeBillSummaryByTagReque
     if request == nil {
         request = NewDescribeBillSummaryByTagRequest()
     }
+    
+    response = NewDescribeBillSummaryByTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBillSummaryByTag
+// This API is used to get the cost distribution over different tags.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, request *DescribeBillSummaryByTagRequest) (response *DescribeBillSummaryByTagResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByTagRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByTagResponse()
     err = c.Send(request, response)

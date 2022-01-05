@@ -15,6 +15,7 @@
 package v20180808
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -84,6 +85,31 @@ func (c *Client) AttachPlugin(request *AttachPluginRequest) (response *AttachPlu
     return
 }
 
+// AttachPlugin
+// This API is used to bind a plugin to an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_SERVICECOUNTFORPLUGINLIMITEXCEEDED = "LimitExceeded.ServiceCountForPluginLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_ATTACHPLUGIN = "UnsupportedOperation.AttachPlugin"
+func (c *Client) AttachPluginWithContext(ctx context.Context, request *AttachPluginRequest) (response *AttachPluginResponse, err error) {
+    if request == nil {
+        request = NewAttachPluginRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAttachPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindApiAppRequest() (request *BindApiAppRequest) {
     request = &BindApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -120,6 +146,32 @@ func (c *Client) BindApiApp(request *BindApiAppRequest) (response *BindApiAppRes
     if request == nil {
         request = NewBindApiAppRequest()
     }
+    
+    response = NewBindApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BindApiApp
+// This API is used to bind an application to an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
+//  LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
+func (c *Client) BindApiAppWithContext(ctx context.Context, request *BindApiAppRequest) (response *BindApiAppResponse, err error) {
+    if request == nil {
+        request = NewBindApiAppRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBindApiAppResponse()
     err = c.Send(request, response)
@@ -170,6 +222,34 @@ func (c *Client) BindEnvironment(request *BindEnvironmentRequest) (response *Bin
     return
 }
 
+// BindEnvironment
+// This API is used to bind a usage plan to a service or API.
+//
+// After you publish a service to an environment, if the API requires authentication and can be called only when it is bound to a usage plan, you can use this API to bind a usage plan to the specified environment.
+//
+// Currently, a usage plan can be bound to an API; however, under the same service, usage plans bound to a service and usage plans bound to an API cannot coexist. Therefore, in an environment to which a service-level usage plan has already been bound, please use the `DemoteServiceUsagePlan` API to degrade it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDAPIIDS = "InvalidParameterValue.InvalidApiIds"
+//  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDUNBINDENVIRONMENT = "UnsupportedOperation.UnsupportedUnBindEnvironment"
+func (c *Client) BindEnvironmentWithContext(ctx context.Context, request *BindEnvironmentRequest) (response *BindEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewBindEnvironmentRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBindEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindIPStrategyRequest() (request *BindIPStrategyRequest) {
     request = &BindIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -201,6 +281,27 @@ func (c *Client) BindIPStrategy(request *BindIPStrategyRequest) (response *BindI
     if request == nil {
         request = NewBindIPStrategyRequest()
     }
+    
+    response = NewBindIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BindIPStrategy
+// This API is used to bind an IP policy to an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDIPSTRATEGY = "ResourceNotFound.InvalidIPStrategy"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) BindIPStrategyWithContext(ctx context.Context, request *BindIPStrategyRequest) (response *BindIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewBindIPStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBindIPStrategyResponse()
     err = c.Send(request, response)
@@ -242,6 +343,31 @@ func (c *Client) BindSecretIds(request *BindSecretIdsRequest) (response *BindSec
     if request == nil {
         request = NewBindSecretIdsRequest()
     }
+    
+    response = NewBindSecretIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BindSecretIds
+// This API is used to bind a key to a usage plan.
+//
+// You can bind a key to a usage plan and bind the usage plan to an environment where a service is published, so that callers can use the key to call APIs in the service. You can use this API to bind a key to a usage plan.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDACCESSKEYIDS = "InvalidParameterValue.InvalidAccessKeyIds"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_ALREADYBINDUSAGEPLAN = "UnsupportedOperation.AlreadyBindUsagePlan"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDAPIKEY = "UnsupportedOperation.UnsupportedBindApiKey"
+func (c *Client) BindSecretIdsWithContext(ctx context.Context, request *BindSecretIdsRequest) (response *BindSecretIdsResponse, err error) {
+    if request == nil {
+        request = NewBindSecretIdsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBindSecretIdsResponse()
     err = c.Send(request, response)
@@ -315,6 +441,57 @@ func (c *Client) BindSubDomain(request *BindSubDomainRequest) (response *BindSub
     return
 }
 
+// BindSubDomain
+// This API is used to bind a custom domain name to a service.
+//
+// Each service in API Gateway provides a default domain name for users to call. If you want to use your own domain name, you can bind a custom domain name to the target service. After getting the ICP filing and configuring the CNAME record between the custom and default domain names, you can directly call the custom domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEIDENTERPRISEWAITSUBMIT = "FailedOperation.CertificateIdEnterpriseWaitSubmit"
+//  FAILEDOPERATION_CERTIFICATEIDERROR = "FailedOperation.CertificateIdError"
+//  FAILEDOPERATION_CERTIFICATEIDEXPIRED = "FailedOperation.CertificateIdExpired"
+//  FAILEDOPERATION_CERTIFICATEIDINFOERROR = "FailedOperation.CertificateIdInfoError"
+//  FAILEDOPERATION_CERTIFICATEIDUNDERVERIFY = "FailedOperation.CertificateIdUnderVerify"
+//  FAILEDOPERATION_CERTIFICATEIDUNKNOWNERROR = "FailedOperation.CertificateIdUnknownError"
+//  FAILEDOPERATION_CERTIFICATEIDVERIFYFAIL = "FailedOperation.CertificateIdVerifyFail"
+//  FAILEDOPERATION_CERTIFICATEISNULL = "FailedOperation.CertificateIsNull"
+//  FAILEDOPERATION_DEFINEMAPPINGENVIRONMENTERROR = "FailedOperation.DefineMappingEnvironmentError"
+//  FAILEDOPERATION_DEFINEMAPPINGNOTNULL = "FailedOperation.DefineMappingNotNull"
+//  FAILEDOPERATION_DEFINEMAPPINGPARAMREPEAT = "FailedOperation.DefineMappingParamRepeat"
+//  FAILEDOPERATION_DEFINEMAPPINGPATHERROR = "FailedOperation.DefineMappingPathError"
+//  FAILEDOPERATION_DOMAINALREADYBINDOTHERSERVICE = "FailedOperation.DomainAlreadyBindOtherService"
+//  FAILEDOPERATION_DOMAINALREADYBINDSERVICE = "FailedOperation.DomainAlreadyBindService"
+//  FAILEDOPERATION_DOMAININBLACKLIST = "FailedOperation.DomainInBlackList"
+//  FAILEDOPERATION_DOMAINNEEDBEIAN = "FailedOperation.DomainNeedBeian"
+//  FAILEDOPERATION_DOMAINRESOLVEERROR = "FailedOperation.DomainResolveError"
+//  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  FAILEDOPERATION_ISDEFAULTMAPPING = "FailedOperation.IsDefaultMapping"
+//  FAILEDOPERATION_NETSUBDOMAINERROR = "FailedOperation.NetSubDomainError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPROCOTOL = "InvalidParameterValue.InvalidProcotol"
+//  LIMITEXCEEDED_EXCEEDEDDEFINEMAPPINGLIMIT = "LimitExceeded.ExceededDefineMappingLimit"
+//  LIMITEXCEEDED_EXCEEDEDDOMAINLIMIT = "LimitExceeded.ExceededDomainLimit"
+//  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_FORCEHTTPS = "UnsupportedOperation.ForceHttps"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+func (c *Client) BindSubDomainWithContext(ctx context.Context, request *BindSubDomainRequest) (response *BindSubDomainResponse, err error) {
+    if request == nil {
+        request = NewBindSubDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBindSubDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBuildAPIDocRequest() (request *BuildAPIDocRequest) {
     request = &BuildAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -346,6 +523,27 @@ func (c *Client) BuildAPIDoc(request *BuildAPIDocRequest) (response *BuildAPIDoc
     if request == nil {
         request = NewBuildAPIDocRequest()
     }
+    
+    response = NewBuildAPIDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BuildAPIDoc
+// This API is used to build an API document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) BuildAPIDocWithContext(ctx context.Context, request *BuildAPIDocRequest) (response *BuildAPIDocResponse, err error) {
+    if request == nil {
+        request = NewBuildAPIDocRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewBuildAPIDocResponse()
     err = c.Send(request, response)
@@ -401,6 +599,45 @@ func (c *Client) CreateAPIDoc(request *CreateAPIDocRequest) (response *CreateAPI
     if request == nil {
         request = NewCreateAPIDocRequest()
     }
+    
+    response = NewCreateAPIDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateAPIDoc
+// This API is used to create an API document.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  FAILEDOPERATION_APIBINDENVIRONMEN = "FailedOperation.ApiBindEnvironmen"
+//  FAILEDOPERATION_APIBINDENVIRONMENT = "FailedOperation.ApiBindEnvironment"
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_APIDOCLIMITEXCEEDED = "LimitExceeded.APIDocLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAPIDocWithContext(ctx context.Context, request *CreateAPIDocRequest) (response *CreateAPIDocResponse, err error) {
+    if request == nil {
+        request = NewCreateAPIDocRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateAPIDocResponse()
     err = c.Send(request, response)
@@ -478,6 +715,61 @@ func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiRespon
     return
 }
 
+// CreateApi
+// This API is used to create an API. Before creating an API, you need to create a service, as each API belongs to a certain service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  FAILEDOPERATION_SCFERROR = "FailedOperation.ScfError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_ILLEGALPROXYIP = "InvalidParameterValue.IllegalProxyIp"
+//  INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
+//  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
+//  INVALIDPARAMETERVALUE_INVALIDAPITYPE = "InvalidParameterValue.InvalidApiType"
+//  INVALIDPARAMETERVALUE_INVALIDBACKENDPATH = "InvalidParameterValue.InvalidBackendPath"
+//  INVALIDPARAMETERVALUE_INVALIDCLB = "InvalidParameterValue.InvalidClb"
+//  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
+//  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDPUBLICKEY = "InvalidParameterValue.InvalidPublicKey"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_INVALIDSCFCONFIG = "InvalidParameterValue.InvalidScfConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEMOCKRETURNMESSAGE = "InvalidParameterValue.InvalidServiceMockReturnMessage"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAMETERS = "InvalidParameterValue.InvalidServiceParameters"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDTSFCONFIG = "InvalidParameterValue.InvalidTsfConfig"
+//  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_PARAMETERNOTMATCH = "InvalidParameterValue.ParameterNotMatch"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
+func (c *Client) CreateApiWithContext(ctx context.Context, request *CreateApiRequest) (response *CreateApiResponse, err error) {
+    if request == nil {
+        request = NewCreateApiRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateApiAppRequest() (request *CreateApiAppRequest) {
     request = &CreateApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -509,6 +801,27 @@ func (c *Client) CreateApiApp(request *CreateApiAppRequest) (response *CreateApi
     if request == nil {
         request = NewCreateApiAppRequest()
     }
+    
+    response = NewCreateApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateApiApp
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
+//  LIMITEXCEEDED_APIKEYCOUNTLIMITEXCEEDED = "LimitExceeded.ApiKeyCountLimitExceeded"
+func (c *Client) CreateApiAppWithContext(ctx context.Context, request *CreateApiAppRequest) (response *CreateApiAppResponse, err error) {
+    if request == nil {
+        request = NewCreateApiAppRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateApiAppResponse()
     err = c.Send(request, response)
@@ -550,6 +863,25 @@ func (c *Client) CreateApiKey(request *CreateApiKeyRequest) (response *CreateApi
     return
 }
 
+// CreateApiKey
+// This API is used to create an API key pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  LIMITEXCEEDED_APIKEYCOUNTLIMITEXCEEDED = "LimitExceeded.ApiKeyCountLimitExceeded"
+func (c *Client) CreateApiKeyWithContext(ctx context.Context, request *CreateApiKeyRequest) (response *CreateApiKeyResponse, err error) {
+    if request == nil {
+        request = NewCreateApiKeyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateIPStrategyRequest() (request *CreateIPStrategyRequest) {
     request = &CreateIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -578,6 +910,24 @@ func (c *Client) CreateIPStrategy(request *CreateIPStrategyRequest) (response *C
     if request == nil {
         request = NewCreateIPStrategyRequest()
     }
+    
+    response = NewCreateIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateIPStrategy
+// This API is used to create a service IP policy.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  LIMITEXCEEDED_IPSTRATEGYLIMITEXCEEDED = "LimitExceeded.IpStrategyLimitExceeded"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) CreateIPStrategyWithContext(ctx context.Context, request *CreateIPStrategyRequest) (response *CreateIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewCreateIPStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateIPStrategyResponse()
     err = c.Send(request, response)
@@ -633,6 +983,45 @@ func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePlu
     if request == nil {
         request = NewCreatePluginRequest()
     }
+    
+    response = NewCreatePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreatePlugin
+// This API is used to create an API Gateway plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
+//  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
+//  INVALIDPARAMETERVALUE_INVALIDBACKENDPATH = "InvalidParameterValue.InvalidBackendPath"
+//  INVALIDPARAMETERVALUE_INVALIDCLB = "InvalidParameterValue.InvalidClb"
+//  INVALIDPARAMETERVALUE_INVALIDCONDITION = "InvalidParameterValue.InvalidCondition"
+//  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
+//  INVALIDPARAMETERVALUE_INVALIDPLUGINCONFIG = "InvalidParameterValue.InvalidPluginConfig"
+//  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
+//  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
+//  MISSINGPARAMETER_PLUGINCONFIG = "MissingParameter.PluginConfig"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) CreatePluginWithContext(ctx context.Context, request *CreatePluginRequest) (response *CreatePluginResponse, err error) {
+    if request == nil {
+        request = NewCreatePluginRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreatePluginResponse()
     err = c.Send(request, response)
@@ -696,6 +1085,47 @@ func (c *Client) CreateService(request *CreateServiceRequest) (response *CreateS
     return
 }
 
+// CreateService
+// This API is used to create a service.
+//
+// The maximum unit in API Gateway is service. Multiple APIs can be created in one service, and each service has a default domain name for users to call. You can also bind your own custom domain name to a service.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSTANCENOTEXIST = "FailedOperation.InstanceNotExist"
+//  FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAUTHEXCEPTION = "InternalError.CauthException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_IPSTRATEGYLIMITEXCEEDED = "LimitExceeded.IpStrategyLimitExceeded"
+//  LIMITEXCEEDED_SERVICECOUNTLIMITEXCEEDED = "LimitExceeded.ServiceCountLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNCERTIFIEDUSER = "UnauthorizedOperation.UncertifiedUser"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) CreateServiceWithContext(ctx context.Context, request *CreateServiceRequest) (response *CreateServiceResponse, err error) {
+    if request == nil {
+        request = NewCreateServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUsagePlanRequest() (request *CreateUsagePlanRequest) {
     request = &CreateUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -726,6 +1156,26 @@ func (c *Client) CreateUsagePlan(request *CreateUsagePlanRequest) (response *Cre
     if request == nil {
         request = NewCreateUsagePlanRequest()
     }
+    
+    response = NewCreateUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateUsagePlan
+// This API is used to create a usage plan.
+//
+// To use API Gateway, you need to create a usage plan and bind it to a service environment.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED_USAGEPLANLIMITEXCEEDED = "LimitExceeded.UsagePlanLimitExceeded"
+func (c *Client) CreateUsagePlanWithContext(ctx context.Context, request *CreateUsagePlanRequest) (response *CreateUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewCreateUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateUsagePlanResponse()
     err = c.Send(request, response)
@@ -774,6 +1224,38 @@ func (c *Client) DeleteAPIDoc(request *DeleteAPIDocRequest) (response *DeleteAPI
     if request == nil {
         request = NewDeleteAPIDocRequest()
     }
+    
+    response = NewDeleteAPIDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteAPIDoc
+// This API is used to delete an API document.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteAPIDocWithContext(ctx context.Context, request *DeleteAPIDocRequest) (response *DeleteAPIDocResponse, err error) {
+    if request == nil {
+        request = NewDeleteAPIDocRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteAPIDocResponse()
     err = c.Send(request, response)
@@ -835,6 +1317,45 @@ func (c *Client) DeleteApi(request *DeleteApiRequest) (response *DeleteApiRespon
     return
 }
 
+// DeleteApi
+// This API is used to delete a created API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APIBINDENVIRONMEN = "FailedOperation.ApiBindEnvironmen"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) DeleteApiWithContext(ctx context.Context, request *DeleteApiRequest) (response *DeleteApiResponse, err error) {
+    if request == nil {
+        request = NewDeleteApiRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteApiAppRequest() (request *DeleteApiAppRequest) {
     request = &DeleteApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -878,6 +1399,33 @@ func (c *Client) DeleteApiApp(request *DeleteApiAppRequest) (response *DeleteApi
     return
 }
 
+// DeleteApiApp
+// This API is used to delete a created application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) DeleteApiAppWithContext(ctx context.Context, request *DeleteApiAppRequest) (response *DeleteApiAppResponse, err error) {
+    if request == nil {
+        request = NewDeleteApiAppRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteApiKeyRequest() (request *DeleteApiKeyRequest) {
     request = &DeleteApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -907,6 +1455,25 @@ func (c *Client) DeleteApiKey(request *DeleteApiKeyRequest) (response *DeleteApi
     if request == nil {
         request = NewDeleteApiKeyRequest()
     }
+    
+    response = NewDeleteApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteApiKey
+// This API is used to delete an API key pair.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
+//  UNSUPPORTEDOPERATION_RESOURCEISINUSE = "UnsupportedOperation.ResourceIsInUse"
+func (c *Client) DeleteApiKeyWithContext(ctx context.Context, request *DeleteApiKeyRequest) (response *DeleteApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDeleteApiKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteApiKeyResponse()
     err = c.Send(request, response)
@@ -945,6 +1512,22 @@ func (c *Client) DeleteIPStrategy(request *DeleteIPStrategyRequest) (response *D
     return
 }
 
+// DeleteIPStrategy
+// This API is used to delete a service IP policy.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDIPSTRATEGY = "ResourceNotFound.InvalidIPStrategy"
+func (c *Client) DeleteIPStrategyWithContext(ctx context.Context, request *DeleteIPStrategyRequest) (response *DeleteIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewDeleteIPStrategyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeletePluginRequest() (request *DeletePluginRequest) {
     request = &DeletePluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -973,6 +1556,24 @@ func (c *Client) DeletePlugin(request *DeletePluginRequest) (response *DeletePlu
     if request == nil {
         request = NewDeletePluginRequest()
     }
+    
+    response = NewDeletePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeletePlugin
+// This API is used to delete an API Gateway plugin.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DeletePluginWithContext(ctx context.Context, request *DeletePluginRequest) (response *DeletePluginResponse, err error) {
+    if request == nil {
+        request = NewDeletePluginRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeletePluginResponse()
     err = c.Send(request, response)
@@ -1018,6 +1619,29 @@ func (c *Client) DeleteService(request *DeleteServiceRequest) (response *DeleteS
     return
 }
 
+// DeleteService
+// This API is used to delete a service in API Gateway.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETESERVICE = "UnsupportedOperation.UnsupportedDeleteService"
+func (c *Client) DeleteServiceWithContext(ctx context.Context, request *DeleteServiceRequest) (response *DeleteServiceResponse, err error) {
+    if request == nil {
+        request = NewDeleteServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteServiceSubDomainMappingRequest() (request *DeleteServiceSubDomainMappingRequest) {
     request = &DeleteServiceSubDomainMappingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1055,6 +1679,27 @@ func (c *Client) DeleteServiceSubDomainMapping(request *DeleteServiceSubDomainMa
     return
 }
 
+// DeleteServiceSubDomainMapping
+// This API is used to delete a custom domain name mapping in a service environment.
+//
+// You can use this API if you use a custom domain name and custom mapping. Please note that if you delete all mappings in all environments, a failure will be returned when this API is called.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETEPATHMAPPINGSETERROR = "FailedOperation.DeletePathMappingSetError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INTERNALERROR = "InternalError"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+func (c *Client) DeleteServiceSubDomainMappingWithContext(ctx context.Context, request *DeleteServiceSubDomainMappingRequest) (response *DeleteServiceSubDomainMappingResponse, err error) {
+    if request == nil {
+        request = NewDeleteServiceSubDomainMappingRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteServiceSubDomainMappingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteUsagePlanRequest() (request *DeleteUsagePlanRequest) {
     request = &DeleteUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1083,6 +1728,24 @@ func (c *Client) DeleteUsagePlan(request *DeleteUsagePlanRequest) (response *Del
     if request == nil {
         request = NewDeleteUsagePlanRequest()
     }
+    
+    response = NewDeleteUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteUsagePlan
+// This API is used to delete a usage plan.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_USAGEPLANINUSE = "UnsupportedOperation.UsagePlanInUse"
+func (c *Client) DeleteUsagePlanWithContext(ctx context.Context, request *DeleteUsagePlanRequest) (response *DeleteUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewDeleteUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteUsagePlanResponse()
     err = c.Send(request, response)
@@ -1127,6 +1790,28 @@ func (c *Client) DemoteServiceUsagePlan(request *DemoteServiceUsagePlanRequest) 
     return
 }
 
+// DemoteServiceUsagePlan
+// This API is used to degrade a usage plan of a service in an environment to the API level.
+//
+// This operation will be denied if there are no APIs under the service.
+//
+// This operation will also be denied if the current environment has not been published.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_NOUSAGEPLANENV = "UnsupportedOperation.NoUsagePlanEnv"
+func (c *Client) DemoteServiceUsagePlanWithContext(ctx context.Context, request *DemoteServiceUsagePlanRequest) (response *DemoteServiceUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewDemoteServiceUsagePlanRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDemoteServiceUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAPIDocDetailRequest() (request *DescribeAPIDocDetailRequest) {
     request = &DescribeAPIDocDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1156,6 +1841,25 @@ func (c *Client) DescribeAPIDocDetail(request *DescribeAPIDocDetailRequest) (res
     if request == nil {
         request = NewDescribeAPIDocDetailRequest()
     }
+    
+    response = NewDescribeAPIDocDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAPIDocDetail
+// This API is used to query the details of an API document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeAPIDocDetailWithContext(ctx context.Context, request *DescribeAPIDocDetailRequest) (response *DescribeAPIDocDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeAPIDocDetailRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAPIDocDetailResponse()
     err = c.Send(request, response)
@@ -1204,6 +1908,32 @@ func (c *Client) DescribeAPIDocs(request *DescribeAPIDocsRequest) (response *Des
     return
 }
 
+// DescribeAPIDocs
+// This API is used to query the list of API documents.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeAPIDocsWithContext(ctx context.Context, request *DescribeAPIDocsRequest) (response *DescribeAPIDocsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAPIDocsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAPIDocsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllPluginApisRequest() (request *DescribeAllPluginApisRequest) {
     request = &DescribeAllPluginApisRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1232,6 +1962,24 @@ func (c *Client) DescribeAllPluginApis(request *DescribeAllPluginApisRequest) (r
     if request == nil {
         request = NewDescribeAllPluginApisRequest()
     }
+    
+    response = NewDescribeAllPluginApisResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAllPluginApis
+// This API is used to list all APIs that can use this plugin, no matter whether the API is bound with the plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribeAllPluginApisWithContext(ctx context.Context, request *DescribeAllPluginApisRequest) (response *DescribeAllPluginApisResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllPluginApisRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAllPluginApisResponse()
     err = c.Send(request, response)
@@ -1279,6 +2027,31 @@ func (c *Client) DescribeApi(request *DescribeApiRequest) (response *DescribeApi
     return
 }
 
+// DescribeApi
+// This API (`DescribeApi`) is used to query the details of the APIs users manage via Tencent Cloud API Gateway.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeApiWithContext(ctx context.Context, request *DescribeApiRequest) (response *DescribeApiResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiAppRequest() (request *DescribeApiAppRequest) {
     request = &DescribeApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1313,6 +2086,24 @@ func (c *Client) DescribeApiApp(request *DescribeApiAppRequest) (response *Descr
     return
 }
 
+// DescribeApiApp
+// This API is used to search for an application by application ID.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+func (c *Client) DescribeApiAppWithContext(ctx context.Context, request *DescribeApiAppRequest) (response *DescribeApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiAppBindApisStatusRequest() (request *DescribeApiAppBindApisStatusRequest) {
     request = &DescribeApiAppBindApisStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1339,6 +2130,22 @@ func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisSta
     if request == nil {
         request = NewDescribeApiAppBindApisStatusRequest()
     }
+    
+    response = NewDescribeApiAppBindApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeApiAppBindApisStatus
+// This API is used to query the list of APIs bound to an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+func (c *Client) DescribeApiAppBindApisStatusWithContext(ctx context.Context, request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppBindApisStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeApiAppBindApisStatusResponse()
     err = c.Send(request, response)
@@ -1378,6 +2185,23 @@ func (c *Client) DescribeApiAppsStatus(request *DescribeApiAppsStatusRequest) (r
     return
 }
 
+// DescribeApiAppsStatus
+// This API is used to query the application list.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeApiAppsStatusWithContext(ctx context.Context, request *DescribeApiAppsStatusRequest) (response *DescribeApiAppsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiAppsStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiAppsStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiBindApiAppsStatusRequest() (request *DescribeApiBindApiAppsStatusRequest) {
     request = &DescribeApiBindApiAppsStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1404,6 +2228,22 @@ func (c *Client) DescribeApiBindApiAppsStatus(request *DescribeApiBindApiAppsSta
     if request == nil {
         request = NewDescribeApiBindApiAppsStatusRequest()
     }
+    
+    response = NewDescribeApiBindApiAppsStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeApiBindApiAppsStatus
+// This API is used to query the list of applications bound to an API.
+//
+// error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+func (c *Client) DescribeApiBindApiAppsStatusWithContext(ctx context.Context, request *DescribeApiBindApiAppsStatusRequest) (response *DescribeApiBindApiAppsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiBindApiAppsStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeApiBindApiAppsStatusResponse()
     err = c.Send(request, response)
@@ -1439,6 +2279,25 @@ func (c *Client) DescribeApiEnvironmentStrategy(request *DescribeApiEnvironmentS
     if request == nil {
         request = NewDescribeApiEnvironmentStrategyRequest()
     }
+    
+    response = NewDescribeApiEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeApiEnvironmentStrategy
+// This API is used to display the throttling policies bound to an API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeApiEnvironmentStrategyWithContext(ctx context.Context, request *DescribeApiEnvironmentStrategyRequest) (response *DescribeApiEnvironmentStrategyResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiEnvironmentStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeApiEnvironmentStrategyResponse()
     err = c.Send(request, response)
@@ -1483,6 +2342,28 @@ func (c *Client) DescribeApiForApiApp(request *DescribeApiForApiAppRequest) (res
     return
 }
 
+// DescribeApiForApiApp
+// This API is used to query the details of an API deployed at API Gateway.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeApiForApiAppWithContext(ctx context.Context, request *DescribeApiForApiAppRequest) (response *DescribeApiForApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiForApiAppRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiForApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiKeyRequest() (request *DescribeApiKeyRequest) {
     request = &DescribeApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1511,6 +2392,24 @@ func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *Descr
     if request == nil {
         request = NewDescribeApiKeyRequest()
     }
+    
+    response = NewDescribeApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeApiKey
+// This API is used to query the details of a key.
+//
+// After creating an API key, you can query its details by using this API.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+func (c *Client) DescribeApiKeyWithContext(ctx context.Context, request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeApiKeyResponse()
     err = c.Send(request, response)
@@ -1551,6 +2450,24 @@ func (c *Client) DescribeApiKeysStatus(request *DescribeApiKeysStatusRequest) (r
     return
 }
 
+// DescribeApiKeysStatus
+// This API is used to query the list of keys.
+//
+// If you have created multiple API key pairs, you can use this API to query the information of one or more keys. This API does not display the `secretKey`.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+func (c *Client) DescribeApiKeysStatusWithContext(ctx context.Context, request *DescribeApiKeysStatusRequest) (response *DescribeApiKeysStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiKeysStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiKeysStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApiUsagePlanRequest() (request *DescribeApiUsagePlanRequest) {
     request = &DescribeApiUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1581,6 +2498,26 @@ func (c *Client) DescribeApiUsagePlan(request *DescribeApiUsagePlanRequest) (res
     if request == nil {
         request = NewDescribeApiUsagePlanRequest()
     }
+    
+    response = NewDescribeApiUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeApiUsagePlan
+// This API is used to query the details of API usage plans in a service.
+//
+// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to a service and APIs under it.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeApiUsagePlanWithContext(ctx context.Context, request *DescribeApiUsagePlanRequest) (response *DescribeApiUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeApiUsagePlanResponse()
     err = c.Send(request, response)
@@ -1624,6 +2561,27 @@ func (c *Client) DescribeApisStatus(request *DescribeApisStatusRequest) (respons
     return
 }
 
+// DescribeApisStatus
+// This API is used to view a certain API or the list of all APIs under a service and relevant information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeApisStatusWithContext(ctx context.Context, request *DescribeApisStatusRequest) (response *DescribeApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApisStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIPStrategyRequest() (request *DescribeIPStrategyRequest) {
     request = &DescribeIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1658,6 +2616,24 @@ func (c *Client) DescribeIPStrategy(request *DescribeIPStrategyRequest) (respons
     return
 }
 
+// DescribeIPStrategy
+// This API is used to query IP policy details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDIPSTRATEGY = "ResourceNotFound.InvalidIPStrategy"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeIPStrategyWithContext(ctx context.Context, request *DescribeIPStrategyRequest) (response *DescribeIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIPStrategyApisStatusRequest() (request *DescribeIPStrategyApisStatusRequest) {
     request = &DescribeIPStrategyApisStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1684,6 +2660,22 @@ func (c *Client) DescribeIPStrategyApisStatus(request *DescribeIPStrategyApisSta
     if request == nil {
         request = NewDescribeIPStrategyApisStatusRequest()
     }
+    
+    response = NewDescribeIPStrategyApisStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeIPStrategyApisStatus
+// This API is used to query the list of APIs to which an IP policy can be bound, i.e., the difference set between all APIs under the service and the APIs already bound to the policy.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDIPSTRATEGY = "ResourceNotFound.InvalidIPStrategy"
+func (c *Client) DescribeIPStrategyApisStatusWithContext(ctx context.Context, request *DescribeIPStrategyApisStatusRequest) (response *DescribeIPStrategyApisStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategyApisStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeIPStrategyApisStatusResponse()
     err = c.Send(request, response)
@@ -1724,6 +2716,24 @@ func (c *Client) DescribeIPStrategysStatus(request *DescribeIPStrategysStatusReq
     return
 }
 
+// DescribeIPStrategysStatus
+// This API is used to query the list of service IP policies.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeIPStrategysStatusWithContext(ctx context.Context, request *DescribeIPStrategysStatusRequest) (response *DescribeIPStrategysStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPStrategysStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeIPStrategysStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLogSearchRequest() (request *DescribeLogSearchRequest) {
     request = &DescribeLogSearchRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1750,6 +2760,22 @@ func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response 
     if request == nil {
         request = NewDescribeLogSearchRequest()
     }
+    
+    response = NewDescribeLogSearchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLogSearch
+// This API is used to search for logs.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+func (c *Client) DescribeLogSearchWithContext(ctx context.Context, request *DescribeLogSearchRequest) (response *DescribeLogSearchResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogSearchRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeLogSearchResponse()
     err = c.Send(request, response)
@@ -1790,6 +2816,24 @@ func (c *Client) DescribePlugin(request *DescribePluginRequest) (response *Descr
     return
 }
 
+// DescribePlugin
+// This API is used to query the plugin details by plugin ID.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribePluginWithContext(ctx context.Context, request *DescribePluginRequest) (response *DescribePluginResponse, err error) {
+    if request == nil {
+        request = NewDescribePluginRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePluginApisRequest() (request *DescribePluginApisRequest) {
     request = &DescribePluginApisRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1819,6 +2863,25 @@ func (c *Client) DescribePluginApis(request *DescribePluginApisRequest) (respons
     if request == nil {
         request = NewDescribePluginApisRequest()
     }
+    
+    response = NewDescribePluginApisResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribePluginApis
+// This API is used to query APIs bound with a specified plugin.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribePluginApisWithContext(ctx context.Context, request *DescribePluginApisRequest) (response *DescribePluginApisResponse, err error) {
+    if request == nil {
+        request = NewDescribePluginApisRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribePluginApisResponse()
     err = c.Send(request, response)
@@ -1864,6 +2927,29 @@ func (c *Client) DescribeService(request *DescribeServiceRequest) (response *Des
     return
 }
 
+// DescribeService
+// This API is used to query the details of a service, such as its description, domain name, protocol, creation time, and releases.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DescribeServiceWithContext(ctx context.Context, request *DescribeServiceRequest) (response *DescribeServiceResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceEnvironmentListRequest() (request *DescribeServiceEnvironmentListRequest) {
     request = &DescribeServiceEnvironmentListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1891,6 +2977,23 @@ func (c *Client) DescribeServiceEnvironmentList(request *DescribeServiceEnvironm
     if request == nil {
         request = NewDescribeServiceEnvironmentListRequest()
     }
+    
+    response = NewDescribeServiceEnvironmentListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceEnvironmentList
+// This API is used to query the list of environments under a service. All environments and their statuses under the queried service will be returned.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceEnvironmentListWithContext(ctx context.Context, request *DescribeServiceEnvironmentListRequest) (response *DescribeServiceEnvironmentListResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceEnvironmentListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceEnvironmentListResponse()
     err = c.Send(request, response)
@@ -1931,6 +3034,24 @@ func (c *Client) DescribeServiceEnvironmentReleaseHistory(request *DescribeServi
     return
 }
 
+// DescribeServiceEnvironmentReleaseHistory
+// This API is used to query the release history in a service environment.
+//
+// A service can only be used when it is published to an environment after creation. This API is used to query the release history in an environment under a service.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceEnvironmentReleaseHistoryWithContext(ctx context.Context, request *DescribeServiceEnvironmentReleaseHistoryRequest) (response *DescribeServiceEnvironmentReleaseHistoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceEnvironmentReleaseHistoryRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceEnvironmentReleaseHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceEnvironmentStrategyRequest() (request *DescribeServiceEnvironmentStrategyRequest) {
     request = &DescribeServiceEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1957,6 +3078,22 @@ func (c *Client) DescribeServiceEnvironmentStrategy(request *DescribeServiceEnvi
     if request == nil {
         request = NewDescribeServiceEnvironmentStrategyRequest()
     }
+    
+    response = NewDescribeServiceEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceEnvironmentStrategy
+// This API is used to display a service throttling policy.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceEnvironmentStrategyWithContext(ctx context.Context, request *DescribeServiceEnvironmentStrategyRequest) (response *DescribeServiceEnvironmentStrategyResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceEnvironmentStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceEnvironmentStrategyResponse()
     err = c.Send(request, response)
@@ -1990,6 +3127,23 @@ func (c *Client) DescribeServiceForApiApp(request *DescribeServiceForApiAppReque
     if request == nil {
         request = NewDescribeServiceForApiAppRequest()
     }
+    
+    response = NewDescribeServiceForApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceForApiApp
+// This API is used to query the details of a service, such as its description, domain name, and protocol.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceForApiAppWithContext(ctx context.Context, request *DescribeServiceForApiAppRequest) (response *DescribeServiceForApiAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceForApiAppRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceForApiAppResponse()
     err = c.Send(request, response)
@@ -2030,6 +3184,24 @@ func (c *Client) DescribeServiceReleaseVersion(request *DescribeServiceReleaseVe
     return
 }
 
+// DescribeServiceReleaseVersion
+// This API is used to query the list of all published versions under a service.
+//
+// A service is generally published on several versions. This API can be used to query the published versions.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceReleaseVersionWithContext(ctx context.Context, request *DescribeServiceReleaseVersionRequest) (response *DescribeServiceReleaseVersionResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceReleaseVersionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceReleaseVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceSubDomainMappingsRequest() (request *DescribeServiceSubDomainMappingsRequest) {
     request = &DescribeServiceSubDomainMappingsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2060,6 +3232,26 @@ func (c *Client) DescribeServiceSubDomainMappings(request *DescribeServiceSubDom
     if request == nil {
         request = NewDescribeServiceSubDomainMappingsRequest()
     }
+    
+    response = NewDescribeServiceSubDomainMappingsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceSubDomainMappings
+// This API is used to query the path mappings of a custom domain name.
+//
+// In API Gateway, you can bind a custom domain name to a service and map its paths. You can customize different path mappings to up to 3 environments under the service. This API is used to query the list of path mappings of a custom domain name bound to a service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+func (c *Client) DescribeServiceSubDomainMappingsWithContext(ctx context.Context, request *DescribeServiceSubDomainMappingsRequest) (response *DescribeServiceSubDomainMappingsResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceSubDomainMappingsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceSubDomainMappingsResponse()
     err = c.Send(request, response)
@@ -2104,6 +3296,28 @@ func (c *Client) DescribeServiceSubDomains(request *DescribeServiceSubDomainsReq
     return
 }
 
+// DescribeServiceSubDomains
+// This API is used to query the list of custom domain names.
+//
+// In API Gateway, you can bind custom domain names to a service for service call. This API is used to query the list of custom domain names bound to a service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DESCRIBESERVICESUBDOMAINSERROR = "FailedOperation.DescribeServiceSubDomainsError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceSubDomainsWithContext(ctx context.Context, request *DescribeServiceSubDomainsRequest) (response *DescribeServiceSubDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceSubDomainsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceSubDomainsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceUsagePlanRequest() (request *DescribeServiceUsagePlanRequest) {
     request = &DescribeServiceUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2133,6 +3347,25 @@ func (c *Client) DescribeServiceUsagePlan(request *DescribeServiceUsagePlanReque
     if request == nil {
         request = NewDescribeServiceUsagePlanRequest()
     }
+    
+    response = NewDescribeServiceUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceUsagePlan
+// This API is used to query the details of usage plans in a service.
+//
+// To make authentication and throttling for a service take effect, you need to bind a usage plan to it. This API is used to query all usage plans bound to a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeServiceUsagePlanWithContext(ctx context.Context, request *DescribeServiceUsagePlanRequest) (response *DescribeServiceUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceUsagePlanResponse()
     err = c.Send(request, response)
@@ -2188,6 +3421,39 @@ func (c *Client) DescribeServicesStatus(request *DescribeServicesStatusRequest) 
     return
 }
 
+// DescribeServicesStatus
+// This API is used to query the list of one or more services and return relevant domain name, time, and other information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDTAGVALUES = "InvalidParameterValue.InvalidTagValues"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeServicesStatusWithContext(ctx context.Context, request *DescribeServicesStatusRequest) (response *DescribeServicesStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeServicesStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeServicesStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUsagePlanRequest() (request *DescribeUsagePlanRequest) {
     request = &DescribeUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2215,6 +3481,23 @@ func (c *Client) DescribeUsagePlan(request *DescribeUsagePlanRequest) (response 
     if request == nil {
         request = NewDescribeUsagePlanRequest()
     }
+    
+    response = NewDescribeUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeUsagePlan
+// This API is used to query the details of a usage plan, such as its name, QPS, creation time, and bound environment.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+func (c *Client) DescribeUsagePlanWithContext(ctx context.Context, request *DescribeUsagePlanRequest) (response *DescribeUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeUsagePlanResponse()
     err = c.Send(request, response)
@@ -2256,6 +3539,25 @@ func (c *Client) DescribeUsagePlanEnvironments(request *DescribeUsagePlanEnviron
     return
 }
 
+// DescribeUsagePlanEnvironments
+// This API is used to query the list of environments bound to a usage plan.
+//
+// After binding a usage plan to environments, you can use this API to query all service environments bound to the usage plan.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+func (c *Client) DescribeUsagePlanEnvironmentsWithContext(ctx context.Context, request *DescribeUsagePlanEnvironmentsRequest) (response *DescribeUsagePlanEnvironmentsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsagePlanEnvironmentsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsagePlanEnvironmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUsagePlanSecretIdsRequest() (request *DescribeUsagePlanSecretIdsRequest) {
     request = &DescribeUsagePlanSecretIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2291,6 +3593,25 @@ func (c *Client) DescribeUsagePlanSecretIds(request *DescribeUsagePlanSecretIdsR
     return
 }
 
+// DescribeUsagePlanSecretIds
+// This API is used to query the list of keys bound to a usage plan.
+//
+// In API Gateway, a usage plan can be bound to multiple key pairs. You can use this API to query the list of keys bound to it.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+func (c *Client) DescribeUsagePlanSecretIdsWithContext(ctx context.Context, request *DescribeUsagePlanSecretIdsRequest) (response *DescribeUsagePlanSecretIdsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsagePlanSecretIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsagePlanSecretIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUsagePlansStatusRequest() (request *DescribeUsagePlansStatusRequest) {
     request = &DescribeUsagePlansStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2318,6 +3639,23 @@ func (c *Client) DescribeUsagePlansStatus(request *DescribeUsagePlansStatusReque
     if request == nil {
         request = NewDescribeUsagePlansStatusRequest()
     }
+    
+    response = NewDescribeUsagePlansStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeUsagePlansStatus
+// This API is used to query the list of usage plans.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+func (c *Client) DescribeUsagePlansStatusWithContext(ctx context.Context, request *DescribeUsagePlansStatusRequest) (response *DescribeUsagePlansStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsagePlansStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeUsagePlansStatusResponse()
     err = c.Send(request, response)
@@ -2361,6 +3699,27 @@ func (c *Client) DetachPlugin(request *DetachPluginRequest) (response *DetachPlu
     return
 }
 
+// DetachPlugin
+// This API is used to unbind an API from the plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDAPIIDS = "InvalidParameterValue.InvalidApiIds"
+//  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+func (c *Client) DetachPluginWithContext(ctx context.Context, request *DetachPluginRequest) (response *DetachPluginResponse, err error) {
+    if request == nil {
+        request = NewDetachPluginRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDetachPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisableApiKeyRequest() (request *DisableApiKeyRequest) {
     request = &DisableApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2396,6 +3755,25 @@ func (c *Client) DisableApiKey(request *DisableApiKeyRequest) (response *Disable
     return
 }
 
+// DisableApiKey
+// This API is used to disable an API key.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION_UINNOTINWHITELIST = "UnsupportedOperation.UinNotInWhiteList"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDUPDATEAPIKEY = "UnsupportedOperation.UnsupportedUpdateApiKey"
+func (c *Client) DisableApiKeyWithContext(ctx context.Context, request *DisableApiKeyRequest) (response *DisableApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDisableApiKeyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDisableApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableApiKeyRequest() (request *EnableApiKeyRequest) {
     request = &EnableApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2424,6 +3802,24 @@ func (c *Client) EnableApiKey(request *EnableApiKeyRequest) (response *EnableApi
     if request == nil {
         request = NewEnableApiKeyRequest()
     }
+    
+    response = NewEnableApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// EnableApiKey
+// This API is used to enable a disabled API key.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION_UINNOTINWHITELIST = "UnsupportedOperation.UinNotInWhiteList"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDUPDATEAPIKEY = "UnsupportedOperation.UnsupportedUpdateApiKey"
+func (c *Client) EnableApiKeyWithContext(ctx context.Context, request *EnableApiKeyRequest) (response *EnableApiKeyResponse, err error) {
+    if request == nil {
+        request = NewEnableApiKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewEnableApiKeyResponse()
     err = c.Send(request, response)
@@ -2465,6 +3861,25 @@ func (c *Client) GenerateApiDocument(request *GenerateApiDocumentRequest) (respo
     return
 }
 
+// GenerateApiDocument
+// This API is used to automatically generate API documents and SDKs. One document and one SDK will be generated for each environment under each service, respectively.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATEAPIDOCUMENTERROR = "FailedOperation.GenerateApiDocumentError"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDGENLANGUAGE = "InvalidParameterValue.InvalidGenLanguage"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+func (c *Client) GenerateApiDocumentWithContext(ctx context.Context, request *GenerateApiDocumentRequest) (response *GenerateApiDocumentResponse, err error) {
+    if request == nil {
+        request = NewGenerateApiDocumentRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGenerateApiDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAPIDocRequest() (request *ModifyAPIDocRequest) {
     request = &ModifyAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2496,6 +3911,27 @@ func (c *Client) ModifyAPIDoc(request *ModifyAPIDocRequest) (response *ModifyAPI
     if request == nil {
         request = NewModifyAPIDocRequest()
     }
+    
+    response = NewModifyAPIDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyAPIDoc
+// This API is used to modify an API document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) ModifyAPIDocWithContext(ctx context.Context, request *ModifyAPIDocRequest) (response *ModifyAPIDocResponse, err error) {
+    if request == nil {
+        request = NewModifyAPIDocRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyAPIDocResponse()
     err = c.Send(request, response)
@@ -2575,6 +4011,63 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
     return
 }
 
+// ModifyApi
+// This API is used to modify an API. You can call this API to edit/modify a configured API. The modified API takes effect only after its service is published to the corresponding environment again.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
+//  INVALIDPARAMETERVALUE_INVALIDBACKENDPATH = "InvalidParameterValue.InvalidBackendPath"
+//  INVALIDPARAMETERVALUE_INVALIDCLB = "InvalidParameterValue.InvalidClb"
+//  INVALIDPARAMETERVALUE_INVALIDCONSTANTPARAMETERS = "InvalidParameterValue.InvalidConstantParameters"
+//  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
+//  INVALIDPARAMETERVALUE_INVALIDMETHOD = "InvalidParameterValue.InvalidMethod"
+//  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDPUBLICKEY = "InvalidParameterValue.InvalidPublicKey"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_INVALIDSCFCONFIG = "InvalidParameterValue.InvalidScfConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
+//  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_PARAMETERNOTMATCH = "InvalidParameterValue.ParameterNotMatch"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_MODIFYEIAMAUTHAPI = "UnsupportedOperation.ModifyEIAMAuthApi"
+//  UNSUPPORTEDOPERATION_MODIFYPROTOCOL = "UnsupportedOperation.ModifyProtocol"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+func (c *Client) ModifyApiWithContext(ctx context.Context, request *ModifyApiRequest) (response *ModifyApiResponse, err error) {
+    if request == nil {
+        request = NewModifyApiRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApiAppRequest() (request *ModifyApiAppRequest) {
     request = &ModifyApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2619,6 +4112,34 @@ func (c *Client) ModifyApiApp(request *ModifyApiAppRequest) (response *ModifyApi
     return
 }
 
+// ModifyApiApp
+// This API is used to modify a created API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) ModifyApiAppWithContext(ctx context.Context, request *ModifyApiAppRequest) (response *ModifyApiAppResponse, err error) {
+    if request == nil {
+        request = NewModifyApiAppRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApiEnvironmentStrategyRequest() (request *ModifyApiEnvironmentStrategyRequest) {
     request = &ModifyApiEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2648,6 +4169,25 @@ func (c *Client) ModifyApiEnvironmentStrategy(request *ModifyApiEnvironmentStrat
     if request == nil {
         request = NewModifyApiEnvironmentStrategyRequest()
     }
+    
+    response = NewModifyApiEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyApiEnvironmentStrategy
+// This API is used to modify an API throttling policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+func (c *Client) ModifyApiEnvironmentStrategyWithContext(ctx context.Context, request *ModifyApiEnvironmentStrategyRequest) (response *ModifyApiEnvironmentStrategyResponse, err error) {
+    if request == nil {
+        request = NewModifyApiEnvironmentStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyApiEnvironmentStrategyResponse()
     err = c.Send(request, response)
@@ -2690,6 +4230,26 @@ func (c *Client) ModifyApiIncrement(request *ModifyApiIncrementRequest) (respons
     return
 }
 
+// ModifyApiIncrement
+// This API is used to incrementally update an API and mainly called by programs (different from `ModifyApi`, which requires that full API parameters be passed in and is suitable for use in the console).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDAPIBUSINESSTYPE = "InvalidParameterValue.InvalidApiBusinessType"
+//  INVALIDPARAMETERVALUE_NOTHINGMODIFYFOROAUTH = "InvalidParameterValue.NothingModifyForOauth"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) ModifyApiIncrementWithContext(ctx context.Context, request *ModifyApiIncrementRequest) (response *ModifyApiIncrementResponse, err error) {
+    if request == nil {
+        request = NewModifyApiIncrementRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyApiIncrementResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyIPStrategyRequest() (request *ModifyIPStrategyRequest) {
     request = &ModifyIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2717,6 +4277,23 @@ func (c *Client) ModifyIPStrategy(request *ModifyIPStrategyRequest) (response *M
     if request == nil {
         request = NewModifyIPStrategyRequest()
     }
+    
+    response = NewModifyIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyIPStrategy
+// This API is used to modify a service IP policy.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDIPSTRATEGY = "ResourceNotFound.InvalidIPStrategy"
+func (c *Client) ModifyIPStrategyWithContext(ctx context.Context, request *ModifyIPStrategyRequest) (response *ModifyIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewModifyIPStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyIPStrategyResponse()
     err = c.Send(request, response)
@@ -2778,6 +4355,45 @@ func (c *Client) ModifyPlugin(request *ModifyPluginRequest) (response *ModifyPlu
     return
 }
 
+// ModifyPlugin
+// This API is used to modify a plugin.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
+//  INVALIDPARAMETERVALUE_INVALIDBACKENDPATH = "InvalidParameterValue.InvalidBackendPath"
+//  INVALIDPARAMETERVALUE_INVALIDCLB = "InvalidParameterValue.InvalidClb"
+//  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
+//  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_INVALIDSCFCONFIG = "InvalidParameterValue.InvalidScfConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDTSFCONFIG = "InvalidParameterValue.InvalidTsfConfig"
+//  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
+//  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) ModifyPluginWithContext(ctx context.Context, request *ModifyPluginRequest) (response *ModifyPluginResponse, err error) {
+    if request == nil {
+        request = NewModifyPluginRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyServiceRequest() (request *ModifyServiceRequest) {
     request = &ModifyServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2817,6 +4433,29 @@ func (c *Client) ModifyService(request *ModifyServiceRequest) (response *ModifyS
     return
 }
 
+// ModifyService
+// This API is used to modify the relevant information of a service. After a service is created, its name, description, and service type can be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_MODIFYNETTYPE = "UnsupportedOperation.ModifyNetType"
+//  UNSUPPORTEDOPERATION_REDUCENETTYPES = "UnsupportedOperation.ReduceNetTypes"
+func (c *Client) ModifyServiceWithContext(ctx context.Context, request *ModifyServiceRequest) (response *ModifyServiceResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyServiceEnvironmentStrategyRequest() (request *ModifyServiceEnvironmentStrategyRequest) {
     request = &ModifyServiceEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2846,6 +4485,25 @@ func (c *Client) ModifyServiceEnvironmentStrategy(request *ModifyServiceEnvironm
     if request == nil {
         request = NewModifyServiceEnvironmentStrategyRequest()
     }
+    
+    response = NewModifyServiceEnvironmentStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyServiceEnvironmentStrategy
+// This API is used to modify a service throttling policy.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+func (c *Client) ModifyServiceEnvironmentStrategyWithContext(ctx context.Context, request *ModifyServiceEnvironmentStrategyRequest) (response *ModifyServiceEnvironmentStrategyResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceEnvironmentStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyServiceEnvironmentStrategyResponse()
     err = c.Send(request, response)
@@ -2896,6 +4554,34 @@ func (c *Client) ModifySubDomain(request *ModifySubDomainRequest) (response *Mod
     return
 }
 
+// ModifySubDomain
+// This API is used to modify the path mapping in the custom domain name settings of a service. The path mapping rule can be modified before it is bound to the custom domain name.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEIDBINDERROR = "FailedOperation.CertificateIdBindError"
+//  FAILEDOPERATION_CERTIFICATEIDERROR = "FailedOperation.CertificateIdError"
+//  FAILEDOPERATION_PATHMAPPINGSETERROR = "FailedOperation.PathMappingSetError"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  FAILEDOPERATION_SETCUSTOMPATHMAPPINGERROR = "FailedOperation.SetCustomPathMappingError"
+//  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
+//  FAILEDOPERATION_UNKNOWNPROTOCOLTYPEERROR = "FailedOperation.UnknownProtocolTypeError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  UNSUPPORTEDOPERATION_FORCEHTTPS = "UnsupportedOperation.ForceHttps"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+func (c *Client) ModifySubDomainWithContext(ctx context.Context, request *ModifySubDomainRequest) (response *ModifySubDomainResponse, err error) {
+    if request == nil {
+        request = NewModifySubDomainRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifySubDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyUsagePlanRequest() (request *ModifyUsagePlanRequest) {
     request = &ModifyUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2924,6 +4610,24 @@ func (c *Client) ModifyUsagePlan(request *ModifyUsagePlanRequest) (response *Mod
     if request == nil {
         request = NewModifyUsagePlanRequest()
     }
+    
+    response = NewModifyUsagePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyUsagePlan
+// This API is used to modify the name, description, and QPS of a usage plan.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+func (c *Client) ModifyUsagePlanWithContext(ctx context.Context, request *ModifyUsagePlanRequest) (response *ModifyUsagePlanResponse, err error) {
+    if request == nil {
+        request = NewModifyUsagePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyUsagePlanResponse()
     err = c.Send(request, response)
@@ -2971,6 +4675,31 @@ func (c *Client) ReleaseService(request *ReleaseServiceRequest) (response *Relea
     return
 }
 
+// ReleaseService
+// This API is used to publish a service.
+//
+// An API Gateway service can only be called when it is published to an environment and takes effect after creation. This API is used to publish a service to an environment such as the `release` environment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ReleaseServiceWithContext(ctx context.Context, request *ReleaseServiceRequest) (response *ReleaseServiceResponse, err error) {
+    if request == nil {
+        request = NewReleaseServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewReleaseServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetAPIDocPasswordRequest() (request *ResetAPIDocPasswordRequest) {
     request = &ResetAPIDocPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2999,6 +4728,24 @@ func (c *Client) ResetAPIDocPassword(request *ResetAPIDocPasswordRequest) (respo
     if request == nil {
         request = NewResetAPIDocPasswordRequest()
     }
+    
+    response = NewResetAPIDocPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ResetAPIDocPassword
+// This API is used to reset the password of an API document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
+func (c *Client) ResetAPIDocPasswordWithContext(ctx context.Context, request *ResetAPIDocPasswordRequest) (response *ResetAPIDocPasswordResponse, err error) {
+    if request == nil {
+        request = NewResetAPIDocPasswordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewResetAPIDocPasswordResponse()
     err = c.Send(request, response)
@@ -3044,6 +4791,29 @@ func (c *Client) UnBindEnvironment(request *UnBindEnvironmentRequest) (response 
     return
 }
 
+// UnBindEnvironment
+// This API is used to unbind a usage plan from a specified environment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDUNBINDENVIRONMENT = "UnsupportedOperation.UnsupportedUnBindEnvironment"
+func (c *Client) UnBindEnvironmentWithContext(ctx context.Context, request *UnBindEnvironmentRequest) (response *UnBindEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewUnBindEnvironmentRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUnBindEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnBindIPStrategyRequest() (request *UnBindIPStrategyRequest) {
     request = &UnBindIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3077,6 +4847,29 @@ func (c *Client) UnBindIPStrategy(request *UnBindIPStrategyRequest) (response *U
     if request == nil {
         request = NewUnBindIPStrategyRequest()
     }
+    
+    response = NewUnBindIPStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UnBindIPStrategy
+// This API is used to unbind an IP policy from a service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDUNBINDENVIRONMENT = "UnsupportedOperation.UnsupportedUnBindEnvironment"
+func (c *Client) UnBindIPStrategyWithContext(ctx context.Context, request *UnBindIPStrategyRequest) (response *UnBindIPStrategyResponse, err error) {
+    if request == nil {
+        request = NewUnBindIPStrategyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUnBindIPStrategyResponse()
     err = c.Send(request, response)
@@ -3117,6 +4910,24 @@ func (c *Client) UnBindSecretIds(request *UnBindSecretIdsRequest) (response *UnB
     return
 }
 
+// UnBindSecretIds
+// This API is used to unbind a key from a usage plan.
+//
+// error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+func (c *Client) UnBindSecretIdsWithContext(ctx context.Context, request *UnBindSecretIdsRequest) (response *UnBindSecretIdsResponse, err error) {
+    if request == nil {
+        request = NewUnBindSecretIdsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUnBindSecretIdsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnBindSubDomainRequest() (request *UnBindSubDomainRequest) {
     request = &UnBindSubDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3150,6 +4961,29 @@ func (c *Client) UnBindSubDomain(request *UnBindSubDomainRequest) (response *UnB
     if request == nil {
         request = NewUnBindSubDomainRequest()
     }
+    
+    response = NewUnBindSubDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UnBindSubDomain
+// This API is used to unbind a custom domain name.
+//
+// After binding a custom domain name to a service by using API Gateway, you can use this API to unbind it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOMAINNOTBINDSERVICE = "FailedOperation.DomainNotBindService"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
+func (c *Client) UnBindSubDomainWithContext(ctx context.Context, request *UnBindSubDomainRequest) (response *UnBindSubDomainResponse, err error) {
+    if request == nil {
+        request = NewUnBindSubDomainRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUnBindSubDomainResponse()
     err = c.Send(request, response)
@@ -3196,6 +5030,30 @@ func (c *Client) UnReleaseService(request *UnReleaseServiceRequest) (response *U
     return
 }
 
+// UnReleaseService
+// This API is used to deactivate a service.
+//
+// Only after a service is published to an environment can its APIs be called. You can call this API to deactivate a service in the release environment. Once deactivated, the service cannot be called.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) UnReleaseServiceWithContext(ctx context.Context, request *UnReleaseServiceRequest) (response *UnReleaseServiceResponse, err error) {
+    if request == nil {
+        request = NewUnReleaseServiceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUnReleaseServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnbindApiAppRequest() (request *UnbindApiAppRequest) {
     request = &UnbindApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3230,6 +5088,30 @@ func (c *Client) UnbindApiApp(request *UnbindApiAppRequest) (response *UnbindApi
     if request == nil {
         request = NewUnbindApiAppRequest()
     }
+    
+    response = NewUnbindApiAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UnbindApiApp
+// This API is used to unbind an application from an API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_RESOURCEUNASSOCIATED = "UnsupportedOperation.ResourceUnassociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
+func (c *Client) UnbindApiAppWithContext(ctx context.Context, request *UnbindApiAppRequest) (response *UnbindApiAppResponse, err error) {
+    if request == nil {
+        request = NewUnbindApiAppRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUnbindApiAppResponse()
     err = c.Send(request, response)
@@ -3279,6 +5161,33 @@ func (c *Client) UpdateApiAppKey(request *UpdateApiAppKeyRequest) (response *Upd
     return
 }
 
+// UpdateApiAppKey
+// This API is used to update an application key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
+//  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
+//  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+//  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEAPI = "UnsupportedOperation.UnsupportedDeleteApi"
+func (c *Client) UpdateApiAppKeyWithContext(ctx context.Context, request *UpdateApiAppKeyRequest) (response *UpdateApiAppKeyResponse, err error) {
+    if request == nil {
+        request = NewUpdateApiAppKeyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpdateApiAppKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateApiKeyRequest() (request *UpdateApiKeyRequest) {
     request = &UpdateApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3306,6 +5215,23 @@ func (c *Client) UpdateApiKey(request *UpdateApiKeyRequest) (response *UpdateApi
     if request == nil {
         request = NewUpdateApiKeyRequest()
     }
+    
+    response = NewUpdateApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateApiKey
+// This API is used to update a created API key pair.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION_UINNOTINWHITELIST = "UnsupportedOperation.UinNotInWhiteList"
+func (c *Client) UpdateApiKeyWithContext(ctx context.Context, request *UpdateApiKeyRequest) (response *UpdateApiKeyResponse, err error) {
+    if request == nil {
+        request = NewUpdateApiKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateApiKeyResponse()
     err = c.Send(request, response)
@@ -3344,6 +5270,28 @@ func (c *Client) UpdateService(request *UpdateServiceRequest) (response *UpdateS
     if request == nil {
         request = NewUpdateServiceRequest()
     }
+    
+    response = NewUpdateServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateService
+// This API is used to switch the running version of a service published in an environment to a specified version. After you create a service by using API Gateway and publish it to an environment, multiple versions will be generated during development. In this case, you can call this API to switch versions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
+func (c *Client) UpdateServiceWithContext(ctx context.Context, request *UpdateServiceRequest) (response *UpdateServiceResponse, err error) {
+    if request == nil {
+        request = NewUpdateServiceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateServiceResponse()
     err = c.Send(request, response)

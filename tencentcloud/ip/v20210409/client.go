@@ -15,6 +15,7 @@
 package v20210409
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -83,6 +84,30 @@ func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) 
     return
 }
 
+// AllocateCustomerCredit
+// This API is used for a partner to set credit for a customer, such as increasing or lowering the credit and setting it to 0.
+//
+// 1. The credit is valid permanently and will not be zeroed regularly.
+//
+// 2. The customer's service will be suspended when its available credit sets to 0, so caution should be exercised with this operation.
+//
+// 3. To prevent the customer from making new purchases without affecting their use of previously purchased products, the partner can set their available credit to 0 after obtaining the non-stop feature privilege from the channel manager.
+//
+// 4. The set credit is an increase to the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates to repossess it. The available credit can be set to 0 at the minimum.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
+    if request == nil {
+        request = NewAllocateCustomerCreditRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAllocateCustomerCreditResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -127,6 +152,34 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
     return
 }
 
+// CreateAccount
+// This API is used to create a Tencent Cloud account in the International Partner platform for a customer. After registration, the customer will be automatically bound to the partner account.
+//
+// 
+//
+// Notes:<br>
+//
+// 1. To create the Tencent Cloud account, the partner should enter and verify the customer’s email address and mobile number.<br>
+//
+// 2. The customer needs to complete personal information after the first login.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
+    if request == nil {
+        request = NewCreateAccountRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
     request = &GetCountryCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -153,6 +206,22 @@ func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *Get
     if request == nil {
         request = NewGetCountryCodesRequest()
     }
+    
+    response = NewGetCountryCodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GetCountryCodes
+// This API is used to obtain country and region codes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCountryCodesRequest) (response *GetCountryCodesResponse, err error) {
+    if request == nil {
+        request = NewGetCountryCodesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewGetCountryCodesResponse()
     err = c.Send(request, response)
@@ -191,6 +260,22 @@ func (c *Client) QueryCreditAllocationHistory(request *QueryCreditAllocationHist
     return
 }
 
+// QueryCreditAllocationHistory
+// This API is used to query all the credit allocation records of a single customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryCreditAllocationHistoryWithContext(ctx context.Context, request *QueryCreditAllocationHistoryRequest) (response *QueryCreditAllocationHistoryResponse, err error) {
+    if request == nil {
+        request = NewQueryCreditAllocationHistoryRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewQueryCreditAllocationHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryCustomersCreditRequest() (request *QueryCustomersCreditRequest) {
     request = &QueryCustomersCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -223,6 +308,22 @@ func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (res
     return
 }
 
+// QueryCustomersCredit
+// This API is used for a partner to query a customer's credit and basic information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
+    if request == nil {
+        request = NewQueryCustomersCreditRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewQueryCustomersCreditResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryPartnerCreditRequest() (request *QueryPartnerCreditRequest) {
     request = &QueryPartnerCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -249,6 +350,22 @@ func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (respons
     if request == nil {
         request = NewQueryPartnerCreditRequest()
     }
+    
+    response = NewQueryPartnerCreditResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// QueryPartnerCredit
+// This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *QueryPartnerCreditRequest) (response *QueryPartnerCreditResponse, err error) {
+    if request == nil {
+        request = NewQueryPartnerCreditRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewQueryPartnerCreditResponse()
     err = c.Send(request, response)

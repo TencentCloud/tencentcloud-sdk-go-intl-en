@@ -15,6 +15,7 @@
 package v20190711
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -97,6 +98,44 @@ func (c *Client) AddSmsSign(request *AddSmsSignRequest) (response *AddSmsSignRes
     return
 }
 
+// AddSmsSign
+// This API is used to add an SMS signature. Please read the [Tencent Cloud SMS Signature Review Standards](https://intl.cloud.tencent.com/document/product/382/39022?from_cn_redirect=1) before starting an application.
+//
+// > Note: individual users cannot use this API to apply for SMS signatures. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). If your account identity is individual, please log in to the console to apply for SMS signatures. For detailed directions, please see [Creating SMS Signatures](https://intl.cloud.tencent.com/document/product/382/36136?from_cn_redirect=1#Sign).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_APPIDANDBIZID = "InvalidParameter.AppidAndBizId"
+//  INVALIDPARAMETERVALUE_IMAGEINVALID = "InvalidParameterValue.ImageInvalid"
+//  INVALIDPARAMETERVALUE_INVALIDDOCUMENTTYPE = "InvalidParameterValue.InvalidDocumentType"
+//  INVALIDPARAMETERVALUE_INVALIDINTERNATIONAL = "InvalidParameterValue.InvalidInternational"
+//  INVALIDPARAMETERVALUE_INVALIDUSEDMETHOD = "InvalidParameterValue.InvalidUsedMethod"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) AddSmsSignWithContext(ctx context.Context, request *AddSmsSignRequest) (response *AddSmsSignResponse, err error) {
+    if request == nil {
+        request = NewAddSmsSignRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddSmsSignResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddSmsTemplateRequest() (request *AddSmsTemplateRequest) {
     request = &AddSmsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -144,6 +183,43 @@ func (c *Client) AddSmsTemplate(request *AddSmsTemplateRequest) (response *AddSm
     if request == nil {
         request = NewAddSmsTemplateRequest()
     }
+    
+    response = NewAddSmsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AddSmsTemplate
+// This API is used to add an SMS template. Please read the [Tencent Cloud SMS Body Template Review Standards](https://intl.cloud.tencent.com/document/product/382/39023?from_cn_redirect=1) before starting an application.
+//
+// > Note: individual users cannot use this API to apply for SMS body templates. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). If your account identity is individual, please log in to the console to apply for SMS body templates. For detailed directions, please see [Creating SMS Body Templates](https://intl.cloud.tencent.com/document/product/382/36136?from_cn_redirect=1#Template).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGSIGNATURE = "FailedOperation.MissingSignature"
+//  FAILEDOPERATION_MISSINGTEMPLATETOMODIFY = "FailedOperation.MissingTemplateToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  FAILEDOPERATION_TEMPLATEALREADYPASSEDCHECK = "FailedOperation.TemplateAlreadyPassedCheck"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_INVALIDPARAMETERS = "InvalidParameter.InvalidParameters"
+//  INVALIDPARAMETERVALUE_INVALIDINTERNATIONAL = "InvalidParameterValue.InvalidInternational"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) AddSmsTemplateWithContext(ctx context.Context, request *AddSmsTemplateRequest) (response *AddSmsTemplateResponse, err error) {
+    if request == nil {
+        request = NewAddSmsTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAddSmsTemplateResponse()
     err = c.Send(request, response)
@@ -202,6 +278,42 @@ func (c *Client) CallbackStatusStatistics(request *CallbackStatusStatisticsReque
     return
 }
 
+// CallbackStatusStatistics
+// This API is used to collect statistics on user receipts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERONBLACKLIST = "FailedOperation.PhoneNumberOnBlacklist"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) CallbackStatusStatisticsWithContext(ctx context.Context, request *CallbackStatusStatisticsRequest) (response *CallbackStatusStatisticsResponse, err error) {
+    if request == nil {
+        request = NewCallbackStatusStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCallbackStatusStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteSmsSignRequest() (request *DeleteSmsSignRequest) {
     request = &DeleteSmsSignRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -242,6 +354,36 @@ func (c *Client) DeleteSmsSign(request *DeleteSmsSignRequest) (response *DeleteS
     if request == nil {
         request = NewDeleteSmsSignRequest()
     }
+    
+    response = NewDeleteSmsSignResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteSmsSign
+// > Note: individual users cannot use this API to delete SMS signatures. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). You can log in to the console to delete SMS signatures. For detailed directions, please see the notes on deleting SMS signatures in [SMS Signature Operations](https://intl.cloud.tencent.com/document/product/382/36136?from_cn_redirect=1#Sign).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGSIGNATURETOMODIFY = "FailedOperation.MissingSignatureToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) DeleteSmsSignWithContext(ctx context.Context, request *DeleteSmsSignRequest) (response *DeleteSmsSignResponse, err error) {
+    if request == nil {
+        request = NewDeleteSmsSignRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteSmsSignResponse()
     err = c.Send(request, response)
@@ -295,6 +437,37 @@ func (c *Client) DeleteSmsTemplate(request *DeleteSmsTemplateRequest) (response 
     return
 }
 
+// DeleteSmsTemplate
+// > Note: individual users cannot use this API to delete SMS body templates. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). You can log in to the console to delete SMS body templates. For detailed directions, please see the notes on deleting SMS body templates in [SMS Body Template Operations](https://intl.cloud.tencent.com/document/product/382/36136?from_cn_redirect=1#Template).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGTEMPLATETOMODIFY = "FailedOperation.MissingTemplateToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) DeleteSmsTemplateWithContext(ctx context.Context, request *DeleteSmsTemplateRequest) (response *DeleteSmsTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteSmsTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteSmsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSmsSignListRequest() (request *DescribeSmsSignListRequest) {
     request = &DescribeSmsSignListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -342,6 +515,37 @@ func (c *Client) DescribeSmsSignList(request *DescribeSmsSignListRequest) (respo
     return
 }
 
+// DescribeSmsSignList
+// > Note: individual users cannot use this API to query SMS signatures. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGSIGNATURETOMODIFY = "FailedOperation.MissingSignatureToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) DescribeSmsSignListWithContext(ctx context.Context, request *DescribeSmsSignListRequest) (response *DescribeSmsSignListResponse, err error) {
+    if request == nil {
+        request = NewDescribeSmsSignListRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSmsSignListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSmsTemplateListRequest() (request *DescribeSmsTemplateListRequest) {
     request = &DescribeSmsTemplateListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -382,6 +586,36 @@ func (c *Client) DescribeSmsTemplateList(request *DescribeSmsTemplateListRequest
     if request == nil {
         request = NewDescribeSmsTemplateListRequest()
     }
+    
+    response = NewDescribeSmsTemplateListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSmsTemplateList
+// > Note: individual users cannot use this API to query SMS body templates. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGTEMPLATETOMODIFY = "FailedOperation.MissingTemplateToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) DescribeSmsTemplateListWithContext(ctx context.Context, request *DescribeSmsTemplateListRequest) (response *DescribeSmsTemplateListResponse, err error) {
+    if request == nil {
+        request = NewDescribeSmsTemplateListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSmsTemplateListResponse()
     err = c.Send(request, response)
@@ -447,6 +681,49 @@ func (c *Client) ModifySmsSign(request *ModifySmsSignRequest) (response *ModifyS
     return
 }
 
+// ModifySmsSign
+// This API is used to modify an SMS signature. Please read the [Tencent Cloud SMS Signature Review Standards](https://intl.cloud.tencent.com/document/product/382/39022?from_cn_redirect=1) before making a modification.
+//
+// >-  Note: individual users cannot use this API to modify SMS signatures. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). If your account identity is individual, you can log in to the console to modify SMS signatures.
+//
+// >- Modifications can be made only if the signature status is **pending review** or **rejected**. **Approved** signatures cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MISSINGSIGNATURETOMODIFY = "FailedOperation.MissingSignatureToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  FAILEDOPERATION_TEMPLATEALREADYPASSEDCHECK = "FailedOperation.TemplateAlreadyPassedCheck"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_APPIDANDBIZID = "InvalidParameter.AppidAndBizId"
+//  INVALIDPARAMETERVALUE_IMAGEINVALID = "InvalidParameterValue.ImageInvalid"
+//  INVALIDPARAMETERVALUE_INVALIDDOCUMENTTYPE = "InvalidParameterValue.InvalidDocumentType"
+//  INVALIDPARAMETERVALUE_INVALIDINTERNATIONAL = "InvalidParameterValue.InvalidInternational"
+//  INVALIDPARAMETERVALUE_INVALIDUSEDMETHOD = "InvalidParameterValue.InvalidUsedMethod"
+//  INVALIDPARAMETERVALUE_MISSINGSIGNATURELIST = "InvalidParameterValue.MissingSignatureList"
+//  INVALIDPARAMETERVALUE_SIGNALREADYPASSEDCHECK = "InvalidParameterValue.SignAlreadyPassedCheck"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) ModifySmsSignWithContext(ctx context.Context, request *ModifySmsSignRequest) (response *ModifySmsSignResponse, err error) {
+    if request == nil {
+        request = NewModifySmsSignRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifySmsSignResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySmsTemplateRequest() (request *ModifySmsTemplateRequest) {
     request = &ModifySmsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -493,6 +770,42 @@ func (c *Client) ModifySmsTemplate(request *ModifySmsTemplateRequest) (response 
     if request == nil {
         request = NewModifySmsTemplateRequest()
     }
+    
+    response = NewModifySmsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifySmsTemplate
+// This API is used to modify an SMS body template. Please read the [Tencent Cloud SMS Body Template Review Standards](https://intl.cloud.tencent.com/document/product/382/39023?from_cn_redirect=1) before making a modification.
+//
+// >-  Note: individual users cannot use this API to modify SMS body templates. For more information, please see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629?from_cn_redirect=1). If your account identity is individual, you can log in to the console to modify SMS body templates.
+//
+// >- Modifications can be made only if the body template status is **pending review** or **rejected**. **Approved** body templates cannot be modified.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_MISSINGTEMPLATETOMODIFY = "FailedOperation.MissingTemplateToModify"
+//  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
+//  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  FAILEDOPERATION_TEMPLATEALREADYPASSEDCHECK = "FailedOperation.TemplateAlreadyPassedCheck"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_INVALIDPARAMETERS = "InvalidParameter.InvalidParameters"
+//  INVALIDPARAMETERVALUE_INVALIDINTERNATIONAL = "InvalidParameterValue.InvalidInternational"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) ModifySmsTemplateWithContext(ctx context.Context, request *ModifySmsTemplateRequest) (response *ModifySmsTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifySmsTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifySmsTemplateResponse()
     err = c.Send(request, response)
@@ -551,6 +864,42 @@ func (c *Client) PullSmsReplyStatus(request *PullSmsReplyStatusRequest) (respons
     return
 }
 
+// PullSmsReplyStatus
+// This API is used to pull SMS reply status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERONBLACKLIST = "FailedOperation.PhoneNumberOnBlacklist"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) PullSmsReplyStatusWithContext(ctx context.Context, request *PullSmsReplyStatusRequest) (response *PullSmsReplyStatusResponse, err error) {
+    if request == nil {
+        request = NewPullSmsReplyStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewPullSmsReplyStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPullSmsReplyStatusByPhoneNumberRequest() (request *PullSmsReplyStatusByPhoneNumberRequest) {
     request = &PullSmsReplyStatusByPhoneNumberRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -595,6 +944,40 @@ func (c *Client) PullSmsReplyStatusByPhoneNumber(request *PullSmsReplyStatusByPh
     if request == nil {
         request = NewPullSmsReplyStatusByPhoneNumberRequest()
     }
+    
+    response = NewPullSmsReplyStatusByPhoneNumberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// PullSmsReplyStatusByPhoneNumber
+// This API is used to pull SMS reply status for one single number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERINBLACKLIST = "FailedOperation.PhoneNumberInBlacklist"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_INVALIDSTARTTIME = "InvalidParameterValue.InvalidStartTime"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) PullSmsReplyStatusByPhoneNumberWithContext(ctx context.Context, request *PullSmsReplyStatusByPhoneNumberRequest) (response *PullSmsReplyStatusByPhoneNumberResponse, err error) {
+    if request == nil {
+        request = NewPullSmsReplyStatusByPhoneNumberRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewPullSmsReplyStatusByPhoneNumberResponse()
     err = c.Send(request, response)
@@ -652,6 +1035,41 @@ func (c *Client) PullSmsSendStatus(request *PullSmsSendStatusRequest) (response 
     return
 }
 
+// PullSmsSendStatus
+// This API is used to pull SMS delivery status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERONBLACKLIST = "FailedOperation.PhoneNumberOnBlacklist"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) PullSmsSendStatusWithContext(ctx context.Context, request *PullSmsSendStatusRequest) (response *PullSmsSendStatusResponse, err error) {
+    if request == nil {
+        request = NewPullSmsSendStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewPullSmsSendStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPullSmsSendStatusByPhoneNumberRequest() (request *PullSmsSendStatusByPhoneNumberRequest) {
     request = &PullSmsSendStatusByPhoneNumberRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -699,6 +1117,43 @@ func (c *Client) PullSmsSendStatusByPhoneNumber(request *PullSmsSendStatusByPhon
     if request == nil {
         request = NewPullSmsSendStatusByPhoneNumberRequest()
     }
+    
+    response = NewPullSmsSendStatusByPhoneNumberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// PullSmsSendStatusByPhoneNumber
+// This API is used to pull SMS delivery status for one single number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERONBLACKLIST = "FailedOperation.PhoneNumberOnBlacklist"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_INVALIDSTARTTIME = "InvalidParameterValue.InvalidStartTime"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) PullSmsSendStatusByPhoneNumberWithContext(ctx context.Context, request *PullSmsSendStatusByPhoneNumberRequest) (response *PullSmsSendStatusByPhoneNumberResponse, err error) {
+    if request == nil {
+        request = NewPullSmsSendStatusByPhoneNumberRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewPullSmsSendStatusByPhoneNumberResponse()
     err = c.Send(request, response)
@@ -778,6 +1233,63 @@ func (c *Client) SendSms(request *SendSmsRequest) (response *SendSmsResponse, er
     return
 }
 
+// SendSms
+// This API is used to send SMS verification codes, notification, or marketing messages to users.
+//
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONTAINSENSITIVEWORD = "FailedOperation.ContainSensitiveWord"
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_INSUFFICIENTBALANCEINSMSPACKAGE = "FailedOperation.InsufficientBalanceInSmsPackage"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_MARKETINGSENDTIMECONSTRAINT = "FailedOperation.MarketingSendTimeConstraint"
+//  FAILEDOPERATION_PHONENUMBERINBLACKLIST = "FailedOperation.PhoneNumberInBlacklist"
+//  FAILEDOPERATION_SIGNATUREINCORRECTORUNAPPROVED = "FailedOperation.SignatureIncorrectOrUnapproved"
+//  FAILEDOPERATION_TEMPLATEINCORRECTORUNAPPROVED = "FailedOperation.TemplateIncorrectOrUnapproved"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_CONTENTLENGTHLIMIT = "InvalidParameterValue.ContentLengthLimit"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_PROHIBITEDUSEURLINTEMPLATEPARAMETER = "InvalidParameterValue.ProhibitedUseUrlInTemplateParameter"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERFORMATERROR = "InvalidParameterValue.TemplateParameterFormatError"
+//  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERLENGTHLIMIT = "InvalidParameterValue.TemplateParameterLengthLimit"
+//  LIMITEXCEEDED_APPDAILYLIMIT = "LimitExceeded.AppDailyLimit"
+//  LIMITEXCEEDED_DAILYLIMIT = "LimitExceeded.DailyLimit"
+//  LIMITEXCEEDED_DELIVERYFREQUENCYLIMIT = "LimitExceeded.DeliveryFrequencyLimit"
+//  LIMITEXCEEDED_PHONENUMBERCOUNTLIMIT = "LimitExceeded.PhoneNumberCountLimit"
+//  LIMITEXCEEDED_PHONENUMBERDAILYLIMIT = "LimitExceeded.PhoneNumberDailyLimit"
+//  LIMITEXCEEDED_PHONENUMBERONEHOURLIMIT = "LimitExceeded.PhoneNumberOneHourLimit"
+//  LIMITEXCEEDED_PHONENUMBERSAMECONTENTDAILYLIMIT = "LimitExceeded.PhoneNumberSameContentDailyLimit"
+//  LIMITEXCEEDED_PHONENUMBERTHIRTYSECONDLIMIT = "LimitExceeded.PhoneNumberThirtySecondLimit"
+//  MISSINGPARAMETER_EMPTYPHONENUMBERSET = "MissingParameter.EmptyPhoneNumberSet"
+//  UNAUTHORIZEDOPERATION_INDIVIDUALUSERMARKETINGSMSPERMISSIONDENY = "UnauthorizedOperation.IndividualUserMarketingSmsPermissionDeny"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+//  UNSUPPORTEDOPERATION_CONTAINDOMESTICANDINTERNATIONALPHONENUMBER = "UnsupportedOperation.ContainDomesticAndInternationalPhoneNumber"
+//  UNSUPPORTEDOPERATION_UNSUPORTEDREGION = "UnsupportedOperation.UnsuportedRegion"
+func (c *Client) SendSmsWithContext(ctx context.Context, request *SendSmsRequest) (response *SendSmsResponse, err error) {
+    if request == nil {
+        request = NewSendSmsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSendSmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSendStatusStatisticsRequest() (request *SendStatusStatisticsRequest) {
     request = &SendStatusStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -831,6 +1343,43 @@ func (c *Client) SendStatusStatistics(request *SendStatusStatisticsRequest) (res
     return
 }
 
+// SendStatusStatistics
+// This API is used to collect statistics on SMS sent by users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERINBLACKLIST = "FailedOperation.PhoneNumberInBlacklist"
+//  FAILEDOPERATION_TEMPLATEINCORRECTORUNAPPROVED = "FailedOperation.TemplateIncorrectOrUnapproved"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) SendStatusStatisticsWithContext(ctx context.Context, request *SendStatusStatisticsRequest) (response *SendStatusStatisticsResponse, err error) {
+    if request == nil {
+        request = NewSendStatusStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSendStatusStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSmsPackagesStatisticsRequest() (request *SmsPackagesStatisticsRequest) {
     request = &SmsPackagesStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -878,6 +1427,43 @@ func (c *Client) SmsPackagesStatistics(request *SmsPackagesStatisticsRequest) (r
     if request == nil {
         request = NewSmsPackagesStatisticsRequest()
     }
+    
+    response = NewSmsPackagesStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SmsPackagesStatistics
+// This API is used to collect statistics on user's packages.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILRESOLVEPACKET = "FailedOperation.FailResolvePacket"
+//  FAILEDOPERATION_JSONPARSEFAIL = "FailedOperation.JsonParseFail"
+//  FAILEDOPERATION_PHONENUMBERINBLACKLIST = "FailedOperation.PhoneNumberInBlacklist"
+//  FAILEDOPERATION_SIGNATUREINCORRECTORUNAPPROVED = "FailedOperation.SignatureIncorrectOrUnapproved"
+//  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
+//  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
+//  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
+//  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
+//  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
+//  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INCORRECTPHONENUMBER = "InvalidParameterValue.IncorrectPhoneNumber"
+//  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppidNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION_REQUESTIPNOTINWHITELIST = "UnauthorizedOperation.RequestIpNotInWhitelist"
+//  UNAUTHORIZEDOPERATION_REQUESTPERMISSIONDENY = "UnauthorizedOperation.RequestPermissionDeny"
+//  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppidIsDisabled"
+//  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
+//  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppidVerifyFail"
+//  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
+func (c *Client) SmsPackagesStatisticsWithContext(ctx context.Context, request *SmsPackagesStatisticsRequest) (response *SmsPackagesStatisticsResponse, err error) {
+    if request == nil {
+        request = NewSmsPackagesStatisticsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSmsPackagesStatisticsResponse()
     err = c.Send(request, response)

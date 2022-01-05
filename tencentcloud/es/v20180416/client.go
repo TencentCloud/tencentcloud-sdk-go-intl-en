@@ -15,6 +15,7 @@
 package v20180416
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -84,6 +85,31 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
     return
 }
 
+// CreateInstance
+// This API is used to create an ES cluster instance with the specified specification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLUSTERRESOURCELIMITERROR = "FailedOperation.ClusterResourceLimitError"
+//  FAILEDOPERATION_DISKCOUNTPARAMERROR = "FailedOperation.DiskCountParamError"
+//  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  FAILEDOPERATION_NOTAUTHENTICATED = "FailedOperation.NotAuthenticated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
+func (c *Client) CreateInstanceWithContext(ctx context.Context, request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
     request = &DeleteInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -119,6 +145,25 @@ func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *Delet
     return
 }
 
+// DeleteInstance
+// This API is used to terminate a cluster instance. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceWithContext(ctx context.Context, request *DeleteInstanceRequest) (response *DeleteInstanceResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceLogsRequest() (request *DescribeInstanceLogsRequest) {
     request = &DescribeInstanceLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -146,6 +191,23 @@ func (c *Client) DescribeInstanceLogs(request *DescribeInstanceLogsRequest) (res
     if request == nil {
         request = NewDescribeInstanceLogsRequest()
     }
+    
+    response = NewDescribeInstanceLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstanceLogs
+// This API is used to query the eligible ES cluster logs in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeInstanceLogsWithContext(ctx context.Context, request *DescribeInstanceLogsRequest) (response *DescribeInstanceLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceLogsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstanceLogsResponse()
     err = c.Send(request, response)
@@ -186,6 +248,24 @@ func (c *Client) DescribeInstanceOperations(request *DescribeInstanceOperationsR
     return
 }
 
+// DescribeInstanceOperations
+// This API is used to query the operation history of an instance by specified criteria.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeInstanceOperationsWithContext(ctx context.Context, request *DescribeInstanceOperationsRequest) (response *DescribeInstanceOperationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceOperationsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceOperationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -214,6 +294,24 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    
+    response = NewDescribeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstances
+// This API is used to query all eligible instances in the current region under the current account.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnAuthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstancesResponse()
     err = c.Send(request, response)
@@ -254,6 +352,24 @@ func (c *Client) GetRequestTargetNodeTypes(request *GetRequestTargetNodeTypesReq
     return
 }
 
+// GetRequestTargetNodeTypes
+// This API is used to get the node types used to receive client requests.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetRequestTargetNodeTypesWithContext(ctx context.Context, request *GetRequestTargetNodeTypesRequest) (response *GetRequestTargetNodeTypesResponse, err error) {
+    if request == nil {
+        request = NewGetRequestTargetNodeTypesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetRequestTargetNodeTypesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRestartInstanceRequest() (request *RestartInstanceRequest) {
     request = &RestartInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -282,6 +398,24 @@ func (c *Client) RestartInstance(request *RestartInstanceRequest) (response *Res
     if request == nil {
         request = NewRestartInstanceRequest()
     }
+    
+    response = NewRestartInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RestartInstance
+// This API is used to restart an ES cluster instance (for operations such as system update). 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) RestartInstanceWithContext(ctx context.Context, request *RestartInstanceRequest) (response *RestartInstanceResponse, err error) {
+    if request == nil {
+        request = NewRestartInstanceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRestartInstanceResponse()
     err = c.Send(request, response)
@@ -322,6 +456,24 @@ func (c *Client) RestartKibana(request *RestartKibanaRequest) (response *Restart
     return
 }
 
+// RestartKibana
+// This API is used to restart Kibana. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) RestartKibanaWithContext(ctx context.Context, request *RestartKibanaRequest) (response *RestartKibanaResponse, err error) {
+    if request == nil {
+        request = NewRestartKibanaRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRestartKibanaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRestartNodesRequest() (request *RestartNodesRequest) {
     request = &RestartNodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -352,6 +504,26 @@ func (c *Client) RestartNodes(request *RestartNodesRequest) (response *RestartNo
     if request == nil {
         request = NewRestartNodesRequest()
     }
+    
+    response = NewRestartNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RestartNodes
+// This API is used to restart cluster nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RestartNodesWithContext(ctx context.Context, request *RestartNodesRequest) (response *RestartNodesResponse, err error) {
+    if request == nil {
+        request = NewRestartNodesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRestartNodesResponse()
     err = c.Send(request, response)
@@ -415,6 +587,47 @@ func (c *Client) UpdateInstance(request *UpdateInstanceRequest) (response *Updat
     return
 }
 
+// UpdateInstance
+// This API is used for operations such as modifying node specification, renaming an instance, modifying configuration, resetting password, and setting Kibana blocklist/allowlist. `InstanceId` is required, while `ForceRestart` is optional. Other parameters or parameter combinations and their meanings are as follows:
+//
+// - InstanceName: renames an instance (only for instance identification)
+//
+// - NodeInfoList: modifies node configuration (horizontally scaling nodes, vertically scaling nodes, adding primary nodes, adding cold nodes, etc.)
+//
+// - EsConfig: modifies cluster configuration
+//
+// - Password: changes the password of the default user "elastic"
+//
+// - EsAcl: modifies the ACL
+//
+// - CosBackUp: sets auto-backup to COS for a cluster
+//
+// Only one of the parameters or parameter combinations above can be passed in at a time, while passing fewer or more ones will cause the request to fail.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLUSTERRESOURCELIMITERROR = "FailedOperation.ClusterResourceLimitError"
+//  FAILEDOPERATION_DISKCOUNTPARAMERROR = "FailedOperation.DiskCountParamError"
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  FAILEDOPERATION_UNSUPPORTREVERSEREGULATIONNODETYPEANDDISK = "FailedOperation.UnsupportReverseRegulationNodeTypeAndDisk"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateInstanceWithContext(ctx context.Context, request *UpdateInstanceRequest) (response *UpdateInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpdateInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpdateInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdatePluginsRequest() (request *UpdatePluginsRequest) {
     request = &UpdatePluginsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -455,6 +668,30 @@ func (c *Client) UpdatePlugins(request *UpdatePluginsRequest) (response *UpdateP
     return
 }
 
+// UpdatePlugins
+// This API is used to change the list of plugins.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  FAILEDOPERATION_ERRORCLUSTERSTATENOREPLICATION = "FailedOperation.ErrorClusterStateNoReplication"
+//  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdatePluginsWithContext(ctx context.Context, request *UpdatePluginsRequest) (response *UpdatePluginsResponse, err error) {
+    if request == nil {
+        request = NewUpdatePluginsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpdatePluginsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateRequestTargetNodeTypesRequest() (request *UpdateRequestTargetNodeTypesRequest) {
     request = &UpdateRequestTargetNodeTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -486,6 +723,27 @@ func (c *Client) UpdateRequestTargetNodeTypes(request *UpdateRequestTargetNodeTy
     if request == nil {
         request = NewUpdateRequestTargetNodeTypesRequest()
     }
+    
+    response = NewUpdateRequestTargetNodeTypesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateRequestTargetNodeTypes
+// This API is used to update the node types used to receive client requests.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateRequestTargetNodeTypesWithContext(ctx context.Context, request *UpdateRequestTargetNodeTypesRequest) (response *UpdateRequestTargetNodeTypesResponse, err error) {
+    if request == nil {
+        request = NewUpdateRequestTargetNodeTypesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateRequestTargetNodeTypesResponse()
     err = c.Send(request, response)
@@ -532,6 +790,30 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
     return
 }
 
+// UpgradeInstance
+// This API is used to upgrade ES cluster version
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpgradeInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpgradeLicenseRequest() (request *UpgradeLicenseRequest) {
     request = &UpgradeLicenseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -564,6 +846,28 @@ func (c *Client) UpgradeLicense(request *UpgradeLicenseRequest) (response *Upgra
     if request == nil {
         request = NewUpgradeLicenseRequest()
     }
+    
+    response = NewUpgradeLicenseResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpgradeLicense
+// This API is used to upgrade ES X-Pack.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpgradeLicenseWithContext(ctx context.Context, request *UpgradeLicenseRequest) (response *UpgradeLicenseResponse, err error) {
+    if request == nil {
+        request = NewUpgradeLicenseRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpgradeLicenseResponse()
     err = c.Send(request, response)

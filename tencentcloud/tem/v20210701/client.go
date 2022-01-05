@@ -15,6 +15,7 @@
 package v20210701
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -76,6 +77,23 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
     return
 }
 
+// CreateApplication
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCosTokenRequest() (request *CreateCosTokenRequest) {
     request = &CreateCosTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -103,6 +121,23 @@ func (c *Client) CreateCosToken(request *CreateCosTokenRequest) (response *Creat
     if request == nil {
         request = NewCreateCosTokenRequest()
     }
+    
+    response = NewCreateCosTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateCosToken
+// This API is used to generate a COS temporary key.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) CreateCosTokenWithContext(ctx context.Context, request *CreateCosTokenRequest) (response *CreateCosTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateCosTokenRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateCosTokenResponse()
     err = c.Send(request, response)
@@ -142,6 +177,23 @@ func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response 
     return
 }
 
+// CreateEnvironment
+// This API is used to create an environment.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) CreateEnvironmentWithContext(ctx context.Context, request *CreateEnvironmentRequest) (response *CreateEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewCreateEnvironmentRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateResourceRequest() (request *CreateResourceRequest) {
     request = &CreateResourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -169,6 +221,23 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    
+    response = NewCreateResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateResource
+// This API is used to bind a cloud resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
+    if request == nil {
+        request = NewCreateResourceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
     err = c.Send(request, response)
@@ -208,6 +277,23 @@ func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteI
     return
 }
 
+// DeleteIngress
+// This API is used to delete an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
+    if request == nil {
+        request = NewDeleteIngressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeployApplicationRequest() (request *DeployApplicationRequest) {
     request = &DeployApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -235,6 +321,23 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
     if request == nil {
         request = NewDeployApplicationRequest()
     }
+    
+    response = NewDeployApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeployApplication
+// This API is used to deploy an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DeployApplicationWithContext(ctx context.Context, request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeployApplicationRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeployApplicationResponse()
     err = c.Send(request, response)
@@ -274,6 +377,23 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
     return
 }
 
+// DescribeApplicationPods
+// This API is used to get the list of application pods.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationPodsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationPodsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeEnvironmentsRequest() (request *DescribeEnvironmentsRequest) {
     request = &DescribeEnvironmentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -301,6 +421,23 @@ func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (res
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
     }
+    
+    response = NewDescribeEnvironmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeEnvironments
+// This API is used to get the list of tenant environments.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
+    if request == nil {
+        request = NewDescribeEnvironmentsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeEnvironmentsResponse()
     err = c.Send(request, response)
@@ -340,6 +477,23 @@ func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *Des
     return
 }
 
+// DescribeIngress
+// This API is used to query an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DescribeIngressWithContext(ctx context.Context, request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
+    if request == nil {
+        request = NewDescribeIngressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIngressesRequest() (request *DescribeIngressesRequest) {
     request = &DescribeIngressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -367,6 +521,23 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    
+    response = NewDescribeIngressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeIngresses
+// This API is used to query the list of ingress rules.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeIngressesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeIngressesResponse()
     err = c.Send(request, response)
@@ -406,6 +577,23 @@ func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesReque
     return
 }
 
+// DescribeRelatedIngresses
+// This API is used to query the list of ingress rules associated with the application.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRelatedIngressesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRelatedIngressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGenerateApplicationPackageDownloadUrlRequest() (request *GenerateApplicationPackageDownloadUrlRequest) {
     request = &GenerateApplicationPackageDownloadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -433,6 +621,23 @@ func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicat
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
     }
+    
+    response = NewGenerateApplicationPackageDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GenerateApplicationPackageDownloadUrl
+// This API is used to generate the pre-signed download URL for the specified application package.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+func (c *Client) GenerateApplicationPackageDownloadUrlWithContext(ctx context.Context, request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewGenerateApplicationPackageDownloadUrlRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewGenerateApplicationPackageDownloadUrlResponse()
     err = c.Send(request, response)
@@ -471,6 +676,22 @@ func (c *Client) ModifyApplicationInfo(request *ModifyApplicationInfoRequest) (r
     return
 }
 
+// ModifyApplicationInfo
+// This API is used to modify the basic information of an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyApplicationInfoWithContext(ctx context.Context, request *ModifyApplicationInfoRequest) (response *ModifyApplicationInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyApplicationInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyApplicationInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyEnvironmentRequest() (request *ModifyEnvironmentRequest) {
     request = &ModifyEnvironmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -497,6 +718,22 @@ func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response 
     if request == nil {
         request = NewModifyEnvironmentRequest()
     }
+    
+    response = NewModifyEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyEnvironment
+// This API is used to edit an environment.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyEnvironmentWithContext(ctx context.Context, request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewModifyEnvironmentRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyEnvironmentResponse()
     err = c.Send(request, response)
@@ -535,6 +772,22 @@ func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyI
     return
 }
 
+// ModifyIngress
+// This API is used to create or update an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
+    if request == nil {
+        request = NewModifyIngressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRestartApplicationPodRequest() (request *RestartApplicationPodRequest) {
     request = &RestartApplicationPodRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -561,6 +814,22 @@ func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (r
     if request == nil {
         request = NewRestartApplicationPodRequest()
     }
+    
+    response = NewRestartApplicationPodResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RestartApplicationPod
+// This API is used to restart an application pod.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
+    if request == nil {
+        request = NewRestartApplicationPodRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRestartApplicationPodResponse()
     err = c.Send(request, response)

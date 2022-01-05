@@ -15,6 +15,7 @@
 package v20201002
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -86,6 +87,33 @@ func (c *Client) BatchSendEmail(request *BatchSendEmailRequest) (response *Batch
     return
 }
 
+// BatchSendEmail
+// This API is used to send a TEXT or HTML email to multiple recipients at a time for marketing or notification purposes. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature. You need to create a recipient group with email addresses first and then send emails by group ID. SES supports scheduled and recurring email sending tasks. You need to pass in `TimedParam` for a scheduled task and `CycleParam` for a recurring one.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
+//  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
+//  MISSINGPARAMETER_TIMEDPARAMNECESSARY = "MissingParameter.TimedParamNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+//  OPERATIONDENIED_RECEIVERSTATUSERROR = "OperationDenied.ReceiverStatusError"
+//  OPERATIONDENIED_SENDADDRESSSTATUSERROR = "OperationDenied.SendAddressStatusError"
+//  OPERATIONDENIED_TEMPLATESTATUSERROR = "OperationDenied.TemplateStatusError"
+func (c *Client) BatchSendEmailWithContext(ctx context.Context, request *BatchSendEmailRequest) (response *BatchSendEmailResponse, err error) {
+    if request == nil {
+        request = NewBatchSendEmailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBatchSendEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateEmailAddressRequest() (request *CreateEmailAddressRequest) {
     request = &CreateEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -128,6 +156,32 @@ func (c *Client) CreateEmailAddress(request *CreateEmailAddressRequest) (respons
     return
 }
 
+// CreateEmailAddress
+// After the sender domain is verified, you need a sender address to send emails. For example, if your sender domain is mail.qcloud.com, your sender address can be service@mail.qcloud.com. If you want to display your name (such as "Tencent Cloud") in the inbox list of the recipients, the sender address should be in the format of `Tencent Cloud <email address>`. Please note that there must be a space between your name and the first angle bracket.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ILLEGALEMAILADDRESS = "InvalidParameterValue.IllegalEmailAddress"
+//  INVALIDPARAMETERVALUE_REPEATEMAILADDRESS = "InvalidParameterValue.RepeatEmailAddress"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_DOMAINNOTVERIFIED = "OperationDenied.DomainNotVerified"
+//  OPERATIONDENIED_EXCEEDSENDERLIMIT = "OperationDenied.ExceedSenderLimit"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateEmailAddressWithContext(ctx context.Context, request *CreateEmailAddressRequest) (response *CreateEmailAddressResponse, err error) {
+    if request == nil {
+        request = NewCreateEmailAddressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateEmailAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateEmailIdentityRequest() (request *CreateEmailIdentityRequest) {
     request = &CreateEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -164,6 +218,32 @@ func (c *Client) CreateEmailIdentity(request *CreateEmailIdentityRequest) (respo
     if request == nil {
         request = NewCreateEmailIdentityRequest()
     }
+    
+    response = NewCreateEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateEmailIdentity
+// This API is used to create a sender domain. Before you can send an email using Tencent Cloud SES, you must create a sender domain as your identity. It can be the domain of your website or mobile app. You must verify the domain to prove that you own it and authorize Tencent Cloud SES to use it to send emails.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CREATEDBYOTHER = "InvalidParameterValue.CreatedByOther"
+//  INVALIDPARAMETERVALUE_INVALIDEMAILIDENTITY = "InvalidParameterValue.InvalidEmailIdentity"
+//  INVALIDPARAMETERVALUE_REPEATCREATION = "InvalidParameterValue.RepeatCreation"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_EXCEEDDOMAINLIMIT = "OperationDenied.ExceedDomainLimit"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateEmailIdentityWithContext(ctx context.Context, request *CreateEmailIdentityRequest) (response *CreateEmailIdentityResponse, err error) {
+    if request == nil {
+        request = NewCreateEmailIdentityRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateEmailIdentityResponse()
     err = c.Send(request, response)
@@ -214,6 +294,34 @@ func (c *Client) CreateEmailTemplate(request *CreateEmailTemplateRequest) (respo
     return
 }
 
+// CreateEmailTemplate
+// This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
+//
+// Note: only an approved template can be used to send emails.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
+//  FAILEDOPERATION_TEMPLATECONTENTTOOLARGE = "FailedOperation.TemplateContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateEmailTemplateWithContext(ctx context.Context, request *CreateEmailTemplateRequest) (response *CreateEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateEmailTemplateRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateEmailTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBlackListRequest() (request *DeleteBlackListRequest) {
     request = &DeleteBlackListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -243,6 +351,25 @@ func (c *Client) DeleteBlackList(request *DeleteBlackListRequest) (response *Del
     if request == nil {
         request = NewDeleteBlackListRequest()
     }
+    
+    response = NewDeleteBlackListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteBlackList
+// This API is used to unblocklist email addresses. If you confirm that a blocklisted recipient address is valid and active, you can remove it from Tencent Cloud’s address blocklist database.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) DeleteBlackListWithContext(ctx context.Context, request *DeleteBlackListRequest) (response *DeleteBlackListResponse, err error) {
+    if request == nil {
+        request = NewDeleteBlackListRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteBlackListResponse()
     err = c.Send(request, response)
@@ -288,6 +415,29 @@ func (c *Client) DeleteEmailAddress(request *DeleteEmailAddressRequest) (respons
     return
 }
 
+// DeleteEmailAddress
+// This API is used to delete a sender address.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NOSUCHSENDER = "InvalidParameterValue.NoSuchSender"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) DeleteEmailAddressWithContext(ctx context.Context, request *DeleteEmailAddressRequest) (response *DeleteEmailAddressResponse, err error) {
+    if request == nil {
+        request = NewDeleteEmailAddressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteEmailAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteEmailIdentityRequest() (request *DeleteEmailIdentityRequest) {
     request = &DeleteEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -326,6 +476,28 @@ func (c *Client) DeleteEmailIdentity(request *DeleteEmailIdentityRequest) (respo
     return
 }
 
+// DeleteEmailIdentity
+// This API is used to delete a sender domain. After deleted, the sender domain can no longer be used to send emails.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) DeleteEmailIdentityWithContext(ctx context.Context, request *DeleteEmailIdentityRequest) (response *DeleteEmailIdentityResponse, err error) {
+    if request == nil {
+        request = NewDeleteEmailIdentityRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteEmailTemplateRequest() (request *DeleteEmailTemplateRequest) {
     request = &DeleteEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -358,6 +530,28 @@ func (c *Client) DeleteEmailTemplate(request *DeleteEmailTemplateRequest) (respo
     if request == nil {
         request = NewDeleteEmailTemplateRequest()
     }
+    
+    response = NewDeleteEmailTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteEmailTemplate
+// This API is used to delete an email template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) DeleteEmailTemplateWithContext(ctx context.Context, request *DeleteEmailTemplateRequest) (response *DeleteEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteEmailTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteEmailTemplateResponse()
     err = c.Send(request, response)
@@ -403,6 +597,29 @@ func (c *Client) GetEmailIdentity(request *GetEmailIdentityRequest) (response *G
     return
 }
 
+// GetEmailIdentity
+// This API is used to get the configuration details of a sender domain.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NOTEXISTDOMAIN = "InvalidParameterValue.NotExistDomain"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) GetEmailIdentityWithContext(ctx context.Context, request *GetEmailIdentityRequest) (response *GetEmailIdentityResponse, err error) {
+    if request == nil {
+        request = NewGetEmailIdentityRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetEmailTemplateRequest() (request *GetEmailTemplateRequest) {
     request = &GetEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -436,6 +653,29 @@ func (c *Client) GetEmailTemplate(request *GetEmailTemplateRequest) (response *G
     if request == nil {
         request = NewGetEmailTemplateRequest()
     }
+    
+    response = NewGetEmailTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GetEmailTemplate
+// This API is used to get the details of a template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATENOTEXIST = "InvalidParameterValue.TemplateNotExist"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) GetEmailTemplateWithContext(ctx context.Context, request *GetEmailTemplateRequest) (response *GetEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewGetEmailTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewGetEmailTemplateResponse()
     err = c.Send(request, response)
@@ -505,6 +745,53 @@ func (c *Client) GetSendEmailStatus(request *GetSendEmailStatusRequest) (respons
     return
 }
 
+// GetSendEmailStatus
+// This API is used to get email sending status. Only data within 90 days can be queried.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
+//  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_INSUFFICIENTQUOTA = "FailedOperation.InsufficientQuota"
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  FAILEDOPERATION_INVALIDTEMPLATEID = "FailedOperation.InvalidTemplateID"
+//  FAILEDOPERATION_NOTAUTHENTICATEDSENDER = "FailedOperation.NotAuthenticatedSender"
+//  FAILEDOPERATION_NOTSUPPORTDATE = "FailedOperation.NotSupportDate"
+//  FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
+//  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
+//  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
+//  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
+//  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EMAILADDRESSISNULL = "InvalidParameterValue.EmailAddressIsNULL"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetSendEmailStatusWithContext(ctx context.Context, request *GetSendEmailStatusRequest) (response *GetSendEmailStatusResponse, err error) {
+    if request == nil {
+        request = NewGetSendEmailStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetSendEmailStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetStatisticsReportRequest() (request *GetStatisticsReportRequest) {
     request = &GetStatisticsReportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -542,6 +829,27 @@ func (c *Client) GetStatisticsReport(request *GetStatisticsReportRequest) (respo
     return
 }
 
+// GetStatisticsReport
+// This API is used to get the email sending statistics over a recent period, including data on sent emails, delivery success rate, open rate, bounce rate, and so on.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) GetStatisticsReportWithContext(ctx context.Context, request *GetStatisticsReportRequest) (response *GetStatisticsReportResponse, err error) {
+    if request == nil {
+        request = NewGetStatisticsReportRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetStatisticsReportResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListBlackEmailAddressRequest() (request *ListBlackEmailAddressRequest) {
     request = &ListBlackEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -573,6 +881,27 @@ func (c *Client) ListBlackEmailAddress(request *ListBlackEmailAddressRequest) (r
     if request == nil {
         request = NewListBlackEmailAddressRequest()
     }
+    
+    response = NewListBlackEmailAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ListBlackEmailAddress
+// The API is used to get blocklisted addresses. In the case of a hard bounce, Tencent Cloud will blocklist the recipient address and do not allow any user to send emails to this address. If you confirm that this is a misjudgment, you can remove it from the blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_WRONGDATE = "InvalidParameterValue.WrongDate"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) ListBlackEmailAddressWithContext(ctx context.Context, request *ListBlackEmailAddressRequest) (response *ListBlackEmailAddressResponse, err error) {
+    if request == nil {
+        request = NewListBlackEmailAddressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewListBlackEmailAddressResponse()
     err = c.Send(request, response)
@@ -617,6 +946,28 @@ func (c *Client) ListEmailAddress(request *ListEmailAddressRequest) (response *L
     return
 }
 
+// ListEmailAddress
+// This API is used to get the list of sender addresses.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) ListEmailAddressWithContext(ctx context.Context, request *ListEmailAddressRequest) (response *ListEmailAddressResponse, err error) {
+    if request == nil {
+        request = NewListEmailAddressRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewListEmailAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListEmailIdentitiesRequest() (request *ListEmailIdentitiesRequest) {
     request = &ListEmailIdentitiesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -655,6 +1006,28 @@ func (c *Client) ListEmailIdentities(request *ListEmailIdentitiesRequest) (respo
     return
 }
 
+// ListEmailIdentities
+// This API is used to get the list of sender domains, including verified and unverified domains.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) ListEmailIdentitiesWithContext(ctx context.Context, request *ListEmailIdentitiesRequest) (response *ListEmailIdentitiesResponse, err error) {
+    if request == nil {
+        request = NewListEmailIdentitiesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewListEmailIdentitiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListEmailTemplatesRequest() (request *ListEmailTemplatesRequest) {
     request = &ListEmailTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -687,6 +1060,28 @@ func (c *Client) ListEmailTemplates(request *ListEmailTemplatesRequest) (respons
     if request == nil {
         request = NewListEmailTemplatesRequest()
     }
+    
+    response = NewListEmailTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ListEmailTemplates
+// This API is used to get the list of email templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) ListEmailTemplatesWithContext(ctx context.Context, request *ListEmailTemplatesRequest) (response *ListEmailTemplatesResponse, err error) {
+    if request == nil {
+        request = NewListEmailTemplatesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewListEmailTemplatesResponse()
     err = c.Send(request, response)
@@ -743,6 +1138,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  INVALIDPARAMETERVALUE_ATTACHCONTENTISWRONG = "InvalidParameterValue.AttachContentIsWrong"
 //  INVALIDPARAMETERVALUE_EMAILADDRESSISNULL = "InvalidParameterValue.EmailAddressIsNULL"
 //  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_INVALIDEMAILIDENTITY = "InvalidParameterValue.InvalidEmailIdentity"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -755,6 +1151,59 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
     if request == nil {
         request = NewSendEmailRequest()
     }
+    
+    response = NewSendEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SendEmail
+// This API is used to send a TEXT or HTML email triggered for authentication or transaction. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ATTACHCONTENTTOOLARGE = "FailedOperation.AttachContentToolarge"
+//  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  FAILEDOPERATION_EXCEEDSENDLIMIT = "FailedOperation.ExceedSendLimit"
+//  FAILEDOPERATION_FREQUENCYLIMIT = "FailedOperation.FrequencyLimit"
+//  FAILEDOPERATION_HIGHREJECTIONRATE = "FailedOperation.HighRejectionRate"
+//  FAILEDOPERATION_INCORRECTEMAIL = "FailedOperation.IncorrectEmail"
+//  FAILEDOPERATION_INCORRECTSENDER = "FailedOperation.IncorrectSender"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_INSUFFICIENTQUOTA = "FailedOperation.InsufficientQuota"
+//  FAILEDOPERATION_INVALIDATTACHNAME = "FailedOperation.InvalidAttachName"
+//  FAILEDOPERATION_INVALIDTEMPLATEID = "FailedOperation.InvalidTemplateID"
+//  FAILEDOPERATION_MISSINGEMAILCONTENT = "FailedOperation.MissingEmailContent"
+//  FAILEDOPERATION_NOATTACHPERMISSION = "FailedOperation.NoAttachPermission"
+//  FAILEDOPERATION_NOTAUTHENTICATEDSENDER = "FailedOperation.NotAuthenticatedSender"
+//  FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
+//  FAILEDOPERATION_SENDEMAILERR = "FailedOperation.SendEmailErr"
+//  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
+//  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
+//  FAILEDOPERATION_TOOMANYRECIPIENTS = "FailedOperation.TooManyRecipients"
+//  FAILEDOPERATION_UNSUPPORTMAILTYPE = "FailedOperation.UnsupportMailType"
+//  FAILEDOPERATION_WITHOUTPERMISSION = "FailedOperation.WithOutPermission"
+//  FAILEDOPERATION_WRONGCONTENTJSON = "FailedOperation.WrongContentJson"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ATTACHCONTENTISWRONG = "InvalidParameterValue.AttachContentIsWrong"
+//  INVALIDPARAMETERVALUE_EMAILADDRESSISNULL = "InvalidParameterValue.EmailAddressIsNULL"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_INVALIDEMAILIDENTITY = "InvalidParameterValue.InvalidEmailIdentity"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) SendEmailWithContext(ctx context.Context, request *SendEmailRequest) (response *SendEmailResponse, err error) {
+    if request == nil {
+        request = NewSendEmailRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSendEmailResponse()
     err = c.Send(request, response)
@@ -801,6 +1250,30 @@ func (c *Client) UpdateEmailIdentity(request *UpdateEmailIdentityRequest) (respo
     return
 }
 
+// UpdateEmailIdentity
+// This API is used to verify whether your DNS configuration is correct.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NOTEXISTDOMAIN = "InvalidParameterValue.NotExistDomain"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) UpdateEmailIdentityWithContext(ctx context.Context, request *UpdateEmailIdentityRequest) (response *UpdateEmailIdentityResponse, err error) {
+    if request == nil {
+        request = NewUpdateEmailIdentityRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpdateEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateEmailTemplateRequest() (request *UpdateEmailTemplateRequest) {
     request = &UpdateEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -837,6 +1310,32 @@ func (c *Client) UpdateEmailTemplate(request *UpdateEmailTemplateRequest) (respo
     if request == nil {
         request = NewUpdateEmailTemplateRequest()
     }
+    
+    response = NewUpdateEmailTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateEmailTemplate
+// This API is used to update an email template. An updated template must be approved again before it can be used.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEISNULL = "InvalidParameterValue.TemplateNameIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATENOTEXIST = "InvalidParameterValue.TemplateNotExist"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) UpdateEmailTemplateWithContext(ctx context.Context, request *UpdateEmailTemplateRequest) (response *UpdateEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewUpdateEmailTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateEmailTemplateResponse()
     err = c.Send(request, response)

@@ -15,6 +15,7 @@
 package v20200326
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -85,6 +86,32 @@ func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest
     return
 }
 
+// CreateStreamLiveChannel
+// This API is used to create a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AVTEMPLATES = "InvalidParameter.AVTemplates"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
+//  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
+func (c *Client) CreateStreamLiveChannelWithContext(ctx context.Context, request *CreateStreamLiveChannelRequest) (response *CreateStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
     request = &CreateStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -118,6 +145,29 @@ func (c *Client) CreateStreamLiveInput(request *CreateStreamLiveInputRequest) (r
     if request == nil {
         request = NewCreateStreamLiveInputRequest()
     }
+    
+    response = NewCreateStreamLiveInputResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateStreamLiveInput
+// This API is used to create a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_INPUTSETTINGS = "InvalidParameter.InputSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) CreateStreamLiveInputWithContext(ctx context.Context, request *CreateStreamLiveInputRequest) (response *CreateStreamLiveInputResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLiveInputRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateStreamLiveInputResponse()
     err = c.Send(request, response)
@@ -160,6 +210,26 @@ func (c *Client) CreateStreamLiveInputSecurityGroup(request *CreateStreamLiveInp
     return
 }
 
+// CreateStreamLiveInputSecurityGroup
+// This API is used to create an input security group. Up to 5 security groups are allowed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
+func (c *Client) CreateStreamLiveInputSecurityGroupWithContext(ctx context.Context, request *CreateStreamLiveInputSecurityGroupRequest) (response *CreateStreamLiveInputSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLiveInputSecurityGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamLiveInputSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
     request = &CreateStreamLivePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -188,6 +258,24 @@ func (c *Client) CreateStreamLivePlan(request *CreateStreamLivePlanRequest) (res
     if request == nil {
         request = NewCreateStreamLivePlanRequest()
     }
+    
+    response = NewCreateStreamLivePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateStreamLivePlan
+// This API is used to create an event in the plan.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
+func (c *Client) CreateStreamLivePlanWithContext(ctx context.Context, request *CreateStreamLivePlanRequest) (response *CreateStreamLivePlanResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLivePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateStreamLivePlanResponse()
     err = c.Send(request, response)
@@ -231,6 +319,27 @@ func (c *Client) DeleteStreamLiveChannel(request *DeleteStreamLiveChannelRequest
     return
 }
 
+// DeleteStreamLiveChannel
+// This API is used to delete a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
+func (c *Client) DeleteStreamLiveChannelWithContext(ctx context.Context, request *DeleteStreamLiveChannelRequest) (response *DeleteStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
     request = &DeleteStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -261,6 +370,26 @@ func (c *Client) DeleteStreamLiveInput(request *DeleteStreamLiveInputRequest) (r
     if request == nil {
         request = NewDeleteStreamLiveInputRequest()
     }
+    
+    response = NewDeleteStreamLiveInputResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteStreamLiveInput
+// This API is used to delete a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DeleteStreamLiveInputWithContext(ctx context.Context, request *DeleteStreamLiveInputRequest) (response *DeleteStreamLiveInputResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLiveInputRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteStreamLiveInputResponse()
     err = c.Send(request, response)
@@ -303,6 +432,26 @@ func (c *Client) DeleteStreamLiveInputSecurityGroup(request *DeleteStreamLiveInp
     return
 }
 
+// DeleteStreamLiveInputSecurityGroup
+// This API is used to delete an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDINPUT = "InvalidParameter.AlreadyAssociatedInput"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DeleteStreamLiveInputSecurityGroupWithContext(ctx context.Context, request *DeleteStreamLiveInputSecurityGroupRequest) (response *DeleteStreamLiveInputSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLiveInputSecurityGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamLiveInputSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamLivePlanRequest() (request *DeleteStreamLivePlanRequest) {
     request = &DeleteStreamLivePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -331,6 +480,24 @@ func (c *Client) DeleteStreamLivePlan(request *DeleteStreamLivePlanRequest) (res
     if request == nil {
         request = NewDeleteStreamLivePlanRequest()
     }
+    
+    response = NewDeleteStreamLivePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteStreamLivePlan
+// This API is used to delete a StreamLive event.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
+func (c *Client) DeleteStreamLivePlanWithContext(ctx context.Context, request *DeleteStreamLivePlanRequest) (response *DeleteStreamLivePlanResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLivePlanRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteStreamLivePlanResponse()
     err = c.Send(request, response)
@@ -370,6 +537,23 @@ func (c *Client) DescribeStreamLiveChannel(request *DescribeStreamLiveChannelReq
     return
 }
 
+// DescribeStreamLiveChannel
+// This API is used to query a StreamLive channel.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveChannelWithContext(ctx context.Context, request *DescribeStreamLiveChannelRequest) (response *DescribeStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveChannelAlertsRequest) {
     request = &DescribeStreamLiveChannelAlertsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -397,6 +581,23 @@ func (c *Client) DescribeStreamLiveChannelAlerts(request *DescribeStreamLiveChan
     if request == nil {
         request = NewDescribeStreamLiveChannelAlertsRequest()
     }
+    
+    response = NewDescribeStreamLiveChannelAlertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveChannelAlerts
+// This API is used to query the alarm information of a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveChannelAlertsWithContext(ctx context.Context, request *DescribeStreamLiveChannelAlertsRequest) (response *DescribeStreamLiveChannelAlertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelAlertsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelAlertsResponse()
     err = c.Send(request, response)
@@ -438,6 +639,25 @@ func (c *Client) DescribeStreamLiveChannelInputStatistics(request *DescribeStrea
     return
 }
 
+// DescribeStreamLiveChannelInputStatistics
+// This API is used to query input statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+func (c *Client) DescribeStreamLiveChannelInputStatisticsWithContext(ctx context.Context, request *DescribeStreamLiveChannelInputStatisticsRequest) (response *DescribeStreamLiveChannelInputStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelInputStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveChannelInputStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChannelLogsRequest) {
     request = &DescribeStreamLiveChannelLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -467,6 +687,25 @@ func (c *Client) DescribeStreamLiveChannelLogs(request *DescribeStreamLiveChanne
     if request == nil {
         request = NewDescribeStreamLiveChannelLogsRequest()
     }
+    
+    response = NewDescribeStreamLiveChannelLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveChannelLogs
+// This API is used to query StreamLive channel logs, such as push event logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+func (c *Client) DescribeStreamLiveChannelLogsWithContext(ctx context.Context, request *DescribeStreamLiveChannelLogsRequest) (response *DescribeStreamLiveChannelLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelLogsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelLogsResponse()
     err = c.Send(request, response)
@@ -509,6 +748,26 @@ func (c *Client) DescribeStreamLiveChannelOutputStatistics(request *DescribeStre
     return
 }
 
+// DescribeStreamLiveChannelOutputStatistics
+// This API is used to query the output statistics of a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+func (c *Client) DescribeStreamLiveChannelOutputStatisticsWithContext(ctx context.Context, request *DescribeStreamLiveChannelOutputStatisticsRequest) (response *DescribeStreamLiveChannelOutputStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelOutputStatisticsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveChannelOutputStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannelsRequest) {
     request = &DescribeStreamLiveChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -535,6 +794,22 @@ func (c *Client) DescribeStreamLiveChannels(request *DescribeStreamLiveChannelsR
     if request == nil {
         request = NewDescribeStreamLiveChannelsRequest()
     }
+    
+    response = NewDescribeStreamLiveChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveChannels
+// This API is used to query StreamLive channels in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLiveChannelsWithContext(ctx context.Context, request *DescribeStreamLiveChannelsRequest) (response *DescribeStreamLiveChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveChannelsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelsResponse()
     err = c.Send(request, response)
@@ -576,6 +851,25 @@ func (c *Client) DescribeStreamLiveInput(request *DescribeStreamLiveInputRequest
     return
 }
 
+// DescribeStreamLiveInput
+// This API is used to query a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveInputWithContext(ctx context.Context, request *DescribeStreamLiveInputRequest) (response *DescribeStreamLiveInputResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveInputRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveInputResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLiveInputSecurityGroupRequest) {
     request = &DescribeStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -605,6 +899,25 @@ func (c *Client) DescribeStreamLiveInputSecurityGroup(request *DescribeStreamLiv
     if request == nil {
         request = NewDescribeStreamLiveInputSecurityGroupRequest()
     }
+    
+    response = NewDescribeStreamLiveInputSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveInputSecurityGroup
+// This API is used to query an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveInputSecurityGroupWithContext(ctx context.Context, request *DescribeStreamLiveInputSecurityGroupRequest) (response *DescribeStreamLiveInputSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveInputSecurityGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputSecurityGroupResponse()
     err = c.Send(request, response)
@@ -643,6 +956,22 @@ func (c *Client) DescribeStreamLiveInputSecurityGroups(request *DescribeStreamLi
     return
 }
 
+// DescribeStreamLiveInputSecurityGroups
+// This API is used to query input security groups in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLiveInputSecurityGroupsWithContext(ctx context.Context, request *DescribeStreamLiveInputSecurityGroupsRequest) (response *DescribeStreamLiveInputSecurityGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveInputSecurityGroupsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveInputSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequest) {
     request = &DescribeStreamLiveInputsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -669,6 +998,22 @@ func (c *Client) DescribeStreamLiveInputs(request *DescribeStreamLiveInputsReque
     if request == nil {
         request = NewDescribeStreamLiveInputsRequest()
     }
+    
+    response = NewDescribeStreamLiveInputsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveInputs
+// This API is used to query StreamLive inputs in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLiveInputsWithContext(ctx context.Context, request *DescribeStreamLiveInputsRequest) (response *DescribeStreamLiveInputsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveInputsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputsResponse()
     err = c.Send(request, response)
@@ -708,6 +1053,23 @@ func (c *Client) DescribeStreamLivePlans(request *DescribeStreamLivePlansRequest
     return
 }
 
+// DescribeStreamLivePlans
+// This API is used to query the events in the plan in batches.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLivePlansWithContext(ctx context.Context, request *DescribeStreamLivePlansRequest) (response *DescribeStreamLivePlansResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLivePlansRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLivePlansResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRequest) {
     request = &DescribeStreamLiveRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -734,6 +1096,22 @@ func (c *Client) DescribeStreamLiveRegions(request *DescribeStreamLiveRegionsReq
     if request == nil {
         request = NewDescribeStreamLiveRegionsRequest()
     }
+    
+    response = NewDescribeStreamLiveRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeStreamLiveRegions
+// This API is used to query all StreamLive regions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeStreamLiveRegionsWithContext(ctx context.Context, request *DescribeStreamLiveRegionsRequest) (response *DescribeStreamLiveRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveRegionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeStreamLiveRegionsResponse()
     err = c.Send(request, response)
@@ -782,6 +1160,32 @@ func (c *Client) ModifyStreamLiveChannel(request *ModifyStreamLiveChannelRequest
     return
 }
 
+// ModifyStreamLiveChannel
+// This API is used to modify a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_AVTEMPLATES = "InvalidParameter.AVTemplates"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ATTACHEDINPUTS = "InvalidParameter.AttachedInputs"
+//  INVALIDPARAMETER_AUDIOTEMPLATES = "InvalidParameter.AudioTemplates"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
+func (c *Client) ModifyStreamLiveChannelWithContext(ctx context.Context, request *ModifyStreamLiveChannelRequest) (response *ModifyStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
     request = &ModifyStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -815,6 +1219,29 @@ func (c *Client) ModifyStreamLiveInput(request *ModifyStreamLiveInputRequest) (r
     if request == nil {
         request = NewModifyStreamLiveInputRequest()
     }
+    
+    response = NewModifyStreamLiveInputResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyStreamLiveInput
+// This API is used to modify a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTSETTINGS = "InvalidParameter.InputSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
+func (c *Client) ModifyStreamLiveInputWithContext(ctx context.Context, request *ModifyStreamLiveInputRequest) (response *ModifyStreamLiveInputResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLiveInputRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyStreamLiveInputResponse()
     err = c.Send(request, response)
@@ -858,6 +1285,27 @@ func (c *Client) ModifyStreamLiveInputSecurityGroup(request *ModifyStreamLiveInp
     return
 }
 
+// ModifyStreamLiveInputSecurityGroup
+// This API is used to modify an input security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
+func (c *Client) ModifyStreamLiveInputSecurityGroupWithContext(ctx context.Context, request *ModifyStreamLiveInputSecurityGroupRequest) (response *ModifyStreamLiveInputSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLiveInputSecurityGroupRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamLiveInputSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest) {
     request = &StartStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -894,6 +1342,26 @@ func (c *Client) StartStreamLiveChannel(request *StartStreamLiveChannelRequest) 
     return
 }
 
+// StartStreamLiveChannel
+// This API is used to start a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
+func (c *Client) StartStreamLiveChannelWithContext(ctx context.Context, request *StartStreamLiveChannelRequest) (response *StartStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewStartStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStartStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
     request = &StopStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -924,6 +1392,26 @@ func (c *Client) StopStreamLiveChannel(request *StopStreamLiveChannelRequest) (r
     if request == nil {
         request = NewStopStreamLiveChannelRequest()
     }
+    
+    response = NewStopStreamLiveChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopStreamLiveChannel
+// This API is used to stop a StreamLive channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
+func (c *Client) StopStreamLiveChannelWithContext(ctx context.Context, request *StopStreamLiveChannelRequest) (response *StopStreamLiveChannelResponse, err error) {
+    if request == nil {
+        request = NewStopStreamLiveChannelRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStopStreamLiveChannelResponse()
     err = c.Send(request, response)

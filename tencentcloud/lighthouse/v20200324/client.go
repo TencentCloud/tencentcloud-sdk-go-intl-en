@@ -15,6 +15,7 @@
 package v20200324
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -95,6 +96,42 @@ func (c *Client) ApplyInstanceSnapshot(request *ApplyInstanceSnapshotRequest) (r
     return
 }
 
+// ApplyInstanceSnapshot
+// This API is used to roll back the system disk snapshot of the specified instance.
+//
+// <li>Only rollback to the original system disk is supported.</li>
+//
+// <li>Only snapshots in `NORMAL` status can be used for rollback. To query the status of a snapshot, you can call the `DescribeSnapshots` API and see the `SnapshotState` field in the response.</li>
+//
+// <li>When a snapshot is rolled back, the status of the instance must be `STOPPED` or `RUNNING`. You can call the `DescribeInstances` API to query the instance status. Instances in `RUNNING` status will be forcibly shut down before snapshot rollback.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DISKSIZENOTMATCH = "InvalidParameterValue.DiskSizeNotMatch"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_SNAPSHOTIDNOTFOUND = "ResourceNotFound.SnapshotIdNotFound"
+//  RESOURCENOTFOUND_SNAPSHOTNOTFOUND = "ResourceNotFound.SnapshotNotFound"
+//  UNSUPPORTEDOPERATION_DISKBUSY = "UnsupportedOperation.DiskBusy"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_INVALIDSNAPSHOTSTATE = "UnsupportedOperation.InvalidSnapshotState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_SNAPSHOTBUSY = "UnsupportedOperation.SnapshotBusy"
+func (c *Client) ApplyInstanceSnapshotWithContext(ctx context.Context, request *ApplyInstanceSnapshotRequest) (response *ApplyInstanceSnapshotResponse, err error) {
+    if request == nil {
+        request = NewApplyInstanceSnapshotRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewApplyInstanceSnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairsRequest) {
     request = &AssociateInstancesKeyPairsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -155,6 +192,50 @@ func (c *Client) AssociateInstancesKeyPairs(request *AssociateInstancesKeyPairsR
     return
 }
 
+// AssociateInstancesKeyPairs
+// This API is used to bind a user-specified key pair to an instance.
+//
+// * Only instances on LINUX_UNIX in [RUNNING, STOPPED] status are supported. Instances in `RUNNING` status will be forcibly shut down before binding.
+//
+// * If the public key of a key pair is written to the SSH configuration of the instance, you will be able to log in to the instance with the private key of the key pair.
+//
+// * If the instance is already associated with a key, the old key will become invalid.
+//
+// * If you currently use a password to log in, you will no longer be able to do so after you associate the instance with a key.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100. If instances not available for the operation are selected, you will get an error code.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_KEYPAIRIDMALFORMED = "InvalidParameterValue.KeyPairIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_KEYIDNOTFOUND = "ResourceNotFound.KeyIdNotFound"
+//  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
+//  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_KEYPAIRBINDDUPLICATE = "UnsupportedOperation.KeyPairBindDuplicate"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_WINDOWSNOTALLOWTOASSOCIATEKEYPAIR = "UnsupportedOperation.WindowsNotAllowToAssociateKeyPair"
+func (c *Client) AssociateInstancesKeyPairsWithContext(ctx context.Context, request *AssociateInstancesKeyPairsRequest) (response *AssociateInstancesKeyPairsResponse, err error) {
+    if request == nil {
+        request = NewAssociateInstancesKeyPairsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAssociateInstancesKeyPairsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAttachCcnRequest() (request *AttachCcnRequest) {
     request = &AttachCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -186,6 +267,27 @@ func (c *Client) AttachCcn(request *AttachCcnRequest) (response *AttachCcnRespon
     if request == nil {
         request = NewAttachCcnRequest()
     }
+    
+    response = NewAttachCcnResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AttachCcn
+// This API is used to associate a CCN instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CCNIDMALFORMED = "InvalidParameterValue.CcnIdMalformed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ATTACHCCNCONDITIONUNSATISFIED = "UnsupportedOperation.AttachCcnConditionUnsatisfied"
+//  UNSUPPORTEDOPERATION_ATTACHCCNFAILED = "UnsupportedOperation.AttachCcnFailed"
+//  UNSUPPORTEDOPERATION_CCNALREADYATTACHED = "UnsupportedOperation.CcnAlreadyAttached"
+func (c *Client) AttachCcnWithContext(ctx context.Context, request *AttachCcnRequest) (response *AttachCcnResponse, err error) {
+    if request == nil {
+        request = NewAttachCcnRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewAttachCcnResponse()
     err = c.Send(request, response)
@@ -224,6 +326,28 @@ func (c *Client) CreateBlueprint(request *CreateBlueprintRequest) (response *Cre
     if request == nil {
         request = NewCreateBlueprintRequest()
     }
+    
+    response = NewCreateBlueprintResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateBlueprint
+// This API is used to create an image.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
+//  FAILEDOPERATION_UNABLETOCREATEBLUEPRINT = "FailedOperation.UnableToCreateBlueprint"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) CreateBlueprintWithContext(ctx context.Context, request *CreateBlueprintRequest) (response *CreateBlueprintResponse, err error) {
+    if request == nil {
+        request = NewCreateBlueprintRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateBlueprintResponse()
     err = c.Send(request, response)
@@ -292,6 +416,52 @@ func (c *Client) CreateFirewallRules(request *CreateFirewallRulesRequest) (respo
     return
 }
 
+// CreateFirewallRules
+// This API is used to add a firewall rule on an instance.
+//
+// 
+//
+// 
+//
+// * `FirewallVersion` is the firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the updated rule from expiring. If it is left empty, conflicts will not be considered.
+//
+// 
+//
+// In the `FirewallRules` parameter:
+//
+// * Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
+//
+// * For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
+//
+// * For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
+//
+// * For the `Action` field, you can enter only `ACCEPT` or `DROP`.
+//
+// * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
+//  INVALIDPARAMETER_FIREWALLRULESDUPLICATED = "InvalidParameter.FirewallRulesDuplicated"
+//  INVALIDPARAMETER_FIREWALLRULESEXIST = "InvalidParameter.FirewallRulesExist"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_FIREWALLRULEDESCRIPTIONTOOLONG = "InvalidParameterValue.FirewallRuleDescriptionTooLong"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  LIMITEXCEEDED_FIREWALLRULESLIMITEXCEEDED = "LimitExceeded.FirewallRulesLimitExceeded"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_FIREWALLBUSY = "UnsupportedOperation.FirewallBusy"
+//  UNSUPPORTEDOPERATION_FIREWALLVERSIONMISMATCH = "UnsupportedOperation.FirewallVersionMismatch"
+func (c *Client) CreateFirewallRulesWithContext(ctx context.Context, request *CreateFirewallRulesRequest) (response *CreateFirewallRulesResponse, err error) {
+    if request == nil {
+        request = NewCreateFirewallRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateFirewallRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInstanceSnapshotRequest() (request *CreateInstanceSnapshotRequest) {
     request = &CreateInstanceSnapshotRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -335,6 +505,33 @@ func (c *Client) CreateInstanceSnapshot(request *CreateInstanceSnapshotRequest) 
     return
 }
 
+// CreateInstanceSnapshot
+// This API is used to create a system disk snapshot of the specified instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_GETSNAPSHOTALLOCQUOTALOCKERROR = "InternalError.GetSnapshotAllocQuotaLockError"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTNAMETOOLONG = "InvalidParameterValue.SnapshotNameTooLong"
+//  LIMITEXCEEDED_SNAPSHOTQUOTALIMITEXCEEDED = "LimitExceeded.SnapshotQuotaLimitExceeded"
+//  OPERATIONDENIED_OPERATIONDENIEDCREATESNAPSHOTFORSTORAGEBUNDLE = "OperationDenied.OperationDeniedCreateSnapshotForStorageBundle"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKBUSY = "UnsupportedOperation.DiskBusy"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) CreateInstanceSnapshotWithContext(ctx context.Context, request *CreateInstanceSnapshotRequest) (response *CreateInstanceSnapshotResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceSnapshotRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceSnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
     request = &CreateKeyPairRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -366,6 +563,27 @@ func (c *Client) CreateKeyPair(request *CreateKeyPairRequest) (response *CreateK
     if request == nil {
         request = NewCreateKeyPairRequest()
     }
+    
+    response = NewCreateKeyPairResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateKeyPair
+// This API is used to create a key pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEKEYPAIRFAILED = "FailedOperation.CreateKeyPairFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATEPARAMETERVALUE = "InvalidParameterValue.DuplicateParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAMEEMPTY = "InvalidParameterValue.InvalidKeyPairNameEmpty"
+//  INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAMEINCLUDEILLEGALCHAR = "InvalidParameterValue.InvalidKeyPairNameIncludeIllegalChar"
+//  INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAMETOOLONG = "InvalidParameterValue.InvalidKeyPairNameTooLong"
+//  LIMITEXCEEDED_KEYPAIRLIMITEXCEEDED = "LimitExceeded.KeyPairLimitExceeded"
+func (c *Client) CreateKeyPairWithContext(ctx context.Context, request *CreateKeyPairRequest) (response *CreateKeyPairResponse, err error) {
+    if request == nil {
+        request = NewCreateKeyPairRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateKeyPairResponse()
     err = c.Send(request, response)
@@ -408,6 +626,32 @@ func (c *Client) DeleteBlueprints(request *DeleteBlueprintsRequest) (response *D
     if request == nil {
         request = NewDeleteBlueprintsRequest()
     }
+    
+    response = NewDeleteBlueprintsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteBlueprints
+// This API is used to delete an image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_BLUEPRINTNOTFOUND = "ResourceNotFound.BlueprintNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
+//  UNSUPPORTEDOPERATION_BLUEPRINTOCCUPIED = "UnsupportedOperation.BlueprintOccupied"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTSHAREDBLUEPRINT = "UnsupportedOperation.NotSupportSharedBlueprint"
+//  UNSUPPORTEDOPERATION_POSTDESTROYRESOURCEFAILED = "UnsupportedOperation.PostDestroyResourceFailed"
+func (c *Client) DeleteBlueprintsWithContext(ctx context.Context, request *DeleteBlueprintsRequest) (response *DeleteBlueprintsResponse, err error) {
+    if request == nil {
+        request = NewDeleteBlueprintsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteBlueprintsResponse()
     err = c.Send(request, response)
@@ -473,6 +717,49 @@ func (c *Client) DeleteFirewallRules(request *DeleteFirewallRulesRequest) (respo
     return
 }
 
+// DeleteFirewallRules
+// This API is used to delete a firewall rule of an instance.
+//
+// 
+//
+// * `FirewallVersion` is used to specify the version of the firewall to be manipulated. If the `FirewallVersion` value passed in is not equal to the current latest version of the firewall, a failure will be returned. If `FirewallVersion` is not passed in, the specified rule will be deleted directly.
+//
+// 
+//
+// In the `FirewallRules` parameter:
+//
+// * Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
+//
+// * For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
+//
+// * For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
+//
+// * For the `Action` field, you can enter only `ACCEPT` or `DROP`.
+//
+// * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
+//  INVALIDPARAMETER_FIREWALLRULESDUPLICATED = "InvalidParameter.FirewallRulesDuplicated"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_FIREWALLRULEDESCRIPTIONTOOLONG = "InvalidParameterValue.FirewallRuleDescriptionTooLong"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_FIREWALLRULESNOTFOUND = "ResourceNotFound.FirewallRulesNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_FIREWALLBUSY = "UnsupportedOperation.FirewallBusy"
+//  UNSUPPORTEDOPERATION_FIREWALLVERSIONMISMATCH = "UnsupportedOperation.FirewallVersionMismatch"
+func (c *Client) DeleteFirewallRulesWithContext(ctx context.Context, request *DeleteFirewallRulesRequest) (response *DeleteFirewallRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteFirewallRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteFirewallRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
     request = &DeleteKeyPairsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -504,6 +791,27 @@ func (c *Client) DeleteKeyPairs(request *DeleteKeyPairsRequest) (response *Delet
     if request == nil {
         request = NewDeleteKeyPairsRequest()
     }
+    
+    response = NewDeleteKeyPairsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteKeyPairs
+// This API is used to delete a key pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETEKEYPAIRFAILED = "FailedOperation.DeleteKeyPairFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_KEYPAIRIDMALFORMED = "InvalidParameterValue.KeyPairIdMalformed"
+//  RESOURCEINUSE_KEYPAIRINUSE = "ResourceInUse.KeyPairInUse"
+//  RESOURCENOTFOUND_KEYIDNOTFOUND = "ResourceNotFound.KeyIdNotFound"
+//  UNSUPPORTEDOPERATION_KEYPAIRBINDTOBLUEPRINTS = "UnsupportedOperation.KeyPairBindToBlueprints"
+func (c *Client) DeleteKeyPairsWithContext(ctx context.Context, request *DeleteKeyPairsRequest) (response *DeleteKeyPairsResponse, err error) {
+    if request == nil {
+        request = NewDeleteKeyPairsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteKeyPairsResponse()
     err = c.Send(request, response)
@@ -551,6 +859,31 @@ func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *Del
     return
 }
 
+// DeleteSnapshots
+// This API is used to delete a snapshot.
+//
+// The snapshot must be in `NORMAL` status. To query the status of a snapshot, you can call the `DescribeSnapshots` API and see the `SnapshotState` field in the response.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SNAPSHOTOPERATIONFAILED = "FailedOperation.SnapshotOperationFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  RESOURCENOTFOUND_SNAPSHOTIDNOTFOUND = "ResourceNotFound.SnapshotIdNotFound"
+//  RESOURCENOTFOUND_SNAPSHOTNOTFOUND = "ResourceNotFound.SnapshotNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSNAPSHOTSTATE = "UnsupportedOperation.InvalidSnapshotState"
+//  UNSUPPORTEDOPERATION_SNAPSHOTBUSY = "UnsupportedOperation.SnapshotBusy"
+func (c *Client) DeleteSnapshotsWithContext(ctx context.Context, request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewDeleteSnapshotsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteSnapshotsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlueprintInstancesRequest() (request *DescribeBlueprintInstancesRequest) {
     request = &DescribeBlueprintInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -583,6 +916,28 @@ func (c *Client) DescribeBlueprintInstances(request *DescribeBlueprintInstancesR
     if request == nil {
         request = NewDescribeBlueprintInstancesRequest()
     }
+    
+    response = NewDescribeBlueprintInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBlueprintInstances
+// This API is used to query the information of an image instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBlueprintInstancesWithContext(ctx context.Context, request *DescribeBlueprintInstancesRequest) (response *DescribeBlueprintInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlueprintInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBlueprintInstancesResponse()
     err = c.Send(request, response)
@@ -630,6 +985,37 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
     if request == nil {
         request = NewDescribeBlueprintsRequest()
     }
+    
+    response = NewDescribeBlueprintsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBlueprints
+// This API is used to query the information of an image.
+//
+// error code that may be returned:
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTTYPE = "InvalidParameterValue.InvalidBlueprintType"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlueprintsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeBlueprintsResponse()
     err = c.Send(request, response)
@@ -686,6 +1072,40 @@ func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *Des
     return
 }
 
+// DescribeBundles
+// This API is used to query the information of a package.
+//
+// error code that may be returned:
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
+//  INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+func (c *Client) DescribeBundlesWithContext(ctx context.Context, request *DescribeBundlesRequest) (response *DescribeBundlesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBundlesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBundlesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInstancesRequest) {
     request = &DescribeCcnAttachedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -715,6 +1135,25 @@ func (c *Client) DescribeCcnAttachedInstances(request *DescribeCcnAttachedInstan
     if request == nil {
         request = NewDescribeCcnAttachedInstancesRequest()
     }
+    
+    response = NewDescribeCcnAttachedInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCcnAttachedInstances
+// This API is used to query the information of instances associated with CCN.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CCNIDMALFORMED = "InvalidParameterValue.CcnIdMalformed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_DESCRIBECCNATTACHEDINSTANCESFAILED = "UnsupportedOperation.DescribeCcnAttachedInstancesFailed"
+func (c *Client) DescribeCcnAttachedInstancesWithContext(ctx context.Context, request *DescribeCcnAttachedInstancesRequest) (response *DescribeCcnAttachedInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCcnAttachedInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeCcnAttachedInstancesResponse()
     err = c.Send(request, response)
@@ -757,6 +1196,26 @@ func (c *Client) DescribeFirewallRules(request *DescribeFirewallRulesRequest) (r
     return
 }
 
+// DescribeFirewallRules
+// This API is used to query the firewall rules of an instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeFirewallRulesWithContext(ctx context.Context, request *DescribeFirewallRulesRequest) (response *DescribeFirewallRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeFirewallRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeFirewallRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeFirewallRulesTemplateRequest() (request *DescribeFirewallRulesTemplateRequest) {
     request = &DescribeFirewallRulesTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -787,6 +1246,26 @@ func (c *Client) DescribeFirewallRulesTemplate(request *DescribeFirewallRulesTem
     if request == nil {
         request = NewDescribeFirewallRulesTemplateRequest()
     }
+    
+    response = NewDescribeFirewallRulesTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeFirewallRulesTemplate
+// This API is used to query a firewall rule template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeFirewallRulesTemplateWithContext(ctx context.Context, request *DescribeFirewallRulesTemplateRequest) (response *DescribeFirewallRulesTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeFirewallRulesTemplateRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeFirewallRulesTemplateResponse()
     err = c.Send(request, response)
@@ -825,6 +1304,22 @@ func (c *Client) DescribeGeneralResourceQuotas(request *DescribeGeneralResourceQ
     return
 }
 
+// DescribeGeneralResourceQuotas
+// This API is used to query the quota information of general resources.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDRESOURCEQUOTARESOURCENAME = "InvalidParameterValue.InvalidResourceQuotaResourceName"
+func (c *Client) DescribeGeneralResourceQuotasWithContext(ctx context.Context, request *DescribeGeneralResourceQuotasRequest) (response *DescribeGeneralResourceQuotasResponse, err error) {
+    if request == nil {
+        request = NewDescribeGeneralResourceQuotasRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeGeneralResourceQuotasResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceLoginKeyPairAttributeRequest() (request *DescribeInstanceLoginKeyPairAttributeRequest) {
     request = &DescribeInstanceLoginKeyPairAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -852,6 +1347,23 @@ func (c *Client) DescribeInstanceLoginKeyPairAttribute(request *DescribeInstance
     if request == nil {
         request = NewDescribeInstanceLoginKeyPairAttributeRequest()
     }
+    
+    response = NewDescribeInstanceLoginKeyPairAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstanceLoginKeyPairAttribute
+// This API is used to query the attributes of the default login key of an instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeInstanceLoginKeyPairAttributeWithContext(ctx context.Context, request *DescribeInstanceLoginKeyPairAttributeRequest) (response *DescribeInstanceLoginKeyPairAttributeResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceLoginKeyPairAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstanceLoginKeyPairAttributeResponse()
     err = c.Send(request, response)
@@ -901,6 +1413,39 @@ func (c *Client) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) 
     if request == nil {
         request = NewDescribeInstanceVncUrlRequest()
     }
+    
+    response = NewDescribeInstanceVncUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstanceVncUrl
+// This API is used to query the VNC URL of an instance, and the obtained address can be used for VNC login to the instance.
+//
+// 
+//
+// * This feature is available to instances in `RUNNING` status.
+//
+// * A VNC URL is only valid for 15 seconds. If you do not access the URL within 15 seconds, it will become invalid, and you will have to query another one.
+//
+// * Once the VNC URL is accessed, it will become invalid, and you will have to query another one if needed.
+//
+// * If the connection is interrupted, up to 30 reconnection requests per minute are allowed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) DescribeInstanceVncUrlWithContext(ctx context.Context, request *DescribeInstanceVncUrlRequest) (response *DescribeInstanceVncUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceVncUrlRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstanceVncUrlResponse()
     err = c.Send(request, response)
@@ -967,6 +1512,50 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
     return
 }
 
+// DescribeInstances
+// This API is used to query the details of one or multiple instances.
+//
+// 
+//
+// * You can query the details of an instance according to its ID, name, or private IP.
+//
+// * For more information on filters, please see [Filters](https://intl.cloud.tencent.com/document/product/1207/47576?from_cn_redirect=1#Filter).
+//
+// * If no parameter is defined, the status of a certain number of instances under the current account will be returned. The number is specified by `Limit` and is 20 by default.
+//
+// * The latest operation (LatestOperation) and the latest operation status (LatestOperationState) of the instance can be queried.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDVALUESNOTLIST = "InvalidParameter.InvalidFilterInvalidValuesNotList"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCENAMETOOLONG = "InvalidParameterValue.InstanceNameTooLong"
+//  INVALIDPARAMETERVALUE_INVALIDIPFORMAT = "InvalidParameterValue.InvalidIpFormat"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesDeniedActionsRequest() (request *DescribeInstancesDeniedActionsRequest) {
     request = &DescribeInstancesDeniedActionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -999,6 +1588,28 @@ func (c *Client) DescribeInstancesDeniedActions(request *DescribeInstancesDenied
     if request == nil {
         request = NewDescribeInstancesDeniedActionsRequest()
     }
+    
+    response = NewDescribeInstancesDeniedActionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstancesDeniedActions
+// This API is used to query the list of operation limits of one or more instances.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeInstancesDeniedActionsWithContext(ctx context.Context, request *DescribeInstancesDeniedActionsRequest) (response *DescribeInstancesDeniedActionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesDeniedActionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstancesDeniedActionsResponse()
     err = c.Send(request, response)
@@ -1044,6 +1655,29 @@ func (c *Client) DescribeInstancesReturnable(request *DescribeInstancesReturnabl
     return
 }
 
+// DescribeInstancesReturnable
+// This API is used to query whether the specified instance can be returned.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INTERNALERROR_DESCRIBEINSTANCESRETURNABLEERROR = "InternalError.DescribeInstancesReturnableError"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeInstancesReturnableWithContext(ctx context.Context, request *DescribeInstancesReturnableRequest) (response *DescribeInstancesReturnableResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesReturnableRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesReturnableResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesTrafficPackagesRequest() (request *DescribeInstancesTrafficPackagesRequest) {
     request = &DescribeInstancesTrafficPackagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1075,6 +1709,27 @@ func (c *Client) DescribeInstancesTrafficPackages(request *DescribeInstancesTraf
     if request == nil {
         request = NewDescribeInstancesTrafficPackagesRequest()
     }
+    
+    response = NewDescribeInstancesTrafficPackagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstancesTrafficPackages
+// This API is used to query the traffic package details of one or more instances.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "InternalError.DescribeInstancesTrafficPackagesFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+func (c *Client) DescribeInstancesTrafficPackagesWithContext(ctx context.Context, request *DescribeInstancesTrafficPackagesRequest) (response *DescribeInstancesTrafficPackagesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesTrafficPackagesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstancesTrafficPackagesResponse()
     err = c.Send(request, response)
@@ -1113,6 +1768,28 @@ func (c *Client) DescribeKeyPairs(request *DescribeKeyPairsRequest) (response *D
     if request == nil {
         request = NewDescribeKeyPairsRequest()
     }
+    
+    response = NewDescribeKeyPairsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeKeyPairs
+// This API is used to query key pairs.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_KEYPAIRIDMALFORMED = "InvalidParameterValue.KeyPairIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+func (c *Client) DescribeKeyPairsWithContext(ctx context.Context, request *DescribeKeyPairsRequest) (response *DescribeKeyPairsResponse, err error) {
+    if request == nil {
+        request = NewDescribeKeyPairsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeKeyPairsResponse()
     err = c.Send(request, response)
@@ -1172,6 +1849,43 @@ func (c *Client) DescribeModifyInstanceBundles(request *DescribeModifyInstanceBu
     return
 }
 
+// DescribeModifyInstanceBundles
+// This API is used to query the list of package options of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
+//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
+//  INTERNALERROR_INVALIDBUNDLEPRICE = "InternalError.InvalidBundlePrice"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
+//  INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_BUNDLENOTSUPPORTMODIFY = "OperationDenied.BundleNotSupportModify"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+func (c *Client) DescribeModifyInstanceBundlesWithContext(ctx context.Context, request *DescribeModifyInstanceBundlesRequest) (response *DescribeModifyInstanceBundlesResponse, err error) {
+    if request == nil {
+        request = NewDescribeModifyInstanceBundlesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeModifyInstanceBundlesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
     request = &DescribeRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1219,6 +1933,43 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
+    response = NewDescribeRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeRegions
+// This API is used to query the information of regions.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
+//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
+//  INTERNALERROR_INVALIDBUNDLEPRICE = "InternalError.InvalidBundlePrice"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
+//  INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_BUNDLENOTSUPPORTMODIFY = "OperationDenied.BundleNotSupportModify"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
@@ -1273,6 +2024,38 @@ func (c *Client) DescribeResetInstanceBlueprints(request *DescribeResetInstanceB
     return
 }
 
+// DescribeResetInstanceBlueprints
+// This API is used to query the image information of a reset instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTSTATE = "InvalidParameterValue.InvalidBlueprintState"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTTYPE = "InvalidParameterValue.InvalidBlueprintType"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) DescribeResetInstanceBlueprintsWithContext(ctx context.Context, request *DescribeResetInstanceBlueprintsRequest) (response *DescribeResetInstanceBlueprintsResponse, err error) {
+    if request == nil {
+        request = NewDescribeResetInstanceBlueprintsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeResetInstanceBlueprintsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
     request = &DescribeSnapshotsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1319,6 +2102,36 @@ func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response 
     return
 }
 
+// DescribeSnapshots
+// This API is used to query the list of snapshots.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDVALUESNOTLIST = "InvalidParameter.InvalidFilterInvalidValuesNotList"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTNAMETOOLONG = "InvalidParameterValue.SnapshotNameTooLong"
+func (c *Client) DescribeSnapshotsWithContext(ctx context.Context, request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSnapshotsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSnapshotsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSnapshotsDeniedActionsRequest() (request *DescribeSnapshotsDeniedActionsRequest) {
     request = &DescribeSnapshotsDeniedActionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1348,6 +2161,25 @@ func (c *Client) DescribeSnapshotsDeniedActions(request *DescribeSnapshotsDenied
     if request == nil {
         request = NewDescribeSnapshotsDeniedActionsRequest()
     }
+    
+    response = NewDescribeSnapshotsDeniedActionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSnapshotsDeniedActions
+// This API is used to query the list of operation limits of one or more snapshots.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+func (c *Client) DescribeSnapshotsDeniedActionsWithContext(ctx context.Context, request *DescribeSnapshotsDeniedActionsRequest) (response *DescribeSnapshotsDeniedActionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSnapshotsDeniedActionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSnapshotsDeniedActionsResponse()
     err = c.Send(request, response)
@@ -1389,6 +2221,25 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
     return
 }
 
+// DescribeZones
+// This API is used to query the list of AZs in a region.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+func (c *Client) DescribeZonesWithContext(ctx context.Context, request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
+    if request == nil {
+        request = NewDescribeZonesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeZonesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDetachCcnRequest() (request *DetachCcnRequest) {
     request = &DetachCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1419,6 +2270,26 @@ func (c *Client) DetachCcn(request *DetachCcnRequest) (response *DetachCcnRespon
     if request == nil {
         request = NewDetachCcnRequest()
     }
+    
+    response = NewDetachCcnResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DetachCcn
+// This API is used to unassociate a CCN instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CCNIDMALFORMED = "InvalidParameterValue.CcnIdMalformed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_DETACHCCNFAILED = "UnsupportedOperation.DetachCcnFailed"
+func (c *Client) DetachCcnWithContext(ctx context.Context, request *DetachCcnRequest) (response *DetachCcnResponse, err error) {
+    if request == nil {
+        request = NewDetachCcnRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDetachCcnResponse()
     err = c.Send(request, response)
@@ -1483,6 +2354,48 @@ func (c *Client) DisassociateInstancesKeyPairs(request *DisassociateInstancesKey
     return
 }
 
+// DisassociateInstancesKeyPairs
+// This API is used to unbind an instance from the specified key pair.
+//
+// 
+//
+// * Only instances on LINUX_UNIX in [RUNNING, STOPPED] status are supported. Instances in `RUNNING` status will be forcibly shut down before unbinding.
+//
+// * After a key pair is unassociated from an instance, you can log in to the instance with password.
+//
+// * If no password was set, you cannot log in to the instance with SSH after unbinding. You can call the ResetInstancesPassword API to set a login password.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_KEYPAIRIDMALFORMED = "InvalidParameterValue.KeyPairIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_KEYIDNOTFOUND = "ResourceNotFound.KeyIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_KEYPAIRNOTBOUNDTOINSTANCE = "UnsupportedOperation.KeyPairNotBoundToInstance"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) DisassociateInstancesKeyPairsWithContext(ctx context.Context, request *DisassociateInstancesKeyPairsRequest) (response *DisassociateInstancesKeyPairsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateInstancesKeyPairsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDisassociateInstancesKeyPairsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
     request = &ImportKeyPairRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1523,6 +2436,30 @@ func (c *Client) ImportKeyPair(request *ImportKeyPairRequest) (response *ImportK
     return
 }
 
+// ImportKeyPair
+// This API is used to import the specified key pair.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEKEYPAIRFAILED = "FailedOperation.CreateKeyPairFailed"
+//  FAILEDOPERATION_DELETEKEYPAIRFAILED = "FailedOperation.DeleteKeyPairFailed"
+//  FAILEDOPERATION_IMPORTKEYPAIRFAILED = "FailedOperation.ImportKeyPairFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATEPARAMETERVALUE = "InvalidParameterValue.DuplicateParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAMEEMPTY = "InvalidParameterValue.InvalidKeyPairNameEmpty"
+//  INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAMETOOLONG = "InvalidParameterValue.InvalidKeyPairNameTooLong"
+//  INVALIDPARAMETERVALUE_KEYPAIRPUBLICKEYDUPLICATED = "InvalidParameterValue.KeyPairPublicKeyDuplicated"
+//  INVALIDPARAMETERVALUE_KEYPAIRPUBLICKEYMALFORMED = "InvalidParameterValue.KeyPairPublicKeyMalformed"
+//  LIMITEXCEEDED_KEYPAIRLIMITEXCEEDED = "LimitExceeded.KeyPairLimitExceeded"
+func (c *Client) ImportKeyPairWithContext(ctx context.Context, request *ImportKeyPairRequest) (response *ImportKeyPairResponse, err error) {
+    if request == nil {
+        request = NewImportKeyPairRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewImportKeyPairResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquirePriceCreateBlueprintRequest() (request *InquirePriceCreateBlueprintRequest) {
     request = &InquirePriceCreateBlueprintRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1550,6 +2487,23 @@ func (c *Client) InquirePriceCreateBlueprint(request *InquirePriceCreateBlueprin
     if request == nil {
         request = NewInquirePriceCreateBlueprintRequest()
     }
+    
+    response = NewInquirePriceCreateBlueprintResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InquirePriceCreateBlueprint
+// This API is used to query the price of a created image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+func (c *Client) InquirePriceCreateBlueprintWithContext(ctx context.Context, request *InquirePriceCreateBlueprintRequest) (response *InquirePriceCreateBlueprintResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateBlueprintRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewInquirePriceCreateBlueprintResponse()
     err = c.Send(request, response)
@@ -1592,6 +2546,26 @@ func (c *Client) InquirePriceCreateInstances(request *InquirePriceCreateInstance
     return
 }
 
+// InquirePriceCreateInstances
+// This API is used to query the price of a created instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+func (c *Client) InquirePriceCreateInstancesWithContext(ctx context.Context, request *InquirePriceCreateInstancesRequest) (response *InquirePriceCreateInstancesResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewInquirePriceCreateInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquirePriceRenewInstancesRequest() (request *InquirePriceRenewInstancesRequest) {
     request = &InquirePriceRenewInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1622,6 +2596,26 @@ func (c *Client) InquirePriceRenewInstances(request *InquirePriceRenewInstancesR
     if request == nil {
         request = NewInquirePriceRenewInstancesRequest()
     }
+    
+    response = NewInquirePriceRenewInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InquirePriceRenewInstances
+// This API is used to query the price of renewed instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+func (c *Client) InquirePriceRenewInstancesWithContext(ctx context.Context, request *InquirePriceRenewInstancesRequest) (response *InquirePriceRenewInstancesResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceRenewInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewInquirePriceRenewInstancesResponse()
     err = c.Send(request, response)
@@ -1660,6 +2654,28 @@ func (c *Client) ModifyBlueprintAttribute(request *ModifyBlueprintAttributeReque
     if request == nil {
         request = NewModifyBlueprintAttributeRequest()
     }
+    
+    response = NewModifyBlueprintAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyBlueprintAttribute
+// This API is used to modify an image attribute.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTSHAREDBLUEPRINT = "UnsupportedOperation.NotSupportSharedBlueprint"
+func (c *Client) ModifyBlueprintAttributeWithContext(ctx context.Context, request *ModifyBlueprintAttributeRequest) (response *ModifyBlueprintAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyBlueprintAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyBlueprintAttributeResponse()
     err = c.Send(request, response)
@@ -1716,6 +2732,46 @@ func (c *Client) ModifyFirewallRuleDescription(request *ModifyFirewallRuleDescri
     if request == nil {
         request = NewModifyFirewallRuleDescriptionRequest()
     }
+    
+    response = NewModifyFirewallRuleDescriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyFirewallRuleDescription
+// This API is used to modify the description of a single firewall rule.
+//
+// 
+//
+// * `FirewallVersion` is used to specify the version of the firewall to be manipulated. If the `FirewallVersion` value passed in is not equal to the current latest version of the firewall, a failure will be returned. If `FirewallVersion` is not passed in, the description of the specified rule will be modified directly.
+//
+// 
+//
+// In the `FirewallRule` parameter:
+//
+// * Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
+//
+// * For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
+//
+// * For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
+//
+// * For the `Action` field, you can enter only `ACCEPT` or `DROP`.
+//
+// * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_FIREWALLRULEDESCRIPTIONTOOLONG = "InvalidParameterValue.FirewallRuleDescriptionTooLong"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_FIREWALLRULESNOTFOUND = "ResourceNotFound.FirewallRulesNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_FIREWALLBUSY = "UnsupportedOperation.FirewallBusy"
+//  UNSUPPORTEDOPERATION_FIREWALLVERSIONMISMATCH = "UnsupportedOperation.FirewallVersionMismatch"
+func (c *Client) ModifyFirewallRuleDescriptionWithContext(ctx context.Context, request *ModifyFirewallRuleDescriptionRequest) (response *ModifyFirewallRuleDescriptionResponse, err error) {
+    if request == nil {
+        request = NewModifyFirewallRuleDescriptionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyFirewallRuleDescriptionResponse()
     err = c.Send(request, response)
@@ -1785,6 +2841,53 @@ func (c *Client) ModifyFirewallRules(request *ModifyFirewallRulesRequest) (respo
     return
 }
 
+// ModifyFirewallRules
+// This API is used to reset the firewall rules of an instance.
+//
+// 
+//
+// This API deletes all firewall rules of the current instance first and then adds new rules.
+//
+// 
+//
+// * `FirewallVersion` is used to specify the version of the firewall to be manipulated. If the `FirewallVersion` value passed in is not equal to the current latest version of the firewall, a failure will be returned. If `FirewallVersion` is not passed in, the specified rule will be reset directly.
+//
+// 
+//
+// In the `FirewallRules` parameter:
+//
+// * Valid values of the `Protocol` field include `TCP`, `UDP`, `ICMP`, and `ALL`.
+//
+// * For the `Port` field, you can enter only `ALL`, a single port number, several port numbers separated by commas, or a port range indicated by two port numbers separated by a minus sign. If `Port` is a range, the port number on the left of the minus sign must be smaller than the one on the right. If `Protocol` is not `TCP` or `UDP`, `Port` can only be empty or `ALL`. The length of the `Port` field cannot exceed 64 characters.
+//
+// * For the `CidrBlock` field, you can enter any string that conforms to the CIDR format standard. Multi-Tenant network isolation rules take precedence over private network rules in the firewall.
+//
+// * For the `Action` field, you can enter only `ACCEPT` or `DROP`.
+//
+// * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
+//  INVALIDPARAMETER_FIREWALLRULESDUPLICATED = "InvalidParameter.FirewallRulesDuplicated"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_FIREWALLRULEDESCRIPTIONTOOLONG = "InvalidParameterValue.FirewallRuleDescriptionTooLong"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_FIREWALLBUSY = "UnsupportedOperation.FirewallBusy"
+//  UNSUPPORTEDOPERATION_FIREWALLVERSIONMISMATCH = "UnsupportedOperation.FirewallVersionMismatch"
+func (c *Client) ModifyFirewallRulesWithContext(ctx context.Context, request *ModifyFirewallRulesRequest) (response *ModifyFirewallRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyFirewallRulesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyFirewallRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequest) {
     request = &ModifyInstancesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1835,6 +2938,40 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
     return
 }
 
+// ModifyInstancesAttribute
+// This API is used to modify the attributes of instances.
+//
+// * The instance name is used only for users’ convenience.
+//
+// * Batch operations are supported. Each request can contain up to 100 instances at a time.
+//
+// * This API is async. A successful request will return a `RequestId`, it does not mean the operation is completed. You can call the `DescribeInstances` API to query the operation result. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETER_ONLYALLOWMODIFYONEATTRIBUTE = "InvalidParameter.OnlyAllowModifyOneAttribute"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCENAMETOOLONG = "InvalidParameterValue.InstanceNameTooLong"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) ModifyInstancesAttributeWithContext(ctx context.Context, request *ModifyInstancesAttributeRequest) (response *ModifyInstancesAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyInstancesAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyInstancesAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyInstancesLoginKeyPairAttributeRequest() (request *ModifyInstancesLoginKeyPairAttributeRequest) {
     request = &ModifyInstancesLoginKeyPairAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1867,6 +3004,28 @@ func (c *Client) ModifyInstancesLoginKeyPairAttribute(request *ModifyInstancesLo
     if request == nil {
         request = NewModifyInstancesLoginKeyPairAttributeRequest()
     }
+    
+    response = NewModifyInstancesLoginKeyPairAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyInstancesLoginKeyPairAttribute
+// This API is used to set the attributes of the default login key pair of an instance.
+//
+// 
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCELOGINKEYPAIRPERMITLOGIN = "InvalidParameterValue.InvalidInstanceLoginKeyPairPermitLogin"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) ModifyInstancesLoginKeyPairAttributeWithContext(ctx context.Context, request *ModifyInstancesLoginKeyPairAttributeRequest) (response *ModifyInstancesLoginKeyPairAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyInstancesLoginKeyPairAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyInstancesLoginKeyPairAttributeResponse()
     err = c.Send(request, response)
@@ -1917,6 +3076,34 @@ func (c *Client) ModifyInstancesRenewFlag(request *ModifyInstancesRenewFlagReque
     return
 }
 
+// ModifyInstancesRenewFlag
+// This API is used to modify the renewal flags of monthly subscribed instances.
+//
+// 
+//
+// * Instances marked with "auto-renewal" will be automatically renewed for one month when they expire.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100.
+//
+// * The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) ModifyInstancesRenewFlagWithContext(ctx context.Context, request *ModifyInstancesRenewFlagRequest) (response *ModifyInstancesRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyInstancesRenewFlagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyInstancesRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySnapshotAttributeRequest() (request *ModifySnapshotAttributeRequest) {
     request = &ModifySnapshotAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1947,6 +3134,26 @@ func (c *Client) ModifySnapshotAttribute(request *ModifySnapshotAttributeRequest
     if request == nil {
         request = NewModifySnapshotAttributeRequest()
     }
+    
+    response = NewModifySnapshotAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifySnapshotAttribute
+// This API is used to modify the attributes of a snapshot.
+//
+// <li>The snapshot name is used only for users’ convenience.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTNAMETOOLONG = "InvalidParameterValue.SnapshotNameTooLong"
+//  RESOURCENOTFOUND_SNAPSHOTIDNOTFOUND = "ResourceNotFound.SnapshotIdNotFound"
+func (c *Client) ModifySnapshotAttributeWithContext(ctx context.Context, request *ModifySnapshotAttributeRequest) (response *ModifySnapshotAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifySnapshotAttributeRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifySnapshotAttributeResponse()
     err = c.Send(request, response)
@@ -2006,6 +3213,43 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
     return
 }
 
+// RebootInstances
+// This API is used to restart instances.
+//
+// 
+//
+// * You can only perform this operation on instances whose status is `RUNNING`.
+//
+// * The instance status will become `REBOOTING` when the API is called successfully and will become `RUNNING` when the instance is successfully restarted.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) RebootInstancesWithContext(ctx context.Context, request *RebootInstancesRequest) (response *RebootInstancesResponse, err error) {
+    if request == nil {
+        request = NewRebootInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRebootInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetAttachCcnRequest() (request *ResetAttachCcnRequest) {
     request = &ResetAttachCcnRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2037,6 +3281,27 @@ func (c *Client) ResetAttachCcn(request *ResetAttachCcnRequest) (response *Reset
     if request == nil {
         request = NewResetAttachCcnRequest()
     }
+    
+    response = NewResetAttachCcnResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ResetAttachCcn
+// This API is used to apply for association again after a CCN instance association application expires.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_CCNIDMALFORMED = "InvalidParameterValue.CcnIdMalformed"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_RESETATTACHCCNFAILED = "UnsupportedOperation.ResetAttachCcnFailed"
+func (c *Client) ResetAttachCcnWithContext(ctx context.Context, request *ResetAttachCcnRequest) (response *ResetAttachCcnResponse, err error) {
+    if request == nil {
+        request = NewResetAttachCcnRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewResetAttachCcnResponse()
     err = c.Send(request, response)
@@ -2102,6 +3367,49 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
     return
 }
 
+// ResetInstance
+// This API is used to reinstall the image on the specified instance.
+//
+// 
+//
+// * If you specify a `BlueprintId`, the specified image is used; otherwise, the image used by the current instance is used.
+//
+// * The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
+//
+// * Currently, this API does not support switching the operating system between `LINUX_UNIX` and `WINDOWS` for instances.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_BLUEPRINTCONFIGNOTMATCH = "InvalidParameterValue.BlueprintConfigNotMatch"
+//  INVALIDPARAMETERVALUE_BLUEPRINTID = "InvalidParameterValue.BlueprintId"
+//  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NOTALLOWTOCHANGEPLATFORMTYPE = "InvalidParameterValue.NotAllowToChangePlatformType"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) ResetInstanceWithContext(ctx context.Context, request *ResetInstanceRequest) (response *ResetInstanceResponse, err error) {
+    if request == nil {
+        request = NewResetInstanceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewResetInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest) {
     request = &ResetInstancesPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2151,6 +3459,45 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
     if request == nil {
         request = NewResetInstancesPasswordRequest()
     }
+    
+    response = NewResetInstancesPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ResetInstancesPassword
+// This API is used to reset the password of the instance OS to a user-specified password.
+//
+// * You can only use this API to modify the password of the admin account. The name of the admin account varies by OS (on Windows, it is `Administrator`; on Ubuntu, it is `ubuntu`; on other systems, it is `root`).
+//
+// * Batch operations are supported. You can reset the passwords of multiple instances to the same one. The maximum number of instances in each request is 100.
+//
+// * It’s recommended to shut down the instance first and then reset the password. If the instance is running, this API will try to shut it down normally. If the attempt fails, it will force to instance to shut down.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NOTALLOWTOCHANGEPLATFORMTYPE = "InvalidParameterValue.NotAllowToChangePlatformType"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) ResetInstancesPasswordWithContext(ctx context.Context, request *ResetInstancesPasswordRequest) (response *ResetInstancesPasswordResponse, err error) {
+    if request == nil {
+        request = NewResetInstancesPasswordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewResetInstancesPasswordResponse()
     err = c.Send(request, response)
@@ -2210,6 +3557,43 @@ func (c *Client) StartInstances(request *StartInstancesRequest) (response *Start
     return
 }
 
+// StartInstances
+// This API is used to start one or more instances.
+//
+// 
+//
+// * You can only perform this operation on instances whose status is `STOPPED`.
+//
+// * The instance status will become `STARTING` when the API is called successfully and will become `RUNNING` when the instance is successfully started.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) StartInstancesWithContext(ctx context.Context, request *StartInstancesRequest) (response *StartInstancesResponse, err error) {
+    if request == nil {
+        request = NewStartInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStartInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopInstancesRequest() (request *StopInstancesRequest) {
     request = &StopInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2261,6 +3645,41 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
     return
 }
 
+// StopInstances
+// This API is used to shut down one or more instances.
+//
+// * You can only perform this operation on instances whose status is `RUNNING`.
+//
+// * The instance status will become `STOPPING` when the API is called successfully and will become `STOPPED` when the instance is successfully shut down.
+//
+// * Batch operations are supported. The maximum number of instances in each request is 100.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) StopInstancesWithContext(ctx context.Context, request *StopInstancesRequest) (response *StopInstancesResponse, err error) {
+    if request == nil {
+        request = NewStopInstancesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStopInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
     request = &TerminateInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2302,6 +3721,37 @@ func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (respons
     if request == nil {
         request = NewTerminateInstancesRequest()
     }
+    
+    response = NewTerminateInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// TerminateInstances
+// This API is used to terminate one or more instances.
+//
+// 
+//
+// * Instances in `SHUTDOWN` status can be terminated through this API and cannot be recovered.
+//
+// * Batch operations are supported. The allowed maximum number of instances in each request is 100.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) TerminateInstancesWithContext(ctx context.Context, request *TerminateInstancesRequest) (response *TerminateInstancesResponse, err error) {
+    if request == nil {
+        request = NewTerminateInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewTerminateInstancesResponse()
     err = c.Send(request, response)

@@ -15,6 +15,7 @@
 package v20191016
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -84,6 +85,31 @@ func (c *Client) AddUserContact(request *AddUserContactRequest) (response *AddUs
     return
 }
 
+// AddUserContact
+// This API is used to add the contact name and email.. The return value is the successfully added contact ID. Select Guangzhou for Region.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddUserContactWithContext(ctx context.Context, request *AddUserContactRequest) (response *AddUserContactResponse, err error) {
+    if request == nil {
+        request = NewAddUserContactRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAddUserContactResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest) {
     request = &CreateDBDiagReportTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -112,6 +138,24 @@ func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) 
     if request == nil {
         request = NewCreateDBDiagReportTaskRequest()
     }
+    
+    response = NewCreateDBDiagReportTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateDBDiagReportTask
+// This API is used to create a health report and send it via email as configured.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) CreateDBDiagReportTaskWithContext(ctx context.Context, request *CreateDBDiagReportTaskRequest) (response *CreateDBDiagReportTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateDBDiagReportTaskRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateDBDiagReportTaskResponse()
     err = c.Send(request, response)
@@ -151,6 +195,29 @@ func (c *Client) CreateDBDiagReportUrl(request *CreateDBDiagReportUrlRequest) (r
     if request == nil {
         request = NewCreateDBDiagReportUrlRequest()
     }
+    
+    response = NewCreateDBDiagReportUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateDBDiagReportUrl
+// This API is used to create a URL for a health report.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateDBDiagReportUrlWithContext(ctx context.Context, request *CreateDBDiagReportUrlRequest) (response *CreateDBDiagReportUrlResponse, err error) {
+    if request == nil {
+        request = NewCreateDBDiagReportUrlRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateDBDiagReportUrlResponse()
     err = c.Send(request, response)
@@ -198,6 +265,31 @@ func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response 
     return
 }
 
+// CreateMailProfile
+// This API is used to create the email configuration. The input parameter `ProfileType` represents the type of the email configuration. Valid values: `dbScan_mail_configuration` (email configuration of database inspection report) and `scheduler_mail_configuration` (email sending configuration of regularly generated health report). Select Guangzhou for Region, regardless of the region where the instance belongs.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateMailProfileWithContext(ctx context.Context, request *CreateMailProfileRequest) (response *CreateMailProfileResponse, err error) {
+    if request == nil {
+        request = NewCreateMailProfileRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSchedulerMailProfileRequest() (request *CreateSchedulerMailProfileRequest) {
     request = &CreateSchedulerMailProfileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -233,6 +325,31 @@ func (c *Client) CreateSchedulerMailProfile(request *CreateSchedulerMailProfileR
     if request == nil {
         request = NewCreateSchedulerMailProfileRequest()
     }
+    
+    response = NewCreateSchedulerMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateSchedulerMailProfile
+// This API is used to create the regular generation time of the health reports and the regular email sending configuration. Pass in the regular generation time of the health reports as a parameter (Monday to Sunday) to set the regular generation time of the health reports, and save the corresponding regular email sending configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSchedulerMailProfileWithContext(ctx context.Context, request *CreateSchedulerMailProfileRequest) (response *CreateSchedulerMailProfileResponse, err error) {
+    if request == nil {
+        request = NewCreateSchedulerMailProfileRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateSchedulerMailProfileResponse()
     err = c.Send(request, response)
@@ -276,6 +393,27 @@ func (c *Client) DescribeAllUserContact(request *DescribeAllUserContactRequest) 
     return
 }
 
+// DescribeAllUserContact
+// This API is used to obtain the information of the contact in the email.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAllUserContactWithContext(ctx context.Context, request *DescribeAllUserContactRequest) (response *DescribeAllUserContactResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllUserContactRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllUserContactResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllUserGroupRequest() (request *DescribeAllUserGroupRequest) {
     request = &DescribeAllUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -305,6 +443,25 @@ func (c *Client) DescribeAllUserGroup(request *DescribeAllUserGroupRequest) (res
     if request == nil {
         request = NewDescribeAllUserGroupRequest()
     }
+    
+    response = NewDescribeAllUserGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAllUserGroup
+// This API is used to obtain the information of the contact group in the email.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAllUserGroupWithContext(ctx context.Context, request *DescribeAllUserGroupRequest) (response *DescribeAllUserGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllUserGroupRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeAllUserGroupResponse()
     err = c.Send(request, response)
@@ -347,6 +504,26 @@ func (c *Client) DescribeDBDiagEvent(request *DescribeDBDiagEventRequest) (respo
     return
 }
 
+// DescribeDBDiagEvent
+// This API is used to get the details of an instance exception diagnosis event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDBDiagEventWithContext(ctx context.Context, request *DescribeDBDiagEventRequest) (response *DescribeDBDiagEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBDiagEventRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBDiagEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBDiagHistoryRequest() (request *DescribeDBDiagHistoryRequest) {
     request = &DescribeDBDiagHistoryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -377,6 +554,26 @@ func (c *Client) DescribeDBDiagHistory(request *DescribeDBDiagHistoryRequest) (r
     if request == nil {
         request = NewDescribeDBDiagHistoryRequest()
     }
+    
+    response = NewDescribeDBDiagHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBDiagHistory
+// This API is used to get the list of instance diagnosis events.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDBDiagHistoryWithContext(ctx context.Context, request *DescribeDBDiagHistoryRequest) (response *DescribeDBDiagHistoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBDiagHistoryRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBDiagHistoryResponse()
     err = c.Send(request, response)
@@ -420,6 +617,27 @@ func (c *Client) DescribeDBDiagReportTasks(request *DescribeDBDiagReportTasksReq
     return
 }
 
+// DescribeDBDiagReportTasks
+// This API is used to query the list of health report generation tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeDBDiagReportTasksWithContext(ctx context.Context, request *DescribeDBDiagReportTasksRequest) (response *DescribeDBDiagReportTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBDiagReportTasksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBDiagReportTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSpaceStatusRequest() (request *DescribeDBSpaceStatusRequest) {
     request = &DescribeDBSpaceStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -450,6 +668,26 @@ func (c *Client) DescribeDBSpaceStatus(request *DescribeDBSpaceStatusRequest) (r
     if request == nil {
         request = NewDescribeDBSpaceStatusRequest()
     }
+    
+    response = NewDescribeDBSpaceStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBSpaceStatus
+// This API is used to query the overview of instance space usage during a specified time period, including disk usage growth (MB), available disk space (MB), total disk space (MB), and estimated number of available days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDBSpaceStatusWithContext(ctx context.Context, request *DescribeDBSpaceStatusRequest) (response *DescribeDBSpaceStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSpaceStatusRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDBSpaceStatusResponse()
     err = c.Send(request, response)
@@ -490,6 +728,30 @@ func (c *Client) DescribeDiagDBInstances(request *DescribeDiagDBInstancesRequest
     if request == nil {
         request = NewDescribeDiagDBInstancesRequest()
     }
+    
+    response = NewDescribeDiagDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDiagDBInstances
+// This API is used to obtain the instance information list. Select Guangzhou for Region.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeDiagDBInstancesWithContext(ctx context.Context, request *DescribeDiagDBInstancesRequest) (response *DescribeDiagDBInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiagDBInstancesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeDiagDBInstancesResponse()
     err = c.Send(request, response)
@@ -537,6 +799,31 @@ func (c *Client) DescribeHealthScore(request *DescribeHealthScoreRequest) (respo
     return
 }
 
+// DescribeHealthScore
+// This API is used to obtain the health score and deduction for exceptions in the specified time period (30 minutes) based on the instance ID.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeHealthScoreWithContext(ctx context.Context, request *DescribeHealthScoreRequest) (response *DescribeHealthScoreResponse, err error) {
+    if request == nil {
+        request = NewDescribeHealthScoreRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeHealthScoreResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMailProfileRequest() (request *DescribeMailProfileRequest) {
     request = &DescribeMailProfileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -571,6 +858,24 @@ func (c *Client) DescribeMailProfile(request *DescribeMailProfileRequest) (respo
     return
 }
 
+// DescribeMailProfile
+// This API is used to obtain the email sending configurations, including the email configuration for database inspection and the email sending configuration for regularly generated health reports. Select Guangzhou for Region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeMailProfileWithContext(ctx context.Context, request *DescribeMailProfileRequest) (response *DescribeMailProfileResponse, err error) {
+    if request == nil {
+        request = NewDescribeMailProfileRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSlowLogTimeSeriesStatsRequest() (request *DescribeSlowLogTimeSeriesStatsRequest) {
     request = &DescribeSlowLogTimeSeriesStatsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -597,6 +902,22 @@ func (c *Client) DescribeSlowLogTimeSeriesStats(request *DescribeSlowLogTimeSeri
     if request == nil {
         request = NewDescribeSlowLogTimeSeriesStatsRequest()
     }
+    
+    response = NewDescribeSlowLogTimeSeriesStatsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSlowLogTimeSeriesStats
+// This API is used to get the slow log statistics histogram.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeSlowLogTimeSeriesStatsWithContext(ctx context.Context, request *DescribeSlowLogTimeSeriesStatsRequest) (response *DescribeSlowLogTimeSeriesStatsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogTimeSeriesStatsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSlowLogTimeSeriesStatsResponse()
     err = c.Send(request, response)
@@ -638,6 +959,25 @@ func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) 
     return
 }
 
+// DescribeSlowLogTopSqls
+// This API is used to get and sort the top slow SQL statements in a specified time period by the aggregation mode of SQL template plus schema.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeSlowLogTopSqlsWithContext(ctx context.Context, request *DescribeSlowLogTopSqlsRequest) (response *DescribeSlowLogTopSqlsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogTopSqlsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeSlowLogTopSqlsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSlowLogUserHostStatsRequest() (request *DescribeSlowLogUserHostStatsRequest) {
     request = &DescribeSlowLogUserHostStatsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -668,6 +1008,26 @@ func (c *Client) DescribeSlowLogUserHostStats(request *DescribeSlowLogUserHostSt
     if request == nil {
         request = NewDescribeSlowLogUserHostStatsRequest()
     }
+    
+    response = NewDescribeSlowLogUserHostStatsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeSlowLogUserHostStats
+// This API is used to obtain the statistical distribution chart of slow log source addresses.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeSlowLogUserHostStatsWithContext(ctx context.Context, request *DescribeSlowLogUserHostStatsRequest) (response *DescribeSlowLogUserHostStatsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSlowLogUserHostStatsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeSlowLogUserHostStatsResponse()
     err = c.Send(request, response)
@@ -712,6 +1072,28 @@ func (c *Client) DescribeTopSpaceSchemaTimeSeries(request *DescribeTopSpaceSchem
     return
 }
 
+// DescribeTopSpaceSchemaTimeSeries
+// This API is used to query the daily space data of top databases consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeTopSpaceSchemaTimeSeriesWithContext(ctx context.Context, request *DescribeTopSpaceSchemaTimeSeriesRequest) (response *DescribeTopSpaceSchemaTimeSeriesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceSchemaTimeSeriesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopSpaceSchemaTimeSeriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTopSpaceSchemasRequest() (request *DescribeTopSpaceSchemasRequest) {
     request = &DescribeTopSpaceSchemasRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -744,6 +1126,28 @@ func (c *Client) DescribeTopSpaceSchemas(request *DescribeTopSpaceSchemasRequest
     if request == nil {
         request = NewDescribeTopSpaceSchemasRequest()
     }
+    
+    response = NewDescribeTopSpaceSchemasResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTopSpaceSchemas
+// This API is used to query real-time space statistics of top databases. The return results are sorted by size by default.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeTopSpaceSchemasWithContext(ctx context.Context, request *DescribeTopSpaceSchemasRequest) (response *DescribeTopSpaceSchemasResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceSchemasRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTopSpaceSchemasResponse()
     err = c.Send(request, response)
@@ -785,6 +1189,25 @@ func (c *Client) DescribeTopSpaceTableTimeSeries(request *DescribeTopSpaceTableT
     return
 }
 
+// DescribeTopSpaceTableTimeSeries
+// This API is used to query the daily space data of top tables consuming the most instance space. The data is daily collected by DBbrain during a specified time period. The return results are sorted by size by default.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTopSpaceTableTimeSeriesWithContext(ctx context.Context, request *DescribeTopSpaceTableTimeSeriesRequest) (response *DescribeTopSpaceTableTimeSeriesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceTableTimeSeriesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopSpaceTableTimeSeriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTopSpaceTablesRequest() (request *DescribeTopSpaceTablesRequest) {
     request = &DescribeTopSpaceTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -814,6 +1237,25 @@ func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) 
     if request == nil {
         request = NewDescribeTopSpaceTablesRequest()
     }
+    
+    response = NewDescribeTopSpaceTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTopSpaceTables
+// This API is used to query real-time space statistics of top tables of an instance. The return results are sorted by size by default.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeTopSpaceTablesWithContext(ctx context.Context, request *DescribeTopSpaceTablesRequest) (response *DescribeTopSpaceTablesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopSpaceTablesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTopSpaceTablesResponse()
     err = c.Send(request, response)
@@ -858,6 +1300,28 @@ func (c *Client) DescribeUserSqlAdvice(request *DescribeUserSqlAdviceRequest) (r
     return
 }
 
+// DescribeUserSqlAdvice
+// This API is used to obtain SQL statement optimization suggestions.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) DescribeUserSqlAdviceWithContext(ctx context.Context, request *DescribeUserSqlAdviceRequest) (response *DescribeUserSqlAdviceResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserSqlAdviceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserSqlAdviceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDiagDBInstanceConfRequest() (request *ModifyDiagDBInstanceConfRequest) {
     request = &ModifyDiagDBInstanceConfRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -888,6 +1352,26 @@ func (c *Client) ModifyDiagDBInstanceConf(request *ModifyDiagDBInstanceConfReque
     if request == nil {
         request = NewModifyDiagDBInstanceConfRequest()
     }
+    
+    response = NewModifyDiagDBInstanceConfResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDiagDBInstanceConf
+// This API is used to enable/disable instance inspection.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyDiagDBInstanceConfWithContext(ctx context.Context, request *ModifyDiagDBInstanceConfRequest) (response *ModifyDiagDBInstanceConfResponse, err error) {
+    if request == nil {
+        request = NewModifyDiagDBInstanceConfRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyDiagDBInstanceConfResponse()
     err = c.Send(request, response)

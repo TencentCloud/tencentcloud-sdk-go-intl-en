@@ -15,6 +15,7 @@
 package v20201221
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -72,6 +73,19 @@ func (c *Client) CreateCosTokenV2(request *CreateCosTokenV2Request) (response *C
     return
 }
 
+// CreateCosTokenV2
+// This API is used to generate a COS temporary key.
+func (c *Client) CreateCosTokenV2WithContext(ctx context.Context, request *CreateCosTokenV2Request) (response *CreateCosTokenV2Response, err error) {
+    if request == nil {
+        request = NewCreateCosTokenV2Request()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateCosTokenV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
     request = &CreateNamespaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -101,6 +115,19 @@ func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *Cre
     return
 }
 
+// CreateNamespace
+// This API is used to create an environment.
+func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
+    if request == nil {
+        request = NewCreateNamespaceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateResourceRequest() (request *CreateResourceRequest) {
     request = &CreateResourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -124,6 +151,19 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    
+    response = NewCreateResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateResource
+// This API is used to bind a cloud resource.
+func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
+    if request == nil {
+        request = NewCreateResourceRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
     err = c.Send(request, response)
@@ -162,6 +202,22 @@ func (c *Client) CreateServiceV2(request *CreateServiceV2Request) (response *Cre
     return
 }
 
+// CreateServiceV2
+// This API is used to create a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) CreateServiceV2WithContext(ctx context.Context, request *CreateServiceV2Request) (response *CreateServiceV2Response, err error) {
+    if request == nil {
+        request = NewCreateServiceV2Request()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateServiceV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteIngressRequest() (request *DeleteIngressRequest) {
     request = &DeleteIngressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -188,6 +244,22 @@ func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteI
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    
+    response = NewDeleteIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteIngress
+// This API is used to delete an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
+    if request == nil {
+        request = NewDeleteIngressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteIngressResponse()
     err = c.Send(request, response)
@@ -226,6 +298,22 @@ func (c *Client) DeployServiceV2(request *DeployServiceV2Request) (response *Dep
     return
 }
 
+// DeployServiceV2
+// This API is used to deploy a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DeployServiceV2WithContext(ctx context.Context, request *DeployServiceV2Request) (response *DeployServiceV2Response, err error) {
+    if request == nil {
+        request = NewDeployServiceV2Request()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeployServiceV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIngressRequest() (request *DescribeIngressRequest) {
     request = &DescribeIngressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -252,6 +340,22 @@ func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *Des
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    
+    response = NewDescribeIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeIngress
+// This API is used to query an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeIngressWithContext(ctx context.Context, request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
+    if request == nil {
+        request = NewDescribeIngressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeIngressResponse()
     err = c.Send(request, response)
@@ -290,6 +394,22 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
     return
 }
 
+// DescribeIngresses
+// This API is used to query the list of ingress rules.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeIngressesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeIngressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNamespacesRequest() (request *DescribeNamespacesRequest) {
     request = &DescribeNamespacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -316,6 +436,22 @@ func (c *Client) DescribeNamespaces(request *DescribeNamespacesRequest) (respons
     if request == nil {
         request = NewDescribeNamespacesRequest()
     }
+    
+    response = NewDescribeNamespacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeNamespaces
+// This API is used to get the list of tenant environments.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeNamespacesWithContext(ctx context.Context, request *DescribeNamespacesRequest) (response *DescribeNamespacesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNamespacesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeNamespacesResponse()
     err = c.Send(request, response)
@@ -354,6 +490,22 @@ func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesReque
     return
 }
 
+// DescribeRelatedIngresses
+// This API is used to query the list of ingress rules associated with the service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRelatedIngressesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeRelatedIngressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServiceRunPodListV2Request() (request *DescribeServiceRunPodListV2Request) {
     request = &DescribeServiceRunPodListV2Request{
         BaseRequest: &tchttp.BaseRequest{},
@@ -380,6 +532,22 @@ func (c *Client) DescribeServiceRunPodListV2(request *DescribeServiceRunPodListV
     if request == nil {
         request = NewDescribeServiceRunPodListV2Request()
     }
+    
+    response = NewDescribeServiceRunPodListV2Response()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeServiceRunPodListV2
+// This API is used to get the list of running pods under a service.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) DescribeServiceRunPodListV2WithContext(ctx context.Context, request *DescribeServiceRunPodListV2Request) (response *DescribeServiceRunPodListV2Response, err error) {
+    if request == nil {
+        request = NewDescribeServiceRunPodListV2Request()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeServiceRunPodListV2Response()
     err = c.Send(request, response)
@@ -418,6 +586,22 @@ func (c *Client) GenerateDownloadUrl(request *GenerateDownloadUrlRequest) (respo
     return
 }
 
+// GenerateDownloadUrl
+// Generate the pre-signed download URL for the specified package
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) GenerateDownloadUrlWithContext(ctx context.Context, request *GenerateDownloadUrlRequest) (response *GenerateDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewGenerateDownloadUrlRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGenerateDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyIngressRequest() (request *ModifyIngressRequest) {
     request = &ModifyIngressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -444,6 +628,22 @@ func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyI
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    
+    response = NewModifyIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyIngress
+// This API is used to create or update an ingress rule.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
+    if request == nil {
+        request = NewModifyIngressRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewModifyIngressResponse()
     err = c.Send(request, response)
@@ -482,6 +682,22 @@ func (c *Client) ModifyNamespace(request *ModifyNamespaceRequest) (response *Mod
     return
 }
 
+// ModifyNamespace
+// This API is used to edit an environment.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyNamespaceWithContext(ctx context.Context, request *ModifyNamespaceRequest) (response *ModifyNamespaceResponse, err error) {
+    if request == nil {
+        request = NewModifyNamespaceRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyServiceInfoRequest() (request *ModifyServiceInfoRequest) {
     request = &ModifyServiceInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -514,6 +730,22 @@ func (c *Client) ModifyServiceInfo(request *ModifyServiceInfoRequest) (response 
     return
 }
 
+// ModifyServiceInfo
+// This API is used to modify a service’s basic information.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) ModifyServiceInfoWithContext(ctx context.Context, request *ModifyServiceInfoRequest) (response *ModifyServiceInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyServiceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRestartServiceRunPodRequest() (request *RestartServiceRunPodRequest) {
     request = &RestartServiceRunPodRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -540,6 +772,22 @@ func (c *Client) RestartServiceRunPod(request *RestartServiceRunPodRequest) (res
     if request == nil {
         request = NewRestartServiceRunPodRequest()
     }
+    
+    response = NewRestartServiceRunPodResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RestartServiceRunPod
+// This API is used to restart an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+func (c *Client) RestartServiceRunPodWithContext(ctx context.Context, request *RestartServiceRunPodRequest) (response *RestartServiceRunPodResponse, err error) {
+    if request == nil {
+        request = NewRestartServiceRunPodRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewRestartServiceRunPodResponse()
     err = c.Send(request, response)

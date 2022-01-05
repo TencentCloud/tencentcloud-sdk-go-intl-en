@@ -15,6 +15,7 @@
 package v20190919
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -83,6 +84,30 @@ func (c *Client) CreateTranscode(request *CreateTranscodeRequest) (response *Cre
     return
 }
 
+// CreateTranscode
+// This API is used to create a document transcoding task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TRANSCODE = "FailedOperation.Transcode"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_FILEFORMATUNSUPPORTED = "InvalidParameter.FileFormatUnsupported"
+//  INVALIDPARAMETER_SDKAPPIDNOTFOUND = "InvalidParameter.SdkAppIdNotFound"
+//  INVALIDPARAMETER_TRANSCODEPARAMETER = "InvalidParameter.TranscodeParameter"
+//  LIMITEXCEEDED_TASKCONCURRENCY = "LimitExceeded.TaskConcurrency"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) CreateTranscodeWithContext(ctx context.Context, request *CreateTranscodeRequest) (response *CreateTranscodeResponse, err error) {
+    if request == nil {
+        request = NewCreateTranscodeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateTranscodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOnlineRecordRequest() (request *DescribeOnlineRecordRequest) {
     request = &DescribeOnlineRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -120,6 +145,27 @@ func (c *Client) DescribeOnlineRecord(request *DescribeOnlineRecordRequest) (res
     return
 }
 
+// DescribeOnlineRecord
+// This API is used to query the status and result of a real-time recording task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECORD = "FailedOperation.Record"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) DescribeOnlineRecordWithContext(ctx context.Context, request *DescribeOnlineRecordRequest) (response *DescribeOnlineRecordResponse, err error) {
+    if request == nil {
+        request = NewDescribeOnlineRecordRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeOnlineRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOnlineRecordCallbackRequest() (request *DescribeOnlineRecordCallbackRequest) {
     request = &DescribeOnlineRecordCallbackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -150,6 +196,26 @@ func (c *Client) DescribeOnlineRecordCallback(request *DescribeOnlineRecordCallb
     if request == nil {
         request = NewDescribeOnlineRecordCallbackRequest()
     }
+    
+    response = NewDescribeOnlineRecordCallbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeOnlineRecordCallback
+// This API is used to query the real-time recording callback address.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) DescribeOnlineRecordCallbackWithContext(ctx context.Context, request *DescribeOnlineRecordCallbackRequest) (response *DescribeOnlineRecordCallbackResponse, err error) {
+    if request == nil {
+        request = NewDescribeOnlineRecordCallbackRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeOnlineRecordCallbackResponse()
     err = c.Send(request, response)
@@ -202,6 +268,36 @@ func (c *Client) DescribeTranscode(request *DescribeTranscodeRequest) (response 
     return
 }
 
+// DescribeTranscode
+// This API is used to query the progress and result of a document transcoding task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FILEDOWNLOADFAIL = "FailedOperation.FileDownloadFail"
+//  FAILEDOPERATION_FILEFORMATERROR = "FailedOperation.FileFormatError"
+//  FAILEDOPERATION_FILEOPENFAIL = "FailedOperation.FileOpenFail"
+//  FAILEDOPERATION_FILEUPLOADFAIL = "FailedOperation.FileUploadFail"
+//  FAILEDOPERATION_TRANSCODE = "FailedOperation.Transcode"
+//  FAILEDOPERATION_TRANSCODESERVERERROR = "FailedOperation.TranscodeServerError"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_FILEFORMATUNSUPPORTED = "InvalidParameter.FileFormatUnsupported"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+//  INVALIDPARAMETER_TRANSCODEPARAMETER = "InvalidParameter.TranscodeParameter"
+//  INVALIDPARAMETER_URLFORMATERROR = "InvalidParameter.UrlFormatError"
+//  LIMITEXCEEDED_TRANSCODEPAGESLIMITATION = "LimitExceeded.TranscodePagesLimitation"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) DescribeTranscodeWithContext(ctx context.Context, request *DescribeTranscodeRequest) (response *DescribeTranscodeResponse, err error) {
+    if request == nil {
+        request = NewDescribeTranscodeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeTranscodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTranscodeCallbackRequest() (request *DescribeTranscodeCallbackRequest) {
     request = &DescribeTranscodeCallbackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -232,6 +328,26 @@ func (c *Client) DescribeTranscodeCallback(request *DescribeTranscodeCallbackReq
     if request == nil {
         request = NewDescribeTranscodeCallbackRequest()
     }
+    
+    response = NewDescribeTranscodeCallbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTranscodeCallback
+// This API is used to query the document transcoding callback address.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) DescribeTranscodeCallbackWithContext(ctx context.Context, request *DescribeTranscodeCallbackRequest) (response *DescribeTranscodeCallbackResponse, err error) {
+    if request == nil {
+        request = NewDescribeTranscodeCallbackRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTranscodeCallbackResponse()
     err = c.Send(request, response)
@@ -276,6 +392,28 @@ func (c *Client) PauseOnlineRecord(request *PauseOnlineRecordRequest) (response 
     return
 }
 
+// PauseOnlineRecord
+// This API is used to pause real-time recording.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+//  UNSUPPORTEDOPERATION_INVALIDTASKSTATUS = "UnsupportedOperation.InvalidTaskStatus"
+//  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
+func (c *Client) PauseOnlineRecordWithContext(ctx context.Context, request *PauseOnlineRecordRequest) (response *PauseOnlineRecordResponse, err error) {
+    if request == nil {
+        request = NewPauseOnlineRecordRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewPauseOnlineRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResumeOnlineRecordRequest() (request *ResumeOnlineRecordRequest) {
     request = &ResumeOnlineRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -308,6 +446,28 @@ func (c *Client) ResumeOnlineRecord(request *ResumeOnlineRecordRequest) (respons
     if request == nil {
         request = NewResumeOnlineRecordRequest()
     }
+    
+    response = NewResumeOnlineRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ResumeOnlineRecord
+// This API is used to resume real-time recording.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+//  UNSUPPORTEDOPERATION_INVALIDTASKSTATUS = "UnsupportedOperation.InvalidTaskStatus"
+//  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
+func (c *Client) ResumeOnlineRecordWithContext(ctx context.Context, request *ResumeOnlineRecordRequest) (response *ResumeOnlineRecordResponse, err error) {
+    if request == nil {
+        request = NewResumeOnlineRecordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewResumeOnlineRecordResponse()
     err = c.Send(request, response)
@@ -350,6 +510,26 @@ func (c *Client) SetOnlineRecordCallback(request *SetOnlineRecordCallbackRequest
     return
 }
 
+// SetOnlineRecordCallback
+// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_CALLBACKADDRESSFORMATERROR = "InvalidParameter.CallbackAddressFormatError"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) SetOnlineRecordCallbackWithContext(ctx context.Context, request *SetOnlineRecordCallbackRequest) (response *SetOnlineRecordCallbackResponse, err error) {
+    if request == nil {
+        request = NewSetOnlineRecordCallbackRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSetOnlineRecordCallbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetOnlineRecordCallbackKeyRequest() (request *SetOnlineRecordCallbackKeyRequest) {
     request = &SetOnlineRecordCallbackKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -380,6 +560,26 @@ func (c *Client) SetOnlineRecordCallbackKey(request *SetOnlineRecordCallbackKeyR
     if request == nil {
         request = NewSetOnlineRecordCallbackKeyRequest()
     }
+    
+    response = NewSetOnlineRecordCallbackKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SetOnlineRecordCallbackKey
+// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) SetOnlineRecordCallbackKeyWithContext(ctx context.Context, request *SetOnlineRecordCallbackKeyRequest) (response *SetOnlineRecordCallbackKeyResponse, err error) {
+    if request == nil {
+        request = NewSetOnlineRecordCallbackKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSetOnlineRecordCallbackKeyResponse()
     err = c.Send(request, response)
@@ -422,6 +622,26 @@ func (c *Client) SetTranscodeCallback(request *SetTranscodeCallbackRequest) (res
     return
 }
 
+// SetTranscodeCallback
+// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_CALLBACKADDRESSFORMATERROR = "InvalidParameter.CallbackAddressFormatError"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) SetTranscodeCallbackWithContext(ctx context.Context, request *SetTranscodeCallbackRequest) (response *SetTranscodeCallbackResponse, err error) {
+    if request == nil {
+        request = NewSetTranscodeCallbackRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSetTranscodeCallbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetTranscodeCallbackKeyRequest() (request *SetTranscodeCallbackKeyRequest) {
     request = &SetTranscodeCallbackKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -452,6 +672,26 @@ func (c *Client) SetTranscodeCallbackKey(request *SetTranscodeCallbackKeyRequest
     if request == nil {
         request = NewSetTranscodeCallbackKeyRequest()
     }
+    
+    response = NewSetTranscodeCallbackKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SetTranscodeCallbackKey
+// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) SetTranscodeCallbackKeyWithContext(ctx context.Context, request *SetTranscodeCallbackKeyRequest) (response *SetTranscodeCallbackKeyResponse, err error) {
+    if request == nil {
+        request = NewSetTranscodeCallbackKeyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSetTranscodeCallbackKeyResponse()
     err = c.Send(request, response)
@@ -498,6 +738,30 @@ func (c *Client) StartOnlineRecord(request *StartOnlineRecordRequest) (response 
     return
 }
 
+// StartOnlineRecord
+// This API is used to start a real-time recording task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_INVALIDEXTRA = "InvalidParameter.InvalidExtra"
+//  INVALIDPARAMETER_RECORDPARAMETER = "InvalidParameter.RecordParameter"
+//  INVALIDPARAMETER_SDKAPPIDNOTFOUND = "InvalidParameter.SdkAppIdNotFound"
+//  LIMITEXCEEDED_TASKCONCURRENCY = "LimitExceeded.TaskConcurrency"
+//  RESOURCEINUSE_RECORDUSERID = "ResourceInUse.RecordUserId"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+func (c *Client) StartOnlineRecordWithContext(ctx context.Context, request *StartOnlineRecordRequest) (response *StartOnlineRecordResponse, err error) {
+    if request == nil {
+        request = NewStartOnlineRecordRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStartOnlineRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopOnlineRecordRequest() (request *StopOnlineRecordRequest) {
     request = &StopOnlineRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -529,6 +793,27 @@ func (c *Client) StopOnlineRecord(request *StopOnlineRecordRequest) (response *S
     if request == nil {
         request = NewStopOnlineRecordRequest()
     }
+    
+    response = NewStopOnlineRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopOnlineRecord
+// This API is used to stop real-time recording.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
+//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+//  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
+func (c *Client) StopOnlineRecordWithContext(ctx context.Context, request *StopOnlineRecordRequest) (response *StopOnlineRecordResponse, err error) {
+    if request == nil {
+        request = NewStopOnlineRecordRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStopOnlineRecordResponse()
     err = c.Send(request, response)

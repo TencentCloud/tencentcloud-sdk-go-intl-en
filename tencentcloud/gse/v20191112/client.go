@@ -15,6 +15,7 @@
 package v20191112
 
 import (
+    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -92,6 +93,39 @@ func (c *Client) CopyFleet(request *CopyFleetRequest) (response *CopyFleetRespon
     return
 }
 
+// CopyFleet
+// This API is used to replicate server fleet.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_FLEETLIMITEXCEEDED = "LimitExceeded.FleetLimitExceeded"
+//  LIMITEXCEEDED_INSTANCELIMITEXCEEDED = "LimitExceeded.InstanceLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CopyFleetWithContext(ctx context.Context, request *CopyFleetRequest) (response *CopyFleetResponse, err error) {
+    if request == nil {
+        request = NewCopyFleetRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCopyFleetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateGameServerSessionRequest() (request *CreateGameServerSessionRequest) {
     request = &CreateGameServerSessionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -133,6 +167,31 @@ func (c *Client) CreateGameServerSession(request *CreateGameServerSessionRequest
     return
 }
 
+// CreateGameServerSession
+// This API is used to create a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) CreateGameServerSessionWithContext(ctx context.Context, request *CreateGameServerSessionRequest) (response *CreateGameServerSessionResponse, err error) {
+    if request == nil {
+        request = NewCreateGameServerSessionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateGameServerSessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteTimerScalingPolicyRequest() (request *DeleteTimerScalingPolicyRequest) {
     request = &DeleteTimerScalingPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -165,6 +224,28 @@ func (c *Client) DeleteTimerScalingPolicy(request *DeleteTimerScalingPolicyReque
     if request == nil {
         request = NewDeleteTimerScalingPolicyRequest()
     }
+    
+    response = NewDeleteTimerScalingPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteTimerScalingPolicy
+// This API (DeleteTimerScalingPolicy) is used to delete a scheduled scaling policy of a fleet.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DeleteTimerScalingPolicyWithContext(ctx context.Context, request *DeleteTimerScalingPolicyRequest) (response *DeleteTimerScalingPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteTimerScalingPolicyRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDeleteTimerScalingPolicyResponse()
     err = c.Send(request, response)
@@ -210,6 +291,29 @@ func (c *Client) DescribeGameServerSessionDetails(request *DescribeGameServerSes
     return
 }
 
+// DescribeGameServerSessionDetails
+// This API is used to query the list of game server session details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DescribeGameServerSessionDetailsWithContext(ctx context.Context, request *DescribeGameServerSessionDetailsRequest) (response *DescribeGameServerSessionDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeGameServerSessionDetailsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeGameServerSessionDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGameServerSessionPlacementRequest() (request *DescribeGameServerSessionPlacementRequest) {
     request = &DescribeGameServerSessionPlacementRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -240,6 +344,26 @@ func (c *Client) DescribeGameServerSessionPlacement(request *DescribeGameServerS
     if request == nil {
         request = NewDescribeGameServerSessionPlacementRequest()
     }
+    
+    response = NewDescribeGameServerSessionPlacementResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeGameServerSessionPlacement
+// This API is used to query the placement of a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DescribeGameServerSessionPlacementWithContext(ctx context.Context, request *DescribeGameServerSessionPlacementRequest) (response *DescribeGameServerSessionPlacementResponse, err error) {
+    if request == nil {
+        request = NewDescribeGameServerSessionPlacementRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeGameServerSessionPlacementResponse()
     err = c.Send(request, response)
@@ -285,6 +409,29 @@ func (c *Client) DescribeGameServerSessions(request *DescribeGameServerSessionsR
     return
 }
 
+// DescribeGameServerSessions
+// This API is used to query the list of game server sessions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DescribeGameServerSessionsWithContext(ctx context.Context, request *DescribeGameServerSessionsRequest) (response *DescribeGameServerSessionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeGameServerSessionsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeGameServerSessionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceTypesRequest() (request *DescribeInstanceTypesRequest) {
     request = &DescribeInstanceTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -315,6 +462,26 @@ func (c *Client) DescribeInstanceTypes(request *DescribeInstanceTypesRequest) (r
     if request == nil {
         request = NewDescribeInstanceTypesRequest()
     }
+    
+    response = NewDescribeInstanceTypesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstanceTypes
+// This API is used to obtain the list of CVM types in the specified region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceTypesWithContext(ctx context.Context, request *DescribeInstanceTypesRequest) (response *DescribeInstanceTypesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceTypesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeInstanceTypesResponse()
     err = c.Send(request, response)
@@ -359,6 +526,28 @@ func (c *Client) DescribePlayerSessions(request *DescribePlayerSessionsRequest) 
     return
 }
 
+// DescribePlayerSessions
+// This API is used to get the list of player sessions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DescribePlayerSessionsWithContext(ctx context.Context, request *DescribePlayerSessionsRequest) (response *DescribePlayerSessionsResponse, err error) {
+    if request == nil {
+        request = NewDescribePlayerSessionsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribePlayerSessionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimerScalingPoliciesRequest() (request *DescribeTimerScalingPoliciesRequest) {
     request = &DescribeTimerScalingPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -391,6 +580,28 @@ func (c *Client) DescribeTimerScalingPolicies(request *DescribeTimerScalingPolic
     if request == nil {
         request = NewDescribeTimerScalingPoliciesRequest()
     }
+    
+    response = NewDescribeTimerScalingPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeTimerScalingPolicies
+// This API (DescribeTimerScalingPolicies) is used to query the scheduled scaling policies of a fleet. You can query the policies by `fleetID` or the fleet name. The returned results are paged. 
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) DescribeTimerScalingPoliciesWithContext(ctx context.Context, request *DescribeTimerScalingPoliciesRequest) (response *DescribeTimerScalingPoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTimerScalingPoliciesRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewDescribeTimerScalingPoliciesResponse()
     err = c.Send(request, response)
@@ -432,6 +643,25 @@ func (c *Client) EndGameServerSessionAndProcess(request *EndGameServerSessionAnd
     return
 }
 
+// EndGameServerSessionAndProcess
+// This API is used to terminate the game server session and the corresponding process, which is applicable to time-limited protection and no protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) EndGameServerSessionAndProcessWithContext(ctx context.Context, request *EndGameServerSessionAndProcessRequest) (response *EndGameServerSessionAndProcessResponse, err error) {
+    if request == nil {
+        request = NewEndGameServerSessionAndProcessRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewEndGameServerSessionAndProcessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetGameServerSessionLogUrlRequest() (request *GetGameServerSessionLogUrlRequest) {
     request = &GetGameServerSessionLogUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -464,6 +694,28 @@ func (c *Client) GetGameServerSessionLogUrl(request *GetGameServerSessionLogUrlR
     if request == nil {
         request = NewGetGameServerSessionLogUrlRequest()
     }
+    
+    response = NewGetGameServerSessionLogUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GetGameServerSessionLogUrl
+// This API is used to get the log URL of a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) GetGameServerSessionLogUrlWithContext(ctx context.Context, request *GetGameServerSessionLogUrlRequest) (response *GetGameServerSessionLogUrlResponse, err error) {
+    if request == nil {
+        request = NewGetGameServerSessionLogUrlRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewGetGameServerSessionLogUrlResponse()
     err = c.Send(request, response)
@@ -514,6 +766,34 @@ func (c *Client) GetInstanceAccess(request *GetInstanceAccessRequest) (response 
     return
 }
 
+// GetInstanceAccess
+// This API is used to get the credentials required for instance login.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetInstanceAccessWithContext(ctx context.Context, request *GetInstanceAccessRequest) (response *GetInstanceAccessResponse, err error) {
+    if request == nil {
+        request = NewGetInstanceAccessRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetInstanceAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewJoinGameServerSessionRequest() (request *JoinGameServerSessionRequest) {
     request = &JoinGameServerSessionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -555,6 +835,31 @@ func (c *Client) JoinGameServerSession(request *JoinGameServerSessionRequest) (r
     return
 }
 
+// JoinGameServerSession
+// This API is used to join a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) JoinGameServerSessionWithContext(ctx context.Context, request *JoinGameServerSessionRequest) (response *JoinGameServerSessionResponse, err error) {
+    if request == nil {
+        request = NewJoinGameServerSessionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewJoinGameServerSessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewJoinGameServerSessionBatchRequest() (request *JoinGameServerSessionBatchRequest) {
     request = &JoinGameServerSessionBatchRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -589,6 +894,30 @@ func (c *Client) JoinGameServerSessionBatch(request *JoinGameServerSessionBatchR
     if request == nil {
         request = NewJoinGameServerSessionBatchRequest()
     }
+    
+    response = NewJoinGameServerSessionBatchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// JoinGameServerSessionBatch
+// This API is used to join game server sessions in batch.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) JoinGameServerSessionBatchWithContext(ctx context.Context, request *JoinGameServerSessionBatchRequest) (response *JoinGameServerSessionBatchResponse, err error) {
+    if request == nil {
+        request = NewJoinGameServerSessionBatchRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewJoinGameServerSessionBatchResponse()
     err = c.Send(request, response)
@@ -638,6 +967,33 @@ func (c *Client) PutTimerScalingPolicy(request *PutTimerScalingPolicyRequest) (r
     return
 }
 
+// PutTimerScalingPolicy
+// This API (PutTimerScalingPolicy) is used to create or update a scheduled scaling policy for a fleet.
+//
+// 
+//
+// If the field `timerID` is filled in, the specified policy will be updated, and if `timerID` is left empty, a new policy will be created.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_INSTANCELIMITEXCEEDED = "LimitExceeded.InstanceLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) PutTimerScalingPolicyWithContext(ctx context.Context, request *PutTimerScalingPolicyRequest) (response *PutTimerScalingPolicyResponse, err error) {
+    if request == nil {
+        request = NewPutTimerScalingPolicyRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewPutTimerScalingPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchGameServerSessionsRequest() (request *SearchGameServerSessionsRequest) {
     request = &SearchGameServerSessionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -670,6 +1026,28 @@ func (c *Client) SearchGameServerSessions(request *SearchGameServerSessionsReque
     if request == nil {
         request = NewSearchGameServerSessionsRequest()
     }
+    
+    response = NewSearchGameServerSessionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SearchGameServerSessions
+// This API is used to search in the list of game server sessions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) SearchGameServerSessionsWithContext(ctx context.Context, request *SearchGameServerSessionsRequest) (response *SearchGameServerSessionsResponse, err error) {
+    if request == nil {
+        request = NewSearchGameServerSessionsRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewSearchGameServerSessionsResponse()
     err = c.Send(request, response)
@@ -719,6 +1097,33 @@ func (c *Client) SetServerReserved(request *SetServerReservedRequest) (response 
     return
 }
 
+// SetServerReserved
+// This API (SetServerReserved) is used to mark the exceptional instances as retained for troubleshooting.
+//
+// 
+//
+// `ReserveValue`: specifies whether to retain the instance. Valid values: `0` (do not retain), `1` (retain). Default value: `0`.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) SetServerReservedWithContext(ctx context.Context, request *SetServerReservedRequest) (response *SetServerReservedResponse, err error) {
+    if request == nil {
+        request = NewSetServerReservedRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSetServerReservedResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartGameServerSessionPlacementRequest() (request *StartGameServerSessionPlacementRequest) {
     request = &StartGameServerSessionPlacementRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -751,6 +1156,28 @@ func (c *Client) StartGameServerSessionPlacement(request *StartGameServerSession
     if request == nil {
         request = NewStartGameServerSessionPlacementRequest()
     }
+    
+    response = NewStartGameServerSessionPlacementResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StartGameServerSessionPlacement
+// This API is used to start placing a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) StartGameServerSessionPlacementWithContext(ctx context.Context, request *StartGameServerSessionPlacementRequest) (response *StartGameServerSessionPlacementResponse, err error) {
+    if request == nil {
+        request = NewStartGameServerSessionPlacementRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewStartGameServerSessionPlacementResponse()
     err = c.Send(request, response)
@@ -792,6 +1219,25 @@ func (c *Client) StopGameServerSessionPlacement(request *StopGameServerSessionPl
     return
 }
 
+// StopGameServerSessionPlacement
+// This API is used to stop placing a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) StopGameServerSessionPlacementWithContext(ctx context.Context, request *StopGameServerSessionPlacementRequest) (response *StopGameServerSessionPlacementResponse, err error) {
+    if request == nil {
+        request = NewStopGameServerSessionPlacementRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStopGameServerSessionPlacementResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateBucketAccelerateOptRequest() (request *UpdateBucketAccelerateOptRequest) {
     request = &UpdateBucketAccelerateOptRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -823,6 +1269,27 @@ func (c *Client) UpdateBucketAccelerateOpt(request *UpdateBucketAccelerateOptReq
     if request == nil {
         request = NewUpdateBucketAccelerateOptRequest()
     }
+    
+    response = NewUpdateBucketAccelerateOptResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateBucketAccelerateOpt
+// This API (UpdateBucketAccelerateOpt) is used to enable COS global acceleration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) UpdateBucketAccelerateOptWithContext(ctx context.Context, request *UpdateBucketAccelerateOptRequest) (response *UpdateBucketAccelerateOptResponse, err error) {
+    if request == nil {
+        request = NewUpdateBucketAccelerateOptRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateBucketAccelerateOptResponse()
     err = c.Send(request, response)
@@ -867,6 +1334,28 @@ func (c *Client) UpdateBucketCORSOpt(request *UpdateBucketCORSOptRequest) (respo
     return
 }
 
+// UpdateBucketCORSOpt
+// This API (UpdateBucketCORSOpt) is used to configure CORS for COS.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) UpdateBucketCORSOptWithContext(ctx context.Context, request *UpdateBucketCORSOptRequest) (response *UpdateBucketCORSOptResponse, err error) {
+    if request == nil {
+        request = NewUpdateBucketCORSOptRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewUpdateBucketCORSOptResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateGameServerSessionRequest() (request *UpdateGameServerSessionRequest) {
     request = &UpdateGameServerSessionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -898,6 +1387,27 @@ func (c *Client) UpdateGameServerSession(request *UpdateGameServerSessionRequest
     if request == nil {
         request = NewUpdateGameServerSessionRequest()
     }
+    
+    response = NewUpdateGameServerSessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// UpdateGameServerSession
+// This API is used to update a game server session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_SERVICENOTOPENED = "UnauthorizedOperation.ServiceNotOpened"
+func (c *Client) UpdateGameServerSessionWithContext(ctx context.Context, request *UpdateGameServerSessionRequest) (response *UpdateGameServerSessionResponse, err error) {
+    if request == nil {
+        request = NewUpdateGameServerSessionRequest()
+    }
+    request.SetContext(ctx)
     
     response = NewUpdateGameServerSessionResponse()
     err = c.Send(request, response)

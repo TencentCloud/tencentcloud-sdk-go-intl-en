@@ -159,6 +159,9 @@ type ClientConnection struct {
 
 	// Number of connections corresponding to a client IP
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Whether it is the Tencent Cloud IP for automated testing
+	InternalService *bool `json:"InternalService,omitempty" name:"InternalService"`
 }
 
 type CreateBackupDBInstanceRequest struct {
@@ -1067,6 +1070,67 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeInstanceParamsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstanceParamsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceParamsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceParamsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The collection of enum parameters
+		InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitempty" name:"InstanceEnumParam"`
+
+		// The collection of integer parameters
+		InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitempty" name:"InstanceIntegerParam"`
+
+		// The collection of text parameters
+		InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitempty" name:"InstanceTextParam"`
+
+		// The collection of string parameters used to represent time ranges
+		InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitempty" name:"InstanceMultiParam"`
+
+		// The total number of modifiable parameters of the instance, such as 0
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceParamsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1689,6 +1753,120 @@ type InstanceDetail struct {
 
 	// Physical instance ID. For an instance that has been rolled back and replaced, its InstanceId and RealInstanceId are different. The physical instance ID is needed in such scenarios as getting monitoring data from Barad
 	RealInstanceId *string `json:"RealInstanceId,omitempty" name:"RealInstanceId"`
+}
+
+type InstanceEnumParam struct {
+
+	// Current value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Acceptable values
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Parameter description
+	Tips []*string `json:"Tips,omitempty" name:"Tips"`
+
+	// Data type of the parameter
+	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
+
+	// Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (yes), `0` (no, and displays "Loading" in the console)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+type InstanceIntegerParam struct {
+
+	// Current value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Maximum value
+	Max *string `json:"Max,omitempty" name:"Max"`
+
+	// Minimum value
+	Min *string `json:"Min,omitempty" name:"Min"`
+
+	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Parameter description
+	Tips []*string `json:"Tips,omitempty" name:"Tips"`
+
+	// Data type of the parameter
+	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
+
+	// Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (no), `0` (yes). This field is only used in the console.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// This field is not in use
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+}
+
+type InstanceMultiParam struct {
+
+	// Current value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Acceptable values
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// Whether to restart the instance for the parameter to take effect
+	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Whether the TencentDB for MongoDB console has pulled parameter information successfully
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Parameter description
+	Tips []*string `json:"Tips,omitempty" name:"Tips"`
+
+	// Data type of the parameter
+	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
+}
+
+type InstanceTextParam struct {
+
+	// Current value (not in use)
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value (not in use)
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
+	// Whether to restart the instance for the parameter to take effect (not in use)
+	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
+
+	// Parameter name (not in use)
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Acceptable values (not in use)
+	TextValue *string `json:"TextValue,omitempty" name:"TextValue"`
+
+	// Parameter description (not in use)
+	Tips []*string `json:"Tips,omitempty" name:"Tips"`
+
+	// Data type of the parameter (not in use)
+	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
+
+	// Whether the TencentDB for MongoDB console has pulled parameter information successfully (not in use)
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type IsolateDBInstanceRequest struct {
