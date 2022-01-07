@@ -243,6 +243,12 @@ type CreateFileSystemRequest struct {
 
 	// Group name of the root directory Inode, which is `supergroup` by default
 	RootInodeGroup *string `json:"RootInodeGroup,omitempty" name:"RootInodeGroup"`
+
+	// Whether to enable verification of Ranger service addresses
+	EnableRanger *bool `json:"EnableRanger,omitempty" name:"EnableRanger"`
+
+	// List of Ranger service addresses (empty array by default)
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitempty" name:"RangerServiceAddresses"`
 }
 
 func (r *CreateFileSystemRequest) ToJsonString() string {
@@ -264,6 +270,8 @@ func (r *CreateFileSystemRequest) FromJsonString(s string) error {
 	delete(f, "SuperUsers")
 	delete(f, "RootInodeUser")
 	delete(f, "RootInodeGroup")
+	delete(f, "EnableRanger")
+	delete(f, "RangerServiceAddresses")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFileSystemRequest has unknown keys!", "")
 	}
@@ -865,13 +873,21 @@ type DescribeFileSystemResponse struct {
 		// File system
 		FileSystem *FileSystem `json:"FileSystem,omitempty" name:"FileSystem"`
 
-		// Used capacity (in bytes), including STANDARD storage and ARCHIVE storage
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Used capacity of the file system, in bytes
+	// Note: this field may return `null`, indicating that no valid value was found.
 		CapacityUsed *uint64 `json:"CapacityUsed,omitempty" name:"CapacityUsed"`
 
-		// Used ARCHIVE storage capacity (in bytes)
+		// Used ARCHIVE capacity of COS, in bytes
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitempty" name:"ArchiveCapacityUsed"`
+
+		// Used STANDARD capacity of COS, in bytes
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitempty" name:"StandardCapacityUsed"`
+
+		// Used STANDARD_IA capacity of COS, in bytes
+	// Note: this field may return `null`, indicating that no valid value was found.
+		DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitempty" name:"DegradeCapacityUsed"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1272,6 +1288,14 @@ type FileSystem struct {
 
 	// POSIX permission control
 	PosixAcl *bool `json:"PosixAcl,omitempty" name:"PosixAcl"`
+
+	// Whether to enable verification of Ranger service addresses
+	// Note: this field may return `null`, indicating that no valid value was found.
+	EnableRanger *bool `json:"EnableRanger,omitempty" name:"EnableRanger"`
+
+	// List of Ranger service addresses
+	// Note: this field may return `null`, indicating that no valid value was found.
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitempty" name:"RangerServiceAddresses"`
 }
 
 type LifeCycleRule struct {
@@ -1416,6 +1440,12 @@ type ModifyFileSystemRequest struct {
 
 	// Whether to verify POSIX ACL
 	PosixAcl *bool `json:"PosixAcl,omitempty" name:"PosixAcl"`
+
+	// Whether to enable verification of Ranger service addresses
+	EnableRanger *bool `json:"EnableRanger,omitempty" name:"EnableRanger"`
+
+	// List of Ranger service addresses, which can be an empty array
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitempty" name:"RangerServiceAddresses"`
 }
 
 func (r *ModifyFileSystemRequest) ToJsonString() string {
@@ -1436,6 +1466,8 @@ func (r *ModifyFileSystemRequest) FromJsonString(s string) error {
 	delete(f, "CapacityQuota")
 	delete(f, "SuperUsers")
 	delete(f, "PosixAcl")
+	delete(f, "EnableRanger")
+	delete(f, "RangerServiceAddresses")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFileSystemRequest has unknown keys!", "")
 	}
@@ -1641,7 +1673,7 @@ type RestoreTask struct {
 	// Restoration task file path
 	FilePath *string `json:"FilePath,omitempty" name:"FilePath"`
 
-	// Restoration task type (1: standard; 2: expedited; 3: bulk)
+	// Restoration task type (`1`: standard; `2`: expedited; `3`: bulk, with only the expedited type available currently)
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 
 	// Validity period (in days) of the temporary copy generated during restoration
@@ -1668,6 +1700,6 @@ type Transition struct {
 	// Trigger time (in days)
 	Days *uint64 `json:"Days,omitempty" name:"Days"`
 
-	// Transition type (1: archive; 2: deletion)
+	// Transition type (`1`: transition to ARCHIVE; `2`: delete; `3`: transition to STANDARD_IA)
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 }

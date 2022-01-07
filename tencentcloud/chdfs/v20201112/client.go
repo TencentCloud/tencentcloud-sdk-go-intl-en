@@ -558,12 +558,12 @@ func NewDeleteAccessGroupResponse() (response *DeleteAccessGroupResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSGROUPBOUND = "FailedOperation.AccessGroupBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDACCESSGROUPID = "InvalidParameterValue.InvalidAccessGroupId"
 //  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_ACCESSGROUPNOTEXISTS = "ResourceNotFound.AccessGroupNotExists"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAccessGroup(request *DeleteAccessGroupRequest) (response *DeleteAccessGroupResponse, err error) {
@@ -581,12 +581,12 @@ func (c *Client) DeleteAccessGroup(request *DeleteAccessGroupRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSGROUPBOUND = "FailedOperation.AccessGroupBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDACCESSGROUPID = "InvalidParameterValue.InvalidAccessGroupId"
 //  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_ACCESSGROUPNOTEXISTS = "ResourceNotFound.AccessGroupNotExists"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAccessGroupWithContext(ctx context.Context, request *DeleteAccessGroupRequest) (response *DeleteAccessGroupResponse, err error) {

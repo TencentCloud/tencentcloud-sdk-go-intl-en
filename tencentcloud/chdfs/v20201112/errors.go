@@ -20,6 +20,9 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
+	// The permission group has been bound.
+	FAILEDOPERATION_ACCESSGROUPBOUND = "FailedOperation.AccessGroupBound"
+
 	// The file system is not empty.
 	FAILEDOPERATION_FILESYSTEMNOTEMPTY = "FailedOperation.FileSystemNotEmpty"
 

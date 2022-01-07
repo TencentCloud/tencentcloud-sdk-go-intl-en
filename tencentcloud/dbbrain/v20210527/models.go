@@ -672,6 +672,78 @@ func (r *DescribeDBDiagEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBDiagEventsRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "2021-05-27 01:00:00". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Risk level list. Valid values in descending order of severity: `1` (critical), `2` (serious), `3` (alarm), `4` (warning), `5` (healthy).
+	Severities []*int64 `json:"Severities,omitempty" name:"Severities"`
+
+	// Instance ID list.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 50.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeDBDiagEventsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBDiagEventsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Severities")
+	delete(f, "InstanceIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBDiagEventsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBDiagEventsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of diagnosis events.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Diagnosis event list.
+		Items []*DiagHistoryEventItem `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBDiagEventsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBDiagEventsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBDiagHistoryRequest struct {
 	*tchttp.BaseRequest
 
@@ -1379,7 +1451,7 @@ type DescribeSlowLogTopSqlsRequest struct {
 	// Start time, such as "2019-09-10 12:13:14".
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
+	// End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Sorting key. Valid values: QueryTime, ExecTimes, RowsSent, LockTime, RowsExamined. Default value: QueryTime.
