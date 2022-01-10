@@ -619,6 +619,9 @@ type ClusterBasicSettings struct {
 
 	// Whether to enable the node’s default security group (default: `No`, Aphla feature)
 	NeedWorkSecurityGroup *bool `json:"NeedWorkSecurityGroup,omitempty" name:"NeedWorkSecurityGroup"`
+
+	// When the Cilium Overlay add-on is selected, TKE will take two IPs from the subnet to create the private network CLB.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 type ClusterCIDRSettings struct {
@@ -1113,7 +1116,7 @@ type CreateClusterRequest struct {
 	// Advanced configuration information of the node
 	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
 
-	// Configuration information of an existing instance
+	// The configuration information for existing instances. All instances must be in the same VPC. Up to 100 instances are allowed in one VPC. Spot instances are not supported.
 	ExistedInstancesForNode []*ExistedInstancesForNode `json:"ExistedInstancesForNode,omitempty" name:"ExistedInstancesForNode"`
 
 	// CVM type and the corresponding data disk mounting configuration information.

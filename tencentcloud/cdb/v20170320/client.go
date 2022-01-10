@@ -2930,6 +2930,7 @@ func NewDescribeErrorLogDataResponse() (response *DescribeErrorLogDataResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -2958,6 +2959,7 @@ func (c *Client) DescribeErrorLogData(request *DescribeErrorLogDataRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -3502,6 +3504,7 @@ func NewDescribeSlowLogDataResponse() (response *DescribeSlowLogDataResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -3531,6 +3534,7 @@ func (c *Client) DescribeSlowLogData(request *DescribeSlowLogDataRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
+//  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -4697,6 +4701,7 @@ func NewModifyBackupDownloadRestrictionResponse() (response *ModifyBackupDownloa
 // error code that may be returned:
 //  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
     if request == nil {
         request = NewModifyBackupDownloadRestrictionRequest()
@@ -4713,6 +4718,7 @@ func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRe
 // error code that may be returned:
 //  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) ModifyBackupDownloadRestrictionWithContext(ctx context.Context, request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
     if request == nil {
         request = NewModifyBackupDownloadRestrictionRequest()
@@ -5208,7 +5214,7 @@ func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
 }
 
 // ModifyRoGroupInfo
-// This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
+// This API is used to update the information of a TencentDB RO group, such as configuring a read-only instance removal policy in case of excessive delay, setting read weights of read-only instances, and setting the replication delay.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
@@ -5219,6 +5225,7 @@ func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+//  OPERATIONDENIED_CONFLICTROSTATUS = "OperationDenied.ConflictRoStatus"
 //  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
 func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
     if request == nil {
@@ -5231,7 +5238,7 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
 }
 
 // ModifyRoGroupInfo
-// This API is used to update the information of a TencentDB RO group, such as configuring an instance removal policy in case of excessive delay and setting read weights of RO instances.
+// This API is used to update the information of a TencentDB RO group, such as configuring a read-only instance removal policy in case of excessive delay, setting read weights of read-only instances, and setting the replication delay.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
@@ -5242,6 +5249,7 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+//  OPERATIONDENIED_CONFLICTROSTATUS = "OperationDenied.ConflictRoStatus"
 //  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
 func (c *Client) ModifyRoGroupInfoWithContext(ctx context.Context, request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
     if request == nil {
@@ -5250,68 +5258,6 @@ func (c *Client) ModifyRoGroupInfoWithContext(ctx context.Context, request *Modi
     request.SetContext(ctx)
     
     response = NewModifyRoGroupInfoResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyRoReplicationDelayRequest() (request *ModifyRoReplicationDelayRequest) {
-    request = &ModifyRoReplicationDelayRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRoReplicationDelay")
-    
-    
-    return
-}
-
-func NewModifyRoReplicationDelayResponse() (response *ModifyRoReplicationDelayResponse) {
-    response = &ModifyRoReplicationDelayResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyRoReplicationDelay
-// This API is used to modify the replication delay of a delayed RO replica.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
-//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-func (c *Client) ModifyRoReplicationDelay(request *ModifyRoReplicationDelayRequest) (response *ModifyRoReplicationDelayResponse, err error) {
-    if request == nil {
-        request = NewModifyRoReplicationDelayRequest()
-    }
-    
-    response = NewModifyRoReplicationDelayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// ModifyRoReplicationDelay
-// This API is used to modify the replication delay of a delayed RO replica.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
-//  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-func (c *Client) ModifyRoReplicationDelayWithContext(ctx context.Context, request *ModifyRoReplicationDelayRequest) (response *ModifyRoReplicationDelayResponse, err error) {
-    if request == nil {
-        request = NewModifyRoReplicationDelayRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewModifyRoReplicationDelayResponse()
     err = c.Send(request, response)
     return
 }
@@ -5756,66 +5702,56 @@ func (c *Client) StartBatchRollbackWithContext(ctx context.Context, request *Sta
     return
 }
 
-func NewStartDelayReplicationRequest() (request *StartDelayReplicationRequest) {
-    request = &StartDelayReplicationRequest{
+func NewStartReplicationRequest() (request *StartReplicationRequest) {
+    request = &StartReplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cdb", APIVersion, "StartDelayReplication")
+    request.Init().WithApiInfo("cdb", APIVersion, "StartReplication")
     
     
     return
 }
 
-func NewStartDelayReplicationResponse() (response *StartDelayReplicationResponse) {
-    response = &StartDelayReplicationResponse{
+func NewStartReplicationResponse() (response *StartReplicationResponse) {
+    response = &StartReplicationResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// StartDelayReplication
-// This API is used to start delayed replication on a delayed RO replica.
+// StartReplication
+// This API is used to start the data replication from the source instance to the read-only instance.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
-func (c *Client) StartDelayReplication(request *StartDelayReplicationRequest) (response *StartDelayReplicationResponse, err error) {
+func (c *Client) StartReplication(request *StartReplicationRequest) (response *StartReplicationResponse, err error) {
     if request == nil {
-        request = NewStartDelayReplicationRequest()
+        request = NewStartReplicationRequest()
     }
     
-    response = NewStartDelayReplicationResponse()
+    response = NewStartReplicationResponse()
     err = c.Send(request, response)
     return
 }
 
-// StartDelayReplication
-// This API is used to start delayed replication on a delayed RO replica.
+// StartReplication
+// This API is used to start the data replication from the source instance to the read-only instance.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
-func (c *Client) StartDelayReplicationWithContext(ctx context.Context, request *StartDelayReplicationRequest) (response *StartDelayReplicationResponse, err error) {
+func (c *Client) StartReplicationWithContext(ctx context.Context, request *StartReplicationRequest) (response *StartReplicationResponse, err error) {
     if request == nil {
-        request = NewStartDelayReplicationRequest()
+        request = NewStartReplicationRequest()
     }
     request.SetContext(ctx)
     
-    response = NewStartDelayReplicationResponse()
+    response = NewStartReplicationResponse()
     err = c.Send(request, response)
     return
 }
@@ -5874,64 +5810,58 @@ func (c *Client) StopDBImportJobWithContext(ctx context.Context, request *StopDB
     return
 }
 
-func NewStopDelayReplicationRequest() (request *StopDelayReplicationRequest) {
-    request = &StopDelayReplicationRequest{
+func NewStopReplicationRequest() (request *StopReplicationRequest) {
+    request = &StopReplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cdb", APIVersion, "StopDelayReplication")
+    request.Init().WithApiInfo("cdb", APIVersion, "StopReplication")
     
     
     return
 }
 
-func NewStopDelayReplicationResponse() (response *StopDelayReplicationResponse) {
-    response = &StopDelayReplicationResponse{
+func NewStopReplicationResponse() (response *StopReplicationResponse) {
+    response = &StopReplicationResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// StopDelayReplication
-// This API is used to stop delayed replication on a delayed RO replica.
+// StopReplication
+// This API is used to stop the data replication from the source instance to the read-only instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-func (c *Client) StopDelayReplication(request *StopDelayReplicationRequest) (response *StopDelayReplicationResponse, err error) {
+func (c *Client) StopReplication(request *StopReplicationRequest) (response *StopReplicationResponse, err error) {
     if request == nil {
-        request = NewStopDelayReplicationRequest()
+        request = NewStopReplicationRequest()
     }
     
-    response = NewStopDelayReplicationResponse()
+    response = NewStopReplicationResponse()
     err = c.Send(request, response)
     return
 }
 
-// StopDelayReplication
-// This API is used to stop delayed replication on a delayed RO replica.
+// StopReplication
+// This API is used to stop the data replication from the source instance to the read-only instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
-//  FAILEDOPERATION_OPERATIONREPLICATIONERROR = "FailedOperation.OperationReplicationError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DUETIMEWRONG = "InvalidParameterValue.DueTimeWrong"
-//  INVALIDPARAMETERVALUE_SRCTYPEEQUALDSTTYPE = "InvalidParameterValue.SrcTypeEqualDstType"
-//  INVALIDPARAMETERVALUE_SRCTYPENOTEQUALDSTTYPE = "InvalidParameterValue.SrcTypeNotEqualDstType"
-//  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
-func (c *Client) StopDelayReplicationWithContext(ctx context.Context, request *StopDelayReplicationRequest) (response *StopDelayReplicationResponse, err error) {
+func (c *Client) StopReplicationWithContext(ctx context.Context, request *StopReplicationRequest) (response *StopReplicationResponse, err error) {
     if request == nil {
-        request = NewStopDelayReplicationRequest()
+        request = NewStopReplicationRequest()
     }
     request.SetContext(ctx)
     
-    response = NewStopDelayReplicationResponse()
+    response = NewStopReplicationResponse()
     err = c.Send(request, response)
     return
 }

@@ -607,6 +607,127 @@ type ClassicalTargetInfo struct {
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 }
 
+type CloneLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// Clones the name of the CLB instance. The name must be 1-60 characters containing letters, numbers, "-" or "_".
+	// Note: if the name of a new CLB instance already exists, a default name will be generated automatically.
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
+
+	// ID of the project to which a CLB instance belongs, which can be obtained through the DescribeProject API. If this parameter is not passed in, the default project will be used.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
+	// Note: A primary AZ is the default AZ that carries traffic. When it fails, the optimal secondary AZ is chosen automatically to take its place. 
+	MasterZoneId *string `json:"MasterZoneId,omitempty" name:"MasterZoneId"`
+
+	// Sets the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+	// Note: A secondary AZ carries traffic when the primary AZ fails. 
+	SlaveZoneId *string `json:"SlaveZoneId,omitempty" name:"SlaveZoneId"`
+
+	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
+
+	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
+
+	// Applies for CLB instances for a specified VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Tags a CLB instance when purchasing it
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Dedicated cluster information
+	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
+
+	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// Whether to support binding cross-VPC IPs or cross-region IPs
+	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
+
+	// Creates `SnatIp` when the binding IPs of other VPCs feature is enabled
+	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps"`
+
+	// ID of the public network CLB dedicated cluster
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// 
+	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
+
+	// Tag of the STGW dedicated cluster
+	ClusterTag *string `json:"ClusterTag,omitempty" name:"ClusterTag"`
+
+	// Availability zones for nearby access of private network CLB instances to distribute traffic
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Unique ID of an EIP, which can only be used when binding the EIP of a private network CLB instance (e.g., `eip-11112222`)
+	EipAddressId *string `json:"EipAddressId,omitempty" name:"EipAddressId"`
+}
+
+func (r *CloneLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "LoadBalancerName")
+	delete(f, "ProjectId")
+	delete(f, "MasterZoneId")
+	delete(f, "SlaveZoneId")
+	delete(f, "ZoneId")
+	delete(f, "InternetAccessible")
+	delete(f, "VipIsp")
+	delete(f, "Vip")
+	delete(f, "Tags")
+	delete(f, "ExclusiveCluster")
+	delete(f, "BandwidthPackageId")
+	delete(f, "SnatPro")
+	delete(f, "SnatIps")
+	delete(f, "ClusterIds")
+	delete(f, "SlaType")
+	delete(f, "ClusterTag")
+	delete(f, "Zones")
+	delete(f, "EipAddressId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CloneLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloneLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ClusterItem struct {
 
 	// Unique cluster ID
@@ -2393,6 +2514,60 @@ func (r *DescribeLoadBalancerListByCertIdResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLoadBalancerOverviewRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeLoadBalancerOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoadBalancerOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLoadBalancerOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLoadBalancerOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of CLB instances
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Number of CLB instances that are running
+		RunningCount *int64 `json:"RunningCount,omitempty" name:"RunningCount"`
+
+		// Number of CLB instances that are isolated
+		IsolationCount *int64 `json:"IsolationCount,omitempty" name:"IsolationCount"`
+
+		// Number of CLB instances that are about to expire
+		WillExpireCount *int64 `json:"WillExpireCount,omitempty" name:"WillExpireCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLoadBalancerOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoadBalancerOverviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLoadBalancerTrafficRequest struct {
 	*tchttp.BaseRequest
 
@@ -2452,7 +2627,7 @@ type DescribeLoadBalancersDetailRequest struct {
 	// Starting offset of the CLB instance list returned. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// List of fields to be returned. The `LoadBalancerId` and `LoadBalancerName` are returned by default.
+	// List of fields. Only fields specified will be returned. If it’s left blank, `null` is returned. The fields `LoadBalancerId` and `LoadBalancerName` are added by default. For details about fields, see <a href="https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#LoadBalancerDetail">LoadBalancerDetail</a>.
 	Fields []*string `json:"Fields,omitempty" name:"Fields"`
 
 	// Target type. Valid values: NODE and GROUP. If the list of fields contains `TargetId`, `TargetAddress`, `TargetPort`, `TargetWeight` and other fields, `Target` of the target group or non-target group must be exported.
@@ -3661,6 +3836,13 @@ type LoadBalancer struct {
 	// Health check log topic ID of CLB CLS
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	HealthLogTopicId *string `json:"HealthLogTopicId,omitempty" name:"HealthLogTopicId"`
+
+	// 
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// CLB attribute
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AttributeFlags []*string `json:"AttributeFlags,omitempty" name:"AttributeFlags"`
 }
 
 type LoadBalancerDetail struct {

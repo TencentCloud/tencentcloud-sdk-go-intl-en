@@ -28,6 +28,12 @@ type ApplySnapshotRequest struct {
 
 	// ID of the original cloud disk corresponding to the snapshot, which can be queried via the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Specifies whether to shut down a CVM automatically before a rollback
+	AutoStopInstance *bool `json:"AutoStopInstance,omitempty" name:"AutoStopInstance"`
+
+	// Specifies whether to start up a CVM automatically after a rollback
+	AutoStartInstance *bool `json:"AutoStartInstance,omitempty" name:"AutoStartInstance"`
 }
 
 func (r *ApplySnapshotRequest) ToJsonString() string {
@@ -44,6 +50,8 @@ func (r *ApplySnapshotRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SnapshotId")
 	delete(f, "DiskId")
+	delete(f, "AutoStopInstance")
+	delete(f, "AutoStartInstance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySnapshotRequest has unknown keys!", "")
 	}
@@ -138,6 +146,18 @@ func (r *AttachDisksResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AttachDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AutoMountConfiguration struct {
+
+	// ID of the instance to which the cloud disk is attached.
+	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Path to the mount point in the CVM
+	MountPoint []*string `json:"MountPoint,omitempty" name:"MountPoint"`
+
+	// File system type. Supported: ext4 and xfs.
+	FileSystemType *string `json:"FileSystemType,omitempty" name:"FileSystemType"`
 }
 
 type AutoSnapshotPolicy struct {
@@ -339,6 +359,9 @@ type CreateDisksRequest struct {
 
 	// Whether to delete the associated non-permanent snapshots when a cloud disk is terminated. Valid values: `0` (do not delete); `1` (delete). Default value: `0`. To find out whether a snapshot is permanent, you can call the `DescribeSnapshots` API and check the `IsPermanent` field (`true`: permanent; `false`: non-permanent) in its response.
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitempty" name:"DeleteSnapshot"`
+
+	// When a cloud disk is created, automatically initialize it and attach it to the specified mount point
+	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitempty" name:"AutoMountConfiguration"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -367,6 +390,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "Encrypt")
 	delete(f, "DiskChargePrepaid")
 	delete(f, "DeleteSnapshot")
+	delete(f, "AutoMountConfiguration")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
 	}

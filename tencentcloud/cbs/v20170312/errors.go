@@ -140,6 +140,9 @@ const (
 	// Quota insufficient.
 	RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 
+	// 
+	RESOURCEINSUFFICIENT_OVERREFUNDQUOTA = "ResourceInsufficient.OverRefundQuota"
+
 	// The resource is not found.
 	RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 
@@ -167,6 +170,9 @@ const (
 	// Incorrect cloud disk type. For example, a system disk cannot be mounted to CVM.
 	RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 
+	// 
+	RESOURCEUNAVAILABLE_ZONENOTMATCH = "ResourceUnavailable.ZoneNotMatch"
+
 	// Order conflict.
 	TRADEDEALCONFLICT = "TradeDealConflict"
 
@@ -184,6 +190,9 @@ const (
 
 	// Unsupported operation
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// 
+	UNSUPPORTEDOPERATION_DETACHPOD = "UnsupportedOperation.DetachPod"
 
 	// Disk is encrypted.
 	UNSUPPORTEDOPERATION_DISKENCRYPT = "UnsupportedOperation.DiskEncrypt"

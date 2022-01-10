@@ -5776,6 +5776,9 @@ type ModifyRoGroupInfoRequest struct {
 
 	// Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
 	IsBalanceRoLoad *int64 `json:"IsBalanceRoLoad,omitempty" name:"IsBalanceRoLoad"`
+
+	// This field has been deprecated.
+	ReplicationDelayTime *int64 `json:"ReplicationDelayTime,omitempty" name:"ReplicationDelayTime"`
 }
 
 func (r *ModifyRoGroupInfoRequest) ToJsonString() string {
@@ -5794,6 +5797,7 @@ func (r *ModifyRoGroupInfoRequest) FromJsonString(s string) error {
 	delete(f, "RoGroupInfo")
 	delete(f, "RoWeightValues")
 	delete(f, "IsBalanceRoLoad")
+	delete(f, "ReplicationDelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoGroupInfoRequest has unknown keys!", "")
 	}
@@ -5803,6 +5807,10 @@ func (r *ModifyRoGroupInfoRequest) FromJsonString(s string) error {
 type ModifyRoGroupInfoResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Async task ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5817,56 +5825,6 @@ func (r *ModifyRoGroupInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyRoGroupInfoResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyRoReplicationDelayRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Replication delay in seconds. Value range: 1 to 259200.
-	ReplicationDelay *int64 `json:"ReplicationDelay,omitempty" name:"ReplicationDelay"`
-}
-
-func (r *ModifyRoReplicationDelayRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRoReplicationDelayRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "ReplicationDelay")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoReplicationDelayRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyRoReplicationDelayResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyRoReplicationDelayResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRoReplicationDelayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6351,6 +6309,10 @@ type RoGroup struct {
 	// Read-only group AZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RoGroupZone *string `json:"RoGroupZone,omitempty" name:"RoGroupZone"`
+
+	// Replication delay.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DelayReplicationTime *int64 `json:"DelayReplicationTime,omitempty" name:"DelayReplicationTime"`
 }
 
 type RoGroupAttr struct {
@@ -6369,6 +6331,9 @@ type RoGroupAttr struct {
 
 	// Weighting mode. Supported values include `system` (automatically assigned by the system) and `custom` (defined by user). Please note that if the `custom` mode is selected, the RO instance weight configuration parameter (RoWeightValues) must be set.
 	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Replication delay.
+	ReplicationDelayTime *int64 `json:"ReplicationDelayTime,omitempty" name:"ReplicationDelayTime"`
 }
 
 type RoInstanceInfo struct {
@@ -6816,50 +6781,38 @@ func (r *StartBatchRollbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StartDelayReplicationRequest struct {
+type StartReplicationRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID
+	// Read-Only instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Delayed replication mode. Valid values: `DEFAULT` (replicate according to the specified replication delay), `GTID` (replicate according to the specified GTID), `DUE_TIME` (replicate according to the specified point in time).
-	DelayReplicationType *string `json:"DelayReplicationType,omitempty" name:"DelayReplicationType"`
-
-	// Specified point in time. Default value: 0. The maximum value cannot be later than the current time.
-	DueTime *int64 `json:"DueTime,omitempty" name:"DueTime"`
-
-	// Specified GITD. This parameter is required when the delayed replication mode is `GTID`.
-	Gtid *string `json:"Gtid,omitempty" name:"Gtid"`
 }
 
-func (r *StartDelayReplicationRequest) ToJsonString() string {
+func (r *StartReplicationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StartDelayReplicationRequest) FromJsonString(s string) error {
+func (r *StartReplicationRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "InstanceId")
-	delete(f, "DelayReplicationType")
-	delete(f, "DueTime")
-	delete(f, "Gtid")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartDelayReplicationRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartReplicationRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StartDelayReplicationResponse struct {
+type StartReplicationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Delayed replication task ID. This parameter will be returned if `DelayReplicationType` is not `DEFAULT`. It can be used to view the status of the delayed replication task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Async task ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6867,14 +6820,14 @@ type StartDelayReplicationResponse struct {
 	} `json:"Response"`
 }
 
-func (r *StartDelayReplicationResponse) ToJsonString() string {
+func (r *StartReplicationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StartDelayReplicationResponse) FromJsonString(s string) error {
+func (r *StartReplicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6924,49 +6877,53 @@ func (r *StopDBImportJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StopDelayReplicationRequest struct {
+type StopReplicationRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID
+	// Read-Only instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
-func (r *StopDelayReplicationRequest) ToJsonString() string {
+func (r *StopReplicationRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StopDelayReplicationRequest) FromJsonString(s string) error {
+func (r *StopReplicationRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "InstanceId")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopDelayReplicationRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopReplicationRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StopDelayReplicationResponse struct {
+type StopReplicationResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Async task ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *StopDelayReplicationResponse) ToJsonString() string {
+func (r *StopReplicationResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *StopDelayReplicationResponse) FromJsonString(s string) error {
+func (r *StopReplicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7389,6 +7346,12 @@ type UpgradeDBInstanceRequest struct {
 
 	// Delay threshold. Value range: 1-10. Default value: `10`.
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
+
+	// Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
+	CrossCluster *int64 `json:"CrossCluster,omitempty" name:"CrossCluster"`
+
+	// New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -7417,6 +7380,8 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "FastUpgrade")
 	delete(f, "MaxDelayTime")
+	delete(f, "CrossCluster")
+	delete(f, "ZoneId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}
