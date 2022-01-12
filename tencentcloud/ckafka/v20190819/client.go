@@ -15,7 +15,6 @@
 package v20190819
 
 import (
-    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -90,6 +89,122 @@ func (c *Client) BatchCreateAclWithContext(ctx context.Context, request *BatchCr
     request.SetContext(ctx)
     
     response = NewBatchCreateAclResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchModifyGroupOffsetsRequest() (request *BatchModifyGroupOffsetsRequest) {
+    request = &BatchModifyGroupOffsetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "BatchModifyGroupOffsets")
+    
+    
+    return
+}
+
+func NewBatchModifyGroupOffsetsResponse() (response *BatchModifyGroupOffsetsResponse) {
+    response = &BatchModifyGroupOffsetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchModifyGroupOffsets
+// This API is used to batch modify consumer group offsets.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+func (c *Client) BatchModifyGroupOffsets(request *BatchModifyGroupOffsetsRequest) (response *BatchModifyGroupOffsetsResponse, err error) {
+    if request == nil {
+        request = NewBatchModifyGroupOffsetsRequest()
+    }
+    
+    response = NewBatchModifyGroupOffsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BatchModifyGroupOffsets
+// This API is used to batch modify consumer group offsets.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+func (c *Client) BatchModifyGroupOffsetsWithContext(ctx context.Context, request *BatchModifyGroupOffsetsRequest) (response *BatchModifyGroupOffsetsResponse, err error) {
+    if request == nil {
+        request = NewBatchModifyGroupOffsetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBatchModifyGroupOffsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchModifyTopicAttributesRequest() (request *BatchModifyTopicAttributesRequest) {
+    request = &BatchModifyTopicAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "BatchModifyTopicAttributes")
+    
+    
+    return
+}
+
+func NewBatchModifyTopicAttributesResponse() (response *BatchModifyTopicAttributesResponse) {
+    response = &BatchModifyTopicAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchModifyTopicAttributes
+// This API is used to batch set topic attributes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) BatchModifyTopicAttributes(request *BatchModifyTopicAttributesRequest) (response *BatchModifyTopicAttributesResponse, err error) {
+    if request == nil {
+        request = NewBatchModifyTopicAttributesRequest()
+    }
+    
+    response = NewBatchModifyTopicAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// BatchModifyTopicAttributes
+// This API is used to batch set topic attributes.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) BatchModifyTopicAttributesWithContext(ctx context.Context, request *BatchModifyTopicAttributesRequest) (response *BatchModifyTopicAttributesResponse, err error) {
+    if request == nil {
+        request = NewBatchModifyTopicAttributesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewBatchModifyTopicAttributesResponse()
     err = c.Send(request, response)
     return
 }
@@ -613,6 +728,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -641,6 +757,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1322,7 +1439,7 @@ func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttribut
 }
 
 // DescribeInstanceAttributes
-// This API is used to get instance attributes.
+// This API is used to get instance attributes. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1349,7 +1466,7 @@ func (c *Client) DescribeInstanceAttributes(request *DescribeInstanceAttributesR
 }
 
 // DescribeInstanceAttributes
-// This API is used to get instance attributes.
+// This API is used to get instance attributes. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1688,6 +1805,7 @@ func NewDescribeTopicResponse() (response *DescribeTopicResponse) {
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1717,6 +1835,7 @@ func (c *Client) DescribeTopic(request *DescribeTopicRequest) (response *Describ
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1753,6 +1872,7 @@ func NewDescribeTopicAttributesResponse() (response *DescribeTopicAttributesResp
 // This API is used to get topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1762,6 +1882,7 @@ func NewDescribeTopicAttributesResponse() (response *DescribeTopicAttributesResp
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1780,6 +1901,7 @@ func (c *Client) DescribeTopicAttributes(request *DescribeTopicAttributesRequest
 // This API is used to get topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1789,6 +1911,7 @@ func (c *Client) DescribeTopicAttributes(request *DescribeTopicAttributesRequest
 //  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
@@ -1831,6 +1954,7 @@ func NewDescribeTopicDetailResponse() (response *DescribeTopicDetailResponse) {
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
@@ -1854,6 +1978,7 @@ func (c *Client) DescribeTopicDetail(request *DescribeTopicDetailRequest) (respo
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
@@ -1977,6 +2102,7 @@ func NewDescribeTopicSyncReplicaResponse() (response *DescribeTopicSyncReplicaRe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopicSyncReplica(request *DescribeTopicSyncReplicaRequest) (response *DescribeTopicSyncReplicaResponse, err error) {
     if request == nil {
         request = NewDescribeTopicSyncReplicaRequest()
@@ -1995,6 +2121,7 @@ func (c *Client) DescribeTopicSyncReplica(request *DescribeTopicSyncReplicaReque
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopicSyncReplicaWithContext(ctx context.Context, request *DescribeTopicSyncReplicaRequest) (response *DescribeTopicSyncReplicaResponse, err error) {
     if request == nil {
         request = NewDescribeTopicSyncReplicaRequest()

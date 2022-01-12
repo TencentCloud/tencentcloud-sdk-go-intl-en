@@ -15,7 +15,6 @@
 package v20170312
 
 import (
-    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -359,6 +358,7 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -407,6 +407,7 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -439,6 +440,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -487,6 +489,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -537,6 +540,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -621,6 +625,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -723,6 +728,7 @@ func NewCreateReadOnlyDBInstanceResponse() (response *CreateReadOnlyDBInstanceRe
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -805,6 +811,7 @@ func (c *Client) CreateReadOnlyDBInstance(request *CreateReadOnlyDBInstanceReque
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -903,6 +910,7 @@ func NewCreateReadOnlyGroupResponse() (response *CreateReadOnlyGroupResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -940,6 +948,7 @@ func (c *Client) CreateReadOnlyGroup(request *CreateReadOnlyGroupRequest) (respo
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -2409,8 +2418,10 @@ func NewDescribeSlowQueryAnalysisResponse() (response *DescribeSlowQueryAnalysis
 // This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeSlowQueryAnalysis(request *DescribeSlowQueryAnalysisRequest) (response *DescribeSlowQueryAnalysisResponse, err error) {
     if request == nil {
         request = NewDescribeSlowQueryAnalysisRequest()
@@ -2425,8 +2436,10 @@ func (c *Client) DescribeSlowQueryAnalysis(request *DescribeSlowQueryAnalysisReq
 // This API is used to count and analyze slow query statements during the specified period of time and return aggregated statistical analysis results which are classified by statement with abstract parameter values.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ESQUERYERROR = "FailedOperation.ESQueryError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeSlowQueryAnalysisWithContext(ctx context.Context, request *DescribeSlowQueryAnalysisRequest) (response *DescribeSlowQueryAnalysisResponse, err error) {
     if request == nil {
         request = NewDescribeSlowQueryAnalysisRequest()
@@ -3431,6 +3444,7 @@ func NewModifyDBInstanceParametersResponse() (response *ModifyDBInstanceParamete
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) ModifyDBInstanceParameters(request *ModifyDBInstanceParametersRequest) (response *ModifyDBInstanceParametersResponse, err error) {
     if request == nil {
@@ -3448,6 +3462,7 @@ func (c *Client) ModifyDBInstanceParameters(request *ModifyDBInstanceParametersR
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) ModifyDBInstanceParametersWithContext(ctx context.Context, request *ModifyDBInstanceParametersRequest) (response *ModifyDBInstanceParametersResponse, err error) {
     if request == nil {
@@ -3573,6 +3588,7 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 //  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
 //  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
 //  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
 func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (response *ModifyDBInstanceSpecResponse, err error) {
     if request == nil {
         request = NewModifyDBInstanceSpecRequest()
@@ -3595,6 +3611,7 @@ func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (res
 //  FAILEDOPERATION_PAYORDERFAILED = "FailedOperation.PayOrderFailed"
 //  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
 //  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
 func (c *Client) ModifyDBInstanceSpecWithContext(ctx context.Context, request *ModifyDBInstanceSpecRequest) (response *ModifyDBInstanceSpecResponse, err error) {
     if request == nil {
         request = NewModifyDBInstanceSpecRequest()
@@ -3799,6 +3816,7 @@ func NewModifySwitchTimePeriodResponse() (response *ModifySwitchTimePeriodRespon
 //  FAILEDOPERATION_CAMCHECKRESOURCEFAILED = "FailedOperation.CamCheckResourceFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
@@ -3825,6 +3843,7 @@ func (c *Client) ModifySwitchTimePeriod(request *ModifySwitchTimePeriodRequest) 
 //  FAILEDOPERATION_CAMCHECKRESOURCEFAILED = "FailedOperation.CamCheckResourceFailed"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"

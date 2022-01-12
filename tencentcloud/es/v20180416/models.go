@@ -20,6 +20,77 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type ClusterView struct {
+
+	// Cluster health status
+	Health *float64 `json:"Health,omitempty" name:"Health"`
+
+	// Whether the cluster is visible
+	Visible *float64 `json:"Visible,omitempty" name:"Visible"`
+
+	// Whether the cluster encounters circuit breaking
+	Break *float64 `json:"Break,omitempty" name:"Break"`
+
+	// Average disk usage
+	AvgDiskUsage *float64 `json:"AvgDiskUsage,omitempty" name:"AvgDiskUsage"`
+
+	// Average memory usage
+	AvgMemUsage *float64 `json:"AvgMemUsage,omitempty" name:"AvgMemUsage"`
+
+	// Average CPU usage
+	AvgCpuUsage *float64 `json:"AvgCpuUsage,omitempty" name:"AvgCpuUsage"`
+
+	// Total disk size of the cluster
+	TotalDiskSize *uint64 `json:"TotalDiskSize,omitempty" name:"TotalDiskSize"`
+
+	// Types of nodes to receive client requests
+	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
+
+	// Number of online nodes
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Total number of nodes
+	TotalNodeNum *int64 `json:"TotalNodeNum,omitempty" name:"TotalNodeNum"`
+
+	// Number of data nodes
+	DataNodeNum *int64 `json:"DataNodeNum,omitempty" name:"DataNodeNum"`
+
+	// Number of indices
+	IndexNum *int64 `json:"IndexNum,omitempty" name:"IndexNum"`
+
+	// Number of documents
+	DocNum *int64 `json:"DocNum,omitempty" name:"DocNum"`
+
+	// Used disk size (in bytes)
+	DiskUsedInBytes *int64 `json:"DiskUsedInBytes,omitempty" name:"DiskUsedInBytes"`
+
+	// Number of shards
+	ShardNum *int64 `json:"ShardNum,omitempty" name:"ShardNum"`
+
+	// Number of primary shards
+	PrimaryShardNum *int64 `json:"PrimaryShardNum,omitempty" name:"PrimaryShardNum"`
+
+	// Number of relocating shards
+	RelocatingShardNum *int64 `json:"RelocatingShardNum,omitempty" name:"RelocatingShardNum"`
+
+	// Number of initializing shards
+	InitializingShardNum *int64 `json:"InitializingShardNum,omitempty" name:"InitializingShardNum"`
+
+	// Number of unassigned shards
+	UnassignedShardNum *int64 `json:"UnassignedShardNum,omitempty" name:"UnassignedShardNum"`
+
+	// Total COS storage of an enterprise cluster, in GB
+	TotalCosStorage *int64 `json:"TotalCosStorage,omitempty" name:"TotalCosStorage"`
+
+	// Name of the COS bucket that stores searchable snapshots of an enterprise cluster
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SearchableSnapshotCosBucket *string `json:"SearchableSnapshotCosBucket,omitempty" name:"SearchableSnapshotCosBucket"`
+
+	// COS app ID of the searchable snapshots of an enterprise cluster
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SearchableSnapshotCosAppId *string `json:"SearchableSnapshotCosAppId,omitempty" name:"SearchableSnapshotCosAppId"`
+}
+
 type CosBackup struct {
 
 	// Whether to enable auto-backup to COS
@@ -185,6 +256,10 @@ type CreateInstanceResponse struct {
 
 		// Instance ID
 		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -431,6 +506,9 @@ type DescribeInstancesRequest struct {
 
 	// VPC VIP list
 	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// List of availability zones
+	ZoneList []*string `json:"ZoneList,omitempty" name:"ZoneList"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -454,6 +532,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "OrderByType")
 	delete(f, "TagList")
 	delete(f, "IpList")
+	delete(f, "ZoneList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -483,6 +562,64 @@ func (r *DescribeInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeViewsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeViewsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeViewsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeViewsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeViewsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cluster view
+	// Note: This field may return `null`, indicating that no valid value was found.
+		ClusterView *ClusterView `json:"ClusterView,omitempty" name:"ClusterView"`
+
+		// Node view
+	// Note: This field may return `null`, indicating that no valid value was found.
+		NodesView []*NodeView `json:"NodesView,omitempty" name:"NodesView"`
+
+		// Kibana view
+	// Note: This field may return `null`, indicating that no valid value was found.
+		KibanasView []*KibanaView `json:"KibanasView,omitempty" name:"KibanasView"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeViewsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeViewsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -695,27 +832,27 @@ type InstanceInfo struct {
 	EnableHotWarmMode *bool `json:"EnableHotWarmMode,omitempty" name:"EnableHotWarmMode"`
 
 	// Warm node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmNodeType *string `json:"WarmNodeType,omitempty" name:"WarmNodeType"`
 
 	// Number of warm nodes
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmNodeNum *uint64 `json:"WarmNodeNum,omitempty" name:"WarmNodeNum"`
 
 	// Number of warm node CPU cores
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmCpuNum *uint64 `json:"WarmCpuNum,omitempty" name:"WarmCpuNum"`
 
-	// Warm node memory size in GB
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Warm node memory size (in GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmMemSize *uint64 `json:"WarmMemSize,omitempty" name:"WarmMemSize"`
 
 	// Warm node disk type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmDiskType *string `json:"WarmDiskType,omitempty" name:"WarmDiskType"`
 
-	// Warm node disk size in GB
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Warm node disk size (in GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
 	WarmDiskSize *uint64 `json:"WarmDiskSize,omitempty" name:"WarmDiskSize"`
 
 	// Cluster node information list
@@ -784,6 +921,54 @@ type InstanceInfo struct {
 	// Security group ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
+
+	// Cold node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdNodeType *string `json:"ColdNodeType,omitempty" name:"ColdNodeType"`
+
+	// Number of cold nodes
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdNodeNum *uint64 `json:"ColdNodeNum,omitempty" name:"ColdNodeNum"`
+
+	// Number of cold node CPU cores
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdCpuNum *uint64 `json:"ColdCpuNum,omitempty" name:"ColdCpuNum"`
+
+	// Cold node memory size (in GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdMemSize *uint64 `json:"ColdMemSize,omitempty" name:"ColdMemSize"`
+
+	// Cold node disk type
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdDiskType *string `json:"ColdDiskType,omitempty" name:"ColdDiskType"`
+
+	// Cold node disk size (in GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColdDiskSize *uint64 `json:"ColdDiskSize,omitempty" name:"ColdDiskSize"`
+
+	// Frozen node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenNodeType *string `json:"FrozenNodeType,omitempty" name:"FrozenNodeType"`
+
+	// Number of frozen nodes
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenNodeNum *uint64 `json:"FrozenNodeNum,omitempty" name:"FrozenNodeNum"`
+
+	// Number of frozen node CPU cores
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenCpuNum *uint64 `json:"FrozenCpuNum,omitempty" name:"FrozenCpuNum"`
+
+	// Frozen node memory size (GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenMemSize *uint64 `json:"FrozenMemSize,omitempty" name:"FrozenMemSize"`
+
+	// Frozen node disk type
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenDiskType *string `json:"FrozenDiskType,omitempty" name:"FrozenDiskType"`
+
+	// Frozen node disk size (in GB)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FrozenDiskSize *uint64 `json:"FrozenDiskSize,omitempty" name:"FrozenDiskSize"`
 }
 
 type InstanceLog struct {
@@ -829,6 +1014,33 @@ type KibanaNodeInfo struct {
 
 	// Kibana node's disk size
 	KibanaNodeDiskSize *uint64 `json:"KibanaNodeDiskSize,omitempty" name:"KibanaNodeDiskSize"`
+}
+
+type KibanaView struct {
+
+	// Kibana node IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Node disk size
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Disk usage
+	DiskUsage *float64 `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// Node memory size
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Memory usage
+	MemUsage *float64 `json:"MemUsage,omitempty" name:"MemUsage"`
+
+	// Number of node CPUs
+	CpuNum *int64 `json:"CpuNum,omitempty" name:"CpuNum"`
+
+	// CPU usage
+	CpuUsage *float64 `json:"CpuUsage,omitempty" name:"CpuUsage"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
 type LocalDiskInfo struct {
@@ -896,6 +1108,60 @@ type NodeInfo struct {
 
 	// Whether to encrypt node disk. 0: no (default); 1: yes.
 	DiskEncrypt *uint64 `json:"DiskEncrypt,omitempty" name:"DiskEncrypt"`
+}
+
+type NodeView struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node IP
+	NodeIp *string `json:"NodeIp,omitempty" name:"NodeIp"`
+
+	// Whether the node is visible
+	Visible *float64 `json:"Visible,omitempty" name:"Visible"`
+
+	// Whether the node encounters circuit breaking
+	Break *float64 `json:"Break,omitempty" name:"Break"`
+
+	// Node disk size
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Disk usage
+	DiskUsage *float64 `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// Node memory size (in GB)
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Memory usage
+	MemUsage *float64 `json:"MemUsage,omitempty" name:"MemUsage"`
+
+	// Number of node CPUs
+	CpuNum *int64 `json:"CpuNum,omitempty" name:"CpuNum"`
+
+	// CPU usage
+	CpuUsage *float64 `json:"CpuUsage,omitempty" name:"CpuUsage"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Node role
+	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
+
+	// Node HTTP IP
+	NodeHttpIp *string `json:"NodeHttpIp,omitempty" name:"NodeHttpIp"`
+
+	// JVM memory usage
+	JvmMemUsage *float64 `json:"JvmMemUsage,omitempty" name:"JvmMemUsage"`
+
+	// Number of node shards
+	ShardNum *int64 `json:"ShardNum,omitempty" name:"ShardNum"`
+
+	// ID list of node disks
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Whether a hidden availability zone
+	Hidden *bool `json:"Hidden,omitempty" name:"Hidden"`
 }
 
 type Operation struct {
@@ -1284,6 +1550,10 @@ type UpdateInstanceResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
+		// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1317,6 +1587,9 @@ type UpdatePluginsRequest struct {
 
 	// Whether to reinstall
 	ForceUpdate *bool `json:"ForceUpdate,omitempty" name:"ForceUpdate"`
+
+	// 0: system plugin
+	PluginType *uint64 `json:"PluginType,omitempty" name:"PluginType"`
 }
 
 func (r *UpdatePluginsRequest) ToJsonString() string {
@@ -1336,6 +1609,7 @@ func (r *UpdatePluginsRequest) FromJsonString(s string) error {
 	delete(f, "RemovePluginList")
 	delete(f, "ForceRestart")
 	delete(f, "ForceUpdate")
+	delete(f, "PluginType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePluginsRequest has unknown keys!", "")
 	}
@@ -1527,6 +1801,10 @@ func (r *UpgradeLicenseRequest) FromJsonString(s string) error {
 type UpgradeLicenseResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

@@ -206,7 +206,7 @@ type CreateMigrateJobRequest struct {
 	// Migration task configuration options
 	MigrateOption *MigrateOption `json:"MigrateOption,omitempty" name:"MigrateOption"`
 
-	// Source instance database type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona. For more information on the supported types in a specific region, see the migration task creation page in the console.
+	// Source instance database type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, Percona, and SQL Server. For more information on the supported types in a specific region, see the migration task creation page in the console.
 	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
 
 	// Source instance access type. Valid values: extranet (public network), cvm (CVM-based self-created instance), dcg (Direct Connect-enabled instance), vpncloud (Tencent Cloud VPN-enabled instance), cdb (TencentDB instance), ccn (CCN instance)
@@ -215,7 +215,7 @@ type CreateMigrateJobRequest struct {
 	// Source instance information, which is correlated with the migration task type
 	SrcInfo *SrcInfo `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
-	// Target instance access type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona. For more information on the supported types in a specific region, see the migration task creation page in the console.
+	// Target instance access type, which currently supports MySQL, Redis, MongoDB, PostgreSQL, MariaDB, and Percona, SQL Server, and TDSQL-C for MySQL. For more information on the supported types in a specific region, see the migration task creation page in the console.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
 	// Target instance access type, which currently only supports cdb (TencentDB instance)
@@ -226,14 +226,13 @@ type CreateMigrateJobRequest struct {
 
 	// Information of the source table to be migrated, which is described in JSON string format. It is required if MigrateOption.MigrateObject is 2 (migrating the specified table).
 	// For databases with a database-table structure:
-	// [{Database:db1,Table:[table1,table2]},{Database:db2}]
+	// [{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
 	// For databases with a database-schema-table structure:
-	// [{Database:db1,Schema:s1
-	// Table:[table1,table2]},{Database:db1,Schema:s2
-	// Table:[table1,table2]},{Database:db2,Schema:s1
-	// Table:[table1,table2]},{Database:db3},{Database:db4
-	// Schema:s1}]
+	// [{"Database":"db1","Schema":"s1","Table":["table1","table2"]},{"Database":"db1","Schema":"s2","Table":["table1","table2"]},{"Database":"db2","Schema":"s1","Table":["table1","table2"]},{"Database":"db3"},{"Database":"db4","Schema":"s1"}]
 	DatabaseInfo *string `json:"DatabaseInfo,omitempty" name:"DatabaseInfo"`
+
+	// Tag of the instance to be migrated.
+	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateMigrateJobRequest) ToJsonString() string {
@@ -257,6 +256,7 @@ func (r *CreateMigrateJobRequest) FromJsonString(s string) error {
 	delete(f, "DstAccessType")
 	delete(f, "DstInfo")
 	delete(f, "DatabaseInfo")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMigrateJobRequest has unknown keys!", "")
 	}
@@ -356,135 +356,6 @@ func (r *CreateSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateSyncCheckJobRequest struct {
-	*tchttp.BaseRequest
-
-	// Disaster recovery sync task ID
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-}
-
-func (r *CreateSyncCheckJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSyncCheckJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSyncCheckJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateSyncCheckJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateSyncCheckJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSyncCheckJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateSyncJobRequest struct {
-	*tchttp.BaseRequest
-
-	// Disaster recovery sync task name
-	JobName *string `json:"JobName,omitempty" name:"JobName"`
-
-	// Configuration options of a disaster recovery sync task
-	SyncOption *SyncOption `json:"SyncOption,omitempty" name:"SyncOption"`
-
-	// Source instance database type, which currently only supports mysql
-	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
-
-	// Source instance access type, which currently only supports cdb (TencentDB instances)
-	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
-
-	// Source instance information
-	SrcInfo *SyncInstanceInfo `json:"SrcInfo,omitempty" name:"SrcInfo"`
-
-	// Target instance access type, which currently only supports mysql
-	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
-
-	// Target instance access type, which currently only supports cdb (TencentDB instances)
-	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Target instance information
-	DstInfo *SyncInstanceInfo `json:"DstInfo,omitempty" name:"DstInfo"`
-
-	// Information of the source table to be synced, which is described in JSON string format.
-	// For databases with a database-table structure:
-	// [{Database:db1,Table:[table1,table2]},{Database:db2}]
-	DatabaseInfo *string `json:"DatabaseInfo,omitempty" name:"DatabaseInfo"`
-}
-
-func (r *CreateSyncJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSyncJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobName")
-	delete(f, "SyncOption")
-	delete(f, "SrcDatabaseType")
-	delete(f, "SrcAccessType")
-	delete(f, "SrcInfo")
-	delete(f, "DstDatabaseType")
-	delete(f, "DstAccessType")
-	delete(f, "DstInfo")
-	delete(f, "DatabaseInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSyncJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateSyncJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Disaster recovery sync task ID
-		JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateSyncJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSyncJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DeleteMigrateJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -528,52 +399,6 @@ func (r *DeleteMigrateJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMigrateJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteSyncJobRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the disaster recovery sync task to be deleted
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-}
-
-func (r *DeleteSyncJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteSyncJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSyncJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteSyncJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteSyncJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteSyncJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1037,139 +862,6 @@ func (r *DescribeSubscribesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSubscribesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSyncCheckJobRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the disaster recovery sync task to be queried
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-}
-
-func (r *DescribeSyncCheckJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSyncCheckJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSyncCheckJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSyncCheckJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task check status: starting, running, finished
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// Code of the task check result
-		ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
-
-		// Prompt message
-		ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
-
-		// Description of a task execution step
-		StepInfo []*SyncCheckStepInfo `json:"StepInfo,omitempty" name:"StepInfo"`
-
-		// Check flag. 0: checking; 1: successfully checked
-		CheckFlag *int64 `json:"CheckFlag,omitempty" name:"CheckFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeSyncCheckJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSyncCheckJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSyncJobsRequest struct {
-	*tchttp.BaseRequest
-
-	// Disaster recovery sync task ID
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-	// Disaster recovery sync task name
-	JobName *string `json:"JobName,omitempty" name:"JobName"`
-
-	// Sort by field. Value range: JobId, Status, JobName, CreateTime
-	Order *string `json:"Order,omitempty" name:"Order"`
-
-	// Sorting order. Value range: ASC (ascending), DESC (descending)
-	OrderSeq *string `json:"OrderSeq,omitempty" name:"OrderSeq"`
-
-	// Offset. Default value: 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of the returned instances. Value range: [1, 100]. Default value: 20
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribeSyncJobsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSyncJobsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	delete(f, "JobName")
-	delete(f, "Order")
-	delete(f, "OrderSeq")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSyncJobsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSyncJobsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tasks
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Array of task details
-		JobList []*SyncJobInfo `json:"JobList,omitempty" name:"JobList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeSyncJobsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSyncJobsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1688,66 +1380,6 @@ func (r *ModifySubscribeVipVportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifySyncJobRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the disaster recovery sync task to be modified
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-	// Name of the disaster recovery sync task
-	JobName *string `json:"JobName,omitempty" name:"JobName"`
-
-	// Configuration options of a disaster recovery sync task
-	SyncOption *SyncOption `json:"SyncOption,omitempty" name:"SyncOption"`
-
-	// When syncing the specified table, you need to set the information of the source table to be synced, which should be described in JSON string format. Below are examples.
-	// For databases with a database-table structure:
-	// [{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
-	DatabaseInfo *string `json:"DatabaseInfo,omitempty" name:"DatabaseInfo"`
-}
-
-func (r *ModifySyncJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifySyncJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	delete(f, "JobName")
-	delete(f, "SyncOption")
-	delete(f, "DatabaseInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySyncJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifySyncJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifySyncJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifySyncJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type OfflineIsolatedSubscribeRequest struct {
 	*tchttp.BaseRequest
 
@@ -1938,52 +1570,6 @@ func (r *StartMigrateJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type StartSyncJobRequest struct {
-	*tchttp.BaseRequest
-
-	// Disaster recovery sync task ID
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-}
-
-func (r *StartSyncJobRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *StartSyncJobRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "JobId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartSyncJobRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type StartSyncJobResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *StartSyncJobResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *StartSyncJobResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type StopMigrateJobRequest struct {
 	*tchttp.BaseRequest
 
@@ -2144,185 +1730,6 @@ type SubscribeRegionConf struct {
 	// Purchasable status of current region. 1: normal, 2: beta test, 3: not purchasable
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
-
-type SwitchDrToMasterRequest struct {
-	*tchttp.BaseRequest
-
-	// Disaster recovery instance information
-	DstInfo *SyncInstanceInfo `json:"DstInfo,omitempty" name:"DstInfo"`
-
-	// Database type (such as MySQL)
-	DatabaseType *string `json:"DatabaseType,omitempty" name:"DatabaseType"`
-}
-
-func (r *SwitchDrToMasterRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SwitchDrToMasterRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DstInfo")
-	delete(f, "DatabaseType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchDrToMasterRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type SwitchDrToMasterResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Backend async task request ID
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *SwitchDrToMasterResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SwitchDrToMasterResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type SyncCheckStepInfo struct {
-
-	// Step number
-	StepNo *uint64 `json:"StepNo,omitempty" name:"StepNo"`
-
-	// Step name
-	StepName *string `json:"StepName,omitempty" name:"StepName"`
-
-	// Code of the step execution result
-	StepCode *int64 `json:"StepCode,omitempty" name:"StepCode"`
-
-	// Message about the step execution result
-	StepMessage *string `json:"StepMessage,omitempty" name:"StepMessage"`
-}
-
-type SyncDetailInfo struct {
-
-	// Total number of steps
-	StepAll *int64 `json:"StepAll,omitempty" name:"StepAll"`
-
-	// Current step
-	StepNow *int64 `json:"StepNow,omitempty" name:"StepNow"`
-
-	// Overall progress
-	Progress *string `json:"Progress,omitempty" name:"Progress"`
-
-	// Progress of the current step
-	CurrentStepProgress *string `json:"CurrentStepProgress,omitempty" name:"CurrentStepProgress"`
-
-	// Master/slave delay in MB
-	MasterSlaveDistance *int64 `json:"MasterSlaveDistance,omitempty" name:"MasterSlaveDistance"`
-
-	// Master/slave delay in seconds
-	SecondsBehindMaster *int64 `json:"SecondsBehindMaster,omitempty" name:"SecondsBehindMaster"`
-
-	// Step information
-	StepInfo []*SyncStepDetailInfo `json:"StepInfo,omitempty" name:"StepInfo"`
-}
-
-type SyncInstanceInfo struct {
-
-	// Region name, such as ap-guangzhou
-	Region *string `json:"Region,omitempty" name:"Region"`
-
-	// Short instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-}
-
-type SyncJobInfo struct {
-
-	// Disaster recovery task ID
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-	// Disaster recovery task name
-	JobName *string `json:"JobName,omitempty" name:"JobName"`
-
-	// Task sync
-	SyncOption *SyncOption `json:"SyncOption,omitempty" name:"SyncOption"`
-
-	// Source access type
-	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
-
-	// Source data type
-	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
-
-	// Source instance information
-	SrcInfo *SyncInstanceInfo `json:"SrcInfo,omitempty" name:"SrcInfo"`
-
-	// Disaster recovery access type
-	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Disaster recovery data type
-	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
-
-	// Disaster recovery instance information
-	DstInfo *SyncInstanceInfo `json:"DstInfo,omitempty" name:"DstInfo"`
-
-	// Task information
-	Detail *SyncDetailInfo `json:"Detail,omitempty" name:"Detail"`
-
-	// Task status
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// Table to be migrated
-	DatabaseInfo *string `json:"DatabaseInfo,omitempty" name:"DatabaseInfo"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-}
-
-type SyncOption struct {
-
-	// Sync object. 1: entire instance; 2: specified table
-	SyncObject *uint64 `json:"SyncObject,omitempty" name:"SyncObject"`
-
-	// Sync start configuration. 1: start immediately
-	RunMode *uint64 `json:"RunMode,omitempty" name:"RunMode"`
-
-	// Sync mode. 3: full + incremental sync
-	SyncType *uint64 `json:"SyncType,omitempty" name:"SyncType"`
-
-	// Data consistency check. 1: no configuration required
-	ConsistencyType *uint64 `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
-}
-
-type SyncStepDetailInfo struct {
-
-	// Step number
-	StepNo *uint64 `json:"StepNo,omitempty" name:"StepNo"`
-
-	// Step name
-	StepName *string `json:"StepName,omitempty" name:"StepName"`
-
-	// Whether it can be stopped
-	CanStop *int64 `json:"CanStop,omitempty" name:"CanStop"`
-
-	// Step ID
-	StepId *int64 `json:"StepId,omitempty" name:"StepId"`
 }
 
 type TagFilter struct {

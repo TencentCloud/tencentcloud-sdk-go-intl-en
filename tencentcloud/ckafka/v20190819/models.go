@@ -204,6 +204,174 @@ func (r *BatchCreateAclResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BatchModifyGroupOffsetsRequest struct {
+	*tchttp.BaseRequest
+
+	// Consumer group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Instance name.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Partition information.
+	Partitions []*Partitions `json:"Partitions,omitempty" name:"Partitions"`
+
+	// Name of the specified topic. Default value: names of all topics.
+	TopicName []*string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+func (r *BatchModifyGroupOffsetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchModifyGroupOffsetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupName")
+	delete(f, "InstanceId")
+	delete(f, "Partitions")
+	delete(f, "TopicName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchModifyGroupOffsetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchModifyGroupOffsetsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned result.
+		Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BatchModifyGroupOffsetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchModifyGroupOffsetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchModifyTopicAttributesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic attribute list
+	Topic []*BatchModifyTopicInfo `json:"Topic,omitempty" name:"Topic"`
+}
+
+func (r *BatchModifyTopicAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchModifyTopicAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Topic")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchModifyTopicAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchModifyTopicAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned result.
+		Result []*BatchModifyTopicResultDTO `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BatchModifyTopicAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchModifyTopicAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchModifyTopicInfo struct {
+
+	// Topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// The number of partitions.
+	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+
+	// Remarks.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Number of replicas.
+	ReplicaNum *int64 `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
+
+	// Message deletion policy. Valid values: `delete`, `compact`.
+	CleanUpPolicy *string `json:"CleanUpPolicy,omitempty" name:"CleanUpPolicy"`
+
+	// The minimum number of replicas specified by `min.insync.replicas` when the producer sets `request.required.acks` to `-1`.
+	MinInsyncReplicas *int64 `json:"MinInsyncReplicas,omitempty" name:"MinInsyncReplicas"`
+
+	// Whether to allow a non-ISR replica to be the leader.
+	UncleanLeaderElectionEnable *bool `json:"UncleanLeaderElectionEnable,omitempty" name:"UncleanLeaderElectionEnable"`
+
+	// Message retention period in topic dimension in milliseconds. Value range: 1 minute to 90 days.
+	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Message retention size in topic dimension. Value range: 1 MB - 1024 GB.
+	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
+
+	// Segment rolling duration in milliseconds. Value range: 1-90 days.
+	SegmentMs *int64 `json:"SegmentMs,omitempty" name:"SegmentMs"`
+
+	// Message size per batch. Value range: 1 KB - 12 MB.
+	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitempty" name:"MaxMessageBytes"`
+}
+
+type BatchModifyTopicResultDTO struct {
+
+	// Instance ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Status code.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReturnCode *string `json:"ReturnCode,omitempty" name:"ReturnCode"`
+
+	// Message status.
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
 type ClusterInfo struct {
 
 	// Cluster ID
@@ -587,6 +755,9 @@ type CreateTopicRequest struct {
 
 	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
 	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
+
+	// Tag list.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -616,6 +787,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "EnableAclRule")
 	delete(f, "AclRuleName")
 	delete(f, "RetentionBytes")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -2086,16 +2258,20 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
 
 type DynamicDiskConfig struct {
 
-	// 
+	// Whether to enable dynamic disk expansion configuration. `0`: disable, `1`: enable.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 
-	// 
+	// Percentage of dynamic disk expansion each time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	StepForwardPercentage *int64 `json:"StepForwardPercentage,omitempty" name:"StepForwardPercentage"`
 
-	// 
+	// Disk quota threshold (in percentage) for triggering the automatic disk expansion event.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiskQuotaPercentage *int64 `json:"DiskQuotaPercentage,omitempty" name:"DiskQuotaPercentage"`
 
-	// 
+	// Max disk space in GB.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	MaxDiskSpace *int64 `json:"MaxDiskSpace,omitempty" name:"MaxDiskSpace"`
 }
 
@@ -2432,7 +2608,8 @@ type InstanceAttributesResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RemainingTopics *int64 `json:"RemainingTopics,omitempty" name:"RemainingTopics"`
 
-	// 
+	// Dynamic disk expansion policy.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
 }
 
@@ -2685,6 +2862,9 @@ type ModifyInstanceAttributesRequest struct {
 
 	// Timestamp
 	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
+
+	// Dynamic disk expansion policy configuration.
+	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
 }
 
 func (r *ModifyInstanceAttributesRequest) ToJsonString() string {
@@ -2706,6 +2886,7 @@ func (r *ModifyInstanceAttributesRequest) FromJsonString(s string) error {
 	delete(f, "DynamicRetentionConfig")
 	delete(f, "RebalanceTime")
 	delete(f, "PublicNetwork")
+	delete(f, "DynamicDiskConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAttributesRequest has unknown keys!", "")
 	}
@@ -2840,6 +3021,9 @@ type ModifyTopicAttributesRequest struct {
 
 	// Message retention file size in bytes, which is an optional parameter. Default value: -1. Currently, the min value that can be entered is 1,048,576 B.
 	RetentionBytes *int64 `json:"RetentionBytes,omitempty" name:"RetentionBytes"`
+
+	// Tag list.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *ModifyTopicAttributesRequest) ToJsonString() string {
@@ -2868,6 +3052,7 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "EnableAclRule")
 	delete(f, "AclRuleName")
 	delete(f, "RetentionBytes")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicAttributesRequest has unknown keys!", "")
 	}
@@ -2918,6 +3103,15 @@ type PartitionOffset struct {
 
 	// Offset, such as 100
 	// Note: this field may return null, indicating that no valid values can be obtained.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type Partitions struct {
+
+	// Partition.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// Partition consumption offset.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -3354,4 +3548,12 @@ type ZoneResponse struct {
 	// Purchase of Physical Dedicated Edition configurations
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	Physical *string `json:"Physical,omitempty" name:"Physical"`
+
+	// Public network bandwidth.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublicNetwork *string `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
+
+	// Public network bandwidth configuration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublicNetworkLimit *string `json:"PublicNetworkLimit,omitempty" name:"PublicNetworkLimit"`
 }

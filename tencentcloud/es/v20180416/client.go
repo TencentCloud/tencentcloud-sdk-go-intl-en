@@ -15,7 +15,6 @@
 package v20180416
 
 import (
-    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -74,6 +73,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  RESOURCEINSUFFICIENT_HIDDENZONE = "ResourceInsufficient.HiddenZone"
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
 func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
     if request == nil {
@@ -98,6 +98,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
+//  RESOURCEINSUFFICIENT_HIDDENZONE = "ResourceInsufficient.HiddenZone"
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
 func (c *Client) CreateInstanceWithContext(ctx context.Context, request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
     if request == nil {
@@ -314,6 +315,58 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeViewsRequest() (request *DescribeViewsRequest) {
+    request = &DescribeViewsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("es", APIVersion, "DescribeViews")
+    
+    
+    return
+}
+
+func NewDescribeViewsResponse() (response *DescribeViewsResponse) {
+    response = &DescribeViewsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeViews
+// This API is used to query view data from three dimensions: cluster, node, and Kibana.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeViews(request *DescribeViewsRequest) (response *DescribeViewsResponse, err error) {
+    if request == nil {
+        request = NewDescribeViewsRequest()
+    }
+    
+    response = NewDescribeViewsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeViews
+// This API is used to query view data from three dimensions: cluster, node, and Kibana.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeViewsWithContext(ctx context.Context, request *DescribeViewsRequest) (response *DescribeViewsResponse, err error) {
+    if request == nil {
+        request = NewDescribeViewsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeViewsResponse()
     err = c.Send(request, response)
     return
 }
@@ -651,6 +704,7 @@ func NewUpdatePluginsResponse() (response *UpdatePluginsResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  FAILEDOPERATION_ERRORCLUSTERSTATENOREPLICATION = "FailedOperation.ErrorClusterStateNoReplication"
+//  FAILEDOPERATION_ERRORCLUSTERSTATEUNHEALTH = "FailedOperation.ErrorClusterStateUnhealth"
 //  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -674,6 +728,7 @@ func (c *Client) UpdatePlugins(request *UpdatePluginsRequest) (response *UpdateP
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  FAILEDOPERATION_ERRORCLUSTERSTATENOREPLICATION = "FailedOperation.ErrorClusterStateNoReplication"
+//  FAILEDOPERATION_ERRORCLUSTERSTATEUNHEALTH = "FailedOperation.ErrorClusterStateUnhealth"
 //  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"

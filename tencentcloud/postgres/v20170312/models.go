@@ -245,9 +245,6 @@ type CreateDBInstancesRequest struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version. Valid values: `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
-	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
-
 	// Instance capacity size in GB.
 	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
 
@@ -262,6 +259,9 @@ type CreateDBInstancesRequest struct {
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing type.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
@@ -295,6 +295,12 @@ type CreateDBInstancesRequest struct {
 
 	// Security group ID
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -310,12 +316,12 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SpecCode")
-	delete(f, "DBVersion")
 	delete(f, "Storage")
 	delete(f, "InstanceCount")
 	delete(f, "Period")
 	delete(f, "Zone")
 	delete(f, "ProjectId")
+	delete(f, "DBVersion")
 	delete(f, "InstanceChargeType")
 	delete(f, "AutoVoucher")
 	delete(f, "VoucherIds")
@@ -327,6 +333,8 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NeedSupportIpv6")
 	delete(f, "TagList")
 	delete(f, "SecurityGroupIds")
+	delete(f, "DBMajorVersion")
+	delete(f, "DBKernelVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -392,7 +400,7 @@ type CreateInstancesRequest struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// PostgreSQL major version. Valid values: `9.3`, `9.5`, `10`, `11`, `12`, `13`, `9.3.5`, `9.5.4`, `10.4`, `11.8`, `12.4`.
+	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
@@ -428,11 +436,14 @@ type CreateInstancesRequest struct {
 	// Security group IDs
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// 
+	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 
-	// 
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+
+	// 
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -470,6 +481,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "DBMajorVersion")
 	delete(f, "DBKernelVersion")
+	delete(f, "DBNodeSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -889,7 +901,7 @@ type DBInstance struct {
 	// Instance database character set
 	DBCharset *string `json:"DBCharset,omitempty" name:"DBCharset"`
 
-	// PostgreSQL major version
+	// PostgreSQL version number
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance creation time
@@ -953,8 +965,12 @@ type DBInstance struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 
-	// 
+	// PostgreSQL major version number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// 
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 }
 
 type DBInstanceNetInfo struct {
@@ -981,6 +997,15 @@ type DBInstanceNetInfo struct {
 	// Subnet ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type DBNode struct {
+
+	// 
+	Role *string `json:"Role,omitempty" name:"Role"`
+
+	// 
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
 type DeleteReadOnlyGroupRequest struct {
@@ -3934,6 +3959,10 @@ type ServerlessDBInstance struct {
 	// Database kernel version
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+
+	// Database major version number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 }
 
 type ServerlessDBInstanceNetInfo struct {
@@ -4041,7 +4070,7 @@ type SpecItemInfo struct {
 	// Specification ID
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version number
+	// PostgerSQL version number
 	Version *string `json:"Version,omitempty" name:"Version"`
 
 	// Full version name corresponding to kernel number
@@ -4067,6 +4096,14 @@ type SpecItemInfo struct {
 
 	// Machine type
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// PostgreSQL major version number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MajorVersion *string `json:"MajorVersion,omitempty" name:"MajorVersion"`
+
+	// PostgreSQL kernel version number
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	KernelVersion *string `json:"KernelVersion,omitempty" name:"KernelVersion"`
 }
 
 type Tag struct {

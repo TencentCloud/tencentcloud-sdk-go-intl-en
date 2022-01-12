@@ -15,7 +15,6 @@
 package v20180330
 
 import (
-    "context"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -137,6 +136,7 @@ func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
@@ -163,6 +163,7 @@ func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (respons
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJobWithContext(ctx context.Context, request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
@@ -279,11 +280,14 @@ func NewCreateMigrateJobResponse() (response *CreateMigrateJobResponse) {
 // For a finance zone linkage, please use the domain name dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameter.BizInvalidParameterValueError"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CreateMigrateJob(request *CreateMigrateJobRequest) (response *CreateMigrateJobResponse, err error) {
@@ -304,11 +308,14 @@ func (c *Client) CreateMigrateJob(request *CreateMigrateJobRequest) (response *C
 // For a finance zone linkage, please use the domain name dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameter.BizInvalidParameterValueError"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CreateMigrateJobWithContext(ctx context.Context, request *CreateMigrateJobRequest) (response *CreateMigrateJobResponse, err error) {
@@ -376,136 +383,6 @@ func (c *Client) CreateSubscribeWithContext(ctx context.Context, request *Create
     return
 }
 
-func NewCreateSyncCheckJobRequest() (request *CreateSyncCheckJobRequest) {
-    request = &CreateSyncCheckJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "CreateSyncCheckJob")
-    
-    
-    return
-}
-
-func NewCreateSyncCheckJobResponse() (response *CreateSyncCheckJobResponse) {
-    response = &CreateSyncCheckJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateSyncCheckJob
-// Before the StartSyncJob API is called to start disaster recovery sync, this API should be called first to create a check. Data sync can start only if the check succeeds. You can view the check result through the DescribeSyncCheckJob API.
-//
-// Sync can begin only if the check succeeds.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_LOCKERROR = "InternalError.LockError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) CreateSyncCheckJob(request *CreateSyncCheckJobRequest) (response *CreateSyncCheckJobResponse, err error) {
-    if request == nil {
-        request = NewCreateSyncCheckJobRequest()
-    }
-    
-    response = NewCreateSyncCheckJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// CreateSyncCheckJob
-// Before the StartSyncJob API is called to start disaster recovery sync, this API should be called first to create a check. Data sync can start only if the check succeeds. You can view the check result through the DescribeSyncCheckJob API.
-//
-// Sync can begin only if the check succeeds.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_LOCKERROR = "InternalError.LockError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) CreateSyncCheckJobWithContext(ctx context.Context, request *CreateSyncCheckJobRequest) (response *CreateSyncCheckJobResponse, err error) {
-    if request == nil {
-        request = NewCreateSyncCheckJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewCreateSyncCheckJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateSyncJobRequest() (request *CreateSyncJobRequest) {
-    request = &CreateSyncJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "CreateSyncJob")
-    
-    
-    return
-}
-
-func NewCreateSyncJobResponse() (response *CreateSyncJobResponse) {
-    response = &CreateSyncJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateSyncJob
-// This API (CreateSyncJob) is used to create a disaster recovery sync task.
-//
-// After successful creation, check can be initiated through the CreateSyncCheckJob API. The sync task can be started through the StartSyncJob API only if the check succeeds.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) CreateSyncJob(request *CreateSyncJobRequest) (response *CreateSyncJobResponse, err error) {
-    if request == nil {
-        request = NewCreateSyncJobRequest()
-    }
-    
-    response = NewCreateSyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// CreateSyncJob
-// This API (CreateSyncJob) is used to create a disaster recovery sync task.
-//
-// After successful creation, check can be initiated through the CreateSyncCheckJob API. The sync task can be started through the StartSyncJob API only if the check succeeds.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) CreateSyncJobWithContext(ctx context.Context, request *CreateSyncJobRequest) (response *CreateSyncJobResponse, err error) {
-    if request == nil {
-        request = NewCreateSyncJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewCreateSyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteMigrateJobRequest() (request *DeleteMigrateJobRequest) {
     request = &DeleteMigrateJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -529,11 +406,19 @@ func NewDeleteMigrateJobResponse() (response *DeleteMigrateJobResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CELERYERROR = "InternalError.CeleryError"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
+//  OPERATIONDENIED_MIGRATESERVICESUPPORTERROR = "OperationDenied.MigrateServiceSupportError"
+//  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DeleteMigrateJob(request *DeleteMigrateJobRequest) (response *DeleteMigrateJobResponse, err error) {
     if request == nil {
         request = NewDeleteMigrateJobRequest()
@@ -550,11 +435,19 @@ func (c *Client) DeleteMigrateJob(request *DeleteMigrateJobRequest) (response *D
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CELERYERROR = "InternalError.CeleryError"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
+//  OPERATIONDENIED_MIGRATESERVICESUPPORTERROR = "OperationDenied.MigrateServiceSupportError"
+//  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DeleteMigrateJobWithContext(ctx context.Context, request *DeleteMigrateJobRequest) (response *DeleteMigrateJobResponse, err error) {
     if request == nil {
         request = NewDeleteMigrateJobRequest()
@@ -562,62 +455,6 @@ func (c *Client) DeleteMigrateJobWithContext(ctx context.Context, request *Delet
     request.SetContext(ctx)
     
     response = NewDeleteMigrateJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteSyncJobRequest() (request *DeleteSyncJobRequest) {
-    request = &DeleteSyncJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "DeleteSyncJob")
-    
-    
-    return
-}
-
-func NewDeleteSyncJobResponse() (response *DeleteSyncJobResponse) {
-    response = &DeleteSyncJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteSyncJob
-// This API is used to delete a disaster recovery sync task. Sync tasks that are running cannot be deleted.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) DeleteSyncJob(request *DeleteSyncJobRequest) (response *DeleteSyncJobResponse, err error) {
-    if request == nil {
-        request = NewDeleteSyncJobRequest()
-    }
-    
-    response = NewDeleteSyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// DeleteSyncJob
-// This API is used to delete a disaster recovery sync task. Sync tasks that are running cannot be deleted.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) DeleteSyncJobWithContext(ctx context.Context, request *DeleteSyncJobRequest) (response *DeleteSyncJobResponse, err error) {
-    if request == nil {
-        request = NewDeleteSyncJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewDeleteSyncJobResponse()
     err = c.Send(request, response)
     return
 }
@@ -765,9 +602,11 @@ func NewDescribeMigrateJobsResponse() (response *DescribeMigrateJobsResponse) {
 // For a finance zone linkage, please use the domain name https://dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DescribeMigrateJobs(request *DescribeMigrateJobsRequest) (response *DescribeMigrateJobsResponse, err error) {
@@ -786,9 +625,11 @@ func (c *Client) DescribeMigrateJobs(request *DescribeMigrateJobsRequest) (respo
 // For a finance zone linkage, please use the domain name https://dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DescribeMigrateJobsWithContext(ctx context.Context, request *DescribeMigrateJobsRequest) (response *DescribeMigrateJobsResponse, err error) {
@@ -931,6 +772,7 @@ func NewDescribeSubscribesResponse() (response *DescribeSubscribesResponse) {
 // This API is used to get the information list of data subscription instances. Pagination is enabled by default with 20 results returned each time.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeSubscribes(request *DescribeSubscribesRequest) (response *DescribeSubscribesResponse, err error) {
@@ -947,6 +789,7 @@ func (c *Client) DescribeSubscribes(request *DescribeSubscribesRequest) (respons
 // This API is used to get the information list of data subscription instances. Pagination is enabled by default with 20 results returned each time.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeSubscribesWithContext(ctx context.Context, request *DescribeSubscribesRequest) (response *DescribeSubscribesResponse, err error) {
@@ -956,136 +799,6 @@ func (c *Client) DescribeSubscribesWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeSubscribesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeSyncCheckJobRequest() (request *DescribeSyncCheckJobRequest) {
-    request = &DescribeSyncCheckJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "DescribeSyncCheckJob")
-    
-    
-    return
-}
-
-func NewDescribeSyncCheckJobResponse() (response *DescribeSyncCheckJobResponse) {
-    response = &DescribeSyncCheckJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeSyncCheckJob
-// This API is used to get the check result after a disaster recovery sync check task is created through the CreateSyncCheckJob API. Check status and progress can be queried.
-//
-// If the check succeeds, you can call the StartSyncJob API to start the sync task.
-//
-// If the check fails, the reason will be returned. You can modify the configuration through the ModifySyncJob API and initiate check again.
-//
-// It takes about 30 seconds to complete the check task. If the returned status is not "finished", the check has not been completed, and this API needs to be polled.
-//
-// If Status=finished and CheckFlag=1, the check succeeds.
-//
-// If Status=finished and CheckFlag !=1, the check fails.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) DescribeSyncCheckJob(request *DescribeSyncCheckJobRequest) (response *DescribeSyncCheckJobResponse, err error) {
-    if request == nil {
-        request = NewDescribeSyncCheckJobRequest()
-    }
-    
-    response = NewDescribeSyncCheckJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// DescribeSyncCheckJob
-// This API is used to get the check result after a disaster recovery sync check task is created through the CreateSyncCheckJob API. Check status and progress can be queried.
-//
-// If the check succeeds, you can call the StartSyncJob API to start the sync task.
-//
-// If the check fails, the reason will be returned. You can modify the configuration through the ModifySyncJob API and initiate check again.
-//
-// It takes about 30 seconds to complete the check task. If the returned status is not "finished", the check has not been completed, and this API needs to be polled.
-//
-// If Status=finished and CheckFlag=1, the check succeeds.
-//
-// If Status=finished and CheckFlag !=1, the check fails.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) DescribeSyncCheckJobWithContext(ctx context.Context, request *DescribeSyncCheckJobRequest) (response *DescribeSyncCheckJobResponse, err error) {
-    if request == nil {
-        request = NewDescribeSyncCheckJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewDescribeSyncCheckJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeSyncJobsRequest() (request *DescribeSyncJobsRequest) {
-    request = &DescribeSyncJobsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "DescribeSyncJobs")
-    
-    
-    return
-}
-
-func NewDescribeSyncJobsResponse() (response *DescribeSyncJobsResponse) {
-    response = &DescribeSyncJobsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeSyncJobs
-// This API is used to query disaster recovery sync tasks initiated on the DTS platform.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeSyncJobs(request *DescribeSyncJobsRequest) (response *DescribeSyncJobsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSyncJobsRequest()
-    }
-    
-    response = NewDescribeSyncJobsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// DescribeSyncJobs
-// This API is used to query disaster recovery sync tasks initiated on the DTS platform.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeSyncJobsWithContext(ctx context.Context, request *DescribeSyncJobsRequest) (response *DescribeSyncJobsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSyncJobsRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewDescribeSyncJobsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1112,7 +825,9 @@ func NewIsolateSubscribeResponse() (response *IsolateSubscribeResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameter.BizInvalidParameterValueError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) IsolateSubscribe(request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
     if request == nil {
@@ -1129,7 +844,9 @@ func (c *Client) IsolateSubscribe(request *IsolateSubscribeRequest) (response *I
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameter.BizInvalidParameterValueError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) IsolateSubscribeWithContext(ctx context.Context, request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
     if request == nil {
@@ -1432,72 +1149,6 @@ func (c *Client) ModifySubscribeVipVportWithContext(ctx context.Context, request
     return
 }
 
-func NewModifySyncJobRequest() (request *ModifySyncJobRequest) {
-    request = &ModifySyncJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "ModifySyncJob")
-    
-    
-    return
-}
-
-func NewModifySyncJobResponse() (response *ModifySyncJobResponse) {
-    response = &ModifySyncJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifySyncJob
-// This API is used to modify a disaster recovery sync task. 
-//
-// If the status of a sync task is creating, created, check succeeded, or check failed, this API can be called to modify the task. 
-//
-// The information of the source and target instances cannot be modified, but the task name and the tables to be synced can.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) ModifySyncJob(request *ModifySyncJobRequest) (response *ModifySyncJobResponse, err error) {
-    if request == nil {
-        request = NewModifySyncJobRequest()
-    }
-    
-    response = NewModifySyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// ModifySyncJob
-// This API is used to modify a disaster recovery sync task. 
-//
-// If the status of a sync task is creating, created, check succeeded, or check failed, this API can be called to modify the task. 
-//
-// The information of the source and target instances cannot be modified, but the task name and the tables to be synced can.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) ModifySyncJobWithContext(ctx context.Context, request *ModifySyncJobRequest) (response *ModifySyncJobResponse, err error) {
-    if request == nil {
-        request = NewModifySyncJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewModifySyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewOfflineIsolatedSubscribeRequest() (request *OfflineIsolatedSubscribeRequest) {
     request = &OfflineIsolatedSubscribeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1641,6 +1292,7 @@ func NewStartMigrateJobResponse() (response *StartMigrateJobResponse) {
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StartMigrateJob(request *StartMigrateJobRequest) (response *StartMigrateJobResponse, err error) {
     if request == nil {
@@ -1668,6 +1320,7 @@ func (c *Client) StartMigrateJob(request *StartMigrateJobRequest) (response *Sta
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StartMigrateJobWithContext(ctx context.Context, request *StartMigrateJobRequest) (response *StartMigrateJobResponse, err error) {
     if request == nil {
@@ -1676,70 +1329,6 @@ func (c *Client) StartMigrateJobWithContext(ctx context.Context, request *StartM
     request.SetContext(ctx)
     
     response = NewStartMigrateJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewStartSyncJobRequest() (request *StartSyncJobRequest) {
-    request = &StartSyncJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "StartSyncJob")
-    
-    
-    return
-}
-
-func NewStartSyncJobResponse() (response *StartSyncJobResponse) {
-    response = &StartSyncJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// StartSyncJob
-// This API is used to start a disaster recovery sync task after it is successfully checked through the CreateSyncCheckJob and DescribeSyncCheckJob APIs.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  FAILEDOPERATION_STARTJOBFAILED = "FailedOperation.StartJobFailed"
-//  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_LOCKERROR = "InternalError.LockError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) StartSyncJob(request *StartSyncJobRequest) (response *StartSyncJobResponse, err error) {
-    if request == nil {
-        request = NewStartSyncJobRequest()
-    }
-    
-    response = NewStartSyncJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// StartSyncJob
-// This API is used to start a disaster recovery sync task after it is successfully checked through the CreateSyncCheckJob and DescribeSyncCheckJob APIs.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  FAILEDOPERATION_STARTJOBFAILED = "FailedOperation.StartJobFailed"
-//  INTERNALERROR_ADDTASKERROR = "InternalError.AddTaskError"
-//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
-//  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
-//  INTERNALERROR_LOCKERROR = "InternalError.LockError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
-func (c *Client) StartSyncJobWithContext(ctx context.Context, request *StartSyncJobRequest) (response *StartSyncJobResponse, err error) {
-    if request == nil {
-        request = NewStartSyncJobRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewStartSyncJobResponse()
     err = c.Send(request, response)
     return
 }
@@ -1773,6 +1362,7 @@ func NewStopMigrateJobResponse() (response *StopMigrateJobResponse) {
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopMigrateJobResponse, err error) {
     if request == nil {
@@ -1796,6 +1386,7 @@ func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopM
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StopMigrateJobWithContext(ctx context.Context, request *StopMigrateJobRequest) (response *StopMigrateJobResponse, err error) {
     if request == nil {
@@ -1804,68 +1395,6 @@ func (c *Client) StopMigrateJobWithContext(ctx context.Context, request *StopMig
     request.SetContext(ctx)
     
     response = NewStopMigrateJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewSwitchDrToMasterRequest() (request *SwitchDrToMasterRequest) {
-    request = &SwitchDrToMasterRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("dts", APIVersion, "SwitchDrToMaster")
-    
-    
-    return
-}
-
-func NewSwitchDrToMasterResponse() (response *SwitchDrToMasterResponse) {
-    response = &SwitchDrToMasterResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// SwitchDrToMaster
-// This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  FAILEDOPERATION_STARTJOBFAILED = "FailedOperation.StartJobFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CGWSYSTEMERROR = "InternalError.CgwSystemError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_ACTIONNOTSUPPORT = "UnsupportedOperation.ActionNotSupport"
-func (c *Client) SwitchDrToMaster(request *SwitchDrToMasterRequest) (response *SwitchDrToMasterResponse, err error) {
-    if request == nil {
-        request = NewSwitchDrToMasterRequest()
-    }
-    
-    response = NewSwitchDrToMasterResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// SwitchDrToMaster
-// This API is used to promote a disaster recovery instance to a master instance, which will stop sync from the original master instance and end the master/slave relationship.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
-//  FAILEDOPERATION_STARTJOBFAILED = "FailedOperation.StartJobFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CGWSYSTEMERROR = "InternalError.CgwSystemError"
-//  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_ACTIONNOTSUPPORT = "UnsupportedOperation.ActionNotSupport"
-func (c *Client) SwitchDrToMasterWithContext(ctx context.Context, request *SwitchDrToMasterRequest) (response *SwitchDrToMasterResponse, err error) {
-    if request == nil {
-        request = NewSwitchDrToMasterRequest()
-    }
-    request.SetContext(ctx)
-    
-    response = NewSwitchDrToMasterResponse()
     err = c.Send(request, response)
     return
 }
