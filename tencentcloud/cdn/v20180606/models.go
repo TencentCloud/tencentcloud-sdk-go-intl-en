@@ -290,22 +290,31 @@ type AdvanceConfig struct {
 
 type AdvanceHttps struct {
 
-	// 
+	// Custom TLS data switch
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CustomTlsStatus *string `json:"CustomTlsStatus,omitempty" name:"CustomTlsStatus"`
 
-	// 
+	// Specifies the TLS version. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
 
-	// 
+	// Custom encryption suite
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Cipher *string `json:"Cipher,omitempty" name:"Cipher"`
 
-	// 
+	// Origin authentication type
+	// `off`: disable authentication
+	// `oneWay`: authenticate the origin 
+	// `twoWay`: two-way authentication
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	VerifyOriginType *string `json:"VerifyOriginType,omitempty" name:"VerifyOriginType"`
 
-	// 
+	// Information of the origin-pull certificate
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CertInfo *ServerCert `json:"CertInfo,omitempty" name:"CertInfo"`
 
-	// 
+	// Information of the origin server certificate
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OriginCertInfo *ClientCert `json:"OriginCertInfo,omitempty" name:"OriginCertInfo"`
 }
 
@@ -4714,7 +4723,8 @@ type Origin struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitempty" name:"PathBasedOrigin"`
 
-	// 
+	// Advanced HTTPS forwarding configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AdvanceHttps *AdvanceHttps `json:"AdvanceHttps,omitempty" name:"AdvanceHttps"`
 }
 
