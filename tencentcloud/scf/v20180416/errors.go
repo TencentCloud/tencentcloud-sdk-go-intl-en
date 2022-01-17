@@ -206,7 +206,7 @@ const (
 	// ApmConfigRegion input error
 	INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
 
-	// 
+	// The value of Args is incorrect.
 	INVALIDPARAMETERVALUE_ARGS = "InvalidParameterValue.Args"
 
 	// The parameter for async retry configuration of the function is invalid.
@@ -242,7 +242,7 @@ const (
 	// CodeSource error.
 	INVALIDPARAMETERVALUE_CODESOURCE = "InvalidParameterValue.CodeSource"
 
-	// 
+	// The value of Command[Entrypoint] is incorrect.
 	INVALIDPARAMETERVALUE_COMMAND = "InvalidParameterValue.Command"
 
 	// Incorrect `CompatibleRuntimes` parameter.
@@ -278,7 +278,7 @@ const (
 	// Description error.
 	INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 
-	// 
+	// The configuration of the environment variable DNS[OS_NAMESERVER] is incorrect.
 	INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
 
 	// EipConfig parameter error.
@@ -298,6 +298,9 @@ const (
 
 	// Filters parameter error.
 	INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
+
+	// The value of `FunctionName` is incorrect. See https://tencentcs.com/5jXKFnBW
+	INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
 
 	// The function does not exist.
 	INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
@@ -326,7 +329,7 @@ const (
 	// IdleTimeOut input parameter error
 	INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
 
-	// 
+	// The input of imageUri is incorrect.
 	INVALIDPARAMETERVALUE_IMAGEURI = "InvalidParameterValue.ImageUri"
 
 	// Invalid InlineZipFile.
@@ -395,7 +398,7 @@ const (
 	// Unsupported function version.
 	INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
 
-	// 
+	// The value Enterprise Edition image ID [RegistryId] is incorrect.
 	INVALIDPARAMETERVALUE_REGISTRYID = "InvalidParameterValue.RegistryId"
 
 	// Invalid RetCode
@@ -418,6 +421,9 @@ const (
 
 	// The value of `Stamp` does not meet the specification. Please fix it and try again.
 	INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
+
+	// The start time is incorrect.
+	INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 
 	// You need to specify both the start time and the end time.
 	INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
@@ -593,6 +599,9 @@ const (
 	// Unable to find the specified mount point under the specified CFS
 	RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
 
+	// 
+	RESOURCENOTFOUND_CFSSTATUSERROR = "ResourceNotFound.CfsStatusError"
+
 	// VPCs of the CFS instance and the SCF function are different.
 	RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
 
@@ -640,6 +649,9 @@ const (
 
 	// The role does not exist.
 	RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+
+	// 
+	RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 
 	// Timer does not exist.
 	RESOURCENOTFOUND_TIMER = "ResourceNotFound.Timer"
@@ -707,9 +719,15 @@ const (
 	// Cos operation is not supported.
 	UNSUPPORTEDOPERATION_COS = "UnsupportedOperation.Cos"
 
+	// 
+	UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+
 	// This region is not supported.
 	UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 
 	// Trigger operation is not supported.
 	UNSUPPORTEDOPERATION_TRIGGER = "UnsupportedOperation.Trigger"
+
+	// 
+	UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 )

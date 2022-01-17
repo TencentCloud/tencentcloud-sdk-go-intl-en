@@ -329,6 +329,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
+//  RESOURCENOTFOUND_CFSSTATUSERROR = "ResourceNotFound.CfsStatusError"
 //  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
 //  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
 //  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
@@ -345,6 +346,8 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
 //  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
     if request == nil {
         request = NewCreateFunctionRequest()
@@ -431,6 +434,7 @@ func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *Creat
 //  RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
+//  RESOURCENOTFOUND_CFSSTATUSERROR = "ResourceNotFound.CfsStatusError"
 //  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
 //  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
 //  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
@@ -447,6 +451,8 @@ func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *Creat
 //  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
 //  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) CreateFunctionWithContext(ctx context.Context, request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
     if request == nil {
         request = NewCreateFunctionRequest()
@@ -1290,6 +1296,60 @@ func (c *Client) GetAliasWithContext(ctx context.Context, request *GetAliasReque
     return
 }
 
+func NewGetAsyncEventStatusRequest() (request *GetAsyncEventStatusRequest) {
+    request = &GetAsyncEventStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "GetAsyncEventStatus")
+    
+    
+    return
+}
+
+func NewGetAsyncEventStatusResponse() (response *GetAsyncEventStatusResponse) {
+    response = &GetAsyncEventStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetAsyncEventStatus
+// This API is used to get the status of an async function execution event. The event status is retained for 3*24 hours, counting from the completion of the event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCEVENTSTATUS = "FailedOperation.AsyncEventStatus"
+//  RESOURCENOTFOUND_ASYNCEVENT = "ResourceNotFound.AsyncEvent"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+func (c *Client) GetAsyncEventStatus(request *GetAsyncEventStatusRequest) (response *GetAsyncEventStatusResponse, err error) {
+    if request == nil {
+        request = NewGetAsyncEventStatusRequest()
+    }
+    
+    response = NewGetAsyncEventStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GetAsyncEventStatus
+// This API is used to get the status of an async function execution event. The event status is retained for 3*24 hours, counting from the completion of the event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ASYNCEVENTSTATUS = "FailedOperation.AsyncEventStatus"
+//  RESOURCENOTFOUND_ASYNCEVENT = "ResourceNotFound.AsyncEvent"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+func (c *Client) GetAsyncEventStatusWithContext(ctx context.Context, request *GetAsyncEventStatusRequest) (response *GetAsyncEventStatusResponse, err error) {
+    if request == nil {
+        request = NewGetAsyncEventStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetAsyncEventStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetFunctionRequest() (request *GetFunctionRequest) {
     request = &GetFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1562,6 +1622,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  LIMITEXCEEDED_OFFSET = "LimitExceeded.Offset"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     if request == nil {
@@ -1594,6 +1655,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //  LIMITEXCEEDED_OFFSET = "LimitExceeded.Offset"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetFunctionLogsWithContext(ctx context.Context, request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     if request == nil {
@@ -1720,6 +1782,78 @@ func (c *Client) GetProvisionedConcurrencyConfigWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewGetProvisionedConcurrencyConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetRequestStatusRequest() (request *GetRequestStatusRequest) {
+    request = &GetRequestStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("scf", APIVersion, "GetRequestStatus")
+    
+    
+    return
+}
+
+func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
+    response = &GetRequestStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetRequestStatus
+// This API is used to query the status of a single function request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
+//  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *GetRequestStatusResponse, err error) {
+    if request == nil {
+        request = NewGetRequestStatusRequest()
+    }
+    
+    response = NewGetRequestStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// GetRequestStatus
+// This API is used to query the status of a single function request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
+//  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+func (c *Client) GetRequestStatusWithContext(ctx context.Context, request *GetRequestStatusRequest) (response *GetRequestStatusResponse, err error) {
+    if request == nil {
+        request = NewGetRequestStatusRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewGetRequestStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -3127,6 +3261,8 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfigurationRequest) (response *UpdateFunctionConfigurationResponse, err error) {
     if request == nil {
         request = NewUpdateFunctionConfigurationRequest()
@@ -3191,6 +3327,8 @@ func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfiguratio
 //  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionConfigurationWithContext(ctx context.Context, request *UpdateFunctionConfigurationRequest) (response *UpdateFunctionConfigurationResponse, err error) {
     if request == nil {
         request = NewUpdateFunctionConfigurationRequest()
@@ -3240,6 +3378,8 @@ func NewUpdateFunctionEventInvokeConfigResponse() (response *UpdateFunctionEvent
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
     if request == nil {
         request = NewUpdateFunctionEventInvokeConfigRequest()
@@ -3271,6 +3411,8 @@ func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInv
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionEventInvokeConfigWithContext(ctx context.Context, request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
     if request == nil {
         request = NewUpdateFunctionEventInvokeConfigRequest()

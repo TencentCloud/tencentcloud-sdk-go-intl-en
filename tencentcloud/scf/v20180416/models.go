@@ -75,6 +75,18 @@ type AsyncEvent struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
+type AsyncEventStatus struct {
+
+	// Async event status. Values: `RUNNING` (running); `FINISHED` (invoked successfully); `ABORTED` (invocation ended); `FAILED` (invocation failed).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Request status code
+	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
+
+	// Async execution request ID
+	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
+}
+
 type AsyncTriggerConfig struct {
 
 	// Async retry configuration of function upon user error
@@ -663,6 +675,9 @@ type DeleteFunctionRequest struct {
 
 	// Function namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Function version. Enter the number of the version that needs to be deleted, otherwise all versions of the function will be deleted.
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
 func (r *DeleteFunctionRequest) ToJsonString() string {
@@ -679,6 +694,7 @@ func (r *DeleteFunctionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FunctionName")
 	delete(f, "Namespace")
+	delete(f, "Qualifier")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteFunctionRequest has unknown keys!", "")
 	}
@@ -1004,7 +1020,10 @@ type Environment struct {
 
 type Filter struct {
 
-	// Fields to be filtered
+	// Fields to be filtered. Up to 10 conditions allowed.
+	// Values of `Name`: `VpcId`, `SubnetId`, `ClsTopicId`, `ClsLogsetId`, `Role`, `CfsId`, `CfsMountInsId`, `Eip`. Values limit: 1.
+	// Name options: Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable. Values limit: 20.
+	// When `Name` is `Runtime`, `CustomImage` refers to the image type function 
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter values of the field
@@ -1122,6 +1141,10 @@ type FunctionVersion struct {
 	// Update time
 	// Note: This field may return null, indicating that no valid value was found.
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+
+	// Version status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type GetAccountRequest struct {
@@ -1244,6 +1267,55 @@ func (r *GetAliasResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetAliasResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAsyncEventStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the async execution request
+	InvokeRequestId *string `json:"InvokeRequestId,omitempty" name:"InvokeRequestId"`
+}
+
+func (r *GetAsyncEventStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAsyncEventStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InvokeRequestId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetAsyncEventStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetAsyncEventStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async event status
+		Result *AsyncEventStatus `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetAsyncEventStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAsyncEventStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1806,6 +1878,76 @@ func (r *GetProvisionedConcurrencyConfigResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GetRequestStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// ID of the request to be queried
+	FunctionRequestId *string `json:"FunctionRequestId,omitempty" name:"FunctionRequestId"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to the current time minus 24 hours.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query, for example `2017-05-16 20:59:59`. If it’s left empty, it defaults to the current time. Note that the EndTime should be later than the StartTime
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *GetRequestStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRequestStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FunctionName")
+	delete(f, "FunctionRequestId")
+	delete(f, "Namespace")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetRequestStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetRequestStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total running functions
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Details of the function running status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Data []*RequestStatus `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetRequestStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRequestStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GetReservedConcurrencyConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -1872,7 +2014,7 @@ type ImageConfig struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
-	// Entry point of the application
+	// Disused
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EntryPoint *string `json:"EntryPoint,omitempty" name:"EntryPoint"`
 
@@ -1963,7 +2105,7 @@ type InvokeRequest struct {
 	// Fill in `RequestResponse` for synchronized invocations (default and recommended) and `Event` for asychronized invocations. Note that for synchronized invocations, the max timeout period is 300s. Choose asychronized invocations if the required timeout period is longer than 300 seconds. You can also use [InvokeFunction](https://intl.cloud.tencent.com/document/product/583/58400?from_cn_redirect=1) for synchronized invocations. 
 	InvocationType *string `json:"InvocationType,omitempty" name:"InvocationType"`
 
-	// Version number or name of the triggered function
+	// The version or alias of the triggered function. It defaults to $LATEST
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
 	// Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to [event input parameter](https://intl.cloud.tencent.com/document/product/583/9210?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E5.85.A5.E5.8F.82.3Ca-id.3D.22input.22.3E.3C.2Fa.3E).
@@ -3084,6 +3226,33 @@ func (r *PutTotalConcurrencyConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RequestStatus struct {
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Return value after the function is executed
+	RetMsg *string `json:"RetMsg,omitempty" name:"RetMsg"`
+
+	// Request ID
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+
+	// Request start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Result of the request. `0`: succeeded, `1`: running, `-1`: exception
+	RetCode *int64 `json:"RetCode,omitempty" name:"RetCode"`
+
+	// Time consumed for the request in ms
+	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Time consumed by the request in MB
+	MemUsage *float64 `json:"MemUsage,omitempty" name:"MemUsage"`
+
+	// Retry Attempts
+	RetryNum *int64 `json:"RetryNum,omitempty" name:"RetryNum"`
+}
+
 type Result struct {
 
 	// It indicates the log output during the function execution. Null is returned for asynchronous invocations.
@@ -3165,7 +3334,7 @@ type TerminateAsyncEventRequest struct {
 	// Namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Specifies whether to enable graceful shutdown
+	// Disused
 	GraceShutdown *bool `json:"GraceShutdown,omitempty" name:"GraceShutdown"`
 }
 
@@ -3419,11 +3588,11 @@ func (r *UpdateAliasResponse) FromJsonString(s string) error {
 type UpdateFunctionCodeRequest struct {
 	*tchttp.BaseRequest
 
-	// Function handler name, which is in the `file name.function name` form. Use a period (.) to separate a file name and function name. The file name and function name must start and end with letters and contain 2-60 characters, including letters, digits, underscores (_), and hyphens (-).
-	Handler *string `json:"Handler,omitempty" name:"Handler"`
-
 	// Name of the function to be modified
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function handler name, which is in the `file name.function name` form. Use a period (.) to separate a file name and function name. The file name and function name must start and end with letters and contain 2-60 characters, including letters, digits, underscores (_), and hyphens (-).
+	Handler *string `json:"Handler,omitempty" name:"Handler"`
 
 	// COS bucket name
 	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
@@ -3439,6 +3608,9 @@ type UpdateFunctionCodeRequest struct {
 
 	// COS region. Note: Beijing includes ap-beijing and ap-beijing-1.
 	CosBucketRegion *string `json:"CosBucketRegion,omitempty" name:"CosBucketRegion"`
+
+	// Whether to install dependencies automatically
+	InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
 
 	// Function environment
 	EnvId *string `json:"EnvId,omitempty" name:"EnvId"`
@@ -3465,13 +3637,14 @@ func (r *UpdateFunctionCodeRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "Handler")
 	delete(f, "FunctionName")
+	delete(f, "Handler")
 	delete(f, "CosBucketName")
 	delete(f, "CosObjectName")
 	delete(f, "ZipFile")
 	delete(f, "Namespace")
 	delete(f, "CosBucketRegion")
+	delete(f, "InstallDependency")
 	delete(f, "EnvId")
 	delete(f, "Publish")
 	delete(f, "Code")
