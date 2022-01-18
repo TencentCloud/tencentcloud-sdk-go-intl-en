@@ -166,6 +166,72 @@ func (r *AttachCcnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AttachDetail struct {
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of elastic cloud disks attached to the instance
+	AttachedDiskCount *int64 `json:"AttachedDiskCount,omitempty" name:"AttachedDiskCount"`
+
+	// Upper limit of attached elastic cloud disks
+	MaxAttachCount *int64 `json:"MaxAttachCount,omitempty" name:"MaxAttachCount"`
+}
+
+type AttachDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
+func (r *AttachDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "InstanceId")
+	delete(f, "RenewFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AttachDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Blueprint struct {
 
 	// Image ID, which is the unique identifier of `Blueprint`.
@@ -542,6 +608,24 @@ func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DataDiskPrice struct {
+
+	// Cloud disk ID.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Cloud disk unit price.
+	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitempty" name:"OriginalDiskPrice"`
+
+	// Total cloud disk price.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discount.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Discounted total price.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
 type DeleteBlueprintsRequest struct {
 	*tchttp.BaseRequest
 
@@ -881,6 +965,58 @@ func (r *DescribeBlueprintsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBundleDiscountRequest struct {
+	*tchttp.BaseRequest
+
+	// Package ID.
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+}
+
+func (r *DescribeBundleDiscountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBundleDiscountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BundleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBundleDiscountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBundleDiscountResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Currency: CNY, USD.
+		Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+		// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+		DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBundleDiscountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBundleDiscountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeBundlesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1000,6 +1136,320 @@ func (r *DescribeCcnAttachedInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCcnAttachedInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiskConfigsRequest struct {
+	*tchttp.BaseRequest
+
+	// Filter list.
+	// <li>zone</li>Filter by availability zone.
+	// Type: String
+	// Required: no
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeDiskConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiskConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of cloud disk configurations.
+		DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitempty" name:"DiskConfigSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDiskConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiskDiscountRequest struct {
+	*tchttp.BaseRequest
+
+	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Cloud disk size.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
+func (r *DescribeDiskDiscountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskDiscountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskType")
+	delete(f, "DiskSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskDiscountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDiskDiscountResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Currency: CNY, USD.
+		Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+		// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+		DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDiskDiscountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDiskDiscountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksDeniedActionsRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
+func (r *DescribeDisksDeniedActionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksDeniedActionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDisksDeniedActionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksDeniedActionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of operation limits of cloud disks.
+		DiskDeniedActionSet []*DiskDeniedActions `json:"DiskDeniedActionSet,omitempty" name:"DiskDeniedActionSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDisksDeniedActionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksDeniedActionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Filter list.
+	// disk-id
+	// Filter by **cloud disk ID**.
+	// Type: String
+	// Required: no
+	// instance-id
+	// Filter by **instance ID**.
+	// Type: String
+	// Required: no
+	// disk-name
+	// Filter by **cloud disk name**.
+	// Type: String
+	// Required: no
+	// zone
+	// Filter by **availability zone**.
+	// Type: String
+	// Required: no
+	// disk-usage
+	// Filter by **cloud disk type**.
+	// Type: String
+	// Required: no
+	// disk-state
+	// Filter by **cloud disk status**.
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The field by which the cloud disks are sorted. Valid values: "CREATED_TIME" (creation time), "EXPIRED_TIME" (expiration time), "DISK_SIZE" (size of cloud disks). Default value: "CREATED_TIME".
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sorting order of the output cloud disks. Valid values: "ASC" (ascending order), "DESC" (descending order). Default value: "DESC".
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+func (r *DescribeDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderField")
+	delete(f, "Order")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of cloud disk information.
+		DiskSet []*Disk `json:"DiskSet,omitempty" name:"DiskSet"`
+
+		// Number of eligible cloud disks.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksReturnableRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeDisksReturnableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksReturnableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDisksReturnableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDisksReturnableResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of returnable cloud disks.
+		DiskReturnableSet []*DiskReturnable `json:"DiskReturnableSet,omitempty" name:"DiskReturnableSet"`
+
+		// Number of eligible cloud disks.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDisksReturnableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDisksReturnableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1307,6 +1757,58 @@ func (r *DescribeInstancesDeniedActionsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstancesDeniedActionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstancesDiskNumRequest struct {
+	*tchttp.BaseRequest
+
+	// List of instance IDs.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *DescribeInstancesDiskNumRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancesDiskNumRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesDiskNumRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstancesDiskNumResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of all attached disks
+		AttachDetailSet []*AttachDetail `json:"AttachDetailSet,omitempty" name:"AttachDetailSet"`
+
+		// Number of attached cloud disks
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstancesDiskNumResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2005,6 +2507,52 @@ func (r *DetachCcnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetachDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
+func (r *DetachDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DetachDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetachDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DisassociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2053,6 +2601,158 @@ func (r *DisassociateInstancesKeyPairsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DisassociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DiscountDetail struct {
+
+	// Billing duration.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Billing unit.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Total price.
+	TotalCost *float64 `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Discounted total price.
+	RealTotalCost *float64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Discount.
+	Discount *int64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Discount details.
+	PolicyDetail *PolicyDetail `json:"PolicyDetail,omitempty" name:"PolicyDetail"`
+}
+
+type Disk struct {
+
+	// Disk ID
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Disk name
+	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
+
+	// Disk type
+	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// Disk media type
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Disk payment type
+	DiskChargeType *string `json:"DiskChargeType,omitempty" name:"DiskChargeType"`
+
+	// Disk size
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Renewal flag
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// Disk status
+	DiskState *string `json:"DiskState,omitempty" name:"DiskState"`
+
+	// Whether the disk is attached to an instance
+	Attached *bool `json:"Attached,omitempty" name:"Attached"`
+
+	// Whether to release the disk along with the instance
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+
+	// Last operation
+	LatestOperation *string `json:"LatestOperation,omitempty" name:"LatestOperation"`
+
+	// Last operation status
+	LatestOperationState *string `json:"LatestOperationState,omitempty" name:"LatestOperationState"`
+
+	// Last request ID
+	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
+
+	// Creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Expiration date
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
+
+	// Isolation time
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsolatedTime *string `json:"IsolatedTime,omitempty" name:"IsolatedTime"`
+}
+
+type DiskChargePrepaid struct {
+
+	// Purchase duration.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// Purchase duration unit. Default value: "m" (month)
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+}
+
+type DiskConfig struct {
+
+	// Availability zone.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Cloud disk type.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Cloud disk sale status.
+	DiskSalesState *string `json:"DiskSalesState,omitempty" name:"DiskSalesState"`
+
+	// Maximum cloud disk size.
+	MaxDiskSize *int64 `json:"MaxDiskSize,omitempty" name:"MaxDiskSize"`
+
+	// Minimum cloud disk size.
+	MinDiskSize *int64 `json:"MinDiskSize,omitempty" name:"MinDiskSize"`
+
+	// Cloud disk increment.
+	DiskStepSize *int64 `json:"DiskStepSize,omitempty" name:"DiskStepSize"`
+}
+
+type DiskDeniedActions struct {
+
+	// Cloud disk ID.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// List of operation limits.
+	DeniedActions []*DeniedAction `json:"DeniedActions,omitempty" name:"DeniedActions"`
+}
+
+type DiskPrice struct {
+
+	// Cloud disk unit price.
+	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitempty" name:"OriginalDiskPrice"`
+
+	// Total cloud disk price.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discount.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Discounted total price.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
+type DiskReturnable struct {
+
+	// Cloud disk ID.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Whether the cloud disk can be returned.
+	IsReturnable *bool `json:"IsReturnable,omitempty" name:"IsReturnable"`
+
+	// Error code of cloud disk return failure.
+	ReturnFailCode *int64 `json:"ReturnFailCode,omitempty" name:"ReturnFailCode"`
+
+	// Error message of cloud disk return failure.
+	ReturnFailMessage *string `json:"ReturnFailMessage,omitempty" name:"ReturnFailMessage"`
 }
 
 type Filter struct {
@@ -2217,6 +2917,67 @@ func (r *InquirePriceCreateBlueprintResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InquirePriceCreateDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// Cloud disk size in GB.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Parameter settings for purchasing the monthly subscribed cloud disk.
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitempty" name:"DiskChargePrepaid"`
+
+	// Number of cloud disks. Default value: 1.
+	DiskCount *int64 `json:"DiskCount,omitempty" name:"DiskCount"`
+}
+
+func (r *InquirePriceCreateDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceCreateDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskSize")
+	delete(f, "DiskType")
+	delete(f, "DiskChargePrepaid")
+	delete(f, "DiskCount")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceCreateDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cloud disk price.
+		DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceCreateDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceCreateDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InquirePriceCreateInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2278,6 +3039,59 @@ func (r *InquirePriceCreateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InquirePriceRenewDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Parameter settings for renewing the monthly subscribed cloud disk.
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitempty" name:"RenewDiskChargePrepaid"`
+}
+
+func (r *InquirePriceRenewDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceRenewDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "RenewDiskChargePrepaid")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceRenewDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquirePriceRenewDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cloud disk price.
+		DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *InquirePriceRenewDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceRenewDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InquirePriceRenewInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2286,6 +3100,12 @@ type InquirePriceRenewInstancesRequest struct {
 
 	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// Whether to renew the data disk
+	RenewDataDisk *bool `json:"RenewDataDisk,omitempty" name:"RenewDataDisk"`
+
+	// Whether the data disk has the same expiration time as the instance
+	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitempty" name:"AlignInstanceExpiredTime"`
 }
 
 func (r *InquirePriceRenewInstancesRequest) ToJsonString() string {
@@ -2302,6 +3122,8 @@ func (r *InquirePriceRenewInstancesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceIds")
 	delete(f, "InstanceChargePrepaid")
+	delete(f, "RenewDataDisk")
+	delete(f, "AlignInstanceExpiredTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceRenewInstancesRequest has unknown keys!", "")
 	}
@@ -2314,6 +3136,10 @@ type InquirePriceRenewInstancesResponse struct {
 
 		// Price query information.
 		Price *Price `json:"Price,omitempty" name:"Price"`
+
+		// List of data disk price information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitempty" name:"DataDiskPriceSet"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2424,6 +3250,9 @@ type Instance struct {
 
 	// AZ.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The list of tags associated with the instance
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type InstanceChargePrepaid struct {
@@ -2595,6 +3424,106 @@ type ModifyBundle struct {
 
 	// Package information.
 	Bundle *Bundle `json:"Bundle,omitempty" name:"Bundle"`
+}
+
+type ModifyDisksAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Cloud disk name.
+	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
+}
+
+func (r *ModifyDisksAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDisksAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "DiskName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDisksAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDisksAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDisksAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDisksAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDisksRenewFlagRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
+func (r *ModifyDisksRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDisksRenewFlagRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "RenewFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDisksRenewFlagRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDisksRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDisksRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDisksRenewFlagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ModifyFirewallRuleDescriptionRequest struct {
@@ -2905,6 +3834,18 @@ func (r *ModifySnapshotAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type PolicyDetail struct {
+
+	// User discount.
+	UserDiscount *int64 `json:"UserDiscount,omitempty" name:"UserDiscount"`
+
+	// Public discount.
+	CommonDiscount *int64 `json:"CommonDiscount,omitempty" name:"CommonDiscount"`
+
+	// Final discount.
+	FinalDiscount *int64 `json:"FinalDiscount,omitempty" name:"FinalDiscount"`
+}
+
 type Price struct {
 
 	// Instance price.
@@ -2970,6 +3911,21 @@ type RegionInfo struct {
 
 	// Whether the region is in the Chinese mainland
 	IsChinaMainland *bool `json:"IsChinaMainland,omitempty" name:"IsChinaMainland"`
+}
+
+type RenewDiskChargePrepaid struct {
+
+	// Purchase duration.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// Duration unit. Default value: "m" (month).
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Expiration time of the current instance.
+	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitempty" name:"CurInstanceDeadline"`
 }
 
 type ResetAttachCcnRequest struct {
@@ -3327,6 +4283,61 @@ type SystemDisk struct {
 	// System disk ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+}
+
+type Tag struct {
+
+	// Tag key.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value.
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type TerminateDisksRequest struct {
+	*tchttp.BaseRequest
+
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
+func (r *TerminateDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type TerminateDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TerminateDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type TerminateInstancesRequest struct {

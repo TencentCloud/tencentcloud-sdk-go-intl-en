@@ -294,6 +294,86 @@ func (c *Client) AttachCcnWithContext(ctx context.Context, request *AttachCcnReq
     return
 }
 
+func NewAttachDisksRequest() (request *AttachDisksRequest) {
+    request = &AttachDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "AttachDisks")
+    
+    
+    return
+}
+
+func NewAttachDisksResponse() (response *AttachDisksResponse) {
+    response = &AttachDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AttachDisks
+// This API is used to attach one or more cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  LIMITEXCEEDED_ATTACHDATADISKQUOTALIMITEXCEEDED = "LimitExceeded.AttachDataDiskQuotaLimitExceeded"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisksResponse, err error) {
+    if request == nil {
+        request = NewAttachDisksRequest()
+    }
+    
+    response = NewAttachDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AttachDisks
+// This API is used to attach one or more cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  LIMITEXCEEDED_ATTACHDATADISKQUOTALIMITEXCEEDED = "LimitExceeded.AttachDataDiskQuotaLimitExceeded"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) AttachDisksWithContext(ctx context.Context, request *AttachDisksRequest) (response *AttachDisksResponse, err error) {
+    if request == nil {
+        request = NewAttachDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewAttachDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBlueprintRequest() (request *CreateBlueprintRequest) {
     request = &CreateBlueprintRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -318,6 +398,7 @@ func NewCreateBlueprintResponse() (response *CreateBlueprintResponse) {
 //  FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
 //  FAILEDOPERATION_UNABLETOCREATEBLUEPRINT = "FailedOperation.UnableToCreateBlueprint"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
@@ -339,6 +420,7 @@ func (c *Client) CreateBlueprint(request *CreateBlueprintRequest) (response *Cre
 //  FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
 //  FAILEDOPERATION_UNABLETOCREATEBLUEPRINT = "FailedOperation.UnableToCreateBlueprint"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
@@ -981,6 +1063,7 @@ func NewDescribeBlueprintsResponse() (response *DescribeBlueprintsResponse) {
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     if request == nil {
         request = NewDescribeBlueprintsRequest()
@@ -1011,6 +1094,7 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     if request == nil {
         request = NewDescribeBlueprintsRequest()
@@ -1018,6 +1102,58 @@ func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeBlueprintsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBundleDiscountRequest() (request *DescribeBundleDiscountRequest) {
+    request = &DescribeBundleDiscountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeBundleDiscount")
+    
+    
+    return
+}
+
+func NewDescribeBundleDiscountResponse() (response *DescribeBundleDiscountResponse) {
+    response = &DescribeBundleDiscountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBundleDiscount
+// This API is used to query the discount information of a package.
+//
+// error code that may be returned:
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+func (c *Client) DescribeBundleDiscount(request *DescribeBundleDiscountRequest) (response *DescribeBundleDiscountResponse, err error) {
+    if request == nil {
+        request = NewDescribeBundleDiscountRequest()
+    }
+    
+    response = NewDescribeBundleDiscountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeBundleDiscount
+// This API is used to query the discount information of a package.
+//
+// error code that may be returned:
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
+func (c *Client) DescribeBundleDiscountWithContext(ctx context.Context, request *DescribeBundleDiscountRequest) (response *DescribeBundleDiscountResponse, err error) {
+    if request == nil {
+        request = NewDescribeBundleDiscountRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeBundleDiscountResponse()
     err = c.Send(request, response)
     return
 }
@@ -1156,6 +1292,280 @@ func (c *Client) DescribeCcnAttachedInstancesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeCcnAttachedInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDiskConfigsRequest() (request *DescribeDiskConfigsRequest) {
+    request = &DescribeDiskConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeDiskConfigs")
+    
+    
+    return
+}
+
+func NewDescribeDiskConfigsResponse() (response *DescribeDiskConfigsResponse) {
+    response = &DescribeDiskConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDiskConfigs
+// This API is used to query the cloud disk configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+func (c *Client) DescribeDiskConfigs(request *DescribeDiskConfigsRequest) (response *DescribeDiskConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskConfigsRequest()
+    }
+    
+    response = NewDescribeDiskConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDiskConfigs
+// This API is used to query the cloud disk configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+func (c *Client) DescribeDiskConfigsWithContext(ctx context.Context, request *DescribeDiskConfigsRequest) (response *DescribeDiskConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskConfigsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDiskConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDiskDiscountRequest() (request *DescribeDiskDiscountRequest) {
+    request = &DescribeDiskDiscountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeDiskDiscount")
+    
+    
+    return
+}
+
+func NewDescribeDiskDiscountResponse() (response *DescribeDiskDiscountResponse) {
+    response = &DescribeDiskDiscountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDiskDiscount
+// This API is used to query the discount information of a cloud disk.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeDiskDiscount(request *DescribeDiskDiscountRequest) (response *DescribeDiskDiscountResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskDiscountRequest()
+    }
+    
+    response = NewDescribeDiskDiscountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDiskDiscount
+// This API is used to query the discount information of a cloud disk.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeDiskDiscountWithContext(ctx context.Context, request *DescribeDiskDiscountRequest) (response *DescribeDiskDiscountResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskDiscountRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDiskDiscountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDisksRequest() (request *DescribeDisksRequest) {
+    request = &DescribeDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeDisks")
+    
+    
+    return
+}
+
+func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
+    response = &DescribeDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDisks
+// This API is used to query the information of one or more cloud disks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+func (c *Client) DescribeDisks(request *DescribeDisksRequest) (response *DescribeDisksResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksRequest()
+    }
+    
+    response = NewDescribeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDisks
+// This API is used to query the information of one or more cloud disks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+func (c *Client) DescribeDisksWithContext(ctx context.Context, request *DescribeDisksRequest) (response *DescribeDisksResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDisksDeniedActionsRequest() (request *DescribeDisksDeniedActionsRequest) {
+    request = &DescribeDisksDeniedActionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeDisksDeniedActions")
+    
+    
+    return
+}
+
+func NewDescribeDisksDeniedActionsResponse() (response *DescribeDisksDeniedActionsResponse) {
+    response = &DescribeDisksDeniedActionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDisksDeniedActions
+// This API is used to query the list of operation limits of one or more cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+func (c *Client) DescribeDisksDeniedActions(request *DescribeDisksDeniedActionsRequest) (response *DescribeDisksDeniedActionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksDeniedActionsRequest()
+    }
+    
+    response = NewDescribeDisksDeniedActionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDisksDeniedActions
+// This API is used to query the list of operation limits of one or more cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+func (c *Client) DescribeDisksDeniedActionsWithContext(ctx context.Context, request *DescribeDisksDeniedActionsRequest) (response *DescribeDisksDeniedActionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksDeniedActionsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDisksDeniedActionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDisksReturnableRequest() (request *DescribeDisksReturnableRequest) {
+    request = &DescribeDisksReturnableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeDisksReturnable")
+    
+    
+    return
+}
+
+func NewDescribeDisksReturnableResponse() (response *DescribeDisksReturnableResponse) {
+    response = &DescribeDisksReturnableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDisksReturnable
+// This API is used to query whether the specified cloud disk can be returned.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEDISKSRETURNABLEERROR = "InternalError.DescribeDisksReturnableError"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+func (c *Client) DescribeDisksReturnable(request *DescribeDisksReturnableRequest) (response *DescribeDisksReturnableResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksReturnableRequest()
+    }
+    
+    response = NewDescribeDisksReturnableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDisksReturnable
+// This API is used to query whether the specified cloud disk can be returned.
+//
+// error code that may be returned:
+//  INTERNALERROR_DESCRIBEDISKSRETURNABLEERROR = "InternalError.DescribeDisksReturnableError"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+func (c *Client) DescribeDisksReturnableWithContext(ctx context.Context, request *DescribeDisksReturnableRequest) (response *DescribeDisksReturnableResponse, err error) {
+    if request == nil {
+        request = NewDescribeDisksReturnableRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDisksReturnableResponse()
     err = c.Send(request, response)
     return
 }
@@ -1612,6 +2022,62 @@ func (c *Client) DescribeInstancesDeniedActionsWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeInstancesDeniedActionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstancesDiskNumRequest() (request *DescribeInstancesDiskNumRequest) {
+    request = &DescribeInstancesDiskNumRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DescribeInstancesDiskNum")
+    
+    
+    return
+}
+
+func NewDescribeInstancesDiskNumResponse() (response *DescribeInstancesDiskNumResponse) {
+    response = &DescribeInstancesDiskNumResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstancesDiskNum
+// This API is used to query the number of cloud disks attached to instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeInstancesDiskNum(request *DescribeInstancesDiskNumRequest) (response *DescribeInstancesDiskNumResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesDiskNumRequest()
+    }
+    
+    response = NewDescribeInstancesDiskNumResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeInstancesDiskNum
+// This API is used to query the number of cloud disks attached to instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeInstancesDiskNumWithContext(ctx context.Context, request *DescribeInstancesDiskNumRequest) (response *DescribeInstancesDiskNumResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesDiskNumRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesDiskNumResponse()
     err = c.Send(request, response)
     return
 }
@@ -2296,6 +2762,68 @@ func (c *Client) DetachCcnWithContext(ctx context.Context, request *DetachCcnReq
     return
 }
 
+func NewDetachDisksRequest() (request *DetachDisksRequest) {
+    request = &DetachDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "DetachDisks")
+    
+    
+    return
+}
+
+func NewDetachDisksResponse() (response *DetachDisksResponse) {
+    response = &DetachDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DetachDisks
+// This API is used to detach one or more cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) DetachDisks(request *DetachDisksRequest) (response *DetachDisksResponse, err error) {
+    if request == nil {
+        request = NewDetachDisksRequest()
+    }
+    
+    response = NewDetachDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DetachDisks
+// This API is used to detach one or more cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) DetachDisksWithContext(ctx context.Context, request *DetachDisksRequest) (response *DetachDisksResponse, err error) {
+    if request == nil {
+        request = NewDetachDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDetachDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKeyPairsRequest) {
     request = &DisassociateInstancesKeyPairsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2510,6 +3038,56 @@ func (c *Client) InquirePriceCreateBlueprintWithContext(ctx context.Context, req
     return
 }
 
+func NewInquirePriceCreateDisksRequest() (request *InquirePriceCreateDisksRequest) {
+    request = &InquirePriceCreateDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "InquirePriceCreateDisks")
+    
+    
+    return
+}
+
+func NewInquirePriceCreateDisksResponse() (response *InquirePriceCreateDisksResponse) {
+    response = &InquirePriceCreateDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquirePriceCreateDisks
+// This API is used to query the price of purchasing cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) InquirePriceCreateDisks(request *InquirePriceCreateDisksRequest) (response *InquirePriceCreateDisksResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateDisksRequest()
+    }
+    
+    response = NewInquirePriceCreateDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InquirePriceCreateDisks
+// This API is used to query the price of purchasing cloud disks.
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) InquirePriceCreateDisksWithContext(ctx context.Context, request *InquirePriceCreateDisksRequest) (response *InquirePriceCreateDisksResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceCreateDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewInquirePriceCreateDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquirePriceCreateInstancesRequest() (request *InquirePriceCreateInstancesRequest) {
     request = &InquirePriceCreateInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2562,6 +3140,60 @@ func (c *Client) InquirePriceCreateInstancesWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewInquirePriceCreateInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePriceRenewDisksRequest() (request *InquirePriceRenewDisksRequest) {
+    request = &InquirePriceRenewDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "InquirePriceRenewDisks")
+    
+    
+    return
+}
+
+func NewInquirePriceRenewDisksResponse() (response *InquirePriceRenewDisksResponse) {
+    response = &InquirePriceRenewDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquirePriceRenewDisks
+// This API is used to query the price of renewing cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+func (c *Client) InquirePriceRenewDisks(request *InquirePriceRenewDisksRequest) (response *InquirePriceRenewDisksResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceRenewDisksRequest()
+    }
+    
+    response = NewInquirePriceRenewDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InquirePriceRenewDisks
+// This API is used to query the price of renewing cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+func (c *Client) InquirePriceRenewDisksWithContext(ctx context.Context, request *InquirePriceRenewDisksRequest) (response *InquirePriceRenewDisksResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceRenewDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewInquirePriceRenewDisksResponse()
     err = c.Send(request, response)
     return
 }
@@ -2649,6 +3281,7 @@ func NewModifyBlueprintAttributeResponse() (response *ModifyBlueprintAttributeRe
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTSHAREDBLUEPRINT = "UnsupportedOperation.NotSupportSharedBlueprint"
 func (c *Client) ModifyBlueprintAttribute(request *ModifyBlueprintAttributeRequest) (response *ModifyBlueprintAttributeResponse, err error) {
     if request == nil {
@@ -2670,6 +3303,7 @@ func (c *Client) ModifyBlueprintAttribute(request *ModifyBlueprintAttributeReque
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
+//  UNSUPPORTEDOPERATION_BLUEPRINTCURSTATEINVALID = "UnsupportedOperation.BlueprintCurStateInvalid"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTSHAREDBLUEPRINT = "UnsupportedOperation.NotSupportSharedBlueprint"
 func (c *Client) ModifyBlueprintAttributeWithContext(ctx context.Context, request *ModifyBlueprintAttributeRequest) (response *ModifyBlueprintAttributeResponse, err error) {
     if request == nil {
@@ -2678,6 +3312,124 @@ func (c *Client) ModifyBlueprintAttributeWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyBlueprintAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDisksAttributeRequest() (request *ModifyDisksAttributeRequest) {
+    request = &ModifyDisksAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyDisksAttribute")
+    
+    
+    return
+}
+
+func NewModifyDisksAttributeResponse() (response *ModifyDisksAttributeResponse) {
+    response = &ModifyDisksAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDisksAttribute
+// This API is used to modify cloud disk attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+func (c *Client) ModifyDisksAttribute(request *ModifyDisksAttributeRequest) (response *ModifyDisksAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDisksAttributeRequest()
+    }
+    
+    response = NewModifyDisksAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDisksAttribute
+// This API is used to modify cloud disk attributes.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+func (c *Client) ModifyDisksAttributeWithContext(ctx context.Context, request *ModifyDisksAttributeRequest) (response *ModifyDisksAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyDisksAttributeRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDisksAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDisksRenewFlagRequest() (request *ModifyDisksRenewFlagRequest) {
+    request = &ModifyDisksRenewFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "ModifyDisksRenewFlag")
+    
+    
+    return
+}
+
+func NewModifyDisksRenewFlagResponse() (response *ModifyDisksRenewFlagResponse) {
+    response = &ModifyDisksRenewFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDisksRenewFlag
+// This API is used to modify the configuration of auto-renewal of cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+func (c *Client) ModifyDisksRenewFlag(request *ModifyDisksRenewFlagRequest) (response *ModifyDisksRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyDisksRenewFlagRequest()
+    }
+    
+    response = NewModifyDisksRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ModifyDisksRenewFlag
+// This API is used to modify the configuration of auto-renewal of cloud disks.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  RESOURCENOTFOUND_DISKNOTFOUND = "ResourceNotFound.DiskNotFound"
+func (c *Client) ModifyDisksRenewFlagWithContext(ctx context.Context, request *ModifyDisksRenewFlagRequest) (response *ModifyDisksRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyDisksRenewFlagRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewModifyDisksRenewFlagResponse()
     err = c.Send(request, response)
     return
 }
@@ -3061,8 +3813,10 @@ func NewModifyInstancesRenewFlagResponse() (response *ModifyInstancesRenewFlagRe
 // * The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
@@ -3088,8 +3842,10 @@ func (c *Client) ModifyInstancesRenewFlag(request *ModifyInstancesRenewFlagReque
 // * The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
@@ -3354,6 +4110,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_BLUEPRINTUNAVAILABLE = "ResourceUnavailable.BlueprintUnavailable"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
@@ -3396,6 +4153,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_BLUEPRINTUNAVAILABLE = "ResourceUnavailable.BlueprintUnavailable"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
@@ -3676,6 +4434,64 @@ func (c *Client) StopInstancesWithContext(ctx context.Context, request *StopInst
     request.SetContext(ctx)
     
     response = NewStopInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTerminateDisksRequest() (request *TerminateDisksRequest) {
+    request = &TerminateDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("lighthouse", APIVersion, "TerminateDisks")
+    
+    
+    return
+}
+
+func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
+    response = &TerminateDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// TerminateDisks
+// This API is used to terminate one or more cloud disk.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *TerminateDisksResponse, err error) {
+    if request == nil {
+        request = NewTerminateDisksRequest()
+    }
+    
+    response = NewTerminateDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// TerminateDisks
+// This API is used to terminate one or more cloud disk.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_DISKUSAGENOTSUPPORTOPERATION = "OperationDenied.DiskUsageNotSupportOperation"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+func (c *Client) TerminateDisksWithContext(ctx context.Context, request *TerminateDisksRequest) (response *TerminateDisksResponse, err error) {
+    if request == nil {
+        request = NewTerminateDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewTerminateDisksResponse()
     err = c.Send(request, response)
     return
 }
