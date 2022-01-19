@@ -87,6 +87,18 @@ type ActivtyRelatedInstance struct {
 	InstanceStatus *string `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
 }
 
+type Advice struct {
+
+	// Problem Description
+	Problem *string `json:"Problem,omitempty" name:"Problem"`
+
+	// Problem Details
+	Detail *string `json:"Detail,omitempty" name:"Detail"`
+
+	// Recommended resolutions
+	Solution *string `json:"Solution,omitempty" name:"Solution"`
+}
+
 type AttachInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -138,6 +150,72 @@ func (r *AttachInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AttachInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachLoadBalancersRequest struct {
+	*tchttp.BaseRequest
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// List of classic CLB IDs. Up to 20 classic CLBs can be bound to a security group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
+
+	// List of application CLBs. Up to 50 application CLBs can be bound to a security group. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
+}
+
+func (r *AttachLoadBalancersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachLoadBalancersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "LoadBalancerIds")
+	delete(f, "ForwardLoadBalancers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AttachLoadBalancersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttachLoadBalancersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Scaling activity ID
+		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AttachLoadBalancersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AttachLoadBalancersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AutoScalingAdvice struct {
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// A collection of suggestions for scaling group configurations.
+	Advices []*Advice `json:"Advices,omitempty" name:"Advices"`
 }
 
 type AutoScalingGroup struct {
@@ -867,13 +945,20 @@ type CreateNotificationConfigurationRequest struct {
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 
-	// Notification receiver type. Values: `USER_GROUP`，`CMQ_QUEUE`，`CMQ_TOPIC`. Default: `USER_GROUP`.
+	// Notification receiver type. Valid values:
+	// <br><li>USER_GROUP:User group
+	// <br><li>CMQ_QUEUE:CMQ queue
+	// <br><li>CMQ_TOPIC:CMQ topic
+	// <br><li>TDMQ_CMQ_TOPIC:TDMQ CMQ topic
+	// <br><li>TDMQ_CMQ_QUEUE:TDMQ CMQ queue
+	// 
+	// Default value: `USER_GROUP`.
 	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
 
-	// CMQ queue name. This field is required when `TargetType` is `CMQ_QUEUE`.
+	// CMQ queue name. This parameter is required when `TargetType` is `CMQ_QUEUE` or `TDMQ_CMQ_QUEUE`.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
-	// CMQ topic name. This field is required when `TargetType` is `CMQ_TOPIC`.
+	// CMQ topic name. This parameter is required when `TargetType` is `CMQ_TOPIC` or `TDMQ_CMQ_TOPIC`.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
@@ -1496,6 +1581,55 @@ func (r *DescribeAutoScalingActivitiesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAutoScalingAdvicesRequest struct {
+	*tchttp.BaseRequest
+
+	// List of scaling groups to be queried. Upper limit: 100.
+	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitempty" name:"AutoScalingGroupIds"`
+}
+
+func (r *DescribeAutoScalingAdvicesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalingAdvicesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoScalingAdvicesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAutoScalingAdvicesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// A collection of suggestions for scaling group configurations.
+		AutoScalingAdviceSet []*AutoScalingAdvice `json:"AutoScalingAdviceSet,omitempty" name:"AutoScalingAdviceSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAutoScalingAdvicesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScalingAdvicesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeAutoScalingGroupLastActivitiesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1632,7 +1766,7 @@ type DescribeAutoScalingInstancesRequest struct {
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Number of returned results. The default value is 20. The maximum is 2000. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -2075,6 +2209,63 @@ func (r *DetachInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetachLoadBalancersRequest struct {
+	*tchttp.BaseRequest
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// List of classic CLB IDs. Up to 20 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
+
+	// List of application CLB IDs. Up to 50 IDs are allowed. `LoadBalancerIds` and `ForwardLoadBalancers` cannot be specified at the same time.
+	ForwardLoadBalancerIdentifications []*ForwardLoadBalancerIdentification `json:"ForwardLoadBalancerIdentifications,omitempty" name:"ForwardLoadBalancerIdentifications"`
+}
+
+func (r *DetachLoadBalancersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachLoadBalancersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "LoadBalancerIds")
+	delete(f, "ForwardLoadBalancerIdentifications")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetachLoadBalancersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DetachLoadBalancersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Scaling activity ID
+		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetachLoadBalancersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetachLoadBalancersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DetailedStatusMessage struct {
 
 	// Error type
@@ -2282,6 +2473,18 @@ type ForwardLoadBalancer struct {
 
 	// The region of CLB instance. It defaults to the region of AS service and is in the format of the common parameter `Region`, such as `ap-guangzhou`.
 	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
+type ForwardLoadBalancerIdentification struct {
+
+	// ID of the CLB
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// Application CLB listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// ID of a forwarding rule. This parameter is required for layer-7 listeners.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 }
 
 type HostNameSettings struct {
@@ -2880,6 +3083,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// Specifies whether to enable additional services, such as security services and monitoring service.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
+
+	// CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
+	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -2911,6 +3117,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "HostNameSettings")
 	delete(f, "InstanceNameSettings")
 	delete(f, "EnhancedService")
+	delete(f, "CamRoleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -2934,6 +3141,59 @@ func (r *ModifyLaunchConfigurationAttributesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyLaunchConfigurationAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLoadBalancerTargetAttributesRequest struct {
+	*tchttp.BaseRequest
+
+	// Scaling group ID
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
+
+	// List of application CLBs to modify.Up to 50 CLBs allowed.
+	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitempty" name:"ForwardLoadBalancers"`
+}
+
+func (r *ModifyLoadBalancerTargetAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancerTargetAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "ForwardLoadBalancers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancerTargetAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLoadBalancerTargetAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Scaling activity ID
+		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLoadBalancerTargetAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancerTargetAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3018,10 +3278,10 @@ type ModifyNotificationConfigurationRequest struct {
 	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 
-	// CMQ queue name.
+	// CMQ or TDMQ CMQ queue name.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
-	// CMQ topic name.
+	// CMQ or TDMQ CMQ toipc name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
@@ -3215,15 +3475,17 @@ func (r *ModifyScheduledActionResponse) FromJsonString(s string) error {
 
 type NotificationTarget struct {
 
-	// Target type. Value range: `CMQ_QUEUE`, `CMQ_TOPIC`.
-	// <li> CMQ_QUEUE: CMQ_QUEUE: CMQ queue model.</li>
-	// <li> CMQ_TOPIC: CMQ topic model.</li>
+	// Target type. Valid values: `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE` and `TDMQ_CMQ_TOPIC`.
+	// <li> CMQ_QUEUE: Tencent Cloud message queue - queue model.</li>
+	// <li> CMQ_TOPIC: Tencent Cloud message queue - topic model.</li>
+	// <li> TDMQ_CMQ_QUEUE: Tencent Cloud TDMQ message queue - queue model.</li>
+	// <li> TDMQ_CMQ_TOPIC: Tencent Cloud TDMQ message queue - topic model.</li>
 	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
 
-	// Queue name. If `TargetType` is `CMQ_QUEUE`, this parameter is required.
+	// Queue name. This parameter is required when `TargetType` is `CMQ_QUEUE` or `TDMQ_CMQ_QUEUE`.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
-	// Topic name. If `TargetType` is `CMQ_TOPIC`, this parameter is required.
+	// Topic name. This parameter is required when `TargetType` is `CMQ_TOPIC` or `TDMQ_CMQ_TOPIC`.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 

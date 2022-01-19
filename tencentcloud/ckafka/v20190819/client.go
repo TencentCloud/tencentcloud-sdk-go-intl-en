@@ -2541,3 +2541,61 @@ func (c *Client) ModifyTopicAttributesWithContext(ctx context.Context, request *
     err = c.Send(request, response)
     return
 }
+
+func NewSendMessageRequest() (request *SendMessageRequest) {
+    request = &SendMessageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "SendMessage")
+    
+    
+    return
+}
+
+func NewSendMessageResponse() (response *SendMessageResponse) {
+    response = &SendMessageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SendMessage
+// This API is used to send messages through the HTTP access layer.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SendMessage(request *SendMessageRequest) (response *SendMessageResponse, err error) {
+    if request == nil {
+        request = NewSendMessageRequest()
+    }
+    
+    response = NewSendMessageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// SendMessage
+// This API is used to send messages through the HTTP access layer.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SendMessageWithContext(ctx context.Context, request *SendMessageRequest) (response *SendMessageResponse, err error) {
+    if request == nil {
+        request = NewSendMessageRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewSendMessageResponse()
+    err = c.Send(request, response)
+    return
+}

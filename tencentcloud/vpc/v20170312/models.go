@@ -644,7 +644,7 @@ type AssociateAddressRequest struct {
 	// The private IP to be bound. If you specify `NetworkInterfaceId`, then you must also specify `PrivateIpAddress`, indicating the EIP is bound to the specified private IP of the specified ENI. At the same time, you must ensure the specified `PrivateIpAddress` is a private IP on the `NetworkInterfaceId`. You can query the private IP of the specified ENI by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `privateIpAddress` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
-	// Whether to enable direct access when binding a specified EIP. For more information, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/1199/41709?from_cn_redirect=1). Valid values: `True` and `False`; default value: `False`. You can set this parameter to `True` when binding an EIP to a CVM instance or an EKS elastic cluster. This parameter is currently in beta. To use it, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
+	// Specify whether to configure direct access when binding EIPs. For details, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/213/12540). Valid values: `True` and `False` (default). This parameter can be set to `True` when binding EIPs to a CVM instance or EKS cluster. It is in a beta test. To try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
 	EipDirectConnection *bool `json:"EipDirectConnection,omitempty" name:"EipDirectConnection"`
 }
 
@@ -2197,6 +2197,9 @@ type CreateDirectConnectGatewayRequest struct {
 
 	// Availability zone where the direct connect gateway resides.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// ID of DC highly available placement group
+	HaZoneGroupId *string `json:"HaZoneGroupId,omitempty" name:"HaZoneGroupId"`
 }
 
 func (r *CreateDirectConnectGatewayRequest) ToJsonString() string {
@@ -2217,6 +2220,7 @@ func (r *CreateDirectConnectGatewayRequest) FromJsonString(s string) error {
 	delete(f, "GatewayType")
 	delete(f, "ModeType")
 	delete(f, "Zone")
+	delete(f, "HaZoneGroupId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectGatewayRequest has unknown keys!", "")
 	}
@@ -3664,6 +3668,18 @@ type CreateVpnConnectionRequest struct {
 
 	// Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
 	RouteType *string `json:"RouteType,omitempty" name:"RouteType"`
+
+	// Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+	NegotiationType *string `json:"NegotiationType,omitempty" name:"NegotiationType"`
+
+	// Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+	DpdEnable *int64 `json:"DpdEnable,omitempty" name:"DpdEnable"`
+
+	// DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+	DpdTimeout *string `json:"DpdTimeout,omitempty" name:"DpdTimeout"`
+
+	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
 }
 
 func (r *CreateVpnConnectionRequest) ToJsonString() string {
@@ -3691,6 +3707,10 @@ func (r *CreateVpnConnectionRequest) FromJsonString(s string) error {
 	delete(f, "HealthCheckLocalIp")
 	delete(f, "HealthCheckRemoteIp")
 	delete(f, "RouteType")
+	delete(f, "NegotiationType")
+	delete(f, "DpdEnable")
+	delete(f, "DpdTimeout")
+	delete(f, "DpdAction")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpnConnectionRequest has unknown keys!", "")
 	}
@@ -5700,21 +5720,21 @@ type DescribeAddressesRequest struct {
 	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
-	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
-	// <li> address-id - String - Required: No - (Filter condition) Filter by the unique EIP ID, such as `eip-11112222`.</li>
-	// <li> address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.</li>
-	// <li> address-ip - String - Required: No - (Filter condition) Filter by EIP.</li>
-	// <li> address-status - String - Required: No - (Filter condition) Filter by the EIP state. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
-	// <li> instance-id - String - Required: No - (Filter condition) Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
-	// <li> private-ip-address - String - Required: No - (Filter condition) Filter by the private IP address bound to the EIP.</li>
-	// <li> network-interface-id - String - Required: No - (Filter condition) Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
-	// <li> is-arrears - String - Required: No - (Filter condition) Whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
-	// <li> address-type - String - Required: No - (Filter condition) Filter by the IP type. Valid values: `EIP`, `AnycastEIP`, and `HighQualityEIP`.</li>
-	// <li> address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
-	// <li> dedicated-cluster-id - String - Required: No - (Filter condition) Filter by the unique CDC ID, such as `cluster-11112222`.</li>
-	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
-	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
+	// <li> address-id - String - Optional - Filter by unique EIP ID, such as `eip-11112222`.</li>
+	// <li> address-name - String - Optional - Filter by EIP name. Fuzzy filtering is not supported.</li>
+	// <li> address-ip - String - Optional - Filter by EIP address.</li>
+	// <li> address-status - String - Optional - Filter by EIP status. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+	// <li> instance-id - String - Optional - Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
+	// <li> private-ip-address - String - Optional - Filter by the private IP address bound to the EIP.</li>
+	// <li> network-interface-id - String - Optional - Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
+	// <li> is-arrears - String - Optional - Filter by the fact whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
+	// <li> address-type - String - Optional - Filter by IP type. Valid values: `WanIP`, `EIP`, `AnycastEIP`, and `HighQualityEIP`. Default value: `EIP`.</li>
+	// <li> address-isp - String - Optional - Filter by ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+	// <li> dedicated-cluster-id - String - Optional - Filter by unique CDC ID, such as `cluster-11112222`.</li>
+	// <li> tag-key - String - Optional - Filter by tag key.</li>
+	// <li> tag-value - String - Optional - Filter by tag value.</li>
+	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
@@ -7996,6 +8016,18 @@ type DescribeSecurityGroupPoliciesRequest struct {
 
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
+	// <li>security-group-id - String - Security group ID.</li>
+	// <li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+	// <li>address-module - String - IP address or address group template ID.</li>
+	// <li>service-module - String - Protocol port or port group template ID.</li>
+	// <li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+	// <li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+	// <li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
+	// <li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
+	// <li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeSecurityGroupPoliciesRequest) ToJsonString() string {
@@ -8011,6 +8043,7 @@ func (r *DescribeSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SecurityGroupId")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupPoliciesRequest has unknown keys!", "")
 	}
@@ -9463,6 +9496,33 @@ type DirectConnectGateway struct {
 	// Availability zone where the direct connect gateway resides.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The status of gateway traffic monitoring
+	// 0: disable
+	// 1: enable
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EnableFlowDetails *uint64 `json:"EnableFlowDetails,omitempty" name:"EnableFlowDetails"`
+
+	// The last time when the gateway traffic monitoring is enabled/disabled
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FlowDetailsUpdateTime *string `json:"FlowDetailsUpdateTime,omitempty" name:"FlowDetailsUpdateTime"`
+
+	// Whether gateway traffic monitoring is supported
+	// 0: No
+	// 1: Yes
+	// Note: this field may return `null`, indicating that no valid values can be found.
+	NewAfc *uint64 `json:"NewAfc,omitempty" name:"NewAfc"`
+
+	// Direct connect gateway access network types:
+	// <li>`VXLAN` - VXLAN type.</li>
+	// <li>`MPLS` - MPLS type.</li>
+	// <li>`Hybrid` - Hybrid type.</li>
+	// Note: this field may return `null`, indicating that no valid values can be found.
+	AccessNetworkType *string `json:"AccessNetworkType,omitempty" name:"AccessNetworkType"`
+
+	// AZ list of direct connect gateway with cross-AZ placement groups
+	// Note: this field may return `null`, indicating that no valid values can be found.
+	HaZoneList []*string `json:"HaZoneList,omitempty" name:"HaZoneList"`
 }
 
 type DirectConnectGatewayCcnRoute struct {
@@ -9475,6 +9535,12 @@ type DirectConnectGatewayCcnRoute struct {
 
 	// The `AS-Path` attribute of `BGP`.
 	ASPath []*string `json:"ASPath,omitempty" name:"ASPath"`
+
+	// Remarks
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Last updated time
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type DisableCcnRoutesRequest struct {
@@ -12979,6 +13045,18 @@ type ModifyVpnConnectionAttributeRequest struct {
 
 	// Peer IP address for the tunnel health check
 	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
+
+	// Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+	NegotiationType *string `json:"NegotiationType,omitempty" name:"NegotiationType"`
+
+	// Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+	DpdEnable *int64 `json:"DpdEnable,omitempty" name:"DpdEnable"`
+
+	// DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+	DpdTimeout *string `json:"DpdTimeout,omitempty" name:"DpdTimeout"`
+
+	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
 }
 
 func (r *ModifyVpnConnectionAttributeRequest) ToJsonString() string {
@@ -13002,6 +13080,10 @@ func (r *ModifyVpnConnectionAttributeRequest) FromJsonString(s string) error {
 	delete(f, "EnableHealthCheck")
 	delete(f, "HealthCheckLocalIp")
 	delete(f, "HealthCheckRemoteIp")
+	delete(f, "NegotiationType")
+	delete(f, "DpdEnable")
+	delete(f, "DpdTimeout")
+	delete(f, "DpdAction")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnConnectionAttributeRequest has unknown keys!", "")
 	}
@@ -14876,7 +14958,7 @@ type Tag struct {
 type TransformAddressRequest struct {
 	*tchttp.BaseRequest
 
-	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/9389?from_cn_redirect=1) API.
+	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [CVM console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/33256).
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 

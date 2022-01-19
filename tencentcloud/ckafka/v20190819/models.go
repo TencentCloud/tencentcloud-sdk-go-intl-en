@@ -143,6 +143,15 @@ type Assignment struct {
 	Topics []*GroupInfoTopics `json:"Topics,omitempty" name:"Topics"`
 }
 
+type BatchContent struct {
+
+	// Message body that is sent.
+	Body *string `json:"Body,omitempty" name:"Body"`
+
+	// Message sending key name.
+	Key *string `json:"Key,omitempty" name:"Key"`
+}
+
 type BatchCreateAclRequest struct {
 	*tchttp.BaseRequest
 
@@ -3211,6 +3220,59 @@ type SaleInfo struct {
 	// Whether it has been sold out. `true`: sold out.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SoldOut *bool `json:"SoldOut,omitempty" name:"SoldOut"`
+}
+
+type SendMessageRequest struct {
+	*tchttp.BaseRequest
+
+	// Datahub access ID.
+	DataHubId *string `json:"DataHubId,omitempty" name:"DataHubId"`
+
+	// Message content that is sent.
+	Message []*BatchContent `json:"Message,omitempty" name:"Message"`
+}
+
+func (r *SendMessageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendMessageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DataHubId")
+	delete(f, "Message")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendMessageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SendMessageResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Message ID list.
+		MessageId []*string `json:"MessageId,omitempty" name:"MessageId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SendMessageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendMessageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SubscribedInfo struct {

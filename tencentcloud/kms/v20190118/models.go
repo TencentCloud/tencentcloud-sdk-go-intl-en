@@ -349,7 +349,7 @@ type CreateKeyRequest struct {
 	// CMK description of up to 1,024 bytes in length
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Key purpose. Valid values: `ENCRYPT_DECRYPT` (default value; creating a symmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_RSA_2048` (creating an RSA2048 asymmetric key for encryption and decryption), `ASYMMETRIC_DECRYPT_SM2` (creating an SM2 asymmetric key for encryption and decryption), and `ASYMMETRIC_SIGN_VERIFY_SM2` (creating an SM2 asymmetric key for signature verification).
+	// Defines the purpose of the key. The valid values are as follows: `ENCRYPT_DECRYPT` (default): creates a symmetric encryption/decryption key; `ASYMMETRIC_DECRYPT_RSA_2048`: creates an asymmetric encryption/decryption 2048-bit RSA key; `ASYMMETRIC_DECRYPT_SM2`: creates an asymmetric encryption/decryption SM2 key; `ASYMMETRIC_SIGN_VERIFY_SM2`: creates an asymmetric SM2 key for signature verification; `ASYMMETRIC_SIGN_VERIFY_ECC`: creates an asymmetric 2048-bit RSA key for signature verification; `ASYMMETRIC_SIGN_VERIFY_ECDSA384`: creates an asymmetric ECDSA384 key for signature verification. You can get a full list of supported key purposes and algorithms using the ListAlgorithms API.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
@@ -507,6 +507,12 @@ type DecryptRequest struct {
 
 	// JSON string of key-value pair. If this parameter is specified for `Encrypt`, the same parameter needs to be provided when the `Decrypt` API is called. The maximum length is 1,024 bytes.
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
+
+	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
+	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
+
+	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
 func (r *DecryptRequest) ToJsonString() string {
@@ -523,6 +529,8 @@ func (r *DecryptRequest) FromJsonString(s string) error {
 	}
 	delete(f, "CiphertextBlob")
 	delete(f, "EncryptionContext")
+	delete(f, "EncryptionPublicKey")
+	delete(f, "EncryptionAlgorithm")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DecryptRequest has unknown keys!", "")
 	}
@@ -536,7 +544,8 @@ type DecryptResponse struct {
 		// Globally unique CMK ID
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-		// Decrypted plaintext. This field is Base64-encoded. In order to get the original plaintext, the Base64-decoding is needed
+		// If `EncryptionPublicKey` is left empty, a Base64-encoded ciphertext will be returned. To get the plaintext, you need to decode the ciphertext first.
+	// If `EncryptionPublicKey` is specified, this field will return the Base64-encoded ciphertext encrypted with the specified public key. To get the plaintext, you need to decode the ciphertext and upload the corresponding private key.
 		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1572,7 +1581,7 @@ type EncryptResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Base64-encoded encrypted ciphertext
+		// Base64-encoded ciphertext, which is the encrypted information of the ciphertext and key. To get the plaintext, you need to pass in this field to the Decrypt API.
 		CiphertextBlob *string `json:"CiphertextBlob,omitempty" name:"CiphertextBlob"`
 
 		// Globally unique ID of the CMK used for encryption
@@ -1608,6 +1617,12 @@ type GenerateDataKeyRequest struct {
 
 	// JSON string of key-value pair. If this field is used, the same string should be entered when the returned `DataKey` is decrypted.
 	EncryptionContext *string `json:"EncryptionContext,omitempty" name:"EncryptionContext"`
+
+	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
+	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
+
+	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
 func (r *GenerateDataKeyRequest) ToJsonString() string {
@@ -1626,6 +1641,8 @@ func (r *GenerateDataKeyRequest) FromJsonString(s string) error {
 	delete(f, "KeySpec")
 	delete(f, "NumberOfBytes")
 	delete(f, "EncryptionContext")
+	delete(f, "EncryptionPublicKey")
+	delete(f, "EncryptionAlgorithm")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GenerateDataKeyRequest has unknown keys!", "")
 	}
@@ -1639,7 +1656,8 @@ type GenerateDataKeyResponse struct {
 		// Globally unique CMK ID
 		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
-		// Plaintext of the generated data key. The plaintext is Base64-encoded and can be used locally after having it Base64-decoded.
+		// If `EncryptionPublicKey` is left empty, a Base64-encoded ciphertext will be returned. To get the plaintext, you need to decode the ciphertext first.
+	// If `EncryptionPublicKey` is specified, this field will return the Base64-encoded ciphertext encrypted with the specified public key. To get the plaintext, you need to decode the ciphertext and upload the corresponding private key.
 		Plaintext *string `json:"Plaintext,omitempty" name:"Plaintext"`
 
 		// Ciphertext of the data key, which should be kept by yourself. KMS does not host user data keys. You can call the `Decrypt` API to get the plaintext of the data key from `CiphertextBlob`.
@@ -2070,7 +2088,7 @@ type KeyMetadata struct {
 	// CMK status. Valid values: Enabled, Disabled, PendingDelete, PendingImport, Archived.
 	KeyState *string `json:"KeyState,omitempty" name:"KeyState"`
 
-	// CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
+	// CMK purpose. Valid values: `ENCRYPT_DECRYPT`, `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// CMK type. 2: FIPS-compliant; 4: SM-CRYPTO
@@ -2178,7 +2196,7 @@ type ListKeyDetailRequest struct {
 	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
-	// Filter by the `KeyUsage` field of CMKs. Valid values: `ALL` (filtering all CMKs), `ENCRYPT_DECRYPT` (it will be used when the parameter is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, and `ASYMMETRIC_SIGN_VERIFY_SM2`.
+	// Filters by the `KeyUsage` field value. Valid values: `ALL` (all CMKs), `ENCRYPT_DECRYPT` (used when this field is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
 	KeyUsage *string `json:"KeyUsage,omitempty" name:"KeyUsage"`
 
 	// Tag filter condition
@@ -2478,10 +2496,10 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
 type SignByAsymmetricKeyRequest struct {
 	*tchttp.BaseRequest
 
-	// Signature algorithm. Supported algorithm: SM2DSA.
+	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
-	// The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// Unique ID of a key
@@ -2717,10 +2735,10 @@ type VerifyByAsymmetricKeyRequest struct {
 	// Signature value, which is generated by calling the KMS signature API.
 	SignatureValue *string `json:"SignatureValue,omitempty" name:"SignatureValue"`
 
-	// The original message or message abstract. For an original message, the length before Base64 encoding can contain up to 4,096 bytes. For a message abstract, the SM2 signature algorithm only supports 32-byte (before Base64 encoding) message abstracts.
+	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Signature algorithm. Supported algorithm: SM2DSA.
+	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
 	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
@@ -2754,7 +2772,7 @@ type VerifyByAsymmetricKeyResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Whether the signature is valid.
+		// Whether the signature is valid. `true`: the signature is valid; `false`: the signature is invalid.
 		SignatureValid *bool `json:"SignatureValid,omitempty" name:"SignatureValid"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

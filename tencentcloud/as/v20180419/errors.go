@@ -56,6 +56,9 @@ const (
 	// VPC API call failed.
 	INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
 
+	// Exceptions occurred while invoking other services.
+	INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
+
 	// An internal request error occurred.
 	INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 
@@ -82,6 +85,9 @@ const (
 
 	// Invalid parameter combination.
 	INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
+
+	// The specified CLB does not exist in the current scaling group.
+	INVALIDPARAMETER_LOADBALANCERNOTINAUTOSCALINGGROUP = "InvalidParameter.LoadBalancerNotInAutoScalingGroup"
 
 	// A parameter is missing. One of the two parameters must be specified.
 	INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
@@ -239,6 +245,9 @@ const (
 	// The subnet information is invalid.
 	INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
 
+	// The backend port of the CLB layer-4 listener already exists.
+	INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
+
 	// The specified threshold must be within the valid range.
 	INVALIDPARAMETERVALUE_THRESHOLDOUTOFRANGE = "InvalidParameterValue.ThresholdOutOfRange"
 
@@ -247,6 +256,9 @@ const (
 
 	// Too many values.
 	INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+
+	// The value of input parameter is too short.
+	INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
 
 	// Incorrect UserData format.
 	INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
@@ -265,6 +277,9 @@ const (
 
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
+
+	// Binding with the specified CLBs will make the total number of bound CLBs exceeds the upper limit.
+	LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
 
 	// The number of auto scaling groups exceeds the limit.
 	LIMITEXCEEDED_AUTOSCALINGGROUPLIMITEXCEEDED = "LimitExceeded.AutoScalingGroupLimitExceeded"
@@ -362,6 +377,12 @@ const (
 	// The specified scheduled task does not exist.
 	RESOURCENOTFOUND_SCHEDULEDACTIONNOTFOUND = "ResourceNotFound.ScheduledActionNotFound"
 
+	// The TDMQ-CMQ queue doesn't exist.
+	RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
+
+	// The TDMQ-CMQ topic doesn't exist.
+	RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
+
 	// The auto scaling group is exceptional.
 	RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
 
@@ -392,6 +413,9 @@ const (
 	// The backend region of the CLB is not the same as the one for AS service.
 	RESOURCEUNAVAILABLE_LBBACKENDREGIONINCONSISTENT = "ResourceUnavailable.LbBackendRegionInconsistent"
 
+	// The CLBs are not in the same project.
+	RESOURCEUNAVAILABLE_LBPROJECTINCONSISTENT = "ResourceUnavailable.LbProjectInconsistent"
+
 	// The CLB and scaling group should reside in the same VPC.
 	RESOURCEUNAVAILABLE_LBVPCINCONSISTENT = "ResourceUnavailable.LbVpcInconsistent"
 
@@ -406,6 +430,9 @@ const (
 
 	// Unable to add instances to the scaling group when they are shut down.
 	RESOURCEUNAVAILABLE_STOPPEDINSTANCENOTALLOWATTACH = "ResourceUnavailable.StoppedInstanceNotAllowAttach"
+
+	// The TDMQ-CMQ topic is not subscribed.
+	RESOURCEUNAVAILABLE_TDMQCMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.TDMQCMQTopicHasNoSubscriber"
 
 	// The specified availability zone is unavailable.
 	RESOURCEUNAVAILABLE_ZONEUNAVAILABLE = "ResourceUnavailable.ZoneUnavailable"

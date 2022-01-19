@@ -569,6 +569,7 @@ func NewDecryptResponse() (response *DecryptResponse) {
 // This API is used to decrypt the ciphertext and obtain the plaintext data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDCIPHERTEXT = "InvalidParameterValue.InvalidCiphertext"
@@ -589,6 +590,7 @@ func (c *Client) Decrypt(request *DecryptRequest) (response *DecryptResponse, er
 // This API is used to decrypt the ciphertext and obtain the plaintext data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDCIPHERTEXT = "InvalidParameterValue.InvalidCiphertext"
@@ -1853,11 +1855,13 @@ func NewGenerateDataKeyResponse() (response *GenerateDataKeyResponse) {
 // This API generates a data key, which you can use to encrypt local data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKDISABLED = "ResourceUnavailable.CmkDisabled"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *GenerateDataKeyResponse, err error) {
     if request == nil {
@@ -1873,11 +1877,13 @@ func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *Gen
 // This API generates a data key, which you can use to encrypt local data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKDISABLED = "ResourceUnavailable.CmkDisabled"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GenerateDataKeyWithContext(ctx context.Context, request *GenerateDataKeyRequest) (response *GenerateDataKeyResponse, err error) {
     if request == nil {
@@ -2074,7 +2080,7 @@ func NewGetPublicKeyResponse() (response *GetPublicKeyResponse) {
 }
 
 // GetPublicKey
-// This API is used to get the information of the public key that is encrypted with the asymmetric cryptographic algorithm and of which the `KeyUsage` is `ASYMMETRIC_DECRYPT_RSA_2048` or `ASYMMETRIC_DECRYPT_SM2`. This public key can be used to encrypt data locally, and the data encrypted with it can only be decrypted with the corresponding private key through KMS. The public key can only be obtained from the asymmetric key in `Enabled` state.
+// This API is used to get the public key of an asymmetric KMS key (which must be enabled). With the public key, you can encrypt messages and verify signatures.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2094,7 +2100,7 @@ func (c *Client) GetPublicKey(request *GetPublicKeyRequest) (response *GetPublic
 }
 
 // GetPublicKey
-// This API is used to get the information of the public key that is encrypted with the asymmetric cryptographic algorithm and of which the `KeyUsage` is `ASYMMETRIC_DECRYPT_RSA_2048` or `ASYMMETRIC_DECRYPT_SM2`. This public key can be used to encrypt data locally, and the data encrypted with it can only be decrypted with the corresponding private key through KMS. The public key can only be obtained from the asymmetric key in `Enabled` state.
+// This API is used to get the public key of an asymmetric KMS key (which must be enabled). With the public key, you can encrypt messages and verify signatures.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2132,7 +2138,7 @@ func NewGetRegionsResponse() (response *GetRegionsResponse) {
 }
 
 // GetRegions
-// This API is used to obtain the list of supported regions.
+// This API is used to return all regions support KMS service.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2147,7 +2153,7 @@ func (c *Client) GetRegions(request *GetRegionsRequest) (response *GetRegionsRes
 }
 
 // GetRegions
-// This API is used to obtain the list of supported regions.
+// This API is used to return all regions support KMS service.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2638,13 +2644,14 @@ func NewSignByAsymmetricKeyResponse() (response *SignByAsymmetricKeyResponse) {
 // SignByAsymmetricKey
 // This API is used to generate a signature with an asymmetric key.
 //
-// Note: only the keys with `KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2` can be used for signature generation.
+// Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `ASYMMETRIC_SIGN_VERIFY_SM2` and `ASYMMETRIC_SIGN_VERIFY_ECC`), the key can be used for signing.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 func (c *Client) SignByAsymmetricKey(request *SignByAsymmetricKeyRequest) (response *SignByAsymmetricKeyResponse, err error) {
@@ -2660,13 +2667,14 @@ func (c *Client) SignByAsymmetricKey(request *SignByAsymmetricKeyRequest) (respo
 // SignByAsymmetricKey
 // This API is used to generate a signature with an asymmetric key.
 //
-// Note: only the keys with `KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2` can be used for signature generation.
+// Note that only when KeyUsage is `ASYMMETRIC_SIGN_VERIFY_${ALGORITHM}` (e.g., `ASYMMETRIC_SIGN_VERIFY_SM2` and `ASYMMETRIC_SIGN_VERIFY_ECC`), the key can be used for signing.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 func (c *Client) SignByAsymmetricKeyWithContext(ctx context.Context, request *SignByAsymmetricKeyRequest) (response *SignByAsymmetricKeyResponse, err error) {
@@ -2886,6 +2894,7 @@ func NewVerifyByAsymmetricKeyResponse() (response *VerifyByAsymmetricKeyResponse
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 func (c *Client) VerifyByAsymmetricKey(request *VerifyByAsymmetricKeyRequest) (response *VerifyByAsymmetricKeyResponse, err error) {
     if request == nil {
         request = NewVerifyByAsymmetricKeyRequest()
@@ -2905,6 +2914,7 @@ func (c *Client) VerifyByAsymmetricKey(request *VerifyByAsymmetricKeyRequest) (r
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 func (c *Client) VerifyByAsymmetricKeyWithContext(ctx context.Context, request *VerifyByAsymmetricKeyRequest) (response *VerifyByAsymmetricKeyResponse, err error) {
     if request == nil {
         request = NewVerifyByAsymmetricKeyRequest()
