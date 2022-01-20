@@ -57,6 +57,9 @@ type AccessRegionDetial struct {
 
 	// Data center type. `dc`: data center; `ec`: edge server.
 	IDCType *string `json:"IDCType,omitempty" name:"IDCType"`
+
+	// 
+	FeatureBitmap *int64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
 type AccessRegionDomainConf struct {
@@ -397,8 +400,11 @@ type CheckProxyCreateRequest struct {
 	// Network type. Valid values: `normal` (default), `cn2`
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// 
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *CheckProxyCreateRequest) ToJsonString() string {
@@ -421,6 +427,7 @@ func (r *CheckProxyCreateRequest) FromJsonString(s string) error {
 	delete(f, "IPAddressVersion")
 	delete(f, "NetworkType")
 	delete(f, "PackageType")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckProxyCreateRequest has unknown keys!", "")
 	}
@@ -1200,8 +1207,14 @@ type CreateProxyRequest struct {
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Network type. Valid values: `normal` (default), `cn2`
+	// Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// 
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *CreateProxyRequest) ToJsonString() string {
@@ -1229,6 +1242,8 @@ func (r *CreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "BillingType")
 	delete(f, "IPAddressVersion")
 	delete(f, "NetworkType")
+	delete(f, "PackageType")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyRequest has unknown keys!", "")
 	}
@@ -2050,7 +2065,7 @@ type DescribeAccessRegionsByDestRegionRequest struct {
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
@@ -2973,6 +2988,7 @@ type DescribeProxiesRequest struct {
 	// RealServerRegion - String - Required: No - Filter by origin server region.
 	// GroupId - String - Required: No - Filter by connection group ID.
 	// IPAddressVersion - String - Required: No - Filter by IP version.
+	// PackageType - String - Required: No - Filter by package type of connection groups.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's a new parameter, and replaces InstanceIds.
@@ -3684,7 +3700,7 @@ type DescribeRegionAndPriceRequest struct {
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
@@ -4620,8 +4636,11 @@ type InquiryPriceCreateProxyRequest struct {
 	// Network type. Valid values: `normal` (default), `cn2`
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// 
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *InquiryPriceCreateProxyRequest) ToJsonString() string {
@@ -4646,6 +4665,7 @@ func (r *InquiryPriceCreateProxyRequest) FromJsonString(s string) error {
 	delete(f, "IPAddressVersion")
 	delete(f, "NetworkType")
 	delete(f, "PackageType")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateProxyRequest has unknown keys!", "")
 	}
@@ -6103,7 +6123,8 @@ type ProxyInfo struct {
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), 
+	// and `CrossBorder` (cross-MLC-border connection).
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
@@ -6113,6 +6134,9 @@ type ProxyInfo struct {
 
 	// 
 	IPList []*IPDetail `json:"IPList,omitempty" name:"IPList"`
+
+	// 
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 type ProxySimpleInfo struct {

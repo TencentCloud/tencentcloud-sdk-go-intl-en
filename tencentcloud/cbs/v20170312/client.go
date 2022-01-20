@@ -170,7 +170,6 @@ func NewAttachDisksResponse() (response *AttachDisksResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_RESOURCEOPFAILED = "InternalError.ResourceOpFailed"
-//  INVALIDDISK_ATTACHED = "InvalidDisk.Attached"
 //  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
 //  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
@@ -188,7 +187,6 @@ func NewAttachDisksResponse() (response *AttachDisksResponse) {
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 //  RESOURCEUNAVAILABLE_ZONENOTMATCH = "ResourceUnavailable.ZoneNotMatch"
-//  ZONENOTMATCH = "ZoneNotMatch"
 func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisksResponse, err error) {
     if request == nil {
         request = NewAttachDisksRequest()
@@ -210,7 +208,6 @@ func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisks
 //
 // error code that may be returned:
 //  INTERNALERROR_RESOURCEOPFAILED = "InternalError.ResourceOpFailed"
-//  INVALIDDISK_ATTACHED = "InvalidDisk.Attached"
 //  INVALIDDISK_NOTPORTABLE = "InvalidDisk.NotPortable"
 //  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
@@ -228,7 +225,6 @@ func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisks
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 //  RESOURCEUNAVAILABLE_ZONENOTMATCH = "ResourceUnavailable.ZoneNotMatch"
-//  ZONENOTMATCH = "ZoneNotMatch"
 func (c *Client) AttachDisksWithContext(ctx context.Context, request *AttachDisksRequest) (response *AttachDisksResponse, err error) {
     if request == nil {
         request = NewAttachDisksRequest()
@@ -2036,13 +2032,12 @@ func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
 //  INSUFFICIENTREFUNDQUOTA = "InsufficientRefundQuota"
 //  INTERNALERROR_FAILQUERYRESOURCE = "InternalError.FailQueryResource"
 //  INVALIDDISK_EXPIRE = "InvalidDisk.Expire"
-//  INVALIDDISK_NOTSUPPORTREFUND = "InvalidDisk.NotSupportRefund"
-//  INVALIDDISK_REPEATREFUND = "InvalidDisk.RepeatRefund"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT_OVERREFUNDQUOTA = "ResourceInsufficient.OverRefundQuota"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTREFUND = "ResourceUnavailable.NotSupportRefund"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_REPEATREFUND = "ResourceUnavailable.RepeatRefund"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
@@ -2071,13 +2066,12 @@ func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *Termi
 //  INSUFFICIENTREFUNDQUOTA = "InsufficientRefundQuota"
 //  INTERNALERROR_FAILQUERYRESOURCE = "InternalError.FailQueryResource"
 //  INVALIDDISK_EXPIRE = "InvalidDisk.Expire"
-//  INVALIDDISK_NOTSUPPORTREFUND = "InvalidDisk.NotSupportRefund"
-//  INVALIDDISK_REPEATREFUND = "InvalidDisk.RepeatRefund"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT_OVERREFUNDQUOTA = "ResourceInsufficient.OverRefundQuota"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTREFUND = "ResourceUnavailable.NotSupportRefund"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_REPEATREFUND = "ResourceUnavailable.RepeatRefund"
 //  TRADEDEALCONFLICT = "TradeDealConflict"

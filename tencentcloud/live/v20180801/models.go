@@ -541,9 +541,10 @@ type CommonMixInputParam struct {
 
 type CommonMixLayoutParams struct {
 
-	// Input layer. Value range: [1,16].
-	// 1) For `image_layer` of background stream (i.e., main host video image or canvas), enter 1.
-	// 2) For audio stream mix, this parameter is also required.
+	// Input layer. Value range: [1,16]
+	// (1) For the background stream, i.e., the room owner’s image or the canvas, set this parameter to `1`.
+	// (2) This parameter is required for audio-only stream mixing as well.
+	// Note that two inputs cannot have the same `ImageLayer` value.
 	ImageLayer *int64 `json:"ImageLayer,omitempty" name:"ImageLayer"`
 
 	// Input type. Value range: [0,5].
@@ -555,19 +556,19 @@ type CommonMixLayoutParams struct {
 	// 5: the input stream is pure video.
 	InputType *int64 `json:"InputType,omitempty" name:"InputType"`
 
-	// Output width of input video image. Value range:
-	// Pixel: [0,2000]
-	// Percentage: [0.01,0.99]
-	// If this parameter is left empty, the input stream width will be used by default.
-	// If percentage is used, the expected output is (percentage * background width).
-	ImageWidth *float64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
-
 	// Output height of input video image. Value range:
 	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, the input stream height will be used by default.
 	// If percentage is used, the expected output is (percentage * background height).
 	ImageHeight *float64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// Output width of input video image. Value range:
+	// Pixel: [0,2000]
+	// Percentage: [0.01,0.99]
+	// If this parameter is left empty, the input stream width will be used by default.
+	// If percentage is used, the expected output is (percentage * background width).
+	ImageWidth *float64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
 
 	// X-axis offset of input in output video image. Value range:
 	// Pixel: [0,2000]
@@ -1259,8 +1260,8 @@ type CreateLiveSnapshotTemplateRequest struct {
 	// Only letters, digits, underscores, and hyphens can be contained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Screencapturing interval in seconds. Default value: 10s.
-	// Value range: 5-300s.
+	// Screencapturing interval (s). Default value: 10
+	// Value range: 2-300
 	SnapshotInterval *int64 `json:"SnapshotInterval,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: `0` (original width)
@@ -1437,9 +1438,10 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
 	NeedAudio *int64 `json:"NeedAudio,omitempty" name:"NeedAudio"`
 
-	// Height. Default value: 0.
-	// Value range: [0,3000]
-	// The value must be a multiple of 2, and 0 is the original height.
+	// Height. Default value: 0
+	// Value range: 0-3000
+	// The value must be a multiple of 2. The original height is `0`.
+	// This parameter is required for a top speed codec template (when `AiTransCode` is `1`).
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
@@ -2577,6 +2579,18 @@ type DescribeBillBandwidthAndFluxListRequest struct {
 
 	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Region. Valid values:
+	// China Mainland
+	// Asia Pacific I
+	// Asia Pacific II
+	// Asia Pacific III
+	// Europe
+	// North America
+	// South America
+	// Middle East
+	// Africa
+	RegionNames []*string `json:"RegionNames,omitempty" name:"RegionNames"`
 }
 
 func (r *DescribeBillBandwidthAndFluxListRequest) ToJsonString() string {
@@ -2597,6 +2611,7 @@ func (r *DescribeBillBandwidthAndFluxListRequest) FromJsonString(s string) error
 	delete(f, "MainlandOrOversea")
 	delete(f, "Granularity")
 	delete(f, "ServiceName")
+	delete(f, "RegionNames")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillBandwidthAndFluxListRequest has unknown keys!", "")
 	}
@@ -6990,13 +7005,13 @@ type PushDataInfo struct {
 	// Pushed video frame rate in Hz.
 	VideoFps *uint64 `json:"VideoFps,omitempty" name:"VideoFps"`
 
-	// Pushed video bitrate in bps.
+	// Video bitrate (Kbps) for publishing
 	VideoSpeed *uint64 `json:"VideoSpeed,omitempty" name:"VideoSpeed"`
 
 	// Pushed audio frame rate in Hz.
 	AudioFps *uint64 `json:"AudioFps,omitempty" name:"AudioFps"`
 
-	// Pushed audio bitrate in bps.
+	// Audio bitrate (Kbps) for publishing
 	AudioSpeed *uint64 `json:"AudioSpeed,omitempty" name:"AudioSpeed"`
 
 	// Push domain name.

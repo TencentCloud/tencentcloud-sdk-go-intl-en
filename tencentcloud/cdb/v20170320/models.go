@@ -735,6 +735,9 @@ type CreateCloneInstanceRequest struct {
 
 	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Financial cage ID.
+	CageId *string `json:"CageId,omitempty" name:"CageId"`
 }
 
 func (r *CreateCloneInstanceRequest) ToJsonString() string {
@@ -768,6 +771,7 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceNodes")
 	delete(f, "DeployGroupId")
 	delete(f, "DryRun")
+	delete(f, "CageId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
 	}
@@ -961,6 +965,9 @@ type CreateDBInstanceHourRequest struct {
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitempty" name:"CageId"`
 
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	ParamTemplateType *string `json:"ParamTemplateType,omitempty" name:"ParamTemplateType"`
+
 	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitempty" name:"AlarmPolicyIdList"`
 
@@ -1012,6 +1019,7 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "AutoSyncFlag")
 	delete(f, "CageId")
+	delete(f, "ParamTemplateType")
 	delete(f, "AlarmPolicyIdList")
 	delete(f, "DryRun")
 	if len(f) > 0 {
@@ -3443,6 +3451,9 @@ func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
 
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
 }
 
 func (r *DescribeParamTemplatesRequest) ToJsonString() string {
@@ -3457,6 +3468,7 @@ func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "EngineVersions")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplatesRequest has unknown keys!", "")
 	}

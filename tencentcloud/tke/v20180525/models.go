@@ -1042,6 +1042,9 @@ type CreateClusterNodePoolRequest struct {
 
 	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
+
+	// Resource tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateClusterNodePoolRequest) ToJsonString() string {
@@ -1066,6 +1069,7 @@ func (r *CreateClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "Taints")
 	delete(f, "NodePoolOs")
 	delete(f, "OsCustomizeType")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -4049,6 +4053,12 @@ type ModifyClusterNodePoolRequest struct {
 
 	// Node custom parameter
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
+
+	// Resource tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// 
+	Unschedulable *int64 `json:"Unschedulable,omitempty" name:"Unschedulable"`
 }
 
 func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
@@ -4074,6 +4084,8 @@ func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "OsName")
 	delete(f, "OsCustomizeType")
 	delete(f, "ExtraArgs")
+	delete(f, "Tags")
+	delete(f, "Unschedulable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -4278,6 +4290,10 @@ type NodePool struct {
 	// Custom script
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
+
+	// Resource tag
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type NodePoolOption struct {
@@ -4350,6 +4366,10 @@ type PrometheusAlertRule struct {
 	// Refer to annotations in prometheus rule
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Annotations []*Label `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Alarm rule status
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
 }
 
 type PrometheusAlertRuleDetail struct {

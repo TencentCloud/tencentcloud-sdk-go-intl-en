@@ -429,7 +429,7 @@ type CreateSnapshotRequest struct {
 	// Snapshot name. If it is left empty, the new snapshot name is "Not named" by default.
 	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
 
-	// Expiration time of the snapshot. The snapshot will be automatically deleted upon expiration.
+	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires
 	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
 }
 
@@ -1307,6 +1307,9 @@ type Disk struct {
 
 	// Creation time of the cloud disk.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
+	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitempty" name:"DeleteSnapshot"`
 }
 
 type DiskChargePrepaid struct {
@@ -2207,6 +2210,9 @@ type TerminateDisksRequest struct {
 
 	// List of cloud disk IDs required to be returned.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
+	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitempty" name:"DeleteSnapshot"`
 }
 
 func (r *TerminateDisksRequest) ToJsonString() string {
@@ -2222,6 +2228,7 @@ func (r *TerminateDisksRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DiskIds")
+	delete(f, "DeleteSnapshot")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateDisksRequest has unknown keys!", "")
 	}

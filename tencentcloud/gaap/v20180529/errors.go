@@ -155,6 +155,9 @@ const (
 	// Listener port already exists.
 	INVALIDPARAMETERVALUE_DUPLICATEDLISTENERPORT = "InvalidParameterValue.DuplicatedListenerPort"
 
+	// The features to be enabled conflict with each other.
+	INVALIDPARAMETERVALUE_FEATURECONFLICT = "InvalidParameterValue.FeatureConflict"
+
 	// The header is blocklisted.
 	INVALIDPARAMETERVALUE_HITBLACKLIST = "InvalidParameterValue.HitBlacklist"
 
@@ -182,6 +185,12 @@ const (
 	// The project does not belong to this user.
 	INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
 
+	// Cross-MLC-border connection is not supported in this connection group.
+	INVALIDPARAMETERVALUE_PROXYANDGROUPFEATURECONFLICT = "InvalidParameterValue.ProxyAndGroupFeatureConflict"
+
+	// The configuration of the cross-MLC-border connection is not supported in this region.
+	INVALIDPARAMETERVALUE_PROXYANDREGIONFEATURECONFLICT = "InvalidParameterValue.ProxyAndRegionFeatureConflict"
+
 	// The origin server does not belong to this user.
 	INVALIDPARAMETERVALUE_REALSERVERNOTBELONG = "InvalidParameterValue.RealServerNotBelong"
 
@@ -208,6 +217,9 @@ const (
 
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
+	// The CUCC cross-MLC-border connection expired and is isolated.
+	UNAUTHORIZEDOPERATION_CROSSBORDERINISOLATING = "UnauthorizedOperation.CrossBorderInIsolating"
 
 	// Unknown parameter.
 	UNKNOWNPARAMETER = "UnknownParameter"
