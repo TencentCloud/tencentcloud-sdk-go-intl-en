@@ -158,6 +158,9 @@ const (
 	// Failed to update the database.
 	INTERNALERROR_UPDATEDATABASEFAILED = "InternalError.UpdateDatabaseFailed"
 
+	// Public network operation failed.
+	INTERNALERROR_WANSERVICEFAILED = "InternalError.WanServiceFailed"
+
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
@@ -214,6 +217,9 @@ const (
 
 	// The specified account does not exist.
 	RESOURCENOTFOUND_ACCOUNTDOESNOTEXIST = "ResourceNotFound.AccountDoesNotExist"
+
+	// The instance does not exist.
+	RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 
 	// The specified database instance was not found.
 	RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"

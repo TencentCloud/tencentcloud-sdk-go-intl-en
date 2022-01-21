@@ -65,6 +65,7 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 // This API is used to query bill details.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -84,6 +85,7 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
 // This API is used to query bill details.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INVALIDPARAMETER = "InvalidParameter"

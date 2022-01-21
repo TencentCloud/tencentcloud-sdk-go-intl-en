@@ -422,6 +422,9 @@ const (
 	// The current plugin cannot be bound.
 	UNSUPPORTEDOPERATION_ATTACHPLUGIN = "UnsupportedOperation.AttachPlugin"
 
+	// Invalid log query period
+	UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
+
 	// Cannot force HTTPS when the protocol is HTTP.
 	UNSUPPORTEDOPERATION_FORCEHTTPS = "UnsupportedOperation.ForceHttps"
 

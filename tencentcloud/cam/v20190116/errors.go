@@ -17,6 +17,9 @@ package v20190116
 const (
 	// error codes for specific actions
 
+	// No permission.
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 

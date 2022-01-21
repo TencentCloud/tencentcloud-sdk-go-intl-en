@@ -4533,6 +4533,14 @@ type MainlandConfig struct {
 	// Video dragging configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+
+	// Private access for S3 origin
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// Private access for OSS origin
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
 }
 
 type ManageClsTopicDomainsRequest struct {
@@ -4894,6 +4902,14 @@ type OverseaConfig struct {
 	// Video dragging configuration.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+
+	// Private access for S3 origin
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// Private access for OSS origin
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
 }
 
 type PathBasedOriginRule struct {
@@ -5880,9 +5896,8 @@ type Seo struct {
 
 type ServerCert struct {
 
-	// Server certificate ID
-	// This is auto-generated when the certificate is being hosted by the SSL Certificate Service
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Server certificate ID, which is auto-generated when the certificate is added to Tencent Cloud SSL Certificates
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CertId *string `json:"CertId,omitempty" name:"CertId"`
 
 	// Server certificate name

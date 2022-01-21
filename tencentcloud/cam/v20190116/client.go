@@ -2473,6 +2473,7 @@ func NewListAccessKeysResponse() (response *ListAccessKeysResponse) {
 // This API is used to list the access keys associated with a specified CAM user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
@@ -2493,6 +2494,7 @@ func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListA
 // This API is used to list the access keys associated with a specified CAM user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
@@ -2606,6 +2608,58 @@ func (c *Client) ListAttachedRolePoliciesWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewListAttachedRolePoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListAttachedUserAllPoliciesRequest() (request *ListAttachedUserAllPoliciesRequest) {
+    request = &ListAttachedUserAllPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "ListAttachedUserAllPolicies")
+    
+    
+    return
+}
+
+func NewListAttachedUserAllPoliciesResponse() (response *ListAttachedUserAllPoliciesResponse) {
+    response = &ListAttachedUserAllPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ListAttachedUserAllPolicies
+// This API is used to list policies associated with the user (including those inherited from the user group).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ListAttachedUserAllPolicies(request *ListAttachedUserAllPoliciesRequest) (response *ListAttachedUserAllPoliciesResponse, err error) {
+    if request == nil {
+        request = NewListAttachedUserAllPoliciesRequest()
+    }
+    
+    response = NewListAttachedUserAllPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ListAttachedUserAllPolicies
+// This API is used to list policies associated with the user (including those inherited from the user group).
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ListAttachedUserAllPoliciesWithContext(ctx context.Context, request *ListAttachedUserAllPoliciesRequest) (response *ListAttachedUserAllPoliciesResponse, err error) {
+    if request == nil {
+        request = NewListAttachedUserAllPoliciesRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewListAttachedUserAllPoliciesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3329,10 +3383,13 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
 //  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
 //  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
 //  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
 //  INVALIDPARAMETER_DESCRIPTIONLENGTHOVERLIMIT = "InvalidParameter.DescriptionLengthOverlimit"
 //  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
 //  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
@@ -3344,8 +3401,15 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_POLICYVERSIONNOTEXISTS = "InvalidParameter.PolicyVersionNotExists"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
 //  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
@@ -3372,10 +3436,13 @@ func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONERROR = "InvalidParameter.ActionError"
+//  INVALIDPARAMETER_ACTIONMISS = "InvalidParameter.ActionMiss"
 //  INVALIDPARAMETER_ACTIONNOTEXIST = "InvalidParameter.ActionNotExist"
 //  INVALIDPARAMETER_ACTIONSERVICENOTEXIST = "InvalidParameter.ActionServiceNotExist"
 //  INVALIDPARAMETER_ATTACHMENTFULL = "InvalidParameter.AttachmentFull"
+//  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
 //  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
+//  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
 //  INVALIDPARAMETER_DESCRIPTIONLENGTHOVERLIMIT = "InvalidParameter.DescriptionLengthOverlimit"
 //  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
 //  INVALIDPARAMETER_NOTSUPPORTPRODUCT = "InvalidParameter.NotSupportProduct"
@@ -3387,8 +3454,15 @@ func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_POLICYVERSIONNOTEXISTS = "InvalidParameter.PolicyVersionNotExists"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
+//  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
+//  INVALIDPARAMETER_RESOURCEQCSERROR = "InvalidParameter.ResourceQcsError"
+//  INVALIDPARAMETER_RESOURCEREGIONERROR = "InvalidParameter.ResourceRegionError"
+//  INVALIDPARAMETER_RESOURCESERVICENOTEXIST = "InvalidParameter.ResourceServiceNotExist"
 //  INVALIDPARAMETER_RESOURCEUINERROR = "InvalidParameter.ResourceUinError"
 //  INVALIDPARAMETER_STATEMENTERROR = "InvalidParameter.StatementError"
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
@@ -3645,6 +3719,9 @@ func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -3695,6 +3772,9 @@ func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePol
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
+//  INVALIDPARAMETER_PRINCIPALSERVICENOTEXIST = "InvalidParameter.PrincipalServiceNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"

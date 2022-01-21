@@ -1141,6 +1141,26 @@ type ConstantParameter struct {
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
 }
 
+type CosConfig struct {
+
+	// Specifies how the backend COS bucket is called by the API. The frontend request method and Action can be:
+	// GET：GetObject
+	// PUT：PutObject
+	// POST：PostObject、AppendObject
+	// HEAD： HeadObject
+	// DELETE： DeleteObject
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Backend COS bucket of the API
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+	// Whether to enable the backend COS signature for the API. It defaults to `false`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Authorization *bool `json:"Authorization,omitempty" name:"Authorization"`
+}
+
 type CreateAPIDocRequest struct {
 	*tchttp.BaseRequest
 
@@ -6333,6 +6353,10 @@ type ServiceConfig struct {
 
 	// API backend service request method, such as `GET`, which is required if `ServiceType` is `HTTP`. The frontend and backend methods can be different
 	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// API backend COS configuration. It’s required if the `ServiceType` is ·`COS`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CosConfig *CosConfig `json:"CosConfig,omitempty" name:"CosConfig"`
 }
 
 type ServiceEnvironmentSet struct {

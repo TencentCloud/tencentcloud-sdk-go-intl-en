@@ -427,6 +427,48 @@ type AttachedPolicyOfRole struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+type AttachedUserPolicy struct {
+
+	// Policy ID.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy name.
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Policy description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time.
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Policy type (`1`: custom policy; `2`: preset policy).
+	StrategyType *string `json:"StrategyType,omitempty" name:"StrategyType"`
+
+	// Creation mode (`1`: create by product feature or project permission; other values: create by policy syntax).
+	CreateMode *string `json:"CreateMode,omitempty" name:"CreateMode"`
+
+	// Information on policies inherited from the user group.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Groups []*AttachedUserPolicyGroupInfo `json:"Groups,omitempty" name:"Groups"`
+
+	// Whether the product has been deprecated (`0`: no; `1`: yes).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Deactived *uint64 `json:"Deactived,omitempty" name:"Deactived"`
+
+	// List of deprecated products.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail"`
+}
+
+type AttachedUserPolicyGroupInfo struct {
+
+	// Group ID.
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+}
+
 type ConsumeCustomMFATokenRequest struct {
 	*tchttp.BaseRequest
 
@@ -2613,6 +2655,78 @@ func (r *ListAttachedRolePoliciesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ListAttachedRolePoliciesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ListAttachedUserAllPoliciesRequest struct {
+	*tchttp.BaseRequest
+
+	// Target user ID.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+
+	// The number of policies displayed on each page. Value range: 1-200.
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Page number. Value range: 1-200.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// `0`: return policies that are directly associated and inherited from the user group; `1`: return policies that are directly associated; `2`: return policies inherited from the user group.
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+
+	// Policy type.
+	StrategyType *uint64 `json:"StrategyType,omitempty" name:"StrategyType"`
+
+	// Keyword for searching.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
+func (r *ListAttachedUserAllPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListAttachedUserAllPoliciesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TargetUin")
+	delete(f, "Rp")
+	delete(f, "Page")
+	delete(f, "AttachType")
+	delete(f, "StrategyType")
+	delete(f, "Keyword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAttachedUserAllPoliciesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ListAttachedUserAllPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Policy list.
+		PolicyList []*AttachedUserPolicy `json:"PolicyList,omitempty" name:"PolicyList"`
+
+		// Total number of policies.
+		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListAttachedUserAllPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListAttachedUserAllPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

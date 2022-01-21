@@ -111,14 +111,15 @@ type BillDetail struct {
 	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Product code
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
 	// Subproduct code
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
-	// Transaction type/code (optional)
+	// Transaction type
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
 	// 
@@ -195,7 +196,7 @@ type BillResourceSummary struct {
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
-	// Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1; if no subproduct name is obtained, '-' is returned.
+	// Subproduct name, which is the subcategory of a Tencent Cloud product, such as CVM-Standard S1. If no subproduct name can be obtained, `-` is returned.
 	ProductCodeName *string `json:"ProductCodeName,omitempty" name:"ProductCodeName"`
 
 	// Billing mode
@@ -284,10 +285,10 @@ type BillResourceSummary struct {
 	// Operator UIN; '-' is returned if no value is obtained
 	OperateUin *string `json:"OperateUin,omitempty" name:"OperateUin"`
 
-	// 
+	// Product code
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-	// 
+	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
 	// 
@@ -306,7 +307,7 @@ type BillTagInfo struct {
 type BusinessSummaryOverviewItem struct {
 
 	// Product code
-	// Note: This field may return null, indicating that no valid value was found.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
@@ -412,8 +413,8 @@ type DescribeBillDetailRequest struct {
 	// Project ID: ID of the project to which the resource belongs
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Business code
-	// Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	// Product code
+	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 }
 
@@ -522,8 +523,8 @@ type DescribeBillResourceSummaryRequest struct {
 	// Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Business code
-	// Note: To query business codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	// Product code
+	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 }
 

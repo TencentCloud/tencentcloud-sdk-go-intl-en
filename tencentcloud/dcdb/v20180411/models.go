@@ -348,7 +348,7 @@ type CreateAccountRequest struct {
 	// Host that can be logged in to, which is in the same format as the host of the MySQL account and supports wildcards, such as %, 10.%, and 10.20.%.
 	Host *string `json:"Host,omitempty" name:"Host"`
 
-	// Account password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
+	// Account password. It must contain 8-32 characters in all of the following four types: lowercase letters, uppercase letters, digits, and symbols (()~!@#$%^&*-+=_|{}[]:<>,.?/), and cannot start with a slash (/).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail; 3: only the secondary will be read from.
@@ -608,6 +608,10 @@ type DCDBInstanceInfo struct {
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (standard primary instance), `3` (standard disaster recovery instance), `4` (dedicated disaster recovery instance)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Instance tag information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 }
 
 type DCDBShardInfo struct {
@@ -1701,6 +1705,63 @@ func (r *DescribeDcnDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeFileDownloadUrlRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Shard ID
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Unsigned file path
+	FilePath *string `json:"FilePath,omitempty" name:"FilePath"`
+}
+
+func (r *DescribeFileDownloadUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFileDownloadUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ShardId")
+	delete(f, "FilePath")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFileDownloadUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeFileDownloadUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Signed download URL
+		PreSignedUrl *string `json:"PreSignedUrl,omitempty" name:"PreSignedUrl"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeFileDownloadUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFileDownloadUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeFlowRequest struct {
 	*tchttp.BaseRequest
 
@@ -1786,6 +1847,9 @@ type DescribeProjectSecurityGroupsResponse struct {
 
 		// Security group details
 		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
+
+		// Number of security groups.
+		Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2021,14 +2085,13 @@ type GrantAccountPrivilegesRequest struct {
 	// Database name. `\*` indicates that global permissions will be queried (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
 
-	// Global permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER; SHOW DATABASES 
-	// Database permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE TEMPORARY TABLES; LOCK TABLES; EXECUTE; CREATE VIEW; SHOW VIEW; CREATE ROUTINE; ALTER ROUTINE; EVENT; TRIGGER 
-	// Table/view permission. Valid values: SELECT; INSERT; UPDATE; DELETE; CREATE; DROP; REFERENCES; INDEX; ALTER; CREATE VIEW; SHOW VIEW; TRIGGER 
-	// Stored procedure/function permission. Valid values: ALTER ROUTINE; EXECUTE 
-	// Field permission. Valid values: INSERT; REFERENCES; SELECT; UPDATE
+	// Global permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`, `SHOW DATABASES`, `REPLICATION CLIENT`, `REPLICATION SLAVE`.
+	// Database permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`. 
+	// Table permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.  
+	// Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
 	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 
-	// Type. Valid values: table; view; proc; func; \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
+	// Type. Valid values: `table`, `\*`. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Type name. For example, if `Type` is table, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
@@ -2618,6 +2681,15 @@ func (r *ResetAccountPasswordResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResourceTag struct {
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type SecurityGroup struct {

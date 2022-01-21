@@ -290,6 +290,7 @@ func NewCloseDBExtranetAccessResponse() (response *CloseDBExtranetAccessResponse
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INTERNALERROR_WANSERVICEFAILED = "InternalError.WanServiceFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
@@ -312,6 +313,7 @@ func (c *Client) CloseDBExtranetAccess(request *CloseDBExtranetAccessRequest) (r
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INTERNALERROR_WANSERVICEFAILED = "InternalError.WanServiceFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
@@ -422,6 +424,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTALREADYEXISTS = "InvalidParameterValue.AccountAlreadyExists"
@@ -450,6 +453,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTALREADYEXISTS = "InvalidParameterValue.AccountAlreadyExists"
@@ -679,10 +683,12 @@ func NewDescribeDBLogFilesResponse() (response *DescribeDBLogFilesResponse) {
 // This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_COSCONFIGURATION = "InternalError.CosConfiguration"
 //  INTERNALERROR_COSSIGNURL = "InternalError.CosSignUrl"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
 //  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -705,10 +711,12 @@ func (c *Client) DescribeDBLogFiles(request *DescribeDBLogFilesRequest) (respons
 // This API is used to get the list of various logs of a database, including cold backups, binlogs, errlogs, and slowlogs.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_COSCONFIGURATION = "InternalError.CosConfiguration"
 //  INTERNALERROR_COSSIGNURL = "InternalError.CosSignUrl"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
 //  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -824,6 +832,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 //  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PRODUCTCONFIGNOTEXISTEDERROR = "ResourceNotFound.ProductConfigNotExistedError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -854,6 +863,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 //  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PRODUCTCONFIGNOTEXISTEDERROR = "ResourceNotFound.ProductConfigNotExistedError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -1329,6 +1339,7 @@ func NewDescribeDcnDetailResponse() (response *DescribeDcnDetailResponse) {
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeDcnDetail(request *DescribeDcnDetailRequest) (response *DescribeDcnDetailResponse, err error) {
     if request == nil {
         request = NewDescribeDcnDetailRequest()
@@ -1347,6 +1358,7 @@ func (c *Client) DescribeDcnDetail(request *DescribeDcnDetailRequest) (response 
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeDcnDetailWithContext(ctx context.Context, request *DescribeDcnDetailRequest) (response *DescribeDcnDetailResponse, err error) {
     if request == nil {
         request = NewDescribeDcnDetailRequest()
@@ -1354,6 +1366,62 @@ func (c *Client) DescribeDcnDetailWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeDcnDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFileDownloadUrlRequest() (request *DescribeFileDownloadUrlRequest) {
+    request = &DescribeFileDownloadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeFileDownloadUrl")
+    
+    
+    return
+}
+
+func NewDescribeFileDownloadUrlResponse() (response *DescribeFileDownloadUrlResponse) {
+    response = &DescribeFileDownloadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeFileDownloadUrl
+// This API is used to get the download URL of a specific backup or log file of a database.
+//
+// error code that may be returned:
+//  INTERNALERROR_COSSIGNURL = "InternalError.CosSignUrl"
+//  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) DescribeFileDownloadUrl(request *DescribeFileDownloadUrlRequest) (response *DescribeFileDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeFileDownloadUrlRequest()
+    }
+    
+    response = NewDescribeFileDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeFileDownloadUrl
+// This API is used to get the download URL of a specific backup or log file of a database.
+//
+// error code that may be returned:
+//  INTERNALERROR_COSSIGNURL = "InternalError.CosSignUrl"
+//  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) DescribeFileDownloadUrlWithContext(ctx context.Context, request *DescribeFileDownloadUrlRequest) (response *DescribeFileDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeFileDownloadUrlRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeFileDownloadUrlResponse()
     err = c.Send(request, response)
     return
 }
