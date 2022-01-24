@@ -68,7 +68,7 @@ const (
 	// The resource is occupied.
 	RESOURCEINUSE = "ResourceInUse"
 
-	// 
+	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
 	// The resource is unavailable.

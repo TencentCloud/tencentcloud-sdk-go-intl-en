@@ -322,6 +322,122 @@ func (c *Client) CreateEmailTemplateWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateReceiverRequest() (request *CreateReceiverRequest) {
+    request = &CreateReceiverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "CreateReceiver")
+    
+    
+    return
+}
+
+func NewCreateReceiverResponse() (response *CreateReceiverResponse) {
+    response = &CreateReceiverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateReceiver
+// This API is used to create a recipient group, which is the list of target email addresses for batch sending emails. After creating a group, you need to upload recipient email addresses. Then, you can create a sending task and select the group to batch send emails.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_RECEIVERDESCILLEGAL = "InvalidParameterValue.ReceiverDescIllegal"
+//  INVALIDPARAMETERVALUE_RECEIVERNAMEILLEGAL = "InvalidParameterValue.ReceiverNameIllegal"
+//  INVALIDPARAMETERVALUE_REPEATRECEIVERNAME = "InvalidParameterValue.RepeatReceiverName"
+//  LIMITEXCEEDED_EXCEEDRECEIVERLIMIT = "LimitExceeded.ExceedReceiverLimit"
+func (c *Client) CreateReceiver(request *CreateReceiverRequest) (response *CreateReceiverResponse, err error) {
+    if request == nil {
+        request = NewCreateReceiverRequest()
+    }
+    
+    response = NewCreateReceiverResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateReceiver
+// This API is used to create a recipient group, which is the list of target email addresses for batch sending emails. After creating a group, you need to upload recipient email addresses. Then, you can create a sending task and select the group to batch send emails.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_RECEIVERDESCILLEGAL = "InvalidParameterValue.ReceiverDescIllegal"
+//  INVALIDPARAMETERVALUE_RECEIVERNAMEILLEGAL = "InvalidParameterValue.ReceiverNameIllegal"
+//  INVALIDPARAMETERVALUE_REPEATRECEIVERNAME = "InvalidParameterValue.RepeatReceiverName"
+//  LIMITEXCEEDED_EXCEEDRECEIVERLIMIT = "LimitExceeded.ExceedReceiverLimit"
+func (c *Client) CreateReceiverWithContext(ctx context.Context, request *CreateReceiverRequest) (response *CreateReceiverResponse, err error) {
+    if request == nil {
+        request = NewCreateReceiverRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateReceiverResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateReceiverDetailRequest() (request *CreateReceiverDetailRequest) {
+    request = &CreateReceiverDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "CreateReceiverDetail")
+    
+    
+    return
+}
+
+func NewCreateReceiverDetailResponse() (response *CreateReceiverDetailResponse) {
+    response = &CreateReceiverDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateReceiverDetail
+// This API is used to add recipient email addresses (up to 100,000 at a time) to a recipient group. This will be processed asynchronously. You can upload recipient email addresses only once. If the data volume is large, it may take some time to upload. You can check the recipient group to learn the upload status and upload quantity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_EXCEEDRECEIVERDETAILLIMIT = "LimitExceeded.ExceedReceiverDetailLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+//  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) CreateReceiverDetail(request *CreateReceiverDetailRequest) (response *CreateReceiverDetailResponse, err error) {
+    if request == nil {
+        request = NewCreateReceiverDetailRequest()
+    }
+    
+    response = NewCreateReceiverDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateReceiverDetail
+// This API is used to add recipient email addresses (up to 100,000 at a time) to a recipient group. This will be processed asynchronously. You can upload recipient email addresses only once. If the data volume is large, it may take some time to upload. You can check the recipient group to learn the upload status and upload quantity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_EXCEEDRECEIVERDETAILLIMIT = "LimitExceeded.ExceedReceiverDetailLimit"
+//  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
+//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+//  OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+func (c *Client) CreateReceiverDetailWithContext(ctx context.Context, request *CreateReceiverDetailRequest) (response *CreateReceiverDetailResponse, err error) {
+    if request == nil {
+        request = NewCreateReceiverDetailRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateReceiverDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBlackListRequest() (request *DeleteBlackListRequest) {
     request = &DeleteBlackListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -700,7 +816,7 @@ func NewGetSendEmailStatusResponse() (response *GetSendEmailStatusResponse) {
 }
 
 // GetSendEmailStatus
-// This API is used to get email sending status. Only data within 90 days can be queried.
+// This API is used to get email sending status. Only data within 30 days can be queried.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
@@ -746,7 +862,7 @@ func (c *Client) GetSendEmailStatus(request *GetSendEmailStatusRequest) (respons
 }
 
 // GetSendEmailStatus
-// This API is used to get email sending status. Only data within 90 days can be queried.
+// This API is used to get email sending status. Only data within 30 days can be queried.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EMAILADDRINBLACKLIST = "FailedOperation.EmailAddrInBlacklist"
@@ -1084,6 +1200,104 @@ func (c *Client) ListEmailTemplatesWithContext(ctx context.Context, request *Lis
     request.SetContext(ctx)
     
     response = NewListEmailTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListReceiversRequest() (request *ListReceiversRequest) {
+    request = &ListReceiversRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "ListReceivers")
+    
+    
+    return
+}
+
+func NewListReceiversResponse() (response *ListReceiversResponse) {
+    response = &ListReceiversResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ListReceivers
+// This API is used to query recipient groups. It supports pagination, fuzzy query, and query by status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ListReceivers(request *ListReceiversRequest) (response *ListReceiversResponse, err error) {
+    if request == nil {
+        request = NewListReceiversRequest()
+    }
+    
+    response = NewListReceiversResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ListReceivers
+// This API is used to query recipient groups. It supports pagination, fuzzy query, and query by status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+//  INTERNALERROR = "InternalError"
+func (c *Client) ListReceiversWithContext(ctx context.Context, request *ListReceiversRequest) (response *ListReceiversResponse, err error) {
+    if request == nil {
+        request = NewListReceiversRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewListReceiversResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListSendTasksRequest() (request *ListSendTasksRequest) {
+    request = &ListSendTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "ListSendTasks")
+    
+    
+    return
+}
+
+func NewListSendTasksResponse() (response *ListSendTasksResponse) {
+    response = &ListSendTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ListSendTasks
+// This API is used to query batch email sending tasks (including immediate, scheduled, and recurring tasks) by page. You can query task data including the number of emails requested to be sent, the number of sent emails, the number of cached emails, and task status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+func (c *Client) ListSendTasks(request *ListSendTasksRequest) (response *ListSendTasksResponse, err error) {
+    if request == nil {
+        request = NewListSendTasksRequest()
+    }
+    
+    response = NewListSendTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// ListSendTasks
+// This API is used to query batch email sending tasks (including immediate, scheduled, and recurring tasks) by page. You can query task data including the number of emails requested to be sent, the number of sent emails, the number of cached emails, and task status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDLIMIT = "FailedOperation.InvalidLimit"
+func (c *Client) ListSendTasksWithContext(ctx context.Context, request *ListSendTasksRequest) (response *ListSendTasksResponse, err error) {
+    if request == nil {
+        request = NewListSendTasksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewListSendTasksResponse()
     err = c.Send(request, response)
     return
 }

@@ -32,6 +32,9 @@ const (
 	// Failed to clear the security group information of an instance.
 	FAILEDOPERATION_CLEARINSTANCEINFOFAILED = "FailedOperation.ClearInstanceInfoFailed"
 
+	// Failed to submit the task.
+	FAILEDOPERATION_COMMITFLOWERROR = "FailedOperation.CommitFlowError"
+
 	// Failed to unassociate the security group.
 	FAILEDOPERATION_DISASSOCIATESECURITYGROUPSFAILED = "FailedOperation.DisassociateSecurityGroupsFailed"
 
@@ -68,6 +71,9 @@ const (
 	// Failed to update the security group.
 	FAILEDOPERATION_UPDATESECURITYGROUPSFAILED = "FailedOperation.UpdateSecurityGroupsFailed"
 
+	// CAM authentication error.
+	INTERNALERROR_CAMAUTHOSSRESPONSERETURNCODEERROR = "InternalError.CamAuthOssResponseReturnCodeError"
+
 	// Internal system error with the database operation, which may be update, insert, select, etc.
 	INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 
@@ -94,6 +100,9 @@ const (
 
 	// Invalid service parameter.
 	INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+
+	// The operation is unsupported due to incorrect parameters.
+	INVALIDPARAMETER_NOTSUPPORTED = "InvalidParameter.NotSupported"
 
 	// Only VPCs are provided in the Shanghai Finance AZ.
 	INVALIDPARAMETER_ONLYVPCONSPECZONEID = "InvalidParameter.OnlyVPCOnSpecZoneId"

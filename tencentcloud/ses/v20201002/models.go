@@ -43,7 +43,7 @@ type BatchSendEmailRequest struct {
 	// Email subject
 	Subject *string `json:"Subject,omitempty" name:"Subject"`
 
-	// Task type. Valid values: `1`: batch; `2`: scheduled; `3`: recurring
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
 	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
@@ -63,6 +63,9 @@ type BatchSendEmailRequest struct {
 
 	// Parameter required for a scheduled sending task
 	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
+
+	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 }
 
 func (r *BatchSendEmailRequest) ToJsonString() string {
@@ -87,6 +90,7 @@ func (r *BatchSendEmailRequest) FromJsonString(s string) error {
 	delete(f, "Attachments")
 	delete(f, "CycleParam")
 	delete(f, "TimedParam")
+	delete(f, "Unsubscribe")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchSendEmailRequest has unknown keys!", "")
 	}
@@ -277,6 +281,109 @@ func (r *CreateEmailTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateEmailTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReceiverDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Email address
+	Emails []*string `json:"Emails,omitempty" name:"Emails"`
+}
+
+func (r *CreateReceiverDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReceiverDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReceiverId")
+	delete(f, "Emails")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReceiverDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReceiverDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReceiverDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReceiverDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReceiverRequest struct {
+	*tchttp.BaseRequest
+
+	// Recipient group name
+	ReceiversName *string `json:"ReceiversName,omitempty" name:"ReceiversName"`
+
+	// Recipient group description
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
+func (r *CreateReceiverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReceiverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReceiversName")
+	delete(f, "Desc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReceiverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReceiverResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Recipient group ID, by which recipient email addresses are uploaded
+		ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReceiverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReceiverResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -969,12 +1076,167 @@ func (r *ListEmailTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ListReceiversRequest struct {
+	*tchttp.BaseRequest
+
+	// Offset, starting from 0. The value is an integer.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of records to query. The value is an integer not exceeding 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded). To query groups in all states, do not pass in this parameter.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Group name keyword for fuzzy query
+	KeyWord *string `json:"KeyWord,omitempty" name:"KeyWord"`
+}
+
+func (r *ListReceiversRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListReceiversRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Status")
+	delete(f, "KeyWord")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListReceiversRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ListReceiversResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Data record
+		Data []*ReceiverData `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListReceiversResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListReceiversResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ListSendTasksRequest struct {
+	*tchttp.BaseRequest
+
+	// Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of records to query. The value is an integer not exceeding 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+}
+
+func (r *ListSendTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListSendTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Status")
+	delete(f, "ReceiverId")
+	delete(f, "TaskType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSendTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ListSendTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Data record
+		Data []*SendTaskData `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ListSendTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListSendTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReceiverData struct {
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Recipient group name
+	ReceiversName *string `json:"ReceiversName,omitempty" name:"ReceiversName"`
+
+	// Total number of recipient email addresses
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Recipient group description
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+
+	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ReceiversStatus *uint64 `json:"ReceiversStatus,omitempty" name:"ReceiversStatus"`
+
+	// Creation time, such as 2021-09-28 16:40:35
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
 
-	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format: 
-	// Sender <email address>, for example:
-	// Tencent Cloud team <noreply@mail.qcloud.com>
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
+	// To display the sender name, enter the address in the following format: 
+	// Sender <email address>
 	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
 
 	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
@@ -994,6 +1256,9 @@ type SendEmailRequest struct {
 
 	// Email attachments
 	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
+
+	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 }
 
 func (r *SendEmailRequest) ToJsonString() string {
@@ -1015,6 +1280,7 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	delete(f, "Template")
 	delete(f, "Simple")
 	delete(f, "Attachments")
+	delete(f, "Unsubscribe")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendEmailRequest has unknown keys!", "")
 	}
@@ -1110,6 +1376,61 @@ type SendEmailStatus struct {
 	UserComplainted *bool `json:"UserComplainted,omitempty" name:"UserComplainted"`
 }
 
+type SendTaskData struct {
+
+	// Task ID
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Sender address
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent
+	TaskStatus *uint64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Number of emails requested to be sent
+	RequestCount *uint64 `json:"RequestCount,omitempty" name:"RequestCount"`
+
+	// Number of emails sent
+	SendCount *uint64 `json:"SendCount,omitempty" name:"SendCount"`
+
+	// Number of emails cached
+	CacheCount *uint64 `json:"CacheCount,omitempty" name:"CacheCount"`
+
+	// Task creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Task update time
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Email subject
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Template and template data
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Template *Template `json:"Template,omitempty" name:"Template"`
+
+	// Parameters of a recurring task
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	CycleParam *CycleEmailParam `json:"CycleParam,omitempty" name:"CycleParam"`
+
+	// Parameters of a scheduled task
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
+
+	// Task exception information
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
+
+	// Recipient group name
+	ReceiversName *string `json:"ReceiversName,omitempty" name:"ReceiversName"`
+}
+
 type Simple struct {
 
 	// HTML code after base64 encoding. To ensure correct display, this parameter should include all code information and cannot contain external CSS.
@@ -1125,6 +1446,8 @@ type Template struct {
 	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
 
 	// Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.
+	// Note: The parameter value cannot be data of a complex type such as HTML.
+	// Example: {"name":"xxx","age":"xx"}
 	TemplateData *string `json:"TemplateData,omitempty" name:"TemplateData"`
 }
 

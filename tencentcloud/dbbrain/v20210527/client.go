@@ -262,6 +262,76 @@ func (c *Client) CreateDBDiagReportUrlWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateKillTaskRequest() (request *CreateKillTaskRequest) {
+    request = &CreateKillTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateKillTask")
+    
+    
+    return
+}
+
+func NewCreateKillTaskResponse() (response *CreateKillTaskResponse) {
+    response = &CreateKillTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateKillTask
+// This API is used to create session killing tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateKillTask(request *CreateKillTaskRequest) (response *CreateKillTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateKillTaskRequest()
+    }
+    
+    response = NewCreateKillTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateKillTask
+// This API is used to create session killing tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateKillTaskWithContext(ctx context.Context, request *CreateKillTaskRequest) (response *CreateKillTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateKillTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateKillTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMailProfileRequest() (request *CreateMailProfileRequest) {
     request = &CreateMailProfileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -330,6 +400,78 @@ func (c *Client) CreateMailProfileWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateMailProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProxySessionKillTaskRequest() (request *CreateProxySessionKillTaskRequest) {
+    request = &CreateProxySessionKillTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateProxySessionKillTask")
+    
+    
+    return
+}
+
+func NewCreateProxySessionKillTaskResponse() (response *CreateProxySessionKillTaskResponse) {
+    response = &CreateProxySessionKillTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateProxySessionKillTask
+// This API is used to create an async task of killing all proxy node connection sessions and is currently supported only for Redis. The async task ID is the returned value, which can be passed to the API `DescribeProxySessionKillTasks` as a parameter to query the execution status of the session killing task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateProxySessionKillTask(request *CreateProxySessionKillTaskRequest) (response *CreateProxySessionKillTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateProxySessionKillTaskRequest()
+    }
+    
+    response = NewCreateProxySessionKillTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateProxySessionKillTask
+// This API is used to create an async task of killing all proxy node connection sessions and is currently supported only for Redis. The async task ID is the returned value, which can be passed to the API `DescribeProxySessionKillTasks` as a parameter to query the execution status of the session killing task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateProxySessionKillTaskWithContext(ctx context.Context, request *CreateProxySessionKillTaskRequest) (response *CreateProxySessionKillTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateProxySessionKillTaskRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateProxySessionKillTaskResponse()
     err = c.Send(request, response)
     return
 }

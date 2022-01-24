@@ -223,6 +223,87 @@ func (r *CreateDBDiagReportUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateKillTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the instance associated with the session killing task.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Task duration in seconds. Pass in `-1` to stop the task manually.
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Client IP, which is a task filter.
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name, which is a task filter. Multiple database names are separated by comma.
+	DB *string `json:"DB,omitempty" name:"DB"`
+
+	// Related command, which is a task filter. Multiple commands are separated by comma.
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Task filter. Filtering by single filter prefix is supported.
+	Info *string `json:"Info,omitempty" name:"Info"`
+
+	// User type, which is a task filter.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Session duration in seconds, which is a task filter.
+	Time *int64 `json:"Time,omitempty" name:"Time"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *CreateKillTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKillTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Duration")
+	delete(f, "Host")
+	delete(f, "DB")
+	delete(f, "Command")
+	delete(f, "Info")
+	delete(f, "User")
+	delete(f, "Time")
+	delete(f, "Product")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKillTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateKillTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task status. `1` is returned if the session killing task is successfully created.
+		Status *int64 `json:"Status,omitempty" name:"Status"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateKillTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKillTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateMailProfileRequest struct {
 	*tchttp.BaseRequest
 
@@ -286,6 +367,59 @@ func (r *CreateMailProfileResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMailProfileResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateProxySessionKillTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *CreateProxySessionKillTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxySessionKillTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Product")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxySessionKillTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateProxySessionKillTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID that is returned after the session killing task is created.
+		AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateProxySessionKillTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxySessionKillTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1141,7 +1275,7 @@ type DescribeMailProfileResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList"`
 
-		// Total number of email templates.
+		// Total number of the configured emails.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 

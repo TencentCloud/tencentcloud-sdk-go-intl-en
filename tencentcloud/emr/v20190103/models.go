@@ -483,6 +483,15 @@ type CustomMetaInfo struct {
 	MetaDataPass *string `json:"MetaDataPass,omitempty" name:"MetaDataPass"`
 }
 
+type CustomServiceDefine struct {
+
+	// Custom parameter key
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Custom parameter value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type DescribeClusterNodesRequest struct {
 	*tchttp.BaseRequest
 
@@ -751,6 +760,21 @@ type EmrProductConfigOutter struct {
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
 }
 
+type ExternalService struct {
+
+	// Shared component type, which can be EMR or CUSTOM
+	ShareType *string `json:"ShareType,omitempty" name:"ShareType"`
+
+	// Custom parameters
+	CustomServiceDefineList []*CustomServiceDefine `json:"CustomServiceDefineList,omitempty" name:"CustomServiceDefineList"`
+
+	// Shared component name
+	Service *string `json:"Service,omitempty" name:"Service"`
+
+	// Shared component cluster
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type HostVolumeContext struct {
 
 	// Directory in the pod for mounting the host, which is the mount point of resources for the host. The specified mount point corresponds to the host path and is used as the data storage directory in the pod.
@@ -823,6 +847,9 @@ type InquiryPriceCreateInstanceRequest struct {
 	// Hadoop-Presto
 	// Hadoop-Hbase
 	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+
+	// Shared component information
+	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -851,6 +878,7 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MetaDBInfo")
 	delete(f, "ProductId")
 	delete(f, "SceneName")
+	delete(f, "ExternalService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
 	}

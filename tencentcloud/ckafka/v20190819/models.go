@@ -1657,17 +1657,20 @@ type DescribeInstancesDetailRequest struct {
 	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
 	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default
+	// Offset. If this parameter is left empty, `0` will be used by default.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
+	// Number of returned results. If this parameter is left empty, `10` will be used by default. The maximum value is `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Tag key match.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// Filter
+	// Filter.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// This parameter has been deprecated and replaced with `InstanceIdList`.
+	InstanceIds *string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesDetailRequest) ToJsonString() string {
@@ -1689,6 +1692,7 @@ func (r *DescribeInstancesDetailRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "TagKey")
 	delete(f, "Filters")
+	delete(f, "InstanceIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesDetailRequest has unknown keys!", "")
 	}
@@ -1738,6 +1742,9 @@ type DescribeInstancesRequest struct {
 
 	// Tag key value (this field has been deprecated).
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -1758,6 +1765,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "TagKey")
+	delete(f, "VpcId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -2724,6 +2732,18 @@ type InstanceDetail struct {
 	// Time of scheduled upgrade
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	RebalanceTime *string `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
+
+	// Number of partitions in the current instance.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PartitionNumber *uint64 `json:"PartitionNumber,omitempty" name:"PartitionNumber"`
+
+	// Public network bandwidth type.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublicNetworkChargeType *string `json:"PublicNetworkChargeType,omitempty" name:"PublicNetworkChargeType"`
+
+	// Public network bandwidth.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
 }
 
 type InstanceDetailResponse struct {
