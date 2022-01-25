@@ -4602,6 +4602,74 @@ func (r *DescribeLiveTranscodeTemplatesResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLiveTranscodeTotalInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time (Beijing time)
+	// Format: yyyy-mm-dd HH:MM:SS
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time (Beijing time)
+	// Format: yyyy-mm-dd HH:MM:SS
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of push domains to query. If this parameter is left empty, the data of all domains is queried.
+	// If this parameter is specified, the data returned will be on an hourly basis.
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
+
+	// Valid values:
+	// `Mainland`: queries transcoding data in the Chinese mainland
+	// `Oversea`: queries transcoding data outside the Chinese mainland
+	// By default, the data both in and outside the Chinese mainland is queried.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+}
+
+func (r *DescribeLiveTranscodeTotalInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveTranscodeTotalInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PushDomains")
+	delete(f, "MainlandOrOversea")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLiveTranscodeTotalInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLiveTranscodeTotalInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of transcoding data
+	// Note: This field may return `null`, indicating that no valid value can be found.
+		DataInfoList []*TranscodeTotalInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLiveTranscodeTotalInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveTranscodeTotalInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
@@ -5285,8 +5353,8 @@ type DescribeStreamPlayInfoListRequest struct {
 	// Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
-	// The difference between the start time and end time cannot be greater than 24 hours. Data in the last 30 days can be queried.
+	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
+	// The start time and end time cannot be more than 24 hours apart and must be within the last 15 days.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name,
@@ -7694,6 +7762,28 @@ type TranscodeDetailInfo struct {
 	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
 
 	// Resolution.
+	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
+}
+
+type TranscodeTotalInfo struct {
+
+	// Usage time (Beijing time)
+	// Example: 2019-03-01 00:00:00
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Transcoding duration in minutes
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Codec, with modules
+	// Examples:
+	// `liveprocessor_H264`: live transcoding-H264
+	// `liveprocessor_H265`: live transcoding-H265
+	// `topspeed_H264`: top speed codec-H264
+	// `topspeed_H265`: top speed codec-H265
+	ModuleCodec *string `json:"ModuleCodec,omitempty" name:"ModuleCodec"`
+
+	// Resolution
+	// Example: 540*480
 	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
 }
 

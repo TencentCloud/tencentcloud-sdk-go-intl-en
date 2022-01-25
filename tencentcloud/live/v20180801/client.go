@@ -4864,6 +4864,70 @@ func (c *Client) DescribeLiveTranscodeTemplatesWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeLiveTranscodeTotalInfoRequest() (request *DescribeLiveTranscodeTotalInfoRequest) {
+    request = &DescribeLiveTranscodeTotalInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeTotalInfo")
+    
+    
+    return
+}
+
+func NewDescribeLiveTranscodeTotalInfoResponse() (response *DescribeLiveTranscodeTotalInfoResponse) {
+    response = &DescribeLiveTranscodeTotalInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLiveTranscodeTotalInfo
+// This API is used to query your total usage of the transcoding service in the last 30 days.
+//
+// Notes:
+//
+// If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
+//
+// If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveTranscodeTotalInfo(request *DescribeLiveTranscodeTotalInfoRequest) (response *DescribeLiveTranscodeTotalInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeTotalInfoRequest()
+    }
+    
+    response = NewDescribeLiveTranscodeTotalInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeLiveTranscodeTotalInfo
+// This API is used to query your total usage of the transcoding service in the last 30 days.
+//
+// Notes:
+//
+// If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
+//
+// If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeLiveTranscodeTotalInfoWithContext(ctx context.Context, request *DescribeLiveTranscodeTotalInfoRequest) (response *DescribeLiveTranscodeTotalInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveTranscodeTotalInfoRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveTranscodeTotalInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLiveWatermarkRequest() (request *DescribeLiveWatermarkRequest) {
     request = &DescribeLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
