@@ -649,8 +649,8 @@ type DescribeSecretResponse struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ResourceID *string `json:"ResourceID,omitempty" name:"ResourceID"`
 
-		// Whether to enable rotation. True: yes; False: no.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+		// Whether to enable rotation. `True`: enable rotation; `False`: disable rotation.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		RotationStatus *bool `json:"RotationStatus,omitempty" name:"RotationStatus"`
 
 		// Rotation frequency in days by default.
@@ -668,6 +668,10 @@ type DescribeSecretResponse struct {
 		// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
+
+		// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+		TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1043,6 +1047,10 @@ type GetServiceStatusResponse struct {
 		// Invalid service type. `0`: not purchased; `1`: normal; `2`: suspended due to arrears; `3`: resource released
 		InvalidType *int64 `json:"InvalidType,omitempty" name:"InvalidType"`
 
+		// `true`: allow SSM to manage Tencent Cloud API key secrets.
+	// `false`: forbid SSM to manage Tencent Cloud API key secrets.
+		AccessKeyEscrowEnabled *bool `json:"AccessKeyEscrowEnabled,omitempty" name:"AccessKeyEscrowEnabled"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1143,6 +1151,7 @@ type ListSecretsRequest struct {
 	// `0` (default): user-defined secret.
 	// `1`: Tencent Cloud services secret.
 	// `2`: SSH key secret.
+	// `3`: Tencent Cloud API key secret.
 	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
 
 	// This parameter is valid only when SecretType is `1`.
@@ -1392,7 +1401,7 @@ type RotateProductSecretResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Async rotation task ID.
+		// Asynchronous rotation task ID. This field is valid when `SecretType` is `1` (i.e., the secret type is Tencent Cloud services secret, such as MySQL/TDSQL credentials).
 		FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1445,8 +1454,11 @@ type SecretMetadata struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	NextRotationTime *uint64 `json:"NextRotationTime,omitempty" name:"NextRotationTime"`
 
-	// 0: user-defined credential; 1: Tencent Cloud service credential.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// `0`: user-defined secret.
+	// `1`: Tencent Cloud services secret.
+	// `2`: SSH key secret.
+	// `3`: Tencent Cloud API key secret.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
 
 	// Tencent Cloud service name, which takes effect only when `SecretType` is 1 (Tencent Cloud service credential)
@@ -1464,6 +1476,10 @@ type SecretMetadata struct {
 	// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
+
+	// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 }
 
 type Tag struct {

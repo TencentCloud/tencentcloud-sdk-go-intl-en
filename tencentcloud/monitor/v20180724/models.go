@@ -4322,6 +4322,14 @@ type URLNotice struct {
 	// Verification code
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ValidationCode *string `json:"ValidationCode,omitempty" name:"ValidationCode"`
+
+	// Start time of the notification in seconds, which is calculated from 00:00:00.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the notification in seconds, which is calculated from 00:00:00.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type UnBindingAllPolicyObjectRequest struct {

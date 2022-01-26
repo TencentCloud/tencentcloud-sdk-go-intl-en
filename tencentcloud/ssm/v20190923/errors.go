@@ -29,6 +29,9 @@ const (
 	// KMS operation failed.
 	FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
 
+	// The rotation is prohibited.
+	FAILEDOPERATION_ROTATIONFORBIDDEN = "FailedOperation.RotationForbidden"
+
 	// An internal error occurred.
 	INTERNALERROR = "InternalError"
 
@@ -53,8 +56,14 @@ const (
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 
+	// Reached the upper limit of access keys.
+	OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+
 	// It is not allowed to manually update credentials with automatic rotation enabled.
 	OPERATIONDENIED_AUTOROTATEDRESOURCE = "OperationDenied.AutoRotatedResource"
+
+	// The role does not exist.
+	OPERATIONDENIED_ROLENOTEXIST = "OperationDenied.RoleNotExist"
 
 	// The number of requests exceeds the frequency limit.
 	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
@@ -73,6 +82,9 @@ const (
 
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
+
+	// The secret does not exist.
+	RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 
 	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"

@@ -755,6 +755,7 @@ func NewDescribeSecretResponse() (response *DescribeSecretResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ROLENOTEXIST = "OperationDenied.RoleNotExist"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
@@ -775,6 +776,7 @@ func (c *Client) DescribeSecret(request *DescribeSecretRequest) (response *Descr
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ROLENOTEXIST = "OperationDenied.RoleNotExist"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
@@ -1169,7 +1171,9 @@ func NewGetSecretValueResponse() (response *GetSecretValueResponse) {
 //  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ROLENOTEXIST = "OperationDenied.RoleNotExist"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
 //  RESOURCEUNAVAILABLE_RESOURCEDISABLED = "ResourceUnavailable.ResourceDisabled"
 //  RESOURCEUNAVAILABLE_RESOURCEPENDINGDELETED = "ResourceUnavailable.ResourcePendingDeleted"
@@ -1195,7 +1199,9 @@ func (c *Client) GetSecretValue(request *GetSecretValueRequest) (response *GetSe
 //  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ROLENOTEXIST = "OperationDenied.RoleNotExist"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
 //  RESOURCEUNAVAILABLE_RESOURCEDISABLED = "ResourceUnavailable.ResourceDisabled"
 //  RESOURCEUNAVAILABLE_RESOURCEPENDINGDELETED = "ResourceUnavailable.ResourcePendingDeleted"
@@ -1520,7 +1526,9 @@ func NewRotateProductSecretResponse() (response *RotateProductSecretResponse) {
 }
 
 // RotateProductSecret
-// This API is used to rotate a Tencent Cloud service credential. It is only applicable to Tencent Cloud service credentials in `Enabled` status but not Tencent Cloud service credentials in other status or user-defined credentials.
+// This API is used to rotate secrets for Tencent Cloud services or Tencent Cloud API key pairs.
+//
+// Note that only the secrets with the "Enabled" status can be rotated.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1535,6 +1543,7 @@ func NewRotateProductSecretResponse() (response *RotateProductSecretResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_AUTOROTATEDRESOURCE = "OperationDenied.AutoRotatedResource"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -1563,7 +1572,9 @@ func (c *Client) RotateProductSecret(request *RotateProductSecretRequest) (respo
 }
 
 // RotateProductSecret
-// This API is used to rotate a Tencent Cloud service credential. It is only applicable to Tencent Cloud service credentials in `Enabled` status but not Tencent Cloud service credentials in other status or user-defined credentials.
+// This API is used to rotate secrets for Tencent Cloud services or Tencent Cloud API key pairs.
+//
+// Note that only the secrets with the "Enabled" status can be rotated.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1578,6 +1589,7 @@ func (c *Client) RotateProductSecret(request *RotateProductSecretRequest) (respo
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_AUTOROTATEDRESOURCE = "OperationDenied.AutoRotatedResource"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -1693,6 +1705,7 @@ func NewUpdateRotationStatusResponse() (response *UpdateRotationStatusResponse) 
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  FAILEDOPERATION_ROTATIONFORBIDDEN = "FailedOperation.RotationForbidden"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1742,6 +1755,7 @@ func (c *Client) UpdateRotationStatus(request *UpdateRotationStatusRequest) (res
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSKMSERROR = "FailedOperation.AccessKmsError"
+//  FAILEDOPERATION_ROTATIONFORBIDDEN = "FailedOperation.RotationForbidden"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
