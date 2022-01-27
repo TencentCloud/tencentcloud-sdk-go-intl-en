@@ -1384,6 +1384,72 @@ func (c *Client) GetSnapOverviewWithContext(ctx context.Context, request *GetSna
     return
 }
 
+func NewInitializeDisksRequest() (request *InitializeDisksRequest) {
+    request = &InitializeDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cbs", APIVersion, "InitializeDisks")
+    
+    
+    return
+}
+
+func NewInitializeDisksResponse() (response *InitializeDisksResponse) {
+    response = &InitializeDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InitializeDisks
+// This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
+//
+// 1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
+//
+// 2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
+//
+// 3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
+//
+// 4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
+    if request == nil {
+        request = NewInitializeDisksRequest()
+    }
+    
+    response = NewInitializeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// InitializeDisks
+// This API is used to reinitialize the cloud disks. Note the following when reinitializing the cloud disks:
+//
+// 1. For a cloud disk created from a snapshot, it is rolled back to the state of the snapshot;
+//
+// 2. For a cloud disk created from the scratch, all data are cleared. Please check and back up the necessary data before the reinitialization;
+//
+// 3. Currently, you can only re-initialize a cloud disk when it’s not attached to a resource and not shared by others;
+//
+// 4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) InitializeDisksWithContext(ctx context.Context, request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
+    if request == nil {
+        request = NewInitializeDisksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewInitializeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquirePriceModifyDiskExtraPerformanceRequest() (request *InquirePriceModifyDiskExtraPerformanceRequest) {
     request = &InquirePriceModifyDiskExtraPerformanceRequest{
         BaseRequest: &tchttp.BaseRequest{},

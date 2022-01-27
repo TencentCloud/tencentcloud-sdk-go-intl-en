@@ -3433,6 +3433,9 @@ type ModifyDBInstanceNetworkRequest struct {
 
 	// Retention period (in hours) of the original VIP. Value range: `0-168`. Default value: `0`, indicating the original VIP is released immediately.
 	OldIpRetainTime *int64 `json:"OldIpRetainTime,omitempty" name:"OldIpRetainTime"`
+
+	// New VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
 }
 
 func (r *ModifyDBInstanceNetworkRequest) ToJsonString() string {
@@ -3451,6 +3454,7 @@ func (r *ModifyDBInstanceNetworkRequest) FromJsonString(s string) error {
 	delete(f, "NewVpcId")
 	delete(f, "NewSubnetId")
 	delete(f, "OldIpRetainTime")
+	delete(f, "Vip")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceNetworkRequest has unknown keys!", "")
 	}
