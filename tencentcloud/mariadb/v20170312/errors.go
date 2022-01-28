@@ -41,6 +41,9 @@ const (
 	// Failed to create the flow.
 	FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 
+	// Failed to create an order.
+	FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+
 	// Failed to create the account.
 	FAILEDOPERATION_CREATEUSERFAILED = "FailedOperation.CreateUserFailed"
 
@@ -61,6 +64,9 @@ const (
 
 	// Failed to set a rule.
 	FAILEDOPERATION_SETRULELOCATIONFAILED = "FailedOperation.SetRuleLocationFailed"
+
+	// Either tag key/value verification or tag API authentication failed.
+	FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
 
 	// Failed to update the security group information of an instance.
 	FAILEDOPERATION_UPDATEINSTANCEINFOFAILED = "FailedOperation.UpdateInstanceInfoFailed"
@@ -89,6 +95,9 @@ const (
 	// Failed to query the information of a dedicated cluster.
 	INTERNALERROR_FENCEERROR = "InternalError.FenceError"
 
+	// Failed to get the monitoring metric data.
+	INTERNALERROR_FETCHMETRICDATAFAILED = "InternalError.FetchMetricDataFailed"
+
 	// Failed to get database instance parameters.
 	INTERNALERROR_GETDBCONFIGFAILED = "InternalError.GetDbConfigFailed"
 
@@ -109,6 +118,9 @@ const (
 
 	// Failed to get the error log.
 	INTERNALERROR_GETSLOWLOGFAILED = "InternalError.GetSlowLogFailed"
+
+	// Failed to query the VPC subnet information.
+	INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 
 	// Failed to get the account list.
 	INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
@@ -173,6 +185,9 @@ const (
 	// The password contains invalid characters.
 	INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 
+	// Parameter check failed.
+	INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
+
 	// The specified flow information was not found.
 	INVALIDPARAMETER_FLOWNOTFOUND = "InvalidParameter.FlowNotFound"
 
@@ -200,6 +215,12 @@ const (
 	// The specified VPC subnet was not found.
 	INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
 
+	// The specified VPC subnet was not found.
+	INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+
+	// Incorrect AZ information.
+	INVALIDPARAMETER_ZONEIDILLEGAL = "InvalidParameter.ZoneIdIllegal"
+
 	// The account to be created already exists.
 	INVALIDPARAMETERVALUE_ACCOUNTALREADYEXISTS = "InvalidParameterValue.AccountAlreadyExists"
 
@@ -221,8 +242,14 @@ const (
 	// The number of days for log retention after modification is either too high or too low.
 	INVALIDPARAMETERVALUE_ILLEGALLOGSAVEDAYS = "InvalidParameterValue.IllegalLogSaveDays"
 
+	// The number of products exceeds the upper limit.
+	INVALIDPARAMETERVALUE_ILLEGALQUANTITY = "InvalidParameterValue.IllegalQuantity"
+
 	// Incorrect permission parameters
 	INVALIDPARAMETERVALUE_ILLEGALRIGHTPARAM = "InvalidParameterValue.IllegalRightParam"
+
+	// Information of the specified AZ was not found.
+	INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 
 	// Invalid instance name.
 	INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
