@@ -703,6 +703,46 @@ type ClusterNetworkSettings struct {
 	Subnets []*string `json:"Subnets,omitempty" name:"Subnets"`
 }
 
+type ClusterStatus struct {
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster status
+	ClusterState *string `json:"ClusterState,omitempty" name:"ClusterState"`
+
+	// Status of nodes in the cluster
+	ClusterInstanceState *string `json:"ClusterInstanceState,omitempty" name:"ClusterInstanceState"`
+
+	// Indicates whether the monitoring service is enabled for the cluster
+	ClusterBMonitor *bool `json:"ClusterBMonitor,omitempty" name:"ClusterBMonitor"`
+
+	// Number of cluster nodes being created. "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+	ClusterInitNodeNum *int64 `json:"ClusterInitNodeNum,omitempty" name:"ClusterInitNodeNum"`
+
+	// Number of running nodes in the cluster. "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+	ClusterRunningNodeNum *int64 `json:"ClusterRunningNodeNum,omitempty" name:"ClusterRunningNodeNum"`
+
+	// Number of abnormal nodes in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+	ClusterFailedNodeNum *int64 `json:"ClusterFailedNodeNum,omitempty" name:"ClusterFailedNodeNum"`
+
+	// Number of shutdown nodes in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ClusterClosedNodeNum *int64 `json:"ClusterClosedNodeNum,omitempty" name:"ClusterClosedNodeNum"`
+
+	// Number of nodes being shut down in the cluster.  "-1" indicates that the request to obtain the node status timed out. "-2" indicates that the request failed.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ClusterClosingNodeNum *int64 `json:"ClusterClosingNodeNum,omitempty" name:"ClusterClosingNodeNum"`
+
+	// Indicates whether to enable cluster deletion protection
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ClusterDeletionProtection *bool `json:"ClusterDeletionProtection,omitempty" name:"ClusterDeletionProtection"`
+
+	// Indicates whether the cluster is auditable
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ClusterAuditEnabled *bool `json:"ClusterAuditEnabled,omitempty" name:"ClusterAuditEnabled"`
+}
+
 type ClusterVersion struct {
 
 	// Cluster ID
@@ -2597,6 +2637,58 @@ func (r *DescribeClusterSecurityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeClusterStatusRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID list. All clusters are pulled if it is left empty.
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+}
+
+func (r *DescribeClusterStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Cluster status list
+		ClusterStatusSet []*ClusterStatus `json:"ClusterStatusSet,omitempty" name:"ClusterStatusSet"`
+
+		// Number of clusters
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
 
@@ -4057,7 +4149,7 @@ type ModifyClusterNodePoolRequest struct {
 	// Resource tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// 
+	// Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run `kubectl uncordon nodename` to enable this node for scheduling.
 	Unschedulable *int64 `json:"Unschedulable,omitempty" name:"Unschedulable"`
 }
 

@@ -58,7 +58,18 @@ type AccessRegionDetial struct {
 	// Data center type. `dc`: data center; `ec`: edge server.
 	IDCType *string `json:"IDCType,omitempty" name:"IDCType"`
 
-	// 
+	// Feature bitmap. Valid values:
+	// `0`: disable the feature;
+	// `1`: enable the feature.
+	// Each bit in the bitmap represents a feature:
+	// 1st bit: layer-4 acceleration;
+	// 2nd bit: layer-7 acceleration;
+	// 3rd bit: HTTP3 access;
+	// 4th bit: IPv6;
+	// 5th bit: dedicated BGP access;
+	// 6th bit: non-BGP access;
+	// 7th bit: QoS acceleration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FeatureBitmap *int64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
@@ -403,7 +414,7 @@ type CheckProxyCreateRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// 
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -854,6 +865,12 @@ type CreateDomainRequest struct {
 	// Client CA certificate, which is used for the HTTPS interaction between the client and GAAP.
 	// This field or the `ClientCertificateId` field is required for mutual authentication only.
 	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// HTTP3 is not enabled by default. You can enable it with this field SetDomainHttp3.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *CreateDomainRequest) ToJsonString() string {
@@ -873,6 +890,7 @@ func (r *CreateDomainRequest) FromJsonString(s string) error {
 	delete(f, "CertificateId")
 	delete(f, "ClientCertificateId")
 	delete(f, "PolyClientCertificateIds")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDomainRequest has unknown keys!", "")
 	}
@@ -992,6 +1010,13 @@ type CreateHTTPSListenerRequest struct {
 
 	// Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *CreateHTTPSListenerRequest) ToJsonString() string {
@@ -1015,6 +1040,7 @@ func (r *CreateHTTPSListenerRequest) FromJsonString(s string) error {
 	delete(f, "ClientCertificateId")
 	delete(f, "PolyClientCertificateIds")
 	delete(f, "GroupId")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateHTTPSListenerRequest has unknown keys!", "")
 	}
@@ -1116,6 +1142,13 @@ type CreateProxyGroupRequest struct {
 
 	// Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *CreateProxyGroupRequest) ToJsonString() string {
@@ -1137,6 +1170,7 @@ func (r *CreateProxyGroupRequest) FromJsonString(s string) error {
 	delete(f, "AccessRegionSet")
 	delete(f, "IPAddressVersion")
 	delete(f, "PackageType")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyGroupRequest has unknown keys!", "")
 	}
@@ -1213,7 +1247,7 @@ type CreateProxyRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// 
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -2789,6 +2823,13 @@ type DescribeHTTPSListenersRequest struct {
 
 	// Connection group ID as a filter
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 func (r *DescribeHTTPSListenersRequest) ToJsonString() string {
@@ -2811,6 +2852,7 @@ func (r *DescribeHTTPSListenersRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "SearchValue")
 	delete(f, "GroupId")
+	delete(f, "Http3Supported")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHTTPSListenersRequest has unknown keys!", "")
 	}
@@ -4482,6 +4524,12 @@ type DomainRuleSet struct {
 	// Blocking-related status of the domain name. `BANNED`: the domain name is blocked; `RECOVER`: the domain name is unblocked or normal; `BANNING`: the domain name is being blocked; `RECOVERING`: the domain name is being unblocked; `BAN_FAILED`: the blocking fails; RECOVER_FAILED: the unblocking fails.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	BanStatus *string `json:"BanStatus,omitempty" name:"BanStatus"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 type Filter struct {
@@ -4639,7 +4687,7 @@ type InquiryPriceCreateProxyRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// 
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -5955,9 +6003,15 @@ type ProxyGroupDetail struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group) and `Accelerator` (game accelerator connection group).
+	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-MLC-border connection group).
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable;
+	// `1`: enable.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 type ProxyGroupInfo struct {
@@ -6001,6 +6055,12 @@ type ProxyGroupInfo struct {
 	// Whether the connection group contains a Microsoft connection
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProxyType *uint64 `json:"ProxyType,omitempty" name:"ProxyType"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 type ProxyIdDict struct {
@@ -6135,7 +6195,10 @@ type ProxyInfo struct {
 	// 
 	IPList []*IPDetail `json:"IPList,omitempty" name:"IPList"`
 
-	// 
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -6235,6 +6298,20 @@ type RegionDetail struct {
 
 	// Data center type. `dc`: data center; `ec`: edge server.
 	IDCType *string `json:"IDCType,omitempty" name:"IDCType"`
+
+	// Feature bitmap. Valid values:
+	// `0`: the feature is not supported;
+	// `1`: the feature is supported.
+	// Each bit in the bitmap represents a feature:
+	// 1st bit: layer-4 acceleration;
+	// 2nd bit: layer-7 acceleration;
+	// 3rd bit: HTTP3 access;
+	// 4th bit: IPv6;
+	// 5th bit: dedicated BGP access;
+	// 6th bit: non-BGP access;
+	// 7th bit: QoS acceleration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FeatureBitmap *uint64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
 type RemoveRealServersRequest struct {

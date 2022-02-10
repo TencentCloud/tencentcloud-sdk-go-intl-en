@@ -176,7 +176,7 @@ type Address struct {
 	// Whether the EIP supports direct connection mode. `True` indicates the EIP supports direct connection. `False` indicates that the resource does not support direct connection.
 	IsEipDirectConnection *bool `json:"IsEipDirectConnection,omitempty" name:"IsEipDirectConnection"`
 
-	// The resource type of the EIP. This includes `CalcIP`, `WanIP`, `EIP`, and `AnycastEIP`. Among these, `CalcIP` indicates the device IP, `WanIP` indicates the common public IP, `EIP` indicates Elastic IP, and `AnycastEip` indicates accelerated EIP.
+	// EIP resource type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (elastic IP) and `AnycastEIP` (accelerated EIP).
 	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
 
 	// Whether the EIP is automatically released after being unbound. `True` indicates the EIP will be automatically released after being unbound. `False` indicates the EIP will not be automatically released after being unbound.
@@ -196,6 +196,16 @@ type Address struct {
 	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// Network billing mode of EIP. The EIP for the bill-by-CVM account will return `null`.
+	// Note: this field may return `null`, indicating that no valid value was found.
+	// Including:
+	// <li><strong>BANDWIDTH_PREPAID_BY_MONTH</strong></li>
+	// <p style="padding-left: 30px;">Prepaid by monthly-subscribed bandwidth.</p>
+	// <li><strong>TRAFFIC_POSTPAID_BY_HOUR</strong></li>
+	// <p style="padding-left: 30px;">Pay-as-you-go billing by hourly traffic.</p>
+	// <li><strong>BANDWIDTH_POSTPAID_BY_HOUR</strong></li>
+	// <p style="padding-left: 30px;">Pay-as-you-go billing by hourly bandwidth.</p>
+	// <li><strong>BANDWIDTH_PACKAGE</strong></li>
+	// <p style="padding-left: 30px;">Bandwidth package.</p>
 	// Note: this field may return `null`, indicating that no valid value was found.
 	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
 
@@ -2265,17 +2275,23 @@ type CreateFlowLogRequest struct {
 	// Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
 	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
 
-	// The storage ID of the flow log.
-	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
-
 	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The description of the flow log instance
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 
+	// The storage ID of the flow log.
+	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
+
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Consumer types: `cls` and `ckafka`
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Information of the flow log consumer, which is required when the consumer type is `ckafka`.
+	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
 }
 
 func (r *CreateFlowLogRequest) ToJsonString() string {
@@ -2294,10 +2310,12 @@ func (r *CreateFlowLogRequest) FromJsonString(s string) error {
 	delete(f, "ResourceType")
 	delete(f, "ResourceId")
 	delete(f, "TrafficType")
-	delete(f, "CloudLogId")
 	delete(f, "VpcId")
 	delete(f, "FlowLogDescription")
+	delete(f, "CloudLogId")
 	delete(f, "Tags")
+	delete(f, "StorageType")
+	delete(f, "FlowLogStorage")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFlowLogRequest has unknown keys!", "")
 	}
@@ -10261,7 +10279,7 @@ type FilterObject struct {
 
 type FlowLog struct {
 
-	// ID of the VPC instance
+	// ID of the VPC instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -10273,16 +10291,16 @@ type FlowLog struct {
 	// The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, and `CCN`.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// The unique ID of the resource.
+	// The unique ID of the resource
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Type of flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
 	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
 
-	// The storage ID of the flow log.
+	// The storage ID of the flow log
 	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
 
-	// The storage ID status of the flow log.
+	// Flow log storage ID status.
 	CloudLogState *string `json:"CloudLogState,omitempty" name:"CloudLogState"`
 
 	// The flow log description.
@@ -10291,8 +10309,29 @@ type FlowLog struct {
 	// The creation time of the flow log.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Tag list, such as [{"Key": "city", "Value": "shanghai"}]
+	// Tag list, such as [{"Key": "city", "Value": "shanghai"}].
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Whether to enable. `true`: yes; `false`: no.
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Consumer end types: cls and ckafka
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Information of the consumer, which is returned when the consumer type is `ckafka`.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
+}
+
+type FlowLogStorage struct {
+
+	// Storage instance ID, which is required when `StorageType` is `ckafka`.
+	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+
+	// Topic ID, which is required when `StorageType` is `ckafka`.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	StorageTopic *string `json:"StorageTopic,omitempty" name:"StorageTopic"`
 }
 
 type GatewayFlowMonitorDetail struct {

@@ -136,6 +136,143 @@ type AnalysisItems struct {
 	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
 }
 
+type BackupPlan struct {
+
+	// Backup cycle
+	BackupPeriod *string `json:"BackupPeriod,omitempty" name:"BackupPeriod"`
+
+	// Retention period of basic backups
+	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitempty" name:"BaseBackupRetentionPeriod"`
+
+	// The earliest time to start a backup
+	MinBackupStartTime *string `json:"MinBackupStartTime,omitempty" name:"MinBackupStartTime"`
+
+	// The latest time to start a backup
+	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitempty" name:"MaxBackupStartTime"`
+}
+
+type CloneDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the original instance to be cloned.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Instance storage capacity in GB.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of a subnet in the VPC specified by `VpcId`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Name of the purchased instance.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Security group ID.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// This parameter is required if you purchase a multi-AZ deployed instance.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list.
+	VoucherIds *string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Campaign ID.
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Basic backup set ID.
+	BackupSetId *string `json:"BackupSetId,omitempty" name:"BackupSetId"`
+
+	// Restoration point in time.
+	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitempty" name:"RecoveryTargetTime"`
+}
+
+func (r *CloneDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "SpecCode")
+	delete(f, "Storage")
+	delete(f, "Period")
+	delete(f, "AutoRenewFlag")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "Name")
+	delete(f, "InstanceChargeType")
+	delete(f, "SecurityGroupIds")
+	delete(f, "ProjectId")
+	delete(f, "TagList")
+	delete(f, "DBNodeSet")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "ActivityId")
+	delete(f, "BackupSetId")
+	delete(f, "RecoveryTargetTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CloneDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Order ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+		// Bill ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloneDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 
@@ -442,7 +579,7 @@ type CreateInstancesRequest struct {
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 
-	// 
+	// Instance node information, which is required if you purchase a multi-AZ deployed instance.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 }
 
@@ -852,6 +989,10 @@ type DBBackup struct {
 
 	// Download address on public network
 	ExternalAddr *string `json:"ExternalAddr,omitempty" name:"ExternalAddr"`
+
+	// Backup set ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SetId *string `json:"SetId,omitempty" name:"SetId"`
 }
 
 type DBInstance struct {
@@ -969,7 +1110,8 @@ type DBInstance struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 
-	// 
+	// Instance node information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 }
 
@@ -1001,10 +1143,12 @@ type DBInstanceNetInfo struct {
 
 type DBNode struct {
 
-	// 
+	// Node type. Valid values:
+	// `Primary`;
+	// `Standby`.
 	Role *string `json:"Role,omitempty" name:"Role"`
 
-	// 
+	// AZ where the node resides, such as ap-guangzhou-1.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
@@ -1173,6 +1317,167 @@ func (r *DescribeAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAvailableRecoveryTimeRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeAvailableRecoveryTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableRecoveryTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableRecoveryTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAvailableRecoveryTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The earliest restoration time (UTC+8).
+		RecoveryBeginTime *string `json:"RecoveryBeginTime,omitempty" name:"RecoveryBeginTime"`
+
+		// The latest restoration time (UTC+8).
+		RecoveryEndTime *string `json:"RecoveryEndTime,omitempty" name:"RecoveryEndTime"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAvailableRecoveryTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableRecoveryTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupPlansRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeBackupPlansRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupPlansRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupPlansRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeBackupPlansResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The set of instance backup plans
+		Plans []*BackupPlan `json:"Plans,omitempty" name:"Plans"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeBackupPlansResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupPlansResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloneDBInstanceSpecRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Basic backup set ID. Either this parameter or `RecoveryTargetTime` must be passed in. If both are passed in, only this parameter takes effect.
+	BackupSetId *string `json:"BackupSetId,omitempty" name:"BackupSetId"`
+
+	// Restoration time (UTC+8). Either this parameter or `BackupSetId` must be passed in.
+	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitempty" name:"RecoveryTargetTime"`
+}
+
+func (r *DescribeCloneDBInstanceSpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloneDBInstanceSpecRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "BackupSetId")
+	delete(f, "RecoveryTargetTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloneDBInstanceSpecRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCloneDBInstanceSpecResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Code of the minimum specification available for purchase.
+		MinSpecCode *string `json:"MinSpecCode,omitempty" name:"MinSpecCode"`
+
+		// The minimum disk capacity in GB available for purchase.
+		MinStorage *int64 `json:"MinStorage,omitempty" name:"MinStorage"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCloneDBInstanceSpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloneDBInstanceSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2804,6 +3109,130 @@ func (r *ModifyAccountRemarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyBackupPlanRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// The earliest time to start a backup
+	MinBackupStartTime *string `json:"MinBackupStartTime,omitempty" name:"MinBackupStartTime"`
+
+	// The latest time to start a backup
+	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitempty" name:"MaxBackupStartTime"`
+
+	// Backup retention period in days. Value range: 3-7
+	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitempty" name:"BaseBackupRetentionPeriod"`
+
+	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
+	BackupPeriod []*string `json:"BackupPeriod,omitempty" name:"BackupPeriod"`
+}
+
+func (r *ModifyBackupPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "MinBackupStartTime")
+	delete(f, "MaxBackupStartTime")
+	delete(f, "BaseBackupRetentionPeriod")
+	delete(f, "BackupPeriod")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyBackupPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyBackupPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceDeploymentRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance node information.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
+func (r *ModifyDBInstanceDeploymentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceDeploymentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "DBNodeSet")
+	delete(f, "SwitchTag")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceDeploymentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceDeploymentResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceDeploymentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceDeploymentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceNameRequest struct {
 	*tchttp.BaseRequest
 
@@ -4231,9 +4660,13 @@ type ZoneInfo struct {
 	// AZ number
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Availability status. UNAVAILABLE: unavailable, AVAILABLE: available
+	// Availability status. Valid values: `UNAVAILABLE`, `AVAILABLE`, `SELLOUT`
 	ZoneState *string `json:"ZoneState,omitempty" name:"ZoneState"`
 
 	// Whether the AZ supports IPv6 address access
 	ZoneSupportIpv6 *uint64 `json:"ZoneSupportIpv6,omitempty" name:"ZoneSupportIpv6"`
+
+	// AZs that can be used as standby when this AZ is primary
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StandbyZoneSet []*string `json:"StandbyZoneSet,omitempty" name:"StandbyZoneSet"`
 }

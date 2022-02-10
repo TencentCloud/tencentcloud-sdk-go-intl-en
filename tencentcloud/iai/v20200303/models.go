@@ -39,9 +39,15 @@ type AnalyzeFaceRequest struct {
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Algorithm model version used by the Face Recognition service. Valid values: 2.0, 3.0.  
-	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API previously, `2.0` will be used by default.  
-	// Different algorithm model versions correspond to different face recognition algorithms. The new version has a better overall effect than the legacy version and is thus recommended.
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
 	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
@@ -101,6 +107,15 @@ func (r *AnalyzeFaceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AnalyzeFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AttributeItem struct {
+
+	// Attribute value
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Probability of recognizing `Type`, which indicates the probability of correct recognition. Value range: [0,1].
+	Probability *float64 `json:"Probability,omitempty" name:"Probability"`
 }
 
 type Candidate struct {
@@ -166,9 +181,15 @@ type CompareFaceRequest struct {
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	UrlB *string `json:"UrlB,omitempty" name:"UrlB"`
 
-	// Algorithm model version used by the Face Recognition service. Valid values: 2.0, 3.0. 
-	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API previously, `2.0` will be used by default. 
-	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is thus recommended.
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
 	// Image quality control. 
@@ -424,9 +445,15 @@ type CreateGroupRequest struct {
 	// Group remarks, which can contain 0 to 40 characters.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
-	// Algorithm model version used by the Face Recognition service. Valid values: 2.0, 3.0.
-	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API previously, `2.0` will be used by default. 
-	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is thus recommended.
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 }
 
@@ -793,6 +820,100 @@ func (r *DeletePersonResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetectFaceAttributesRequest struct {
+	*tchttp.BaseRequest
+
+	// Maximum number of processable faces. 
+	// Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
+	// This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats. 
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. 
+	// The image cannot exceed 5 MB in size after being Base64-encoded. 
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low. 
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Whether to return attributes such as age, gender, and emotion. 
+	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
+	// Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
+	// Default value: None, indicating that no attributes need to be returned. 
+	// You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
+	// For more information on the attributes, please see the output parameters as described below. 
+	// The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
+	FaceAttributesType *string `json:"FaceAttributesType,omitempty" name:"FaceAttributesType"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image is not rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+
+	// Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
+func (r *DetectFaceAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectFaceAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MaxFaceNum")
+	delete(f, "Image")
+	delete(f, "Url")
+	delete(f, "FaceAttributesType")
+	delete(f, "NeedRotateDetection")
+	delete(f, "FaceModelVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectFaceAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DetectFaceAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Width of requested image.
+		ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+		// Height of requested image.
+		ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+		// Face information list.
+		FaceDetailInfos []*FaceDetailInfo `json:"FaceDetailInfos,omitempty" name:"FaceDetailInfos"`
+
+		// Algorithm model version used for face recognition.
+		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DetectFaceAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectFaceAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DetectFaceRequest struct {
 	*tchttp.BaseRequest
 
@@ -830,9 +951,15 @@ type DetectFaceRequest struct {
 	// We recommend enabling this feature for the face adding operation.
 	NeedQualityDetection *uint64 `json:"NeedQualityDetection,omitempty" name:"NeedQualityDetection"`
 
-	// Algorithm model version used by the Face Recognition service. Valid values: 2.0, 3.0.  
-	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API previously, `2.0` will be used by default. 
-	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is thus recommended.
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
 	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
@@ -914,9 +1041,15 @@ type DetectLiveFaceRequest struct {
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Algorithm model version used by the Face Recognition service. Valid values: 2.0, 3.0.  
-	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API previously, `2.0` will be used by default. 
-	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is thus recommended.
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 }
 
@@ -972,6 +1105,40 @@ func (r *DetectLiveFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Eye struct {
+
+	// Whether glasses are worn.
+	// The `Type` values of the `AttributeItem` include: 0: no glasses; 1: general glasses; 2: sunglasses.
+	Glass *AttributeItem `json:"Glass,omitempty" name:"Glass"`
+
+	// Whether the eyes are open.
+	// The `Type` values of the `AttributeItem` include: 0: open; 1: closed.
+	EyeOpen *AttributeItem `json:"EyeOpen,omitempty" name:"EyeOpen"`
+
+	// Whether the person has double eyelids.
+	// The `Type` values of the `AttributeItem` include: 0: no; 1: yes.
+	EyelidType *AttributeItem `json:"EyelidType,omitempty" name:"EyelidType"`
+
+	// Eye size.
+	// The `Type` values of the `AttributeItem` include: 0: small eyes; 1: general eyes; 2: big eyes.
+	EyeSize *AttributeItem `json:"EyeSize,omitempty" name:"EyeSize"`
+}
+
+type Eyebrow struct {
+
+	// Eyebrow thickness.
+	// The `Type` values of the `AttributeItem` include: 0: light; 1: thick.
+	EyebrowDensity *AttributeItem `json:"EyebrowDensity,omitempty" name:"EyebrowDensity"`
+
+	// Eyebrow curve.
+	// The `Type` values of the `AttributeItem` include: 0: flat; 1: curved.
+	EyebrowCurve *AttributeItem `json:"EyebrowCurve,omitempty" name:"EyebrowCurve"`
+
+	// Eyebrow length.
+	// The `Type` values of the `AttributeItem` include: 0: short; 1: long.
+	EyebrowLength *AttributeItem `json:"EyebrowLength,omitempty" name:"EyebrowLength"`
+}
+
 type FaceAttributesInfo struct {
 
 	// Gender. The gender is female for the value range [0,49] and male for the value range [50,100]. The closer the value to 0 or 100, the higher the confidence. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
@@ -1016,6 +1183,93 @@ type FaceAttributesInfo struct {
 	// Whether the eyes are open. Valid values: true, false. As long as there is more than one eye closed, `false` will be returned. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EyeOpen *bool `json:"EyeOpen,omitempty" name:"EyeOpen"`
+}
+
+type FaceDetailAttributesInfo struct {
+
+	// Age. Value range: [0,65], where 65 indicates 65 years old or above. 
+	// If `FaceAttributesType` does not include `Age` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Age *int64 `json:"Age,omitempty" name:"Age"`
+
+	// Beauty score. Value range: [0,100]. 
+	// If `FaceAttributesType` does not include `Beauty` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Beauty *int64 `json:"Beauty,omitempty" name:"Beauty"`
+
+	// Emotion, including relaxed, happy, surprised, angry, sad, disgusted, and scared. 
+	// The `Type` values of the `AttributeItem` include: 0: relaxed; 1: happy; 2: surprised; 3: angry; 4: sad; 5: disgusted; 6: scared.
+	// If `FaceAttributesType` does not include `Emotion` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Emotion *AttributeItem `json:"Emotion,omitempty" name:"Emotion"`
+
+	// Eye information, including whether glasses are worn, whether eyes are closed, whether the person has double eyelids, and the eye size. 
+	// If `FaceAttributesType` does not include `Eye` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Eye *Eye `json:"Eye,omitempty" name:"Eye"`
+
+	// Eyebrow information, including whether the eyebrows are thick, curved, or long. 
+	// If `FaceAttributesType` does not include `Eyebrow` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Eyebrow *Eyebrow `json:"Eyebrow,omitempty" name:"Eyebrow"`
+
+	// Gender information. 
+	// The `Type` values of the `AttributeItem` include: 0: male; 1: female.	
+	// If `FaceAttributesType` does not include `Gender` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Gender *AttributeItem `json:"Gender,omitempty" name:"Gender"`
+
+	// Hair information, including length, bang, and color. 
+	// If `FaceAttributesType` does not include `Hair` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Hair *Hair `json:"Hair,omitempty" name:"Hair"`
+
+	// Hat information, including whether a hat is worn, hat style, and hat color. 
+	// If `FaceAttributesType` does not include `Hat` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Hat *Hat `json:"Hat,omitempty" name:"Hat"`
+
+	// Pose information, including the face pitch, yaw, and roll. 
+	// If `FaceAttributesType` does not include `Headpose` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	HeadPose *HeadPose `json:"HeadPose,omitempty" name:"HeadPose"`
+
+	// Mask information. 
+	// The `Type` values of the `AttributeItem` include: 0: no mask; 1: the mask is worn and does not cover the face; 2: the mask is worn and covers the chin; 3: the mask is worn and covers the mouth; 4: the mask is worn properly.
+	// If `FaceAttributesType` does not include `Mask` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Mask *AttributeItem `json:"Mask,omitempty" name:"Mask"`
+
+	// Mouth information, including whether the mouth is open and the lip thickness. 
+	// If `FaceAttributesType` does not include `Mouth` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Mouth *Mouth `json:"Mouth,omitempty" name:"Mouth"`
+
+	// Beard information.
+	// The `Type` values of the `AttributeItem` include: 0: no beard; 1: beard detected. 
+	// If `FaceAttributesType` does not include `Moustache` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Moustache *AttributeItem `json:"Moustache,omitempty" name:"Moustache"`
+
+	// Nose information. 
+	// The `Type` values of the `AttributeItem` include: 0: upturned nose; 1: aquiline nose; 2: general nose; 3: bulbous nose.
+	// If `FaceAttributesType` does not include `Nose` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Nose *AttributeItem `json:"Nose,omitempty" name:"Nose"`
+
+	// Face shape information. 
+	// The `Type` values of the `AttributeItem` include: 0: square; 1: triangular; 2: oval; 3: heart-shaped; 4: round.
+	// If `FaceAttributesType` does not include `Shape` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Shape *AttributeItem `json:"Shape,omitempty" name:"Shape"`
+
+	// Skin color information. 
+	// The `Type` values of the `AttributeItem` include: 0: yellow; 1: brown; 2: black; 3: white.
+	// If `FaceAttributesType` does not include `Skin` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Skin *AttributeItem `json:"Skin,omitempty" name:"Skin"`
+
+	// Smile level. Value range: [0,100]. 
+	// If `FaceAttributesType` does not include `Smile` or more than 5 faces are detected, this parameter will still be returned but meaningless.
+	Smile *int64 `json:"Smile,omitempty" name:"Smile"`
+}
+
+type FaceDetailInfo struct {
+
+	// Position of the detected face frame.
+	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
+
+	// Face attribute information. According to the types specified in `FaceAttributesType`, the following face attributes will be returned: age (Age), beauty score (Beauty), 
+	// emotion (Emotion), eye information (Eye), eyebrow information (Eyebrow), gender (Gender), 
+	// hair information (Hair), hat information (Hat), pose (Headpose), mask information (Mask), mouth information (Mouse), beard information (Moustache), 
+	// nose information (Nose), face shape (Shape), skin color (Skin), and smile information (Smile), etc.  
+	// If no types are specified in `FaceAttributesType`, the detailed items returned by `FaceDetaiAttributesInfo` will be meaningless.
+	FaceDetailAttributesInfo *FaceDetailAttributesInfo `json:"FaceDetailAttributesInfo,omitempty" name:"FaceDetailAttributesInfo"`
 }
 
 type FaceHairAttributesInfo struct {
@@ -1575,6 +1829,44 @@ type GroupInfo struct {
 	CreationTimestamp *uint64 `json:"CreationTimestamp,omitempty" name:"CreationTimestamp"`
 }
 
+type Hair struct {
+
+	// Hair length information.
+	// The `Type` values of the `AttributeItem` include: 0: bald, 1: short hair, 2: medium hair, 3: long hair, 4: braid.
+	Length *AttributeItem `json:"Length,omitempty" name:"Length"`
+
+	// Bang information.
+	// The `Type` values of the `AttributeItem` include: 0: no bang; 1: bang detected.
+	Bang *AttributeItem `json:"Bang,omitempty" name:"Bang"`
+
+	// Hair color information.
+	// The `Type` values of the `AttributeItem` include: 0: black; 1: golden; 2: brown; 3: gray.
+	Color *AttributeItem `json:"Color,omitempty" name:"Color"`
+}
+
+type Hat struct {
+
+	// Hat wearing status information.
+	// The `Type` values of the `AttributeItem` include: 0: no hat; 1: general hat; 2: helmet; 3: security guard hat.
+	Style *AttributeItem `json:"Style,omitempty" name:"Style"`
+
+	// Hat color.
+	// The `Type` values of the `AttributeItem` include: 0: no hat; 1: red; 2: yellow; 3: blue; 4: black; 5: gray; 6: mixed colors.
+	Color *AttributeItem `json:"Color,omitempty" name:"Color"`
+}
+
+type HeadPose struct {
+
+	// Pitch. Value range: [-30,30].
+	Pitch *int64 `json:"Pitch,omitempty" name:"Pitch"`
+
+	// Yaw. Value range: [-30,30].
+	Yaw *int64 `json:"Yaw,omitempty" name:"Yaw"`
+
+	// Roll. Value range: [-180,180].
+	Roll *int64 `json:"Roll,omitempty" name:"Roll"`
+}
+
 type ModifyGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1741,6 +2033,13 @@ func (r *ModifyPersonGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Mouth struct {
+
+	// Whether the mouth is open.
+	// The `Type` values of the `AttributeItem` include: 0: closed; 1: open.
+	MouthOpen *AttributeItem `json:"MouthOpen,omitempty" name:"MouthOpen"`
+}
+
 type PersonExDescriptionInfo struct {
 
 	// Person description field index, whose value starts from 0.
@@ -1777,8 +2076,8 @@ type PersonInfo struct {
 	// List of contained face images
 	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
 
-	// Person creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time. 
-	// The UNIX epoch time is 00:00:00, Thursday, January 1, 1970, Coordinated Universal Time (UTC). For more information, please see the UNIX time document.
+	// Person creation time, measured in the number of milliseconds elapsed since the Unix epoch 
+	// The Unix epoch is 00:00:00, Thursday, January 1, 1970, Coordinated Universal Time (UTC). For more information, please see the Unix time document.
 	CreationTimestamp *uint64 `json:"CreationTimestamp,omitempty" name:"CreationTimestamp"`
 }
 
@@ -1821,6 +2120,7 @@ type SearchFacesRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
+	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.
@@ -1930,6 +2230,7 @@ type SearchFacesReturnsByGroupRequest struct {
 	*tchttp.BaseRequest
 
 	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
+	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
 	// Base64-encoded image data, which cannot exceed 5 MB.

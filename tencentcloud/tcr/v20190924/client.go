@@ -178,6 +178,68 @@ func (c *Client) CreateImmutableTagRulesWithContext(ctx context.Context, request
     return
 }
 
+func NewCreateInstanceTokenRequest() (request *CreateInstanceTokenRequest) {
+    request = &CreateInstanceTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateInstanceToken")
+    
+    
+    return
+}
+
+func NewCreateInstanceTokenResponse() (response *CreateInstanceTokenResponse) {
+    response = &CreateInstanceTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateInstanceToken
+// This API is used to create a temporary or long-term instance access credential.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstanceToken(request *CreateInstanceTokenRequest) (response *CreateInstanceTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceTokenRequest()
+    }
+    
+    response = NewCreateInstanceTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// CreateInstanceToken
+// This API is used to create a temporary or long-term instance access credential.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstanceTokenWithContext(ctx context.Context, request *CreateInstanceTokenRequest) (response *CreateInstanceTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceTokenRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMultipleSecurityPolicyRequest() (request *CreateMultipleSecurityPolicyRequest) {
     request = &CreateMultipleSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},

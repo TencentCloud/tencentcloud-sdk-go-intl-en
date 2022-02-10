@@ -53,7 +53,7 @@ const (
 	// Failed to get project information. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_CDBCGWCONNECTERROR = "FailedOperation.CdbCgwConnectError"
 
-	// 
+	// Classic network creation is unsupported.
 	FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 
 	// Failed to create the renewal order.
@@ -67,6 +67,9 @@ const (
 
 	// Failed to unbind resources from a project.
 	FAILEDOPERATION_DELETERESOURCEPROJECTTAGERROR = "FailedOperation.DeleteResourceProjectTagError"
+
+	// Failed to unbind the resource from the tag.
+	FAILEDOPERATION_DELETERESOURCESTOTAGERROR = "FailedOperation.DeleteResourcesToTagError"
 
 	// Failed to access ES. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_ESCONNECTERROR = "FailedOperation.ESConnectError"
@@ -371,7 +374,7 @@ const (
 	// The length of parameter exceeds the limit.
 	INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
 
-	// 
+	// Invalid parameter values.
 	INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 
 	// The maximum value of the parameter has been reached.

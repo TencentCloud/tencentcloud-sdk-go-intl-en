@@ -17,6 +17,12 @@ package v20200303
 const (
 	// error codes for specific actions
 
+	// Authentication failed.
+	AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
 	// This operation cannot be performed across algorithm model versions.
 	FAILEDOPERATION_ACROSSVERSIONSERROR = "FailedOperation.AcrossVersionsError"
 

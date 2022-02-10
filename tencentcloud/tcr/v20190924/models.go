@@ -126,6 +126,74 @@ func (r *CreateImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateInstanceTokenRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Access credential type. Values: `longterm` and `temp` (default, valid for one hour)
+	TokenType *string `json:"TokenType,omitempty" name:"TokenType"`
+
+	// Description of the long-term access credential
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
+func (r *CreateInstanceTokenRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstanceTokenRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "TokenType")
+	delete(f, "Desc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceTokenRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstanceTokenResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Username
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Username *string `json:"Username,omitempty" name:"Username"`
+
+		// Access credential
+		Token *string `json:"Token,omitempty" name:"Token"`
+
+		// Expiration timestamp of access credential. It is a string of numbers without unit.
+		ExpTime *int64 `json:"ExpTime,omitempty" name:"ExpTime"`
+
+		// Token ID of long-term access credential. It is not available to temporary access credential.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		TokenId *string `json:"TokenId,omitempty" name:"TokenId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateInstanceTokenResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstanceTokenResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateMultipleSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 
