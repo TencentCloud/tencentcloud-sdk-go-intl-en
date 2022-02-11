@@ -1804,6 +1804,9 @@ type DescribeBaseMetricsRequest struct {
 
 	// Metric name. Tencent Cloud services have different metric names. For more information on metric names, see the monitoring metric documentation of each service. For example, see [CVM Monitoring Metrics](https://intl.cloud.tencent.com/document/product/248/6843?from_cn_redirect=1) for the metric names of CVM
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Filter by dimension. This parameter is optional.
+	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 func (r *DescribeBaseMetricsRequest) ToJsonString() string {
@@ -1820,6 +1823,7 @@ func (r *DescribeBaseMetricsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Namespace")
 	delete(f, "MetricName")
+	delete(f, "Dimensions")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBaseMetricsRequest has unknown keys!", "")
 	}

@@ -204,7 +204,7 @@ type Cluster struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HealthyInfo *string `json:"HealthyInfo,omitempty" name:"HealthyInfo"`
 
-	// Cluster status. 0: creating; 1: normal; 2: deleting; 3: deleted; 5. creation failed; 6: deletion failed
+	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Maximum number of namespaces
@@ -411,6 +411,18 @@ type CmqQueue struct {
 	// Namespace name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The maximum number of unacknowledged messages.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MaxUnackedMsgNum *int64 `json:"MaxUnackedMsgNum,omitempty" name:"MaxUnackedMsgNum"`
+
+	// Maximum size of heaped messages in bytes.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MaxMsgBacklogSize *int64 `json:"MaxMsgBacklogSize,omitempty" name:"MaxMsgBacklogSize"`
 }
 
 type CmqSubscription struct {
@@ -540,37 +552,6 @@ type CmqTransactionPolicy struct {
 	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
 }
 
-type Connection struct {
-
-	// Producer address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitempty" name:"Address"`
-
-	// Topic partition.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions *int64 `json:"Partitions,omitempty" name:"Partitions"`
-
-	// Producer version.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClientVersion *string `json:"ClientVersion,omitempty" name:"ClientVersion"`
-
-	// Producer name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
-
-	// Producer ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProducerId *string `json:"ProducerId,omitempty" name:"ProducerId"`
-
-	// Average message size in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AverageMsgSize *string `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
-
-	// Production rate in bytes/sec.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputIn *string `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
-}
-
 type Consumer struct {
 
 	// The time when the consumer started connecting.
@@ -627,7 +608,7 @@ type CreateClusterRequest struct {
 	// Remarks (up to 128 characters).
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// List of cluster tags
+	// Cluster tag list (deprecated).
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Whether to enable public network access. If this parameter is left empty, the feature will be enabled by default
@@ -3035,75 +3016,150 @@ func (r *DescribeEnvironmentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeProducersRequest struct {
+type DescribePublisherSummaryRequest struct {
 	*tchttp.BaseRequest
 
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Fuzzy match by producer name.
-	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
-
-	// Pulsar cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
 }
 
-func (r *DescribeProducersRequest) ToJsonString() string {
+func (r *DescribePublisherSummaryRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeProducersRequest) FromJsonString(s string) error {
+func (r *DescribePublisherSummaryRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "EnvironmentId")
-	delete(f, "TopicName")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "ProducerName")
 	delete(f, "ClusterId")
+	delete(f, "Namespace")
+	delete(f, "Topic")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProducersRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePublisherSummaryRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeProducersResponse struct {
+type DescribePublisherSummaryResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Array set of producers.
-		ProducerSets []*Producer `json:"ProducerSets,omitempty" name:"ProducerSets"`
+		// Production rate (messages/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		MsgRateIn *float64 `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
 
-		// Total number of records.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+		// Production rate (byte/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		MsgThroughputIn *float64 `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
+
+		// The number of producers.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		PublisherCount *int64 `json:"PublisherCount,omitempty" name:"PublisherCount"`
+
+		// Message storage size in bytes.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		StorageSize *int64 `json:"StorageSize,omitempty" name:"StorageSize"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
 }
 
-func (r *DescribeProducersResponse) ToJsonString() string {
+func (r *DescribePublisherSummaryResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *DescribeProducersResponse) FromJsonString(s string) error {
+func (r *DescribePublisherSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePublishersRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Topic name.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Parameter filter. The `ProducerName` and `Address` fields are supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset for query. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of query results displayed per page. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sort by field.
+	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+}
+
+func (r *DescribePublishersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublishersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Namespace")
+	delete(f, "Topic")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Sort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePublishersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePublishersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of query results.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of producer information.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		Publishers []*Publisher `json:"Publishers,omitempty" name:"Publishers"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePublishersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePublishersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4619,23 +4675,6 @@ type PartitionsTopic struct {
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 }
 
-type Producer struct {
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Number of connections.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	CountConnect *int64 `json:"CountConnect,omitempty" name:"CountConnect"`
-
-	// Set of connections.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConnectionSets []*Connection `json:"ConnectionSets,omitempty" name:"ConnectionSets"`
-}
-
 type PublishCmqMsgRequest struct {
 	*tchttp.BaseRequest
 
@@ -4694,6 +4733,45 @@ func (r *PublishCmqMsgResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *PublishCmqMsgResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Publisher struct {
+
+	// Producer ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProducerId *int64 `json:"ProducerId,omitempty" name:"ProducerId"`
+
+	// Producer name.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
+
+	// Producer address.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// Client version.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClientVersion *string `json:"ClientVersion,omitempty" name:"ClientVersion"`
+
+	// Message production rate (message/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MsgRateIn *float64 `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
+
+	// Message production throughput rate (byte/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MsgThroughputIn *float64 `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
+
+	// Average message size in bytes.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AverageMsgSize *float64 `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
+
+	// Connection time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ConnectedSince *string `json:"ConnectedSince,omitempty" name:"ConnectedSince"`
+
+	// Serial number of the topic partition connected to the producer.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
 }
 
 type ReceiveMessageRequest struct {
@@ -5353,6 +5431,15 @@ func (r *SendMsgResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SendMsgResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Sort struct {
+
+	// Sorting field.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Ascending order: `ASC`; descending order: `DESC`.
+	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
 type Subscription struct {
