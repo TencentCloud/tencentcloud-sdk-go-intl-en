@@ -570,7 +570,7 @@ type ScanVoiceRequest struct {
 	// Application ID, which is the `AppID` obtained when you create an application in [Console > Service Management](https://console.cloud.tencent.com/gamegme)
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, politically sensitive, advertising, terrorism, and prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
+	// Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, advertising, and other prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
 	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
 	// Whether it is a live stream. false: audio file detection, true: audio stream detection.
@@ -583,6 +583,9 @@ type ScanVoiceRequest struct {
 
 	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">callback description</a> above. (Note: if this field is empty, the detection result can only be obtained by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
+
+	// The language. `jp` represents Japanese
+	Lang *string `json:"Lang,omitempty" name:"Lang"`
 }
 
 func (r *ScanVoiceRequest) ToJsonString() string {
@@ -602,6 +605,7 @@ func (r *ScanVoiceRequest) FromJsonString(s string) error {
 	delete(f, "Live")
 	delete(f, "Tasks")
 	delete(f, "Callback")
+	delete(f, "Lang")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScanVoiceRequest has unknown keys!", "")
 	}

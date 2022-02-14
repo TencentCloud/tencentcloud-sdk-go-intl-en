@@ -261,7 +261,7 @@ func NewDescribeScanResultListResponse() (response *DescribeScanResultListRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TAGKEY = "InvalidParameter.TagKey"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -287,7 +287,7 @@ func (c *Client) DescribeScanResultList(request *DescribeScanResultListRequest) 
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TAGKEY = "InvalidParameter.TagKey"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -329,7 +329,7 @@ func NewModifyAppStatusResponse() (response *ModifyAppStatusResponse) {
 //  FAILEDOPERATION_USERFEENEGATIVE = "FailedOperation.UserFeeNegative"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_BIZIDISNOTFOUND = "ResourceNotFound.BizidIsNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -353,7 +353,7 @@ func (c *Client) ModifyAppStatus(request *ModifyAppStatusRequest) (response *Mod
 //  FAILEDOPERATION_USERFEENEGATIVE = "FailedOperation.UserFeeNegative"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_BIZIDISNOTFOUND = "ResourceNotFound.BizidIsNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -388,13 +388,13 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 }
 
 // ScanVoice
-// This API is used to submit a speech detection task. Up to 100 tasks can be added in the detection task list. Before using this API, please enable the speech analysis service in [Console > Service Configuration](https://console.cloud.tencent.com/gamegme/conf).
+// This API is used to submit a speech detection task. Up to 100 tasks can be added in the detection task list. Before using this API, please activate the speech analysis service in [Console > Service Configuration](https://console.cloud.tencent.com/gamegme/conf).
 //
 // </br></br>
 //
 // 
 //
-// <h4><b>Feature trial description:</b></h4>
+// <h4><b>About the trial:</b></h4>
 //
 // <li>You can try out the speech analysis service free of charge in <a href="https://console.cloud.tencent.com/gamegme/tryout">Console > Product Trial</a>.</li>
 //
@@ -404,11 +404,11 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 //
 // <h4><b>API feature description:</b></h4>
 //
-// <li>This API can check audio streams or files for non-compliant content.</li>
+// <li>This API checks audio streams or files for non-compliant content.</li>
 //
 // <li>The detection result can be obtained by setting the callback address (`Callback`) or calling the `DescribeScanResultList` API for polling.</li>
 //
-// <li>The scenario can be specified, such as abusive, pornographic, or politically sensitive information.</li>
+// <li>The scenario can be specified, such as abusive or pornographic.</li>
 //
 // <li>Detection tasks can be submitted in batches. Up to 100 tasks can be added in the detection task list.</li>
 //
@@ -470,17 +470,13 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 //
 // <p>porn: pornographic</p>
 //
-// <p>politics: politically sensitive</p>
-//
 // <p>abuse: abusive</p>
 //
 // <p>ad: advertising</p>
 //
-// <p>terrorism: terrorism</p>
-//
 // <p>contraband: prohibited</p>
 //
-// <p>customized: custom keyword library. This feature is only available to allowlisted users. To try it out, please <a href="https://intl.cloud.tencent.com/apply/p/8809fjcik56?from_cn_redirect=1">contact us</a>.</p>
+// <p>customized: custom keyword library. This feature is only available to beta users. To try it out, please <a href="https://intl.cloud.tencent.com/apply/p/8809fjcik56?from_cn_redirect=1">contact us</a>.</p>
 //
 // </td>
 //
@@ -506,7 +502,7 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 //
 // <tr>
 //
-// <th>Name</th>
+// <th>Item</th>
 //
 // <th>Type</th>
 //
@@ -667,7 +663,8 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CALLBACKADDRESS = "InvalidParameter.CallbackAddress"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -684,13 +681,13 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
 }
 
 // ScanVoice
-// This API is used to submit a speech detection task. Up to 100 tasks can be added in the detection task list. Before using this API, please enable the speech analysis service in [Console > Service Configuration](https://console.cloud.tencent.com/gamegme/conf).
+// This API is used to submit a speech detection task. Up to 100 tasks can be added in the detection task list. Before using this API, please activate the speech analysis service in [Console > Service Configuration](https://console.cloud.tencent.com/gamegme/conf).
 //
 // </br></br>
 //
 // 
 //
-// <h4><b>Feature trial description:</b></h4>
+// <h4><b>About the trial:</b></h4>
 //
 // <li>You can try out the speech analysis service free of charge in <a href="https://console.cloud.tencent.com/gamegme/tryout">Console > Product Trial</a>.</li>
 //
@@ -700,11 +697,11 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
 //
 // <h4><b>API feature description:</b></h4>
 //
-// <li>This API can check audio streams or files for non-compliant content.</li>
+// <li>This API checks audio streams or files for non-compliant content.</li>
 //
 // <li>The detection result can be obtained by setting the callback address (`Callback`) or calling the `DescribeScanResultList` API for polling.</li>
 //
-// <li>The scenario can be specified, such as abusive, pornographic, or politically sensitive information.</li>
+// <li>The scenario can be specified, such as abusive or pornographic.</li>
 //
 // <li>Detection tasks can be submitted in batches. Up to 100 tasks can be added in the detection task list.</li>
 //
@@ -766,17 +763,13 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
 //
 // <p>porn: pornographic</p>
 //
-// <p>politics: politically sensitive</p>
-//
 // <p>abuse: abusive</p>
 //
 // <p>ad: advertising</p>
 //
-// <p>terrorism: terrorism</p>
-//
 // <p>contraband: prohibited</p>
 //
-// <p>customized: custom keyword library. This feature is only available to allowlisted users. To try it out, please <a href="https://intl.cloud.tencent.com/apply/p/8809fjcik56?from_cn_redirect=1">contact us</a>.</p>
+// <p>customized: custom keyword library. This feature is only available to beta users. To try it out, please <a href="https://intl.cloud.tencent.com/apply/p/8809fjcik56?from_cn_redirect=1">contact us</a>.</p>
 //
 // </td>
 //
@@ -802,7 +795,7 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
 //
 // <tr>
 //
-// <th>Name</th>
+// <th>Item</th>
 //
 // <th>Type</th>
 //
@@ -963,7 +956,8 @@ func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CALLBACKADDRESS = "InvalidParameter.CallbackAddress"
-//  MISSINGPARAMETER_ = "MissingParameter."
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"

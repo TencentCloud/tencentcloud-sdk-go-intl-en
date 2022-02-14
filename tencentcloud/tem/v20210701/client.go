@@ -65,8 +65,10 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 // This API is used to create an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
     if request == nil {
         request = NewCreateApplicationRequest()
@@ -81,8 +83,10 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
 // This API is used to create an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
     if request == nil {
         request = NewCreateApplicationRequest()
@@ -115,8 +119,8 @@ func NewCreateCosTokenResponse() (response *CreateCosTokenResponse) {
 // This API is used to generate a COS temporary key.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateCosToken(request *CreateCosTokenRequest) (response *CreateCosTokenResponse, err error) {
     if request == nil {
         request = NewCreateCosTokenRequest()
@@ -131,8 +135,8 @@ func (c *Client) CreateCosToken(request *CreateCosTokenRequest) (response *Creat
 // This API is used to generate a COS temporary key.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateCosTokenWithContext(ctx context.Context, request *CreateCosTokenRequest) (response *CreateCosTokenResponse, err error) {
     if request == nil {
         request = NewCreateCosTokenRequest()
@@ -165,8 +169,9 @@ func NewCreateEnvironmentResponse() (response *CreateEnvironmentResponse) {
 // This API is used to create an environment.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_CREATEEKSCLUSTERERROR = "InternalError.CreateEksClusterError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response *CreateEnvironmentResponse, err error) {
     if request == nil {
         request = NewCreateEnvironmentRequest()
@@ -181,8 +186,9 @@ func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response 
 // This API is used to create an environment.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_CREATEEKSCLUSTERERROR = "InternalError.CreateEksClusterError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 func (c *Client) CreateEnvironmentWithContext(ctx context.Context, request *CreateEnvironmentRequest) (response *CreateEnvironmentResponse, err error) {
     if request == nil {
         request = NewCreateEnvironmentRequest()
@@ -215,8 +221,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 // This API is used to bind a cloud resource.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     if request == nil {
         request = NewCreateResourceRequest()
@@ -231,8 +236,7 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
 // This API is used to bind a cloud resource.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     if request == nil {
         request = NewCreateResourceRequest()
@@ -240,6 +244,82 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApplicationRequest() (request *DeleteApplicationRequest) {
+    request = &DeleteApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "DeleteApplication")
+    
+    
+    return
+}
+
+func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
+    response = &DeleteApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteApplication
+// This API is used to delete an application.
+//
+//   - Stop the application if it’s running
+//
+//   - Delete resources associated with this application
+//
+//   - Delele the application
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationRequest()
+    }
+    
+    response = NewDeleteApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DeleteApplication
+// This API is used to delete an application.
+//
+//   - Stop the application if it’s running
+//
+//   - Delete resources associated with this application
+//
+//   - Delele the application
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationResponse()
     err = c.Send(request, response)
     return
 }
@@ -265,8 +345,15 @@ func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
 // This API is used to delete an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
     if request == nil {
         request = NewDeleteIngressRequest()
@@ -281,8 +368,15 @@ func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteI
 // This API is used to delete an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
     if request == nil {
         request = NewDeleteIngressRequest()
@@ -315,8 +409,15 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 // This API is used to deploy an application.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_TRAITSTRACINGNOTSUPPORTED = "InvalidParameterValue.TraitsTracingNotSupported"
+//  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) DeployApplication(request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
     if request == nil {
         request = NewDeployApplicationRequest()
@@ -331,8 +432,15 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 // This API is used to deploy an application.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_TRAITSTRACINGNOTSUPPORTED = "InvalidParameterValue.TraitsTracingNotSupported"
+//  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) DeployApplicationWithContext(ctx context.Context, request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
     if request == nil {
         request = NewDeployApplicationRequest()
@@ -365,8 +473,10 @@ func NewDescribeApplicationPodsResponse() (response *DescribeApplicationPodsResp
 // This API is used to get the list of application pods.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
@@ -381,8 +491,10 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
 // This API is used to get the list of application pods.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
@@ -415,8 +527,8 @@ func NewDescribeEnvironmentsResponse() (response *DescribeEnvironmentsResponse) 
 // This API is used to get the list of tenant environments.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
@@ -431,8 +543,8 @@ func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (res
 // This API is used to get the list of tenant environments.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
@@ -465,8 +577,8 @@ func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
 // This API is used to query an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
     if request == nil {
         request = NewDescribeIngressRequest()
@@ -481,8 +593,8 @@ func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *Des
 // This API is used to query an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeIngressWithContext(ctx context.Context, request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
     if request == nil {
         request = NewDescribeIngressRequest()
@@ -515,8 +627,7 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
 // This API is used to query the list of ingress rules.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeIngressesRequest()
@@ -531,8 +642,7 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
 // This API is used to query the list of ingress rules.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeIngressesRequest()
@@ -565,8 +675,7 @@ func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesRe
 // This API is used to query the list of ingress rules associated with the application.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
@@ -581,8 +690,7 @@ func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesReque
 // This API is used to query the list of ingress rules associated with the application.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
@@ -615,8 +723,7 @@ func NewGenerateApplicationPackageDownloadUrlResponse() (response *GenerateAppli
 // This API is used to generate the pre-signed download URL for the specified application package.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
@@ -631,8 +738,7 @@ func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicat
 // This API is used to generate the pre-signed download URL for the specified application package.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) GenerateApplicationPackageDownloadUrlWithContext(ctx context.Context, request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
@@ -713,7 +819,7 @@ func NewModifyEnvironmentResponse() (response *ModifyEnvironmentResponse) {
 // This API is used to edit an environment.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
     if request == nil {
         request = NewModifyEnvironmentRequest()
@@ -728,7 +834,7 @@ func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response 
 // This API is used to edit an environment.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 func (c *Client) ModifyEnvironmentWithContext(ctx context.Context, request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
     if request == nil {
         request = NewModifyEnvironmentRequest()
@@ -761,7 +867,7 @@ func NewModifyIngressResponse() (response *ModifyIngressResponse) {
 // This API is used to create or update an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
     if request == nil {
         request = NewModifyIngressRequest()
@@ -776,7 +882,7 @@ func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyI
 // This API is used to create or update an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
     if request == nil {
         request = NewModifyIngressRequest()
@@ -784,6 +890,56 @@ func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIn
     request.SetContext(ctx)
     
     response = NewModifyIngressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRestartApplicationRequest() (request *RestartApplicationRequest) {
+    request = &RestartApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "RestartApplication")
+    
+    
+    return
+}
+
+func NewRestartApplicationResponse() (response *RestartApplicationResponse) {
+    response = &RestartApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RestartApplication
+// This API is used to restart an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+func (c *Client) RestartApplication(request *RestartApplicationRequest) (response *RestartApplicationResponse, err error) {
+    if request == nil {
+        request = NewRestartApplicationRequest()
+    }
+    
+    response = NewRestartApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RestartApplication
+// This API is used to restart an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+func (c *Client) RestartApplicationWithContext(ctx context.Context, request *RestartApplicationRequest) (response *RestartApplicationResponse, err error) {
+    if request == nil {
+        request = NewRestartApplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRestartApplicationResponse()
     err = c.Send(request, response)
     return
 }
@@ -809,7 +965,8 @@ func NewRestartApplicationPodResponse() (response *RestartApplicationPodResponse
 // This API is used to restart an application pod.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
     if request == nil {
         request = NewRestartApplicationPodRequest()
@@ -824,7 +981,8 @@ func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (r
 // This API is used to restart an application pod.
 //
 // error code that may be returned:
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
     if request == nil {
         request = NewRestartApplicationPodRequest()
@@ -832,6 +990,114 @@ func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewRestartApplicationPodResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRollingUpdateApplicationByVersionRequest() (request *RollingUpdateApplicationByVersionRequest) {
+    request = &RollingUpdateApplicationByVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "RollingUpdateApplicationByVersion")
+    
+    
+    return
+}
+
+func NewRollingUpdateApplicationByVersionResponse() (response *RollingUpdateApplicationByVersionResponse) {
+    response = &RollingUpdateApplicationByVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RollingUpdateApplicationByVersion
+// This API is used to configure the rolling update policy for an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+func (c *Client) RollingUpdateApplicationByVersion(request *RollingUpdateApplicationByVersionRequest) (response *RollingUpdateApplicationByVersionResponse, err error) {
+    if request == nil {
+        request = NewRollingUpdateApplicationByVersionRequest()
+    }
+    
+    response = NewRollingUpdateApplicationByVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// RollingUpdateApplicationByVersion
+// This API is used to configure the rolling update policy for an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+func (c *Client) RollingUpdateApplicationByVersionWithContext(ctx context.Context, request *RollingUpdateApplicationByVersionRequest) (response *RollingUpdateApplicationByVersionResponse, err error) {
+    if request == nil {
+        request = NewRollingUpdateApplicationByVersionRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewRollingUpdateApplicationByVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopApplicationRequest() (request *StopApplicationRequest) {
+    request = &StopApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "StopApplication")
+    
+    
+    return
+}
+
+func NewStopApplicationResponse() (response *StopApplicationResponse) {
+    response = &StopApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StopApplication
+// This API is used to stop an application.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+func (c *Client) StopApplication(request *StopApplicationRequest) (response *StopApplicationResponse, err error) {
+    if request == nil {
+        request = NewStopApplicationRequest()
+    }
+    
+    response = NewStopApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// StopApplication
+// This API is used to stop an application.
+//
+// error code that may be returned:
+//  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+func (c *Client) StopApplicationWithContext(ctx context.Context, request *StopApplicationRequest) (response *StopApplicationResponse, err error) {
+    if request == nil {
+        request = NewStopApplicationRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewStopApplicationResponse()
     err = c.Send(request, response)
     return
 }

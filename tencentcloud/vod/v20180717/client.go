@@ -3900,6 +3900,7 @@ func NewDescribeSubAppIdsResponse() (response *DescribeSubAppIdsResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTEXIST = "ResourceNotFound.ServiceNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response *DescribeSubAppIdsResponse, err error) {
     if request == nil {
@@ -3918,6 +3919,7 @@ func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response 
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTEXIST = "ResourceNotFound.ServiceNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSubAppIdsWithContext(ctx context.Context, request *DescribeSubAppIdsRequest) (response *DescribeSubAppIdsResponse, err error) {
     if request == nil {
@@ -5935,6 +5937,8 @@ func NewModifyVodDomainConfigResponse() (response *ModifyVodDomainConfigResponse
 // 1. You can modify settings of only domain names whose status is `Online`.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyVodDomainConfig(request *ModifyVodDomainConfigRequest) (response *ModifyVodDomainConfigResponse, err error) {
     if request == nil {
@@ -5952,6 +5956,8 @@ func (c *Client) ModifyVodDomainConfig(request *ModifyVodDomainConfigRequest) (r
 // 1. You can modify settings of only domain names whose status is `Online`.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyVodDomainConfigWithContext(ctx context.Context, request *ModifyVodDomainConfigRequest) (response *ModifyVodDomainConfigResponse, err error) {
     if request == nil {
@@ -6174,27 +6180,31 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for an audio/video media file in VOD, including:
+// This API is used to initiate a media processing task on a VOD file. The task may include:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screenshot
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screenshot
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Cover generating by screencapturing;
+// 6. Taking a screenshot to use as the thumbnail
 //
-// 7. Adaptive bitrate streaming (with encryption);
+// 7. Adaptive bitrate streaming and encryption
 //
-// 8. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 8. Intelligent recognition of pornographic, terrorism, and politically sensitive content
 //
-// 9. Intelligent content analysis (tag, category, cover, and frame-specific tag);
+// 9. Intelligent content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
 //
-// 10. Intelligent content recognition (opening and closing credits, face, full text, text keyword, full speech, speech keyword, and object).
+// 10. Recognition of opening and closing credits, faces, full text, text keywords, full speech, speech keywords, and objects
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6223,27 +6233,31 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for an audio/video media file in VOD, including:
+// This API is used to initiate a media processing task on a VOD file. The task may include:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screenshot
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screenshot
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Cover generating by screencapturing;
+// 6. Taking a screenshot to use as the thumbnail
 //
-// 7. Adaptive bitrate streaming (with encryption);
+// 7. Adaptive bitrate streaming and encryption
 //
-// 8. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 8. Intelligent recognition of pornographic, terrorism, and politically sensitive content
 //
-// 9. Intelligent content analysis (tag, category, cover, and frame-specific tag);
+// 9. Intelligent content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
 //
-// 10. Intelligent content recognition (opening and closing credits, face, full text, text keyword, full speech, speech keyword, and object).
+// 10. Recognition of opening and closing credits, faces, full text, text keywords, full speech, speech keywords, and objects
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

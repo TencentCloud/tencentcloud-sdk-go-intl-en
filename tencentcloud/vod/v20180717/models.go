@@ -139,6 +139,12 @@ type AdaptiveDynamicStreamingInfoItem struct {
 
 	// Playback address.
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// File size (bytes)
+	// <li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
+	// <li>If the file is a DASH file, the value of this parameter is the sum of the size of the MPD and segment files.</li>
+	// <li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
+	Size *int64 `json:"Size,omitempty" name:"Size"`
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
@@ -465,62 +471,62 @@ type AiAnalysisTaskTagResult struct {
 type AiContentReviewResult struct {
 
 	// Task type. Valid values:
-	// <li>`Porn`: porn information recognition in images</li>
-	// <li>`Terrorism`: terrorism information recognition in images</li>
-	// <li>`Political`: politically sensitive information recognition in images</li>
-	// <li>`Porn.Asr`: ASR-based porn information recognition in speech</li>
-	// <li>`Porn.Ocr`: OCR-based porn information recognition in text</li>
-	// <li>`Political.Asr`: ASR-based politically sensitive information recognition in speech</li>
-	// <li>`Political.Ocr`: OCR-based politically sensitive information recognition in text</li>
-	// <li>`Terrorism.Ocr`: OCR-based terrorism information recognition in text</li>
-	// <li>`Prohibited.Asr`: ASR-based prohibited information recognition in speech</li>
-	// <li>`Prohibited.Ocr`: OCR-based prohibited information recognition in text</li>
+	// <li>`Porn`: recognition of pornographic content in images</li>
+	// <li>`Terrorism`: recognition of terrorism content in images</li>
+	// <li>`Political`: recognition of politically sensitive content in images</li>
+	// <li>`Porn.Asr`: ASR-based recognition of pornographic content</li>
+	// <li>`Porn.Ocr`: OCR-based recognition of pornographic content</li>
+	// <li>`Political.Asr`: ASR-based recognition of politically sensitive content</li>
+	// <li>`Political.Ocr`: OCR-based recognition of politically sensitive content</li>
+	// <li>`Terrorism.Ocr`: OCR-based recognition of terrorism content</li>
+	// <li>`Prohibited.Asr`: ASR-based recognition of banned content</li>
+	// <li>`Prohibited.Ocr`: OCR-based recognition of banned content</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Query result of intelligent porn information detection in video image task in video content audit, which is valid when task type is `Porn`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for intelligent recognition of pornographic content in images. This parameter is valid when `Type` is `Porn`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PornTask *AiReviewTaskPornResult `json:"PornTask,omitempty" name:"PornTask"`
 
-	// Query result of intelligent terrorism information detection in video image task in video content audit, which is valid when task type is `Terrorism`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for intelligent recognition of terrorism content in images. This parameter is valid when `Type` is `Terrorism`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	TerrorismTask *AiReviewTaskTerrorismResult `json:"TerrorismTask,omitempty" name:"TerrorismTask"`
 
-	// Query result of intelligent politically sensitive information detection in video image task in video content audit, which is valid when task type is `Political`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for intelligent recognition of politically sensitive content in images. This parameter is valid when `Type` is `Political`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PoliticalTask *AiReviewTaskPoliticalResult `json:"PoliticalTask,omitempty" name:"PoliticalTask"`
 
-	// Query result of ASR-based porn information detection in speech task in video content audit, which is valid when task type is `Porn.Asr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for ASR-based recognition of pornographic content. This parameter is valid when `Type` is `Porn.Asr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PornAsrTask *AiReviewTaskPornAsrResult `json:"PornAsrTask,omitempty" name:"PornAsrTask"`
 
-	// Query result of OCR-based porn information detection in text task in video content audit, which is valid when task type is `Porn.Ocr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for OCR-based recognition of pornographic content. This parameter is valid when `Type` is `Porn.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PornOcrTask *AiReviewTaskPornOcrResult `json:"PornOcrTask,omitempty" name:"PornOcrTask"`
 
-	// Query result of ASR-based politically sensitive information detection in speech task in video content audit, which is valid when task type is `Political.Asr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for ASR-based recognition of politically sensitive content. This parameter is valid when `Type` is `Political.Asr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PoliticalAsrTask *AiReviewTaskPoliticalAsrResult `json:"PoliticalAsrTask,omitempty" name:"PoliticalAsrTask"`
 
-	// Query result of OCR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Ocr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for OCR-based recognition of politically sensitive content. This parameter is valid when `Type` is `Political.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PoliticalOcrTask *AiReviewTaskPoliticalOcrResult `json:"PoliticalOcrTask,omitempty" name:"PoliticalOcrTask"`
 
-	// Query result of OCR-based terrorism information detection in text task in video content audit, which is valid when task type is `Terrorism.Ocr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for OCR-based recognition of terrorism content. This parameter is valid when `Type` is `Terrorism.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	TerrorismOcrTask *AiReviewTaskTerrorismOcrResult `json:"TerrorismOcrTask,omitempty" name:"TerrorismOcrTask"`
 
-	// Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid when task type is `Prohibited.Asr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProhibitedAsrTask *AiReviewTaskProhibitedAsrResult `json:"ProhibitedAsrTask,omitempty" name:"ProhibitedAsrTask"`
-
-	// Query result of OCR-based prohibited information detection in text task in video content audit, which is valid when task type is `Prohibited.Ocr`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result for OCR-based recognition of banned content. This parameter is valid when `Type` is `Prohibited.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ProhibitedOcrTask *AiReviewTaskProhibitedOcrResult `json:"ProhibitedOcrTask,omitempty" name:"ProhibitedOcrTask"`
+
+	// Result for ASR-based recognition of banned content. This parameter is valid when `Type` is `Prohibited.Asr`.
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ProhibitedAsrTask *AiReviewTaskProhibitedAsrResult `json:"ProhibitedAsrTask,omitempty" name:"ProhibitedAsrTask"`
 }
 
 type AiContentReviewTaskInput struct {
 
-	// Video content audit template ID.
+	// Intelligent recognition template ID
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
@@ -1083,188 +1089,183 @@ type AiRecognitionTaskSegmentSegmentItem struct {
 
 type AiReviewPoliticalAsrTaskInput struct {
 
-	// Politically sensitive information detection template ID.
+	// ID of the template for recognition of politically sensitive content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalAsrTaskOutput struct {
 
-	// Score of ASR-detected politically sensitive information in speech between 0 and 100.
+	// Confidence score for the ASR-detected politically sensitive content. Value range: 0-100
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for ASR-detected politically sensitive information in speech. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the ASR-detected politically sensitive content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain ASR-detected politically sensitive information
+	// List of video segments that contain ASR-detected politically sensitive content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain ASR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain ASR-detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain ASR-detected politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
 
-	// Politically sensitive information detection template ID.
+	// ID of the template for recognition of politically sensitive content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalOcrTaskOutput struct {
 
-	// Score of OCR-detected politically sensitive information in text between 0 and 100.
+	// Confidence score for the OCR-detected politically sensitive content. Value range: 0-100
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for OCR-detected politically sensitive information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the OCR-detected politically sensitive content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected politically sensitive information
+	// List of video segments that contain OCR-detected politically sensitive content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain OCR-detected politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain OCR-detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain OCR-detected politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPoliticalTaskInput struct {
 
-	// Politically sensitive information detection template ID.
+	// ID of the template for recognition of politically sensitive content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalTaskOutput struct {
 
-	// Score of detected politically sensitive information in video between 0 and 100.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Confidence score for the detected politically sensitive content. Value range: 0-100
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for detected politically sensitive information. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Processing suggestion for the detected politically sensitive content
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 	// violation_photo:
-	// <li>violation_photo: violating photo.</li>
+	// <li>`violation_photo`: banned images</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-	// <li>politician: political figure.</li>
+	// <li>`politician`: politically sensitive people</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain politically sensitive information
+	// List of video segments that contain detected politically sensitive content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain politically sensitive information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain detected politically sensitive content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain politically sensitive information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain politically sensitive content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornAsrTaskInput struct {
 
-	// Porn information detection template ID.
+	// ID of the template for recognition of pornographic content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornAsrTaskOutput struct {
 
-	// Score of ASR-detected porn information in speech between 0 and 100.
+	// Confidence score for the ASR-detected pornographic content
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for ASR-detected porn information in speech. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the ASR-detected pornographic content
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain ASR-detected porn information
+	// List of video segments that contain ASR-detected pornographic content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain ASR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain ASR-detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain ASR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain ASR-detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornOcrTaskInput struct {
 
-	// Porn information detection template ID.
+	// ID of the template for recognition of pornographic content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornOcrTaskOutput struct {
 
-	// Score of OCR-detected porn information in text between 0 and 100.
+	// Confidence score for the OCR-detected pornographic content
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for OCR-detected porn information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the OCR-detected pornographic content
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected porn information
+	// List of video segments that contain OCR-detected pornographic content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain OCR-detected porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain OCR-detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain OCR-detected porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain OCR-detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewPornTaskInput struct {
 
-	// Porn information detection template ID.
+	// ID of the template for recognition of pornographic content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornTaskOutput struct {
 
-	// Score of detected porn information in video between 0 and 100.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Confidence score for the detected pornographic content. Value range: 0-100
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for detected porn information. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Processing suggestion for the detected pornographic content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of detected porn information in video. Valid values:
-	// <li>porn: porn.</li>
-	// <li>sexy: sexiness.</li>
-	// <li>vulgar: vulgarity.</li>
-	// <li>intimacy: intimacy.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Labels for the detected pornographic content. Valid values:
+	// <li>porn</li>
+	// <li>sexy</li>
+	// <li>vulgar</li>
+	// <li>intimacy</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain porn information
+	// List of video segments that contain detected pornographic content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain porn information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain detected pornographic content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file of for video segments that contain porn information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain detected pornographic content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
@@ -1339,10 +1340,10 @@ type AiReviewTaskPoliticalAsrResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of ASR-based politically sensitive information detection in speech task in content audit.
+	// Input for ASR-based recognition of politically sensitive content
 	Input *AiReviewPoliticalAsrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of ASR-based politically sensitive information detection in speech task in content audit.
+	// Output for ASR-based recognition of politically sensitive content
 	Output *AiReviewPoliticalAsrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1361,11 +1362,11 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of OCR-based politically sensitive information detection in text task in content audit.
+	// Input for OCR-based recognition of politically sensitive content
 	Input *AiReviewPoliticalOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of OCR-based politically sensitive information detection in text task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for OCR-based recognition of politically sensitive content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPoliticalOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1384,11 +1385,11 @@ type AiReviewTaskPoliticalResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of politically sensitive information detection task in content audit.
+	// Input for intelligent recognition of politically sensitive content
 	Input *AiReviewPoliticalTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of politically sensitive information detection task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for intelligent recognition of politically sensitive content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPoliticalTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1407,11 +1408,11 @@ type AiReviewTaskPornAsrResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of ASR-based porn information detection in speech task in content audit.
+	// Input for ASR-based recognition of pornographic content
 	Input *AiReviewPornAsrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of ASR-based porn information detection in speech task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for ASR-based recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornAsrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1430,11 +1431,11 @@ type AiReviewTaskPornOcrResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of OCR-based porn information detection in text task in content audit.
+	// Input for OCR-based recognition of pornographic content
 	Input *AiReviewPornOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of OCR-based porn information detection in text task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for OCR-based recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1453,11 +1454,11 @@ type AiReviewTaskPornResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of porn information detection task in content audit.
+	// Input for intelligent recognition of pornographic content
 	Input *AiReviewPornTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of porn information detection task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for intelligent recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1475,11 +1476,11 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of ASR-based prohibited information detection in speech task in content audit
+	// Input for ASR-based recognition of banned content
 	Input *AiReviewProhibitedAsrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of ASR-based prohibited information detection in speech task in content audit
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for ASR-based recognition of banned content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1497,11 +1498,11 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of OCR-based prohibited information detection in text task in content audit
+	// Input for OCR-based recognition of banned content
 	Input *AiReviewProhibitedOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of OCR-based prohibited information detection in text task in content audit
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for OCR-based recognition of banned content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1519,11 +1520,11 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of OCR-based terrorism information detection in text task in content audit.
+	// Input for OCR-based recognition of terrorism content
 	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of OCR-based terrorism information detection in text task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for OCR-based recognition of terrorism content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1542,45 +1543,45 @@ type AiReviewTaskTerrorismResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of terrorism information detection task in content audit.
+	// Input for intelligent recognition of terrorism content
 	Input *AiReviewTerrorismTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of terrorism information detection task in content audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Output for intelligent recognition of terrorism content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiReviewTerrorismOcrTaskInput struct {
 
-	// Terrorism information detection template ID.
+	// ID of the template for recognition of terrorism content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
 
-	// Score of OCR-detected terrorism information in text between 0 and 100.
+	// Confidence score for the OCR-detected terrorism content. Value range: 0-100
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for OCR-detected terrorism information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the OCR-detected terrorism content
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected terrorism information
+	// List of video segments that contain OCR-detected terrorism content
 	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
-	// URL to the file for video segments that contain OCR-detected terrorism information. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
+	// URL to the file for video segments that contain OCR-detected terrorism content. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time specified by `SegmentSetFileUrlExpireTime`.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file for video segments that contain OCR-detected terrorism information, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
+	// Expiration time of the URL to the file for video segments that contain OCR-detected terrorism content, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type AiReviewTerrorismTaskInput struct {
 
-	// Terrorism information detection template ID.
+	// ID of the template for recognition of terrorism content
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
@@ -2565,25 +2566,25 @@ func (r *ConfirmEventsResponse) FromJsonString(s string) error {
 
 type ContentReviewTemplateItem struct {
 
-	// Unique ID of content audit template.
+	// Unique ID of an intelligent recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Content audit template name. Length limit: 64 characters.
+	// Name of an intelligent recognition template. Max 64 characters
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Content audit template description. Length limit: 256 characters.
+	// Description of an intelligent recognition template. Max 256 characters
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
-	// Porn information detection control parameter.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Terrorism information detection control parameter.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of terrorism content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Politically sensitive information detection control parameter.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of politically sensitive content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -2592,13 +2593,13 @@ type ContentReviewTemplateItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
 
-	// Custom content audit control parameter.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Custom recognition parameters
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
 
-	// Switch controlling whether to add audit result to review list (for human review).
-	// <li>ON: yes;</li>
-	// <li>OFF: no.</li>
+	// Whether to subject the recognition result to human review
+	// <li>ON</li>
+	// <li>OFF</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
@@ -3385,7 +3386,7 @@ type CreateProcedureTemplateRequest struct {
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameter of AI-based content audit task.
+	// Intelligent recognition task
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -5842,13 +5843,14 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// This API is used to query video processing task types. Valid values:
-	// <li>Transcoding: basic transcoding</li>
-	// <li>Transcoding-TESHD: TESHD transcoding</li>
-	// <li>Editing: video editing</li>
-	// <li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-	// <li>ContentAudit: content moderation</li>
-	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
+	// Type of media processing task. Valid values:
+	// <li>`Transcoding`: basic transcoding</li>
+	// <li>`Transcoding-TESHD`: TESHD transcoding</li>
+	// <li>`Editing`: video editing</li>
+	// <li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
+	// <li>`ContentAudit`: content moderation</li>
+	// <li>`RemoveWatermark`: watermark removal</li>
+	// <li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -7502,10 +7504,10 @@ type FaceConfigureInfo struct {
 	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100. Default value: 95.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports celebrity;</li>
-	// <li>politician: politically sensitive figure.</li>
+	// Default face filter labels, which specify the types of faces to return. If this parameter is left empty, the recognition results for all labels are returned. Valid values:
+	// <li>`entertainment`: people in the entertainment industry</li>
+	// <li>`sport`: sports celebrities</li>
+	// <li>`politician`: politically sensitive people</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
@@ -7530,10 +7532,10 @@ type FaceConfigureInfoForUpdate struct {
 	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0–100.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or a blank value is entered, all results of the default figures will be returned. Valid values:
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports celebrity;</li>
-	// <li>politician: politically sensitive figure.</li>
+	// Default face filter labels, which specify the types of faces to return. If this parameter is left empty or an empty value is entered, the recognition results for all labels are returned. Valid values:
+	// <li>`entertainment`: people in the entertainment industry</li>
+	// <li>`sport`: sports celebrities</li>
+	// <li>`politician`: politically sensitive people</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom face labels for filtering. After you specify a label, callbacks of face images without this label will be returned. If this parameter is not specified or left empty, callbacks of all face images will be returned.
@@ -8259,11 +8261,10 @@ type MediaContentReviewAsrTextSegmentItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for suspected segment audit. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Processing suggestion for the detected suspicious content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of suspected keywords.
@@ -8285,11 +8286,10 @@ type MediaContentReviewOcrTextSegmentItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for suspected segment audit. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Processing suggestion for the detected suspicious content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// List of suspected keywords.
@@ -8316,49 +8316,49 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// End time offset of a suspected segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Score of a suspected politically sensitive segment.
+	// Confidence score for the detected politically sensitive content
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for politically sensitive information detection of a suspected segment. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the detected politically sensitive content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Name of a politically sensitive figure or violating photo.
+	// Name of the politically sensitive content or banned images
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// Labels for the detected politically sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 	// violation_photo:
-	// <li>violation_photo: violating photo.</li>
+	// <li>`violation_photo`: banned images</li>
 	// politician:
-	// <li>nation_politician: head of state/government;</li>
-	// <li>province_politician: province/state leader;</li>
-	// <li>bureau_politician: ministry leader;</li>
-	// <li>county_politician: county/city leader;</li>
-	// <li>rural_politician: town leader;</li>
-	// <li>sensitive_politician: politically sensitive figure;</li>
-	// <li>foreign_politician: head of a foreign country/government.</li>
+	// <li>`nation_politician`: state leader of China</li>
+	// <li>`province_politician`: provincial officials</li>
+	// <li>`bureau_politician`: bureau-level officials</li>
+	// <li>`county_politician`: county-level officials</li>
+	// <li>`rural_politician`: township-level officials</li>
+	// <li>`sensitive_politician`: politically sensitive people</li>
+	// <li>`foreign_politician`: state leaders of other countries</li>
 	// entertainment:
-	// <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+	// <li>`sensitive_entertainment`: banned people in the entertainment industry</li>
 	// sport:
-	// <li>sensitive_sport: sensitive sports figure.</li>
+	// <li>`sensitive_sport`: banned sports celebrities</li>
 	// entrepreneur:
-	// <li>sensitive_entrepreneur: sensitive business figure.</li>
+	// <li>`sensitive_entrepreneur`: banned businesspeople</li>
 	// scholar:
-	// <li>sensitive_scholar: sensitive educator.</li>
+	// <li>sensitive_scholar: banned scholars</li>
 	// celebrity:
-	// <li>sensitive_celebrity: sensitive well-known figure;</li>
-	// <li>historical_celebrity: well-known historical figures.</li>
+	// <li>sensitive_celebrity: banned celebrities</li>
+	// <li>historical_celebrity: banned historical figures</li>
 	// military:
-	// <li>sensitive_military: militarily sensitive figure.</li>
+	// <li>sensitive_military: banned people in military</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// URL of a suspected image (which will not be permanently stored
 	//  and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+	// Coordinates (pixel) of the detected politically sensitive content or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// This field has been disused. Please use `PicUrlExpireTime`.
@@ -8376,16 +8376,16 @@ type MediaContentReviewSegmentItem struct {
 	// End time offset of a suspected segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Score of a suspected porn segment.
+	// Confidence score for the detected pornographic content
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Tag of porn information detection result of a suspected segment.
+	// Label for the detected pornographic content
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// Suggestion for porn information detection of a suspected segment. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// Processing suggestion for the detected pornographic content. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
 	// URL of a suspected image (which will not be permanently stored
@@ -10963,253 +10963,253 @@ type PlayerConfig struct {
 
 type PoliticalAsrReviewTemplateInfo struct {
 
-	// Switch of politically sensitive information detection in speech task. Valid values:
-	// <li>ON: enables politically sensitive information detection in speech task;</li>
-	// <li>OFF: disables politically sensitive information detection in speech task.</li>
+	// Whether to enable ASR-based recognition of politically sensitive content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
-	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
-
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
+	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 }
 
 type PoliticalAsrReviewTemplateInfoForUpdate struct {
 
-	// Switch of politically sensitive information detection in speech task. Valid values:
-	// <li>ON: enables politically sensitive information detection in speech task;</li>
-	// <li>OFF: disables politically sensitive information detection in speech task.</li>
+	// Whether to enable ASR-based recognition of politically sensitive content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PoliticalConfigureInfo struct {
 
-	// Control parameter of politically sensitive information detection in video image.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of politically sensitive content in images
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ImgReviewInfo *PoliticalImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in speech.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for ASR-based recognition of politically sensitive content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	AsrReviewInfo *PoliticalAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for OCR-based recognition of politically sensitive content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PoliticalConfigureInfoForUpdate struct {
 
-	// Control parameter of politically sensitive information detection in video image.
+	// Parameters for recognition of politically sensitive content in images
 	ImgReviewInfo *PoliticalImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in speech.
+	// Parameters for ASR-based recognition of politically sensitive content
 	AsrReviewInfo *PoliticalAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in text.
+	// Parameters for OCR-based recognition of politically sensitive content
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PoliticalImgReviewTemplateInfo struct {
 
-	// Switch of politically sensitive information detection in video image task. Valid values:
-	// <li>ON: enables politically sensitive information detection in video image task;</li>
-	// <li>OFF: disables politically sensitive information detection in video image task.</li>
+	// Whether to enable recognition of politically sensitive content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: violating photo;</li>
-	// <li>politician: political figure;</li>
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports figure;</li>
-	// <li>entrepreneur: business figure;</li>
-	// <li>scholar: educator;</li>
-	// <li>celebrity: well-known figure;</li>
-	// <li>military: military figure.</li>
+	// Filter labels for recognition of politically sensitive content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+	// <li>`violation_photo`: banned images</li>
+	// <li>`politician`: politically sensitive people</li>
+	// <li>`entertainment`: people in the entertainment industry</li>
+	// <li>`sport`: sportspeople</li>
+	// <li>`entrepreneur`: businesspeople</li>
+	// <li>`scholar`: scholars</li>
+	// <li>`celebrity`: celebrities</li>
+	// <li>`military`: people in military</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `97` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `95` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PoliticalImgReviewTemplateInfoForUpdate struct {
 
-	// Switch of politically sensitive information detection in video image task. Valid values:
-	// <li>ON: enables politically sensitive information detection in video image task;</li>
-	// <li>OFF: disables politically sensitive information detection in video image task.</li>
+	// Whether to enable recognition of politically sensitive content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: violating photo;</li>
-	// <li>politician: political figure;</li>
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports figure;</li>
-	// <li>entrepreneur: business figure;</li>
-	// <li>scholar: educator;</li>
-	// <li>celebrity: well-known figure;</li>
-	// <li>military: military figure.</li>
+	// Filter labels for recognition of politically sensitive content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+	// <li>`violation_photo`: banned images</li>
+	// <li>`politician`: politically sensitive people</li>
+	// <li>`entertainment`: people in the entertainment industry</li>
+	// <li>`sport`: sportspeople</li>
+	// <li>`entrepreneur`: businesspeople</li>
+	// <li>`scholar`: scholars</li>
+	// <li>`celebrity`: celebrities</li>
+	// <li>`military`: people in military</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PoliticalOcrReviewTemplateInfo struct {
 
-	// Switch of politically sensitive information detection in text task. Valid values:
-	// <li>ON: enables politically sensitive information detection in text task;</li>
-	// <li>OFF: disables politically sensitive information detection in text task.</li>
+	// Whether to enable OCR-based recognition of politically sensitive content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PoliticalOcrReviewTemplateInfoForUpdate struct {
 
-	// Switch of politically sensitive information detection in text task. Valid values:
-	// <li>ON: enables politically sensitive information detection in text task;</li>
-	// <li>OFF: disables politically sensitive information detection in text task.</li>
+	// Whether to enable OCR-based recognition of politically sensitive content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornAsrReviewTemplateInfo struct {
 
-	// Switch of porn information detection in speech task. Valid values:
-	// <li>ON: enables porn information detection in speech task;</li>
-	// <li>OFF: disables porn information detection in speech task.</li>
+	// Whether to enable ASR-based recognition of pornographic content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornAsrReviewTemplateInfoForUpdate struct {
 
-	// Switch of porn detection in speech task. Valid values:
-	// <li>ON: enables porn detection in speech task;</li>
-	// <li>OFF: disables porn detection in speech task.</li>
+	// Whether to enable ASR-based recognition of pornographic content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornConfigureInfo struct {
 
-	// Control parameter of porn information detection in video image.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of pornographic content in images
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ImgReviewInfo *PornImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of porn information detection in speech.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for ASR-based recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	AsrReviewInfo *PornAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of porn information detection in text.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for OCR-based recognition of pornographic content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	OcrReviewInfo *PornOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PornConfigureInfoForUpdate struct {
 
-	// Control parameter of porn detection in video image.
+	// Parameters for recognition of pornographic content in images
 	ImgReviewInfo *PornImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of porn detection in speech.
+	// Parameters for ASR-based recognition of pornographic content
 	AsrReviewInfo *PornAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of porn detection in text.
+	// Parameters for OCR-based recognition of pornographic content
 	OcrReviewInfo *PornOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PornImgReviewTemplateInfo struct {
 
-	// Switch of porn information detection in video image task. Valid values:
-	// <li>ON: enables porn information detection in video image task;</li>
-	// <li>OFF: disables porn information detection in video image task.</li>
+	// Whether to enable recognition of pornographic content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for porn information detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>porn: porn;</li>
-	// <li>vulgar: vulgarity;</li>
-	// <li>intimacy: intimacy;</li>
-	// <li>sexy: sexiness.</li>
+	// Filter labels for recognition of pornographic content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+	// <li>porn</li>
+	// <li>vulgar</li>
+	// <li>intimacy</li>
+	// <li>sexy</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `90` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 0 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `0` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornImgReviewTemplateInfoForUpdate struct {
 
-	// Switch of porn detection in video image task. Valid values:
-	// <li>ON: enables porn detection in video image task;</li>
-	// <li>OFF: disables porn detection in video image task.</li>
+	// Whether to enable recognition of pornographic content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tag for porn detection in video image. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>porn: porn;</li>
-	// <li>vulgar: vulgarity;</li>
-	// <li>intimacy: intimacy;</li>
-	// <li>sexy: sexiness.</li>
+	// Filter labels for recognition of pornographic content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
+	// <li>porn</li>
+	// <li>vulgar</li>
+	// <li>intimacy</li>
+	// <li>sexy</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornOcrReviewTemplateInfo struct {
 
-	// Switch of porn information detection in text task. Valid values:
-	// <li>ON: enables porn information detection in text task;</li>
-	// <li>OFF: disables porn information detection in text task.</li>
+	// Whether to enable OCR-based recognition of pornographic content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type PornOcrReviewTemplateInfoForUpdate struct {
 
-	// Switch of porn detection in text task. Valid values:
-	// <li>ON: enables porn detection in text task;</li>
-	// <li>OFF: disables porn detection in text task.</li>
+	// Whether to enable OCR-based recognition of pornographic content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
@@ -11261,8 +11261,7 @@ type ProcedureTask struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet"`
 
-	// Execution status and result of video content audit task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Status and result of an intelligent recognition task
 	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitempty" name:"AiContentReviewResultSet"`
 
 	// Execution status and result of video content analysis task.
@@ -11310,8 +11309,8 @@ type ProcedureTemplate struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameter of AI-based content audit task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Intelligent recognition task
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -11504,7 +11503,7 @@ type ProcessMediaRequest struct {
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Type parameter of video content audit task.
+	// Parameters for intelligent recognition
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Video content analysis task parameter.
@@ -11591,10 +11590,10 @@ type ProhibitedAsrReviewTemplateInfo struct {
 	// <li>OFF: disables prohibited information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -11605,10 +11604,10 @@ type ProhibitedAsrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: disables prohibited information detection in speech task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -11639,10 +11638,10 @@ type ProhibitedOcrReviewTemplateInfo struct {
 	// <li>OFF: disables prohibited information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -11653,10 +11652,10 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 	// <li>OFF: disables prohibited information detection in text task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -12864,53 +12863,61 @@ type TaskSimpleInfo struct {
 
 type TaskStatData struct {
 
-	// Task type.
-	// <li>Transcoding: basic transcoding</li>
-	// <li>Transcoding-TESHD: TESHD transcoding</li>
-	// <li>Editing: video editing</li>
-	// <li>AdaptiveBitrateStreaming: adaptive bitrate streaming</li>
-	// <li>ContentAudit: content moderation</li>
-	// <li>Transcode: transcoding types, including basic transcoding, TESHD transcoding and video editing. This value is not recommended.</li>
+	// Task type
+	// <li>`Transcoding`: basic transcoding</li>
+	// <li>`Transcoding-TESHD`: TESHD transcoding</li>
+	// <li>`Editing`: video editing</li>
+	// <li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
+	// <li>`ContentAudit`: content moderation</li>
+	// <li>`RemoveWatermark`: watermark removal</li>
+	// <li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).
 	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary"`
 
-	// Detailed statistics of tasks with different specifications.
-	// Transcoding specification:
-	// <li>Remuxing: remuxing</li>
-	// <li>Audio: audio transcoding</li>
-	// <li>Standard.H264.SD: H.264 SD transcoding</li>
-	// <li>Standard.H264.HD: H.264 HD transcoding</li>
-	// <li>Standard.H264.FHD: H.264 FHD transcoding</li>
-	// <li>Standard.H264.2K: H.264 2K transcoding</li>
-	// <li>Standard.H264.4K: H.264 4K transcoding</li>
-	// <li>Standard.H265.SD: H.265 SD transcoding</li>
-	// <li>Standard.H265.HD: H.265 HD transcoding</li>
-	// <li>Standard.H265.FHD: H.265 FHD transcoding</li>
-	// <li>Standard.H265.2K: H.265 2K transcoding</li>
-	// <li>Standard.H265.4K: H.265 4K transcoding</li>
-	// <li>TESHD-10.H264.SD: H.264 SD TESHD transcoding</li>
-	// <li>TESHD-10.H264.HD: H.264 HD TESHD transcoding</li>
-	// <li>TESHD-10.H264.FHD: H.264 FHD TESHD transcoding</li>
-	// <li>TESHD-10.H264.2K: H.264 2K TESHD transcoding</li>
-	// <li>TESHD-10.H264.4K: H.264 4K TESHD transcoding</li>
-	// <li>TESHD-10.H265.SD: H.265 SD TESHD transcoding</li>
-	// <li>TESHD-10.H265.HD: H.265 HD TESHD transcoding</li>
-	// <li>TESHD-10.H265.FHD: H.265 FHD TESHD transcoding</li>
-	// <li>TESHD-10.H265.2K: H.265 2K TESHD transcoding</li>
-	// <li>TESHD-10.H265.4K: H.265 4K TESHD transcoding</li>
-	// <li>Edit.Audio: audio editing</li>
-	// <li>Edit.H264.SD: H.264 SD video editing</li>
-	// <li>Edit.H264.HD: H.264 HD video editing</li>
-	// <li>Edit.H264.FHD: H.264 FHD video editing</li>
-	// <li>Edit.H264.2K: H.264 2K video editing</li>
-	// <li>Edit.H264.4K: H.264 4K video editing</li>
-	// <li>Edit.H265.SD: H.265 SD video editing</li>
-	// <li>Edit.H265.HD: H.265 HD video editing</li>
-	// <li>Edit.H265.FHD: H.265 FHD video editing</li>
-	// <li>Edit.H265.2K: H.265 2K video editing</li>
-	// <li>Edit.H265.4K: H.265 4K video editing</li>
+	// Detailed statistics of different tasks
+	// Transcoding statistics:
+	// <li>Remuxing</li>
+	// <li>Audio</li>
+	// <li>Standard.H264.SD</li>
+	// <li>Standard.H264.HD</li>
+	// <li>Standard.H264.FHD</li>
+	// <li>Standard.H264.2K</li>
+	// <li>Standard.H264.4K</li>
+	// <li>Standard.H265.SD</li>
+	// <li>Standard.H265.HD</li>
+	// <li>Standard.H265.FHD</li>
+	// <li>Standard.H265.2K</li>
+	// <li>Standard.H265.4K</li>
+	// <li>TESHD-10.H264.SD</li>
+	// <li>TESHD-10.H264.HD</li>
+	// <li>TESHD-10.H264.FHD</li>
+	// <li>TESHD-10.H264.2K</li>
+	// <li>TESHD-10.H264.4K</li>
+	// <li>TESHD-10.H265.SD</li>
+	// <li>TESHD-10.H265.HD</li>
+	// <li>TESHD-10.H265.FHD</li>
+	// <li>TESHD-10.H265.2K</li>
+	// <li>TESHD-10.H265.4K</li>
+	// <li>Edit.Audio</li>
+	// <li>Edit.H264.SD</li>
+	// <li>Edit.H264.HD</li>
+	// <li>Edit.H264.FHD</li>
+	// <li>Edit.H264.2K</li>
+	// <li>Edit.H264.4K</li>
+	// <li>Edit.H265.SD</li>
+	// <li>Edit.H265.HD</li>
+	// <li>Edit.H265.FHD</li>
+	// <li>Edit.H265.2K</li>
+	// <li>Edit.H265.4K</li>
+	// Watermark removal:
+	// <li>`480P`: 640 × 480 and below</li>
+	// <li>`720P`: 1280 × 720 and below</li>
+	// <li>`1080P`: 1920 × 1080 and below</li>
+	// <li>`2K`: 2560 × 1440 and below</li>
+	// <li>`4K`: 3840 × 2160 and below</li>
+	// <li>`8K`: 7680 × 4320 and below</li>
 	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details"`
 }
 
@@ -12943,36 +12950,36 @@ type TempCertificate struct {
 
 type TerrorismConfigureInfo struct {
 
-	// Control parameter of terrorism information detection in video image task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for recognition of terrorism content in images
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of terrorism information detection in text task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for OCR-based recognition of terrorism content
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {
 
-	// Control parameter of terrorism information detection in video image task.
+	// Parameters for recognition of terrorism content in images
 	ImgReviewInfo *TerrorismImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of terrorism information detection in text task.
+	// Parameters for OCR-based recognition of terrorism content
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismImgReviewTemplateInfo struct {
 
-	// Switch of terrorism information detection in video image task. Valid values:
-	// <li>ON: enables terrorism information detection in video image task;</li>
-	// <li>OFF: disables terrorism information detection in video image task.</li>
+	// Whether to enable recognition of terrorism content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+	// Filter labels for recognition of terrorism content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
 	// <li>`guns`: weapons and guns</li>
-	// <li>`crowd`: crowds</li>
-	// <li>`bloody`: bloody images</li>
-	// <li>`police`: police forces</li>
+	// <li>`crowd`: crowd</li>
+	// <li>`bloody`: bloody scenes</li>
+	// <li>`police`: police force</li>
 	// <li>`banners`: terrorism flags</li>
 	// <li>`militant`: militants</li>
 	// <li>`explosion`: explosions and fires</li>
@@ -12980,25 +12987,25 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>`scenario`: terrorism images</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `90` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 80 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `80` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type TerrorismImgReviewTemplateInfoForUpdate struct {
 
-	// Switch of terrorism information detection in video image task. Valid values:
-	// <li>ON: enables terrorism information detection in video image task;</li>
-	// <li>OFF: disables terrorism information detection in video image task.</li>
+	// Whether to enable recognition of terrorism content in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for terrorism information detection in images. If a moderation result contains a selected tag, it will be returned. If no filter tag is specified, all moderation results will be returned. Valid values:
+	// Filter labels for recognition of terrorism content in images. Results containing the specified labels are returned. If no labels are specified, all results are returned. Valid values:
 	// <li>`guns`: weapons and guns</li>
-	// <li>`crowd`: crowds</li>
-	// <li>`bloody`: bloody images</li>
-	// <li>`police`: police forces</li>
+	// <li>`crowd`: crowd</li>
+	// <li>`bloody`: bloody scenes</li>
+	// <li>`police`: police force</li>
 	// <li>`banners`: terrorism flags</li>
 	// <li>`militant`: militants</li>
 	// <li>`explosion`: explosions and fires</li>
@@ -13006,38 +13013,38 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>`scenario`: terrorism images</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type TerrorismOcrReviewTemplateInfo struct {
 
-	// Switch of terrorism information detection in text task. Valid values:
-	// <li>ON: enables terrorism information detection in text task;</li>
-	// <li>OFF: disables terrorism information detection in text task.</li>
+	// Whether to enable OCR-based recognition of terrorism content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type TerrorismOcrReviewTemplateInfoForUpdate struct {
 
-	// Switch of terrorism information detection in text task. Valid values:
-	// <li>ON: enables terrorism information detection in text task;</li>
-	// <li>OFF: disables terrorism information detection in text task.</li>
+	// Whether to enable OCR-based recognition of terrorism content. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
@@ -13294,136 +13301,136 @@ type UrlSignatureAuthPolicy struct {
 
 type UserDefineAsrTextReviewTemplateInfo struct {
 
-	// Switch of custom speech audit task. Valid values:
-	// <li>ON: enables custom speech audit task;</li>
-	// <li>OFF: disables custom speech audit task.</li>
+	// Whether to enable custom ASR-based recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
 
-	// Switch of custom speech audit task. Valid values:
-	// <li>ON: enables custom speech audit task;</li>
-	// <li>OFF: disables custom speech audit task.</li>
+	// Whether to enable custom ASR-based recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom speech filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom speech keywords.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom ASR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom ASR-based recognition.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type UserDefineConfigureInfo struct {
 
-	// Control parameter of custom figure audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for custom facial recognition
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	FaceReviewInfo *UserDefineFaceReviewTemplateInfo `json:"FaceReviewInfo,omitempty" name:"FaceReviewInfo"`
 
-	// Control parameter of custom speech audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for custom ASR-based recognition
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	AsrReviewInfo *UserDefineAsrTextReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of custom text audit.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Parameters for custom OCR-based recognition
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	OcrReviewInfo *UserDefineOcrTextReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type UserDefineConfigureInfoForUpdate struct {
 
-	// Control parameter of custom figure audit.
+	// Parameters for custom facial recognition
 	FaceReviewInfo *UserDefineFaceReviewTemplateInfoForUpdate `json:"FaceReviewInfo,omitempty" name:"FaceReviewInfo"`
 
-	// Control parameter of custom speech audit.
+	// Parameters for custom ASR-based recognition
 	AsrReviewInfo *UserDefineAsrTextReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of custom text audit.
+	// Parameters for custom OCR-based recognition
 	OcrReviewInfo *UserDefineOcrTextReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type UserDefineFaceReviewTemplateInfo struct {
 
-	// Switch of custom figure audit task. Valid values:
-	// <li>ON: enables custom figure audit task;</li>
-	// <li>OFF: disables custom figure audit task.</li>
+	// Whether to enable custom facial recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom facial recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding custom facial libraries.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `97` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 95 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `95` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type UserDefineFaceReviewTemplateInfoForUpdate struct {
 
-	// Switch of custom figure audit task. Valid values:
-	// <li>ON: enables custom figure audit task;</li>
-	// <li>OFF: disables custom figure audit task.</li>
+	// Whether to enable custom facial recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom figure filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for the custom figure library.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom facial recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding custom facial libraries.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type UserDefineOcrTextReviewTemplateInfo struct {
 
-	// Switch of custom text audit task. Valid values:
-	// <li>ON: enables custom text audit task;</li>
-	// <li>OFF: disables custom text audit task.</li>
+	// Whether to enable custom OCR-based recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom OCR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom OCR-based recognition.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. If this parameter is left empty, `100` will be used by default. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0-100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. If this parameter is left empty, `75` will be used by default. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
 type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 
-	// Switch of custom text audit task. Valid values:
-	// <li>ON: enables custom text audit task;</li>
-	// <li>OFF: disables custom text audit task.</li>
+	// Whether to enable custom OCR-based recognition. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Custom text filter tag. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. To use the tag filtering feature, you need to add the corresponding tag when adding materials for custom text keywords.
-	// There can be up to 10 tags, each with a length limit of 16 characters.
+	// Filter labels for custom OCR-based recognition. Results containing the specified labels are returned. If no labels are specified, all results are returned. To filter by labels, specify the labels when adding keywords for custom OCR-based recognition.
+	// Up to 10 labels are allowed, each containing no more than 16 characters.
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
-	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0–100.
+	// Confidence score threshold for determining that something should be blocked. If this threshold is reached, VOD will suggest that the content be blocked. Value range: 0-100
 	BlockConfidence *int64 `json:"BlockConfidence,omitempty" name:"BlockConfidence"`
 
-	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
+	// Confidence score threshold for human review. If this threshold is reached, human review is needed. Value range: 0-100
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
