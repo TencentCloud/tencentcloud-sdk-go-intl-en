@@ -2764,6 +2764,59 @@ type ShardInfo struct {
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
+type SwitchDBInstanceHARequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of tdsql-ow728lmc
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Target AZ. The node with the lowest delay in the target AZ will be automatically promoted to source node.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+func (r *SwitchDBInstanceHARequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDBInstanceHARequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Zone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchDBInstanceHARequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchDBInstanceHAResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		FlowId *uint64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchDBInstanceHAResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDBInstanceHAResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type TableColumn struct {
 
 	// Column name

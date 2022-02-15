@@ -433,7 +433,7 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 type CreateHourDBInstanceRequest struct {
 	*tchttp.BaseRequest
 
-	// AZs to deploy instance nodes. You can specify up to two AZs. If each shard has one primary node and two replica nodes, two of the three will be deployed in the first AZ you have specified.
+	// AZs to deploy instance nodes. You can specify up to two AZs.
 	Zones []*string `json:"Zones,omitempty" name:"Zones"`
 
 	// Number of nodes.
