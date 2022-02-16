@@ -127,6 +127,107 @@ func (r *AddTimeWindowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Address struct {
+
+	// Address
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Port
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	UniqSubnet *string `json:"UniqSubnet,omitempty" name:"UniqSubnet"`
+
+	// Description
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
+type ApplyCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the source instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Number of nodes in the proxy group
+	ProxyCount *uint64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory
+	Mem *uint64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Security group
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// Description
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
+func (r *ApplyCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UniqVpcId")
+	delete(f, "UniqSubnetId")
+	delete(f, "ProxyCount")
+	delete(f, "Cpu")
+	delete(f, "Mem")
+	delete(f, "SecurityGroup")
+	delete(f, "Desc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ApplyCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ApplyCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -338,6 +439,41 @@ func (r *BalanceRoGroupLoadResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BaseGroupInfo struct {
+
+	// Proxy group ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Number of proxy nodes
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Proxy group status. Valid values: `init` (delivering), `online` (active), `offline` (inactive), `destroy` (destoryed)
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Region
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Availability zone
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Whether read/write separation is enabled
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	OpenRW *bool `json:"OpenRW,omitempty" name:"OpenRW"`
+
+	// Current proxy version
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+
+	// Target version to which the proxy can be upgraded
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	SupportUpgradeProxyVersion *string `json:"SupportUpgradeProxyVersion,omitempty" name:"SupportUpgradeProxyVersion"`
+}
+
 type BinlogInfo struct {
 
 	// Binlog backup filename
@@ -390,6 +526,60 @@ type CloneItem struct {
 
 	// Task status. Valid values: `initial`, `running`, `wait_complete`, `success`, `failed`.
 	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+}
+
+type CloseCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Proxy group ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Whether only to disable read/write separation. Valid values: `true`, `false`
+	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
+}
+
+func (r *CloseCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	delete(f, "OnlyCloseRW")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CloseCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloseCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CloseWanServiceRequest struct {
@@ -478,6 +668,21 @@ type CommonTimeWindow struct {
 
 	// Time window on Sunday in the format of 02:00-06:00
 	Sunday *string `json:"Sunday,omitempty" name:"Sunday"`
+}
+
+type ConnectionPoolInfo struct {
+
+	// Whether the connection pool is enabled
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ConnectionPool *bool `json:"ConnectionPool,omitempty" name:"ConnectionPool"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Connection persistence timeout in seconds
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	PoolConnectionTimeOut *int64 `json:"PoolConnectionTimeOut,omitempty" name:"PoolConnectionTimeOut"`
 }
 
 type CreateAccountsRequest struct {
@@ -1136,6 +1341,9 @@ type CreateParamTemplateRequest struct {
 
 	// List of parameters.
 	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
+
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
 }
 
 func (r *CreateParamTemplateRequest) ToJsonString() string {
@@ -1155,6 +1363,7 @@ func (r *CreateParamTemplateRequest) FromJsonString(s string) error {
 	delete(f, "EngineVersion")
 	delete(f, "TemplateId")
 	delete(f, "ParamList")
+	delete(f, "TemplateType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateParamTemplateRequest has unknown keys!", "")
 	}
@@ -1248,6 +1457,29 @@ func (r *CreateRoInstanceIpResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateRoInstanceIpResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CustomConfig struct {
+
+	// Device
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Device *string `json:"Device,omitempty" name:"Device"`
+
+	// Type
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Device type
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Memory
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Number of CPU cores
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
 }
 
 type DBSwitchInfo struct {
@@ -2151,6 +2383,84 @@ func (r *DescribeBinlogsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBinlogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *DescribeCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Basic information of the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		BaseGroup *BaseGroupInfo `json:"BaseGroup,omitempty" name:"BaseGroup"`
+
+		// Address information of the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Address *Address `json:"Address,omitempty" name:"Address"`
+
+		// Node information of the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		ProxyNode *ProxyNodeInfo `json:"ProxyNode,omitempty" name:"ProxyNode"`
+
+		// Read/Write separation information
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		RWInstInfo *RWInfo `json:"RWInstInfo,omitempty" name:"RWInstInfo"`
+
+		// Connection pool information
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		ConnectionPoolInfo *ConnectionPoolInfo `json:"ConnectionPoolInfo,omitempty" name:"ConnectionPoolInfo"`
+
+		// Number of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Proxy information
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		ProxyGroup []*ProxyGroup `json:"ProxyGroup,omitempty" name:"ProxyGroup"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCDBProxyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3385,6 +3695,58 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeLocalBinlogConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeLocalBinlogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLocalBinlogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLocalBinlogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLocalBinlogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Binlog retention policy of the instance.
+		LocalBinlogConfig *LocalBinlogConfig `json:"LocalBinlogConfig,omitempty" name:"LocalBinlogConfig"`
+
+		// Default binlog retention policy in the region.
+		LocalBinlogConfigDefault *LocalBinlogConfigDefault `json:"LocalBinlogConfigDefault,omitempty" name:"LocalBinlogConfigDefault"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLocalBinlogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLocalBinlogConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeParamTemplateInfoRequest struct {
 	*tchttp.BaseRequest
 
@@ -3433,6 +3795,9 @@ type DescribeParamTemplateInfoResponse struct {
 		// Parameter template description
 		Description *string `json:"Description,omitempty" name:"Description"`
 
+		// Parameter template type. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+		TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -3452,7 +3817,7 @@ func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// Engine version. If it is left empty, all parameter templates will be queried.
 	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
 }
 
@@ -3550,6 +3915,134 @@ func (r *DescribeProjectSecurityGroupsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxyConnectionPoolConfRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Paginated query offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum entries returned per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeProxyConnectionPoolConfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyConnectionPoolConfRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxyConnectionPoolConfRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxyConnectionPoolConfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of queried configurations
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Count *int64 `json:"Count,omitempty" name:"Count"`
+
+		// Connection pool configuration details
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		PoolConf *PoolConf `json:"PoolConf,omitempty" name:"PoolConf"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProxyConnectionPoolConfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyConnectionPoolConfResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxyCustomConfRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Paginated query offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum entries returned per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeProxyCustomConfRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyCustomConfRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxyCustomConfRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxyCustomConfResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of queried proxy configurations
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Proxy configuration details
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		CustomConf *CustomConfig `json:"CustomConf,omitempty" name:"CustomConf"`
+
+		// Weight rule
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		WeightRule *Rule `json:"WeightRule,omitempty" name:"WeightRule"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProxyCustomConfResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyCustomConfResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4840,6 +5333,24 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type LocalBinlogConfig struct {
+
+	// Retention period of local binlog. Value range: [72,168].
+	SaveHours *int64 `json:"SaveHours,omitempty" name:"SaveHours"`
+
+	// Space utilization of local binlog. Value range: [30,50].
+	MaxUsage *int64 `json:"MaxUsage,omitempty" name:"MaxUsage"`
+}
+
+type LocalBinlogConfigDefault struct {
+
+	// Retention period of local binlog. Value range: [72,168].
+	SaveHours *int64 `json:"SaveHours,omitempty" name:"SaveHours"`
+
+	// Space utilization of local binlog. Value range: [30,50].
+	MaxUsage *int64 `json:"MaxUsage,omitempty" name:"MaxUsage"`
+}
+
 type MasterInfo struct {
 
 	// Region information
@@ -5323,6 +5834,264 @@ func (r *ModifyBackupDownloadRestrictionResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyCDBProxyConnectionPoolRequest struct {
+	*tchttp.BaseRequest
+
+	// Database proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Whether to enable the connection pool. Valid values: `true` (enable);
+	//                              `false` (disable).
+	OpenConnectionPool *bool `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool type.
+	// You can use the `DescribeProxyConnectionPoolConf` API to query the connection pool type.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Connection persistence timeout in seconds
+	PoolConnectionTimeOut *int64 `json:"PoolConnectionTimeOut,omitempty" name:"PoolConnectionTimeOut"`
+}
+
+func (r *ModifyCDBProxyConnectionPoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyConnectionPoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProxyGroupId")
+	delete(f, "OpenConnectionPool")
+	delete(f, "ConnectionPoolType")
+	delete(f, "PoolConnectionTimeOut")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDBProxyConnectionPoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyConnectionPoolResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyCDBProxyConnectionPoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyConnectionPoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyDescRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Database proxy description
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
+func (r *ModifyCDBProxyDescRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyDescRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	delete(f, "Desc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDBProxyDescRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyDescResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyCDBProxyDescResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyDescResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the database proxy group
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`
+	IsKickout *bool `json:"IsKickout,omitempty" name:"IsKickout"`
+
+	// The minimum number of read-only instances allowed by the proxy group
+	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
+
+	// Delay threshold. If `IsKickOut` is set to `true`, this parameter is required.
+	MaxDelay *uint64 `json:"MaxDelay,omitempty" name:"MaxDelay"`
+
+	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Read-Only weight of an instance
+	RoWeightValues *RoWeight `json:"RoWeightValues,omitempty" name:"RoWeightValues"`
+
+	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`
+	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false`
+	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+}
+
+func (r *ModifyCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProxyGroupId")
+	delete(f, "IsKickout")
+	delete(f, "MinCount")
+	delete(f, "MaxDelay")
+	delete(f, "WeightMode")
+	delete(f, "RoWeightValues")
+	delete(f, "FailOver")
+	delete(f, "AutoAddRo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyVipVPortRequest struct {
+	*tchttp.BaseRequest
+
+	// Proxy group ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// New IP
+	DstIp *string `json:"DstIp,omitempty" name:"DstIp"`
+
+	// New port
+	DstPort *uint64 `json:"DstPort,omitempty" name:"DstPort"`
+
+	// Valid hours of the old IP
+	ReleaseDuration *uint64 `json:"ReleaseDuration,omitempty" name:"ReleaseDuration"`
+}
+
+func (r *ModifyCDBProxyVipVPortRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyVipVPortRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProxyGroupId")
+	delete(f, "UniqVpcId")
+	delete(f, "UniqSubnetId")
+	delete(f, "DstIp")
+	delete(f, "DstPort")
+	delete(f, "ReleaseDuration")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDBProxyVipVPortRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyCDBProxyVipVPortResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyCDBProxyVipVPortResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDBProxyVipVPortResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceNameRequest struct {
 	*tchttp.BaseRequest
 
@@ -5659,6 +6428,60 @@ func (r *ModifyInstanceTagResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyInstanceTagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLocalBinlogConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Retention period of local binlog. Value range: [72,168].
+	SaveHours *int64 `json:"SaveHours,omitempty" name:"SaveHours"`
+
+	// Space utilization of local binlog. Value range: [30,50].
+	MaxUsage *int64 `json:"MaxUsage,omitempty" name:"MaxUsage"`
+}
+
+func (r *ModifyLocalBinlogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLocalBinlogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SaveHours")
+	delete(f, "MaxUsage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLocalBinlogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLocalBinlogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLocalBinlogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLocalBinlogConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6102,6 +6925,9 @@ type ParamTemplateInfo struct {
 
 	// Instance engine version
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Parameter template type
+	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
 }
 
 type Parameter struct {
@@ -6118,7 +6944,7 @@ type ParameterDetail struct {
 	// Parameter name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Parameter type
+	// Parameter type. Valid values: `integer`, `enum`, `float`, `string`, `func`
 	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
 
 	// Default value of the parameter
@@ -6141,6 +6967,235 @@ type ParameterDetail struct {
 
 	// Enumerated values of the parameter. It is null if the parameter is non-enumerated
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// Maximum parameter value, which is valid only when `ParamType` is set to `func`
+	MaxFunc *string `json:"MaxFunc,omitempty" name:"MaxFunc"`
+
+	// Minimum parameter value, which is valid only when `ParamType` is set to `func`
+	MinFunc *string `json:"MinFunc,omitempty" name:"MinFunc"`
+}
+
+type PoolConf struct {
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Maximum value of connection persistence timeout in seconds
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MaxPoolConnectionTimeOut *int64 `json:"MaxPoolConnectionTimeOut,omitempty" name:"MaxPoolConnectionTimeOut"`
+
+	// Minimum value of connection persistence timeout in seconds
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MinPoolConnectionTimeOut *int64 `json:"MinPoolConnectionTimeOut,omitempty" name:"MinPoolConnectionTimeOut"`
+}
+
+type ProxyGroup struct {
+
+	// Basic information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	BaseGroup *BaseGroupInfo `json:"BaseGroup,omitempty" name:"BaseGroup"`
+
+	// Address information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Address []*Address `json:"Address,omitempty" name:"Address"`
+
+	// Connection pool information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ConnectionPoolInfo *ConnectionPoolInfo `json:"ConnectionPoolInfo,omitempty" name:"ConnectionPoolInfo"`
+
+	// Node information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNode []*ProxyNodeInfo `json:"ProxyNode,omitempty" name:"ProxyNode"`
+
+	// Routing information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	RWInstInfo *RWInfo `json:"RWInstInfo,omitempty" name:"RWInstInfo"`
+}
+
+type ProxyGroups struct {
+
+	// Basic information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	BaseGroup *BaseGroupInfo `json:"BaseGroup,omitempty" name:"BaseGroup"`
+
+	// Address information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Address []*Address `json:"Address,omitempty" name:"Address"`
+
+	// Connection pool information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ConnectionPoolInfo *ConnectionPoolInfo `json:"ConnectionPoolInfo,omitempty" name:"ConnectionPoolInfo"`
+
+	// Node information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNode []*ProxyNodeInfo `json:"ProxyNode,omitempty" name:"ProxyNode"`
+
+	// Routing information of the proxy
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	RWInstInfo *RWInfos `json:"RWInstInfo,omitempty" name:"RWInstInfo"`
+}
+
+type ProxyNodeInfo struct {
+
+	// Proxy node ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNodeId *string `json:"ProxyNodeId,omitempty" name:"ProxyNodeId"`
+
+	// Current number of connections to the node
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNodeConnections *uint64 `json:"ProxyNodeConnections,omitempty" name:"ProxyNodeConnections"`
+
+	// CPU
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNodeCpu *uint64 `json:"ProxyNodeCpu,omitempty" name:"ProxyNodeCpu"`
+
+	// Memory
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyNodeMem *uint64 `json:"ProxyNodeMem,omitempty" name:"ProxyNodeMem"`
+
+	// Node status:
+	// init (applying)
+	// online (active)
+	// offline (inactive)
+	// destroy (destroyed)
+	// recovering (recovering from fault)
+	// error (failed)
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	ProxyStatus *string `json:"ProxyStatus,omitempty" name:"ProxyStatus"`
+}
+
+type QueryCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *QueryCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+		// Proxy information
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		ProxyGroup []*ProxyGroups `json:"ProxyGroup,omitempty" name:"ProxyGroup"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *QueryCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RWInfo struct {
+
+	// Number of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	InstCount *uint64 `json:"InstCount,omitempty" name:"InstCount"`
+
+	// Assignment mode of read/write weights
+	// Valid values: `system` (auto-assigned), `custom`
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Whether to remove delayed read-only instances from the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	IsKickOut *bool `json:"IsKickOut,omitempty" name:"IsKickOut"`
+
+	// The minimum number of read-only instances allowed by the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
+
+	// Delay threshold
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MaxDelay *uint64 `json:"MaxDelay,omitempty" name:"MaxDelay"`
+
+	// Whether to enable failover
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add newly created read-only instances to the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Information of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	RWInstInfo *RWInstanceInfo `json:"RWInstInfo,omitempty" name:"RWInstInfo"`
+}
+
+type RWInfos struct {
+
+	// Number of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	InstCount *uint64 `json:"InstCount,omitempty" name:"InstCount"`
+
+	// Assignment mode of read/write weights
+	// Valid values: `system` (auto-assigned), `custom`
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Whether to remove delayed read-only instances from the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	IsKickOut *bool `json:"IsKickOut,omitempty" name:"IsKickOut"`
+
+	// The minimum number of read-only instances allowed by the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
+
+	// Delay threshold
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	MaxDelay *uint64 `json:"MaxDelay,omitempty" name:"MaxDelay"`
+
+	// Whether to enable failover
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add newly created read-only instances to the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Information of instances in the proxy group
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	RWInstInfo []*RWInstanceInfo `json:"RWInstInfo,omitempty" name:"RWInstInfo"`
+}
+
+type RWInstanceInfo struct {
 }
 
 type RegionSellConf struct {
@@ -6220,6 +7275,52 @@ type ReleaseResult struct {
 
 	// Error message for instance deisolation.
 	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type ReloadBalanceProxyNodeRequest struct {
+	*tchttp.BaseRequest
+
+	// Proxy group ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *ReloadBalanceProxyNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReloadBalanceProxyNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReloadBalanceProxyNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReloadBalanceProxyNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ReloadBalanceProxyNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type RestartDBInstancesRequest struct {
@@ -6438,6 +7539,9 @@ type RoVipInfo struct {
 	RoVip *string `json:"RoVip,omitempty" name:"RoVip"`
 }
 
+type RoWeight struct {
+}
+
 type RoWeightValue struct {
 
 	// RO instance ID.
@@ -6530,6 +7634,17 @@ type RollbackTimeRange struct {
 
 	// End time available for rollback in the format of yyyy-MM-dd HH:mm:ss, such as 2016-11-02 11:44:47
 	End *string `json:"End,omitempty" name:"End"`
+}
+
+type Rule struct {
+
+	// The maximum weight
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	LessThan *uint64 `json:"LessThan,omitempty" name:"LessThan"`
+
+	// Weight
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 type SecurityGroup struct {
@@ -6988,6 +8103,56 @@ func (r *StopRollbackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SwitchCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *SwitchCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SwitchCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *SwitchCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SwitchDBInstanceMasterSlaveRequest struct {
 	*tchttp.BaseRequest
 
@@ -7247,6 +8412,146 @@ type TaskDetail struct {
 
 	// Async task request ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+}
+
+type UpgradeCDBProxyRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Number of proxy nodes
+	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// Number of CPU cores per proxy node
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory per proxy node
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Load rebalance mode. Valid values: `auto`, `manual`
+	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
+
+	// Upgrade time. Valid values: `nowTime` (upgrade immediately), `timeWindow` (upgrade during instance maintenance time)
+	UpgradeTime *string `json:"UpgradeTime,omitempty" name:"UpgradeTime"`
+}
+
+func (r *UpgradeCDBProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeCDBProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	delete(f, "ProxyCount")
+	delete(f, "Cpu")
+	delete(f, "Mem")
+	delete(f, "ReloadBalance")
+	delete(f, "UpgradeTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeCDBProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeCDBProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeCDBProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeCDBProxyVersionRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database proxy ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Current version of database proxy
+	SrcProxyVersion *string `json:"SrcProxyVersion,omitempty" name:"SrcProxyVersion"`
+
+	// Target version of database proxy
+	DstProxyVersion *string `json:"DstProxyVersion,omitempty" name:"DstProxyVersion"`
+
+	// Upgrade time. Valid values: `nowTime` (upgrade immediately), `timeWindow` (upgrade during instance maintenance time)
+	UpgradeTime *string `json:"UpgradeTime,omitempty" name:"UpgradeTime"`
+}
+
+func (r *UpgradeCDBProxyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeCDBProxyVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ProxyGroupId")
+	delete(f, "SrcProxyVersion")
+	delete(f, "DstProxyVersion")
+	delete(f, "UpgradeTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeCDBProxyVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeCDBProxyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async request ID
+	// Note: this field may return `null`, indicating that no valid value can be found.
+		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpgradeCDBProxyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeCDBProxyVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type UpgradeDBInstanceEngineVersionRequest struct {
