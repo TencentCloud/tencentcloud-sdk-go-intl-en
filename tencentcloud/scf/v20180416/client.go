@@ -1469,6 +1469,7 @@ func NewGetFunctionAddressResponse() (response *GetFunctionAddressResponse) {
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
@@ -1498,6 +1499,7 @@ func (c *Client) GetFunctionAddress(request *GetFunctionAddressRequest) (respons
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
@@ -1608,7 +1610,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 }
 
 // GetFunctionLogs
-// This API is used to return function running logs according to the specified log query criteria.
+// This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1641,7 +1643,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 }
 
 // GetFunctionLogs
-// This API is used to return function running logs according to the specified log query criteria.
+// This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2737,6 +2739,7 @@ func NewPutProvisionedConcurrencyConfigResponse() (response *PutProvisionedConcu
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_MINCAPACITY = "InvalidParameterValue.MinCapacity"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERCRONCONFIGDUPLICATE = "InvalidParameterValue.ProvisionTriggerCronConfigDuplicate"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAME = "InvalidParameterValue.ProvisionTriggerName"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAMEDUPLICATE = "InvalidParameterValue.ProvisionTriggerNameDuplicate"
@@ -2782,6 +2785,7 @@ func (c *Client) PutProvisionedConcurrencyConfig(request *PutProvisionedConcurre
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_MINCAPACITY = "InvalidParameterValue.MinCapacity"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERCRONCONFIGDUPLICATE = "InvalidParameterValue.ProvisionTriggerCronConfigDuplicate"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAME = "InvalidParameterValue.ProvisionTriggerName"
 //  INVALIDPARAMETERVALUE_PROVISIONTRIGGERNAMEDUPLICATE = "InvalidParameterValue.ProvisionTriggerNameDuplicate"
@@ -3267,6 +3271,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
 //  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
@@ -3336,6 +3341,7 @@ func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfiguratio
 //  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
 //  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
@@ -3395,6 +3401,7 @@ func NewUpdateFunctionEventInvokeConfigResponse() (response *UpdateFunctionEvent
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_UPDATEFUNCTIONEVENTINVOKECONFIG = "UnsupportedOperation.UpdateFunctionEventInvokeConfig"
 //  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
     if request == nil {
@@ -3428,6 +3435,7 @@ func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInv
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+//  UNSUPPORTEDOPERATION_UPDATEFUNCTIONEVENTINVOKECONFIG = "UnsupportedOperation.UpdateFunctionEventInvokeConfig"
 //  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionEventInvokeConfigWithContext(ctx context.Context, request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
     if request == nil {

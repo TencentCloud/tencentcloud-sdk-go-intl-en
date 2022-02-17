@@ -1985,6 +1985,9 @@ type DescribeListBGPIPInstancesRequest struct {
 
 	// Whether to obtain only Anti-DDoS instances with Sec-MCA enabled. Valid values: `1` (only obtain Anti-DDoS instances with Sec-MCA enabled) and `0` (obtain other Anti-DDoS instances).
 	FilterDamDDoSStatus *int64 `json:"FilterDamDDoSStatus,omitempty" name:"FilterDamDDoSStatus"`
+
+	// Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
 }
 
 func (r *DescribeListBGPIPInstancesRequest) ToJsonString() string {
@@ -2009,6 +2012,7 @@ func (r *DescribeListBGPIPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterEipType")
 	delete(f, "FilterEipEipAddressStatus")
 	delete(f, "FilterDamDDoSStatus")
+	delete(f, "FilterStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPIPInstancesRequest has unknown keys!", "")
 	}
@@ -2064,6 +2068,12 @@ type DescribeListBGPInstancesRequest struct {
 
 	// Line filter. Valid values: 1: BGP; 2: Non-BGP.
 	FilterLine *uint64 `json:"FilterLine,omitempty" name:"FilterLine"`
+
+	// Filters by instance status. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
+
+	// Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+	FilterBoundStatus *string `json:"FilterBoundStatus,omitempty" name:"FilterBoundStatus"`
 }
 
 func (r *DescribeListBGPInstancesRequest) ToJsonString() string {
@@ -2085,6 +2095,8 @@ func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterRegion")
 	delete(f, "FilterName")
 	delete(f, "FilterLine")
+	delete(f, "FilterStatus")
+	delete(f, "FilterBoundStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPInstancesRequest has unknown keys!", "")
 	}

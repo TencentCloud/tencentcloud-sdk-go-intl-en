@@ -155,28 +155,28 @@ type Code struct {
 	// `TempCosObjectName` is required if TempCos is used for the creation.
 	TempCosObjectName *string `json:"TempCosObjectName,omitempty" name:"TempCosObjectName"`
 
-	// Git address
+	// (Disused) Git address
 	GitUrl *string `json:"GitUrl,omitempty" name:"GitUrl"`
 
-	// Git user name
+	// (Disused) Git username
 	GitUserName *string `json:"GitUserName,omitempty" name:"GitUserName"`
 
-	// Git password
+	// (Disused) Git password
 	GitPassword *string `json:"GitPassword,omitempty" name:"GitPassword"`
 
-	// Git password after encryption. In general, this value is not required.
+	// (Disused) Git password after encryption. It’s usually not required.
 	GitPasswordSecret *string `json:"GitPasswordSecret,omitempty" name:"GitPasswordSecret"`
 
-	// Git branch
+	// (Disused) Git branch
 	GitBranch *string `json:"GitBranch,omitempty" name:"GitBranch"`
 
-	// Code path in Git repository
+	// (Disused) Directory to the codes in the Git repository. 
 	GitDirectory *string `json:"GitDirectory,omitempty" name:"GitDirectory"`
 
-	// Version to be pulled
+	// (Disused) 
 	GitCommitId *string `json:"GitCommitId,omitempty" name:"GitCommitId"`
 
-	// Git user name after encryption. In general, this value is not required.
+	// (Disused) Git username after encryption. It’s usually not required.
 	GitUserNameSecret *string `json:"GitUserNameSecret,omitempty" name:"GitUserNameSecret"`
 
 	// TCR image configurations
@@ -676,7 +676,7 @@ type DeleteFunctionRequest struct {
 	// Function namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Function version. Enter the number of the version that needs to be deleted, otherwise all versions of the function will be deleted.
+	// ID of the version to delete. All versions are deleted if it’s left empty.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
@@ -1890,10 +1890,10 @@ type GetRequestStatusRequest struct {
 	// Function namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to the current time minus 24 hours.
+	// Start time of the query, for example `2017-05-16 20:00:00`. If it’s left empty, it defaults to 15 minutes before the current time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time of the query, for example `2017-05-16 20:59:59`. If it’s left empty, it defaults to the current time. Note that the EndTime should be later than the StartTime
+	// End time of the query. such as `2017-05-16 20:59:59`. If `StartTime` is not specified, `EndTime` defaults to the current time. If `StartTime` is specified, `EndTime` is required, and it need to be later than the `StartTime`.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -2018,12 +2018,12 @@ type ImageConfig struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EntryPoint *string `json:"EntryPoint,omitempty" name:"EntryPoint"`
 
-	// entrypoint execution command
+	// The command to start up the container, such as `python`. If it’s not specified, Entrypoint in Dockerfile is used.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Command *string `json:"Command,omitempty" name:"Command"`
 
-	// Command parameters
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// The parameters to start up the container. Separate parameters with spaces, such as `u app.py`. If it’s not specified, `CMD in Dockerfile is used.
+	// Note: This field may return `null`, indicating that no valid value can be found.
 	Args *string `json:"Args,omitempty" name:"Args"`
 }
 
@@ -2198,10 +2198,10 @@ type LayerVersionInfo struct {
 
 type LayerVersionSimple struct {
 
-	// Layer name
+	// Name of the layer to bind. Leave it blank if you want to unbind layers
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
-	// Version number
+	// Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
 	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
@@ -3334,7 +3334,7 @@ type TerminateAsyncEventRequest struct {
 	// Namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Disused
+	// Whether to enable grace shutdown. If it’s `true`, a `SIGTERM` signal is sent to the specified request. See [Sending termination signal](https://intl.cloud.tencent.com/document/product/583/63969?from_cn_redirect=1#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]. It’s set to `false` by default.
 	GraceShutdown *bool `json:"GraceShutdown,omitempty" name:"GraceShutdown"`
 }
 
@@ -3441,6 +3441,10 @@ type TriggerAction struct {
 	// Trigger time of the scheduled action in Cron expression. Seven fields are required and should be separated with a space.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TriggerCronConfig *string `json:"TriggerCronConfig,omitempty" name:"TriggerCronConfig"`
+
+	// The provision type. Value: `Default`
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ProvisionedType *string `json:"ProvisionedType,omitempty" name:"ProvisionedType"`
 }
 
 type TriggerCount struct {

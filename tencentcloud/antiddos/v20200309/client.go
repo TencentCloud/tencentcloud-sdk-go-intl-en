@@ -333,9 +333,7 @@ func NewCreateDDoSAIResponse() (response *CreateDDoSAIResponse) {
 // This API is used to set Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDDoSAI(request *CreateDDoSAIRequest) (response *CreateDDoSAIResponse, err error) {
     if request == nil {
         request = NewCreateDDoSAIRequest()
@@ -350,9 +348,7 @@ func (c *Client) CreateDDoSAI(request *CreateDDoSAIRequest) (response *CreateDDo
 // This API is used to set Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDDoSAIWithContext(ctx context.Context, request *CreateDDoSAIRequest) (response *CreateDDoSAIResponse, err error) {
     if request == nil {
         request = NewCreateDDoSAIRequest()
@@ -386,6 +382,7 @@ func NewCreateDDoSGeoIPBlockConfigResponse() (response *CreateDDoSGeoIPBlockConf
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSGeoIPBlockConfig(request *CreateDDoSGeoIPBlockConfigRequest) (response *CreateDDoSGeoIPBlockConfigResponse, err error) {
     if request == nil {
@@ -402,6 +399,7 @@ func (c *Client) CreateDDoSGeoIPBlockConfig(request *CreateDDoSGeoIPBlockConfigR
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSGeoIPBlockConfigWithContext(ctx context.Context, request *CreateDDoSGeoIPBlockConfigRequest) (response *CreateDDoSGeoIPBlockConfigResponse, err error) {
     if request == nil {
@@ -436,6 +434,8 @@ func NewCreateDDoSSpeedLimitConfigResponse() (response *CreateDDoSSpeedLimitConf
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSSpeedLimitConfig(request *CreateDDoSSpeedLimitConfigRequest) (response *CreateDDoSSpeedLimitConfigResponse, err error) {
     if request == nil {
         request = NewCreateDDoSSpeedLimitConfigRequest()
@@ -451,6 +451,8 @@ func (c *Client) CreateDDoSSpeedLimitConfig(request *CreateDDoSSpeedLimitConfigR
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSSpeedLimitConfigWithContext(ctx context.Context, request *CreateDDoSSpeedLimitConfigRequest) (response *CreateDDoSSpeedLimitConfigResponse, err error) {
     if request == nil {
         request = NewCreateDDoSSpeedLimitConfigRequest()
@@ -639,6 +641,7 @@ func NewCreatePacketFilterConfigResponse() (response *CreatePacketFilterConfigRe
 // This API is used to add Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
     if request == nil {
@@ -654,6 +657,7 @@ func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigReque
 // This API is used to add Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfigWithContext(ctx context.Context, request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
     if request == nil {
@@ -687,6 +691,7 @@ func NewCreateProtocolBlockConfigResponse() (response *CreateProtocolBlockConfig
 // This API is used to set Anti-DDoS protocol blocking configurations.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateProtocolBlockConfig(request *CreateProtocolBlockConfigRequest) (response *CreateProtocolBlockConfigResponse, err error) {
     if request == nil {
@@ -702,6 +707,7 @@ func (c *Client) CreateProtocolBlockConfig(request *CreateProtocolBlockConfigReq
 // This API is used to set Anti-DDoS protocol blocking configurations.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateProtocolBlockConfigWithContext(ctx context.Context, request *CreateProtocolBlockConfigRequest) (response *CreateProtocolBlockConfigResponse, err error) {
     if request == nil {
@@ -854,6 +860,9 @@ func NewCreateWaterPrintKeyResponse() (response *CreateWaterPrintKeyResponse) {
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintKey(request *CreateWaterPrintKeyRequest) (response *CreateWaterPrintKeyResponse, err error) {
     if request == nil {
         request = NewCreateWaterPrintKeyRequest()
@@ -869,6 +878,9 @@ func (c *Client) CreateWaterPrintKey(request *CreateWaterPrintKeyRequest) (respo
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintKeyWithContext(ctx context.Context, request *CreateWaterPrintKeyRequest) (response *CreateWaterPrintKeyResponse, err error) {
     if request == nil {
         request = NewCreateWaterPrintKeyRequest()
@@ -1096,6 +1108,7 @@ func NewDeleteWaterPrintConfigResponse() (response *DeleteWaterPrintConfigRespon
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteWaterPrintConfig(request *DeleteWaterPrintConfigRequest) (response *DeleteWaterPrintConfigResponse, err error) {
     if request == nil {
         request = NewDeleteWaterPrintConfigRequest()
@@ -1111,6 +1124,7 @@ func (c *Client) DeleteWaterPrintConfig(request *DeleteWaterPrintConfigRequest) 
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteWaterPrintConfigWithContext(ctx context.Context, request *DeleteWaterPrintConfigRequest) (response *DeleteWaterPrintConfigResponse, err error) {
     if request == nil {
         request = NewDeleteWaterPrintConfigRequest()
@@ -1143,7 +1157,7 @@ func NewDeleteWaterPrintKeyResponse() (response *DeleteWaterPrintKeyResponse) {
 // This API is used to delete Anti-DDoS watermark keys.
 //
 // error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     if request == nil {
         request = NewDeleteWaterPrintKeyRequest()
@@ -1158,7 +1172,7 @@ func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (respo
 // This API is used to delete Anti-DDoS watermark keys.
 //
 // error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKeyWithContext(ctx context.Context, request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     if request == nil {
         request = NewDeleteWaterPrintKeyRequest()
@@ -1191,7 +1205,7 @@ func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatus
 // This API is used to querying the status of Anti-DDoS IP.
 //
 // error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     if request == nil {
         request = NewDescribeBasicDeviceStatusRequest()
@@ -1206,7 +1220,7 @@ func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusReq
 // This API is used to querying the status of Anti-DDoS IP.
 //
 // error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatusWithContext(ctx context.Context, request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     if request == nil {
         request = NewDescribeBasicDeviceStatusRequest()
