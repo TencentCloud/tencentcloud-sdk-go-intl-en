@@ -1780,6 +1780,72 @@ func (r *DescribeDBSlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDatabaseTableRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of dcdbt-ow7t8lmc.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database name, which can be obtained through the `DescribeDatabases` API.
+	DbName *string `json:"DbName,omitempty" name:"DbName"`
+
+	// Table name, which can be obtained through the `DescribeDatabaseObjects` API.
+	Table *string `json:"Table,omitempty" name:"Table"`
+}
+
+func (r *DescribeDatabaseTableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseTableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DbName")
+	delete(f, "Table")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseTableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDatabaseTableResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance name.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Database name.
+		DbName *string `json:"DbName,omitempty" name:"DbName"`
+
+		// Table name.
+		Table *string `json:"Table,omitempty" name:"Table"`
+
+		// Column information.
+		Cols []*TableColumn `json:"Cols,omitempty" name:"Cols"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDatabaseTableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseTableResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDatabasesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3389,6 +3455,15 @@ func (r *SwitchDBInstanceHAResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SwitchDBInstanceHAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TableColumn struct {
+
+	// Column name
+	Col *string `json:"Col,omitempty" name:"Col"`
+
+	// Column type
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type TablePrivilege struct {
