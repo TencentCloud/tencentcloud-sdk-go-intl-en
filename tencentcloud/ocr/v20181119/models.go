@@ -532,10 +532,11 @@ type MLIDCardOCRResponse struct {
 		// Gender
 		Sex *string `json:"Sex,omitempty" name:"Sex"`
 
-		// Alarm code
-	// -9103	Alarm for photographed document
-	// -9102	Alarm for photocopied document
-	// -9106       Alarm for covered card
+		// Warning code
+	// -9103 Warning for spoofed card
+	// -9102 Warning for photocopied card
+	// -9106 Warning for covered card
+	// -9107 Warning for blurry image
 		Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
 
 		// Identity photo
