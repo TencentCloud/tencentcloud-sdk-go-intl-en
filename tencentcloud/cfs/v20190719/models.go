@@ -972,6 +972,9 @@ type FileSystemInfo struct {
 
 	// Total capacity of the file system
 	Capacity *uint64 `json:"Capacity,omitempty" name:"Capacity"`
+
+	// File system tag list
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 }
 
 type MountInfo struct {

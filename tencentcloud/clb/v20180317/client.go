@@ -420,7 +420,37 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 }
 
 // CloneLoadBalancer
-// This API is used to generate a CLB instance that has the same rules and binding relations as the specified CLB instance.
+// This API is used to create a CLB instance with the same forwarding rules and binding relation as the source CLB instance. Note that this API is asynchronous, which means that changes to the source CLB after the invocation are not cloned.
+//
+// 
+//
+// Use limits:
+//
+// Classic network-based CLBs, Classic CLBs, IPv6 CLBs, and NAT64 CLBs are not supported.
+//
+// Monthly-subscribed CLB instances are not supported.
+//
+// QUIC and port listeners are not supported.
+//
+// The CLB backend server cannot be bound to a target group or an SCF function.
+//
+// The following settings will not be cloned automatically: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
+//
+// 
+//
+// Permissions:
+//
+// The required permissions are as follows: `CreateLoadBalancer`, `CreateLoadBalancerListeners`, `CreateListenerRules`, `BatchRegisterTargets`, `SetLoadBalancerSecurityGroups`, `ModifyLoadBalancerAttributes`, `SetLoadBalancerClsLog`, and `DeleteLoadBalancer`. Note that `DeleteLoadBalancer` is used to roll back in case of cloning failures. If you do not have the permission, the failure data will remain.
+//
+// 
+//
+// Notes:
+//
+// For a BGP bandwidth package, you need to pass the package ID.
+//
+// To clone a dedicated CLB cluster, specify it in the parameter, otherwise a shared CLB cluster is created.
+//
+// This API is only available for beta users. To try it out, [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -454,7 +484,37 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 }
 
 // CloneLoadBalancer
-// This API is used to generate a CLB instance that has the same rules and binding relations as the specified CLB instance.
+// This API is used to create a CLB instance with the same forwarding rules and binding relation as the source CLB instance. Note that this API is asynchronous, which means that changes to the source CLB after the invocation are not cloned.
+//
+// 
+//
+// Use limits:
+//
+// Classic network-based CLBs, Classic CLBs, IPv6 CLBs, and NAT64 CLBs are not supported.
+//
+// Monthly-subscribed CLB instances are not supported.
+//
+// QUIC and port listeners are not supported.
+//
+// The CLB backend server cannot be bound to a target group or an SCF function.
+//
+// The following settings will not be cloned automatically: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
+//
+// 
+//
+// Permissions:
+//
+// The required permissions are as follows: `CreateLoadBalancer`, `CreateLoadBalancerListeners`, `CreateListenerRules`, `BatchRegisterTargets`, `SetLoadBalancerSecurityGroups`, `ModifyLoadBalancerAttributes`, `SetLoadBalancerClsLog`, and `DeleteLoadBalancer`. Note that `DeleteLoadBalancer` is used to roll back in case of cloning failures. If you do not have the permission, the failure data will remain.
+//
+// 
+//
+// Notes:
+//
+// For a BGP bandwidth package, you need to pass the package ID.
+//
+// To clone a dedicated CLB cluster, specify it in the parameter, otherwise a shared CLB cluster is created.
+//
+// This API is only available for beta users. To try it out, [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2020,6 +2080,70 @@ func (c *Client) DescribeClsLogSetWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeCrossTargetsRequest() (request *DescribeCrossTargetsRequest) {
+    request = &DescribeCrossTargetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeCrossTargets")
+    
+    
+    return
+}
+
+func NewDescribeCrossTargetsResponse() (response *DescribeCrossTargetsResponse) {
+    response = &DescribeCrossTargetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCrossTargets
+// Queries information of CVMs and ENIs that use cross-region binding 2.0
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCrossTargets(request *DescribeCrossTargetsRequest) (response *DescribeCrossTargetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCrossTargetsRequest()
+    }
+    
+    response = NewDescribeCrossTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeCrossTargets
+// Queries information of CVMs and ENIs that use cross-region binding 2.0
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeCrossTargetsWithContext(ctx context.Context, request *DescribeCrossTargetsRequest) (response *DescribeCrossTargetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCrossTargetsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeCrossTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomizedConfigAssociateListRequest() (request *DescribeCustomizedConfigAssociateListRequest) {
     request = &DescribeCustomizedConfigAssociateListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3192,6 +3316,70 @@ func (c *Client) ManualRewriteWithContext(ctx context.Context, request *ManualRe
     return
 }
 
+func NewMigrateClassicalLoadBalancersRequest() (request *MigrateClassicalLoadBalancersRequest) {
+    request = &MigrateClassicalLoadBalancersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("clb", APIVersion, "MigrateClassicalLoadBalancers")
+    
+    
+    return
+}
+
+func NewMigrateClassicalLoadBalancersResponse() (response *MigrateClassicalLoadBalancersResponse) {
+    response = &MigrateClassicalLoadBalancersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// MigrateClassicalLoadBalancers
+// This API is used to upgrade classic CLB instances to application CLB instances.
+//
+// This is an async API. After it is returned successfully, you can check the action result by calling `DescribeLoadBalancers`. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) MigrateClassicalLoadBalancers(request *MigrateClassicalLoadBalancersRequest) (response *MigrateClassicalLoadBalancersResponse, err error) {
+    if request == nil {
+        request = NewMigrateClassicalLoadBalancersRequest()
+    }
+    
+    response = NewMigrateClassicalLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// MigrateClassicalLoadBalancers
+// This API is used to upgrade classic CLB instances to application CLB instances.
+//
+// This is an async API. After it is returned successfully, you can check the action result by calling `DescribeLoadBalancers`. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) MigrateClassicalLoadBalancersWithContext(ctx context.Context, request *MigrateClassicalLoadBalancersRequest) (response *MigrateClassicalLoadBalancersResponse, err error) {
+    if request == nil {
+        request = NewMigrateClassicalLoadBalancersRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewMigrateClassicalLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyBlockIPListRequest() (request *ModifyBlockIPListRequest) {
     request = &ModifyBlockIPListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3544,7 +3732,7 @@ func NewModifyLoadBalancerSlaResponse() (response *ModifyLoadBalancerSlaResponse
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade shared CLB instances to LCU-supported CLB instances (downgrade is not allowed) and upgrade/downgrade the specification of LCU-supported instances.
+// This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3566,7 +3754,7 @@ func (c *Client) ModifyLoadBalancerSla(request *ModifyLoadBalancerSlaRequest) (r
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade shared CLB instances to LCU-supported CLB instances (downgrade is not allowed) and upgrade/downgrade the specification of LCU-supported instances.
+// This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
