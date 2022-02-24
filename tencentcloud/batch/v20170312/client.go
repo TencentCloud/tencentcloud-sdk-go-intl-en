@@ -1577,6 +1577,7 @@ func NewSubmitJobResponse() (response *SubmitJobResponse) {
 //  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
 //  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
 //  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_INSTANCETYPEDUPLICATE = "InvalidParameterValue.InstanceTypeDuplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
 //  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
@@ -1620,6 +1621,7 @@ func (c *Client) SubmitJob(request *SubmitJobRequest) (response *SubmitJobRespon
 //  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
 //  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
 //  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_INSTANCETYPEDUPLICATE = "InvalidParameterValue.InstanceTypeDuplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
 //  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
@@ -1795,6 +1797,7 @@ func NewTerminateJobResponse() (response *TerminateJobResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCEINUSE_JOB = "ResourceInUse.Job"
 //  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_TERMINATEOPERATIONWITHENVID = "UnsupportedOperation.TerminateOperationWithEnvId"
@@ -1818,6 +1821,7 @@ func (c *Client) TerminateJob(request *TerminateJobRequest) (response *Terminate
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
+//  RESOURCEINUSE_JOB = "ResourceInUse.Job"
 //  RESOURCENOTFOUND_JOB = "ResourceNotFound.Job"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_TERMINATEOPERATIONWITHENVID = "UnsupportedOperation.TerminateOperationWithEnvId"

@@ -4136,7 +4136,7 @@ func NewModifyProjectLimitResponse() (response *ModifyProjectLimitResponse) {
 }
 
 // ModifyProjectLimit
-// This API is used to add or modify a project limit.
+// This API is used to add or modify data reporting limit.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4172,7 +4172,7 @@ func (c *Client) ModifyProjectLimit(request *ModifyProjectLimitRequest) (respons
 }
 
 // ModifyProjectLimit
-// This API is used to add or modify a project limit.
+// This API is used to add or modify data reporting limit.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

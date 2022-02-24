@@ -887,7 +887,7 @@ type DescribeDataCustomUrlRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `top`: top resources view; `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `pagepv`: PV view; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -1024,7 +1024,7 @@ type DescribeDataEventUrlRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `ckuv`: UV trend; `ckpv`: PV trend; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -1157,7 +1157,7 @@ type DescribeDataFetchProjectRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -1431,7 +1431,7 @@ type DescribeDataFetchUrlRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `allcount`: performance view; `day`: 14-day data; `count40x`: HTTP status codes 40X view; `count50x`: HTTP status codes 50X view; `count5xand4x`: HTTP status codes 40X∑50X view; `top`: top resources view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -1625,7 +1625,7 @@ type DescribeDataLogUrlStatisticsRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// "analysis", "compare", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+	// `analysis`: exception analysis; `compare`: exception list comparison; `allcount`: performance view; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -1760,7 +1760,7 @@ type DescribeDataPerformancePageRequest struct {
 	// End time
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// ["pagepv","allcount"]
+	// `pagepv`: PV view; `allcount`: performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Log level
@@ -1887,7 +1887,7 @@ type DescribeDataPerformanceProjectRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+	// `allcount`; performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `condition`: condition list; `area`: request speed distribution; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -2149,7 +2149,7 @@ type DescribeDataPvUrlStatisticsRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type: "allcount", "falls", "samp", "version", "ext3", "nettype", "platform", "isp", "region", "device", "browser", "ext1", "ext2"
+	// `allcount`; performance view; `day`: 14-day data, `vp`: performance; `ckuv`: UV; `ckpv`: PV; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -2396,7 +2396,7 @@ type DescribeDataSetUrlStatisticsRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+	// `allcount`: performance view; `data`: mini program; `component`: mini program-related components; `day`: 14-day data; `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -2529,7 +2529,7 @@ type DescribeDataStaticProjectRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -2666,7 +2666,7 @@ type DescribeDataStaticResourceRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `top`: top resources view; `count40x`: HTTP status codes 40X view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time
@@ -2803,7 +2803,7 @@ type DescribeDataStaticUrlRequest struct {
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Type
+	// `pagepv`: page view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// End time

@@ -767,11 +767,11 @@ type ConfigListItem struct {
 type CreateClsLogSetRequest struct {
 	*tchttp.BaseRequest
 
-	// Logset retention period in days; max value: 90
-	Period *uint64 `json:"Period,omitempty" name:"Period"`
-
 	// Logset name, which must be unique among all CLS logsets; default value: clb_logset
 	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+
+	// Logset retention period (in days)
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Logset type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
 	LogsetType *string `json:"LogsetType,omitempty" name:"LogsetType"`
@@ -789,8 +789,8 @@ func (r *CreateClsLogSetRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "Period")
 	delete(f, "LogsetName")
+	delete(f, "Period")
 	delete(f, "LogsetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClsLogSetRequest has unknown keys!", "")
@@ -1260,6 +1260,9 @@ type CreateTopicRequest struct {
 
 	// Log type. Valid values: ACCESS (access logs; default value) and HEALTH (health check logs).
 	TopicType *string `json:"TopicType,omitempty" name:"TopicType"`
+
+	// Logset retention period (in days). Default: 30 days.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -1277,6 +1280,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "TopicName")
 	delete(f, "PartitionCount")
 	delete(f, "TopicType")
+	delete(f, "Period")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -1601,13 +1605,13 @@ type DeleteRuleRequest struct {
 	// Array of IDs of the forwarding rules to be deleted
 	LocationIds []*string `json:"LocationIds,omitempty" name:"LocationIds"`
 
-	// Domain name of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
+	// Specifies the target domain name. Only one domain name is allowed. This field is invalid when `LocationIds` is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// A listener must be configured with a default domain name. If you need to delete the default domain name, you can specify another one as the new default domain name.
+	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 }
 
@@ -3526,8 +3530,8 @@ type HealthCheck struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpVersion *string `json:"HttpVersion,omitempty" name:"HttpVersion"`
 
-	// Specifies the source IP for health check. `0`: use the CLB VIP as the source IP; `1`: IP range starting with 100.64 serving as the source IP. Default: `0`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the type of IP for health check. `0` (default): Use the CLB VIP as the source IP. `1`: Use the IP range starting with 100.64 as the source IP.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SourceIpType *int64 `json:"SourceIpType,omitempty" name:"SourceIpType"`
 }
 
@@ -4083,6 +4087,10 @@ type LoadBalancerDetail struct {
 	// Health status of the target real server.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TargetHealth *string `json:"TargetHealth,omitempty" name:"TargetHealth"`
+
+	// List o domain names associated with the forwarding rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Domains *string `json:"Domains,omitempty" name:"Domains"`
 }
 
 type LoadBalancerHealth struct {
@@ -4309,10 +4317,10 @@ type ModifyDomainAttributesRequest struct {
 	// CLB listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-	// Domain name, which must be under a created forwarding rule.
+	// The domain name, which must be associated with an existing forwarding rule. If there are multiple domain names, you only need to specify one.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// New domain name
+	// The one domain name to modify. `NewDomain` and `NewDomains` can not be both specified.
 	NewDomain *string `json:"NewDomain,omitempty" name:"NewDomain"`
 
 	// Domain name certificate information. Note: This is only applicable to SNI-enabled listeners.
@@ -4324,8 +4332,11 @@ type ModifyDomainAttributesRequest struct {
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
 	DefaultServer *bool `json:"DefaultServer,omitempty" name:"DefaultServer"`
 
-	// A listener must be configured with a default domain name. If you need to disable the default domain name, you must specify another one as the new default domain name.
+	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
+
+	// The new domain names to modify. `NewDomain` and `NewDomains` can not be both specified.
+	NewDomains []*string `json:"NewDomains,omitempty" name:"NewDomains"`
 }
 
 func (r *ModifyDomainAttributesRequest) ToJsonString() string {
@@ -4348,6 +4359,7 @@ func (r *ModifyDomainAttributesRequest) FromJsonString(s string) error {
 	delete(f, "Http2")
 	delete(f, "DefaultServer")
 	delete(f, "NewDefaultServerDomain")
+	delete(f, "NewDomains")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDomainAttributesRequest has unknown keys!", "")
 	}
@@ -5334,11 +5346,11 @@ type RuleHealth struct {
 
 type RuleInput struct {
 
-	// Domain name of the forwarding rule. Length: 1-80.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
 	// Forwarding rule path. Length: 1-200.
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// The domain name associated with the forwarding rule. It can contain 1-80 characters. Only one domain name can be entered. If you need to enter multiple domain names, use `Domains`.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Session persistence time in seconds. Value range: 30-3,600. Setting it to 0 indicates that session persistence is disabled.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
@@ -5373,6 +5385,9 @@ type RuleInput struct {
 
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names
 	Quic *bool `json:"Quic,omitempty" name:"Quic"`
+
+	// The domain name associated with the forwarding rule. Each contain 1-80 characters. If you only need to enter one domain name, use `Domain` instead.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 }
 
 type RuleOutput struct {
@@ -5449,6 +5464,10 @@ type RuleOutput struct {
 	// QUIC status
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	QuicStatus *string `json:"QuicStatus,omitempty" name:"QuicStatus"`
+
+	// List of domain names associated with the forwarding rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 }
 
 type RuleTargets struct {

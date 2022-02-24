@@ -565,6 +565,8 @@ type DeployApplicationRequest struct {
 	// JDK version
 	// - KONA: use KONA JDK
 	// - OPEN: use open JDK
+	// - KONA: use KONA JDK
+	// - OPEN: use open JDK
 	JdkVersion *string `json:"JdkVersion,omitempty" name:"JdkVersion"`
 
 	// Security group IDs
@@ -620,6 +622,15 @@ type DeployApplicationRequest struct {
 
 	// Specifies whether to enable logging. `1`: enable; `0`: do not enable
 	LogEnable *int64 `json:"LogEnable,omitempty" name:"LogEnable"`
+
+	// Whether the configuration is modified (except for the image configuration)
+	ConfEdited *bool `json:"ConfEdited,omitempty" name:"ConfEdited"`
+
+	// Whether the application acceleration is enabled 
+	SpeedUp *bool `json:"SpeedUp,omitempty" name:"SpeedUp"`
+
+	// Whether to enable probing
+	StartupProbe *HealthCheckConfig `json:"StartupProbe,omitempty" name:"StartupProbe"`
 }
 
 func (r *DeployApplicationRequest) ToJsonString() string {
@@ -669,6 +680,9 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	delete(f, "HorizontalAutoscaler")
 	delete(f, "CronHorizontalAutoscaler")
 	delete(f, "LogEnable")
+	delete(f, "ConfEdited")
+	delete(f, "SpeedUp")
+	delete(f, "StartupProbe")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployApplicationRequest has unknown keys!", "")
 	}
@@ -711,6 +725,9 @@ type DeployStrategyConf struct {
 
 	// Interval between batches
 	BatchInterval *int64 `json:"BatchInterval,omitempty" name:"BatchInterval"`
+
+	// The minimum number of available pods
+	MinAvailable *int64 `json:"MinAvailable,omitempty" name:"MinAvailable"`
 }
 
 type DescribeApplicationPodsRequest struct {
@@ -1547,6 +1564,14 @@ type Pair struct {
 
 	// Value
 	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// `default``: Custom. `reserved`: System variable. `referenced`: Referenced configuration item.
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Configuration name
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Config *string `json:"Config,omitempty" name:"Config"`
 }
 
 type PortMapping struct {
@@ -1710,19 +1735,19 @@ type RollingUpdateApplicationByVersionRequest struct {
 	// Request source. Options: `IntelliJ`, `Coding`
 	From *string `json:"From,omitempty" name:"From"`
 
-	// 
+	// The deployment policy. Values: `AUTO` (automatically deploy), `BETA` (deploy a small batch first to test the result, and deploy the rest automatically) and `MANUAL` (manually deploy)
 	DeployStrategyType *string `json:"DeployStrategyType,omitempty" name:"DeployStrategyType"`
 
-	// 
+	// Total number of batches
 	TotalBatchCount *int64 `json:"TotalBatchCount,omitempty" name:"TotalBatchCount"`
 
-	// 
+	// Interval between the batches
 	BatchInterval *int64 `json:"BatchInterval,omitempty" name:"BatchInterval"`
 
-	// 
+	// Number of instances in a beta batch
 	BetaBatchNum *int64 `json:"BetaBatchNum,omitempty" name:"BetaBatchNum"`
 
-	// 
+	// Minimum number of available instances during the deployment
 	MinAvailable *int64 `json:"MinAvailable,omitempty" name:"MinAvailable"`
 }
 
@@ -1944,4 +1969,7 @@ type TemNamespaceInfo struct {
 
 	// Whether to enable TSW
 	EnableTswTraceService *bool `json:"EnableTswTraceService,omitempty" name:"EnableTswTraceService"`
+
+	// Whether the environment is locked. `1`: locked; `0`: not locked
+	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
 }

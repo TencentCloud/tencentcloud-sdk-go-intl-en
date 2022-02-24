@@ -114,6 +114,36 @@ func (r *AddEcdnDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AdvanceHttps struct {
+
+	// Custom TLS data switch
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CustomTlsStatus *string `json:"CustomTlsStatus,omitempty" name:"CustomTlsStatus"`
+
+	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
+
+	// Custom encryption suite
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Cipher *string `json:"Cipher,omitempty" name:"Cipher"`
+
+	// Origin-pull verification status
+	// `off`: Disables origin-pull verification
+	// `oneWay`: Only verify the origin
+	// `twoWay`: Enables two-way origin-pull verification
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	VerifyOriginType *string `json:"VerifyOriginType,omitempty" name:"VerifyOriginType"`
+
+	// Configuration information of the origin-pull certificate
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CertInfo *ServerCert `json:"CertInfo,omitempty" name:"CertInfo"`
+
+	// Configuration information of the origin server certificate
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OriginCertInfo *ClientCert `json:"OriginCertInfo,omitempty" name:"OriginCertInfo"`
+}
+
 type Cache struct {
 
 	// Caching configuration rule array.
@@ -512,11 +542,11 @@ type DescribeEcdnStatisticsRequest struct {
 	// 5xx: returns the number of 5xx status codes or details of status codes starting with 5
 	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
 
-	// Time granularity, which can be:
-	// 1 day	 1, 5, 15, 30, 60, 120, 240, 1440 
-	// 2-3 days 15, 30, 60, 120, 240, 1440
-	// 4-7 days 30, 60, 120, 240, 1440
-	// 8-90 days	 60, 120, 240, 1440
+	// Sampling interval in minutes. The available options vary for different query period. See below: 
+	// 1 day: `1`, `5`, `15`, `30`, `60`, `120`, `240`, `1440` 
+	// 2 to 3 days: `15`, `30`, `60`, `120`, `240`, `1440`
+	// 4 to 7 days: `30`, `60`, `120`, `240`, `1440`
+	// 8 to 31 days: `60`, `120`, `240`, `1440`
 	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
 
 	// Specifies the list of domain names to be queried
@@ -817,6 +847,10 @@ type DomainBriefInfo struct {
 
 	// Domain name lock status. normal: not locked; global: globally locked
 	Readonly *string `json:"Readonly,omitempty" name:"Readonly"`
+
+	// Domain name tag
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
 }
 
 type DomainData struct {
@@ -909,17 +943,18 @@ type DomainDetailInfo struct {
 
 type DomainFilter struct {
 
-	// Filter field name, which can be:
-	// - origin: primary origin server.
-	// - domain: domain name.
-	// - resourceId: domain name ID.
-	// - status: domain name status. Valid values: online, offline, processing.
-	// - disable: domain name blockage status. Valid values: normal, unlicensed.
-	// - projectId: project ID.
-	// - fullUrlCache: full path cache. Valid values: on, off.
-	// - https: whether to configure HTTPS. Valid values: on, off, processing.
-	// - originPullProtocol: origin-pull protocol type. Valid values: http, follow, https.
-	// - area: acceleration region. Valid values: mainland, overseas, global.
+	// Filters by the field name, which includes:
+	// - `origin`: Primary origin server.
+	// - `domain`: Domain name.
+	// - `resourceId`: Domain name ID.
+	// - `status`: Domain name status. Valid values: `online`, `offline`, and `processing`.
+	// - `disable`: Whether the domain name is blocked. Valid values: `normal`, `unlicensed`.
+	// - `projectId`: Project ID.
+	// - `fullUrlCache`: Whether to enable full-path cache, which can be `on` or `off`.
+	// - `https`: Whether to configure HTTPS, which can be `on`, `off` or `processing`.
+	// - `originPullProtocol`: Origin-pull protocol type, which can be `http`, `follow`, or `https`.
+	// - `area`: Acceleration region, which can be `mainland`，`overseas` or `global`.
+	// - `tagKey`: Tag key.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filter field value.
@@ -1115,6 +1150,10 @@ type Origin struct {
 	// This is required when setting `BackupOrigins`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
+
+	// HTTPS advanced origin-pull configuration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AdvanceHttps *AdvanceHttps `json:"AdvanceHttps,omitempty" name:"AdvanceHttps"`
 }
 
 type PurgePathCacheRequest struct {
@@ -1151,7 +1190,7 @@ type PurgePathCacheResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Purge task ID. The first ten digits are the UTC time when the task is submitted.
+		// Purge task ID
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1221,7 +1260,7 @@ type PurgeUrlsCacheResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Purge task ID. The first ten digits are the UTC time when the task is submitted.
+		// Purge task ID
 		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1522,7 +1561,9 @@ func (r *UpdateDomainConfigResponse) FromJsonString(s string) error {
 
 type WebSocket struct {
 
-	// WebSocket configuration switch, which can be `on` or `off`.
+	// Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
+	// 
+	// * WebSocket is now only available for beta users. To use it, please submit a ticket.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Sets timeout period in seconds. Maximum value: 65

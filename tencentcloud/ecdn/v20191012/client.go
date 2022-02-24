@@ -64,39 +64,9 @@ func NewAddEcdnDomainResponse() (response *AddEcdnDomainResponse) {
 // AddEcdnDomain
 // This API is used to create an acceleration domain name.
 //
-// error code that may be returned:
-//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
-//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
-//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
-//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
-//  INVALIDPARAMETER_ECDNCAMTAGKEYNOTEXIST = "InvalidParameter.EcdnCamTagKeyNotExist"
-//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
-//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
-//  INVALIDPARAMETER_ECDNRESOURCEMANYTAGKEY = "InvalidParameter.EcdnResourceManyTagKey"
-//  INVALIDPARAMETER_ECDNTAGKEYINVALID = "InvalidParameter.EcdnTagKeyInvalid"
-//  INVALIDPARAMETER_ECDNTAGKEYNOTEXIST = "InvalidParameter.EcdnTagKeyNotExist"
-//  INVALIDPARAMETER_ECDNTAGKEYTOOMANYVALUE = "InvalidParameter.EcdnTagKeyTooManyValue"
-//  INVALIDPARAMETER_ECDNTAGVALUEINVALID = "InvalidParameter.EcdnTagValueInvalid"
-//  INVALIDPARAMETER_ECDNUSERTOOMANYTAGKEY = "InvalidParameter.EcdnUserTooManyTagKey"
-//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
-//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
-//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
-//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
-func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdnDomainResponse, err error) {
-    if request == nil {
-        request = NewAddEcdnDomainRequest()
-    }
-    
-    response = NewAddEcdnDomainResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// AddEcdnDomain
-// This API is used to create an acceleration domain name.
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41123?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
@@ -113,10 +83,58 @@ func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdn
 //  INVALIDPARAMETER_ECDNTAGVALUEINVALID = "InvalidParameter.EcdnTagValueInvalid"
 //  INVALIDPARAMETER_ECDNUSERTOOMANYTAGKEY = "InvalidParameter.EcdnUserTooManyTagKey"
 //  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  LIMITEXCEEDED_ECDNUSERTOOMANYDOMAINS = "LimitExceeded.EcdnUserTooManyDomains"
+//  RESOURCEINUSE_ECDNDOMAINEXISTS = "ResourceInUse.EcdnDomainExists"
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.EcdnDomainRecordNotVerified"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.EcdnHostIsOwnedByOther"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
+func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdnDomainResponse, err error) {
+    if request == nil {
+        request = NewAddEcdnDomainRequest()
+    }
+    
+    response = NewAddEcdnDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// AddEcdnDomain
+// This API is used to create an acceleration domain name.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41123?from_cn_redirect=1">corresponding CDN API</a>.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNCAMTAGKEYNOTEXIST = "InvalidParameter.EcdnCamTagKeyNotExist"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNRESOURCEMANYTAGKEY = "InvalidParameter.EcdnResourceManyTagKey"
+//  INVALIDPARAMETER_ECDNTAGKEYINVALID = "InvalidParameter.EcdnTagKeyInvalid"
+//  INVALIDPARAMETER_ECDNTAGKEYNOTEXIST = "InvalidParameter.EcdnTagKeyNotExist"
+//  INVALIDPARAMETER_ECDNTAGKEYTOOMANYVALUE = "InvalidParameter.EcdnTagKeyTooManyValue"
+//  INVALIDPARAMETER_ECDNTAGVALUEINVALID = "InvalidParameter.EcdnTagValueInvalid"
+//  INVALIDPARAMETER_ECDNUSERTOOMANYTAGKEY = "InvalidParameter.EcdnUserTooManyTagKey"
+//  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
+//  LIMITEXCEEDED_ECDNUSERTOOMANYDOMAINS = "LimitExceeded.EcdnUserTooManyDomains"
+//  RESOURCEINUSE_ECDNDOMAINEXISTS = "ResourceInUse.EcdnDomainExists"
+//  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.EcdnDomainRecordNotVerified"
+//  UNAUTHORIZEDOPERATION_ECDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.EcdnHostIsOwnedByOther"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) AddEcdnDomainWithContext(ctx context.Context, request *AddEcdnDomainRequest) (response *AddEcdnDomainResponse, err error) {
@@ -150,16 +168,24 @@ func NewDeleteEcdnDomainResponse() (response *DeleteEcdnDomainResponse) {
 // DeleteEcdnDomain
 // This API is used to delete a specified acceleration domain name. The acceleration domain name to be deleted must be in disabled status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/570/42471?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTOFFLINE = "ResourceUnavailable.EcdnDomainIsNotOffline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DeleteEcdnDomain(request *DeleteEcdnDomainRequest) (response *DeleteEcdnDomainResponse, err error) {
     if request == nil {
@@ -174,16 +200,24 @@ func (c *Client) DeleteEcdnDomain(request *DeleteEcdnDomainRequest) (response *D
 // DeleteEcdnDomain
 // This API is used to delete a specified acceleration domain name. The acceleration domain name to be deleted must be in disabled status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/570/42471?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTOFFLINE = "ResourceUnavailable.EcdnDomainIsNotOffline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DeleteEcdnDomainWithContext(ctx context.Context, request *DeleteEcdnDomainRequest) (response *DeleteEcdnDomainResponse, err error) {
     if request == nil {
@@ -216,6 +250,10 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 // DescribeDomains
 // This API is used to query the basic information of a CDN domain name, including the project ID, status, business type, creation time, update time, etc.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41118?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
 //  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
@@ -238,6 +276,10 @@ func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *Des
 
 // DescribeDomains
 // This API is used to query the basic information of a CDN domain name, including the project ID, status, business type, creation time, update time, etc.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41118?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -280,12 +322,17 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
 // DescribeDomainsConfig
 // This API is used to query the detailed configuration information of a CDN acceleration domain name.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41117?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
 //  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
 //  INVALIDPARAMETER_ECDNCERTNOCERTINFO = "InvalidParameter.EcdnCertNoCertInfo"
+//  INVALIDPARAMETER_ECDNCONFIGINVALIDCACHE = "InvalidParameter.EcdnConfigInvalidCache"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
@@ -305,12 +352,17 @@ func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (r
 // DescribeDomainsConfig
 // This API is used to query the detailed configuration information of a CDN acceleration domain name.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41117?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
 //  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
 //  INVALIDPARAMETER_ECDNCERTNOCERTINFO = "InvalidParameter.EcdnCertNoCertInfo"
+//  INVALIDPARAMETER_ECDNCONFIGINVALIDCACHE = "InvalidParameter.EcdnConfigInvalidCache"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  LIMITEXCEEDED_ECDNDOMAINOPTOOOFTEN = "LimitExceeded.EcdnDomainOpTooOften"
@@ -540,6 +592,7 @@ func NewDescribeEcdnStatisticsResponse() (response *DescribeEcdnStatisticsRespon
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
 //  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_ECDNINVALIDPARAMINTERVAL = "InvalidParameter.EcdnInvalidParamInterval"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  INVALIDPARAMETER_ECDNSTATINVALIDDATE = "InvalidParameter.EcdnStatInvalidDate"
@@ -567,6 +620,7 @@ func NewDescribeEcdnStatisticsResponse() (response *DescribeEcdnStatisticsRespon
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_PROJECTNOPERMISSION = "UnauthorizedOperation.ProjectNoPermission"
 //  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) (response *DescribeEcdnStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
@@ -600,6 +654,7 @@ func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) 
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
 //  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_ECDNINVALIDPARAMINTERVAL = "InvalidParameter.EcdnInvalidParamInterval"
 //  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
 //  INVALIDPARAMETER_ECDNSTATINVALIDDATE = "InvalidParameter.EcdnStatInvalidDate"
@@ -627,6 +682,7 @@ func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) 
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_PROJECTNOPERMISSION = "UnauthorizedOperation.ProjectNoPermission"
 //  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeEcdnStatisticsWithContext(ctx context.Context, request *DescribeEcdnStatisticsRequest) (response *DescribeEcdnStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
@@ -656,7 +712,11 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
 }
 
 // DescribeIpStatus
-// This API is used to query the detailed node information of the acceleration platform to which the domain name is connected.
+// This API is used to query ECDN node IPs. This API is only available to beta users. Please submit a ticket to use it.
+//
+// 
+//
+// If you need to add the node IPs to your origin allowlist, keep querying the updating the IPs regularly to ensure the success of origin forwarding. 
 //
 // error code that may be returned:
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -667,6 +727,7 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
 //  RESOURCENOTFOUND_ECDNHOSTNOTEXISTS = "ResourceNotFound.EcdnHostNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
@@ -680,7 +741,11 @@ func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *D
 }
 
 // DescribeIpStatus
-// This API is used to query the detailed node information of the acceleration platform to which the domain name is connected.
+// This API is used to query ECDN node IPs. This API is only available to beta users. Please submit a ticket to use it.
+//
+// 
+//
+// If you need to add the node IPs to your origin allowlist, keep querying the updating the IPs regularly to ensure the success of origin forwarding. 
 //
 // error code that may be returned:
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -691,6 +756,7 @@ func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *D
 //  RESOURCENOTFOUND_ECDNHOSTNOTEXISTS = "ResourceNotFound.EcdnHostNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) DescribeIpStatusWithContext(ctx context.Context, request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
@@ -724,6 +790,10 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 // DescribePurgeQuota
 // This API is used to query the usage quota of the purge API.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41956?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
@@ -732,6 +802,7 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
     if request == nil {
@@ -746,6 +817,10 @@ func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (respons
 // DescribePurgeQuota
 // This API is used to query the usage quota of the purge API.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/41956?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
@@ -754,6 +829,7 @@ func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (respons
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeQuotaWithContext(ctx context.Context, request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
     if request == nil {
@@ -784,7 +860,11 @@ func NewDescribePurgeTasksResponse() (response *DescribePurgeTasksResponse) {
 }
 
 // DescribePurgeTasks
-// This API is used to query the submission history of purge tasks and their execution progress.
+// This API is used to query the submission record and progress of purge tasks.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/37873?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
@@ -793,6 +873,7 @@ func NewDescribePurgeTasksResponse() (response *DescribePurgeTasksResponse) {
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (response *DescribePurgeTasksResponse, err error) {
     if request == nil {
@@ -805,7 +886,11 @@ func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (respons
 }
 
 // DescribePurgeTasks
-// This API is used to query the submission history of purge tasks and their execution progress.
+// This API is used to query the submission record and progress of purge tasks.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/37873?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
@@ -814,6 +899,7 @@ func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (respons
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeTasksWithContext(ctx context.Context, request *DescribePurgeTasksRequest) (response *DescribePurgeTasksResponse, err error) {
     if request == nil {
@@ -846,34 +932,9 @@ func NewPurgePathCacheResponse() (response *PurgePathCacheResponse) {
 // PurgePathCache
 // This API is used to purge cache directories in batches. One purge task ID will be returned for each submission.
 //
-// error code that may be returned:
-//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
-//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
-//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
-//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
-//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
-//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
-//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
-//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
-//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgePathExceedBatchLimit"
-//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgePathExceedDayLimit"
-//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
-//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
-//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
-func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgePathCacheRequest()
-    }
-    
-    response = NewPurgePathCacheResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// PurgePathCache
-// This API is used to purge cache directories in batches. One purge task ID will be returned for each submission.
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/570/42475?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
@@ -890,6 +951,41 @@ func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *Purge
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
+func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
+    if request == nil {
+        request = NewPurgePathCacheRequest()
+    }
+    
+    response = NewPurgePathCacheResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// PurgePathCache
+// This API is used to purge cache directories in batches. One purge task ID will be returned for each submission.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/570/42475?from_cn_redirect=1">corresponding CDN API</a>.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
+//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
+//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgePathExceedBatchLimit"
+//  LIMITEXCEEDED_ECDNPURGEPATHEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgePathExceedDayLimit"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgePathCacheWithContext(ctx context.Context, request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
     if request == nil {
@@ -922,35 +1018,9 @@ func NewPurgeUrlsCacheResponse() (response *PurgeUrlsCacheResponse) {
 // PurgeUrlsCache
 // This API is used to batch purge URLs. One purge task ID will be returned for each submission.
 //
-// error code that may be returned:
-//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
-//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
-//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
-//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
-//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
-//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
-//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
-//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
-//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
-//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgeUrlExceedBatchLimit"
-//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgeUrlExceedDayLimit"
-//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
-//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
-//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
-func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgeUrlsCacheRequest()
-    }
-    
-    response = NewPurgeUrlsCacheResponse()
-    err = c.Send(request, response)
-    return
-}
-
-// PurgeUrlsCache
-// This API is used to batch purge URLs. One purge task ID will be returned for each submission.
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/37870?from_cn_redirect=1">corresponding CDN API</a>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
@@ -968,6 +1038,42 @@ func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *Purge
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
+//  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
+func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
+    if request == nil {
+        request = NewPurgeUrlsCacheRequest()
+    }
+    
+    response = NewPurgeUrlsCacheResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// PurgeUrlsCache
+// This API is used to batch purge URLs. One purge task ID will be returned for each submission.
+//
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/api/228/37870?from_cn_redirect=1">corresponding CDN API</a>.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
+//  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
+//  INTERNALERROR_ECDNDBERROR = "InternalError.EcdnDbError"
+//  INTERNALERROR_ECDNSYSTEMERROR = "InternalError.EcdnSystemError"
+//  INVALIDPARAMETER_ECDNDOMAININVALIDSTATUS = "InvalidParameter.EcdnDomainInvalidStatus"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  INVALIDPARAMETER_ECDNPARAMERROR = "InvalidParameter.EcdnParamError"
+//  INVALIDPARAMETER_ECDNPURGEWILDCARDNOTALLOWED = "InvalidParameter.EcdnPurgeWildcardNotAllowed"
+//  INVALIDPARAMETER_ECDNURLEXCEEDLENGTH = "InvalidParameter.EcdnUrlExceedLength"
+//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDBATCHLIMIT = "LimitExceeded.EcdnPurgeUrlExceedBatchLimit"
+//  LIMITEXCEEDED_ECDNPURGEURLEXCEEDDAYLIMIT = "LimitExceeded.EcdnPurgeUrlExceedDayLimit"
+//  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
+//  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgeUrlsCacheWithContext(ctx context.Context, request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
     if request == nil {
@@ -1000,6 +1106,10 @@ func NewStartEcdnDomainResponse() (response *StartEcdnDomainResponse) {
 // StartEcdnDomain
 // This API is used to enable an acceleration domain name. The domain name to be enabled must be in deactivated status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/product/228/41121?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -1009,7 +1119,10 @@ func NewStartEcdnDomainResponse() (response *StartEcdnDomainResponse) {
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTOFFLINE = "ResourceUnavailable.EcdnDomainIsNotOffline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *StartEcdnDomainResponse, err error) {
     if request == nil {
@@ -1024,6 +1137,10 @@ func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *Sta
 // StartEcdnDomain
 // This API is used to enable an acceleration domain name. The domain name to be enabled must be in deactivated status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/product/228/41121?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -1033,7 +1150,10 @@ func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *Sta
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTOFFLINE = "ResourceUnavailable.EcdnDomainIsNotOffline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StartEcdnDomainWithContext(ctx context.Context, request *StartEcdnDomainRequest) (response *StartEcdnDomainResponse, err error) {
     if request == nil {
@@ -1066,6 +1186,10 @@ func NewStopEcdnDomainResponse() (response *StopEcdnDomainResponse) {
 // StopEcdnDomain
 // This API is used to disable an acceleration domain name. The domain name to be disabled must be in enabled or deploying status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/product/228/41120?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -1076,7 +1200,9 @@ func NewStopEcdnDomainResponse() (response *StopEcdnDomainResponse) {
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTONLINE = "ResourceUnavailable.EcdnDomainIsNotOnline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopEcdnDomainResponse, err error) {
     if request == nil {
@@ -1091,6 +1217,10 @@ func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopE
 // StopEcdnDomain
 // This API is used to disable an acceleration domain name. The domain name to be disabled must be in enabled or deploying status.
 //
+// 
+//
+// >? If you have migrated your ECDN service to CDN, you can use the <a href="https://intl.cloud.tencent.com/document/product/228/41120?from_cn_redirect=1">corresponding CDN API</a>.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
 //  INTERNALERROR_ECDNCONFIGERROR = "InternalError.EcdnConfigError"
@@ -1101,7 +1231,9 @@ func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopE
 //  RESOURCEINUSE_ECDNOPINPROGRESS = "ResourceInUse.EcdnOpInProgress"
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISNOTONLINE = "ResourceUnavailable.EcdnDomainIsNotOnline"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StopEcdnDomainWithContext(ctx context.Context, request *StopEcdnDomainRequest) (response *StopEcdnDomainResponse, err error) {
     if request == nil {
@@ -1134,7 +1266,11 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
 // UpdateDomainConfig
 // This API is used to update the configuration information of an ECDN acceleration domain name.
 //
-// Note: if you need to update a complex configuration item, you must pass in all attributes of the entire object, and the default values will be used for the attributes that are not passed in. You are recommended to get the configuration attribute through the query API first and then directly modify and pass it to this API. Due to the special nature of the certificate for HTTPS configuration, you do not need to pass in the certificate and key fields during the update.
+// Note: if you need to update complex configuration items, you must pass all the attributes of the entire object. The default value will be used for attributes that are not passed. We recommend calling the querying API to obtain the configuration attributes first. You can then modify and pass the attributes to the API. The certificate and key fields do not need to be passed for HTTPS configuration.
+//
+// 
+//
+// >?  If your application has been migrated to Tencent Cloud CDN, you can use <a href="https://intl.cloud.tencent.com/document/product/228/41116?from_cn_redirect=1">CDN APIs</a>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
@@ -1149,8 +1285,10 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNPROJECTNOTEXISTS = "ResourceNotFound.EcdnProjectNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.EcdnProjectUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
@@ -1167,7 +1305,11 @@ func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (respons
 // UpdateDomainConfig
 // This API is used to update the configuration information of an ECDN acceleration domain name.
 //
-// Note: if you need to update a complex configuration item, you must pass in all attributes of the entire object, and the default values will be used for the attributes that are not passed in. You are recommended to get the configuration attribute through the query API first and then directly modify and pass it to this API. Due to the special nature of the certificate for HTTPS configuration, you do not need to pass in the certificate and key fields during the update.
+// Note: if you need to update complex configuration items, you must pass all the attributes of the entire object. The default value will be used for attributes that are not passed. We recommend calling the querying API to obtain the configuration attributes first. You can then modify and pass the attributes to the API. The certificate and key fields do not need to be passed for HTTPS configuration.
+//
+// 
+//
+// >?  If your application has been migrated to Tencent Cloud CDN, you can use <a href="https://intl.cloud.tencent.com/document/product/228/41116?from_cn_redirect=1">CDN APIs</a>.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ECDNCONFIGERROR = "FailedOperation.EcdnConfigError"
@@ -1182,8 +1324,10 @@ func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (respons
 //  RESOURCENOTFOUND_ECDNDOMAINNOTEXISTS = "ResourceNotFound.EcdnDomainNotExists"
 //  RESOURCENOTFOUND_ECDNPROJECTNOTEXISTS = "ResourceNotFound.EcdnProjectNotExists"
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
+//  RESOURCEUNAVAILABLE_ECDNDOMAINISLOCKED = "ResourceUnavailable.EcdnDomainIsLocked"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNDOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnDomainUnauthorized"
+//  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.EcdnProjectUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"

@@ -1479,6 +1479,9 @@ type CreateApiRequest struct {
 	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
 	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
 
+	// Event bus ID.
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
 	// SCF function type, which takes effect if the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
 	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
 
@@ -1553,6 +1556,7 @@ func (r *CreateApiRequest) FromJsonString(s string) error {
 	delete(f, "TargetNamespaceId")
 	delete(f, "UserType")
 	delete(f, "IsBase64Encoded")
+	delete(f, "EventBusId")
 	delete(f, "ServiceScfFunctionType")
 	delete(f, "EIAMAppType")
 	delete(f, "EIAMAuthType")
@@ -5544,6 +5548,24 @@ type ModifyApiRequest struct {
 
 	// Header trigger rules. The number of rules cannot exceed 10.
 	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules"`
+
+	// Event bus ID.
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// SCF function type, which takes effect when the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
+	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
+
+	// EIAM application type.
+	EIAMAppType *string `json:"EIAMAppType,omitempty" name:"EIAMAppType"`
+
+	// EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+	EIAMAuthType *string `json:"EIAMAuthType,omitempty" name:"EIAMAuthType"`
+
+	// Validity of the EIAM application token. Unit: second. Default value: `7200`.
+	EIAMAppId *string `json:"EIAMAppId,omitempty" name:"EIAMAppId"`
+
+	// EIAM application ID.
+	TokenTimeout *int64 `json:"TokenTimeout,omitempty" name:"TokenTimeout"`
 }
 
 func (r *ModifyApiRequest) ToJsonString() string {
@@ -5606,6 +5628,12 @@ func (r *ModifyApiRequest) FromJsonString(s string) error {
 	delete(f, "IsBase64Encoded")
 	delete(f, "IsBase64Trigger")
 	delete(f, "Base64EncodedTriggerRules")
+	delete(f, "EventBusId")
+	delete(f, "ServiceScfFunctionType")
+	delete(f, "EIAMAppType")
+	delete(f, "EIAMAuthType")
+	delete(f, "EIAMAppId")
+	delete(f, "TokenTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApiRequest has unknown keys!", "")
 	}

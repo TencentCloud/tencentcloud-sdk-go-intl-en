@@ -119,7 +119,7 @@ const (
 	// The list of instance types cannot be empty.
 	INVALIDPARAMETERVALUE_INSTANCETYPESEMPTY = "InvalidParameterValue.InstanceTypesEmpty"
 
-	// 
+	// The value of `DataTypeAny` is invalid.
 	INVALIDPARAMETERVALUE_INVALIDDATATYPEANY = "InvalidParameterValue.InvalidDataTypeAny"
 
 	// The number of filter parameter values exceeds the limit.
@@ -134,7 +134,7 @@ const (
 	// Invalid negative parameter.
 	INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 
-	// 
+	// The parameter value is not in float type.
 	INVALIDPARAMETERVALUE_NOTFLOAT = "InvalidParameterValue.NotFloat"
 
 	// Invalid storage path format.
