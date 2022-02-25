@@ -2171,7 +2171,7 @@ func NewDescribeCmqSubscriptionDetailResponse() (response *DescribeCmqSubscripti
 // This API is used to query the CMQ subscription details.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 func (c *Client) DescribeCmqSubscriptionDetail(request *DescribeCmqSubscriptionDetailRequest) (response *DescribeCmqSubscriptionDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCmqSubscriptionDetailRequest()
@@ -2186,7 +2186,7 @@ func (c *Client) DescribeCmqSubscriptionDetail(request *DescribeCmqSubscriptionD
 // This API is used to query the CMQ subscription details.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 func (c *Client) DescribeCmqSubscriptionDetailWithContext(ctx context.Context, request *DescribeCmqSubscriptionDetailRequest) (response *DescribeCmqSubscriptionDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCmqSubscriptionDetailRequest()
@@ -2220,6 +2220,7 @@ func NewDescribeCmqTopicDetailResponse() (response *DescribeCmqTopicDetailRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeCmqTopicDetail(request *DescribeCmqTopicDetailRequest) (response *DescribeCmqTopicDetailResponse, err error) {
     if request == nil {
@@ -2236,6 +2237,7 @@ func (c *Client) DescribeCmqTopicDetail(request *DescribeCmqTopicDetailRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeCmqTopicDetailWithContext(ctx context.Context, request *DescribeCmqTopicDetailRequest) (response *DescribeCmqTopicDetailResponse, err error) {
     if request == nil {
@@ -2270,6 +2272,7 @@ func NewDescribeCmqTopicsResponse() (response *DescribeCmqTopicsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 func (c *Client) DescribeCmqTopics(request *DescribeCmqTopicsRequest) (response *DescribeCmqTopicsResponse, err error) {
     if request == nil {
         request = NewDescribeCmqTopicsRequest()
@@ -2285,6 +2288,7 @@ func (c *Client) DescribeCmqTopics(request *DescribeCmqTopicsRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
 func (c *Client) DescribeCmqTopicsWithContext(ctx context.Context, request *DescribeCmqTopicsRequest) (response *DescribeCmqTopicsResponse, err error) {
     if request == nil {
         request = NewDescribeCmqTopicsRequest()

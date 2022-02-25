@@ -1384,6 +1384,66 @@ func (r *DescribeMySqlProcessListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeProxySessionKillTasksRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The async session killing task ID, which is obtained after the API `CreateProxySessionKillTask` is successfully called.
+	AsyncRequestIds []*int64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DescribeProxySessionKillTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxySessionKillTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AsyncRequestIds")
+	delete(f, "Product")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxySessionKillTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProxySessionKillTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Session killing task details.
+		Tasks []*TaskInfo `json:"Tasks,omitempty" name:"Tasks"`
+
+		// Total number of tasks.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProxySessionKillTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxySessionKillTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeSecurityAuditLogDownloadUrlsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2809,6 +2869,42 @@ type TableSpaceTimeSeries struct {
 
 	// Space metric value in a unit of time interval
 	SeriesData *MonitorFloatMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
+}
+
+type TaskInfo struct {
+
+	// Async task ID.
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// List of all proxies of the current instance.
+	InstProxyList []*string `json:"InstProxyList,omitempty" name:"InstProxyList"`
+
+	// Total number of proxies of the current instance.
+	InstProxyCount *int64 `json:"InstProxyCount,omitempty" name:"InstProxyCount"`
+
+	// Task creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Task start time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Task status. Valid values: `created` (create), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
+	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// IDs of the proxies that have completed the session killing tasks.
+	FinishedProxyList []*string `json:"FinishedProxyList,omitempty" name:"FinishedProxyList"`
+
+	// IDs of the proxies that failed to execute the session killing tasks.
+	FailedProxyList []*string `json:"FailedProxyList,omitempty" name:"FailedProxyList"`
+
+	// Task end time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task progress.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type TimeSlice struct {

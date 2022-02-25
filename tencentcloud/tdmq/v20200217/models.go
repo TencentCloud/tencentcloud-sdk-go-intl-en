@@ -273,6 +273,12 @@ type Cluster struct {
 	// Tag
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Billing mode:
+	// `0`: Pay-as-you-go
+	// `1`: Monthly subscription
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 }
 
 type CmqDeadLetterPolicy struct {
@@ -569,6 +575,10 @@ type Consumer struct {
 	// Consumer version.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ClientVersion *string `json:"ClientVersion,omitempty" name:"ClientVersion"`
+
+	// Serial number of the topic partition connected to the consumer.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
 }
 
 type ConsumersSchedule struct {
@@ -708,6 +718,9 @@ type CreateCmqQueueRequest struct {
 
 	// Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled
 	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+
+	// Tag array.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateCmqQueueRequest) ToJsonString() string {
@@ -737,6 +750,7 @@ func (r *CreateCmqQueueRequest) FromJsonString(s string) error {
 	delete(f, "MaxReceiveCount")
 	delete(f, "MaxTimeToLive")
 	delete(f, "Trace")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCmqQueueRequest has unknown keys!", "")
 	}
@@ -860,6 +874,9 @@ type CreateCmqTopicRequest struct {
 
 	// Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
 	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+
+	// Tag array.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateCmqTopicRequest) ToJsonString() string {
@@ -879,6 +896,7 @@ func (r *CreateCmqTopicRequest) FromJsonString(s string) error {
 	delete(f, "FilterType")
 	delete(f, "MsgRetentionSeconds")
 	delete(f, "Trace")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCmqTopicRequest has unknown keys!", "")
 	}
@@ -1441,6 +1459,9 @@ type CreateTopicRequest struct {
 	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic (up to 128).
 	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
 	// 0: general message;
 	// 1: globally sequential message;
 	// 2: partitionally sequential message;
@@ -1448,11 +1469,15 @@ type CreateTopicRequest struct {
 	// 4: dead letter queue.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
-	// Remarks (up to 128 characters).
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
 	// Pulsar cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Pulsar topic type.
+	// `0`: Non-persistent and non-partitioned
+	// `1`: Non-persistent and partitioned
+	// `2`: Persistent and non-partitioned
+	// `3`: Persistent and partitioned
+	PulsarTopicType *int64 `json:"PulsarTopicType,omitempty" name:"PulsarTopicType"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -1470,9 +1495,10 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "EnvironmentId")
 	delete(f, "TopicName")
 	delete(f, "Partitions")
-	delete(f, "TopicType")
 	delete(f, "Remark")
+	delete(f, "TopicType")
 	delete(f, "ClusterId")
+	delete(f, "PulsarTopicType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -5509,6 +5535,18 @@ type Subscription struct {
 	// Modification time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubType *string `json:"SubType,omitempty" name:"SubType"`
+
+	// Whether messages are blocked as the limit of unacknowledged messages has been reached.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BlockedSubscriptionOnUnackedMsgs *bool `json:"BlockedSubscriptionOnUnackedMsgs,omitempty" name:"BlockedSubscriptionOnUnackedMsgs"`
+
+	// Maximum number of unacknowledged messages.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MaxUnackedMsgNum *int64 `json:"MaxUnackedMsgNum,omitempty" name:"MaxUnackedMsgNum"`
 }
 
 type SubscriptionTopic struct {
@@ -5623,6 +5661,13 @@ type Topic struct {
 	// Maximum number of consumers.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ConsumerLimit *string `json:"ConsumerLimit,omitempty" name:"ConsumerLimit"`
+
+	// `0`: Non-persistent and non-partitioned
+	// `1`: Non-persistent and partitioned
+	// `2`: Persistent and non-partitioned
+	// `3`: Persistent and partitioned
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PulsarTopicType *int64 `json:"PulsarTopicType,omitempty" name:"PulsarTopicType"`
 }
 
 type TopicRecord struct {

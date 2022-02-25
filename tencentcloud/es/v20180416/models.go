@@ -977,6 +977,14 @@ type InstanceInfo struct {
 	// Cluster health status. `-1`: Unknown; `0`: Green; `1`: Yellow; `2`: Red
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HealthStatus *int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
+
+	// Private URL of the HTTPS cluster
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EsPrivateUrl *string `json:"EsPrivateUrl,omitempty" name:"EsPrivateUrl"`
+
+	// Private domain of the HTTPS cluster
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EsPrivateDomain *string `json:"EsPrivateDomain,omitempty" name:"EsPrivateDomain"`
 }
 
 type InstanceLog struct {

@@ -20,6 +20,9 @@ const (
 	// Error with CAM signature/authentication.
 	AUTHFAILURE = "AuthFailure"
 
+	// DryRun operation, which means the DryRun parameter is passed in yet the request will still be successful.
+	DRYRUNOPERATION = "DryRunOperation"
+
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
@@ -47,8 +50,20 @@ const (
 	// The number of requests exceeds the frequency limit.
 	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 
+	// The resource is occupied.
+	RESOURCEINUSE = "ResourceInUse"
+
+	// Insufficient resource.
+	RESOURCEINSUFFICIENT = "ResourceInsufficient"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
+
+	// The resource is unavailable.
+	RESOURCEUNAVAILABLE = "ResourceUnavailable"
+
+	// The resources have been sold out.
+	RESOURCESSOLDOUT = "ResourcesSoldOut"
 
 	// The operation is unauthorized.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"

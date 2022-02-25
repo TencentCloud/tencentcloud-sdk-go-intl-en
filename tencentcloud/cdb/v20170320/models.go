@@ -1012,17 +1012,20 @@ type CreateDBImportJobRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filename. The file must be a .sql file uploaded to Tencent Cloud.
-	FileName *string `json:"FileName,omitempty" name:"FileName"`
-
 	// TencentDB username
 	User *string `json:"User,omitempty" name:"User"`
+
+	// Filename. The file must be a .sql file uploaded to Tencent Cloud.
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
 	// Password of a TencentDB instance user account
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Name of the target database. If this parameter is not passed in, no database is specified.
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
+
+	// URL of a .sql file stored in COS. Either `FileName` or `CosUrl` must be specified.
+	CosUrl *string `json:"CosUrl,omitempty" name:"CosUrl"`
 }
 
 func (r *CreateDBImportJobRequest) ToJsonString() string {
@@ -1038,10 +1041,11 @@ func (r *CreateDBImportJobRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
-	delete(f, "FileName")
 	delete(f, "User")
+	delete(f, "FileName")
 	delete(f, "Password")
 	delete(f, "DbName")
+	delete(f, "CosUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBImportJobRequest has unknown keys!", "")
 	}
@@ -3332,6 +3336,9 @@ type DescribeDefaultParamsRequest struct {
 
 	// MySQL version. Currently, the supported versions are ["5.1", "5.5", "5.6", "5.7"].
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
 }
 
 func (r *DescribeDefaultParamsRequest) ToJsonString() string {
@@ -3347,6 +3354,7 @@ func (r *DescribeDefaultParamsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "EngineVersion")
+	delete(f, "TemplateType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDefaultParamsRequest has unknown keys!", "")
 	}
@@ -8757,7 +8765,7 @@ type ZoneConf struct {
 
 type ZoneSellConf struct {
 
-	// AZ status. Value range: 0 (not available), 1 (available), 2 (purchasable), 3 (not purchasable), 4 (not displayed)
+	// AZ status used to indicate whether instances are purchasable. Value range: `1` (purchasable), `3` (not purchasable), `4` (AZ not displayed)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// AZ name
@@ -8805,4 +8813,15 @@ type ZoneSellConf struct {
 	// Information of supported cross-AZ read-only zone
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone"`
+
+	// AZ status used to indicate whether dedicated instances are purchasable. Valid values: `1 (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+	ExClusterStatus *int64 `json:"ExClusterStatus,omitempty" name:"ExClusterStatus"`
+
+	// AZ information of the cross-AZ deployed read-only instances which are associated with a dedicated instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExClusterRemoteRoZone []*string `json:"ExClusterRemoteRoZone,omitempty" name:"ExClusterRemoteRoZone"`
+
+	// AZ information of a multi-AZ deployed dedicated instance.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExClusterZoneConf *ZoneConf `json:"ExClusterZoneConf,omitempty" name:"ExClusterZoneConf"`
 }
