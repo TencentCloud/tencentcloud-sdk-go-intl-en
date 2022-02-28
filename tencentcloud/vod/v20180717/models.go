@@ -2331,7 +2331,7 @@ type ComposeMediaOutput struct {
 type ComposeMediaRequest struct {
 	*tchttp.BaseRequest
 
-	// List of input media tracks, i.e., information of multiple tracks composed of video, audio, image, and other materials. <li>Multiple input tracks are aligned with the output media file on the time axis. </li><li>The materials of each track at the same time point on the time axis will be superimposed. Specifically, videos or images will be superimposed for video image by track order, where a material with a higher track order will be more on top, while audio materials will be mixed. </li><li>Up to 10 tracks are supported for each type (video, audio, or image).</li>
+	// List of input media tracks, including video, audio, and image tracks. <li>Input tracks are synced to the output media file.</li><li>Input tracks are synced to each other. Videos and images in higher tracks are superimposed over those in lower tracks. Audio tracks are mixed.</li><li>There can be up to 10 tracks for video, audio, and images each.</li><li>The total number of clips in all tracks cannot exceed 500.</li>
 	Tracks []*MediaTrack `json:"Tracks,omitempty" name:"Tracks"`
 
 	// Information of output media file.
@@ -3705,17 +3705,34 @@ type CreateSuperPlayerConfigRequest struct {
 	// Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Switch of DRM-protected adaptive bitstream playback:
-	// <li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
-	// <li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
-	// Default value: OFF.
+	// Type of audio/video played. Valid values:
+	// <li>AdaptiveDynamicStreaming</li>
+	// <li>Transcode</li>
+	// <li>Original</li>
+	// Default value: `AdaptiveDynamicStream`
+	AudioVideoType *string `json:"AudioVideoType,omitempty" name:"AudioVideoType"`
+
+	// Whether to allow only adaptive bitrate streaming playback protected by DRM. Valid values:
+	// <li>`ON`: allow only adaptive bitrate streaming playback protected by DRM</li>
+	// <li>`OFF`: allow adaptive bitrate streaming playback not protected by DRM</li>
+	// Default value: `OFF`
+	// This parameter is valid when `AudioVideoType` is `AdaptiveDynamicStream`.
 	DrmSwitch *string `json:"DrmSwitch,omitempty" name:"DrmSwitch"`
 
-	// ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `OFF`.
+	// ID of the adaptive bitrate streaming template allowed for playback not protected by DRM.
+	// 
+	// This parameter is required if `AudioVideoType` is `AdaptiveDynamicStream` and `DrmSwitch` is `OFF`.
 	AdaptiveDynamicStreamingDefinition *uint64 `json:"AdaptiveDynamicStreamingDefinition,omitempty" name:"AdaptiveDynamicStreamingDefinition"`
 
-	// Content of the DRM-protected adaptive bitrate streaming template that allows output, which is required if `DrmSwitch` is `ON`.
+	// Content of the adaptive bitrate streaming template allowed for playback protected by DRM.
+	// 
+	// This parameter is required if `AudioVideoType` is `AdaptiveDynamicStream` and `DrmSwitch` is `ON`.
 	DrmStreamingsInfo *DrmStreamingsInfo `json:"DrmStreamingsInfo,omitempty" name:"DrmStreamingsInfo"`
+
+	// ID of the transcoding template allowed for playback
+	// 
+	// This parameter is required if `AudioVideoType` is `Transcode`.
+	TranscodeDefinition *uint64 `json:"TranscodeDefinition,omitempty" name:"TranscodeDefinition"`
 
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitempty" name:"ImageSpriteDefinition"`
@@ -3758,9 +3775,11 @@ func (r *CreateSuperPlayerConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "AudioVideoType")
 	delete(f, "DrmSwitch")
 	delete(f, "AdaptiveDynamicStreamingDefinition")
 	delete(f, "DrmStreamingsInfo")
+	delete(f, "TranscodeDefinition")
 	delete(f, "ImageSpriteDefinition")
 	delete(f, "ResolutionNames")
 	delete(f, "Domain")
@@ -10245,6 +10264,12 @@ type ModifySuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// Type of audio/video played. Valid values:
+	// <li>AdaptiveDynamicStreaming</li>
+	// <li>Transcode</li>
+	// <li>Original</li>
+	AudioVideoType *string `json:"AudioVideoType,omitempty" name:"AudioVideoType"`
+
 	// Switch of DRM-protected adaptive bitstream playback:
 	// <li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
 	// <li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
@@ -10255,6 +10280,9 @@ type ModifySuperPlayerConfigRequest struct {
 
 	// Content of the DRM-protected adaptive bitrate streaming template that allows output.
 	DrmStreamingsInfo *DrmStreamingsInfoForUpdate `json:"DrmStreamingsInfo,omitempty" name:"DrmStreamingsInfo"`
+
+	// ID of the transcoding template allowed for playback
+	TranscodeDefinition *uint64 `json:"TranscodeDefinition,omitempty" name:"TranscodeDefinition"`
 
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitempty" name:"ImageSpriteDefinition"`
@@ -10291,9 +10319,11 @@ func (r *ModifySuperPlayerConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "AudioVideoType")
 	delete(f, "DrmSwitch")
 	delete(f, "AdaptiveDynamicStreamingDefinition")
 	delete(f, "DrmStreamingsInfo")
+	delete(f, "TranscodeDefinition")
 	delete(f, "ImageSpriteDefinition")
 	delete(f, "ResolutionNames")
 	delete(f, "Domain")

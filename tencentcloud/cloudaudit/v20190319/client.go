@@ -44,6 +44,60 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewDescribeAuditTracksRequest() (request *DescribeAuditTracksRequest) {
+    request = &DescribeAuditTracksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cloudaudit", APIVersion, "DescribeAuditTracks")
+    
+    
+    return
+}
+
+func NewDescribeAuditTracksResponse() (response *DescribeAuditTracksResponse) {
+    response = &DescribeAuditTracksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAuditTracks
+// This API is used to query the CloudAudit tracking set list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
+//  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
+func (c *Client) DescribeAuditTracks(request *DescribeAuditTracksRequest) (response *DescribeAuditTracksResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditTracksRequest()
+    }
+    
+    response = NewDescribeAuditTracksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeAuditTracks
+// This API is used to query the CloudAudit tracking set list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
+//  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
+func (c *Client) DescribeAuditTracksWithContext(ctx context.Context, request *DescribeAuditTracksRequest) (response *DescribeAuditTracksResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditTracksRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditTracksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeEventsRequest() (request *DescribeEventsRequest) {
     request = &DescribeEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},

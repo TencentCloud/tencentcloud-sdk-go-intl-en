@@ -22,4 +22,10 @@ const (
 
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// The alias already exists.
+	INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
+
+	// The maximum number of tracking sets has been exceeded.
+	LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 )
