@@ -22,6 +22,7 @@ const (
 	Guangzhou = "ap-guangzhou"
 	GuangzhouOpen = "ap-guangzhou-open"
 	HongKong = "ap-hongkong"
+	Jakarta = "ap-jakarta"
 	Mumbai = "ap-mumbai"
 	Seoul = "ap-seoul"
 	Shanghai = "ap-shanghai"
@@ -34,4 +35,5 @@ const (
 	Ashburn = "na-ashburn"
 	SiliconValley = "na-siliconvalley"
 	Toronto = "na-toronto"
+	SaoPaulo = "sa-saopaulo"
 )
