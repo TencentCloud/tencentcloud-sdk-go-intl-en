@@ -290,6 +290,10 @@ type AlarmPolicy struct {
 	// Tag
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagInstances []*TagInstance `json:"TagInstances,omitempty" name:"TagInstances"`
+
+	// Information on the filter dimension associated with a policy.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FilterDimensionsParam *string `json:"FilterDimensionsParam,omitempty" name:"FilterDimensionsParam"`
 }
 
 type AlarmPolicyCondition struct {
@@ -1573,6 +1577,8 @@ type DescribeAlarmPoliciesRequest struct {
 	// You can also refer to the “Example 2” below.
 	// 
 	// For more information on the parameter samples of different Tencent Cloud services, see [Product Policy Type and Dimension Information](https://intl.cloud.tencent.com/document/product/248/50397?from_cn_redirect=1).
+	// 
+	// Note: If `1` is passed in for `NeedCorrespondence`, the relationship between a policy and an instance needs to be returned. You can pass in up to 20 alarm object dimensions to avoid request timeout.
 	Dimensions *string `json:"Dimensions,omitempty" name:"Dimensions"`
 
 	// Search by recipient. You can get the user list with the API [ListUsers](https://intl.cloud.tencent.com/document/product/598/34587?from_cn_redirect=1) in “Cloud Access Management” or query the sub-user information with the API [GetUser](https://intl.cloud.tencent.com/document/product/598/34590?from_cn_redirect=1). The `Uid` field in the returned result should be entered here.
@@ -1609,6 +1615,9 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// Instance group ID.
 	InstanceGroupId *int64 `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+
+	// Whether the relationship between a policy and the input parameter filter dimension is required. `1`: Yes. `0`: No. Default value: `0`.
+	NeedCorrespondence *int64 `json:"NeedCorrespondence,omitempty" name:"NeedCorrespondence"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -1641,6 +1650,7 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "Enable")
 	delete(f, "NotBindingNoticeRule")
 	delete(f, "InstanceGroupId")
+	delete(f, "NeedCorrespondence")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}
@@ -4466,8 +4476,8 @@ type UserNotice struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Notification channel list. Valid values: EMAIL (email), SMS (SMS), CALL (phone), WECHAT (WeChat)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Notification channel list. Valid values: `EMAIL` (email), `SMS` (SMS), `CALL` (phone), `WECHAT` (WeChat), `RTX` (WeCom)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	NoticeWay []*string `json:"NoticeWay,omitempty" name:"NoticeWay"`
 
 	// User `uid` list
@@ -4497,4 +4507,8 @@ type UserNotice struct {
 	// Whether receipt notification is required. Valid values: 0 (no), 1 (yes)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	NeedPhoneArriveNotice *int64 `json:"NeedPhoneArriveNotice,omitempty" name:"NeedPhoneArriveNotice"`
+
+	// Dial type. `SYNC` (simultaneous dial), `CIRCLE` (polled dial). Default value: `CIRCLE`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PhoneCallType *string `json:"PhoneCallType,omitempty" name:"PhoneCallType"`
 }

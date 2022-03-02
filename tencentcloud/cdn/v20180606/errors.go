@@ -74,10 +74,10 @@ const (
 	// To enable HTTPS, access port 443 must be enabled.
 	INVALIDPARAMETER_ACCESSPORTOPENEDHTTPS = "InvalidParameter.AccessPortOpenedHttps"
 
-	// 
+	// Please delete the rate limiting configuration before you switch the acceleration region.
 	INVALIDPARAMETER_BANDLIMITREQUIREDMAINLAND = "InvalidParameter.BandLimitRequiredMainland"
 
-	// 
+	// Tencent Cloud COS and third-party object storage origins only support "Return 404". Please modify and try again.
 	INVALIDPARAMETER_BANDWIDTHALERTCOUNTERMEASURECONFLICTORIGINTYPE = "InvalidParameter.BandwidthAlertCounterMeasureConflictOriginType"
 
 	// Invalid domain name status.
@@ -346,6 +346,9 @@ const (
 
 	// The domain name has been connected to the service region outside Chinese mainland. If you need to switch the service region to "Global", please verify its ownership for domain name retrieval.
 	RESOURCEUNAVAILABLE_CDNHOSTBELONGSTOOTHERSINOVERSEAS = "ResourceUnavailable.CdnHostBelongsToOthersInOverseas"
+
+	// The DSA feature is already enabled for the domain name.
+	RESOURCEUNAVAILABLE_CDNHOSTEXISTSINDSA = "ResourceUnavailable.CdnHostExistsInDsa"
 
 	// The domain name has been connected in the TCB console.
 	RESOURCEUNAVAILABLE_CDNHOSTEXISTSINTCB = "ResourceUnavailable.CdnHostExistsInTcb"

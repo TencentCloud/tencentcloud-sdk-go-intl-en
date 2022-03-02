@@ -62,9 +62,11 @@ type AddCdnDomainRequest struct {
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Acceleration domain name service type
-	// web: static acceleration
-	// download: download acceleration
-	// media: streaming media VOD acceleration
+	// `web`: Webpage file downloads
+	// `download`: Large file downloads
+	// `media`: Audio and video on demand acceleration
+	// `hybrid`: Dynamic and static content acceleration
+	// `dynamic`: Dynamic content acceleration
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Origin server configuration
@@ -165,7 +167,7 @@ type AddCdnDomainRequest struct {
 	// Offline cache
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+	// QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
 	// Access authentication for S3 origin
@@ -3178,10 +3180,12 @@ type DetailDomain struct {
 	// Project ID, which can be viewed on the Tencent Cloud project management page
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Domain name service type
-	// web: static acceleration
-	// download: download acceleration
-	// media: streaming VOD acceleration
+	// Acceleration domain name service type
+	// `web`: Webpage file downloads
+	// `download`: Large file downloads
+	// `media`: Audio and video on demand acceleration
+	// `hybrid`: Dynamic and static content acceleration
+	// `dynamic`: Dynamic content acceleration
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Domain name creation time
@@ -3405,6 +3409,10 @@ type DetailDomain struct {
 	// Shared CNAME configuration (only available to beta users)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ShareCname *ShareCname `json:"ShareCname,omitempty" name:"ShareCname"`
+
+	// Rule engine
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RuleEngine *RuleEngine `json:"RuleEngine,omitempty" name:"RuleEngine"`
 }
 
 type DisableCachesRequest struct {
@@ -5563,6 +5571,18 @@ type RuleCacheConfig struct {
 	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
+type RuleEngine struct {
+
+	// Specifies whether to enable rule engine
+	// `on`: Enable
+	// `off`: Disable
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
 type RuleQueryString struct {
 
 	// Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
@@ -5928,6 +5948,10 @@ type ServerCert struct {
 	// Certificate remarks
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Certificate source
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	From *string `json:"From,omitempty" name:"From"`
 }
 
 type ShareCname struct {
@@ -6359,7 +6383,7 @@ type UpdateDomainConfigRequest struct {
 	// Merging pull requests
 	OriginCombine *OriginCombine `json:"OriginCombine,omitempty" name:"OriginCombine"`
 
-	// QUIC is in beta now. Please submit an application to join the beta. For more information, please see QUIC product documents.
+	// QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
 	// Access authentication for OSS origin

@@ -1335,8 +1335,14 @@ type CreateRuleRequest struct {
 	// If this field is not passed in, it indicates that the ForwardProtocol of the corresponding listener will be used.
 	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
 
-	// Remote host to which the acceleration connection forwards. If this parameter is not specified, the default host will be used, i.e., the host with which the client initiates HTTP requests.
+	// The forwarding host. If it’s not specified, the default host is used, that is the host with which the client initiates HTTP requests.
 	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
+
+	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+	ServerNameIndicationSwitch *string `json:"ServerNameIndicationSwitch,omitempty" name:"ServerNameIndicationSwitch"`
+
+	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
 }
 
 func (r *CreateRuleRequest) ToJsonString() string {
@@ -1360,6 +1366,8 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	delete(f, "CheckParams")
 	delete(f, "ForwardProtocol")
 	delete(f, "ForwardHost")
+	delete(f, "ServerNameIndicationSwitch")
+	delete(f, "ServerNameIndication")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRuleRequest has unknown keys!", "")
 	}
@@ -3336,8 +3344,8 @@ type DescribeProxyGroupListRequest struct {
 
 	// Filter condition   
 	// Each request can have a maximum of 5 filter conditions for `Filter.Values`.
-	// RealServerRegion - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
-	// PackageType - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (game accelerator connection group).
+	// `RealServerRegion` - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
+	// `PackageType` - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (silver connection group).
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
@@ -5483,9 +5491,15 @@ type ModifyRuleAttributeRequest struct {
 	// If `ForwardProtocol=default`, the `ForwardProtocol` of the listener will be used.
 	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
 
-	// The `host` carried in the request forwarded from the acceleration connection to the origin server.
-	// If `ForwardHost=default`, the domain name of rule will be used. For other cases, the value set in this field will be used.
+	// The forwarding host, which is carried in the request forwarded from the acceleration connection to the origin server.
+	// If `ForwardHost=default`, the domain name configured with the forwarding rule will be used. For other cases, the value set in this field will be used.
 	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
+
+	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+	ServerNameIndicationSwitch *string `json:"ServerNameIndicationSwitch,omitempty" name:"ServerNameIndicationSwitch"`
+
+	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
 }
 
 func (r *ModifyRuleAttributeRequest) ToJsonString() string {
@@ -5508,6 +5522,8 @@ func (r *ModifyRuleAttributeRequest) FromJsonString(s string) error {
 	delete(f, "Path")
 	delete(f, "ForwardProtocol")
 	delete(f, "ForwardHost")
+	delete(f, "ServerNameIndicationSwitch")
+	delete(f, "ServerNameIndication")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRuleAttributeRequest has unknown keys!", "")
 	}
@@ -6003,8 +6019,8 @@ type ProxyGroupDetail struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-MLC-border connection group).
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (silver connection group), and `CrossBorder` (cross-MLC-border connection group).
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Specifies whether to enable HTTP3. Valid values:
@@ -6183,9 +6199,9 @@ type ProxyInfo struct {
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
-	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), 
+	// Package type of connections. Valid values: `Thunder` (general connection), `Accelerator` (silver connection), 
 	// and `CrossBorder` (cross-MLC-border connection).
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Blocking-related status of the domain name. `BANNED`: the domain name is blocked; `RECOVER`: the domain name is unblocked or normal; `BANNING`: the domain name is being blocked; `RECOVERING`: the domain name is being unblocked; `BAN_FAILED`: the blocking fails; RECOVER_FAILED: the unblocking fails.
@@ -6200,6 +6216,10 @@ type ProxyInfo struct {
 	// `1`: enable HTTP3.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+
+	// Indicates whether the origin server IP or domain name is in the blocklist. Valid values: `0` (no) and `1` (yes).
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	InBanBlacklist *int64 `json:"InBanBlacklist,omitempty" name:"InBanBlacklist"`
 }
 
 type ProxySimpleInfo struct {
@@ -6246,6 +6266,9 @@ type RealServer struct {
 
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Indicates whether the origin server IP or domain name is in the blocklist. Valid values: `0` (no) and `1` (yes).
+	InBanBlacklist *int64 `json:"InBanBlacklist,omitempty" name:"InBanBlacklist"`
 }
 
 type RealServerBindSetReq struct {
@@ -6434,6 +6457,16 @@ type RuleInfo struct {
 	// The `host` carried in the request forwarded from the connection to the origin server. `default` indicates directly forwarding the received 'host'.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
+
+	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ServerNameIndicationSwitch *string `json:"ServerNameIndicationSwitch,omitempty" name:"ServerNameIndicationSwitch"`
+
+	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
 }
 
 type SecurityPolicyRuleIn struct {
@@ -6520,7 +6553,7 @@ type SetAuthenticationRequest struct {
 	// CA certificate ID of the origin server, which is obtained from the certificate management page. When authenticating the origin server, enter this parameter or the `RealServerCertificateIds` parameter.
 	RealServerCertificateId *string `json:"RealServerCertificateId,omitempty" name:"RealServerCertificateId"`
 
-	// Domain name of the origin server certificate.
+	// This field has been disused. Use ServerNameIndication instead.
 	RealServerCertificateDomain *string `json:"RealServerCertificateDomain,omitempty" name:"RealServerCertificateDomain"`
 
 	// CA certificate IDs of multiple origin servers, which are obtained from the certificate management page. When authenticating the origin servers, enter this parameter or the `RealServerCertificateId` parameter.
