@@ -23,10 +23,15 @@ import (
 type AssumeRoleRequest struct {
 	*tchttp.BaseRequest
 
-	// Role resource description, such as qcs::cam::uin/12345678:role/4611686018427397919, qcs::cam::uin/12345678:roleName/testRoleName
+	// Resource descriptions of a role, which can be obtained by clicking the role name in the [CAM console](https://console.cloud.tencent.com/cam/role).
+	// General role:
+	// qcs::cam::uin/12345678:role/4611686018427397919, qcs::cam::uin/12345678:roleName/testRoleName
+	// Service role:
+	// qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920, qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleName
 	RoleArn *string `json:"RoleArn,omitempty" name:"RoleArn"`
 
-	// User-defined temporary session name
+	// User-defined temporary session name.
+	// It can contain 2-128 letters, digits, and symbols (=,.@_-). Regex: [\w+=,.@_-]*
 	RoleSessionName *string `json:"RoleSessionName,omitempty" name:"RoleSessionName"`
 
 	// Specifies the validity period of credentials in seconds. Default value: 7200. Maximum value: 43200
@@ -34,10 +39,14 @@ type AssumeRoleRequest struct {
 
 	// Policy description
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://cloud.tencent.com/document/api/598/33159#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM’s [Syntax Logic](https://cloud.tencent.com/document/product/598/10603).
+	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
+	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
 	// 3. The policy cannot contain the `principal` element.
 	Policy *string `json:"Policy,omitempty" name:"Policy"`
+
+	// External role ID, which can be obtained by clicking the role name in the [CAM console](https://console.cloud.tencent.com/cam/role).
+	// It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-]*
+	ExternalId *string `json:"ExternalId,omitempty" name:"ExternalId"`
 }
 
 func (r *AssumeRoleRequest) ToJsonString() string {
@@ -56,6 +65,7 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 	delete(f, "RoleSessionName")
 	delete(f, "DurationSeconds")
 	delete(f, "Policy")
+	delete(f, "ExternalId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleRequest has unknown keys!", "")
 	}
@@ -106,7 +116,7 @@ type AssumeRoleWithSAMLRequest struct {
 	// Session name
 	RoleSessionName *string `json:"RoleSessionName,omitempty" name:"RoleSessionName"`
 
-	// Specifies the validity period of credentials in seconds. Default value: 7200. Maximum value: 7200
+	// The validity period of the temporary credentials in seconds. Default value: 7,200s. Maximum value: 43,200s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 
@@ -164,14 +174,76 @@ func (r *AssumeRoleWithSAMLResponse) FromJsonString(s string) error {
 
 type Credentials struct {
 
-	// token
+	// Token, which contains up to 4,096 bytes depending on the associated policies.
 	Token *string `json:"Token,omitempty" name:"Token"`
 
-	// Temporary credentials secret ID
+	// Temporary credentials key ID, which contains up to 1,024 bytes.
 	TmpSecretId *string `json:"TmpSecretId,omitempty" name:"TmpSecretId"`
 
-	// Temporary credentials secret key
+	// Temporary credentials key, which contains up to 1,024 bytes.
 	TmpSecretKey *string `json:"TmpSecretKey,omitempty" name:"TmpSecretKey"`
+}
+
+type GetCallerIdentityRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetCallerIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCallerIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCallerIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetCallerIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ARN of the current caller.
+		Arn *string `json:"Arn,omitempty" name:"Arn"`
+
+		// Root account UIN of the current caller.
+		AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+
+		// User ID.
+	// 1. If the caller is a Tencent Cloud account, the UIN of the current account is returned.
+	// 2. If the caller is a role, `roleId:roleSessionName` is returned.
+	// 3. If the caller is a federated user, `uin:federatedUserName` is returned.
+		UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+		// Account UIN.
+	// 1. If the caller is a Tencent Cloud account, the UIN of the current account is returned.
+	// 2. If the caller is a role, the UIN of the account that applies for the role is returned.
+		PrincipalId *string `json:"PrincipalId,omitempty" name:"PrincipalId"`
+
+		// Identity type.
+		Type *string `json:"Type,omitempty" name:"Type"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetCallerIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCallerIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type GetFederationTokenRequest struct {
@@ -182,12 +254,12 @@ type GetFederationTokenRequest struct {
 
 	// Policy description
 	// Note:
-	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://cloud.tencent.com/document/api/598/33159#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
-	// 2. For the policy syntax, please see CAM’s [Syntax Logic](https://cloud.tencent.com/document/product/598/10603).
+	// 1. The policy needs to be URL-encoded (if you request a TencentCloud API through the GET method, all parameters must be URL-encoded again in accordance with [Signature v3](https://intl.cloud.tencent.com/document/api/598/33159?from_cn_redirect=1#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2) before the request is sent).
+	// 2. For the policy syntax, please see CAM's [Syntax Logic](https://intl.cloud.tencent.com/document/product/598/10603?from_cn_redirect=1).
 	// 3. The policy cannot contain the `principal` element.
 	Policy *string `json:"Policy,omitempty" name:"Policy"`
 
-	// Specifies the validity period of credentials in seconds. Default value: 1800. Maximum value: 7200
+	// The validity period of temporary credentials in seconds. Default value: 1,800s. Maximum value for a root account: 7,200s. Maximum value for a sub-account: 129,600s.
 	DurationSeconds *uint64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
 }
 

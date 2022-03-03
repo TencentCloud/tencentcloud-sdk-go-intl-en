@@ -17,6 +17,9 @@ package v20180813
 const (
 	// error codes for specific actions
 
+	// Invalid key.
+	AUTHFAILURE_ACCESSKEYILLEGAL = "AuthFailure.AccessKeyIllegal"
+
 	// Database error.
 	INTERNALERROR_DBERROR = "InternalError.DbError"
 
@@ -29,7 +32,7 @@ const (
 	// Failed to get the role.
 	INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
 
-	// Failed to obtain the seed token.
+	// Failed to obtain the token.
 	INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
 
 	// Invalid role.
@@ -38,11 +41,14 @@ const (
 	// pb packaging failed.
 	INTERNALERROR_PBSERIALIZEERROR = "InternalError.PbSerializeError"
 
-	// Internal error.
+	// Internal system error, such as network error.
 	INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 
 	// Unknown error.
 	INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+
+	// This type of key is not supported.
+	INVALIDPARAMETER_ACCESSKEYNOTSUPPORT = "InvalidParameter.AccessKeyNotSupport"
 
 	// The account does not exist or is unavailable.
 	INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
@@ -65,7 +71,7 @@ const (
 	// The policy is too long.
 	INVALIDPARAMETER_POLICYTOOLONG = "InvalidParameter.PolicyTooLong"
 
-	// Resource error.
+	// Six-segment resource description error.
 	INVALIDPARAMETER_RESOUCEERROR = "InvalidParameter.ResouceError"
 
 	// Policy syntax error.
@@ -74,7 +80,7 @@ const (
 	// Invalid policy.
 	INVALIDPARAMETER_STRATEGYINVALID = "InvalidParameter.StrategyInvalid"
 
-	// Invalid `TCB temp code`.
+	// Invalid temporary code.
 	INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
 
 	// The role corresponding to the account does not exist.

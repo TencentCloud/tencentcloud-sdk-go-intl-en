@@ -878,6 +878,68 @@ func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeDBSlowLogsRequest() (request *DescribeDBSlowLogsRequest) {
+    request = &DescribeDBSlowLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeDBSlowLogs")
+    
+    
+    return
+}
+
+func NewDescribeDBSlowLogsResponse() (response *DescribeDBSlowLogsResponse) {
+    response = &DescribeDBSlowLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBSlowLogs
+// This API is used to query the list of slow query logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INTERNALERROR_GETSLOWLOGFAILED = "InternalError.GetSlowLogFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INVALIDPARAMETER_ILLEGALTIME = "InvalidParameter.IllegalTime"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBSlowLogs(request *DescribeDBSlowLogsRequest) (response *DescribeDBSlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSlowLogsRequest()
+    }
+    
+    response = NewDescribeDBSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+// DescribeDBSlowLogs
+// This API is used to query the list of slow query logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INTERNALERROR_GETSLOWLOGFAILED = "InternalError.GetSlowLogFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INVALIDPARAMETER_ILLEGALTIME = "InvalidParameter.IllegalTime"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBSlowLogsWithContext(ctx context.Context, request *DescribeDBSlowLogsRequest) (response *DescribeDBSlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBSlowLogsRequest()
+    }
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSyncModeRequest() (request *DescribeDBSyncModeRequest) {
     request = &DescribeDBSyncModeRequest{
         BaseRequest: &tchttp.BaseRequest{},

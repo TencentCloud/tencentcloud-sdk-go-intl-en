@@ -61,6 +61,9 @@ type AVTemplate struct {
 
 	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
 	RateControlMode *string `json:"RateControlMode,omitempty" name:"RateControlMode"`
+
+	// Watermark ID
+	WatermarkId *string `json:"WatermarkId,omitempty" name:"WatermarkId"`
 }
 
 type AttachedInput struct {
@@ -1413,16 +1416,16 @@ type InputSecurityGroupInfo struct {
 
 type InputSettingInfo struct {
 
-	// Application name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+	// Note: This field may return `null`, indicating that no valid value was found.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Stream name, which is used for RTMP_PUSH and can contain 1-32 letters and digits.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Stream name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+	// Note: This field may return `null`, indicating that no valid value was found.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Origin-pull URL, which is used for RTMP_PULL/HLS_PULL/MP4_PULL. Length limit: [1,512].
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Source URL, which is valid if `Type` is `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL` and can contain 1-512 characters
+	// Note: This field may return `null`, indicating that no valid value was found.
 	SourceUrl *string `json:"SourceUrl,omitempty" name:"SourceUrl"`
 
 	// RTP/UDP input address, which does not need to be entered for the input parameter.
@@ -1432,6 +1435,12 @@ type InputSettingInfo struct {
 	// Source type for stream pulling and relaying. To pull content from private-read COS buckets under the current account, set this parameter to `TencentCOS`; otherwise, leave it empty.
 	// Note: this field may return `null`, indicating that no valid value was found.
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH`
+	// Value range: 0 (default) or 10000-600000
+	// The value must be a multiple of 1,000.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DelayTime *int64 `json:"DelayTime,omitempty" name:"DelayTime"`
 }
 
 type InputStatistics struct {
@@ -2140,4 +2149,8 @@ type VideoTemplateInfo struct {
 
 	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
 	RateControlMode *string `json:"RateControlMode,omitempty" name:"RateControlMode"`
+
+	// Watermark ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	WatermarkId *string `json:"WatermarkId,omitempty" name:"WatermarkId"`
 }

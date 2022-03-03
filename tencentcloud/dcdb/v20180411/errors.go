@@ -104,6 +104,9 @@ const (
 	// Failed to query security group details.
 	INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 
+	// Failed to query slow query logs.
+	INTERNALERROR_GETSLOWLOGFAILED = "InternalError.GetSlowLogFailed"
+
 	// Failed to query the VPC subnet information.
 	INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 
@@ -175,6 +178,9 @@ const (
 
 	// Invalid parameters.
 	INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
+
+	// Incorrect time parameter.
+	INVALIDPARAMETER_ILLEGALTIME = "InvalidParameter.IllegalTime"
 
 	// Failed to find the requested instance.
 	INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"

@@ -1159,6 +1159,103 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDBSlowLogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of dcdbt-hw0qj6m1
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Data entry number starting from which to return results
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query start time in the format of 2016-07-23 14:55:20
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Shard ID of the instance in the format of shard-53ima8ln
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Query end time in the format of 2016-08-22 14:55:20. If this parameter is left empty, the current time will be used as the query end time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Specific name of database to be queried
+	Db *string `json:"Db,omitempty" name:"Db"`
+
+	// Sorting metric. Valid values: `query_time_sum`, `query_count`. Default value: `query_time_sum`
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `desc` (descending), `asc` (ascending). Default value: `desc`
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Query slow queries from either the source or the replica. Valid values: `0` (source), `1` (replica). Default value: `0`
+	Slave *int64 `json:"Slave,omitempty" name:"Slave"`
+}
+
+func (r *DescribeDBSlowLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSlowLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "StartTime")
+	delete(f, "ShardId")
+	delete(f, "EndTime")
+	delete(f, "Db")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Slave")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSlowLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBSlowLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Sum of all statement lock durations
+		LockTimeSum *float64 `json:"LockTimeSum,omitempty" name:"LockTimeSum"`
+
+		// Total number of statement queries
+		QueryCount *int64 `json:"QueryCount,omitempty" name:"QueryCount"`
+
+		// Total number of slow queries that have been logged
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// Sum of all statement query durations
+		QueryTimeSum *float64 `json:"QueryTimeSum,omitempty" name:"QueryTimeSum"`
+
+		// Slow query log data
+		Data []*SlowLogData `json:"Data,omitempty" name:"Data"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBSlowLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSlowLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDBSyncModeRequest struct {
 	*tchttp.BaseRequest
 
@@ -2762,6 +2859,68 @@ type ShardInfo struct {
 
 	// Number of CPU cores
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+}
+
+type SlowLogData struct {
+
+	// Statement checksum for querying details
+	CheckSum *string `json:"CheckSum,omitempty" name:"CheckSum"`
+
+	// Database name
+	Db *string `json:"Db,omitempty" name:"Db"`
+
+	// Abstracted SQL statement
+	FingerPrint *string `json:"FingerPrint,omitempty" name:"FingerPrint"`
+
+	// Average lock duration
+	LockTimeAvg *string `json:"LockTimeAvg,omitempty" name:"LockTimeAvg"`
+
+	// Maximum lock duration
+	LockTimeMax *string `json:"LockTimeMax,omitempty" name:"LockTimeMax"`
+
+	// Minimum lock duration
+	LockTimeMin *string `json:"LockTimeMin,omitempty" name:"LockTimeMin"`
+
+	// Sum of lock durations
+	LockTimeSum *string `json:"LockTimeSum,omitempty" name:"LockTimeSum"`
+
+	// Number of queries
+	QueryCount *string `json:"QueryCount,omitempty" name:"QueryCount"`
+
+	// Average query duration
+	QueryTimeAvg *string `json:"QueryTimeAvg,omitempty" name:"QueryTimeAvg"`
+
+	// Maximum query duration
+	QueryTimeMax *string `json:"QueryTimeMax,omitempty" name:"QueryTimeMax"`
+
+	// Minimum query duration
+	QueryTimeMin *string `json:"QueryTimeMin,omitempty" name:"QueryTimeMin"`
+
+	// Sum of query durations
+	QueryTimeSum *string `json:"QueryTimeSum,omitempty" name:"QueryTimeSum"`
+
+	// Number of scanned rows
+	RowsExaminedSum *string `json:"RowsExaminedSum,omitempty" name:"RowsExaminedSum"`
+
+	// Number of sent rows
+	RowsSentSum *string `json:"RowsSentSum,omitempty" name:"RowsSentSum"`
+
+	// Last execution time
+	TsMax *string `json:"TsMax,omitempty" name:"TsMax"`
+
+	// First execution time
+	TsMin *string `json:"TsMin,omitempty" name:"TsMin"`
+
+	// Account
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Sample SQL
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ExampleSql *string `json:"ExampleSql,omitempty" name:"ExampleSql"`
+
+	// Host address of the account
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
 type SwitchDBInstanceHARequest struct {
