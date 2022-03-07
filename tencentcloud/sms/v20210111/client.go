@@ -16,6 +16,7 @@ package v20210111
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,6 +78,7 @@ func NewAddSmsSignResponse() (response *AddSmsSignResponse) {
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
 //  FAILEDOPERATION_PARAMETERSOTHERERROR = "FailedOperation.ParametersOtherError"
 //  FAILEDOPERATION_SIGNNUMBERLIMIT = "FailedOperation.SignNumberLimit"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
 //  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
@@ -97,13 +99,7 @@ func NewAddSmsSignResponse() (response *AddSmsSignResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) AddSmsSign(request *AddSmsSignRequest) (response *AddSmsSignResponse, err error) {
-    if request == nil {
-        request = NewAddSmsSignRequest()
-    }
-    
-    response = NewAddSmsSignResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddSmsSignWithContext(context.Background(), request)
 }
 
 // AddSmsSign
@@ -122,6 +118,7 @@ func (c *Client) AddSmsSign(request *AddSmsSignRequest) (response *AddSmsSignRes
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
 //  FAILEDOPERATION_PARAMETERSOTHERERROR = "FailedOperation.ParametersOtherError"
 //  FAILEDOPERATION_SIGNNUMBERLIMIT = "FailedOperation.SignNumberLimit"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
 //  INTERNALERROR_SIGFIELDMISSING = "InternalError.SigFieldMissing"
@@ -145,6 +142,11 @@ func (c *Client) AddSmsSignWithContext(ctx context.Context, request *AddSmsSignR
     if request == nil {
         request = NewAddSmsSignRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddSmsSign require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddSmsSignResponse()
@@ -205,13 +207,7 @@ func NewAddSmsTemplateResponse() (response *AddSmsTemplateResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) AddSmsTemplate(request *AddSmsTemplateRequest) (response *AddSmsTemplateResponse, err error) {
-    if request == nil {
-        request = NewAddSmsTemplateRequest()
-    }
-    
-    response = NewAddSmsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddSmsTemplateWithContext(context.Background(), request)
 }
 
 // AddSmsTemplate
@@ -253,6 +249,11 @@ func (c *Client) AddSmsTemplateWithContext(ctx context.Context, request *AddSmsT
     if request == nil {
         request = NewAddSmsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddSmsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddSmsTemplateResponse()
@@ -311,13 +312,7 @@ func NewCallbackStatusStatisticsResponse() (response *CallbackStatusStatisticsRe
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) CallbackStatusStatistics(request *CallbackStatusStatisticsRequest) (response *CallbackStatusStatisticsResponse, err error) {
-    if request == nil {
-        request = NewCallbackStatusStatisticsRequest()
-    }
-    
-    response = NewCallbackStatusStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.CallbackStatusStatisticsWithContext(context.Background(), request)
 }
 
 // CallbackStatusStatistics
@@ -357,6 +352,11 @@ func (c *Client) CallbackStatusStatisticsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCallbackStatusStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CallbackStatusStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCallbackStatusStatisticsResponse()
@@ -394,6 +394,7 @@ func NewDeleteSmsSignResponse() (response *DeleteSmsSignResponse) {
 //  FAILEDOPERATION_MISSINGSIGNATURETOMODIFY = "FailedOperation.MissingSignatureToModify"
 //  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
@@ -405,13 +406,7 @@ func NewDeleteSmsSignResponse() (response *DeleteSmsSignResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) DeleteSmsSign(request *DeleteSmsSignRequest) (response *DeleteSmsSignResponse, err error) {
-    if request == nil {
-        request = NewDeleteSmsSignRequest()
-    }
-    
-    response = NewDeleteSmsSignResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSmsSignWithContext(context.Background(), request)
 }
 
 // DeleteSmsSign
@@ -427,6 +422,7 @@ func (c *Client) DeleteSmsSign(request *DeleteSmsSignRequest) (response *DeleteS
 //  FAILEDOPERATION_MISSINGSIGNATURETOMODIFY = "FailedOperation.MissingSignatureToModify"
 //  FAILEDOPERATION_NOTENTERPRISECERTIFICATION = "FailedOperation.NotEnterpriseCertification"
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
@@ -441,6 +437,11 @@ func (c *Client) DeleteSmsSignWithContext(ctx context.Context, request *DeleteSm
     if request == nil {
         request = NewDeleteSmsSignRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSmsSign require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSmsSignResponse()
@@ -491,13 +492,7 @@ func NewDeleteSmsTemplateResponse() (response *DeleteSmsTemplateResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) DeleteSmsTemplate(request *DeleteSmsTemplateRequest) (response *DeleteSmsTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteSmsTemplateRequest()
-    }
-    
-    response = NewDeleteSmsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSmsTemplateWithContext(context.Background(), request)
 }
 
 // DeleteSmsTemplate
@@ -529,6 +524,11 @@ func (c *Client) DeleteSmsTemplateWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteSmsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSmsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSmsTemplateResponse()
@@ -563,13 +563,7 @@ func NewDescribePhoneNumberInfoResponse() (response *DescribePhoneNumberInfoResp
 //  FAILEDOPERATION_PHONENUMBERPARSEFAIL = "FailedOperation.PhoneNumberParseFail"
 //  LIMITEXCEEDED_PHONENUMBERCOUNTLIMIT = "LimitExceeded.PhoneNumberCountLimit"
 func (c *Client) DescribePhoneNumberInfo(request *DescribePhoneNumberInfoRequest) (response *DescribePhoneNumberInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribePhoneNumberInfoRequest()
-    }
-    
-    response = NewDescribePhoneNumberInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePhoneNumberInfoWithContext(context.Background(), request)
 }
 
 // DescribePhoneNumberInfo
@@ -585,6 +579,11 @@ func (c *Client) DescribePhoneNumberInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribePhoneNumberInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePhoneNumberInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePhoneNumberInfoResponse()
@@ -633,13 +632,7 @@ func NewDescribeSmsSignListResponse() (response *DescribeSmsSignListResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) DescribeSmsSignList(request *DescribeSmsSignListRequest) (response *DescribeSmsSignListResponse, err error) {
-    if request == nil {
-        request = NewDescribeSmsSignListRequest()
-    }
-    
-    response = NewDescribeSmsSignListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSmsSignListWithContext(context.Background(), request)
 }
 
 // DescribeSmsSignList
@@ -669,6 +662,11 @@ func (c *Client) DescribeSmsSignListWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeSmsSignListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSmsSignList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSmsSignListResponse()
@@ -711,6 +709,7 @@ func NewDescribeSmsTemplateListResponse() (response *DescribeSmsTemplateListResp
 //  FAILEDOPERATION_TEMPLATENUMBERLIMIT = "FailedOperation.TemplateNumberLimit"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
 //  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -723,13 +722,7 @@ func NewDescribeSmsTemplateListResponse() (response *DescribeSmsTemplateListResp
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) DescribeSmsTemplateList(request *DescribeSmsTemplateListRequest) (response *DescribeSmsTemplateListResponse, err error) {
-    if request == nil {
-        request = NewDescribeSmsTemplateListRequest()
-    }
-    
-    response = NewDescribeSmsTemplateListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSmsTemplateListWithContext(context.Background(), request)
 }
 
 // DescribeSmsTemplateList
@@ -750,6 +743,7 @@ func (c *Client) DescribeSmsTemplateList(request *DescribeSmsTemplateListRequest
 //  FAILEDOPERATION_TEMPLATENUMBERLIMIT = "FailedOperation.TemplateNumberLimit"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
+//  INTERNALERROR_SENDANDRECVFAIL = "InternalError.SendAndRecvFail"
 //  INTERNALERROR_SIGVERIFICATIONFAIL = "InternalError.SigVerificationFail"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -765,6 +759,11 @@ func (c *Client) DescribeSmsTemplateListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeSmsTemplateListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSmsTemplateList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSmsTemplateListResponse()
@@ -790,13 +789,13 @@ func NewModifySmsSignResponse() (response *ModifySmsSignResponse) {
 }
 
 // ModifySmsSign
-// 1. This API is used to modify an SMS signature. You need to read the [Tencent Cloud SMS Signature Review Standards](https://intl.cloud.tencent.com/document/product/382/39022) before making a modification.
+// 1. This API is used to modify an SMS signature. Read the [Tencent Cloud SMS signature review standards](https://intl.cloud.tencent.com/document/product/382/40658) before making a modification.
 //
-// 2. ⚠️ Note: individual users cannot use this API to modify SMS signatures. For more information, see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the [console](https://console.cloud.tencent.com/smsv2) to modify SMS signatures.
+// 2. ⚠️ Note: Individual users cannot use this API to modify SMS signatures. For more information, see [Identity Verification Guide](https://intl.cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the [console](https://console.cloud.tencent.com/smsv2) to modify SMS signatures.
 //
 // 3. Modifications can be made only if the signature status is **Pending Review** or **Rejected**. **Approved** signatures cannot be modified.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
 // >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
 //
@@ -809,6 +808,7 @@ func NewModifySmsSignResponse() (response *ModifySmsSignResponse) {
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
 //  FAILEDOPERATION_SIGNNUMBERLIMIT = "FailedOperation.SignNumberLimit"
 //  FAILEDOPERATION_TEMPLATEALREADYPASSEDCHECK = "FailedOperation.TemplateAlreadyPassedCheck"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
@@ -828,23 +828,17 @@ func NewModifySmsSignResponse() (response *ModifySmsSignResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) ModifySmsSign(request *ModifySmsSignRequest) (response *ModifySmsSignResponse, err error) {
-    if request == nil {
-        request = NewModifySmsSignRequest()
-    }
-    
-    response = NewModifySmsSignResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySmsSignWithContext(context.Background(), request)
 }
 
 // ModifySmsSign
-// 1. This API is used to modify an SMS signature. You need to read the [Tencent Cloud SMS Signature Review Standards](https://intl.cloud.tencent.com/document/product/382/39022) before making a modification.
+// 1. This API is used to modify an SMS signature. Read the [Tencent Cloud SMS signature review standards](https://intl.cloud.tencent.com/document/product/382/40658) before making a modification.
 //
-// 2. ⚠️ Note: individual users cannot use this API to modify SMS signatures. For more information, see [Identity Verification Overview](https://intl.cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the [console](https://console.cloud.tencent.com/smsv2) to modify SMS signatures.
+// 2. ⚠️ Note: Individual users cannot use this API to modify SMS signatures. For more information, see [Identity Verification Guide](https://intl.cloud.tencent.com/document/product/378/3629). If your account identity is individual, you can log in to the [console](https://console.cloud.tencent.com/smsv2) to modify SMS signatures.
 //
 // 3. Modifications can be made only if the signature status is **Pending Review** or **Rejected**. **Approved** signatures cannot be modified.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
 // >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
 //
@@ -857,6 +851,7 @@ func (c *Client) ModifySmsSign(request *ModifySmsSignRequest) (response *ModifyS
 //  FAILEDOPERATION_OTHERERROR = "FailedOperation.OtherError"
 //  FAILEDOPERATION_SIGNNUMBERLIMIT = "FailedOperation.SignNumberLimit"
 //  FAILEDOPERATION_TEMPLATEALREADYPASSEDCHECK = "FailedOperation.TemplateAlreadyPassedCheck"
+//  FAILEDOPERATION_TEMPLATEIDNOTEXIST = "FailedOperation.TemplateIdNotExist"
 //  INTERNALERROR_OTHERERROR = "InternalError.OtherError"
 //  INTERNALERROR_REQUESTTIMEEXCEPTION = "InternalError.RequestTimeException"
 //  INTERNALERROR_RESTAPIINTERFACENOTEXIST = "InternalError.RestApiInterfaceNotExist"
@@ -879,6 +874,11 @@ func (c *Client) ModifySmsSignWithContext(ctx context.Context, request *ModifySm
     if request == nil {
         request = NewModifySmsSignRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySmsSign require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySmsSignResponse()
@@ -938,13 +938,7 @@ func NewModifySmsTemplateResponse() (response *ModifySmsTemplateResponse) {
 //  UNAUTHORIZEDOPERATION_SERIVCESUSPENDDUETOARREARS = "UnauthorizedOperation.SerivceSuspendDueToArrears"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) ModifySmsTemplate(request *ModifySmsTemplateRequest) (response *ModifySmsTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifySmsTemplateRequest()
-    }
-    
-    response = NewModifySmsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySmsTemplateWithContext(context.Background(), request)
 }
 
 // ModifySmsTemplate
@@ -985,6 +979,11 @@ func (c *Client) ModifySmsTemplateWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifySmsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySmsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySmsTemplateResponse()
@@ -1014,7 +1013,9 @@ func NewPullSmsReplyStatusResponse() (response *PullSmsReplyStatusResponse) {
 //
 // Currently, you can also [configure the reply callback](https://intl.cloud.tencent.com/document/product/382/42907?from_cn_redirect=1) to get replies.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: You need to contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) to activate this API.
+//
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
 // >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
 //
@@ -1041,13 +1042,7 @@ func NewPullSmsReplyStatusResponse() (response *PullSmsReplyStatusResponse) {
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsReplyStatus(request *PullSmsReplyStatusRequest) (response *PullSmsReplyStatusResponse, err error) {
-    if request == nil {
-        request = NewPullSmsReplyStatusRequest()
-    }
-    
-    response = NewPullSmsReplyStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullSmsReplyStatusWithContext(context.Background(), request)
 }
 
 // PullSmsReplyStatus
@@ -1055,7 +1050,9 @@ func (c *Client) PullSmsReplyStatus(request *PullSmsReplyStatusRequest) (respons
 //
 // Currently, you can also [configure the reply callback](https://intl.cloud.tencent.com/document/product/382/42907?from_cn_redirect=1) to get replies.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: You need to contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) to activate this API.
+//
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
 // >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
 //
@@ -1085,6 +1082,11 @@ func (c *Client) PullSmsReplyStatusWithContext(ctx context.Context, request *Pul
     if request == nil {
         request = NewPullSmsReplyStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullSmsReplyStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullSmsReplyStatusResponse()
@@ -1142,13 +1144,7 @@ func NewPullSmsReplyStatusByPhoneNumberResponse() (response *PullSmsReplyStatusB
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsReplyStatusByPhoneNumber(request *PullSmsReplyStatusByPhoneNumberRequest) (response *PullSmsReplyStatusByPhoneNumberResponse, err error) {
-    if request == nil {
-        request = NewPullSmsReplyStatusByPhoneNumberRequest()
-    }
-    
-    response = NewPullSmsReplyStatusByPhoneNumberResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullSmsReplyStatusByPhoneNumberWithContext(context.Background(), request)
 }
 
 // PullSmsReplyStatusByPhoneNumber
@@ -1187,6 +1183,11 @@ func (c *Client) PullSmsReplyStatusByPhoneNumberWithContext(ctx context.Context,
     if request == nil {
         request = NewPullSmsReplyStatusByPhoneNumberRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullSmsReplyStatusByPhoneNumber require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullSmsReplyStatusByPhoneNumberResponse()
@@ -1244,13 +1245,7 @@ func NewPullSmsSendStatusResponse() (response *PullSmsSendStatusResponse) {
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatus(request *PullSmsSendStatusRequest) (response *PullSmsSendStatusResponse, err error) {
-    if request == nil {
-        request = NewPullSmsSendStatusRequest()
-    }
-    
-    response = NewPullSmsSendStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullSmsSendStatusWithContext(context.Background(), request)
 }
 
 // PullSmsSendStatus
@@ -1289,6 +1284,11 @@ func (c *Client) PullSmsSendStatusWithContext(ctx context.Context, request *Pull
     if request == nil {
         request = NewPullSmsSendStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullSmsSendStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullSmsSendStatusResponse()
@@ -1349,13 +1349,7 @@ func NewPullSmsSendStatusByPhoneNumberResponse() (response *PullSmsSendStatusByP
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatusByPhoneNumber(request *PullSmsSendStatusByPhoneNumberRequest) (response *PullSmsSendStatusByPhoneNumberResponse, err error) {
-    if request == nil {
-        request = NewPullSmsSendStatusByPhoneNumberRequest()
-    }
-    
-    response = NewPullSmsSendStatusByPhoneNumberResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullSmsSendStatusByPhoneNumberWithContext(context.Background(), request)
 }
 
 // PullSmsSendStatusByPhoneNumber
@@ -1397,6 +1391,11 @@ func (c *Client) PullSmsSendStatusByPhoneNumberWithContext(ctx context.Context, 
     if request == nil {
         request = NewPullSmsSendStatusByPhoneNumberRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullSmsSendStatusByPhoneNumber require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullSmsSendStatusByPhoneNumberResponse()
@@ -1424,9 +1423,11 @@ func NewSendSmsResponse() (response *SendSmsResponse) {
 // SendSms
 // This API is used to send SMS verification codes, notification, or marketing messages to users.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the [SDK](https://intl.cloud.tencent.com/document/product/382/43193?from_cn_redirect=1).
 //
-// >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
+// >- Note: You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
+//
+// >- Note: This API is currently on the 2021-01-11 version. If you are still using the [2019-07-11 version](https://intl.cloud.tencent.com/document/product/382/38778?from_cn_redirect=1), we recommend you use this latest version. For version differences, see [Version description](https://intl.cloud.tencent.com/document/product/382/63195?from_cn_redirect=1#.E7.89.88.E6.9C.AC.E6.8F.8F.E8.BF.B0).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONTAINSENSITIVEWORD = "FailedOperation.ContainSensitiveWord"
@@ -1451,7 +1452,11 @@ func NewSendSmsResponse() (response *SendSmsResponse) {
 //  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppIdNotExist"
 //  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERFORMATERROR = "InvalidParameterValue.TemplateParameterFormatError"
 //  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERLENGTHLIMIT = "InvalidParameterValue.TemplateParameterLengthLimit"
+//  LIMITEXCEEDED_APPCOUNTRYORREGIONDAILYLIMIT = "LimitExceeded.AppCountryOrRegionDailyLimit"
+//  LIMITEXCEEDED_APPCOUNTRYORREGIONINBLACKLIST = "LimitExceeded.AppCountryOrRegionInBlacklist"
 //  LIMITEXCEEDED_APPDAILYLIMIT = "LimitExceeded.AppDailyLimit"
+//  LIMITEXCEEDED_APPGLOBALDAILYLIMIT = "LimitExceeded.AppGlobalDailyLimit"
+//  LIMITEXCEEDED_APPMAINLANDCHINADAILYLIMIT = "LimitExceeded.AppMainlandChinaDailyLimit"
 //  LIMITEXCEEDED_DAILYLIMIT = "LimitExceeded.DailyLimit"
 //  LIMITEXCEEDED_DELIVERYFREQUENCYLIMIT = "LimitExceeded.DeliveryFrequencyLimit"
 //  LIMITEXCEEDED_PHONENUMBERCOUNTLIMIT = "LimitExceeded.PhoneNumberCountLimit"
@@ -1470,21 +1475,17 @@ func NewSendSmsResponse() (response *SendSmsResponse) {
 //  UNSUPPORTEDOPERATION_CONTAINDOMESTICANDINTERNATIONALPHONENUMBER = "UnsupportedOperation.ContainDomesticAndInternationalPhoneNumber"
 //  UNSUPPORTEDOPERATION_UNSUPORTEDREGION = "UnsupportedOperation.UnsuportedRegion"
 func (c *Client) SendSms(request *SendSmsRequest) (response *SendSmsResponse, err error) {
-    if request == nil {
-        request = NewSendSmsRequest()
-    }
-    
-    response = NewSendSmsResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendSmsWithContext(context.Background(), request)
 }
 
 // SendSms
 // This API is used to send SMS verification codes, notification, or marketing messages to users.
 //
-// >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
+// >- Note: Because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the [SDK](https://intl.cloud.tencent.com/document/product/382/43193?from_cn_redirect=1).
 //
-// >- You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
+// >- Note: You can run this API directly in [API 3.0 Explorer](https://console.cloud.tencent.com/api/explorer?Product=sms&Version=2021-01-11&Action=SendSms), which eliminates the signature calculation steps. After it is executed successfully, API Explorer can **automatically generate** SDK code samples.
+//
+// >- Note: This API is currently on the 2021-01-11 version. If you are still using the [2019-07-11 version](https://intl.cloud.tencent.com/document/product/382/38778?from_cn_redirect=1), we recommend you use this latest version. For version differences, see [Version description](https://intl.cloud.tencent.com/document/product/382/63195?from_cn_redirect=1#.E7.89.88.E6.9C.AC.E6.8F.8F.E8.BF.B0).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONTAINSENSITIVEWORD = "FailedOperation.ContainSensitiveWord"
@@ -1509,7 +1510,11 @@ func (c *Client) SendSms(request *SendSmsRequest) (response *SendSmsResponse, er
 //  INVALIDPARAMETERVALUE_SDKAPPIDNOTEXIST = "InvalidParameterValue.SdkAppIdNotExist"
 //  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERFORMATERROR = "InvalidParameterValue.TemplateParameterFormatError"
 //  INVALIDPARAMETERVALUE_TEMPLATEPARAMETERLENGTHLIMIT = "InvalidParameterValue.TemplateParameterLengthLimit"
+//  LIMITEXCEEDED_APPCOUNTRYORREGIONDAILYLIMIT = "LimitExceeded.AppCountryOrRegionDailyLimit"
+//  LIMITEXCEEDED_APPCOUNTRYORREGIONINBLACKLIST = "LimitExceeded.AppCountryOrRegionInBlacklist"
 //  LIMITEXCEEDED_APPDAILYLIMIT = "LimitExceeded.AppDailyLimit"
+//  LIMITEXCEEDED_APPGLOBALDAILYLIMIT = "LimitExceeded.AppGlobalDailyLimit"
+//  LIMITEXCEEDED_APPMAINLANDCHINADAILYLIMIT = "LimitExceeded.AppMainlandChinaDailyLimit"
 //  LIMITEXCEEDED_DAILYLIMIT = "LimitExceeded.DailyLimit"
 //  LIMITEXCEEDED_DELIVERYFREQUENCYLIMIT = "LimitExceeded.DeliveryFrequencyLimit"
 //  LIMITEXCEEDED_PHONENUMBERCOUNTLIMIT = "LimitExceeded.PhoneNumberCountLimit"
@@ -1531,6 +1536,11 @@ func (c *Client) SendSmsWithContext(ctx context.Context, request *SendSmsRequest
     if request == nil {
         request = NewSendSmsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendSms require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendSmsResponse()
@@ -1590,13 +1600,7 @@ func NewSendStatusStatisticsResponse() (response *SendStatusStatisticsResponse) 
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) SendStatusStatistics(request *SendStatusStatisticsRequest) (response *SendStatusStatisticsResponse, err error) {
-    if request == nil {
-        request = NewSendStatusStatisticsRequest()
-    }
-    
-    response = NewSendStatusStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendStatusStatisticsWithContext(context.Background(), request)
 }
 
 // SendStatusStatistics
@@ -1637,6 +1641,11 @@ func (c *Client) SendStatusStatisticsWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewSendStatusStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendStatusStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendStatusStatisticsResponse()

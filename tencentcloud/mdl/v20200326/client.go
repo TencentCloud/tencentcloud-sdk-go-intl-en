@@ -16,6 +16,7 @@ package v20200326
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,13 +78,7 @@ func NewCreateStreamLiveChannelResponse() (response *CreateStreamLiveChannelResp
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest) (response *CreateStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamLiveChannelRequest()
-    }
-    
-    response = NewCreateStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // CreateStreamLiveChannel
@@ -105,6 +100,11 @@ func (c *Client) CreateStreamLiveChannelWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamLiveChannelResponse()
@@ -142,13 +142,7 @@ func NewCreateStreamLiveInputResponse() (response *CreateStreamLiveInputResponse
 //  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
 //  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
 func (c *Client) CreateStreamLiveInput(request *CreateStreamLiveInputRequest) (response *CreateStreamLiveInputResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamLiveInputRequest()
-    }
-    
-    response = NewCreateStreamLiveInputResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamLiveInputWithContext(context.Background(), request)
 }
 
 // CreateStreamLiveInput
@@ -167,6 +161,11 @@ func (c *Client) CreateStreamLiveInputWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateStreamLiveInputRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLiveInput require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamLiveInputResponse()
@@ -201,13 +200,7 @@ func NewCreateStreamLiveInputSecurityGroupResponse() (response *CreateStreamLive
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
 func (c *Client) CreateStreamLiveInputSecurityGroup(request *CreateStreamLiveInputSecurityGroupRequest) (response *CreateStreamLiveInputSecurityGroupResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamLiveInputSecurityGroupRequest()
-    }
-    
-    response = NewCreateStreamLiveInputSecurityGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamLiveInputSecurityGroupWithContext(context.Background(), request)
 }
 
 // CreateStreamLiveInputSecurityGroup
@@ -223,6 +216,11 @@ func (c *Client) CreateStreamLiveInputSecurityGroupWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateStreamLiveInputSecurityGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLiveInputSecurityGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamLiveInputSecurityGroupResponse()
@@ -255,13 +253,7 @@ func NewCreateStreamLivePlanResponse() (response *CreateStreamLivePlanResponse) 
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
 func (c *Client) CreateStreamLivePlan(request *CreateStreamLivePlanRequest) (response *CreateStreamLivePlanResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamLivePlanRequest()
-    }
-    
-    response = NewCreateStreamLivePlanResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamLivePlanWithContext(context.Background(), request)
 }
 
 // CreateStreamLivePlan
@@ -275,6 +267,11 @@ func (c *Client) CreateStreamLivePlanWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateStreamLivePlanRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLivePlan require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamLivePlanResponse()
@@ -310,13 +307,7 @@ func NewDeleteStreamLiveChannelResponse() (response *DeleteStreamLiveChannelResp
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) DeleteStreamLiveChannel(request *DeleteStreamLiveChannelRequest) (response *DeleteStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLiveChannelRequest()
-    }
-    
-    response = NewDeleteStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // DeleteStreamLiveChannel
@@ -333,6 +324,11 @@ func (c *Client) DeleteStreamLiveChannelWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLiveChannelResponse()
@@ -367,13 +363,7 @@ func NewDeleteStreamLiveInputResponse() (response *DeleteStreamLiveInputResponse
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DeleteStreamLiveInput(request *DeleteStreamLiveInputRequest) (response *DeleteStreamLiveInputResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLiveInputRequest()
-    }
-    
-    response = NewDeleteStreamLiveInputResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLiveInputWithContext(context.Background(), request)
 }
 
 // DeleteStreamLiveInput
@@ -389,6 +379,11 @@ func (c *Client) DeleteStreamLiveInputWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteStreamLiveInputRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLiveInput require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLiveInputResponse()
@@ -423,13 +418,7 @@ func NewDeleteStreamLiveInputSecurityGroupResponse() (response *DeleteStreamLive
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DeleteStreamLiveInputSecurityGroup(request *DeleteStreamLiveInputSecurityGroupRequest) (response *DeleteStreamLiveInputSecurityGroupResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLiveInputSecurityGroupRequest()
-    }
-    
-    response = NewDeleteStreamLiveInputSecurityGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLiveInputSecurityGroupWithContext(context.Background(), request)
 }
 
 // DeleteStreamLiveInputSecurityGroup
@@ -445,6 +434,11 @@ func (c *Client) DeleteStreamLiveInputSecurityGroupWithContext(ctx context.Conte
     if request == nil {
         request = NewDeleteStreamLiveInputSecurityGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLiveInputSecurityGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLiveInputSecurityGroupResponse()
@@ -477,13 +471,7 @@ func NewDeleteStreamLivePlanResponse() (response *DeleteStreamLivePlanResponse) 
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_PLAN = "InvalidParameter.Plan"
 func (c *Client) DeleteStreamLivePlan(request *DeleteStreamLivePlanRequest) (response *DeleteStreamLivePlanResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLivePlanRequest()
-    }
-    
-    response = NewDeleteStreamLivePlanResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLivePlanWithContext(context.Background(), request)
 }
 
 // DeleteStreamLivePlan
@@ -497,6 +485,11 @@ func (c *Client) DeleteStreamLivePlanWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteStreamLivePlanRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLivePlan require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLivePlanResponse()
@@ -528,13 +521,7 @@ func NewDescribeStreamLiveChannelResponse() (response *DescribeStreamLiveChannel
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamLiveChannel(request *DescribeStreamLiveChannelRequest) (response *DescribeStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannel
@@ -547,6 +534,11 @@ func (c *Client) DescribeStreamLiveChannelWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelResponse()
@@ -578,13 +570,7 @@ func NewDescribeStreamLiveChannelAlertsResponse() (response *DescribeStreamLiveC
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamLiveChannelAlerts(request *DescribeStreamLiveChannelAlertsRequest) (response *DescribeStreamLiveChannelAlertsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelAlertsRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelAlertsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelAlertsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannelAlerts
@@ -597,6 +583,11 @@ func (c *Client) DescribeStreamLiveChannelAlertsWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeStreamLiveChannelAlertsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannelAlerts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelAlertsResponse()
@@ -630,13 +621,7 @@ func NewDescribeStreamLiveChannelInputStatisticsResponse() (response *DescribeSt
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeStreamLiveChannelInputStatistics(request *DescribeStreamLiveChannelInputStatisticsRequest) (response *DescribeStreamLiveChannelInputStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelInputStatisticsRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelInputStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelInputStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannelInputStatistics
@@ -651,6 +636,11 @@ func (c *Client) DescribeStreamLiveChannelInputStatisticsWithContext(ctx context
     if request == nil {
         request = NewDescribeStreamLiveChannelInputStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannelInputStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelInputStatisticsResponse()
@@ -684,13 +674,7 @@ func NewDescribeStreamLiveChannelLogsResponse() (response *DescribeStreamLiveCha
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeStreamLiveChannelLogs(request *DescribeStreamLiveChannelLogsRequest) (response *DescribeStreamLiveChannelLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelLogsRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelLogsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannelLogs
@@ -705,6 +689,11 @@ func (c *Client) DescribeStreamLiveChannelLogsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeStreamLiveChannelLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannelLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelLogsResponse()
@@ -739,13 +728,7 @@ func NewDescribeStreamLiveChannelOutputStatisticsResponse() (response *DescribeS
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 func (c *Client) DescribeStreamLiveChannelOutputStatistics(request *DescribeStreamLiveChannelOutputStatisticsRequest) (response *DescribeStreamLiveChannelOutputStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelOutputStatisticsRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelOutputStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelOutputStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannelOutputStatistics
@@ -761,6 +744,11 @@ func (c *Client) DescribeStreamLiveChannelOutputStatisticsWithContext(ctx contex
     if request == nil {
         request = NewDescribeStreamLiveChannelOutputStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannelOutputStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelOutputStatisticsResponse()
@@ -791,13 +779,7 @@ func NewDescribeStreamLiveChannelsResponse() (response *DescribeStreamLiveChanne
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeStreamLiveChannels(request *DescribeStreamLiveChannelsRequest) (response *DescribeStreamLiveChannelsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveChannelsRequest()
-    }
-    
-    response = NewDescribeStreamLiveChannelsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveChannelsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveChannels
@@ -809,6 +791,11 @@ func (c *Client) DescribeStreamLiveChannelsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeStreamLiveChannelsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveChannels require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveChannelsResponse()
@@ -842,13 +829,7 @@ func NewDescribeStreamLiveInputResponse() (response *DescribeStreamLiveInputResp
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamLiveInput(request *DescribeStreamLiveInputRequest) (response *DescribeStreamLiveInputResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveInputRequest()
-    }
-    
-    response = NewDescribeStreamLiveInputResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveInputWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveInput
@@ -863,6 +844,11 @@ func (c *Client) DescribeStreamLiveInputWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeStreamLiveInputRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveInput require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputResponse()
@@ -896,13 +882,7 @@ func NewDescribeStreamLiveInputSecurityGroupResponse() (response *DescribeStream
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamLiveInputSecurityGroup(request *DescribeStreamLiveInputSecurityGroupRequest) (response *DescribeStreamLiveInputSecurityGroupResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveInputSecurityGroupRequest()
-    }
-    
-    response = NewDescribeStreamLiveInputSecurityGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveInputSecurityGroupWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveInputSecurityGroup
@@ -917,6 +897,11 @@ func (c *Client) DescribeStreamLiveInputSecurityGroupWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeStreamLiveInputSecurityGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveInputSecurityGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputSecurityGroupResponse()
@@ -947,13 +932,7 @@ func NewDescribeStreamLiveInputSecurityGroupsResponse() (response *DescribeStrea
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeStreamLiveInputSecurityGroups(request *DescribeStreamLiveInputSecurityGroupsRequest) (response *DescribeStreamLiveInputSecurityGroupsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveInputSecurityGroupsRequest()
-    }
-    
-    response = NewDescribeStreamLiveInputSecurityGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveInputSecurityGroupsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveInputSecurityGroups
@@ -965,6 +944,11 @@ func (c *Client) DescribeStreamLiveInputSecurityGroupsWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeStreamLiveInputSecurityGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveInputSecurityGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputSecurityGroupsResponse()
@@ -995,13 +979,7 @@ func NewDescribeStreamLiveInputsResponse() (response *DescribeStreamLiveInputsRe
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeStreamLiveInputs(request *DescribeStreamLiveInputsRequest) (response *DescribeStreamLiveInputsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveInputsRequest()
-    }
-    
-    response = NewDescribeStreamLiveInputsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveInputsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveInputs
@@ -1013,6 +991,11 @@ func (c *Client) DescribeStreamLiveInputsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeStreamLiveInputsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveInputs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveInputsResponse()
@@ -1044,13 +1027,7 @@ func NewDescribeStreamLivePlansResponse() (response *DescribeStreamLivePlansResp
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamLivePlans(request *DescribeStreamLivePlansRequest) (response *DescribeStreamLivePlansResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLivePlansRequest()
-    }
-    
-    response = NewDescribeStreamLivePlansResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLivePlansWithContext(context.Background(), request)
 }
 
 // DescribeStreamLivePlans
@@ -1063,6 +1040,11 @@ func (c *Client) DescribeStreamLivePlansWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeStreamLivePlansRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLivePlans require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLivePlansResponse()
@@ -1093,13 +1075,7 @@ func NewDescribeStreamLiveRegionsResponse() (response *DescribeStreamLiveRegions
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeStreamLiveRegions(request *DescribeStreamLiveRegionsRequest) (response *DescribeStreamLiveRegionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLiveRegionsRequest()
-    }
-    
-    response = NewDescribeStreamLiveRegionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLiveRegionsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLiveRegions
@@ -1111,6 +1087,11 @@ func (c *Client) DescribeStreamLiveRegionsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStreamLiveRegionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveRegions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLiveRegionsResponse()
@@ -1151,13 +1132,7 @@ func NewModifyStreamLiveChannelResponse() (response *ModifyStreamLiveChannelResp
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) ModifyStreamLiveChannel(request *ModifyStreamLiveChannelRequest) (response *ModifyStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamLiveChannelRequest()
-    }
-    
-    response = NewModifyStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // ModifyStreamLiveChannel
@@ -1179,6 +1154,11 @@ func (c *Client) ModifyStreamLiveChannelWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamLiveChannelResponse()
@@ -1216,13 +1196,7 @@ func NewModifyStreamLiveInputResponse() (response *ModifyStreamLiveInputResponse
 //  INVALIDPARAMETER_SECURITYGROUPS = "InvalidParameter.SecurityGroups"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) ModifyStreamLiveInput(request *ModifyStreamLiveInputRequest) (response *ModifyStreamLiveInputResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamLiveInputRequest()
-    }
-    
-    response = NewModifyStreamLiveInputResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamLiveInputWithContext(context.Background(), request)
 }
 
 // ModifyStreamLiveInput
@@ -1241,6 +1215,11 @@ func (c *Client) ModifyStreamLiveInputWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyStreamLiveInputRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLiveInput require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamLiveInputResponse()
@@ -1276,13 +1255,7 @@ func NewModifyStreamLiveInputSecurityGroupResponse() (response *ModifyStreamLive
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
 func (c *Client) ModifyStreamLiveInputSecurityGroup(request *ModifyStreamLiveInputSecurityGroupRequest) (response *ModifyStreamLiveInputSecurityGroupResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamLiveInputSecurityGroupRequest()
-    }
-    
-    response = NewModifyStreamLiveInputSecurityGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamLiveInputSecurityGroupWithContext(context.Background(), request)
 }
 
 // ModifyStreamLiveInputSecurityGroup
@@ -1299,6 +1272,11 @@ func (c *Client) ModifyStreamLiveInputSecurityGroupWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyStreamLiveInputSecurityGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLiveInputSecurityGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamLiveInputSecurityGroupResponse()
@@ -1333,13 +1311,7 @@ func NewStartStreamLiveChannelResponse() (response *StartStreamLiveChannelRespon
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) StartStreamLiveChannel(request *StartStreamLiveChannelRequest) (response *StartStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewStartStreamLiveChannelRequest()
-    }
-    
-    response = NewStartStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // StartStreamLiveChannel
@@ -1355,6 +1327,11 @@ func (c *Client) StartStreamLiveChannelWithContext(ctx context.Context, request 
     if request == nil {
         request = NewStartStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartStreamLiveChannelResponse()
@@ -1389,13 +1366,7 @@ func NewStopStreamLiveChannelResponse() (response *StopStreamLiveChannelResponse
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATEERROR = "InvalidParameter.StateError"
 func (c *Client) StopStreamLiveChannel(request *StopStreamLiveChannelRequest) (response *StopStreamLiveChannelResponse, err error) {
-    if request == nil {
-        request = NewStopStreamLiveChannelRequest()
-    }
-    
-    response = NewStopStreamLiveChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopStreamLiveChannelWithContext(context.Background(), request)
 }
 
 // StopStreamLiveChannel
@@ -1411,6 +1382,11 @@ func (c *Client) StopStreamLiveChannelWithContext(ctx context.Context, request *
     if request == nil {
         request = NewStopStreamLiveChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopStreamLiveChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopStreamLiveChannelResponse()

@@ -16,6 +16,7 @@ package v20200527
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -68,13 +69,7 @@ func NewBindNewLVBDomainWithChannelResponse() (response *BindNewLVBDomainWithCha
 //  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
 //  INVALIDPARAMETER_LVBDOMAIN = "InvalidParameter.LvbDomain"
 func (c *Client) BindNewLVBDomainWithChannel(request *BindNewLVBDomainWithChannelRequest) (response *BindNewLVBDomainWithChannelResponse, err error) {
-    if request == nil {
-        request = NewBindNewLVBDomainWithChannelRequest()
-    }
-    
-    response = NewBindNewLVBDomainWithChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.BindNewLVBDomainWithChannelWithContext(context.Background(), request)
 }
 
 // BindNewLVBDomainWithChannel
@@ -87,6 +82,11 @@ func (c *Client) BindNewLVBDomainWithChannelWithContext(ctx context.Context, req
     if request == nil {
         request = NewBindNewLVBDomainWithChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindNewLVBDomainWithChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBindNewLVBDomainWithChannelResponse()
@@ -121,13 +121,7 @@ func NewCreateStreamPackageChannelResponse() (response *CreateStreamPackageChann
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
 func (c *Client) CreateStreamPackageChannel(request *CreateStreamPackageChannelRequest) (response *CreateStreamPackageChannelResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamPackageChannelRequest()
-    }
-    
-    response = NewCreateStreamPackageChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamPackageChannelWithContext(context.Background(), request)
 }
 
 // CreateStreamPackageChannel
@@ -143,6 +137,11 @@ func (c *Client) CreateStreamPackageChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateStreamPackageChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamPackageChannelResponse()
@@ -178,13 +177,7 @@ func NewCreateStreamPackageChannelEndpointResponse() (response *CreateStreamPack
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackageChannelEndpointRequest) (response *CreateStreamPackageChannelEndpointResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamPackageChannelEndpointRequest()
-    }
-    
-    response = NewCreateStreamPackageChannelEndpointResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamPackageChannelEndpointWithContext(context.Background(), request)
 }
 
 // CreateStreamPackageChannelEndpoint
@@ -201,6 +194,11 @@ func (c *Client) CreateStreamPackageChannelEndpointWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateStreamPackageChannelEndpointRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageChannelEndpoint require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamPackageChannelEndpointResponse()
@@ -234,13 +232,7 @@ func NewDeleteStreamPackageChannelEndpointsResponse() (response *DeleteStreamPac
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) DeleteStreamPackageChannelEndpoints(request *DeleteStreamPackageChannelEndpointsRequest) (response *DeleteStreamPackageChannelEndpointsResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamPackageChannelEndpointsRequest()
-    }
-    
-    response = NewDeleteStreamPackageChannelEndpointsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamPackageChannelEndpointsWithContext(context.Background(), request)
 }
 
 // DeleteStreamPackageChannelEndpoints
@@ -255,6 +247,11 @@ func (c *Client) DeleteStreamPackageChannelEndpointsWithContext(ctx context.Cont
     if request == nil {
         request = NewDeleteStreamPackageChannelEndpointsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageChannelEndpoints require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageChannelEndpointsResponse()
@@ -288,13 +285,7 @@ func NewDeleteStreamPackageChannelsResponse() (response *DeleteStreamPackageChan
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
 func (c *Client) DeleteStreamPackageChannels(request *DeleteStreamPackageChannelsRequest) (response *DeleteStreamPackageChannelsResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamPackageChannelsRequest()
-    }
-    
-    response = NewDeleteStreamPackageChannelsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamPackageChannelsWithContext(context.Background(), request)
 }
 
 // DeleteStreamPackageChannels
@@ -309,6 +300,11 @@ func (c *Client) DeleteStreamPackageChannelsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteStreamPackageChannelsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageChannels require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageChannelsResponse()
@@ -341,13 +337,7 @@ func NewDescribeStreamPackageChannelResponse() (response *DescribeStreamPackageC
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) DescribeStreamPackageChannel(request *DescribeStreamPackageChannelRequest) (response *DescribeStreamPackageChannelResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamPackageChannelRequest()
-    }
-    
-    response = NewDescribeStreamPackageChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamPackageChannelWithContext(context.Background(), request)
 }
 
 // DescribeStreamPackageChannel
@@ -361,6 +351,11 @@ func (c *Client) DescribeStreamPackageChannelWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeStreamPackageChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamPackageChannelResponse()
@@ -396,13 +391,7 @@ func NewDescribeStreamPackageChannelsResponse() (response *DescribeStreamPackage
 //  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
 //  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
 func (c *Client) DescribeStreamPackageChannels(request *DescribeStreamPackageChannelsRequest) (response *DescribeStreamPackageChannelsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamPackageChannelsRequest()
-    }
-    
-    response = NewDescribeStreamPackageChannelsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamPackageChannelsWithContext(context.Background(), request)
 }
 
 // DescribeStreamPackageChannels
@@ -419,6 +408,11 @@ func (c *Client) DescribeStreamPackageChannelsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeStreamPackageChannelsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageChannels require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamPackageChannelsResponse()
@@ -453,13 +447,7 @@ func NewModifyStreamPackageChannelResponse() (response *ModifyStreamPackageChann
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
 func (c *Client) ModifyStreamPackageChannel(request *ModifyStreamPackageChannelRequest) (response *ModifyStreamPackageChannelResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamPackageChannelRequest()
-    }
-    
-    response = NewModifyStreamPackageChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamPackageChannelWithContext(context.Background(), request)
 }
 
 // ModifyStreamPackageChannel
@@ -475,6 +463,11 @@ func (c *Client) ModifyStreamPackageChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyStreamPackageChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamPackageChannelResponse()
@@ -510,13 +503,7 @@ func NewModifyStreamPackageChannelEndpointResponse() (response *ModifyStreamPack
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackageChannelEndpointRequest) (response *ModifyStreamPackageChannelEndpointResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamPackageChannelEndpointRequest()
-    }
-    
-    response = NewModifyStreamPackageChannelEndpointResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamPackageChannelEndpointWithContext(context.Background(), request)
 }
 
 // ModifyStreamPackageChannelEndpoint
@@ -533,6 +520,11 @@ func (c *Client) ModifyStreamPackageChannelEndpointWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyStreamPackageChannelEndpointRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageChannelEndpoint require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamPackageChannelEndpointResponse()
@@ -566,13 +558,7 @@ func NewModifyStreamPackageChannelInputAuthInfoResponse() (response *ModifyStrea
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyStreamPackageChannelInputAuthInfo(request *ModifyStreamPackageChannelInputAuthInfoRequest) (response *ModifyStreamPackageChannelInputAuthInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamPackageChannelInputAuthInfoRequest()
-    }
-    
-    response = NewModifyStreamPackageChannelInputAuthInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamPackageChannelInputAuthInfoWithContext(context.Background(), request)
 }
 
 // ModifyStreamPackageChannelInputAuthInfo
@@ -587,6 +573,11 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfoWithContext(ctx context.
     if request == nil {
         request = NewModifyStreamPackageChannelInputAuthInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageChannelInputAuthInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamPackageChannelInputAuthInfoResponse()
@@ -620,13 +611,7 @@ func NewUnbindCdnDomainWithChannelResponse() (response *UnbindCdnDomainWithChann
 //  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 func (c *Client) UnbindCdnDomainWithChannel(request *UnbindCdnDomainWithChannelRequest) (response *UnbindCdnDomainWithChannelResponse, err error) {
-    if request == nil {
-        request = NewUnbindCdnDomainWithChannelRequest()
-    }
-    
-    response = NewUnbindCdnDomainWithChannelResponse()
-    err = c.Send(request, response)
-    return
+    return c.UnbindCdnDomainWithChannelWithContext(context.Background(), request)
 }
 
 // UnbindCdnDomainWithChannel
@@ -641,6 +626,11 @@ func (c *Client) UnbindCdnDomainWithChannelWithContext(ctx context.Context, requ
     if request == nil {
         request = NewUnbindCdnDomainWithChannelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindCdnDomainWithChannel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUnbindCdnDomainWithChannelResponse()

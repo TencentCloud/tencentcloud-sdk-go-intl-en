@@ -16,6 +16,7 @@ package v20180301
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -91,13 +92,7 @@ func NewDetectReflectLivenessAndCompareResponse() (response *DetectReflectLivene
 //  INTERNALERROR_LIFEPHOTOPOORQUALITY = "InternalError.LifePhotoPoorQuality"
 //  INTERNALERROR_LIFEPHOTOSIZEERROR = "InternalError.LifePhotoSizeError"
 func (c *Client) DetectReflectLivenessAndCompare(request *DetectReflectLivenessAndCompareRequest) (response *DetectReflectLivenessAndCompareResponse, err error) {
-    if request == nil {
-        request = NewDetectReflectLivenessAndCompareRequest()
-    }
-    
-    response = NewDetectReflectLivenessAndCompareResponse()
-    err = c.Send(request, response)
-    return
+    return c.DetectReflectLivenessAndCompareWithContext(context.Background(), request)
 }
 
 // DetectReflectLivenessAndCompare
@@ -133,6 +128,11 @@ func (c *Client) DetectReflectLivenessAndCompareWithContext(ctx context.Context,
     if request == nil {
         request = NewDetectReflectLivenessAndCompareRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetectReflectLivenessAndCompare require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDetectReflectLivenessAndCompareResponse()
@@ -214,13 +214,7 @@ func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
 //  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) LivenessCompare(request *LivenessCompareRequest) (response *LivenessCompareResponse, err error) {
-    if request == nil {
-        request = NewLivenessCompareRequest()
-    }
-    
-    response = NewLivenessCompareResponse()
-    err = c.Send(request, response)
-    return
+    return c.LivenessCompareWithContext(context.Background(), request)
 }
 
 // LivenessCompare
@@ -283,6 +277,11 @@ func (c *Client) LivenessCompareWithContext(ctx context.Context, request *Livene
     if request == nil {
         request = NewLivenessCompareRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("LivenessCompare require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewLivenessCompareResponse()

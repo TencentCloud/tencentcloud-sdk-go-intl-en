@@ -16,6 +16,7 @@ package v20190924
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -81,13 +82,7 @@ func NewCheckInstanceResponse() (response *CheckInstanceResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CheckInstance(request *CheckInstanceRequest) (response *CheckInstanceResponse, err error) {
-    if request == nil {
-        request = NewCheckInstanceRequest()
-    }
-    
-    response = NewCheckInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CheckInstanceWithContext(context.Background(), request)
 }
 
 // CheckInstance
@@ -113,6 +108,11 @@ func (c *Client) CheckInstanceWithContext(ctx context.Context, request *CheckIns
     if request == nil {
         request = NewCheckInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCheckInstanceResponse()
@@ -148,13 +148,7 @@ func NewCreateImmutableTagRulesResponse() (response *CreateImmutableTagRulesResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 func (c *Client) CreateImmutableTagRules(request *CreateImmutableTagRulesRequest) (response *CreateImmutableTagRulesResponse, err error) {
-    if request == nil {
-        request = NewCreateImmutableTagRulesRequest()
-    }
-    
-    response = NewCreateImmutableTagRulesResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateImmutableTagRulesWithContext(context.Background(), request)
 }
 
 // CreateImmutableTagRules
@@ -171,6 +165,11 @@ func (c *Client) CreateImmutableTagRulesWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateImmutableTagRulesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateImmutableTagRules require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateImmutableTagRulesResponse()
@@ -208,13 +207,7 @@ func NewCreateInstanceTokenResponse() (response *CreateInstanceTokenResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateInstanceToken(request *CreateInstanceTokenRequest) (response *CreateInstanceTokenResponse, err error) {
-    if request == nil {
-        request = NewCreateInstanceTokenRequest()
-    }
-    
-    response = NewCreateInstanceTokenResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateInstanceTokenWithContext(context.Background(), request)
 }
 
 // CreateInstanceToken
@@ -233,6 +226,11 @@ func (c *Client) CreateInstanceTokenWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateInstanceTokenRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstanceToken require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateInstanceTokenResponse()
@@ -269,13 +267,7 @@ func NewCreateMultipleSecurityPolicyResponse() (response *CreateMultipleSecurity
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateMultipleSecurityPolicy(request *CreateMultipleSecurityPolicyRequest) (response *CreateMultipleSecurityPolicyResponse, err error) {
-    if request == nil {
-        request = NewCreateMultipleSecurityPolicyRequest()
-    }
-    
-    response = NewCreateMultipleSecurityPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateMultipleSecurityPolicyWithContext(context.Background(), request)
 }
 
 // CreateMultipleSecurityPolicy
@@ -293,6 +285,11 @@ func (c *Client) CreateMultipleSecurityPolicyWithContext(ctx context.Context, re
     if request == nil {
         request = NewCreateMultipleSecurityPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMultipleSecurityPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateMultipleSecurityPolicyResponse()
@@ -334,13 +331,7 @@ func NewCreateReplicationInstanceResponse() (response *CreateReplicationInstance
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateReplicationInstance(request *CreateReplicationInstanceRequest) (response *CreateReplicationInstanceResponse, err error) {
-    if request == nil {
-        request = NewCreateReplicationInstanceRequest()
-    }
-    
-    response = NewCreateReplicationInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateReplicationInstanceWithContext(context.Background(), request)
 }
 
 // CreateReplicationInstance
@@ -363,6 +354,11 @@ func (c *Client) CreateReplicationInstanceWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateReplicationInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateReplicationInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateReplicationInstanceResponse()
@@ -397,13 +393,7 @@ func NewDeleteImmutableTagRulesResponse() (response *DeleteImmutableTagRulesResp
 //  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteImmutableTagRules(request *DeleteImmutableTagRulesRequest) (response *DeleteImmutableTagRulesResponse, err error) {
-    if request == nil {
-        request = NewDeleteImmutableTagRulesRequest()
-    }
-    
-    response = NewDeleteImmutableTagRulesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteImmutableTagRulesWithContext(context.Background(), request)
 }
 
 // DeleteImmutableTagRules
@@ -419,6 +409,11 @@ func (c *Client) DeleteImmutableTagRulesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteImmutableTagRulesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteImmutableTagRules require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteImmutableTagRulesResponse()
@@ -455,13 +450,7 @@ func NewDeleteMultipleSecurityPolicyResponse() (response *DeleteMultipleSecurity
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteMultipleSecurityPolicy(request *DeleteMultipleSecurityPolicyRequest) (response *DeleteMultipleSecurityPolicyResponse, err error) {
-    if request == nil {
-        request = NewDeleteMultipleSecurityPolicyRequest()
-    }
-    
-    response = NewDeleteMultipleSecurityPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMultipleSecurityPolicyWithContext(context.Background(), request)
 }
 
 // DeleteMultipleSecurityPolicy
@@ -479,6 +468,11 @@ func (c *Client) DeleteMultipleSecurityPolicyWithContext(ctx context.Context, re
     if request == nil {
         request = NewDeleteMultipleSecurityPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMultipleSecurityPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMultipleSecurityPolicyResponse()
@@ -515,13 +509,7 @@ func NewDescribeImmutableTagRulesResponse() (response *DescribeImmutableTagRules
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 func (c *Client) DescribeImmutableTagRules(request *DescribeImmutableTagRulesRequest) (response *DescribeImmutableTagRulesResponse, err error) {
-    if request == nil {
-        request = NewDescribeImmutableTagRulesRequest()
-    }
-    
-    response = NewDescribeImmutableTagRulesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeImmutableTagRulesWithContext(context.Background(), request)
 }
 
 // DescribeImmutableTagRules
@@ -539,6 +527,11 @@ func (c *Client) DescribeImmutableTagRulesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeImmutableTagRulesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImmutableTagRules require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeImmutableTagRulesResponse()
@@ -575,13 +568,7 @@ func NewDescribeReplicationInstanceCreateTasksResponse() (response *DescribeRepl
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeReplicationInstanceCreateTasks(request *DescribeReplicationInstanceCreateTasksRequest) (response *DescribeReplicationInstanceCreateTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeReplicationInstanceCreateTasksRequest()
-    }
-    
-    response = NewDescribeReplicationInstanceCreateTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeReplicationInstanceCreateTasksWithContext(context.Background(), request)
 }
 
 // DescribeReplicationInstanceCreateTasks
@@ -599,6 +586,11 @@ func (c *Client) DescribeReplicationInstanceCreateTasksWithContext(ctx context.C
     if request == nil {
         request = NewDescribeReplicationInstanceCreateTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReplicationInstanceCreateTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeReplicationInstanceCreateTasksResponse()
@@ -635,13 +627,7 @@ func NewDescribeReplicationInstanceSyncStatusResponse() (response *DescribeRepli
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeReplicationInstanceSyncStatus(request *DescribeReplicationInstanceSyncStatusRequest) (response *DescribeReplicationInstanceSyncStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeReplicationInstanceSyncStatusRequest()
-    }
-    
-    response = NewDescribeReplicationInstanceSyncStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeReplicationInstanceSyncStatusWithContext(context.Background(), request)
 }
 
 // DescribeReplicationInstanceSyncStatus
@@ -659,6 +645,11 @@ func (c *Client) DescribeReplicationInstanceSyncStatusWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeReplicationInstanceSyncStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReplicationInstanceSyncStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeReplicationInstanceSyncStatusResponse()
@@ -697,13 +688,7 @@ func NewDescribeReplicationInstancesResponse() (response *DescribeReplicationIns
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeReplicationInstances(request *DescribeReplicationInstancesRequest) (response *DescribeReplicationInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeReplicationInstancesRequest()
-    }
-    
-    response = NewDescribeReplicationInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeReplicationInstancesWithContext(context.Background(), request)
 }
 
 // DescribeReplicationInstances
@@ -723,6 +708,11 @@ func (c *Client) DescribeReplicationInstancesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeReplicationInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReplicationInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeReplicationInstancesResponse()
@@ -766,13 +756,7 @@ func NewManageReplicationResponse() (response *ManageReplicationResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ManageReplication(request *ManageReplicationRequest) (response *ManageReplicationResponse, err error) {
-    if request == nil {
-        request = NewManageReplicationRequest()
-    }
-    
-    response = NewManageReplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.ManageReplicationWithContext(context.Background(), request)
 }
 
 // ManageReplication
@@ -797,6 +781,11 @@ func (c *Client) ManageReplicationWithContext(ctx context.Context, request *Mana
     if request == nil {
         request = NewManageReplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ManageReplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewManageReplicationResponse()
@@ -832,13 +821,7 @@ func NewModifyImmutableTagRulesResponse() (response *ModifyImmutableTagRulesResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 func (c *Client) ModifyImmutableTagRules(request *ModifyImmutableTagRulesRequest) (response *ModifyImmutableTagRulesResponse, err error) {
-    if request == nil {
-        request = NewModifyImmutableTagRulesRequest()
-    }
-    
-    response = NewModifyImmutableTagRulesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyImmutableTagRulesWithContext(context.Background(), request)
 }
 
 // ModifyImmutableTagRules
@@ -855,6 +838,11 @@ func (c *Client) ModifyImmutableTagRulesWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyImmutableTagRulesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyImmutableTagRules require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyImmutableTagRulesResponse()
@@ -894,13 +882,7 @@ func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyInstance(request *ModifyInstanceRequest) (response *ModifyInstanceResponse, err error) {
-    if request == nil {
-        request = NewModifyInstanceRequest()
-    }
-    
-    response = NewModifyInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyInstanceWithContext(context.Background(), request)
 }
 
 // ModifyInstance
@@ -921,6 +903,11 @@ func (c *Client) ModifyInstanceWithContext(ctx context.Context, request *ModifyI
     if request == nil {
         request = NewModifyInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyInstanceResponse()

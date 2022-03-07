@@ -16,6 +16,7 @@ package v20200309
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -84,13 +85,7 @@ func NewAssociateDDoSEipAddressResponse() (response *AssociateDDoSEipAddressResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AssociateDDoSEipAddress(request *AssociateDDoSEipAddressRequest) (response *AssociateDDoSEipAddressResponse, err error) {
-    if request == nil {
-        request = NewAssociateDDoSEipAddressRequest()
-    }
-    
-    response = NewAssociateDDoSEipAddressResponse()
-    err = c.Send(request, response)
-    return
+    return c.AssociateDDoSEipAddressWithContext(context.Background(), request)
 }
 
 // AssociateDDoSEipAddress
@@ -119,6 +114,11 @@ func (c *Client) AssociateDDoSEipAddressWithContext(ctx context.Context, request
     if request == nil {
         request = NewAssociateDDoSEipAddressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateDDoSEipAddress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAssociateDDoSEipAddressResponse()
@@ -166,13 +166,7 @@ func NewAssociateDDoSEipLoadBalancerResponse() (response *AssociateDDoSEipLoadBa
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AssociateDDoSEipLoadBalancer(request *AssociateDDoSEipLoadBalancerRequest) (response *AssociateDDoSEipLoadBalancerResponse, err error) {
-    if request == nil {
-        request = NewAssociateDDoSEipLoadBalancerRequest()
-    }
-    
-    response = NewAssociateDDoSEipLoadBalancerResponse()
-    err = c.Send(request, response)
-    return
+    return c.AssociateDDoSEipLoadBalancerWithContext(context.Background(), request)
 }
 
 // AssociateDDoSEipLoadBalancer
@@ -201,6 +195,11 @@ func (c *Client) AssociateDDoSEipLoadBalancerWithContext(ctx context.Context, re
     if request == nil {
         request = NewAssociateDDoSEipLoadBalancerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateDDoSEipLoadBalancer require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAssociateDDoSEipLoadBalancerResponse()
@@ -233,13 +232,7 @@ func NewCreateBlackWhiteIpListResponse() (response *CreateBlackWhiteIpListRespon
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateBlackWhiteIpList(request *CreateBlackWhiteIpListRequest) (response *CreateBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewCreateBlackWhiteIpListRequest()
-    }
-    
-    response = NewCreateBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateBlackWhiteIpListWithContext(context.Background(), request)
 }
 
 // CreateBlackWhiteIpList
@@ -253,6 +246,11 @@ func (c *Client) CreateBlackWhiteIpListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateBlackWhiteIpListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBlackWhiteIpList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateBlackWhiteIpListResponse()
@@ -285,13 +283,7 @@ func NewCreateBoundIPResponse() (response *CreateBoundIPResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateBoundIP(request *CreateBoundIPRequest) (response *CreateBoundIPResponse, err error) {
-    if request == nil {
-        request = NewCreateBoundIPRequest()
-    }
-    
-    response = NewCreateBoundIPResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateBoundIPWithContext(context.Background(), request)
 }
 
 // CreateBoundIP
@@ -305,6 +297,11 @@ func (c *Client) CreateBoundIPWithContext(ctx context.Context, request *CreateBo
     if request == nil {
         request = NewCreateBoundIPRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBoundIP require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateBoundIPResponse()
@@ -335,13 +332,7 @@ func NewCreateDDoSAIResponse() (response *CreateDDoSAIResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDDoSAI(request *CreateDDoSAIRequest) (response *CreateDDoSAIResponse, err error) {
-    if request == nil {
-        request = NewCreateDDoSAIRequest()
-    }
-    
-    response = NewCreateDDoSAIResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDDoSAIWithContext(context.Background(), request)
 }
 
 // CreateDDoSAI
@@ -353,6 +344,11 @@ func (c *Client) CreateDDoSAIWithContext(ctx context.Context, request *CreateDDo
     if request == nil {
         request = NewCreateDDoSAIRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDDoSAI require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDDoSAIResponse()
@@ -385,13 +381,7 @@ func NewCreateDDoSGeoIPBlockConfigResponse() (response *CreateDDoSGeoIPBlockConf
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSGeoIPBlockConfig(request *CreateDDoSGeoIPBlockConfigRequest) (response *CreateDDoSGeoIPBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateDDoSGeoIPBlockConfigRequest()
-    }
-    
-    response = NewCreateDDoSGeoIPBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDDoSGeoIPBlockConfigWithContext(context.Background(), request)
 }
 
 // CreateDDoSGeoIPBlockConfig
@@ -405,6 +395,11 @@ func (c *Client) CreateDDoSGeoIPBlockConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateDDoSGeoIPBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDDoSGeoIPBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDDoSGeoIPBlockConfigResponse()
@@ -437,13 +432,7 @@ func NewCreateDDoSSpeedLimitConfigResponse() (response *CreateDDoSSpeedLimitConf
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDDoSSpeedLimitConfig(request *CreateDDoSSpeedLimitConfigRequest) (response *CreateDDoSSpeedLimitConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateDDoSSpeedLimitConfigRequest()
-    }
-    
-    response = NewCreateDDoSSpeedLimitConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDDoSSpeedLimitConfigWithContext(context.Background(), request)
 }
 
 // CreateDDoSSpeedLimitConfig
@@ -457,6 +446,11 @@ func (c *Client) CreateDDoSSpeedLimitConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateDDoSSpeedLimitConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDDoSSpeedLimitConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDDoSSpeedLimitConfigResponse()
@@ -487,13 +481,7 @@ func NewCreateDefaultAlarmThresholdResponse() (response *CreateDefaultAlarmThres
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateDefaultAlarmThreshold(request *CreateDefaultAlarmThresholdRequest) (response *CreateDefaultAlarmThresholdResponse, err error) {
-    if request == nil {
-        request = NewCreateDefaultAlarmThresholdRequest()
-    }
-    
-    response = NewCreateDefaultAlarmThresholdResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDefaultAlarmThresholdWithContext(context.Background(), request)
 }
 
 // CreateDefaultAlarmThreshold
@@ -505,6 +493,11 @@ func (c *Client) CreateDefaultAlarmThresholdWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateDefaultAlarmThresholdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDefaultAlarmThreshold require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDefaultAlarmThresholdResponse()
@@ -535,13 +528,7 @@ func NewCreateIPAlarmThresholdConfigResponse() (response *CreateIPAlarmThreshold
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateIPAlarmThresholdConfig(request *CreateIPAlarmThresholdConfigRequest) (response *CreateIPAlarmThresholdConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateIPAlarmThresholdConfigRequest()
-    }
-    
-    response = NewCreateIPAlarmThresholdConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateIPAlarmThresholdConfigWithContext(context.Background(), request)
 }
 
 // CreateIPAlarmThresholdConfig
@@ -553,6 +540,11 @@ func (c *Client) CreateIPAlarmThresholdConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewCreateIPAlarmThresholdConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIPAlarmThresholdConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateIPAlarmThresholdConfigResponse()
@@ -589,13 +581,7 @@ func NewCreateL7RuleCertsResponse() (response *CreateL7RuleCertsResponse) {
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) CreateL7RuleCerts(request *CreateL7RuleCertsRequest) (response *CreateL7RuleCertsResponse, err error) {
-    if request == nil {
-        request = NewCreateL7RuleCertsRequest()
-    }
-    
-    response = NewCreateL7RuleCertsResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateL7RuleCertsWithContext(context.Background(), request)
 }
 
 // CreateL7RuleCerts
@@ -613,6 +599,11 @@ func (c *Client) CreateL7RuleCertsWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateL7RuleCertsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateL7RuleCerts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateL7RuleCertsResponse()
@@ -644,13 +635,7 @@ func NewCreatePacketFilterConfigResponse() (response *CreatePacketFilterConfigRe
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
-    if request == nil {
-        request = NewCreatePacketFilterConfigRequest()
-    }
-    
-    response = NewCreatePacketFilterConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePacketFilterConfigWithContext(context.Background(), request)
 }
 
 // CreatePacketFilterConfig
@@ -663,6 +648,11 @@ func (c *Client) CreatePacketFilterConfigWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreatePacketFilterConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePacketFilterConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePacketFilterConfigResponse()
@@ -694,13 +684,7 @@ func NewCreateProtocolBlockConfigResponse() (response *CreateProtocolBlockConfig
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateProtocolBlockConfig(request *CreateProtocolBlockConfigRequest) (response *CreateProtocolBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateProtocolBlockConfigRequest()
-    }
-    
-    response = NewCreateProtocolBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateProtocolBlockConfigWithContext(context.Background(), request)
 }
 
 // CreateProtocolBlockConfig
@@ -713,6 +697,11 @@ func (c *Client) CreateProtocolBlockConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateProtocolBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProtocolBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateProtocolBlockConfigResponse()
@@ -752,13 +741,7 @@ func NewCreateSchedulingDomainResponse() (response *CreateSchedulingDomainRespon
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateSchedulingDomain(request *CreateSchedulingDomainRequest) (response *CreateSchedulingDomainResponse, err error) {
-    if request == nil {
-        request = NewCreateSchedulingDomainRequest()
-    }
-    
-    response = NewCreateSchedulingDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSchedulingDomainWithContext(context.Background(), request)
 }
 
 // CreateSchedulingDomain
@@ -779,6 +762,11 @@ func (c *Client) CreateSchedulingDomainWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateSchedulingDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSchedulingDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSchedulingDomainResponse()
@@ -811,13 +799,7 @@ func NewCreateWaterPrintConfigResponse() (response *CreateWaterPrintConfigRespon
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintConfig(request *CreateWaterPrintConfigRequest) (response *CreateWaterPrintConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateWaterPrintConfigRequest()
-    }
-    
-    response = NewCreateWaterPrintConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateWaterPrintConfigWithContext(context.Background(), request)
 }
 
 // CreateWaterPrintConfig
@@ -831,6 +813,11 @@ func (c *Client) CreateWaterPrintConfigWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateWaterPrintConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWaterPrintConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateWaterPrintConfigResponse()
@@ -864,13 +851,7 @@ func NewCreateWaterPrintKeyResponse() (response *CreateWaterPrintKeyResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintKey(request *CreateWaterPrintKeyRequest) (response *CreateWaterPrintKeyResponse, err error) {
-    if request == nil {
-        request = NewCreateWaterPrintKeyRequest()
-    }
-    
-    response = NewCreateWaterPrintKeyResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateWaterPrintKeyWithContext(context.Background(), request)
 }
 
 // CreateWaterPrintKey
@@ -885,6 +866,11 @@ func (c *Client) CreateWaterPrintKeyWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreateWaterPrintKeyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWaterPrintKey require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateWaterPrintKeyResponse()
@@ -916,13 +902,7 @@ func NewDeleteBlackWhiteIpListResponse() (response *DeleteBlackWhiteIpListRespon
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteBlackWhiteIpList(request *DeleteBlackWhiteIpListRequest) (response *DeleteBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDeleteBlackWhiteIpListRequest()
-    }
-    
-    response = NewDeleteBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteBlackWhiteIpListWithContext(context.Background(), request)
 }
 
 // DeleteBlackWhiteIpList
@@ -935,6 +915,11 @@ func (c *Client) DeleteBlackWhiteIpListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteBlackWhiteIpListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBlackWhiteIpList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteBlackWhiteIpListResponse()
@@ -965,13 +950,7 @@ func NewDeleteDDoSGeoIPBlockConfigResponse() (response *DeleteDDoSGeoIPBlockConf
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteDDoSGeoIPBlockConfig(request *DeleteDDoSGeoIPBlockConfigRequest) (response *DeleteDDoSGeoIPBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteDDoSGeoIPBlockConfigRequest()
-    }
-    
-    response = NewDeleteDDoSGeoIPBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteDDoSGeoIPBlockConfigWithContext(context.Background(), request)
 }
 
 // DeleteDDoSGeoIPBlockConfig
@@ -983,6 +962,11 @@ func (c *Client) DeleteDDoSGeoIPBlockConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteDDoSGeoIPBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDDoSGeoIPBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteDDoSGeoIPBlockConfigResponse()
@@ -1013,13 +997,7 @@ func NewDeleteDDoSSpeedLimitConfigResponse() (response *DeleteDDoSSpeedLimitConf
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteDDoSSpeedLimitConfig(request *DeleteDDoSSpeedLimitConfigRequest) (response *DeleteDDoSSpeedLimitConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteDDoSSpeedLimitConfigRequest()
-    }
-    
-    response = NewDeleteDDoSSpeedLimitConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteDDoSSpeedLimitConfigWithContext(context.Background(), request)
 }
 
 // DeleteDDoSSpeedLimitConfig
@@ -1031,6 +1009,11 @@ func (c *Client) DeleteDDoSSpeedLimitConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteDDoSSpeedLimitConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDDoSSpeedLimitConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteDDoSSpeedLimitConfigResponse()
@@ -1061,13 +1044,7 @@ func NewDeletePacketFilterConfigResponse() (response *DeletePacketFilterConfigRe
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeletePacketFilterConfig(request *DeletePacketFilterConfigRequest) (response *DeletePacketFilterConfigResponse, err error) {
-    if request == nil {
-        request = NewDeletePacketFilterConfigRequest()
-    }
-    
-    response = NewDeletePacketFilterConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePacketFilterConfigWithContext(context.Background(), request)
 }
 
 // DeletePacketFilterConfig
@@ -1079,6 +1056,11 @@ func (c *Client) DeletePacketFilterConfigWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeletePacketFilterConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePacketFilterConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePacketFilterConfigResponse()
@@ -1110,13 +1092,7 @@ func NewDeleteWaterPrintConfigResponse() (response *DeleteWaterPrintConfigRespon
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteWaterPrintConfig(request *DeleteWaterPrintConfigRequest) (response *DeleteWaterPrintConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteWaterPrintConfigRequest()
-    }
-    
-    response = NewDeleteWaterPrintConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteWaterPrintConfigWithContext(context.Background(), request)
 }
 
 // DeleteWaterPrintConfig
@@ -1129,6 +1105,11 @@ func (c *Client) DeleteWaterPrintConfigWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteWaterPrintConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWaterPrintConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteWaterPrintConfigResponse()
@@ -1159,13 +1140,7 @@ func NewDeleteWaterPrintKeyResponse() (response *DeleteWaterPrintKeyResponse) {
 // error code that may be returned:
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
-    if request == nil {
-        request = NewDeleteWaterPrintKeyRequest()
-    }
-    
-    response = NewDeleteWaterPrintKeyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteWaterPrintKeyWithContext(context.Background(), request)
 }
 
 // DeleteWaterPrintKey
@@ -1177,6 +1152,11 @@ func (c *Client) DeleteWaterPrintKeyWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeleteWaterPrintKeyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWaterPrintKey require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteWaterPrintKeyResponse()
@@ -1207,13 +1187,7 @@ func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatus
 // error code that may be returned:
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeBasicDeviceStatusRequest()
-    }
-    
-    response = NewDescribeBasicDeviceStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBasicDeviceStatusWithContext(context.Background(), request)
 }
 
 // DescribeBasicDeviceStatus
@@ -1225,6 +1199,11 @@ func (c *Client) DescribeBasicDeviceStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeBasicDeviceStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBasicDeviceStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBasicDeviceStatusResponse()
@@ -1264,13 +1243,7 @@ func NewDescribeBizTrendResponse() (response *DescribeBizTrendResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeBizTrend(request *DescribeBizTrendRequest) (response *DescribeBizTrendResponse, err error) {
-    if request == nil {
-        request = NewDescribeBizTrendRequest()
-    }
-    
-    response = NewDescribeBizTrendResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBizTrendWithContext(context.Background(), request)
 }
 
 // DescribeBizTrend
@@ -1291,6 +1264,11 @@ func (c *Client) DescribeBizTrendWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeBizTrendRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBizTrend require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBizTrendResponse()
@@ -1337,13 +1315,7 @@ func NewDescribeBlackWhiteIpListResponse() (response *DescribeBlackWhiteIpListRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBlackWhiteIpList(request *DescribeBlackWhiteIpListRequest) (response *DescribeBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDescribeBlackWhiteIpListRequest()
-    }
-    
-    response = NewDescribeBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBlackWhiteIpListWithContext(context.Background(), request)
 }
 
 // DescribeBlackWhiteIpList
@@ -1371,6 +1343,11 @@ func (c *Client) DescribeBlackWhiteIpListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBlackWhiteIpListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBlackWhiteIpList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBlackWhiteIpListResponse()
@@ -1417,13 +1394,7 @@ func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCCTrend(request *DescribeCCTrendRequest) (response *DescribeCCTrendResponse, err error) {
-    if request == nil {
-        request = NewDescribeCCTrendRequest()
-    }
-    
-    response = NewDescribeCCTrendResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCCTrendWithContext(context.Background(), request)
 }
 
 // DescribeCCTrend
@@ -1451,6 +1422,11 @@ func (c *Client) DescribeCCTrendWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeCCTrendRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCCTrend require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCCTrendResponse()
@@ -1497,13 +1473,7 @@ func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
-    if request == nil {
-        request = NewDescribeDDoSTrendRequest()
-    }
-    
-    response = NewDescribeDDoSTrendResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDDoSTrendWithContext(context.Background(), request)
 }
 
 // DescribeDDoSTrend
@@ -1531,6 +1501,11 @@ func (c *Client) DescribeDDoSTrendWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDDoSTrendRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDDoSTrend require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDDoSTrendResponse()
@@ -1577,13 +1552,7 @@ func NewDescribeDefaultAlarmThresholdResponse() (response *DescribeDefaultAlarmT
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
-    if request == nil {
-        request = NewDescribeDefaultAlarmThresholdRequest()
-    }
-    
-    response = NewDescribeDefaultAlarmThresholdResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDefaultAlarmThresholdWithContext(context.Background(), request)
 }
 
 // DescribeDefaultAlarmThreshold
@@ -1611,6 +1580,11 @@ func (c *Client) DescribeDefaultAlarmThresholdWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeDefaultAlarmThresholdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDefaultAlarmThreshold require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDefaultAlarmThresholdResponse()
@@ -1648,13 +1622,7 @@ func NewDescribeL7RulesBySSLCertIdResponse() (response *DescribeL7RulesBySSLCert
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeL7RulesBySSLCertId(request *DescribeL7RulesBySSLCertIdRequest) (response *DescribeL7RulesBySSLCertIdResponse, err error) {
-    if request == nil {
-        request = NewDescribeL7RulesBySSLCertIdRequest()
-    }
-    
-    response = NewDescribeL7RulesBySSLCertIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeL7RulesBySSLCertIdWithContext(context.Background(), request)
 }
 
 // DescribeL7RulesBySSLCertId
@@ -1673,6 +1641,11 @@ func (c *Client) DescribeL7RulesBySSLCertIdWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeL7RulesBySSLCertIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeL7RulesBySSLCertId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeL7RulesBySSLCertIdResponse()
@@ -1710,13 +1683,7 @@ func NewDescribeListBGPIPInstancesResponse() (response *DescribeListBGPIPInstanc
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListBGPIPInstances(request *DescribeListBGPIPInstancesRequest) (response *DescribeListBGPIPInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeListBGPIPInstancesRequest()
-    }
-    
-    response = NewDescribeListBGPIPInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListBGPIPInstancesWithContext(context.Background(), request)
 }
 
 // DescribeListBGPIPInstances
@@ -1735,6 +1702,11 @@ func (c *Client) DescribeListBGPIPInstancesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeListBGPIPInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListBGPIPInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListBGPIPInstancesResponse()
@@ -1772,13 +1744,7 @@ func NewDescribeListBGPInstancesResponse() (response *DescribeListBGPInstancesRe
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListBGPInstances(request *DescribeListBGPInstancesRequest) (response *DescribeListBGPInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeListBGPInstancesRequest()
-    }
-    
-    response = NewDescribeListBGPInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListBGPInstancesWithContext(context.Background(), request)
 }
 
 // DescribeListBGPInstances
@@ -1797,6 +1763,11 @@ func (c *Client) DescribeListBGPInstancesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeListBGPInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListBGPInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListBGPInstancesResponse()
@@ -1834,13 +1805,7 @@ func NewDescribeListBlackWhiteIpListResponse() (response *DescribeListBlackWhite
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListBlackWhiteIpList(request *DescribeListBlackWhiteIpListRequest) (response *DescribeListBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDescribeListBlackWhiteIpListRequest()
-    }
-    
-    response = NewDescribeListBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListBlackWhiteIpListWithContext(context.Background(), request)
 }
 
 // DescribeListBlackWhiteIpList
@@ -1859,6 +1824,11 @@ func (c *Client) DescribeListBlackWhiteIpListWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeListBlackWhiteIpListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListBlackWhiteIpList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListBlackWhiteIpListResponse()
@@ -1896,13 +1866,7 @@ func NewDescribeListDDoSAIResponse() (response *DescribeListDDoSAIResponse) {
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListDDoSAI(request *DescribeListDDoSAIRequest) (response *DescribeListDDoSAIResponse, err error) {
-    if request == nil {
-        request = NewDescribeListDDoSAIRequest()
-    }
-    
-    response = NewDescribeListDDoSAIResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListDDoSAIWithContext(context.Background(), request)
 }
 
 // DescribeListDDoSAI
@@ -1921,6 +1885,11 @@ func (c *Client) DescribeListDDoSAIWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeListDDoSAIRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListDDoSAI require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListDDoSAIResponse()
@@ -1958,13 +1927,7 @@ func NewDescribeListDDoSGeoIPBlockConfigResponse() (response *DescribeListDDoSGe
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListDDoSGeoIPBlockConfig(request *DescribeListDDoSGeoIPBlockConfigRequest) (response *DescribeListDDoSGeoIPBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListDDoSGeoIPBlockConfigRequest()
-    }
-    
-    response = NewDescribeListDDoSGeoIPBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListDDoSGeoIPBlockConfigWithContext(context.Background(), request)
 }
 
 // DescribeListDDoSGeoIPBlockConfig
@@ -1983,6 +1946,11 @@ func (c *Client) DescribeListDDoSGeoIPBlockConfigWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeListDDoSGeoIPBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListDDoSGeoIPBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListDDoSGeoIPBlockConfigResponse()
@@ -2020,13 +1988,7 @@ func NewDescribeListDDoSSpeedLimitConfigResponse() (response *DescribeListDDoSSp
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListDDoSSpeedLimitConfig(request *DescribeListDDoSSpeedLimitConfigRequest) (response *DescribeListDDoSSpeedLimitConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListDDoSSpeedLimitConfigRequest()
-    }
-    
-    response = NewDescribeListDDoSSpeedLimitConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListDDoSSpeedLimitConfigWithContext(context.Background(), request)
 }
 
 // DescribeListDDoSSpeedLimitConfig
@@ -2045,6 +2007,11 @@ func (c *Client) DescribeListDDoSSpeedLimitConfigWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeListDDoSSpeedLimitConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListDDoSSpeedLimitConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListDDoSSpeedLimitConfigResponse()
@@ -2082,13 +2049,7 @@ func NewDescribeListIPAlarmConfigResponse() (response *DescribeListIPAlarmConfig
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListIPAlarmConfig(request *DescribeListIPAlarmConfigRequest) (response *DescribeListIPAlarmConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListIPAlarmConfigRequest()
-    }
-    
-    response = NewDescribeListIPAlarmConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListIPAlarmConfigWithContext(context.Background(), request)
 }
 
 // DescribeListIPAlarmConfig
@@ -2107,6 +2068,11 @@ func (c *Client) DescribeListIPAlarmConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeListIPAlarmConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListIPAlarmConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListIPAlarmConfigResponse()
@@ -2144,13 +2110,7 @@ func NewDescribeListListenerResponse() (response *DescribeListListenerResponse) 
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListListener(request *DescribeListListenerRequest) (response *DescribeListListenerResponse, err error) {
-    if request == nil {
-        request = NewDescribeListListenerRequest()
-    }
-    
-    response = NewDescribeListListenerResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListListenerWithContext(context.Background(), request)
 }
 
 // DescribeListListener
@@ -2169,6 +2129,11 @@ func (c *Client) DescribeListListenerWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeListListenerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListListener require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListListenerResponse()
@@ -2206,13 +2171,7 @@ func NewDescribeListPacketFilterConfigResponse() (response *DescribeListPacketFi
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListPacketFilterConfig(request *DescribeListPacketFilterConfigRequest) (response *DescribeListPacketFilterConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListPacketFilterConfigRequest()
-    }
-    
-    response = NewDescribeListPacketFilterConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListPacketFilterConfigWithContext(context.Background(), request)
 }
 
 // DescribeListPacketFilterConfig
@@ -2231,6 +2190,11 @@ func (c *Client) DescribeListPacketFilterConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeListPacketFilterConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListPacketFilterConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListPacketFilterConfigResponse()
@@ -2268,13 +2232,7 @@ func NewDescribeListProtectThresholdConfigResponse() (response *DescribeListProt
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListProtectThresholdConfig(request *DescribeListProtectThresholdConfigRequest) (response *DescribeListProtectThresholdConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListProtectThresholdConfigRequest()
-    }
-    
-    response = NewDescribeListProtectThresholdConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListProtectThresholdConfigWithContext(context.Background(), request)
 }
 
 // DescribeListProtectThresholdConfig
@@ -2293,6 +2251,11 @@ func (c *Client) DescribeListProtectThresholdConfigWithContext(ctx context.Conte
     if request == nil {
         request = NewDescribeListProtectThresholdConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListProtectThresholdConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListProtectThresholdConfigResponse()
@@ -2330,13 +2293,7 @@ func NewDescribeListProtocolBlockConfigResponse() (response *DescribeListProtoco
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListProtocolBlockConfig(request *DescribeListProtocolBlockConfigRequest) (response *DescribeListProtocolBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListProtocolBlockConfigRequest()
-    }
-    
-    response = NewDescribeListProtocolBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListProtocolBlockConfigWithContext(context.Background(), request)
 }
 
 // DescribeListProtocolBlockConfig
@@ -2355,6 +2312,11 @@ func (c *Client) DescribeListProtocolBlockConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeListProtocolBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListProtocolBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListProtocolBlockConfigResponse()
@@ -2392,13 +2354,7 @@ func NewDescribeListSchedulingDomainResponse() (response *DescribeListScheduling
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListSchedulingDomain(request *DescribeListSchedulingDomainRequest) (response *DescribeListSchedulingDomainResponse, err error) {
-    if request == nil {
-        request = NewDescribeListSchedulingDomainRequest()
-    }
-    
-    response = NewDescribeListSchedulingDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListSchedulingDomainWithContext(context.Background(), request)
 }
 
 // DescribeListSchedulingDomain
@@ -2417,6 +2373,11 @@ func (c *Client) DescribeListSchedulingDomainWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeListSchedulingDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListSchedulingDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListSchedulingDomainResponse()
@@ -2454,13 +2415,7 @@ func NewDescribeListWaterPrintConfigResponse() (response *DescribeListWaterPrint
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListWaterPrintConfig(request *DescribeListWaterPrintConfigRequest) (response *DescribeListWaterPrintConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListWaterPrintConfigRequest()
-    }
-    
-    response = NewDescribeListWaterPrintConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeListWaterPrintConfigWithContext(context.Background(), request)
 }
 
 // DescribeListWaterPrintConfig
@@ -2479,6 +2434,11 @@ func (c *Client) DescribeListWaterPrintConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeListWaterPrintConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeListWaterPrintConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeListWaterPrintConfigResponse()
@@ -2526,13 +2486,7 @@ func NewDisassociateDDoSEipAddressResponse() (response *DisassociateDDoSEipAddre
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DisassociateDDoSEipAddress(request *DisassociateDDoSEipAddressRequest) (response *DisassociateDDoSEipAddressResponse, err error) {
-    if request == nil {
-        request = NewDisassociateDDoSEipAddressRequest()
-    }
-    
-    response = NewDisassociateDDoSEipAddressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DisassociateDDoSEipAddressWithContext(context.Background(), request)
 }
 
 // DisassociateDDoSEipAddress
@@ -2561,6 +2515,11 @@ func (c *Client) DisassociateDDoSEipAddressWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDisassociateDDoSEipAddressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisassociateDDoSEipAddress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDisassociateDDoSEipAddressResponse()
@@ -2591,13 +2550,7 @@ func NewModifyDDoSGeoIPBlockConfigResponse() (response *ModifyDDoSGeoIPBlockConf
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyDDoSGeoIPBlockConfig(request *ModifyDDoSGeoIPBlockConfigRequest) (response *ModifyDDoSGeoIPBlockConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyDDoSGeoIPBlockConfigRequest()
-    }
-    
-    response = NewModifyDDoSGeoIPBlockConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDDoSGeoIPBlockConfigWithContext(context.Background(), request)
 }
 
 // ModifyDDoSGeoIPBlockConfig
@@ -2609,6 +2562,11 @@ func (c *Client) ModifyDDoSGeoIPBlockConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDDoSGeoIPBlockConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDDoSGeoIPBlockConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDDoSGeoIPBlockConfigResponse()
@@ -2639,13 +2597,7 @@ func NewModifyDDoSSpeedLimitConfigResponse() (response *ModifyDDoSSpeedLimitConf
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyDDoSSpeedLimitConfig(request *ModifyDDoSSpeedLimitConfigRequest) (response *ModifyDDoSSpeedLimitConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyDDoSSpeedLimitConfigRequest()
-    }
-    
-    response = NewModifyDDoSSpeedLimitConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDDoSSpeedLimitConfigWithContext(context.Background(), request)
 }
 
 // ModifyDDoSSpeedLimitConfig
@@ -2657,6 +2609,11 @@ func (c *Client) ModifyDDoSSpeedLimitConfigWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDDoSSpeedLimitConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDDoSSpeedLimitConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDDoSSpeedLimitConfigResponse()
@@ -2687,13 +2644,7 @@ func NewModifyDomainUsrNameResponse() (response *ModifyDomainUsrNameResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyDomainUsrName(request *ModifyDomainUsrNameRequest) (response *ModifyDomainUsrNameResponse, err error) {
-    if request == nil {
-        request = NewModifyDomainUsrNameRequest()
-    }
-    
-    response = NewModifyDomainUsrNameResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDomainUsrNameWithContext(context.Background(), request)
 }
 
 // ModifyDomainUsrName
@@ -2705,6 +2656,11 @@ func (c *Client) ModifyDomainUsrNameWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifyDomainUsrNameRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDomainUsrName require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDomainUsrNameResponse()
@@ -2736,13 +2692,7 @@ func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) 
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyNewDomainRules(request *ModifyNewDomainRulesRequest) (response *ModifyNewDomainRulesResponse, err error) {
-    if request == nil {
-        request = NewModifyNewDomainRulesRequest()
-    }
-    
-    response = NewModifyNewDomainRulesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyNewDomainRulesWithContext(context.Background(), request)
 }
 
 // ModifyNewDomainRules
@@ -2755,6 +2705,11 @@ func (c *Client) ModifyNewDomainRulesWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyNewDomainRulesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNewDomainRules require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyNewDomainRulesResponse()
@@ -2786,13 +2741,7 @@ func NewModifyPacketFilterConfigResponse() (response *ModifyPacketFilterConfigRe
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPacketFilterConfig(request *ModifyPacketFilterConfigRequest) (response *ModifyPacketFilterConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyPacketFilterConfigRequest()
-    }
-    
-    response = NewModifyPacketFilterConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPacketFilterConfigWithContext(context.Background(), request)
 }
 
 // ModifyPacketFilterConfig
@@ -2805,6 +2754,11 @@ func (c *Client) ModifyPacketFilterConfigWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyPacketFilterConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPacketFilterConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPacketFilterConfigResponse()
@@ -2836,13 +2790,7 @@ func NewSwitchWaterPrintConfigResponse() (response *SwitchWaterPrintConfigRespon
 //  INTERNALERROR = "InternalError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SwitchWaterPrintConfig(request *SwitchWaterPrintConfigRequest) (response *SwitchWaterPrintConfigResponse, err error) {
-    if request == nil {
-        request = NewSwitchWaterPrintConfigRequest()
-    }
-    
-    response = NewSwitchWaterPrintConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.SwitchWaterPrintConfigWithContext(context.Background(), request)
 }
 
 // SwitchWaterPrintConfig
@@ -2855,6 +2803,11 @@ func (c *Client) SwitchWaterPrintConfigWithContext(ctx context.Context, request 
     if request == nil {
         request = NewSwitchWaterPrintConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchWaterPrintConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSwitchWaterPrintConfigResponse()

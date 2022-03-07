@@ -16,6 +16,7 @@ package v20201221
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -64,13 +65,7 @@ func NewCreateCosTokenV2Response() (response *CreateCosTokenV2Response) {
 // CreateCosTokenV2
 // This API is used to generate a COS temporary key.
 func (c *Client) CreateCosTokenV2(request *CreateCosTokenV2Request) (response *CreateCosTokenV2Response, err error) {
-    if request == nil {
-        request = NewCreateCosTokenV2Request()
-    }
-    
-    response = NewCreateCosTokenV2Response()
-    err = c.Send(request, response)
-    return
+    return c.CreateCosTokenV2WithContext(context.Background(), request)
 }
 
 // CreateCosTokenV2
@@ -79,6 +74,11 @@ func (c *Client) CreateCosTokenV2WithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateCosTokenV2Request()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCosTokenV2 require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateCosTokenV2Response()
@@ -106,13 +106,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
 // CreateNamespace
 // This API is used to create an environment.
 func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
-    if request == nil {
-        request = NewCreateNamespaceRequest()
-    }
-    
-    response = NewCreateNamespaceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateNamespaceWithContext(context.Background(), request)
 }
 
 // CreateNamespace
@@ -121,6 +115,11 @@ func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateNamespaceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNamespace require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateNamespaceResponse()
@@ -148,13 +147,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 // CreateResource
 // This API is used to bind a cloud resource.
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
-    if request == nil {
-        request = NewCreateResourceRequest()
-    }
-    
-    response = NewCreateResourceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateResourceWithContext(context.Background(), request)
 }
 
 // CreateResource
@@ -163,6 +156,11 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateResource require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
@@ -193,13 +191,7 @@ func NewCreateServiceV2Response() (response *CreateServiceV2Response) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) CreateServiceV2(request *CreateServiceV2Request) (response *CreateServiceV2Response, err error) {
-    if request == nil {
-        request = NewCreateServiceV2Request()
-    }
-    
-    response = NewCreateServiceV2Response()
-    err = c.Send(request, response)
-    return
+    return c.CreateServiceV2WithContext(context.Background(), request)
 }
 
 // CreateServiceV2
@@ -211,6 +203,11 @@ func (c *Client) CreateServiceV2WithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateServiceV2Request()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateServiceV2 require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateServiceV2Response()
@@ -241,13 +238,7 @@ func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
-    if request == nil {
-        request = NewDeleteIngressRequest()
-    }
-    
-    response = NewDeleteIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteIngressWithContext(context.Background(), request)
 }
 
 // DeleteIngress
@@ -259,6 +250,11 @@ func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIn
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteIngressResponse()
@@ -289,13 +285,7 @@ func NewDeployServiceV2Response() (response *DeployServiceV2Response) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DeployServiceV2(request *DeployServiceV2Request) (response *DeployServiceV2Response, err error) {
-    if request == nil {
-        request = NewDeployServiceV2Request()
-    }
-    
-    response = NewDeployServiceV2Response()
-    err = c.Send(request, response)
-    return
+    return c.DeployServiceV2WithContext(context.Background(), request)
 }
 
 // DeployServiceV2
@@ -307,6 +297,11 @@ func (c *Client) DeployServiceV2WithContext(ctx context.Context, request *Deploy
     if request == nil {
         request = NewDeployServiceV2Request()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeployServiceV2 require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeployServiceV2Response()
@@ -337,13 +332,7 @@ func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
-    if request == nil {
-        request = NewDescribeIngressRequest()
-    }
-    
-    response = NewDescribeIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIngressWithContext(context.Background(), request)
 }
 
 // DescribeIngress
@@ -355,6 +344,11 @@ func (c *Client) DescribeIngressWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIngressResponse()
@@ -385,13 +379,7 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
-    if request == nil {
-        request = NewDescribeIngressesRequest()
-    }
-    
-    response = NewDescribeIngressesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIngressesWithContext(context.Background(), request)
 }
 
 // DescribeIngresses
@@ -403,6 +391,11 @@ func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIngresses require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIngressesResponse()
@@ -433,13 +426,7 @@ func NewDescribeNamespacesResponse() (response *DescribeNamespacesResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeNamespaces(request *DescribeNamespacesRequest) (response *DescribeNamespacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeNamespacesRequest()
-    }
-    
-    response = NewDescribeNamespacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeNamespacesWithContext(context.Background(), request)
 }
 
 // DescribeNamespaces
@@ -451,6 +438,11 @@ func (c *Client) DescribeNamespacesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeNamespacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNamespaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeNamespacesResponse()
@@ -481,13 +473,7 @@ func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesRe
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
-    if request == nil {
-        request = NewDescribeRelatedIngressesRequest()
-    }
-    
-    response = NewDescribeRelatedIngressesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRelatedIngressesWithContext(context.Background(), request)
 }
 
 // DescribeRelatedIngresses
@@ -499,6 +485,11 @@ func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRelatedIngresses require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRelatedIngressesResponse()
@@ -529,13 +520,7 @@ func NewDescribeServiceRunPodListV2Response() (response *DescribeServiceRunPodLi
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) DescribeServiceRunPodListV2(request *DescribeServiceRunPodListV2Request) (response *DescribeServiceRunPodListV2Response, err error) {
-    if request == nil {
-        request = NewDescribeServiceRunPodListV2Request()
-    }
-    
-    response = NewDescribeServiceRunPodListV2Response()
-    err = c.Send(request, response)
-    return
+    return c.DescribeServiceRunPodListV2WithContext(context.Background(), request)
 }
 
 // DescribeServiceRunPodListV2
@@ -547,6 +532,11 @@ func (c *Client) DescribeServiceRunPodListV2WithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeServiceRunPodListV2Request()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeServiceRunPodListV2 require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeServiceRunPodListV2Response()
@@ -577,13 +567,7 @@ func NewGenerateDownloadUrlResponse() (response *GenerateDownloadUrlResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) GenerateDownloadUrl(request *GenerateDownloadUrlRequest) (response *GenerateDownloadUrlResponse, err error) {
-    if request == nil {
-        request = NewGenerateDownloadUrlRequest()
-    }
-    
-    response = NewGenerateDownloadUrlResponse()
-    err = c.Send(request, response)
-    return
+    return c.GenerateDownloadUrlWithContext(context.Background(), request)
 }
 
 // GenerateDownloadUrl
@@ -595,6 +579,11 @@ func (c *Client) GenerateDownloadUrlWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGenerateDownloadUrlRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GenerateDownloadUrl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGenerateDownloadUrlResponse()
@@ -625,13 +614,7 @@ func NewModifyIngressResponse() (response *ModifyIngressResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
-    if request == nil {
-        request = NewModifyIngressRequest()
-    }
-    
-    response = NewModifyIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyIngressWithContext(context.Background(), request)
 }
 
 // ModifyIngress
@@ -643,6 +626,11 @@ func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIn
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyIngressResponse()
@@ -673,13 +661,7 @@ func NewModifyNamespaceResponse() (response *ModifyNamespaceResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyNamespace(request *ModifyNamespaceRequest) (response *ModifyNamespaceResponse, err error) {
-    if request == nil {
-        request = NewModifyNamespaceRequest()
-    }
-    
-    response = NewModifyNamespaceResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyNamespaceWithContext(context.Background(), request)
 }
 
 // ModifyNamespace
@@ -691,6 +673,11 @@ func (c *Client) ModifyNamespaceWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyNamespaceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNamespace require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyNamespaceResponse()
@@ -721,13 +708,7 @@ func NewModifyServiceInfoResponse() (response *ModifyServiceInfoResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyServiceInfo(request *ModifyServiceInfoRequest) (response *ModifyServiceInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyServiceInfoRequest()
-    }
-    
-    response = NewModifyServiceInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyServiceInfoWithContext(context.Background(), request)
 }
 
 // ModifyServiceInfo
@@ -739,6 +720,11 @@ func (c *Client) ModifyServiceInfoWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyServiceInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyServiceInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyServiceInfoResponse()
@@ -769,13 +755,7 @@ func NewRestartServiceRunPodResponse() (response *RestartServiceRunPodResponse) 
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) RestartServiceRunPod(request *RestartServiceRunPodRequest) (response *RestartServiceRunPodResponse, err error) {
-    if request == nil {
-        request = NewRestartServiceRunPodRequest()
-    }
-    
-    response = NewRestartServiceRunPodResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartServiceRunPodWithContext(context.Background(), request)
 }
 
 // RestartServiceRunPod
@@ -787,6 +767,11 @@ func (c *Client) RestartServiceRunPodWithContext(ctx context.Context, request *R
     if request == nil {
         request = NewRestartServiceRunPodRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartServiceRunPod require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartServiceRunPodResponse()

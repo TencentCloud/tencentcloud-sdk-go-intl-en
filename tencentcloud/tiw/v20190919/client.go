@@ -16,6 +16,7 @@ package v20190919
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -75,13 +76,7 @@ func NewCreateTranscodeResponse() (response *CreateTranscodeResponse) {
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) CreateTranscode(request *CreateTranscodeRequest) (response *CreateTranscodeResponse, err error) {
-    if request == nil {
-        request = NewCreateTranscodeRequest()
-    }
-    
-    response = NewCreateTranscodeResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTranscodeWithContext(context.Background(), request)
 }
 
 // CreateTranscode
@@ -101,6 +96,11 @@ func (c *Client) CreateTranscodeWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateTranscodeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTranscode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTranscodeResponse()
@@ -136,13 +136,7 @@ func NewDescribeOnlineRecordResponse() (response *DescribeOnlineRecordResponse) 
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DescribeOnlineRecord(request *DescribeOnlineRecordRequest) (response *DescribeOnlineRecordResponse, err error) {
-    if request == nil {
-        request = NewDescribeOnlineRecordRequest()
-    }
-    
-    response = NewDescribeOnlineRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOnlineRecordWithContext(context.Background(), request)
 }
 
 // DescribeOnlineRecord
@@ -159,6 +153,11 @@ func (c *Client) DescribeOnlineRecordWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeOnlineRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOnlineRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOnlineRecordResponse()
@@ -193,13 +192,7 @@ func NewDescribeOnlineRecordCallbackResponse() (response *DescribeOnlineRecordCa
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DescribeOnlineRecordCallback(request *DescribeOnlineRecordCallbackRequest) (response *DescribeOnlineRecordCallbackResponse, err error) {
-    if request == nil {
-        request = NewDescribeOnlineRecordCallbackRequest()
-    }
-    
-    response = NewDescribeOnlineRecordCallbackResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOnlineRecordCallbackWithContext(context.Background(), request)
 }
 
 // DescribeOnlineRecordCallback
@@ -215,6 +208,11 @@ func (c *Client) DescribeOnlineRecordCallbackWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeOnlineRecordCallbackRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOnlineRecordCallback require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOnlineRecordCallbackResponse()
@@ -259,13 +257,7 @@ func NewDescribeTranscodeResponse() (response *DescribeTranscodeResponse) {
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DescribeTranscode(request *DescribeTranscodeRequest) (response *DescribeTranscodeResponse, err error) {
-    if request == nil {
-        request = NewDescribeTranscodeRequest()
-    }
-    
-    response = NewDescribeTranscodeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTranscodeWithContext(context.Background(), request)
 }
 
 // DescribeTranscode
@@ -291,6 +283,11 @@ func (c *Client) DescribeTranscodeWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeTranscodeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTranscode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTranscodeResponse()
@@ -325,13 +322,7 @@ func NewDescribeTranscodeCallbackResponse() (response *DescribeTranscodeCallback
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DescribeTranscodeCallback(request *DescribeTranscodeCallbackRequest) (response *DescribeTranscodeCallbackResponse, err error) {
-    if request == nil {
-        request = NewDescribeTranscodeCallbackRequest()
-    }
-    
-    response = NewDescribeTranscodeCallbackResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTranscodeCallbackWithContext(context.Background(), request)
 }
 
 // DescribeTranscodeCallback
@@ -347,6 +338,11 @@ func (c *Client) DescribeTranscodeCallbackWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeTranscodeCallbackRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTranscodeCallback require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTranscodeCallbackResponse()
@@ -383,13 +379,7 @@ func NewPauseOnlineRecordResponse() (response *PauseOnlineRecordResponse) {
 //  UNSUPPORTEDOPERATION_INVALIDTASKSTATUS = "UnsupportedOperation.InvalidTaskStatus"
 //  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
 func (c *Client) PauseOnlineRecord(request *PauseOnlineRecordRequest) (response *PauseOnlineRecordResponse, err error) {
-    if request == nil {
-        request = NewPauseOnlineRecordRequest()
-    }
-    
-    response = NewPauseOnlineRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.PauseOnlineRecordWithContext(context.Background(), request)
 }
 
 // PauseOnlineRecord
@@ -407,6 +397,11 @@ func (c *Client) PauseOnlineRecordWithContext(ctx context.Context, request *Paus
     if request == nil {
         request = NewPauseOnlineRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PauseOnlineRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPauseOnlineRecordResponse()
@@ -443,13 +438,7 @@ func NewResumeOnlineRecordResponse() (response *ResumeOnlineRecordResponse) {
 //  UNSUPPORTEDOPERATION_INVALIDTASKSTATUS = "UnsupportedOperation.InvalidTaskStatus"
 //  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
 func (c *Client) ResumeOnlineRecord(request *ResumeOnlineRecordRequest) (response *ResumeOnlineRecordResponse, err error) {
-    if request == nil {
-        request = NewResumeOnlineRecordRequest()
-    }
-    
-    response = NewResumeOnlineRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.ResumeOnlineRecordWithContext(context.Background(), request)
 }
 
 // ResumeOnlineRecord
@@ -467,6 +456,11 @@ func (c *Client) ResumeOnlineRecordWithContext(ctx context.Context, request *Res
     if request == nil {
         request = NewResumeOnlineRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeOnlineRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewResumeOnlineRecordResponse()
@@ -501,13 +495,7 @@ func NewSetOnlineRecordCallbackResponse() (response *SetOnlineRecordCallbackResp
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetOnlineRecordCallback(request *SetOnlineRecordCallbackRequest) (response *SetOnlineRecordCallbackResponse, err error) {
-    if request == nil {
-        request = NewSetOnlineRecordCallbackRequest()
-    }
-    
-    response = NewSetOnlineRecordCallbackResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetOnlineRecordCallbackWithContext(context.Background(), request)
 }
 
 // SetOnlineRecordCallback
@@ -523,6 +511,11 @@ func (c *Client) SetOnlineRecordCallbackWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetOnlineRecordCallbackRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetOnlineRecordCallback require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetOnlineRecordCallbackResponse()
@@ -557,13 +550,7 @@ func NewSetOnlineRecordCallbackKeyResponse() (response *SetOnlineRecordCallbackK
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetOnlineRecordCallbackKey(request *SetOnlineRecordCallbackKeyRequest) (response *SetOnlineRecordCallbackKeyResponse, err error) {
-    if request == nil {
-        request = NewSetOnlineRecordCallbackKeyRequest()
-    }
-    
-    response = NewSetOnlineRecordCallbackKeyResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetOnlineRecordCallbackKeyWithContext(context.Background(), request)
 }
 
 // SetOnlineRecordCallbackKey
@@ -579,6 +566,11 @@ func (c *Client) SetOnlineRecordCallbackKeyWithContext(ctx context.Context, requ
     if request == nil {
         request = NewSetOnlineRecordCallbackKeyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetOnlineRecordCallbackKey require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetOnlineRecordCallbackKeyResponse()
@@ -613,13 +605,7 @@ func NewSetTranscodeCallbackResponse() (response *SetTranscodeCallbackResponse) 
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetTranscodeCallback(request *SetTranscodeCallbackRequest) (response *SetTranscodeCallbackResponse, err error) {
-    if request == nil {
-        request = NewSetTranscodeCallbackRequest()
-    }
-    
-    response = NewSetTranscodeCallbackResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetTranscodeCallbackWithContext(context.Background(), request)
 }
 
 // SetTranscodeCallback
@@ -635,6 +621,11 @@ func (c *Client) SetTranscodeCallbackWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewSetTranscodeCallbackRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetTranscodeCallback require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetTranscodeCallbackResponse()
@@ -669,13 +660,7 @@ func NewSetTranscodeCallbackKeyResponse() (response *SetTranscodeCallbackKeyResp
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetTranscodeCallbackKey(request *SetTranscodeCallbackKeyRequest) (response *SetTranscodeCallbackKeyResponse, err error) {
-    if request == nil {
-        request = NewSetTranscodeCallbackKeyRequest()
-    }
-    
-    response = NewSetTranscodeCallbackKeyResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetTranscodeCallbackKeyWithContext(context.Background(), request)
 }
 
 // SetTranscodeCallbackKey
@@ -691,6 +676,11 @@ func (c *Client) SetTranscodeCallbackKeyWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetTranscodeCallbackKeyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetTranscodeCallbackKey require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetTranscodeCallbackKeyResponse()
@@ -729,13 +719,7 @@ func NewStartOnlineRecordResponse() (response *StartOnlineRecordResponse) {
 //  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StartOnlineRecord(request *StartOnlineRecordRequest) (response *StartOnlineRecordResponse, err error) {
-    if request == nil {
-        request = NewStartOnlineRecordRequest()
-    }
-    
-    response = NewStartOnlineRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartOnlineRecordWithContext(context.Background(), request)
 }
 
 // StartOnlineRecord
@@ -755,6 +739,11 @@ func (c *Client) StartOnlineRecordWithContext(ctx context.Context, request *Star
     if request == nil {
         request = NewStartOnlineRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartOnlineRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartOnlineRecordResponse()
@@ -790,13 +779,7 @@ func NewStopOnlineRecordResponse() (response *StopOnlineRecordResponse) {
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 //  UNSUPPORTEDOPERATION_TASKHASALREADYSTOPPED = "UnsupportedOperation.TaskHasAlreadyStopped"
 func (c *Client) StopOnlineRecord(request *StopOnlineRecordRequest) (response *StopOnlineRecordResponse, err error) {
-    if request == nil {
-        request = NewStopOnlineRecordRequest()
-    }
-    
-    response = NewStopOnlineRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopOnlineRecordWithContext(context.Background(), request)
 }
 
 // StopOnlineRecord
@@ -813,6 +796,11 @@ func (c *Client) StopOnlineRecordWithContext(ctx context.Context, request *StopO
     if request == nil {
         request = NewStopOnlineRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopOnlineRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopOnlineRecordResponse()

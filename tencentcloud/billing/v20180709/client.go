@@ -16,6 +16,7 @@ package v20180709
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -72,13 +73,7 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (response *DescribeBillDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillDetailRequest()
-    }
-    
-    response = NewDescribeBillDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillDetailWithContext(context.Background(), request)
 }
 
 // DescribeBillDetail
@@ -95,6 +90,11 @@ func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeBillDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillDetailResponse()
@@ -126,13 +126,7 @@ func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSum
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummaryRequest) (response *DescribeBillResourceSummaryResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillResourceSummaryRequest()
-    }
-    
-    response = NewDescribeBillResourceSummaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillResourceSummaryWithContext(context.Background(), request)
 }
 
 // DescribeBillResourceSummary
@@ -145,6 +139,11 @@ func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeBillResourceSummaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillResourceSummary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillResourceSummaryResponse()
@@ -178,13 +177,7 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillSummaryByPayModeRequest()
-    }
-    
-    response = NewDescribeBillSummaryByPayModeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillSummaryByPayModeWithContext(context.Background(), request)
 }
 
 // DescribeBillSummaryByPayMode
@@ -199,6 +192,11 @@ func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByPayMode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByPayModeResponse()
@@ -233,13 +231,7 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillSummaryByProductRequest()
-    }
-    
-    response = NewDescribeBillSummaryByProductResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillSummaryByProductWithContext(context.Background(), request)
 }
 
 // DescribeBillSummaryByProduct
@@ -255,6 +247,11 @@ func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByProductRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByProduct require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByProductResponse()
@@ -288,13 +285,7 @@ func NewDescribeBillSummaryByProjectResponse() (response *DescribeBillSummaryByP
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProject(request *DescribeBillSummaryByProjectRequest) (response *DescribeBillSummaryByProjectResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillSummaryByProjectRequest()
-    }
-    
-    response = NewDescribeBillSummaryByProjectResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillSummaryByProjectWithContext(context.Background(), request)
 }
 
 // DescribeBillSummaryByProject
@@ -309,6 +300,11 @@ func (c *Client) DescribeBillSummaryByProjectWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeBillSummaryByProjectRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByProject require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByProjectResponse()
@@ -342,13 +338,7 @@ func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillSummaryByRegionRequest()
-    }
-    
-    response = NewDescribeBillSummaryByRegionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillSummaryByRegionWithContext(context.Background(), request)
 }
 
 // DescribeBillSummaryByRegion
@@ -363,6 +353,11 @@ func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeBillSummaryByRegionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByRegion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByRegionResponse()
@@ -397,13 +392,7 @@ func NewDescribeBillSummaryByTagResponse() (response *DescribeBillSummaryByTagRe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByTag(request *DescribeBillSummaryByTagRequest) (response *DescribeBillSummaryByTagResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillSummaryByTagRequest()
-    }
-    
-    response = NewDescribeBillSummaryByTagResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillSummaryByTagWithContext(context.Background(), request)
 }
 
 // DescribeBillSummaryByTag
@@ -419,6 +408,11 @@ func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeBillSummaryByTagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByTag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByTagResponse()

@@ -16,6 +16,7 @@ package v20201016
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,13 +78,7 @@ func NewApplyConfigToMachineGroupResponse() (response *ApplyConfigToMachineGroup
 //  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) ApplyConfigToMachineGroup(request *ApplyConfigToMachineGroupRequest) (response *ApplyConfigToMachineGroupResponse, err error) {
-    if request == nil {
-        request = NewApplyConfigToMachineGroupRequest()
-    }
-    
-    response = NewApplyConfigToMachineGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.ApplyConfigToMachineGroupWithContext(context.Background(), request)
 }
 
 // ApplyConfigToMachineGroup
@@ -105,6 +100,11 @@ func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, reque
     if request == nil {
         request = NewApplyConfigToMachineGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyConfigToMachineGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewApplyConfigToMachineGroupResponse()
@@ -146,13 +146,7 @@ func NewCreateAlarmResponse() (response *CreateAlarmResponse) {
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateAlarm(request *CreateAlarmRequest) (response *CreateAlarmResponse, err error) {
-    if request == nil {
-        request = NewCreateAlarmRequest()
-    }
-    
-    response = NewCreateAlarmResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAlarmWithContext(context.Background(), request)
 }
 
 // CreateAlarm
@@ -175,6 +169,11 @@ func (c *Client) CreateAlarmWithContext(ctx context.Context, request *CreateAlar
     if request == nil {
         request = NewCreateAlarmRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlarm require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAlarmResponse()
@@ -212,13 +211,7 @@ func NewCreateAlarmNoticeResponse() (response *CreateAlarmNoticeResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) CreateAlarmNotice(request *CreateAlarmNoticeRequest) (response *CreateAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewCreateAlarmNoticeRequest()
-    }
-    
-    response = NewCreateAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAlarmNoticeWithContext(context.Background(), request)
 }
 
 // CreateAlarmNotice
@@ -237,6 +230,11 @@ func (c *Client) CreateAlarmNoticeWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAlarmNoticeResponse()
@@ -275,13 +273,7 @@ func NewCreateAsyncContextTaskResponse() (response *CreateAsyncContextTaskRespon
 //  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateAsyncContextTask(request *CreateAsyncContextTaskRequest) (response *CreateAsyncContextTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateAsyncContextTaskRequest()
-    }
-    
-    response = NewCreateAsyncContextTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAsyncContextTaskWithContext(context.Background(), request)
 }
 
 // CreateAsyncContextTask
@@ -301,6 +293,11 @@ func (c *Client) CreateAsyncContextTaskWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateAsyncContextTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAsyncContextTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAsyncContextTaskResponse()
@@ -340,13 +337,7 @@ func NewCreateAsyncSearchTaskResponse() (response *CreateAsyncSearchTaskResponse
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateAsyncSearchTask(request *CreateAsyncSearchTaskRequest) (response *CreateAsyncSearchTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateAsyncSearchTaskRequest()
-    }
-    
-    response = NewCreateAsyncSearchTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAsyncSearchTaskWithContext(context.Background(), request)
 }
 
 // CreateAsyncSearchTask
@@ -367,6 +358,11 @@ func (c *Client) CreateAsyncSearchTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateAsyncSearchTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAsyncSearchTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAsyncSearchTaskResponse()
@@ -409,13 +405,7 @@ func NewCreateConfigResponse() (response *CreateConfigResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateConfig(request *CreateConfigRequest) (response *CreateConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateConfigRequest()
-    }
-    
-    response = NewCreateConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateConfigWithContext(context.Background(), request)
 }
 
 // CreateConfig
@@ -439,6 +429,11 @@ func (c *Client) CreateConfigWithContext(ctx context.Context, request *CreateCon
     if request == nil {
         request = NewCreateConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateConfigResponse()
@@ -478,13 +473,7 @@ func NewCreateConsumerResponse() (response *CreateConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) CreateConsumer(request *CreateConsumerRequest) (response *CreateConsumerResponse, err error) {
-    if request == nil {
-        request = NewCreateConsumerRequest()
-    }
-    
-    response = NewCreateConsumerResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateConsumerWithContext(context.Background(), request)
 }
 
 // CreateConsumer
@@ -505,6 +494,11 @@ func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateC
     if request == nil {
         request = NewCreateConsumerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConsumer require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateConsumerResponse()
@@ -544,13 +538,7 @@ func NewCreateExportResponse() (response *CreateExportResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExportResponse, err error) {
-    if request == nil {
-        request = NewCreateExportRequest()
-    }
-    
-    response = NewCreateExportResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateExportWithContext(context.Background(), request)
 }
 
 // CreateExport
@@ -571,6 +559,11 @@ func (c *Client) CreateExportWithContext(ctx context.Context, request *CreateExp
     if request == nil {
         request = NewCreateExportRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateExport require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateExportResponse()
@@ -612,13 +605,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
-    if request == nil {
-        request = NewCreateIndexRequest()
-    }
-    
-    response = NewCreateIndexResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateIndexWithContext(context.Background(), request)
 }
 
 // CreateIndex
@@ -641,6 +628,11 @@ func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateInde
     if request == nil {
         request = NewCreateIndexRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIndex require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateIndexResponse()
@@ -683,13 +675,7 @@ func NewCreateLogsetResponse() (response *CreateLogsetResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) CreateLogset(request *CreateLogsetRequest) (response *CreateLogsetResponse, err error) {
-    if request == nil {
-        request = NewCreateLogsetRequest()
-    }
-    
-    response = NewCreateLogsetResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateLogsetWithContext(context.Background(), request)
 }
 
 // CreateLogset
@@ -713,6 +699,11 @@ func (c *Client) CreateLogsetWithContext(ctx context.Context, request *CreateLog
     if request == nil {
         request = NewCreateLogsetRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateLogset require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateLogsetResponse()
@@ -757,13 +748,7 @@ func NewCreateMachineGroupResponse() (response *CreateMachineGroupResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) CreateMachineGroup(request *CreateMachineGroupRequest) (response *CreateMachineGroupResponse, err error) {
-    if request == nil {
-        request = NewCreateMachineGroupRequest()
-    }
-    
-    response = NewCreateMachineGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateMachineGroupWithContext(context.Background(), request)
 }
 
 // CreateMachineGroup
@@ -789,6 +774,11 @@ func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateMachineGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMachineGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateMachineGroupResponse()
@@ -832,13 +822,7 @@ func NewCreateShipperResponse() (response *CreateShipperResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateShipper(request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
-    if request == nil {
-        request = NewCreateShipperRequest()
-    }
-    
-    response = NewCreateShipperResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateShipperWithContext(context.Background(), request)
 }
 
 // CreateShipper
@@ -863,6 +847,11 @@ func (c *Client) CreateShipperWithContext(ctx context.Context, request *CreateSh
     if request == nil {
         request = NewCreateShipperRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateShipper require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateShipperResponse()
@@ -906,13 +895,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
-    if request == nil {
-        request = NewCreateTopicRequest()
-    }
-    
-    response = NewCreateTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTopicWithContext(context.Background(), request)
 }
 
 // CreateTopic
@@ -937,6 +920,11 @@ func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopi
     if request == nil {
         request = NewCreateTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTopicResponse()
@@ -974,13 +962,7 @@ func NewDeleteAlarmResponse() (response *DeleteAlarmResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_ALARMNOTEXIST = "ResourceNotFound.AlarmNotExist"
 func (c *Client) DeleteAlarm(request *DeleteAlarmRequest) (response *DeleteAlarmResponse, err error) {
-    if request == nil {
-        request = NewDeleteAlarmRequest()
-    }
-    
-    response = NewDeleteAlarmResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAlarmWithContext(context.Background(), request)
 }
 
 // DeleteAlarm
@@ -999,6 +981,11 @@ func (c *Client) DeleteAlarmWithContext(ctx context.Context, request *DeleteAlar
     if request == nil {
         request = NewDeleteAlarmRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarm require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAlarmResponse()
@@ -1038,13 +1025,7 @@ func NewDeleteAlarmNoticeResponse() (response *DeleteAlarmNoticeResponse) {
 //  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 func (c *Client) DeleteAlarmNotice(request *DeleteAlarmNoticeRequest) (response *DeleteAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewDeleteAlarmNoticeRequest()
-    }
-    
-    response = NewDeleteAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAlarmNoticeWithContext(context.Background(), request)
 }
 
 // DeleteAlarmNotice
@@ -1065,6 +1046,11 @@ func (c *Client) DeleteAlarmNoticeWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAlarmNoticeResponse()
@@ -1099,13 +1085,7 @@ func NewDeleteAsyncContextTaskResponse() (response *DeleteAsyncContextTaskRespon
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DeleteAsyncContextTask(request *DeleteAsyncContextTaskRequest) (response *DeleteAsyncContextTaskResponse, err error) {
-    if request == nil {
-        request = NewDeleteAsyncContextTaskRequest()
-    }
-    
-    response = NewDeleteAsyncContextTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAsyncContextTaskWithContext(context.Background(), request)
 }
 
 // DeleteAsyncContextTask
@@ -1121,6 +1101,11 @@ func (c *Client) DeleteAsyncContextTaskWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteAsyncContextTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAsyncContextTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAsyncContextTaskResponse()
@@ -1157,13 +1142,7 @@ func NewDeleteAsyncSearchTaskResponse() (response *DeleteAsyncSearchTaskResponse
 //  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DeleteAsyncSearchTask(request *DeleteAsyncSearchTaskRequest) (response *DeleteAsyncSearchTaskResponse, err error) {
-    if request == nil {
-        request = NewDeleteAsyncSearchTaskRequest()
-    }
-    
-    response = NewDeleteAsyncSearchTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAsyncSearchTaskWithContext(context.Background(), request)
 }
 
 // DeleteAsyncSearchTask
@@ -1181,6 +1160,11 @@ func (c *Client) DeleteAsyncSearchTaskWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteAsyncSearchTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAsyncSearchTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAsyncSearchTaskResponse()
@@ -1222,13 +1206,7 @@ func NewDeleteConfigResponse() (response *DeleteConfigResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 func (c *Client) DeleteConfig(request *DeleteConfigRequest) (response *DeleteConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteConfigRequest()
-    }
-    
-    response = NewDeleteConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteConfigWithContext(context.Background(), request)
 }
 
 // DeleteConfig
@@ -1251,6 +1229,11 @@ func (c *Client) DeleteConfigWithContext(ctx context.Context, request *DeleteCon
     if request == nil {
         request = NewDeleteConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteConfigResponse()
@@ -1291,13 +1274,7 @@ func NewDeleteConfigFromMachineGroupResponse() (response *DeleteConfigFromMachin
 //  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) DeleteConfigFromMachineGroup(request *DeleteConfigFromMachineGroupRequest) (response *DeleteConfigFromMachineGroupResponse, err error) {
-    if request == nil {
-        request = NewDeleteConfigFromMachineGroupRequest()
-    }
-    
-    response = NewDeleteConfigFromMachineGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteConfigFromMachineGroupWithContext(context.Background(), request)
 }
 
 // DeleteConfigFromMachineGroup
@@ -1319,6 +1296,11 @@ func (c *Client) DeleteConfigFromMachineGroupWithContext(ctx context.Context, re
     if request == nil {
         request = NewDeleteConfigFromMachineGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConfigFromMachineGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteConfigFromMachineGroupResponse()
@@ -1357,13 +1339,7 @@ func NewDeleteConsumerResponse() (response *DeleteConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DeleteConsumer(request *DeleteConsumerRequest) (response *DeleteConsumerResponse, err error) {
-    if request == nil {
-        request = NewDeleteConsumerRequest()
-    }
-    
-    response = NewDeleteConsumerResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteConsumerWithContext(context.Background(), request)
 }
 
 // DeleteConsumer
@@ -1383,6 +1359,11 @@ func (c *Client) DeleteConsumerWithContext(ctx context.Context, request *DeleteC
     if request == nil {
         request = NewDeleteConsumerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConsumer require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteConsumerResponse()
@@ -1421,13 +1402,7 @@ func NewDeleteExportResponse() (response *DeleteExportResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
 func (c *Client) DeleteExport(request *DeleteExportRequest) (response *DeleteExportResponse, err error) {
-    if request == nil {
-        request = NewDeleteExportRequest()
-    }
-    
-    response = NewDeleteExportResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteExportWithContext(context.Background(), request)
 }
 
 // DeleteExport
@@ -1447,6 +1422,11 @@ func (c *Client) DeleteExportWithContext(ctx context.Context, request *DeleteExp
     if request == nil {
         request = NewDeleteExportRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteExport require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteExportResponse()
@@ -1487,13 +1467,7 @@ func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
 //  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndexResponse, err error) {
-    if request == nil {
-        request = NewDeleteIndexRequest()
-    }
-    
-    response = NewDeleteIndexResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteIndexWithContext(context.Background(), request)
 }
 
 // DeleteIndex
@@ -1515,6 +1489,11 @@ func (c *Client) DeleteIndexWithContext(ctx context.Context, request *DeleteInde
     if request == nil {
         request = NewDeleteIndexRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIndex require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteIndexResponse()
@@ -1555,13 +1534,7 @@ func NewDeleteLogsetResponse() (response *DeleteLogsetResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 func (c *Client) DeleteLogset(request *DeleteLogsetRequest) (response *DeleteLogsetResponse, err error) {
-    if request == nil {
-        request = NewDeleteLogsetRequest()
-    }
-    
-    response = NewDeleteLogsetResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteLogsetWithContext(context.Background(), request)
 }
 
 // DeleteLogset
@@ -1583,6 +1556,11 @@ func (c *Client) DeleteLogsetWithContext(ctx context.Context, request *DeleteLog
     if request == nil {
         request = NewDeleteLogsetRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLogset require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteLogsetResponse()
@@ -1623,13 +1601,7 @@ func NewDeleteMachineGroupResponse() (response *DeleteMachineGroupResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) DeleteMachineGroup(request *DeleteMachineGroupRequest) (response *DeleteMachineGroupResponse, err error) {
-    if request == nil {
-        request = NewDeleteMachineGroupRequest()
-    }
-    
-    response = NewDeleteMachineGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMachineGroupWithContext(context.Background(), request)
 }
 
 // DeleteMachineGroup
@@ -1651,6 +1623,11 @@ func (c *Client) DeleteMachineGroupWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteMachineGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMachineGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMachineGroupResponse()
@@ -1692,13 +1669,7 @@ func NewDeleteShipperResponse() (response *DeleteShipperResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
 func (c *Client) DeleteShipper(request *DeleteShipperRequest) (response *DeleteShipperResponse, err error) {
-    if request == nil {
-        request = NewDeleteShipperRequest()
-    }
-    
-    response = NewDeleteShipperResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteShipperWithContext(context.Background(), request)
 }
 
 // DeleteShipper
@@ -1721,6 +1692,11 @@ func (c *Client) DeleteShipperWithContext(ctx context.Context, request *DeleteSh
     if request == nil {
         request = NewDeleteShipperRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteShipper require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteShipperResponse()
@@ -1761,13 +1737,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
-    if request == nil {
-        request = NewDeleteTopicRequest()
-    }
-    
-    response = NewDeleteTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteTopicWithContext(context.Background(), request)
 }
 
 // DeleteTopic
@@ -1789,6 +1759,11 @@ func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopi
     if request == nil {
         request = NewDeleteTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteTopicResponse()
@@ -1826,13 +1801,7 @@ func NewDescribeAlarmNoticesResponse() (response *DescribeAlarmNoticesResponse) 
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeAlarmNotices(request *DescribeAlarmNoticesRequest) (response *DescribeAlarmNoticesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmNoticesRequest()
-    }
-    
-    response = NewDescribeAlarmNoticesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmNoticesWithContext(context.Background(), request)
 }
 
 // DescribeAlarmNotices
@@ -1851,6 +1820,11 @@ func (c *Client) DescribeAlarmNoticesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeAlarmNoticesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmNotices require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmNoticesResponse()
@@ -1884,13 +1858,7 @@ func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmsRequest()
-    }
-    
-    response = NewDescribeAlarmsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmsWithContext(context.Background(), request)
 }
 
 // DescribeAlarms
@@ -1905,6 +1873,11 @@ func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeAlarmsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarms require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmsResponse()
@@ -1942,13 +1915,7 @@ func NewDescribeAsyncContextResultResponse() (response *DescribeAsyncContextResu
 //  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
 //  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
 func (c *Client) DescribeAsyncContextResult(request *DescribeAsyncContextResultRequest) (response *DescribeAsyncContextResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncContextResultRequest()
-    }
-    
-    response = NewDescribeAsyncContextResultResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAsyncContextResultWithContext(context.Background(), request)
 }
 
 // DescribeAsyncContextResult
@@ -1967,6 +1934,11 @@ func (c *Client) DescribeAsyncContextResultWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeAsyncContextResultRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAsyncContextResult require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAsyncContextResultResponse()
@@ -2000,13 +1972,7 @@ func NewDescribeAsyncContextTasksResponse() (response *DescribeAsyncContextTasks
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeAsyncContextTasks(request *DescribeAsyncContextTasksRequest) (response *DescribeAsyncContextTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncContextTasksRequest()
-    }
-    
-    response = NewDescribeAsyncContextTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAsyncContextTasksWithContext(context.Background(), request)
 }
 
 // DescribeAsyncContextTasks
@@ -2021,6 +1987,11 @@ func (c *Client) DescribeAsyncContextTasksWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAsyncContextTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAsyncContextTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAsyncContextTasksResponse()
@@ -2058,13 +2029,7 @@ func NewDescribeAsyncSearchResultResponse() (response *DescribeAsyncSearchResult
 //  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
 //  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
 func (c *Client) DescribeAsyncSearchResult(request *DescribeAsyncSearchResultRequest) (response *DescribeAsyncSearchResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncSearchResultRequest()
-    }
-    
-    response = NewDescribeAsyncSearchResultResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAsyncSearchResultWithContext(context.Background(), request)
 }
 
 // DescribeAsyncSearchResult
@@ -2083,6 +2048,11 @@ func (c *Client) DescribeAsyncSearchResultWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAsyncSearchResultRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAsyncSearchResult require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAsyncSearchResultResponse()
@@ -2117,13 +2087,7 @@ func NewDescribeAsyncSearchTasksResponse() (response *DescribeAsyncSearchTasksRe
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 func (c *Client) DescribeAsyncSearchTasks(request *DescribeAsyncSearchTasksRequest) (response *DescribeAsyncSearchTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncSearchTasksRequest()
-    }
-    
-    response = NewDescribeAsyncSearchTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAsyncSearchTasksWithContext(context.Background(), request)
 }
 
 // DescribeAsyncSearchTasks
@@ -2139,6 +2103,11 @@ func (c *Client) DescribeAsyncSearchTasksWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeAsyncSearchTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAsyncSearchTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAsyncSearchTasksResponse()
@@ -2180,13 +2149,7 @@ func NewDescribeConfigMachineGroupsResponse() (response *DescribeConfigMachineGr
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 func (c *Client) DescribeConfigMachineGroups(request *DescribeConfigMachineGroupsRequest) (response *DescribeConfigMachineGroupsResponse, err error) {
-    if request == nil {
-        request = NewDescribeConfigMachineGroupsRequest()
-    }
-    
-    response = NewDescribeConfigMachineGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeConfigMachineGroupsWithContext(context.Background(), request)
 }
 
 // DescribeConfigMachineGroups
@@ -2209,6 +2172,11 @@ func (c *Client) DescribeConfigMachineGroupsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeConfigMachineGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConfigMachineGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeConfigMachineGroupsResponse()
@@ -2248,13 +2216,7 @@ func NewDescribeConfigsResponse() (response *DescribeConfigsResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
-    if request == nil {
-        request = NewDescribeConfigsRequest()
-    }
-    
-    response = NewDescribeConfigsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeConfigsWithContext(context.Background(), request)
 }
 
 // DescribeConfigs
@@ -2275,6 +2237,11 @@ func (c *Client) DescribeConfigsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeConfigsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConfigs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeConfigsResponse()
@@ -2313,13 +2280,7 @@ func NewDescribeConsumerResponse() (response *DescribeConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeConsumer(request *DescribeConsumerRequest) (response *DescribeConsumerResponse, err error) {
-    if request == nil {
-        request = NewDescribeConsumerRequest()
-    }
-    
-    response = NewDescribeConsumerResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeConsumerWithContext(context.Background(), request)
 }
 
 // DescribeConsumer
@@ -2339,6 +2300,11 @@ func (c *Client) DescribeConsumerWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeConsumerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumer require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeConsumerResponse()
@@ -2378,13 +2344,7 @@ func NewDescribeExportsResponse() (response *DescribeExportsResponse) {
 //  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeExports(request *DescribeExportsRequest) (response *DescribeExportsResponse, err error) {
-    if request == nil {
-        request = NewDescribeExportsRequest()
-    }
-    
-    response = NewDescribeExportsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeExportsWithContext(context.Background(), request)
 }
 
 // DescribeExports
@@ -2405,6 +2365,11 @@ func (c *Client) DescribeExportsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeExportsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExports require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeExportsResponse()
@@ -2446,13 +2411,7 @@ func NewDescribeIndexResponse() (response *DescribeIndexResponse) {
 //  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeIndex(request *DescribeIndexRequest) (response *DescribeIndexResponse, err error) {
-    if request == nil {
-        request = NewDescribeIndexRequest()
-    }
-    
-    response = NewDescribeIndexResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIndexWithContext(context.Background(), request)
 }
 
 // DescribeIndex
@@ -2475,6 +2434,11 @@ func (c *Client) DescribeIndexWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeIndexRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIndex require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIndexResponse()
@@ -2518,13 +2482,7 @@ func NewDescribeLogContextResponse() (response *DescribeLogContextResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeLogContext(request *DescribeLogContextRequest) (response *DescribeLogContextResponse, err error) {
-    if request == nil {
-        request = NewDescribeLogContextRequest()
-    }
-    
-    response = NewDescribeLogContextResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeLogContextWithContext(context.Background(), request)
 }
 
 // DescribeLogContext
@@ -2549,6 +2507,11 @@ func (c *Client) DescribeLogContextWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeLogContextRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogContext require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeLogContextResponse()
@@ -2589,13 +2552,7 @@ func NewDescribeLogsetsResponse() (response *DescribeLogsetsResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLogsets(request *DescribeLogsetsRequest) (response *DescribeLogsetsResponse, err error) {
-    if request == nil {
-        request = NewDescribeLogsetsRequest()
-    }
-    
-    response = NewDescribeLogsetsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeLogsetsWithContext(context.Background(), request)
 }
 
 // DescribeLogsets
@@ -2617,6 +2574,11 @@ func (c *Client) DescribeLogsetsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeLogsetsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogsets require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeLogsetsResponse()
@@ -2656,13 +2618,7 @@ func NewDescribeMachineGroupConfigsResponse() (response *DescribeMachineGroupCon
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) DescribeMachineGroupConfigs(request *DescribeMachineGroupConfigsRequest) (response *DescribeMachineGroupConfigsResponse, err error) {
-    if request == nil {
-        request = NewDescribeMachineGroupConfigsRequest()
-    }
-    
-    response = NewDescribeMachineGroupConfigsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMachineGroupConfigsWithContext(context.Background(), request)
 }
 
 // DescribeMachineGroupConfigs
@@ -2683,6 +2639,11 @@ func (c *Client) DescribeMachineGroupConfigsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeMachineGroupConfigsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachineGroupConfigs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMachineGroupConfigsResponse()
@@ -2721,13 +2682,7 @@ func NewDescribeMachineGroupsResponse() (response *DescribeMachineGroupsResponse
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeMachineGroups(request *DescribeMachineGroupsRequest) (response *DescribeMachineGroupsResponse, err error) {
-    if request == nil {
-        request = NewDescribeMachineGroupsRequest()
-    }
-    
-    response = NewDescribeMachineGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMachineGroupsWithContext(context.Background(), request)
 }
 
 // DescribeMachineGroups
@@ -2747,6 +2702,11 @@ func (c *Client) DescribeMachineGroupsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeMachineGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachineGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMachineGroupsResponse()
@@ -2788,13 +2748,7 @@ func NewDescribeMachinesResponse() (response *DescribeMachinesResponse) {
 //  RESOURCENOTFOUND_AGENTVERSIONNOTEXIST = "ResourceNotFound.AgentVersionNotExist"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *DescribeMachinesResponse, err error) {
-    if request == nil {
-        request = NewDescribeMachinesRequest()
-    }
-    
-    response = NewDescribeMachinesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMachinesWithContext(context.Background(), request)
 }
 
 // DescribeMachines
@@ -2817,6 +2771,11 @@ func (c *Client) DescribeMachinesWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeMachinesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachines require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMachinesResponse()
@@ -2857,13 +2816,7 @@ func NewDescribePartitionsResponse() (response *DescribePartitionsResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribePartitions(request *DescribePartitionsRequest) (response *DescribePartitionsResponse, err error) {
-    if request == nil {
-        request = NewDescribePartitionsRequest()
-    }
-    
-    response = NewDescribePartitionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePartitionsWithContext(context.Background(), request)
 }
 
 // DescribePartitions
@@ -2885,6 +2838,11 @@ func (c *Client) DescribePartitionsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePartitionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePartitions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePartitionsResponse()
@@ -2926,13 +2884,7 @@ func NewDescribeShipperTasksResponse() (response *DescribeShipperTasksResponse) 
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
 func (c *Client) DescribeShipperTasks(request *DescribeShipperTasksRequest) (response *DescribeShipperTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeShipperTasksRequest()
-    }
-    
-    response = NewDescribeShipperTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeShipperTasksWithContext(context.Background(), request)
 }
 
 // DescribeShipperTasks
@@ -2955,6 +2907,11 @@ func (c *Client) DescribeShipperTasksWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeShipperTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShipperTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeShipperTasksResponse()
@@ -2996,13 +2953,7 @@ func NewDescribeShippersResponse() (response *DescribeShippersResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) DescribeShippers(request *DescribeShippersRequest) (response *DescribeShippersResponse, err error) {
-    if request == nil {
-        request = NewDescribeShippersRequest()
-    }
-    
-    response = NewDescribeShippersResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeShippersWithContext(context.Background(), request)
 }
 
 // DescribeShippers
@@ -3025,6 +2976,11 @@ func (c *Client) DescribeShippersWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeShippersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShippers require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeShippersResponse()
@@ -3065,13 +3021,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
 func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicsRequest()
-    }
-    
-    response = NewDescribeTopicsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicsWithContext(context.Background(), request)
 }
 
 // DescribeTopics
@@ -3093,6 +3043,11 @@ func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeTopicsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicsResponse()
@@ -3138,13 +3093,7 @@ func NewGetAlarmLogResponse() (response *GetAlarmLogResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) GetAlarmLog(request *GetAlarmLogRequest) (response *GetAlarmLogResponse, err error) {
-    if request == nil {
-        request = NewGetAlarmLogRequest()
-    }
-    
-    response = NewGetAlarmLogResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetAlarmLogWithContext(context.Background(), request)
 }
 
 // GetAlarmLog
@@ -3171,6 +3120,11 @@ func (c *Client) GetAlarmLogWithContext(ctx context.Context, request *GetAlarmLo
     if request == nil {
         request = NewGetAlarmLogRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAlarmLog require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetAlarmLogResponse()
@@ -3213,13 +3167,7 @@ func NewMergePartitionResponse() (response *MergePartitionResponse) {
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) MergePartition(request *MergePartitionRequest) (response *MergePartitionResponse, err error) {
-    if request == nil {
-        request = NewMergePartitionRequest()
-    }
-    
-    response = NewMergePartitionResponse()
-    err = c.Send(request, response)
-    return
+    return c.MergePartitionWithContext(context.Background(), request)
 }
 
 // MergePartition
@@ -3243,6 +3191,11 @@ func (c *Client) MergePartitionWithContext(ctx context.Context, request *MergePa
     if request == nil {
         request = NewMergePartitionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MergePartition require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewMergePartitionResponse()
@@ -3285,13 +3238,7 @@ func NewModifyAlarmResponse() (response *ModifyAlarmResponse) {
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) ModifyAlarm(request *ModifyAlarmRequest) (response *ModifyAlarmResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmRequest()
-    }
-    
-    response = NewModifyAlarmResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmWithContext(context.Background(), request)
 }
 
 // ModifyAlarm
@@ -3315,6 +3262,11 @@ func (c *Client) ModifyAlarmWithContext(ctx context.Context, request *ModifyAlar
     if request == nil {
         request = NewModifyAlarmRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarm require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmResponse()
@@ -3355,13 +3307,7 @@ func NewModifyAlarmNoticeResponse() (response *ModifyAlarmNoticeResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 func (c *Client) ModifyAlarmNotice(request *ModifyAlarmNoticeRequest) (response *ModifyAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmNoticeRequest()
-    }
-    
-    response = NewModifyAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmNoticeWithContext(context.Background(), request)
 }
 
 // ModifyAlarmNotice
@@ -3383,6 +3329,11 @@ func (c *Client) ModifyAlarmNoticeWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmNoticeResponse()
@@ -3425,13 +3376,7 @@ func NewModifyConfigResponse() (response *ModifyConfigResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 func (c *Client) ModifyConfig(request *ModifyConfigRequest) (response *ModifyConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyConfigRequest()
-    }
-    
-    response = NewModifyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyConfigWithContext(context.Background(), request)
 }
 
 // ModifyConfig
@@ -3455,6 +3400,11 @@ func (c *Client) ModifyConfigWithContext(ctx context.Context, request *ModifyCon
     if request == nil {
         request = NewModifyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyConfigResponse()
@@ -3493,13 +3443,7 @@ func NewModifyConsumerResponse() (response *ModifyConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 func (c *Client) ModifyConsumer(request *ModifyConsumerRequest) (response *ModifyConsumerResponse, err error) {
-    if request == nil {
-        request = NewModifyConsumerRequest()
-    }
-    
-    response = NewModifyConsumerResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyConsumerWithContext(context.Background(), request)
 }
 
 // ModifyConsumer
@@ -3519,6 +3463,11 @@ func (c *Client) ModifyConsumerWithContext(ctx context.Context, request *ModifyC
     if request == nil {
         request = NewModifyConsumerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConsumer require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyConsumerResponse()
@@ -3560,13 +3509,7 @@ func NewModifyIndexResponse() (response *ModifyIndexResponse) {
 //  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndexResponse, err error) {
-    if request == nil {
-        request = NewModifyIndexRequest()
-    }
-    
-    response = NewModifyIndexResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyIndexWithContext(context.Background(), request)
 }
 
 // ModifyIndex
@@ -3589,6 +3532,11 @@ func (c *Client) ModifyIndexWithContext(ctx context.Context, request *ModifyInde
     if request == nil {
         request = NewModifyIndexRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIndex require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyIndexResponse()
@@ -3631,13 +3579,7 @@ func NewModifyLogsetResponse() (response *ModifyLogsetResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 func (c *Client) ModifyLogset(request *ModifyLogsetRequest) (response *ModifyLogsetResponse, err error) {
-    if request == nil {
-        request = NewModifyLogsetRequest()
-    }
-    
-    response = NewModifyLogsetResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyLogsetWithContext(context.Background(), request)
 }
 
 // ModifyLogset
@@ -3661,6 +3603,11 @@ func (c *Client) ModifyLogsetWithContext(ctx context.Context, request *ModifyLog
     if request == nil {
         request = NewModifyLogsetRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLogset require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyLogsetResponse()
@@ -3704,13 +3651,7 @@ func NewModifyMachineGroupResponse() (response *ModifyMachineGroupResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_MACHINEGROUPNOTEXIST = "ResourceNotFound.MachineGroupNotExist"
 func (c *Client) ModifyMachineGroup(request *ModifyMachineGroupRequest) (response *ModifyMachineGroupResponse, err error) {
-    if request == nil {
-        request = NewModifyMachineGroupRequest()
-    }
-    
-    response = NewModifyMachineGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyMachineGroupWithContext(context.Background(), request)
 }
 
 // ModifyMachineGroup
@@ -3735,6 +3676,11 @@ func (c *Client) ModifyMachineGroupWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyMachineGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMachineGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyMachineGroupResponse()
@@ -3775,13 +3721,7 @@ func NewModifyShipperResponse() (response *ModifyShipperResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
 func (c *Client) ModifyShipper(request *ModifyShipperRequest) (response *ModifyShipperResponse, err error) {
-    if request == nil {
-        request = NewModifyShipperRequest()
-    }
-    
-    response = NewModifyShipperResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyShipperWithContext(context.Background(), request)
 }
 
 // ModifyShipper
@@ -3803,6 +3743,11 @@ func (c *Client) ModifyShipperWithContext(ctx context.Context, request *ModifySh
     if request == nil {
         request = NewModifyShipperRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyShipper require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyShipperResponse()
@@ -3847,13 +3792,7 @@ func NewModifyTopicResponse() (response *ModifyTopicResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
-    if request == nil {
-        request = NewModifyTopicRequest()
-    }
-    
-    response = NewModifyTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyTopicWithContext(context.Background(), request)
 }
 
 // ModifyTopic
@@ -3879,6 +3818,11 @@ func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopi
     if request == nil {
         request = NewModifyTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyTopicResponse()
@@ -3922,13 +3866,7 @@ func NewRetryShipperTaskResponse() (response *RetryShipperTaskResponse) {
 //  RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
 //  RESOURCENOTFOUND_SHIPPERTASKNOTEXIST = "ResourceNotFound.ShipperTaskNotExist"
 func (c *Client) RetryShipperTask(request *RetryShipperTaskRequest) (response *RetryShipperTaskResponse, err error) {
-    if request == nil {
-        request = NewRetryShipperTaskRequest()
-    }
-    
-    response = NewRetryShipperTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.RetryShipperTaskWithContext(context.Background(), request)
 }
 
 // RetryShipperTask
@@ -3953,6 +3891,11 @@ func (c *Client) RetryShipperTaskWithContext(ctx context.Context, request *Retry
     if request == nil {
         request = NewRetryShipperTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RetryShipperTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRetryShipperTaskResponse()
@@ -3997,13 +3940,7 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogResponse, err error) {
-    if request == nil {
-        request = NewSearchLogRequest()
-    }
-    
-    response = NewSearchLogResponse()
-    err = c.Send(request, response)
-    return
+    return c.SearchLogWithContext(context.Background(), request)
 }
 
 // SearchLog
@@ -4029,6 +3966,11 @@ func (c *Client) SearchLogWithContext(ctx context.Context, request *SearchLogReq
     if request == nil {
         request = NewSearchLogRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchLog require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSearchLogResponse()
@@ -4074,13 +4016,7 @@ func NewSplitPartitionResponse() (response *SplitPartitionResponse) {
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SplitPartition(request *SplitPartitionRequest) (response *SplitPartitionResponse, err error) {
-    if request == nil {
-        request = NewSplitPartitionRequest()
-    }
-    
-    response = NewSplitPartitionResponse()
-    err = c.Send(request, response)
-    return
+    return c.SplitPartitionWithContext(context.Background(), request)
 }
 
 // SplitPartition
@@ -4107,6 +4043,11 @@ func (c *Client) SplitPartitionWithContext(ctx context.Context, request *SplitPa
     if request == nil {
         request = NewSplitPartitionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SplitPartition require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSplitPartitionResponse()
@@ -4452,13 +4393,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *UploadLogResponse, err error) {
-    if request == nil {
-        request = NewUploadLogRequest()
-    }
-    request.SetBody(data)
-    response = NewUploadLogResponse()
-    err = c.SendOctetStream(request, response)
-    return
+    return c.UploadLogWithContext(context.Background(), request)
 }
 
 // UploadLog
@@ -4785,6 +4720,11 @@ func (c *Client) UploadLogWithContext(ctx context.Context, request *UploadLogReq
     if request == nil {
         request = NewUploadLogRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadLog require credential")
+    }
+
     request.SetContext(ctx)
     request.SetBody(data)
     response = NewUploadLogResponse()

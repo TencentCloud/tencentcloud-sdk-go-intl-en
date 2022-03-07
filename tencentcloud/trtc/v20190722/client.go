@@ -16,6 +16,7 @@ package v20190722
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -72,13 +73,7 @@ func NewCreatePictureResponse() (response *CreatePictureResponse) {
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) CreatePicture(request *CreatePictureRequest) (response *CreatePictureResponse, err error) {
-    if request == nil {
-        request = NewCreatePictureRequest()
-    }
-    
-    response = NewCreatePictureResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePictureWithContext(context.Background(), request)
 }
 
 // CreatePicture
@@ -95,6 +90,11 @@ func (c *Client) CreatePictureWithContext(ctx context.Context, request *CreatePi
     if request == nil {
         request = NewCreatePictureRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePicture require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePictureResponse()
@@ -131,13 +131,7 @@ func NewCreateTroubleInfoResponse() (response *CreateTroubleInfoResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateTroubleInfo(request *CreateTroubleInfoRequest) (response *CreateTroubleInfoResponse, err error) {
-    if request == nil {
-        request = NewCreateTroubleInfoRequest()
-    }
-    
-    response = NewCreateTroubleInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTroubleInfoWithContext(context.Background(), request)
 }
 
 // CreateTroubleInfo
@@ -155,6 +149,11 @@ func (c *Client) CreateTroubleInfoWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateTroubleInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTroubleInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTroubleInfoResponse()
@@ -189,13 +188,7 @@ func NewDeletePictureResponse() (response *DeletePictureResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DeletePicture(request *DeletePictureRequest) (response *DeletePictureResponse, err error) {
-    if request == nil {
-        request = NewDeletePictureRequest()
-    }
-    
-    response = NewDeletePictureResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePictureWithContext(context.Background(), request)
 }
 
 // DeletePicture
@@ -211,6 +204,11 @@ func (c *Client) DeletePictureWithContext(ctx context.Context, request *DeletePi
     if request == nil {
         request = NewDeletePictureRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePicture require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePictureResponse()
@@ -258,13 +256,7 @@ func NewDescribeAbnormalEventResponse() (response *DescribeAbnormalEventResponse
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeAbnormalEvent(request *DescribeAbnormalEventRequest) (response *DescribeAbnormalEventResponse, err error) {
-    if request == nil {
-        request = NewDescribeAbnormalEventRequest()
-    }
-    
-    response = NewDescribeAbnormalEventResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAbnormalEventWithContext(context.Background(), request)
 }
 
 // DescribeAbnormalEvent
@@ -293,6 +285,11 @@ func (c *Client) DescribeAbnormalEventWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAbnormalEventRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAbnormalEvent require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAbnormalEventResponse()
@@ -344,13 +341,7 @@ func NewDescribeCallDetailResponse() (response *DescribeCallDetailResponse) {
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeCallDetail(request *DescribeCallDetailRequest) (response *DescribeCallDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeCallDetailRequest()
-    }
-    
-    response = NewDescribeCallDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCallDetailWithContext(context.Background(), request)
 }
 
 // DescribeCallDetail
@@ -383,6 +374,11 @@ func (c *Client) DescribeCallDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeCallDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCallDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCallDetailResponse()
@@ -432,13 +428,7 @@ func NewDescribeDetailEventResponse() (response *DescribeDetailEventResponse) {
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 func (c *Client) DescribeDetailEvent(request *DescribeDetailEventRequest) (response *DescribeDetailEventResponse, err error) {
-    if request == nil {
-        request = NewDescribeDetailEventRequest()
-    }
-    
-    response = NewDescribeDetailEventResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDetailEventWithContext(context.Background(), request)
 }
 
 // DescribeDetailEvent
@@ -469,6 +459,11 @@ func (c *Client) DescribeDetailEventWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDetailEventRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDetailEvent require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDetailEventResponse()
@@ -512,13 +507,7 @@ func NewDescribeHistoryScaleResponse() (response *DescribeHistoryScaleResponse) 
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeHistoryScale(request *DescribeHistoryScaleRequest) (response *DescribeHistoryScaleResponse, err error) {
-    if request == nil {
-        request = NewDescribeHistoryScaleRequest()
-    }
-    
-    response = NewDescribeHistoryScaleResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeHistoryScaleWithContext(context.Background(), request)
 }
 
 // DescribeHistoryScale
@@ -543,6 +532,11 @@ func (c *Client) DescribeHistoryScaleWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeHistoryScaleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHistoryScale require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeHistoryScaleResponse()
@@ -578,13 +572,7 @@ func NewDescribePictureResponse() (response *DescribePictureResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribePicture(request *DescribePictureRequest) (response *DescribePictureResponse, err error) {
-    if request == nil {
-        request = NewDescribePictureRequest()
-    }
-    
-    response = NewDescribePictureResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePictureWithContext(context.Background(), request)
 }
 
 // DescribePicture
@@ -601,6 +589,11 @@ func (c *Client) DescribePictureWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribePictureRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePicture require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePictureResponse()
@@ -646,13 +639,7 @@ func NewDescribeRecordStatisticResponse() (response *DescribeRecordStatisticResp
 //  INVALIDPARAMETER_APPID = "InvalidParameter.AppId"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 func (c *Client) DescribeRecordStatistic(request *DescribeRecordStatisticRequest) (response *DescribeRecordStatisticResponse, err error) {
-    if request == nil {
-        request = NewDescribeRecordStatisticRequest()
-    }
-    
-    response = NewDescribeRecordStatisticResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRecordStatisticWithContext(context.Background(), request)
 }
 
 // DescribeRecordStatistic
@@ -679,6 +666,11 @@ func (c *Client) DescribeRecordStatisticWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeRecordStatisticRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordStatistic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRecordStatisticResponse()
@@ -732,13 +724,7 @@ func NewDescribeRoomInformationResponse() (response *DescribeRoomInformationResp
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeRoomInformation(request *DescribeRoomInformationRequest) (response *DescribeRoomInformationResponse, err error) {
-    if request == nil {
-        request = NewDescribeRoomInformationRequest()
-    }
-    
-    response = NewDescribeRoomInformationResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRoomInformationWithContext(context.Background(), request)
 }
 
 // DescribeRoomInformation
@@ -773,6 +759,11 @@ func (c *Client) DescribeRoomInformationWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeRoomInformationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoomInformation require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRoomInformationResponse()
@@ -814,13 +805,7 @@ func NewDescribeTrtcInteractiveTimeResponse() (response *DescribeTrtcInteractive
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 func (c *Client) DescribeTrtcInteractiveTime(request *DescribeTrtcInteractiveTimeRequest) (response *DescribeTrtcInteractiveTimeResponse, err error) {
-    if request == nil {
-        request = NewDescribeTrtcInteractiveTimeRequest()
-    }
-    
-    response = NewDescribeTrtcInteractiveTimeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTrtcInteractiveTimeWithContext(context.Background(), request)
 }
 
 // DescribeTrtcInteractiveTime
@@ -843,6 +828,11 @@ func (c *Client) DescribeTrtcInteractiveTimeWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeTrtcInteractiveTimeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTrtcInteractiveTime require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTrtcInteractiveTimeResponse()
@@ -884,13 +874,7 @@ func NewDescribeTrtcMcuTranscodeTimeResponse() (response *DescribeTrtcMcuTransco
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 func (c *Client) DescribeTrtcMcuTranscodeTime(request *DescribeTrtcMcuTranscodeTimeRequest) (response *DescribeTrtcMcuTranscodeTimeResponse, err error) {
-    if request == nil {
-        request = NewDescribeTrtcMcuTranscodeTimeRequest()
-    }
-    
-    response = NewDescribeTrtcMcuTranscodeTimeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTrtcMcuTranscodeTimeWithContext(context.Background(), request)
 }
 
 // DescribeTrtcMcuTranscodeTime
@@ -913,6 +897,11 @@ func (c *Client) DescribeTrtcMcuTranscodeTimeWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeTrtcMcuTranscodeTimeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTrtcMcuTranscodeTime require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTrtcMcuTranscodeTimeResponse()
@@ -962,13 +951,7 @@ func NewDescribeUserInformationResponse() (response *DescribeUserInformationResp
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
 func (c *Client) DescribeUserInformation(request *DescribeUserInformationRequest) (response *DescribeUserInformationResponse, err error) {
-    if request == nil {
-        request = NewDescribeUserInformationRequest()
-    }
-    
-    response = NewDescribeUserInformationResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUserInformationWithContext(context.Background(), request)
 }
 
 // DescribeUserInformation
@@ -999,6 +982,11 @@ func (c *Client) DescribeUserInformationWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeUserInformationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserInformation require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUserInformationResponse()
@@ -1038,13 +1026,7 @@ func NewDismissRoomResponse() (response *DismissRoomResponse) {
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DismissRoom(request *DismissRoomRequest) (response *DismissRoomResponse, err error) {
-    if request == nil {
-        request = NewDismissRoomRequest()
-    }
-    
-    response = NewDismissRoomResponse()
-    err = c.Send(request, response)
-    return
+    return c.DismissRoomWithContext(context.Background(), request)
 }
 
 // DismissRoom
@@ -1065,6 +1047,11 @@ func (c *Client) DismissRoomWithContext(ctx context.Context, request *DismissRoo
     if request == nil {
         request = NewDismissRoomRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DismissRoom require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDismissRoomResponse()
@@ -1103,13 +1090,7 @@ func NewDismissRoomByStrRoomIdResponse() (response *DismissRoomByStrRoomIdRespon
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) DismissRoomByStrRoomId(request *DismissRoomByStrRoomIdRequest) (response *DismissRoomByStrRoomIdResponse, err error) {
-    if request == nil {
-        request = NewDismissRoomByStrRoomIdRequest()
-    }
-    
-    response = NewDismissRoomByStrRoomIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.DismissRoomByStrRoomIdWithContext(context.Background(), request)
 }
 
 // DismissRoomByStrRoomId
@@ -1129,6 +1110,11 @@ func (c *Client) DismissRoomByStrRoomIdWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDismissRoomByStrRoomIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DismissRoomByStrRoomId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDismissRoomByStrRoomIdResponse()
@@ -1164,13 +1150,7 @@ func NewModifyPictureResponse() (response *ModifyPictureResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) ModifyPicture(request *ModifyPictureRequest) (response *ModifyPictureResponse, err error) {
-    if request == nil {
-        request = NewModifyPictureRequest()
-    }
-    
-    response = NewModifyPictureResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPictureWithContext(context.Background(), request)
 }
 
 // ModifyPicture
@@ -1187,6 +1167,11 @@ func (c *Client) ModifyPictureWithContext(ctx context.Context, request *ModifyPi
     if request == nil {
         request = NewModifyPictureRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPicture require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPictureResponse()
@@ -1228,13 +1213,7 @@ func NewRemoveUserResponse() (response *RemoveUserResponse) {
 //  MISSINGPARAMETER_USERIDS = "MissingParameter.UserIds"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) RemoveUser(request *RemoveUserRequest) (response *RemoveUserResponse, err error) {
-    if request == nil {
-        request = NewRemoveUserRequest()
-    }
-    
-    response = NewRemoveUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.RemoveUserWithContext(context.Background(), request)
 }
 
 // RemoveUser
@@ -1257,6 +1236,11 @@ func (c *Client) RemoveUserWithContext(ctx context.Context, request *RemoveUserR
     if request == nil {
         request = NewRemoveUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRemoveUserResponse()
@@ -1297,13 +1281,7 @@ func NewRemoveUserByStrRoomIdResponse() (response *RemoveUserByStrRoomIdResponse
 //  MISSINGPARAMETER_USERIDS = "MissingParameter.UserIds"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) RemoveUserByStrRoomId(request *RemoveUserByStrRoomIdRequest) (response *RemoveUserByStrRoomIdResponse, err error) {
-    if request == nil {
-        request = NewRemoveUserByStrRoomIdRequest()
-    }
-    
-    response = NewRemoveUserByStrRoomIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.RemoveUserByStrRoomIdWithContext(context.Background(), request)
 }
 
 // RemoveUserByStrRoomId
@@ -1325,6 +1303,11 @@ func (c *Client) RemoveUserByStrRoomIdWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRemoveUserByStrRoomIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveUserByStrRoomId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRemoveUserByStrRoomIdResponse()
@@ -1426,13 +1409,7 @@ func NewStartMCUMixTranscodeResponse() (response *StartMCUMixTranscodeResponse) 
 //  MISSINGPARAMETER_VIDEOENCODEPARAMS = "MissingParameter.VideoEncodeParams"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StartMCUMixTranscode(request *StartMCUMixTranscodeRequest) (response *StartMCUMixTranscodeResponse, err error) {
-    if request == nil {
-        request = NewStartMCUMixTranscodeRequest()
-    }
-    
-    response = NewStartMCUMixTranscodeResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartMCUMixTranscodeWithContext(context.Background(), request)
 }
 
 // StartMCUMixTranscode
@@ -1515,6 +1492,11 @@ func (c *Client) StartMCUMixTranscodeWithContext(ctx context.Context, request *S
     if request == nil {
         request = NewStartMCUMixTranscodeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartMCUMixTranscode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartMCUMixTranscodeResponse()
@@ -1612,13 +1594,7 @@ func NewStartMCUMixTranscodeByStrRoomIdResponse() (response *StartMCUMixTranscod
 //  MISSINGPARAMETER_VIDEOENCODEPARAMS = "MissingParameter.VideoEncodeParams"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StartMCUMixTranscodeByStrRoomId(request *StartMCUMixTranscodeByStrRoomIdRequest) (response *StartMCUMixTranscodeByStrRoomIdResponse, err error) {
-    if request == nil {
-        request = NewStartMCUMixTranscodeByStrRoomIdRequest()
-    }
-    
-    response = NewStartMCUMixTranscodeByStrRoomIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartMCUMixTranscodeByStrRoomIdWithContext(context.Background(), request)
 }
 
 // StartMCUMixTranscodeByStrRoomId
@@ -1697,6 +1673,11 @@ func (c *Client) StartMCUMixTranscodeByStrRoomIdWithContext(ctx context.Context,
     if request == nil {
         request = NewStartMCUMixTranscodeByStrRoomIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartMCUMixTranscodeByStrRoomId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartMCUMixTranscodeByStrRoomIdResponse()
@@ -1738,13 +1719,7 @@ func NewStopMCUMixTranscodeResponse() (response *StopMCUMixTranscodeResponse) {
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StopMCUMixTranscode(request *StopMCUMixTranscodeRequest) (response *StopMCUMixTranscodeResponse, err error) {
-    if request == nil {
-        request = NewStopMCUMixTranscodeRequest()
-    }
-    
-    response = NewStopMCUMixTranscodeResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopMCUMixTranscodeWithContext(context.Background(), request)
 }
 
 // StopMCUMixTranscode
@@ -1767,6 +1742,11 @@ func (c *Client) StopMCUMixTranscodeWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStopMCUMixTranscodeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopMCUMixTranscode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopMCUMixTranscodeResponse()
@@ -1808,13 +1788,7 @@ func NewStopMCUMixTranscodeByStrRoomIdResponse() (response *StopMCUMixTranscodeB
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) StopMCUMixTranscodeByStrRoomId(request *StopMCUMixTranscodeByStrRoomIdRequest) (response *StopMCUMixTranscodeByStrRoomIdResponse, err error) {
-    if request == nil {
-        request = NewStopMCUMixTranscodeByStrRoomIdRequest()
-    }
-    
-    response = NewStopMCUMixTranscodeByStrRoomIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopMCUMixTranscodeByStrRoomIdWithContext(context.Background(), request)
 }
 
 // StopMCUMixTranscodeByStrRoomId
@@ -1837,6 +1811,11 @@ func (c *Client) StopMCUMixTranscodeByStrRoomIdWithContext(ctx context.Context, 
     if request == nil {
         request = NewStopMCUMixTranscodeByStrRoomIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopMCUMixTranscodeByStrRoomId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopMCUMixTranscodeByStrRoomIdResponse()

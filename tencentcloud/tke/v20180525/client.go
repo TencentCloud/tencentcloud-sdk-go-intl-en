@@ -16,6 +16,7 @@ package v20180525
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -78,13 +79,7 @@ func NewAcquireClusterAdminRoleResponse() (response *AcquireClusterAdminRoleResp
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 //  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
 func (c *Client) AcquireClusterAdminRole(request *AcquireClusterAdminRoleRequest) (response *AcquireClusterAdminRoleResponse, err error) {
-    if request == nil {
-        request = NewAcquireClusterAdminRoleRequest()
-    }
-    
-    response = NewAcquireClusterAdminRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.AcquireClusterAdminRoleWithContext(context.Background(), request)
 }
 
 // AcquireClusterAdminRole
@@ -107,6 +102,11 @@ func (c *Client) AcquireClusterAdminRoleWithContext(ctx context.Context, request
     if request == nil {
         request = NewAcquireClusterAdminRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AcquireClusterAdminRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAcquireClusterAdminRoleResponse()
@@ -147,13 +147,7 @@ func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (response *AddExistedInstancesResponse, err error) {
-    if request == nil {
-        request = NewAddExistedInstancesRequest()
-    }
-    
-    response = NewAddExistedInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddExistedInstancesWithContext(context.Background(), request)
 }
 
 // AddExistedInstances
@@ -175,6 +169,11 @@ func (c *Client) AddExistedInstancesWithContext(ctx context.Context, request *Ad
     if request == nil {
         request = NewAddExistedInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddExistedInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddExistedInstancesResponse()
@@ -205,13 +204,7 @@ func NewAddNodeToNodePoolResponse() (response *AddNodeToNodePoolResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) AddNodeToNodePool(request *AddNodeToNodePoolRequest) (response *AddNodeToNodePoolResponse, err error) {
-    if request == nil {
-        request = NewAddNodeToNodePoolRequest()
-    }
-    
-    response = NewAddNodeToNodePoolResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddNodeToNodePoolWithContext(context.Background(), request)
 }
 
 // AddNodeToNodePool
@@ -223,6 +216,11 @@ func (c *Client) AddNodeToNodePoolWithContext(ctx context.Context, request *AddN
     if request == nil {
         request = NewAddNodeToNodePoolRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddNodeToNodePool require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddNodeToNodePoolResponse()
@@ -262,13 +260,7 @@ func NewAddVpcCniSubnetsResponse() (response *AddVpcCniSubnetsResponse) {
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) AddVpcCniSubnets(request *AddVpcCniSubnetsRequest) (response *AddVpcCniSubnetsResponse, err error) {
-    if request == nil {
-        request = NewAddVpcCniSubnetsRequest()
-    }
-    
-    response = NewAddVpcCniSubnetsResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddVpcCniSubnetsWithContext(context.Background(), request)
 }
 
 // AddVpcCniSubnets
@@ -289,6 +281,11 @@ func (c *Client) AddVpcCniSubnetsWithContext(ctx context.Context, request *AddVp
     if request == nil {
         request = NewAddVpcCniSubnetsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddVpcCniSubnets require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddVpcCniSubnetsResponse()
@@ -327,13 +324,7 @@ func NewCheckInstancesUpgradeAbleResponse() (response *CheckInstancesUpgradeAble
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleRequest) (response *CheckInstancesUpgradeAbleResponse, err error) {
-    if request == nil {
-        request = NewCheckInstancesUpgradeAbleRequest()
-    }
-    
-    response = NewCheckInstancesUpgradeAbleResponse()
-    err = c.Send(request, response)
-    return
+    return c.CheckInstancesUpgradeAbleWithContext(context.Background(), request)
 }
 
 // CheckInstancesUpgradeAble
@@ -353,6 +344,11 @@ func (c *Client) CheckInstancesUpgradeAbleWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCheckInstancesUpgradeAbleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckInstancesUpgradeAble require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCheckInstancesUpgradeAbleResponse()
@@ -424,13 +420,7 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 //  INVALIDPARAMETER_INVALIDPRIVATENETWORKCIDR = "InvalidParameter.InvalidPrivateNetworkCIDR"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterRequest()
-    }
-    
-    response = NewCreateClusterResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterWithContext(context.Background(), request)
 }
 
 // CreateCluster
@@ -483,6 +473,11 @@ func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateCl
     if request == nil {
         request = NewCreateClusterRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCluster require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterResponse()
@@ -530,13 +525,7 @@ func NewCreateClusterAsGroupResponse() (response *CreateClusterAsGroupResponse) 
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateClusterAsGroup(request *CreateClusterAsGroupRequest) (response *CreateClusterAsGroupResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterAsGroupRequest()
-    }
-    
-    response = NewCreateClusterAsGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterAsGroupWithContext(context.Background(), request)
 }
 
 // CreateClusterAsGroup
@@ -565,6 +554,11 @@ func (c *Client) CreateClusterAsGroupWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateClusterAsGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterAsGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterAsGroupResponse()
@@ -613,13 +607,7 @@ func NewCreateClusterEndpointResponse() (response *CreateClusterEndpointResponse
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateClusterEndpoint(request *CreateClusterEndpointRequest) (response *CreateClusterEndpointResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterEndpointRequest()
-    }
-    
-    response = NewCreateClusterEndpointResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterEndpointWithContext(context.Background(), request)
 }
 
 // CreateClusterEndpoint
@@ -649,6 +637,11 @@ func (c *Client) CreateClusterEndpointWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateClusterEndpointRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterEndpoint require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterEndpointResponse()
@@ -696,13 +689,7 @@ func NewCreateClusterEndpointVipResponse() (response *CreateClusterEndpointVipRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateClusterEndpointVip(request *CreateClusterEndpointVipRequest) (response *CreateClusterEndpointVipResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterEndpointVipRequest()
-    }
-    
-    response = NewCreateClusterEndpointVipResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterEndpointVipWithContext(context.Background(), request)
 }
 
 // CreateClusterEndpointVip
@@ -731,6 +718,11 @@ func (c *Client) CreateClusterEndpointVipWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateClusterEndpointVipRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterEndpointVip require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterEndpointVipResponse()
@@ -791,13 +783,7 @@ func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesRespon
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) (response *CreateClusterInstancesResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterInstancesRequest()
-    }
-    
-    response = NewCreateClusterInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterInstancesWithContext(context.Background(), request)
 }
 
 // CreateClusterInstances
@@ -839,6 +825,11 @@ func (c *Client) CreateClusterInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateClusterInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterInstancesResponse()
@@ -875,13 +866,7 @@ func NewCreateClusterNodePoolResponse() (response *CreateClusterNodePoolResponse
 //  RESOURCENOTFOUND_ASASGNOTEXIST = "ResourceNotFound.AsAsgNotExist"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) CreateClusterNodePool(request *CreateClusterNodePoolRequest) (response *CreateClusterNodePoolResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterNodePoolRequest()
-    }
-    
-    response = NewCreateClusterNodePoolResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterNodePoolWithContext(context.Background(), request)
 }
 
 // CreateClusterNodePool
@@ -899,6 +884,11 @@ func (c *Client) CreateClusterNodePoolWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateClusterNodePoolRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterNodePool require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterNodePoolResponse()
@@ -929,13 +919,7 @@ func NewCreateClusterNodePoolFromExistingAsgResponse() (response *CreateClusterN
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterNodePoolFromExistingAsgRequest()
-    }
-    
-    response = NewCreateClusterNodePoolFromExistingAsgResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterNodePoolFromExistingAsgWithContext(context.Background(), request)
 }
 
 // CreateClusterNodePoolFromExistingAsg
@@ -947,6 +931,11 @@ func (c *Client) CreateClusterNodePoolFromExistingAsgWithContext(ctx context.Con
     if request == nil {
         request = NewCreateClusterNodePoolFromExistingAsgRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterNodePoolFromExistingAsg require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterNodePoolFromExistingAsgResponse()
@@ -990,13 +979,7 @@ func NewCreateClusterRouteTableResponse() (response *CreateClusterRouteTableResp
 //  INVALIDPARAMETER_CIDRCONFLICTWITHOTHERROUTE = "InvalidParameter.CidrConflictWithOtherRoute"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) CreateClusterRouteTable(request *CreateClusterRouteTableRequest) (response *CreateClusterRouteTableResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterRouteTableRequest()
-    }
-    
-    response = NewCreateClusterRouteTableResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClusterRouteTableWithContext(context.Background(), request)
 }
 
 // CreateClusterRouteTable
@@ -1021,6 +1004,11 @@ func (c *Client) CreateClusterRouteTableWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateClusterRouteTableRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterRouteTable require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClusterRouteTableResponse()
@@ -1055,13 +1043,7 @@ func NewCreatePrometheusAlertRuleResponse() (response *CreatePrometheusAlertRule
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreatePrometheusAlertRule(request *CreatePrometheusAlertRuleRequest) (response *CreatePrometheusAlertRuleResponse, err error) {
-    if request == nil {
-        request = NewCreatePrometheusAlertRuleRequest()
-    }
-    
-    response = NewCreatePrometheusAlertRuleResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePrometheusAlertRuleWithContext(context.Background(), request)
 }
 
 // CreatePrometheusAlertRule
@@ -1077,6 +1059,11 @@ func (c *Client) CreatePrometheusAlertRuleWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreatePrometheusAlertRuleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusAlertRule require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePrometheusAlertRuleResponse()
@@ -1118,13 +1105,7 @@ func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DeleteCluster(request *DeleteClusterRequest) (response *DeleteClusterResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterRequest()
-    }
-    
-    response = NewDeleteClusterResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterWithContext(context.Background(), request)
 }
 
 // DeleteCluster
@@ -1147,6 +1128,11 @@ func (c *Client) DeleteClusterWithContext(ctx context.Context, request *DeleteCl
     if request == nil {
         request = NewDeleteClusterRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCluster require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterResponse()
@@ -1193,13 +1179,7 @@ func NewDeleteClusterAsGroupsResponse() (response *DeleteClusterAsGroupsResponse
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DeleteClusterAsGroups(request *DeleteClusterAsGroupsRequest) (response *DeleteClusterAsGroupsResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterAsGroupsRequest()
-    }
-    
-    response = NewDeleteClusterAsGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterAsGroupsWithContext(context.Background(), request)
 }
 
 // DeleteClusterAsGroups
@@ -1227,6 +1207,11 @@ func (c *Client) DeleteClusterAsGroupsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteClusterAsGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterAsGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterAsGroupsResponse()
@@ -1278,13 +1263,7 @@ func NewDeleteClusterEndpointResponse() (response *DeleteClusterEndpointResponse
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteClusterEndpoint(request *DeleteClusterEndpointRequest) (response *DeleteClusterEndpointResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterEndpointRequest()
-    }
-    
-    response = NewDeleteClusterEndpointResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterEndpointWithContext(context.Background(), request)
 }
 
 // DeleteClusterEndpoint
@@ -1317,6 +1296,11 @@ func (c *Client) DeleteClusterEndpointWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteClusterEndpointRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterEndpoint require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterEndpointResponse()
@@ -1365,13 +1349,7 @@ func NewDeleteClusterEndpointVipResponse() (response *DeleteClusterEndpointVipRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteClusterEndpointVip(request *DeleteClusterEndpointVipRequest) (response *DeleteClusterEndpointVipResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterEndpointVipRequest()
-    }
-    
-    response = NewDeleteClusterEndpointVipResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterEndpointVipWithContext(context.Background(), request)
 }
 
 // DeleteClusterEndpointVip
@@ -1401,6 +1379,11 @@ func (c *Client) DeleteClusterEndpointVipWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteClusterEndpointVipRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterEndpointVip require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterEndpointVipResponse()
@@ -1441,13 +1424,7 @@ func NewDeleteClusterInstancesResponse() (response *DeleteClusterInstancesRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) DeleteClusterInstances(request *DeleteClusterInstancesRequest) (response *DeleteClusterInstancesResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterInstancesRequest()
-    }
-    
-    response = NewDeleteClusterInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterInstancesWithContext(context.Background(), request)
 }
 
 // DeleteClusterInstances
@@ -1469,6 +1446,11 @@ func (c *Client) DeleteClusterInstancesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteClusterInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterInstancesResponse()
@@ -1501,13 +1483,7 @@ func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (response *DeleteClusterNodePoolResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterNodePoolRequest()
-    }
-    
-    response = NewDeleteClusterNodePoolResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterNodePoolWithContext(context.Background(), request)
 }
 
 // DeleteClusterNodePool
@@ -1521,6 +1497,11 @@ func (c *Client) DeleteClusterNodePoolWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDeleteClusterNodePoolRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterNodePool require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterNodePoolResponse()
@@ -1556,13 +1537,7 @@ func NewDeleteClusterRouteResponse() (response *DeleteClusterRouteResponse) {
 //  INTERNALERROR_VPCCOMMON = "InternalError.VpcCommon"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteClusterRoute(request *DeleteClusterRouteRequest) (response *DeleteClusterRouteResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterRouteRequest()
-    }
-    
-    response = NewDeleteClusterRouteResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterRouteWithContext(context.Background(), request)
 }
 
 // DeleteClusterRoute
@@ -1579,6 +1554,11 @@ func (c *Client) DeleteClusterRouteWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteClusterRouteRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterRoute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterRouteResponse()
@@ -1614,13 +1594,7 @@ func NewDeleteClusterRouteTableResponse() (response *DeleteClusterRouteTableResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ROUTETABLENOTEMPTY = "InvalidParameter.RouteTableNotEmpty"
 func (c *Client) DeleteClusterRouteTable(request *DeleteClusterRouteTableRequest) (response *DeleteClusterRouteTableResponse, err error) {
-    if request == nil {
-        request = NewDeleteClusterRouteTableRequest()
-    }
-    
-    response = NewDeleteClusterRouteTableResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClusterRouteTableWithContext(context.Background(), request)
 }
 
 // DeleteClusterRouteTable
@@ -1637,6 +1611,11 @@ func (c *Client) DeleteClusterRouteTableWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteClusterRouteTableRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterRouteTable require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClusterRouteTableResponse()
@@ -1670,13 +1649,7 @@ func NewDeletePrometheusAlertRuleResponse() (response *DeletePrometheusAlertRule
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DeletePrometheusAlertRule(request *DeletePrometheusAlertRuleRequest) (response *DeletePrometheusAlertRuleResponse, err error) {
-    if request == nil {
-        request = NewDeletePrometheusAlertRuleRequest()
-    }
-    
-    response = NewDeletePrometheusAlertRuleResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePrometheusAlertRuleWithContext(context.Background(), request)
 }
 
 // DeletePrometheusAlertRule
@@ -1691,6 +1664,11 @@ func (c *Client) DeletePrometheusAlertRuleWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeletePrometheusAlertRuleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusAlertRule require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePrometheusAlertRuleResponse()
@@ -1726,13 +1704,7 @@ func NewDescribeAvailableClusterVersionResponse() (response *DescribeAvailableCl
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) DescribeAvailableClusterVersion(request *DescribeAvailableClusterVersionRequest) (response *DescribeAvailableClusterVersionResponse, err error) {
-    if request == nil {
-        request = NewDescribeAvailableClusterVersionRequest()
-    }
-    
-    response = NewDescribeAvailableClusterVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAvailableClusterVersionWithContext(context.Background(), request)
 }
 
 // DescribeAvailableClusterVersion
@@ -1749,6 +1721,11 @@ func (c *Client) DescribeAvailableClusterVersionWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeAvailableClusterVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAvailableClusterVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAvailableClusterVersionResponse()
@@ -1789,13 +1766,7 @@ func NewDescribeClusterAsGroupOptionResponse() (response *DescribeClusterAsGroup
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterAsGroupOption(request *DescribeClusterAsGroupOptionRequest) (response *DescribeClusterAsGroupOptionResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterAsGroupOptionRequest()
-    }
-    
-    response = NewDescribeClusterAsGroupOptionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterAsGroupOptionWithContext(context.Background(), request)
 }
 
 // DescribeClusterAsGroupOption
@@ -1817,6 +1788,11 @@ func (c *Client) DescribeClusterAsGroupOptionWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeClusterAsGroupOptionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterAsGroupOption require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterAsGroupOptionResponse()
@@ -1859,13 +1835,7 @@ func NewDescribeClusterAsGroupsResponse() (response *DescribeClusterAsGroupsResp
 //  INTERNALERROR_VPCPEERNOTFOUND = "InternalError.VpcPeerNotFound"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 func (c *Client) DescribeClusterAsGroups(request *DescribeClusterAsGroupsRequest) (response *DescribeClusterAsGroupsResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterAsGroupsRequest()
-    }
-    
-    response = NewDescribeClusterAsGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterAsGroupsWithContext(context.Background(), request)
 }
 
 // DescribeClusterAsGroups
@@ -1889,6 +1859,11 @@ func (c *Client) DescribeClusterAsGroupsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeClusterAsGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterAsGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterAsGroupsResponse()
@@ -1922,13 +1897,7 @@ func NewDescribeClusterAuthenticationOptionsResponse() (response *DescribeCluste
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) DescribeClusterAuthenticationOptions(request *DescribeClusterAuthenticationOptionsRequest) (response *DescribeClusterAuthenticationOptionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterAuthenticationOptionsRequest()
-    }
-    
-    response = NewDescribeClusterAuthenticationOptionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterAuthenticationOptionsWithContext(context.Background(), request)
 }
 
 // DescribeClusterAuthenticationOptions
@@ -1943,6 +1912,11 @@ func (c *Client) DescribeClusterAuthenticationOptionsWithContext(ctx context.Con
     if request == nil {
         request = NewDescribeClusterAuthenticationOptionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterAuthenticationOptions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterAuthenticationOptionsResponse()
@@ -1980,13 +1954,7 @@ func NewDescribeClusterCommonNamesResponse() (response *DescribeClusterCommonNam
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 //  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
 func (c *Client) DescribeClusterCommonNames(request *DescribeClusterCommonNamesRequest) (response *DescribeClusterCommonNamesResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterCommonNamesRequest()
-    }
-    
-    response = NewDescribeClusterCommonNamesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterCommonNamesWithContext(context.Background(), request)
 }
 
 // DescribeClusterCommonNames
@@ -2005,6 +1973,11 @@ func (c *Client) DescribeClusterCommonNamesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeClusterCommonNamesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterCommonNames require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterCommonNamesResponse()
@@ -2056,13 +2029,7 @@ func NewDescribeClusterEndpointStatusResponse() (response *DescribeClusterEndpoi
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterEndpointStatus(request *DescribeClusterEndpointStatusRequest) (response *DescribeClusterEndpointStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterEndpointStatusRequest()
-    }
-    
-    response = NewDescribeClusterEndpointStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterEndpointStatusWithContext(context.Background(), request)
 }
 
 // DescribeClusterEndpointStatus
@@ -2095,6 +2062,11 @@ func (c *Client) DescribeClusterEndpointStatusWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeClusterEndpointStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterEndpointStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterEndpointStatusResponse()
@@ -2146,13 +2118,7 @@ func NewDescribeClusterEndpointVipStatusResponse() (response *DescribeClusterEnd
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterEndpointVipStatus(request *DescribeClusterEndpointVipStatusRequest) (response *DescribeClusterEndpointVipStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterEndpointVipStatusRequest()
-    }
-    
-    response = NewDescribeClusterEndpointVipStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterEndpointVipStatusWithContext(context.Background(), request)
 }
 
 // DescribeClusterEndpointVipStatus
@@ -2185,6 +2151,11 @@ func (c *Client) DescribeClusterEndpointVipStatusWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeClusterEndpointVipStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterEndpointVipStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterEndpointVipStatusResponse()
@@ -2225,13 +2196,7 @@ func NewDescribeClusterInstancesResponse() (response *DescribeClusterInstancesRe
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) DescribeClusterInstances(request *DescribeClusterInstancesRequest) (response *DescribeClusterInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterInstancesRequest()
-    }
-    
-    response = NewDescribeClusterInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterInstancesWithContext(context.Background(), request)
 }
 
 // DescribeClusterInstances
@@ -2253,6 +2218,11 @@ func (c *Client) DescribeClusterInstancesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeClusterInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterInstancesResponse()
@@ -2297,13 +2267,7 @@ func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfig
 //  RESOURCENOTFOUND_KUBERNETESRESOURCENOTFOUND = "ResourceNotFound.KubernetesResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigRequest) (response *DescribeClusterKubeconfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterKubeconfigRequest()
-    }
-    
-    response = NewDescribeClusterKubeconfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterKubeconfigWithContext(context.Background(), request)
 }
 
 // DescribeClusterKubeconfig
@@ -2329,6 +2293,11 @@ func (c *Client) DescribeClusterKubeconfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeClusterKubeconfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterKubeconfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterKubeconfigResponse()
@@ -2363,13 +2332,7 @@ func NewDescribeClusterNodePoolDetailResponse() (response *DescribeClusterNodePo
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) DescribeClusterNodePoolDetail(request *DescribeClusterNodePoolDetailRequest) (response *DescribeClusterNodePoolDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterNodePoolDetailRequest()
-    }
-    
-    response = NewDescribeClusterNodePoolDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterNodePoolDetailWithContext(context.Background(), request)
 }
 
 // DescribeClusterNodePoolDetail
@@ -2385,6 +2348,11 @@ func (c *Client) DescribeClusterNodePoolDetailWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeClusterNodePoolDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterNodePoolDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterNodePoolDetailResponse()
@@ -2419,13 +2387,7 @@ func NewDescribeClusterNodePoolsResponse() (response *DescribeClusterNodePoolsRe
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) DescribeClusterNodePools(request *DescribeClusterNodePoolsRequest) (response *DescribeClusterNodePoolsResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterNodePoolsRequest()
-    }
-    
-    response = NewDescribeClusterNodePoolsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterNodePoolsWithContext(context.Background(), request)
 }
 
 // DescribeClusterNodePools
@@ -2441,6 +2403,11 @@ func (c *Client) DescribeClusterNodePoolsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeClusterNodePoolsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterNodePools require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterNodePoolsResponse()
@@ -2471,13 +2438,7 @@ func NewDescribeClusterRouteTablesResponse() (response *DescribeClusterRouteTabl
 // error code that may be returned:
 //  INTERNALERROR_DB = "InternalError.Db"
 func (c *Client) DescribeClusterRouteTables(request *DescribeClusterRouteTablesRequest) (response *DescribeClusterRouteTablesResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterRouteTablesRequest()
-    }
-    
-    response = NewDescribeClusterRouteTablesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterRouteTablesWithContext(context.Background(), request)
 }
 
 // DescribeClusterRouteTables
@@ -2489,6 +2450,11 @@ func (c *Client) DescribeClusterRouteTablesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeClusterRouteTablesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterRouteTables require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterRouteTablesResponse()
@@ -2521,13 +2487,7 @@ func NewDescribeClusterRoutesResponse() (response *DescribeClusterRoutesResponse
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeClusterRoutes(request *DescribeClusterRoutesRequest) (response *DescribeClusterRoutesResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterRoutesRequest()
-    }
-    
-    response = NewDescribeClusterRoutesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterRoutesWithContext(context.Background(), request)
 }
 
 // DescribeClusterRoutes
@@ -2541,6 +2501,11 @@ func (c *Client) DescribeClusterRoutesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeClusterRoutesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterRoutes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterRoutesResponse()
@@ -2595,13 +2560,7 @@ func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest) (response *DescribeClusterSecurityResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterSecurityRequest()
-    }
-    
-    response = NewDescribeClusterSecurityResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterSecurityWithContext(context.Background(), request)
 }
 
 // DescribeClusterSecurity
@@ -2637,6 +2596,11 @@ func (c *Client) DescribeClusterSecurityWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeClusterSecurityRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterSecurity require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterSecurityResponse()
@@ -2678,13 +2642,7 @@ func NewDescribeClusterStatusResponse() (response *DescribeClusterStatusResponse
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeClusterStatus(request *DescribeClusterStatusRequest) (response *DescribeClusterStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeClusterStatusRequest()
-    }
-    
-    response = NewDescribeClusterStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClusterStatusWithContext(context.Background(), request)
 }
 
 // DescribeClusterStatus
@@ -2707,6 +2665,11 @@ func (c *Client) DescribeClusterStatusWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeClusterStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClusterStatusResponse()
@@ -2750,13 +2713,7 @@ func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *DescribeClustersResponse, err error) {
-    if request == nil {
-        request = NewDescribeClustersRequest()
-    }
-    
-    response = NewDescribeClustersResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeClustersWithContext(context.Background(), request)
 }
 
 // DescribeClusters
@@ -2781,6 +2738,11 @@ func (c *Client) DescribeClustersWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeClustersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusters require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeClustersResponse()
@@ -2812,13 +2774,7 @@ func NewDescribeEnableVpcCniProgressResponse() (response *DescribeEnableVpcCniPr
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 func (c *Client) DescribeEnableVpcCniProgress(request *DescribeEnableVpcCniProgressRequest) (response *DescribeEnableVpcCniProgressResponse, err error) {
-    if request == nil {
-        request = NewDescribeEnableVpcCniProgressRequest()
-    }
-    
-    response = NewDescribeEnableVpcCniProgressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEnableVpcCniProgressWithContext(context.Background(), request)
 }
 
 // DescribeEnableVpcCniProgress
@@ -2831,6 +2787,11 @@ func (c *Client) DescribeEnableVpcCniProgressWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeEnableVpcCniProgressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEnableVpcCniProgress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEnableVpcCniProgressResponse()
@@ -2889,13 +2850,7 @@ func NewDescribeExistedInstancesResponse() (response *DescribeExistedInstancesRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeExistedInstances(request *DescribeExistedInstancesRequest) (response *DescribeExistedInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeExistedInstancesRequest()
-    }
-    
-    response = NewDescribeExistedInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeExistedInstancesWithContext(context.Background(), request)
 }
 
 // DescribeExistedInstances
@@ -2935,6 +2890,11 @@ func (c *Client) DescribeExistedInstancesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeExistedInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExistedInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeExistedInstancesResponse()
@@ -2982,13 +2942,7 @@ func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *DescribeImagesResponse, err error) {
-    if request == nil {
-        request = NewDescribeImagesRequest()
-    }
-    
-    response = NewDescribeImagesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeImagesWithContext(context.Background(), request)
 }
 
 // DescribeImages
@@ -3017,6 +2971,11 @@ func (c *Client) DescribeImagesWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeImagesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImages require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeImagesResponse()
@@ -3053,13 +3012,7 @@ func NewDescribePrometheusInstanceResponse() (response *DescribePrometheusInstan
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusInstance(request *DescribePrometheusInstanceRequest) (response *DescribePrometheusInstanceResponse, err error) {
-    if request == nil {
-        request = NewDescribePrometheusInstanceRequest()
-    }
-    
-    response = NewDescribePrometheusInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrometheusInstanceWithContext(context.Background(), request)
 }
 
 // DescribePrometheusInstance
@@ -3077,6 +3030,11 @@ func (c *Client) DescribePrometheusInstanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribePrometheusInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrometheusInstanceResponse()
@@ -3122,13 +3080,7 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeRegionsRequest()
-    }
-    
-    response = NewDescribeRegionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRegionsWithContext(context.Background(), request)
 }
 
 // DescribeRegions
@@ -3155,6 +3107,11 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeRegionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRegions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRegionsResponse()
@@ -3191,13 +3148,7 @@ func NewDescribeRouteTableConflictsResponse() (response *DescribeRouteTableConfl
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflictsRequest) (response *DescribeRouteTableConflictsResponse, err error) {
-    if request == nil {
-        request = NewDescribeRouteTableConflictsRequest()
-    }
-    
-    response = NewDescribeRouteTableConflictsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRouteTableConflictsWithContext(context.Background(), request)
 }
 
 // DescribeRouteTableConflicts
@@ -3215,6 +3166,11 @@ func (c *Client) DescribeRouteTableConflictsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeRouteTableConflictsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRouteTableConflicts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRouteTableConflictsResponse()
@@ -3262,13 +3218,7 @@ func NewDescribeVersionsResponse() (response *DescribeVersionsResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeVersions(request *DescribeVersionsRequest) (response *DescribeVersionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeVersionsRequest()
-    }
-    
-    response = NewDescribeVersionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVersionsWithContext(context.Background(), request)
 }
 
 // DescribeVersions
@@ -3297,6 +3247,11 @@ func (c *Client) DescribeVersionsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeVersionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVersions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVersionsResponse()
@@ -3339,13 +3294,7 @@ func NewDescribeVpcCniPodLimitsResponse() (response *DescribeVpcCniPodLimitsResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeVpcCniPodLimits(request *DescribeVpcCniPodLimitsRequest) (response *DescribeVpcCniPodLimitsResponse, err error) {
-    if request == nil {
-        request = NewDescribeVpcCniPodLimitsRequest()
-    }
-    
-    response = NewDescribeVpcCniPodLimitsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVpcCniPodLimitsWithContext(context.Background(), request)
 }
 
 // DescribeVpcCniPodLimits
@@ -3369,6 +3318,11 @@ func (c *Client) DescribeVpcCniPodLimitsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeVpcCniPodLimitsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVpcCniPodLimits require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVpcCniPodLimitsResponse()
@@ -3400,13 +3354,7 @@ func NewDisableClusterDeletionProtectionResponse() (response *DisableClusterDele
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) DisableClusterDeletionProtection(request *DisableClusterDeletionProtectionRequest) (response *DisableClusterDeletionProtectionResponse, err error) {
-    if request == nil {
-        request = NewDisableClusterDeletionProtectionRequest()
-    }
-    
-    response = NewDisableClusterDeletionProtectionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DisableClusterDeletionProtectionWithContext(context.Background(), request)
 }
 
 // DisableClusterDeletionProtection
@@ -3419,6 +3367,11 @@ func (c *Client) DisableClusterDeletionProtectionWithContext(ctx context.Context
     if request == nil {
         request = NewDisableClusterDeletionProtectionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableClusterDeletionProtection require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDisableClusterDeletionProtectionResponse()
@@ -3450,13 +3403,7 @@ func NewEnableClusterDeletionProtectionResponse() (response *EnableClusterDeleti
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) EnableClusterDeletionProtection(request *EnableClusterDeletionProtectionRequest) (response *EnableClusterDeletionProtectionResponse, err error) {
-    if request == nil {
-        request = NewEnableClusterDeletionProtectionRequest()
-    }
-    
-    response = NewEnableClusterDeletionProtectionResponse()
-    err = c.Send(request, response)
-    return
+    return c.EnableClusterDeletionProtectionWithContext(context.Background(), request)
 }
 
 // EnableClusterDeletionProtection
@@ -3469,6 +3416,11 @@ func (c *Client) EnableClusterDeletionProtectionWithContext(ctx context.Context,
     if request == nil {
         request = NewEnableClusterDeletionProtectionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableClusterDeletionProtection require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEnableClusterDeletionProtectionResponse()
@@ -3501,13 +3453,7 @@ func NewEnableVpcCniNetworkTypeResponse() (response *EnableVpcCniNetworkTypeResp
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) EnableVpcCniNetworkType(request *EnableVpcCniNetworkTypeRequest) (response *EnableVpcCniNetworkTypeResponse, err error) {
-    if request == nil {
-        request = NewEnableVpcCniNetworkTypeRequest()
-    }
-    
-    response = NewEnableVpcCniNetworkTypeResponse()
-    err = c.Send(request, response)
-    return
+    return c.EnableVpcCniNetworkTypeWithContext(context.Background(), request)
 }
 
 // EnableVpcCniNetworkType
@@ -3521,6 +3467,11 @@ func (c *Client) EnableVpcCniNetworkTypeWithContext(ctx context.Context, request
     if request == nil {
         request = NewEnableVpcCniNetworkTypeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableVpcCniNetworkType require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEnableVpcCniNetworkTypeResponse()
@@ -3552,13 +3503,7 @@ func NewGetUpgradeInstanceProgressResponse() (response *GetUpgradeInstanceProgre
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressRequest) (response *GetUpgradeInstanceProgressResponse, err error) {
-    if request == nil {
-        request = NewGetUpgradeInstanceProgressRequest()
-    }
-    
-    response = NewGetUpgradeInstanceProgressResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetUpgradeInstanceProgressWithContext(context.Background(), request)
 }
 
 // GetUpgradeInstanceProgress
@@ -3571,6 +3516,11 @@ func (c *Client) GetUpgradeInstanceProgressWithContext(ctx context.Context, requ
     if request == nil {
         request = NewGetUpgradeInstanceProgressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetUpgradeInstanceProgress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetUpgradeInstanceProgressResponse()
@@ -3621,13 +3571,7 @@ func NewModifyClusterAsGroupAttributeResponse() (response *ModifyClusterAsGroupA
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyClusterAsGroupAttribute(request *ModifyClusterAsGroupAttributeRequest) (response *ModifyClusterAsGroupAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterAsGroupAttributeRequest()
-    }
-    
-    response = NewModifyClusterAsGroupAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterAsGroupAttributeWithContext(context.Background(), request)
 }
 
 // ModifyClusterAsGroupAttribute
@@ -3659,6 +3603,11 @@ func (c *Client) ModifyClusterAsGroupAttributeWithContext(ctx context.Context, r
     if request == nil {
         request = NewModifyClusterAsGroupAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterAsGroupAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterAsGroupAttributeResponse()
@@ -3705,13 +3654,7 @@ func NewModifyClusterAsGroupOptionAttributeResponse() (response *ModifyClusterAs
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyClusterAsGroupOptionAttribute(request *ModifyClusterAsGroupOptionAttributeRequest) (response *ModifyClusterAsGroupOptionAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterAsGroupOptionAttributeRequest()
-    }
-    
-    response = NewModifyClusterAsGroupOptionAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterAsGroupOptionAttributeWithContext(context.Background(), request)
 }
 
 // ModifyClusterAsGroupOptionAttribute
@@ -3739,6 +3682,11 @@ func (c *Client) ModifyClusterAsGroupOptionAttributeWithContext(ctx context.Cont
     if request == nil {
         request = NewModifyClusterAsGroupOptionAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterAsGroupOptionAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterAsGroupOptionAttributeResponse()
@@ -3779,13 +3727,7 @@ func NewModifyClusterAttributeResponse() (response *ModifyClusterAttributeRespon
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) ModifyClusterAttribute(request *ModifyClusterAttributeRequest) (response *ModifyClusterAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterAttributeRequest()
-    }
-    
-    response = NewModifyClusterAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterAttributeWithContext(context.Background(), request)
 }
 
 // ModifyClusterAttribute
@@ -3807,6 +3749,11 @@ func (c *Client) ModifyClusterAttributeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyClusterAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterAttributeResponse()
@@ -3840,13 +3787,7 @@ func NewModifyClusterAuthenticationOptionsResponse() (response *ModifyClusterAut
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) ModifyClusterAuthenticationOptions(request *ModifyClusterAuthenticationOptionsRequest) (response *ModifyClusterAuthenticationOptionsResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterAuthenticationOptionsRequest()
-    }
-    
-    response = NewModifyClusterAuthenticationOptionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterAuthenticationOptionsWithContext(context.Background(), request)
 }
 
 // ModifyClusterAuthenticationOptions
@@ -3861,6 +3802,11 @@ func (c *Client) ModifyClusterAuthenticationOptionsWithContext(ctx context.Conte
     if request == nil {
         request = NewModifyClusterAuthenticationOptionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterAuthenticationOptions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterAuthenticationOptionsResponse()
@@ -3909,13 +3855,7 @@ func NewModifyClusterEndpointSPResponse() (response *ModifyClusterEndpointSPResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest) (response *ModifyClusterEndpointSPResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterEndpointSPRequest()
-    }
-    
-    response = NewModifyClusterEndpointSPResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterEndpointSPWithContext(context.Background(), request)
 }
 
 // ModifyClusterEndpointSP
@@ -3945,6 +3885,11 @@ func (c *Client) ModifyClusterEndpointSPWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyClusterEndpointSPRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterEndpointSP require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterEndpointSPResponse()
@@ -3979,13 +3924,7 @@ func NewModifyClusterNodePoolResponse() (response *ModifyClusterNodePoolResponse
 //  OPERATIONDENIED = "OperationDenied"
 //  UNSUPPORTEDOPERATION_CAENABLEFAILED = "UnsupportedOperation.CaEnableFailed"
 func (c *Client) ModifyClusterNodePool(request *ModifyClusterNodePoolRequest) (response *ModifyClusterNodePoolResponse, err error) {
-    if request == nil {
-        request = NewModifyClusterNodePoolRequest()
-    }
-    
-    response = NewModifyClusterNodePoolResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClusterNodePoolWithContext(context.Background(), request)
 }
 
 // ModifyClusterNodePool
@@ -4001,6 +3940,11 @@ func (c *Client) ModifyClusterNodePoolWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyClusterNodePoolRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterNodePool require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClusterNodePoolResponse()
@@ -4040,13 +3984,7 @@ func NewModifyNodePoolInstanceTypesResponse() (response *ModifyNodePoolInstanceT
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) ModifyNodePoolInstanceTypes(request *ModifyNodePoolInstanceTypesRequest) (response *ModifyNodePoolInstanceTypesResponse, err error) {
-    if request == nil {
-        request = NewModifyNodePoolInstanceTypesRequest()
-    }
-    
-    response = NewModifyNodePoolInstanceTypesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyNodePoolInstanceTypesWithContext(context.Background(), request)
 }
 
 // ModifyNodePoolInstanceTypes
@@ -4067,6 +4005,11 @@ func (c *Client) ModifyNodePoolInstanceTypesWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyNodePoolInstanceTypesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNodePoolInstanceTypes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyNodePoolInstanceTypesResponse()
@@ -4101,13 +4044,7 @@ func NewModifyPrometheusAlertRuleResponse() (response *ModifyPrometheusAlertRule
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) ModifyPrometheusAlertRule(request *ModifyPrometheusAlertRuleRequest) (response *ModifyPrometheusAlertRuleResponse, err error) {
-    if request == nil {
-        request = NewModifyPrometheusAlertRuleRequest()
-    }
-    
-    response = NewModifyPrometheusAlertRuleResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPrometheusAlertRuleWithContext(context.Background(), request)
 }
 
 // ModifyPrometheusAlertRule
@@ -4123,6 +4060,11 @@ func (c *Client) ModifyPrometheusAlertRuleWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyPrometheusAlertRuleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrometheusAlertRule require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPrometheusAlertRuleResponse()
@@ -4154,13 +4096,7 @@ func NewRemoveNodeFromNodePoolResponse() (response *RemoveNodeFromNodePoolRespon
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) (response *RemoveNodeFromNodePoolResponse, err error) {
-    if request == nil {
-        request = NewRemoveNodeFromNodePoolRequest()
-    }
-    
-    response = NewRemoveNodeFromNodePoolResponse()
-    err = c.Send(request, response)
-    return
+    return c.RemoveNodeFromNodePoolWithContext(context.Background(), request)
 }
 
 // RemoveNodeFromNodePool
@@ -4173,6 +4109,11 @@ func (c *Client) RemoveNodeFromNodePoolWithContext(ctx context.Context, request 
     if request == nil {
         request = NewRemoveNodeFromNodePoolRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveNodeFromNodePool require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRemoveNodeFromNodePoolResponse()
@@ -4212,13 +4153,7 @@ func NewSetNodePoolNodeProtectionResponse() (response *SetNodePoolNodeProtection
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionRequest) (response *SetNodePoolNodeProtectionResponse, err error) {
-    if request == nil {
-        request = NewSetNodePoolNodeProtectionRequest()
-    }
-    
-    response = NewSetNodePoolNodeProtectionResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetNodePoolNodeProtectionWithContext(context.Background(), request)
 }
 
 // SetNodePoolNodeProtection
@@ -4239,6 +4174,11 @@ func (c *Client) SetNodePoolNodeProtectionWithContext(ctx context.Context, reque
     if request == nil {
         request = NewSetNodePoolNodeProtectionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetNodePoolNodeProtection require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetNodePoolNodeProtectionResponse()
@@ -4275,13 +4215,7 @@ func NewUpdateClusterVersionResponse() (response *UpdateClusterVersionResponse) 
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpdateClusterVersion(request *UpdateClusterVersionRequest) (response *UpdateClusterVersionResponse, err error) {
-    if request == nil {
-        request = NewUpdateClusterVersionRequest()
-    }
-    
-    response = NewUpdateClusterVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateClusterVersionWithContext(context.Background(), request)
 }
 
 // UpdateClusterVersion
@@ -4299,6 +4233,11 @@ func (c *Client) UpdateClusterVersionWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpdateClusterVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateClusterVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateClusterVersionResponse()
@@ -4336,13 +4275,7 @@ func NewUpgradeClusterInstancesResponse() (response *UpgradeClusterInstancesResp
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest) (response *UpgradeClusterInstancesResponse, err error) {
-    if request == nil {
-        request = NewUpgradeClusterInstancesRequest()
-    }
-    
-    response = NewUpgradeClusterInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpgradeClusterInstancesWithContext(context.Background(), request)
 }
 
 // UpgradeClusterInstances
@@ -4361,6 +4294,11 @@ func (c *Client) UpgradeClusterInstancesWithContext(ctx context.Context, request
     if request == nil {
         request = NewUpgradeClusterInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeClusterInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpgradeClusterInstancesResponse()

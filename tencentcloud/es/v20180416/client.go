@@ -16,6 +16,7 @@ package v20180416
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,13 +78,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 //  RESOURCEINSUFFICIENT_HIDDENZONE = "ResourceInsufficient.HiddenZone"
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
 func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
-    if request == nil {
-        request = NewCreateInstanceRequest()
-    }
-    
-    response = NewCreateInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateInstanceWithContext(context.Background(), request)
 }
 
 // CreateInstance
@@ -105,6 +100,11 @@ func (c *Client) CreateInstanceWithContext(ctx context.Context, request *CreateI
     if request == nil {
         request = NewCreateInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateInstanceResponse()
@@ -138,13 +138,7 @@ func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *DeleteInstanceResponse, err error) {
-    if request == nil {
-        request = NewDeleteInstanceRequest()
-    }
-    
-    response = NewDeleteInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteInstanceWithContext(context.Background(), request)
 }
 
 // DeleteInstance
@@ -159,6 +153,11 @@ func (c *Client) DeleteInstanceWithContext(ctx context.Context, request *DeleteI
     if request == nil {
         request = NewDeleteInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteInstanceResponse()
@@ -190,13 +189,7 @@ func NewDescribeInstanceLogsResponse() (response *DescribeInstanceLogsResponse) 
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeInstanceLogs(request *DescribeInstanceLogsRequest) (response *DescribeInstanceLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstanceLogsRequest()
-    }
-    
-    response = NewDescribeInstanceLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstanceLogsWithContext(context.Background(), request)
 }
 
 // DescribeInstanceLogs
@@ -209,6 +202,11 @@ func (c *Client) DescribeInstanceLogsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeInstanceLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstanceLogsResponse()
@@ -241,13 +239,7 @@ func NewDescribeInstanceOperationsResponse() (response *DescribeInstanceOperatio
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DescribeInstanceOperations(request *DescribeInstanceOperationsRequest) (response *DescribeInstanceOperationsResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstanceOperationsRequest()
-    }
-    
-    response = NewDescribeInstanceOperationsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstanceOperationsWithContext(context.Background(), request)
 }
 
 // DescribeInstanceOperations
@@ -261,6 +253,11 @@ func (c *Client) DescribeInstanceOperationsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeInstanceOperationsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceOperations require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstanceOperationsResponse()
@@ -293,13 +290,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstancesRequest()
-    }
-    
-    response = NewDescribeInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstancesWithContext(context.Background(), request)
 }
 
 // DescribeInstances
@@ -313,6 +304,11 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstancesResponse()
@@ -345,13 +341,7 @@ func NewDescribeViewsResponse() (response *DescribeViewsResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DescribeViews(request *DescribeViewsRequest) (response *DescribeViewsResponse, err error) {
-    if request == nil {
-        request = NewDescribeViewsRequest()
-    }
-    
-    response = NewDescribeViewsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeViewsWithContext(context.Background(), request)
 }
 
 // DescribeViews
@@ -365,6 +355,11 @@ func (c *Client) DescribeViewsWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeViewsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeViews require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeViewsResponse()
@@ -397,13 +392,7 @@ func NewGetRequestTargetNodeTypesResponse() (response *GetRequestTargetNodeTypes
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetRequestTargetNodeTypes(request *GetRequestTargetNodeTypesRequest) (response *GetRequestTargetNodeTypesResponse, err error) {
-    if request == nil {
-        request = NewGetRequestTargetNodeTypesRequest()
-    }
-    
-    response = NewGetRequestTargetNodeTypesResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetRequestTargetNodeTypesWithContext(context.Background(), request)
 }
 
 // GetRequestTargetNodeTypes
@@ -417,6 +406,11 @@ func (c *Client) GetRequestTargetNodeTypesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewGetRequestTargetNodeTypesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRequestTargetNodeTypes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetRequestTargetNodeTypesResponse()
@@ -449,13 +443,7 @@ func NewRestartInstanceResponse() (response *RestartInstanceResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) RestartInstance(request *RestartInstanceRequest) (response *RestartInstanceResponse, err error) {
-    if request == nil {
-        request = NewRestartInstanceRequest()
-    }
-    
-    response = NewRestartInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartInstanceWithContext(context.Background(), request)
 }
 
 // RestartInstance
@@ -469,6 +457,11 @@ func (c *Client) RestartInstanceWithContext(ctx context.Context, request *Restar
     if request == nil {
         request = NewRestartInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartInstanceResponse()
@@ -501,13 +494,7 @@ func NewRestartKibanaResponse() (response *RestartKibanaResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) RestartKibana(request *RestartKibanaRequest) (response *RestartKibanaResponse, err error) {
-    if request == nil {
-        request = NewRestartKibanaRequest()
-    }
-    
-    response = NewRestartKibanaResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartKibanaWithContext(context.Background(), request)
 }
 
 // RestartKibana
@@ -521,6 +508,11 @@ func (c *Client) RestartKibanaWithContext(ctx context.Context, request *RestartK
     if request == nil {
         request = NewRestartKibanaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartKibana require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartKibanaResponse()
@@ -555,13 +547,7 @@ func NewRestartNodesResponse() (response *RestartNodesResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) RestartNodes(request *RestartNodesRequest) (response *RestartNodesResponse, err error) {
-    if request == nil {
-        request = NewRestartNodesRequest()
-    }
-    
-    response = NewRestartNodesResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartNodesWithContext(context.Background(), request)
 }
 
 // RestartNodes
@@ -577,6 +563,11 @@ func (c *Client) RestartNodesWithContext(ctx context.Context, request *RestartNo
     if request == nil {
         request = NewRestartNodesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartNodes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartNodesResponse()
@@ -633,13 +624,7 @@ func NewUpdateInstanceResponse() (response *UpdateInstanceResponse) {
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdateInstance(request *UpdateInstanceRequest) (response *UpdateInstanceResponse, err error) {
-    if request == nil {
-        request = NewUpdateInstanceRequest()
-    }
-    
-    response = NewUpdateInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateInstanceWithContext(context.Background(), request)
 }
 
 // UpdateInstance
@@ -677,6 +662,11 @@ func (c *Client) UpdateInstanceWithContext(ctx context.Context, request *UpdateI
     if request == nil {
         request = NewUpdateInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateInstanceResponse()
@@ -716,13 +706,7 @@ func NewUpdatePluginsResponse() (response *UpdatePluginsResponse) {
 //  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdatePlugins(request *UpdatePluginsRequest) (response *UpdatePluginsResponse, err error) {
-    if request == nil {
-        request = NewUpdatePluginsRequest()
-    }
-    
-    response = NewUpdatePluginsResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdatePluginsWithContext(context.Background(), request)
 }
 
 // UpdatePlugins
@@ -743,6 +727,11 @@ func (c *Client) UpdatePluginsWithContext(ctx context.Context, request *UpdatePl
     if request == nil {
         request = NewUpdatePluginsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePlugins require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdatePluginsResponse()
@@ -778,13 +767,7 @@ func NewUpdateRequestTargetNodeTypesResponse() (response *UpdateRequestTargetNod
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdateRequestTargetNodeTypes(request *UpdateRequestTargetNodeTypesRequest) (response *UpdateRequestTargetNodeTypesResponse, err error) {
-    if request == nil {
-        request = NewUpdateRequestTargetNodeTypesRequest()
-    }
-    
-    response = NewUpdateRequestTargetNodeTypesResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateRequestTargetNodeTypesWithContext(context.Background(), request)
 }
 
 // UpdateRequestTargetNodeTypes
@@ -801,6 +784,11 @@ func (c *Client) UpdateRequestTargetNodeTypesWithContext(ctx context.Context, re
     if request == nil {
         request = NewUpdateRequestTargetNodeTypesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateRequestTargetNodeTypes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateRequestTargetNodeTypesResponse()
@@ -839,13 +827,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
-    if request == nil {
-        request = NewUpgradeInstanceRequest()
-    }
-    
-    response = NewUpgradeInstanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpgradeInstanceWithContext(context.Background(), request)
 }
 
 // UpgradeInstance
@@ -865,6 +847,11 @@ func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *Upgrad
     if request == nil {
         request = NewUpgradeInstanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeInstance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpgradeInstanceResponse()
@@ -901,13 +888,7 @@ func NewUpgradeLicenseResponse() (response *UpgradeLicenseResponse) {
 //  RESOURCEINSUFFICIENT_BALANCE = "ResourceInsufficient.Balance"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpgradeLicense(request *UpgradeLicenseRequest) (response *UpgradeLicenseResponse, err error) {
-    if request == nil {
-        request = NewUpgradeLicenseRequest()
-    }
-    
-    response = NewUpgradeLicenseResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpgradeLicenseWithContext(context.Background(), request)
 }
 
 // UpgradeLicense
@@ -925,6 +906,11 @@ func (c *Client) UpgradeLicenseWithContext(ctx context.Context, request *Upgrade
     if request == nil {
         request = NewUpgradeLicenseRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeLicense require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpgradeLicenseResponse()

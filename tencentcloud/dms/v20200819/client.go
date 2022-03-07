@@ -16,6 +16,7 @@ package v20200819
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -82,13 +83,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  RESOURCENOTFOUND_INVALIDREPLYNOTFOUND = "ResourceNotFound.InvalidReplyNotFound"
 //  RESOURCENOTFOUND_INVALIDTASKNAMENOTFOUND = "ResourceNotFound.InvalidTaskNameNotFound"
 func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailResponse, err error) {
-    if request == nil {
-        request = NewSendEmailRequest()
-    }
-    
-    response = NewSendEmailResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendEmailWithContext(context.Background(), request)
 }
 
 // SendEmail
@@ -115,6 +110,11 @@ func (c *Client) SendEmailWithContext(ctx context.Context, request *SendEmailReq
     if request == nil {
         request = NewSendEmailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendEmail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendEmailResponse()
@@ -164,13 +164,7 @@ func NewSendTemplatedEmailResponse() (response *SendTemplatedEmailResponse) {
 //  RESOURCENOTFOUND_INVALIDTASKNAMENOTFOUND = "ResourceNotFound.InvalidTaskNameNotFound"
 //  RESOURCENOTFOUND_INVALIDTEMPLATENOTFOUND = "ResourceNotFound.InvalidTemplateNotFound"
 func (c *Client) SendTemplatedEmail(request *SendTemplatedEmailRequest) (response *SendTemplatedEmailResponse, err error) {
-    if request == nil {
-        request = NewSendTemplatedEmailRequest()
-    }
-    
-    response = NewSendTemplatedEmailResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendTemplatedEmailWithContext(context.Background(), request)
 }
 
 // SendTemplatedEmail
@@ -201,6 +195,11 @@ func (c *Client) SendTemplatedEmailWithContext(ctx context.Context, request *Sen
     if request == nil {
         request = NewSendTemplatedEmailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendTemplatedEmail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendTemplatedEmailResponse()

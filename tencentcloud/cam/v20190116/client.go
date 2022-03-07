@@ -16,6 +16,7 @@ package v20190116
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -73,13 +74,7 @@ func NewAddUserResponse() (response *AddUserResponse) {
 //  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
 //  REQUESTLIMITEXCEEDED_CREATEUSER = "RequestLimitExceeded.CreateUser"
 func (c *Client) AddUser(request *AddUserRequest) (response *AddUserResponse, err error) {
-    if request == nil {
-        request = NewAddUserRequest()
-    }
-    
-    response = NewAddUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddUserWithContext(context.Background(), request)
 }
 
 // AddUser
@@ -97,6 +92,11 @@ func (c *Client) AddUserWithContext(ctx context.Context, request *AddUserRequest
     if request == nil {
         request = NewAddUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddUserResponse()
@@ -132,13 +132,7 @@ func NewAddUserToGroupResponse() (response *AddUserToGroupResponse) {
 //  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) AddUserToGroup(request *AddUserToGroupRequest) (response *AddUserToGroupResponse, err error) {
-    if request == nil {
-        request = NewAddUserToGroupRequest()
-    }
-    
-    response = NewAddUserToGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddUserToGroupWithContext(context.Background(), request)
 }
 
 // AddUserToGroup
@@ -155,6 +149,11 @@ func (c *Client) AddUserToGroupWithContext(ctx context.Context, request *AddUser
     if request == nil {
         request = NewAddUserToGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddUserToGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddUserToGroupResponse()
@@ -194,13 +193,7 @@ func NewAttachGroupPolicyResponse() (response *AttachGroupPolicyResponse) {
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) AttachGroupPolicy(request *AttachGroupPolicyRequest) (response *AttachGroupPolicyResponse, err error) {
-    if request == nil {
-        request = NewAttachGroupPolicyRequest()
-    }
-    
-    response = NewAttachGroupPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.AttachGroupPolicyWithContext(context.Background(), request)
 }
 
 // AttachGroupPolicy
@@ -221,6 +214,11 @@ func (c *Client) AttachGroupPolicyWithContext(ctx context.Context, request *Atta
     if request == nil {
         request = NewAttachGroupPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachGroupPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAttachGroupPolicyResponse()
@@ -257,13 +255,7 @@ func NewAttachRolePolicyResponse() (response *AttachRolePolicyResponse) {
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) AttachRolePolicy(request *AttachRolePolicyRequest) (response *AttachRolePolicyResponse, err error) {
-    if request == nil {
-        request = NewAttachRolePolicyRequest()
-    }
-    
-    response = NewAttachRolePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.AttachRolePolicyWithContext(context.Background(), request)
 }
 
 // AttachRolePolicy
@@ -281,6 +273,11 @@ func (c *Client) AttachRolePolicyWithContext(ctx context.Context, request *Attac
     if request == nil {
         request = NewAttachRolePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachRolePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAttachRolePolicyResponse()
@@ -319,13 +316,7 @@ func NewAttachUserPolicyResponse() (response *AttachUserPolicyResponse) {
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) AttachUserPolicy(request *AttachUserPolicyRequest) (response *AttachUserPolicyResponse, err error) {
-    if request == nil {
-        request = NewAttachUserPolicyRequest()
-    }
-    
-    response = NewAttachUserPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.AttachUserPolicyWithContext(context.Background(), request)
 }
 
 // AttachUserPolicy
@@ -345,6 +336,11 @@ func (c *Client) AttachUserPolicyWithContext(ctx context.Context, request *Attac
     if request == nil {
         request = NewAttachUserPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachUserPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAttachUserPolicyResponse()
@@ -375,13 +371,7 @@ func NewConsumeCustomMFATokenResponse() (response *ConsumeCustomMFATokenResponse
 // error code that may be returned:
 //  INVALIDPARAMETER_MFATOKENERROR = "InvalidParameter.MFATokenError"
 func (c *Client) ConsumeCustomMFAToken(request *ConsumeCustomMFATokenRequest) (response *ConsumeCustomMFATokenResponse, err error) {
-    if request == nil {
-        request = NewConsumeCustomMFATokenRequest()
-    }
-    
-    response = NewConsumeCustomMFATokenResponse()
-    err = c.Send(request, response)
-    return
+    return c.ConsumeCustomMFATokenWithContext(context.Background(), request)
 }
 
 // ConsumeCustomMFAToken
@@ -393,6 +383,11 @@ func (c *Client) ConsumeCustomMFATokenWithContext(ctx context.Context, request *
     if request == nil {
         request = NewConsumeCustomMFATokenRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConsumeCustomMFAToken require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewConsumeCustomMFATokenResponse()
@@ -424,13 +419,7 @@ func NewCreateGroupResponse() (response *CreateGroupResponse) {
 //  INVALIDPARAMETER_GROUPFULL = "InvalidParameter.GroupFull"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
 func (c *Client) CreateGroup(request *CreateGroupRequest) (response *CreateGroupResponse, err error) {
-    if request == nil {
-        request = NewCreateGroupRequest()
-    }
-    
-    response = NewCreateGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateGroupWithContext(context.Background(), request)
 }
 
 // CreateGroup
@@ -443,6 +432,11 @@ func (c *Client) CreateGroupWithContext(ctx context.Context, request *CreateGrou
     if request == nil {
         request = NewCreateGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateGroupResponse()
@@ -504,13 +498,7 @@ func NewCreatePolicyResponse() (response *CreatePolicyResponse) {
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CreatePolicy(request *CreatePolicyRequest) (response *CreatePolicyResponse, err error) {
-    if request == nil {
-        request = NewCreatePolicyRequest()
-    }
-    
-    response = NewCreatePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePolicyWithContext(context.Background(), request)
 }
 
 // CreatePolicy
@@ -553,6 +541,11 @@ func (c *Client) CreatePolicyWithContext(ctx context.Context, request *CreatePol
     if request == nil {
         request = NewCreatePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePolicyResponse()
@@ -616,13 +609,7 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (response *CreatePolicyVersionResponse, err error) {
-    if request == nil {
-        request = NewCreatePolicyVersionRequest()
-    }
-    
-    response = NewCreatePolicyVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePolicyVersionWithContext(context.Background(), request)
 }
 
 // CreatePolicyVersion
@@ -667,6 +654,11 @@ func (c *Client) CreatePolicyVersionWithContext(ctx context.Context, request *Cr
     if request == nil {
         request = NewCreatePolicyVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePolicyVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePolicyVersionResponse()
@@ -717,13 +709,7 @@ func NewCreateRoleResponse() (response *CreateRoleResponse) {
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) CreateRole(request *CreateRoleRequest) (response *CreateRoleResponse, err error) {
-    if request == nil {
-        request = NewCreateRoleRequest()
-    }
-    
-    response = NewCreateRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateRoleWithContext(context.Background(), request)
 }
 
 // CreateRole
@@ -755,6 +741,11 @@ func (c *Client) CreateRoleWithContext(ctx context.Context, request *CreateRoleR
     if request == nil {
         request = NewCreateRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateRoleResponse()
@@ -789,13 +780,7 @@ func NewCreateSAMLProviderResponse() (response *CreateSAMLProviderResponse) {
 //  INVALIDPARAMETERVALUE_NAMEERROR = "InvalidParameterValue.NameError"
 //  LIMITEXCEEDED_IDENTITYFULL = "LimitExceeded.IdentityFull"
 func (c *Client) CreateSAMLProvider(request *CreateSAMLProviderRequest) (response *CreateSAMLProviderResponse, err error) {
-    if request == nil {
-        request = NewCreateSAMLProviderRequest()
-    }
-    
-    response = NewCreateSAMLProviderResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSAMLProviderWithContext(context.Background(), request)
 }
 
 // CreateSAMLProvider
@@ -811,6 +796,11 @@ func (c *Client) CreateSAMLProviderWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateSAMLProviderRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSAMLProvider require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSAMLProviderResponse()
@@ -845,13 +835,7 @@ func NewCreateServiceLinkedRoleResponse() (response *CreateServiceLinkedRoleResp
 //  INVALIDPARAMETER_ROLENAMEERROR = "InvalidParameter.RoleNameError"
 //  INVALIDPARAMETER_ROLENAMEINUSE = "InvalidParameter.RoleNameInUse"
 func (c *Client) CreateServiceLinkedRole(request *CreateServiceLinkedRoleRequest) (response *CreateServiceLinkedRoleResponse, err error) {
-    if request == nil {
-        request = NewCreateServiceLinkedRoleRequest()
-    }
-    
-    response = NewCreateServiceLinkedRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateServiceLinkedRoleWithContext(context.Background(), request)
 }
 
 // CreateServiceLinkedRole
@@ -867,6 +851,11 @@ func (c *Client) CreateServiceLinkedRoleWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateServiceLinkedRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateServiceLinkedRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateServiceLinkedRoleResponse()
@@ -897,13 +886,7 @@ func NewCreateUserSAMLConfigResponse() (response *CreateUserSAMLConfigResponse) 
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 func (c *Client) CreateUserSAMLConfig(request *CreateUserSAMLConfigRequest) (response *CreateUserSAMLConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateUserSAMLConfigRequest()
-    }
-    
-    response = NewCreateUserSAMLConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateUserSAMLConfigWithContext(context.Background(), request)
 }
 
 // CreateUserSAMLConfig
@@ -915,6 +898,11 @@ func (c *Client) CreateUserSAMLConfigWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateUserSAMLConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserSAMLConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateUserSAMLConfigResponse()
@@ -945,13 +933,7 @@ func NewDeleteGroupResponse() (response *DeleteGroupResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroupResponse, err error) {
-    if request == nil {
-        request = NewDeleteGroupRequest()
-    }
-    
-    response = NewDeleteGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteGroupWithContext(context.Background(), request)
 }
 
 // DeleteGroup
@@ -963,6 +945,11 @@ func (c *Client) DeleteGroupWithContext(ctx context.Context, request *DeleteGrou
     if request == nil {
         request = NewDeleteGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteGroupResponse()
@@ -998,13 +985,7 @@ func NewDeletePolicyResponse() (response *DeletePolicyResponse) {
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 func (c *Client) DeletePolicy(request *DeletePolicyRequest) (response *DeletePolicyResponse, err error) {
-    if request == nil {
-        request = NewDeletePolicyRequest()
-    }
-    
-    response = NewDeletePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePolicyWithContext(context.Background(), request)
 }
 
 // DeletePolicy
@@ -1021,6 +1002,11 @@ func (c *Client) DeletePolicyWithContext(ctx context.Context, request *DeletePol
     if request == nil {
         request = NewDeletePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePolicyResponse()
@@ -1075,13 +1061,7 @@ func NewDeletePolicyVersionResponse() (response *DeletePolicyVersionResponse) {
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (response *DeletePolicyVersionResponse, err error) {
-    if request == nil {
-        request = NewDeletePolicyVersionRequest()
-    }
-    
-    response = NewDeletePolicyVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePolicyVersionWithContext(context.Background(), request)
 }
 
 // DeletePolicyVersion
@@ -1117,6 +1097,11 @@ func (c *Client) DeletePolicyVersionWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDeletePolicyVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePolicyVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePolicyVersionResponse()
@@ -1150,13 +1135,7 @@ func NewDeleteRoleResponse() (response *DeleteRoleResponse) {
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) DeleteRole(request *DeleteRoleRequest) (response *DeleteRoleResponse, err error) {
-    if request == nil {
-        request = NewDeleteRoleRequest()
-    }
-    
-    response = NewDeleteRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteRoleWithContext(context.Background(), request)
 }
 
 // DeleteRole
@@ -1171,6 +1150,11 @@ func (c *Client) DeleteRoleWithContext(ctx context.Context, request *DeleteRoleR
     if request == nil {
         request = NewDeleteRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteRoleResponse()
@@ -1208,13 +1192,7 @@ func NewDeleteRolePermissionsBoundaryResponse() (response *DeleteRolePermissions
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteRolePermissionsBoundary(request *DeleteRolePermissionsBoundaryRequest) (response *DeleteRolePermissionsBoundaryResponse, err error) {
-    if request == nil {
-        request = NewDeleteRolePermissionsBoundaryRequest()
-    }
-    
-    response = NewDeleteRolePermissionsBoundaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteRolePermissionsBoundaryWithContext(context.Background(), request)
 }
 
 // DeleteRolePermissionsBoundary
@@ -1233,6 +1211,11 @@ func (c *Client) DeleteRolePermissionsBoundaryWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteRolePermissionsBoundaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRolePermissionsBoundary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteRolePermissionsBoundaryResponse()
@@ -1264,13 +1247,7 @@ func NewDeleteSAMLProviderResponse() (response *DeleteSAMLProviderResponse) {
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) DeleteSAMLProvider(request *DeleteSAMLProviderRequest) (response *DeleteSAMLProviderResponse, err error) {
-    if request == nil {
-        request = NewDeleteSAMLProviderRequest()
-    }
-    
-    response = NewDeleteSAMLProviderResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSAMLProviderWithContext(context.Background(), request)
 }
 
 // DeleteSAMLProvider
@@ -1283,6 +1260,11 @@ func (c *Client) DeleteSAMLProviderWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteSAMLProviderRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSAMLProvider require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSAMLProviderResponse()
@@ -1315,13 +1297,7 @@ func NewDeleteServiceLinkedRoleResponse() (response *DeleteServiceLinkedRoleResp
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) DeleteServiceLinkedRole(request *DeleteServiceLinkedRoleRequest) (response *DeleteServiceLinkedRoleResponse, err error) {
-    if request == nil {
-        request = NewDeleteServiceLinkedRoleRequest()
-    }
-    
-    response = NewDeleteServiceLinkedRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteServiceLinkedRoleWithContext(context.Background(), request)
 }
 
 // DeleteServiceLinkedRole
@@ -1335,6 +1311,11 @@ func (c *Client) DeleteServiceLinkedRoleWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteServiceLinkedRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteServiceLinkedRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteServiceLinkedRoleResponse()
@@ -1369,13 +1350,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  UNAUTHORIZEDOPERATION_DELETEAPIKEY = "UnauthorizedOperation.DeleteApiKey"
 func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
-    if request == nil {
-        request = NewDeleteUserRequest()
-    }
-    
-    response = NewDeleteUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteUserWithContext(context.Background(), request)
 }
 
 // DeleteUser
@@ -1391,6 +1366,11 @@ func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserR
     if request == nil {
         request = NewDeleteUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteUserResponse()
@@ -1426,13 +1406,7 @@ func NewDeleteUserPermissionsBoundaryResponse() (response *DeleteUserPermissions
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteUserPermissionsBoundary(request *DeleteUserPermissionsBoundaryRequest) (response *DeleteUserPermissionsBoundaryResponse, err error) {
-    if request == nil {
-        request = NewDeleteUserPermissionsBoundaryRequest()
-    }
-    
-    response = NewDeleteUserPermissionsBoundaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteUserPermissionsBoundaryWithContext(context.Background(), request)
 }
 
 // DeleteUserPermissionsBoundary
@@ -1449,6 +1423,11 @@ func (c *Client) DeleteUserPermissionsBoundaryWithContext(ctx context.Context, r
     if request == nil {
         request = NewDeleteUserPermissionsBoundaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUserPermissionsBoundary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteUserPermissionsBoundaryResponse()
@@ -1480,13 +1459,7 @@ func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
-    if request == nil {
-        request = NewDescribeRoleListRequest()
-    }
-    
-    response = NewDescribeRoleListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRoleListWithContext(context.Background(), request)
 }
 
 // DescribeRoleList
@@ -1499,6 +1472,11 @@ func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeRoleListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoleList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRoleListResponse()
@@ -1531,13 +1509,7 @@ func NewDescribeSafeAuthFlagResponse() (response *DescribeSafeAuthFlagResponse) 
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DescribeSafeAuthFlag(request *DescribeSafeAuthFlagRequest) (response *DescribeSafeAuthFlagResponse, err error) {
-    if request == nil {
-        request = NewDescribeSafeAuthFlagRequest()
-    }
-    
-    response = NewDescribeSafeAuthFlagResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSafeAuthFlagWithContext(context.Background(), request)
 }
 
 // DescribeSafeAuthFlag
@@ -1551,6 +1523,11 @@ func (c *Client) DescribeSafeAuthFlagWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeSafeAuthFlagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSafeAuthFlag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSafeAuthFlagResponse()
@@ -1583,13 +1560,7 @@ func NewDescribeSafeAuthFlagCollResponse() (response *DescribeSafeAuthFlagCollRe
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DescribeSafeAuthFlagColl(request *DescribeSafeAuthFlagCollRequest) (response *DescribeSafeAuthFlagCollResponse, err error) {
-    if request == nil {
-        request = NewDescribeSafeAuthFlagCollRequest()
-    }
-    
-    response = NewDescribeSafeAuthFlagCollResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSafeAuthFlagCollWithContext(context.Background(), request)
 }
 
 // DescribeSafeAuthFlagColl
@@ -1603,6 +1574,11 @@ func (c *Client) DescribeSafeAuthFlagCollWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSafeAuthFlagCollRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSafeAuthFlagColl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSafeAuthFlagCollResponse()
@@ -1635,13 +1611,7 @@ func NewDescribeSafeAuthFlagIntlResponse() (response *DescribeSafeAuthFlagIntlRe
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DescribeSafeAuthFlagIntl(request *DescribeSafeAuthFlagIntlRequest) (response *DescribeSafeAuthFlagIntlResponse, err error) {
-    if request == nil {
-        request = NewDescribeSafeAuthFlagIntlRequest()
-    }
-    
-    response = NewDescribeSafeAuthFlagIntlResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSafeAuthFlagIntlWithContext(context.Background(), request)
 }
 
 // DescribeSafeAuthFlagIntl
@@ -1655,6 +1625,11 @@ func (c *Client) DescribeSafeAuthFlagIntlWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSafeAuthFlagIntlRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSafeAuthFlagIntl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSafeAuthFlagIntlResponse()
@@ -1687,13 +1662,7 @@ func NewDescribeSubAccountsResponse() (response *DescribeSubAccountsResponse) {
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeSubAccounts(request *DescribeSubAccountsRequest) (response *DescribeSubAccountsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSubAccountsRequest()
-    }
-    
-    response = NewDescribeSubAccountsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSubAccountsWithContext(context.Background(), request)
 }
 
 // DescribeSubAccounts
@@ -1707,6 +1676,11 @@ func (c *Client) DescribeSubAccountsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeSubAccountsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubAccounts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSubAccountsResponse()
@@ -1739,13 +1713,7 @@ func NewDescribeUserSAMLConfigResponse() (response *DescribeUserSAMLConfigRespon
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) (response *DescribeUserSAMLConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeUserSAMLConfigRequest()
-    }
-    
-    response = NewDescribeUserSAMLConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUserSAMLConfigWithContext(context.Background(), request)
 }
 
 // DescribeUserSAMLConfig
@@ -1759,6 +1727,11 @@ func (c *Client) DescribeUserSAMLConfigWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeUserSAMLConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserSAMLConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUserSAMLConfigResponse()
@@ -1795,13 +1768,7 @@ func NewDetachGroupPolicyResponse() (response *DetachGroupPolicyResponse) {
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DetachGroupPolicy(request *DetachGroupPolicyRequest) (response *DetachGroupPolicyResponse, err error) {
-    if request == nil {
-        request = NewDetachGroupPolicyRequest()
-    }
-    
-    response = NewDetachGroupPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DetachGroupPolicyWithContext(context.Background(), request)
 }
 
 // DetachGroupPolicy
@@ -1819,6 +1786,11 @@ func (c *Client) DetachGroupPolicyWithContext(ctx context.Context, request *Deta
     if request == nil {
         request = NewDetachGroupPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetachGroupPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDetachGroupPolicyResponse()
@@ -1852,13 +1824,7 @@ func NewDetachRolePolicyResponse() (response *DetachRolePolicyResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) DetachRolePolicy(request *DetachRolePolicyRequest) (response *DetachRolePolicyResponse, err error) {
-    if request == nil {
-        request = NewDetachRolePolicyRequest()
-    }
-    
-    response = NewDetachRolePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DetachRolePolicyWithContext(context.Background(), request)
 }
 
 // DetachRolePolicy
@@ -1873,6 +1839,11 @@ func (c *Client) DetachRolePolicyWithContext(ctx context.Context, request *Detac
     if request == nil {
         request = NewDetachRolePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetachRolePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDetachRolePolicyResponse()
@@ -1910,13 +1881,7 @@ func NewDetachUserPolicyResponse() (response *DetachUserPolicyResponse) {
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) DetachUserPolicy(request *DetachUserPolicyRequest) (response *DetachUserPolicyResponse, err error) {
-    if request == nil {
-        request = NewDetachUserPolicyRequest()
-    }
-    
-    response = NewDetachUserPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DetachUserPolicyWithContext(context.Background(), request)
 }
 
 // DetachUserPolicy
@@ -1935,6 +1900,11 @@ func (c *Client) DetachUserPolicyWithContext(ctx context.Context, request *Detac
     if request == nil {
         request = NewDetachUserPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetachUserPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDetachUserPolicyResponse()
@@ -1965,13 +1935,7 @@ func NewGetAccountSummaryResponse() (response *GetAccountSummaryResponse) {
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 func (c *Client) GetAccountSummary(request *GetAccountSummaryRequest) (response *GetAccountSummaryResponse, err error) {
-    if request == nil {
-        request = NewGetAccountSummaryRequest()
-    }
-    
-    response = NewGetAccountSummaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetAccountSummaryWithContext(context.Background(), request)
 }
 
 // GetAccountSummary
@@ -1983,6 +1947,11 @@ func (c *Client) GetAccountSummaryWithContext(ctx context.Context, request *GetA
     if request == nil {
         request = NewGetAccountSummaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAccountSummary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetAccountSummaryResponse()
@@ -2013,13 +1982,7 @@ func NewGetCustomMFATokenInfoResponse() (response *GetCustomMFATokenInfoResponse
 // error code that may be returned:
 //  INVALIDPARAMETER_MFATOKENERROR = "InvalidParameter.MFATokenError"
 func (c *Client) GetCustomMFATokenInfo(request *GetCustomMFATokenInfoRequest) (response *GetCustomMFATokenInfoResponse, err error) {
-    if request == nil {
-        request = NewGetCustomMFATokenInfoRequest()
-    }
-    
-    response = NewGetCustomMFATokenInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetCustomMFATokenInfoWithContext(context.Background(), request)
 }
 
 // GetCustomMFATokenInfo
@@ -2031,6 +1994,11 @@ func (c *Client) GetCustomMFATokenInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewGetCustomMFATokenInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetCustomMFATokenInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetCustomMFATokenInfoResponse()
@@ -2062,13 +2030,7 @@ func NewGetGroupResponse() (response *GetGroupResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetGroup(request *GetGroupRequest) (response *GetGroupResponse, err error) {
-    if request == nil {
-        request = NewGetGroupRequest()
-    }
-    
-    response = NewGetGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetGroupWithContext(context.Background(), request)
 }
 
 // GetGroup
@@ -2081,6 +2043,11 @@ func (c *Client) GetGroupWithContext(ctx context.Context, request *GetGroupReque
     if request == nil {
         request = NewGetGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetGroupResponse()
@@ -2114,13 +2081,7 @@ func NewGetPolicyResponse() (response *GetPolicyResponse) {
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 func (c *Client) GetPolicy(request *GetPolicyRequest) (response *GetPolicyResponse, err error) {
-    if request == nil {
-        request = NewGetPolicyRequest()
-    }
-    
-    response = NewGetPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetPolicyWithContext(context.Background(), request)
 }
 
 // GetPolicy
@@ -2135,6 +2096,11 @@ func (c *Client) GetPolicyWithContext(ctx context.Context, request *GetPolicyReq
     if request == nil {
         request = NewGetPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetPolicyResponse()
@@ -2169,13 +2135,7 @@ func NewGetPolicyVersionResponse() (response *GetPolicyVersionResponse) {
 //  INVALIDPARAMETER_POLICYVERSIONNOTEXISTS = "InvalidParameter.PolicyVersionNotExists"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 func (c *Client) GetPolicyVersion(request *GetPolicyVersionRequest) (response *GetPolicyVersionResponse, err error) {
-    if request == nil {
-        request = NewGetPolicyVersionRequest()
-    }
-    
-    response = NewGetPolicyVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetPolicyVersionWithContext(context.Background(), request)
 }
 
 // GetPolicyVersion
@@ -2191,6 +2151,11 @@ func (c *Client) GetPolicyVersionWithContext(ctx context.Context, request *GetPo
     if request == nil {
         request = NewGetPolicyVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetPolicyVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetPolicyVersionResponse()
@@ -2223,13 +2188,7 @@ func NewGetRoleResponse() (response *GetRoleResponse) {
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) GetRole(request *GetRoleRequest) (response *GetRoleResponse, err error) {
-    if request == nil {
-        request = NewGetRoleRequest()
-    }
-    
-    response = NewGetRoleResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetRoleWithContext(context.Background(), request)
 }
 
 // GetRole
@@ -2243,6 +2202,11 @@ func (c *Client) GetRoleWithContext(ctx context.Context, request *GetRoleRequest
     if request == nil {
         request = NewGetRoleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRole require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetRoleResponse()
@@ -2274,13 +2238,7 @@ func NewGetSAMLProviderResponse() (response *GetSAMLProviderResponse) {
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 func (c *Client) GetSAMLProvider(request *GetSAMLProviderRequest) (response *GetSAMLProviderResponse, err error) {
-    if request == nil {
-        request = NewGetSAMLProviderRequest()
-    }
-    
-    response = NewGetSAMLProviderResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetSAMLProviderWithContext(context.Background(), request)
 }
 
 // GetSAMLProvider
@@ -2293,6 +2251,11 @@ func (c *Client) GetSAMLProviderWithContext(ctx context.Context, request *GetSAM
     if request == nil {
         request = NewGetSAMLProviderRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSAMLProvider require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetSAMLProviderResponse()
@@ -2324,13 +2287,7 @@ func NewGetSecurityLastUsedResponse() (response *GetSecurityLastUsedResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) GetSecurityLastUsed(request *GetSecurityLastUsedRequest) (response *GetSecurityLastUsedResponse, err error) {
-    if request == nil {
-        request = NewGetSecurityLastUsedRequest()
-    }
-    
-    response = NewGetSecurityLastUsedResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetSecurityLastUsedWithContext(context.Background(), request)
 }
 
 // GetSecurityLastUsed
@@ -2343,6 +2300,11 @@ func (c *Client) GetSecurityLastUsedWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetSecurityLastUsedRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSecurityLastUsed require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetSecurityLastUsedResponse()
@@ -2375,13 +2337,7 @@ func NewGetServiceLinkedRoleDeletionStatusResponse() (response *GetServiceLinked
 //  INVALIDPARAMETER_DELETIONTASKNOTEXIST = "InvalidParameter.DeletionTaskNotExist"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) GetServiceLinkedRoleDeletionStatus(request *GetServiceLinkedRoleDeletionStatusRequest) (response *GetServiceLinkedRoleDeletionStatusResponse, err error) {
-    if request == nil {
-        request = NewGetServiceLinkedRoleDeletionStatusRequest()
-    }
-    
-    response = NewGetServiceLinkedRoleDeletionStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetServiceLinkedRoleDeletionStatusWithContext(context.Background(), request)
 }
 
 // GetServiceLinkedRoleDeletionStatus
@@ -2395,6 +2351,11 @@ func (c *Client) GetServiceLinkedRoleDeletionStatusWithContext(ctx context.Conte
     if request == nil {
         request = NewGetServiceLinkedRoleDeletionStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetServiceLinkedRoleDeletionStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetServiceLinkedRoleDeletionStatusResponse()
@@ -2426,13 +2387,7 @@ func NewGetUserResponse() (response *GetUserResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, err error) {
-    if request == nil {
-        request = NewGetUserRequest()
-    }
-    
-    response = NewGetUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetUserWithContext(context.Background(), request)
 }
 
 // GetUser
@@ -2445,6 +2400,11 @@ func (c *Client) GetUserWithContext(ctx context.Context, request *GetUserRequest
     if request == nil {
         request = NewGetUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetUserResponse()
@@ -2481,13 +2441,7 @@ func NewListAccessKeysResponse() (response *ListAccessKeysResponse) {
 //  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
 //  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
 func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListAccessKeysResponse, err error) {
-    if request == nil {
-        request = NewListAccessKeysRequest()
-    }
-    
-    response = NewListAccessKeysResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAccessKeysWithContext(context.Background(), request)
 }
 
 // ListAccessKeys
@@ -2505,6 +2459,11 @@ func (c *Client) ListAccessKeysWithContext(ctx context.Context, request *ListAcc
     if request == nil {
         request = NewListAccessKeysRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAccessKeys require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAccessKeysResponse()
@@ -2536,13 +2495,7 @@ func NewListAttachedGroupPoliciesResponse() (response *ListAttachedGroupPolicies
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) ListAttachedGroupPolicies(request *ListAttachedGroupPoliciesRequest) (response *ListAttachedGroupPoliciesResponse, err error) {
-    if request == nil {
-        request = NewListAttachedGroupPoliciesRequest()
-    }
-    
-    response = NewListAttachedGroupPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAttachedGroupPoliciesWithContext(context.Background(), request)
 }
 
 // ListAttachedGroupPolicies
@@ -2555,6 +2508,11 @@ func (c *Client) ListAttachedGroupPoliciesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewListAttachedGroupPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAttachedGroupPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAttachedGroupPoliciesResponse()
@@ -2586,13 +2544,7 @@ func NewListAttachedRolePoliciesResponse() (response *ListAttachedRolePoliciesRe
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) ListAttachedRolePolicies(request *ListAttachedRolePoliciesRequest) (response *ListAttachedRolePoliciesResponse, err error) {
-    if request == nil {
-        request = NewListAttachedRolePoliciesRequest()
-    }
-    
-    response = NewListAttachedRolePoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAttachedRolePoliciesWithContext(context.Background(), request)
 }
 
 // ListAttachedRolePolicies
@@ -2605,6 +2557,11 @@ func (c *Client) ListAttachedRolePoliciesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewListAttachedRolePoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAttachedRolePolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAttachedRolePoliciesResponse()
@@ -2637,13 +2594,7 @@ func NewListAttachedUserAllPoliciesResponse() (response *ListAttachedUserAllPoli
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListAttachedUserAllPolicies(request *ListAttachedUserAllPoliciesRequest) (response *ListAttachedUserAllPoliciesResponse, err error) {
-    if request == nil {
-        request = NewListAttachedUserAllPoliciesRequest()
-    }
-    
-    response = NewListAttachedUserAllPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAttachedUserAllPoliciesWithContext(context.Background(), request)
 }
 
 // ListAttachedUserAllPolicies
@@ -2657,6 +2608,11 @@ func (c *Client) ListAttachedUserAllPoliciesWithContext(ctx context.Context, req
     if request == nil {
         request = NewListAttachedUserAllPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAttachedUserAllPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAttachedUserAllPoliciesResponse()
@@ -2688,13 +2644,7 @@ func NewListAttachedUserPoliciesResponse() (response *ListAttachedUserPoliciesRe
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) ListAttachedUserPolicies(request *ListAttachedUserPoliciesRequest) (response *ListAttachedUserPoliciesResponse, err error) {
-    if request == nil {
-        request = NewListAttachedUserPoliciesRequest()
-    }
-    
-    response = NewListAttachedUserPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAttachedUserPoliciesWithContext(context.Background(), request)
 }
 
 // ListAttachedUserPolicies
@@ -2707,6 +2657,11 @@ func (c *Client) ListAttachedUserPoliciesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewListAttachedUserPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAttachedUserPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAttachedUserPoliciesResponse()
@@ -2737,13 +2692,7 @@ func NewListCollaboratorsResponse() (response *ListCollaboratorsResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ListCollaborators(request *ListCollaboratorsRequest) (response *ListCollaboratorsResponse, err error) {
-    if request == nil {
-        request = NewListCollaboratorsRequest()
-    }
-    
-    response = NewListCollaboratorsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListCollaboratorsWithContext(context.Background(), request)
 }
 
 // ListCollaborators
@@ -2755,6 +2704,11 @@ func (c *Client) ListCollaboratorsWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListCollaboratorsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListCollaborators require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListCollaboratorsResponse()
@@ -2788,13 +2742,7 @@ func NewListEntitiesForPolicyResponse() (response *ListEntitiesForPolicyResponse
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
 func (c *Client) ListEntitiesForPolicy(request *ListEntitiesForPolicyRequest) (response *ListEntitiesForPolicyResponse, err error) {
-    if request == nil {
-        request = NewListEntitiesForPolicyRequest()
-    }
-    
-    response = NewListEntitiesForPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListEntitiesForPolicyWithContext(context.Background(), request)
 }
 
 // ListEntitiesForPolicy
@@ -2809,6 +2757,11 @@ func (c *Client) ListEntitiesForPolicyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewListEntitiesForPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListEntitiesForPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListEntitiesForPolicyResponse()
@@ -2842,13 +2795,7 @@ func NewListGroupsResponse() (response *ListGroupsResponse) {
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
 func (c *Client) ListGroups(request *ListGroupsRequest) (response *ListGroupsResponse, err error) {
-    if request == nil {
-        request = NewListGroupsRequest()
-    }
-    
-    response = NewListGroupsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListGroupsWithContext(context.Background(), request)
 }
 
 // ListGroups
@@ -2863,6 +2810,11 @@ func (c *Client) ListGroupsWithContext(ctx context.Context, request *ListGroupsR
     if request == nil {
         request = NewListGroupsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListGroups require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListGroupsResponse()
@@ -2893,13 +2845,7 @@ func NewListGroupsForUserResponse() (response *ListGroupsForUserResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response *ListGroupsForUserResponse, err error) {
-    if request == nil {
-        request = NewListGroupsForUserRequest()
-    }
-    
-    response = NewListGroupsForUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListGroupsForUserWithContext(context.Background(), request)
 }
 
 // ListGroupsForUser
@@ -2911,6 +2857,11 @@ func (c *Client) ListGroupsForUserWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListGroupsForUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListGroupsForUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListGroupsForUserResponse()
@@ -2947,13 +2898,7 @@ func NewListPoliciesResponse() (response *ListPoliciesResponse) {
 //  INVALIDPARAMETER_SERVICETYPEERROR = "InvalidParameter.ServiceTypeError"
 //  INVALIDPARAMETER_UINERROR = "InvalidParameter.UinError"
 func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPoliciesResponse, err error) {
-    if request == nil {
-        request = NewListPoliciesRequest()
-    }
-    
-    response = NewListPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListPoliciesWithContext(context.Background(), request)
 }
 
 // ListPolicies
@@ -2971,6 +2916,11 @@ func (c *Client) ListPoliciesWithContext(ctx context.Context, request *ListPolic
     if request == nil {
         request = NewListPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListPoliciesResponse()
@@ -3004,13 +2954,7 @@ func NewListPolicyVersionsResponse() (response *ListPolicyVersionsResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 func (c *Client) ListPolicyVersions(request *ListPolicyVersionsRequest) (response *ListPolicyVersionsResponse, err error) {
-    if request == nil {
-        request = NewListPolicyVersionsRequest()
-    }
-    
-    response = NewListPolicyVersionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListPolicyVersionsWithContext(context.Background(), request)
 }
 
 // ListPolicyVersions
@@ -3025,6 +2969,11 @@ func (c *Client) ListPolicyVersionsWithContext(ctx context.Context, request *Lis
     if request == nil {
         request = NewListPolicyVersionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListPolicyVersions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListPolicyVersionsResponse()
@@ -3058,13 +3007,7 @@ func NewListSAMLProvidersResponse() (response *ListSAMLProvidersResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 func (c *Client) ListSAMLProviders(request *ListSAMLProvidersRequest) (response *ListSAMLProvidersResponse, err error) {
-    if request == nil {
-        request = NewListSAMLProvidersRequest()
-    }
-    
-    response = NewListSAMLProvidersResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListSAMLProvidersWithContext(context.Background(), request)
 }
 
 // ListSAMLProviders
@@ -3079,6 +3022,11 @@ func (c *Client) ListSAMLProvidersWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListSAMLProvidersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListSAMLProviders require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListSAMLProvidersResponse()
@@ -3109,13 +3057,7 @@ func NewListUsersResponse() (response *ListUsersResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ListUsers(request *ListUsersRequest) (response *ListUsersResponse, err error) {
-    if request == nil {
-        request = NewListUsersRequest()
-    }
-    
-    response = NewListUsersResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListUsersWithContext(context.Background(), request)
 }
 
 // ListUsers
@@ -3127,6 +3069,11 @@ func (c *Client) ListUsersWithContext(ctx context.Context, request *ListUsersReq
     if request == nil {
         request = NewListUsersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListUsers require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListUsersResponse()
@@ -3157,13 +3104,7 @@ func NewListUsersForGroupResponse() (response *ListUsersForGroupResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) ListUsersForGroup(request *ListUsersForGroupRequest) (response *ListUsersForGroupResponse, err error) {
-    if request == nil {
-        request = NewListUsersForGroupRequest()
-    }
-    
-    response = NewListUsersForGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListUsersForGroupWithContext(context.Background(), request)
 }
 
 // ListUsersForGroup
@@ -3175,6 +3116,11 @@ func (c *Client) ListUsersForGroupWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListUsersForGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListUsersForGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListUsersForGroupResponse()
@@ -3213,13 +3159,7 @@ func NewPutRolePermissionsBoundaryResponse() (response *PutRolePermissionsBounda
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutRolePermissionsBoundary(request *PutRolePermissionsBoundaryRequest) (response *PutRolePermissionsBoundaryResponse, err error) {
-    if request == nil {
-        request = NewPutRolePermissionsBoundaryRequest()
-    }
-    
-    response = NewPutRolePermissionsBoundaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutRolePermissionsBoundaryWithContext(context.Background(), request)
 }
 
 // PutRolePermissionsBoundary
@@ -3239,6 +3179,11 @@ func (c *Client) PutRolePermissionsBoundaryWithContext(ctx context.Context, requ
     if request == nil {
         request = NewPutRolePermissionsBoundaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutRolePermissionsBoundary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutRolePermissionsBoundaryResponse()
@@ -3276,13 +3221,7 @@ func NewPutUserPermissionsBoundaryResponse() (response *PutUserPermissionsBounda
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutUserPermissionsBoundary(request *PutUserPermissionsBoundaryRequest) (response *PutUserPermissionsBoundaryResponse, err error) {
-    if request == nil {
-        request = NewPutUserPermissionsBoundaryRequest()
-    }
-    
-    response = NewPutUserPermissionsBoundaryResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutUserPermissionsBoundaryWithContext(context.Background(), request)
 }
 
 // PutUserPermissionsBoundary
@@ -3301,6 +3240,11 @@ func (c *Client) PutUserPermissionsBoundaryWithContext(ctx context.Context, requ
     if request == nil {
         request = NewPutUserPermissionsBoundaryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutUserPermissionsBoundary require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutUserPermissionsBoundaryResponse()
@@ -3332,13 +3276,7 @@ func NewRemoveUserFromGroupResponse() (response *RemoveUserFromGroupResponse) {
 //  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (response *RemoveUserFromGroupResponse, err error) {
-    if request == nil {
-        request = NewRemoveUserFromGroupRequest()
-    }
-    
-    response = NewRemoveUserFromGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.RemoveUserFromGroupWithContext(context.Background(), request)
 }
 
 // RemoveUserFromGroup
@@ -3351,6 +3289,11 @@ func (c *Client) RemoveUserFromGroupWithContext(ctx context.Context, request *Re
     if request == nil {
         request = NewRemoveUserFromGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveUserFromGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRemoveUserFromGroupResponse()
@@ -3419,13 +3362,7 @@ func NewSetDefaultPolicyVersionResponse() (response *SetDefaultPolicyVersionResp
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetDefaultPolicyVersion(request *SetDefaultPolicyVersionRequest) (response *SetDefaultPolicyVersionResponse, err error) {
-    if request == nil {
-        request = NewSetDefaultPolicyVersionRequest()
-    }
-    
-    response = NewSetDefaultPolicyVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetDefaultPolicyVersionWithContext(context.Background(), request)
 }
 
 // SetDefaultPolicyVersion
@@ -3475,6 +3412,11 @@ func (c *Client) SetDefaultPolicyVersionWithContext(ctx context.Context, request
     if request == nil {
         request = NewSetDefaultPolicyVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetDefaultPolicyVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetDefaultPolicyVersionResponse()
@@ -3510,13 +3452,7 @@ func NewSetMfaFlagResponse() (response *SetMfaFlagResponse) {
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetMfaFlag(request *SetMfaFlagRequest) (response *SetMfaFlagResponse, err error) {
-    if request == nil {
-        request = NewSetMfaFlagRequest()
-    }
-    
-    response = NewSetMfaFlagResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetMfaFlagWithContext(context.Background(), request)
 }
 
 // SetMfaFlag
@@ -3533,6 +3469,11 @@ func (c *Client) SetMfaFlagWithContext(ctx context.Context, request *SetMfaFlagR
     if request == nil {
         request = NewSetMfaFlagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetMfaFlag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetMfaFlagResponse()
@@ -3580,13 +3521,7 @@ func NewUpdateAssumeRolePolicyResponse() (response *UpdateAssumeRolePolicyRespon
 //  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
 //  INVALIDPARAMETER_VERSIONERROR = "InvalidParameter.VersionError"
 func (c *Client) UpdateAssumeRolePolicy(request *UpdateAssumeRolePolicyRequest) (response *UpdateAssumeRolePolicyResponse, err error) {
-    if request == nil {
-        request = NewUpdateAssumeRolePolicyRequest()
-    }
-    
-    response = NewUpdateAssumeRolePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateAssumeRolePolicyWithContext(context.Background(), request)
 }
 
 // UpdateAssumeRolePolicy
@@ -3615,6 +3550,11 @@ func (c *Client) UpdateAssumeRolePolicyWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUpdateAssumeRolePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAssumeRolePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateAssumeRolePolicyResponse()
@@ -3648,13 +3588,7 @@ func NewUpdateGroupResponse() (response *UpdateGroupResponse) {
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroupResponse, err error) {
-    if request == nil {
-        request = NewUpdateGroupRequest()
-    }
-    
-    response = NewUpdateGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateGroupWithContext(context.Background(), request)
 }
 
 // UpdateGroup
@@ -3669,6 +3603,11 @@ func (c *Client) UpdateGroupWithContext(ctx context.Context, request *UpdateGrou
     if request == nil {
         request = NewUpdateGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateGroupResponse()
@@ -3737,13 +3676,7 @@ func NewUpdatePolicyResponse() (response *UpdatePolicyResponse) {
 //  RESOURCENOTFOUND_POLICYIDNOTFOUND = "ResourceNotFound.PolicyIdNotFound"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdatePolicy(request *UpdatePolicyRequest) (response *UpdatePolicyResponse, err error) {
-    if request == nil {
-        request = NewUpdatePolicyRequest()
-    }
-    
-    response = NewUpdatePolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdatePolicyWithContext(context.Background(), request)
 }
 
 // UpdatePolicy
@@ -3793,6 +3726,11 @@ func (c *Client) UpdatePolicyWithContext(ctx context.Context, request *UpdatePol
     if request == nil {
         request = NewUpdatePolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdatePolicyResponse()
@@ -3825,13 +3763,7 @@ func NewUpdateRoleConsoleLoginResponse() (response *UpdateRoleConsoleLoginRespon
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) UpdateRoleConsoleLogin(request *UpdateRoleConsoleLoginRequest) (response *UpdateRoleConsoleLoginResponse, err error) {
-    if request == nil {
-        request = NewUpdateRoleConsoleLoginRequest()
-    }
-    
-    response = NewUpdateRoleConsoleLoginResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateRoleConsoleLoginWithContext(context.Background(), request)
 }
 
 // UpdateRoleConsoleLogin
@@ -3845,6 +3777,11 @@ func (c *Client) UpdateRoleConsoleLoginWithContext(ctx context.Context, request 
     if request == nil {
         request = NewUpdateRoleConsoleLoginRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateRoleConsoleLogin require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateRoleConsoleLoginResponse()
@@ -3878,13 +3815,7 @@ func NewUpdateRoleDescriptionResponse() (response *UpdateRoleDescriptionResponse
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 func (c *Client) UpdateRoleDescription(request *UpdateRoleDescriptionRequest) (response *UpdateRoleDescriptionResponse, err error) {
-    if request == nil {
-        request = NewUpdateRoleDescriptionRequest()
-    }
-    
-    response = NewUpdateRoleDescriptionResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateRoleDescriptionWithContext(context.Background(), request)
 }
 
 // UpdateRoleDescription
@@ -3899,6 +3830,11 @@ func (c *Client) UpdateRoleDescriptionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewUpdateRoleDescriptionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateRoleDescription require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateRoleDescriptionResponse()
@@ -3930,13 +3866,7 @@ func NewUpdateSAMLProviderResponse() (response *UpdateSAMLProviderResponse) {
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) UpdateSAMLProvider(request *UpdateSAMLProviderRequest) (response *UpdateSAMLProviderResponse, err error) {
-    if request == nil {
-        request = NewUpdateSAMLProviderRequest()
-    }
-    
-    response = NewUpdateSAMLProviderResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateSAMLProviderWithContext(context.Background(), request)
 }
 
 // UpdateSAMLProvider
@@ -3949,6 +3879,11 @@ func (c *Client) UpdateSAMLProviderWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateSAMLProviderRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateSAMLProvider require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateSAMLProviderResponse()
@@ -3980,13 +3915,7 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserResponse, err error) {
-    if request == nil {
-        request = NewUpdateUserRequest()
-    }
-    
-    response = NewUpdateUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateUserWithContext(context.Background(), request)
 }
 
 // UpdateUser
@@ -3999,6 +3928,11 @@ func (c *Client) UpdateUserWithContext(ctx context.Context, request *UpdateUserR
     if request == nil {
         request = NewUpdateUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateUserResponse()
@@ -4030,13 +3964,7 @@ func NewUpdateUserSAMLConfigResponse() (response *UpdateUserSAMLConfigResponse) 
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 //  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) UpdateUserSAMLConfig(request *UpdateUserSAMLConfigRequest) (response *UpdateUserSAMLConfigResponse, err error) {
-    if request == nil {
-        request = NewUpdateUserSAMLConfigRequest()
-    }
-    
-    response = NewUpdateUserSAMLConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateUserSAMLConfigWithContext(context.Background(), request)
 }
 
 // UpdateUserSAMLConfig
@@ -4049,6 +3977,11 @@ func (c *Client) UpdateUserSAMLConfigWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpdateUserSAMLConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateUserSAMLConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateUserSAMLConfigResponse()

@@ -16,6 +16,7 @@ package v20191016
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -76,13 +77,7 @@ func NewAddUserContactResponse() (response *AddUserContactResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AddUserContact(request *AddUserContactRequest) (response *AddUserContactResponse, err error) {
-    if request == nil {
-        request = NewAddUserContactRequest()
-    }
-    
-    response = NewAddUserContactResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddUserContactWithContext(context.Background(), request)
 }
 
 // AddUserContact
@@ -103,6 +98,11 @@ func (c *Client) AddUserContactWithContext(ctx context.Context, request *AddUser
     if request == nil {
         request = NewAddUserContactRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddUserContact require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddUserContactResponse()
@@ -135,13 +135,7 @@ func NewCreateDBDiagReportTaskResponse() (response *CreateDBDiagReportTaskRespon
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) CreateDBDiagReportTask(request *CreateDBDiagReportTaskRequest) (response *CreateDBDiagReportTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateDBDiagReportTaskRequest()
-    }
-    
-    response = NewCreateDBDiagReportTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDBDiagReportTaskWithContext(context.Background(), request)
 }
 
 // CreateDBDiagReportTask
@@ -155,6 +149,11 @@ func (c *Client) CreateDBDiagReportTaskWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateDBDiagReportTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBDiagReportTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDBDiagReportTaskResponse()
@@ -192,13 +191,7 @@ func NewCreateDBDiagReportUrlResponse() (response *CreateDBDiagReportUrlResponse
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDBDiagReportUrl(request *CreateDBDiagReportUrlRequest) (response *CreateDBDiagReportUrlResponse, err error) {
-    if request == nil {
-        request = NewCreateDBDiagReportUrlRequest()
-    }
-    
-    response = NewCreateDBDiagReportUrlResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDBDiagReportUrlWithContext(context.Background(), request)
 }
 
 // CreateDBDiagReportUrl
@@ -217,6 +210,11 @@ func (c *Client) CreateDBDiagReportUrlWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateDBDiagReportUrlRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBDiagReportUrl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDBDiagReportUrlResponse()
@@ -256,13 +254,7 @@ func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) CreateMailProfile(request *CreateMailProfileRequest) (response *CreateMailProfileResponse, err error) {
-    if request == nil {
-        request = NewCreateMailProfileRequest()
-    }
-    
-    response = NewCreateMailProfileResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateMailProfileWithContext(context.Background(), request)
 }
 
 // CreateMailProfile
@@ -283,6 +275,11 @@ func (c *Client) CreateMailProfileWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateMailProfileRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMailProfile require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateMailProfileResponse()
@@ -322,13 +319,7 @@ func NewCreateSchedulerMailProfileResponse() (response *CreateSchedulerMailProfi
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateSchedulerMailProfile(request *CreateSchedulerMailProfileRequest) (response *CreateSchedulerMailProfileResponse, err error) {
-    if request == nil {
-        request = NewCreateSchedulerMailProfileRequest()
-    }
-    
-    response = NewCreateSchedulerMailProfileResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSchedulerMailProfileWithContext(context.Background(), request)
 }
 
 // CreateSchedulerMailProfile
@@ -349,6 +340,11 @@ func (c *Client) CreateSchedulerMailProfileWithContext(ctx context.Context, requ
     if request == nil {
         request = NewCreateSchedulerMailProfileRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSchedulerMailProfile require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSchedulerMailProfileResponse()
@@ -384,13 +380,7 @@ func NewDescribeAllUserContactResponse() (response *DescribeAllUserContactRespon
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeAllUserContact(request *DescribeAllUserContactRequest) (response *DescribeAllUserContactResponse, err error) {
-    if request == nil {
-        request = NewDescribeAllUserContactRequest()
-    }
-    
-    response = NewDescribeAllUserContactResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAllUserContactWithContext(context.Background(), request)
 }
 
 // DescribeAllUserContact
@@ -407,6 +397,11 @@ func (c *Client) DescribeAllUserContactWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAllUserContactRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllUserContact require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAllUserContactResponse()
@@ -440,13 +435,7 @@ func NewDescribeAllUserGroupResponse() (response *DescribeAllUserGroupResponse) 
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeAllUserGroup(request *DescribeAllUserGroupRequest) (response *DescribeAllUserGroupResponse, err error) {
-    if request == nil {
-        request = NewDescribeAllUserGroupRequest()
-    }
-    
-    response = NewDescribeAllUserGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAllUserGroupWithContext(context.Background(), request)
 }
 
 // DescribeAllUserGroup
@@ -461,6 +450,11 @@ func (c *Client) DescribeAllUserGroupWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeAllUserGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllUserGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAllUserGroupResponse()
@@ -495,13 +489,7 @@ func NewDescribeDBDiagEventResponse() (response *DescribeDBDiagEventResponse) {
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeDBDiagEvent(request *DescribeDBDiagEventRequest) (response *DescribeDBDiagEventResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBDiagEventRequest()
-    }
-    
-    response = NewDescribeDBDiagEventResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDBDiagEventWithContext(context.Background(), request)
 }
 
 // DescribeDBDiagEvent
@@ -517,6 +505,11 @@ func (c *Client) DescribeDBDiagEventWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeDBDiagEventRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBDiagEvent require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDBDiagEventResponse()
@@ -551,13 +544,7 @@ func NewDescribeDBDiagHistoryResponse() (response *DescribeDBDiagHistoryResponse
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeDBDiagHistory(request *DescribeDBDiagHistoryRequest) (response *DescribeDBDiagHistoryResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBDiagHistoryRequest()
-    }
-    
-    response = NewDescribeDBDiagHistoryResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDBDiagHistoryWithContext(context.Background(), request)
 }
 
 // DescribeDBDiagHistory
@@ -573,6 +560,11 @@ func (c *Client) DescribeDBDiagHistoryWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDBDiagHistoryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBDiagHistory require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDBDiagHistoryResponse()
@@ -608,13 +600,7 @@ func NewDescribeDBDiagReportTasksResponse() (response *DescribeDBDiagReportTasks
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeDBDiagReportTasks(request *DescribeDBDiagReportTasksRequest) (response *DescribeDBDiagReportTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBDiagReportTasksRequest()
-    }
-    
-    response = NewDescribeDBDiagReportTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDBDiagReportTasksWithContext(context.Background(), request)
 }
 
 // DescribeDBDiagReportTasks
@@ -631,6 +617,11 @@ func (c *Client) DescribeDBDiagReportTasksWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeDBDiagReportTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBDiagReportTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDBDiagReportTasksResponse()
@@ -665,13 +656,7 @@ func NewDescribeDBSpaceStatusResponse() (response *DescribeDBSpaceStatusResponse
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeDBSpaceStatus(request *DescribeDBSpaceStatusRequest) (response *DescribeDBSpaceStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBSpaceStatusRequest()
-    }
-    
-    response = NewDescribeDBSpaceStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDBSpaceStatusWithContext(context.Background(), request)
 }
 
 // DescribeDBSpaceStatus
@@ -687,6 +672,11 @@ func (c *Client) DescribeDBSpaceStatusWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDBSpaceStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBSpaceStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDBSpaceStatusResponse()
@@ -725,13 +715,7 @@ func NewDescribeDiagDBInstancesResponse() (response *DescribeDiagDBInstancesResp
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeDiagDBInstances(request *DescribeDiagDBInstancesRequest) (response *DescribeDiagDBInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiagDBInstancesRequest()
-    }
-    
-    response = NewDescribeDiagDBInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDiagDBInstancesWithContext(context.Background(), request)
 }
 
 // DescribeDiagDBInstances
@@ -751,6 +735,11 @@ func (c *Client) DescribeDiagDBInstancesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDiagDBInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiagDBInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDiagDBInstancesResponse()
@@ -790,13 +779,7 @@ func NewDescribeHealthScoreResponse() (response *DescribeHealthScoreResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeHealthScore(request *DescribeHealthScoreRequest) (response *DescribeHealthScoreResponse, err error) {
-    if request == nil {
-        request = NewDescribeHealthScoreRequest()
-    }
-    
-    response = NewDescribeHealthScoreResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeHealthScoreWithContext(context.Background(), request)
 }
 
 // DescribeHealthScore
@@ -817,6 +800,11 @@ func (c *Client) DescribeHealthScoreWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeHealthScoreRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHealthScore require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeHealthScoreResponse()
@@ -849,13 +837,7 @@ func NewDescribeMailProfileResponse() (response *DescribeMailProfileResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeMailProfile(request *DescribeMailProfileRequest) (response *DescribeMailProfileResponse, err error) {
-    if request == nil {
-        request = NewDescribeMailProfileRequest()
-    }
-    
-    response = NewDescribeMailProfileResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMailProfileWithContext(context.Background(), request)
 }
 
 // DescribeMailProfile
@@ -869,6 +851,11 @@ func (c *Client) DescribeMailProfileWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeMailProfileRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMailProfile require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMailProfileResponse()
@@ -899,13 +886,7 @@ func NewDescribeSlowLogTimeSeriesStatsResponse() (response *DescribeSlowLogTimeS
 // error code that may be returned:
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeSlowLogTimeSeriesStats(request *DescribeSlowLogTimeSeriesStatsRequest) (response *DescribeSlowLogTimeSeriesStatsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSlowLogTimeSeriesStatsRequest()
-    }
-    
-    response = NewDescribeSlowLogTimeSeriesStatsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSlowLogTimeSeriesStatsWithContext(context.Background(), request)
 }
 
 // DescribeSlowLogTimeSeriesStats
@@ -917,6 +898,11 @@ func (c *Client) DescribeSlowLogTimeSeriesStatsWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeSlowLogTimeSeriesStatsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSlowLogTimeSeriesStats require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSlowLogTimeSeriesStatsResponse()
@@ -950,13 +936,7 @@ func NewDescribeSlowLogTopSqlsResponse() (response *DescribeSlowLogTopSqlsRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) (response *DescribeSlowLogTopSqlsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSlowLogTopSqlsRequest()
-    }
-    
-    response = NewDescribeSlowLogTopSqlsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSlowLogTopSqlsWithContext(context.Background(), request)
 }
 
 // DescribeSlowLogTopSqls
@@ -971,6 +951,11 @@ func (c *Client) DescribeSlowLogTopSqlsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeSlowLogTopSqlsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSlowLogTopSqls require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSlowLogTopSqlsResponse()
@@ -1005,13 +990,7 @@ func NewDescribeSlowLogUserHostStatsResponse() (response *DescribeSlowLogUserHos
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeSlowLogUserHostStats(request *DescribeSlowLogUserHostStatsRequest) (response *DescribeSlowLogUserHostStatsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSlowLogUserHostStatsRequest()
-    }
-    
-    response = NewDescribeSlowLogUserHostStatsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSlowLogUserHostStatsWithContext(context.Background(), request)
 }
 
 // DescribeSlowLogUserHostStats
@@ -1027,6 +1006,11 @@ func (c *Client) DescribeSlowLogUserHostStatsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeSlowLogUserHostStatsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSlowLogUserHostStats require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSlowLogUserHostStatsResponse()
@@ -1063,13 +1047,7 @@ func NewDescribeTopSpaceSchemaTimeSeriesResponse() (response *DescribeTopSpaceSc
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeTopSpaceSchemaTimeSeries(request *DescribeTopSpaceSchemaTimeSeriesRequest) (response *DescribeTopSpaceSchemaTimeSeriesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopSpaceSchemaTimeSeriesRequest()
-    }
-    
-    response = NewDescribeTopSpaceSchemaTimeSeriesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopSpaceSchemaTimeSeriesWithContext(context.Background(), request)
 }
 
 // DescribeTopSpaceSchemaTimeSeries
@@ -1087,6 +1065,11 @@ func (c *Client) DescribeTopSpaceSchemaTimeSeriesWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeTopSpaceSchemaTimeSeriesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopSpaceSchemaTimeSeries require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopSpaceSchemaTimeSeriesResponse()
@@ -1123,13 +1106,7 @@ func NewDescribeTopSpaceSchemasResponse() (response *DescribeTopSpaceSchemasResp
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeTopSpaceSchemas(request *DescribeTopSpaceSchemasRequest) (response *DescribeTopSpaceSchemasResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopSpaceSchemasRequest()
-    }
-    
-    response = NewDescribeTopSpaceSchemasResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopSpaceSchemasWithContext(context.Background(), request)
 }
 
 // DescribeTopSpaceSchemas
@@ -1147,6 +1124,11 @@ func (c *Client) DescribeTopSpaceSchemasWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTopSpaceSchemasRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopSpaceSchemas require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopSpaceSchemasResponse()
@@ -1180,13 +1162,7 @@ func NewDescribeTopSpaceTableTimeSeriesResponse() (response *DescribeTopSpaceTab
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTopSpaceTableTimeSeries(request *DescribeTopSpaceTableTimeSeriesRequest) (response *DescribeTopSpaceTableTimeSeriesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopSpaceTableTimeSeriesRequest()
-    }
-    
-    response = NewDescribeTopSpaceTableTimeSeriesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopSpaceTableTimeSeriesWithContext(context.Background(), request)
 }
 
 // DescribeTopSpaceTableTimeSeries
@@ -1201,6 +1177,11 @@ func (c *Client) DescribeTopSpaceTableTimeSeriesWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeTopSpaceTableTimeSeriesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopSpaceTableTimeSeries require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopSpaceTableTimeSeriesResponse()
@@ -1234,13 +1215,7 @@ func NewDescribeTopSpaceTablesResponse() (response *DescribeTopSpaceTablesRespon
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTopSpaceTables(request *DescribeTopSpaceTablesRequest) (response *DescribeTopSpaceTablesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopSpaceTablesRequest()
-    }
-    
-    response = NewDescribeTopSpaceTablesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopSpaceTablesWithContext(context.Background(), request)
 }
 
 // DescribeTopSpaceTables
@@ -1255,6 +1230,11 @@ func (c *Client) DescribeTopSpaceTablesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeTopSpaceTablesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopSpaceTables require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopSpaceTablesResponse()
@@ -1291,13 +1271,7 @@ func NewDescribeUserSqlAdviceResponse() (response *DescribeUserSqlAdviceResponse
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) DescribeUserSqlAdvice(request *DescribeUserSqlAdviceRequest) (response *DescribeUserSqlAdviceResponse, err error) {
-    if request == nil {
-        request = NewDescribeUserSqlAdviceRequest()
-    }
-    
-    response = NewDescribeUserSqlAdviceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUserSqlAdviceWithContext(context.Background(), request)
 }
 
 // DescribeUserSqlAdvice
@@ -1315,6 +1289,11 @@ func (c *Client) DescribeUserSqlAdviceWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeUserSqlAdviceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserSqlAdvice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUserSqlAdviceResponse()
@@ -1349,13 +1328,7 @@ func NewModifyDiagDBInstanceConfResponse() (response *ModifyDiagDBInstanceConfRe
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) ModifyDiagDBInstanceConf(request *ModifyDiagDBInstanceConfRequest) (response *ModifyDiagDBInstanceConfResponse, err error) {
-    if request == nil {
-        request = NewModifyDiagDBInstanceConfRequest()
-    }
-    
-    response = NewModifyDiagDBInstanceConfResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDiagDBInstanceConfWithContext(context.Background(), request)
 }
 
 // ModifyDiagDBInstanceConf
@@ -1371,6 +1344,11 @@ func (c *Client) ModifyDiagDBInstanceConfWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyDiagDBInstanceConfRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDiagDBInstanceConf require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDiagDBInstanceConfResponse()

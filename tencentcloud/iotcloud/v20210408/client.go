@@ -16,6 +16,7 @@ package v20210408
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -78,13 +79,7 @@ func NewCreateDeviceResponse() (response *CreateDeviceResponse) {
 //  UNAUTHORIZEDOPERATION_PRODUCTNOTSUPPORTPSK = "UnauthorizedOperation.ProductNotSupportPSK"
 //  UNSUPPORTEDOPERATION_SUITETOKENNOCREATE = "UnsupportedOperation.SuiteTokenNoCreate"
 func (c *Client) CreateDevice(request *CreateDeviceRequest) (response *CreateDeviceResponse, err error) {
-    if request == nil {
-        request = NewCreateDeviceRequest()
-    }
-    
-    response = NewCreateDeviceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDeviceWithContext(context.Background(), request)
 }
 
 // CreateDevice
@@ -107,6 +102,11 @@ func (c *Client) CreateDeviceWithContext(ctx context.Context, request *CreateDev
     if request == nil {
         request = NewCreateDeviceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDevice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDeviceResponse()
@@ -139,13 +139,7 @@ func NewCreatePrivateCAResponse() (response *CreatePrivateCAResponse) {
 //  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
 func (c *Client) CreatePrivateCA(request *CreatePrivateCARequest) (response *CreatePrivateCAResponse, err error) {
-    if request == nil {
-        request = NewCreatePrivateCARequest()
-    }
-    
-    response = NewCreatePrivateCAResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePrivateCAWithContext(context.Background(), request)
 }
 
 // CreatePrivateCA
@@ -159,6 +153,11 @@ func (c *Client) CreatePrivateCAWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreatePrivateCARequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrivateCA require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePrivateCAResponse()
@@ -194,13 +193,7 @@ func NewDeleteDeviceResponse() (response *DeleteDeviceResponse) {
 //  UNAUTHORIZEDOPERATION_GATEWAYHASBINDEDDEVICES = "UnauthorizedOperation.GatewayHasBindedDevices"
 //  UNSUPPORTEDOPERATION_DEVICEOTATASKINPROGRESS = "UnsupportedOperation.DeviceOtaTaskInProgress"
 func (c *Client) DeleteDevice(request *DeleteDeviceRequest) (response *DeleteDeviceResponse, err error) {
-    if request == nil {
-        request = NewDeleteDeviceRequest()
-    }
-    
-    response = NewDeleteDeviceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteDeviceWithContext(context.Background(), request)
 }
 
 // DeleteDevice
@@ -217,6 +210,11 @@ func (c *Client) DeleteDeviceWithContext(ctx context.Context, request *DeleteDev
     if request == nil {
         request = NewDeleteDeviceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDevice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteDeviceResponse()
@@ -248,13 +246,7 @@ func NewDeletePrivateCAResponse() (response *DeletePrivateCAResponse) {
 //  LIMITEXCEEDED_CAALREADYBINDPRODUCT = "LimitExceeded.CAAlreadyBindProduct"
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DeletePrivateCA(request *DeletePrivateCARequest) (response *DeletePrivateCAResponse, err error) {
-    if request == nil {
-        request = NewDeletePrivateCARequest()
-    }
-    
-    response = NewDeletePrivateCAResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePrivateCAWithContext(context.Background(), request)
 }
 
 // DeletePrivateCA
@@ -267,6 +259,11 @@ func (c *Client) DeletePrivateCAWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeletePrivateCARequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrivateCA require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePrivateCAResponse()
@@ -303,13 +300,7 @@ func NewDeleteProductResponse() (response *DeleteProductResponse) {
 //  UNSUPPORTEDOPERATION_PRODUCTHASBINDGATEWAY = "UnsupportedOperation.ProductHasBindGateway"
 //  UNSUPPORTEDOPERATION_PRODUCTHASBINDEDGATEWAYPRODUCT = "UnsupportedOperation.ProductHasBindedGatewayProduct"
 func (c *Client) DeleteProduct(request *DeleteProductRequest) (response *DeleteProductResponse, err error) {
-    if request == nil {
-        request = NewDeleteProductRequest()
-    }
-    
-    response = NewDeleteProductResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteProductWithContext(context.Background(), request)
 }
 
 // DeleteProduct
@@ -327,6 +318,11 @@ func (c *Client) DeleteProductWithContext(ctx context.Context, request *DeletePr
     if request == nil {
         request = NewDeleteProductRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProduct require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteProductResponse()
@@ -360,13 +356,7 @@ func NewDescribeDeviceResponse() (response *DescribeDeviceResponse) {
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeDevice(request *DescribeDeviceRequest) (response *DescribeDeviceResponse, err error) {
-    if request == nil {
-        request = NewDescribeDeviceRequest()
-    }
-    
-    response = NewDescribeDeviceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDeviceWithContext(context.Background(), request)
 }
 
 // DescribeDevice
@@ -381,6 +371,11 @@ func (c *Client) DescribeDeviceWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeDeviceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDevice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDeviceResponse()
@@ -413,13 +408,7 @@ func NewDescribeDevicesResponse() (response *DescribeDevicesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeDevices(request *DescribeDevicesRequest) (response *DescribeDevicesResponse, err error) {
-    if request == nil {
-        request = NewDescribeDevicesRequest()
-    }
-    
-    response = NewDescribeDevicesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDevicesWithContext(context.Background(), request)
 }
 
 // DescribeDevices
@@ -433,6 +422,11 @@ func (c *Client) DescribeDevicesWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDevicesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDevices require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDevicesResponse()
@@ -463,13 +457,7 @@ func NewDescribePrivateCAResponse() (response *DescribePrivateCAResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DescribePrivateCA(request *DescribePrivateCARequest) (response *DescribePrivateCAResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateCARequest()
-    }
-    
-    response = NewDescribePrivateCAResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateCAWithContext(context.Background(), request)
 }
 
 // DescribePrivateCA
@@ -481,6 +469,11 @@ func (c *Client) DescribePrivateCAWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribePrivateCARequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateCA require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateCAResponse()
@@ -511,13 +504,7 @@ func NewDescribePrivateCABindedProductsResponse() (response *DescribePrivateCABi
 // error code that may be returned:
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DescribePrivateCABindedProducts(request *DescribePrivateCABindedProductsRequest) (response *DescribePrivateCABindedProductsResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateCABindedProductsRequest()
-    }
-    
-    response = NewDescribePrivateCABindedProductsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateCABindedProductsWithContext(context.Background(), request)
 }
 
 // DescribePrivateCABindedProducts
@@ -529,6 +516,11 @@ func (c *Client) DescribePrivateCABindedProductsWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribePrivateCABindedProductsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateCABindedProducts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateCABindedProductsResponse()
@@ -559,13 +551,7 @@ func NewDescribePrivateCAsResponse() (response *DescribePrivateCAsResponse) {
 // error code that may be returned:
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DescribePrivateCAs(request *DescribePrivateCAsRequest) (response *DescribePrivateCAsResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateCAsRequest()
-    }
-    
-    response = NewDescribePrivateCAsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateCAsWithContext(context.Background(), request)
 }
 
 // DescribePrivateCAs
@@ -577,6 +563,11 @@ func (c *Client) DescribePrivateCAsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePrivateCAsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateCAs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateCAsResponse()
@@ -609,13 +600,7 @@ func NewDescribeProductResponse() (response *DescribeProductResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProduct(request *DescribeProductRequest) (response *DescribeProductResponse, err error) {
-    if request == nil {
-        request = NewDescribeProductRequest()
-    }
-    
-    response = NewDescribeProductResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProductWithContext(context.Background(), request)
 }
 
 // DescribeProduct
@@ -629,6 +614,11 @@ func (c *Client) DescribeProductWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeProductRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProduct require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProductResponse()
@@ -661,13 +651,7 @@ func NewDescribeProductCAResponse() (response *DescribeProductCAResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProductCA(request *DescribeProductCARequest) (response *DescribeProductCAResponse, err error) {
-    if request == nil {
-        request = NewDescribeProductCARequest()
-    }
-    
-    response = NewDescribeProductCAResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProductCAWithContext(context.Background(), request)
 }
 
 // DescribeProductCA
@@ -681,6 +665,11 @@ func (c *Client) DescribeProductCAWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeProductCARequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProductCA require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProductCAResponse()
@@ -713,13 +702,7 @@ func NewSetProductsForbiddenStatusResponse() (response *SetProductsForbiddenStat
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) SetProductsForbiddenStatus(request *SetProductsForbiddenStatusRequest) (response *SetProductsForbiddenStatusResponse, err error) {
-    if request == nil {
-        request = NewSetProductsForbiddenStatusRequest()
-    }
-    
-    response = NewSetProductsForbiddenStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetProductsForbiddenStatusWithContext(context.Background(), request)
 }
 
 // SetProductsForbiddenStatus
@@ -733,6 +716,11 @@ func (c *Client) SetProductsForbiddenStatusWithContext(ctx context.Context, requ
     if request == nil {
         request = NewSetProductsForbiddenStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetProductsForbiddenStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetProductsForbiddenStatusResponse()
@@ -765,13 +753,7 @@ func NewUpdateDeviceLogLevelResponse() (response *UpdateDeviceLogLevelResponse) 
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEISNOTENABLED = "UnauthorizedOperation.DeviceIsNotEnabled"
 func (c *Client) UpdateDeviceLogLevel(request *UpdateDeviceLogLevelRequest) (response *UpdateDeviceLogLevelResponse, err error) {
-    if request == nil {
-        request = NewUpdateDeviceLogLevelRequest()
-    }
-    
-    response = NewUpdateDeviceLogLevelResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateDeviceLogLevelWithContext(context.Background(), request)
 }
 
 // UpdateDeviceLogLevel
@@ -785,6 +767,11 @@ func (c *Client) UpdateDeviceLogLevelWithContext(ctx context.Context, request *U
     if request == nil {
         request = NewUpdateDeviceLogLevelRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDeviceLogLevel require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateDeviceLogLevelResponse()
@@ -819,13 +806,7 @@ func NewUpdateDevicesEnableStateResponse() (response *UpdateDevicesEnableStateRe
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEHASALREADYBINDGATEWAY = "UnauthorizedOperation.DeviceHasAlreadyBindGateway"
 func (c *Client) UpdateDevicesEnableState(request *UpdateDevicesEnableStateRequest) (response *UpdateDevicesEnableStateResponse, err error) {
-    if request == nil {
-        request = NewUpdateDevicesEnableStateRequest()
-    }
-    
-    response = NewUpdateDevicesEnableStateResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateDevicesEnableStateWithContext(context.Background(), request)
 }
 
 // UpdateDevicesEnableState
@@ -841,6 +822,11 @@ func (c *Client) UpdateDevicesEnableStateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewUpdateDevicesEnableStateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDevicesEnableState require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateDevicesEnableStateResponse()
@@ -871,13 +857,7 @@ func NewUpdatePrivateCAResponse() (response *UpdatePrivateCAResponse) {
 // error code that may be returned:
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
 func (c *Client) UpdatePrivateCA(request *UpdatePrivateCARequest) (response *UpdatePrivateCAResponse, err error) {
-    if request == nil {
-        request = NewUpdatePrivateCARequest()
-    }
-    
-    response = NewUpdatePrivateCAResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdatePrivateCAWithContext(context.Background(), request)
 }
 
 // UpdatePrivateCA
@@ -889,6 +869,11 @@ func (c *Client) UpdatePrivateCAWithContext(ctx context.Context, request *Update
     if request == nil {
         request = NewUpdatePrivateCARequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePrivateCA require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdatePrivateCAResponse()

@@ -16,6 +16,7 @@ package v20180724
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -68,13 +69,7 @@ func NewBindingPolicyObjectResponse() (response *BindingPolicyObjectResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) BindingPolicyObject(request *BindingPolicyObjectRequest) (response *BindingPolicyObjectResponse, err error) {
-    if request == nil {
-        request = NewBindingPolicyObjectRequest()
-    }
-    
-    response = NewBindingPolicyObjectResponse()
-    err = c.Send(request, response)
-    return
+    return c.BindingPolicyObjectWithContext(context.Background(), request)
 }
 
 // BindingPolicyObject
@@ -87,6 +82,11 @@ func (c *Client) BindingPolicyObjectWithContext(ctx context.Context, request *Bi
     if request == nil {
         request = NewBindingPolicyObjectRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindingPolicyObject require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBindingPolicyObjectResponse()
@@ -123,13 +123,7 @@ func NewCreateAlarmNoticeResponse() (response *CreateAlarmNoticeResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateAlarmNotice(request *CreateAlarmNoticeRequest) (response *CreateAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewCreateAlarmNoticeRequest()
-    }
-    
-    response = NewCreateAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAlarmNoticeWithContext(context.Background(), request)
 }
 
 // CreateAlarmNotice
@@ -147,6 +141,11 @@ func (c *Client) CreateAlarmNoticeWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAlarmNoticeResponse()
@@ -183,13 +182,7 @@ func NewCreateAlarmPolicyResponse() (response *CreateAlarmPolicyResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateAlarmPolicy(request *CreateAlarmPolicyRequest) (response *CreateAlarmPolicyResponse, err error) {
-    if request == nil {
-        request = NewCreateAlarmPolicyRequest()
-    }
-    
-    response = NewCreateAlarmPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAlarmPolicyWithContext(context.Background(), request)
 }
 
 // CreateAlarmPolicy
@@ -207,6 +200,11 @@ func (c *Client) CreateAlarmPolicyWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateAlarmPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlarmPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAlarmPolicyResponse()
@@ -249,13 +247,7 @@ func NewCreatePolicyGroupResponse() (response *CreatePolicyGroupResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePolicyGroup(request *CreatePolicyGroupRequest) (response *CreatePolicyGroupResponse, err error) {
-    if request == nil {
-        request = NewCreatePolicyGroupRequest()
-    }
-    
-    response = NewCreatePolicyGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePolicyGroupWithContext(context.Background(), request)
 }
 
 // CreatePolicyGroup
@@ -279,6 +271,11 @@ func (c *Client) CreatePolicyGroupWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreatePolicyGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePolicyGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePolicyGroupResponse()
@@ -313,13 +310,7 @@ func NewDeleteAlarmNoticesResponse() (response *DeleteAlarmNoticesResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteAlarmNotices(request *DeleteAlarmNoticesRequest) (response *DeleteAlarmNoticesResponse, err error) {
-    if request == nil {
-        request = NewDeleteAlarmNoticesRequest()
-    }
-    
-    response = NewDeleteAlarmNoticesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAlarmNoticesWithContext(context.Background(), request)
 }
 
 // DeleteAlarmNotices
@@ -335,6 +326,11 @@ func (c *Client) DeleteAlarmNoticesWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteAlarmNoticesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarmNotices require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAlarmNoticesResponse()
@@ -369,13 +365,7 @@ func NewDeleteAlarmPolicyResponse() (response *DeleteAlarmPolicyResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteAlarmPolicy(request *DeleteAlarmPolicyRequest) (response *DeleteAlarmPolicyResponse, err error) {
-    if request == nil {
-        request = NewDeleteAlarmPolicyRequest()
-    }
-    
-    response = NewDeleteAlarmPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAlarmPolicyWithContext(context.Background(), request)
 }
 
 // DeleteAlarmPolicy
@@ -391,6 +381,11 @@ func (c *Client) DeleteAlarmPolicyWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteAlarmPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarmPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAlarmPolicyResponse()
@@ -456,13 +451,7 @@ func NewDeletePolicyGroupResponse() (response *DeletePolicyGroupResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeletePolicyGroup(request *DeletePolicyGroupRequest) (response *DeletePolicyGroupResponse, err error) {
-    if request == nil {
-        request = NewDeletePolicyGroupRequest()
-    }
-    
-    response = NewDeletePolicyGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePolicyGroupWithContext(context.Background(), request)
 }
 
 // DeletePolicyGroup
@@ -509,6 +498,11 @@ func (c *Client) DeletePolicyGroupWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeletePolicyGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePolicyGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePolicyGroupResponse()
@@ -543,13 +537,7 @@ func NewDescribeAccidentEventListResponse() (response *DescribeAccidentEventList
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAccidentEventList(request *DescribeAccidentEventListRequest) (response *DescribeAccidentEventListResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccidentEventListRequest()
-    }
-    
-    response = NewDescribeAccidentEventListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAccidentEventListWithContext(context.Background(), request)
 }
 
 // DescribeAccidentEventList
@@ -565,6 +553,11 @@ func (c *Client) DescribeAccidentEventListWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAccidentEventListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccidentEventList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAccidentEventListResponse()
@@ -596,13 +589,7 @@ func NewDescribeAlarmEventsResponse() (response *DescribeAlarmEventsResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmEvents(request *DescribeAlarmEventsRequest) (response *DescribeAlarmEventsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmEventsRequest()
-    }
-    
-    response = NewDescribeAlarmEventsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmEventsWithContext(context.Background(), request)
 }
 
 // DescribeAlarmEvents
@@ -615,6 +602,11 @@ func (c *Client) DescribeAlarmEventsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeAlarmEventsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmEvents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmEventsResponse()
@@ -654,13 +646,7 @@ func NewDescribeAlarmHistoriesResponse() (response *DescribeAlarmHistoriesRespon
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmHistories(request *DescribeAlarmHistoriesRequest) (response *DescribeAlarmHistoriesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmHistoriesRequest()
-    }
-    
-    response = NewDescribeAlarmHistoriesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmHistoriesWithContext(context.Background(), request)
 }
 
 // DescribeAlarmHistories
@@ -681,6 +667,11 @@ func (c *Client) DescribeAlarmHistoriesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAlarmHistoriesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmHistories require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmHistoriesResponse()
@@ -712,13 +703,7 @@ func NewDescribeAlarmMetricsResponse() (response *DescribeAlarmMetricsResponse) 
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmMetrics(request *DescribeAlarmMetricsRequest) (response *DescribeAlarmMetricsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmMetricsRequest()
-    }
-    
-    response = NewDescribeAlarmMetricsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmMetricsWithContext(context.Background(), request)
 }
 
 // DescribeAlarmMetrics
@@ -731,6 +716,11 @@ func (c *Client) DescribeAlarmMetricsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeAlarmMetricsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmMetrics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmMetricsResponse()
@@ -767,13 +757,7 @@ func NewDescribeAlarmNoticeResponse() (response *DescribeAlarmNoticeResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmNotice(request *DescribeAlarmNoticeRequest) (response *DescribeAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmNoticeRequest()
-    }
-    
-    response = NewDescribeAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmNoticeWithContext(context.Background(), request)
 }
 
 // DescribeAlarmNotice
@@ -791,6 +775,11 @@ func (c *Client) DescribeAlarmNoticeWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmNoticeResponse()
@@ -827,13 +816,7 @@ func NewDescribeAlarmNoticeCallbacksResponse() (response *DescribeAlarmNoticeCal
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmNoticeCallbacks(request *DescribeAlarmNoticeCallbacksRequest) (response *DescribeAlarmNoticeCallbacksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmNoticeCallbacksRequest()
-    }
-    
-    response = NewDescribeAlarmNoticeCallbacksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmNoticeCallbacksWithContext(context.Background(), request)
 }
 
 // DescribeAlarmNoticeCallbacks
@@ -851,6 +834,11 @@ func (c *Client) DescribeAlarmNoticeCallbacksWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeAlarmNoticeCallbacksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmNoticeCallbacks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmNoticeCallbacksResponse()
@@ -887,13 +875,7 @@ func NewDescribeAlarmNoticesResponse() (response *DescribeAlarmNoticesResponse) 
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmNotices(request *DescribeAlarmNoticesRequest) (response *DescribeAlarmNoticesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmNoticesRequest()
-    }
-    
-    response = NewDescribeAlarmNoticesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmNoticesWithContext(context.Background(), request)
 }
 
 // DescribeAlarmNotices
@@ -911,6 +893,11 @@ func (c *Client) DescribeAlarmNoticesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeAlarmNoticesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmNotices require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmNoticesResponse()
@@ -943,13 +930,7 @@ func NewDescribeAlarmPoliciesResponse() (response *DescribeAlarmPoliciesResponse
 //  INTERNALERROR = "InternalError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmPolicies(request *DescribeAlarmPoliciesRequest) (response *DescribeAlarmPoliciesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmPoliciesRequest()
-    }
-    
-    response = NewDescribeAlarmPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmPoliciesWithContext(context.Background(), request)
 }
 
 // DescribeAlarmPolicies
@@ -963,6 +944,11 @@ func (c *Client) DescribeAlarmPoliciesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAlarmPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmPoliciesResponse()
@@ -996,13 +982,7 @@ func NewDescribeAlarmPolicyResponse() (response *DescribeAlarmPolicyResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAlarmPolicy(request *DescribeAlarmPolicyRequest) (response *DescribeAlarmPolicyResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmPolicyRequest()
-    }
-    
-    response = NewDescribeAlarmPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmPolicyWithContext(context.Background(), request)
 }
 
 // DescribeAlarmPolicy
@@ -1017,6 +997,11 @@ func (c *Client) DescribeAlarmPolicyWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeAlarmPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmPolicyResponse()
@@ -1047,13 +1032,7 @@ func NewDescribeAllNamespacesResponse() (response *DescribeAllNamespacesResponse
 // error code that may be returned:
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAllNamespaces(request *DescribeAllNamespacesRequest) (response *DescribeAllNamespacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAllNamespacesRequest()
-    }
-    
-    response = NewDescribeAllNamespacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAllNamespacesWithContext(context.Background(), request)
 }
 
 // DescribeAllNamespaces
@@ -1065,6 +1044,11 @@ func (c *Client) DescribeAllNamespacesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAllNamespacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllNamespaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAllNamespacesResponse()
@@ -1095,13 +1079,7 @@ func NewDescribeBaseMetricsResponse() (response *DescribeBaseMetricsResponse) {
 // error code that may be returned:
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
-    if request == nil {
-        request = NewDescribeBaseMetricsRequest()
-    }
-    
-    response = NewDescribeBaseMetricsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBaseMetricsWithContext(context.Background(), request)
 }
 
 // DescribeBaseMetrics
@@ -1113,6 +1091,11 @@ func (c *Client) DescribeBaseMetricsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBaseMetricsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaseMetrics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBaseMetricsResponse()
@@ -1148,13 +1131,7 @@ func NewDescribeBasicAlarmListResponse() (response *DescribeBasicAlarmListRespon
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicAlarmList(request *DescribeBasicAlarmListRequest) (response *DescribeBasicAlarmListResponse, err error) {
-    if request == nil {
-        request = NewDescribeBasicAlarmListRequest()
-    }
-    
-    response = NewDescribeBasicAlarmListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBasicAlarmListWithContext(context.Background(), request)
 }
 
 // DescribeBasicAlarmList
@@ -1171,6 +1148,11 @@ func (c *Client) DescribeBasicAlarmListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeBasicAlarmListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBasicAlarmList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBasicAlarmListResponse()
@@ -1238,13 +1220,7 @@ func NewDescribeBindingPolicyObjectListResponse() (response *DescribeBindingPoli
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBindingPolicyObjectList(request *DescribeBindingPolicyObjectListRequest) (response *DescribeBindingPolicyObjectListResponse, err error) {
-    if request == nil {
-        request = NewDescribeBindingPolicyObjectListRequest()
-    }
-    
-    response = NewDescribeBindingPolicyObjectListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBindingPolicyObjectListWithContext(context.Background(), request)
 }
 
 // DescribeBindingPolicyObjectList
@@ -1293,6 +1269,11 @@ func (c *Client) DescribeBindingPolicyObjectListWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeBindingPolicyObjectListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBindingPolicyObjectList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBindingPolicyObjectListResponse()
@@ -1323,13 +1304,7 @@ func NewDescribeMonitorTypesResponse() (response *DescribeMonitorTypesResponse) 
 // error code that may be returned:
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeMonitorTypes(request *DescribeMonitorTypesRequest) (response *DescribeMonitorTypesResponse, err error) {
-    if request == nil {
-        request = NewDescribeMonitorTypesRequest()
-    }
-    
-    response = NewDescribeMonitorTypesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMonitorTypesWithContext(context.Background(), request)
 }
 
 // DescribeMonitorTypes
@@ -1341,6 +1316,11 @@ func (c *Client) DescribeMonitorTypesWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeMonitorTypesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMonitorTypes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMonitorTypesResponse()
@@ -1406,13 +1386,7 @@ func NewDescribePolicyConditionListResponse() (response *DescribePolicyCondition
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePolicyConditionList(request *DescribePolicyConditionListRequest) (response *DescribePolicyConditionListResponse, err error) {
-    if request == nil {
-        request = NewDescribePolicyConditionListRequest()
-    }
-    
-    response = NewDescribePolicyConditionListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePolicyConditionListWithContext(context.Background(), request)
 }
 
 // DescribePolicyConditionList
@@ -1459,6 +1433,11 @@ func (c *Client) DescribePolicyConditionListWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribePolicyConditionListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePolicyConditionList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePolicyConditionListResponse()
@@ -1524,13 +1503,7 @@ func NewDescribePolicyGroupInfoResponse() (response *DescribePolicyGroupInfoResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePolicyGroupInfo(request *DescribePolicyGroupInfoRequest) (response *DescribePolicyGroupInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribePolicyGroupInfoRequest()
-    }
-    
-    response = NewDescribePolicyGroupInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePolicyGroupInfoWithContext(context.Background(), request)
 }
 
 // DescribePolicyGroupInfo
@@ -1577,6 +1550,11 @@ func (c *Client) DescribePolicyGroupInfoWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribePolicyGroupInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePolicyGroupInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePolicyGroupInfoResponse()
@@ -1642,13 +1620,7 @@ func NewDescribePolicyGroupListResponse() (response *DescribePolicyGroupListResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePolicyGroupList(request *DescribePolicyGroupListRequest) (response *DescribePolicyGroupListResponse, err error) {
-    if request == nil {
-        request = NewDescribePolicyGroupListRequest()
-    }
-    
-    response = NewDescribePolicyGroupListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePolicyGroupListWithContext(context.Background(), request)
 }
 
 // DescribePolicyGroupList
@@ -1695,6 +1667,11 @@ func (c *Client) DescribePolicyGroupListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribePolicyGroupListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePolicyGroupList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePolicyGroupListResponse()
@@ -1732,13 +1709,7 @@ func NewDescribeProductEventListResponse() (response *DescribeProductEventListRe
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeProductEventList(request *DescribeProductEventListRequest) (response *DescribeProductEventListResponse, err error) {
-    if request == nil {
-        request = NewDescribeProductEventListRequest()
-    }
-    
-    response = NewDescribeProductEventListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProductEventListWithContext(context.Background(), request)
 }
 
 // DescribeProductEventList
@@ -1757,6 +1728,11 @@ func (c *Client) DescribeProductEventListWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeProductEventListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProductEventList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProductEventListResponse()
@@ -1831,13 +1807,7 @@ func NewDescribeStatisticDataResponse() (response *DescribeStatisticDataResponse
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeStatisticData(request *DescribeStatisticDataRequest) (response *DescribeStatisticDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeStatisticDataRequest()
-    }
-    
-    response = NewDescribeStatisticDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStatisticDataWithContext(context.Background(), request)
 }
 
 // DescribeStatisticData
@@ -1893,6 +1863,11 @@ func (c *Client) DescribeStatisticDataWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeStatisticDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStatisticData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStatisticDataResponse()
@@ -1930,13 +1905,7 @@ func NewGetMonitorDataResponse() (response *GetMonitorDataResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) GetMonitorData(request *GetMonitorDataRequest) (response *GetMonitorDataResponse, err error) {
-    if request == nil {
-        request = NewGetMonitorDataRequest()
-    }
-    
-    response = NewGetMonitorDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetMonitorDataWithContext(context.Background(), request)
 }
 
 // GetMonitorData
@@ -1955,6 +1924,11 @@ func (c *Client) GetMonitorDataWithContext(ctx context.Context, request *GetMoni
     if request == nil {
         request = NewGetMonitorDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetMonitorData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetMonitorDataResponse()
@@ -1990,13 +1964,7 @@ func NewModifyAlarmNoticeResponse() (response *ModifyAlarmNoticeResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAlarmNotice(request *ModifyAlarmNoticeRequest) (response *ModifyAlarmNoticeResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmNoticeRequest()
-    }
-    
-    response = NewModifyAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmNoticeWithContext(context.Background(), request)
 }
 
 // ModifyAlarmNotice
@@ -2013,6 +1981,11 @@ func (c *Client) ModifyAlarmNoticeWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyAlarmNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmNoticeResponse()
@@ -2048,13 +2021,7 @@ func NewModifyAlarmPolicyConditionResponse() (response *ModifyAlarmPolicyConditi
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAlarmPolicyCondition(request *ModifyAlarmPolicyConditionRequest) (response *ModifyAlarmPolicyConditionResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmPolicyConditionRequest()
-    }
-    
-    response = NewModifyAlarmPolicyConditionResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmPolicyConditionWithContext(context.Background(), request)
 }
 
 // ModifyAlarmPolicyCondition
@@ -2071,6 +2038,11 @@ func (c *Client) ModifyAlarmPolicyConditionWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyAlarmPolicyConditionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmPolicyCondition require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmPolicyConditionResponse()
@@ -2106,13 +2078,7 @@ func NewModifyAlarmPolicyInfoResponse() (response *ModifyAlarmPolicyInfoResponse
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAlarmPolicyInfo(request *ModifyAlarmPolicyInfoRequest) (response *ModifyAlarmPolicyInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmPolicyInfoRequest()
-    }
-    
-    response = NewModifyAlarmPolicyInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmPolicyInfoWithContext(context.Background(), request)
 }
 
 // ModifyAlarmPolicyInfo
@@ -2129,6 +2095,11 @@ func (c *Client) ModifyAlarmPolicyInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyAlarmPolicyInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmPolicyInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmPolicyInfoResponse()
@@ -2162,13 +2133,7 @@ func NewModifyAlarmPolicyNoticeResponse() (response *ModifyAlarmPolicyNoticeResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAlarmPolicyNotice(request *ModifyAlarmPolicyNoticeRequest) (response *ModifyAlarmPolicyNoticeResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmPolicyNoticeRequest()
-    }
-    
-    response = NewModifyAlarmPolicyNoticeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmPolicyNoticeWithContext(context.Background(), request)
 }
 
 // ModifyAlarmPolicyNotice
@@ -2183,6 +2148,11 @@ func (c *Client) ModifyAlarmPolicyNoticeWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyAlarmPolicyNoticeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmPolicyNotice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmPolicyNoticeResponse()
@@ -2218,13 +2188,7 @@ func NewModifyAlarmPolicyStatusResponse() (response *ModifyAlarmPolicyStatusResp
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAlarmPolicyStatus(request *ModifyAlarmPolicyStatusRequest) (response *ModifyAlarmPolicyStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmPolicyStatusRequest()
-    }
-    
-    response = NewModifyAlarmPolicyStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmPolicyStatusWithContext(context.Background(), request)
 }
 
 // ModifyAlarmPolicyStatus
@@ -2241,6 +2205,11 @@ func (c *Client) ModifyAlarmPolicyStatusWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyAlarmPolicyStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmPolicyStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmPolicyStatusResponse()
@@ -2275,13 +2244,7 @@ func NewModifyAlarmPolicyTasksResponse() (response *ModifyAlarmPolicyTasksRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAlarmPolicyTasks(request *ModifyAlarmPolicyTasksRequest) (response *ModifyAlarmPolicyTasksResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmPolicyTasksRequest()
-    }
-    
-    response = NewModifyAlarmPolicyTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmPolicyTasksWithContext(context.Background(), request)
 }
 
 // ModifyAlarmPolicyTasks
@@ -2297,6 +2260,11 @@ func (c *Client) ModifyAlarmPolicyTasksWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifyAlarmPolicyTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmPolicyTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmPolicyTasksResponse()
@@ -2331,13 +2299,7 @@ func NewModifyAlarmReceiversResponse() (response *ModifyAlarmReceiversResponse) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAlarmReceivers(request *ModifyAlarmReceiversRequest) (response *ModifyAlarmReceiversResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmReceiversRequest()
-    }
-    
-    response = NewModifyAlarmReceiversResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmReceiversWithContext(context.Background(), request)
 }
 
 // ModifyAlarmReceivers
@@ -2353,6 +2315,11 @@ func (c *Client) ModifyAlarmReceiversWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyAlarmReceiversRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmReceivers require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmReceiversResponse()
@@ -2404,13 +2371,7 @@ func NewModifyPolicyGroupResponse() (response *ModifyPolicyGroupResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPolicyGroup(request *ModifyPolicyGroupRequest) (response *ModifyPolicyGroupResponse, err error) {
-    if request == nil {
-        request = NewModifyPolicyGroupRequest()
-    }
-    
-    response = NewModifyPolicyGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPolicyGroupWithContext(context.Background(), request)
 }
 
 // ModifyPolicyGroup
@@ -2443,6 +2404,11 @@ func (c *Client) ModifyPolicyGroupWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyPolicyGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPolicyGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPolicyGroupResponse()
@@ -2501,13 +2467,7 @@ func NewPutMonitorDataResponse() (response *PutMonitorDataResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) PutMonitorData(request *PutMonitorDataRequest) (response *PutMonitorDataResponse, err error) {
-    if request == nil {
-        request = NewPutMonitorDataRequest()
-    }
-    
-    response = NewPutMonitorDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutMonitorDataWithContext(context.Background(), request)
 }
 
 // PutMonitorData
@@ -2547,6 +2507,11 @@ func (c *Client) PutMonitorDataWithContext(ctx context.Context, request *PutMoni
     if request == nil {
         request = NewPutMonitorDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutMonitorData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutMonitorDataResponse()
@@ -2584,13 +2549,7 @@ func NewSendCustomAlarmMsgResponse() (response *SendCustomAlarmMsgResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SendCustomAlarmMsg(request *SendCustomAlarmMsgRequest) (response *SendCustomAlarmMsgResponse, err error) {
-    if request == nil {
-        request = NewSendCustomAlarmMsgRequest()
-    }
-    
-    response = NewSendCustomAlarmMsgResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendCustomAlarmMsgWithContext(context.Background(), request)
 }
 
 // SendCustomAlarmMsg
@@ -2609,6 +2568,11 @@ func (c *Client) SendCustomAlarmMsgWithContext(ctx context.Context, request *Sen
     if request == nil {
         request = NewSendCustomAlarmMsgRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendCustomAlarmMsg require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendCustomAlarmMsgResponse()
@@ -2646,13 +2610,7 @@ func NewSetDefaultAlarmPolicyResponse() (response *SetDefaultAlarmPolicyResponse
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SetDefaultAlarmPolicy(request *SetDefaultAlarmPolicyRequest) (response *SetDefaultAlarmPolicyResponse, err error) {
-    if request == nil {
-        request = NewSetDefaultAlarmPolicyRequest()
-    }
-    
-    response = NewSetDefaultAlarmPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.SetDefaultAlarmPolicyWithContext(context.Background(), request)
 }
 
 // SetDefaultAlarmPolicy
@@ -2671,6 +2629,11 @@ func (c *Client) SetDefaultAlarmPolicyWithContext(ctx context.Context, request *
     if request == nil {
         request = NewSetDefaultAlarmPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetDefaultAlarmPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSetDefaultAlarmPolicyResponse()
@@ -2736,13 +2699,7 @@ func NewUnBindingAllPolicyObjectResponse() (response *UnBindingAllPolicyObjectRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UnBindingAllPolicyObject(request *UnBindingAllPolicyObjectRequest) (response *UnBindingAllPolicyObjectResponse, err error) {
-    if request == nil {
-        request = NewUnBindingAllPolicyObjectRequest()
-    }
-    
-    response = NewUnBindingAllPolicyObjectResponse()
-    err = c.Send(request, response)
-    return
+    return c.UnBindingAllPolicyObjectWithContext(context.Background(), request)
 }
 
 // UnBindingAllPolicyObject
@@ -2789,6 +2746,11 @@ func (c *Client) UnBindingAllPolicyObjectWithContext(ctx context.Context, reques
     if request == nil {
         request = NewUnBindingAllPolicyObjectRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnBindingAllPolicyObject require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUnBindingAllPolicyObjectResponse()
@@ -2856,13 +2818,7 @@ func NewUnBindingPolicyObjectResponse() (response *UnBindingPolicyObjectResponse
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UnBindingPolicyObject(request *UnBindingPolicyObjectRequest) (response *UnBindingPolicyObjectResponse, err error) {
-    if request == nil {
-        request = NewUnBindingPolicyObjectRequest()
-    }
-    
-    response = NewUnBindingPolicyObjectResponse()
-    err = c.Send(request, response)
-    return
+    return c.UnBindingPolicyObjectWithContext(context.Background(), request)
 }
 
 // UnBindingPolicyObject
@@ -2911,6 +2867,11 @@ func (c *Client) UnBindingPolicyObjectWithContext(ctx context.Context, request *
     if request == nil {
         request = NewUnBindingPolicyObjectRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnBindingPolicyObject require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUnBindingPolicyObjectResponse()

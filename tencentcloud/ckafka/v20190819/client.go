@@ -16,6 +16,7 @@ package v20190819
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -68,13 +69,7 @@ func NewBatchCreateAclResponse() (response *BatchCreateAclResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) BatchCreateAcl(request *BatchCreateAclRequest) (response *BatchCreateAclResponse, err error) {
-    if request == nil {
-        request = NewBatchCreateAclRequest()
-    }
-    
-    response = NewBatchCreateAclResponse()
-    err = c.Send(request, response)
-    return
+    return c.BatchCreateAclWithContext(context.Background(), request)
 }
 
 // BatchCreateAcl
@@ -87,6 +82,11 @@ func (c *Client) BatchCreateAclWithContext(ctx context.Context, request *BatchCr
     if request == nil {
         request = NewBatchCreateAclRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchCreateAcl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBatchCreateAclResponse()
@@ -121,13 +121,7 @@ func NewBatchModifyGroupOffsetsResponse() (response *BatchModifyGroupOffsetsResp
 //  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
 //  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
 func (c *Client) BatchModifyGroupOffsets(request *BatchModifyGroupOffsetsRequest) (response *BatchModifyGroupOffsetsResponse, err error) {
-    if request == nil {
-        request = NewBatchModifyGroupOffsetsRequest()
-    }
-    
-    response = NewBatchModifyGroupOffsetsResponse()
-    err = c.Send(request, response)
-    return
+    return c.BatchModifyGroupOffsetsWithContext(context.Background(), request)
 }
 
 // BatchModifyGroupOffsets
@@ -143,6 +137,11 @@ func (c *Client) BatchModifyGroupOffsetsWithContext(ctx context.Context, request
     if request == nil {
         request = NewBatchModifyGroupOffsetsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchModifyGroupOffsets require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBatchModifyGroupOffsetsResponse()
@@ -179,13 +178,7 @@ func NewBatchModifyTopicAttributesResponse() (response *BatchModifyTopicAttribut
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) BatchModifyTopicAttributes(request *BatchModifyTopicAttributesRequest) (response *BatchModifyTopicAttributesResponse, err error) {
-    if request == nil {
-        request = NewBatchModifyTopicAttributesRequest()
-    }
-    
-    response = NewBatchModifyTopicAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.BatchModifyTopicAttributesWithContext(context.Background(), request)
 }
 
 // BatchModifyTopicAttributes
@@ -203,6 +196,11 @@ func (c *Client) BatchModifyTopicAttributesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewBatchModifyTopicAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchModifyTopicAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBatchModifyTopicAttributesResponse()
@@ -245,13 +243,7 @@ func NewCreateAclResponse() (response *CreateAclResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) CreateAcl(request *CreateAclRequest) (response *CreateAclResponse, err error) {
-    if request == nil {
-        request = NewCreateAclRequest()
-    }
-    
-    response = NewCreateAclResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAclWithContext(context.Background(), request)
 }
 
 // CreateAcl
@@ -275,6 +267,11 @@ func (c *Client) CreateAclWithContext(ctx context.Context, request *CreateAclReq
     if request == nil {
         request = NewCreateAclRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAcl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAclResponse()
@@ -317,13 +314,7 @@ func NewCreatePartitionResponse() (response *CreatePartitionResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) CreatePartition(request *CreatePartitionRequest) (response *CreatePartitionResponse, err error) {
-    if request == nil {
-        request = NewCreatePartitionRequest()
-    }
-    
-    response = NewCreatePartitionResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePartitionWithContext(context.Background(), request)
 }
 
 // CreatePartition
@@ -347,6 +338,11 @@ func (c *Client) CreatePartitionWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreatePartitionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePartition require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePartitionResponse()
@@ -389,13 +385,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
-    if request == nil {
-        request = NewCreateTopicRequest()
-    }
-    
-    response = NewCreateTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTopicWithContext(context.Background(), request)
 }
 
 // CreateTopic
@@ -419,6 +409,11 @@ func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopi
     if request == nil {
         request = NewCreateTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTopicResponse()
@@ -461,13 +456,7 @@ func NewCreateTopicIpWhiteListResponse() (response *CreateTopicIpWhiteListRespon
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) CreateTopicIpWhiteList(request *CreateTopicIpWhiteListRequest) (response *CreateTopicIpWhiteListResponse, err error) {
-    if request == nil {
-        request = NewCreateTopicIpWhiteListRequest()
-    }
-    
-    response = NewCreateTopicIpWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTopicIpWhiteListWithContext(context.Background(), request)
 }
 
 // CreateTopicIpWhiteList
@@ -491,6 +480,11 @@ func (c *Client) CreateTopicIpWhiteListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateTopicIpWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTopicIpWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTopicIpWhiteListResponse()
@@ -533,13 +527,7 @@ func NewCreateUserResponse() (response *CreateUserResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserResponse, err error) {
-    if request == nil {
-        request = NewCreateUserRequest()
-    }
-    
-    response = NewCreateUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateUserWithContext(context.Background(), request)
 }
 
 // CreateUser
@@ -563,6 +551,11 @@ func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserR
     if request == nil {
         request = NewCreateUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateUserResponse()
@@ -605,13 +598,7 @@ func NewDeleteAclResponse() (response *DeleteAclResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteAcl(request *DeleteAclRequest) (response *DeleteAclResponse, err error) {
-    if request == nil {
-        request = NewDeleteAclRequest()
-    }
-    
-    response = NewDeleteAclResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAclWithContext(context.Background(), request)
 }
 
 // DeleteAcl
@@ -635,6 +622,11 @@ func (c *Client) DeleteAclWithContext(ctx context.Context, request *DeleteAclReq
     if request == nil {
         request = NewDeleteAclRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAcl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAclResponse()
@@ -669,13 +661,7 @@ func NewDeleteRouteTriggerTimeResponse() (response *DeleteRouteTriggerTimeRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteRouteTriggerTime(request *DeleteRouteTriggerTimeRequest) (response *DeleteRouteTriggerTimeResponse, err error) {
-    if request == nil {
-        request = NewDeleteRouteTriggerTimeRequest()
-    }
-    
-    response = NewDeleteRouteTriggerTimeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteRouteTriggerTimeWithContext(context.Background(), request)
 }
 
 // DeleteRouteTriggerTime
@@ -691,6 +677,11 @@ func (c *Client) DeleteRouteTriggerTimeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteRouteTriggerTimeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRouteTriggerTime require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteRouteTriggerTimeResponse()
@@ -735,13 +726,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
-    if request == nil {
-        request = NewDeleteTopicRequest()
-    }
-    
-    response = NewDeleteTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteTopicWithContext(context.Background(), request)
 }
 
 // DeleteTopic
@@ -767,6 +752,11 @@ func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopi
     if request == nil {
         request = NewDeleteTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteTopicResponse()
@@ -809,13 +799,7 @@ func NewDeleteTopicIpWhiteListResponse() (response *DeleteTopicIpWhiteListRespon
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteTopicIpWhiteList(request *DeleteTopicIpWhiteListRequest) (response *DeleteTopicIpWhiteListResponse, err error) {
-    if request == nil {
-        request = NewDeleteTopicIpWhiteListRequest()
-    }
-    
-    response = NewDeleteTopicIpWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteTopicIpWhiteListWithContext(context.Background(), request)
 }
 
 // DeleteTopicIpWhiteList
@@ -839,6 +823,11 @@ func (c *Client) DeleteTopicIpWhiteListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteTopicIpWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTopicIpWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteTopicIpWhiteListResponse()
@@ -881,13 +870,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
-    if request == nil {
-        request = NewDeleteUserRequest()
-    }
-    
-    response = NewDeleteUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteUserWithContext(context.Background(), request)
 }
 
 // DeleteUser
@@ -911,6 +894,11 @@ func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserR
     if request == nil {
         request = NewDeleteUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteUserResponse()
@@ -953,13 +941,7 @@ func NewDescribeACLResponse() (response *DescribeACLResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeACL(request *DescribeACLRequest) (response *DescribeACLResponse, err error) {
-    if request == nil {
-        request = NewDescribeACLRequest()
-    }
-    
-    response = NewDescribeACLResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeACLWithContext(context.Background(), request)
 }
 
 // DescribeACL
@@ -983,6 +965,11 @@ func (c *Client) DescribeACLWithContext(ctx context.Context, request *DescribeAC
     if request == nil {
         request = NewDescribeACLRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeACL require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeACLResponse()
@@ -1025,13 +1012,7 @@ func NewDescribeAppInfoResponse() (response *DescribeAppInfoResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeAppInfo(request *DescribeAppInfoRequest) (response *DescribeAppInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeAppInfoRequest()
-    }
-    
-    response = NewDescribeAppInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAppInfoWithContext(context.Background(), request)
 }
 
 // DescribeAppInfo
@@ -1055,6 +1036,11 @@ func (c *Client) DescribeAppInfoWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeAppInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAppInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAppInfoResponse()
@@ -1097,13 +1083,7 @@ func NewDescribeCkafkaZoneResponse() (response *DescribeCkafkaZoneResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeCkafkaZone(request *DescribeCkafkaZoneRequest) (response *DescribeCkafkaZoneResponse, err error) {
-    if request == nil {
-        request = NewDescribeCkafkaZoneRequest()
-    }
-    
-    response = NewDescribeCkafkaZoneResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCkafkaZoneWithContext(context.Background(), request)
 }
 
 // DescribeCkafkaZone
@@ -1127,6 +1107,11 @@ func (c *Client) DescribeCkafkaZoneWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeCkafkaZoneRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCkafkaZone require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCkafkaZoneResponse()
@@ -1169,13 +1154,7 @@ func NewDescribeConsumerGroupResponse() (response *DescribeConsumerGroupResponse
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeConsumerGroup(request *DescribeConsumerGroupRequest) (response *DescribeConsumerGroupResponse, err error) {
-    if request == nil {
-        request = NewDescribeConsumerGroupRequest()
-    }
-    
-    response = NewDescribeConsumerGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeConsumerGroupWithContext(context.Background(), request)
 }
 
 // DescribeConsumerGroup
@@ -1199,6 +1178,11 @@ func (c *Client) DescribeConsumerGroupWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeConsumerGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumerGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeConsumerGroupResponse()
@@ -1241,13 +1225,7 @@ func NewDescribeGroupResponse() (response *DescribeGroupResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeGroup(request *DescribeGroupRequest) (response *DescribeGroupResponse, err error) {
-    if request == nil {
-        request = NewDescribeGroupRequest()
-    }
-    
-    response = NewDescribeGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeGroupWithContext(context.Background(), request)
 }
 
 // DescribeGroup
@@ -1271,6 +1249,11 @@ func (c *Client) DescribeGroupWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeGroupResponse()
@@ -1313,13 +1296,7 @@ func NewDescribeGroupInfoResponse() (response *DescribeGroupInfoResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeGroupInfo(request *DescribeGroupInfoRequest) (response *DescribeGroupInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeGroupInfoRequest()
-    }
-    
-    response = NewDescribeGroupInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeGroupInfoWithContext(context.Background(), request)
 }
 
 // DescribeGroupInfo
@@ -1343,6 +1320,11 @@ func (c *Client) DescribeGroupInfoWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeGroupInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroupInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeGroupInfoResponse()
@@ -1385,13 +1367,7 @@ func NewDescribeGroupOffsetsResponse() (response *DescribeGroupOffsetsResponse) 
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeGroupOffsets(request *DescribeGroupOffsetsRequest) (response *DescribeGroupOffsetsResponse, err error) {
-    if request == nil {
-        request = NewDescribeGroupOffsetsRequest()
-    }
-    
-    response = NewDescribeGroupOffsetsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeGroupOffsetsWithContext(context.Background(), request)
 }
 
 // DescribeGroupOffsets
@@ -1415,6 +1391,11 @@ func (c *Client) DescribeGroupOffsetsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeGroupOffsetsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroupOffsets require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeGroupOffsetsResponse()
@@ -1457,13 +1438,7 @@ func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttribut
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeInstanceAttributes(request *DescribeInstanceAttributesRequest) (response *DescribeInstanceAttributesResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstanceAttributesRequest()
-    }
-    
-    response = NewDescribeInstanceAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstanceAttributesWithContext(context.Background(), request)
 }
 
 // DescribeInstanceAttributes
@@ -1487,6 +1462,11 @@ func (c *Client) DescribeInstanceAttributesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeInstanceAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstanceAttributesResponse()
@@ -1525,13 +1505,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstancesRequest()
-    }
-    
-    response = NewDescribeInstancesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstancesWithContext(context.Background(), request)
 }
 
 // DescribeInstances
@@ -1551,6 +1525,11 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeInstancesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstances require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstancesResponse()
@@ -1593,13 +1572,7 @@ func NewDescribeInstancesDetailResponse() (response *DescribeInstancesDetailResp
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeInstancesDetail(request *DescribeInstancesDetailRequest) (response *DescribeInstancesDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstancesDetailRequest()
-    }
-    
-    response = NewDescribeInstancesDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstancesDetailWithContext(context.Background(), request)
 }
 
 // DescribeInstancesDetail
@@ -1623,6 +1596,11 @@ func (c *Client) DescribeInstancesDetailWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeInstancesDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstancesDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstancesDetailResponse()
@@ -1665,13 +1643,7 @@ func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeRegion(request *DescribeRegionRequest) (response *DescribeRegionResponse, err error) {
-    if request == nil {
-        request = NewDescribeRegionRequest()
-    }
-    
-    response = NewDescribeRegionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRegionWithContext(context.Background(), request)
 }
 
 // DescribeRegion
@@ -1695,6 +1667,11 @@ func (c *Client) DescribeRegionWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeRegionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRegion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRegionResponse()
@@ -1737,13 +1714,7 @@ func NewDescribeRouteResponse() (response *DescribeRouteResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeRoute(request *DescribeRouteRequest) (response *DescribeRouteResponse, err error) {
-    if request == nil {
-        request = NewDescribeRouteRequest()
-    }
-    
-    response = NewDescribeRouteResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRouteWithContext(context.Background(), request)
 }
 
 // DescribeRoute
@@ -1767,6 +1738,11 @@ func (c *Client) DescribeRouteWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeRouteRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRouteResponse()
@@ -1812,13 +1788,7 @@ func NewDescribeTopicResponse() (response *DescribeTopicResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeTopic(request *DescribeTopicRequest) (response *DescribeTopicResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicRequest()
-    }
-    
-    response = NewDescribeTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicWithContext(context.Background(), request)
 }
 
 // DescribeTopic
@@ -1845,6 +1815,11 @@ func (c *Client) DescribeTopicWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicResponse()
@@ -1889,13 +1864,7 @@ func NewDescribeTopicAttributesResponse() (response *DescribeTopicAttributesResp
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeTopicAttributes(request *DescribeTopicAttributesRequest) (response *DescribeTopicAttributesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicAttributesRequest()
-    }
-    
-    response = NewDescribeTopicAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicAttributesWithContext(context.Background(), request)
 }
 
 // DescribeTopicAttributes
@@ -1921,6 +1890,11 @@ func (c *Client) DescribeTopicAttributesWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeTopicAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicAttributesResponse()
@@ -1960,13 +1934,7 @@ func NewDescribeTopicDetailResponse() (response *DescribeTopicDetailResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeTopicDetail(request *DescribeTopicDetailRequest) (response *DescribeTopicDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicDetailRequest()
-    }
-    
-    response = NewDescribeTopicDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicDetailWithContext(context.Background(), request)
 }
 
 // DescribeTopicDetail
@@ -1987,6 +1955,11 @@ func (c *Client) DescribeTopicDetailWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTopicDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicDetailResponse()
@@ -2035,13 +2008,7 @@ func NewDescribeTopicSubscribeGroupResponse() (response *DescribeTopicSubscribeG
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeTopicSubscribeGroup(request *DescribeTopicSubscribeGroupRequest) (response *DescribeTopicSubscribeGroupResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicSubscribeGroupRequest()
-    }
-    
-    response = NewDescribeTopicSubscribeGroupResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicSubscribeGroupWithContext(context.Background(), request)
 }
 
 // DescribeTopicSubscribeGroup
@@ -2071,6 +2038,11 @@ func (c *Client) DescribeTopicSubscribeGroupWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeTopicSubscribeGroupRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicSubscribeGroup require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicSubscribeGroupResponse()
@@ -2105,13 +2077,7 @@ func NewDescribeTopicSyncReplicaResponse() (response *DescribeTopicSyncReplicaRe
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopicSyncReplica(request *DescribeTopicSyncReplicaRequest) (response *DescribeTopicSyncReplicaResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicSyncReplicaRequest()
-    }
-    
-    response = NewDescribeTopicSyncReplicaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTopicSyncReplicaWithContext(context.Background(), request)
 }
 
 // DescribeTopicSyncReplica
@@ -2127,6 +2093,11 @@ func (c *Client) DescribeTopicSyncReplicaWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeTopicSyncReplicaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicSyncReplica require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTopicSyncReplicaResponse()
@@ -2169,13 +2140,7 @@ func NewDescribeUserResponse() (response *DescribeUserResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
-    if request == nil {
-        request = NewDescribeUserRequest()
-    }
-    
-    response = NewDescribeUserResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUserWithContext(context.Background(), request)
 }
 
 // DescribeUser
@@ -2199,6 +2164,11 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     if request == nil {
         request = NewDescribeUserRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUser require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUserResponse()
@@ -2229,13 +2199,7 @@ func NewFetchMessageByOffsetResponse() (response *FetchMessageByOffsetResponse) 
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) FetchMessageByOffset(request *FetchMessageByOffsetRequest) (response *FetchMessageByOffsetResponse, err error) {
-    if request == nil {
-        request = NewFetchMessageByOffsetRequest()
-    }
-    
-    response = NewFetchMessageByOffsetResponse()
-    err = c.Send(request, response)
-    return
+    return c.FetchMessageByOffsetWithContext(context.Background(), request)
 }
 
 // FetchMessageByOffset
@@ -2247,6 +2211,11 @@ func (c *Client) FetchMessageByOffsetWithContext(ctx context.Context, request *F
     if request == nil {
         request = NewFetchMessageByOffsetRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FetchMessageByOffset require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewFetchMessageByOffsetResponse()
@@ -2289,13 +2258,7 @@ func NewModifyGroupOffsetsResponse() (response *ModifyGroupOffsetsResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) ModifyGroupOffsets(request *ModifyGroupOffsetsRequest) (response *ModifyGroupOffsetsResponse, err error) {
-    if request == nil {
-        request = NewModifyGroupOffsetsRequest()
-    }
-    
-    response = NewModifyGroupOffsetsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyGroupOffsetsWithContext(context.Background(), request)
 }
 
 // ModifyGroupOffsets
@@ -2319,6 +2282,11 @@ func (c *Client) ModifyGroupOffsetsWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyGroupOffsetsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyGroupOffsets require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyGroupOffsetsResponse()
@@ -2361,13 +2329,7 @@ func NewModifyInstanceAttributesResponse() (response *ModifyInstanceAttributesRe
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) ModifyInstanceAttributes(request *ModifyInstanceAttributesRequest) (response *ModifyInstanceAttributesResponse, err error) {
-    if request == nil {
-        request = NewModifyInstanceAttributesRequest()
-    }
-    
-    response = NewModifyInstanceAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyInstanceAttributesWithContext(context.Background(), request)
 }
 
 // ModifyInstanceAttributes
@@ -2391,6 +2353,11 @@ func (c *Client) ModifyInstanceAttributesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyInstanceAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyInstanceAttributesResponse()
@@ -2433,13 +2400,7 @@ func NewModifyPasswordResponse() (response *ModifyPasswordResponse) {
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) ModifyPassword(request *ModifyPasswordRequest) (response *ModifyPasswordResponse, err error) {
-    if request == nil {
-        request = NewModifyPasswordRequest()
-    }
-    
-    response = NewModifyPasswordResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPasswordWithContext(context.Background(), request)
 }
 
 // ModifyPassword
@@ -2463,6 +2424,11 @@ func (c *Client) ModifyPasswordWithContext(ctx context.Context, request *ModifyP
     if request == nil {
         request = NewModifyPasswordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPassword require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPasswordResponse()
@@ -2505,13 +2471,7 @@ func NewModifyTopicAttributesResponse() (response *ModifyTopicAttributesResponse
 //  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
 //  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
 func (c *Client) ModifyTopicAttributes(request *ModifyTopicAttributesRequest) (response *ModifyTopicAttributesResponse, err error) {
-    if request == nil {
-        request = NewModifyTopicAttributesRequest()
-    }
-    
-    response = NewModifyTopicAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyTopicAttributesWithContext(context.Background(), request)
 }
 
 // ModifyTopicAttributes
@@ -2535,6 +2495,11 @@ func (c *Client) ModifyTopicAttributesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyTopicAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTopicAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyTopicAttributesResponse()
@@ -2570,13 +2535,7 @@ func NewSendMessageResponse() (response *SendMessageResponse) {
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SendMessage(request *SendMessageRequest) (response *SendMessageResponse, err error) {
-    if request == nil {
-        request = NewSendMessageRequest()
-    }
-    
-    response = NewSendMessageResponse()
-    err = c.Send(request, response)
-    return
+    return c.SendMessageWithContext(context.Background(), request)
 }
 
 // SendMessage
@@ -2593,6 +2552,11 @@ func (c *Client) SendMessageWithContext(ctx context.Context, request *SendMessag
     if request == nil {
         request = NewSendMessageRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendMessage require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSendMessageResponse()

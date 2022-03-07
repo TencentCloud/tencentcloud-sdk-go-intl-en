@@ -16,6 +16,7 @@ package v20190319
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -70,13 +71,7 @@ func NewDescribeAuditTracksResponse() (response *DescribeAuditTracksResponse) {
 //  INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 func (c *Client) DescribeAuditTracks(request *DescribeAuditTracksRequest) (response *DescribeAuditTracksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAuditTracksRequest()
-    }
-    
-    response = NewDescribeAuditTracksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAuditTracksWithContext(context.Background(), request)
 }
 
 // DescribeAuditTracks
@@ -91,6 +86,11 @@ func (c *Client) DescribeAuditTracksWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeAuditTracksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditTracks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAuditTracksResponse()
@@ -122,13 +122,7 @@ func NewDescribeEventsResponse() (response *DescribeEventsResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *DescribeEventsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEventsRequest()
-    }
-    
-    response = NewDescribeEventsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEventsWithContext(context.Background(), request)
 }
 
 // DescribeEvents
@@ -141,6 +135,11 @@ func (c *Client) DescribeEventsWithContext(ctx context.Context, request *Describ
     if request == nil {
         request = NewDescribeEventsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEvents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEventsResponse()

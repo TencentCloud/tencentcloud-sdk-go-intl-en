@@ -16,6 +16,7 @@ package v20180416
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -99,13 +100,7 @@ func NewCopyFunctionResponse() (response *CopyFunctionResponse) {
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 func (c *Client) CopyFunction(request *CopyFunctionRequest) (response *CopyFunctionResponse, err error) {
-    if request == nil {
-        request = NewCopyFunctionRequest()
-    }
-    
-    response = NewCopyFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.CopyFunctionWithContext(context.Background(), request)
 }
 
 // CopyFunction
@@ -149,6 +144,11 @@ func (c *Client) CopyFunctionWithContext(ctx context.Context, request *CopyFunct
     if request == nil {
         request = NewCopyFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CopyFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCopyFunctionResponse()
@@ -195,13 +195,7 @@ func NewCreateAliasResponse() (response *CreateAliasResponse) {
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) CreateAlias(request *CreateAliasRequest) (response *CreateAliasResponse, err error) {
-    if request == nil {
-        request = NewCreateAliasRequest()
-    }
-    
-    response = NewCreateAliasResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAliasWithContext(context.Background(), request)
 }
 
 // CreateAlias
@@ -229,6 +223,11 @@ func (c *Client) CreateAliasWithContext(ctx context.Context, request *CreateAlia
     if request == nil {
         request = NewCreateAliasRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlias require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAliasResponse()
@@ -352,13 +351,7 @@ func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
 //  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
 //  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
-    if request == nil {
-        request = NewCreateFunctionRequest()
-    }
-    
-    response = NewCreateFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateFunctionWithContext(context.Background(), request)
 }
 
 // CreateFunction
@@ -463,6 +456,11 @@ func (c *Client) CreateFunctionWithContext(ctx context.Context, request *CreateF
     if request == nil {
         request = NewCreateFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateFunctionResponse()
@@ -505,13 +503,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
-    if request == nil {
-        request = NewCreateNamespaceRequest()
-    }
-    
-    response = NewCreateNamespaceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateNamespaceWithContext(context.Background(), request)
 }
 
 // CreateNamespace
@@ -535,6 +527,11 @@ func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateNamespaceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNamespace require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateNamespaceResponse()
@@ -615,13 +612,7 @@ func NewCreateTriggerResponse() (response *CreateTriggerResponse) {
 //  UNSUPPORTEDOPERATION_COS = "UnsupportedOperation.Cos"
 //  UNSUPPORTEDOPERATION_TRIGGER = "UnsupportedOperation.Trigger"
 func (c *Client) CreateTrigger(request *CreateTriggerRequest) (response *CreateTriggerResponse, err error) {
-    if request == nil {
-        request = NewCreateTriggerRequest()
-    }
-    
-    response = NewCreateTriggerResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTriggerWithContext(context.Background(), request)
 }
 
 // CreateTrigger
@@ -683,6 +674,11 @@ func (c *Client) CreateTriggerWithContext(ctx context.Context, request *CreateTr
     if request == nil {
         request = NewCreateTriggerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTrigger require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTriggerResponse()
@@ -719,13 +715,7 @@ func NewDeleteAliasResponse() (response *DeleteAliasResponse) {
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 func (c *Client) DeleteAlias(request *DeleteAliasRequest) (response *DeleteAliasResponse, err error) {
-    if request == nil {
-        request = NewDeleteAliasRequest()
-    }
-    
-    response = NewDeleteAliasResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAliasWithContext(context.Background(), request)
 }
 
 // DeleteAlias
@@ -743,6 +733,11 @@ func (c *Client) DeleteAliasWithContext(ctx context.Context, request *DeleteAlia
     if request == nil {
         request = NewDeleteAliasRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlias require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAliasResponse()
@@ -793,13 +788,7 @@ func NewDeleteFunctionResponse() (response *DeleteFunctionResponse) {
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ALIASBIND = "UnsupportedOperation.AliasBind"
 func (c *Client) DeleteFunction(request *DeleteFunctionRequest) (response *DeleteFunctionResponse, err error) {
-    if request == nil {
-        request = NewDeleteFunctionRequest()
-    }
-    
-    response = NewDeleteFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteFunctionWithContext(context.Background(), request)
 }
 
 // DeleteFunction
@@ -831,6 +820,11 @@ func (c *Client) DeleteFunctionWithContext(ctx context.Context, request *DeleteF
     if request == nil {
         request = NewDeleteFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteFunctionResponse()
@@ -867,13 +861,7 @@ func NewDeleteLayerVersionResponse() (response *DeleteLayerVersionResponse) {
 //  RESOURCENOTFOUND_LAYERVERSION = "ResourceNotFound.LayerVersion"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) DeleteLayerVersion(request *DeleteLayerVersionRequest) (response *DeleteLayerVersionResponse, err error) {
-    if request == nil {
-        request = NewDeleteLayerVersionRequest()
-    }
-    
-    response = NewDeleteLayerVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteLayerVersionWithContext(context.Background(), request)
 }
 
 // DeleteLayerVersion
@@ -891,6 +879,11 @@ func (c *Client) DeleteLayerVersionWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteLayerVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLayerVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteLayerVersionResponse()
@@ -929,13 +922,7 @@ func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteNamespace(request *DeleteNamespaceRequest) (response *DeleteNamespaceResponse, err error) {
-    if request == nil {
-        request = NewDeleteNamespaceRequest()
-    }
-    
-    response = NewDeleteNamespaceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteNamespaceWithContext(context.Background(), request)
 }
 
 // DeleteNamespace
@@ -955,6 +942,11 @@ func (c *Client) DeleteNamespaceWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteNamespaceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNamespace require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteNamespaceResponse()
@@ -993,13 +985,7 @@ func NewDeleteProvisionedConcurrencyConfigResponse() (response *DeleteProvisione
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteProvisionedConcurrencyConfig(request *DeleteProvisionedConcurrencyConfigRequest) (response *DeleteProvisionedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteProvisionedConcurrencyConfigRequest()
-    }
-    
-    response = NewDeleteProvisionedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteProvisionedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // DeleteProvisionedConcurrencyConfig
@@ -1019,6 +1005,11 @@ func (c *Client) DeleteProvisionedConcurrencyConfigWithContext(ctx context.Conte
     if request == nil {
         request = NewDeleteProvisionedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProvisionedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteProvisionedConcurrencyConfigResponse()
@@ -1054,13 +1045,7 @@ func NewDeleteReservedConcurrencyConfigResponse() (response *DeleteReservedConcu
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteReservedConcurrencyConfig(request *DeleteReservedConcurrencyConfigRequest) (response *DeleteReservedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteReservedConcurrencyConfigRequest()
-    }
-    
-    response = NewDeleteReservedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteReservedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // DeleteReservedConcurrencyConfig
@@ -1077,6 +1062,11 @@ func (c *Client) DeleteReservedConcurrencyConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewDeleteReservedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteReservedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteReservedConcurrencyConfigResponse()
@@ -1133,13 +1123,7 @@ func NewDeleteTriggerResponse() (response *DeleteTriggerResponse) {
 //  UNAUTHORIZEDOPERATION_DELETETRIGGER = "UnauthorizedOperation.DeleteTrigger"
 //  UNSUPPORTEDOPERATION_CDN = "UnsupportedOperation.Cdn"
 func (c *Client) DeleteTrigger(request *DeleteTriggerRequest) (response *DeleteTriggerResponse, err error) {
-    if request == nil {
-        request = NewDeleteTriggerRequest()
-    }
-    
-    response = NewDeleteTriggerResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteTriggerWithContext(context.Background(), request)
 }
 
 // DeleteTrigger
@@ -1177,6 +1161,11 @@ func (c *Client) DeleteTriggerWithContext(ctx context.Context, request *DeleteTr
     if request == nil {
         request = NewDeleteTriggerRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTrigger require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteTriggerResponse()
@@ -1208,13 +1197,7 @@ func NewGetAccountResponse() (response *GetAccountResponse) {
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetAccount(request *GetAccountRequest) (response *GetAccountResponse, err error) {
-    if request == nil {
-        request = NewGetAccountRequest()
-    }
-    
-    response = NewGetAccountResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetAccountWithContext(context.Background(), request)
 }
 
 // GetAccount
@@ -1227,6 +1210,11 @@ func (c *Client) GetAccountWithContext(ctx context.Context, request *GetAccountR
     if request == nil {
         request = NewGetAccountRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAccount require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetAccountResponse()
@@ -1267,13 +1255,7 @@ func NewGetAliasResponse() (response *GetAliasResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetAlias(request *GetAliasRequest) (response *GetAliasResponse, err error) {
-    if request == nil {
-        request = NewGetAliasRequest()
-    }
-    
-    response = NewGetAliasResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetAliasWithContext(context.Background(), request)
 }
 
 // GetAlias
@@ -1295,6 +1277,11 @@ func (c *Client) GetAliasWithContext(ctx context.Context, request *GetAliasReque
     if request == nil {
         request = NewGetAliasRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAlias require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetAliasResponse()
@@ -1328,13 +1315,7 @@ func NewGetAsyncEventStatusResponse() (response *GetAsyncEventStatusResponse) {
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 func (c *Client) GetAsyncEventStatus(request *GetAsyncEventStatusRequest) (response *GetAsyncEventStatusResponse, err error) {
-    if request == nil {
-        request = NewGetAsyncEventStatusRequest()
-    }
-    
-    response = NewGetAsyncEventStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetAsyncEventStatusWithContext(context.Background(), request)
 }
 
 // GetAsyncEventStatus
@@ -1349,6 +1330,11 @@ func (c *Client) GetAsyncEventStatusWithContext(ctx context.Context, request *Ge
     if request == nil {
         request = NewGetAsyncEventStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAsyncEventStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetAsyncEventStatusResponse()
@@ -1395,13 +1381,7 @@ func NewGetFunctionResponse() (response *GetFunctionResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
 func (c *Client) GetFunction(request *GetFunctionRequest) (response *GetFunctionResponse, err error) {
-    if request == nil {
-        request = NewGetFunctionRequest()
-    }
-    
-    response = NewGetFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetFunctionWithContext(context.Background(), request)
 }
 
 // GetFunction
@@ -1429,6 +1409,11 @@ func (c *Client) GetFunctionWithContext(ctx context.Context, request *GetFunctio
     if request == nil {
         request = NewGetFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetFunctionResponse()
@@ -1474,13 +1459,7 @@ func NewGetFunctionAddressResponse() (response *GetFunctionAddressResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
 func (c *Client) GetFunctionAddress(request *GetFunctionAddressRequest) (response *GetFunctionAddressResponse, err error) {
-    if request == nil {
-        request = NewGetFunctionAddressRequest()
-    }
-    
-    response = NewGetFunctionAddressResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetFunctionAddressWithContext(context.Background(), request)
 }
 
 // GetFunctionAddress
@@ -1507,6 +1486,11 @@ func (c *Client) GetFunctionAddressWithContext(ctx context.Context, request *Get
     if request == nil {
         request = NewGetFunctionAddressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFunctionAddress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetFunctionAddressResponse()
@@ -1552,13 +1536,7 @@ func NewGetFunctionEventInvokeConfigResponse() (response *GetFunctionEventInvoke
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetFunctionEventInvokeConfig(request *GetFunctionEventInvokeConfigRequest) (response *GetFunctionEventInvokeConfigResponse, err error) {
-    if request == nil {
-        request = NewGetFunctionEventInvokeConfigRequest()
-    }
-    
-    response = NewGetFunctionEventInvokeConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetFunctionEventInvokeConfigWithContext(context.Background(), request)
 }
 
 // GetFunctionEventInvokeConfig
@@ -1585,6 +1563,11 @@ func (c *Client) GetFunctionEventInvokeConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewGetFunctionEventInvokeConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFunctionEventInvokeConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetFunctionEventInvokeConfigResponse()
@@ -1633,13 +1616,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
-    if request == nil {
-        request = NewGetFunctionLogsRequest()
-    }
-    
-    response = NewGetFunctionLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetFunctionLogsWithContext(context.Background(), request)
 }
 
 // GetFunctionLogs
@@ -1669,6 +1646,11 @@ func (c *Client) GetFunctionLogsWithContext(ctx context.Context, request *GetFun
     if request == nil {
         request = NewGetFunctionLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFunctionLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetFunctionLogsResponse()
@@ -1702,13 +1684,7 @@ func NewGetLayerVersionResponse() (response *GetLayerVersionResponse) {
 //  RESOURCENOTFOUND_LAYERVERSION = "ResourceNotFound.LayerVersion"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) GetLayerVersion(request *GetLayerVersionRequest) (response *GetLayerVersionResponse, err error) {
-    if request == nil {
-        request = NewGetLayerVersionRequest()
-    }
-    
-    response = NewGetLayerVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetLayerVersionWithContext(context.Background(), request)
 }
 
 // GetLayerVersion
@@ -1723,6 +1699,11 @@ func (c *Client) GetLayerVersionWithContext(ctx context.Context, request *GetLay
     if request == nil {
         request = NewGetLayerVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetLayerVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetLayerVersionResponse()
@@ -1761,13 +1742,7 @@ func NewGetProvisionedConcurrencyConfigResponse() (response *GetProvisionedConcu
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetProvisionedConcurrencyConfig(request *GetProvisionedConcurrencyConfigRequest) (response *GetProvisionedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewGetProvisionedConcurrencyConfigRequest()
-    }
-    
-    response = NewGetProvisionedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetProvisionedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // GetProvisionedConcurrencyConfig
@@ -1787,6 +1762,11 @@ func (c *Client) GetProvisionedConcurrencyConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewGetProvisionedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetProvisionedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetProvisionedConcurrencyConfigResponse()
@@ -1829,13 +1809,7 @@ func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *GetRequestStatusResponse, err error) {
-    if request == nil {
-        request = NewGetRequestStatusRequest()
-    }
-    
-    response = NewGetRequestStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetRequestStatusWithContext(context.Background(), request)
 }
 
 // GetRequestStatus
@@ -1859,6 +1833,11 @@ func (c *Client) GetRequestStatusWithContext(ctx context.Context, request *GetRe
     if request == nil {
         request = NewGetRequestStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRequestStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetRequestStatusResponse()
@@ -1896,13 +1875,7 @@ func NewGetReservedConcurrencyConfigResponse() (response *GetReservedConcurrency
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetReservedConcurrencyConfig(request *GetReservedConcurrencyConfigRequest) (response *GetReservedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewGetReservedConcurrencyConfigRequest()
-    }
-    
-    response = NewGetReservedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetReservedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // GetReservedConcurrencyConfig
@@ -1921,6 +1894,11 @@ func (c *Client) GetReservedConcurrencyConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewGetReservedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetReservedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetReservedConcurrencyConfigResponse()
@@ -1961,13 +1939,7 @@ func NewInvokeResponse() (response *InvokeResponse) {
 //  RESOURCEUNAVAILABLE_INSUFFICIENTBALANCE = "ResourceUnavailable.InsufficientBalance"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) Invoke(request *InvokeRequest) (response *InvokeResponse, err error) {
-    if request == nil {
-        request = NewInvokeRequest()
-    }
-    
-    response = NewInvokeResponse()
-    err = c.Send(request, response)
-    return
+    return c.InvokeWithContext(context.Background(), request)
 }
 
 // Invoke
@@ -1989,6 +1961,11 @@ func (c *Client) InvokeWithContext(ctx context.Context, request *InvokeRequest) 
     if request == nil {
         request = NewInvokeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("Invoke require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInvokeResponse()
@@ -2031,13 +2008,7 @@ func NewInvokeFunctionResponse() (response *InvokeFunctionResponse) {
 //  RESOURCEUNAVAILABLE_INSUFFICIENTBALANCE = "ResourceUnavailable.InsufficientBalance"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) InvokeFunction(request *InvokeFunctionRequest) (response *InvokeFunctionResponse, err error) {
-    if request == nil {
-        request = NewInvokeFunctionRequest()
-    }
-    
-    response = NewInvokeFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.InvokeFunctionWithContext(context.Background(), request)
 }
 
 // InvokeFunction
@@ -2061,6 +2032,11 @@ func (c *Client) InvokeFunctionWithContext(ctx context.Context, request *InvokeF
     if request == nil {
         request = NewInvokeFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InvokeFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInvokeFunctionResponse()
@@ -2097,13 +2073,7 @@ func NewListAliasesResponse() (response *ListAliasesResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListAliases(request *ListAliasesRequest) (response *ListAliasesResponse, err error) {
-    if request == nil {
-        request = NewListAliasesRequest()
-    }
-    
-    response = NewListAliasesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAliasesWithContext(context.Background(), request)
 }
 
 // ListAliases
@@ -2121,6 +2091,11 @@ func (c *Client) ListAliasesWithContext(ctx context.Context, request *ListAliase
     if request == nil {
         request = NewListAliasesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAliases require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAliasesResponse()
@@ -2159,13 +2134,7 @@ func NewListAsyncEventsResponse() (response *ListAsyncEventsResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 func (c *Client) ListAsyncEvents(request *ListAsyncEventsRequest) (response *ListAsyncEventsResponse, err error) {
-    if request == nil {
-        request = NewListAsyncEventsRequest()
-    }
-    
-    response = NewListAsyncEventsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListAsyncEventsWithContext(context.Background(), request)
 }
 
 // ListAsyncEvents
@@ -2185,6 +2154,11 @@ func (c *Client) ListAsyncEventsWithContext(ctx context.Context, request *ListAs
     if request == nil {
         request = NewListAsyncEventsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAsyncEvents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListAsyncEventsResponse()
@@ -2226,13 +2200,7 @@ func NewListFunctionsResponse() (response *ListFunctionsResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
 func (c *Client) ListFunctions(request *ListFunctionsRequest) (response *ListFunctionsResponse, err error) {
-    if request == nil {
-        request = NewListFunctionsRequest()
-    }
-    
-    response = NewListFunctionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListFunctionsWithContext(context.Background(), request)
 }
 
 // ListFunctions
@@ -2255,6 +2223,11 @@ func (c *Client) ListFunctionsWithContext(ctx context.Context, request *ListFunc
     if request == nil {
         request = NewListFunctionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListFunctions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListFunctionsResponse()
@@ -2289,13 +2262,7 @@ func NewListLayerVersionsResponse() (response *ListLayerVersionsResponse) {
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListLayerVersions(request *ListLayerVersionsRequest) (response *ListLayerVersionsResponse, err error) {
-    if request == nil {
-        request = NewListLayerVersionsRequest()
-    }
-    
-    response = NewListLayerVersionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListLayerVersionsWithContext(context.Background(), request)
 }
 
 // ListLayerVersions
@@ -2311,6 +2278,11 @@ func (c *Client) ListLayerVersionsWithContext(ctx context.Context, request *List
     if request == nil {
         request = NewListLayerVersionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListLayerVersions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListLayerVersionsResponse()
@@ -2346,13 +2318,7 @@ func NewListLayersResponse() (response *ListLayersResponse) {
 //  LIMITEXCEEDED_LAYERS = "LimitExceeded.Layers"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListLayers(request *ListLayersRequest) (response *ListLayersResponse, err error) {
-    if request == nil {
-        request = NewListLayersRequest()
-    }
-    
-    response = NewListLayersResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListLayersWithContext(context.Background(), request)
 }
 
 // ListLayers
@@ -2369,6 +2335,11 @@ func (c *Client) ListLayersWithContext(ctx context.Context, request *ListLayersR
     if request == nil {
         request = NewListLayersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListLayers require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListLayersResponse()
@@ -2402,13 +2373,7 @@ func NewListNamespacesResponse() (response *ListNamespacesResponse) {
 //  INVALIDPARAMETERVALUE_SEARCHKEY = "InvalidParameterValue.SearchKey"
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 func (c *Client) ListNamespaces(request *ListNamespacesRequest) (response *ListNamespacesResponse, err error) {
-    if request == nil {
-        request = NewListNamespacesRequest()
-    }
-    
-    response = NewListNamespacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListNamespacesWithContext(context.Background(), request)
 }
 
 // ListNamespaces
@@ -2423,6 +2388,11 @@ func (c *Client) ListNamespacesWithContext(ctx context.Context, request *ListNam
     if request == nil {
         request = NewListNamespacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListNamespaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListNamespacesResponse()
@@ -2456,13 +2426,7 @@ func NewListTriggersResponse() (response *ListTriggersResponse) {
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
 func (c *Client) ListTriggers(request *ListTriggersRequest) (response *ListTriggersResponse, err error) {
-    if request == nil {
-        request = NewListTriggersRequest()
-    }
-    
-    response = NewListTriggersResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListTriggersWithContext(context.Background(), request)
 }
 
 // ListTriggers
@@ -2477,6 +2441,11 @@ func (c *Client) ListTriggersWithContext(ctx context.Context, request *ListTrigg
     if request == nil {
         request = NewListTriggersRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTriggers require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListTriggersResponse()
@@ -2515,13 +2484,7 @@ func NewListVersionByFunctionResponse() (response *ListVersionByFunctionResponse
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListVersionByFunction(request *ListVersionByFunctionRequest) (response *ListVersionByFunctionResponse, err error) {
-    if request == nil {
-        request = NewListVersionByFunctionRequest()
-    }
-    
-    response = NewListVersionByFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListVersionByFunctionWithContext(context.Background(), request)
 }
 
 // ListVersionByFunction
@@ -2541,6 +2504,11 @@ func (c *Client) ListVersionByFunctionWithContext(ctx context.Context, request *
     if request == nil {
         request = NewListVersionByFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListVersionByFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListVersionByFunctionResponse()
@@ -2592,13 +2560,7 @@ func NewPublishLayerVersionResponse() (response *PublishLayerVersionResponse) {
 //  UNAUTHORIZEDOPERATION_NOTMC = "UnauthorizedOperation.NotMC"
 //  UNSUPPORTEDOPERATION_COS = "UnsupportedOperation.Cos"
 func (c *Client) PublishLayerVersion(request *PublishLayerVersionRequest) (response *PublishLayerVersionResponse, err error) {
-    if request == nil {
-        request = NewPublishLayerVersionRequest()
-    }
-    
-    response = NewPublishLayerVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.PublishLayerVersionWithContext(context.Background(), request)
 }
 
 // PublishLayerVersion
@@ -2631,6 +2593,11 @@ func (c *Client) PublishLayerVersionWithContext(ctx context.Context, request *Pu
     if request == nil {
         request = NewPublishLayerVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PublishLayerVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPublishLayerVersionResponse()
@@ -2672,13 +2639,7 @@ func NewPublishVersionResponse() (response *PublishVersionResponse) {
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) PublishVersion(request *PublishVersionRequest) (response *PublishVersionResponse, err error) {
-    if request == nil {
-        request = NewPublishVersionRequest()
-    }
-    
-    response = NewPublishVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.PublishVersionWithContext(context.Background(), request)
 }
 
 // PublishVersion
@@ -2701,6 +2662,11 @@ func (c *Client) PublishVersionWithContext(ctx context.Context, request *Publish
     if request == nil {
         request = NewPublishVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PublishVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPublishVersionResponse()
@@ -2762,13 +2728,7 @@ func NewPutProvisionedConcurrencyConfigResponse() (response *PutProvisionedConcu
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutProvisionedConcurrencyConfig(request *PutProvisionedConcurrencyConfigRequest) (response *PutProvisionedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewPutProvisionedConcurrencyConfigRequest()
-    }
-    
-    response = NewPutProvisionedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutProvisionedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // PutProvisionedConcurrencyConfig
@@ -2811,6 +2771,11 @@ func (c *Client) PutProvisionedConcurrencyConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewPutProvisionedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutProvisionedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutProvisionedConcurrencyConfigResponse()
@@ -2852,13 +2817,7 @@ func NewPutReservedConcurrencyConfigResponse() (response *PutReservedConcurrency
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutReservedConcurrencyConfig(request *PutReservedConcurrencyConfigRequest) (response *PutReservedConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewPutReservedConcurrencyConfigRequest()
-    }
-    
-    response = NewPutReservedConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutReservedConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // PutReservedConcurrencyConfig
@@ -2881,6 +2840,11 @@ func (c *Client) PutReservedConcurrencyConfigWithContext(ctx context.Context, re
     if request == nil {
         request = NewPutReservedConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutReservedConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutReservedConcurrencyConfigResponse()
@@ -2920,13 +2884,7 @@ func NewPutTotalConcurrencyConfigResponse() (response *PutTotalConcurrencyConfig
 //  RESOURCENOTFOUND_TOTALCONCURRENCYMEMORY = "ResourceNotFound.TotalConcurrencyMemory"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PutTotalConcurrencyConfig(request *PutTotalConcurrencyConfigRequest) (response *PutTotalConcurrencyConfigResponse, err error) {
-    if request == nil {
-        request = NewPutTotalConcurrencyConfigRequest()
-    }
-    
-    response = NewPutTotalConcurrencyConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.PutTotalConcurrencyConfigWithContext(context.Background(), request)
 }
 
 // PutTotalConcurrencyConfig
@@ -2947,6 +2905,11 @@ func (c *Client) PutTotalConcurrencyConfigWithContext(ctx context.Context, reque
     if request == nil {
         request = NewPutTotalConcurrencyConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PutTotalConcurrencyConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPutTotalConcurrencyConfigResponse()
@@ -2980,13 +2943,7 @@ func NewTerminateAsyncEventResponse() (response *TerminateAsyncEventResponse) {
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 func (c *Client) TerminateAsyncEvent(request *TerminateAsyncEventRequest) (response *TerminateAsyncEventResponse, err error) {
-    if request == nil {
-        request = NewTerminateAsyncEventRequest()
-    }
-    
-    response = NewTerminateAsyncEventResponse()
-    err = c.Send(request, response)
-    return
+    return c.TerminateAsyncEventWithContext(context.Background(), request)
 }
 
 // TerminateAsyncEvent
@@ -3001,6 +2958,11 @@ func (c *Client) TerminateAsyncEventWithContext(ctx context.Context, request *Te
     if request == nil {
         request = NewTerminateAsyncEventRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateAsyncEvent require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewTerminateAsyncEventResponse()
@@ -3045,13 +3007,7 @@ func NewUpdateAliasResponse() (response *UpdateAliasResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) UpdateAlias(request *UpdateAliasRequest) (response *UpdateAliasResponse, err error) {
-    if request == nil {
-        request = NewUpdateAliasRequest()
-    }
-    
-    response = NewUpdateAliasResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateAliasWithContext(context.Background(), request)
 }
 
 // UpdateAlias
@@ -3077,6 +3033,11 @@ func (c *Client) UpdateAliasWithContext(ctx context.Context, request *UpdateAlia
     if request == nil {
         request = NewUpdateAliasRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAlias require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateAliasResponse()
@@ -3143,13 +3104,7 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //  UNAUTHORIZEDOPERATION_UPDATEFUNCTIONCODE = "UnauthorizedOperation.UpdateFunctionCode"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (response *UpdateFunctionCodeResponse, err error) {
-    if request == nil {
-        request = NewUpdateFunctionCodeRequest()
-    }
-    
-    response = NewUpdateFunctionCodeResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateFunctionCodeWithContext(context.Background(), request)
 }
 
 // UpdateFunctionCode
@@ -3197,6 +3152,11 @@ func (c *Client) UpdateFunctionCodeWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateFunctionCodeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateFunctionCode require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateFunctionCodeResponse()
@@ -3282,13 +3242,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 //  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
 //  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfigurationRequest) (response *UpdateFunctionConfigurationResponse, err error) {
-    if request == nil {
-        request = NewUpdateFunctionConfigurationRequest()
-    }
-    
-    response = NewUpdateFunctionConfigurationResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateFunctionConfigurationWithContext(context.Background(), request)
 }
 
 // UpdateFunctionConfiguration
@@ -3355,6 +3309,11 @@ func (c *Client) UpdateFunctionConfigurationWithContext(ctx context.Context, req
     if request == nil {
         request = NewUpdateFunctionConfigurationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateFunctionConfiguration require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateFunctionConfigurationResponse()
@@ -3404,13 +3363,7 @@ func NewUpdateFunctionEventInvokeConfigResponse() (response *UpdateFunctionEvent
 //  UNSUPPORTEDOPERATION_UPDATEFUNCTIONEVENTINVOKECONFIG = "UnsupportedOperation.UpdateFunctionEventInvokeConfig"
 //  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
 func (c *Client) UpdateFunctionEventInvokeConfig(request *UpdateFunctionEventInvokeConfigRequest) (response *UpdateFunctionEventInvokeConfigResponse, err error) {
-    if request == nil {
-        request = NewUpdateFunctionEventInvokeConfigRequest()
-    }
-    
-    response = NewUpdateFunctionEventInvokeConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateFunctionEventInvokeConfigWithContext(context.Background(), request)
 }
 
 // UpdateFunctionEventInvokeConfig
@@ -3441,6 +3394,11 @@ func (c *Client) UpdateFunctionEventInvokeConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewUpdateFunctionEventInvokeConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateFunctionEventInvokeConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateFunctionEventInvokeConfigResponse()
@@ -3472,13 +3430,7 @@ func NewUpdateNamespaceResponse() (response *UpdateNamespaceResponse) {
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 func (c *Client) UpdateNamespace(request *UpdateNamespaceRequest) (response *UpdateNamespaceResponse, err error) {
-    if request == nil {
-        request = NewUpdateNamespaceRequest()
-    }
-    
-    response = NewUpdateNamespaceResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateNamespaceWithContext(context.Background(), request)
 }
 
 // UpdateNamespace
@@ -3491,6 +3443,11 @@ func (c *Client) UpdateNamespaceWithContext(ctx context.Context, request *Update
     if request == nil {
         request = NewUpdateNamespaceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateNamespace require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateNamespaceResponse()

@@ -16,6 +16,7 @@ package v20180228
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -70,13 +71,7 @@ func NewAddLoginWhiteListResponse() (response *AddLoginWhiteListResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) AddLoginWhiteList(request *AddLoginWhiteListRequest) (response *AddLoginWhiteListResponse, err error) {
-    if request == nil {
-        request = NewAddLoginWhiteListRequest()
-    }
-    
-    response = NewAddLoginWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddLoginWhiteListWithContext(context.Background(), request)
 }
 
 // AddLoginWhiteList
@@ -91,6 +86,11 @@ func (c *Client) AddLoginWhiteListWithContext(ctx context.Context, request *AddL
     if request == nil {
         request = NewAddLoginWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddLoginWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddLoginWhiteListResponse()
@@ -124,13 +124,7 @@ func NewAddMachineTagResponse() (response *AddMachineTagResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) AddMachineTag(request *AddMachineTagRequest) (response *AddMachineTagResponse, err error) {
-    if request == nil {
-        request = NewAddMachineTagRequest()
-    }
-    
-    response = NewAddMachineTagResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddMachineTagWithContext(context.Background(), request)
 }
 
 // AddMachineTag
@@ -145,6 +139,11 @@ func (c *Client) AddMachineTagWithContext(ctx context.Context, request *AddMachi
     if request == nil {
         request = NewAddMachineTagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddMachineTag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddMachineTagResponse()
@@ -182,13 +181,7 @@ func NewCloseProVersionResponse() (response *CloseProVersionResponse) {
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CloseProVersion(request *CloseProVersionRequest) (response *CloseProVersionResponse, err error) {
-    if request == nil {
-        request = NewCloseProVersionRequest()
-    }
-    
-    response = NewCloseProVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.CloseProVersionWithContext(context.Background(), request)
 }
 
 // CloseProVersion
@@ -207,6 +200,11 @@ func (c *Client) CloseProVersionWithContext(ctx context.Context, request *CloseP
     if request == nil {
         request = NewCloseProVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseProVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCloseProVersionResponse()
@@ -241,13 +239,7 @@ func NewCreateOpenPortTaskResponse() (response *CreateOpenPortTaskResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOpenPortTask(request *CreateOpenPortTaskRequest) (response *CreateOpenPortTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateOpenPortTaskRequest()
-    }
-    
-    response = NewCreateOpenPortTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateOpenPortTaskWithContext(context.Background(), request)
 }
 
 // CreateOpenPortTask
@@ -263,6 +255,11 @@ func (c *Client) CreateOpenPortTaskWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreateOpenPortTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOpenPortTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateOpenPortTaskResponse()
@@ -299,13 +296,7 @@ func NewCreateProcessTaskResponse() (response *CreateProcessTaskResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateProcessTask(request *CreateProcessTaskRequest) (response *CreateProcessTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateProcessTaskRequest()
-    }
-    
-    response = NewCreateProcessTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateProcessTaskWithContext(context.Background(), request)
 }
 
 // CreateProcessTask
@@ -323,6 +314,11 @@ func (c *Client) CreateProcessTaskWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateProcessTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProcessTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateProcessTaskResponse()
@@ -357,13 +353,7 @@ func NewCreateUsualLoginPlacesResponse() (response *CreateUsualLoginPlacesRespon
 //  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateUsualLoginPlaces(request *CreateUsualLoginPlacesRequest) (response *CreateUsualLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewCreateUsualLoginPlacesRequest()
-    }
-    
-    response = NewCreateUsualLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateUsualLoginPlacesWithContext(context.Background(), request)
 }
 
 // CreateUsualLoginPlaces
@@ -379,6 +369,11 @@ func (c *Client) CreateUsualLoginPlacesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewCreateUsualLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUsualLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateUsualLoginPlacesResponse()
@@ -412,13 +407,7 @@ func NewDeleteBruteAttacksResponse() (response *DeleteBruteAttacksResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteBruteAttacks(request *DeleteBruteAttacksRequest) (response *DeleteBruteAttacksResponse, err error) {
-    if request == nil {
-        request = NewDeleteBruteAttacksRequest()
-    }
-    
-    response = NewDeleteBruteAttacksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteBruteAttacksWithContext(context.Background(), request)
 }
 
 // DeleteBruteAttacks
@@ -433,6 +422,11 @@ func (c *Client) DeleteBruteAttacksWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeleteBruteAttacksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBruteAttacks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteBruteAttacksResponse()
@@ -466,13 +460,7 @@ func NewDeleteLoginWhiteListResponse() (response *DeleteLoginWhiteListResponse) 
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteLoginWhiteList(request *DeleteLoginWhiteListRequest) (response *DeleteLoginWhiteListResponse, err error) {
-    if request == nil {
-        request = NewDeleteLoginWhiteListRequest()
-    }
-    
-    response = NewDeleteLoginWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteLoginWhiteListWithContext(context.Background(), request)
 }
 
 // DeleteLoginWhiteList
@@ -487,6 +475,11 @@ func (c *Client) DeleteLoginWhiteListWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteLoginWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLoginWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteLoginWhiteListResponse()
@@ -522,13 +515,7 @@ func NewDeleteMachineResponse() (response *DeleteMachineResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMachine(request *DeleteMachineRequest) (response *DeleteMachineResponse, err error) {
-    if request == nil {
-        request = NewDeleteMachineRequest()
-    }
-    
-    response = NewDeleteMachineResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMachineWithContext(context.Background(), request)
 }
 
 // DeleteMachine
@@ -545,6 +532,11 @@ func (c *Client) DeleteMachineWithContext(ctx context.Context, request *DeleteMa
     if request == nil {
         request = NewDeleteMachineRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMachine require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMachineResponse()
@@ -578,13 +570,7 @@ func NewDeleteMachineTagResponse() (response *DeleteMachineTagResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteMachineTag(request *DeleteMachineTagRequest) (response *DeleteMachineTagResponse, err error) {
-    if request == nil {
-        request = NewDeleteMachineTagRequest()
-    }
-    
-    response = NewDeleteMachineTagResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMachineTagWithContext(context.Background(), request)
 }
 
 // DeleteMachineTag
@@ -599,6 +585,11 @@ func (c *Client) DeleteMachineTagWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteMachineTagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMachineTag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMachineTagResponse()
@@ -630,13 +621,7 @@ func NewDeleteMaliciousRequestsResponse() (response *DeleteMaliciousRequestsResp
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMaliciousRequests(request *DeleteMaliciousRequestsRequest) (response *DeleteMaliciousRequestsResponse, err error) {
-    if request == nil {
-        request = NewDeleteMaliciousRequestsRequest()
-    }
-    
-    response = NewDeleteMaliciousRequestsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMaliciousRequestsWithContext(context.Background(), request)
 }
 
 // DeleteMaliciousRequests
@@ -649,6 +634,11 @@ func (c *Client) DeleteMaliciousRequestsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteMaliciousRequestsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMaliciousRequests require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMaliciousRequestsResponse()
@@ -682,13 +672,7 @@ func NewDeleteMalwaresResponse() (response *DeleteMalwaresResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteMalwares(request *DeleteMalwaresRequest) (response *DeleteMalwaresResponse, err error) {
-    if request == nil {
-        request = NewDeleteMalwaresRequest()
-    }
-    
-    response = NewDeleteMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMalwaresWithContext(context.Background(), request)
 }
 
 // DeleteMalwares
@@ -703,6 +687,11 @@ func (c *Client) DeleteMalwaresWithContext(ctx context.Context, request *DeleteM
     if request == nil {
         request = NewDeleteMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMalwaresResponse()
@@ -736,13 +725,7 @@ func NewDeleteNonlocalLoginPlacesResponse() (response *DeleteNonlocalLoginPlaces
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DeleteNonlocalLoginPlaces(request *DeleteNonlocalLoginPlacesRequest) (response *DeleteNonlocalLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewDeleteNonlocalLoginPlacesRequest()
-    }
-    
-    response = NewDeleteNonlocalLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteNonlocalLoginPlacesWithContext(context.Background(), request)
 }
 
 // DeleteNonlocalLoginPlaces
@@ -757,6 +740,11 @@ func (c *Client) DeleteNonlocalLoginPlacesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteNonlocalLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNonlocalLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteNonlocalLoginPlacesResponse()
@@ -790,13 +778,7 @@ func NewDeleteUsualLoginPlacesResponse() (response *DeleteUsualLoginPlacesRespon
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DeleteUsualLoginPlaces(request *DeleteUsualLoginPlacesRequest) (response *DeleteUsualLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewDeleteUsualLoginPlacesRequest()
-    }
-    
-    response = NewDeleteUsualLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteUsualLoginPlacesWithContext(context.Background(), request)
 }
 
 // DeleteUsualLoginPlaces
@@ -811,6 +793,11 @@ func (c *Client) DeleteUsualLoginPlacesWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteUsualLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUsualLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteUsualLoginPlacesResponse()
@@ -845,13 +832,7 @@ func NewDescribeAccountStatisticsResponse() (response *DescribeAccountStatistics
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAccountStatistics(request *DescribeAccountStatisticsRequest) (response *DescribeAccountStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccountStatisticsRequest()
-    }
-    
-    response = NewDescribeAccountStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAccountStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeAccountStatistics
@@ -867,6 +848,11 @@ func (c *Client) DescribeAccountStatisticsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeAccountStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccountStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAccountStatisticsResponse()
@@ -900,13 +886,7 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccountsRequest()
-    }
-    
-    response = NewDescribeAccountsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAccountsWithContext(context.Background(), request)
 }
 
 // DescribeAccounts
@@ -921,6 +901,11 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAccountsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccounts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAccountsResponse()
@@ -954,13 +939,7 @@ func NewDescribeAgentVulsResponse() (response *DescribeAgentVulsResponse) {
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAgentVuls(request *DescribeAgentVulsRequest) (response *DescribeAgentVulsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAgentVulsRequest()
-    }
-    
-    response = NewDescribeAgentVulsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAgentVulsWithContext(context.Background(), request)
 }
 
 // DescribeAgentVuls
@@ -975,6 +954,11 @@ func (c *Client) DescribeAgentVulsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeAgentVulsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAgentVuls require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAgentVulsResponse()
@@ -1005,13 +989,7 @@ func NewDescribeAlarmAttributeResponse() (response *DescribeAlarmAttributeRespon
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAlarmAttribute(request *DescribeAlarmAttributeRequest) (response *DescribeAlarmAttributeResponse, err error) {
-    if request == nil {
-        request = NewDescribeAlarmAttributeRequest()
-    }
-    
-    response = NewDescribeAlarmAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAlarmAttributeWithContext(context.Background(), request)
 }
 
 // DescribeAlarmAttribute
@@ -1023,6 +1001,11 @@ func (c *Client) DescribeAlarmAttributeWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAlarmAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAlarmAttributeResponse()
@@ -1056,13 +1039,7 @@ func NewDescribeBruteAttacksResponse() (response *DescribeBruteAttacksResponse) 
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeBruteAttacks(request *DescribeBruteAttacksRequest) (response *DescribeBruteAttacksResponse, err error) {
-    if request == nil {
-        request = NewDescribeBruteAttacksRequest()
-    }
-    
-    response = NewDescribeBruteAttacksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBruteAttacksWithContext(context.Background(), request)
 }
 
 // DescribeBruteAttacks
@@ -1077,6 +1054,11 @@ func (c *Client) DescribeBruteAttacksWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeBruteAttacksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBruteAttacks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBruteAttacksResponse()
@@ -1112,13 +1094,7 @@ func NewDescribeComponentInfoResponse() (response *DescribeComponentInfoResponse
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeComponentInfo(request *DescribeComponentInfoRequest) (response *DescribeComponentInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeComponentInfoRequest()
-    }
-    
-    response = NewDescribeComponentInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeComponentInfoWithContext(context.Background(), request)
 }
 
 // DescribeComponentInfo
@@ -1135,6 +1111,11 @@ func (c *Client) DescribeComponentInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeComponentInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeComponentInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeComponentInfoResponse()
@@ -1169,13 +1150,7 @@ func NewDescribeComponentStatisticsResponse() (response *DescribeComponentStatis
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeComponentStatistics(request *DescribeComponentStatisticsRequest) (response *DescribeComponentStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeComponentStatisticsRequest()
-    }
-    
-    response = NewDescribeComponentStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeComponentStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeComponentStatistics
@@ -1191,6 +1166,11 @@ func (c *Client) DescribeComponentStatisticsWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeComponentStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeComponentStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeComponentStatisticsResponse()
@@ -1224,13 +1204,7 @@ func NewDescribeComponentsResponse() (response *DescribeComponentsResponse) {
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeComponents(request *DescribeComponentsRequest) (response *DescribeComponentsResponse, err error) {
-    if request == nil {
-        request = NewDescribeComponentsRequest()
-    }
-    
-    response = NewDescribeComponentsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeComponentsWithContext(context.Background(), request)
 }
 
 // DescribeComponents
@@ -1245,6 +1219,11 @@ func (c *Client) DescribeComponentsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeComponentsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeComponents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeComponentsResponse()
@@ -1279,13 +1258,7 @@ func NewDescribeHistoryAccountsResponse() (response *DescribeHistoryAccountsResp
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeHistoryAccounts(request *DescribeHistoryAccountsRequest) (response *DescribeHistoryAccountsResponse, err error) {
-    if request == nil {
-        request = NewDescribeHistoryAccountsRequest()
-    }
-    
-    response = NewDescribeHistoryAccountsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeHistoryAccountsWithContext(context.Background(), request)
 }
 
 // DescribeHistoryAccounts
@@ -1301,6 +1274,11 @@ func (c *Client) DescribeHistoryAccountsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeHistoryAccountsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHistoryAccounts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeHistoryAccountsResponse()
@@ -1334,13 +1312,7 @@ func NewDescribeImpactedHostsResponse() (response *DescribeImpactedHostsResponse
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeImpactedHosts(request *DescribeImpactedHostsRequest) (response *DescribeImpactedHostsResponse, err error) {
-    if request == nil {
-        request = NewDescribeImpactedHostsRequest()
-    }
-    
-    response = NewDescribeImpactedHostsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeImpactedHostsWithContext(context.Background(), request)
 }
 
 // DescribeImpactedHosts
@@ -1355,6 +1327,11 @@ func (c *Client) DescribeImpactedHostsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeImpactedHostsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImpactedHosts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeImpactedHostsResponse()
@@ -1388,13 +1365,7 @@ func NewDescribeLoginWhiteListResponse() (response *DescribeLoginWhiteListRespon
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeLoginWhiteList(request *DescribeLoginWhiteListRequest) (response *DescribeLoginWhiteListResponse, err error) {
-    if request == nil {
-        request = NewDescribeLoginWhiteListRequest()
-    }
-    
-    response = NewDescribeLoginWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeLoginWhiteListWithContext(context.Background(), request)
 }
 
 // DescribeLoginWhiteList
@@ -1409,6 +1380,11 @@ func (c *Client) DescribeLoginWhiteListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeLoginWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLoginWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeLoginWhiteListResponse()
@@ -1443,13 +1419,7 @@ func NewDescribeMachineInfoResponse() (response *DescribeMachineInfoResponse) {
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeMachineInfo(request *DescribeMachineInfoRequest) (response *DescribeMachineInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeMachineInfoRequest()
-    }
-    
-    response = NewDescribeMachineInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMachineInfoWithContext(context.Background(), request)
 }
 
 // DescribeMachineInfo
@@ -1465,6 +1435,11 @@ func (c *Client) DescribeMachineInfoWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeMachineInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachineInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMachineInfoResponse()
@@ -1499,13 +1474,7 @@ func NewDescribeMachinesResponse() (response *DescribeMachinesResponse) {
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *DescribeMachinesResponse, err error) {
-    if request == nil {
-        request = NewDescribeMachinesRequest()
-    }
-    
-    response = NewDescribeMachinesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMachinesWithContext(context.Background(), request)
 }
 
 // DescribeMachines
@@ -1521,6 +1490,11 @@ func (c *Client) DescribeMachinesWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeMachinesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachines require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMachinesResponse()
@@ -1552,13 +1526,7 @@ func NewDescribeMaliciousRequestsResponse() (response *DescribeMaliciousRequests
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeMaliciousRequests(request *DescribeMaliciousRequestsRequest) (response *DescribeMaliciousRequestsResponse, err error) {
-    if request == nil {
-        request = NewDescribeMaliciousRequestsRequest()
-    }
-    
-    response = NewDescribeMaliciousRequestsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMaliciousRequestsWithContext(context.Background(), request)
 }
 
 // DescribeMaliciousRequests
@@ -1571,6 +1539,11 @@ func (c *Client) DescribeMaliciousRequestsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeMaliciousRequestsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMaliciousRequests require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMaliciousRequestsResponse()
@@ -1604,13 +1577,7 @@ func NewDescribeMalwaresResponse() (response *DescribeMalwaresResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeMalwares(request *DescribeMalwaresRequest) (response *DescribeMalwaresResponse, err error) {
-    if request == nil {
-        request = NewDescribeMalwaresRequest()
-    }
-    
-    response = NewDescribeMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMalwaresWithContext(context.Background(), request)
 }
 
 // DescribeMalwares
@@ -1625,6 +1592,11 @@ func (c *Client) DescribeMalwaresWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMalwaresResponse()
@@ -1658,13 +1630,7 @@ func NewDescribeNonlocalLoginPlacesResponse() (response *DescribeNonlocalLoginPl
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) DescribeNonlocalLoginPlaces(request *DescribeNonlocalLoginPlacesRequest) (response *DescribeNonlocalLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeNonlocalLoginPlacesRequest()
-    }
-    
-    response = NewDescribeNonlocalLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeNonlocalLoginPlacesWithContext(context.Background(), request)
 }
 
 // DescribeNonlocalLoginPlaces
@@ -1679,6 +1645,11 @@ func (c *Client) DescribeNonlocalLoginPlacesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeNonlocalLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNonlocalLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeNonlocalLoginPlacesResponse()
@@ -1711,13 +1682,7 @@ func NewDescribeOpenPortStatisticsResponse() (response *DescribeOpenPortStatisti
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeOpenPortStatistics(request *DescribeOpenPortStatisticsRequest) (response *DescribeOpenPortStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeOpenPortStatisticsRequest()
-    }
-    
-    response = NewDescribeOpenPortStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOpenPortStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeOpenPortStatistics
@@ -1731,6 +1696,11 @@ func (c *Client) DescribeOpenPortStatisticsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeOpenPortStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOpenPortStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOpenPortStatisticsResponse()
@@ -1765,13 +1735,7 @@ func NewDescribeOpenPortTaskStatusResponse() (response *DescribeOpenPortTaskStat
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeOpenPortTaskStatus(request *DescribeOpenPortTaskStatusRequest) (response *DescribeOpenPortTaskStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeOpenPortTaskStatusRequest()
-    }
-    
-    response = NewDescribeOpenPortTaskStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOpenPortTaskStatusWithContext(context.Background(), request)
 }
 
 // DescribeOpenPortTaskStatus
@@ -1787,6 +1751,11 @@ func (c *Client) DescribeOpenPortTaskStatusWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeOpenPortTaskStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOpenPortTaskStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOpenPortTaskStatusResponse()
@@ -1820,13 +1789,7 @@ func NewDescribeOpenPortsResponse() (response *DescribeOpenPortsResponse) {
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeOpenPorts(request *DescribeOpenPortsRequest) (response *DescribeOpenPortsResponse, err error) {
-    if request == nil {
-        request = NewDescribeOpenPortsRequest()
-    }
-    
-    response = NewDescribeOpenPortsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOpenPortsWithContext(context.Background(), request)
 }
 
 // DescribeOpenPorts
@@ -1841,6 +1804,11 @@ func (c *Client) DescribeOpenPortsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeOpenPortsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOpenPorts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOpenPortsResponse()
@@ -1873,13 +1841,7 @@ func NewDescribeOverviewStatisticsResponse() (response *DescribeOverviewStatisti
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeOverviewStatistics(request *DescribeOverviewStatisticsRequest) (response *DescribeOverviewStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeOverviewStatisticsRequest()
-    }
-    
-    response = NewDescribeOverviewStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOverviewStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeOverviewStatistics
@@ -1893,6 +1855,11 @@ func (c *Client) DescribeOverviewStatisticsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeOverviewStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOverviewStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOverviewStatisticsResponse()
@@ -1923,13 +1890,7 @@ func NewDescribeProVersionInfoResponse() (response *DescribeProVersionInfoRespon
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeProVersionInfo(request *DescribeProVersionInfoRequest) (response *DescribeProVersionInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeProVersionInfoRequest()
-    }
-    
-    response = NewDescribeProVersionInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProVersionInfoWithContext(context.Background(), request)
 }
 
 // DescribeProVersionInfo
@@ -1941,6 +1902,11 @@ func (c *Client) DescribeProVersionInfoWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeProVersionInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProVersionInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProVersionInfoResponse()
@@ -1975,13 +1941,7 @@ func NewDescribeProcessStatisticsResponse() (response *DescribeProcessStatistics
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeProcessStatistics(request *DescribeProcessStatisticsRequest) (response *DescribeProcessStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeProcessStatisticsRequest()
-    }
-    
-    response = NewDescribeProcessStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProcessStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeProcessStatistics
@@ -1997,6 +1957,11 @@ func (c *Client) DescribeProcessStatisticsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeProcessStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcessStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProcessStatisticsResponse()
@@ -2033,13 +1998,7 @@ func NewDescribeProcessTaskStatusResponse() (response *DescribeProcessTaskStatus
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeProcessTaskStatus(request *DescribeProcessTaskStatusRequest) (response *DescribeProcessTaskStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeProcessTaskStatusRequest()
-    }
-    
-    response = NewDescribeProcessTaskStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProcessTaskStatusWithContext(context.Background(), request)
 }
 
 // DescribeProcessTaskStatus
@@ -2057,6 +2016,11 @@ func (c *Client) DescribeProcessTaskStatusWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeProcessTaskStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcessTaskStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProcessTaskStatusResponse()
@@ -2091,13 +2055,7 @@ func NewDescribeProcessesResponse() (response *DescribeProcessesResponse) {
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeProcesses(request *DescribeProcessesRequest) (response *DescribeProcessesResponse, err error) {
-    if request == nil {
-        request = NewDescribeProcessesRequest()
-    }
-    
-    response = NewDescribeProcessesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProcessesWithContext(context.Background(), request)
 }
 
 // DescribeProcesses
@@ -2113,6 +2071,11 @@ func (c *Client) DescribeProcessesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeProcessesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcesses require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProcessesResponse()
@@ -2145,13 +2108,7 @@ func NewDescribeSecurityDynamicsResponse() (response *DescribeSecurityDynamicsRe
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeSecurityDynamics(request *DescribeSecurityDynamicsRequest) (response *DescribeSecurityDynamicsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSecurityDynamicsRequest()
-    }
-    
-    response = NewDescribeSecurityDynamicsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSecurityDynamicsWithContext(context.Background(), request)
 }
 
 // DescribeSecurityDynamics
@@ -2165,6 +2122,11 @@ func (c *Client) DescribeSecurityDynamicsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeSecurityDynamicsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityDynamics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSecurityDynamicsResponse()
@@ -2198,13 +2160,7 @@ func NewDescribeSecurityTrendsResponse() (response *DescribeSecurityTrendsRespon
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeSecurityTrends(request *DescribeSecurityTrendsRequest) (response *DescribeSecurityTrendsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSecurityTrendsRequest()
-    }
-    
-    response = NewDescribeSecurityTrendsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSecurityTrendsWithContext(context.Background(), request)
 }
 
 // DescribeSecurityTrends
@@ -2219,6 +2175,11 @@ func (c *Client) DescribeSecurityTrendsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeSecurityTrendsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityTrends require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSecurityTrendsResponse()
@@ -2252,13 +2213,7 @@ func NewDescribeTagMachinesResponse() (response *DescribeTagMachinesResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTagMachines(request *DescribeTagMachinesRequest) (response *DescribeTagMachinesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTagMachinesRequest()
-    }
-    
-    response = NewDescribeTagMachinesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTagMachinesWithContext(context.Background(), request)
 }
 
 // DescribeTagMachines
@@ -2273,6 +2228,11 @@ func (c *Client) DescribeTagMachinesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeTagMachinesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTagMachines require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTagMachinesResponse()
@@ -2307,13 +2267,7 @@ func NewDescribeTagsResponse() (response *DescribeTagsResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeTagsResponse, err error) {
-    if request == nil {
-        request = NewDescribeTagsRequest()
-    }
-    
-    response = NewDescribeTagsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTagsWithContext(context.Background(), request)
 }
 
 // DescribeTags
@@ -2329,6 +2283,11 @@ func (c *Client) DescribeTagsWithContext(ctx context.Context, request *DescribeT
     if request == nil {
         request = NewDescribeTagsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTags require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTagsResponse()
@@ -2363,13 +2322,7 @@ func NewDescribeUsualLoginPlacesResponse() (response *DescribeUsualLoginPlacesRe
 //  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeUsualLoginPlaces(request *DescribeUsualLoginPlacesRequest) (response *DescribeUsualLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeUsualLoginPlacesRequest()
-    }
-    
-    response = NewDescribeUsualLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUsualLoginPlacesWithContext(context.Background(), request)
 }
 
 // DescribeUsualLoginPlaces
@@ -2385,6 +2338,11 @@ func (c *Client) DescribeUsualLoginPlacesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeUsualLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsualLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUsualLoginPlacesResponse()
@@ -2419,13 +2377,7 @@ func NewDescribeVulInfoResponse() (response *DescribeVulInfoResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeVulInfo(request *DescribeVulInfoRequest) (response *DescribeVulInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeVulInfoRequest()
-    }
-    
-    response = NewDescribeVulInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVulInfoWithContext(context.Background(), request)
 }
 
 // DescribeVulInfo
@@ -2441,6 +2393,11 @@ func (c *Client) DescribeVulInfoWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeVulInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVulInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVulInfoResponse()
@@ -2474,13 +2431,7 @@ func NewDescribeVulScanResultResponse() (response *DescribeVulScanResultResponse
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeVulScanResult(request *DescribeVulScanResultRequest) (response *DescribeVulScanResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeVulScanResultRequest()
-    }
-    
-    response = NewDescribeVulScanResultResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVulScanResultWithContext(context.Background(), request)
 }
 
 // DescribeVulScanResult
@@ -2495,6 +2446,11 @@ func (c *Client) DescribeVulScanResultWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeVulScanResultRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVulScanResult require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVulScanResultResponse()
@@ -2527,13 +2483,7 @@ func NewDescribeVulsResponse() (response *DescribeVulsResponse) {
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeVuls(request *DescribeVulsRequest) (response *DescribeVulsResponse, err error) {
-    if request == nil {
-        request = NewDescribeVulsRequest()
-    }
-    
-    response = NewDescribeVulsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVulsWithContext(context.Background(), request)
 }
 
 // DescribeVuls
@@ -2547,6 +2497,11 @@ func (c *Client) DescribeVulsWithContext(ctx context.Context, request *DescribeV
     if request == nil {
         request = NewDescribeVulsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVuls require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVulsResponse()
@@ -2579,13 +2534,7 @@ func NewDescribeWeeklyReportBruteAttacksResponse() (response *DescribeWeeklyRepo
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportBruteAttacks(request *DescribeWeeklyReportBruteAttacksRequest) (response *DescribeWeeklyReportBruteAttacksResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportBruteAttacksRequest()
-    }
-    
-    response = NewDescribeWeeklyReportBruteAttacksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportBruteAttacksWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReportBruteAttacks
@@ -2599,6 +2548,11 @@ func (c *Client) DescribeWeeklyReportBruteAttacksWithContext(ctx context.Context
     if request == nil {
         request = NewDescribeWeeklyReportBruteAttacksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReportBruteAttacks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportBruteAttacksResponse()
@@ -2630,13 +2584,7 @@ func NewDescribeWeeklyReportInfoResponse() (response *DescribeWeeklyReportInfoRe
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeWeeklyReportInfo(request *DescribeWeeklyReportInfoRequest) (response *DescribeWeeklyReportInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportInfoRequest()
-    }
-    
-    response = NewDescribeWeeklyReportInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportInfoWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReportInfo
@@ -2649,6 +2597,11 @@ func (c *Client) DescribeWeeklyReportInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeWeeklyReportInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReportInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportInfoResponse()
@@ -2681,13 +2634,7 @@ func NewDescribeWeeklyReportMalwaresResponse() (response *DescribeWeeklyReportMa
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportMalwares(request *DescribeWeeklyReportMalwaresRequest) (response *DescribeWeeklyReportMalwaresResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportMalwaresRequest()
-    }
-    
-    response = NewDescribeWeeklyReportMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportMalwaresWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReportMalwares
@@ -2701,6 +2648,11 @@ func (c *Client) DescribeWeeklyReportMalwaresWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeWeeklyReportMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReportMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportMalwaresResponse()
@@ -2733,13 +2685,7 @@ func NewDescribeWeeklyReportNonlocalLoginPlacesResponse() (response *DescribeWee
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportNonlocalLoginPlaces(request *DescribeWeeklyReportNonlocalLoginPlacesRequest) (response *DescribeWeeklyReportNonlocalLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportNonlocalLoginPlacesRequest()
-    }
-    
-    response = NewDescribeWeeklyReportNonlocalLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportNonlocalLoginPlacesWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReportNonlocalLoginPlaces
@@ -2753,6 +2699,11 @@ func (c *Client) DescribeWeeklyReportNonlocalLoginPlacesWithContext(ctx context.
     if request == nil {
         request = NewDescribeWeeklyReportNonlocalLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReportNonlocalLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportNonlocalLoginPlacesResponse()
@@ -2785,13 +2736,7 @@ func NewDescribeWeeklyReportVulsResponse() (response *DescribeWeeklyReportVulsRe
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 func (c *Client) DescribeWeeklyReportVuls(request *DescribeWeeklyReportVulsRequest) (response *DescribeWeeklyReportVulsResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportVulsRequest()
-    }
-    
-    response = NewDescribeWeeklyReportVulsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportVulsWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReportVuls
@@ -2805,6 +2750,11 @@ func (c *Client) DescribeWeeklyReportVulsWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeWeeklyReportVulsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReportVuls require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportVulsResponse()
@@ -2836,13 +2786,7 @@ func NewDescribeWeeklyReportsResponse() (response *DescribeWeeklyReportsResponse
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
 func (c *Client) DescribeWeeklyReports(request *DescribeWeeklyReportsRequest) (response *DescribeWeeklyReportsResponse, err error) {
-    if request == nil {
-        request = NewDescribeWeeklyReportsRequest()
-    }
-    
-    response = NewDescribeWeeklyReportsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWeeklyReportsWithContext(context.Background(), request)
 }
 
 // DescribeWeeklyReports
@@ -2855,6 +2799,11 @@ func (c *Client) DescribeWeeklyReportsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeWeeklyReportsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWeeklyReports require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWeeklyReportsResponse()
@@ -2890,13 +2839,7 @@ func NewEditTagsResponse() (response *EditTagsResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) EditTags(request *EditTagsRequest) (response *EditTagsResponse, err error) {
-    if request == nil {
-        request = NewEditTagsRequest()
-    }
-    
-    response = NewEditTagsResponse()
-    err = c.Send(request, response)
-    return
+    return c.EditTagsWithContext(context.Background(), request)
 }
 
 // EditTags
@@ -2913,6 +2856,11 @@ func (c *Client) EditTagsWithContext(ctx context.Context, request *EditTagsReque
     if request == nil {
         request = NewEditTagsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EditTags require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEditTagsResponse()
@@ -2944,13 +2892,7 @@ func NewExportBruteAttacksResponse() (response *ExportBruteAttacksResponse) {
 //  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
 //  INTERNALERROR = "InternalError"
 func (c *Client) ExportBruteAttacks(request *ExportBruteAttacksRequest) (response *ExportBruteAttacksResponse, err error) {
-    if request == nil {
-        request = NewExportBruteAttacksRequest()
-    }
-    
-    response = NewExportBruteAttacksResponse()
-    err = c.Send(request, response)
-    return
+    return c.ExportBruteAttacksWithContext(context.Background(), request)
 }
 
 // ExportBruteAttacks
@@ -2963,6 +2905,11 @@ func (c *Client) ExportBruteAttacksWithContext(ctx context.Context, request *Exp
     if request == nil {
         request = NewExportBruteAttacksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportBruteAttacks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewExportBruteAttacksResponse()
@@ -2994,13 +2941,7 @@ func NewExportMaliciousRequestsResponse() (response *ExportMaliciousRequestsResp
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) ExportMaliciousRequests(request *ExportMaliciousRequestsRequest) (response *ExportMaliciousRequestsResponse, err error) {
-    if request == nil {
-        request = NewExportMaliciousRequestsRequest()
-    }
-    
-    response = NewExportMaliciousRequestsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ExportMaliciousRequestsWithContext(context.Background(), request)
 }
 
 // ExportMaliciousRequests
@@ -3013,6 +2954,11 @@ func (c *Client) ExportMaliciousRequestsWithContext(ctx context.Context, request
     if request == nil {
         request = NewExportMaliciousRequestsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportMaliciousRequests require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewExportMaliciousRequestsResponse()
@@ -3044,13 +2990,7 @@ func NewExportMalwaresResponse() (response *ExportMalwaresResponse) {
 //  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
 //  INTERNALERROR = "InternalError"
 func (c *Client) ExportMalwares(request *ExportMalwaresRequest) (response *ExportMalwaresResponse, err error) {
-    if request == nil {
-        request = NewExportMalwaresRequest()
-    }
-    
-    response = NewExportMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.ExportMalwaresWithContext(context.Background(), request)
 }
 
 // ExportMalwares
@@ -3063,6 +3003,11 @@ func (c *Client) ExportMalwaresWithContext(ctx context.Context, request *ExportM
     if request == nil {
         request = NewExportMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewExportMalwaresResponse()
@@ -3094,13 +3039,7 @@ func NewExportNonlocalLoginPlacesResponse() (response *ExportNonlocalLoginPlaces
 //  FAILEDOPERATION_EXPORT = "FailedOperation.Export"
 //  INTERNALERROR = "InternalError"
 func (c *Client) ExportNonlocalLoginPlaces(request *ExportNonlocalLoginPlacesRequest) (response *ExportNonlocalLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewExportNonlocalLoginPlacesRequest()
-    }
-    
-    response = NewExportNonlocalLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ExportNonlocalLoginPlacesWithContext(context.Background(), request)
 }
 
 // ExportNonlocalLoginPlaces
@@ -3113,6 +3052,11 @@ func (c *Client) ExportNonlocalLoginPlacesWithContext(ctx context.Context, reque
     if request == nil {
         request = NewExportNonlocalLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportNonlocalLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewExportNonlocalLoginPlacesResponse()
@@ -3147,13 +3091,7 @@ func NewIgnoreImpactedHostsResponse() (response *IgnoreImpactedHostsResponse) {
 //  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) IgnoreImpactedHosts(request *IgnoreImpactedHostsRequest) (response *IgnoreImpactedHostsResponse, err error) {
-    if request == nil {
-        request = NewIgnoreImpactedHostsRequest()
-    }
-    
-    response = NewIgnoreImpactedHostsResponse()
-    err = c.Send(request, response)
-    return
+    return c.IgnoreImpactedHostsWithContext(context.Background(), request)
 }
 
 // IgnoreImpactedHosts
@@ -3169,6 +3107,11 @@ func (c *Client) IgnoreImpactedHostsWithContext(ctx context.Context, request *Ig
     if request == nil {
         request = NewIgnoreImpactedHostsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IgnoreImpactedHosts require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewIgnoreImpactedHostsResponse()
@@ -3202,13 +3145,7 @@ func NewMisAlarmNonlocalLoginPlacesResponse() (response *MisAlarmNonlocalLoginPl
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) MisAlarmNonlocalLoginPlaces(request *MisAlarmNonlocalLoginPlacesRequest) (response *MisAlarmNonlocalLoginPlacesResponse, err error) {
-    if request == nil {
-        request = NewMisAlarmNonlocalLoginPlacesRequest()
-    }
-    
-    response = NewMisAlarmNonlocalLoginPlacesResponse()
-    err = c.Send(request, response)
-    return
+    return c.MisAlarmNonlocalLoginPlacesWithContext(context.Background(), request)
 }
 
 // MisAlarmNonlocalLoginPlaces
@@ -3223,6 +3160,11 @@ func (c *Client) MisAlarmNonlocalLoginPlacesWithContext(ctx context.Context, req
     if request == nil {
         request = NewMisAlarmNonlocalLoginPlacesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MisAlarmNonlocalLoginPlaces require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewMisAlarmNonlocalLoginPlacesResponse()
@@ -3256,13 +3198,7 @@ func NewModifyAlarmAttributeResponse() (response *ModifyAlarmAttributeResponse) 
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifyAlarmAttribute(request *ModifyAlarmAttributeRequest) (response *ModifyAlarmAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyAlarmAttributeRequest()
-    }
-    
-    response = NewModifyAlarmAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAlarmAttributeWithContext(context.Background(), request)
 }
 
 // ModifyAlarmAttribute
@@ -3277,6 +3213,11 @@ func (c *Client) ModifyAlarmAttributeWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyAlarmAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAlarmAttributeResponse()
@@ -3307,13 +3248,7 @@ func NewModifyAutoOpenProVersionConfigResponse() (response *ModifyAutoOpenProVer
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) ModifyAutoOpenProVersionConfig(request *ModifyAutoOpenProVersionConfigRequest) (response *ModifyAutoOpenProVersionConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyAutoOpenProVersionConfigRequest()
-    }
-    
-    response = NewModifyAutoOpenProVersionConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAutoOpenProVersionConfigWithContext(context.Background(), request)
 }
 
 // ModifyAutoOpenProVersionConfig
@@ -3325,6 +3260,11 @@ func (c *Client) ModifyAutoOpenProVersionConfigWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyAutoOpenProVersionConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAutoOpenProVersionConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAutoOpenProVersionConfigResponse()
@@ -3358,13 +3298,7 @@ func NewModifyLoginWhiteListResponse() (response *ModifyLoginWhiteListResponse) 
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) ModifyLoginWhiteList(request *ModifyLoginWhiteListRequest) (response *ModifyLoginWhiteListResponse, err error) {
-    if request == nil {
-        request = NewModifyLoginWhiteListRequest()
-    }
-    
-    response = NewModifyLoginWhiteListResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyLoginWhiteListWithContext(context.Background(), request)
 }
 
 // ModifyLoginWhiteList
@@ -3379,6 +3313,11 @@ func (c *Client) ModifyLoginWhiteListWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyLoginWhiteListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLoginWhiteList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyLoginWhiteListResponse()
@@ -3411,13 +3350,7 @@ func NewModifyProVersionRenewFlagResponse() (response *ModifyProVersionRenewFlag
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyProVersionRenewFlag(request *ModifyProVersionRenewFlagRequest) (response *ModifyProVersionRenewFlagResponse, err error) {
-    if request == nil {
-        request = NewModifyProVersionRenewFlagRequest()
-    }
-    
-    response = NewModifyProVersionRenewFlagResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyProVersionRenewFlagWithContext(context.Background(), request)
 }
 
 // ModifyProVersionRenewFlag
@@ -3431,6 +3364,11 @@ func (c *Client) ModifyProVersionRenewFlagWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyProVersionRenewFlagRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProVersionRenewFlag require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyProVersionRenewFlagResponse()
@@ -3467,13 +3405,7 @@ func NewOpenProVersionResponse() (response *OpenProVersionResponse) {
 //  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) OpenProVersion(request *OpenProVersionRequest) (response *OpenProVersionResponse, err error) {
-    if request == nil {
-        request = NewOpenProVersionRequest()
-    }
-    
-    response = NewOpenProVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.OpenProVersionWithContext(context.Background(), request)
 }
 
 // OpenProVersion
@@ -3491,6 +3423,11 @@ func (c *Client) OpenProVersionWithContext(ctx context.Context, request *OpenPro
     if request == nil {
         request = NewOpenProVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenProVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewOpenProVersionResponse()
@@ -3525,13 +3462,7 @@ func NewRecoverMalwaresResponse() (response *RecoverMalwaresResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) RecoverMalwares(request *RecoverMalwaresRequest) (response *RecoverMalwaresResponse, err error) {
-    if request == nil {
-        request = NewRecoverMalwaresRequest()
-    }
-    
-    response = NewRecoverMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.RecoverMalwaresWithContext(context.Background(), request)
 }
 
 // RecoverMalwares
@@ -3547,6 +3478,11 @@ func (c *Client) RecoverMalwaresWithContext(ctx context.Context, request *Recove
     if request == nil {
         request = NewRecoverMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecoverMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRecoverMalwaresResponse()
@@ -3583,13 +3519,7 @@ func NewRescanImpactedHostResponse() (response *RescanImpactedHostResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) RescanImpactedHost(request *RescanImpactedHostRequest) (response *RescanImpactedHostResponse, err error) {
-    if request == nil {
-        request = NewRescanImpactedHostRequest()
-    }
-    
-    response = NewRescanImpactedHostResponse()
-    err = c.Send(request, response)
-    return
+    return c.RescanImpactedHostWithContext(context.Background(), request)
 }
 
 // RescanImpactedHost
@@ -3607,6 +3537,11 @@ func (c *Client) RescanImpactedHostWithContext(ctx context.Context, request *Res
     if request == nil {
         request = NewRescanImpactedHostRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RescanImpactedHost require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRescanImpactedHostResponse()
@@ -3642,13 +3577,7 @@ func NewSeparateMalwaresResponse() (response *SeparateMalwaresResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) SeparateMalwares(request *SeparateMalwaresRequest) (response *SeparateMalwaresResponse, err error) {
-    if request == nil {
-        request = NewSeparateMalwaresRequest()
-    }
-    
-    response = NewSeparateMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.SeparateMalwaresWithContext(context.Background(), request)
 }
 
 // SeparateMalwares
@@ -3665,6 +3594,11 @@ func (c *Client) SeparateMalwaresWithContext(ctx context.Context, request *Separ
     if request == nil {
         request = NewSeparateMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SeparateMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSeparateMalwaresResponse()
@@ -3696,13 +3630,7 @@ func NewTrustMaliciousRequestResponse() (response *TrustMaliciousRequestResponse
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) TrustMaliciousRequest(request *TrustMaliciousRequestRequest) (response *TrustMaliciousRequestResponse, err error) {
-    if request == nil {
-        request = NewTrustMaliciousRequestRequest()
-    }
-    
-    response = NewTrustMaliciousRequestResponse()
-    err = c.Send(request, response)
-    return
+    return c.TrustMaliciousRequestWithContext(context.Background(), request)
 }
 
 // TrustMaliciousRequest
@@ -3715,6 +3643,11 @@ func (c *Client) TrustMaliciousRequestWithContext(ctx context.Context, request *
     if request == nil {
         request = NewTrustMaliciousRequestRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TrustMaliciousRequest require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewTrustMaliciousRequestResponse()
@@ -3749,13 +3682,7 @@ func NewTrustMalwaresResponse() (response *TrustMalwaresResponse) {
 //  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) TrustMalwares(request *TrustMalwaresRequest) (response *TrustMalwaresResponse, err error) {
-    if request == nil {
-        request = NewTrustMalwaresRequest()
-    }
-    
-    response = NewTrustMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.TrustMalwaresWithContext(context.Background(), request)
 }
 
 // TrustMalwares
@@ -3771,6 +3698,11 @@ func (c *Client) TrustMalwaresWithContext(ctx context.Context, request *TrustMal
     if request == nil {
         request = NewTrustMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TrustMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewTrustMalwaresResponse()
@@ -3803,13 +3735,7 @@ func NewUntrustMaliciousRequestResponse() (response *UntrustMaliciousRequestResp
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UntrustMaliciousRequest(request *UntrustMaliciousRequestRequest) (response *UntrustMaliciousRequestResponse, err error) {
-    if request == nil {
-        request = NewUntrustMaliciousRequestRequest()
-    }
-    
-    response = NewUntrustMaliciousRequestResponse()
-    err = c.Send(request, response)
-    return
+    return c.UntrustMaliciousRequestWithContext(context.Background(), request)
 }
 
 // UntrustMaliciousRequest
@@ -3823,6 +3749,11 @@ func (c *Client) UntrustMaliciousRequestWithContext(ctx context.Context, request
     if request == nil {
         request = NewUntrustMaliciousRequestRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UntrustMaliciousRequest require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUntrustMaliciousRequestResponse()
@@ -3856,13 +3787,7 @@ func NewUntrustMalwaresResponse() (response *UntrustMalwaresResponse) {
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 func (c *Client) UntrustMalwares(request *UntrustMalwaresRequest) (response *UntrustMalwaresResponse, err error) {
-    if request == nil {
-        request = NewUntrustMalwaresRequest()
-    }
-    
-    response = NewUntrustMalwaresResponse()
-    err = c.Send(request, response)
-    return
+    return c.UntrustMalwaresWithContext(context.Background(), request)
 }
 
 // UntrustMalwares
@@ -3877,6 +3802,11 @@ func (c *Client) UntrustMalwaresWithContext(ctx context.Context, request *Untrus
     if request == nil {
         request = NewUntrustMalwaresRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UntrustMalwares require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUntrustMalwaresResponse()

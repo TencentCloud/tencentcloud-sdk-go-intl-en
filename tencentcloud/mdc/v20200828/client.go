@@ -16,6 +16,7 @@ package v20200828
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -72,13 +73,7 @@ func NewCreateStreamLinkFlowResponse() (response *CreateStreamLinkFlowResponse) 
 //  INVALIDPARAMETER_MAXBANDWIDTH = "InvalidParameter.MaxBandwidth"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 func (c *Client) CreateStreamLinkFlow(request *CreateStreamLinkFlowRequest) (response *CreateStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewCreateStreamLinkFlowRequest()
-    }
-    
-    response = NewCreateStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // CreateStreamLinkFlow
@@ -95,6 +90,11 @@ func (c *Client) CreateStreamLinkFlowWithContext(ctx context.Context, request *C
     if request == nil {
         request = NewCreateStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateStreamLinkFlowResponse()
@@ -126,13 +126,7 @@ func NewDeleteStreamLinkFlowResponse() (response *DeleteStreamLinkFlowResponse) 
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) DeleteStreamLinkFlow(request *DeleteStreamLinkFlowRequest) (response *DeleteStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLinkFlowRequest()
-    }
-    
-    response = NewDeleteStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // DeleteStreamLinkFlow
@@ -145,6 +139,11 @@ func (c *Client) DeleteStreamLinkFlowWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDeleteStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLinkFlowResponse()
@@ -178,13 +177,7 @@ func NewDeleteStreamLinkOutputResponse() (response *DeleteStreamLinkOutputRespon
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) DeleteStreamLinkOutput(request *DeleteStreamLinkOutputRequest) (response *DeleteStreamLinkOutputResponse, err error) {
-    if request == nil {
-        request = NewDeleteStreamLinkOutputRequest()
-    }
-    
-    response = NewDeleteStreamLinkOutputResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteStreamLinkOutputWithContext(context.Background(), request)
 }
 
 // DeleteStreamLinkOutput
@@ -199,6 +192,11 @@ func (c *Client) DeleteStreamLinkOutputWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDeleteStreamLinkOutputRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLinkOutput require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteStreamLinkOutputResponse()
@@ -230,13 +228,7 @@ func NewDescribeStreamLinkFlowResponse() (response *DescribeStreamLinkFlowRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 func (c *Client) DescribeStreamLinkFlow(request *DescribeStreamLinkFlowRequest) (response *DescribeStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLinkFlowRequest()
-    }
-    
-    response = NewDescribeStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // DescribeStreamLinkFlow
@@ -249,6 +241,11 @@ func (c *Client) DescribeStreamLinkFlowWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLinkFlowResponse()
@@ -282,13 +279,7 @@ func NewDescribeStreamLinkFlowsResponse() (response *DescribeStreamLinkFlowsResp
 //  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
 //  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
 func (c *Client) DescribeStreamLinkFlows(request *DescribeStreamLinkFlowsRequest) (response *DescribeStreamLinkFlowsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLinkFlowsRequest()
-    }
-    
-    response = NewDescribeStreamLinkFlowsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLinkFlowsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLinkFlows
@@ -303,6 +294,11 @@ func (c *Client) DescribeStreamLinkFlowsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeStreamLinkFlowsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlows require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLinkFlowsResponse()
@@ -333,13 +329,7 @@ func NewDescribeStreamLinkRegionsResponse() (response *DescribeStreamLinkRegions
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeStreamLinkRegions(request *DescribeStreamLinkRegionsRequest) (response *DescribeStreamLinkRegionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamLinkRegionsRequest()
-    }
-    
-    response = NewDescribeStreamLinkRegionsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStreamLinkRegionsWithContext(context.Background(), request)
 }
 
 // DescribeStreamLinkRegions
@@ -351,6 +341,11 @@ func (c *Client) DescribeStreamLinkRegionsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeStreamLinkRegionsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkRegions require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStreamLinkRegionsResponse()
@@ -384,13 +379,7 @@ func NewModifyStreamLinkFlowResponse() (response *ModifyStreamLinkFlowResponse) 
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) ModifyStreamLinkFlow(request *ModifyStreamLinkFlowRequest) (response *ModifyStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewModifyStreamLinkFlowRequest()
-    }
-    
-    response = NewModifyStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // ModifyStreamLinkFlow
@@ -405,6 +394,11 @@ func (c *Client) ModifyStreamLinkFlowWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyStreamLinkFlowResponse()
@@ -438,13 +432,7 @@ func NewStartStreamLinkFlowResponse() (response *StartStreamLinkFlowResponse) {
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) StartStreamLinkFlow(request *StartStreamLinkFlowRequest) (response *StartStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewStartStreamLinkFlowRequest()
-    }
-    
-    response = NewStartStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // StartStreamLinkFlow
@@ -459,6 +447,11 @@ func (c *Client) StartStreamLinkFlowWithContext(ctx context.Context, request *St
     if request == nil {
         request = NewStartStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartStreamLinkFlowResponse()
@@ -491,13 +484,7 @@ func NewStopStreamLinkFlowResponse() (response *StopStreamLinkFlowResponse) {
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_STATE = "InvalidParameter.State"
 func (c *Client) StopStreamLinkFlow(request *StopStreamLinkFlowRequest) (response *StopStreamLinkFlowResponse, err error) {
-    if request == nil {
-        request = NewStopStreamLinkFlowRequest()
-    }
-    
-    response = NewStopStreamLinkFlowResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopStreamLinkFlowWithContext(context.Background(), request)
 }
 
 // StopStreamLinkFlow
@@ -511,6 +498,11 @@ func (c *Client) StopStreamLinkFlowWithContext(ctx context.Context, request *Sto
     if request == nil {
         request = NewStopStreamLinkFlowRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopStreamLinkFlow require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopStreamLinkFlowResponse()

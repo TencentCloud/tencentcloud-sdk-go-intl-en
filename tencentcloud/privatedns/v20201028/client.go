@@ -16,6 +16,7 @@ package v20201028
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -89,13 +90,7 @@ func NewCreatePrivateDNSAccountResponse() (response *CreatePrivateDNSAccountResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePrivateDNSAccount(request *CreatePrivateDNSAccountRequest) (response *CreatePrivateDNSAccountResponse, err error) {
-    if request == nil {
-        request = NewCreatePrivateDNSAccountRequest()
-    }
-    
-    response = NewCreatePrivateDNSAccountResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePrivateDNSAccountWithContext(context.Background(), request)
 }
 
 // CreatePrivateDNSAccount
@@ -129,6 +124,11 @@ func (c *Client) CreatePrivateDNSAccountWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreatePrivateDNSAccountRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrivateDNSAccount require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePrivateDNSAccountResponse()
@@ -191,13 +191,7 @@ func NewCreatePrivateZoneResponse() (response *CreatePrivateZoneResponse) {
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
 func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (response *CreatePrivateZoneResponse, err error) {
-    if request == nil {
-        request = NewCreatePrivateZoneRequest()
-    }
-    
-    response = NewCreatePrivateZoneResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePrivateZoneWithContext(context.Background(), request)
 }
 
 // CreatePrivateZone
@@ -241,6 +235,11 @@ func (c *Client) CreatePrivateZoneWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreatePrivateZoneRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrivateZone require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePrivateZoneResponse()
@@ -306,13 +305,7 @@ func NewCreatePrivateZoneRecordResponse() (response *CreatePrivateZoneRecordResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePrivateZoneRecord(request *CreatePrivateZoneRecordRequest) (response *CreatePrivateZoneRecordResponse, err error) {
-    if request == nil {
-        request = NewCreatePrivateZoneRecordRequest()
-    }
-    
-    response = NewCreatePrivateZoneRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePrivateZoneRecordWithContext(context.Background(), request)
 }
 
 // CreatePrivateZoneRecord
@@ -359,6 +352,11 @@ func (c *Client) CreatePrivateZoneRecordWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreatePrivateZoneRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrivateZoneRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePrivateZoneRecordResponse()
@@ -409,13 +407,7 @@ func NewDeletePrivateDNSAccountResponse() (response *DeletePrivateDNSAccountResp
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_EXISTBOUNDVPC = "UnsupportedOperation.ExistBoundVpc"
 func (c *Client) DeletePrivateDNSAccount(request *DeletePrivateDNSAccountRequest) (response *DeletePrivateDNSAccountResponse, err error) {
-    if request == nil {
-        request = NewDeletePrivateDNSAccountRequest()
-    }
-    
-    response = NewDeletePrivateDNSAccountResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePrivateDNSAccountWithContext(context.Background(), request)
 }
 
 // DeletePrivateDNSAccount
@@ -447,6 +439,11 @@ func (c *Client) DeletePrivateDNSAccountWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeletePrivateDNSAccountRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrivateDNSAccount require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePrivateDNSAccountResponse()
@@ -498,13 +495,7 @@ func NewDeletePrivateZoneResponse() (response *DeletePrivateZoneResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeletePrivateZone(request *DeletePrivateZoneRequest) (response *DeletePrivateZoneResponse, err error) {
-    if request == nil {
-        request = NewDeletePrivateZoneRequest()
-    }
-    
-    response = NewDeletePrivateZoneResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePrivateZoneWithContext(context.Background(), request)
 }
 
 // DeletePrivateZone
@@ -537,6 +528,11 @@ func (c *Client) DeletePrivateZoneWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeletePrivateZoneRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrivateZone require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePrivateZoneResponse()
@@ -589,13 +585,7 @@ func NewDeletePrivateZoneRecordResponse() (response *DeletePrivateZoneRecordResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeletePrivateZoneRecord(request *DeletePrivateZoneRecordRequest) (response *DeletePrivateZoneRecordResponse, err error) {
-    if request == nil {
-        request = NewDeletePrivateZoneRecordRequest()
-    }
-    
-    response = NewDeletePrivateZoneRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePrivateZoneRecordWithContext(context.Background(), request)
 }
 
 // DeletePrivateZoneRecord
@@ -629,6 +619,11 @@ func (c *Client) DeletePrivateZoneRecordWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeletePrivateZoneRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrivateZoneRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePrivateZoneRecordResponse()
@@ -680,13 +675,7 @@ func NewDescribeAccountVpcListResponse() (response *DescribeAccountVpcListRespon
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
 func (c *Client) DescribeAccountVpcList(request *DescribeAccountVpcListRequest) (response *DescribeAccountVpcListResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccountVpcListRequest()
-    }
-    
-    response = NewDescribeAccountVpcListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAccountVpcListWithContext(context.Background(), request)
 }
 
 // DescribeAccountVpcList
@@ -719,6 +708,11 @@ func (c *Client) DescribeAccountVpcListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeAccountVpcListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccountVpcList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAccountVpcListResponse()
@@ -766,13 +760,7 @@ func NewDescribeAuditLogResponse() (response *DescribeAuditLogResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAuditLog(request *DescribeAuditLogRequest) (response *DescribeAuditLogResponse, err error) {
-    if request == nil {
-        request = NewDescribeAuditLogRequest()
-    }
-    
-    response = NewDescribeAuditLogResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAuditLogWithContext(context.Background(), request)
 }
 
 // DescribeAuditLog
@@ -801,6 +789,11 @@ func (c *Client) DescribeAuditLogWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAuditLogRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLog require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAuditLogResponse()
@@ -851,13 +844,7 @@ func NewDescribeDashboardResponse() (response *DescribeDashboardResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDashboard(request *DescribeDashboardRequest) (response *DescribeDashboardResponse, err error) {
-    if request == nil {
-        request = NewDescribeDashboardRequest()
-    }
-    
-    response = NewDescribeDashboardResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDashboardWithContext(context.Background(), request)
 }
 
 // DescribeDashboard
@@ -889,6 +876,11 @@ func (c *Client) DescribeDashboardWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeDashboardRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDashboard require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDashboardResponse()
@@ -938,13 +930,7 @@ func NewDescribePrivateDNSAccountListResponse() (response *DescribePrivateDNSAcc
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePrivateDNSAccountList(request *DescribePrivateDNSAccountListRequest) (response *DescribePrivateDNSAccountListResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateDNSAccountListRequest()
-    }
-    
-    response = NewDescribePrivateDNSAccountListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateDNSAccountListWithContext(context.Background(), request)
 }
 
 // DescribePrivateDNSAccountList
@@ -975,6 +961,11 @@ func (c *Client) DescribePrivateDNSAccountListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribePrivateDNSAccountListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateDNSAccountList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateDNSAccountListResponse()
@@ -1026,13 +1017,7 @@ func NewDescribePrivateZoneResponse() (response *DescribePrivateZoneResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePrivateZone(request *DescribePrivateZoneRequest) (response *DescribePrivateZoneResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateZoneRequest()
-    }
-    
-    response = NewDescribePrivateZoneResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateZoneWithContext(context.Background(), request)
 }
 
 // DescribePrivateZone
@@ -1065,6 +1050,11 @@ func (c *Client) DescribePrivateZoneWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribePrivateZoneRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZone require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateZoneResponse()
@@ -1114,13 +1104,7 @@ func NewDescribePrivateZoneListResponse() (response *DescribePrivateZoneListResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePrivateZoneList(request *DescribePrivateZoneListRequest) (response *DescribePrivateZoneListResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateZoneListRequest()
-    }
-    
-    response = NewDescribePrivateZoneListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateZoneListWithContext(context.Background(), request)
 }
 
 // DescribePrivateZoneList
@@ -1151,6 +1135,11 @@ func (c *Client) DescribePrivateZoneListWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribePrivateZoneListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZoneList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateZoneListResponse()
@@ -1192,13 +1181,7 @@ func NewDescribePrivateZoneRecordListResponse() (response *DescribePrivateZoneRe
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePrivateZoneRecordList(request *DescribePrivateZoneRecordListRequest) (response *DescribePrivateZoneRecordListResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateZoneRecordListRequest()
-    }
-    
-    response = NewDescribePrivateZoneRecordListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateZoneRecordListWithContext(context.Background(), request)
 }
 
 // DescribePrivateZoneRecordList
@@ -1221,6 +1204,11 @@ func (c *Client) DescribePrivateZoneRecordListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribePrivateZoneRecordListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZoneRecordList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateZoneRecordListResponse()
@@ -1269,13 +1257,7 @@ func NewDescribePrivateZoneServiceResponse() (response *DescribePrivateZoneServi
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePrivateZoneService(request *DescribePrivateZoneServiceRequest) (response *DescribePrivateZoneServiceResponse, err error) {
-    if request == nil {
-        request = NewDescribePrivateZoneServiceRequest()
-    }
-    
-    response = NewDescribePrivateZoneServiceResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePrivateZoneServiceWithContext(context.Background(), request)
 }
 
 // DescribePrivateZoneService
@@ -1305,6 +1287,11 @@ func (c *Client) DescribePrivateZoneServiceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribePrivateZoneServiceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZoneService require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePrivateZoneServiceResponse()
@@ -1337,13 +1324,7 @@ func NewDescribeRequestDataResponse() (response *DescribeRequestDataResponse) {
 //  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
 func (c *Client) DescribeRequestData(request *DescribeRequestDataRequest) (response *DescribeRequestDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeRequestDataRequest()
-    }
-    
-    response = NewDescribeRequestDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRequestDataWithContext(context.Background(), request)
 }
 
 // DescribeRequestData
@@ -1357,6 +1338,11 @@ func (c *Client) DescribeRequestDataWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeRequestDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRequestData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRequestDataResponse()
@@ -1408,13 +1394,7 @@ func NewModifyPrivateZoneResponse() (response *ModifyPrivateZoneResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPrivateZone(request *ModifyPrivateZoneRequest) (response *ModifyPrivateZoneResponse, err error) {
-    if request == nil {
-        request = NewModifyPrivateZoneRequest()
-    }
-    
-    response = NewModifyPrivateZoneResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPrivateZoneWithContext(context.Background(), request)
 }
 
 // ModifyPrivateZone
@@ -1447,6 +1427,11 @@ func (c *Client) ModifyPrivateZoneWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyPrivateZoneRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrivateZone require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPrivateZoneResponse()
@@ -1515,13 +1500,7 @@ func NewModifyPrivateZoneRecordResponse() (response *ModifyPrivateZoneRecordResp
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPrivateZoneRecord(request *ModifyPrivateZoneRecordRequest) (response *ModifyPrivateZoneRecordResponse, err error) {
-    if request == nil {
-        request = NewModifyPrivateZoneRecordRequest()
-    }
-    
-    response = NewModifyPrivateZoneRecordResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPrivateZoneRecordWithContext(context.Background(), request)
 }
 
 // ModifyPrivateZoneRecord
@@ -1571,6 +1550,11 @@ func (c *Client) ModifyPrivateZoneRecordWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyPrivateZoneRecordRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrivateZoneRecord require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPrivateZoneRecordResponse()
@@ -1627,13 +1611,7 @@ func NewModifyPrivateZoneVpcResponse() (response *ModifyPrivateZoneVpcResponse) 
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyPrivateZoneVpc(request *ModifyPrivateZoneVpcRequest) (response *ModifyPrivateZoneVpcResponse, err error) {
-    if request == nil {
-        request = NewModifyPrivateZoneVpcRequest()
-    }
-    
-    response = NewModifyPrivateZoneVpcResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPrivateZoneVpcWithContext(context.Background(), request)
 }
 
 // ModifyPrivateZoneVpc
@@ -1671,6 +1649,11 @@ func (c *Client) ModifyPrivateZoneVpcWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyPrivateZoneVpcRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrivateZoneVpc require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPrivateZoneVpcResponse()
@@ -1719,13 +1702,7 @@ func NewSubscribePrivateZoneServiceResponse() (response *SubscribePrivateZoneSer
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SubscribePrivateZoneService(request *SubscribePrivateZoneServiceRequest) (response *SubscribePrivateZoneServiceResponse, err error) {
-    if request == nil {
-        request = NewSubscribePrivateZoneServiceRequest()
-    }
-    
-    response = NewSubscribePrivateZoneServiceResponse()
-    err = c.Send(request, response)
-    return
+    return c.SubscribePrivateZoneServiceWithContext(context.Background(), request)
 }
 
 // SubscribePrivateZoneService
@@ -1755,6 +1732,11 @@ func (c *Client) SubscribePrivateZoneServiceWithContext(ctx context.Context, req
     if request == nil {
         request = NewSubscribePrivateZoneServiceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubscribePrivateZoneService require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSubscribePrivateZoneServiceResponse()

@@ -16,6 +16,7 @@ package v20191012
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -95,13 +96,7 @@ func NewAddEcdnDomainResponse() (response *AddEcdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) AddEcdnDomain(request *AddEcdnDomainRequest) (response *AddEcdnDomainResponse, err error) {
-    if request == nil {
-        request = NewAddEcdnDomainRequest()
-    }
-    
-    response = NewAddEcdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddEcdnDomainWithContext(context.Background(), request)
 }
 
 // AddEcdnDomain
@@ -141,6 +136,11 @@ func (c *Client) AddEcdnDomainWithContext(ctx context.Context, request *AddEcdnD
     if request == nil {
         request = NewAddEcdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddEcdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddEcdnDomainResponse()
@@ -188,13 +188,7 @@ func NewDeleteEcdnDomainResponse() (response *DeleteEcdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DeleteEcdnDomain(request *DeleteEcdnDomainRequest) (response *DeleteEcdnDomainResponse, err error) {
-    if request == nil {
-        request = NewDeleteEcdnDomainRequest()
-    }
-    
-    response = NewDeleteEcdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteEcdnDomainWithContext(context.Background(), request)
 }
 
 // DeleteEcdnDomain
@@ -223,6 +217,11 @@ func (c *Client) DeleteEcdnDomainWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteEcdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteEcdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteEcdnDomainResponse()
@@ -265,13 +264,7 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *DescribeDomainsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDomainsRequest()
-    }
-    
-    response = NewDescribeDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDomainsWithContext(context.Background(), request)
 }
 
 // DescribeDomains
@@ -295,6 +288,11 @@ func (c *Client) DescribeDomainsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDomainsResponse()
@@ -340,13 +338,7 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
 //  RESOURCENOTFOUND_ECDNUSERNOTEXISTS = "ResourceNotFound.EcdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_ECDNCAMUNAUTHORIZED = "UnauthorizedOperation.EcdnCamUnauthorized"
 func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (response *DescribeDomainsConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeDomainsConfigRequest()
-    }
-    
-    response = NewDescribeDomainsConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDomainsConfigWithContext(context.Background(), request)
 }
 
 // DescribeDomainsConfig
@@ -373,6 +365,11 @@ func (c *Client) DescribeDomainsConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDomainsConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDomainsConfigResponse()
@@ -415,13 +412,7 @@ func NewDescribeEcdnDomainLogsResponse() (response *DescribeEcdnDomainLogsRespon
 //  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNNODOMAINUNAUTHORIZED = "UnauthorizedOperation.EcdnNoDomainUnauthorized"
 func (c *Client) DescribeEcdnDomainLogs(request *DescribeEcdnDomainLogsRequest) (response *DescribeEcdnDomainLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEcdnDomainLogsRequest()
-    }
-    
-    response = NewDescribeEcdnDomainLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEcdnDomainLogsWithContext(context.Background(), request)
 }
 
 // DescribeEcdnDomainLogs
@@ -445,6 +436,11 @@ func (c *Client) DescribeEcdnDomainLogsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeEcdnDomainLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEcdnDomainLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEcdnDomainLogsResponse()
@@ -501,13 +497,7 @@ func NewDescribeEcdnDomainStatisticsResponse() (response *DescribeEcdnDomainStat
 //  UNAUTHORIZEDOPERATION_PROJECTNOPERMISSION = "UnauthorizedOperation.ProjectNoPermission"
 //  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
 func (c *Client) DescribeEcdnDomainStatistics(request *DescribeEcdnDomainStatisticsRequest) (response *DescribeEcdnDomainStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEcdnDomainStatisticsRequest()
-    }
-    
-    response = NewDescribeEcdnDomainStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEcdnDomainStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeEcdnDomainStatistics
@@ -545,6 +535,11 @@ func (c *Client) DescribeEcdnDomainStatisticsWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeEcdnDomainStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEcdnDomainStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEcdnDomainStatisticsResponse()
@@ -622,13 +617,7 @@ func NewDescribeEcdnStatisticsResponse() (response *DescribeEcdnStatisticsRespon
 //  UNAUTHORIZEDOPERATION_PROJECTSNOPERMISSION = "UnauthorizedOperation.ProjectsNoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeEcdnStatistics(request *DescribeEcdnStatisticsRequest) (response *DescribeEcdnStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEcdnStatisticsRequest()
-    }
-    
-    response = NewDescribeEcdnStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEcdnStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeEcdnStatistics
@@ -687,6 +676,11 @@ func (c *Client) DescribeEcdnStatisticsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeEcdnStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEcdnStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEcdnStatisticsResponse()
@@ -731,13 +725,7 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNHOSTUNAUTHORIZED = "UnauthorizedOperation.EcdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeIpStatusRequest()
-    }
-    
-    response = NewDescribeIpStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIpStatusWithContext(context.Background(), request)
 }
 
 // DescribeIpStatus
@@ -763,6 +751,11 @@ func (c *Client) DescribeIpStatusWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeIpStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIpStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIpStatusResponse()
@@ -805,13 +798,7 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
-    if request == nil {
-        request = NewDescribePurgeQuotaRequest()
-    }
-    
-    response = NewDescribePurgeQuotaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePurgeQuotaWithContext(context.Background(), request)
 }
 
 // DescribePurgeQuota
@@ -835,6 +822,11 @@ func (c *Client) DescribePurgeQuotaWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePurgeQuota require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePurgeQuotaResponse()
@@ -876,13 +868,7 @@ func NewDescribePurgeTasksResponse() (response *DescribePurgeTasksResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (response *DescribePurgeTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribePurgeTasksRequest()
-    }
-    
-    response = NewDescribePurgeTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePurgeTasksWithContext(context.Background(), request)
 }
 
 // DescribePurgeTasks
@@ -905,6 +891,11 @@ func (c *Client) DescribePurgeTasksWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePurgeTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePurgeTasksResponse()
@@ -954,13 +945,7 @@ func NewPurgePathCacheResponse() (response *PurgePathCacheResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgePathCacheRequest()
-    }
-    
-    response = NewPurgePathCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PurgePathCacheWithContext(context.Background(), request)
 }
 
 // PurgePathCache
@@ -991,6 +976,11 @@ func (c *Client) PurgePathCacheWithContext(ctx context.Context, request *PurgePa
     if request == nil {
         request = NewPurgePathCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PurgePathCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPurgePathCacheResponse()
@@ -1041,13 +1031,7 @@ func NewPurgeUrlsCacheResponse() (response *PurgeUrlsCacheResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgeUrlsCacheRequest()
-    }
-    
-    response = NewPurgeUrlsCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PurgeUrlsCacheWithContext(context.Background(), request)
 }
 
 // PurgeUrlsCache
@@ -1079,6 +1063,11 @@ func (c *Client) PurgeUrlsCacheWithContext(ctx context.Context, request *PurgeUr
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PurgeUrlsCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPurgeUrlsCacheResponse()
@@ -1125,13 +1114,7 @@ func NewStartEcdnDomainResponse() (response *StartEcdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StartEcdnDomain(request *StartEcdnDomainRequest) (response *StartEcdnDomainResponse, err error) {
-    if request == nil {
-        request = NewStartEcdnDomainRequest()
-    }
-    
-    response = NewStartEcdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartEcdnDomainWithContext(context.Background(), request)
 }
 
 // StartEcdnDomain
@@ -1159,6 +1142,11 @@ func (c *Client) StartEcdnDomainWithContext(ctx context.Context, request *StartE
     if request == nil {
         request = NewStartEcdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartEcdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartEcdnDomainResponse()
@@ -1205,13 +1193,7 @@ func NewStopEcdnDomainResponse() (response *StopEcdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNMIGRATEDCDN = "UnauthorizedOperation.EcdnMigratedCdn"
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 func (c *Client) StopEcdnDomain(request *StopEcdnDomainRequest) (response *StopEcdnDomainResponse, err error) {
-    if request == nil {
-        request = NewStopEcdnDomainRequest()
-    }
-    
-    response = NewStopEcdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopEcdnDomainWithContext(context.Background(), request)
 }
 
 // StopEcdnDomain
@@ -1239,6 +1221,11 @@ func (c *Client) StopEcdnDomainWithContext(ctx context.Context, request *StopEcd
     if request == nil {
         request = NewStopEcdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopEcdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopEcdnDomainResponse()
@@ -1293,13 +1280,7 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
 //  UNAUTHORIZEDOPERATION_ECDNUSERISSUSPENDED = "UnauthorizedOperation.EcdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_ECDNUSERNOWHITELIST = "UnauthorizedOperation.EcdnUserNoWhitelist"
 func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (response *UpdateDomainConfigResponse, err error) {
-    if request == nil {
-        request = NewUpdateDomainConfigRequest()
-    }
-    
-    response = NewUpdateDomainConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateDomainConfigWithContext(context.Background(), request)
 }
 
 // UpdateDomainConfig
@@ -1335,6 +1316,11 @@ func (c *Client) UpdateDomainConfigWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateDomainConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDomainConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateDomainConfigResponse()

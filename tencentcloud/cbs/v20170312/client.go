@@ -16,6 +16,7 @@ package v20170312
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -92,13 +93,7 @@ func NewApplySnapshotResponse() (response *ApplySnapshotResponse) {
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 func (c *Client) ApplySnapshot(request *ApplySnapshotRequest) (response *ApplySnapshotResponse, err error) {
-    if request == nil {
-        request = NewApplySnapshotRequest()
-    }
-    
-    response = NewApplySnapshotResponse()
-    err = c.Send(request, response)
-    return
+    return c.ApplySnapshotWithContext(context.Background(), request)
 }
 
 // ApplySnapshot
@@ -135,6 +130,11 @@ func (c *Client) ApplySnapshotWithContext(ctx context.Context, request *ApplySna
     if request == nil {
         request = NewApplySnapshotRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplySnapshot require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewApplySnapshotResponse()
@@ -188,13 +188,7 @@ func NewAttachDisksResponse() (response *AttachDisksResponse) {
 //  RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 //  RESOURCEUNAVAILABLE_ZONENOTMATCH = "ResourceUnavailable.ZoneNotMatch"
 func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisksResponse, err error) {
-    if request == nil {
-        request = NewAttachDisksRequest()
-    }
-    
-    response = NewAttachDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.AttachDisksWithContext(context.Background(), request)
 }
 
 // AttachDisks
@@ -229,6 +223,11 @@ func (c *Client) AttachDisksWithContext(ctx context.Context, request *AttachDisk
     if request == nil {
         request = NewAttachDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAttachDisksResponse()
@@ -274,13 +273,7 @@ func NewBindAutoSnapshotPolicyResponse() (response *BindAutoSnapshotPolicyRespon
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) BindAutoSnapshotPolicy(request *BindAutoSnapshotPolicyRequest) (response *BindAutoSnapshotPolicyResponse, err error) {
-    if request == nil {
-        request = NewBindAutoSnapshotPolicyRequest()
-    }
-    
-    response = NewBindAutoSnapshotPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.BindAutoSnapshotPolicyWithContext(context.Background(), request)
 }
 
 // BindAutoSnapshotPolicy
@@ -307,6 +300,11 @@ func (c *Client) BindAutoSnapshotPolicyWithContext(ctx context.Context, request 
     if request == nil {
         request = NewBindAutoSnapshotPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindAutoSnapshotPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewBindAutoSnapshotPolicyResponse()
@@ -347,13 +345,7 @@ func NewCreateAutoSnapshotPolicyResponse() (response *CreateAutoSnapshotPolicyRe
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateAutoSnapshotPolicy(request *CreateAutoSnapshotPolicyRequest) (response *CreateAutoSnapshotPolicyResponse, err error) {
-    if request == nil {
-        request = NewCreateAutoSnapshotPolicyRequest()
-    }
-    
-    response = NewCreateAutoSnapshotPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAutoSnapshotPolicyWithContext(context.Background(), request)
 }
 
 // CreateAutoSnapshotPolicy
@@ -375,6 +367,11 @@ func (c *Client) CreateAutoSnapshotPolicyWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateAutoSnapshotPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAutoSnapshotPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAutoSnapshotPolicyResponse()
@@ -422,13 +419,7 @@ func NewCreateDisksResponse() (response *CreateDisksResponse) {
 //  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
 func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisksResponse, err error) {
-    if request == nil {
-        request = NewCreateDisksRequest()
-    }
-    
-    response = NewCreateDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateDisksWithContext(context.Background(), request)
 }
 
 // CreateDisks
@@ -457,6 +448,11 @@ func (c *Client) CreateDisksWithContext(ctx context.Context, request *CreateDisk
     if request == nil {
         request = NewCreateDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateDisksResponse()
@@ -513,13 +509,7 @@ func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
 //  RESOURCEUNAVAILABLE_TOOMANYCREATINGSNAPSHOT = "ResourceUnavailable.TooManyCreatingSnapshot"
 //  UNSUPPORTEDOPERATION_DISKENCRYPT = "UnsupportedOperation.DiskEncrypt"
 func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (response *CreateSnapshotResponse, err error) {
-    if request == nil {
-        request = NewCreateSnapshotRequest()
-    }
-    
-    response = NewCreateSnapshotResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSnapshotWithContext(context.Background(), request)
 }
 
 // CreateSnapshot
@@ -557,6 +547,11 @@ func (c *Client) CreateSnapshotWithContext(ctx context.Context, request *CreateS
     if request == nil {
         request = NewCreateSnapshotRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSnapshot require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSnapshotResponse()
@@ -594,13 +589,7 @@ func NewDeleteAutoSnapshotPoliciesResponse() (response *DeleteAutoSnapshotPolici
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DeleteAutoSnapshotPolicies(request *DeleteAutoSnapshotPoliciesRequest) (response *DeleteAutoSnapshotPoliciesResponse, err error) {
-    if request == nil {
-        request = NewDeleteAutoSnapshotPoliciesRequest()
-    }
-    
-    response = NewDeleteAutoSnapshotPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAutoSnapshotPoliciesWithContext(context.Background(), request)
 }
 
 // DeleteAutoSnapshotPolicies
@@ -619,6 +608,11 @@ func (c *Client) DeleteAutoSnapshotPoliciesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDeleteAutoSnapshotPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAutoSnapshotPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAutoSnapshotPoliciesResponse()
@@ -663,13 +657,7 @@ func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
 //  UNSUPPORTEDOPERATION_SNAPHASSHARED = "UnsupportedOperation.SnapHasShared"
 //  UNSUPPORTEDOPERATION_SNAPSHOTHASBINDEDIMAGE = "UnsupportedOperation.SnapshotHasBindedImage"
 func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
-    if request == nil {
-        request = NewDeleteSnapshotsRequest()
-    }
-    
-    response = NewDeleteSnapshotsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSnapshotsWithContext(context.Background(), request)
 }
 
 // DeleteSnapshots
@@ -695,6 +683,11 @@ func (c *Client) DeleteSnapshotsWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteSnapshotsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSnapshots require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSnapshotsResponse()
@@ -733,13 +726,7 @@ func NewDescribeAutoSnapshotPoliciesResponse() (response *DescribeAutoSnapshotPo
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAutoSnapshotPolicies(request *DescribeAutoSnapshotPoliciesRequest) (response *DescribeAutoSnapshotPoliciesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAutoSnapshotPoliciesRequest()
-    }
-    
-    response = NewDescribeAutoSnapshotPoliciesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAutoSnapshotPoliciesWithContext(context.Background(), request)
 }
 
 // DescribeAutoSnapshotPolicies
@@ -759,6 +746,11 @@ func (c *Client) DescribeAutoSnapshotPoliciesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeAutoSnapshotPoliciesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAutoSnapshotPolicies require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAutoSnapshotPoliciesResponse()
@@ -790,13 +782,7 @@ func NewDescribeDiskAssociatedAutoSnapshotPolicyResponse() (response *DescribeDi
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicy(request *DescribeDiskAssociatedAutoSnapshotPolicyRequest) (response *DescribeDiskAssociatedAutoSnapshotPolicyResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiskAssociatedAutoSnapshotPolicyRequest()
-    }
-    
-    response = NewDescribeDiskAssociatedAutoSnapshotPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDiskAssociatedAutoSnapshotPolicyWithContext(context.Background(), request)
 }
 
 // DescribeDiskAssociatedAutoSnapshotPolicy
@@ -809,6 +795,11 @@ func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicyWithContext(ctx context
     if request == nil {
         request = NewDescribeDiskAssociatedAutoSnapshotPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiskAssociatedAutoSnapshotPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDiskAssociatedAutoSnapshotPolicyResponse()
@@ -840,13 +831,7 @@ func NewDescribeDiskConfigQuotaResponse() (response *DescribeDiskConfigQuotaResp
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeDiskConfigQuota(request *DescribeDiskConfigQuotaRequest) (response *DescribeDiskConfigQuotaResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiskConfigQuotaRequest()
-    }
-    
-    response = NewDescribeDiskConfigQuotaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDiskConfigQuotaWithContext(context.Background(), request)
 }
 
 // DescribeDiskConfigQuota
@@ -859,6 +844,11 @@ func (c *Client) DescribeDiskConfigQuotaWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeDiskConfigQuotaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiskConfigQuota require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDiskConfigQuotaResponse()
@@ -898,13 +888,7 @@ func NewDescribeDiskOperationLogsResponse() (response *DescribeDiskOperationLogs
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeDiskOperationLogs(request *DescribeDiskOperationLogsRequest) (response *DescribeDiskOperationLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDiskOperationLogsRequest()
-    }
-    
-    response = NewDescribeDiskOperationLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDiskOperationLogsWithContext(context.Background(), request)
 }
 
 // DescribeDiskOperationLogs
@@ -925,6 +909,11 @@ func (c *Client) DescribeDiskOperationLogsWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDescribeDiskOperationLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiskOperationLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDiskOperationLogsResponse()
@@ -963,13 +952,7 @@ func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeDisks(request *DescribeDisksRequest) (response *DescribeDisksResponse, err error) {
-    if request == nil {
-        request = NewDescribeDisksRequest()
-    }
-    
-    response = NewDescribeDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDisksWithContext(context.Background(), request)
 }
 
 // DescribeDisks
@@ -989,6 +972,11 @@ func (c *Client) DescribeDisksWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDisksResponse()
@@ -1026,13 +1014,7 @@ func NewDescribeInstancesDiskNumResponse() (response *DescribeInstancesDiskNumRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeInstancesDiskNum(request *DescribeInstancesDiskNumRequest) (response *DescribeInstancesDiskNumResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstancesDiskNumRequest()
-    }
-    
-    response = NewDescribeInstancesDiskNumResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeInstancesDiskNumWithContext(context.Background(), request)
 }
 
 // DescribeInstancesDiskNum
@@ -1051,6 +1033,11 @@ func (c *Client) DescribeInstancesDiskNumWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeInstancesDiskNumRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstancesDiskNum require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeInstancesDiskNumResponse()
@@ -1090,13 +1077,7 @@ func NewDescribeSnapshotOperationLogsResponse() (response *DescribeSnapshotOpera
 //  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeSnapshotOperationLogs(request *DescribeSnapshotOperationLogsRequest) (response *DescribeSnapshotOperationLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSnapshotOperationLogsRequest()
-    }
-    
-    response = NewDescribeSnapshotOperationLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSnapshotOperationLogsWithContext(context.Background(), request)
 }
 
 // DescribeSnapshotOperationLogs
@@ -1117,6 +1098,11 @@ func (c *Client) DescribeSnapshotOperationLogsWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeSnapshotOperationLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSnapshotOperationLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSnapshotOperationLogsResponse()
@@ -1149,13 +1135,7 @@ func NewDescribeSnapshotSharePermissionResponse() (response *DescribeSnapshotSha
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeSnapshotSharePermission(request *DescribeSnapshotSharePermissionRequest) (response *DescribeSnapshotSharePermissionResponse, err error) {
-    if request == nil {
-        request = NewDescribeSnapshotSharePermissionRequest()
-    }
-    
-    response = NewDescribeSnapshotSharePermissionResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSnapshotSharePermissionWithContext(context.Background(), request)
 }
 
 // DescribeSnapshotSharePermission
@@ -1169,6 +1149,11 @@ func (c *Client) DescribeSnapshotSharePermissionWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSnapshotSharePermissionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSnapshotSharePermission require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSnapshotSharePermissionResponse()
@@ -1207,13 +1192,7 @@ func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSnapshotsRequest()
-    }
-    
-    response = NewDescribeSnapshotsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSnapshotsWithContext(context.Background(), request)
 }
 
 // DescribeSnapshots
@@ -1233,6 +1212,11 @@ func (c *Client) DescribeSnapshotsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeSnapshotsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSnapshots require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSnapshotsResponse()
@@ -1286,13 +1270,7 @@ func NewDetachDisksResponse() (response *DetachDisksResponse) {
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNSUPPORTEDOPERATION_DETACHPOD = "UnsupportedOperation.DetachPod"
 func (c *Client) DetachDisks(request *DetachDisksRequest) (response *DetachDisksResponse, err error) {
-    if request == nil {
-        request = NewDetachDisksRequest()
-    }
-    
-    response = NewDetachDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DetachDisksWithContext(context.Background(), request)
 }
 
 // DetachDisks
@@ -1327,6 +1305,11 @@ func (c *Client) DetachDisksWithContext(ctx context.Context, request *DetachDisk
     if request == nil {
         request = NewDetachDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetachDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDetachDisksResponse()
@@ -1358,13 +1341,7 @@ func NewGetSnapOverviewResponse() (response *GetSnapOverviewResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) GetSnapOverview(request *GetSnapOverviewRequest) (response *GetSnapOverviewResponse, err error) {
-    if request == nil {
-        request = NewGetSnapOverviewRequest()
-    }
-    
-    response = NewGetSnapOverviewResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetSnapOverviewWithContext(context.Background(), request)
 }
 
 // GetSnapOverview
@@ -1377,6 +1354,11 @@ func (c *Client) GetSnapOverviewWithContext(ctx context.Context, request *GetSna
     if request == nil {
         request = NewGetSnapOverviewRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSnapOverview require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetSnapOverviewResponse()
@@ -1416,13 +1398,7 @@ func NewInitializeDisksResponse() (response *InitializeDisksResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
-    if request == nil {
-        request = NewInitializeDisksRequest()
-    }
-    
-    response = NewInitializeDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.InitializeDisksWithContext(context.Background(), request)
 }
 
 // InitializeDisks
@@ -1443,6 +1419,11 @@ func (c *Client) InitializeDisksWithContext(ctx context.Context, request *Initia
     if request == nil {
         request = NewInitializeDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InitializeDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInitializeDisksResponse()
@@ -1476,13 +1457,7 @@ func NewInquirePriceModifyDiskExtraPerformanceResponse() (response *InquirePrice
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
 func (c *Client) InquirePriceModifyDiskExtraPerformance(request *InquirePriceModifyDiskExtraPerformanceRequest) (response *InquirePriceModifyDiskExtraPerformanceResponse, err error) {
-    if request == nil {
-        request = NewInquirePriceModifyDiskExtraPerformanceRequest()
-    }
-    
-    response = NewInquirePriceModifyDiskExtraPerformanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.InquirePriceModifyDiskExtraPerformanceWithContext(context.Background(), request)
 }
 
 // InquirePriceModifyDiskExtraPerformance
@@ -1497,6 +1472,11 @@ func (c *Client) InquirePriceModifyDiskExtraPerformanceWithContext(ctx context.C
     if request == nil {
         request = NewInquirePriceModifyDiskExtraPerformanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquirePriceModifyDiskExtraPerformance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInquirePriceModifyDiskExtraPerformanceResponse()
@@ -1532,13 +1512,7 @@ func NewInquiryPriceCreateDisksResponse() (response *InquiryPriceCreateDisksResp
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) InquiryPriceCreateDisks(request *InquiryPriceCreateDisksRequest) (response *InquiryPriceCreateDisksResponse, err error) {
-    if request == nil {
-        request = NewInquiryPriceCreateDisksRequest()
-    }
-    
-    response = NewInquiryPriceCreateDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.InquiryPriceCreateDisksWithContext(context.Background(), request)
 }
 
 // InquiryPriceCreateDisks
@@ -1555,6 +1529,11 @@ func (c *Client) InquiryPriceCreateDisksWithContext(ctx context.Context, request
     if request == nil {
         request = NewInquiryPriceCreateDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceCreateDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInquiryPriceCreateDisksResponse()
@@ -1590,13 +1569,7 @@ func NewInquiryPriceResizeDiskResponse() (response *InquiryPriceResizeDiskRespon
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
 func (c *Client) InquiryPriceResizeDisk(request *InquiryPriceResizeDiskRequest) (response *InquiryPriceResizeDiskResponse, err error) {
-    if request == nil {
-        request = NewInquiryPriceResizeDiskRequest()
-    }
-    
-    response = NewInquiryPriceResizeDiskResponse()
-    err = c.Send(request, response)
-    return
+    return c.InquiryPriceResizeDiskWithContext(context.Background(), request)
 }
 
 // InquiryPriceResizeDisk
@@ -1613,6 +1586,11 @@ func (c *Client) InquiryPriceResizeDiskWithContext(ctx context.Context, request 
     if request == nil {
         request = NewInquiryPriceResizeDiskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceResizeDisk require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewInquiryPriceResizeDiskResponse()
@@ -1653,13 +1631,7 @@ func NewModifyAutoSnapshotPolicyAttributeResponse() (response *ModifyAutoSnapsho
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNSUPPORTEDOPERATION_STATEERROR = "UnsupportedOperation.StateError"
 func (c *Client) ModifyAutoSnapshotPolicyAttribute(request *ModifyAutoSnapshotPolicyAttributeRequest) (response *ModifyAutoSnapshotPolicyAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyAutoSnapshotPolicyAttributeRequest()
-    }
-    
-    response = NewModifyAutoSnapshotPolicyAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAutoSnapshotPolicyAttributeWithContext(context.Background(), request)
 }
 
 // ModifyAutoSnapshotPolicyAttribute
@@ -1681,6 +1653,11 @@ func (c *Client) ModifyAutoSnapshotPolicyAttributeWithContext(ctx context.Contex
     if request == nil {
         request = NewModifyAutoSnapshotPolicyAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAutoSnapshotPolicyAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAutoSnapshotPolicyAttributeResponse()
@@ -1725,13 +1702,7 @@ func NewModifyDiskAttributesResponse() (response *ModifyDiskAttributesResponse) 
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) ModifyDiskAttributes(request *ModifyDiskAttributesRequest) (response *ModifyDiskAttributesResponse, err error) {
-    if request == nil {
-        request = NewModifyDiskAttributesRequest()
-    }
-    
-    response = NewModifyDiskAttributesResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDiskAttributesWithContext(context.Background(), request)
 }
 
 // ModifyDiskAttributes
@@ -1757,6 +1728,11 @@ func (c *Client) ModifyDiskAttributesWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifyDiskAttributesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDiskAttributes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDiskAttributesResponse()
@@ -1798,13 +1774,7 @@ func NewModifyDiskExtraPerformanceResponse() (response *ModifyDiskExtraPerforman
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyDiskExtraPerformance(request *ModifyDiskExtraPerformanceRequest) (response *ModifyDiskExtraPerformanceResponse, err error) {
-    if request == nil {
-        request = NewModifyDiskExtraPerformanceRequest()
-    }
-    
-    response = NewModifyDiskExtraPerformanceResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyDiskExtraPerformanceWithContext(context.Background(), request)
 }
 
 // ModifyDiskExtraPerformance
@@ -1827,6 +1797,11 @@ func (c *Client) ModifyDiskExtraPerformanceWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifyDiskExtraPerformanceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDiskExtraPerformance require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyDiskExtraPerformanceResponse()
@@ -1866,13 +1841,7 @@ func NewModifySnapshotAttributeResponse() (response *ModifySnapshotAttributeResp
 //  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifySnapshotAttribute(request *ModifySnapshotAttributeRequest) (response *ModifySnapshotAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifySnapshotAttributeRequest()
-    }
-    
-    response = NewModifySnapshotAttributeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySnapshotAttributeWithContext(context.Background(), request)
 }
 
 // ModifySnapshotAttribute
@@ -1893,6 +1862,11 @@ func (c *Client) ModifySnapshotAttributeWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySnapshotAttributeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySnapshotAttribute require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySnapshotAttributeResponse()
@@ -1939,13 +1913,7 @@ func NewModifySnapshotsSharePermissionResponse() (response *ModifySnapshotsShare
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 func (c *Client) ModifySnapshotsSharePermission(request *ModifySnapshotsSharePermissionRequest) (response *ModifySnapshotsSharePermissionResponse, err error) {
-    if request == nil {
-        request = NewModifySnapshotsSharePermissionRequest()
-    }
-    
-    response = NewModifySnapshotsSharePermissionResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySnapshotsSharePermissionWithContext(context.Background(), request)
 }
 
 // ModifySnapshotsSharePermission
@@ -1973,6 +1941,11 @@ func (c *Client) ModifySnapshotsSharePermissionWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifySnapshotsSharePermissionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySnapshotsSharePermission require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySnapshotsSharePermissionResponse()
@@ -2022,13 +1995,7 @@ func NewResizeDiskResponse() (response *ResizeDiskResponse) {
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
 //  UNSUPPORTEDOPERATION_INSTANCENOTSTOPPED = "UnsupportedOperation.InstanceNotStopped"
 func (c *Client) ResizeDisk(request *ResizeDiskRequest) (response *ResizeDiskResponse, err error) {
-    if request == nil {
-        request = NewResizeDiskRequest()
-    }
-    
-    response = NewResizeDiskResponse()
-    err = c.Send(request, response)
-    return
+    return c.ResizeDiskWithContext(context.Background(), request)
 }
 
 // ResizeDisk
@@ -2059,6 +2026,11 @@ func (c *Client) ResizeDiskWithContext(ctx context.Context, request *ResizeDiskR
     if request == nil {
         request = NewResizeDiskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResizeDisk require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewResizeDiskResponse()
@@ -2108,13 +2080,7 @@ func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
 //  RESOURCEUNAVAILABLE_REPEATREFUND = "ResourceUnavailable.RepeatRefund"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
 func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *TerminateDisksResponse, err error) {
-    if request == nil {
-        request = NewTerminateDisksRequest()
-    }
-    
-    response = NewTerminateDisksResponse()
-    err = c.Send(request, response)
-    return
+    return c.TerminateDisksWithContext(context.Background(), request)
 }
 
 // TerminateDisks
@@ -2145,6 +2111,11 @@ func (c *Client) TerminateDisksWithContext(ctx context.Context, request *Termina
     if request == nil {
         request = NewTerminateDisksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateDisks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewTerminateDisksResponse()
@@ -2183,13 +2154,7 @@ func NewUnbindAutoSnapshotPolicyResponse() (response *UnbindAutoSnapshotPolicyRe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) UnbindAutoSnapshotPolicy(request *UnbindAutoSnapshotPolicyRequest) (response *UnbindAutoSnapshotPolicyResponse, err error) {
-    if request == nil {
-        request = NewUnbindAutoSnapshotPolicyRequest()
-    }
-    
-    response = NewUnbindAutoSnapshotPolicyResponse()
-    err = c.Send(request, response)
-    return
+    return c.UnbindAutoSnapshotPolicyWithContext(context.Background(), request)
 }
 
 // UnbindAutoSnapshotPolicy
@@ -2209,6 +2174,11 @@ func (c *Client) UnbindAutoSnapshotPolicyWithContext(ctx context.Context, reques
     if request == nil {
         request = NewUnbindAutoSnapshotPolicyRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindAutoSnapshotPolicy require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUnbindAutoSnapshotPolicyResponse()

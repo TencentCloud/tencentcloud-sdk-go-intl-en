@@ -16,6 +16,7 @@ package v20180711
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -77,13 +78,7 @@ func NewCreateAppResponse() (response *CreateAppResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateApp(request *CreateAppRequest) (response *CreateAppResponse, err error) {
-    if request == nil {
-        request = NewCreateAppRequest()
-    }
-    
-    response = NewCreateAppResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAppWithContext(context.Background(), request)
 }
 
 // CreateApp
@@ -105,6 +100,11 @@ func (c *Client) CreateAppWithContext(ctx context.Context, request *CreateAppReq
     if request == nil {
         request = NewCreateAppRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApp require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAppResponse()
@@ -144,13 +144,7 @@ func NewDescribeAppStatisticsResponse() (response *DescribeAppStatisticsResponse
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAppStatistics(request *DescribeAppStatisticsRequest) (response *DescribeAppStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAppStatisticsRequest()
-    }
-    
-    response = NewDescribeAppStatisticsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAppStatisticsWithContext(context.Background(), request)
 }
 
 // DescribeAppStatistics
@@ -171,6 +165,11 @@ func (c *Client) DescribeAppStatisticsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeAppStatisticsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAppStatistics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAppStatisticsResponse()
@@ -205,13 +204,7 @@ func NewDescribeApplicationDataResponse() (response *DescribeApplicationDataResp
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeApplicationData(request *DescribeApplicationDataRequest) (response *DescribeApplicationDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeApplicationDataRequest()
-    }
-    
-    response = NewDescribeApplicationDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeApplicationDataWithContext(context.Background(), request)
 }
 
 // DescribeApplicationData
@@ -227,6 +220,11 @@ func (c *Client) DescribeApplicationDataWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeApplicationDataResponse()
@@ -268,13 +266,7 @@ func NewDescribeScanResultListResponse() (response *DescribeScanResultListRespon
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeScanResultList(request *DescribeScanResultListRequest) (response *DescribeScanResultListResponse, err error) {
-    if request == nil {
-        request = NewDescribeScanResultListRequest()
-    }
-    
-    response = NewDescribeScanResultListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeScanResultListWithContext(context.Background(), request)
 }
 
 // DescribeScanResultList
@@ -297,6 +289,11 @@ func (c *Client) DescribeScanResultListWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeScanResultListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeScanResultList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeScanResultListResponse()
@@ -336,13 +333,7 @@ func NewModifyAppStatusResponse() (response *ModifyAppStatusResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAppStatus(request *ModifyAppStatusRequest) (response *ModifyAppStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyAppStatusRequest()
-    }
-    
-    response = NewModifyAppStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAppStatusWithContext(context.Background(), request)
 }
 
 // ModifyAppStatus
@@ -363,6 +354,11 @@ func (c *Client) ModifyAppStatusWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyAppStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAppStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAppStatusResponse()
@@ -671,13 +667,7 @@ func NewScanVoiceResponse() (response *ScanVoiceResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ScanVoice(request *ScanVoiceRequest) (response *ScanVoiceResponse, err error) {
-    if request == nil {
-        request = NewScanVoiceRequest()
-    }
-    
-    response = NewScanVoiceResponse()
-    err = c.Send(request, response)
-    return
+    return c.ScanVoiceWithContext(context.Background(), request)
 }
 
 // ScanVoice
@@ -967,6 +957,11 @@ func (c *Client) ScanVoiceWithContext(ctx context.Context, request *ScanVoiceReq
     if request == nil {
         request = NewScanVoiceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ScanVoice require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewScanVoiceResponse()

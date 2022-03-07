@@ -16,6 +16,7 @@ package v20180606
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -115,13 +116,7 @@ func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDomainResponse, err error) {
-    if request == nil {
-        request = NewAddCdnDomainRequest()
-    }
-    
-    response = NewAddCdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.AddCdnDomainWithContext(context.Background(), request)
 }
 
 // AddCdnDomain
@@ -181,6 +176,11 @@ func (c *Client) AddCdnDomainWithContext(ctx context.Context, request *AddCdnDom
     if request == nil {
         request = NewAddCdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddCdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAddCdnDomainResponse()
@@ -244,13 +244,7 @@ func NewCreateClsLogTopicResponse() (response *CreateClsLogTopicResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) CreateClsLogTopic(request *CreateClsLogTopicRequest) (response *CreateClsLogTopicResponse, err error) {
-    if request == nil {
-        request = NewCreateClsLogTopicRequest()
-    }
-    
-    response = NewCreateClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClsLogTopicWithContext(context.Background(), request)
 }
 
 // CreateClsLogTopic
@@ -295,6 +289,11 @@ func (c *Client) CreateClsLogTopicWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateClsLogTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClsLogTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClsLogTopicResponse()
@@ -334,13 +333,7 @@ func NewCreateScdnFailedLogTaskResponse() (response *CreateScdnFailedLogTaskResp
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
 func (c *Client) CreateScdnFailedLogTask(request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateScdnFailedLogTaskRequest()
-    }
-    
-    response = NewCreateScdnFailedLogTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateScdnFailedLogTaskWithContext(context.Background(), request)
 }
 
 // CreateScdnFailedLogTask
@@ -361,6 +354,11 @@ func (c *Client) CreateScdnFailedLogTaskWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateScdnFailedLogTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateScdnFailedLogTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateScdnFailedLogTaskResponse()
@@ -409,13 +407,7 @@ func NewDeleteCdnDomainResponse() (response *DeleteCdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) DeleteCdnDomain(request *DeleteCdnDomainRequest) (response *DeleteCdnDomainResponse, err error) {
-    if request == nil {
-        request = NewDeleteCdnDomainRequest()
-    }
-    
-    response = NewDeleteCdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteCdnDomainWithContext(context.Background(), request)
 }
 
 // DeleteCdnDomain
@@ -445,6 +437,11 @@ func (c *Client) DeleteCdnDomainWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteCdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteCdnDomainResponse()
@@ -501,13 +498,7 @@ func NewDeleteClsLogTopicResponse() (response *DeleteClsLogTopicResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DeleteClsLogTopic(request *DeleteClsLogTopicRequest) (response *DeleteClsLogTopicResponse, err error) {
-    if request == nil {
-        request = NewDeleteClsLogTopicRequest()
-    }
-    
-    response = NewDeleteClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClsLogTopicWithContext(context.Background(), request)
 }
 
 // DeleteClsLogTopic
@@ -545,6 +536,11 @@ func (c *Client) DeleteClsLogTopicWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteClsLogTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClsLogTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClsLogTopicResponse()
@@ -598,13 +594,7 @@ func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeBillingData(request *DescribeBillingDataRequest) (response *DescribeBillingDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillingDataRequest()
-    }
-    
-    response = NewDescribeBillingDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeBillingDataWithContext(context.Background(), request)
 }
 
 // DescribeBillingData
@@ -639,6 +629,11 @@ func (c *Client) DescribeBillingDataWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeBillingDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillingData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeBillingDataResponse()
@@ -726,13 +721,7 @@ func NewDescribeCdnDataResponse() (response *DescribeCdnDataResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeCdnData(request *DescribeCdnDataRequest) (response *DescribeCdnDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeCdnDataRequest()
-    }
-    
-    response = NewDescribeCdnDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCdnDataWithContext(context.Background(), request)
 }
 
 // DescribeCdnData
@@ -801,6 +790,11 @@ func (c *Client) DescribeCdnDataWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeCdnDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCdnDataResponse()
@@ -851,13 +845,7 @@ func NewDescribeCdnDomainLogsResponse() (response *DescribeCdnDomainLogsResponse
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) DescribeCdnDomainLogs(request *DescribeCdnDomainLogsRequest) (response *DescribeCdnDomainLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeCdnDomainLogsRequest()
-    }
-    
-    response = NewDescribeCdnDomainLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCdnDomainLogsWithContext(context.Background(), request)
 }
 
 // DescribeCdnDomainLogs
@@ -889,6 +877,11 @@ func (c *Client) DescribeCdnDomainLogsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeCdnDomainLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnDomainLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCdnDomainLogsResponse()
@@ -930,13 +923,7 @@ func NewDescribeCdnIpResponse() (response *DescribeCdnIpResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 func (c *Client) DescribeCdnIp(request *DescribeCdnIpRequest) (response *DescribeCdnIpResponse, err error) {
-    if request == nil {
-        request = NewDescribeCdnIpRequest()
-    }
-    
-    response = NewDescribeCdnIpResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCdnIpWithContext(context.Background(), request)
 }
 
 // DescribeCdnIp
@@ -959,6 +946,11 @@ func (c *Client) DescribeCdnIpWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeCdnIpRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnIp require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCdnIpResponse()
@@ -999,13 +991,7 @@ func NewDescribeCdnOriginIpResponse() (response *DescribeCdnOriginIpResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 func (c *Client) DescribeCdnOriginIp(request *DescribeCdnOriginIpRequest) (response *DescribeCdnOriginIpResponse, err error) {
-    if request == nil {
-        request = NewDescribeCdnOriginIpRequest()
-    }
-    
-    response = NewDescribeCdnOriginIpResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCdnOriginIpWithContext(context.Background(), request)
 }
 
 // DescribeCdnOriginIp
@@ -1027,6 +1013,11 @@ func (c *Client) DescribeCdnOriginIpWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeCdnOriginIpRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnOriginIp require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCdnOriginIpResponse()
@@ -1075,13 +1066,7 @@ func NewDescribeCertDomainsResponse() (response *DescribeCertDomainsResponse) {
 //  UNSUPPORTEDOPERATION_CLSNOTALLOWED = "UnsupportedOperation.ClsNotAllowed"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) DescribeCertDomains(request *DescribeCertDomainsRequest) (response *DescribeCertDomainsResponse, err error) {
-    if request == nil {
-        request = NewDescribeCertDomainsRequest()
-    }
-    
-    response = NewDescribeCertDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCertDomainsWithContext(context.Background(), request)
 }
 
 // DescribeCertDomains
@@ -1111,6 +1096,11 @@ func (c *Client) DescribeCertDomainsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeCertDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCertDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCertDomainsResponse()
@@ -1164,13 +1154,7 @@ func NewDescribeDomainsResponse() (response *DescribeDomainsResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeDomains(request *DescribeDomainsRequest) (response *DescribeDomainsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDomainsRequest()
-    }
-    
-    response = NewDescribeDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDomainsWithContext(context.Background(), request)
 }
 
 // DescribeDomains
@@ -1205,6 +1189,11 @@ func (c *Client) DescribeDomainsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDomainsResponse()
@@ -1259,13 +1248,7 @@ func NewDescribeDomainsConfigResponse() (response *DescribeDomainsConfigResponse
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeDomainsConfig(request *DescribeDomainsConfigRequest) (response *DescribeDomainsConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeDomainsConfigRequest()
-    }
-    
-    response = NewDescribeDomainsConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDomainsConfigWithContext(context.Background(), request)
 }
 
 // DescribeDomainsConfig
@@ -1301,6 +1284,11 @@ func (c *Client) DescribeDomainsConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeDomainsConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDomainsConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDomainsConfigResponse()
@@ -1345,13 +1333,7 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *DescribeIpStatusResponse, err error) {
-    if request == nil {
-        request = NewDescribeIpStatusRequest()
-    }
-    
-    response = NewDescribeIpStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIpStatusWithContext(context.Background(), request)
 }
 
 // DescribeIpStatus
@@ -1377,6 +1359,11 @@ func (c *Client) DescribeIpStatusWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeIpStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIpStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIpStatusResponse()
@@ -1433,13 +1420,7 @@ func NewDescribeIpVisitResponse() (response *DescribeIpVisitResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeIpVisit(request *DescribeIpVisitRequest) (response *DescribeIpVisitResponse, err error) {
-    if request == nil {
-        request = NewDescribeIpVisitRequest()
-    }
-    
-    response = NewDescribeIpVisitResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIpVisitWithContext(context.Background(), request)
 }
 
 // DescribeIpVisit
@@ -1477,6 +1458,11 @@ func (c *Client) DescribeIpVisitWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIpVisitRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIpVisit require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIpVisitResponse()
@@ -1519,13 +1505,7 @@ func NewDescribeMapInfoResponse() (response *DescribeMapInfoResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeMapInfo(request *DescribeMapInfoRequest) (response *DescribeMapInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeMapInfoRequest()
-    }
-    
-    response = NewDescribeMapInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMapInfoWithContext(context.Background(), request)
 }
 
 // DescribeMapInfo
@@ -1549,6 +1529,11 @@ func (c *Client) DescribeMapInfoWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeMapInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMapInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMapInfoResponse()
@@ -1627,13 +1612,7 @@ func NewDescribeOriginDataResponse() (response *DescribeOriginDataResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribeOriginData(request *DescribeOriginDataRequest) (response *DescribeOriginDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeOriginDataRequest()
-    }
-    
-    response = NewDescribeOriginDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeOriginDataWithContext(context.Background(), request)
 }
 
 // DescribeOriginData
@@ -1693,6 +1672,11 @@ func (c *Client) DescribeOriginDataWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeOriginDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOriginData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeOriginDataResponse()
@@ -1730,13 +1714,7 @@ func NewDescribePayTypeResponse() (response *DescribePayTypeResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePayType(request *DescribePayTypeRequest) (response *DescribePayTypeResponse, err error) {
-    if request == nil {
-        request = NewDescribePayTypeRequest()
-    }
-    
-    response = NewDescribePayTypeResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePayTypeWithContext(context.Background(), request)
 }
 
 // DescribePayType
@@ -1755,6 +1733,11 @@ func (c *Client) DescribePayTypeWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribePayTypeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePayType require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePayTypeResponse()
@@ -1790,13 +1773,7 @@ func NewDescribePurgeQuotaResponse() (response *DescribePurgeQuotaResponse) {
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePurgeQuota(request *DescribePurgeQuotaRequest) (response *DescribePurgeQuotaResponse, err error) {
-    if request == nil {
-        request = NewDescribePurgeQuotaRequest()
-    }
-    
-    response = NewDescribePurgeQuotaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePurgeQuotaWithContext(context.Background(), request)
 }
 
 // DescribePurgeQuota
@@ -1813,6 +1790,11 @@ func (c *Client) DescribePurgeQuotaWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeQuotaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePurgeQuota require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePurgeQuotaResponse()
@@ -1852,13 +1834,7 @@ func NewDescribePurgeTasksResponse() (response *DescribePurgeTasksResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePurgeTasks(request *DescribePurgeTasksRequest) (response *DescribePurgeTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribePurgeTasksRequest()
-    }
-    
-    response = NewDescribePurgeTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePurgeTasksWithContext(context.Background(), request)
 }
 
 // DescribePurgeTasks
@@ -1879,6 +1855,11 @@ func (c *Client) DescribePurgeTasksWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribePurgeTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePurgeTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePurgeTasksResponse()
@@ -1914,13 +1895,7 @@ func NewDescribePushQuotaResponse() (response *DescribePushQuotaResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DescribePushQuota(request *DescribePushQuotaRequest) (response *DescribePushQuotaResponse, err error) {
-    if request == nil {
-        request = NewDescribePushQuotaRequest()
-    }
-    
-    response = NewDescribePushQuotaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePushQuotaWithContext(context.Background(), request)
 }
 
 // DescribePushQuota
@@ -1937,6 +1912,11 @@ func (c *Client) DescribePushQuotaWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribePushQuotaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePushQuota require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePushQuotaResponse()
@@ -1988,13 +1968,7 @@ func NewDescribePushTasksResponse() (response *DescribePushTasksResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 func (c *Client) DescribePushTasks(request *DescribePushTasksRequest) (response *DescribePushTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribePushTasksRequest()
-    }
-    
-    response = NewDescribePushTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePushTasksWithContext(context.Background(), request)
 }
 
 // DescribePushTasks
@@ -2027,6 +2001,11 @@ func (c *Client) DescribePushTasksWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribePushTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePushTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePushTasksResponse()
@@ -2066,13 +2045,7 @@ func NewDescribeReportDataResponse() (response *DescribeReportDataResponse) {
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) DescribeReportData(request *DescribeReportDataRequest) (response *DescribeReportDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeReportDataRequest()
-    }
-    
-    response = NewDescribeReportDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeReportDataWithContext(context.Background(), request)
 }
 
 // DescribeReportData
@@ -2093,6 +2066,11 @@ func (c *Client) DescribeReportDataWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeReportDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReportData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeReportDataResponse()
@@ -2132,13 +2110,7 @@ func NewDescribeUrlViolationsResponse() (response *DescribeUrlViolationsResponse
 //  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
 func (c *Client) DescribeUrlViolations(request *DescribeUrlViolationsRequest) (response *DescribeUrlViolationsResponse, err error) {
-    if request == nil {
-        request = NewDescribeUrlViolationsRequest()
-    }
-    
-    response = NewDescribeUrlViolationsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeUrlViolationsWithContext(context.Background(), request)
 }
 
 // DescribeUrlViolations
@@ -2159,6 +2131,11 @@ func (c *Client) DescribeUrlViolationsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeUrlViolationsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUrlViolations require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeUrlViolationsResponse()
@@ -2208,13 +2185,7 @@ func NewDisableCachesResponse() (response *DisableCachesResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DisableCaches(request *DisableCachesRequest) (response *DisableCachesResponse, err error) {
-    if request == nil {
-        request = NewDisableCachesRequest()
-    }
-    
-    response = NewDisableCachesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DisableCachesWithContext(context.Background(), request)
 }
 
 // DisableCaches
@@ -2245,6 +2216,11 @@ func (c *Client) DisableCachesWithContext(ctx context.Context, request *DisableC
     if request == nil {
         request = NewDisableCachesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableCaches require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDisableCachesResponse()
@@ -2302,13 +2278,7 @@ func NewDisableClsLogTopicResponse() (response *DisableClsLogTopicResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) DisableClsLogTopic(request *DisableClsLogTopicRequest) (response *DisableClsLogTopicResponse, err error) {
-    if request == nil {
-        request = NewDisableClsLogTopicRequest()
-    }
-    
-    response = NewDisableClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.DisableClsLogTopicWithContext(context.Background(), request)
 }
 
 // DisableClsLogTopic
@@ -2347,6 +2317,11 @@ func (c *Client) DisableClsLogTopicWithContext(ctx context.Context, request *Dis
     if request == nil {
         request = NewDisableClsLogTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableClsLogTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDisableClsLogTopicResponse()
@@ -2393,13 +2368,7 @@ func NewEnableCachesResponse() (response *EnableCachesResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) EnableCaches(request *EnableCachesRequest) (response *EnableCachesResponse, err error) {
-    if request == nil {
-        request = NewEnableCachesRequest()
-    }
-    
-    response = NewEnableCachesResponse()
-    err = c.Send(request, response)
-    return
+    return c.EnableCachesWithContext(context.Background(), request)
 }
 
 // EnableCaches
@@ -2427,6 +2396,11 @@ func (c *Client) EnableCachesWithContext(ctx context.Context, request *EnableCac
     if request == nil {
         request = NewEnableCachesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableCaches require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEnableCachesResponse()
@@ -2484,13 +2458,7 @@ func NewEnableClsLogTopicResponse() (response *EnableClsLogTopicResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) EnableClsLogTopic(request *EnableClsLogTopicRequest) (response *EnableClsLogTopicResponse, err error) {
-    if request == nil {
-        request = NewEnableClsLogTopicRequest()
-    }
-    
-    response = NewEnableClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
+    return c.EnableClsLogTopicWithContext(context.Background(), request)
 }
 
 // EnableClsLogTopic
@@ -2529,6 +2497,11 @@ func (c *Client) EnableClsLogTopicWithContext(ctx context.Context, request *Enab
     if request == nil {
         request = NewEnableClsLogTopicRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableClsLogTopic require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEnableClsLogTopicResponse()
@@ -2575,13 +2548,7 @@ func NewGetDisableRecordsResponse() (response *GetDisableRecordsResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) GetDisableRecords(request *GetDisableRecordsRequest) (response *GetDisableRecordsResponse, err error) {
-    if request == nil {
-        request = NewGetDisableRecordsRequest()
-    }
-    
-    response = NewGetDisableRecordsResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetDisableRecordsWithContext(context.Background(), request)
 }
 
 // GetDisableRecords
@@ -2609,6 +2576,11 @@ func (c *Client) GetDisableRecordsWithContext(ctx context.Context, request *GetD
     if request == nil {
         request = NewGetDisableRecordsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetDisableRecords require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetDisableRecordsResponse()
@@ -2671,13 +2643,7 @@ func NewListClsLogTopicsResponse() (response *ListClsLogTopicsResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) ListClsLogTopics(request *ListClsLogTopicsRequest) (response *ListClsLogTopicsResponse, err error) {
-    if request == nil {
-        request = NewListClsLogTopicsRequest()
-    }
-    
-    response = NewListClsLogTopicsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListClsLogTopicsWithContext(context.Background(), request)
 }
 
 // ListClsLogTopics
@@ -2721,6 +2687,11 @@ func (c *Client) ListClsLogTopicsWithContext(ctx context.Context, request *ListC
     if request == nil {
         request = NewListClsLogTopicsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListClsLogTopics require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListClsLogTopicsResponse()
@@ -2777,13 +2748,7 @@ func NewListClsTopicDomainsResponse() (response *ListClsTopicDomainsResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) ListClsTopicDomains(request *ListClsTopicDomainsRequest) (response *ListClsTopicDomainsResponse, err error) {
-    if request == nil {
-        request = NewListClsTopicDomainsRequest()
-    }
-    
-    response = NewListClsTopicDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListClsTopicDomainsWithContext(context.Background(), request)
 }
 
 // ListClsTopicDomains
@@ -2821,6 +2786,11 @@ func (c *Client) ListClsTopicDomainsWithContext(ctx context.Context, request *Li
     if request == nil {
         request = NewListClsTopicDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListClsTopicDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListClsTopicDomainsResponse()
@@ -2894,13 +2864,7 @@ func NewListTopDataResponse() (response *ListTopDataResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) ListTopData(request *ListTopDataRequest) (response *ListTopDataResponse, err error) {
-    if request == nil {
-        request = NewListTopDataRequest()
-    }
-    
-    response = NewListTopDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.ListTopDataWithContext(context.Background(), request)
 }
 
 // ListTopData
@@ -2955,6 +2919,11 @@ func (c *Client) ListTopDataWithContext(ctx context.Context, request *ListTopDat
     if request == nil {
         request = NewListTopDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListTopData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewListTopDataResponse()
@@ -3014,13 +2983,7 @@ func NewManageClsTopicDomainsResponse() (response *ManageClsTopicDomainsResponse
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) ManageClsTopicDomains(request *ManageClsTopicDomainsRequest) (response *ManageClsTopicDomainsResponse, err error) {
-    if request == nil {
-        request = NewManageClsTopicDomainsRequest()
-    }
-    
-    response = NewManageClsTopicDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ManageClsTopicDomainsWithContext(context.Background(), request)
 }
 
 // ManageClsTopicDomains
@@ -3061,6 +3024,11 @@ func (c *Client) ManageClsTopicDomainsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewManageClsTopicDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ManageClsTopicDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewManageClsTopicDomainsResponse()
@@ -3117,13 +3085,7 @@ func NewPurgePathCacheResponse() (response *PurgePathCacheResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) PurgePathCache(request *PurgePathCacheRequest) (response *PurgePathCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgePathCacheRequest()
-    }
-    
-    response = NewPurgePathCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PurgePathCacheWithContext(context.Background(), request)
 }
 
 // PurgePathCache
@@ -3161,6 +3123,11 @@ func (c *Client) PurgePathCacheWithContext(ctx context.Context, request *PurgePa
     if request == nil {
         request = NewPurgePathCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PurgePathCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPurgePathCacheResponse()
@@ -3218,13 +3185,7 @@ func NewPurgeUrlsCacheResponse() (response *PurgeUrlsCacheResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) PurgeUrlsCache(request *PurgeUrlsCacheRequest) (response *PurgeUrlsCacheResponse, err error) {
-    if request == nil {
-        request = NewPurgeUrlsCacheRequest()
-    }
-    
-    response = NewPurgeUrlsCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PurgeUrlsCacheWithContext(context.Background(), request)
 }
 
 // PurgeUrlsCache
@@ -3263,6 +3224,11 @@ func (c *Client) PurgeUrlsCacheWithContext(ctx context.Context, request *PurgeUr
     if request == nil {
         request = NewPurgeUrlsCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PurgeUrlsCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPurgeUrlsCacheResponse()
@@ -3322,13 +3288,7 @@ func NewPushUrlsCacheResponse() (response *PushUrlsCacheResponse) {
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 func (c *Client) PushUrlsCache(request *PushUrlsCacheRequest) (response *PushUrlsCacheResponse, err error) {
-    if request == nil {
-        request = NewPushUrlsCacheRequest()
-    }
-    
-    response = NewPushUrlsCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PushUrlsCacheWithContext(context.Background(), request)
 }
 
 // PushUrlsCache
@@ -3369,6 +3329,11 @@ func (c *Client) PushUrlsCacheWithContext(ctx context.Context, request *PushUrls
     if request == nil {
         request = NewPushUrlsCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PushUrlsCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPushUrlsCacheResponse()
@@ -3430,13 +3395,7 @@ func NewSearchClsLogResponse() (response *SearchClsLogResponse) {
 //  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) SearchClsLog(request *SearchClsLogRequest) (response *SearchClsLogResponse, err error) {
-    if request == nil {
-        request = NewSearchClsLogRequest()
-    }
-    
-    response = NewSearchClsLogResponse()
-    err = c.Send(request, response)
-    return
+    return c.SearchClsLogWithContext(context.Background(), request)
 }
 
 // SearchClsLog
@@ -3479,6 +3438,11 @@ func (c *Client) SearchClsLogWithContext(ctx context.Context, request *SearchCls
     if request == nil {
         request = NewSearchClsLogRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchClsLog require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSearchClsLogResponse()
@@ -3531,13 +3495,7 @@ func NewStartCdnDomainResponse() (response *StartCdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) StartCdnDomain(request *StartCdnDomainRequest) (response *StartCdnDomainResponse, err error) {
-    if request == nil {
-        request = NewStartCdnDomainRequest()
-    }
-    
-    response = NewStartCdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartCdnDomainWithContext(context.Background(), request)
 }
 
 // StartCdnDomain
@@ -3571,6 +3529,11 @@ func (c *Client) StartCdnDomainWithContext(ctx context.Context, request *StartCd
     if request == nil {
         request = NewStartCdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartCdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartCdnDomainResponse()
@@ -3623,13 +3586,7 @@ func NewStopCdnDomainResponse() (response *StopCdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 //  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
 func (c *Client) StopCdnDomain(request *StopCdnDomainRequest) (response *StopCdnDomainResponse, err error) {
-    if request == nil {
-        request = NewStopCdnDomainRequest()
-    }
-    
-    response = NewStopCdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopCdnDomainWithContext(context.Background(), request)
 }
 
 // StopCdnDomain
@@ -3663,6 +3620,11 @@ func (c *Client) StopCdnDomainWithContext(ctx context.Context, request *StopCdnD
     if request == nil {
         request = NewStopCdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopCdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopCdnDomainResponse()
@@ -3738,13 +3700,7 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (response *UpdateDomainConfigResponse, err error) {
-    if request == nil {
-        request = NewUpdateDomainConfigRequest()
-    }
-    
-    response = NewUpdateDomainConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateDomainConfigWithContext(context.Background(), request)
 }
 
 // UpdateDomainConfig
@@ -3801,6 +3757,11 @@ func (c *Client) UpdateDomainConfigWithContext(ctx context.Context, request *Upd
     if request == nil {
         request = NewUpdateDomainConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDomainConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateDomainConfigResponse()
@@ -3839,13 +3800,7 @@ func NewUpdatePayTypeResponse() (response *UpdatePayTypeResponse) {
 //  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
 func (c *Client) UpdatePayType(request *UpdatePayTypeRequest) (response *UpdatePayTypeResponse, err error) {
-    if request == nil {
-        request = NewUpdatePayTypeRequest()
-    }
-    
-    response = NewUpdatePayTypeResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdatePayTypeWithContext(context.Background(), request)
 }
 
 // UpdatePayType
@@ -3865,6 +3820,11 @@ func (c *Client) UpdatePayTypeWithContext(ctx context.Context, request *UpdatePa
     if request == nil {
         request = NewUpdatePayTypeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePayType require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdatePayTypeResponse()
@@ -3912,13 +3872,7 @@ func NewUpdateScdnDomainResponse() (response *UpdateScdnDomainResponse) {
 //  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 func (c *Client) UpdateScdnDomain(request *UpdateScdnDomainRequest) (response *UpdateScdnDomainResponse, err error) {
-    if request == nil {
-        request = NewUpdateScdnDomainRequest()
-    }
-    
-    response = NewUpdateScdnDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.UpdateScdnDomainWithContext(context.Background(), request)
 }
 
 // UpdateScdnDomain
@@ -3947,6 +3901,11 @@ func (c *Client) UpdateScdnDomainWithContext(ctx context.Context, request *Updat
     if request == nil {
         request = NewUpdateScdnDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateScdnDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewUpdateScdnDomainResponse()

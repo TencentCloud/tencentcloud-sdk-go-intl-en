@@ -16,6 +16,7 @@ package v20180717
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -75,13 +76,7 @@ func NewApplyUploadResponse() (response *ApplyUploadResponse) {
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ApplyUpload(request *ApplyUploadRequest) (response *ApplyUploadResponse, err error) {
-    if request == nil {
-        request = NewApplyUploadRequest()
-    }
-    
-    response = NewApplyUploadResponse()
-    err = c.Send(request, response)
-    return
+    return c.ApplyUploadWithContext(context.Background(), request)
 }
 
 // ApplyUpload
@@ -101,6 +96,11 @@ func (c *Client) ApplyUploadWithContext(ctx context.Context, request *ApplyUploa
     if request == nil {
         request = NewApplyUploadRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyUpload require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewApplyUploadResponse()
@@ -135,13 +135,7 @@ func NewAttachMediaSubtitlesResponse() (response *AttachMediaSubtitlesResponse) 
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) AttachMediaSubtitles(request *AttachMediaSubtitlesRequest) (response *AttachMediaSubtitlesResponse, err error) {
-    if request == nil {
-        request = NewAttachMediaSubtitlesRequest()
-    }
-    
-    response = NewAttachMediaSubtitlesResponse()
-    err = c.Send(request, response)
-    return
+    return c.AttachMediaSubtitlesWithContext(context.Background(), request)
 }
 
 // AttachMediaSubtitles
@@ -157,6 +151,11 @@ func (c *Client) AttachMediaSubtitlesWithContext(ctx context.Context, request *A
     if request == nil {
         request = NewAttachMediaSubtitlesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AttachMediaSubtitles require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAttachMediaSubtitlesResponse()
@@ -191,13 +190,7 @@ func NewCommitUploadResponse() (response *CommitUploadResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CommitUpload(request *CommitUploadRequest) (response *CommitUploadResponse, err error) {
-    if request == nil {
-        request = NewCommitUploadRequest()
-    }
-    
-    response = NewCommitUploadResponse()
-    err = c.Send(request, response)
-    return
+    return c.CommitUploadWithContext(context.Background(), request)
 }
 
 // CommitUpload
@@ -213,6 +206,11 @@ func (c *Client) CommitUploadWithContext(ctx context.Context, request *CommitUpl
     if request == nil {
         request = NewCommitUploadRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CommitUpload require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCommitUploadResponse()
@@ -261,13 +259,7 @@ func NewComposeMediaResponse() (response *ComposeMediaResponse) {
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ComposeMedia(request *ComposeMediaRequest) (response *ComposeMediaResponse, err error) {
-    if request == nil {
-        request = NewComposeMediaRequest()
-    }
-    
-    response = NewComposeMediaResponse()
-    err = c.Send(request, response)
-    return
+    return c.ComposeMediaWithContext(context.Background(), request)
 }
 
 // ComposeMedia
@@ -297,6 +289,11 @@ func (c *Client) ComposeMediaWithContext(ctx context.Context, request *ComposeMe
     if request == nil {
         request = NewComposeMediaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ComposeMedia require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewComposeMediaResponse()
@@ -335,13 +332,7 @@ func NewConfirmEventsResponse() (response *ConfirmEventsResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ConfirmEvents(request *ConfirmEventsRequest) (response *ConfirmEventsResponse, err error) {
-    if request == nil {
-        request = NewConfirmEventsRequest()
-    }
-    
-    response = NewConfirmEventsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ConfirmEventsWithContext(context.Background(), request)
 }
 
 // ConfirmEvents
@@ -361,6 +352,11 @@ func (c *Client) ConfirmEventsWithContext(ctx context.Context, request *ConfirmE
     if request == nil {
         request = NewConfirmEventsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConfirmEvents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewConfirmEventsResponse()
@@ -402,13 +398,7 @@ func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateRe
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAIAnalysisTemplate(request *CreateAIAnalysisTemplateRequest) (response *CreateAIAnalysisTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateAIAnalysisTemplateRequest()
-    }
-    
-    response = NewCreateAIAnalysisTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAIAnalysisTemplateWithContext(context.Background(), request)
 }
 
 // CreateAIAnalysisTemplate
@@ -431,6 +421,11 @@ func (c *Client) CreateAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewCreateAIAnalysisTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAIAnalysisTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAIAnalysisTemplateResponse()
@@ -475,13 +470,7 @@ func NewCreateAIRecognitionTemplateResponse() (response *CreateAIRecognitionTemp
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplateRequest) (response *CreateAIRecognitionTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateAIRecognitionTemplateRequest()
-    }
-    
-    response = NewCreateAIRecognitionTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAIRecognitionTemplateWithContext(context.Background(), request)
 }
 
 // CreateAIRecognitionTemplate
@@ -507,6 +496,11 @@ func (c *Client) CreateAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateAIRecognitionTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAIRecognitionTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAIRecognitionTemplateResponse()
@@ -556,13 +550,7 @@ func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdapti
 //  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 func (c *Client) CreateAdaptiveDynamicStreamingTemplate(request *CreateAdaptiveDynamicStreamingTemplateRequest) (response *CreateAdaptiveDynamicStreamingTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
-    }
-    
-    response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAdaptiveDynamicStreamingTemplateWithContext(context.Background(), request)
 }
 
 // CreateAdaptiveDynamicStreamingTemplate
@@ -593,6 +581,11 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewCreateAdaptiveDynamicStreamingTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAdaptiveDynamicStreamingTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
@@ -635,13 +628,7 @@ func NewCreateAnimatedGraphicsTemplateResponse() (response *CreateAnimatedGraphi
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAnimatedGraphicsTemplate(request *CreateAnimatedGraphicsTemplateRequest) (response *CreateAnimatedGraphicsTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateAnimatedGraphicsTemplateRequest()
-    }
-    
-    response = NewCreateAnimatedGraphicsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAnimatedGraphicsTemplateWithContext(context.Background(), request)
 }
 
 // CreateAnimatedGraphicsTemplate
@@ -665,6 +652,11 @@ func (c *Client) CreateAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewCreateAnimatedGraphicsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAnimatedGraphicsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAnimatedGraphicsTemplateResponse()
@@ -710,13 +702,7 @@ func NewCreateClassResponse() (response *CreateClassResponse) {
 //  INVALIDPARAMETERVALUE_PARENTID = "InvalidParameterValue.ParentId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateClass(request *CreateClassRequest) (response *CreateClassResponse, err error) {
-    if request == nil {
-        request = NewCreateClassRequest()
-    }
-    
-    response = NewCreateClassResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateClassWithContext(context.Background(), request)
 }
 
 // CreateClass
@@ -743,6 +729,11 @@ func (c *Client) CreateClassWithContext(ctx context.Context, request *CreateClas
     if request == nil {
         request = NewCreateClassRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClass require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateClassResponse()
@@ -786,13 +777,7 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplateRequest) (response *CreateContentReviewTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateContentReviewTemplateRequest()
-    }
-    
-    response = NewCreateContentReviewTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateContentReviewTemplateWithContext(context.Background(), request)
 }
 
 // CreateContentReviewTemplate
@@ -817,6 +802,11 @@ func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewCreateContentReviewTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateContentReviewTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateContentReviewTemplateResponse()
@@ -859,13 +849,7 @@ func NewCreateImageSpriteTemplateResponse() (response *CreateImageSpriteTemplate
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateImageSpriteTemplate(request *CreateImageSpriteTemplateRequest) (response *CreateImageSpriteTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateImageSpriteTemplateRequest()
-    }
-    
-    response = NewCreateImageSpriteTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateImageSpriteTemplateWithContext(context.Background(), request)
 }
 
 // CreateImageSpriteTemplate
@@ -889,6 +873,11 @@ func (c *Client) CreateImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewCreateImageSpriteTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateImageSpriteTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateImageSpriteTemplateResponse()
@@ -923,13 +912,7 @@ func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
 //  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreatePersonSample(request *CreatePersonSampleRequest) (response *CreatePersonSampleResponse, err error) {
-    if request == nil {
-        request = NewCreatePersonSampleRequest()
-    }
-    
-    response = NewCreatePersonSampleResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreatePersonSampleWithContext(context.Background(), request)
 }
 
 // CreatePersonSample
@@ -945,6 +928,11 @@ func (c *Client) CreatePersonSampleWithContext(ctx context.Context, request *Cre
     if request == nil {
         request = NewCreatePersonSampleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePersonSample require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreatePersonSampleResponse()
@@ -982,13 +970,7 @@ func NewCreateProcedureTemplateResponse() (response *CreateProcedureTemplateResp
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateProcedureTemplate(request *CreateProcedureTemplateRequest) (response *CreateProcedureTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateProcedureTemplateRequest()
-    }
-    
-    response = NewCreateProcedureTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateProcedureTemplateWithContext(context.Background(), request)
 }
 
 // CreateProcedureTemplate
@@ -1007,6 +989,11 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateProcedureTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProcedureTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateProcedureTemplateResponse()
@@ -1048,13 +1035,7 @@ func NewCreateSampleSnapshotTemplateResponse() (response *CreateSampleSnapshotTe
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSampleSnapshotTemplate(request *CreateSampleSnapshotTemplateRequest) (response *CreateSampleSnapshotTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateSampleSnapshotTemplateRequest()
-    }
-    
-    response = NewCreateSampleSnapshotTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSampleSnapshotTemplateWithContext(context.Background(), request)
 }
 
 // CreateSampleSnapshotTemplate
@@ -1077,6 +1058,11 @@ func (c *Client) CreateSampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewCreateSampleSnapshotTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSampleSnapshotTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSampleSnapshotTemplateResponse()
@@ -1117,13 +1103,7 @@ func NewCreateSnapshotByTimeOffsetTemplateResponse() (response *CreateSnapshotBy
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSnapshotByTimeOffsetTemplate(request *CreateSnapshotByTimeOffsetTemplateRequest) (response *CreateSnapshotByTimeOffsetTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateSnapshotByTimeOffsetTemplateRequest()
-    }
-    
-    response = NewCreateSnapshotByTimeOffsetTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSnapshotByTimeOffsetTemplateWithContext(context.Background(), request)
 }
 
 // CreateSnapshotByTimeOffsetTemplate
@@ -1145,6 +1125,11 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewCreateSnapshotByTimeOffsetTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSnapshotByTimeOffsetTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSnapshotByTimeOffsetTemplateResponse()
@@ -1180,13 +1165,7 @@ func NewCreateSubAppIdResponse() (response *CreateSubAppIdResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSubAppId(request *CreateSubAppIdRequest) (response *CreateSubAppIdResponse, err error) {
-    if request == nil {
-        request = NewCreateSubAppIdRequest()
-    }
-    
-    response = NewCreateSubAppIdResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSubAppIdWithContext(context.Background(), request)
 }
 
 // CreateSubAppId
@@ -1203,6 +1182,11 @@ func (c *Client) CreateSubAppIdWithContext(ctx context.Context, request *CreateS
     if request == nil {
         request = NewCreateSubAppIdRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSubAppId require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSubAppIdResponse()
@@ -1238,13 +1222,7 @@ func NewCreateSuperPlayerConfigResponse() (response *CreateSuperPlayerConfigResp
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSuperPlayerConfig(request *CreateSuperPlayerConfigRequest) (response *CreateSuperPlayerConfigResponse, err error) {
-    if request == nil {
-        request = NewCreateSuperPlayerConfigRequest()
-    }
-    
-    response = NewCreateSuperPlayerConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSuperPlayerConfigWithContext(context.Background(), request)
 }
 
 // CreateSuperPlayerConfig
@@ -1261,6 +1239,11 @@ func (c *Client) CreateSuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateSuperPlayerConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSuperPlayerConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSuperPlayerConfigResponse()
@@ -1319,13 +1302,7 @@ func NewCreateTranscodeTemplateResponse() (response *CreateTranscodeTemplateResp
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateTranscodeTemplate(request *CreateTranscodeTemplateRequest) (response *CreateTranscodeTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateTranscodeTemplateRequest()
-    }
-    
-    response = NewCreateTranscodeTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateTranscodeTemplateWithContext(context.Background(), request)
 }
 
 // CreateTranscodeTemplate
@@ -1365,6 +1342,11 @@ func (c *Client) CreateTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateTranscodeTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTranscodeTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateTranscodeTemplateResponse()
@@ -1401,13 +1383,7 @@ func NewCreateVodDomainResponse() (response *CreateVodDomainResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DOMAINNAMEINBLACKLIST = "InvalidParameterValue.DomainNameInBlackList"
 func (c *Client) CreateVodDomain(request *CreateVodDomainRequest) (response *CreateVodDomainResponse, err error) {
-    if request == nil {
-        request = NewCreateVodDomainRequest()
-    }
-    
-    response = NewCreateVodDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateVodDomainWithContext(context.Background(), request)
 }
 
 // CreateVodDomain
@@ -1425,6 +1401,11 @@ func (c *Client) CreateVodDomainWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateVodDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateVodDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateVodDomainResponse()
@@ -1477,13 +1458,7 @@ func NewCreateWatermarkTemplateResponse() (response *CreateWatermarkTemplateResp
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateWatermarkTemplate(request *CreateWatermarkTemplateRequest) (response *CreateWatermarkTemplateResponse, err error) {
-    if request == nil {
-        request = NewCreateWatermarkTemplateRequest()
-    }
-    
-    response = NewCreateWatermarkTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateWatermarkTemplateWithContext(context.Background(), request)
 }
 
 // CreateWatermarkTemplate
@@ -1517,6 +1492,11 @@ func (c *Client) CreateWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewCreateWatermarkTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWatermarkTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateWatermarkTemplateResponse()
@@ -1549,13 +1529,7 @@ func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateWordSamples(request *CreateWordSamplesRequest) (response *CreateWordSamplesResponse, err error) {
-    if request == nil {
-        request = NewCreateWordSamplesRequest()
-    }
-    
-    response = NewCreateWordSamplesResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateWordSamplesWithContext(context.Background(), request)
 }
 
 // CreateWordSamples
@@ -1569,6 +1543,11 @@ func (c *Client) CreateWordSamplesWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateWordSamplesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWordSamples require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateWordSamplesResponse()
@@ -1607,13 +1586,7 @@ func NewDeleteAIAnalysisTemplateResponse() (response *DeleteAIAnalysisTemplateRe
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAIAnalysisTemplate(request *DeleteAIAnalysisTemplateRequest) (response *DeleteAIAnalysisTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteAIAnalysisTemplateRequest()
-    }
-    
-    response = NewDeleteAIAnalysisTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAIAnalysisTemplateWithContext(context.Background(), request)
 }
 
 // DeleteAIAnalysisTemplate
@@ -1633,6 +1606,11 @@ func (c *Client) DeleteAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDeleteAIAnalysisTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAIAnalysisTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAIAnalysisTemplateResponse()
@@ -1667,13 +1645,7 @@ func NewDeleteAIRecognitionTemplateResponse() (response *DeleteAIRecognitionTemp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplateRequest) (response *DeleteAIRecognitionTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteAIRecognitionTemplateRequest()
-    }
-    
-    response = NewDeleteAIRecognitionTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAIRecognitionTemplateWithContext(context.Background(), request)
 }
 
 // DeleteAIRecognitionTemplate
@@ -1689,6 +1661,11 @@ func (c *Client) DeleteAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteAIRecognitionTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAIRecognitionTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAIRecognitionTemplateResponse()
@@ -1722,13 +1699,7 @@ func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdapti
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveDynamicStreamingTemplateRequest) (response *DeleteAdaptiveDynamicStreamingTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
-    }
-    
-    response = NewDeleteAdaptiveDynamicStreamingTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAdaptiveDynamicStreamingTemplateWithContext(context.Background(), request)
 }
 
 // DeleteAdaptiveDynamicStreamingTemplate
@@ -1743,6 +1714,11 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewDeleteAdaptiveDynamicStreamingTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAdaptiveDynamicStreamingTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAdaptiveDynamicStreamingTemplateResponse()
@@ -1776,13 +1752,7 @@ func NewDeleteAnimatedGraphicsTemplateResponse() (response *DeleteAnimatedGraphi
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteAnimatedGraphicsTemplate(request *DeleteAnimatedGraphicsTemplateRequest) (response *DeleteAnimatedGraphicsTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteAnimatedGraphicsTemplateRequest()
-    }
-    
-    response = NewDeleteAnimatedGraphicsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteAnimatedGraphicsTemplateWithContext(context.Background(), request)
 }
 
 // DeleteAnimatedGraphicsTemplate
@@ -1797,6 +1767,11 @@ func (c *Client) DeleteAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewDeleteAnimatedGraphicsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAnimatedGraphicsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteAnimatedGraphicsTemplateResponse()
@@ -1832,13 +1807,7 @@ func NewDeleteClassResponse() (response *DeleteClassResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_CLASSNOTEMPTY = "UnsupportedOperation.ClassNotEmpty"
 func (c *Client) DeleteClass(request *DeleteClassRequest) (response *DeleteClassResponse, err error) {
-    if request == nil {
-        request = NewDeleteClassRequest()
-    }
-    
-    response = NewDeleteClassResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteClassWithContext(context.Background(), request)
 }
 
 // DeleteClass
@@ -1855,6 +1824,11 @@ func (c *Client) DeleteClassWithContext(ctx context.Context, request *DeleteClas
     if request == nil {
         request = NewDeleteClassRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClass require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteClassResponse()
@@ -1889,13 +1863,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplateRequest) (response *DeleteContentReviewTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteContentReviewTemplateRequest()
-    }
-    
-    response = NewDeleteContentReviewTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteContentReviewTemplateWithContext(context.Background(), request)
 }
 
 // DeleteContentReviewTemplate
@@ -1911,6 +1879,11 @@ func (c *Client) DeleteContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewDeleteContentReviewTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteContentReviewTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteContentReviewTemplateResponse()
@@ -1943,13 +1916,7 @@ func NewDeleteImageSpriteTemplateResponse() (response *DeleteImageSpriteTemplate
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateRequest) (response *DeleteImageSpriteTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteImageSpriteTemplateRequest()
-    }
-    
-    response = NewDeleteImageSpriteTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteImageSpriteTemplateWithContext(context.Background(), request)
 }
 
 // DeleteImageSpriteTemplate
@@ -1963,6 +1930,11 @@ func (c *Client) DeleteImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewDeleteImageSpriteTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteImageSpriteTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteImageSpriteTemplateResponse()
@@ -2001,13 +1973,7 @@ func NewDeleteMediaResponse() (response *DeleteMediaResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteMedia(request *DeleteMediaRequest) (response *DeleteMediaResponse, err error) {
-    if request == nil {
-        request = NewDeleteMediaRequest()
-    }
-    
-    response = NewDeleteMediaResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMediaWithContext(context.Background(), request)
 }
 
 // DeleteMedia
@@ -2027,6 +1993,11 @@ func (c *Client) DeleteMediaWithContext(ctx context.Context, request *DeleteMedi
     if request == nil {
         request = NewDeleteMediaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMedia require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMediaResponse()
@@ -2059,13 +2030,7 @@ func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
 //  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
-    if request == nil {
-        request = NewDeletePersonSampleRequest()
-    }
-    
-    response = NewDeletePersonSampleResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeletePersonSampleWithContext(context.Background(), request)
 }
 
 // DeletePersonSample
@@ -2079,6 +2044,11 @@ func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *Del
     if request == nil {
         request = NewDeletePersonSampleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePersonSample require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeletePersonSampleResponse()
@@ -2114,13 +2084,7 @@ func NewDeleteProcedureTemplateResponse() (response *DeleteProcedureTemplateResp
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteProcedureTemplate(request *DeleteProcedureTemplateRequest) (response *DeleteProcedureTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteProcedureTemplateRequest()
-    }
-    
-    response = NewDeleteProcedureTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteProcedureTemplateWithContext(context.Background(), request)
 }
 
 // DeleteProcedureTemplate
@@ -2137,6 +2101,11 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteProcedureTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProcedureTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteProcedureTemplateResponse()
@@ -2169,13 +2138,7 @@ func NewDeleteSampleSnapshotTemplateResponse() (response *DeleteSampleSnapshotTe
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSampleSnapshotTemplate(request *DeleteSampleSnapshotTemplateRequest) (response *DeleteSampleSnapshotTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteSampleSnapshotTemplateRequest()
-    }
-    
-    response = NewDeleteSampleSnapshotTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSampleSnapshotTemplateWithContext(context.Background(), request)
 }
 
 // DeleteSampleSnapshotTemplate
@@ -2189,6 +2152,11 @@ func (c *Client) DeleteSampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewDeleteSampleSnapshotTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSampleSnapshotTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSampleSnapshotTemplateResponse()
@@ -2221,13 +2189,7 @@ func NewDeleteSnapshotByTimeOffsetTemplateResponse() (response *DeleteSnapshotBy
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTimeOffsetTemplateRequest) (response *DeleteSnapshotByTimeOffsetTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
-    }
-    
-    response = NewDeleteSnapshotByTimeOffsetTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSnapshotByTimeOffsetTemplateWithContext(context.Background(), request)
 }
 
 // DeleteSnapshotByTimeOffsetTemplate
@@ -2241,6 +2203,11 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewDeleteSnapshotByTimeOffsetTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSnapshotByTimeOffsetTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSnapshotByTimeOffsetTemplateResponse()
@@ -2277,13 +2244,7 @@ func NewDeleteSuperPlayerConfigResponse() (response *DeleteSuperPlayerConfigResp
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteSuperPlayerConfig(request *DeleteSuperPlayerConfigRequest) (response *DeleteSuperPlayerConfigResponse, err error) {
-    if request == nil {
-        request = NewDeleteSuperPlayerConfigRequest()
-    }
-    
-    response = NewDeleteSuperPlayerConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteSuperPlayerConfigWithContext(context.Background(), request)
 }
 
 // DeleteSuperPlayerConfig
@@ -2301,6 +2262,11 @@ func (c *Client) DeleteSuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteSuperPlayerConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSuperPlayerConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteSuperPlayerConfigResponse()
@@ -2335,13 +2301,7 @@ func NewDeleteTranscodeTemplateResponse() (response *DeleteTranscodeTemplateResp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteTranscodeTemplate(request *DeleteTranscodeTemplateRequest) (response *DeleteTranscodeTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteTranscodeTemplateRequest()
-    }
-    
-    response = NewDeleteTranscodeTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteTranscodeTemplateWithContext(context.Background(), request)
 }
 
 // DeleteTranscodeTemplate
@@ -2357,6 +2317,11 @@ func (c *Client) DeleteTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteTranscodeTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTranscodeTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteTranscodeTemplateResponse()
@@ -2390,13 +2355,7 @@ func NewDeleteVodDomainResponse() (response *DeleteVodDomainResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteVodDomain(request *DeleteVodDomainRequest) (response *DeleteVodDomainResponse, err error) {
-    if request == nil {
-        request = NewDeleteVodDomainRequest()
-    }
-    
-    response = NewDeleteVodDomainResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteVodDomainWithContext(context.Background(), request)
 }
 
 // DeleteVodDomain
@@ -2411,6 +2370,11 @@ func (c *Client) DeleteVodDomainWithContext(ctx context.Context, request *Delete
     if request == nil {
         request = NewDeleteVodDomainRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteVodDomain require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteVodDomainResponse()
@@ -2446,13 +2410,7 @@ func NewDeleteWatermarkTemplateResponse() (response *DeleteWatermarkTemplateResp
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteWatermarkTemplate(request *DeleteWatermarkTemplateRequest) (response *DeleteWatermarkTemplateResponse, err error) {
-    if request == nil {
-        request = NewDeleteWatermarkTemplateRequest()
-    }
-    
-    response = NewDeleteWatermarkTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteWatermarkTemplateWithContext(context.Background(), request)
 }
 
 // DeleteWatermarkTemplate
@@ -2469,6 +2427,11 @@ func (c *Client) DeleteWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewDeleteWatermarkTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWatermarkTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteWatermarkTemplateResponse()
@@ -2501,13 +2464,7 @@ func NewDeleteWordSamplesResponse() (response *DeleteWordSamplesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DeleteWordSamples(request *DeleteWordSamplesRequest) (response *DeleteWordSamplesResponse, err error) {
-    if request == nil {
-        request = NewDeleteWordSamplesRequest()
-    }
-    
-    response = NewDeleteWordSamplesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteWordSamplesWithContext(context.Background(), request)
 }
 
 // DeleteWordSamples
@@ -2521,6 +2478,11 @@ func (c *Client) DeleteWordSamplesWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteWordSamplesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWordSamples require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteWordSamplesResponse()
@@ -2556,13 +2518,7 @@ func NewDescribeAIAnalysisTemplatesResponse() (response *DescribeAIAnalysisTempl
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIAnalysisTemplates(request *DescribeAIAnalysisTemplatesRequest) (response *DescribeAIAnalysisTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAIAnalysisTemplatesRequest()
-    }
-    
-    response = NewDescribeAIAnalysisTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAIAnalysisTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeAIAnalysisTemplates
@@ -2579,6 +2535,11 @@ func (c *Client) DescribeAIAnalysisTemplatesWithContext(ctx context.Context, req
     if request == nil {
         request = NewDescribeAIAnalysisTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAIAnalysisTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAIAnalysisTemplatesResponse()
@@ -2615,13 +2576,7 @@ func NewDescribeAIRecognitionTemplatesResponse() (response *DescribeAIRecognitio
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTemplatesRequest) (response *DescribeAIRecognitionTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAIRecognitionTemplatesRequest()
-    }
-    
-    response = NewDescribeAIRecognitionTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAIRecognitionTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeAIRecognitionTemplates
@@ -2639,6 +2594,11 @@ func (c *Client) DescribeAIRecognitionTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeAIRecognitionTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAIRecognitionTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAIRecognitionTemplatesResponse()
@@ -2675,13 +2635,7 @@ func NewDescribeAdaptiveDynamicStreamingTemplatesResponse() (response *DescribeA
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAdaptiveDynamicStreamingTemplates(request *DescribeAdaptiveDynamicStreamingTemplatesRequest) (response *DescribeAdaptiveDynamicStreamingTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
-    }
-    
-    response = NewDescribeAdaptiveDynamicStreamingTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAdaptiveDynamicStreamingTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeAdaptiveDynamicStreamingTemplates
@@ -2699,6 +2653,11 @@ func (c *Client) DescribeAdaptiveDynamicStreamingTemplatesWithContext(ctx contex
     if request == nil {
         request = NewDescribeAdaptiveDynamicStreamingTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAdaptiveDynamicStreamingTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAdaptiveDynamicStreamingTemplatesResponse()
@@ -2732,13 +2691,7 @@ func NewDescribeAllClassResponse() (response *DescribeAllClassResponse) {
 //  INTERNALERROR = "InternalError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAllClass(request *DescribeAllClassRequest) (response *DescribeAllClassResponse, err error) {
-    if request == nil {
-        request = NewDescribeAllClassRequest()
-    }
-    
-    response = NewDescribeAllClassResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAllClassWithContext(context.Background(), request)
 }
 
 // DescribeAllClass
@@ -2753,6 +2706,11 @@ func (c *Client) DescribeAllClassWithContext(ctx context.Context, request *Descr
     if request == nil {
         request = NewDescribeAllClassRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllClass require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAllClassResponse()
@@ -2789,13 +2747,7 @@ func NewDescribeAnimatedGraphicsTemplatesResponse() (response *DescribeAnimatedG
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGraphicsTemplatesRequest) (response *DescribeAnimatedGraphicsTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAnimatedGraphicsTemplatesRequest()
-    }
-    
-    response = NewDescribeAnimatedGraphicsTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAnimatedGraphicsTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeAnimatedGraphicsTemplates
@@ -2813,6 +2765,11 @@ func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Contex
     if request == nil {
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAnimatedGraphicsTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAnimatedGraphicsTemplatesResponse()
@@ -2860,13 +2817,7 @@ func NewDescribeCDNStatDetailsResponse() (response *DescribeCDNStatDetailsRespon
 //  INVALIDPARAMETERVALUE_METRIC = "InvalidParameterValue.Metric"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 func (c *Client) DescribeCDNStatDetails(request *DescribeCDNStatDetailsRequest) (response *DescribeCDNStatDetailsResponse, err error) {
-    if request == nil {
-        request = NewDescribeCDNStatDetailsRequest()
-    }
-    
-    response = NewDescribeCDNStatDetailsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCDNStatDetailsWithContext(context.Background(), request)
 }
 
 // DescribeCDNStatDetails
@@ -2895,6 +2846,11 @@ func (c *Client) DescribeCDNStatDetailsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeCDNStatDetailsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCDNStatDetails require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCDNStatDetailsResponse()
@@ -2944,13 +2900,7 @@ func NewDescribeCDNUsageDataResponse() (response *DescribeCDNUsageDataResponse) 
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeCDNUsageData(request *DescribeCDNUsageDataRequest) (response *DescribeCDNUsageDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeCDNUsageDataRequest()
-    }
-    
-    response = NewDescribeCDNUsageDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCDNUsageDataWithContext(context.Background(), request)
 }
 
 // DescribeCDNUsageData
@@ -2981,6 +2931,11 @@ func (c *Client) DescribeCDNUsageDataWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeCDNUsageDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCDNUsageData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCDNUsageDataResponse()
@@ -3023,13 +2978,7 @@ func NewDescribeCdnLogsResponse() (response *DescribeCdnLogsResponse) {
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeCdnLogs(request *DescribeCdnLogsRequest) (response *DescribeCdnLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeCdnLogsRequest()
-    }
-    
-    response = NewDescribeCdnLogsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeCdnLogsWithContext(context.Background(), request)
 }
 
 // DescribeCdnLogs
@@ -3053,6 +3002,11 @@ func (c *Client) DescribeCdnLogsWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeCdnLogsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnLogs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeCdnLogsResponse()
@@ -3090,13 +3044,7 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTemplatesRequest) (response *DescribeContentReviewTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeContentReviewTemplatesRequest()
-    }
-    
-    response = NewDescribeContentReviewTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeContentReviewTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeContentReviewTemplates
@@ -3115,6 +3063,11 @@ func (c *Client) DescribeContentReviewTemplatesWithContext(ctx context.Context, 
     if request == nil {
         request = NewDescribeContentReviewTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeContentReviewTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeContentReviewTemplatesResponse()
@@ -3162,13 +3115,7 @@ func NewDescribeDailyPlayStatFileListResponse() (response *DescribeDailyPlayStat
 //  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 func (c *Client) DescribeDailyPlayStatFileList(request *DescribeDailyPlayStatFileListRequest) (response *DescribeDailyPlayStatFileListResponse, err error) {
-    if request == nil {
-        request = NewDescribeDailyPlayStatFileListRequest()
-    }
-    
-    response = NewDescribeDailyPlayStatFileListResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeDailyPlayStatFileListWithContext(context.Background(), request)
 }
 
 // DescribeDailyPlayStatFileList
@@ -3197,6 +3144,11 @@ func (c *Client) DescribeDailyPlayStatFileListWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeDailyPlayStatFileListRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDailyPlayStatFileList require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeDailyPlayStatFileListResponse()
@@ -3233,13 +3185,7 @@ func NewDescribeImageSpriteTemplatesResponse() (response *DescribeImageSpriteTem
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTemplatesRequest) (response *DescribeImageSpriteTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeImageSpriteTemplatesRequest()
-    }
-    
-    response = NewDescribeImageSpriteTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeImageSpriteTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeImageSpriteTemplates
@@ -3257,6 +3203,11 @@ func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, re
     if request == nil {
         request = NewDescribeImageSpriteTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageSpriteTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeImageSpriteTemplatesResponse()
@@ -3314,13 +3265,7 @@ func NewDescribeMediaInfosResponse() (response *DescribeMediaInfosResponse) {
 //  INVALIDPARAMETERVALUE_FILEIDSEMPTY = "InvalidParameterValue.FileIdsEmpty"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (response *DescribeMediaInfosResponse, err error) {
-    if request == nil {
-        request = NewDescribeMediaInfosRequest()
-    }
-    
-    response = NewDescribeMediaInfosResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMediaInfosWithContext(context.Background(), request)
 }
 
 // DescribeMediaInfos
@@ -3359,6 +3304,11 @@ func (c *Client) DescribeMediaInfosWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeMediaInfosRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMediaInfos require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMediaInfosResponse()
@@ -3396,13 +3346,7 @@ func NewDescribeMediaProcessUsageDataResponse() (response *DescribeMediaProcessU
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMediaProcessUsageData(request *DescribeMediaProcessUsageDataRequest) (response *DescribeMediaProcessUsageDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeMediaProcessUsageDataRequest()
-    }
-    
-    response = NewDescribeMediaProcessUsageDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMediaProcessUsageDataWithContext(context.Background(), request)
 }
 
 // DescribeMediaProcessUsageData
@@ -3421,6 +3365,11 @@ func (c *Client) DescribeMediaProcessUsageDataWithContext(ctx context.Context, r
     if request == nil {
         request = NewDescribeMediaProcessUsageDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMediaProcessUsageData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMediaProcessUsageDataResponse()
@@ -3453,13 +3402,7 @@ func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (response *DescribePersonSamplesResponse, err error) {
-    if request == nil {
-        request = NewDescribePersonSamplesRequest()
-    }
-    
-    response = NewDescribePersonSamplesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribePersonSamplesWithContext(context.Background(), request)
 }
 
 // DescribePersonSamples
@@ -3473,6 +3416,11 @@ func (c *Client) DescribePersonSamplesWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribePersonSamplesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePersonSamples require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribePersonSamplesResponse()
@@ -3509,13 +3457,7 @@ func NewDescribeProcedureTemplatesResponse() (response *DescribeProcedureTemplat
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeProcedureTemplates(request *DescribeProcedureTemplatesRequest) (response *DescribeProcedureTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeProcedureTemplatesRequest()
-    }
-    
-    response = NewDescribeProcedureTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeProcedureTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeProcedureTemplates
@@ -3533,6 +3475,11 @@ func (c *Client) DescribeProcedureTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeProcedureTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProcedureTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeProcedureTemplatesResponse()
@@ -3579,13 +3526,7 @@ func NewDescribeReviewDetailsResponse() (response *DescribeReviewDetailsResponse
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeReviewDetails(request *DescribeReviewDetailsRequest) (response *DescribeReviewDetailsResponse, err error) {
-    if request == nil {
-        request = NewDescribeReviewDetailsRequest()
-    }
-    
-    response = NewDescribeReviewDetailsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeReviewDetailsWithContext(context.Background(), request)
 }
 
 // DescribeReviewDetails
@@ -3613,6 +3554,11 @@ func (c *Client) DescribeReviewDetailsWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeReviewDetailsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReviewDetails require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeReviewDetailsResponse()
@@ -3649,13 +3595,7 @@ func NewDescribeSampleSnapshotTemplatesResponse() (response *DescribeSampleSnaps
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSampleSnapshotTemplates(request *DescribeSampleSnapshotTemplatesRequest) (response *DescribeSampleSnapshotTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeSampleSnapshotTemplatesRequest()
-    }
-    
-    response = NewDescribeSampleSnapshotTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSampleSnapshotTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeSampleSnapshotTemplates
@@ -3673,6 +3613,11 @@ func (c *Client) DescribeSampleSnapshotTemplatesWithContext(ctx context.Context,
     if request == nil {
         request = NewDescribeSampleSnapshotTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSampleSnapshotTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSampleSnapshotTemplatesResponse()
@@ -3709,13 +3654,7 @@ func NewDescribeSnapshotByTimeOffsetTemplatesResponse() (response *DescribeSnaps
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshotByTimeOffsetTemplatesRequest) (response *DescribeSnapshotByTimeOffsetTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
-    }
-    
-    response = NewDescribeSnapshotByTimeOffsetTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSnapshotByTimeOffsetTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeSnapshotByTimeOffsetTemplates
@@ -3733,6 +3672,11 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplatesWithContext(ctx context.Co
     if request == nil {
         request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSnapshotByTimeOffsetTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSnapshotByTimeOffsetTemplatesResponse()
@@ -3767,13 +3711,7 @@ func NewDescribeStorageDataResponse() (response *DescribeStorageDataResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeStorageData(request *DescribeStorageDataRequest) (response *DescribeStorageDataResponse, err error) {
-    if request == nil {
-        request = NewDescribeStorageDataRequest()
-    }
-    
-    response = NewDescribeStorageDataResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStorageDataWithContext(context.Background(), request)
 }
 
 // DescribeStorageData
@@ -3789,6 +3727,11 @@ func (c *Client) DescribeStorageDataWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeStorageDataRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStorageData require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStorageDataResponse()
@@ -3835,13 +3778,7 @@ func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsRespon
 //  INVALIDPARAMETERVALUE_TIMETYPE = "InvalidParameterValue.TimeType"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeStorageDetails(request *DescribeStorageDetailsRequest) (response *DescribeStorageDetailsResponse, err error) {
-    if request == nil {
-        request = NewDescribeStorageDetailsRequest()
-    }
-    
-    response = NewDescribeStorageDetailsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeStorageDetailsWithContext(context.Background(), request)
 }
 
 // DescribeStorageDetails
@@ -3869,6 +3806,11 @@ func (c *Client) DescribeStorageDetailsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewDescribeStorageDetailsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStorageDetails require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeStorageDetailsResponse()
@@ -3903,13 +3845,7 @@ func NewDescribeSubAppIdsResponse() (response *DescribeSubAppIdsResponse) {
 //  RESOURCENOTFOUND_SERVICENOTEXIST = "ResourceNotFound.ServiceNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSubAppIds(request *DescribeSubAppIdsRequest) (response *DescribeSubAppIdsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSubAppIdsRequest()
-    }
-    
-    response = NewDescribeSubAppIdsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSubAppIdsWithContext(context.Background(), request)
 }
 
 // DescribeSubAppIds
@@ -3925,6 +3861,11 @@ func (c *Client) DescribeSubAppIdsWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeSubAppIdsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubAppIds require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSubAppIdsResponse()
@@ -3959,13 +3900,7 @@ func NewDescribeSuperPlayerConfigsResponse() (response *DescribeSuperPlayerConfi
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeSuperPlayerConfigs(request *DescribeSuperPlayerConfigsRequest) (response *DescribeSuperPlayerConfigsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSuperPlayerConfigsRequest()
-    }
-    
-    response = NewDescribeSuperPlayerConfigsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSuperPlayerConfigsWithContext(context.Background(), request)
 }
 
 // DescribeSuperPlayerConfigs
@@ -3981,6 +3916,11 @@ func (c *Client) DescribeSuperPlayerConfigsWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeSuperPlayerConfigsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSuperPlayerConfigs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSuperPlayerConfigsResponse()
@@ -4018,13 +3958,7 @@ func NewDescribeTaskDetailResponse() (response *DescribeTaskDetailResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTaskDetail(request *DescribeTaskDetailRequest) (response *DescribeTaskDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeTaskDetailRequest()
-    }
-    
-    response = NewDescribeTaskDetailResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTaskDetailWithContext(context.Background(), request)
 }
 
 // DescribeTaskDetail
@@ -4043,6 +3977,11 @@ func (c *Client) DescribeTaskDetailWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeTaskDetailRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTaskDetail require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTaskDetailResponse()
@@ -4082,13 +4021,7 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
 //  INVALIDPARAMETERVALUE_STATUS = "InvalidParameterValue.Status"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *DescribeTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeTasksRequest()
-    }
-    
-    response = NewDescribeTasksResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTasksWithContext(context.Background(), request)
 }
 
 // DescribeTasks
@@ -4109,6 +4042,11 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     if request == nil {
         request = NewDescribeTasksRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTasks require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTasksResponse()
@@ -4148,13 +4086,7 @@ func NewDescribeTranscodeTemplatesResponse() (response *DescribeTranscodeTemplat
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesRequest) (response *DescribeTranscodeTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTranscodeTemplatesRequest()
-    }
-    
-    response = NewDescribeTranscodeTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeTranscodeTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeTranscodeTemplates
@@ -4175,6 +4107,11 @@ func (c *Client) DescribeTranscodeTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeTranscodeTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTranscodeTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeTranscodeTemplatesResponse()
@@ -4211,13 +4148,7 @@ func NewDescribeVodDomainsResponse() (response *DescribeVodDomainsResponse) {
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_OFFSETTOOLARGE = "InvalidParameterValue.OffsetTooLarge"
 func (c *Client) DescribeVodDomains(request *DescribeVodDomainsRequest) (response *DescribeVodDomainsResponse, err error) {
-    if request == nil {
-        request = NewDescribeVodDomainsRequest()
-    }
-    
-    response = NewDescribeVodDomainsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeVodDomainsWithContext(context.Background(), request)
 }
 
 // DescribeVodDomains
@@ -4235,6 +4166,11 @@ func (c *Client) DescribeVodDomainsWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeVodDomainsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVodDomains require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeVodDomainsResponse()
@@ -4272,13 +4208,7 @@ func NewDescribeWatermarkTemplatesResponse() (response *DescribeWatermarkTemplat
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWatermarkTemplates(request *DescribeWatermarkTemplatesRequest) (response *DescribeWatermarkTemplatesResponse, err error) {
-    if request == nil {
-        request = NewDescribeWatermarkTemplatesRequest()
-    }
-    
-    response = NewDescribeWatermarkTemplatesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWatermarkTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeWatermarkTemplates
@@ -4297,6 +4227,11 @@ func (c *Client) DescribeWatermarkTemplatesWithContext(ctx context.Context, requ
     if request == nil {
         request = NewDescribeWatermarkTemplatesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWatermarkTemplates require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWatermarkTemplatesResponse()
@@ -4329,13 +4264,7 @@ func NewDescribeWordSamplesResponse() (response *DescribeWordSamplesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWordSamples(request *DescribeWordSamplesRequest) (response *DescribeWordSamplesResponse, err error) {
-    if request == nil {
-        request = NewDescribeWordSamplesRequest()
-    }
-    
-    response = NewDescribeWordSamplesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeWordSamplesWithContext(context.Background(), request)
 }
 
 // DescribeWordSamples
@@ -4349,6 +4278,11 @@ func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeWordSamplesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWordSamples require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeWordSamplesResponse()
@@ -4407,13 +4341,7 @@ func NewEditMediaResponse() (response *EditMediaResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
-    if request == nil {
-        request = NewEditMediaRequest()
-    }
-    
-    response = NewEditMediaResponse()
-    err = c.Send(request, response)
-    return
+    return c.EditMediaWithContext(context.Background(), request)
 }
 
 // EditMedia
@@ -4453,6 +4381,11 @@ func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaReq
     if request == nil {
         request = NewEditMediaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EditMedia require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewEditMediaResponse()
@@ -4489,13 +4422,7 @@ func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *ExecuteFunctionResponse, err error) {
-    if request == nil {
-        request = NewExecuteFunctionRequest()
-    }
-    
-    response = NewExecuteFunctionResponse()
-    err = c.Send(request, response)
-    return
+    return c.ExecuteFunctionWithContext(context.Background(), request)
 }
 
 // ExecuteFunction
@@ -4513,6 +4440,11 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     if request == nil {
         request = NewExecuteFunctionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExecuteFunction require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewExecuteFunctionResponse()
@@ -4552,13 +4484,7 @@ func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResp
 //  INVALIDPARAMETERVALUE_OPERATION = "InvalidParameterValue.Operation"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ForbidMediaDistribution(request *ForbidMediaDistributionRequest) (response *ForbidMediaDistributionResponse, err error) {
-    if request == nil {
-        request = NewForbidMediaDistributionRequest()
-    }
-    
-    response = NewForbidMediaDistributionResponse()
-    err = c.Send(request, response)
-    return
+    return c.ForbidMediaDistributionWithContext(context.Background(), request)
 }
 
 // ForbidMediaDistribution
@@ -4579,6 +4505,11 @@ func (c *Client) ForbidMediaDistributionWithContext(ctx context.Context, request
     if request == nil {
         request = NewForbidMediaDistributionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ForbidMediaDistribution require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewForbidMediaDistributionResponse()
@@ -4664,13 +4595,7 @@ func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) LiveRealTimeClip(request *LiveRealTimeClipRequest) (response *LiveRealTimeClipResponse, err error) {
-    if request == nil {
-        request = NewLiveRealTimeClipRequest()
-    }
-    
-    response = NewLiveRealTimeClipResponse()
-    err = c.Send(request, response)
-    return
+    return c.LiveRealTimeClipWithContext(context.Background(), request)
 }
 
 // LiveRealTimeClip
@@ -4737,6 +4662,11 @@ func (c *Client) LiveRealTimeClipWithContext(ctx context.Context, request *LiveR
     if request == nil {
         request = NewLiveRealTimeClipRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("LiveRealTimeClip require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewLiveRealTimeClipResponse()
@@ -4773,13 +4703,7 @@ func NewManageTaskResponse() (response *ManageTaskResponse) {
 //  INVALIDPARAMETERVALUE_TASKID = "InvalidParameterValue.TaskId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ManageTask(request *ManageTaskRequest) (response *ManageTaskResponse, err error) {
-    if request == nil {
-        request = NewManageTaskRequest()
-    }
-    
-    response = NewManageTaskResponse()
-    err = c.Send(request, response)
-    return
+    return c.ManageTaskWithContext(context.Background(), request)
 }
 
 // ManageTask
@@ -4797,6 +4721,11 @@ func (c *Client) ManageTaskWithContext(ctx context.Context, request *ManageTaskR
     if request == nil {
         request = NewManageTaskRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ManageTask require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewManageTaskResponse()
@@ -4842,13 +4771,7 @@ func NewModifyAIAnalysisTemplateResponse() (response *ModifyAIAnalysisTemplateRe
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAIAnalysisTemplate(request *ModifyAIAnalysisTemplateRequest) (response *ModifyAIAnalysisTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyAIAnalysisTemplateRequest()
-    }
-    
-    response = NewModifyAIAnalysisTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAIAnalysisTemplateWithContext(context.Background(), request)
 }
 
 // ModifyAIAnalysisTemplate
@@ -4875,6 +4798,11 @@ func (c *Client) ModifyAIAnalysisTemplateWithContext(ctx context.Context, reques
     if request == nil {
         request = NewModifyAIAnalysisTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAIAnalysisTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAIAnalysisTemplateResponse()
@@ -4920,13 +4848,7 @@ func NewModifyAIRecognitionTemplateResponse() (response *ModifyAIRecognitionTemp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplateRequest) (response *ModifyAIRecognitionTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyAIRecognitionTemplateRequest()
-    }
-    
-    response = NewModifyAIRecognitionTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAIRecognitionTemplateWithContext(context.Background(), request)
 }
 
 // ModifyAIRecognitionTemplate
@@ -4953,6 +4875,11 @@ func (c *Client) ModifyAIRecognitionTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyAIRecognitionTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAIRecognitionTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAIRecognitionTemplateResponse()
@@ -5002,13 +4929,7 @@ func NewModifyAdaptiveDynamicStreamingTemplateResponse() (response *ModifyAdapti
 //  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) ModifyAdaptiveDynamicStreamingTemplate(request *ModifyAdaptiveDynamicStreamingTemplateRequest) (response *ModifyAdaptiveDynamicStreamingTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
-    }
-    
-    response = NewModifyAdaptiveDynamicStreamingTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAdaptiveDynamicStreamingTemplateWithContext(context.Background(), request)
 }
 
 // ModifyAdaptiveDynamicStreamingTemplate
@@ -5039,6 +4960,11 @@ func (c *Client) ModifyAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     if request == nil {
         request = NewModifyAdaptiveDynamicStreamingTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAdaptiveDynamicStreamingTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAdaptiveDynamicStreamingTemplateResponse()
@@ -5080,13 +5006,7 @@ func NewModifyAnimatedGraphicsTemplateResponse() (response *ModifyAnimatedGraphi
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyAnimatedGraphicsTemplate(request *ModifyAnimatedGraphicsTemplateRequest) (response *ModifyAnimatedGraphicsTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyAnimatedGraphicsTemplateRequest()
-    }
-    
-    response = NewModifyAnimatedGraphicsTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyAnimatedGraphicsTemplateWithContext(context.Background(), request)
 }
 
 // ModifyAnimatedGraphicsTemplate
@@ -5109,6 +5029,11 @@ func (c *Client) ModifyAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     if request == nil {
         request = NewModifyAnimatedGraphicsTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAnimatedGraphicsTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyAnimatedGraphicsTemplateResponse()
@@ -5145,13 +5070,7 @@ func NewModifyClassResponse() (response *ModifyClassResponse) {
 //  INVALIDPARAMETERVALUE_CLASSNAME = "InvalidParameterValue.ClassName"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyClass(request *ModifyClassRequest) (response *ModifyClassResponse, err error) {
-    if request == nil {
-        request = NewModifyClassRequest()
-    }
-    
-    response = NewModifyClassResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyClassWithContext(context.Background(), request)
 }
 
 // ModifyClass
@@ -5169,6 +5088,11 @@ func (c *Client) ModifyClassWithContext(ctx context.Context, request *ModifyClas
     if request == nil {
         request = NewModifyClassRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClass require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyClassResponse()
@@ -5212,13 +5136,7 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplateRequest) (response *ModifyContentReviewTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyContentReviewTemplateRequest()
-    }
-    
-    response = NewModifyContentReviewTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyContentReviewTemplateWithContext(context.Background(), request)
 }
 
 // ModifyContentReviewTemplate
@@ -5243,6 +5161,11 @@ func (c *Client) ModifyContentReviewTemplateWithContext(ctx context.Context, req
     if request == nil {
         request = NewModifyContentReviewTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyContentReviewTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyContentReviewTemplateResponse()
@@ -5283,13 +5206,7 @@ func NewModifyImageSpriteTemplateResponse() (response *ModifyImageSpriteTemplate
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyImageSpriteTemplate(request *ModifyImageSpriteTemplateRequest) (response *ModifyImageSpriteTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyImageSpriteTemplateRequest()
-    }
-    
-    response = NewModifyImageSpriteTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyImageSpriteTemplateWithContext(context.Background(), request)
 }
 
 // ModifyImageSpriteTemplate
@@ -5311,6 +5228,11 @@ func (c *Client) ModifyImageSpriteTemplateWithContext(ctx context.Context, reque
     if request == nil {
         request = NewModifyImageSpriteTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyImageSpriteTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyImageSpriteTemplateResponse()
@@ -5359,13 +5281,7 @@ func NewModifyMediaInfoResponse() (response *ModifyMediaInfoResponse) {
 //  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyMediaInfo(request *ModifyMediaInfoRequest) (response *ModifyMediaInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyMediaInfoRequest()
-    }
-    
-    response = NewModifyMediaInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyMediaInfoWithContext(context.Background(), request)
 }
 
 // ModifyMediaInfo
@@ -5395,6 +5311,11 @@ func (c *Client) ModifyMediaInfoWithContext(ctx context.Context, request *Modify
     if request == nil {
         request = NewModifyMediaInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMediaInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyMediaInfoResponse()
@@ -5431,13 +5352,7 @@ func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
 //  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (response *ModifyPersonSampleResponse, err error) {
-    if request == nil {
-        request = NewModifyPersonSampleRequest()
-    }
-    
-    response = NewModifyPersonSampleResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyPersonSampleWithContext(context.Background(), request)
 }
 
 // ModifyPersonSample
@@ -5455,6 +5370,11 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifyPersonSampleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPersonSample require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyPersonSampleResponse()
@@ -5494,13 +5414,7 @@ func NewModifySampleSnapshotTemplateResponse() (response *ModifySampleSnapshotTe
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySampleSnapshotTemplate(request *ModifySampleSnapshotTemplateRequest) (response *ModifySampleSnapshotTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifySampleSnapshotTemplateRequest()
-    }
-    
-    response = NewModifySampleSnapshotTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySampleSnapshotTemplateWithContext(context.Background(), request)
 }
 
 // ModifySampleSnapshotTemplate
@@ -5521,6 +5435,11 @@ func (c *Client) ModifySampleSnapshotTemplateWithContext(ctx context.Context, re
     if request == nil {
         request = NewModifySampleSnapshotTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySampleSnapshotTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySampleSnapshotTemplateResponse()
@@ -5559,13 +5478,7 @@ func NewModifySnapshotByTimeOffsetTemplateResponse() (response *ModifySnapshotBy
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySnapshotByTimeOffsetTemplate(request *ModifySnapshotByTimeOffsetTemplateRequest) (response *ModifySnapshotByTimeOffsetTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifySnapshotByTimeOffsetTemplateRequest()
-    }
-    
-    response = NewModifySnapshotByTimeOffsetTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySnapshotByTimeOffsetTemplateWithContext(context.Background(), request)
 }
 
 // ModifySnapshotByTimeOffsetTemplate
@@ -5585,6 +5498,11 @@ func (c *Client) ModifySnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     if request == nil {
         request = NewModifySnapshotByTimeOffsetTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySnapshotByTimeOffsetTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySnapshotByTimeOffsetTemplateResponse()
@@ -5620,13 +5538,7 @@ func NewModifySubAppIdInfoResponse() (response *ModifySubAppIdInfoResponse) {
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySubAppIdInfo(request *ModifySubAppIdInfoRequest) (response *ModifySubAppIdInfoResponse, err error) {
-    if request == nil {
-        request = NewModifySubAppIdInfoRequest()
-    }
-    
-    response = NewModifySubAppIdInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubAppIdInfoWithContext(context.Background(), request)
 }
 
 // ModifySubAppIdInfo
@@ -5643,6 +5555,11 @@ func (c *Client) ModifySubAppIdInfoWithContext(ctx context.Context, request *Mod
     if request == nil {
         request = NewModifySubAppIdInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubAppIdInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubAppIdInfoResponse()
@@ -5677,13 +5594,7 @@ func NewModifySubAppIdStatusResponse() (response *ModifySubAppIdStatusResponse) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySubAppIdStatus(request *ModifySubAppIdStatusRequest) (response *ModifySubAppIdStatusResponse, err error) {
-    if request == nil {
-        request = NewModifySubAppIdStatusRequest()
-    }
-    
-    response = NewModifySubAppIdStatusResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubAppIdStatusWithContext(context.Background(), request)
 }
 
 // ModifySubAppIdStatus
@@ -5699,6 +5610,11 @@ func (c *Client) ModifySubAppIdStatusWithContext(ctx context.Context, request *M
     if request == nil {
         request = NewModifySubAppIdStatusRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubAppIdStatus require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubAppIdStatusResponse()
@@ -5733,13 +5649,7 @@ func NewModifySuperPlayerConfigResponse() (response *ModifySuperPlayerConfigResp
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifySuperPlayerConfig(request *ModifySuperPlayerConfigRequest) (response *ModifySuperPlayerConfigResponse, err error) {
-    if request == nil {
-        request = NewModifySuperPlayerConfigRequest()
-    }
-    
-    response = NewModifySuperPlayerConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySuperPlayerConfigWithContext(context.Background(), request)
 }
 
 // ModifySuperPlayerConfig
@@ -5755,6 +5665,11 @@ func (c *Client) ModifySuperPlayerConfigWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySuperPlayerConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySuperPlayerConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySuperPlayerConfigResponse()
@@ -5809,13 +5724,7 @@ func NewModifyTranscodeTemplateResponse() (response *ModifyTranscodeTemplateResp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyTranscodeTemplate(request *ModifyTranscodeTemplateRequest) (response *ModifyTranscodeTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyTranscodeTemplateRequest()
-    }
-    
-    response = NewModifyTranscodeTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyTranscodeTemplateWithContext(context.Background(), request)
 }
 
 // ModifyTranscodeTemplate
@@ -5851,6 +5760,11 @@ func (c *Client) ModifyTranscodeTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyTranscodeTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTranscodeTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyTranscodeTemplateResponse()
@@ -5885,13 +5799,7 @@ func NewModifyVodDomainAccelerateConfigResponse() (response *ModifyVodDomainAcce
 //  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyVodDomainAccelerateConfig(request *ModifyVodDomainAccelerateConfigRequest) (response *ModifyVodDomainAccelerateConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyVodDomainAccelerateConfigRequest()
-    }
-    
-    response = NewModifyVodDomainAccelerateConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyVodDomainAccelerateConfigWithContext(context.Background(), request)
 }
 
 // ModifyVodDomainAccelerateConfig
@@ -5907,6 +5815,11 @@ func (c *Client) ModifyVodDomainAccelerateConfigWithContext(ctx context.Context,
     if request == nil {
         request = NewModifyVodDomainAccelerateConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyVodDomainAccelerateConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyVodDomainAccelerateConfigResponse()
@@ -5941,13 +5854,7 @@ func NewModifyVodDomainConfigResponse() (response *ModifyVodDomainConfigResponse
 //  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyVodDomainConfig(request *ModifyVodDomainConfigRequest) (response *ModifyVodDomainConfigResponse, err error) {
-    if request == nil {
-        request = NewModifyVodDomainConfigRequest()
-    }
-    
-    response = NewModifyVodDomainConfigResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyVodDomainConfigWithContext(context.Background(), request)
 }
 
 // ModifyVodDomainConfig
@@ -5963,6 +5870,11 @@ func (c *Client) ModifyVodDomainConfigWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyVodDomainConfigRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyVodDomainConfig require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyVodDomainConfigResponse()
@@ -6011,13 +5923,7 @@ func NewModifyWatermarkTemplateResponse() (response *ModifyWatermarkTemplateResp
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyWatermarkTemplate(request *ModifyWatermarkTemplateRequest) (response *ModifyWatermarkTemplateResponse, err error) {
-    if request == nil {
-        request = NewModifyWatermarkTemplateRequest()
-    }
-    
-    response = NewModifyWatermarkTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyWatermarkTemplateWithContext(context.Background(), request)
 }
 
 // ModifyWatermarkTemplate
@@ -6047,6 +5953,11 @@ func (c *Client) ModifyWatermarkTemplateWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifyWatermarkTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWatermarkTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyWatermarkTemplateResponse()
@@ -6080,13 +5991,7 @@ func NewModifyWordSampleResponse() (response *ModifyWordSampleResponse) {
 //  RESOURCENOTFOUND_WORD = "ResourceNotFound.Word"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyWordSample(request *ModifyWordSampleRequest) (response *ModifyWordSampleResponse, err error) {
-    if request == nil {
-        request = NewModifyWordSampleRequest()
-    }
-    
-    response = NewModifyWordSampleResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyWordSampleWithContext(context.Background(), request)
 }
 
 // ModifyWordSample
@@ -6101,6 +6006,11 @@ func (c *Client) ModifyWordSampleWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyWordSampleRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWordSample require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyWordSampleResponse()
@@ -6134,13 +6044,7 @@ func NewParseStreamingManifestResponse() (response *ParseStreamingManifestRespon
 //  INVALIDPARAMETERVALUE_MEDIAMANIFESTCONTENT = "InvalidParameterValue.MediaManifestContent"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ParseStreamingManifest(request *ParseStreamingManifestRequest) (response *ParseStreamingManifestResponse, err error) {
-    if request == nil {
-        request = NewParseStreamingManifestRequest()
-    }
-    
-    response = NewParseStreamingManifestResponse()
-    err = c.Send(request, response)
-    return
+    return c.ParseStreamingManifestWithContext(context.Background(), request)
 }
 
 // ParseStreamingManifest
@@ -6155,6 +6059,11 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     if request == nil {
         request = NewParseStreamingManifestRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ParseStreamingManifest require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewParseStreamingManifestResponse()
@@ -6223,13 +6132,7 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
-    if request == nil {
-        request = NewProcessMediaRequest()
-    }
-    
-    response = NewProcessMediaResponse()
-    err = c.Send(request, response)
-    return
+    return c.ProcessMediaWithContext(context.Background(), request)
 }
 
 // ProcessMedia
@@ -6279,6 +6182,11 @@ func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMe
     if request == nil {
         request = NewProcessMediaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMedia require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewProcessMediaResponse()
@@ -6327,13 +6235,7 @@ func NewProcessMediaByProcedureResponse() (response *ProcessMediaByProcedureResp
 //  INVALIDPARAMETERVALUE_UNIQUEIDENTIFIER = "InvalidParameterValue.UniqueIdentifier"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMediaByProcedure(request *ProcessMediaByProcedureRequest) (response *ProcessMediaByProcedureResponse, err error) {
-    if request == nil {
-        request = NewProcessMediaByProcedureRequest()
-    }
-    
-    response = NewProcessMediaByProcedureResponse()
-    err = c.Send(request, response)
-    return
+    return c.ProcessMediaByProcedureWithContext(context.Background(), request)
 }
 
 // ProcessMediaByProcedure
@@ -6363,6 +6265,11 @@ func (c *Client) ProcessMediaByProcedureWithContext(ctx context.Context, request
     if request == nil {
         request = NewProcessMediaByProcedureRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMediaByProcedure require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewProcessMediaByProcedureResponse()
@@ -6406,13 +6313,7 @@ func NewProcessMediaByUrlResponse() (response *ProcessMediaByUrlResponse) {
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ProcessMediaByUrl(request *ProcessMediaByUrlRequest) (response *ProcessMediaByUrlResponse, err error) {
-    if request == nil {
-        request = NewProcessMediaByUrlRequest()
-    }
-    
-    response = NewProcessMediaByUrlResponse()
-    err = c.Send(request, response)
-    return
+    return c.ProcessMediaByUrlWithContext(context.Background(), request)
 }
 
 // ProcessMediaByUrl
@@ -6437,6 +6338,11 @@ func (c *Client) ProcessMediaByUrlWithContext(ctx context.Context, request *Proc
     if request == nil {
         request = NewProcessMediaByUrlRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMediaByUrl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewProcessMediaByUrlResponse()
@@ -6482,13 +6388,7 @@ func NewPullEventsResponse() (response *PullEventsResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PullEvents(request *PullEventsRequest) (response *PullEventsResponse, err error) {
-    if request == nil {
-        request = NewPullEventsRequest()
-    }
-    
-    response = NewPullEventsResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullEventsWithContext(context.Background(), request)
 }
 
 // PullEvents
@@ -6515,6 +6415,11 @@ func (c *Client) PullEventsWithContext(ctx context.Context, request *PullEventsR
     if request == nil {
         request = NewPullEventsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullEvents require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullEventsResponse()
@@ -6562,13 +6467,7 @@ func NewPullUploadResponse() (response *PullUploadResponse) {
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PullUpload(request *PullUploadRequest) (response *PullUploadResponse, err error) {
-    if request == nil {
-        request = NewPullUploadRequest()
-    }
-    
-    response = NewPullUploadResponse()
-    err = c.Send(request, response)
-    return
+    return c.PullUploadWithContext(context.Background(), request)
 }
 
 // PullUpload
@@ -6597,6 +6496,11 @@ func (c *Client) PullUploadWithContext(ctx context.Context, request *PullUploadR
     if request == nil {
         request = NewPullUploadRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PullUpload require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPullUploadResponse()
@@ -6633,13 +6537,7 @@ func NewPushUrlCacheResponse() (response *PushUrlCacheResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PushUrlCache(request *PushUrlCacheRequest) (response *PushUrlCacheResponse, err error) {
-    if request == nil {
-        request = NewPushUrlCacheRequest()
-    }
-    
-    response = NewPushUrlCacheResponse()
-    err = c.Send(request, response)
-    return
+    return c.PushUrlCacheWithContext(context.Background(), request)
 }
 
 // PushUrlCache
@@ -6657,6 +6555,11 @@ func (c *Client) PushUrlCacheWithContext(ctx context.Context, request *PushUrlCa
     if request == nil {
         request = NewPushUrlCacheRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PushUrlCache require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewPushUrlCacheResponse()
@@ -6693,13 +6596,7 @@ func NewResetProcedureTemplateResponse() (response *ResetProcedureTemplateRespon
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ResetProcedureTemplate(request *ResetProcedureTemplateRequest) (response *ResetProcedureTemplateResponse, err error) {
-    if request == nil {
-        request = NewResetProcedureTemplateRequest()
-    }
-    
-    response = NewResetProcedureTemplateResponse()
-    err = c.Send(request, response)
-    return
+    return c.ResetProcedureTemplateWithContext(context.Background(), request)
 }
 
 // ResetProcedureTemplate
@@ -6717,6 +6614,11 @@ func (c *Client) ResetProcedureTemplateWithContext(ctx context.Context, request 
     if request == nil {
         request = NewResetProcedureTemplateRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetProcedureTemplate require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewResetProcedureTemplateResponse()
@@ -6836,13 +6738,7 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMediaResponse, err error) {
-    if request == nil {
-        request = NewSearchMediaRequest()
-    }
-    
-    response = NewSearchMediaResponse()
-    err = c.Send(request, response)
-    return
+    return c.SearchMediaWithContext(context.Background(), request)
 }
 
 // SearchMedia
@@ -6943,6 +6839,11 @@ func (c *Client) SearchMediaWithContext(ctx context.Context, request *SearchMedi
     if request == nil {
         request = NewSearchMediaRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchMedia require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSearchMediaResponse()
@@ -7025,13 +6926,7 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
 //  RESOURCEUNAVAILABLE_MASTERPLAYLIST = "ResourceUnavailable.MasterPlaylist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleHlsClipResponse, err error) {
-    if request == nil {
-        request = NewSimpleHlsClipRequest()
-    }
-    
-    response = NewSimpleHlsClipResponse()
-    err = c.Send(request, response)
-    return
+    return c.SimpleHlsClipWithContext(context.Background(), request)
 }
 
 // SimpleHlsClip
@@ -7095,6 +6990,11 @@ func (c *Client) SimpleHlsClipWithContext(ctx context.Context, request *SimpleHl
     if request == nil {
         request = NewSimpleHlsClipRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SimpleHlsClip require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewSimpleHlsClipResponse()
@@ -7136,13 +7036,7 @@ func NewWeChatMiniProgramPublishResponse() (response *WeChatMiniProgramPublishRe
 //  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) WeChatMiniProgramPublish(request *WeChatMiniProgramPublishRequest) (response *WeChatMiniProgramPublishResponse, err error) {
-    if request == nil {
-        request = NewWeChatMiniProgramPublishRequest()
-    }
-    
-    response = NewWeChatMiniProgramPublishResponse()
-    err = c.Send(request, response)
-    return
+    return c.WeChatMiniProgramPublishWithContext(context.Background(), request)
 }
 
 // WeChatMiniProgramPublish
@@ -7165,6 +7059,11 @@ func (c *Client) WeChatMiniProgramPublishWithContext(ctx context.Context, reques
     if request == nil {
         request = NewWeChatMiniProgramPublishRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("WeChatMiniProgramPublish require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewWeChatMiniProgramPublishResponse()

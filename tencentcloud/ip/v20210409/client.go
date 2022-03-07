@@ -16,6 +16,7 @@ package v20210409
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -75,13 +76,7 @@ func NewAllocateCustomerCreditResponse() (response *AllocateCustomerCreditRespon
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
-    if request == nil {
-        request = NewAllocateCustomerCreditRequest()
-    }
-    
-    response = NewAllocateCustomerCreditResponse()
-    err = c.Send(request, response)
-    return
+    return c.AllocateCustomerCreditWithContext(context.Background(), request)
 }
 
 // AllocateCustomerCredit
@@ -101,6 +96,11 @@ func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request 
     if request == nil {
         request = NewAllocateCustomerCreditRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AllocateCustomerCredit require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewAllocateCustomerCreditResponse()
@@ -143,13 +143,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
-    if request == nil {
-        request = NewCreateAccountRequest()
-    }
-    
-    response = NewCreateAccountResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateAccountWithContext(context.Background(), request)
 }
 
 // CreateAccount
@@ -173,6 +167,11 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     if request == nil {
         request = NewCreateAccountRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAccount require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateAccountResponse()
@@ -203,13 +202,7 @@ func NewGetCountryCodesResponse() (response *GetCountryCodesResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 func (c *Client) GetCountryCodes(request *GetCountryCodesRequest) (response *GetCountryCodesResponse, err error) {
-    if request == nil {
-        request = NewGetCountryCodesRequest()
-    }
-    
-    response = NewGetCountryCodesResponse()
-    err = c.Send(request, response)
-    return
+    return c.GetCountryCodesWithContext(context.Background(), request)
 }
 
 // GetCountryCodes
@@ -221,6 +214,11 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     if request == nil {
         request = NewGetCountryCodesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetCountryCodes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGetCountryCodesResponse()
@@ -251,13 +249,7 @@ func NewQueryCreditAllocationHistoryResponse() (response *QueryCreditAllocationH
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) QueryCreditAllocationHistory(request *QueryCreditAllocationHistoryRequest) (response *QueryCreditAllocationHistoryResponse, err error) {
-    if request == nil {
-        request = NewQueryCreditAllocationHistoryRequest()
-    }
-    
-    response = NewQueryCreditAllocationHistoryResponse()
-    err = c.Send(request, response)
-    return
+    return c.QueryCreditAllocationHistoryWithContext(context.Background(), request)
 }
 
 // QueryCreditAllocationHistory
@@ -269,6 +261,11 @@ func (c *Client) QueryCreditAllocationHistoryWithContext(ctx context.Context, re
     if request == nil {
         request = NewQueryCreditAllocationHistoryRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryCreditAllocationHistory require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewQueryCreditAllocationHistoryResponse()
@@ -299,13 +296,7 @@ func NewQueryCustomersCreditResponse() (response *QueryCustomersCreditResponse) 
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
-    if request == nil {
-        request = NewQueryCustomersCreditRequest()
-    }
-    
-    response = NewQueryCustomersCreditResponse()
-    err = c.Send(request, response)
-    return
+    return c.QueryCustomersCreditWithContext(context.Background(), request)
 }
 
 // QueryCustomersCredit
@@ -317,6 +308,11 @@ func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *Q
     if request == nil {
         request = NewQueryCustomersCreditRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryCustomersCredit require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewQueryCustomersCreditResponse()
@@ -347,13 +343,7 @@ func NewQueryPartnerCreditResponse() (response *QueryPartnerCreditResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (response *QueryPartnerCreditResponse, err error) {
-    if request == nil {
-        request = NewQueryPartnerCreditRequest()
-    }
-    
-    response = NewQueryPartnerCreditResponse()
-    err = c.Send(request, response)
-    return
+    return c.QueryPartnerCreditWithContext(context.Background(), request)
 }
 
 // QueryPartnerCredit
@@ -365,6 +355,11 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     if request == nil {
         request = NewQueryPartnerCreditRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryPartnerCredit require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewQueryPartnerCreditResponse()

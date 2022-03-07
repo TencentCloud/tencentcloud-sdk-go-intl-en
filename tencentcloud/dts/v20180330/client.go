@@ -16,6 +16,7 @@ package v20180330
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -74,13 +75,7 @@ func NewActivateSubscribeResponse() (response *ActivateSubscribeResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ActivateSubscribe(request *ActivateSubscribeRequest) (response *ActivateSubscribeResponse, err error) {
-    if request == nil {
-        request = NewActivateSubscribeRequest()
-    }
-    
-    response = NewActivateSubscribeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ActivateSubscribeWithContext(context.Background(), request)
 }
 
 // ActivateSubscribe
@@ -99,6 +94,11 @@ func (c *Client) ActivateSubscribeWithContext(ctx context.Context, request *Acti
     if request == nil {
         request = NewActivateSubscribeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ActivateSubscribe require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewActivateSubscribeResponse()
@@ -141,13 +141,7 @@ func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewCompleteMigrateJobRequest()
-    }
-    
-    response = NewCompleteMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.CompleteMigrateJobWithContext(context.Background(), request)
 }
 
 // CompleteMigrateJob
@@ -171,6 +165,11 @@ func (c *Client) CompleteMigrateJobWithContext(ctx context.Context, request *Com
     if request == nil {
         request = NewCompleteMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CompleteMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCompleteMigrateJobResponse()
@@ -216,13 +215,7 @@ func NewCreateMigrateCheckJobResponse() (response *CreateMigrateCheckJobResponse
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) CreateMigrateCheckJob(request *CreateMigrateCheckJobRequest) (response *CreateMigrateCheckJobResponse, err error) {
-    if request == nil {
-        request = NewCreateMigrateCheckJobRequest()
-    }
-    
-    response = NewCreateMigrateCheckJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateMigrateCheckJobWithContext(context.Background(), request)
 }
 
 // CreateMigrateCheckJob
@@ -249,6 +242,11 @@ func (c *Client) CreateMigrateCheckJobWithContext(ctx context.Context, request *
     if request == nil {
         request = NewCreateMigrateCheckJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMigrateCheckJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateMigrateCheckJobResponse()
@@ -292,13 +290,7 @@ func NewCreateMigrateJobResponse() (response *CreateMigrateJobResponse) {
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CreateMigrateJob(request *CreateMigrateJobRequest) (response *CreateMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewCreateMigrateJobRequest()
-    }
-    
-    response = NewCreateMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateMigrateJobWithContext(context.Background(), request)
 }
 
 // CreateMigrateJob
@@ -323,6 +315,11 @@ func (c *Client) CreateMigrateJobWithContext(ctx context.Context, request *Creat
     if request == nil {
         request = NewCreateMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateMigrateJobResponse()
@@ -356,13 +353,7 @@ func NewCreateSubscribeResponse() (response *CreateSubscribeResponse) {
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 func (c *Client) CreateSubscribe(request *CreateSubscribeRequest) (response *CreateSubscribeResponse, err error) {
-    if request == nil {
-        request = NewCreateSubscribeRequest()
-    }
-    
-    response = NewCreateSubscribeResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateSubscribeWithContext(context.Background(), request)
 }
 
 // CreateSubscribe
@@ -377,6 +368,11 @@ func (c *Client) CreateSubscribeWithContext(ctx context.Context, request *Create
     if request == nil {
         request = NewCreateSubscribeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSubscribe require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateSubscribeResponse()
@@ -421,13 +417,7 @@ func NewDeleteMigrateJobResponse() (response *DeleteMigrateJobResponse) {
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DeleteMigrateJob(request *DeleteMigrateJobRequest) (response *DeleteMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewDeleteMigrateJobRequest()
-    }
-    
-    response = NewDeleteMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteMigrateJobWithContext(context.Background(), request)
 }
 
 // DeleteMigrateJob
@@ -453,6 +443,11 @@ func (c *Client) DeleteMigrateJobWithContext(ctx context.Context, request *Delet
     if request == nil {
         request = NewDeleteMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteMigrateJobResponse()
@@ -487,13 +482,7 @@ func NewDescribeAsyncRequestInfoResponse() (response *DescribeAsyncRequestInfoRe
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAsyncRequestInfo(request *DescribeAsyncRequestInfoRequest) (response *DescribeAsyncRequestInfoResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncRequestInfoRequest()
-    }
-    
-    response = NewDescribeAsyncRequestInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeAsyncRequestInfoWithContext(context.Background(), request)
 }
 
 // DescribeAsyncRequestInfo
@@ -509,6 +498,11 @@ func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeAsyncRequestInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAsyncRequestInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeAsyncRequestInfoResponse()
@@ -547,13 +541,7 @@ func NewDescribeMigrateCheckJobResponse() (response *DescribeMigrateCheckJobResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) DescribeMigrateCheckJob(request *DescribeMigrateCheckJobRequest) (response *DescribeMigrateCheckJobResponse, err error) {
-    if request == nil {
-        request = NewDescribeMigrateCheckJobRequest()
-    }
-    
-    response = NewDescribeMigrateCheckJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMigrateCheckJobWithContext(context.Background(), request)
 }
 
 // DescribeMigrateCheckJob
@@ -573,6 +561,11 @@ func (c *Client) DescribeMigrateCheckJobWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeMigrateCheckJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMigrateCheckJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMigrateCheckJobResponse()
@@ -611,13 +604,7 @@ func NewDescribeMigrateJobsResponse() (response *DescribeMigrateJobsResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DescribeMigrateJobs(request *DescribeMigrateJobsRequest) (response *DescribeMigrateJobsResponse, err error) {
-    if request == nil {
-        request = NewDescribeMigrateJobsRequest()
-    }
-    
-    response = NewDescribeMigrateJobsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeMigrateJobsWithContext(context.Background(), request)
 }
 
 // DescribeMigrateJobs
@@ -637,6 +624,11 @@ func (c *Client) DescribeMigrateJobsWithContext(ctx context.Context, request *De
     if request == nil {
         request = NewDescribeMigrateJobsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMigrateJobs require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeMigrateJobsResponse()
@@ -669,13 +661,7 @@ func NewDescribeRegionConfResponse() (response *DescribeRegionConfResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRegionConf(request *DescribeRegionConfRequest) (response *DescribeRegionConfResponse, err error) {
-    if request == nil {
-        request = NewDescribeRegionConfRequest()
-    }
-    
-    response = NewDescribeRegionConfResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRegionConfWithContext(context.Background(), request)
 }
 
 // DescribeRegionConf
@@ -689,6 +675,11 @@ func (c *Client) DescribeRegionConfWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeRegionConfRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRegionConf require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRegionConfResponse()
@@ -723,13 +714,7 @@ func NewDescribeSubscribeConfResponse() (response *DescribeSubscribeConfResponse
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) DescribeSubscribeConf(request *DescribeSubscribeConfRequest) (response *DescribeSubscribeConfResponse, err error) {
-    if request == nil {
-        request = NewDescribeSubscribeConfRequest()
-    }
-    
-    response = NewDescribeSubscribeConfResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSubscribeConfWithContext(context.Background(), request)
 }
 
 // DescribeSubscribeConf
@@ -745,6 +730,11 @@ func (c *Client) DescribeSubscribeConfWithContext(ctx context.Context, request *
     if request == nil {
         request = NewDescribeSubscribeConfRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribeConf require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSubscribeConfResponse()
@@ -777,13 +767,7 @@ func NewDescribeSubscribesResponse() (response *DescribeSubscribesResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeSubscribes(request *DescribeSubscribesRequest) (response *DescribeSubscribesResponse, err error) {
-    if request == nil {
-        request = NewDescribeSubscribesRequest()
-    }
-    
-    response = NewDescribeSubscribesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeSubscribesWithContext(context.Background(), request)
 }
 
 // DescribeSubscribes
@@ -797,6 +781,11 @@ func (c *Client) DescribeSubscribesWithContext(ctx context.Context, request *Des
     if request == nil {
         request = NewDescribeSubscribesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribes require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeSubscribesResponse()
@@ -831,13 +820,7 @@ func NewIsolateSubscribeResponse() (response *IsolateSubscribeResponse) {
 //  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) IsolateSubscribe(request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
-    if request == nil {
-        request = NewIsolateSubscribeRequest()
-    }
-    
-    response = NewIsolateSubscribeResponse()
-    err = c.Send(request, response)
-    return
+    return c.IsolateSubscribeWithContext(context.Background(), request)
 }
 
 // IsolateSubscribe
@@ -853,6 +836,11 @@ func (c *Client) IsolateSubscribeWithContext(ctx context.Context, request *Isola
     if request == nil {
         request = NewIsolateSubscribeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateSubscribe require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewIsolateSubscribeResponse()
@@ -895,13 +883,7 @@ func NewModifyMigrateJobResponse() (response *ModifyMigrateJobResponse) {
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) ModifyMigrateJob(request *ModifyMigrateJobRequest) (response *ModifyMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewModifyMigrateJobRequest()
-    }
-    
-    response = NewModifyMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyMigrateJobWithContext(context.Background(), request)
 }
 
 // ModifyMigrateJob
@@ -925,6 +907,11 @@ func (c *Client) ModifyMigrateJobWithContext(ctx context.Context, request *Modif
     if request == nil {
         request = NewModifyMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyMigrateJobResponse()
@@ -959,13 +946,7 @@ func NewModifySubscribeConsumeTimeResponse() (response *ModifySubscribeConsumeTi
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySubscribeConsumeTime(request *ModifySubscribeConsumeTimeRequest) (response *ModifySubscribeConsumeTimeResponse, err error) {
-    if request == nil {
-        request = NewModifySubscribeConsumeTimeRequest()
-    }
-    
-    response = NewModifySubscribeConsumeTimeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubscribeConsumeTimeWithContext(context.Background(), request)
 }
 
 // ModifySubscribeConsumeTime
@@ -981,6 +962,11 @@ func (c *Client) ModifySubscribeConsumeTimeWithContext(ctx context.Context, requ
     if request == nil {
         request = NewModifySubscribeConsumeTimeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeConsumeTime require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubscribeConsumeTimeResponse()
@@ -1013,13 +999,7 @@ func NewModifySubscribeNameResponse() (response *ModifySubscribeNameResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySubscribeName(request *ModifySubscribeNameRequest) (response *ModifySubscribeNameResponse, err error) {
-    if request == nil {
-        request = NewModifySubscribeNameRequest()
-    }
-    
-    response = NewModifySubscribeNameResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubscribeNameWithContext(context.Background(), request)
 }
 
 // ModifySubscribeName
@@ -1033,6 +1013,11 @@ func (c *Client) ModifySubscribeNameWithContext(ctx context.Context, request *Mo
     if request == nil {
         request = NewModifySubscribeNameRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeName require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubscribeNameResponse()
@@ -1067,13 +1052,7 @@ func NewModifySubscribeObjectsResponse() (response *ModifySubscribeObjectsRespon
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySubscribeObjects(request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
-    if request == nil {
-        request = NewModifySubscribeObjectsRequest()
-    }
-    
-    response = NewModifySubscribeObjectsResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubscribeObjectsWithContext(context.Background(), request)
 }
 
 // ModifySubscribeObjects
@@ -1089,6 +1068,11 @@ func (c *Client) ModifySubscribeObjectsWithContext(ctx context.Context, request 
     if request == nil {
         request = NewModifySubscribeObjectsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeObjects require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubscribeObjectsResponse()
@@ -1122,13 +1106,7 @@ func NewModifySubscribeVipVportResponse() (response *ModifySubscribeVipVportResp
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifySubscribeVipVport(request *ModifySubscribeVipVportRequest) (response *ModifySubscribeVipVportResponse, err error) {
-    if request == nil {
-        request = NewModifySubscribeVipVportRequest()
-    }
-    
-    response = NewModifySubscribeVipVportResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifySubscribeVipVportWithContext(context.Background(), request)
 }
 
 // ModifySubscribeVipVport
@@ -1143,6 +1121,11 @@ func (c *Client) ModifySubscribeVipVportWithContext(ctx context.Context, request
     if request == nil {
         request = NewModifySubscribeVipVportRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeVipVport require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifySubscribeVipVportResponse()
@@ -1176,13 +1159,7 @@ func NewOfflineIsolatedSubscribeResponse() (response *OfflineIsolatedSubscribeRe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) OfflineIsolatedSubscribe(request *OfflineIsolatedSubscribeRequest) (response *OfflineIsolatedSubscribeResponse, err error) {
-    if request == nil {
-        request = NewOfflineIsolatedSubscribeRequest()
-    }
-    
-    response = NewOfflineIsolatedSubscribeResponse()
-    err = c.Send(request, response)
-    return
+    return c.OfflineIsolatedSubscribeWithContext(context.Background(), request)
 }
 
 // OfflineIsolatedSubscribe
@@ -1197,6 +1174,11 @@ func (c *Client) OfflineIsolatedSubscribeWithContext(ctx context.Context, reques
     if request == nil {
         request = NewOfflineIsolatedSubscribeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OfflineIsolatedSubscribe require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewOfflineIsolatedSubscribeResponse()
@@ -1231,13 +1213,7 @@ func NewResetSubscribeResponse() (response *ResetSubscribeResponse) {
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ResetSubscribe(request *ResetSubscribeRequest) (response *ResetSubscribeResponse, err error) {
-    if request == nil {
-        request = NewResetSubscribeRequest()
-    }
-    
-    response = NewResetSubscribeResponse()
-    err = c.Send(request, response)
-    return
+    return c.ResetSubscribeWithContext(context.Background(), request)
 }
 
 // ResetSubscribe
@@ -1253,6 +1229,11 @@ func (c *Client) ResetSubscribeWithContext(ctx context.Context, request *ResetSu
     if request == nil {
         request = NewResetSubscribeRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetSubscribe require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewResetSubscribeResponse()
@@ -1296,13 +1277,7 @@ func NewStartMigrateJobResponse() (response *StartMigrateJobResponse) {
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StartMigrateJob(request *StartMigrateJobRequest) (response *StartMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewStartMigrateJobRequest()
-    }
-    
-    response = NewStartMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.StartMigrateJobWithContext(context.Background(), request)
 }
 
 // StartMigrateJob
@@ -1327,6 +1302,11 @@ func (c *Client) StartMigrateJobWithContext(ctx context.Context, request *StartM
     if request == nil {
         request = NewStartMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStartMigrateJobResponse()
@@ -1366,13 +1346,7 @@ func NewStopMigrateJobResponse() (response *StopMigrateJobResponse) {
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopMigrateJobResponse, err error) {
-    if request == nil {
-        request = NewStopMigrateJobRequest()
-    }
-    
-    response = NewStopMigrateJobResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopMigrateJobWithContext(context.Background(), request)
 }
 
 // StopMigrateJob
@@ -1393,6 +1367,11 @@ func (c *Client) StopMigrateJobWithContext(ctx context.Context, request *StopMig
     if request == nil {
         request = NewStopMigrateJobRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopMigrateJob require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopMigrateJobResponse()

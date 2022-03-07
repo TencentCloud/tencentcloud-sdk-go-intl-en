@@ -16,6 +16,7 @@ package v20210701
 
 import (
     "context"
+    "errors"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
@@ -70,13 +71,7 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
-    if request == nil {
-        request = NewCreateApplicationRequest()
-    }
-    
-    response = NewCreateApplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateApplicationWithContext(context.Background(), request)
 }
 
 // CreateApplication
@@ -91,6 +86,11 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateApplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateApplicationResponse()
@@ -122,13 +122,7 @@ func NewCreateCosTokenResponse() (response *CreateCosTokenResponse) {
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) CreateCosToken(request *CreateCosTokenRequest) (response *CreateCosTokenResponse, err error) {
-    if request == nil {
-        request = NewCreateCosTokenRequest()
-    }
-    
-    response = NewCreateCosTokenResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateCosTokenWithContext(context.Background(), request)
 }
 
 // CreateCosToken
@@ -141,6 +135,11 @@ func (c *Client) CreateCosTokenWithContext(ctx context.Context, request *CreateC
     if request == nil {
         request = NewCreateCosTokenRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCosToken require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateCosTokenResponse()
@@ -173,13 +172,7 @@ func NewCreateEnvironmentResponse() (response *CreateEnvironmentResponse) {
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response *CreateEnvironmentResponse, err error) {
-    if request == nil {
-        request = NewCreateEnvironmentRequest()
-    }
-    
-    response = NewCreateEnvironmentResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateEnvironmentWithContext(context.Background(), request)
 }
 
 // CreateEnvironment
@@ -193,6 +186,11 @@ func (c *Client) CreateEnvironmentWithContext(ctx context.Context, request *Crea
     if request == nil {
         request = NewCreateEnvironmentRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEnvironment require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateEnvironmentResponse()
@@ -223,13 +221,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
-    if request == nil {
-        request = NewCreateResourceRequest()
-    }
-    
-    response = NewCreateResourceResponse()
-    err = c.Send(request, response)
-    return
+    return c.CreateResourceWithContext(context.Background(), request)
 }
 
 // CreateResource
@@ -241,6 +233,11 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     if request == nil {
         request = NewCreateResourceRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateResource require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
@@ -286,13 +283,7 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 //  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
-    if request == nil {
-        request = NewDeleteApplicationRequest()
-    }
-    
-    response = NewDeleteApplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteApplicationWithContext(context.Background(), request)
 }
 
 // DeleteApplication
@@ -319,6 +310,11 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     if request == nil {
         request = NewDeleteApplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteApplicationResponse()
@@ -358,13 +354,7 @@ func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
 //  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
-    if request == nil {
-        request = NewDeleteIngressRequest()
-    }
-    
-    response = NewDeleteIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeleteIngressWithContext(context.Background(), request)
 }
 
 // DeleteIngress
@@ -385,6 +375,11 @@ func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIn
     if request == nil {
         request = NewDeleteIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeleteIngressResponse()
@@ -423,13 +418,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) DeployApplication(request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
-    if request == nil {
-        request = NewDeployApplicationRequest()
-    }
-    
-    response = NewDeployApplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.DeployApplicationWithContext(context.Background(), request)
 }
 
 // DeployApplication
@@ -449,6 +438,11 @@ func (c *Client) DeployApplicationWithContext(ctx context.Context, request *Depl
     if request == nil {
         request = NewDeployApplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeployApplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDeployApplicationResponse()
@@ -482,13 +476,7 @@ func NewDescribeApplicationPodsResponse() (response *DescribeApplicationPodsResp
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
-    if request == nil {
-        request = NewDescribeApplicationPodsRequest()
-    }
-    
-    response = NewDescribeApplicationPodsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeApplicationPodsWithContext(context.Background(), request)
 }
 
 // DescribeApplicationPods
@@ -503,6 +491,11 @@ func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationPods require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeApplicationPodsResponse()
@@ -534,13 +527,7 @@ func NewDescribeEnvironmentsResponse() (response *DescribeEnvironmentsResponse) 
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEnvironmentsRequest()
-    }
-    
-    response = NewDescribeEnvironmentsResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeEnvironmentsWithContext(context.Background(), request)
 }
 
 // DescribeEnvironments
@@ -553,6 +540,11 @@ func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *D
     if request == nil {
         request = NewDescribeEnvironmentsRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEnvironments require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeEnvironmentsResponse()
@@ -584,13 +576,7 @@ func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *DescribeIngressResponse, err error) {
-    if request == nil {
-        request = NewDescribeIngressRequest()
-    }
-    
-    response = NewDescribeIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIngressWithContext(context.Background(), request)
 }
 
 // DescribeIngress
@@ -603,6 +589,11 @@ func (c *Client) DescribeIngressWithContext(ctx context.Context, request *Descri
     if request == nil {
         request = NewDescribeIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIngressResponse()
@@ -633,13 +624,7 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
 // error code that may be returned:
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
-    if request == nil {
-        request = NewDescribeIngressesRequest()
-    }
-    
-    response = NewDescribeIngressesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeIngressesWithContext(context.Background(), request)
 }
 
 // DescribeIngresses
@@ -651,6 +636,11 @@ func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *Desc
     if request == nil {
         request = NewDescribeIngressesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIngresses require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeIngressesResponse()
@@ -681,13 +671,7 @@ func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesRe
 // error code that may be returned:
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
-    if request == nil {
-        request = NewDescribeRelatedIngressesRequest()
-    }
-    
-    response = NewDescribeRelatedIngressesResponse()
-    err = c.Send(request, response)
-    return
+    return c.DescribeRelatedIngressesWithContext(context.Background(), request)
 }
 
 // DescribeRelatedIngresses
@@ -699,6 +683,11 @@ func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, reques
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRelatedIngresses require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewDescribeRelatedIngressesResponse()
@@ -729,13 +718,7 @@ func NewGenerateApplicationPackageDownloadUrlResponse() (response *GenerateAppli
 // error code that may be returned:
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
-    if request == nil {
-        request = NewGenerateApplicationPackageDownloadUrlRequest()
-    }
-    
-    response = NewGenerateApplicationPackageDownloadUrlResponse()
-    err = c.Send(request, response)
-    return
+    return c.GenerateApplicationPackageDownloadUrlWithContext(context.Background(), request)
 }
 
 // GenerateApplicationPackageDownloadUrl
@@ -747,6 +730,11 @@ func (c *Client) GenerateApplicationPackageDownloadUrlWithContext(ctx context.Co
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GenerateApplicationPackageDownloadUrl require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewGenerateApplicationPackageDownloadUrlResponse()
@@ -777,13 +765,7 @@ func NewModifyApplicationInfoResponse() (response *ModifyApplicationInfoResponse
 // error code that may be returned:
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyApplicationInfo(request *ModifyApplicationInfoRequest) (response *ModifyApplicationInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyApplicationInfoRequest()
-    }
-    
-    response = NewModifyApplicationInfoResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyApplicationInfoWithContext(context.Background(), request)
 }
 
 // ModifyApplicationInfo
@@ -795,6 +777,11 @@ func (c *Client) ModifyApplicationInfoWithContext(ctx context.Context, request *
     if request == nil {
         request = NewModifyApplicationInfoRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApplicationInfo require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyApplicationInfoResponse()
@@ -825,13 +812,7 @@ func NewModifyEnvironmentResponse() (response *ModifyEnvironmentResponse) {
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
-    if request == nil {
-        request = NewModifyEnvironmentRequest()
-    }
-    
-    response = NewModifyEnvironmentResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyEnvironmentWithContext(context.Background(), request)
 }
 
 // ModifyEnvironment
@@ -843,6 +824,11 @@ func (c *Client) ModifyEnvironmentWithContext(ctx context.Context, request *Modi
     if request == nil {
         request = NewModifyEnvironmentRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEnvironment require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyEnvironmentResponse()
@@ -873,13 +859,7 @@ func NewModifyIngressResponse() (response *ModifyIngressResponse) {
 // error code that may be returned:
 //  INTERNALERROR_UPDATEINGRESSERROR = "InternalError.UpdateIngressError"
 func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyIngressResponse, err error) {
-    if request == nil {
-        request = NewModifyIngressRequest()
-    }
-    
-    response = NewModifyIngressResponse()
-    err = c.Send(request, response)
-    return
+    return c.ModifyIngressWithContext(context.Background(), request)
 }
 
 // ModifyIngress
@@ -891,6 +871,11 @@ func (c *Client) ModifyIngressWithContext(ctx context.Context, request *ModifyIn
     if request == nil {
         request = NewModifyIngressRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIngress require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewModifyIngressResponse()
@@ -922,13 +907,7 @@ func NewRestartApplicationResponse() (response *RestartApplicationResponse) {
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) RestartApplication(request *RestartApplicationRequest) (response *RestartApplicationResponse, err error) {
-    if request == nil {
-        request = NewRestartApplicationRequest()
-    }
-    
-    response = NewRestartApplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartApplicationWithContext(context.Background(), request)
 }
 
 // RestartApplication
@@ -941,6 +920,11 @@ func (c *Client) RestartApplicationWithContext(ctx context.Context, request *Res
     if request == nil {
         request = NewRestartApplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartApplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartApplicationResponse()
@@ -972,13 +956,7 @@ func NewRestartApplicationPodResponse() (response *RestartApplicationPodResponse
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
-    if request == nil {
-        request = NewRestartApplicationPodRequest()
-    }
-    
-    response = NewRestartApplicationPodResponse()
-    err = c.Send(request, response)
-    return
+    return c.RestartApplicationPodWithContext(context.Background(), request)
 }
 
 // RestartApplicationPod
@@ -991,6 +969,11 @@ func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *
     if request == nil {
         request = NewRestartApplicationPodRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartApplicationPod require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRestartApplicationPodResponse()
@@ -1026,13 +1009,7 @@ func NewRollingUpdateApplicationByVersionResponse() (response *RollingUpdateAppl
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) RollingUpdateApplicationByVersion(request *RollingUpdateApplicationByVersionRequest) (response *RollingUpdateApplicationByVersionResponse, err error) {
-    if request == nil {
-        request = NewRollingUpdateApplicationByVersionRequest()
-    }
-    
-    response = NewRollingUpdateApplicationByVersionResponse()
-    err = c.Send(request, response)
-    return
+    return c.RollingUpdateApplicationByVersionWithContext(context.Background(), request)
 }
 
 // RollingUpdateApplicationByVersion
@@ -1049,6 +1026,11 @@ func (c *Client) RollingUpdateApplicationByVersionWithContext(ctx context.Contex
     if request == nil {
         request = NewRollingUpdateApplicationByVersionRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RollingUpdateApplicationByVersion require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewRollingUpdateApplicationByVersionResponse()
@@ -1080,13 +1062,7 @@ func NewStopApplicationResponse() (response *StopApplicationResponse) {
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) StopApplication(request *StopApplicationRequest) (response *StopApplicationResponse, err error) {
-    if request == nil {
-        request = NewStopApplicationRequest()
-    }
-    
-    response = NewStopApplicationResponse()
-    err = c.Send(request, response)
-    return
+    return c.StopApplicationWithContext(context.Background(), request)
 }
 
 // StopApplication
@@ -1099,6 +1075,11 @@ func (c *Client) StopApplicationWithContext(ctx context.Context, request *StopAp
     if request == nil {
         request = NewStopApplicationRequest()
     }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopApplication require credential")
+    }
+
     request.SetContext(ctx)
     
     response = NewStopApplicationResponse()
