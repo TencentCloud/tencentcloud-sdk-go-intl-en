@@ -29,6 +29,58 @@ type Account struct {
 	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
+type ActivateHourDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *ActivateHourDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActivateHourDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ActivateHourDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ActivateHourDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IDs of isolated instances
+		SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+		// IDs of instances failed to be isolated
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ActivateHourDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActivateHourDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -779,6 +831,12 @@ type Database struct {
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
 }
 
+type DatabaseFunction struct {
+
+	// Function name
+	Func *string `json:"Func,omitempty" name:"Func"`
+}
+
 type DatabasePrivilege struct {
 
 	// Permission information
@@ -786,6 +844,24 @@ type DatabasePrivilege struct {
 
 	// Database name
 	Database *string `json:"Database,omitempty" name:"Database"`
+}
+
+type DatabaseProcedure struct {
+
+	// Stored procedure name
+	Proc *string `json:"Proc,omitempty" name:"Proc"`
+}
+
+type DatabaseTable struct {
+
+	// Table name
+	Table *string `json:"Table,omitempty" name:"Table"`
+}
+
+type DatabaseView struct {
+
+	// View name
+	View *string `json:"View,omitempty" name:"View"`
 }
 
 type DcnDetailItem struct {
@@ -1780,6 +1856,74 @@ func (r *DescribeDBSlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeDatabaseObjectsRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of dcdbt-ow7t8lmc.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database name, which can be obtained through the `DescribeDatabases` API.
+	DbName *string `json:"DbName,omitempty" name:"DbName"`
+}
+
+func (r *DescribeDatabaseObjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DbName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatabaseObjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDatabaseObjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Passed through from the input parameters.
+		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+		// Database name.
+		DbName *string `json:"DbName,omitempty" name:"DbName"`
+
+		// List of tables.
+		Tables []*DatabaseTable `json:"Tables,omitempty" name:"Tables"`
+
+		// List of views.
+		Views []*DatabaseView `json:"Views,omitempty" name:"Views"`
+
+		// List of stored procedures.
+		Procs []*DatabaseProcedure `json:"Procs,omitempty" name:"Procs"`
+
+		// List of functions.
+		Funcs []*DatabaseFunction `json:"Funcs,omitempty" name:"Funcs"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDatabaseObjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatabaseObjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeDatabaseTableRequest struct {
 	*tchttp.BaseRequest
 
@@ -2466,6 +2610,58 @@ func (r *InitDBInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *InitDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type IsolateHourDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *IsolateHourDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateHourDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateHourDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type IsolateHourDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IDs of instances removed from isolation
+		SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+		// IDs of instances failed to be removed from isolation
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *IsolateHourDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateHourDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

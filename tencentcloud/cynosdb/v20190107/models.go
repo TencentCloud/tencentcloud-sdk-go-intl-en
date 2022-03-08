@@ -38,6 +38,59 @@ type Account struct {
 	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
+type ActivateInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Array of instance IDs
+	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+}
+
+func (r *ActivateInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActivateInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ActivateInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ActivateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task flow ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ActivateInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActivateInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AddInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -247,13 +300,16 @@ type CreateClustersRequest struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Number of CPU cores of normal instance
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
+	// Number of CPU cores of a non-serverless instance
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
 	// Memory of a non-serverless instance in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Storage capacity in GB
+	// This parameter has been deprecated.
+	// Storage capacity in GB.
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
 	// Cluster name
@@ -286,6 +342,7 @@ type CreateClustersRequest struct {
 	// Specified time for time point rollback or snapshot time for snapshot rollback
 	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
 
+	// This parameter has been deprecated.
 	// Specified allowed time range for time point rollback
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
 
@@ -1468,7 +1525,14 @@ type DescribeInstancesRequest struct {
 	// Engine type. Valid values: MYSQL, POSTGRESQL
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
-	// Instance status
+	// Instance status. Valid values:
+	// creating
+	// running
+	// isolating
+	// isolated
+	// activating: Removing the instance from isolation
+	// offlining: Eliminating the instance
+	// offlined: Instance eliminated
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Instance ID list
@@ -1943,7 +2007,7 @@ type ModifyBackupConfigRequest struct {
 	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
 	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitempty" name:"BackupTimeBeg"`
 
-	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
 
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800
@@ -2008,6 +2072,9 @@ type ModifyClusterParamRequest struct {
 
 	// The list of parameters to be modified
 	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+
+	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
 }
 
 func (r *ModifyClusterParamRequest) ToJsonString() string {
@@ -2024,6 +2091,7 @@ func (r *ModifyClusterParamRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "ParamList")
+	delete(f, "IsInMaintainPeriod")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterParamRequest has unknown keys!", "")
 	}
@@ -2325,6 +2393,59 @@ type ParamItem struct {
 	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
 }
 
+type PauseServerlessRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
+	ForcePause *int64 `json:"ForcePause,omitempty" name:"ForcePause"`
+}
+
+func (r *PauseServerlessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseServerlessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ForcePause")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PauseServerlessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type PauseServerlessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *PauseServerlessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseServerlessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type PolicyRule struct {
 
 	// Policy, which can be `ACCEPT` or `DROP`
@@ -2365,6 +2486,55 @@ type QueryFilter struct {
 
 	// Search field
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type ResumeServerlessRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *ResumeServerlessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeServerlessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeServerlessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResumeServerlessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResumeServerlessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeServerlessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SecurityGroup struct {

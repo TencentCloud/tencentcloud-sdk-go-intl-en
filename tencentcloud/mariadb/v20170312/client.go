@@ -45,6 +45,61 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewActivateHourDBInstanceRequest() (request *ActivateHourDBInstanceRequest) {
+    request = &ActivateHourDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "ActivateHourDBInstance")
+    
+    
+    return
+}
+
+func NewActivateHourDBInstanceResponse() (response *ActivateHourDBInstanceResponse) {
+    response = &ActivateHourDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ActivateHourDBInstance
+// This API is used to remove the isolation of pay-as-you-go instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCEID = "InvalidParameterValue.IllegalInstanceId"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ActivateHourDBInstance(request *ActivateHourDBInstanceRequest) (response *ActivateHourDBInstanceResponse, err error) {
+    return c.ActivateHourDBInstanceWithContext(context.Background(), request)
+}
+
+// ActivateHourDBInstance
+// This API is used to remove the isolation of pay-as-you-go instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCEID = "InvalidParameterValue.IllegalInstanceId"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ActivateHourDBInstanceWithContext(ctx context.Context, request *ActivateHourDBInstanceRequest) (response *ActivateHourDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewActivateHourDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ActivateHourDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewActivateHourDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsRequest) {
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1281,6 +1336,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 //  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PRODUCTCONFIGNOTEXISTEDERROR = "ResourceNotFound.ProductConfigNotExistedError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
@@ -1306,6 +1362,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 //  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PRODUCTCONFIGNOTEXISTEDERROR = "ResourceNotFound.ProductConfigNotExistedError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
@@ -1387,6 +1444,61 @@ func (c *Client) DescribeDBSlowLogsWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeDBSlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDatabaseObjectsRequest() (request *DescribeDatabaseObjectsRequest) {
+    request = &DescribeDatabaseObjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDatabaseObjects")
+    
+    
+    return
+}
+
+func NewDescribeDatabaseObjectsResponse() (response *DescribeDatabaseObjectsResponse) {
+    response = &DescribeDatabaseObjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDatabaseObjects
+// This API is used to query the list of database objects in a TencentDB instance, including tables, stored procedures, views, and functions.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETDBOBJECTFAILED = "InternalError.GetDbObjectFailed"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) DescribeDatabaseObjects(request *DescribeDatabaseObjectsRequest) (response *DescribeDatabaseObjectsResponse, err error) {
+    return c.DescribeDatabaseObjectsWithContext(context.Background(), request)
+}
+
+// DescribeDatabaseObjects
+// This API is used to query the list of database objects in a TencentDB instance, including tables, stored procedures, views, and functions.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETDBOBJECTFAILED = "InternalError.GetDbObjectFailed"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) DescribeDatabaseObjectsWithContext(ctx context.Context, request *DescribeDatabaseObjectsRequest) (response *DescribeDatabaseObjectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDatabaseObjectsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDatabaseObjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDatabaseObjectsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2103,6 +2215,61 @@ func (c *Client) InitDBInstancesWithContext(ctx context.Context, request *InitDB
     request.SetContext(ctx)
     
     response = NewInitDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIsolateHourDBInstanceRequest() (request *IsolateHourDBInstanceRequest) {
+    request = &IsolateHourDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "IsolateHourDBInstance")
+    
+    
+    return
+}
+
+func NewIsolateHourDBInstanceResponse() (response *IsolateHourDBInstanceResponse) {
+    response = &IsolateHourDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// IsolateHourDBInstance
+// This API is used to isolate pay-as-you-go instances.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCEID = "InvalidParameterValue.IllegalInstanceId"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) IsolateHourDBInstance(request *IsolateHourDBInstanceRequest) (response *IsolateHourDBInstanceResponse, err error) {
+    return c.IsolateHourDBInstanceWithContext(context.Background(), request)
+}
+
+// IsolateHourDBInstance
+// This API is used to isolate pay-as-you-go instances.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALINSTANCEID = "InvalidParameterValue.IllegalInstanceId"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) IsolateHourDBInstanceWithContext(ctx context.Context, request *IsolateHourDBInstanceRequest) (response *IsolateHourDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewIsolateHourDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateHourDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateHourDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
