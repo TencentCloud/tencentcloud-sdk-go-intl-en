@@ -4393,7 +4393,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *UploadLogResponse, err error) {
-    return c.UploadLogWithContext(context.Background(), request)
+    return c.UploadLogWithContext(context.Background(), request, data)
 }
 
 // UploadLog
