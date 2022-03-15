@@ -2412,6 +2412,55 @@ func (c *Client) GetUserWithContext(ctx context.Context, request *GetUserRequest
     return
 }
 
+func NewGetUserAppIdRequest() (request *GetUserAppIdRequest) {
+    request = &GetUserAppIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "GetUserAppId")
+    
+    
+    return
+}
+
+func NewGetUserAppIdResponse() (response *GetUserAppIdResponse) {
+    response = &GetUserAppIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetUserAppId
+// This API is used to get the user AppId.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+func (c *Client) GetUserAppId(request *GetUserAppIdRequest) (response *GetUserAppIdResponse, err error) {
+    return c.GetUserAppIdWithContext(context.Background(), request)
+}
+
+// GetUserAppId
+// This API is used to get the user AppId.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+func (c *Client) GetUserAppIdWithContext(ctx context.Context, request *GetUserAppIdRequest) (response *GetUserAppIdResponse, err error) {
+    if request == nil {
+        request = NewGetUserAppIdRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetUserAppId require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetUserAppIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListAccessKeysRequest() (request *ListAccessKeysRequest) {
     request = &ListAccessKeysRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3511,6 +3560,7 @@ func NewUpdateAssumeRolePolicyResponse() (response *UpdateAssumeRolePolicyRespon
 //  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
 //  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
 //  INVALIDPARAMETER_PRINCIPALQCSCROSSERROR = "InvalidParameter.PrincipalQcsCrossError"
 //  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"
@@ -3537,6 +3587,7 @@ func (c *Client) UpdateAssumeRolePolicy(request *UpdateAssumeRolePolicyRequest) 
 //  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
 //  INVALIDPARAMETER_EFFECTERROR = "InvalidParameter.EffectError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_POLICYDOCUMENTLENGTHOVERLIMIT = "InvalidParameter.PolicyDocumentLengthOverLimit"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
 //  INVALIDPARAMETER_PRINCIPALQCSCROSSERROR = "InvalidParameter.PrincipalQcsCrossError"
 //  INVALIDPARAMETER_PRINCIPALQCSERROR = "InvalidParameter.PrincipalQcsError"

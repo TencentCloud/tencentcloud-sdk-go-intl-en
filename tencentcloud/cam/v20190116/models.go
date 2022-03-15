@@ -1634,7 +1634,7 @@ type DescribeUserSAMLConfigResponse struct {
 		// SAML metadata document.
 		SAMLMetadata *string `json:"SAMLMetadata,omitempty" name:"SAMLMetadata"`
 
-		// Status. `0`: not set, `11`: enabled, `2`: disabled.
+		// Status. `0`: not set, `1`: enabled, `2`: disabled.
 		Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2068,7 +2068,7 @@ type GetPolicyVersionRequest struct {
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Policy version ID
+	// Policy version, which can be obtained through `ListPolicyVersions`.
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
 }
 
@@ -2233,7 +2233,7 @@ func (r *GetSAMLProviderResponse) FromJsonString(s string) error {
 type GetSecurityLastUsedRequest struct {
 	*tchttp.BaseRequest
 
-	// A parameter used to query the key ID list.
+	// Key ID list query. Up to 10 key IDs can be queried.
 	SecretIdList []*string `json:"SecretIdList,omitempty" name:"SecretIdList"`
 }
 
@@ -2339,6 +2339,57 @@ func (r *GetServiceLinkedRoleDeletionStatusResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GetUserAppIdRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *GetUserAppIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetUserAppIdRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetUserAppIdRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetUserAppIdResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// UIN of the current account.
+		Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+		// OwnerUin of the current account.
+		OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+		// AppId of the current account.
+		AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetUserAppIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetUserAppIdResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GetUserRequest struct {
 	*tchttp.BaseRequest
 
@@ -2379,9 +2430,10 @@ type GetUserResponse struct {
 		Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
 		// Sub-user remarks
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 		Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-		// If sub-user can log in to the Console
+		// Whether the sub-user can log in to the console. `0`: No; `1`: Yes.
 		ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
 		// Mobile number
@@ -2453,22 +2505,22 @@ type GroupMemberInfo struct {
 	// Mobile number country/area code
 	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
 
-	// If mobile number has been verified
+	// Whether the mobile phone has been verified. `0`: No; `1`: Yes.
 	PhoneFlag *uint64 `json:"PhoneFlag,omitempty" name:"PhoneFlag"`
 
 	// Email address
 	Email *string `json:"Email,omitempty" name:"Email"`
 
-	// If email has been verified
+	// Whether the email has been verified. `0`: No; `1`: Yes.
 	EmailFlag *uint64 `json:"EmailFlag,omitempty" name:"EmailFlag"`
 
-	// User type
+	// User type. `1`: Global collaborator; `2`: Project collaborator; `3`: Message recipient.
 	UserType *uint64 `json:"UserType,omitempty" name:"UserType"`
 
 	// Time policy created
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// If the user is the main message recipient
+	// Whether the user is the primary message recipient. `0`: No; `1`: Yes.
 	IsReceiverOwner *uint64 `json:"IsReceiverOwner,omitempty" name:"IsReceiverOwner"`
 }
 
@@ -3636,7 +3688,7 @@ type SetDefaultPolicyVersionRequest struct {
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Policy version ID
+	// Policy version, which can be obtained through `ListPolicyVersions`.
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
 }
 
@@ -3820,6 +3872,10 @@ type SubAccountInfo struct {
 	// Creation time
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Nickname.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	NickName *string `json:"NickName,omitempty" name:"NickName"`
 }
 
 type SubAccountUser struct {
@@ -3830,7 +3886,7 @@ type SubAccountUser struct {
 	// Sub-user name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Sub-user UID
+	// Sub-user UID. UID is the unique identifier of a user who is a message recipient, while UIN is a unique identifier of a user.
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
 	// Sub-user remarks
@@ -4030,10 +4086,10 @@ type UpdateRoleConsoleLoginRequest struct {
 	// Whether login is allowed. 1: yes, 0: no
 	ConsoleLogin *int64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
-	// Role ID
+	// Role ID. Use either `RoleId` or `RoleName` as the input parameter.
 	RoleId *int64 `json:"RoleId,omitempty" name:"RoleId"`
 
-	// Role name
+	// Role name. Use either `RoleId` or `RoleName` as the input parameter.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 

@@ -395,6 +395,15 @@ type CcnAttachedInstance struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+type ContainerEnv struct {
+
+	// Environment variable key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Environment variable value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type CreateBlueprintRequest struct {
 	*tchttp.BaseRequest
 
@@ -556,6 +565,97 @@ func (r *CreateInstanceSnapshotResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstancesRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the Lighthouse package
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+
+	// ID of the Lighthouse image
+	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
+
+	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The display name of the Lighthouse instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// List of availability zones. A random AZ is selected by default.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Whether the request is a dry run only.
+	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
+	// If the dry run fails, the corresponding error code will be returned.
+	// If the dry run succeeds, the RequestId will be returned.
+	// `false` (default value): send a normal request and create instance(s) if all the requirements are met.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitempty" name:"LoginConfiguration"`
+
+	// Configuration of the containers to create
+	Containers []*DockerContainerConfiguration `json:"Containers,omitempty" name:"Containers"`
+}
+
+func (r *CreateInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BundleId")
+	delete(f, "BlueprintId")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "InstanceName")
+	delete(f, "InstanceCount")
+	delete(f, "Zones")
+	delete(f, "DryRun")
+	delete(f, "ClientToken")
+	delete(f, "LoginConfiguration")
+	delete(f, "Containers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
+	// 
+	// You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
+		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1834,7 +1934,7 @@ type DescribeInstancesRequest struct {
 	// <li>instance-state</li>Filter by **instance status**.
 	// Type: String
 	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+	// Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -2755,6 +2855,53 @@ type DiskReturnable struct {
 	ReturnFailMessage *string `json:"ReturnFailMessage,omitempty" name:"ReturnFailMessage"`
 }
 
+type DockerContainerConfiguration struct {
+
+	// Container image address
+	ContainerImage *string `json:"ContainerImage,omitempty" name:"ContainerImage"`
+
+	// Container name
+	ContainerName *string `json:"ContainerName,omitempty" name:"ContainerName"`
+
+	// List of environment variables
+	Envs []*ContainerEnv `json:"Envs,omitempty" name:"Envs"`
+
+	// List of mappings of container ports and host ports
+	PublishPorts []*DockerContainerPublishPort `json:"PublishPorts,omitempty" name:"PublishPorts"`
+
+	// List of container mount volumes
+	Volumes []*DockerContainerVolume `json:"Volumes,omitempty" name:"Volumes"`
+
+	// The command to run
+	Command *string `json:"Command,omitempty" name:"Command"`
+}
+
+type DockerContainerPublishPort struct {
+
+	// Host port
+	HostPort *int64 `json:"HostPort,omitempty" name:"HostPort"`
+
+	// Container port
+	ContainerPort *int64 `json:"ContainerPort,omitempty" name:"ContainerPort"`
+
+	// External IP. It defaults to 0.0.0.0.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
+type DockerContainerVolume struct {
+
+	// Container path
+	ContainerPath *string `json:"ContainerPath,omitempty" name:"ContainerPath"`
+
+	// Host path
+	HostPath *string `json:"HostPath,omitempty" name:"HostPath"`
+}
+
 type Filter struct {
 
 	// Field to be filtered.
@@ -3351,6 +3498,9 @@ type KeyPair struct {
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 }
 
+type LoginConfiguration struct {
+}
+
 type LoginSettings struct {
 
 	// Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
@@ -3424,6 +3574,10 @@ type ModifyBundle struct {
 
 	// Package information.
 	Bundle *Bundle `json:"Bundle,omitempty" name:"Bundle"`
+
+	// The reason of package changing failure. It’s empty if the package change status is `AVAILABLE`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	NotSupportModifyMessage *string `json:"NotSupportModifyMessage,omitempty" name:"NotSupportModifyMessage"`
 }
 
 type ModifyDisksAttributeRequest struct {
