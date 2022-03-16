@@ -32,6 +32,9 @@ const (
 	// The server is busy. Retry later.
 	INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 
+	// Failed to delete the application
+	INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
+
 	// Failed to invoke the version deployment
 	INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
 
@@ -41,7 +44,7 @@ const (
 	// Failed to restart
 	INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 
-	// 
+	// Failed to update the ingress
 	INTERNALERROR_UPDATEINGRESSERROR = "InternalError.UpdateIngressError"
 
 	// The version number is invalid.
@@ -52,6 +55,9 @@ const (
 
 	// Failed to create the environment. The upper limit of environment is reached.
 	INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
+
+	// Failed to create the environment. The upper limit of environment is reached.
+	INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 
 	// There are running pods in this application.
 	INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
@@ -68,11 +74,17 @@ const (
 	// There is still traffic routed to this version.
 	INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
 
+	// 
+	MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
+
 	// The environment ID can not be left empty.
 	MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 
 	// The target microservice is offline.
 	RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+
+	// The environment does not exist.
+	RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
 
 	// The application is not found.
 	RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
@@ -83,7 +95,7 @@ const (
 	// The environment corresponding to this version is not found.
 	RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 
-	// 
+	// The environment corresponding to this version is not found.
 	RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
 
 	// Waiting for the installation of addon

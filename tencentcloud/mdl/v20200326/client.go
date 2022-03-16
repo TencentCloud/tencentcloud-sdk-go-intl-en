@@ -279,6 +279,63 @@ func (c *Client) CreateStreamLivePlanWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateStreamLiveWatermarkRequest() (request *CreateStreamLiveWatermarkRequest) {
+    request = &CreateStreamLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveWatermark")
+    
+    
+    return
+}
+
+func NewCreateStreamLiveWatermarkResponse() (response *CreateStreamLiveWatermarkResponse) {
+    response = &CreateStreamLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateStreamLiveWatermark
+// This API is used to add a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_IMAGESETTINGS = "InvalidParameter.ImageSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_TEXTSETTINGS = "InvalidParameter.TextSettings"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) CreateStreamLiveWatermark(request *CreateStreamLiveWatermarkRequest) (response *CreateStreamLiveWatermarkResponse, err error) {
+    return c.CreateStreamLiveWatermarkWithContext(context.Background(), request)
+}
+
+// CreateStreamLiveWatermark
+// This API is used to add a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_IMAGESETTINGS = "InvalidParameter.ImageSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_TEXTSETTINGS = "InvalidParameter.TextSettings"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) CreateStreamLiveWatermarkWithContext(ctx context.Context, request *CreateStreamLiveWatermarkRequest) (response *CreateStreamLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLiveWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLiveWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelRequest) {
     request = &DeleteStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -493,6 +550,59 @@ func (c *Client) DeleteStreamLivePlanWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteStreamLivePlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamLiveWatermarkRequest() (request *DeleteStreamLiveWatermarkRequest) {
+    request = &DeleteStreamLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveWatermark")
+    
+    
+    return
+}
+
+func NewDeleteStreamLiveWatermarkResponse() (response *DeleteStreamLiveWatermarkResponse) {
+    response = &DeleteStreamLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteStreamLiveWatermark
+// This API is used to delete a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DeleteStreamLiveWatermark(request *DeleteStreamLiveWatermarkRequest) (response *DeleteStreamLiveWatermarkResponse, err error) {
+    return c.DeleteStreamLiveWatermarkWithContext(context.Background(), request)
+}
+
+// DeleteStreamLiveWatermark
+// This API is used to delete a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ALREADYASSOCIATEDCHANNEL = "InvalidParameter.AlreadyAssociatedChannel"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DeleteStreamLiveWatermarkWithContext(ctx context.Context, request *DeleteStreamLiveWatermarkRequest) (response *DeleteStreamLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamLiveWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamLiveWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamLiveWatermarkResponse()
     err = c.Send(request, response)
     return
 }
@@ -1099,6 +1209,108 @@ func (c *Client) DescribeStreamLiveRegionsWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeStreamLiveWatermarkRequest() (request *DescribeStreamLiveWatermarkRequest) {
+    request = &DescribeStreamLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveWatermark")
+    
+    
+    return
+}
+
+func NewDescribeStreamLiveWatermarkResponse() (response *DescribeStreamLiveWatermarkResponse) {
+    response = &DescribeStreamLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLiveWatermark
+// This API is used to query a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveWatermark(request *DescribeStreamLiveWatermarkRequest) (response *DescribeStreamLiveWatermarkResponse, err error) {
+    return c.DescribeStreamLiveWatermarkWithContext(context.Background(), request)
+}
+
+// DescribeStreamLiveWatermark
+// This API is used to query a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveWatermarkWithContext(ctx context.Context, request *DescribeStreamLiveWatermarkRequest) (response *DescribeStreamLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLiveWatermarksRequest() (request *DescribeStreamLiveWatermarksRequest) {
+    request = &DescribeStreamLiveWatermarksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveWatermarks")
+    
+    
+    return
+}
+
+func NewDescribeStreamLiveWatermarksResponse() (response *DescribeStreamLiveWatermarksResponse) {
+    response = &DescribeStreamLiveWatermarksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLiveWatermarks
+// This API is used to query multiple watermarks at a time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveWatermarks(request *DescribeStreamLiveWatermarksRequest) (response *DescribeStreamLiveWatermarksResponse, err error) {
+    return c.DescribeStreamLiveWatermarksWithContext(context.Background(), request)
+}
+
+// DescribeStreamLiveWatermarks
+// This API is used to query multiple watermarks at a time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLiveWatermarksWithContext(ctx context.Context, request *DescribeStreamLiveWatermarksRequest) (response *DescribeStreamLiveWatermarksResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveWatermarksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveWatermarks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveWatermarksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelRequest) {
     request = &ModifyStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1280,6 +1492,63 @@ func (c *Client) ModifyStreamLiveInputSecurityGroupWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewModifyStreamLiveInputSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamLiveWatermarkRequest() (request *ModifyStreamLiveWatermarkRequest) {
+    request = &ModifyStreamLiveWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveWatermark")
+    
+    
+    return
+}
+
+func NewModifyStreamLiveWatermarkResponse() (response *ModifyStreamLiveWatermarkResponse) {
+    response = &ModifyStreamLiveWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyStreamLiveWatermark
+// This API is used to modify a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_IMAGESETTINGS = "InvalidParameter.ImageSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_TEXTSETTINGS = "InvalidParameter.TextSettings"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) ModifyStreamLiveWatermark(request *ModifyStreamLiveWatermarkRequest) (response *ModifyStreamLiveWatermarkResponse, err error) {
+    return c.ModifyStreamLiveWatermarkWithContext(context.Background(), request)
+}
+
+// ModifyStreamLiveWatermark
+// This API is used to modify a watermark.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_IMAGESETTINGS = "InvalidParameter.ImageSettings"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_TEXTSETTINGS = "InvalidParameter.TextSettings"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) ModifyStreamLiveWatermarkWithContext(ctx context.Context, request *ModifyStreamLiveWatermarkRequest) (response *ModifyStreamLiveWatermarkResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLiveWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLiveWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamLiveWatermarkResponse()
     err = c.Send(request, response)
     return
 }

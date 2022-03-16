@@ -45,6 +45,59 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewActiveHourDCDBInstanceRequest() (request *ActiveHourDCDBInstanceRequest) {
+    request = &ActiveHourDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "ActiveHourDCDBInstance")
+    
+    
+    return
+}
+
+func NewActiveHourDCDBInstanceResponse() (response *ActiveHourDCDBInstanceResponse) {
+    response = &ActiveHourDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ActiveHourDCDBInstance
+// This API is used to remove the isolation of pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ActiveHourDCDBInstance(request *ActiveHourDCDBInstanceRequest) (response *ActiveHourDCDBInstanceResponse, err error) {
+    return c.ActiveHourDCDBInstanceWithContext(context.Background(), request)
+}
+
+// ActiveHourDCDBInstance
+// This API is used to remove the isolation of pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ActiveHourDCDBInstanceWithContext(ctx context.Context, request *ActiveHourDCDBInstanceRequest) (response *ActiveHourDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewActiveHourDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ActiveHourDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewActiveHourDCDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsRequest) {
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -465,6 +518,75 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     request.SetContext(ctx)
     
     response = NewCreateAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateHourDCDBInstanceRequest() (request *CreateHourDCDBInstanceRequest) {
+    request = &CreateHourDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "CreateHourDCDBInstance")
+    
+    
+    return
+}
+
+func NewCreateHourDCDBInstanceResponse() (response *CreateHourDCDBInstanceResponse) {
+    response = &CreateHourDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateHourDCDBInstance
+// This API is used to create pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateHourDCDBInstance(request *CreateHourDCDBInstanceRequest) (response *CreateHourDCDBInstanceResponse, err error) {
+    return c.CreateHourDCDBInstanceWithContext(context.Background(), request)
+}
+
+// CreateHourDCDBInstance
+// This API is used to create pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateHourDCDBInstanceWithContext(ctx context.Context, request *CreateHourDCDBInstanceRequest) (response *CreateHourDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateHourDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateHourDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateHourDCDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -1941,6 +2063,57 @@ func (c *Client) InitDCDBInstancesWithContext(ctx context.Context, request *Init
     request.SetContext(ctx)
     
     response = NewInitDCDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIsolateHourDCDBInstanceRequest() (request *IsolateHourDCDBInstanceRequest) {
+    request = &IsolateHourDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("dcdb", APIVersion, "IsolateHourDCDBInstance")
+    
+    
+    return
+}
+
+func NewIsolateHourDCDBInstanceResponse() (response *IsolateHourDCDBInstanceResponse) {
+    response = &IsolateHourDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// IsolateHourDCDBInstance
+// This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) IsolateHourDCDBInstance(request *IsolateHourDCDBInstanceRequest) (response *IsolateHourDCDBInstanceResponse, err error) {
+    return c.IsolateHourDCDBInstanceWithContext(context.Background(), request)
+}
+
+// IsolateHourDCDBInstance
+// This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) IsolateHourDCDBInstanceWithContext(ctx context.Context, request *IsolateHourDCDBInstanceRequest) (response *IsolateHourDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewIsolateHourDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateHourDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateHourDCDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

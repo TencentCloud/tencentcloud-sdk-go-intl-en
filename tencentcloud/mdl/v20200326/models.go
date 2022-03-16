@@ -173,6 +173,34 @@ type ChannelPipelineAlerts struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+type CreateImageSettings struct {
+
+	// Image file format. Valid values: png, jpg.
+	ImageType *string `json:"ImageType,omitempty" name:"ImageType"`
+
+	// Base64 encoded image content
+	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
+
+	// Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+	XPos *int64 `json:"XPos,omitempty" name:"XPos"`
+
+	// The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+	YPos *int64 `json:"YPos,omitempty" name:"YPos"`
+
+	// The watermark image’s width as a percentage of the video width. Value range: 0-100. Default: 10.
+	// `0` means to scale the width proportionally to the height.
+	// You cannot set both `Width` and `Height` to `0`.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// The watermark image’s height as a percentage of the video height. Value range: 0-100. Default: 10.
+	// `0` means to scale the height proportionally to the width.
+	// You cannot set both `Width` and `Height` to `0`.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
 type CreateStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
 
@@ -412,6 +440,88 @@ func (r *CreateStreamLivePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateStreamLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Watermark type. Valid values: STATIC_IMAGE, TEXT.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+	ImageSettings *CreateImageSettings `json:"ImageSettings,omitempty" name:"ImageSettings"`
+
+	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+	TextSettings *CreateTextSettings `json:"TextSettings,omitempty" name:"TextSettings"`
+}
+
+func (r *CreateStreamLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamLiveWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "ImageSettings")
+	delete(f, "TextSettings")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateStreamLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Watermark ID
+		Id *string `json:"Id,omitempty" name:"Id"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateStreamLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamLiveWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTextSettings struct {
+
+	// Text
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Origin. Valid values: TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT.
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// The watermark’s horizontal distance from the origin as a percentage of the video width. Value range: 0-100. Default: 10.
+	XPos *int64 `json:"XPos,omitempty" name:"XPos"`
+
+	// The watermark’s vertical distance from the origin as a percentage of the video height. Value range: 0-100. Default: 10.
+	YPos *int64 `json:"YPos,omitempty" name:"YPos"`
+
+	// Font size. Value range: 25-50.
+	FontSize *int64 `json:"FontSize,omitempty" name:"FontSize"`
+
+	// Font color, which is an RGB color value. Default value: 0x000000.
+	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+}
+
 type DashRemuxSettingsInfo struct {
 
 	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
@@ -610,6 +720,70 @@ func (r *DeleteStreamLivePlanResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DeleteStreamLivePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteStreamLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+func (r *DeleteStreamLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamLiveWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamLiveWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteStreamLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteStreamLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamLiveWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeImageSettings struct {
+
+	// Origin
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// The watermark image’s horizontal distance from the origin as a percentage of the video width
+	XPos *int64 `json:"XPos,omitempty" name:"XPos"`
+
+	// The watermark image’s vertical distance from the origin as a percentage of the video height
+	YPos *int64 `json:"YPos,omitempty" name:"YPos"`
+
+	// The watermark image’s width as a percentage of the video width
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// The watermark image’s height as a percentage of the video height
+	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
 type DescribeStreamLiveChannelAlertsRequest struct {
@@ -1225,6 +1399,149 @@ func (r *DescribeStreamLiveRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStreamLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+func (r *DescribeStreamLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Watermark information
+		Info *DescribeWatermarkInfo `json:"Info,omitempty" name:"Info"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLiveWatermarksRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeStreamLiveWatermarksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveWatermarksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveWatermarksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLiveWatermarksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// List of watermark information
+		Infos []*DescribeWatermarkInfo `json:"Infos,omitempty" name:"Infos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLiveWatermarksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveWatermarksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeTextSettings struct {
+
+	// Text
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Origin
+	Location *string `json:"Location,omitempty" name:"Location"`
+
+	// The watermark image’s horizontal distance from the origin as a percentage of the video width
+	XPos *int64 `json:"XPos,omitempty" name:"XPos"`
+
+	// The watermark image’s vertical distance from the origin as a percentage of the video height
+	YPos *int64 `json:"YPos,omitempty" name:"YPos"`
+
+	// Font size
+	FontSize *int64 `json:"FontSize,omitempty" name:"FontSize"`
+
+	// Font color
+	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+}
+
+type DescribeWatermarkInfo struct {
+
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Watermark name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Watermark type. Valid values: STATIC_IMAGE, TEXT.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ImageSettings *DescribeImageSettings `json:"ImageSettings,omitempty" name:"ImageSettings"`
+
+	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TextSettings *DescribeTextSettings `json:"TextSettings,omitempty" name:"TextSettings"`
+
+	// Last modified time (UTC+0) of the watermark, in the format of `2020-01-01T12:00:00Z`
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// List of channel IDs the watermark is bound to
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AttachedChannels []*string `json:"AttachedChannels,omitempty" name:"AttachedChannels"`
+}
+
 type DestinationInfo struct {
 
 	// Relay destination address. Length limit: [1,512].
@@ -1658,6 +1975,64 @@ func (r *ModifyStreamLiveInputSecurityGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyStreamLiveInputSecurityGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyStreamLiveWatermarkRequest struct {
+	*tchttp.BaseRequest
+
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Watermark name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+	ImageSettings *CreateImageSettings `json:"ImageSettings,omitempty" name:"ImageSettings"`
+
+	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+	TextSettings *CreateTextSettings `json:"TextSettings,omitempty" name:"TextSettings"`
+}
+
+func (r *ModifyStreamLiveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamLiveWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "ImageSettings")
+	delete(f, "TextSettings")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyStreamLiveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyStreamLiveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamLiveWatermarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

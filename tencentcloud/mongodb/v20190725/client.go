@@ -120,6 +120,7 @@ func NewCreateBackupDBInstanceResponse() (response *CreateBackupDBInstanceRespon
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
 //  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
@@ -134,6 +135,7 @@ func (c *Client) CreateBackupDBInstance(request *CreateBackupDBInstanceRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_CHECKAPPIDFAILED = "InvalidParameterValue.CheckAppIdFailed"
 //  INVALIDPARAMETERVALUE_ILLEGALINSTANCESTATUS = "InvalidParameterValue.IllegalInstanceStatus"
@@ -670,6 +672,7 @@ func NewDescribeDBInstanceDealResponse() (response *DescribeDBInstanceDealRespon
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) DescribeDBInstanceDeal(request *DescribeDBInstanceDealRequest) (response *DescribeDBInstanceDealResponse, err error) {
     return c.DescribeDBInstanceDealWithContext(context.Background(), request)
 }
@@ -680,6 +683,7 @@ func (c *Client) DescribeDBInstanceDeal(request *DescribeDBInstanceDealRequest) 
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) DescribeDBInstanceDealWithContext(ctx context.Context, request *DescribeDBInstanceDealRequest) (response *DescribeDBInstanceDealResponse, err error) {
     if request == nil {
         request = NewDescribeDBInstanceDealRequest()
@@ -775,6 +779,7 @@ func NewDescribeInstanceParamsResponse() (response *DescribeInstanceParamsRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CURRENTINSTANCENOTSUPPORTMODIFYPARAMS = "InvalidParameter.CurrentInstanceNotSupportModifyParams"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) (response *DescribeInstanceParamsResponse, err error) {
@@ -788,6 +793,7 @@ func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) 
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CURRENTINSTANCENOTSUPPORTMODIFYPARAMS = "InvalidParameter.CurrentInstanceNotSupportModifyParams"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request *DescribeInstanceParamsRequest) (response *DescribeInstanceParamsResponse, err error) {
@@ -828,6 +834,7 @@ func NewDescribeSecurityGroupResponse() (response *DescribeSecurityGroupResponse
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 func (c *Client) DescribeSecurityGroup(request *DescribeSecurityGroupRequest) (response *DescribeSecurityGroupResponse, err error) {
     return c.DescribeSecurityGroupWithContext(context.Background(), request)
@@ -838,6 +845,7 @@ func (c *Client) DescribeSecurityGroup(request *DescribeSecurityGroupRequest) (r
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 func (c *Client) DescribeSecurityGroupWithContext(ctx context.Context, request *DescribeSecurityGroupRequest) (response *DescribeSecurityGroupResponse, err error) {
     if request == nil {
@@ -1155,7 +1163,9 @@ func NewInquirePriceModifyDBInstanceSpecResponse() (response *InquirePriceModify
 // This API is used to query price of instance specification adjustment.
 //
 // error code that may be returned:
+//  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
 func (c *Client) InquirePriceModifyDBInstanceSpec(request *InquirePriceModifyDBInstanceSpecRequest) (response *InquirePriceModifyDBInstanceSpecResponse, err error) {
     return c.InquirePriceModifyDBInstanceSpecWithContext(context.Background(), request)
 }
@@ -1164,7 +1174,9 @@ func (c *Client) InquirePriceModifyDBInstanceSpec(request *InquirePriceModifyDBI
 // This API is used to query price of instance specification adjustment.
 //
 // error code that may be returned:
+//  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
 func (c *Client) InquirePriceModifyDBInstanceSpecWithContext(ctx context.Context, request *InquirePriceModifyDBInstanceSpecRequest) (response *InquirePriceModifyDBInstanceSpecResponse, err error) {
     if request == nil {
         request = NewInquirePriceModifyDBInstanceSpecRequest()
@@ -1293,6 +1305,59 @@ func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *Isol
     request.SetContext(ctx)
     
     response = NewIsolateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceSecurityGroupRequest() (request *ModifyDBInstanceSecurityGroupRequest) {
+    request = &ModifyDBInstanceSecurityGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifyDBInstanceSecurityGroup")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceSecurityGroupResponse() (response *ModifyDBInstanceSecurityGroupResponse) {
+    response = &ModifyDBInstanceSecurityGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBInstanceSecurityGroup
+// This API is used to modify the security groups associated with an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) ModifyDBInstanceSecurityGroup(request *ModifyDBInstanceSecurityGroupRequest) (response *ModifyDBInstanceSecurityGroupResponse, err error) {
+    return c.ModifyDBInstanceSecurityGroupWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceSecurityGroup
+// This API is used to modify the security groups associated with an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+func (c *Client) ModifyDBInstanceSecurityGroupWithContext(ctx context.Context, request *ModifyDBInstanceSecurityGroupRequest) (response *ModifyDBInstanceSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceSecurityGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceSecurityGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceSecurityGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -1434,6 +1499,7 @@ func NewRenameInstanceResponse() (response *RenameInstanceResponse) {
 // This API is used to rename a TencentDB instance.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
 //  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"
@@ -1447,6 +1513,7 @@ func (c *Client) RenameInstance(request *RenameInstanceRequest) (response *Renam
 // This API is used to rename a TencentDB instance.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_ILLEGALINSTANCENAME = "InvalidParameterValue.IllegalInstanceName"
 //  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"

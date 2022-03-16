@@ -631,6 +631,15 @@ type DeployApplicationRequest struct {
 
 	// Whether to enable probing
 	StartupProbe *HealthCheckConfig `json:"StartupProbe,omitempty" name:"StartupProbe"`
+
+	// The version of the operating system
+	// If `openjdk` is selected, the value can be: 
+	// - ALPINE
+	// - CENTOS
+	// If `konajdk` is selected, the value can be: 
+	// - ALPINE
+	// - TENCENTOS
+	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
 }
 
 func (r *DeployApplicationRequest) ToJsonString() string {
@@ -683,6 +692,7 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	delete(f, "ConfEdited")
 	delete(f, "SpeedUp")
 	delete(f, "StartupProbe")
+	delete(f, "OsFlavour")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployApplicationRequest has unknown keys!", "")
 	}
@@ -728,6 +738,9 @@ type DeployStrategyConf struct {
 
 	// The minimum number of available pods
 	MinAvailable *int64 `json:"MinAvailable,omitempty" name:"MinAvailable"`
+
+	// Whether to enable force release
+	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
 type DescribeApplicationPodsRequest struct {

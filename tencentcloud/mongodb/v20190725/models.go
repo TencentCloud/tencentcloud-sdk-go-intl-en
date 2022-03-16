@@ -26,7 +26,7 @@ type AssignProjectRequest struct {
 	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Project ID
+	// Unique ID of an existing project (instead of a new project).
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
@@ -98,6 +98,13 @@ type BackupDownloadTask struct {
 
 	// Backup download address
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Backup type of the backup file. Valid values: `0` (logical backup), `1` (physical backup)
+	BackupMethod *int64 `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	// Backup description you set when starting a backup task
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BackupDesc *string `json:"BackupDesc,omitempty" name:"BackupDesc"`
 }
 
 type BackupDownloadTaskStatus struct {
@@ -224,13 +231,15 @@ func (r *CreateBackupDBInstanceResponse) FromJsonString(s string) error {
 type CreateBackupDownloadTaskRequest struct {
 	*tchttp.BaseRequest
 
-	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
+	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API
+	// The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API.
 	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 
-	// The list of shards with backups to be downloaded
+	// Specify the node name of a replica set instance or the shard name list of a sharded cluster instance. Only backups of the specified node or shards will be downloaded.
+	// Suppose you have a replica set instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0` to download the full backup. For a replica set instance, the parameter value must be in the format of "instance ID_0".
+	// Suppose you have a sharded cluster instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0&BackupSets.1=cmgo-p8vnipr5_1` to download the backup data of shard 0 and shard 1. To download the full backup, please specify all shard names.
 	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets"`
 }
 
@@ -712,7 +721,7 @@ type DescribeBackupDownloadTaskRequest struct {
 	// The start time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the start time can be any time earlier than the end time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The end time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the end time can be any time later than the start time.
+	// The end time of the query period. Tasks will be queried if their start and end times fall within the query period. If it is left empty, the end time can be any time later than the start time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default value: `20`.
@@ -790,7 +799,7 @@ type DescribeClientConnectionsRequest struct {
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The number of records that will be returned. Default value: 10,000.
+	// Number of results to be returned for a single request. Value range: 1-1,000. Default value: 1,000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
@@ -1433,7 +1442,7 @@ type InquirePriceCreateDBInstancesRequest struct {
 	// Instance region name in the format of ap-guangzhou-2.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Number of nodes in each replica set. Currently, the number of nodes per replica set is fixed at 3, while the number of secondary nodes per shard is customizable. For more information, please see the parameter returned by the `DescribeSpecInfo` API.
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
 	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
@@ -1445,7 +1454,7 @@ type InquirePriceCreateDBInstancesRequest struct {
 	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
-	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO), STDS5 (standard).
+	// Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
 	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
 
 	// Number of instances. Minimum value: 1. Maximum value: 10.
@@ -1523,6 +1532,12 @@ type InquirePriceModifyDBInstanceSpecRequest struct {
 
 	// Instance disk size in GB after specification adjustment.
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
+	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
 }
 
 func (r *InquirePriceModifyDBInstanceSpecRequest) ToJsonString() string {
@@ -1540,6 +1555,8 @@ func (r *InquirePriceModifyDBInstanceSpecRequest) FromJsonString(s string) error
 	delete(f, "InstanceId")
 	delete(f, "Memory")
 	delete(f, "Volume")
+	delete(f, "NodeNum")
+	delete(f, "ReplicateSetNum")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceModifyDBInstanceSpecRequest has unknown keys!", "")
 	}
@@ -1766,7 +1783,7 @@ type InstanceEnumParam struct {
 	// Acceptable values
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
-	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Parameter name
@@ -1778,7 +1795,7 @@ type InstanceEnumParam struct {
 	// Data type of the parameter
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (yes), `0` (no, and displays "Loading" in the console)
+	// Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -1796,7 +1813,7 @@ type InstanceIntegerParam struct {
 	// Minimum value
 	Min *string `json:"Min,omitempty" name:"Min"`
 
-	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no)
+	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Parameter name
@@ -1808,10 +1825,10 @@ type InstanceIntegerParam struct {
 	// Data type of the parameter
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether the TencentDB for MongoDB console has pulled parameter information successfully. Valid values: `1` (no), `0` (yes). This field is only used in the console.
+	// Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// This field is not in use
+	// Redundant field which can be ignored
 	Unit *string `json:"Unit,omitempty" name:"Unit"`
 }
 
@@ -1826,46 +1843,46 @@ type InstanceMultiParam struct {
 	// Acceptable values
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
+	// Whether to restart the instance for the parameter to take effect. Valid values: `1` (yes), `0` (no, which means the parameter setting takes effect immediately)
+	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Parameter description
+	Tips []*string `json:"Tips,omitempty" name:"Tips"`
+
+	// Data type of the current value. Default value: `multi`
+	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
+}
+
+type InstanceTextParam struct {
+
+	// Current value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value
+	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
+
 	// Whether to restart the instance for the parameter to take effect
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Parameter name
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
 
-	// Whether the TencentDB for MongoDB console has pulled parameter information successfully
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	// Value of a text parameter
+	TextValue *string `json:"TextValue,omitempty" name:"TextValue"`
 
 	// Parameter description
 	Tips []*string `json:"Tips,omitempty" name:"Tips"`
 
-	// Data type of the parameter
-	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
-}
-
-type InstanceTextParam struct {
-
-	// Current value (not in use)
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
-
-	// Default value (not in use)
-	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
-
-	// Whether to restart the instance for the parameter to take effect (not in use)
-	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
-
-	// Parameter name (not in use)
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
-
-	// Acceptable values (not in use)
-	TextValue *string `json:"TextValue,omitempty" name:"TextValue"`
-
-	// Parameter description (not in use)
-	Tips []*string `json:"Tips,omitempty" name:"Tips"`
-
-	// Data type of the parameter (not in use)
+	// Value type
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether the TencentDB for MongoDB console has pulled parameter information successfully (not in use)
+	// Whether `CurrentValue` is the parameter value actually in use. Valid values: `1` (yes), `0` (no)
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -1915,6 +1932,56 @@ func (r *IsolateDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceSecurityGroupRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Target security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSecurityGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSecurityGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceSecurityGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2046,7 +2113,7 @@ type RenameInstanceRequest struct {
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// Custom name of the instance, which can contain up to 60 letters, digits, or symbols (_-)
 	NewName *string `json:"NewName,omitempty" name:"NewName"`
 }
 
@@ -2142,7 +2209,7 @@ func (r *RenewDBInstancesResponse) FromJsonString(s string) error {
 
 type ReplicaSetInfo struct {
 
-	// Shard name
+	// Replica set ID
 	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
 }
 
@@ -2155,7 +2222,7 @@ type ResetDBInstancePasswordRequest struct {
 	// Instance account name
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
-	// New password
+	// New password, which must contain at least eight characters
 	Password *string `json:"Password,omitempty" name:"Password"`
 }
 

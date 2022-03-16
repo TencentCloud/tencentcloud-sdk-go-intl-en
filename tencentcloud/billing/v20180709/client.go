@@ -419,3 +419,109 @@ func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, reques
     err = c.Send(request, response)
     return
 }
+
+func NewDescribeVoucherInfoRequest() (request *DescribeVoucherInfoRequest) {
+    request = &DescribeVoucherInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeVoucherInfo")
+    
+    
+    return
+}
+
+func NewDescribeVoucherInfoResponse() (response *DescribeVoucherInfoResponse) {
+    response = &DescribeVoucherInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeVoucherInfo
+// This API is used to query vouchers.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDAPPID = "FailedOperation.InvalidAppId"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeVoucherInfo(request *DescribeVoucherInfoRequest) (response *DescribeVoucherInfoResponse, err error) {
+    return c.DescribeVoucherInfoWithContext(context.Background(), request)
+}
+
+// DescribeVoucherInfo
+// This API is used to query vouchers.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDAPPID = "FailedOperation.InvalidAppId"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeVoucherInfoWithContext(ctx context.Context, request *DescribeVoucherInfoRequest) (response *DescribeVoucherInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeVoucherInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVoucherInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVoucherInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVoucherUsageDetailsRequest() (request *DescribeVoucherUsageDetailsRequest) {
+    request = &DescribeVoucherUsageDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeVoucherUsageDetails")
+    
+    
+    return
+}
+
+func NewDescribeVoucherUsageDetailsResponse() (response *DescribeVoucherUsageDetailsResponse) {
+    response = &DescribeVoucherUsageDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeVoucherUsageDetails
+// This API is used to query voucher usage details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDAPPID = "FailedOperation.InvalidAppId"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeVoucherUsageDetails(request *DescribeVoucherUsageDetailsRequest) (response *DescribeVoucherUsageDetailsResponse, err error) {
+    return c.DescribeVoucherUsageDetailsWithContext(context.Background(), request)
+}
+
+// DescribeVoucherUsageDetails
+// This API is used to query voucher usage details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDAPPID = "FailedOperation.InvalidAppId"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeVoucherUsageDetailsWithContext(ctx context.Context, request *DescribeVoucherUsageDetailsRequest) (response *DescribeVoucherUsageDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeVoucherUsageDetailsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVoucherUsageDetails require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVoucherUsageDetailsResponse()
+    err = c.Send(request, response)
+    return
+}

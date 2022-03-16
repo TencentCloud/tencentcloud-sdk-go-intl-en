@@ -20,6 +20,58 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type ActiveHourDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// List of instance IDs in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *ActiveHourDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActiveHourDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ActiveHourDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ActiveHourDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IDs of instances removed from isolation
+		SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+		// IDs of instances failed to be removed from isolation
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ActiveHourDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ActiveHourDCDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 
@@ -416,6 +468,146 @@ func (r *CreateAccountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateHourDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Shard memory in GB, which can be obtained through the `DescribeShardSpec` API.
+	//   
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard capacity in GB, which can be obtained through the `DescribeShardSpec` API.
+	//   
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// The number of nodes per shard, which can be obtained through the `DescribeShardSpec` API.
+	//   
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+
+	// The number of shards in the instance. Value range: 2-8. Upgrade your instance to have up to 64 shards if you require more.
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// The number of instances to be purchased
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID. If this parameter is left empty or not passed in, the instance will be created on the classic network.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID, which is required when `VpcId` is specified
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The number of CPU cores per shard, which can be obtained through the `DescribeShardSpec` API.
+	//   
+	ShardCpu *int64 `json:"ShardCpu,omitempty" name:"ShardCpu"`
+
+	// Database engine version. Valid values:
+	// 10.0.10: MariaDB 10.0.10;
+	// 10.1.9: MariaDB 10.1.9;
+	// 5.7.17: Percona 5.7.17.
+	// If this parameter is left empty, `10.1.9` will be used.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
+
+	// AZs to deploy shard nodes. You can specify up to two AZs.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Custom name of the instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Whether IPv6 is supported
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
+
+	// Array of tag key-value pairs
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// If you create a disaster recovery instance, you need to use this parameter to specify the region of the associated source instance so that the disaster recovery instance can sync data with the source instance over the Data Communication Network (DCN).
+	DcnRegion *string `json:"DcnRegion,omitempty" name:"DcnRegion"`
+
+	// If you create a disaster recovery instance, you need to use this parameter to specify the ID of the associated source instance so that the disaster recovery instance can sync data with the source instance over the Data Communication Network (DCN).
+	DcnInstanceId *string `json:"DcnInstanceId,omitempty" name:"DcnInstanceId"`
+
+	// List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
+	InitParams []*DBParamValue `json:"InitParams,omitempty" name:"InitParams"`
+
+	// ID of the instance to be rolled back
+	RollbackInstanceId *string `json:"RollbackInstanceId,omitempty" name:"RollbackInstanceId"`
+
+	// Rollback time
+	RollbackTime *string `json:"RollbackTime,omitempty" name:"RollbackTime"`
+
+	// Array of security group IDs (this parameter is compatible with the old parameter `SecurityGroupId`)
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *CreateHourDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateHourDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ShardMemory")
+	delete(f, "ShardStorage")
+	delete(f, "ShardNodeCount")
+	delete(f, "ShardCount")
+	delete(f, "Count")
+	delete(f, "ProjectId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "ShardCpu")
+	delete(f, "DbVersionId")
+	delete(f, "Zones")
+	delete(f, "SecurityGroupId")
+	delete(f, "InstanceName")
+	delete(f, "Ipv6Flag")
+	delete(f, "ResourceTags")
+	delete(f, "DcnRegion")
+	delete(f, "DcnInstanceId")
+	delete(f, "InitParams")
+	delete(f, "RollbackInstanceId")
+	delete(f, "RollbackTime")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateHourDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateHourDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
+		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+		// Task ID, which can be used to query the creation progress
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateHourDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateHourDCDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2297,6 +2489,58 @@ func (r *InitDCDBInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *InitDCDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type IsolateHourDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *IsolateHourDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateHourDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateHourDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type IsolateHourDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IDs of isolated instances
+		SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+		// IDs of instances failed to be isolated
+		FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *IsolateHourDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateHourDCDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

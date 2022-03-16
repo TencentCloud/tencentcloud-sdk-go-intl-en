@@ -50,6 +50,15 @@ type ActionSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
+type ApplicableProducts struct {
+
+	// Valid values: `all products` or names of the applicable products (string). Multiple names are separated by commas.
+	GoodsName *string `json:"GoodsName,omitempty" name:"GoodsName"`
+
+	// Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If `GoodsName` contains multiple product names and `PayMode` is `*`, it indicates that the voucher can be used in all billing modes for each of the products.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+}
+
 type BillDetail struct {
 
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
@@ -912,6 +921,195 @@ func (r *DescribeBillSummaryByTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeVoucherInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page number the records start from. The default is 1.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The voucher ID.
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// The voucher order ID.
+	CodeId *string `json:"CodeId,omitempty" name:"CodeId"`
+
+	// The product code.
+	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
+
+	// The campaign ID.
+	ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// The voucher name.
+	VoucherName *string `json:"VoucherName,omitempty" name:"VoucherName"`
+
+	// The start time of the promotional campaign.
+	TimeFrom *string `json:"TimeFrom,omitempty" name:"TimeFrom"`
+
+	// The end time of the promotional campaign.
+	TimeTo *string `json:"TimeTo,omitempty" name:"TimeTo"`
+
+	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+	SortField *string `json:"SortField,omitempty" name:"SortField"`
+
+	// Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
+
+	// The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+	PayScene *string `json:"PayScene,omitempty" name:"PayScene"`
+
+	// The operator. The default is the UIN of the current user.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
+func (r *DescribeVoucherInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoucherInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Status")
+	delete(f, "VoucherId")
+	delete(f, "CodeId")
+	delete(f, "ProductCode")
+	delete(f, "ActivityId")
+	delete(f, "VoucherName")
+	delete(f, "TimeFrom")
+	delete(f, "TimeTo")
+	delete(f, "SortField")
+	delete(f, "SortOrder")
+	delete(f, "PayMode")
+	delete(f, "PayScene")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoucherInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVoucherInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of vouchers.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The total voucher balance. The value of this parameter is the total balance (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+		TotalBalance *int64 `json:"TotalBalance,omitempty" name:"TotalBalance"`
+
+		// The voucher information.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		VoucherInfos []*VoucherInfos `json:"VoucherInfos,omitempty" name:"VoucherInfos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVoucherInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoucherInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVoucherUsageDetailsRequest struct {
+	*tchttp.BaseRequest
+
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page number the records start from. The default is 1.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The voucher ID.
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// The operator. The default is the UIN of the current.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
+func (r *DescribeVoucherUsageDetailsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoucherUsageDetailsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "VoucherId")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoucherUsageDetailsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVoucherUsageDetailsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The total number of vouchers.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The total amount used. The value of this parameter is the total amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+		TotalUsedAmount *int64 `json:"TotalUsedAmount,omitempty" name:"TotalUsedAmount"`
+
+		// The usage details.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		UsageRecords []*UsageRecords `json:"UsageRecords,omitempty" name:"UsageRecords"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeVoucherUsageDetailsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoucherUsageDetailsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ExcludedProducts struct {
+
+	// The names of non-applicable products.
+	GoodsName *string `json:"GoodsName,omitempty" name:"GoodsName"`
+
+	// `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+}
+
 type PayModeSummaryOverviewItem struct {
 
 	// Billing mode
@@ -1031,4 +1229,65 @@ type TagSummaryOverviewItem struct {
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
+type UsageDetails struct {
+
+	// The name of the product.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// 
+	SubProductName *string `json:"SubProductName,omitempty" name:"SubProductName"`
+}
+
+type UsageRecords struct {
+
+	// The amount used. The value of this parameter is the amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	UsedAmount *int64 `json:"UsedAmount,omitempty" name:"UsedAmount"`
+
+	// The time when the voucher was used.
+	UsedTime *string `json:"UsedTime,omitempty" name:"UsedTime"`
+
+	// The details of the product purchased.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UsageDetails []*UsageDetails `json:"UsageDetails,omitempty" name:"UsageDetails"`
+}
+
+type VoucherInfos struct {
+
+	// The owner of the voucher.
+	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+	// The status of the voucher: `unUsed`, `used`, `delivered`, `cancel`, `overdue`
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The value of the voucher. The value of this parameter is the voucher value (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	NominalValue *int64 `json:"NominalValue,omitempty" name:"NominalValue"`
+
+	// The balance left. The value of this parameter is the balance left (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	Balance *int64 `json:"Balance,omitempty" name:"Balance"`
+
+	// The voucher ID.
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+	PayScene *string `json:"PayScene,omitempty" name:"PayScene"`
+
+	// The start time of the validity period.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The end time of the validity period.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The products that are applicable.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ApplicableProducts *ApplicableProducts `json:"ApplicableProducts,omitempty" name:"ApplicableProducts"`
+
+	// The products that are not applicable.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ExcludedProducts []*ExcludedProducts `json:"ExcludedProducts,omitempty" name:"ExcludedProducts"`
 }
