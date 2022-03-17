@@ -62,6 +62,9 @@ const (
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 
+	// 
+	OPERATIONDENIED_RESOURCETASKPAUSED = "OperationDenied.ResourceTaskPaused"
+
 	// The number of requests exceeds the frequency limit.
 	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 

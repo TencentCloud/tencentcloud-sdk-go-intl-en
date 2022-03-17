@@ -95,6 +95,25 @@ type CdbInfo struct {
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 }
 
+type ClusterExternalServiceInfo struct {
+
+	// Dependency. `0`: Other clusters depend on the current cluster. `1`: The current cluster depends on other clusters.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DependType *int64 `json:"DependType,omitempty" name:"DependType"`
+
+	// Shared component
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Service *string `json:"Service,omitempty" name:"Service"`
+
+	// Sharing cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Sharing cluster status
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterStatus *int64 `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
+}
+
 type ClusterInstancesInfo struct {
 
 	// ID
@@ -267,6 +286,10 @@ type ClusterInstancesInfo struct {
 	// Subnet name
 	// Note: This field may return `null`, indicating that no valid value was found.
 	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// Cluster dependency
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ClusterExternalServiceInfo []*ClusterExternalServiceInfo `json:"ClusterExternalServiceInfo,omitempty" name:"ClusterExternalServiceInfo"`
 }
 
 type CreateInstanceRequest struct {
@@ -399,6 +422,9 @@ type CreateInstanceRequest struct {
 	// Hadoop-Presto
 	// Hadoop-Hbase
 	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+
+	// Shared component information
+	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -441,6 +467,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MetaDBInfo")
 	delete(f, "ApplicationRole")
 	delete(f, "SceneName")
+	delete(f, "ExternalService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -758,6 +785,10 @@ type EmrProductConfigOutter struct {
 	// Security groups
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
+
+	// SSH key ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PublicKeyId *string `json:"PublicKeyId,omitempty" name:"PublicKeyId"`
 }
 
 type ExternalService struct {

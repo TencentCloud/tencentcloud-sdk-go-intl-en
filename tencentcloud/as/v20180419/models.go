@@ -1171,6 +1171,10 @@ type DataDisk struct {
 	// Data disk snapshot ID, such as `snap-l8psqwnt`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Specifies whether the data disk is terminated along with the termination of the associated CVM instance.  Values: <br><li>`TRUE` (only available for pay-as-you-go cloud disks that are billed by hour) and `FALSE`.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
 }
 
 type DeleteAutoScalingGroupRequest struct {
@@ -1753,7 +1757,7 @@ func (r *DescribeAutoScalingGroupsResponse) FromJsonString(s string) error {
 type DescribeAutoScalingInstancesRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the CVM instance to be queried. This parameter does not support specifying both InstanceIds and Filters at the same time.
+	// IDs of the CVM instances to query. Up to 100 IDs can be queried at one time. `InstanceIds` and `Filters` can not be both specified.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Filter.
@@ -1765,7 +1769,7 @@ type DescribeAutoScalingInstancesRequest struct {
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. The default value is 20. The maximum is 2000. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -3726,6 +3730,9 @@ type ScheduledAction struct {
 
 	// Creation time of the scheduled task. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Specifies how the scheduled action is executed. <br><li>`CRONTAB`: execute repeatedly <br><li>`ONCE`: execute only once
+	ScheduledType *string `json:"ScheduledType,omitempty" name:"ScheduledType"`
 }
 
 type ServiceSettings struct {

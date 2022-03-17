@@ -309,6 +309,264 @@ func (c *Client) CreateBoundIPWithContext(ctx context.Context, request *CreateBo
     return
 }
 
+func NewCreateCCPrecisionPolicyRequest() (request *CreateCCPrecisionPolicyRequest) {
+    request = &CreateCCPrecisionPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "CreateCCPrecisionPolicy")
+    
+    
+    return
+}
+
+func NewCreateCCPrecisionPolicyResponse() (response *CreateCCPrecisionPolicyResponse) {
+    response = &CreateCCPrecisionPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCCPrecisionPolicy
+// This API is used to create a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCCPrecisionPolicy(request *CreateCCPrecisionPolicyRequest) (response *CreateCCPrecisionPolicyResponse, err error) {
+    return c.CreateCCPrecisionPolicyWithContext(context.Background(), request)
+}
+
+// CreateCCPrecisionPolicy
+// This API is used to create a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCCPrecisionPolicyWithContext(ctx context.Context, request *CreateCCPrecisionPolicyRequest) (response *CreateCCPrecisionPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateCCPrecisionPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCCPrecisionPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCCPrecisionPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCCReqLimitPolicyRequest() (request *CreateCCReqLimitPolicyRequest) {
+    request = &CreateCCReqLimitPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "CreateCCReqLimitPolicy")
+    
+    
+    return
+}
+
+func NewCreateCCReqLimitPolicyResponse() (response *CreateCCReqLimitPolicyResponse) {
+    response = &CreateCCReqLimitPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCCReqLimitPolicy
+// This API is used to create a CC frequency limit policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCCReqLimitPolicy(request *CreateCCReqLimitPolicyRequest) (response *CreateCCReqLimitPolicyResponse, err error) {
+    return c.CreateCCReqLimitPolicyWithContext(context.Background(), request)
+}
+
+// CreateCCReqLimitPolicy
+// This API is used to create a CC frequency limit policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCCReqLimitPolicyWithContext(ctx context.Context, request *CreateCCReqLimitPolicyRequest) (response *CreateCCReqLimitPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateCCReqLimitPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCCReqLimitPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCCReqLimitPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCcBlackWhiteIpListRequest() (request *CreateCcBlackWhiteIpListRequest) {
+    request = &CreateCcBlackWhiteIpListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "CreateCcBlackWhiteIpList")
+    
+    
+    return
+}
+
+func NewCreateCcBlackWhiteIpListResponse() (response *CreateCcBlackWhiteIpListResponse) {
+    response = &CreateCcBlackWhiteIpListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCcBlackWhiteIpList
+// This API is used to create a layer 4 access control list to prevent CC attacks.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCcBlackWhiteIpList(request *CreateCcBlackWhiteIpListRequest) (response *CreateCcBlackWhiteIpListResponse, err error) {
+    return c.CreateCcBlackWhiteIpListWithContext(context.Background(), request)
+}
+
+// CreateCcBlackWhiteIpList
+// This API is used to create a layer 4 access control list to prevent CC attacks.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCcBlackWhiteIpListWithContext(ctx context.Context, request *CreateCcBlackWhiteIpListRequest) (response *CreateCcBlackWhiteIpListResponse, err error) {
+    if request == nil {
+        request = NewCreateCcBlackWhiteIpListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCcBlackWhiteIpList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCcBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCcGeoIPBlockConfigRequest() (request *CreateCcGeoIPBlockConfigRequest) {
+    request = &CreateCcGeoIPBlockConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "CreateCcGeoIPBlockConfig")
+    
+    
+    return
+}
+
+func NewCreateCcGeoIPBlockConfigResponse() (response *CreateCcGeoIPBlockConfigResponse) {
+    response = &CreateCcGeoIPBlockConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCcGeoIPBlockConfig
+// This API is used to create a regional blocking configuration.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCcGeoIPBlockConfig(request *CreateCcGeoIPBlockConfigRequest) (response *CreateCcGeoIPBlockConfigResponse, err error) {
+    return c.CreateCcGeoIPBlockConfigWithContext(context.Background(), request)
+}
+
+// CreateCcGeoIPBlockConfig
+// This API is used to create a regional blocking configuration.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCcGeoIPBlockConfigWithContext(ctx context.Context, request *CreateCcGeoIPBlockConfigRequest) (response *CreateCcGeoIPBlockConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateCcGeoIPBlockConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCcGeoIPBlockConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCcGeoIPBlockConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDDoSAIRequest() (request *CreateDDoSAIRequest) {
     request = &CreateDDoSAIRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -632,6 +890,7 @@ func NewCreatePacketFilterConfigResponse() (response *CreatePacketFilterConfigRe
 // This API is used to add Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
@@ -642,6 +901,7 @@ func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigReque
 // This API is used to add Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfigWithContext(ctx context.Context, request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
@@ -796,6 +1056,7 @@ func NewCreateWaterPrintConfigResponse() (response *CreateWaterPrintConfigRespon
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintConfig(request *CreateWaterPrintConfigRequest) (response *CreateWaterPrintConfigResponse, err error) {
@@ -807,6 +1068,7 @@ func (c *Client) CreateWaterPrintConfig(request *CreateWaterPrintConfigRequest) 
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateWaterPrintConfigWithContext(ctx context.Context, request *CreateWaterPrintConfigRequest) (response *CreateWaterPrintConfigResponse, err error) {
@@ -923,6 +1185,343 @@ func (c *Client) DeleteBlackWhiteIpListWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDeleteBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCCLevelPolicyRequest() (request *DeleteCCLevelPolicyRequest) {
+    request = &DeleteCCLevelPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCLevelPolicy")
+    
+    
+    return
+}
+
+func NewDeleteCCLevelPolicyResponse() (response *DeleteCCLevelPolicyResponse) {
+    response = &DeleteCCLevelPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCCLevelPolicy
+// This API is used to delete a level-defining policy of CC attacks. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCLevelPolicy(request *DeleteCCLevelPolicyRequest) (response *DeleteCCLevelPolicyResponse, err error) {
+    return c.DeleteCCLevelPolicyWithContext(context.Background(), request)
+}
+
+// DeleteCCLevelPolicy
+// This API is used to delete a level-defining policy of CC attacks. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCLevelPolicyWithContext(ctx context.Context, request *DeleteCCLevelPolicyRequest) (response *DeleteCCLevelPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteCCLevelPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCCLevelPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCCLevelPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCCPrecisionPolicyRequest() (request *DeleteCCPrecisionPolicyRequest) {
+    request = &DeleteCCPrecisionPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCPrecisionPolicy")
+    
+    
+    return
+}
+
+func NewDeleteCCPrecisionPolicyResponse() (response *DeleteCCPrecisionPolicyResponse) {
+    response = &DeleteCCPrecisionPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCCPrecisionPolicy
+// This API is used to delete a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCPrecisionPolicy(request *DeleteCCPrecisionPolicyRequest) (response *DeleteCCPrecisionPolicyResponse, err error) {
+    return c.DeleteCCPrecisionPolicyWithContext(context.Background(), request)
+}
+
+// DeleteCCPrecisionPolicy
+// This API is used to delete a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCPrecisionPolicyWithContext(ctx context.Context, request *DeleteCCPrecisionPolicyRequest) (response *DeleteCCPrecisionPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteCCPrecisionPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCCPrecisionPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCCPrecisionPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCCThresholdPolicyRequest() (request *DeleteCCThresholdPolicyRequest) {
+    request = &DeleteCCThresholdPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCThresholdPolicy")
+    
+    
+    return
+}
+
+func NewDeleteCCThresholdPolicyResponse() (response *DeleteCCThresholdPolicyResponse) {
+    response = &DeleteCCThresholdPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCCThresholdPolicy
+// This API is used to delete a CC cleansing threshold policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCThresholdPolicy(request *DeleteCCThresholdPolicyRequest) (response *DeleteCCThresholdPolicyResponse, err error) {
+    return c.DeleteCCThresholdPolicyWithContext(context.Background(), request)
+}
+
+// DeleteCCThresholdPolicy
+// This API is used to delete a CC cleansing threshold policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCCThresholdPolicyWithContext(ctx context.Context, request *DeleteCCThresholdPolicyRequest) (response *DeleteCCThresholdPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteCCThresholdPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCCThresholdPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCCThresholdPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCcBlackWhiteIpListRequest() (request *DeleteCcBlackWhiteIpListRequest) {
+    request = &DeleteCcBlackWhiteIpListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCcBlackWhiteIpList")
+    
+    
+    return
+}
+
+func NewDeleteCcBlackWhiteIpListResponse() (response *DeleteCcBlackWhiteIpListResponse) {
+    response = &DeleteCcBlackWhiteIpListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCcBlackWhiteIpList
+// This API is used to delete a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCcBlackWhiteIpList(request *DeleteCcBlackWhiteIpListRequest) (response *DeleteCcBlackWhiteIpListResponse, err error) {
+    return c.DeleteCcBlackWhiteIpListWithContext(context.Background(), request)
+}
+
+// DeleteCcBlackWhiteIpList
+// This API is used to delete a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCcBlackWhiteIpListWithContext(ctx context.Context, request *DeleteCcBlackWhiteIpListRequest) (response *DeleteCcBlackWhiteIpListResponse, err error) {
+    if request == nil {
+        request = NewDeleteCcBlackWhiteIpListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCcBlackWhiteIpList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCcBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCcGeoIPBlockConfigRequest() (request *DeleteCcGeoIPBlockConfigRequest) {
+    request = &DeleteCcGeoIPBlockConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCcGeoIPBlockConfig")
+    
+    
+    return
+}
+
+func NewDeleteCcGeoIPBlockConfigResponse() (response *DeleteCcGeoIPBlockConfigResponse) {
+    response = &DeleteCcGeoIPBlockConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCcGeoIPBlockConfig
+// This API is used to delete a regional blocking configuration.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCcGeoIPBlockConfig(request *DeleteCcGeoIPBlockConfigRequest) (response *DeleteCcGeoIPBlockConfigResponse, err error) {
+    return c.DeleteCcGeoIPBlockConfigWithContext(context.Background(), request)
+}
+
+// DeleteCcGeoIPBlockConfig
+// This API is used to delete a regional blocking configuration.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCcGeoIPBlockConfigWithContext(ctx context.Context, request *DeleteCcGeoIPBlockConfigRequest) (response *DeleteCcGeoIPBlockConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteCcGeoIPBlockConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCcGeoIPBlockConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCcGeoIPBlockConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -1138,6 +1737,7 @@ func NewDeleteWaterPrintKeyResponse() (response *DeleteWaterPrintKeyResponse) {
 // This API is used to delete Anti-DDoS watermark keys.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     return c.DeleteWaterPrintKeyWithContext(context.Background(), request)
@@ -1147,6 +1747,7 @@ func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (respo
 // This API is used to delete Anti-DDoS watermark keys.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKeyWithContext(ctx context.Context, request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     if request == nil {
@@ -1185,6 +1786,7 @@ func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatus
 // This API is used to querying the status of Anti-DDoS IP.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     return c.DescribeBasicDeviceStatusWithContext(context.Background(), request)
@@ -1194,6 +1796,7 @@ func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusReq
 // This API is used to querying the status of Anti-DDoS IP.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatusWithContext(ctx context.Context, request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     if request == nil {
@@ -1355,6 +1958,322 @@ func (c *Client) DescribeBlackWhiteIpListWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeCCLevelListRequest() (request *DescribeCCLevelListRequest) {
+    request = &DescribeCCLevelListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCLevelList")
+    
+    
+    return
+}
+
+func NewDescribeCCLevelListResponse() (response *DescribeCCLevelListResponse) {
+    response = &DescribeCCLevelListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCCLevelList
+// This API is used to query the list of CC protection levels.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCLevelList(request *DescribeCCLevelListRequest) (response *DescribeCCLevelListResponse, err error) {
+    return c.DescribeCCLevelListWithContext(context.Background(), request)
+}
+
+// DescribeCCLevelList
+// This API is used to query the list of CC protection levels.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCLevelListWithContext(ctx context.Context, request *DescribeCCLevelListRequest) (response *DescribeCCLevelListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCCLevelListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCCLevelList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCCLevelListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCCLevelPolicyRequest() (request *DescribeCCLevelPolicyRequest) {
+    request = &DescribeCCLevelPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCLevelPolicy")
+    
+    
+    return
+}
+
+func NewDescribeCCLevelPolicyResponse() (response *DescribeCCLevelPolicyResponse) {
+    response = &DescribeCCLevelPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCCLevelPolicy
+// This API is used the query a level-defining policy of CC attacks
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCLevelPolicy(request *DescribeCCLevelPolicyRequest) (response *DescribeCCLevelPolicyResponse, err error) {
+    return c.DescribeCCLevelPolicyWithContext(context.Background(), request)
+}
+
+// DescribeCCLevelPolicy
+// This API is used the query a level-defining policy of CC attacks
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCLevelPolicyWithContext(ctx context.Context, request *DescribeCCLevelPolicyRequest) (response *DescribeCCLevelPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeCCLevelPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCCLevelPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCCLevelPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCCPrecisionPlyListRequest() (request *DescribeCCPrecisionPlyListRequest) {
+    request = &DescribeCCPrecisionPlyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCPrecisionPlyList")
+    
+    
+    return
+}
+
+func NewDescribeCCPrecisionPlyListResponse() (response *DescribeCCPrecisionPlyListResponse) {
+    response = &DescribeCCPrecisionPlyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCCPrecisionPlyList
+// This API is used to obtain a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCPrecisionPlyList(request *DescribeCCPrecisionPlyListRequest) (response *DescribeCCPrecisionPlyListResponse, err error) {
+    return c.DescribeCCPrecisionPlyListWithContext(context.Background(), request)
+}
+
+// DescribeCCPrecisionPlyList
+// This API is used to obtain a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCPrecisionPlyListWithContext(ctx context.Context, request *DescribeCCPrecisionPlyListRequest) (response *DescribeCCPrecisionPlyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCCPrecisionPlyListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCCPrecisionPlyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCCPrecisionPlyListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCCThresholdListRequest() (request *DescribeCCThresholdListRequest) {
+    request = &DescribeCCThresholdListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCThresholdList")
+    
+    
+    return
+}
+
+func NewDescribeCCThresholdListResponse() (response *DescribeCCThresholdListResponse) {
+    response = &DescribeCCThresholdListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCCThresholdList
+// This API is used to query the list of CC cleansing thresholds.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCThresholdList(request *DescribeCCThresholdListRequest) (response *DescribeCCThresholdListResponse, err error) {
+    return c.DescribeCCThresholdListWithContext(context.Background(), request)
+}
+
+// DescribeCCThresholdList
+// This API is used to query the list of CC cleansing thresholds.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCCThresholdListWithContext(ctx context.Context, request *DescribeCCThresholdListRequest) (response *DescribeCCThresholdListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCCThresholdListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCCThresholdList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCCThresholdListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
     request = &DescribeCCTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1434,6 +2353,106 @@ func (c *Client) DescribeCCTrendWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeCcBlackWhiteIpListRequest() (request *DescribeCcBlackWhiteIpListRequest) {
+    request = &DescribeCcBlackWhiteIpListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcBlackWhiteIpList")
+    
+    
+    return
+}
+
+func NewDescribeCcBlackWhiteIpListResponse() (response *DescribeCcBlackWhiteIpListResponse) {
+    response = &DescribeCcBlackWhiteIpListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCcBlackWhiteIpList
+// This API is used to obtain a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCcBlackWhiteIpList(request *DescribeCcBlackWhiteIpListRequest) (response *DescribeCcBlackWhiteIpListResponse, err error) {
+    return c.DescribeCcBlackWhiteIpListWithContext(context.Background(), request)
+}
+
+// DescribeCcBlackWhiteIpList
+// This API is used to obtain a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCcBlackWhiteIpListWithContext(ctx context.Context, request *DescribeCcBlackWhiteIpListRequest) (response *DescribeCcBlackWhiteIpListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCcBlackWhiteIpListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCcBlackWhiteIpList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCcBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCcGeoIPBlockConfigListRequest() (request *DescribeCcGeoIPBlockConfigListRequest) {
+    request = &DescribeCcGeoIPBlockConfigListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcGeoIPBlockConfigList")
+    
+    
+    return
+}
+
+func NewDescribeCcGeoIPBlockConfigListResponse() (response *DescribeCcGeoIPBlockConfigListResponse) {
+    response = &DescribeCcGeoIPBlockConfigListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCcGeoIPBlockConfigList
+// This API is used to obtain a list of regional blocking configurations.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCcGeoIPBlockConfigList(request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
+    return c.DescribeCcGeoIPBlockConfigListWithContext(context.Background(), request)
+}
+
+// DescribeCcGeoIPBlockConfigList
+// This API is used to obtain a list of regional blocking configurations.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCcGeoIPBlockConfigListWithContext(ctx context.Context, request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCcGeoIPBlockConfigListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCcGeoIPBlockConfigList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCcGeoIPBlockConfigListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
     request = &DescribeDDoSTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1455,22 +2474,7 @@ func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
 // This API is used to get DDoS attack traffic bandwidth and attack packet rate.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     return c.DescribeDDoSTrendWithContext(context.Background(), request)
@@ -1480,22 +2484,7 @@ func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response 
 // This API is used to get DDoS attack traffic bandwidth and attack packet rate.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrendWithContext(ctx context.Context, request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     if request == nil {
@@ -1534,22 +2523,7 @@ func NewDescribeDefaultAlarmThresholdResponse() (response *DescribeDefaultAlarmT
 // This API is used to get the default alarm threshold of an IP.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     return c.DescribeDefaultAlarmThresholdWithContext(context.Background(), request)
@@ -1559,22 +2533,7 @@ func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThre
 // This API is used to get the default alarm threshold of an IP.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThresholdWithContext(ctx context.Context, request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     if request == nil {
@@ -2527,6 +3486,136 @@ func (c *Client) DisassociateDDoSEipAddressWithContext(ctx context.Context, requ
     return
 }
 
+func NewModifyCCPrecisionPolicyRequest() (request *ModifyCCPrecisionPolicyRequest) {
+    request = &ModifyCCPrecisionPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "ModifyCCPrecisionPolicy")
+    
+    
+    return
+}
+
+func NewModifyCCPrecisionPolicyResponse() (response *ModifyCCPrecisionPolicyResponse) {
+    response = &ModifyCCPrecisionPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCCPrecisionPolicy
+// This API is used to modify a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCCPrecisionPolicy(request *ModifyCCPrecisionPolicyRequest) (response *ModifyCCPrecisionPolicyResponse, err error) {
+    return c.ModifyCCPrecisionPolicyWithContext(context.Background(), request)
+}
+
+// ModifyCCPrecisionPolicy
+// This API is used to modify a CC precise protection policy.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCCPrecisionPolicyWithContext(ctx context.Context, request *ModifyCCPrecisionPolicyRequest) (response *ModifyCCPrecisionPolicyResponse, err error) {
+    if request == nil {
+        request = NewModifyCCPrecisionPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCCPrecisionPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCCPrecisionPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCcBlackWhiteIpListRequest() (request *ModifyCcBlackWhiteIpListRequest) {
+    request = &ModifyCcBlackWhiteIpListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("antiddos", APIVersion, "ModifyCcBlackWhiteIpList")
+    
+    
+    return
+}
+
+func NewModifyCcBlackWhiteIpListResponse() (response *ModifyCcBlackWhiteIpListResponse) {
+    response = &ModifyCcBlackWhiteIpListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCcBlackWhiteIpList
+// This API is used to modify a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCcBlackWhiteIpList(request *ModifyCcBlackWhiteIpListRequest) (response *ModifyCcBlackWhiteIpListResponse, err error) {
+    return c.ModifyCcBlackWhiteIpListWithContext(context.Background(), request)
+}
+
+// ModifyCcBlackWhiteIpList
+// This API is used to modify a layer-4 access control list.
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCcBlackWhiteIpListWithContext(ctx context.Context, request *ModifyCcBlackWhiteIpListRequest) (response *ModifyCcBlackWhiteIpListResponse, err error) {
+    if request == nil {
+        request = NewModifyCcBlackWhiteIpListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCcBlackWhiteIpList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCcBlackWhiteIpListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDDoSGeoIPBlockConfigRequest() (request *ModifyDDoSGeoIPBlockConfigRequest) {
     request = &ModifyDDoSGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2788,6 +3877,7 @@ func NewSwitchWaterPrintConfigResponse() (response *SwitchWaterPrintConfigRespon
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SwitchWaterPrintConfig(request *SwitchWaterPrintConfigRequest) (response *SwitchWaterPrintConfigResponse, err error) {
     return c.SwitchWaterPrintConfigWithContext(context.Background(), request)
@@ -2798,6 +3888,7 @@ func (c *Client) SwitchWaterPrintConfig(request *SwitchWaterPrintConfigRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SwitchWaterPrintConfigWithContext(ctx context.Context, request *SwitchWaterPrintConfigRequest) (response *SwitchWaterPrintConfigResponse, err error) {
     if request == nil {

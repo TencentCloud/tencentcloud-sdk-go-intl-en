@@ -279,6 +279,63 @@ func (c *Client) CreateAclWithContext(ctx context.Context, request *CreateAclReq
     return
 }
 
+func NewCreateConsumerRequest() (request *CreateConsumerRequest) {
+    request = &CreateConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ckafka", APIVersion, "CreateConsumer")
+    
+    
+    return
+}
+
+func NewCreateConsumerResponse() (response *CreateConsumerResponse) {
+    response = &CreateConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateConsumer
+// This API is used to create a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateConsumer(request *CreateConsumerRequest) (response *CreateConsumerResponse, err error) {
+    return c.CreateConsumerWithContext(context.Background(), request)
+}
+
+// CreateConsumer
+// This API is used to create a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateConsumerRequest) (response *CreateConsumerResponse, err error) {
+    if request == nil {
+        request = NewCreateConsumerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConsumer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePartitionRequest() (request *CreatePartitionRequest) {
     request = &CreatePartitionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -371,6 +428,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 // This API is used to create a CKafka topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -392,6 +450,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 // This API is used to create a CKafka topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -710,6 +769,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 // This API is used to delete a CKafka topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -733,6 +793,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 // This API is used to delete a CKafka topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1069,6 +1130,7 @@ func NewDescribeCkafkaZoneResponse() (response *DescribeCkafkaZoneResponse) {
 // This API is used to view the AZ list of Ckafka.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1090,6 +1152,7 @@ func (c *Client) DescribeCkafkaZone(request *DescribeCkafkaZoneRequest) (respons
 // This API is used to view the AZ list of Ckafka.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1140,6 +1203,7 @@ func NewDescribeConsumerGroupResponse() (response *DescribeConsumerGroupResponse
 // This API is used to query consumer group information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1161,6 +1225,7 @@ func (c *Client) DescribeConsumerGroup(request *DescribeConsumerGroupRequest) (r
 // This API is used to query consumer group information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1211,6 +1276,7 @@ func NewDescribeGroupResponse() (response *DescribeGroupResponse) {
 // This API is used to enumerate consumer groups (simplified).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1232,6 +1298,7 @@ func (c *Client) DescribeGroup(request *DescribeGroupRequest) (response *Describ
 // This API is used to enumerate consumer groups (simplified).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1282,6 +1349,7 @@ func NewDescribeGroupInfoResponse() (response *DescribeGroupInfoResponse) {
 // This API is used to get consumer group information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1303,6 +1371,7 @@ func (c *Client) DescribeGroupInfo(request *DescribeGroupInfoRequest) (response 
 // This API is used to get consumer group information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1353,6 +1422,7 @@ func NewDescribeGroupOffsetsResponse() (response *DescribeGroupOffsetsResponse) 
 // This API is used to get the consumer group offset.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1374,6 +1444,7 @@ func (c *Client) DescribeGroupOffsets(request *DescribeGroupOffsetsRequest) (res
 // This API is used to get the consumer group offset.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1424,6 +1495,7 @@ func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttribut
 // This API is used to get instance attributes. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1445,6 +1517,7 @@ func (c *Client) DescribeInstanceAttributes(request *DescribeInstanceAttributesR
 // This API is used to get instance attributes. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1495,6 +1568,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 // This API is used to get the list of CKafka instances under a user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1512,6 +1586,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 // This API is used to get the list of CKafka instances under a user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1558,6 +1633,7 @@ func NewDescribeInstancesDetailResponse() (response *DescribeInstancesDetailResp
 // This API is used to get instance list details under a user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1579,6 +1655,7 @@ func (c *Client) DescribeInstancesDetail(request *DescribeInstancesDetailRequest
 // This API is used to get instance list details under a user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1629,6 +1706,7 @@ func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
 // This API is used to enumerate regions, and can be called only in Guangzhou.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1650,6 +1728,7 @@ func (c *Client) DescribeRegion(request *DescribeRegionRequest) (response *Descr
 // This API is used to enumerate regions, and can be called only in Guangzhou.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1700,6 +1779,7 @@ func NewDescribeRouteResponse() (response *DescribeRouteResponse) {
 // This API is used to view route information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1721,6 +1801,7 @@ func (c *Client) DescribeRoute(request *DescribeRouteRequest) (response *Describ
 // This API is used to view route information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1773,6 +1854,7 @@ func NewDescribeTopicResponse() (response *DescribeTopicResponse) {
 // This API is used to get the list of topics in a CKafka instance of a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -1797,6 +1879,7 @@ func (c *Client) DescribeTopic(request *DescribeTopicRequest) (response *Describ
 // This API is used to get the list of topics in a CKafka instance of a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2071,6 +2154,7 @@ func NewDescribeTopicSyncReplicaResponse() (response *DescribeTopicSyncReplicaRe
 // This API is used to get the details of a synced topic replica.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2084,6 +2168,7 @@ func (c *Client) DescribeTopicSyncReplica(request *DescribeTopicSyncReplicaReque
 // This API is used to get the details of a synced topic replica.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2244,6 +2329,7 @@ func NewModifyGroupOffsetsResponse() (response *ModifyGroupOffsetsResponse) {
 // This API is used to set the consumer group (Groups) offset.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2265,6 +2351,7 @@ func (c *Client) ModifyGroupOffsets(request *ModifyGroupOffsetsRequest) (respons
 // This API is used to set the consumer group (Groups) offset.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2457,6 +2544,7 @@ func NewModifyTopicAttributesResponse() (response *ModifyTopicAttributesResponse
 // This API is used to modify topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2478,6 +2566,7 @@ func (c *Client) ModifyTopicAttributes(request *ModifyTopicAttributesRequest) (r
 // This API is used to modify topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2528,10 +2617,13 @@ func NewSendMessageResponse() (response *SendMessageResponse) {
 // This API is used to send messages through the HTTP access layer.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_RESOURCETASKPAUSED = "OperationDenied.ResourceTaskPaused"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SendMessage(request *SendMessageRequest) (response *SendMessageResponse, err error) {
@@ -2542,10 +2634,13 @@ func (c *Client) SendMessage(request *SendMessageRequest) (response *SendMessage
 // This API is used to send messages through the HTTP access layer.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_RESOURCETASKPAUSED = "OperationDenied.ResourceTaskPaused"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SendMessageWithContext(ctx context.Context, request *SendMessageRequest) (response *SendMessageResponse, err error) {

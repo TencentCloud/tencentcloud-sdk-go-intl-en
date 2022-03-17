@@ -603,6 +603,67 @@ func (r *CreateAclResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Topic name. You must specify the name of an existing topic for either `TopicName` or `TopicNameList`.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Topic name array.
+	TopicNameList []*string `json:"TopicNameList,omitempty" name:"TopicNameList"`
+}
+
+func (r *CreateConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GroupName")
+	delete(f, "TopicName")
+	delete(f, "TopicNameList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Description of the created consumer group.
+		Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreatePartitionRequest struct {
 	*tchttp.BaseRequest
 
@@ -2680,7 +2741,7 @@ type InstanceDetail struct {
 	// Whether to renew the instance automatically, which is an int-type enumerated value. 1: yes, 2: no
 	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// Instance status, which is an int-type value. 0: healthy, 1: alarmed, 2: exceptional
+	// Instance status. An int-type value will be returned. `0`: Healthy, `1`: Alarmed, `2`: Exceptional
 	Healthy *int64 `json:"Healthy,omitempty" name:"Healthy"`
 
 	// Instance status information
