@@ -243,6 +243,63 @@ func (r *BindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CopySnapshotCrossRegionsRequest struct {
+	*tchttp.BaseRequest
+
+	// Destination regions of the replication task. You can query the value of regions by calling [DescribeRegions](https://intl.cloud.tencent.com/document/product/213/9456?from_cn_redirect=1) API. Note that you can only specify regions that support snapshots.
+	DestinationRegions []*string `json:"DestinationRegions,omitempty" name:"DestinationRegions"`
+
+	// Snapshot ID, which can be queried via the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Name of the snapshot replica. If it’s not specified, it defaults to “Copied [source snapshot ID from [region name]”
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+}
+
+func (r *CopySnapshotCrossRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CopySnapshotCrossRegionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DestinationRegions")
+	delete(f, "SnapshotId")
+	delete(f, "SnapshotName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CopySnapshotCrossRegionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CopySnapshotCrossRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Result of the cross-region replication task. The ID of the new snapshot replica is returned if the request succeeds. Otherwise `Error` is returned.
+		SnapshotCopyResultSet []*SnapshotCopyResult `json:"SnapshotCopyResultSet,omitempty" name:"SnapshotCopyResultSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CopySnapshotCrossRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CopySnapshotCrossRegionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -2208,6 +2265,21 @@ type Snapshot struct {
 
 	// The time when the snapshot sharing starts
 	TimeStartShare *string `json:"TimeStartShare,omitempty" name:"TimeStartShare"`
+}
+
+type SnapshotCopyResult struct {
+
+	// ID of the snapshot replica
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Error message. It’s null if the request succeeds.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Error code. It’s `Success` if the request succeeds.
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Destination region of the replication task
+	DestinationRegion *string `json:"DestinationRegion,omitempty" name:"DestinationRegion"`
 }
 
 type SnapshotOperationLog struct {

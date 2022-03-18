@@ -312,6 +312,79 @@ func (c *Client) BindAutoSnapshotPolicyWithContext(ctx context.Context, request 
     return
 }
 
+func NewCopySnapshotCrossRegionsRequest() (request *CopySnapshotCrossRegionsRequest) {
+    request = &CopySnapshotCrossRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cbs", APIVersion, "CopySnapshotCrossRegions")
+    
+    
+    return
+}
+
+func NewCopySnapshotCrossRegionsResponse() (response *CopySnapshotCrossRegionsResponse) {
+    response = &CopySnapshotCrossRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CopySnapshotCrossRegions
+// This API is used to replicate a snapshot to another region.
+//
+// 
+//
+// * This is an async API. A new snapshot ID is issued when the cross-region replication task is generated. It does not mean that the snapshot has been replicated successfully. You can all the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API in the destination region to check for this snapshot. If the snapshot status is `NORMAL`, the snapshot is replicated successfully.
+//
+// * The snapshot cross-region replication service will be commercialized in the Q3 of 2022. We will notify users about the commercialization in advance. Please check your messages in the Message Center.
+//
+// error code that may be returned:
+//  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDSNAPSHOT_NOTSUPPORTED = "InvalidSnapshot.NotSupported"
+//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  RESOURCEBUSY = "ResourceBusy"
+//  RESOURCEINUSE_COPYSNAPSHOTCONFLICT = "ResourceInUse.CopySnapshotConflict"
+//  UNSUPPORTEDOPERATION_SNAPSHOTNOTSUPPORTCOPY = "UnsupportedOperation.SnapshotNotSupportCopy"
+func (c *Client) CopySnapshotCrossRegions(request *CopySnapshotCrossRegionsRequest) (response *CopySnapshotCrossRegionsResponse, err error) {
+    return c.CopySnapshotCrossRegionsWithContext(context.Background(), request)
+}
+
+// CopySnapshotCrossRegions
+// This API is used to replicate a snapshot to another region.
+//
+// 
+//
+// * This is an async API. A new snapshot ID is issued when the cross-region replication task is generated. It does not mean that the snapshot has been replicated successfully. You can all the [DescribeSnapshots](https://intl.cloud.tencent.com/document/product/362/15647?from_cn_redirect=1) API in the destination region to check for this snapshot. If the snapshot status is `NORMAL`, the snapshot is replicated successfully.
+//
+// * The snapshot cross-region replication service will be commercialized in the Q3 of 2022. We will notify users about the commercialization in advance. Please check your messages in the Message Center.
+//
+// error code that may be returned:
+//  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDSNAPSHOT_NOTSUPPORTED = "InvalidSnapshot.NotSupported"
+//  INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+//  RESOURCEBUSY = "ResourceBusy"
+//  RESOURCEINUSE_COPYSNAPSHOTCONFLICT = "ResourceInUse.CopySnapshotConflict"
+//  UNSUPPORTEDOPERATION_SNAPSHOTNOTSUPPORTCOPY = "UnsupportedOperation.SnapshotNotSupportCopy"
+func (c *Client) CopySnapshotCrossRegionsWithContext(ctx context.Context, request *CopySnapshotCrossRegionsRequest) (response *CopySnapshotCrossRegionsResponse, err error) {
+    if request == nil {
+        request = NewCopySnapshotCrossRegionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CopySnapshotCrossRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCopySnapshotCrossRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAutoSnapshotPolicyRequest() (request *CreateAutoSnapshotPolicyRequest) {
     request = &CreateAutoSnapshotPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -418,6 +491,7 @@ func NewCreateDisksResponse() (response *CreateDisksResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
+//  UNAUTHORIZEDOPERATION_ROLENOTEXISTS = "UnauthorizedOperation.RoleNotExists"
 func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisksResponse, err error) {
     return c.CreateDisksWithContext(context.Background(), request)
 }
@@ -444,6 +518,7 @@ func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisks
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
 //  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
+//  UNAUTHORIZEDOPERATION_ROLENOTEXISTS = "UnauthorizedOperation.RoleNotExists"
 func (c *Client) CreateDisksWithContext(ctx context.Context, request *CreateDisksRequest) (response *CreateDisksResponse, err error) {
     if request == nil {
         request = NewCreateDisksRequest()
@@ -1698,6 +1773,7 @@ func NewModifyDiskAttributesResponse() (response *ModifyDiskAttributesResponse) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
@@ -1721,6 +1797,7 @@ func (c *Client) ModifyDiskAttributes(request *ModifyDiskAttributesRequest) (res
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"

@@ -507,6 +507,42 @@ type CommonNamespace struct {
 	DashboardId *string `json:"DashboardId,omitempty" name:"DashboardId"`
 }
 
+type Condition struct {
+
+	// Alarm notification frequency.
+	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
+
+	// Predefined repeated notification policy. `0`: One-time alarm; `1`: exponential alarm; `2`: consecutive alarm.
+	AlarmNotifyType *int64 `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
+
+	// Detection method.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CalcType *string `json:"CalcType,omitempty" name:"CalcType"`
+
+	// Detection value.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CalcValue *string `json:"CalcValue,omitempty" name:"CalcValue"`
+
+	// Duration.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ContinueTime *string `json:"ContinueTime,omitempty" name:"ContinueTime"`
+
+	// Metric ID.
+	MetricID *int64 `json:"MetricID,omitempty" name:"MetricID"`
+
+	// Displayed metric name.
+	MetricDisplayName *string `json:"MetricDisplayName,omitempty" name:"MetricDisplayName"`
+
+	// Statistical period.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Rule ID.
+	RuleID *int64 `json:"RuleID,omitempty" name:"RuleID"`
+
+	// Metric unit.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+}
+
 type ConditionsTemp struct {
 
 	// Template name
@@ -615,7 +651,7 @@ type CreateAlarmPolicyRequest struct {
 	// Project ID. For products with different projects, a value other than `-1` must be passed in. `-1`: no project; `0`: default project. If no value is passed in, `-1` will be used. The supported project IDs can be viewed on the [**Account Center** > **Project Management**](https://console.cloud.tencent.com/project) page of the console.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// ID of trigger condition template. This parameter can be left empty.
+	// Trigger condition template ID. Pass in this parameter if the policy is associated with the trigger condition template; otherwise, pass in the `Condition` parameter. The trigger condition template ID can be obtained via [`DescribeConditionsTemplateList`](https://intl.cloud.tencent.com/document/api/248/70250?from_cn_redirect=1).
 	ConditionTemplateId *int64 `json:"ConditionTemplateId,omitempty" name:"ConditionTemplateId"`
 
 	// Metric trigger condition. The supported metrics can be queried via [DescribeAlarmMetrics](https://intl.cloud.tencent.com/document/product/248/51283?from_cn_redirect=1).
@@ -2189,6 +2225,83 @@ func (r *DescribeBindingPolicyObjectListResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeConditionsTemplateListRequest struct {
+	*tchttp.BaseRequest
+
+	// The value is fixed to `monitor`.
+	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// View name, which can be obtained via [DescribeAllNamespaces](https://intl.cloud.tencent.com/document/product/248/48683?from_cn_redirect=1). For the monitoring of Tencent Cloud services, the value of this parameter is `QceNamespacesNew.N.Id` of the output parameter of `DescribeAllNamespaces`, for example, `cvm_device`.
+	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
+
+	// Filter by trigger condition template name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Filter by trigger condition template ID.
+	GroupID *string `json:"GroupID,omitempty" name:"GroupID"`
+
+	// Pagination parameter, which specifies the number of returned results per page. Value range: 1-100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset starting from 0. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting method by update time. `asc`: Ascending order; `desc`: Descending order.
+	UpdateTimeOrder *string `json:"UpdateTimeOrder,omitempty" name:"UpdateTimeOrder"`
+}
+
+func (r *DescribeConditionsTemplateListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConditionsTemplateListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "ViewName")
+	delete(f, "GroupName")
+	delete(f, "GroupID")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "UpdateTimeOrder")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConditionsTemplateListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeConditionsTemplateListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of templates.
+		Total *int64 `json:"Total,omitempty" name:"Total"`
+
+		// Template list.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		TemplateGroupList []*TemplateGroup `json:"TemplateGroupList,omitempty" name:"TemplateGroupList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeConditionsTemplateListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConditionsTemplateListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeMonitorTypesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3291,6 +3404,26 @@ type DimensionsDesc struct {
 	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
+type EventCondition struct {
+
+	// Alarm notification frequency.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AlarmNotifyPeriod *string `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
+
+	// Predefined repeated notification policy. `0`: One-time alarm; `1`: exponential alarm; `2`: consecutive alarm
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AlarmNotifyType *string `json:"AlarmNotifyType,omitempty" name:"AlarmNotifyType"`
+
+	// Event ID.
+	EventID *string `json:"EventID,omitempty" name:"EventID"`
+
+	// Displayed event name.
+	EventDisplayName *string `json:"EventDisplayName,omitempty" name:"EventDisplayName"`
+
+	// Rule ID.
+	RuleID *string `json:"RuleID,omitempty" name:"RuleID"`
+}
+
 type GetMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -3722,14 +3855,17 @@ func (r *ModifyAlarmPolicyInfoResponse) FromJsonString(s string) error {
 type ModifyAlarmPolicyNoticeRequest struct {
 	*tchttp.BaseRequest
 
-	// Module name. Enter "monitor" here
+	// Module name, which is specified as `monitor`.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Alarm policy ID
+	// Alarm policy ID. If both `PolicyIds` and this parameter are returned, only `PolicyIds` takes effect.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Alarm notification template ID list
+	// List of alarm notification template IDs.
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Alarm policy ID array, which can be used to associate notification templates with multiple alarm policies. Max value: 30.
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 func (r *ModifyAlarmPolicyNoticeRequest) ToJsonString() string {
@@ -3747,6 +3883,7 @@ func (r *ModifyAlarmPolicyNoticeRequest) FromJsonString(s string) error {
 	delete(f, "Module")
 	delete(f, "PolicyId")
 	delete(f, "NoticeIds")
+	delete(f, "PolicyIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmPolicyNoticeRequest has unknown keys!", "")
 	}
@@ -4082,6 +4219,106 @@ type Point struct {
 	Value *float64 `json:"Value,omitempty" name:"Value"`
 }
 
+type PolicyGroup struct {
+
+	// Whether the alarm policy can be set to default.
+	CanSetDefault *bool `json:"CanSetDefault,omitempty" name:"CanSetDefault"`
+
+	// Alarm policy group ID.
+	GroupID *int64 `json:"GroupID,omitempty" name:"GroupID"`
+
+	// Alarm policy group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Creation time.
+	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
+
+	// Whether the alarm policy is set to default.
+	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
+
+	// Whether the alarm policy is enabled.
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// UIN of the last modifier.
+	LastEditUin *int64 `json:"LastEditUin,omitempty" name:"LastEditUin"`
+
+	// Number of unshielded instances.
+	NoShieldedInstanceCount *int64 `json:"NoShieldedInstanceCount,omitempty" name:"NoShieldedInstanceCount"`
+
+	// Parent policy group ID.
+	ParentGroupID *int64 `json:"ParentGroupID,omitempty" name:"ParentGroupID"`
+
+	// Project ID.
+	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+
+	// Alarm recipient information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ReceiverInfos []*PolicyGroupReceiverInfo `json:"ReceiverInfos,omitempty" name:"ReceiverInfos"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Modification time.
+	UpdateTime *int64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The total number of associated instances.
+	TotalInstanceCount *int64 `json:"TotalInstanceCount,omitempty" name:"TotalInstanceCount"`
+
+	// View.
+	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
+
+	// Whether the logical relationship between rules is AND.
+	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
+}
+
+type PolicyGroupReceiverInfo struct {
+
+	// End time of a valid time period.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether it is required to send notifications.
+	NeedSendNotice *int64 `json:"NeedSendNotice,omitempty" name:"NeedSendNotice"`
+
+	// Alarm receiving channel.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	NotifyWay []*string `json:"NotifyWay,omitempty" name:"NotifyWay"`
+
+	// Alarm call intervals for individuals in seconds.
+	PersonInterval *int64 `json:"PersonInterval,omitempty" name:"PersonInterval"`
+
+	// Message recipient group list.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList"`
+
+	// Recipient type.
+	ReceiverType *string `json:"ReceiverType,omitempty" name:"ReceiverType"`
+
+	// Recipient list. The list of recipient IDs that is queried by a platform API.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
+
+	// Alarm resolution notification method.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RecoverNotify []*string `json:"RecoverNotify,omitempty" name:"RecoverNotify"`
+
+	// Alarm call interval per round in seconds.
+	RoundInterval *int64 `json:"RoundInterval,omitempty" name:"RoundInterval"`
+
+	// Number of alarm call rounds.
+	RoundNumber *int64 `json:"RoundNumber,omitempty" name:"RoundNumber"`
+
+	// Alarm call notification time. Valid values: `OCCUR` (indicating that a notification is sent when the alarm is triggered) and `RECOVER` (indicating that a notification is sent when the alarm is resolved).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SendFor []*string `json:"SendFor,omitempty" name:"SendFor"`
+
+	// Start time of a valid time period.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// UID of the alarm call recipient.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UIDList []*int64 `json:"UIDList,omitempty" name:"UIDList"`
+}
+
 type PutMonitorDataRequest struct {
 	*tchttp.BaseRequest
 
@@ -4321,6 +4558,45 @@ type TagInstance struct {
 	// Tag status. 2: existent; 1: nonexistent
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagStatus *int64 `json:"TagStatus,omitempty" name:"TagStatus"`
+}
+
+type TemplateGroup struct {
+
+	// Metric alarm rules.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Conditions []*Condition `json:"Conditions,omitempty" name:"Conditions"`
+
+	// Event alarm rules.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EventConditions []*EventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
+
+	// The associated alarm policy groups.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PolicyGroups []*PolicyGroup `json:"PolicyGroups,omitempty" name:"PolicyGroups"`
+
+	// Template-based policy group ID.
+	GroupID *int64 `json:"GroupID,omitempty" name:"GroupID"`
+
+	// Template-based policy group name.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Creation time.
+	InsertTime *int64 `json:"InsertTime,omitempty" name:"InsertTime"`
+
+	// UIN of the last modifier.
+	LastEditUin *int64 `json:"LastEditUin,omitempty" name:"LastEditUin"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Update time.
+	UpdateTime *int64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// View.
+	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
+
+	// Whether the logical relationship between rules is AND.
+	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 }
 
 type URLNotice struct {

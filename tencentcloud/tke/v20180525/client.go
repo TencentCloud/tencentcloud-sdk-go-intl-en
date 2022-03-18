@@ -3005,6 +3005,7 @@ func NewDescribePrometheusInstanceResponse() (response *DescribePrometheusInstan
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -3020,6 +3021,7 @@ func (c *Client) DescribePrometheusInstance(request *DescribePrometheusInstanceR
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -3174,6 +3176,73 @@ func (c *Client) DescribeRouteTableConflictsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeRouteTableConflictsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTKEEdgeScriptRequest() (request *DescribeTKEEdgeScriptRequest) {
+    request = &DescribeTKEEdgeScriptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeScript")
+    
+    
+    return
+}
+
+func NewDescribeTKEEdgeScriptResponse() (response *DescribeTKEEdgeScriptResponse) {
+    response = &DescribeTKEEdgeScriptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTKEEdgeScript
+// This API is used to query the URL of TKE edge script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTKEEdgeScript(request *DescribeTKEEdgeScriptRequest) (response *DescribeTKEEdgeScriptResponse, err error) {
+    return c.DescribeTKEEdgeScriptWithContext(context.Background(), request)
+}
+
+// DescribeTKEEdgeScript
+// This API is used to query the URL of TKE edge script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTKEEdgeScriptWithContext(ctx context.Context, request *DescribeTKEEdgeScriptRequest) (response *DescribeTKEEdgeScriptResponse, err error) {
+    if request == nil {
+        request = NewDescribeTKEEdgeScriptRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTKEEdgeScript require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTKEEdgeScriptResponse()
     err = c.Send(request, response)
     return
 }
