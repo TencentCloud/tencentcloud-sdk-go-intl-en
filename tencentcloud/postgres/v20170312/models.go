@@ -376,6 +376,72 @@ func (r *CloseServerlessDBExtranetAccessResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateDBInstanceNetworkAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Unified VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+	IsAssignVip *bool `json:"IsAssignVip,omitempty" name:"IsAssignVip"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
+func (r *CreateDBInstanceNetworkAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceNetworkAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "IsAssignVip")
+	delete(f, "Vip")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceNetworkAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateDBInstanceNetworkAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateDBInstanceNetworkAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 
@@ -785,6 +851,72 @@ func (r *CreateReadOnlyDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateReadOnlyGroupNetworkAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID in the format of pgro-4t9c6g7k.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// Unified VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+	IsAssignVip *bool `json:"IsAssignVip,omitempty" name:"IsAssignVip"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
+func (r *CreateReadOnlyGroupNetworkAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReadOnlyGroupNetworkAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReadOnlyGroupId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "IsAssignVip")
+	delete(f, "Vip")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReadOnlyGroupNetworkAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateReadOnlyGroupNetworkAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateReadOnlyGroupNetworkAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReadOnlyGroupNetworkAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -1150,6 +1282,130 @@ type DBNode struct {
 
 	// AZ where the node resides, such as ap-guangzhou-1.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+type DeleteDBInstanceNetworkAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
+func (r *DeleteDBInstanceNetworkAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBInstanceNetworkAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "Vip")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDBInstanceNetworkAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteDBInstanceNetworkAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteDBInstanceNetworkAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReadOnlyGroupNetworkAccessRequest struct {
+	*tchttp.BaseRequest
+
+	// RO group ID in the format of pgro-4t9c6g7k.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
+func (r *DeleteReadOnlyGroupNetworkAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReadOnlyGroupNetworkAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReadOnlyGroupId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "Vip")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteReadOnlyGroupNetworkAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReadOnlyGroupNetworkAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteReadOnlyGroupNetworkAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReadOnlyGroupNetworkAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteReadOnlyGroupRequest struct {

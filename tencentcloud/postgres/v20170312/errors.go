@@ -62,6 +62,9 @@ const (
 	// Failed to access database management service. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 
+	// Data operation failed. Please contact customer service.
+	FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+
 	// Failed to delete VPC routes.
 	FAILEDOPERATION_DELETEALLROUTE = "FailedOperation.DeleteAllRoute"
 
@@ -112,6 +115,9 @@ const (
 
 	// Failed to modify RO group configuration.
 	FAILEDOPERATION_MODIFYROGROUPERROR = "FailedOperation.ModifyROGroupError"
+
+	// The number of networks does not meet resource requirements.
+	FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
 
 	// Failed to access database management service. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_OSSACCESSERROR = "FailedOperation.OssAccessError"
@@ -166,6 +172,9 @@ const (
 
 	// This read-only replica already belongs to another RO group.
 	FAILEDOPERATION_ROINSTANCEHASINROGROUPERROR = "FailedOperation.ROInstanceHasInROGroupError"
+
+	// Serverless instances do not support the operation.
+	FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
 
 	// Failed to access internal service. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
@@ -232,6 +241,9 @@ const (
 
 	// Failed to access database management service. Please contact customer service.
 	INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
+
+	// Failed to parse background data. Please contact customer service.
+	INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
 
 	// System error. When this error occurs, please contact customer service for assistance.
 	INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -419,6 +431,9 @@ const (
 	// You do not have the permission to operate this resource.
 	OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 
+	// IPv6 is not supported.
+	OPERATIONDENIED_INSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.InstanceIpv6NotSupportedError"
+
 	// This operation cannot be performed on an instance in this status.
 	OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
 
@@ -439,6 +454,9 @@ const (
 
 	// This operation cannot be performed on an RO group in this status.
 	OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+
+	// Read-only instances do not support IPv6.
+	OPERATIONDENIED_ROINSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.ROInstanceIpv6NotSupportedError"
 
 	// The total number of read-only nodes should not exceed the upper limit.
 	OPERATIONDENIED_ROINSTANCECOUNTEXEEDERROR = "OperationDenied.RoInstanceCountExeedError"

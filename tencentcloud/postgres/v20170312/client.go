@@ -168,6 +168,7 @@ func NewCloneDBInstanceResponse() (response *CloneDBInstanceResponse) {
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) CloneDBInstance(request *CloneDBInstanceRequest) (response *CloneDBInstanceResponse, err error) {
     return c.CloneDBInstanceWithContext(context.Background(), request)
@@ -192,6 +193,7 @@ func (c *Client) CloneDBInstance(request *CloneDBInstanceRequest) (response *Clo
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) CloneDBInstanceWithContext(ctx context.Context, request *CloneDBInstanceRequest) (response *CloneDBInstanceResponse, err error) {
     if request == nil {
@@ -405,6 +407,89 @@ func (c *Client) CloseServerlessDBExtranetAccessWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewCloseServerlessDBExtranetAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDBInstanceNetworkAccessRequest() (request *CreateDBInstanceNetworkAccessRequest) {
+    request = &CreateDBInstanceNetworkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateDBInstanceNetworkAccess")
+    
+    
+    return
+}
+
+func NewCreateDBInstanceNetworkAccessResponse() (response *CreateDBInstanceNetworkAccessResponse) {
+    response = &CreateDBInstanceNetworkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDBInstanceNetworkAccess
+// This API is used to add a network for an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
+//  FLOWERROR = "FlowError"
+//  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.InstanceIpv6NotSupportedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateDBInstanceNetworkAccess(request *CreateDBInstanceNetworkAccessRequest) (response *CreateDBInstanceNetworkAccessResponse, err error) {
+    return c.CreateDBInstanceNetworkAccessWithContext(context.Background(), request)
+}
+
+// CreateDBInstanceNetworkAccess
+// This API is used to add a network for an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
+//  FLOWERROR = "FlowError"
+//  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.InstanceIpv6NotSupportedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateDBInstanceNetworkAccessWithContext(ctx context.Context, request *CreateDBInstanceNetworkAccessRequest) (response *CreateDBInstanceNetworkAccessResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceNetworkAccessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBInstanceNetworkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstanceNetworkAccessResponse()
     err = c.Send(request, response)
     return
 }
@@ -668,6 +753,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -747,6 +833,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_PARAMETERLENGTHLIMITERROR = "InvalidParameterValue.ParameterLengthLimitError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTRANGEERROR = "InvalidParameterValue.ParameterOutRangeError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_SPECNOTRECOGNIZEDERROR = "InvalidParameterValue.SpecNotRecognizedError"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -1055,6 +1142,83 @@ func (c *Client) CreateReadOnlyGroupWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateReadOnlyGroupNetworkAccessRequest() (request *CreateReadOnlyGroupNetworkAccessRequest) {
+    request = &CreateReadOnlyGroupNetworkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateReadOnlyGroupNetworkAccess")
+    
+    
+    return
+}
+
+func NewCreateReadOnlyGroupNetworkAccessResponse() (response *CreateReadOnlyGroupNetworkAccessResponse) {
+    response = &CreateReadOnlyGroupNetworkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateReadOnlyGroupNetworkAccess
+// This API is used to add a network for an RO group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  FLOWERROR = "FlowError"
+//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
+//  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+func (c *Client) CreateReadOnlyGroupNetworkAccess(request *CreateReadOnlyGroupNetworkAccessRequest) (response *CreateReadOnlyGroupNetworkAccessResponse, err error) {
+    return c.CreateReadOnlyGroupNetworkAccessWithContext(context.Background(), request)
+}
+
+// CreateReadOnlyGroupNetworkAccess
+// This API is used to add a network for an RO group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  FLOWERROR = "FlowError"
+//  INTERNALERROR_FLOWERROR = "InternalError.FlowError"
+//  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+func (c *Client) CreateReadOnlyGroupNetworkAccessWithContext(ctx context.Context, request *CreateReadOnlyGroupNetworkAccessRequest) (response *CreateReadOnlyGroupNetworkAccessResponse, err error) {
+    if request == nil {
+        request = NewCreateReadOnlyGroupNetworkAccessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateReadOnlyGroupNetworkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateReadOnlyGroupNetworkAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateServerlessDBInstanceRequest() (request *CreateServerlessDBInstanceRequest) {
     request = &CreateServerlessDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1100,6 +1264,7 @@ func NewCreateServerlessDBInstanceResponse() (response *CreateServerlessDBInstan
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
 //  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -1141,6 +1306,7 @@ func (c *Client) CreateServerlessDBInstance(request *CreateServerlessDBInstanceR
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDPASSWORDFORMAT = "InvalidParameterValue.InvalidPasswordFormat"
 //  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PARAMETERCHARACTERERROR = "InvalidParameterValue.ParameterCharacterError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -1162,6 +1328,83 @@ func (c *Client) CreateServerlessDBInstanceWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewCreateServerlessDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDBInstanceNetworkAccessRequest() (request *DeleteDBInstanceNetworkAccessRequest) {
+    request = &DeleteDBInstanceNetworkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteDBInstanceNetworkAccess")
+    
+    
+    return
+}
+
+func NewDeleteDBInstanceNetworkAccessResponse() (response *DeleteDBInstanceNetworkAccessResponse) {
+    response = &DeleteDBInstanceNetworkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteDBInstanceNetworkAccess
+// This API is used to delete a network of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_ROINSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.ROInstanceIpv6NotSupportedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteDBInstanceNetworkAccess(request *DeleteDBInstanceNetworkAccessRequest) (response *DeleteDBInstanceNetworkAccessResponse, err error) {
+    return c.DeleteDBInstanceNetworkAccessWithContext(context.Background(), request)
+}
+
+// DeleteDBInstanceNetworkAccess
+// This API is used to delete a network of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_QUERYSPECERROR = "FailedOperation.QuerySpecError"
+//  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  OPERATIONDENIED_ROINSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.ROInstanceIpv6NotSupportedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteDBInstanceNetworkAccessWithContext(ctx context.Context, request *DeleteDBInstanceNetworkAccessRequest) (response *DeleteDBInstanceNetworkAccessResponse, err error) {
+    if request == nil {
+        request = NewDeleteDBInstanceNetworkAccessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDBInstanceNetworkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDBInstanceNetworkAccessResponse()
     err = c.Send(request, response)
     return
 }
@@ -1237,6 +1480,75 @@ func (c *Client) DeleteReadOnlyGroupWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDeleteReadOnlyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteReadOnlyGroupNetworkAccessRequest() (request *DeleteReadOnlyGroupNetworkAccessRequest) {
+    request = &DeleteReadOnlyGroupNetworkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteReadOnlyGroupNetworkAccess")
+    
+    
+    return
+}
+
+func NewDeleteReadOnlyGroupNetworkAccessResponse() (response *DeleteReadOnlyGroupNetworkAccessResponse) {
+    response = &DeleteReadOnlyGroupNetworkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteReadOnlyGroupNetworkAccess
+// This API is used to delete a network of an RO group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+func (c *Client) DeleteReadOnlyGroupNetworkAccess(request *DeleteReadOnlyGroupNetworkAccessRequest) (response *DeleteReadOnlyGroupNetworkAccessResponse, err error) {
+    return c.DeleteReadOnlyGroupNetworkAccessWithContext(context.Background(), request)
+}
+
+// DeleteReadOnlyGroupNetworkAccess
+// This API is used to delete a network of an RO group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
+//  FAILEDOPERATION_NETWORKNUMLIMITERROR = "FailedOperation.NetworkNumLimitError"
+//  FAILEDOPERATION_ROGROUPNOTFOUNDERROR = "FailedOperation.ROGroupNotFoundError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_ROGROUPSTATUSERROR = "OperationDenied.ROGroupStatusError"
+func (c *Client) DeleteReadOnlyGroupNetworkAccessWithContext(ctx context.Context, request *DeleteReadOnlyGroupNetworkAccessRequest) (response *DeleteReadOnlyGroupNetworkAccessResponse, err error) {
+    if request == nil {
+        request = NewDeleteReadOnlyGroupNetworkAccessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteReadOnlyGroupNetworkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteReadOnlyGroupNetworkAccessResponse()
     err = c.Send(request, response)
     return
 }
