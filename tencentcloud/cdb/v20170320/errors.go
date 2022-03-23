@@ -20,6 +20,9 @@ const (
 	// CAM signature/authentication error.
 	AUTHFAILURE = "AuthFailure"
 
+	// The sub-account has no permissions.
+	AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
+
 	// Backend or process error.
 	CDBERROR = "CdbError"
 
@@ -326,6 +329,9 @@ const (
 	// The audit policy already exists.
 	OPERATIONDENIED_AUDITPOLICYEXISTERROR = "OperationDenied.AuditPolicyExistError"
 
+	// The number of audit policies exceeds the limit.
+	OPERATIONDENIED_AUDITPOLICYOVERQUOTAERROR = "OperationDenied.AuditPolicyOverQuotaError"
+
 	// The audit rule has been associated.
 	OPERATIONDENIED_AUDITRULEHASBIND = "OperationDenied.AuditRuleHasBind"
 
@@ -340,6 +346,9 @@ const (
 
 	// The operation is not allowed as the RO group contains an invalid read-only instance.
 	OPERATIONDENIED_CONFLICTROSTATUS = "OperationDenied.ConflictRoStatus"
+
+	// The configuration of read-only group is being modified. Please do not make repeated requests.
+	OPERATIONDENIED_CONFLICTSTATUS = "OperationDenied.ConflictStatus"
 
 	// You have enabled the compliance audit feature of DBbrain, so you cannot enable the rule-based audit.
 	OPERATIONDENIED_DBBRAINPOLICYCONFLICT = "OperationDenied.DBBrainPolicyConflict"

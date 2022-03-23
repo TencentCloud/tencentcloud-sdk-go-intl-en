@@ -1168,7 +1168,7 @@ type CreateDBInstanceHourRequest struct {
 	// The number of CPU cores of the instance. If this parameter is left empty, the number of CPU cores depends on the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes).
+	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitempty" name:"AutoSyncFlag"`
 
 	// Financial cage ID.
@@ -2156,16 +2156,16 @@ type DescribeBackupSummariesRequest struct {
 	// TencentDB product type to be queried. Currently, only `mysql` is supported.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Pagination offset.
+	// Paginated query offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Paginated query limit. Default value: 20.
+	// Maximum entries returned per page, which ranges from 1 to 100. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Sorting criterion. Valid values: BackupVolume (backup capacity), DataBackupVolume (data backup capacity), BinlogBackupVolume (log backup capacity), AutoBackupVolume (automatic backup capacity), ManualBackupVolume (manual backup capacity).
+	// Sorting criterion. Valid values: `BackupVolume` (backup capacity), `DataBackupVolume` (data backup capacity), `BinlogBackupVolume` (log backup capacity), `AutoBackupVolume` (automatic backup capacity), `ManualBackupVolume` (manual backup capacity). Default value: `BackupVolume`.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: ASC (ascending), DESC (descending).
+	// Sorting order. Valid values: `ASC` (ascending), `DESC` (descending). Default value: `ASC`.
 	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
 }
 
@@ -3045,7 +3045,7 @@ type DescribeDBSecurityGroupsRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replica will be queried. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be queried.
+	// This parameter takes effect only when the ID of a read-only instance is passed in. If the parameter is set to `False` or left empty, the security groups bound with the RO groups of the read-only instance can only be queried. If it is set to `True`, the security groups can be modified.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitempty" name:"ForReadonlyInstance"`
 }
 
@@ -4375,7 +4375,7 @@ type DescribeSlowLogsRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Offset. Minimum value: 0.
+	// Pagination offset, starting from `0`. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of entries per page. Value range: 1-100. Default value: 20.
@@ -5596,8 +5596,8 @@ type ModifyAccountPrivilegesRequest struct {
 	// Database account, including username and domain name.
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
-	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
-	// Note: if this parameter is not passed in, it means to clear the permission.
+	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER","CREATE USER","RELOAD","REPLICATION CLIENT","REPLICATION SLAVE","UPDATE".
+	// Note: If this parameter is not passed in, it means to clear the permission.
 	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
 
 	// Database permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", 	"DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
@@ -6106,7 +6106,7 @@ type ModifyDBInstanceNameRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance name.
+	// The modified instance name.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 }
 
@@ -7480,7 +7480,7 @@ type RoInstanceInfo struct {
 	// RO instance ID in the format of cdbro-c1nl9rpv
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// RO instance status. Value range: 0 (creating), 1 (running), 4 (deleting)
+	// RO instance status. Valid values: `0` (creating), `1` (running), `3` (remote RO), `4` (deleting). When the `DescribeDBInstances` API is used to query the information of the source instance, if the source instance is associated with a remote read-only instance, the returned status value of the remote read-only instance always shows 3.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only)
