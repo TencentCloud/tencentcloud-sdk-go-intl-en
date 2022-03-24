@@ -374,6 +374,9 @@ const (
 	// Incorrect parameter value: invalid `Operation`.
 	INVALIDPARAMETERVALUE_OPERATION = "InvalidParameterValue.Operation"
 
+	// Parameter error: Current storage class error.
+	INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
+
 	// Incorrect parameter value: invalid `ParentId`
 	INVALIDPARAMETERVALUE_PARENTID = "InvalidParameterValue.ParentId"
 
@@ -455,6 +458,9 @@ const (
 	// Incorrect parameter value: the value of human confirmation result is invalid.
 	INVALIDPARAMETERVALUE_STATUS = "InvalidParameterValue.Status"
 
+	// Parameter error: The target storage class is not allowed.
+	INVALIDPARAMETERVALUE_STORAGECLASS = "InvalidParameterValue.StorageClass"
+
 	// Incorrect parameter value: `StorageRegion`.
 	INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
 
@@ -524,6 +530,15 @@ const (
 	// The deduplication ID already exists on the same day. The request is removed due to duplication.
 	INVALIDPARAMETERVALUE_UNIQUEIDENTIFIER = "InvalidParameterValue.UniqueIdentifier"
 
+	// Parameter error: This retrieval mode is not supported for the file.
+	INVALIDPARAMETERVALUE_UNSUPPORTEDRESTORETIER = "InvalidParameterValue.UnsupportedRestoreTier"
+
+	// Parameter error: Unsupported target storage class. DEEP ARCHIVE is only supported in certain regions.
+	INVALIDPARAMETERVALUE_UNSUPPORTEDSTORAGECLASS = "InvalidParameterValue.UnsupportedStorageClass"
+
+	// Parameter error: Unsupported storage class change.
+	INVALIDPARAMETERVALUE_UNSUPPORTEDTRANSITION = "InvalidParameterValue.UnsupportedTransition"
+
 	// Incorrect parameter: the URL is invalid.
 	INVALIDPARAMETERVALUE_URL = "InvalidParameterValue.Url"
 
@@ -566,6 +581,9 @@ const (
 	// Limit exceeded: the number of templates exceeds the limit.
 	LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
 
+	// Missing parameter.
+	MISSINGPARAMETER = "MissingParameter"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
@@ -589,6 +607,9 @@ const (
 
 	// The resource does not exist: keyword.
 	RESOURCENOTFOUND_WORD = "ResourceNotFound.Word"
+
+	// The resource is unavailable.
+	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
 	// Incorrect parameter: M3U8 of `MasterPlaylist` is not supported.
 	RESOURCEUNAVAILABLE_MASTERPLAYLIST = "ResourceUnavailable.MasterPlaylist"

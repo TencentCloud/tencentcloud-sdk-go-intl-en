@@ -1209,6 +1209,63 @@ func (c *Client) DescribeStreamLiveRegionsWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeStreamLiveTranscodeDetailRequest() (request *DescribeStreamLiveTranscodeDetailRequest) {
+    request = &DescribeStreamLiveTranscodeDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveTranscodeDetail")
+    
+    
+    return
+}
+
+func NewDescribeStreamLiveTranscodeDetailResponse() (response *DescribeStreamLiveTranscodeDetailResponse) {
+    response = &DescribeStreamLiveTranscodeDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLiveTranscodeDetail
+// This API is used to query the transcoding information of StreamLive streams.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+func (c *Client) DescribeStreamLiveTranscodeDetail(request *DescribeStreamLiveTranscodeDetailRequest) (response *DescribeStreamLiveTranscodeDetailResponse, err error) {
+    return c.DescribeStreamLiveTranscodeDetailWithContext(context.Background(), request)
+}
+
+// DescribeStreamLiveTranscodeDetail
+// This API is used to query the transcoding information of StreamLive streams.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+func (c *Client) DescribeStreamLiveTranscodeDetailWithContext(ctx context.Context, request *DescribeStreamLiveTranscodeDetailRequest) (response *DescribeStreamLiveTranscodeDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLiveTranscodeDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLiveTranscodeDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLiveTranscodeDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamLiveWatermarkRequest() (request *DescribeStreamLiveWatermarkRequest) {
     request = &DescribeStreamLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},

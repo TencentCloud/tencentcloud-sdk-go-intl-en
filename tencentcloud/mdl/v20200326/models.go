@@ -1399,6 +1399,87 @@ func (r *DescribeStreamLiveRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeStreamLiveTranscodeDetailRequest struct {
+	*tchttp.BaseRequest
+
+	// The query start time (UTC+8) in the format of yyyy-MM-dd.
+	// You can only query data in the last month (not including the current day).
+	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
+
+	// The query end time (UTC+8) in the format of yyyy-MM-dd.
+	// You can only query data in the last month (not including the current day).
+	EndDayTime *string `json:"EndDayTime,omitempty" name:"EndDayTime"`
+
+	// The channel ID (optional).
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// The number of pages. Default value: 1.
+	// The value cannot exceed 100.
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The number of records per page. Default value: 10.
+	// Value range: 1-1000.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeStreamLiveTranscodeDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveTranscodeDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartDayTime")
+	delete(f, "EndDayTime")
+	delete(f, "ChannelId")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveTranscodeDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStreamLiveTranscodeDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// A list of the transcoding information.
+		Infos []*DescribeTranscodeDetailInfo `json:"Infos,omitempty" name:"Infos"`
+
+		// The number of the current page.
+		PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+		// The number of records per page.
+		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+		// The total number of records.
+		TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+		// The total number of pages.
+		TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStreamLiveTranscodeDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamLiveTranscodeDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeStreamLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 
@@ -1512,6 +1593,41 @@ type DescribeTextSettings struct {
 
 	// Font color
 	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+}
+
+type DescribeTranscodeDetailInfo struct {
+
+	// The channel ID.
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// The start time (UTC+8) of transcoding in the format of yyyy-MM-dd HH:mm:ss.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time (UTC+8) of transcoding in the format of yyyy-MM-dd HH:mm:ss.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The duration (s) of transcoding.
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The encoding method.
+	// Examples:
+	// `liveprocessor_H264`: Live transcoding-H264
+	// `liveprocessor_H265`: Live transcoding-H265
+	// `topspeed_H264`: Top speed codec-H264
+	// `topspeed_H265`: Top speed codec-H265
+	ModuleCodec *string `json:"ModuleCodec,omitempty" name:"ModuleCodec"`
+
+	// The target bitrate (Kbps).
+	Bitrate *int64 `json:"Bitrate,omitempty" name:"Bitrate"`
+
+	// The transcoding type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The push domain name.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// The target resolution.
+	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
 }
 
 type DescribeWatermarkInfo struct {

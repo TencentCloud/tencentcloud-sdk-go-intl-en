@@ -179,6 +179,12 @@ const (
 	// No task found
 	INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 
+	// 
+	INTERNALERROR_TRADECOMMON = "InternalError.TradeCommon"
+
+	// 
+	INTERNALERROR_TRADEINSUFFICIENTBALANCE = "InternalError.TradeInsufficientBalance"
+
 	// Internal error.
 	INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 

@@ -224,6 +224,10 @@ type AdaptiveStreamTemplate struct {
 	// <li>0: no</li>
 	// <li>1: yes</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// TESHD transcoding parameters
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 }
 
 type AiAnalysisResult struct {
@@ -9866,6 +9870,75 @@ func (r *ModifyMediaInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyMediaStorageClassRequest struct {
+	*tchttp.BaseRequest
+
+	// The unique IDs of media files
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
+
+	// The target storage class. Valid values:
+	// <li>STANDARD</li>
+	// <li>STANDARD_IA</li>
+	// <li>ARCHIVE</li>
+	// <li>DEEP_ARCHIVE</li>
+	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
+
+	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
+	// If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Expedited</li>
+	// <li>Standard</li>
+	// <li>Bulk</li>
+	// If the current storage class is DEEP ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Standard</li>
+	// <li>Bulk</li>
+	RestoreTier *string `json:"RestoreTier,omitempty" name:"RestoreTier"`
+}
+
+func (r *ModifyMediaStorageClassRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMediaStorageClassRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileIds")
+	delete(f, "StorageClass")
+	delete(f, "SubAppId")
+	delete(f, "RestoreTier")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaStorageClassRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyMediaStorageClassResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyMediaStorageClassResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMediaStorageClassResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyPersonSampleRequest struct {
 	*tchttp.BaseRequest
 
@@ -12806,9 +12879,7 @@ type SvgWatermarkInputForUpdate struct {
 
 type TEHDConfig struct {
 
-	// TESHD type. Valid values:
-	// <li>TEHD-100: TESHD-100.</li>
-	// If this parameter is left blank, TESHD will not be enabled.
+	// TESHD transcoding type. Valid values: <li>TEHD-100</li> <li>OFF (default)</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Maximum bitrate, which is valid when `Type` is `TESHD`.
@@ -12818,9 +12889,7 @@ type TEHDConfig struct {
 
 type TEHDConfigForUpdate struct {
 
-	// TESHD type. Valid values:
-	// <li>TEHD-100: TESHD-100.</li>
-	// If this parameter is left blank, no modification will be made.
+	// TESHD transcoding type. Valid values: <li>TEHD-100</li> <li>OFF (default)</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Maximum bitrate. If this parameter is left blank, no modification will be made.
