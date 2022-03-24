@@ -1722,6 +1722,9 @@ type UpgradeInstanceRequest struct {
 
 	// Upgrade mode. <li>scale: blue/green deployment</li><li>restart: rolling restart</li>Default value: scale
 	UpgradeMode *string `json:"UpgradeMode,omitempty" name:"UpgradeMode"`
+
+	// Whether to back up the cluster before version upgrade (no backup by default)
+	CosBackup *bool `json:"CosBackup,omitempty" name:"CosBackup"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -1742,6 +1745,7 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	delete(f, "LicenseType")
 	delete(f, "BasicSecurityType")
 	delete(f, "UpgradeMode")
+	delete(f, "CosBackup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
 	}

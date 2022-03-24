@@ -5323,6 +5323,133 @@ func (c *Client) ModifyMediaInfoWithContext(ctx context.Context, request *Modify
     return
 }
 
+func NewModifyMediaStorageClassRequest() (request *ModifyMediaStorageClassRequest) {
+    request = &ModifyMediaStorageClassRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyMediaStorageClass")
+    
+    
+    return
+}
+
+func NewModifyMediaStorageClassResponse() (response *ModifyMediaStorageClassResponse) {
+    response = &ModifyMediaStorageClassResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyMediaStorageClass
+// This API is used to modify the storage class of media files.
+//
+// If the current storage class is STANDARD, it can be changed to one of the following classes:
+//
+// <li>STANDARD_IA</li>
+//
+// <li>ARCHIVE</li>
+//
+// <li>DEEP ARCHIVE</li>
+//
+// If the current storage class is STANDARD_IA, it can be changed to one of the following classes:
+//
+// <li>STANDARD</li>
+//
+// <li>ARCHIVE</li>
+//
+// <li>DEEP ARCHIVE</li>
+//
+// If the current storage class is ARCHIVE, it can be changed to the following class:
+//
+// <li>STANDARD</li>
+//
+// If the current storage class is DEEP ARCHIVE, it can be changed to the following class:
+//
+// <li>STANDARD</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
+//  INVALIDPARAMETERVALUE_STORAGECLASS = "InvalidParameterValue.StorageClass"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDRESTORETIER = "InvalidParameterValue.UnsupportedRestoreTier"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDSTORAGECLASS = "InvalidParameterValue.UnsupportedStorageClass"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTRANSITION = "InvalidParameterValue.UnsupportedTransition"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMediaStorageClass(request *ModifyMediaStorageClassRequest) (response *ModifyMediaStorageClassResponse, err error) {
+    return c.ModifyMediaStorageClassWithContext(context.Background(), request)
+}
+
+// ModifyMediaStorageClass
+// This API is used to modify the storage class of media files.
+//
+// If the current storage class is STANDARD, it can be changed to one of the following classes:
+//
+// <li>STANDARD_IA</li>
+//
+// <li>ARCHIVE</li>
+//
+// <li>DEEP ARCHIVE</li>
+//
+// If the current storage class is STANDARD_IA, it can be changed to one of the following classes:
+//
+// <li>STANDARD</li>
+//
+// <li>ARCHIVE</li>
+//
+// <li>DEEP ARCHIVE</li>
+//
+// If the current storage class is ARCHIVE, it can be changed to the following class:
+//
+// <li>STANDARD</li>
+//
+// If the current storage class is DEEP ARCHIVE, it can be changed to the following class:
+//
+// <li>STANDARD</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
+//  INVALIDPARAMETERVALUE_STORAGECLASS = "InvalidParameterValue.StorageClass"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDRESTORETIER = "InvalidParameterValue.UnsupportedRestoreTier"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDSTORAGECLASS = "InvalidParameterValue.UnsupportedStorageClass"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTRANSITION = "InvalidParameterValue.UnsupportedTransition"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMediaStorageClassWithContext(ctx context.Context, request *ModifyMediaStorageClassRequest) (response *ModifyMediaStorageClassResponse, err error) {
+    if request == nil {
+        request = NewModifyMediaStorageClassRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMediaStorageClass require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMediaStorageClassResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyPersonSampleRequest() (request *ModifyPersonSampleRequest) {
     request = &ModifyPersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},

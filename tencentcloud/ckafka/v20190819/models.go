@@ -2816,6 +2816,17 @@ type InstanceDetailResponse struct {
 	InstanceList []*InstanceDetail `json:"InstanceList,omitempty" name:"InstanceList"`
 }
 
+type InstanceQuotaConfigResp struct {
+
+	// Production throttling in MB/sec.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	QuotaProducerByteRate *int64 `json:"QuotaProducerByteRate,omitempty" name:"QuotaProducerByteRate"`
+
+	// Consumption throttling in MB/sec.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitempty" name:"QuotaConsumerByteRate"`
+}
+
 type InstanceResponse struct {
 
 	// List of eligible instances
@@ -3114,6 +3125,12 @@ type ModifyTopicAttributesRequest struct {
 
 	// Tag list.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Production throttling in MB/sec.
+	QuotaProducerByteRate *int64 `json:"QuotaProducerByteRate,omitempty" name:"QuotaProducerByteRate"`
+
+	// Consumption throttling in MB/sec.
+	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitempty" name:"QuotaConsumerByteRate"`
 }
 
 func (r *ModifyTopicAttributesRequest) ToJsonString() string {
@@ -3143,6 +3160,8 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "AclRuleName")
 	delete(f, "RetentionBytes")
 	delete(f, "Tags")
+	delete(f, "QuotaProducerByteRate")
+	delete(f, "QuotaConsumerByteRate")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicAttributesRequest has unknown keys!", "")
 	}
@@ -3430,6 +3449,10 @@ type TopicAttributesResponse struct {
 	// Preset ACL rule list.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	AclRuleList []*AclRule `json:"AclRuleList,omitempty" name:"AclRuleList"`
+
+	// Traffic throttling policy in topic dimension.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	QuotaConfig *InstanceQuotaConfigResp `json:"QuotaConfig,omitempty" name:"QuotaConfig"`
 }
 
 type TopicDetail struct {
