@@ -813,6 +813,26 @@ func (r *BindApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BindApiInfo struct {
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// Unique ID of the service
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// Service name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Bound At
+	BindTime *string `json:"BindTime,omitempty" name:"BindTime"`
+}
+
 type BindEnvironmentRequest struct {
 	*tchttp.BaseRequest
 
@@ -1159,6 +1179,14 @@ type CosConfig struct {
 	// Whether to enable the backend COS signature for the API. It defaults to `false`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Authorization *bool `json:"Authorization,omitempty" name:"Authorization"`
+
+	// The path matching mode of the backend COS service
+	// `BackEndPath`: Match the backend path
+	// `FullPath`: Match the full path
+	// 
+	// Default: `BackEndPath`
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PathMatchMode *string `json:"PathMatchMode,omitempty" name:"PathMatchMode"`
 }
 
 type CreateAPIDocRequest struct {
@@ -1598,17 +1626,29 @@ type CreateApiRsp struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
-	// path
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Path
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
-	// method
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Request method
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
 	// Creation time
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Status of the import task
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Details of the error
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
+
+	// API name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
 }
 
 type CreateIPStrategyRequest struct {
@@ -1766,6 +1806,9 @@ type CreateServiceRequest struct {
 
 	// Dedicated instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// VPC attribute
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 }
 
 func (r *CreateServiceRequest) ToJsonString() string {
@@ -1790,6 +1833,7 @@ func (r *CreateServiceRequest) FromJsonString(s string) error {
 	delete(f, "AppIdType")
 	delete(f, "Tags")
 	delete(f, "InstanceId")
+	delete(f, "UniqVpcId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceRequest has unknown keys!", "")
 	}
@@ -1838,6 +1882,88 @@ func (r *CreateServiceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateUpstreamRequest struct {
+	*tchttp.BaseRequest
+
+	// Backend protocol. Values: `HTTP`, `HTTPS`
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// The balancing method can only be `ROUND_ROBIN`.
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Unique VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Name of the upstream 
+	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
+
+	// Description of the upstream
+	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Retry attempts. It defaults to `3`.
+	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
+
+	// The host header in the request sending to the backend
+	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
+
+	// Backend nodes
+	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// The location of K8s service
+	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
+}
+
+func (r *CreateUpstreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUpstreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Scheme")
+	delete(f, "Algorithm")
+	delete(f, "UniqVpcId")
+	delete(f, "UpstreamName")
+	delete(f, "UpstreamDescription")
+	delete(f, "Retries")
+	delete(f, "UpstreamHost")
+	delete(f, "Nodes")
+	delete(f, "K8sService")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUpstreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateUpstreamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique upstream IP returned
+	// Note: This field may return `null`, indicating that no valid value was found.
+		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateUpstreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUpstreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2317,6 +2443,56 @@ func (r *DeleteServiceSubDomainMappingResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteServiceSubDomainMappingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteUpstreamRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the upstream to delete
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+}
+
+func (r *DeleteUpstreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUpstreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UpstreamId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteUpstreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteUpstreamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// ID of the upstream deleted
+	// Note: This field may return `null`, indicating that no valid value was found.
+		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteUpstreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteUpstreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4468,6 +4644,142 @@ func (r *DescribeServicesStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUpstreamBindApis struct {
+
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of bound APIs
+	BindApiSet []*BindApiInfo `json:"BindApiSet,omitempty" name:"BindApiSet"`
+}
+
+type DescribeUpstreamBindApisRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results returned in a page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Upstream ID
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// Filters the results by `ServiceId` and `ApiId`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeUpstreamBindApisRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamBindApisRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "UpstreamId")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUpstreamBindApisRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUpstreamBindApisResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Query results
+		Result *DescribeUpstreamBindApis `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUpstreamBindApisResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamBindApisResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUpstreamInfo struct {
+
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of query result
+	UpstreamSet []*UpstreamInfo `json:"UpstreamSet,omitempty" name:"UpstreamSet"`
+}
+
+type DescribeUpstreamsRequest struct {
+	*tchttp.BaseRequest
+
+	// Number of results returned in a page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeUpstreamsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUpstreamsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUpstreamsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Query results
+		Result *DescribeUpstreamInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUpstreamsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUpstreamsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeUsagePlanEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 
@@ -5117,6 +5429,39 @@ type IPStrategysStatus struct {
 	// Policy list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StrategySet []*IPStrategy `json:"StrategySet,omitempty" name:"StrategySet"`
+}
+
+type K8sLabel struct {
+
+	// Key of the label
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value of the label
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type K8sService struct {
+
+	// Weight
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+
+	// K8s cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace of the container
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Name of the service
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Service port
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// The additional Label of the Pod
+	ExtraLabels []*K8sLabel `json:"ExtraLabels,omitempty" name:"ExtraLabels"`
+
+	// (Optional) Custom name of the service
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type LogQuery struct {
@@ -5976,6 +6321,92 @@ func (r *ModifySubDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyUpstreamRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique ID of the upstream
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// Name of the upstream 
+	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
+
+	// Description of the upstream
+	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Backend protocol. Values: `HTTP`, `HTTPS`
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// The balancing method can only be `ROUND_ROBIN`.
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Unique VPC ID.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Retry attempts. It defaults to `3`.
+	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
+
+	// The host header in the request sending to the backend
+	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
+
+	// List of backend nodes
+	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// Configuration of K8s service
+	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
+}
+
+func (r *ModifyUpstreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUpstreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UpstreamId")
+	delete(f, "UpstreamName")
+	delete(f, "UpstreamDescription")
+	delete(f, "Scheme")
+	delete(f, "Algorithm")
+	delete(f, "UniqVpcId")
+	delete(f, "Retries")
+	delete(f, "UpstreamHost")
+	delete(f, "Nodes")
+	delete(f, "K8sService")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUpstreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyUpstreamResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of the upstream after the modification
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Result *UpstreamInfo `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyUpstreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUpstreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyUsagePlanRequest struct {
 	*tchttp.BaseRequest
 
@@ -6367,7 +6798,7 @@ type Service struct {
 
 type ServiceConfig struct {
 
-	// Backend type, which takes effect when VPC is enabled. Valid values: `clb` and `upstream` (VPC channel)
+	// The backend type. It’s available when `vpc` is enabled. Values: `clb`, `cvm` and `upstream`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// Unique VPC ID.
@@ -7104,6 +7535,141 @@ func (r *UpdateServiceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpdateServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpstreamHealthChecker struct {
+
+	// Specifies whether to enable active health check
+	EnableActiveCheck *bool `json:"EnableActiveCheck,omitempty" name:"EnableActiveCheck"`
+
+	// Specifies whether the enable passive health check
+	EnablePassiveCheck *bool `json:"EnablePassiveCheck,omitempty" name:"EnablePassiveCheck"`
+
+	// The HTTP status code that indicates that the upstream is healthy
+	HealthyHttpStatus *string `json:"HealthyHttpStatus,omitempty" name:"HealthyHttpStatus"`
+
+	// The HTTP status code that indicates that the upstream is unhealthy
+	UnhealthyHttpStatus *string `json:"UnhealthyHttpStatus,omitempty" name:"UnhealthyHttpStatus"`
+
+	// The threshold on consecutive TCP errors. Range: [0, 254]. `0` indicates not to check TCP.
+	TcpFailureThreshold *uint64 `json:"TcpFailureThreshold,omitempty" name:"TcpFailureThreshold"`
+
+	// The threshold on consecutive timeouts. Range: [0, 254]. `0` indicates not to check TCP.
+	TimeoutThreshold *uint64 `json:"TimeoutThreshold,omitempty" name:"TimeoutThreshold"`
+
+	// The threshold on consecutive HTTP errors. Range: [0, 254]. `0` indicates not to check HTTP.
+	HttpFailureThreshold *uint64 `json:"HttpFailureThreshold,omitempty" name:"HttpFailureThreshold"`
+
+	// The path for active health check. It defaults to `/`.
+	ActiveCheckHttpPath *string `json:"ActiveCheckHttpPath,omitempty" name:"ActiveCheckHttpPath"`
+
+	// The timeout period for active health check in seconds. Default: `5`. 
+	ActiveCheckTimeout *uint64 `json:"ActiveCheckTimeout,omitempty" name:"ActiveCheckTimeout"`
+
+	// The interval for active health check in seconds. Default: `5`. 
+	ActiveCheckInterval *uint64 `json:"ActiveCheckInterval,omitempty" name:"ActiveCheckInterval"`
+
+	// Header of the active health check request
+	ActiveRequestHeader []*UpstreamHealthCheckerReqHeaders `json:"ActiveRequestHeader,omitempty" name:"ActiveRequestHeader"`
+
+	// The period for an abnormal to recover automatically in seconds. If only the passive health check is enabled, it must be greater than 0. Otherwise the abnormal nodes can not recovered automatically. The default value is 30 seconds. 
+	UnhealthyTimeout *uint64 `json:"UnhealthyTimeout,omitempty" name:"UnhealthyTimeout"`
+}
+
+type UpstreamHealthCheckerReqHeaders struct {
+}
+
+type UpstreamInfo struct {
+
+	// Unique ID of the upstream
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// Name of the upstream 
+	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
+
+	// Description of the upstream
+	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Protocol
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// Load balancing algorithm
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Unique VPC ID.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Number of retried attempts
+	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
+
+	// Backend nodes
+	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Label
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Health check configuration
+	// Note: This field may return `null`, indicating that no valid value was found.
+	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
+
+	// Type of the upstream
+	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
+
+	// Configuration of K8s service
+	// Note: This field may return `null`, indicating that no valid value was found.
+	K8sServices []*K8sService `json:"K8sServices,omitempty" name:"K8sServices"`
+
+	// Host of the upstream
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
+}
+
+type UpstreamNode struct {
+
+	// IP or domain name of the host
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// The port number. Range: [0, 65535]
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Value range: [0, 100]. `0` refers to disable it.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+
+	// VM instance ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	VmInstanceId *string `json:"VmInstanceId,omitempty" name:"VmInstanceId"`
+
+	// Tag
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// Health status of the node. Value: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Healthy *string `json:"Healthy,omitempty" name:"Healthy"`
+
+	// The K8s service name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// K8s namespace
+	// Note: This field may return `null`, indicating that no valid value was found.
+	NameSpace *string `json:"NameSpace,omitempty" name:"NameSpace"`
+
+	// ID of the TKE cluster
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Source of the node
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// The unique service name in API Gateway
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UniqueServiceName *string `json:"UniqueServiceName,omitempty" name:"UniqueServiceName"`
 }
 
 type UsagePlan struct {

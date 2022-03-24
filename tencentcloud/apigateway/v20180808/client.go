@@ -69,6 +69,8 @@ func NewAttachPluginResponse() (response *AttachPluginResponse) {
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -89,6 +91,8 @@ func (c *Client) AttachPlugin(request *AttachPluginRequest) (response *AttachPlu
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -335,6 +339,7 @@ func NewBindSecretIdsResponse() (response *BindSecretIdsResponse) {
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDACCESSKEYIDS = "InvalidParameterValue.InvalidAccessKeyIds"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED_ACCESSKEYCOUNTINUSAGEPLANLIMITEXCEEDED = "LimitExceeded.AccessKeyCountInUsagePlanLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
 //  UNSUPPORTEDOPERATION_ALREADYBINDUSAGEPLAN = "UnsupportedOperation.AlreadyBindUsagePlan"
@@ -353,6 +358,7 @@ func (c *Client) BindSecretIds(request *BindSecretIdsRequest) (response *BindSec
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDACCESSKEYIDS = "InvalidParameterValue.InvalidAccessKeyIds"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  LIMITEXCEEDED_ACCESSKEYCOUNTINUSAGEPLANLIMITEXCEEDED = "LimitExceeded.AccessKeyCountInUsagePlanLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
 //  UNSUPPORTEDOPERATION_ALREADYBINDUSAGEPLAN = "UnsupportedOperation.AlreadyBindUsagePlan"
@@ -663,6 +669,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SCFERROR = "FailedOperation.ScfError"
@@ -703,6 +710,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
+//  UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
@@ -715,6 +723,7 @@ func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SCFERROR = "FailedOperation.ScfError"
@@ -755,6 +764,7 @@ func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiRespon
 //  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_INVALIDOAUTHAPI = "ResourceNotFound.InvalidOauthApi"
+//  UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
@@ -796,6 +806,7 @@ func NewCreateApiAppResponse() (response *CreateApiAppResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -810,6 +821,7 @@ func (c *Client) CreateApiApp(request *CreateApiAppRequest) (response *CreateApi
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACCESSKEYEXIST = "FailedOperation.AccessKeyExist"
+//  FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -969,6 +981,7 @@ func NewCreatePluginResponse() (response *CreatePluginResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
 //  INVALIDPARAMETERVALUE_INVALIDPLUGINCONFIG = "InvalidParameterValue.InvalidPluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDSCFCONFIG = "InvalidParameterValue.InvalidScfConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
@@ -1002,6 +1015,7 @@ func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePlu
 //  INVALIDPARAMETERVALUE_INVALIDIPADDRESS = "InvalidParameterValue.InvalidIPAddress"
 //  INVALIDPARAMETERVALUE_INVALIDPLUGINCONFIG = "InvalidParameterValue.InvalidPluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDPORT = "InvalidParameterValue.InvalidPort"
+//  INVALIDPARAMETERVALUE_INVALIDSCFCONFIG = "InvalidParameterValue.InvalidScfConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
@@ -1065,6 +1079,7 @@ func NewCreateServiceResponse() (response *CreateServiceResponse) {
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
 //  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -1099,6 +1114,7 @@ func (c *Client) CreateService(request *CreateServiceRequest) (response *CreateS
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
 //  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -1123,6 +1139,89 @@ func (c *Client) CreateServiceWithContext(ctx context.Context, request *CreateSe
     request.SetContext(ctx)
     
     response = NewCreateServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateUpstreamRequest() (request *CreateUpstreamRequest) {
+    request = &CreateUpstreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "CreateUpstream")
+    
+    
+    return
+}
+
+func NewCreateUpstreamResponse() (response *CreateUpstreamResponse) {
+    response = &CreateUpstreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateUpstream
+// This API is used to create an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATEUPSTREAM = "FailedOperation.OperateUpstream"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateUpstream(request *CreateUpstreamRequest) (response *CreateUpstreamResponse, err error) {
+    return c.CreateUpstreamWithContext(context.Background(), request)
+}
+
+// CreateUpstream
+// This API is used to create an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATEUPSTREAM = "FailedOperation.OperateUpstream"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateUpstreamWithContext(ctx context.Context, request *CreateUpstreamRequest) (response *CreateUpstreamResponse, err error) {
+    if request == nil {
+        request = NewCreateUpstreamRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUpstream require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUpstreamResponse()
     err = c.Send(request, response)
     return
 }
@@ -1545,6 +1644,7 @@ func NewDeletePluginResponse() (response *DeletePluginResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DeletePlugin(request *DeletePluginRequest) (response *DeletePluginResponse, err error) {
@@ -1556,6 +1656,7 @@ func (c *Client) DeletePlugin(request *DeletePluginRequest) (response *DeletePlu
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DeletePluginWithContext(ctx context.Context, request *DeletePluginRequest) (response *DeletePluginResponse, err error) {
@@ -1688,6 +1789,73 @@ func (c *Client) DeleteServiceSubDomainMappingWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDeleteServiceSubDomainMappingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteUpstreamRequest() (request *DeleteUpstreamRequest) {
+    request = &DeleteUpstreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DeleteUpstream")
+    
+    
+    return
+}
+
+func NewDeleteUpstreamResponse() (response *DeleteUpstreamResponse) {
+    response = &DeleteUpstreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteUpstream
+// This API is used to delete an upstream. Note that you can only delete an upstream when it’s not bound with an API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEUPSTREAM = "UnsupportedOperation.UnsupportedDeleteUpstream"
+func (c *Client) DeleteUpstream(request *DeleteUpstreamRequest) (response *DeleteUpstreamResponse, err error) {
+    return c.DeleteUpstreamWithContext(context.Background(), request)
+}
+
+// DeleteUpstream
+// This API is used to delete an upstream. Note that you can only delete an upstream when it’s not bound with an API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEUPSTREAM = "UnsupportedOperation.UnsupportedDeleteUpstream"
+func (c *Client) DeleteUpstreamWithContext(ctx context.Context, request *DeleteUpstreamRequest) (response *DeleteUpstreamResponse, err error) {
+    if request == nil {
+        request = NewDeleteUpstreamRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteUpstream require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteUpstreamResponse()
     err = c.Send(request, response)
     return
 }
@@ -2113,6 +2281,7 @@ func NewDescribeApiAppBindApisStatusResponse() (response *DescribeApiAppBindApis
 //
 // error code that may be returned:
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
     return c.DescribeApiAppBindApisStatusWithContext(context.Background(), request)
@@ -2123,6 +2292,7 @@ func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisSta
 //
 // error code that may be returned:
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeApiAppBindApisStatusWithContext(ctx context.Context, request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
     if request == nil {
@@ -2417,9 +2587,9 @@ func NewDescribeApiKeysStatusResponse() (response *DescribeApiKeysStatusResponse
 }
 
 // DescribeApiKeysStatus
-// This API is used to query the list of keys.
+// This API is used to query the information of one or more API keys.
 //
-// If you have created multiple API key pairs, you can use this API to query the information of one or more keys. This API does not display the `secretKey`.
+//  
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -2428,9 +2598,9 @@ func (c *Client) DescribeApiKeysStatus(request *DescribeApiKeysStatusRequest) (r
 }
 
 // DescribeApiKeysStatus
-// This API is used to query the list of keys.
+// This API is used to query the information of one or more API keys.
 //
-// If you have created multiple API key pairs, you can use this API to query the information of one or more keys. This API does not display the `secretKey`.
+//  
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -3310,6 +3480,7 @@ func NewDescribeServiceUsagePlanResponse() (response *DescribeServiceUsagePlanRe
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceUsagePlan(request *DescribeServiceUsagePlanRequest) (response *DescribeServiceUsagePlanResponse, err error) {
     return c.DescribeServiceUsagePlanWithContext(context.Background(), request)
@@ -3322,6 +3493,7 @@ func (c *Client) DescribeServiceUsagePlan(request *DescribeServiceUsagePlanReque
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceUsagePlanWithContext(ctx context.Context, request *DescribeServiceUsagePlanRequest) (response *DescribeServiceUsagePlanResponse, err error) {
     if request == nil {
@@ -3379,6 +3551,7 @@ func NewDescribeServicesStatusResponse() (response *DescribeServicesStatusRespon
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeServicesStatus(request *DescribeServicesStatusRequest) (response *DescribeServicesStatusResponse, err error) {
     return c.DescribeServicesStatusWithContext(context.Background(), request)
 }
@@ -3406,6 +3579,7 @@ func (c *Client) DescribeServicesStatus(request *DescribeServicesStatusRequest) 
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeServicesStatusWithContext(ctx context.Context, request *DescribeServicesStatusRequest) (response *DescribeServicesStatusResponse, err error) {
     if request == nil {
         request = NewDescribeServicesStatusRequest()
@@ -3418,6 +3592,136 @@ func (c *Client) DescribeServicesStatusWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeServicesStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUpstreamBindApisRequest() (request *DescribeUpstreamBindApisRequest) {
+    request = &DescribeUpstreamBindApisRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUpstreamBindApis")
+    
+    
+    return
+}
+
+func NewDescribeUpstreamBindApisResponse() (response *DescribeUpstreamBindApisResponse) {
+    response = &DescribeUpstreamBindApisResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUpstreamBindApis
+// This API is used to query the list of APIs bound with an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUpstreamBindApis(request *DescribeUpstreamBindApisRequest) (response *DescribeUpstreamBindApisResponse, err error) {
+    return c.DescribeUpstreamBindApisWithContext(context.Background(), request)
+}
+
+// DescribeUpstreamBindApis
+// This API is used to query the list of APIs bound with an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUpstreamBindApisWithContext(ctx context.Context, request *DescribeUpstreamBindApisRequest) (response *DescribeUpstreamBindApisResponse, err error) {
+    if request == nil {
+        request = NewDescribeUpstreamBindApisRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUpstreamBindApis require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUpstreamBindApisResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUpstreamsRequest() (request *DescribeUpstreamsRequest) {
+    request = &DescribeUpstreamsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUpstreams")
+    
+    
+    return
+}
+
+func NewDescribeUpstreamsResponse() (response *DescribeUpstreamsResponse) {
+    response = &DescribeUpstreamsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUpstreams
+// This API is used to query the list of upstreams.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeUpstreams(request *DescribeUpstreamsRequest) (response *DescribeUpstreamsResponse, err error) {
+    return c.DescribeUpstreamsWithContext(context.Background(), request)
+}
+
+// DescribeUpstreams
+// This API is used to query the list of upstreams.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) DescribeUpstreamsWithContext(ctx context.Context, request *DescribeUpstreamsRequest) (response *DescribeUpstreamsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUpstreamsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUpstreams require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUpstreamsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3922,6 +4226,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
@@ -3931,6 +4236,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_BASICSERVICENOTALLOWATTACHPLUGIN = "InvalidParameter.BasicServiceNotAllowAttachPlugin"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ILLEGALPROXYIP = "InvalidParameterValue.IllegalProxyIp"
@@ -3948,6 +4254,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
 //  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
 //  INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
 //  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
@@ -3974,6 +4281,7 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
 // error code that may be returned:
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
+//  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
@@ -3983,6 +4291,7 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
 //  INTERNALERROR_SCFEXCEPTION = "InternalError.ScfException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
+//  INVALIDPARAMETER_BASICSERVICENOTALLOWATTACHPLUGIN = "InvalidParameter.BasicServiceNotAllowAttachPlugin"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ILLEGALPROXYIP = "InvalidParameterValue.IllegalProxyIp"
@@ -4000,6 +4309,7 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICEPARAM = "InvalidParameterValue.InvalidServiceParam"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
+//  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
 //  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
 //  INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
 //  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
@@ -4546,6 +4856,79 @@ func (c *Client) ModifySubDomainWithContext(ctx context.Context, request *Modify
     return
 }
 
+func NewModifyUpstreamRequest() (request *ModifyUpstreamRequest) {
+    request = &ModifyUpstreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("apigateway", APIVersion, "ModifyUpstream")
+    
+    
+    return
+}
+
+func NewModifyUpstreamResponse() (response *ModifyUpstreamResponse) {
+    response = &ModifyUpstreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyUpstream
+// This API is used to modify an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATEUPSTREAM = "FailedOperation.OperateUpstream"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUpstream(request *ModifyUpstreamRequest) (response *ModifyUpstreamResponse, err error) {
+    return c.ModifyUpstreamWithContext(context.Background(), request)
+}
+
+// ModifyUpstream
+// This API is used to modify an upstream.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_OPERATEUPSTREAM = "FailedOperation.OperateUpstream"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
+//  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUpstreamWithContext(ctx context.Context, request *ModifyUpstreamRequest) (response *ModifyUpstreamResponse, err error) {
+    if request == nil {
+        request = NewModifyUpstreamRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUpstream require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUpstreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyUsagePlanRequest() (request *ModifyUsagePlanRequest) {
     request = &ModifyUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4903,6 +5286,7 @@ func NewUnBindSubDomainResponse() (response *UnBindSubDomainResponse) {
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
 func (c *Client) UnBindSubDomain(request *UnBindSubDomainRequest) (response *UnBindSubDomainResponse, err error) {
     return c.UnBindSubDomainWithContext(context.Background(), request)
@@ -4920,6 +5304,7 @@ func (c *Client) UnBindSubDomain(request *UnBindSubDomainRequest) (response *UnB
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  FAILEDOPERATION_SUBDOMAINFORMATERROR = "FailedOperation.SubDomainFormatError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_INVALIDSTATUS = "UnsupportedOperation.InvalidStatus"
 func (c *Client) UnBindSubDomainWithContext(ctx context.Context, request *UnBindSubDomainRequest) (response *UnBindSubDomainResponse, err error) {
     if request == nil {
@@ -4961,6 +5346,7 @@ func NewUnReleaseServiceResponse() (response *UnReleaseServiceResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"
@@ -4978,6 +5364,7 @@ func (c *Client) UnReleaseService(request *UnReleaseServiceRequest) (response *U
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED_REQUESTLIMITEXCEEDED = "LimitExceeded.RequestLimitExceeded"

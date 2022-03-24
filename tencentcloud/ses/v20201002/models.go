@@ -25,7 +25,7 @@ type Attachment struct {
 	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types](https://intl.cloud.tencent.com/document/product/1288/51951?from_cn_redirect=1).
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
-	// Attachment content after base64 encoding. A single attachment cannot exceed 5 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 10 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 10 MB.
+	// Attachment content after Base64 encoding. A single attachment cannot exceed 4 MB. Note: Tencent Cloud APIs require that a request packet should not exceed 8 MB. If you are sending multiple attachments, the total size of these attachments cannot exceed 8 MB.
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
@@ -52,10 +52,10 @@ type BatchSendEmailRequest struct {
 	// Template when emails are sent using a template
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
-	// Email content when emails are sent by calling the API
+	// Email content when emails are sent by calling the API. This parameter is currently unavailable.
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
-	// Email attachments
+	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
 	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
 
 	// Parameter required for a recurring sending task
@@ -66,6 +66,9 @@ type BatchSendEmailRequest struct {
 
 	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
+
+	// 
+	ADLocation *uint64 `json:"ADLocation,omitempty" name:"ADLocation"`
 }
 
 func (r *BatchSendEmailRequest) ToJsonString() string {
@@ -91,6 +94,7 @@ func (r *BatchSendEmailRequest) FromJsonString(s string) error {
 	delete(f, "CycleParam")
 	delete(f, "TimedParam")
 	delete(f, "Unsubscribe")
+	delete(f, "ADLocation")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchSendEmailRequest has unknown keys!", "")
 	}
@@ -595,6 +599,52 @@ func (r *DeleteEmailTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteEmailTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReceiverRequest struct {
+	*tchttp.BaseRequest
+
+	// Recipient group ID, which is returned when a recipient group is created.
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+}
+
+func (r *DeleteReceiverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReceiverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ReceiverId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteReceiverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteReceiverResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteReceiverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReceiverResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1259,6 +1309,9 @@ type SendEmailRequest struct {
 
 	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
+
+	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
+	TriggerType *uint64 `json:"TriggerType,omitempty" name:"TriggerType"`
 }
 
 func (r *SendEmailRequest) ToJsonString() string {
@@ -1281,6 +1334,7 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	delete(f, "Simple")
 	delete(f, "Attachments")
 	delete(f, "Unsubscribe")
+	delete(f, "TriggerType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendEmailRequest has unknown keys!", "")
 	}

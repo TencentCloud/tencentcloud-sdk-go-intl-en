@@ -70,6 +70,7 @@ func NewBatchSendEmailResponse() (response *BatchSendEmailResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
 //  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_SUBJECTLENGTHERROR = "InvalidParameterValue.SubjectLengthError"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
 //  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
 //  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
@@ -90,6 +91,7 @@ func (c *Client) BatchSendEmail(request *BatchSendEmailRequest) (response *Batch
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
 //  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_SUBJECTLENGTHERROR = "InvalidParameterValue.SubjectLengthError"
 //  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
 //  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
 //  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
@@ -268,7 +270,7 @@ func NewCreateEmailTemplateResponse() (response *CreateEmailTemplateResponse) {
 // CreateEmailTemplate
 // This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
 //
-// Note: only an approved template can be used to send emails.
+// Note: Only an approved template can be used to send emails.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
@@ -289,7 +291,7 @@ func (c *Client) CreateEmailTemplate(request *CreateEmailTemplateRequest) (respo
 // CreateEmailTemplate
 // This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
 //
-// Note: only an approved template can be used to send emails.
+// Note: Only an approved template can be used to send emails.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
@@ -396,6 +398,7 @@ func NewCreateReceiverDetailResponse() (response *CreateReceiverDetailResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  LIMITEXCEEDED_EXCEEDRECEIVERDETAILLIMIT = "LimitExceeded.ExceedReceiverDetailLimit"
 //  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
@@ -411,6 +414,7 @@ func (c *Client) CreateReceiverDetail(request *CreateReceiverDetailRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  LIMITEXCEEDED_EXCEEDRECEIVERDETAILLIMIT = "LimitExceeded.ExceedReceiverDetailLimit"
 //  MISSINGPARAMETER_EMAILSNECESSARY = "MissingParameter.EmailsNecessary"
@@ -661,6 +665,55 @@ func (c *Client) DeleteEmailTemplateWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDeleteEmailTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteReceiverRequest() (request *DeleteReceiverRequest) {
+    request = &DeleteReceiverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "DeleteReceiver")
+    
+    
+    return
+}
+
+func NewDeleteReceiverResponse() (response *DeleteReceiverResponse) {
+    response = &DeleteReceiverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteReceiver
+// This API is used to delete a recipient group and all recipient email addresses in the group based on the recipient group ID.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+func (c *Client) DeleteReceiver(request *DeleteReceiverRequest) (response *DeleteReceiverResponse, err error) {
+    return c.DeleteReceiverWithContext(context.Background(), request)
+}
+
+// DeleteReceiver
+// This API is used to delete a recipient group and all recipient email addresses in the group based on the recipient group ID.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+func (c *Client) DeleteReceiverWithContext(ctx context.Context, request *DeleteReceiverRequest) (response *DeleteReceiverResponse, err error) {
+    if request == nil {
+        request = NewDeleteReceiverRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteReceiver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteReceiverResponse()
     err = c.Send(request, response)
     return
 }
@@ -1320,6 +1373,7 @@ func NewSendEmailResponse() (response *SendEmailResponse) {
 //  FAILEDOPERATION_NOATTACHPERMISSION = "FailedOperation.NoAttachPermission"
 //  FAILEDOPERATION_NOTAUTHENTICATEDSENDER = "FailedOperation.NotAuthenticatedSender"
 //  FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
+//  FAILEDOPERATION_RECEIVERHASUNSUBSCRIBED = "FailedOperation.ReceiverHasUnsubscribed"
 //  FAILEDOPERATION_SENDEMAILERR = "FailedOperation.SendEmailErr"
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"
@@ -1366,6 +1420,7 @@ func (c *Client) SendEmail(request *SendEmailRequest) (response *SendEmailRespon
 //  FAILEDOPERATION_NOATTACHPERMISSION = "FailedOperation.NoAttachPermission"
 //  FAILEDOPERATION_NOTAUTHENTICATEDSENDER = "FailedOperation.NotAuthenticatedSender"
 //  FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
+//  FAILEDOPERATION_RECEIVERHASUNSUBSCRIBED = "FailedOperation.ReceiverHasUnsubscribed"
 //  FAILEDOPERATION_SENDEMAILERR = "FailedOperation.SendEmailErr"
 //  FAILEDOPERATION_TEMPORARYBLOCKED = "FailedOperation.TemporaryBlocked"
 //  FAILEDOPERATION_TOOMANYATTACHMENTS = "FailedOperation.TooManyAttachments"

@@ -77,13 +77,16 @@ const (
 	// Incorrect protocol. Make sure the protocol is correct.
 	FAILEDOPERATION_PROTOCOLCHECKERR = "FailedOperation.ProtocolCheckErr"
 
+	// The recipient has unsubscribed.
+	FAILEDOPERATION_RECEIVERHASUNSUBSCRIBED = "FailedOperation.ReceiverHasUnsubscribed"
+
 	// Email sending error. Please submit a ticket to us for troubleshooting.
 	FAILEDOPERATION_SENDEMAILERR = "FailedOperation.SendEmailErr"
 
 	// The request has not taken effect. Try again.
 	FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 
-	// The template is too large. Remove some content.
+	// The template size is too large. Reduce the size.
 	FAILEDOPERATION_TEMPLATECONTENTTOOLARGE = "FailedOperation.TemplateContentToolarge"
 
 	// The email has been blocked temporarily due to violations of rules.
@@ -155,10 +158,13 @@ const (
 	// Duplicate recipient group name.
 	INVALIDPARAMETERVALUE_REPEATRECEIVERNAME = "InvalidParameterValue.RepeatReceiverName"
 
+	// The email subject must contain 1 to 100 characters.
+	INVALIDPARAMETERVALUE_SUBJECTLENGTHERROR = "InvalidParameterValue.SubjectLengthError"
+
 	// The template resource is empty.
 	INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
 
-	// Incorrect template content. Make sure the base64 content is correct.
+	// Incorrect template content. Make sure the Base64 content is correct.
 	INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
 
 	// Variables must be in JSON format.

@@ -107,6 +107,9 @@ const (
 	// The domain name is not configured with a CNAME record resolving to the default domain name, or the resolution has not taken effect yet.
 	FAILEDOPERATION_DOMAINRESOLVEERROR = "FailedOperation.DomainResolveError"
 
+	// Error form EIAM
+	FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
+
 	// Failed to bind/unbind EventBridge.
 	FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 
@@ -127,6 +130,9 @@ const (
 
 	// The entered default second-level domain name is incorrect.
 	FAILEDOPERATION_NETSUBDOMAINERROR = "FailedOperation.NetSubDomainError"
+
+	// Backend error
+	FAILEDOPERATION_OPERATEUPSTREAM = "FailedOperation.OperateUpstream"
 
 	// An error occurred while setting the path mapping.
 	FAILEDOPERATION_PATHMAPPINGSETERROR = "FailedOperation.PathMappingSetError"
@@ -164,7 +170,7 @@ const (
 	// CAuth internal request error. Please try again later. If the problem persists, please submit a ticket.
 	INTERNALERROR_CAUTHEXCEPTION = "InternalError.CauthException"
 
-	// 
+	// CLB internal request error. Please try again. If the problem persists, please submit a ticket.
 	INTERNALERROR_CLBEXCEPTION = "InternalError.ClbException"
 
 	// OSS internal request error. Please try again. If the problem persists, please contact the smart customer service or submit a ticket.
@@ -181,6 +187,12 @@ const (
 
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// You are using the basic edition and can not be bind a plug-in.
+	INVALIDPARAMETER_BASICSERVICENOTALLOWATTACHPLUGIN = "InvalidParameter.BasicServiceNotAllowAttachPlugin"
+
+	// The plugin you want to bound conflicts with existing plugins.
+	INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
 
 	// Incorrect parameter format.
 	INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -287,6 +299,9 @@ const (
 	// The URL parameters are invalid.
 	INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
 
+	// Invalid VPC information
+	INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
+
 	// The method is incorrect. For backend services in the WEBSOCKET type, the frontend method should be configured as GET.
 	INVALIDPARAMETERVALUE_INVALIDWSMETHOD = "InvalidParameterValue.InvalidWSMethod"
 
@@ -316,6 +331,9 @@ const (
 
 	// The number of API documents exceeds the limit.
 	LIMITEXCEEDED_APIDOCLIMITEXCEEDED = "LimitExceeded.APIDocLimitExceeded"
+
+	// Reached the upper limit of access keys.
+	LIMITEXCEEDED_ACCESSKEYCOUNTINUSAGEPLANLIMITEXCEEDED = "LimitExceeded.AccessKeyCountInUsagePlanLimitExceeded"
 
 	// Number of applications bound with the service reaches the upper limit.
 	LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
@@ -425,6 +443,9 @@ const (
 	// The current plugin cannot be bound.
 	UNSUPPORTEDOPERATION_ATTACHPLUGIN = "UnsupportedOperation.AttachPlugin"
 
+	// You are using the basic edition and only one API can be created.
+	UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
+
 	// Invalid log query period
 	UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
 
@@ -481,6 +502,9 @@ const (
 
 	// This service is being used and cannot be deleted.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDDELETESERVICE = "UnsupportedOperation.UnsupportedDeleteService"
+
+	// Operation failed: There are resources associated with this upstream.
+	UNSUPPORTEDOPERATION_UNSUPPORTEDDELETEUPSTREAM = "UnsupportedOperation.UnsupportedDeleteUpstream"
 
 	// Unsupported network type
 	UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
