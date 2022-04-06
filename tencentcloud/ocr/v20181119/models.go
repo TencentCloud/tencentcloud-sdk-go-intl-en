@@ -657,6 +657,12 @@ type MLIDPassportOCRResponse struct {
 	// }
 		AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
 
+		// The first row of the machine-readable zone (MRZ) at the bottom
+		CodeSet *string `json:"CodeSet,omitempty" name:"CodeSet"`
+
+		// The second row of the MRZ at the bottom
+		CodeCrc *string `json:"CodeCrc,omitempty" name:"CodeCrc"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`

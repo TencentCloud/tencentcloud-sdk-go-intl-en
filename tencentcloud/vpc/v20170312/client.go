@@ -240,6 +240,7 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
 func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response *AllocateAddressesResponse, err error) {
     return c.AllocateAddressesWithContext(context.Background(), request)
 }
@@ -282,6 +283,7 @@ func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response 
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
 func (c *Client) AllocateAddressesWithContext(ctx context.Context, request *AllocateAddressesRequest) (response *AllocateAddressesResponse, err error) {
     if request == nil {
         request = NewAllocateAddressesRequest()
@@ -796,75 +798,6 @@ func (c *Client) AssociateDirectConnectGatewayNatGatewayWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewAssociateDirectConnectGatewayNatGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewAssociateNatGatewayAddressRequest() (request *AssociateNatGatewayAddressRequest) {
-    request = &AssociateNatGatewayAddressRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNatGatewayAddress")
-    
-    
-    return
-}
-
-func NewAssociateNatGatewayAddressResponse() (response *AssociateNatGatewayAddressResponse) {
-    response = &AssociateNatGatewayAddressResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// AssociateNatGatewayAddress
-// This API is used to bind an EIP to NAT Gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
-func (c *Client) AssociateNatGatewayAddress(request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
-    return c.AssociateNatGatewayAddressWithContext(context.Background(), request)
-}
-
-// AssociateNatGatewayAddress
-// This API is used to bind an EIP to NAT Gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
-func (c *Client) AssociateNatGatewayAddressWithContext(ctx context.Context, request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
-    if request == nil {
-        request = NewAssociateNatGatewayAddressRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("AssociateNatGatewayAddress require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewAssociateNatGatewayAddressResponse()
     err = c.Send(request, response)
     return
 }
@@ -2213,105 +2146,6 @@ func (c *Client) CreateLocalGatewayWithContext(ctx context.Context, request *Cre
     return
 }
 
-func NewCreateNatGatewayRequest() (request *CreateNatGatewayRequest) {
-    request = &CreateNatGatewayRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGateway")
-    
-    
-    return
-}
-
-func NewCreateNatGatewayResponse() (response *CreateNatGatewayResponse) {
-    response = &CreateNatGatewayResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateNatGateway
-// This API is used to create a NAT Gateway.
-//
-// Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
-//
-// error code that may be returned:
-//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
-//  INVALIDADDRESSSTATE = "InvalidAddressState"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
-//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
-func (c *Client) CreateNatGateway(request *CreateNatGatewayRequest) (response *CreateNatGatewayResponse, err error) {
-    return c.CreateNatGatewayWithContext(context.Background(), request)
-}
-
-// CreateNatGateway
-// This API is used to create a NAT Gateway.
-//
-// Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
-//
-// error code that may be returned:
-//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
-//  INVALIDADDRESSSTATE = "InvalidAddressState"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
-//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
-func (c *Client) CreateNatGatewayWithContext(ctx context.Context, request *CreateNatGatewayRequest) (response *CreateNatGatewayResponse, err error) {
-    if request == nil {
-        request = NewCreateNatGatewayRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateNatGateway require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateNatGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) {
     request = &CreateNatGatewayDestinationIpPortTranslationNatRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2333,31 +2167,13 @@ func NewCreateNatGatewayDestinationIpPortTranslationNatRuleResponse() (response 
 // This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
 //
 // error code that may be returned:
-//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
-//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
-//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+//  UNSUPPORTEDOPERATION_LOCALGATEWAYALREADYEXISTS = "UnsupportedOperation.LocalGatewayAlreadyExists"
 func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
     return c.CreateNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
 }
@@ -2366,31 +2182,13 @@ func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *Cr
 // This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
 //
 // error code that may be returned:
-//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
-//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
-//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
-//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
-//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
-//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
-//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
-//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+//  UNSUPPORTEDOPERATION_LOCALGATEWAYALREADYEXISTS = "UnsupportedOperation.LocalGatewayAlreadyExists"
 func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
     if request == nil {
         request = NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest()
@@ -2436,6 +2234,7 @@ func NewCreateNatGatewaySourceIpTranslationNatRuleResponse() (response *CreateNa
 //  INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION_NATGATEWAYRULEPIPEXISTS = "UnsupportedOperation.NatGatewayRulePipExists"
 //  UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
 func (c *Client) CreateNatGatewaySourceIpTranslationNatRule(request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     return c.CreateNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
@@ -2453,6 +2252,7 @@ func (c *Client) CreateNatGatewaySourceIpTranslationNatRule(request *CreateNatGa
 //  INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION_NATGATEWAYRULEPIPEXISTS = "UnsupportedOperation.NatGatewayRulePipExists"
 //  UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
 func (c *Client) CreateNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     if request == nil {
@@ -4420,169 +4220,6 @@ func (c *Client) DeleteLocalGatewayWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeleteLocalGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteNatGatewayRequest() (request *DeleteNatGatewayRequest) {
-    request = &DeleteNatGatewayRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGateway")
-    
-    
-    return
-}
-
-func NewDeleteNatGatewayResponse() (response *DeleteNatGatewayResponse) {
-    response = &DeleteNatGatewayResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteNatGateway
-// This API (DeleteNatGateway) is used to delete a NAT gateway.
-//
-// After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-func (c *Client) DeleteNatGateway(request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
-    return c.DeleteNatGatewayWithContext(context.Background(), request)
-}
-
-// DeleteNatGateway
-// This API (DeleteNatGateway) is used to delete a NAT gateway.
-//
-// After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-func (c *Client) DeleteNatGatewayWithContext(ctx context.Context, request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
-    if request == nil {
-        request = NewDeleteNatGatewayRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteNatGateway require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteNatGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) {
-    request = &DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewayDestinationIpPortTranslationNatRule")
-    
-    
-    return
-}
-
-func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse() (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse) {
-    response = &DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteNatGatewayDestinationIpPortTranslationNatRule
-// This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRule(request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
-    return c.DeleteNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
-}
-
-// DeleteNatGatewayDestinationIpPortTranslationNatRule
-// This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
-func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
-    if request == nil {
-        request = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteNatGatewayDestinationIpPortTranslationNatRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteNatGatewaySourceIpTranslationNatRuleRequest() (request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) {
-    request = &DeleteNatGatewaySourceIpTranslationNatRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewaySourceIpTranslationNatRule")
-    
-    
-    return
-}
-
-func NewDeleteNatGatewaySourceIpTranslationNatRuleResponse() (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse) {
-    response = &DeleteNatGatewaySourceIpTranslationNatRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteNatGatewaySourceIpTranslationNatRule
-// This API is used to delete a SNAT forwarding rule of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
-func (c *Client) DeleteNatGatewaySourceIpTranslationNatRule(request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
-    return c.DeleteNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
-}
-
-// DeleteNatGatewaySourceIpTranslationNatRule
-// This API is used to delete a SNAT forwarding rule of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
-func (c *Client) DeleteNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
-    if request == nil {
-        request = NewDeleteNatGatewaySourceIpTranslationNatRuleRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteNatGatewaySourceIpTranslationNatRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteNatGatewaySourceIpTranslationNatRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -6926,181 +6563,6 @@ func (c *Client) DescribeLocalGatewayWithContext(ctx context.Context, request *D
     return
 }
 
-func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest() (request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) {
-    request = &DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewayDestinationIpPortTranslationNatRules")
-    
-    
-    return
-}
-
-func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse() (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) {
-    response = &DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeNatGatewayDestinationIpPortTranslationNatRules
-// This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
-//
-// error code that may be returned:
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
-    return c.DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(context.Background(), request)
-}
-
-// DescribeNatGatewayDestinationIpPortTranslationNatRules
-// This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
-//
-// error code that may be returned:
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
-    if request == nil {
-        request = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeNatGatewayDestinationIpPortTranslationNatRules require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeNatGatewaySourceIpTranslationNatRulesRequest() (request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) {
-    request = &DescribeNatGatewaySourceIpTranslationNatRulesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewaySourceIpTranslationNatRules")
-    
-    
-    return
-}
-
-func NewDescribeNatGatewaySourceIpTranslationNatRulesResponse() (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse) {
-    response = &DescribeNatGatewaySourceIpTranslationNatRulesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeNatGatewaySourceIpTranslationNatRules
-// This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
-    return c.DescribeNatGatewaySourceIpTranslationNatRulesWithContext(context.Background(), request)
-}
-
-// DescribeNatGatewaySourceIpTranslationNatRules
-// This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeNatGatewaySourceIpTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
-    if request == nil {
-        request = NewDescribeNatGatewaySourceIpTranslationNatRulesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeNatGatewaySourceIpTranslationNatRules require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeNatGatewaySourceIpTranslationNatRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeNatGatewaysRequest() (request *DescribeNatGatewaysRequest) {
-    request = &DescribeNatGatewaysRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGateways")
-    
-    
-    return
-}
-
-func NewDescribeNatGatewaysResponse() (response *DescribeNatGatewaysResponse) {
-    response = &DescribeNatGatewaysResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeNatGateways
-// This API (DescribeNatGateways) is used to query NAT gateways.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-func (c *Client) DescribeNatGateways(request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
-    return c.DescribeNatGatewaysWithContext(context.Background(), request)
-}
-
-// DescribeNatGateways
-// This API (DescribeNatGateways) is used to query NAT gateways.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-func (c *Client) DescribeNatGatewaysWithContext(ctx context.Context, request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
-    if request == nil {
-        request = NewDescribeNatGatewaysRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeNatGateways require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeNatGatewaysResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeNetDetectStatesRequest() (request *DescribeNetDetectStatesRequest) {
     request = &DescribeNetDetectStatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8931,59 +8393,6 @@ func (c *Client) DisassociateDirectConnectGatewayNatGatewayWithContext(ctx conte
     return
 }
 
-func NewDisassociateNatGatewayAddressRequest() (request *DisassociateNatGatewayAddressRequest) {
-    request = &DisassociateNatGatewayAddressRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNatGatewayAddress")
-    
-    
-    return
-}
-
-func NewDisassociateNatGatewayAddressResponse() (response *DisassociateNatGatewayAddressResponse) {
-    response = &DisassociateNatGatewayAddressResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DisassociateNatGatewayAddress
-// This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSDISASSOCIATE = "UnsupportedOperation.PublicIpAddressDisassociate"
-func (c *Client) DisassociateNatGatewayAddress(request *DisassociateNatGatewayAddressRequest) (response *DisassociateNatGatewayAddressResponse, err error) {
-    return c.DisassociateNatGatewayAddressWithContext(context.Background(), request)
-}
-
-// DisassociateNatGatewayAddress
-// This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSDISASSOCIATE = "UnsupportedOperation.PublicIpAddressDisassociate"
-func (c *Client) DisassociateNatGatewayAddressWithContext(ctx context.Context, request *DisassociateNatGatewayAddressRequest) (response *DisassociateNatGatewayAddressResponse, err error) {
-    if request == nil {
-        request = NewDisassociateNatGatewayAddressRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DisassociateNatGatewayAddress require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDisassociateNatGatewayAddressResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDisassociateNetworkInterfaceSecurityGroupsRequest() (request *DisassociateNetworkInterfaceSecurityGroupsRequest) {
     request = &DisassociateNetworkInterfaceSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9461,53 +8870,6 @@ func (c *Client) InquirePriceCreateDirectConnectGatewayWithContext(ctx context.C
     request.SetContext(ctx)
     
     response = NewInquirePriceCreateDirectConnectGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewInquiryPriceCreateVpnGatewayRequest() (request *InquiryPriceCreateVpnGatewayRequest) {
-    request = &InquiryPriceCreateVpnGatewayRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceCreateVpnGateway")
-    
-    
-    return
-}
-
-func NewInquiryPriceCreateVpnGatewayResponse() (response *InquiryPriceCreateVpnGatewayResponse) {
-    response = &InquiryPriceCreateVpnGatewayResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// InquiryPriceCreateVpnGateway
-// This API (InquiryPriceCreateVpnGateway) is used to query the price for VPN gateway creation.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-func (c *Client) InquiryPriceCreateVpnGateway(request *InquiryPriceCreateVpnGatewayRequest) (response *InquiryPriceCreateVpnGatewayResponse, err error) {
-    return c.InquiryPriceCreateVpnGatewayWithContext(context.Background(), request)
-}
-
-// InquiryPriceCreateVpnGateway
-// This API (InquiryPriceCreateVpnGateway) is used to query the price for VPN gateway creation.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-func (c *Client) InquiryPriceCreateVpnGatewayWithContext(ctx context.Context, request *InquiryPriceCreateVpnGatewayRequest) (response *InquiryPriceCreateVpnGatewayResponse, err error) {
-    if request == nil {
-        request = NewInquiryPriceCreateVpnGatewayRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("InquiryPriceCreateVpnGateway require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewInquiryPriceCreateVpnGatewayResponse()
     err = c.Send(request, response)
     return
 }
@@ -10621,173 +9983,6 @@ func (c *Client) ModifyLocalGatewayWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyLocalGatewayResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyNatGatewayAttributeRequest() (request *ModifyNatGatewayAttributeRequest) {
-    request = &ModifyNatGatewayAttributeRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayAttribute")
-    
-    
-    return
-}
-
-func NewModifyNatGatewayAttributeResponse() (response *ModifyNatGatewayAttributeResponse) {
-    response = &ModifyNatGatewayAttributeResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyNatGatewayAttribute
-// This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) ModifyNatGatewayAttribute(request *ModifyNatGatewayAttributeRequest) (response *ModifyNatGatewayAttributeResponse, err error) {
-    return c.ModifyNatGatewayAttributeWithContext(context.Background(), request)
-}
-
-// ModifyNatGatewayAttribute
-// This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) ModifyNatGatewayAttributeWithContext(ctx context.Context, request *ModifyNatGatewayAttributeRequest) (response *ModifyNatGatewayAttributeResponse, err error) {
-    if request == nil {
-        request = NewModifyNatGatewayAttributeRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyNatGatewayAttribute require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyNatGatewayAttributeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) {
-    request = &ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayDestinationIpPortTranslationNatRule")
-    
-    
-    return
-}
-
-func NewModifyNatGatewayDestinationIpPortTranslationNatRuleResponse() (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse) {
-    response = &ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyNatGatewayDestinationIpPortTranslationNatRule
-// This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRule(request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
-    return c.ModifyNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
-}
-
-// ModifyNatGatewayDestinationIpPortTranslationNatRule
-// This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
-    if request == nil {
-        request = NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyNatGatewayDestinationIpPortTranslationNatRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyNatGatewayDestinationIpPortTranslationNatRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyNatGatewaySourceIpTranslationNatRuleRequest() (request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) {
-    request = &ModifyNatGatewaySourceIpTranslationNatRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewaySourceIpTranslationNatRule")
-    
-    
-    return
-}
-
-func NewModifyNatGatewaySourceIpTranslationNatRuleResponse() (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse) {
-    response = &ModifyNatGatewaySourceIpTranslationNatRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyNatGatewaySourceIpTranslationNatRule
-// This API is used to modify a SNAT forwarding rule of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
-func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
-    return c.ModifyNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
-}
-
-// ModifyNatGatewaySourceIpTranslationNatRule
-// This API is used to modify a SNAT forwarding rule of the NAT Gateway.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
-func (c *Client) ModifyNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
-    if request == nil {
-        request = NewModifyNatGatewaySourceIpTranslationNatRuleRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyNatGatewaySourceIpTranslationNatRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyNatGatewaySourceIpTranslationNatRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -12308,55 +11503,6 @@ func (c *Client) ResetAttachCcnInstancesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewResetAttachCcnInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewResetNatGatewayConnectionRequest() (request *ResetNatGatewayConnectionRequest) {
-    request = &ResetNatGatewayConnectionRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vpc", APIVersion, "ResetNatGatewayConnection")
-    
-    
-    return
-}
-
-func NewResetNatGatewayConnectionResponse() (response *ResetNatGatewayConnectionResponse) {
-    response = &ResetNatGatewayConnectionResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ResetNatGatewayConnection
-// This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
-//
-// error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
-//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
-func (c *Client) ResetNatGatewayConnection(request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
-    return c.ResetNatGatewayConnectionWithContext(context.Background(), request)
-}
-
-// ResetNatGatewayConnection
-// This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
-//
-// error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
-//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
-func (c *Client) ResetNatGatewayConnectionWithContext(ctx context.Context, request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
-    if request == nil {
-        request = NewResetNatGatewayConnectionRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ResetNatGatewayConnection require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewResetNatGatewayConnectionResponse()
     err = c.Send(request, response)
     return
 }

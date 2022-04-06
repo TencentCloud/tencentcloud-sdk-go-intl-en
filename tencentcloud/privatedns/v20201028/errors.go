@@ -38,12 +38,6 @@ const (
 	// Failed to create the private domain.
 	FAILEDOPERATION_CREATEZONEFAILED = "FailedOperation.CreateZoneFailed"
 
-	// The private domain is currently associated with a VPC. Please disassociate the VPC first before clearing its records.
-	FAILEDOPERATION_DELETELASTBINDVPCRECORDFAILED = "FailedOperation.DeleteLastBindVpcRecordFailed"
-
-	// Failed to delete the domain.
-	FAILEDOPERATION_DELETEZONEFAILED = "FailedOperation.DeleteZoneFailed"
-
 	// Failed to modify the record.
 	FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
 
@@ -137,8 +131,17 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// Cannot create a dedicated internal TLD.
+	INVALIDPARAMETERVALUE_RESERVEDDOMAIN = "InvalidParameterValue.ReservedDomain"
+
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
+
+	// Exceeded the custom TLD quota.
+	LIMITEXCEEDED_TLDOUTOFLIMIT = "LimitExceeded.TldOutOfLimit"
+
+	// The number of private domains using the custom TLD exceeds the total quota.
+	LIMITEXCEEDED_TLDOUTOFRANGE = "LimitExceeded.TldOutOfRange"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
@@ -164,6 +167,12 @@ const (
 	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
+	//  
+	RESOURCEUNAVAILABLE_TLDOPERATELIMIT = "ResourceUnavailable.TldOperateLimit"
+
+	// The TLD value-added package expired.
+	RESOURCEUNAVAILABLE_TLDPACKAGEEXPIRED = "ResourceUnavailable.TldPackageExpired"
+
 	// The resources have been sold out.
 	RESOURCESSOLDOUT = "ResourcesSoldOut"
 
@@ -184,7 +193,4 @@ const (
 
 	// Account not bound.
 	UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
-
-	// There are bound VPC resources.
-	UNSUPPORTEDOPERATION_EXISTBOUNDVPC = "UnsupportedOperation.ExistBoundVpc"
 )

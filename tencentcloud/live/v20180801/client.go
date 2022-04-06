@@ -317,6 +317,7 @@ func NewBindLiveDomainCertResponse() (response *BindLiveDomainCertResponse) {
 //  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
     return c.BindLiveDomainCertWithContext(context.Background(), request)
@@ -334,6 +335,7 @@ func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (respons
 //  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 func (c *Client) BindLiveDomainCertWithContext(ctx context.Context, request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
     if request == nil {
@@ -2567,57 +2569,6 @@ func (c *Client) DescribeAreaBillBandwidthAndFluxListWithContext(ctx context.Con
     request.SetContext(ctx)
     
     response = NewDescribeAreaBillBandwidthAndFluxListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeBillBandwidthAndFluxListRequest() (request *DescribeBillBandwidthAndFluxListRequest) {
-    request = &DescribeBillBandwidthAndFluxListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeBillBandwidthAndFluxList")
-    
-    
-    return
-}
-
-func NewDescribeBillBandwidthAndFluxListResponse() (response *DescribeBillBandwidthAndFluxListResponse) {
-    response = &DescribeBillBandwidthAndFluxListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeBillBandwidthAndFluxList
-// This API is used to query the data of billable LVB bandwidth and traffic.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
-    return c.DescribeBillBandwidthAndFluxListWithContext(context.Background(), request)
-}
-
-// DescribeBillBandwidthAndFluxList
-// This API is used to query the data of billable LVB bandwidth and traffic.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeBillBandwidthAndFluxListWithContext(ctx context.Context, request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
-    if request == nil {
-        request = NewDescribeBillBandwidthAndFluxListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeBillBandwidthAndFluxList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeBillBandwidthAndFluxListResponse()
     err = c.Send(request, response)
     return
 }
@@ -5450,57 +5401,6 @@ func (c *Client) DescribeStreamPlayInfoListWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeStreamPlayInfoListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeStreamPushInfoListRequest() (request *DescribeStreamPushInfoListRequest) {
-    request = &DescribeStreamPushInfoListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeStreamPushInfoList")
-    
-    
-    return
-}
-
-func NewDescribeStreamPushInfoListResponse() (response *DescribeStreamPushInfoListResponse) {
-    response = &DescribeStreamPushInfoListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeStreamPushInfoList
-// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
-    return c.DescribeStreamPushInfoListWithContext(context.Background(), request)
-}
-
-// DescribeStreamPushInfoList
-// This API is used to query the upstream push quality data by stream ID, including frame rate, bitrate, elapsed time, and codec of audio and video files.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeStreamPushInfoListWithContext(ctx context.Context, request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
-    if request == nil {
-        request = NewDescribeStreamPushInfoListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeStreamPushInfoList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeStreamPushInfoListResponse()
     err = c.Send(request, response)
     return
 }

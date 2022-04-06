@@ -56,14 +56,8 @@ const (
 	// Invalid parameter combination.
 	INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
 
-	// The instance description is too long.
-	INVALIDPARAMETER_JOBDESCRIPTIONTOOLONG = "InvalidParameter.JobDescriptionTooLong"
-
 	// Invalid instance ID format.
 	INVALIDPARAMETER_JOBIDMALFORMED = "InvalidParameter.JobIdMalformed"
-
-	// The instance name is too long.
-	INVALIDPARAMETER_JOBNAMETOOLONG = "InvalidParameter.JobNameTooLong"
 
 	// Duplicate message notification event name.
 	INVALIDPARAMETER_NOTIFICATIONEVENTNAMEDUPLICATE = "InvalidParameter.NotificationEventNameDuplicate"
@@ -122,6 +116,9 @@ const (
 	// The value of `DataTypeAny` is invalid.
 	INVALIDPARAMETERVALUE_INVALIDDATATYPEANY = "InvalidParameterValue.InvalidDataTypeAny"
 
+	// Incorrect `Filter` parameter.
+	INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+
 	// The number of filter parameter values exceeds the limit.
 	INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 
@@ -133,9 +130,6 @@ const (
 
 	// Invalid negative parameter.
 	INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
-
-	// The parameter value is not in float type.
-	INVALIDPARAMETERVALUE_NOTFLOAT = "InvalidParameterValue.NotFloat"
 
 	// Invalid storage path format.
 	INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
@@ -160,9 +154,6 @@ const (
 
 	// Insufficient CPU quota.
 	LIMITEXCEEDED_CPUQUOTA = "LimitExceeded.CpuQuota"
-
-	// Insufficient instance quota.
-	LIMITEXCEEDED_JOBQUOTA = "LimitExceeded.JobQuota"
 
 	// Insufficient task template quota.
 	LIMITEXCEEDED_TASKTEMPLATEQUOTA = "LimitExceeded.TaskTemplateQuota"

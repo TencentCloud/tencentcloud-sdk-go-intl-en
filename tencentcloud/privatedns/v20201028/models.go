@@ -296,156 +296,6 @@ type DatePoint struct {
 	Value *int64 `json:"Value,omitempty" name:"Value"`
 }
 
-type DeletePrivateDNSAccountRequest struct {
-	*tchttp.BaseRequest
-
-	// Private DNS account
-	Account *PrivateDNSAccount `json:"Account,omitempty" name:"Account"`
-}
-
-func (r *DeletePrivateDNSAccountRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateDNSAccountRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Account")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePrivateDNSAccountRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeletePrivateDNSAccountResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeletePrivateDNSAccountResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateDNSAccountResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeletePrivateZoneRecordRequest struct {
-	*tchttp.BaseRequest
-
-	// Private domain ID
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Record ID
-	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
-
-	// Array of record IDs. `RecordId` takes precedence.
-	RecordIdSet []*string `json:"RecordIdSet,omitempty" name:"RecordIdSet"`
-}
-
-func (r *DeletePrivateZoneRecordRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateZoneRecordRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "RecordId")
-	delete(f, "RecordIdSet")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePrivateZoneRecordRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeletePrivateZoneRecordResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeletePrivateZoneRecordResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateZoneRecordResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeletePrivateZoneRequest struct {
-	*tchttp.BaseRequest
-
-	// Private domain ID
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Array of private domain IDs. `ZoneId` takes precedence.
-	ZoneIdSet []*string `json:"ZoneIdSet,omitempty" name:"ZoneIdSet"`
-}
-
-func (r *DeletePrivateZoneRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateZoneRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "ZoneIdSet")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePrivateZoneRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeletePrivateZoneResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeletePrivateZoneResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeletePrivateZoneResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeAccountVpcListRequest struct {
 	*tchttp.BaseRequest
 
@@ -689,179 +539,6 @@ func (r *DescribePrivateDNSAccountListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribePrivateZoneListRequest struct {
-	*tchttp.BaseRequest
-
-	// Pagination offset, starting from 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of entries per page. Maximum value: 100. Default value: 20
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filter parameter
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribePrivateZoneListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateZoneListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePrivateZoneListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of private domains
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of private domains
-		PrivateZoneSet []*PrivateZone `json:"PrivateZoneSet,omitempty" name:"PrivateZoneSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribePrivateZoneListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePrivateZoneRecordListRequest struct {
-	*tchttp.BaseRequest
-
-	// Private domain ID: zone-xxxxxx
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Filter parameter
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Pagination offset, starting from 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of entries per page. Maximum value: 100. Default value: 20
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribePrivateZoneRecordListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneRecordListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Filters")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateZoneRecordListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePrivateZoneRecordListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of DNS records
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of DNS records
-		RecordSet []*PrivateZoneRecord `json:"RecordSet,omitempty" name:"RecordSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribePrivateZoneRecordListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneRecordListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePrivateZoneRequest struct {
-	*tchttp.BaseRequest
-
-	// Domain name, which must be in the format of standard TLD
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-func (r *DescribePrivateZoneRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateZoneRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribePrivateZoneResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Private domain details
-		PrivateZone *PrivateZone `json:"PrivateZone,omitempty" name:"PrivateZone"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribePrivateZoneResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrivateZoneResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribePrivateZoneServiceRequest struct {
 	*tchttp.BaseRequest
 }
@@ -904,6 +581,51 @@ func (r *DescribePrivateZoneServiceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribePrivateZoneServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeQuotaUsageRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeQuotaUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuotaUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQuotaUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeQuotaUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// TLD quota usage
+		TldQuota *TldQuota `json:"TldQuota,omitempty" name:"TldQuota"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeQuotaUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuotaUsageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1203,89 +925,6 @@ type PrivateDNSAccount struct {
 	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
 }
 
-type PrivateZone struct {
-
-	// Private domain ID: zone-xxxxxxxx
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Domain name owner UIN
-	OwnerUin *int64 `json:"OwnerUin,omitempty" name:"OwnerUin"`
-
-	// Private domain
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Creation time
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// Modification time
-	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
-
-	// Number of results
-	RecordCount *int64 `json:"RecordCount,omitempty" name:"RecordCount"`
-
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// List of bound VPCs
-	VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
-
-	// Private domain status. Valid values: ENABLED (DNS enabled); SUSPEND (DNS paused); FROZEN (locked)
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-	// Subdomain recursive DNS status. Valid values: ENABLED, DISABLED
-	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
-
-	// Set of tag key-value pairs
-	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
-
-	// List of authorized accounts' VPCs associated with the private domain
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AccountVpcSet []*AccountVpcInfoOutput `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
-}
-
-type PrivateZoneRecord struct {
-
-	// Record ID
-	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
-
-	// Private domain ID: zone-xxxxxxxx
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Subdomain
-	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
-
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR"
-	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
-
-	// Record value
-	RecordValue *string `json:"RecordValue,omitempty" name:"RecordValue"`
-
-	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1–86400s. Default value: 600
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MX *int64 `json:"MX,omitempty" name:"MX"`
-
-	// Record status: ENABLED
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-	// Record weight. Value range: 1–100
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
-
-	// Record creation time
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// Record update time
-	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
-
-	// Additional information
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
-}
-
 type SubscribePrivateZoneServiceRequest struct {
 	*tchttp.BaseRequest
 }
@@ -1338,6 +977,21 @@ type TagInfo struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TldQuota struct {
+
+	// Total quota
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Used quota
+	Used *int64 `json:"Used,omitempty" name:"Used"`
+
+	// Available quota
+	Stock *int64 `json:"Stock,omitempty" name:"Stock"`
+
+	// User’s quota
+	Quota *int64 `json:"Quota,omitempty" name:"Quota"`
 }
 
 type VpcInfo struct {

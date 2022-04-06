@@ -243,6 +243,7 @@ func NewCreateTaskTemplateResponse() (response *CreateTaskTemplateResponse) {
 //  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
 //  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_IMAGEIDMALFORMED = "InvalidParameter.ImageIdMalformed"
 //  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
 //  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
 //  INVALIDPARAMETER_TASKTEMPLATENAME = "InvalidParameter.TaskTemplateName"
@@ -250,6 +251,7 @@ func NewCreateTaskTemplateResponse() (response *CreateTaskTemplateResponse) {
 //  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
 //  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
 //  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_INVALIDDATATYPEANY = "InvalidParameterValue.InvalidDataTypeAny"
 //  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
 //  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
@@ -269,6 +271,7 @@ func (c *Client) CreateTaskTemplate(request *CreateTaskTemplateRequest) (respons
 //  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
 //  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
+//  INVALIDPARAMETER_IMAGEIDMALFORMED = "InvalidParameter.ImageIdMalformed"
 //  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
 //  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
 //  INVALIDPARAMETER_TASKTEMPLATENAME = "InvalidParameter.TaskTemplateName"
@@ -276,6 +279,7 @@ func (c *Client) CreateTaskTemplate(request *CreateTaskTemplateRequest) (respons
 //  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
 //  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
 //  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
+//  INVALIDPARAMETERVALUE_INVALIDDATATYPEANY = "InvalidParameterValue.InvalidDataTypeAny"
 //  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
 //  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
@@ -496,6 +500,7 @@ func NewDescribeAvailableCvmInstanceTypesResponse() (response *DescribeAvailable
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 func (c *Client) DescribeAvailableCvmInstanceTypes(request *DescribeAvailableCvmInstanceTypesRequest) (response *DescribeAvailableCvmInstanceTypesResponse, err error) {
@@ -510,6 +515,7 @@ func (c *Client) DescribeAvailableCvmInstanceTypes(request *DescribeAvailableCvm
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 func (c *Client) DescribeAvailableCvmInstanceTypesWithContext(ctx context.Context, request *DescribeAvailableCvmInstanceTypesRequest) (response *DescribeAvailableCvmInstanceTypesResponse, err error) {
@@ -764,6 +770,7 @@ func NewDescribeComputeEnvsResponse() (response *DescribeComputeEnvsResponse) {
 //  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
 //  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_RESOURCETYPE = "InvalidParameterValue.ResourceType"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  UNKNOWNPARAMETER = "UnknownParameter"
@@ -780,6 +787,7 @@ func (c *Client) DescribeComputeEnvs(request *DescribeComputeEnvsRequest) (respo
 //  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
 //  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_RESOURCETYPE = "InvalidParameterValue.ResourceType"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  UNKNOWNPARAMETER = "UnknownParameter"
@@ -1515,111 +1523,6 @@ func (c *Client) RetryJobsWithContext(ctx context.Context, request *RetryJobsReq
     return
 }
 
-func NewSubmitJobRequest() (request *SubmitJobRequest) {
-    request = &SubmitJobRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("batch", APIVersion, "SubmitJob")
-    
-    
-    return
-}
-
-func NewSubmitJobResponse() (response *SubmitJobResponse) {
-    response = &SubmitJobResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// SubmitJob
-// This API is used to submit a instance.
-//
-// error code that may be returned:
-//  ALLOWEDONEATTRIBUTEINENVIDANDCOMPUTEENV = "AllowedOneAttributeInEnvIdAndComputeEnv"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
-//  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
-//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
-//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
-//  INVALIDPARAMETER_IMAGEIDMALFORMED = "InvalidParameter.ImageIdMalformed"
-//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
-//  INVALIDPARAMETER_JOBDESCRIPTIONTOOLONG = "InvalidParameter.JobDescriptionTooLong"
-//  INVALIDPARAMETER_JOBNAMETOOLONG = "InvalidParameter.JobNameTooLong"
-//  INVALIDPARAMETER_NOTIFICATIONEVENTNAMEDUPLICATE = "InvalidParameter.NotificationEventNameDuplicate"
-//  INVALIDPARAMETER_NOTIFICATIONTOPICNAME = "InvalidParameter.NotificationTopicName"
-//  INVALIDPARAMETER_NOTIFICATIONTOPICNAMETOOLONG = "InvalidParameter.NotificationTopicNameTooLong"
-//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
-//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
-//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
-//  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
-//  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
-//  INVALIDPARAMETERVALUE_INSTANCETYPEDUPLICATE = "InvalidParameterValue.InstanceTypeDuplicate"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
-//  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
-//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
-//  INVALIDPARAMETERVALUE_NOTFLOAT = "InvalidParameterValue.NotFloat"
-//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
-//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
-//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
-//  LIMITEXCEEDED_JOBQUOTA = "LimitExceeded.JobQuota"
-//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
-//  UNAUTHORIZEDOPERATION_USERNOTALLOWEDTOUSEBATCH = "UnauthorizedOperation.UserNotAllowedToUseBatch"
-func (c *Client) SubmitJob(request *SubmitJobRequest) (response *SubmitJobResponse, err error) {
-    return c.SubmitJobWithContext(context.Background(), request)
-}
-
-// SubmitJob
-// This API is used to submit a instance.
-//
-// error code that may be returned:
-//  ALLOWEDONEATTRIBUTEINENVIDANDCOMPUTEENV = "AllowedOneAttributeInEnvIdAndComputeEnv"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
-//  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
-//  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
-//  INVALIDPARAMETER_ENVIDMALFORMED = "InvalidParameter.EnvIdMalformed"
-//  INVALIDPARAMETER_IMAGEIDMALFORMED = "InvalidParameter.ImageIdMalformed"
-//  INVALIDPARAMETER_INVALIDPARAMETERCOMBINATION = "InvalidParameter.InvalidParameterCombination"
-//  INVALIDPARAMETER_JOBDESCRIPTIONTOOLONG = "InvalidParameter.JobDescriptionTooLong"
-//  INVALIDPARAMETER_JOBNAMETOOLONG = "InvalidParameter.JobNameTooLong"
-//  INVALIDPARAMETER_NOTIFICATIONEVENTNAMEDUPLICATE = "InvalidParameter.NotificationEventNameDuplicate"
-//  INVALIDPARAMETER_NOTIFICATIONTOPICNAME = "InvalidParameter.NotificationTopicName"
-//  INVALIDPARAMETER_NOTIFICATIONTOPICNAMETOOLONG = "InvalidParameter.NotificationTopicNameTooLong"
-//  INVALIDPARAMETER_TASKNAME = "InvalidParameter.TaskName"
-//  INVALIDPARAMETER_TASKNAMETOOLONG = "InvalidParameter.TaskNameTooLong"
-//  INVALIDPARAMETERVALUE_COMPUTEENV = "InvalidParameterValue.ComputeEnv"
-//  INVALIDPARAMETERVALUE_DEPENDENCENOTFOUNDTASKNAME = "InvalidParameterValue.DependenceNotFoundTaskName"
-//  INVALIDPARAMETERVALUE_DEPENDENCEUNFEASIBLE = "InvalidParameterValue.DependenceUnfeasible"
-//  INVALIDPARAMETERVALUE_INSTANCETYPEDUPLICATE = "InvalidParameterValue.InstanceTypeDuplicate"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_LOCALPATH = "InvalidParameterValue.LocalPath"
-//  INVALIDPARAMETERVALUE_MAXRETRYCOUNT = "InvalidParameterValue.MaxRetryCount"
-//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
-//  INVALIDPARAMETERVALUE_NOTFLOAT = "InvalidParameterValue.NotFloat"
-//  INVALIDPARAMETERVALUE_REMOTESTORAGEPATH = "InvalidParameterValue.RemoteStoragePath"
-//  INVALIDPARAMETERVALUE_REMOTESTORAGESCHEMETYPE = "InvalidParameterValue.RemoteStorageSchemeType"
-//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
-//  LIMITEXCEEDED_JOBQUOTA = "LimitExceeded.JobQuota"
-//  RESOURCENOTFOUND_COMPUTEENV = "ResourceNotFound.ComputeEnv"
-//  UNAUTHORIZEDOPERATION_USERNOTALLOWEDTOUSEBATCH = "UnauthorizedOperation.UserNotAllowedToUseBatch"
-func (c *Client) SubmitJobWithContext(ctx context.Context, request *SubmitJobRequest) (response *SubmitJobResponse, err error) {
-    if request == nil {
-        request = NewSubmitJobRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("SubmitJob require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewSubmitJobResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewTerminateComputeNodeRequest() (request *TerminateComputeNodeRequest) {
     request = &TerminateComputeNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1649,6 +1552,7 @@ func NewTerminateComputeNodeResponse() (response *TerminateComputeNodeResponse) 
 //  RESOURCENOTFOUND_COMPUTENODE = "ResourceNotFound.ComputeNode"
 //  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTEENVOPERATION = "UnsupportedOperation.ComputeEnvOperation"
 //  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
 //  UNSUPPORTEDOPERATION_COMPUTENODEISTERMINATING = "UnsupportedOperation.ComputeNodeIsTerminating"
 func (c *Client) TerminateComputeNode(request *TerminateComputeNodeRequest) (response *TerminateComputeNodeResponse, err error) {
@@ -1667,6 +1571,7 @@ func (c *Client) TerminateComputeNode(request *TerminateComputeNodeRequest) (res
 //  RESOURCENOTFOUND_COMPUTENODE = "ResourceNotFound.ComputeNode"
 //  UNSUPPORTEDOPERATION_ACCEPTOTHERREQUEST = "UnsupportedOperation.AcceptOtherRequest"
 //  UNSUPPORTEDOPERATION_COMPUTEENVACCEPTOTHERREQUEST = "UnsupportedOperation.ComputeEnvAcceptOtherRequest"
+//  UNSUPPORTEDOPERATION_COMPUTEENVOPERATION = "UnsupportedOperation.ComputeEnvOperation"
 //  UNSUPPORTEDOPERATION_COMPUTENODEFORBIDTERMINATE = "UnsupportedOperation.ComputeNodeForbidTerminate"
 //  UNSUPPORTEDOPERATION_COMPUTENODEISTERMINATING = "UnsupportedOperation.ComputeNodeIsTerminating"
 func (c *Client) TerminateComputeNodeWithContext(ctx context.Context, request *TerminateComputeNodeRequest) (response *TerminateComputeNodeResponse, err error) {

@@ -575,6 +575,61 @@ func (c *Client) RestartNodesWithContext(ctx context.Context, request *RestartNo
     return
 }
 
+func NewUpdateDictionariesRequest() (request *UpdateDictionariesRequest) {
+    request = &UpdateDictionariesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("es", APIVersion, "UpdateDictionaries")
+    
+    
+    return
+}
+
+func NewUpdateDictionariesResponse() (response *UpdateDictionariesResponse) {
+    response = &UpdateDictionariesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateDictionaries
+// This API is used to update ES cluster dictionaries.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateDictionaries(request *UpdateDictionariesRequest) (response *UpdateDictionariesResponse, err error) {
+    return c.UpdateDictionariesWithContext(context.Background(), request)
+}
+
+// UpdateDictionaries
+// This API is used to update ES cluster dictionaries.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateDictionariesWithContext(ctx context.Context, request *UpdateDictionariesRequest) (response *UpdateDictionariesResponse, err error) {
+    if request == nil {
+        request = NewUpdateDictionariesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateDictionaries require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateDictionariesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateInstanceRequest() (request *UpdateInstanceRequest) {
     request = &UpdateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -615,6 +670,8 @@ func NewUpdateInstanceResponse() (response *UpdateInstanceResponse) {
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  FAILEDOPERATION_ERRORCLUSTERSTATEUNHEALTH = "FailedOperation.ErrorClusterStateUnhealth"
 //  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  FAILEDOPERATION_UNSUPPORTRESETNODETYPEANDSCALEOUTDISK = "FailedOperation.UnsupportResetNodeTypeAndScaleoutDisk"
+//  FAILEDOPERATION_UNSUPPORTRESETSCALEDOWNANDMODIFYDISK = "FailedOperation.UnsupportResetScaledownAndModifyDisk"
 //  FAILEDOPERATION_UNSUPPORTREVERSEREGULATIONNODETYPEANDDISK = "FailedOperation.UnsupportReverseRegulationNodeTypeAndDisk"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -650,6 +707,8 @@ func (c *Client) UpdateInstance(request *UpdateInstanceRequest) (response *Updat
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  FAILEDOPERATION_ERRORCLUSTERSTATEUNHEALTH = "FailedOperation.ErrorClusterStateUnhealth"
 //  FAILEDOPERATION_NOPAYMENT = "FailedOperation.NoPayment"
+//  FAILEDOPERATION_UNSUPPORTRESETNODETYPEANDSCALEOUTDISK = "FailedOperation.UnsupportResetNodeTypeAndScaleoutDisk"
+//  FAILEDOPERATION_UNSUPPORTRESETSCALEDOWNANDMODIFYDISK = "FailedOperation.UnsupportResetScaledownAndModifyDisk"
 //  FAILEDOPERATION_UNSUPPORTREVERSEREGULATIONNODETYPEANDDISK = "FailedOperation.UnsupportReverseRegulationNodeTypeAndDisk"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
