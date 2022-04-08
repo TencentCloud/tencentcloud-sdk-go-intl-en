@@ -863,6 +863,65 @@ func (c *Client) CreateServiceLinkedRoleWithContext(ctx context.Context, request
     return
 }
 
+func NewCreateUserOIDCConfigRequest() (request *CreateUserOIDCConfigRequest) {
+    request = &CreateUserOIDCConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "CreateUserOIDCConfig")
+    
+    
+    return
+}
+
+func NewCreateUserOIDCConfigResponse() (response *CreateUserOIDCConfigResponse) {
+    response = &CreateUserOIDCConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateUserOIDCConfig
+// This API is used to create a user OIDC configuration. Only one user OIDC IdP can be created, and the user SAML SSO IdP will be automatically disabled after it is created.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
+//  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"
+//  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+//  INVALIDPARAMETERVALUE_NAMEERROR = "InvalidParameterValue.NameError"
+//  LIMITEXCEEDED_IDENTITYFULL = "LimitExceeded.IdentityFull"
+func (c *Client) CreateUserOIDCConfig(request *CreateUserOIDCConfigRequest) (response *CreateUserOIDCConfigResponse, err error) {
+    return c.CreateUserOIDCConfigWithContext(context.Background(), request)
+}
+
+// CreateUserOIDCConfig
+// This API is used to create a user OIDC configuration. Only one user OIDC IdP can be created, and the user SAML SSO IdP will be automatically disabled after it is created.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
+//  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"
+//  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+//  INVALIDPARAMETERVALUE_NAMEERROR = "InvalidParameterValue.NameError"
+//  LIMITEXCEEDED_IDENTITYFULL = "LimitExceeded.IdentityFull"
+func (c *Client) CreateUserOIDCConfigWithContext(ctx context.Context, request *CreateUserOIDCConfigRequest) (response *CreateUserOIDCConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateUserOIDCConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUserOIDCConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUserOIDCConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUserSAMLConfigRequest() (request *CreateUserSAMLConfigRequest) {
     request = &CreateUserSAMLConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1484,57 +1543,6 @@ func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *Descr
     return
 }
 
-func NewDescribeSafeAuthFlagRequest() (request *DescribeSafeAuthFlagRequest) {
-    request = &DescribeSafeAuthFlagRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlag")
-    
-    
-    return
-}
-
-func NewDescribeSafeAuthFlagResponse() (response *DescribeSafeAuthFlagResponse) {
-    response = &DescribeSafeAuthFlagResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeSafeAuthFlag
-// This API is used to query security settings.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DescribeSafeAuthFlag(request *DescribeSafeAuthFlagRequest) (response *DescribeSafeAuthFlagResponse, err error) {
-    return c.DescribeSafeAuthFlagWithContext(context.Background(), request)
-}
-
-// DescribeSafeAuthFlag
-// This API is used to query security settings.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DescribeSafeAuthFlagWithContext(ctx context.Context, request *DescribeSafeAuthFlagRequest) (response *DescribeSafeAuthFlagResponse, err error) {
-    if request == nil {
-        request = NewDescribeSafeAuthFlagRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeSafeAuthFlag require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeSafeAuthFlagResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeSafeAuthFlagCollRequest() (request *DescribeSafeAuthFlagCollRequest) {
     request = &DescribeSafeAuthFlagCollRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1688,6 +1696,53 @@ func (c *Client) DescribeSubAccountsWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeUserOIDCConfigRequest() (request *DescribeUserOIDCConfigRequest) {
+    request = &DescribeUserOIDCConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DescribeUserOIDCConfig")
+    
+    
+    return
+}
+
+func NewDescribeUserOIDCConfigResponse() (response *DescribeUserOIDCConfigResponse) {
+    response = &DescribeUserOIDCConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUserOIDCConfig
+// This API is used to query the user OIDC configuration.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+func (c *Client) DescribeUserOIDCConfig(request *DescribeUserOIDCConfigRequest) (response *DescribeUserOIDCConfigResponse, err error) {
+    return c.DescribeUserOIDCConfigWithContext(context.Background(), request)
+}
+
+// DescribeUserOIDCConfig
+// This API is used to query the user OIDC configuration.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+func (c *Client) DescribeUserOIDCConfigWithContext(ctx context.Context, request *DescribeUserOIDCConfigRequest) (response *DescribeUserOIDCConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserOIDCConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserOIDCConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserOIDCConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserSAMLConfigRequest() (request *DescribeUserSAMLConfigRequest) {
     request = &DescribeUserSAMLConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1709,9 +1764,7 @@ func NewDescribeUserSAMLConfigResponse() (response *DescribeUserSAMLConfigRespon
 // This API is used to query user SAML configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) (response *DescribeUserSAMLConfigResponse, err error) {
     return c.DescribeUserSAMLConfigWithContext(context.Background(), request)
 }
@@ -1720,9 +1773,7 @@ func (c *Client) DescribeUserSAMLConfig(request *DescribeUserSAMLConfigRequest) 
 // This API is used to query user SAML configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
 func (c *Client) DescribeUserSAMLConfigWithContext(ctx context.Context, request *DescribeUserSAMLConfigRequest) (response *DescribeUserSAMLConfigResponse, err error) {
     if request == nil {
         request = NewDescribeUserSAMLConfigRequest()
@@ -1908,6 +1959,53 @@ func (c *Client) DetachUserPolicyWithContext(ctx context.Context, request *Detac
     request.SetContext(ctx)
     
     response = NewDetachUserPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisableUserSSORequest() (request *DisableUserSSORequest) {
+    request = &DisableUserSSORequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "DisableUserSSO")
+    
+    
+    return
+}
+
+func NewDisableUserSSOResponse() (response *DisableUserSSOResponse) {
+    response = &DisableUserSSOResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisableUserSSO
+// This API is used to disable user SSO.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+func (c *Client) DisableUserSSO(request *DisableUserSSORequest) (response *DisableUserSSOResponse, err error) {
+    return c.DisableUserSSOWithContext(context.Background(), request)
+}
+
+// DisableUserSSO
+// This API is used to disable user SSO.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+func (c *Client) DisableUserSSOWithContext(ctx context.Context, request *DisableUserSSORequest) (response *DisableUserSSOResponse, err error) {
+    if request == nil {
+        request = NewDisableUserSSORequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableUserSSO require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableUserSSOResponse()
     err = c.Send(request, response)
     return
 }
@@ -3989,6 +4087,65 @@ func (c *Client) UpdateUserWithContext(ctx context.Context, request *UpdateUserR
     request.SetContext(ctx)
     
     response = NewUpdateUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateUserOIDCConfigRequest() (request *UpdateUserOIDCConfigRequest) {
+    request = &UpdateUserOIDCConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cam", APIVersion, "UpdateUserOIDCConfig")
+    
+    
+    return
+}
+
+func NewUpdateUserOIDCConfigResponse() (response *UpdateUserOIDCConfigResponse) {
+    response = &UpdateUserOIDCConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateUserOIDCConfig
+// This API is used to modify the user OIDC configuration.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
+//  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"
+//  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+//  LIMITEXCEEDED_IDENTITYFULL = "LimitExceeded.IdentityFull"
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+func (c *Client) UpdateUserOIDCConfig(request *UpdateUserOIDCConfigRequest) (response *UpdateUserOIDCConfigResponse, err error) {
+    return c.UpdateUserOIDCConfigWithContext(context.Background(), request)
+}
+
+// UpdateUserOIDCConfig
+// This API is used to modify the user OIDC configuration.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
+//  INVALIDPARAMETERVALUE_IDENTITYKEYERROR = "InvalidParameterValue.IdentityKeyError"
+//  INVALIDPARAMETERVALUE_IDENTITYURLERROR = "InvalidParameterValue.IdentityUrlError"
+//  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
+//  LIMITEXCEEDED_IDENTITYFULL = "LimitExceeded.IdentityFull"
+//  RESOURCENOTFOUND_IDENTITYNOTEXIST = "ResourceNotFound.IdentityNotExist"
+func (c *Client) UpdateUserOIDCConfigWithContext(ctx context.Context, request *UpdateUserOIDCConfigRequest) (response *UpdateUserOIDCConfigResponse, err error) {
+    if request == nil {
+        request = NewUpdateUserOIDCConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateUserOIDCConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateUserOIDCConfigResponse()
     err = c.Send(request, response)
     return
 }

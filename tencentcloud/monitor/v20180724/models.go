@@ -168,6 +168,10 @@ type AlarmNotice struct {
 	// List of IDs of the alarm policies bound to alarm notification template
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
+
+	// Channel to push alarm notifications to CLS.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
 }
 
 type AlarmPolicy struct {
@@ -480,6 +484,21 @@ func (r *BindingPolicyObjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CLSNotice struct {
+
+	// Region.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Logset ID.
+	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
+
+	// Topic ID.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Status. Valid values: `0` (disabled), `1` (enabled). Default value: `1` (enabled). This parameter can be left empty.
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+}
+
 type CommonNamespace struct {
 
 	// Namespace ID
@@ -578,6 +597,9 @@ type CreateAlarmNoticeRequest struct {
 
 	// Callback notifications (up to 3)
 	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
+
+	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
+	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
 }
 
 func (r *CreateAlarmNoticeRequest) ToJsonString() string {
@@ -598,6 +620,7 @@ func (r *CreateAlarmNoticeRequest) FromJsonString(s string) error {
 	delete(f, "NoticeLanguage")
 	delete(f, "UserNotices")
 	delete(f, "URLNotices")
+	delete(f, "CLSNotices")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmNoticeRequest has unknown keys!", "")
 	}
@@ -1654,6 +1677,9 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// Whether the relationship between a policy and the input parameter filter dimension is required. `1`: Yes. `0`: No. Default value: `0`.
 	NeedCorrespondence *int64 `json:"NeedCorrespondence,omitempty" name:"NeedCorrespondence"`
+
+	// Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
+	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -1687,6 +1713,7 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "NotBindingNoticeRule")
 	delete(f, "InstanceGroupId")
 	delete(f, "NeedCorrespondence")
+	delete(f, "TriggerTasks")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}
@@ -3677,6 +3704,9 @@ type ModifyAlarmNoticeRequest struct {
 
 	// Callback notifications (up to 3)
 	URLNotices []*URLNotice `json:"URLNotices,omitempty" name:"URLNotices"`
+
+	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
+	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
 }
 
 func (r *ModifyAlarmNoticeRequest) ToJsonString() string {
@@ -3698,6 +3728,7 @@ func (r *ModifyAlarmNoticeRequest) FromJsonString(s string) error {
 	delete(f, "NoticeId")
 	delete(f, "UserNotices")
 	delete(f, "URLNotices")
+	delete(f, "CLSNotices")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmNoticeRequest has unknown keys!", "")
 	}

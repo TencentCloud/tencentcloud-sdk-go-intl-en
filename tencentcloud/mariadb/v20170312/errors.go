@@ -95,21 +95,6 @@ const (
 	// Failed to query the information of a dedicated cluster.
 	INTERNALERROR_FENCEERROR = "InternalError.FenceError"
 
-	// Failed to obtain monitoring data.
-	INTERNALERROR_FETCHMETRICDATAFAILED = "InternalError.FetchMetricDataFailed"
-
-	// Failed to get database instance parameters.
-	INTERNALERROR_GETDBCONFIGFAILED = "InternalError.GetDbConfigFailed"
-
-	// Failed to get the database list.
-	INTERNALERROR_GETDBLISTFAILED = "InternalError.GetDbListFailed"
-
-	// Failed to get the database objects.
-	INTERNALERROR_GETDBOBJECTFAILED = "InternalError.GetDbObjectFailed"
-
-	// Failed to get the instance details.
-	INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
-
 	// Failed to get the backend instance information.
 	INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
 
@@ -119,14 +104,8 @@ const (
 	// Failed to query security group details.
 	INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 
-	// Failed to get the error log.
-	INTERNALERROR_GETSLOWLOGFAILED = "InternalError.GetSlowLogFailed"
-
 	// Failed to query the VPC subnet information.
 	INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
-
-	// Failed to obtain information about the table structure.
-	INTERNALERROR_GETTABLEINFOFAILED = "InternalError.GetTableInfoFailed"
 
 	// Failed to get the account list.
 	INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
@@ -161,9 +140,6 @@ const (
 	// An error occurred when querying an instance.
 	INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
 
-	// Failed to get slow logs.
-	INTERNALERROR_LOGDBFAILED = "InternalError.LogDBFailed"
-
 	// Database operation failed.
 	INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 
@@ -194,17 +170,11 @@ const (
 	// Verification of input parameters failed.
 	INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
 
-	// The specified flow information was not found.
-	INVALIDPARAMETER_FLOWNOTFOUND = "InvalidParameter.FlowNotFound"
-
 	// An error occurred while verifying parameter validity.
 	INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 
 	// Invalid parameters
 	INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
-
-	// Incorrect time parameter.
-	INVALIDPARAMETER_ILLEGALTIME = "InvalidParameter.IllegalTime"
 
 	// Failed to find the requested instance.
 	INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -224,14 +194,8 @@ const (
 	// The specified VPC subnet was not found.
 	INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
 
-	// Incorrect AZ information.
-	INVALIDPARAMETER_ZONEIDILLEGAL = "InvalidParameter.ZoneIdIllegal"
-
 	// The account to be created already exists.
 	INVALIDPARAMETERVALUE_ACCOUNTALREADYEXISTS = "InvalidParameterValue.AccountAlreadyExists"
-
-	// The instance does not support this sync mode.
-	INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
 
 	// The specified permission could not be granted to this account.
 	INVALIDPARAMETERVALUE_BADUSERRIGHT = "InvalidParameterValue.BadUserRight"
@@ -242,15 +206,6 @@ const (
 	// The dedicated cluster to which the database instance belongs was not found.
 	INVALIDPARAMETERVALUE_ILLEGALEXCLUSTERID = "InvalidParameterValue.IllegalExclusterID"
 
-	// An error occurred while initializing database instance parameters.
-	INVALIDPARAMETERVALUE_ILLEGALINITPARAM = "InvalidParameterValue.IllegalInitParam"
-
-	// Invalid instance ID.
-	INVALIDPARAMETERVALUE_ILLEGALINSTANCEID = "InvalidParameterValue.IllegalInstanceId"
-
-	// The number of days for log retention after modification is either too high or too low.
-	INVALIDPARAMETERVALUE_ILLEGALLOGSAVEDAYS = "InvalidParameterValue.IllegalLogSaveDays"
-
 	// The number of products exceeds the upper limit.
 	INVALIDPARAMETERVALUE_ILLEGALQUANTITY = "InvalidParameterValue.IllegalQuantity"
 
@@ -260,14 +215,8 @@ const (
 	// Information of the specified AZ was not found.
 	INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 
-	// Invalid instance name.
-	INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
-
 	// Parameter verification error.
 	INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-
-	// The shard does not exist.
-	INVALIDPARAMETERVALUE_SHARDNOTEXIST = "InvalidParameterValue.ShardNotExist"
 
 	// The specification information of the database instance was not found.
 	INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
@@ -290,9 +239,6 @@ const (
 	// The sync task has been deleted.
 	RESOURCENOTFOUND_SYNCTASKDELETED = "ResourceNotFound.SyncTaskDeleted"
 
-	// Incorrect instance status. Unable to initialize.
-	RESOURCEUNAVAILABLE_BADINSTANCESTATUS = "ResourceUnavailable.BadInstanceStatus"
-
 	// An error occurred while calling COS APIs.
 	RESOURCEUNAVAILABLE_COSAPIFAILED = "ResourceUnavailable.CosApiFailed"
 
@@ -307,9 +253,6 @@ const (
 
 	// You have no permission to manipulate this API or resource.
 	UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
-
-	// Unsupported operation.
-	UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
 
 	// The proxy program is too old. Please contact customer service for upgrade and try again.
 	UNSUPPORTEDOPERATION_OLDPROXYVERSION = "UnsupportedOperation.OldProxyVersion"

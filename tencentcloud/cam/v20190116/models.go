@@ -863,6 +863,85 @@ func (r *CreateServiceLinkedRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateUserOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// OpenID Connect IdP URL.
+	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID registered with the OpenID Connect IdP.
+	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+	// Authorization response type, which is always `id_token`.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Authorization response mode. Valid values: form_post (recommended); fragment.
+	ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+	// Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+	MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+	// Authorization information scope. Valid values: openid (default); email; profile.
+	Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateUserOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityUrl")
+	delete(f, "IdentityKey")
+	delete(f, "ClientId")
+	delete(f, "AuthorizationEndpoint")
+	delete(f, "ResponseType")
+	delete(f, "ResponseMode")
+	delete(f, "MappingFiled")
+	delete(f, "Scope")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateUserOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateUserOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateUserOIDCConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateUserSAMLConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -1505,57 +1584,6 @@ func (r *DescribeSafeAuthFlagIntlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeSafeAuthFlagRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *DescribeSafeAuthFlagRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSafeAuthFlagRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSafeAuthFlagRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSafeAuthFlagResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Login protection settings
-		LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
-
-		// Sensitive operation protection settings
-		ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
-
-		// Suspicious login location protection settings
-		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeSafeAuthFlagResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSafeAuthFlagResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeSubAccountsRequest struct {
 	*tchttp.BaseRequest
 
@@ -1602,6 +1630,81 @@ func (r *DescribeSubAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSubAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUserOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DescribeUserOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUserOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IdP type. 12: user OIDC IdP
+		ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
+
+		// IdP URL
+		IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+		// Signature public key
+		IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+		// Client ID
+		ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+		// Status. 0: not set; 2: disabled; 11: enabled.
+		Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+		// Authorization endpoint
+		AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+		// Authorization scope
+		Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+		// Authorization response type
+		ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+		// Authorization response mode
+		ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+		// Mapping field name
+		MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+		// Description
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUserOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1808,6 +1911,48 @@ func (r *DetachUserPolicyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DetachUserPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableUserSSORequest struct {
+	*tchttp.BaseRequest
+}
+
+func (r *DisableUserSSORequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableUserSSORequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableUserSSORequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DisableUserSSOResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DisableUserSSOResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableUserSSOResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4239,6 +4384,85 @@ func (r *UpdateSAMLProviderResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateSAMLProviderResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateUserOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// OpenID Connect IdP URL.
+	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID registered with the OpenID Connect IdP.
+	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+	// Authorization response type, which is always `id_token`.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Authorization response mode. Valid values: form_post (recommended); fragment.
+	ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+	// Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+	MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+	// Authorization information scope. Valid values: openid (default); email; profile.
+	Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *UpdateUserOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUserOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityUrl")
+	delete(f, "IdentityKey")
+	delete(f, "ClientId")
+	delete(f, "AuthorizationEndpoint")
+	delete(f, "ResponseType")
+	delete(f, "ResponseMode")
+	delete(f, "MappingFiled")
+	delete(f, "Scope")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateUserOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateUserOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateUserOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateUserOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

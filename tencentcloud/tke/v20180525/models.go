@@ -283,6 +283,12 @@ type AutoScalingGroupRange struct {
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
 }
 
+type AutoUpgradeClusterLevel struct {
+
+	// Whether to enable Auto Cluster Upgrade
+	IsAutoUpgrade *bool `json:"IsAutoUpgrade,omitempty" name:"IsAutoUpgrade"`
+}
+
 type AutoscalingAdded struct {
 
 	// Number of nodes that are being added
@@ -410,7 +416,7 @@ type Cluster struct {
 	// Tag description list.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
-	// Cluster status (Running, Creating, or Abnormal)
+	// Cluster status (`Running`, `Creating`, `Idling` or `Abnormal`)
 	ClusterStatus *string `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
 
 	// Cluster attributes (including a map of different cluster attributes, with attribute fields including NodeNameType (lan-ip mode and hostname mode, with lan-ip mode as default))
@@ -442,6 +448,12 @@ type Cluster struct {
 	// Specifies whether the cluster supports external nodes.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	EnableExternalNode *bool `json:"EnableExternalNode,omitempty" name:"EnableExternalNode"`
+
+	// 
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+	// 
+	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -622,6 +634,12 @@ type ClusterBasicSettings struct {
 
 	// When the Cilium Overlay add-on is selected, TKE will take two IPs from the subnet to create the private network CLB.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Cluster specifications available for managed clusters
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+	// Auto cluster upgrade for managed clusters
+	AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
 }
 
 type ClusterCIDRSettings struct {
@@ -4044,6 +4062,12 @@ type ModifyClusterAttributeRequest struct {
 
 	// Cluster description
 	ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+	// Cluster specification
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+	// Auto-upgrades cluster specification
+	AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
 }
 
 func (r *ModifyClusterAttributeRequest) ToJsonString() string {
@@ -4062,6 +4086,8 @@ func (r *ModifyClusterAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ProjectId")
 	delete(f, "ClusterName")
 	delete(f, "ClusterDesc")
+	delete(f, "ClusterLevel")
+	delete(f, "AutoUpgradeClusterLevel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAttributeRequest has unknown keys!", "")
 	}
@@ -4083,6 +4109,14 @@ type ModifyClusterAttributeResponse struct {
 		// Cluster description
 	// Note: this field may return null, indicating that no valid values can be obtained.
 		ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+		// Cluster specification
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+		// Auto-upgrades cluster specification
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
