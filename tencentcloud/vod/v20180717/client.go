@@ -1802,6 +1802,7 @@ func NewDeleteClassResponse() (response *DeleteClassResponse) {
 // * Otherwise, [delete the media files](https://intl.cloud.tencent.com/document/product/266/31764?from_cn_redirect=1) and subcategories first before deleting the category.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_CLASSID = "InvalidParameterValue.ClassId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -1816,6 +1817,7 @@ func (c *Client) DeleteClass(request *DeleteClassRequest) (response *DeleteClass
 // * Otherwise, [delete the media files](https://intl.cloud.tencent.com/document/product/266/31764?from_cn_redirect=1) and subcategories first before deleting the category.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_CLASSID = "InvalidParameterValue.ClassId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2185,6 +2187,7 @@ func NewDeleteSnapshotByTimeOffsetTemplateResponse() (response *DeleteSnapshotBy
 // This API is used to delete a custom time point screencapturing template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2196,6 +2199,7 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTim
 // This API is used to delete a custom time point screencapturing template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -3316,6 +3320,73 @@ func (c *Client) DescribeMediaInfosWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeMediaPlayStatDetailsRequest() (request *DescribeMediaPlayStatDetailsRequest) {
+    request = &DescribeMediaPlayStatDetailsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeMediaPlayStatDetails")
+    
+    
+    return
+}
+
+func NewDescribeMediaPlayStatDetailsResponse() (response *DescribeMediaPlayStatDetailsResponse) {
+    response = &DescribeMediaPlayStatDetailsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeMediaPlayStatDetails
+// This API is used to query the playback statistics of a media file at the specified granularity.
+//
+// * You can query playback statistics in the past year.
+//
+// * If the granularity is an hour, the start and end time cannot be more than seven days apart.
+//
+// * If the granularity is a day, the start and end time cannot be more than 90 days apart.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_INTERVAL = "InvalidParameterValue.Interval"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+func (c *Client) DescribeMediaPlayStatDetails(request *DescribeMediaPlayStatDetailsRequest) (response *DescribeMediaPlayStatDetailsResponse, err error) {
+    return c.DescribeMediaPlayStatDetailsWithContext(context.Background(), request)
+}
+
+// DescribeMediaPlayStatDetails
+// This API is used to query the playback statistics of a media file at the specified granularity.
+//
+// * You can query playback statistics in the past year.
+//
+// * If the granularity is an hour, the start and end time cannot be more than seven days apart.
+//
+// * If the granularity is a day, the start and end time cannot be more than 90 days apart.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_INTERVAL = "InvalidParameterValue.Interval"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+func (c *Client) DescribeMediaPlayStatDetailsWithContext(ctx context.Context, request *DescribeMediaPlayStatDetailsRequest) (response *DescribeMediaPlayStatDetailsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMediaPlayStatDetailsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMediaPlayStatDetails require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMediaPlayStatDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMediaProcessUsageDataRequest() (request *DescribeMediaProcessUsageDataRequest) {
     request = &DescribeMediaProcessUsageDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4286,109 +4357,6 @@ func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeWordSamplesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewEditMediaRequest() (request *EditMediaRequest) {
-    request = &EditMediaRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vod", APIVersion, "EditMedia")
-    
-    
-    return
-}
-
-func NewEditMediaResponse() (response *EditMediaResponse) {
-    response = &EditMediaResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// EditMedia
-// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
-//
-// 
-//
-// 1. Clipping a file in VOD to generate a new video;
-//
-// 2. Splicing multiple files in VOD to generate a new video;
-//
-// 3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
-//
-// 4. Directly generating a new video from a stream in VOD;
-//
-// 5. Clipping a stream in VOD to generate a new video;
-//
-// 6. Splicing multiple streams in VOD to generate a new video;
-//
-// 7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
-//
-// 
-//
-// You can also specify whether to perform a task flow for the generated new video.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
-//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
-    return c.EditMediaWithContext(context.Background(), request)
-}
-
-// EditMedia
-// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
-//
-// 
-//
-// 1. Clipping a file in VOD to generate a new video;
-//
-// 2. Splicing multiple files in VOD to generate a new video;
-//
-// 3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
-//
-// 4. Directly generating a new video from a stream in VOD;
-//
-// 5. Clipping a stream in VOD to generate a new video;
-//
-// 6. Splicing multiple streams in VOD to generate a new video;
-//
-// 7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
-//
-// 
-//
-// You can also specify whether to perform a task flow for the generated new video.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
-//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
-//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaRequest) (response *EditMediaResponse, err error) {
-    if request == nil {
-        request = NewEditMediaRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("EditMedia require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewEditMediaResponse()
     err = c.Send(request, response)
     return
 }
@@ -6198,6 +6166,87 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     return
 }
 
+func NewProcessImageRequest() (request *ProcessImageRequest) {
+    request = &ProcessImageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ProcessImage")
+    
+    
+    return
+}
+
+func NewProcessImageResponse() (response *ProcessImageResponse) {
+    response = &ProcessImageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ProcessImage
+// This API is used to initiate an image processing task. Image processing operations include the following:
+//
+// 
+//
+// 1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+//
+// 
+//
+// ><li>File size: < 5 MB</li>
+//
+// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+//
+// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ProcessImage(request *ProcessImageRequest) (response *ProcessImageResponse, err error) {
+    return c.ProcessImageWithContext(context.Background(), request)
+}
+
+// ProcessImage
+// This API is used to initiate an image processing task. Image processing operations include the following:
+//
+// 
+//
+// 1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+//
+// 
+//
+// ><li>File size: < 5 MB</li>
+//
+// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+//
+// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ProcessImageWithContext(ctx context.Context, request *ProcessImageRequest) (response *ProcessImageResponse, err error) {
+    if request == nil {
+        request = NewProcessImageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessImage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessImageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewProcessMediaRequest() (request *ProcessMediaRequest) {
     request = &ProcessMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7125,75 +7174,6 @@ func (c *Client) SimpleHlsClipWithContext(ctx context.Context, request *SimpleHl
     request.SetContext(ctx)
     
     response = NewSimpleHlsClipResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewWeChatMiniProgramPublishRequest() (request *WeChatMiniProgramPublishRequest) {
-    request = &WeChatMiniProgramPublishRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vod", APIVersion, "WeChatMiniProgramPublish")
-    
-    
-    return
-}
-
-func NewWeChatMiniProgramPublishResponse() (response *WeChatMiniProgramPublishResponse) {
-    response = &WeChatMiniProgramPublishResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// WeChatMiniProgramPublish
-// This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_NOPRIVILEGES = "FailedOperation.NoPrivileges"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
-//  INVALIDPARAMETERVALUE_FILETYPE = "InvalidParameterValue.FileType"
-//  INVALIDPARAMETERVALUE_SOURCEDEFINITION = "InvalidParameterValue.SourceDefinition"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) WeChatMiniProgramPublish(request *WeChatMiniProgramPublishRequest) (response *WeChatMiniProgramPublishResponse, err error) {
-    return c.WeChatMiniProgramPublishWithContext(context.Background(), request)
-}
-
-// WeChatMiniProgramPublish
-// This API is used to publish a VOD video on WeChat Mini Program for playback in the WeChat Mini Program player.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_NOPRIVILEGES = "FailedOperation.NoPrivileges"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
-//  INVALIDPARAMETERVALUE_FILETYPE = "InvalidParameterValue.FileType"
-//  INVALIDPARAMETERVALUE_SOURCEDEFINITION = "InvalidParameterValue.SourceDefinition"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) WeChatMiniProgramPublishWithContext(ctx context.Context, request *WeChatMiniProgramPublishRequest) (response *WeChatMiniProgramPublishResponse, err error) {
-    if request == nil {
-        request = NewWeChatMiniProgramPublishRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("WeChatMiniProgramPublish require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewWeChatMiniProgramPublishResponse()
     err = c.Send(request, response)
     return
 }

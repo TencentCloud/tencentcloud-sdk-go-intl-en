@@ -358,6 +358,9 @@ type CreateTawInstanceRequest struct {
 
 	// Billing for data storage
 	PeriodRetain *string `json:"PeriodRetain,omitempty" name:"PeriodRetain"`
+
+	// Instance purchase channel. Valid value: `cdn`.
+	BuyingChannel *string `json:"BuyingChannel,omitempty" name:"BuyingChannel"`
 }
 
 func (r *CreateTawInstanceRequest) ToJsonString() string {
@@ -380,6 +383,7 @@ func (r *CreateTawInstanceRequest) FromJsonString(s string) error {
 	delete(f, "InstanceDesc")
 	delete(f, "CountNum")
 	delete(f, "PeriodRetain")
+	delete(f, "BuyingChannel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTawInstanceRequest has unknown keys!", "")
 	}
@@ -3196,7 +3200,7 @@ type DescribeLogListRequest struct {
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Query statement. Maximum length: 4096
+	// Query statement, which can contain up to 4,096 characters.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
 	// End time
@@ -3461,66 +3465,6 @@ func (r *DescribeProjectLimitsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeProjectsRequest struct {
-	*tchttp.BaseRequest
-
-	// Number of items per page (integer)
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Page number (integer)
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Filter
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeProjectsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeProjectsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeProjectsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of items in the list
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Project list
-		ProjectSet []*RumProject `json:"ProjectSet,omitempty" name:"ProjectSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeProjectsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeProjectsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribePvListRequest struct {
 	*tchttp.BaseRequest
 
@@ -3697,63 +3641,6 @@ func (r *DescribeReleaseFilesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeScoresRequest struct {
-	*tchttp.BaseRequest
-
-	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// Project ID
-	ID *int64 `json:"ID,omitempty" name:"ID"`
-}
-
-func (r *DescribeScoresRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeScoresRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "EndTime")
-	delete(f, "StartTime")
-	delete(f, "ID")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScoresRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeScoresResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array
-		ScoreSet []*ScoreInfo `json:"ScoreSet,omitempty" name:"ScoreSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeScoresResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeScoresResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeTawAreasRequest struct {
 	*tchttp.BaseRequest
 
@@ -3819,86 +3706,6 @@ func (r *DescribeTawAreasResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTawAreasResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeTawInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Billing status
-	ChargeStatuses []*int64 `json:"ChargeStatuses,omitempty" name:"ChargeStatuses"`
-
-	// Billing type
-	ChargeTypes []*int64 `json:"ChargeTypes,omitempty" name:"ChargeTypes"`
-
-	// Pagination limit
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Pagination offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Region ID
-	AreaIds []*int64 `json:"AreaIds,omitempty" name:"AreaIds"`
-
-	// Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: terminating; 8: terminated)
-	InstanceStatuses []*int64 `json:"InstanceStatuses,omitempty" name:"InstanceStatuses"`
-
-	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-	// Filter parameter
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeTawInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTawInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ChargeStatuses")
-	delete(f, "ChargeTypes")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "AreaIds")
-	delete(f, "InstanceStatuses")
-	delete(f, "InstanceIds")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTawInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeTawInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance list
-		InstanceSet []*RumInstanceInfo `json:"InstanceSet,omitempty" name:"InstanceSet"`
-
-		// Total number of instances
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeTawInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTawInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4010,15 +3817,6 @@ func (r *DescribeWhitelistsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeWhitelistsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type Filter struct {
-
-	// One or more filter values.
-	Values []*string `json:"Values,omitempty" name:"Values"`
-
-	// Filter name.
-	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type LogExport struct {
@@ -4362,97 +4160,6 @@ type RumAreaInfo struct {
 	AreaKey *string `json:"AreaKey,omitempty" name:"AreaKey"`
 }
 
-type RumInstanceInfo struct {
-
-	// Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: deleted)
-	InstanceStatus *int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
-
-	// Region ID
-	AreaId *int64 `json:"AreaId,omitempty" name:"AreaId"`
-
-	// Tag list
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Cluster ID
-	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Instance description
-	InstanceDesc *string `json:"InstanceDesc,omitempty" name:"InstanceDesc"`
-
-	// Billing status (1: in use; 2: expired; 3: terminated; 4: assigning; 5: assignment failed)
-	ChargeStatus *int64 `json:"ChargeStatus,omitempty" name:"ChargeStatus"`
-
-	// Billing type (1: free; 2: prepaid; 3: postpaid)
-	ChargeType *int64 `json:"ChargeType,omitempty" name:"ChargeType"`
-
-	// Update time
-	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
-
-	// Data retention period (in days)
-	DataRetentionDays *int64 `json:"DataRetentionDays,omitempty" name:"DataRetentionDays"`
-
-	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-	// Creation time
-	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
-}
-
-type RumProject struct {
-
-	// Project name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Creator ID
-	Creator *string `json:"Creator,omitempty" name:"Creator"`
-
-	// Instance ID
-	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
-
-	// Project type
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Project repository address
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Repo *string `json:"Repo,omitempty" name:"Repo"`
-
-	// Project URL
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	URL *string `json:"URL,omitempty" name:"URL"`
-
-	// Project sample rate
-	Rate *string `json:"Rate,omitempty" name:"Rate"`
-
-	// Unique project key (12 characters)
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Whether to enable URL aggregation
-	EnableURLGroup *int64 `json:"EnableURLGroup,omitempty" name:"EnableURLGroup"`
-
-	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-	// Project ID
-	ID *int64 `json:"ID,omitempty" name:"ID"`
-
-	// Instance key
-	InstanceKey *string `json:"InstanceKey,omitempty" name:"InstanceKey"`
-
-	// Project description
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Desc *string `json:"Desc,omitempty" name:"Desc"`
-
-	// Starred status. 1: yes; 0: no
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsStar *int64 `json:"IsStar,omitempty" name:"IsStar"`
-}
-
 type RumPvInfo struct {
 
 	// Project ID
@@ -4476,48 +4183,6 @@ type RumUvInfo struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-}
-
-type ScoreInfo struct {
-
-	// duration
-	StaticDuration *string `json:"StaticDuration,omitempty" name:"StaticDuration"`
-
-	// pv
-	PagePv *string `json:"PagePv,omitempty" name:"PagePv"`
-
-	// Failure
-	ApiFail *string `json:"ApiFail,omitempty" name:"ApiFail"`
-
-	// Request
-	ApiNum *string `json:"ApiNum,omitempty" name:"ApiNum"`
-
-	// fail
-	StaticFail *string `json:"StaticFail,omitempty" name:"StaticFail"`
-
-	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
-
-	// uv
-	PageUv *string `json:"PageUv,omitempty" name:"PageUv"`
-
-	// Number of requests
-	ApiDuration *string `json:"ApiDuration,omitempty" name:"ApiDuration"`
-
-	// Score
-	Score *string `json:"Score,omitempty" name:"Score"`
-
-	// error
-	PageError *string `json:"PageError,omitempty" name:"PageError"`
-
-	// num
-	StaticNum *string `json:"StaticNum,omitempty" name:"StaticNum"`
-
-	// num
-	RecordNum *int64 `json:"RecordNum,omitempty" name:"RecordNum"`
-
-	// Duration
-	PageDuration *string `json:"PageDuration,omitempty" name:"PageDuration"`
 }
 
 type StopInstanceRequest struct {

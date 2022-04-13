@@ -75,6 +75,7 @@ func NewCreateLogExportResponse() (response *CreateLogExportResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateLogExport(request *CreateLogExportRequest) (response *CreateLogExportResponse, err error) {
     return c.CreateLogExportWithContext(context.Background(), request)
 }
@@ -92,6 +93,7 @@ func (c *Client) CreateLogExport(request *CreateLogExportRequest) (response *Cre
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateLogExportWithContext(ctx context.Context, request *CreateLogExportRequest) (response *CreateLogExportResponse, err error) {
     if request == nil {
         request = NewCreateLogExportRequest()
@@ -130,6 +132,7 @@ func NewCreateOfflineLogConfigResponse() (response *CreateOfflineLogConfigRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOfflineLogConfig(request *CreateOfflineLogConfigRequest) (response *CreateOfflineLogConfigResponse, err error) {
     return c.CreateOfflineLogConfigWithContext(context.Background(), request)
 }
@@ -139,6 +142,7 @@ func (c *Client) CreateOfflineLogConfig(request *CreateOfflineLogConfigRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOfflineLogConfigWithContext(ctx context.Context, request *CreateOfflineLogConfigRequest) (response *CreateOfflineLogConfigResponse, err error) {
     if request == nil {
         request = NewCreateOfflineLogConfigRequest()
@@ -2881,6 +2885,7 @@ func NewDescribeLogExportsResponse() (response *DescribeLogExportsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLogExports(request *DescribeLogExportsRequest) (response *DescribeLogExportsResponse, err error) {
     return c.DescribeLogExportsWithContext(context.Background(), request)
 }
@@ -2898,6 +2903,7 @@ func (c *Client) DescribeLogExports(request *DescribeLogExportsRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLogExportsWithContext(ctx context.Context, request *DescribeLogExportsRequest) (response *DescribeLogExportsResponse, err error) {
     if request == nil {
         request = NewDescribeLogExportsRequest()
@@ -3267,71 +3273,6 @@ func (c *Client) DescribeProjectLimitsWithContext(ctx context.Context, request *
     return
 }
 
-func NewDescribeProjectsRequest() (request *DescribeProjectsRequest) {
-    request = &DescribeProjectsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("rum", APIVersion, "DescribeProjects")
-    
-    
-    return
-}
-
-func NewDescribeProjectsResponse() (response *DescribeProjectsResponse) {
-    response = &DescribeProjectsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeProjects
-// This API is used to get the list of projects (under teams created by an instance).
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DescribeProjects(request *DescribeProjectsRequest) (response *DescribeProjectsResponse, err error) {
-    return c.DescribeProjectsWithContext(context.Background(), request)
-}
-
-// DescribeProjects
-// This API is used to get the list of projects (under teams created by an instance).
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DescribeProjectsWithContext(ctx context.Context, request *DescribeProjectsRequest) (response *DescribeProjectsResponse, err error) {
-    if request == nil {
-        request = NewDescribeProjectsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeProjects require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeProjectsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribePvListRequest() (request *DescribePvListRequest) {
     request = &DescribePvListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3591,91 +3532,6 @@ func (c *Client) DescribeReleaseFilesWithContext(ctx context.Context, request *D
     return
 }
 
-func NewDescribeScoresRequest() (request *DescribeScoresRequest) {
-    request = &DescribeScoresRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("rum", APIVersion, "DescribeScores")
-    
-    
-    return
-}
-
-func NewDescribeScoresResponse() (response *DescribeScoresResponse) {
-    response = &DescribeScoresResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeScores
-// This API is used to get the list of homepage scores.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
-//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeScores(request *DescribeScoresRequest) (response *DescribeScoresResponse, err error) {
-    return c.DescribeScoresWithContext(context.Background(), request)
-}
-
-// DescribeScores
-// This API is used to get the list of homepage scores.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
-//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeScoresWithContext(ctx context.Context, request *DescribeScoresRequest) (response *DescribeScoresResponse, err error) {
-    if request == nil {
-        request = NewDescribeScoresRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeScores require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeScoresResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeTawAreasRequest() (request *DescribeTawAreasRequest) {
     request = &DescribeTawAreasRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3725,59 +3581,6 @@ func (c *Client) DescribeTawAreasWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeTawAreasResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeTawInstancesRequest() (request *DescribeTawInstancesRequest) {
-    request = &DescribeTawInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("rum", APIVersion, "DescribeTawInstances")
-    
-    
-    return
-}
-
-func NewDescribeTawInstancesResponse() (response *DescribeTawInstancesResponse) {
-    response = &DescribeTawInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeTawInstances
-// This API is used to query instance information.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeTawInstances(request *DescribeTawInstancesRequest) (response *DescribeTawInstancesResponse, err error) {
-    return c.DescribeTawInstancesWithContext(context.Background(), request)
-}
-
-// DescribeTawInstances
-// This API is used to query instance information.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeTawInstancesWithContext(ctx context.Context, request *DescribeTawInstancesRequest) (response *DescribeTawInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeTawInstancesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeTawInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeTawInstancesResponse()
     err = c.Send(request, response)
     return
 }
