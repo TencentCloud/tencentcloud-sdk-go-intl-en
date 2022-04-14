@@ -2116,85 +2116,6 @@ func (c *Client) DescribeCCLevelPolicyWithContext(ctx context.Context, request *
     return
 }
 
-func NewDescribeCCPrecisionPlyListRequest() (request *DescribeCCPrecisionPlyListRequest) {
-    request = &DescribeCCPrecisionPlyListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCPrecisionPlyList")
-    
-    
-    return
-}
-
-func NewDescribeCCPrecisionPlyListResponse() (response *DescribeCCPrecisionPlyListResponse) {
-    response = &DescribeCCPrecisionPlyListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCCPrecisionPlyList
-// This API is used to obtain a CC precise protection policy.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCCPrecisionPlyList(request *DescribeCCPrecisionPlyListRequest) (response *DescribeCCPrecisionPlyListResponse, err error) {
-    return c.DescribeCCPrecisionPlyListWithContext(context.Background(), request)
-}
-
-// DescribeCCPrecisionPlyList
-// This API is used to obtain a CC precise protection policy.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCCPrecisionPlyListWithContext(ctx context.Context, request *DescribeCCPrecisionPlyListRequest) (response *DescribeCCPrecisionPlyListResponse, err error) {
-    if request == nil {
-        request = NewDescribeCCPrecisionPlyListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCCPrecisionPlyList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCCPrecisionPlyListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeCCThresholdListRequest() (request *DescribeCCThresholdListRequest) {
     request = &DescribeCCThresholdListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2353,106 +2274,6 @@ func (c *Client) DescribeCCTrendWithContext(ctx context.Context, request *Descri
     return
 }
 
-func NewDescribeCcBlackWhiteIpListRequest() (request *DescribeCcBlackWhiteIpListRequest) {
-    request = &DescribeCcBlackWhiteIpListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcBlackWhiteIpList")
-    
-    
-    return
-}
-
-func NewDescribeCcBlackWhiteIpListResponse() (response *DescribeCcBlackWhiteIpListResponse) {
-    response = &DescribeCcBlackWhiteIpListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCcBlackWhiteIpList
-// This API is used to obtain a layer-4 access control list.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCcBlackWhiteIpList(request *DescribeCcBlackWhiteIpListRequest) (response *DescribeCcBlackWhiteIpListResponse, err error) {
-    return c.DescribeCcBlackWhiteIpListWithContext(context.Background(), request)
-}
-
-// DescribeCcBlackWhiteIpList
-// This API is used to obtain a layer-4 access control list.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCcBlackWhiteIpListWithContext(ctx context.Context, request *DescribeCcBlackWhiteIpListRequest) (response *DescribeCcBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDescribeCcBlackWhiteIpListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCcBlackWhiteIpList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCcBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeCcGeoIPBlockConfigListRequest() (request *DescribeCcGeoIPBlockConfigListRequest) {
-    request = &DescribeCcGeoIPBlockConfigListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcGeoIPBlockConfigList")
-    
-    
-    return
-}
-
-func NewDescribeCcGeoIPBlockConfigListResponse() (response *DescribeCcGeoIPBlockConfigListResponse) {
-    response = &DescribeCcGeoIPBlockConfigListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCcGeoIPBlockConfigList
-// This API is used to obtain a list of regional blocking configurations.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCcGeoIPBlockConfigList(request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
-    return c.DescribeCcGeoIPBlockConfigListWithContext(context.Background(), request)
-}
-
-// DescribeCcGeoIPBlockConfigList
-// This API is used to obtain a list of regional blocking configurations.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCcGeoIPBlockConfigListWithContext(ctx context.Context, request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
-    if request == nil {
-        request = NewDescribeCcGeoIPBlockConfigListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCcGeoIPBlockConfigList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCcGeoIPBlockConfigListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
     request = &DescribeDDoSTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2474,7 +2295,22 @@ func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
 // This API is used to get DDoS attack traffic bandwidth and attack packet rate.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     return c.DescribeDDoSTrendWithContext(context.Background(), request)
@@ -2484,7 +2320,22 @@ func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response 
 // This API is used to get DDoS attack traffic bandwidth and attack packet rate.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrendWithContext(ctx context.Context, request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     if request == nil {
@@ -2523,7 +2374,22 @@ func NewDescribeDefaultAlarmThresholdResponse() (response *DescribeDefaultAlarmT
 // This API is used to get the default alarm threshold of an IP.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     return c.DescribeDefaultAlarmThresholdWithContext(context.Background(), request)
@@ -2533,7 +2399,22 @@ func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThre
 // This API is used to get the default alarm threshold of an IP.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThresholdWithContext(ctx context.Context, request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     if request == nil {
@@ -2669,67 +2550,6 @@ func (c *Client) DescribeListBGPIPInstancesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeListBGPIPInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeListBGPInstancesRequest() (request *DescribeListBGPInstancesRequest) {
-    request = &DescribeListBGPInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListBGPInstances")
-    
-    
-    return
-}
-
-func NewDescribeListBGPInstancesResponse() (response *DescribeListBGPInstancesResponse) {
-    response = &DescribeListBGPInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeListBGPInstances
-// This API is used to get a list of Anti-DDoS Pro instances.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeListBGPInstances(request *DescribeListBGPInstancesRequest) (response *DescribeListBGPInstancesResponse, err error) {
-    return c.DescribeListBGPInstancesWithContext(context.Background(), request)
-}
-
-// DescribeListBGPInstances
-// This API is used to get a list of Anti-DDoS Pro instances.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeListBGPInstancesWithContext(ctx context.Context, request *DescribeListBGPInstancesRequest) (response *DescribeListBGPInstancesResponse, err error) {
-    if request == nil {
-        request = NewDescribeListBGPInstancesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeListBGPInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeListBGPInstancesResponse()
     err = c.Send(request, response)
     return
 }

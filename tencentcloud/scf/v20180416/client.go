@@ -235,239 +235,6 @@ func (c *Client) CreateAliasWithContext(ctx context.Context, request *CreateAlia
     return
 }
 
-func NewCreateFunctionRequest() (request *CreateFunctionRequest) {
-    request = &CreateFunctionRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("scf", APIVersion, "CreateFunction")
-    
-    
-    return
-}
-
-func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
-    response = &CreateFunctionResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateFunction
-// This API is used to create a function based on the input parameters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
-//  FAILEDOPERATION_CREATEFUNCTION = "FailedOperation.CreateFunction"
-//  FAILEDOPERATION_NAMESPACE = "FailedOperation.Namespace"
-//  FAILEDOPERATION_OPENSERVICE = "FailedOperation.OpenService"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
-//  FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
-//  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
-//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
-//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
-//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
-//  INVALIDPARAMETERVALUE_ARGS = "InvalidParameterValue.Args"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
-//  INVALIDPARAMETERVALUE_CFSSTRUCTIONERROR = "InvalidParameterValue.CfsStructionError"
-//  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
-//  INVALIDPARAMETERVALUE_CODE = "InvalidParameterValue.Code"
-//  INVALIDPARAMETERVALUE_CODESECRET = "InvalidParameterValue.CodeSecret"
-//  INVALIDPARAMETERVALUE_CODESOURCE = "InvalidParameterValue.CodeSource"
-//  INVALIDPARAMETERVALUE_COMMAND = "InvalidParameterValue.Command"
-//  INVALIDPARAMETERVALUE_COS = "InvalidParameterValue.Cos"
-//  INVALIDPARAMETERVALUE_COSBUCKETNAME = "InvalidParameterValue.CosBucketName"
-//  INVALIDPARAMETERVALUE_COSBUCKETREGION = "InvalidParameterValue.CosBucketRegion"
-//  INVALIDPARAMETERVALUE_COSOBJECTNAME = "InvalidParameterValue.CosObjectName"
-//  INVALIDPARAMETERVALUE_DEADLETTERCONFIG = "InvalidParameterValue.DeadLetterConfig"
-//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
-//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
-//  INVALIDPARAMETERVALUE_EIPCONFIG = "InvalidParameterValue.EipConfig"
-//  INVALIDPARAMETERVALUE_ENVIRONMENT = "InvalidParameterValue.Environment"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTEXCEEDEDLIMIT = "InvalidParameterValue.EnvironmentExceededLimit"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTSYSTEMPROTECT = "InvalidParameterValue.EnvironmentSystemProtect"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_GITCOMMITID = "InvalidParameterValue.GitCommitId"
-//  INVALIDPARAMETERVALUE_GITURL = "InvalidParameterValue.GitUrl"
-//  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
-//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
-//  INVALIDPARAMETERVALUE_IMAGEURI = "InvalidParameterValue.ImageUri"
-//  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
-//  INVALIDPARAMETERVALUE_MEMORYSIZE = "InvalidParameterValue.MemorySize"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_NODESPEC = "InvalidParameterValue.NodeSpec"
-//  INVALIDPARAMETERVALUE_NODETYPE = "InvalidParameterValue.NodeType"
-//  INVALIDPARAMETERVALUE_PROTOCOLTYPE = "InvalidParameterValue.ProtocolType"
-//  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
-//  INVALIDPARAMETERVALUE_REGISTRYID = "InvalidParameterValue.RegistryId"
-//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
-//  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
-//  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
-//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
-//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
-//  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
-//  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
-//  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
-//  LIMITEXCEEDED_FUNCTION = "LimitExceeded.Function"
-//  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
-//  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"
-//  LIMITEXCEEDED_TIMEOUT = "LimitExceeded.Timeout"
-//  MISSINGPARAMETER_CODE = "MissingParameter.Code"
-//  MISSINGPARAMETER_RUNTIME = "MissingParameter.Runtime"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINUSE_FUNCTION = "ResourceInUse.Function"
-//  RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
-//  RESOURCENOTFOUND_CFSSTATUSERROR = "ResourceNotFound.CfsStatusError"
-//  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
-//  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
-//  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
-//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
-//  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
-//  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
-//  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-//  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
-//  RESOURCEUNAVAILABLE_NAMESPACE = "ResourceUnavailable.Namespace"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
-//  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
-//  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
-//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
-func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
-    return c.CreateFunctionWithContext(context.Background(), request)
-}
-
-// CreateFunction
-// This API is used to create a function based on the input parameters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
-//  FAILEDOPERATION_CREATEFUNCTION = "FailedOperation.CreateFunction"
-//  FAILEDOPERATION_NAMESPACE = "FailedOperation.Namespace"
-//  FAILEDOPERATION_OPENSERVICE = "FailedOperation.OpenService"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
-//  FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
-//  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
-//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
-//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
-//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
-//  INVALIDPARAMETERVALUE_ARGS = "InvalidParameterValue.Args"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
-//  INVALIDPARAMETERVALUE_CFSSTRUCTIONERROR = "InvalidParameterValue.CfsStructionError"
-//  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
-//  INVALIDPARAMETERVALUE_CODE = "InvalidParameterValue.Code"
-//  INVALIDPARAMETERVALUE_CODESECRET = "InvalidParameterValue.CodeSecret"
-//  INVALIDPARAMETERVALUE_CODESOURCE = "InvalidParameterValue.CodeSource"
-//  INVALIDPARAMETERVALUE_COMMAND = "InvalidParameterValue.Command"
-//  INVALIDPARAMETERVALUE_COS = "InvalidParameterValue.Cos"
-//  INVALIDPARAMETERVALUE_COSBUCKETNAME = "InvalidParameterValue.CosBucketName"
-//  INVALIDPARAMETERVALUE_COSBUCKETREGION = "InvalidParameterValue.CosBucketRegion"
-//  INVALIDPARAMETERVALUE_COSOBJECTNAME = "InvalidParameterValue.CosObjectName"
-//  INVALIDPARAMETERVALUE_DEADLETTERCONFIG = "InvalidParameterValue.DeadLetterConfig"
-//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
-//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
-//  INVALIDPARAMETERVALUE_EIPCONFIG = "InvalidParameterValue.EipConfig"
-//  INVALIDPARAMETERVALUE_ENVIRONMENT = "InvalidParameterValue.Environment"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTEXCEEDEDLIMIT = "InvalidParameterValue.EnvironmentExceededLimit"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTSYSTEMPROTECT = "InvalidParameterValue.EnvironmentSystemProtect"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_GITCOMMITID = "InvalidParameterValue.GitCommitId"
-//  INVALIDPARAMETERVALUE_GITURL = "InvalidParameterValue.GitUrl"
-//  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
-//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
-//  INVALIDPARAMETERVALUE_IMAGEURI = "InvalidParameterValue.ImageUri"
-//  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
-//  INVALIDPARAMETERVALUE_MEMORYSIZE = "InvalidParameterValue.MemorySize"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_NODESPEC = "InvalidParameterValue.NodeSpec"
-//  INVALIDPARAMETERVALUE_NODETYPE = "InvalidParameterValue.NodeType"
-//  INVALIDPARAMETERVALUE_PROTOCOLTYPE = "InvalidParameterValue.ProtocolType"
-//  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
-//  INVALIDPARAMETERVALUE_REGISTRYID = "InvalidParameterValue.RegistryId"
-//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
-//  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
-//  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
-//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  INVALIDPARAMETERVALUE_VPCNOTSETWHENOPENCFS = "InvalidParameterValue.VpcNotSetWhenOpenCfs"
-//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
-//  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
-//  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
-//  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
-//  LIMITEXCEEDED_FUNCTION = "LimitExceeded.Function"
-//  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
-//  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"
-//  LIMITEXCEEDED_TIMEOUT = "LimitExceeded.Timeout"
-//  MISSINGPARAMETER_CODE = "MissingParameter.Code"
-//  MISSINGPARAMETER_RUNTIME = "MissingParameter.Runtime"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINUSE_FUNCTION = "ResourceInUse.Function"
-//  RESOURCEINUSE_FUNCTIONNAME = "ResourceInUse.FunctionName"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_CFSMOUNTINSNOTMATCH = "ResourceNotFound.CfsMountInsNotMatch"
-//  RESOURCENOTFOUND_CFSSTATUSERROR = "ResourceNotFound.CfsStatusError"
-//  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
-//  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
-//  RESOURCENOTFOUND_DEMO = "ResourceNotFound.Demo"
-//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
-//  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
-//  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
-//  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-//  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
-//  RESOURCEUNAVAILABLE_NAMESPACE = "ResourceUnavailable.Namespace"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
-//  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
-//  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
-//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
-func (c *Client) CreateFunctionWithContext(ctx context.Context, request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
-    if request == nil {
-        request = NewCreateFunctionRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateFunction require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateFunctionResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
     request = &CreateNamespaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1342,85 +1109,6 @@ func (c *Client) GetAsyncEventStatusWithContext(ctx context.Context, request *Ge
     return
 }
 
-func NewGetFunctionRequest() (request *GetFunctionRequest) {
-    request = &GetFunctionRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("scf", APIVersion, "GetFunction")
-    
-    
-    return
-}
-
-func NewGetFunctionResponse() (response *GetFunctionResponse) {
-    response = &GetFunctionResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// GetFunction
-// This API is used to obtain function details, such as name, code, handler, associated trigger, and timeout.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_APIGW = "FailedOperation.Apigw"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXCEPTION = "InternalError.Exception"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_CODESECRET = "InvalidParameterValue.CodeSecret"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
-//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
-//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
-func (c *Client) GetFunction(request *GetFunctionRequest) (response *GetFunctionResponse, err error) {
-    return c.GetFunctionWithContext(context.Background(), request)
-}
-
-// GetFunction
-// This API is used to obtain function details, such as name, code, handler, associated trigger, and timeout.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_APIGW = "FailedOperation.Apigw"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXCEPTION = "InternalError.Exception"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_CODESECRET = "InvalidParameterValue.CodeSecret"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
-//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
-//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNAUTHORIZEDOPERATION_CODESECRET = "UnauthorizedOperation.CodeSecret"
-func (c *Client) GetFunctionWithContext(ctx context.Context, request *GetFunctionRequest) (response *GetFunctionResponse, err error) {
-    if request == nil {
-        request = NewGetFunctionRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("GetFunction require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewGetFunctionResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewGetFunctionAddressRequest() (request *GetFunctionAddressRequest) {
     request = &GetFunctionAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1740,6 +1428,7 @@ func NewGetProvisionedConcurrencyConfigResponse() (response *GetProvisionedConcu
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetProvisionedConcurrencyConfig(request *GetProvisionedConcurrencyConfigRequest) (response *GetProvisionedConcurrencyConfigResponse, err error) {
     return c.GetProvisionedConcurrencyConfigWithContext(context.Background(), request)
@@ -1757,6 +1446,7 @@ func (c *Client) GetProvisionedConcurrencyConfig(request *GetProvisionedConcurre
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONVERSION = "ResourceNotFound.FunctionVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) GetProvisionedConcurrencyConfigWithContext(ctx context.Context, request *GetProvisionedConcurrencyConfigRequest) (response *GetProvisionedConcurrencyConfigResponse, err error) {
     if request == nil {
@@ -2002,6 +1692,7 @@ func NewInvokeFunctionResponse() (response *InvokeFunctionResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CLIENTCONTEXT = "InvalidParameterValue.ClientContext"
 //  INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
@@ -2023,6 +1714,7 @@ func (c *Client) InvokeFunction(request *InvokeFunctionRequest) (response *Invok
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CLIENTCONTEXT = "InvalidParameterValue.ClientContext"
 //  INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
@@ -2193,6 +1885,7 @@ func NewListFunctionsResponse() (response *ListFunctionsResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
@@ -2213,6 +1906,7 @@ func (c *Client) ListFunctions(request *ListFunctionsRequest) (response *ListFun
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
@@ -2632,6 +2326,7 @@ func NewPublishVersionResponse() (response *PublishVersionResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -2652,6 +2347,7 @@ func (c *Client) PublishVersion(request *PublishVersionRequest) (response *Publi
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -3160,163 +2856,6 @@ func (c *Client) UpdateFunctionCodeWithContext(ctx context.Context, request *Upd
     request.SetContext(ctx)
     
     response = NewUpdateFunctionCodeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpdateFunctionConfigurationRequest() (request *UpdateFunctionConfigurationRequest) {
-    request = &UpdateFunctionConfigurationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("scf", APIVersion, "UpdateFunctionConfiguration")
-    
-    
-    return
-}
-
-func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigurationResponse) {
-    response = &UpdateFunctionConfigurationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// UpdateFunctionConfiguration
-// This API is used to update the function configuration based on the input parameters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
-//  FAILEDOPERATION_DEBUGMODEUPDATETIMEOUTFAIL = "FailedOperation.DebugModeUpdateTimeOutFail"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
-//  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
-//  FAILEDOPERATION_UPDATEFUNCTIONCONFIGURATION = "FailedOperation.UpdateFunctionConfiguration"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
-//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
-//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
-//  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
-//  INVALIDPARAMETERVALUE_CLSROLE = "InvalidParameterValue.ClsRole"
-//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
-//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
-//  INVALIDPARAMETERVALUE_EIPCONFIG = "InvalidParameterValue.EipConfig"
-//  INVALIDPARAMETERVALUE_ENVIRONMENT = "InvalidParameterValue.Environment"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTEXCEEDEDLIMIT = "InvalidParameterValue.EnvironmentExceededLimit"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTSYSTEMPROTECT = "InvalidParameterValue.EnvironmentSystemProtect"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
-//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
-//  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
-//  INVALIDPARAMETERVALUE_MEMORYSIZE = "InvalidParameterValue.MemorySize"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_NODESPEC = "InvalidParameterValue.NodeSpec"
-//  INVALIDPARAMETERVALUE_NODETYPE = "InvalidParameterValue.NodeType"
-//  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
-//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
-//  INVALIDPARAMETERVALUE_SYSTEMENVIRONMENT = "InvalidParameterValue.SystemEnvironment"
-//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
-//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
-//  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
-//  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
-//  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"
-//  LIMITEXCEEDED_TIMEOUT = "LimitExceeded.Timeout"
-//  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
-//  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
-//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
-//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
-//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
-//  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
-//  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-//  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
-//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
-func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfigurationRequest) (response *UpdateFunctionConfigurationResponse, err error) {
-    return c.UpdateFunctionConfigurationWithContext(context.Background(), request)
-}
-
-// UpdateFunctionConfiguration
-// This API is used to update the function configuration based on the input parameters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_APMCONFIGINSTANCEID = "FailedOperation.ApmConfigInstanceId"
-//  FAILEDOPERATION_DEBUGMODEUPDATETIMEOUTFAIL = "FailedOperation.DebugModeUpdateTimeOutFail"
-//  FAILEDOPERATION_QCSROLENOTFOUND = "FailedOperation.QcsRoleNotFound"
-//  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
-//  FAILEDOPERATION_UPDATEFUNCTIONCONFIGURATION = "FailedOperation.UpdateFunctionConfiguration"
-//  INTERNALERROR_SYSTEM = "InternalError.System"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_APMCONFIG = "InvalidParameterValue.ApmConfig"
-//  INVALIDPARAMETERVALUE_APMCONFIGINSTANCEID = "InvalidParameterValue.ApmConfigInstanceId"
-//  INVALIDPARAMETERVALUE_APMCONFIGREGION = "InvalidParameterValue.ApmConfigRegion"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERDUPLICATE = "InvalidParameterValue.CfsParameterDuplicate"
-//  INVALIDPARAMETERVALUE_CFSPARAMETERERROR = "InvalidParameterValue.CfsParameterError"
-//  INVALIDPARAMETERVALUE_CLS = "InvalidParameterValue.Cls"
-//  INVALIDPARAMETERVALUE_CLSROLE = "InvalidParameterValue.ClsRole"
-//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
-//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
-//  INVALIDPARAMETERVALUE_EIPCONFIG = "InvalidParameterValue.EipConfig"
-//  INVALIDPARAMETERVALUE_ENVIRONMENT = "InvalidParameterValue.Environment"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTEXCEEDEDLIMIT = "InvalidParameterValue.EnvironmentExceededLimit"
-//  INVALIDPARAMETERVALUE_ENVIRONMENTSYSTEMPROTECT = "InvalidParameterValue.EnvironmentSystemProtect"
-//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
-//  INVALIDPARAMETERVALUE_HANDLER = "InvalidParameterValue.Handler"
-//  INVALIDPARAMETERVALUE_IDLETIMEOUT = "InvalidParameterValue.IdleTimeOut"
-//  INVALIDPARAMETERVALUE_LAYERS = "InvalidParameterValue.Layers"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_MEMORY = "InvalidParameterValue.Memory"
-//  INVALIDPARAMETERVALUE_MEMORYSIZE = "InvalidParameterValue.MemorySize"
-//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
-//  INVALIDPARAMETERVALUE_NODESPEC = "InvalidParameterValue.NodeSpec"
-//  INVALIDPARAMETERVALUE_NODETYPE = "InvalidParameterValue.NodeType"
-//  INVALIDPARAMETERVALUE_PUBLICNETCONFIG = "InvalidParameterValue.PublicNetConfig"
-//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
-//  INVALIDPARAMETERVALUE_SYSTEMENVIRONMENT = "InvalidParameterValue.SystemEnvironment"
-//  INVALIDPARAMETERVALUE_TRACEENABLE = "InvalidParameterValue.TraceEnable"
-//  INVALIDPARAMETERVALUE_WEBSOCKETSPARAMS = "InvalidParameterValue.WebSocketsParams"
-//  LIMITEXCEEDED_EIP = "LimitExceeded.Eip"
-//  LIMITEXCEEDED_INITTIMEOUT = "LimitExceeded.InitTimeout"
-//  LIMITEXCEEDED_MEMORY = "LimitExceeded.Memory"
-//  LIMITEXCEEDED_TIMEOUT = "LimitExceeded.Timeout"
-//  RESOURCENOTFOUND_CFSVPCNOTMATCH = "ResourceNotFound.CfsVpcNotMatch"
-//  RESOURCENOTFOUND_CMQ = "ResourceNotFound.Cmq"
-//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
-//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
-//  RESOURCENOTFOUND_GETCFSMOUNTINSERROR = "ResourceNotFound.GetCfsMountInsError"
-//  RESOURCENOTFOUND_GETCFSNOTMATCH = "ResourceNotFound.GetCfsNotMatch"
-//  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
-//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-//  RESOURCENOTFOUND_VPC = "ResourceNotFound.Vpc"
-//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
-//  UNSUPPORTEDOPERATION_VPCCONFIG = "UnsupportedOperation.VpcConfig"
-func (c *Client) UpdateFunctionConfigurationWithContext(ctx context.Context, request *UpdateFunctionConfigurationRequest) (response *UpdateFunctionConfigurationResponse, err error) {
-    if request == nil {
-        request = NewUpdateFunctionConfigurationRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("UpdateFunctionConfiguration require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewUpdateFunctionConfigurationResponse()
     err = c.Send(request, response)
     return
 }

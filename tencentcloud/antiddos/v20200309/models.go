@@ -265,90 +265,6 @@ type BGPIPInstanceUsages struct {
 	Last7DayAttackCount *uint64 `json:"Last7DayAttackCount,omitempty" name:"Last7DayAttackCount"`
 }
 
-type BGPInstance struct {
-
-	// Anti-DDoS instance details
-	InstanceDetail *InstanceRelation `json:"InstanceDetail,omitempty" name:"InstanceDetail"`
-
-	// Anti-DDoS instance specifications
-	SpecificationLimit *BGPInstanceSpecification `json:"SpecificationLimit,omitempty" name:"SpecificationLimit"`
-
-	// Anti-DDoS instance usage statistics
-	Usage *BGPInstanceUsages `json:"Usage,omitempty" name:"Usage"`
-
-	// Region of the Anti-DDoS instance
-	Region *RegionInfo `json:"Region,omitempty" name:"Region"`
-
-	// Status of the Anti-DDoS instance. Valid values:
-	// `idle`: running
-	// `attacking`: under attacks
-	// `blocking`: blocked
-	// `creating`: creating
-	// `deblocking`: unblocked
-	// `isolate`: isolated
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-	// Purchase Time
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-	// Expiration time
-	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
-
-	// Name of the Anti-DDoS instance
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Package details of the Anti-DDoS instance.
-	// Note: This field is `null` for an Anti-DDoS instance without using a package.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PackInfo *PackInfo `json:"PackInfo,omitempty" name:"PackInfo"`
-
-	// Details of the cloud product used by the EIP bound to the Anti-DDoS Pro instance
-	EipProductInfos []*EipProductInfo `json:"EipProductInfos,omitempty" name:"EipProductInfos"`
-
-	// Binding status of the Anti-DDoS Pro instance
-	// `idle`: the instance is bound.
-	//  `bounding`: the instance is in binding.
-	// `failed`: the binding failed.
-	// ]
-	BoundStatus *string `json:"BoundStatus,omitempty" name:"BoundStatus"`
-
-	// Layer-4 protection level
-	DDoSLevel *string `json:"DDoSLevel,omitempty" name:"DDoSLevel"`
-
-	// CC protection switch
-	CCEnable *int64 `json:"CCEnable,omitempty" name:"CCEnable"`
-}
-
-type BGPInstanceSpecification struct {
-
-	// Base protection bandwidth (in Gbps)
-	ProtectBandwidth *uint64 `json:"ProtectBandwidth,omitempty" name:"ProtectBandwidth"`
-
-	// Number of protection chances
-	ProtectCountLimit *uint64 `json:"ProtectCountLimit,omitempty" name:"ProtectCountLimit"`
-
-	// Number of protection IPs
-	ProtectIPNumberLimit *uint64 `json:"ProtectIPNumberLimit,omitempty" name:"ProtectIPNumberLimit"`
-
-	// Auto-renewal status. Valid values:
-	// `0`: disabled
-	// `1`: enabled
-	// ]
-	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
-}
-
-type BGPInstanceUsages struct {
-
-	// Number of used protection chances
-	ProtectCountUsage *uint64 `json:"ProtectCountUsage,omitempty" name:"ProtectCountUsage"`
-
-	// Number of protected IPs
-	ProtectIPNumberUsage *uint64 `json:"ProtectIPNumberUsage,omitempty" name:"ProtectIPNumberUsage"`
-
-	// Number of attack times in the last 7 days
-	Last7DayAttackCount *uint64 `json:"Last7DayAttackCount,omitempty" name:"Last7DayAttackCount"`
-}
-
 type BlackWhiteIpRelation struct {
 
 	// IP address
@@ -421,36 +337,6 @@ type CCPrecisionPlyRecord struct {
 	ValueOperator *string `json:"ValueOperator,omitempty" name:"ValueOperator"`
 }
 
-type CCPrecisionPolicy struct {
-
-	// Policy ID
-	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// IP address
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-	// Domain name
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Action of limiting request frequency. Valid values: `alg` (limit request frequency via verification codes) and `drop`(drop requests).
-	PolicyAction *string `json:"PolicyAction,omitempty" name:"PolicyAction"`
-
-	// List of policies
-	PolicyList []*CCPrecisionPlyRecord `json:"PolicyList,omitempty" name:"PolicyList"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time
-	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-}
-
 type CCReqLimitPolicyRecord struct {
 
 	// Sampling interval (in seconds). Valid values: `1`, `10`, `30`, and `60`.
@@ -502,39 +388,6 @@ type CCThresholdPolicy struct {
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
-type CcBlackWhiteIpPolicy struct {
-
-	// Policy ID
-	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// IP address
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Domain name
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-	// IP type. Valid values: `black` (blocklisted IP), `white`(allowlisted IP).
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Blocklist/Allowlist IP address
-	BlackWhiteIp *string `json:"BlackWhiteIp,omitempty" name:"BlackWhiteIp"`
-
-	// Mask
-	Mask *uint64 `json:"Mask,omitempty" name:"Mask"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time
-	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-}
-
 type CcGeoIPBlockConfig struct {
 
 	// Region type. Valid values:
@@ -555,39 +408,6 @@ type CcGeoIPBlockConfig struct {
 
 	// This field is required when RegionType is `customized`; it can be left empty when RegionType is `china` or `oversea`.
 	AreaList []*int64 `json:"AreaList,omitempty" name:"AreaList"`
-}
-
-type CcGeoIpPolicyNew struct {
-
-	// Policy ID
-	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// IP address
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// 
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Protocol. Valid values: `HTTP` and `HTTPS`.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-	// Action. Valid values: `drop` and `alg`.
-	Action *string `json:"Action,omitempty" name:"Action"`
-
-	// Region type. Valid values: `china`, `oversea` and `customized`.
-	RegionType *string `json:"RegionType,omitempty" name:"RegionType"`
-
-	// ID list of regions to be blocked
-	AreaList []*uint64 `json:"AreaList,omitempty" name:"AreaList"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time
-	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
 type CertIdInsL7Rules struct {
@@ -1381,6 +1201,9 @@ func (r *CreateProtocolBlockConfigResponse) FromJsonString(s string) error {
 
 type CreateSchedulingDomainRequest struct {
 	*tchttp.BaseRequest
+
+	// 
+	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
 func (r *CreateSchedulingDomainRequest) ToJsonString() string {
@@ -1395,6 +1218,7 @@ func (r *CreateSchedulingDomainRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Product")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSchedulingDomainRequest has unknown keys!", "")
 	}
@@ -2494,82 +2318,6 @@ func (r *DescribeCCLevelPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeCCPrecisionPlyListRequest struct {
-	*tchttp.BaseRequest
-
-	// Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
-	Business *string `json:"Business,omitempty" name:"Business"`
-
-	// Starting offset of the page. Value: (number of pages – 1) * items per page.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results returned in one page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// IP address, which is required when an Anti-DDoS Advanced instance is used.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Domain name, which is required when an Anti-DDoS Advanced instance is used.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Protocol, which is required when an Anti-DDoS Advanced instance is used.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-}
-
-func (r *DescribeCCPrecisionPlyListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCCPrecisionPlyListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Business")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "InstanceId")
-	delete(f, "Ip")
-	delete(f, "Domain")
-	delete(f, "Protocol")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCCPrecisionPlyListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCCPrecisionPlyListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of policy lists
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Information of the policy list
-		PrecisionPolicyList []*CCPrecisionPolicy `json:"PrecisionPolicyList,omitempty" name:"PrecisionPolicyList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeCCPrecisionPlyListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCCPrecisionPlyListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeCCThresholdListRequest struct {
 	*tchttp.BaseRequest
 
@@ -2733,166 +2481,6 @@ func (r *DescribeCCTrendResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCCTrendResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCcBlackWhiteIpListRequest struct {
-	*tchttp.BaseRequest
-
-	// Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
-	Business *string `json:"Business,omitempty" name:"Business"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Starting offset of the page. Value: (number of pages – 1) * items per page.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results returned in one page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// IP address, which is required when an Anti-DDoS Advanced instance is used.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Domain name, which is required when an Anti-DDoS Advanced instance is used.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Protocol, which is required when an Anti-DDoS Advanced instance is used.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-	// Specifies a blocklist/allowlist IP.
-	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
-
-	// Specifies whether is an IP blocklist or IP allowlist.
-	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
-}
-
-func (r *DescribeCcBlackWhiteIpListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCcBlackWhiteIpListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Business")
-	delete(f, "InstanceId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Ip")
-	delete(f, "Domain")
-	delete(f, "Protocol")
-	delete(f, "FilterIp")
-	delete(f, "FilterType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcBlackWhiteIpListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCcBlackWhiteIpListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of policy lists
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Information of the policy list
-		CcBlackWhiteIpList []*CcBlackWhiteIpPolicy `json:"CcBlackWhiteIpList,omitempty" name:"CcBlackWhiteIpList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeCcBlackWhiteIpListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCcBlackWhiteIpListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCcGeoIPBlockConfigListRequest struct {
-	*tchttp.BaseRequest
-
-	// Anti-DDoS service type. Valid values: `bgpip-multip` (Anti-DDoS Pro) and `bgpip` (Anti-DDoS Advanced).
-	Business *string `json:"Business,omitempty" name:"Business"`
-
-	// Starting offset of the page. Value: (number of pages – 1) * items per page.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results returned in one page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// IP address, which is required when an Anti-DDoS Advanced instance is used.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Domain name, which is required when an Anti-DDoS Advanced instance is used.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Protocol, which is required when an Anti-DDoS Advanced instance is used.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-}
-
-func (r *DescribeCcGeoIPBlockConfigListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCcGeoIPBlockConfigListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Business")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "InstanceId")
-	delete(f, "Ip")
-	delete(f, "Domain")
-	delete(f, "Protocol")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcGeoIPBlockConfigListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCcGeoIPBlockConfigListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of policy lists
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Information of the policy list
-		CcGeoIpPolicyList []*CcGeoIpPolicyNew `json:"CcGeoIpPolicyList,omitempty" name:"CcGeoIpPolicyList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeCcGeoIPBlockConfigListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCcGeoIPBlockConfigListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3201,90 +2789,6 @@ func (r *DescribeListBGPIPInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeListBGPIPInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeListBGPInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Starting offset of the page. Value: (number of pages – 1) * items per page.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// IP filter
-	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
-
-	// Anti-DDoS instance ID filter. For example, `bgp-00000001`.
-	FilterInstanceId *string `json:"FilterInstanceId,omitempty" name:"FilterInstanceId"`
-
-	// Region filter. For example, `ap-guangzhou`.
-	FilterRegion *string `json:"FilterRegion,omitempty" name:"FilterRegion"`
-
-	// Name filter
-	FilterName *string `json:"FilterName,omitempty" name:"FilterName"`
-
-	// Line filter. Valid values: 1: BGP; 2: Non-BGP.
-	FilterLine *uint64 `json:"FilterLine,omitempty" name:"FilterLine"`
-
-	// Filters by instance status. `idle`: Running; `attacking`: Being attacked; `blocking`: Being blocked.
-	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
-
-	// Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
-	FilterBoundStatus *string `json:"FilterBoundStatus,omitempty" name:"FilterBoundStatus"`
-}
-
-func (r *DescribeListBGPInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "FilterIp")
-	delete(f, "FilterInstanceId")
-	delete(f, "FilterRegion")
-	delete(f, "FilterName")
-	delete(f, "FilterLine")
-	delete(f, "FilterStatus")
-	delete(f, "FilterBoundStatus")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeListBGPInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of lists
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// List of Anti-DDoS Pro instances
-		InstanceList []*BGPInstance `json:"InstanceList,omitempty" name:"InstanceList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeListBGPInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeListBGPInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4070,31 +3574,6 @@ type EipAddressRelation struct {
 	// Modification time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-}
-
-type EipProductInfo struct {
-
-	// IP address
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// Cloud product category. Valid values:
-	// `public`: CVM
-	// `bm`: BM
-	// `eni`: ENI
-	// `vpngw`: VPN gateway
-	//  `natgw`: NAT gateway
-	// `waf`: WAF
-	// `fpc`: financial products
-	// `gaap`: GAAP 
-	// `other`: hosted IP
-	// ]
-	BizType *string `json:"BizType,omitempty" name:"BizType"`
-
-	// Cloud sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (hosted IP).
-	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
-
-	// Cloud instance ID of the IP. This field InstanceId will be `eni-*` if the instance ID is bound to an ENI IP; `none` if there is no instance ID to bind to a hosted IP.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type ForwardListener struct {

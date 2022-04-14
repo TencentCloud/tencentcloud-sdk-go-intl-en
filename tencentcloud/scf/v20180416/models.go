@@ -20,15 +20,6 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
-type AccessInfo struct {
-
-	// Domain name
-	Host *string `json:"Host,omitempty" name:"Host"`
-
-	// VIP
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
-}
-
 type Alias struct {
 
 	// Master version pointed to by the alias
@@ -94,45 +85,6 @@ type AsyncTriggerConfig struct {
 
 	// Message retention period
 	MsgTTL *int64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
-}
-
-type CfsConfig struct {
-
-	// File system information list
-	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitempty" name:"CfsInsList"`
-}
-
-type CfsInsInfo struct {
-
-	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
-
-	// User group ID
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
-
-	// CFS instance ID
-	CfsId *string `json:"CfsId,omitempty" name:"CfsId"`
-
-	// File system mount target ID
-	MountInsId *string `json:"MountInsId,omitempty" name:"MountInsId"`
-
-	// Local mount target
-	LocalMountDir *string `json:"LocalMountDir,omitempty" name:"LocalMountDir"`
-
-	// Remote mount target
-	RemoteMountDir *string `json:"RemoteMountDir,omitempty" name:"RemoteMountDir"`
-
-	// File system IP, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
-
-	// VPC ID of file system, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MountVpcId *string `json:"MountVpcId,omitempty" name:"MountVpcId"`
-
-	// VPC subnet ID of file system, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MountSubnetId *string `json:"MountSubnetId,omitempty" name:"MountSubnetId"`
 }
 
 type Code struct {
@@ -328,152 +280,6 @@ func (r *CreateAliasResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateFunctionRequest struct {
-	*tchttp.BaseRequest
-
-	// Name of the new function. The name can contain 2 to 60 characters, including English letters, digits, hyphens (-), and underscores (_). The name must start with a letter and cannot end with a hyphen or underscore.
-	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
-
-	// Function code. Note: `COS`, `ZipFile`, and `DemoId` cannot be specified at the same time.
-	Code *Code `json:"Code,omitempty" name:"Code"`
-
-	// Function handler name. It supports the format of "file name.handler name" where the file name and handler name are separated with a "." (for Java, it is in the format of "package name.class name::handler name"). File and handler names can contain 2–60 letters, digits, underscores, and dashes and must start and end with letters
-	Handler *string `json:"Handler,omitempty" name:"Handler"`
-
-	// Function description. It can contain up to 1,000 characters including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3072 MB in increments of 128 MB
-	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
-
-	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
-	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
-
-	// Function environment variable
-	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
-
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, Php5, Php7, Go1, Java8, CustomRuntime. Default value: Python2.7
-	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
-
-	// Function VPC configuration
-	VpcConfig *VpcConfig `json:"VpcConfig,omitempty" name:"VpcConfig"`
-
-	// Function namespace
-	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
-
-	// Role bound to the function
-	Role *string `json:"Role,omitempty" name:"Role"`
-
-	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
-	InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
-
-	// CLS Logset ID to which the function logs are shipped
-	ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
-
-	// CLS Topic ID to which the function logs are shipped
-	ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
-
-	// Function type. The default value is `Event`. Enter `Event` if you need to create a trigger function. Enter `HTTP` if you need to create an HTTP function service.
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Code source. Valid values: ZipFile, Cos, Demo
-	CodeSource *string `json:"CodeSource,omitempty" name:"CodeSource"`
-
-	// List of layer versions to be associate with the function. Layers will be overwritten sequentially in the order in the list.
-	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers"`
-
-	// Dead letter queue parameter
-	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
-
-	// Public network access configuration
-	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
-
-	// File system configuration parameter, which is used for the function to mount the file system
-	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
-
-	// The function initialization timeout period. It defaults to 65s for general cases and 90s for image deployment functions.
-	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
-
-	// Tag parameter of the function. It is an array of key-value pairs.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-	// Whether to enable the async attribute. TRUE: yes; FALSE: no
-	AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
-
-	// Whether to enable event tracking. TRUE: yes; FALSE: no
-	TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
-
-	// Protocols supported by HTTP-triggered functions. Valid value: `WS` (WebSockets)
-	ProtocolType *string `json:"ProtocolType,omitempty" name:"ProtocolType"`
-
-	// Parameters of the specified protocol
-	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
-}
-
-func (r *CreateFunctionRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateFunctionRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FunctionName")
-	delete(f, "Code")
-	delete(f, "Handler")
-	delete(f, "Description")
-	delete(f, "MemorySize")
-	delete(f, "Timeout")
-	delete(f, "Environment")
-	delete(f, "Runtime")
-	delete(f, "VpcConfig")
-	delete(f, "Namespace")
-	delete(f, "Role")
-	delete(f, "InstallDependency")
-	delete(f, "ClsLogsetId")
-	delete(f, "ClsTopicId")
-	delete(f, "Type")
-	delete(f, "CodeSource")
-	delete(f, "Layers")
-	delete(f, "DeadLetterConfig")
-	delete(f, "PublicNetConfig")
-	delete(f, "CfsConfig")
-	delete(f, "InitTimeout")
-	delete(f, "Tags")
-	delete(f, "AsyncRunEnable")
-	delete(f, "TraceEnable")
-	delete(f, "ProtocolType")
-	delete(f, "ProtocolParams")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFunctionRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateFunctionResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateFunctionResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateFunctionResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateNamespaceRequest struct {
 	*tchttp.BaseRequest
 
@@ -542,7 +348,7 @@ type CreateTriggerRequest struct {
 	// Function namespace
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
-	// Function version
+	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 
 	// Initial enabling status of the trigger. `OPEN` indicates enabled, and `CLOSE` indicates disabled.
@@ -599,18 +405,6 @@ func (r *CreateTriggerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateTriggerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeadLetterConfig struct {
-
-	// Dead letter queue mode
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Dead letter queue name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Tag form of a dead letter queue topic mode
-	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 }
 
 type DeleteAliasRequest struct {
@@ -985,37 +779,6 @@ func (r *DeleteTriggerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DeleteTriggerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type EipConfigIn struct {
-
-	// Status of the EIP. Values: ['ENABLE','DISABLE']
-	EipStatus *string `json:"EipStatus,omitempty" name:"EipStatus"`
-}
-
-type EipConfigOut struct {
-
-	// Whether it is a fixed IP. Valid values: ["ENABLE","DISABLE"]
-	EipStatus *string `json:"EipStatus,omitempty" name:"EipStatus"`
-
-	// IP list
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	EipAddress []*string `json:"EipAddress,omitempty" name:"EipAddress"`
-}
-
-type EipOutConfig struct {
-
-	// It specifies whether the IP is fixed. The value is `TRUE` or `FALSE`.
-	EipFixed *string `json:"EipFixed,omitempty" name:"EipFixed"`
-
-	// IP list
-	Eips []*string `json:"Eips,omitempty" name:"Eips"`
-}
-
-type Environment struct {
-
-	// Environment variable array
-	Variables []*Variable `json:"Variables,omitempty" name:"Variables"`
 }
 
 type Filter struct {
@@ -1537,206 +1300,6 @@ func (r *GetFunctionLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type GetFunctionRequest struct {
-	*tchttp.BaseRequest
-
-	// Name of the function to obtain details
-	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
-
-	// Function version number
-	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
-
-	// Function namespace
-	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
-
-	// It indicates whether to display the code. `TRUE` means displaying the code, and `FALSE` means hiding the code. The code will not be displayed for entry files exceeding 1 MB.
-	ShowCode *string `json:"ShowCode,omitempty" name:"ShowCode"`
-}
-
-func (r *GetFunctionRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetFunctionRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FunctionName")
-	delete(f, "Qualifier")
-	delete(f, "Namespace")
-	delete(f, "ShowCode")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFunctionRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type GetFunctionResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Latest modification time of the function
-		ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
-
-		// Function code
-		CodeInfo *string `json:"CodeInfo,omitempty" name:"CodeInfo"`
-
-		// Function description
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// Function trigger list
-		Triggers []*Trigger `json:"Triggers,omitempty" name:"Triggers"`
-
-		// Function entry
-		Handler *string `json:"Handler,omitempty" name:"Handler"`
-
-		// Function code size
-		CodeSize *int64 `json:"CodeSize,omitempty" name:"CodeSize"`
-
-		// Function timeout
-		Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
-
-		// Function version
-		FunctionVersion *string `json:"FunctionVersion,omitempty" name:"FunctionVersion"`
-
-		// Maximum available memory of the function
-		MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
-
-		// Function running environment
-		Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
-
-		// Function name
-		FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
-
-		// Function VPC
-		VpcConfig *VpcConfig `json:"VpcConfig,omitempty" name:"VpcConfig"`
-
-		// Whether to use GPU
-		UseGpu *string `json:"UseGpu,omitempty" name:"UseGpu"`
-
-		// Function environment variable
-		Environment *Environment `json:"Environment,omitempty" name:"Environment"`
-
-		// Whether the code is correct
-		CodeResult *string `json:"CodeResult,omitempty" name:"CodeResult"`
-
-		// Code error information
-		CodeError *string `json:"CodeError,omitempty" name:"CodeError"`
-
-		// Error code
-		ErrNo *int64 `json:"ErrNo,omitempty" name:"ErrNo"`
-
-		// Function namespace
-		Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
-
-		// Role bound to the function
-		Role *string `json:"Role,omitempty" name:"Role"`
-
-		// Whether to install dependencies automatically
-		InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
-
-		// Function status. For valid values and status change process, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1)
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// Status description
-		StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
-
-		// CLS logset to which logs are shipped
-		ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
-
-		// CLS Topic to which logs are shipped
-		ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
-
-		// Function ID
-		FunctionId *string `json:"FunctionId,omitempty" name:"FunctionId"`
-
-		// Function tag list
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// EipConfig configuration
-		EipConfig *EipOutConfig `json:"EipConfig,omitempty" name:"EipConfig"`
-
-		// Domain name information
-		AccessInfo *AccessInfo `json:"AccessInfo,omitempty" name:"AccessInfo"`
-
-		// Function type. The value is `HTTP` or `Event`.
-		Type *string `json:"Type,omitempty" name:"Type"`
-
-		// Whether to enable L5
-		L5Enable *string `json:"L5Enable,omitempty" name:"L5Enable"`
-
-		// Version information of a layer associated with a function
-		Layers []*LayerVersionInfo `json:"Layers,omitempty" name:"Layers"`
-
-		// Information of a dead letter queue associated with a function
-		DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
-
-		// Function creation time
-		AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
-
-		// Public network access configuration
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		PublicNetConfig *PublicNetConfigOut `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
-
-		// Whether Ons is enabled
-	// Note: This field may return null, indicating that no valid value was found.
-		OnsEnable *string `json:"OnsEnable,omitempty" name:"OnsEnable"`
-
-		// File system configuration parameter, which is used for the function to mount the file system
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
-
-		// Function billing status. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
-
-		// Function version
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
-
-		// Timeout period for function initialization
-		InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
-
-		// Cause of function failure
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		StatusReasons []*StatusReason `json:"StatusReasons,omitempty" name:"StatusReasons"`
-
-		// Specifies whether to enable asynchronization 
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AsyncRunEnable *string `json:"AsyncRunEnable,omitempty" name:"AsyncRunEnable"`
-
-		// Specifies whether to enable event tracking
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TraceEnable *string `json:"TraceEnable,omitempty" name:"TraceEnable"`
-
-		// Protocols supported by HTTP-triggered functions. It supports WebSockets for now.
-	// Note: This field may return null, indicating that no valid value was found.
-		ProtocolType *string `json:"ProtocolType,omitempty" name:"ProtocolType"`
-
-		// Parameters of the specified protocol
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *GetFunctionResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetFunctionResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type GetLayerVersionRequest struct {
 	*tchttp.BaseRequest
 
@@ -2194,15 +1757,6 @@ type LayerVersionInfo struct {
 
 	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
 	Status *string `json:"Status,omitempty" name:"Status"`
-}
-
-type LayerVersionSimple struct {
-
-	// Name of the layer to bind. Leave it blank if you want to unbind layers
-	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
-
-	// Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
-	LayerVersion *int64 `json:"LayerVersion,omitempty" name:"LayerVersion"`
 }
 
 type LimitsInfo struct {
@@ -2890,31 +2444,14 @@ type NamespaceUsage struct {
 
 	// Number of functions in namespace
 	FunctionsCount *int64 `json:"FunctionsCount,omitempty" name:"FunctionsCount"`
-}
 
-type ProtocolParams struct {
+	// Total memory quota of the namespace
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TotalConcurrencyMem *int64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
 
-	// Parameters of WebSockets protocol
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	WSParams *WSParams `json:"WSParams,omitempty" name:"WSParams"`
-}
-
-type PublicNetConfigIn struct {
-
-	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
-	PublicNetStatus *string `json:"PublicNetStatus,omitempty" name:"PublicNetStatus"`
-
-	// EIP configuration
-	EipConfig *EipConfigIn `json:"EipConfig,omitempty" name:"EipConfig"`
-}
-
-type PublicNetConfigOut struct {
-
-	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
-	PublicNetStatus *string `json:"PublicNetStatus,omitempty" name:"PublicNetStatus"`
-
-	// EIP configuration
-	EipConfig *EipConfigOut `json:"EipConfig,omitempty" name:"EipConfig"`
+	// Memory usage of the namespace
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TotalAllocatedConcurrencyMem *int64 `json:"TotalAllocatedConcurrencyMem,omitempty" name:"TotalAllocatedConcurrencyMem"`
 }
 
 type PublishLayerVersionRequest struct {
@@ -3077,6 +2614,23 @@ type PutProvisionedConcurrencyConfigRequest struct {
 
 	// Scheduled provisioned concurrency scaling action
 	TriggerActions []*TriggerAction `json:"TriggerActions,omitempty" name:"TriggerActions"`
+
+	// Specifies the provisioned concurrency type.
+	// `Default`: Static provisioned concurrency. 
+	// `ConcurrencyUtilizationTracking`: Scales the concurrency automatically according to the concurrency utilization.
+	// If `ConcurrencyUtilizationTracking` is passed in, 
+	// 
+	// `TrackingTarget`, `MinCapacity` and `MaxCapacity` are required, and `VersionProvisionedConcurrencyNum` must be `0`. 
+	ProvisionedType *string `json:"ProvisionedType,omitempty" name:"ProvisionedType"`
+
+	// The target concurrency utilization. Range: (0,1) (two decimal places)
+	TrackingTarget *float64 `json:"TrackingTarget,omitempty" name:"TrackingTarget"`
+
+	// The minimum number of instances. It can not be smaller than `1`.
+	MinCapacity *uint64 `json:"MinCapacity,omitempty" name:"MinCapacity"`
+
+	// The maximum number of instances
+	MaxCapacity *uint64 `json:"MaxCapacity,omitempty" name:"MaxCapacity"`
 }
 
 func (r *PutProvisionedConcurrencyConfigRequest) ToJsonString() string {
@@ -3096,6 +2650,10 @@ func (r *PutProvisionedConcurrencyConfigRequest) FromJsonString(s string) error 
 	delete(f, "VersionProvisionedConcurrencyNum")
 	delete(f, "Namespace")
 	delete(f, "TriggerActions")
+	delete(f, "ProvisionedType")
+	delete(f, "TrackingTarget")
+	delete(f, "MinCapacity")
+	delete(f, "MaxCapacity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PutProvisionedConcurrencyConfigRequest has unknown keys!", "")
 	}
@@ -3679,128 +3237,6 @@ func (r *UpdateFunctionCodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type UpdateFunctionConfigurationRequest struct {
-	*tchttp.BaseRequest
-
-	// Name of the function to be modified
-	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
-
-	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
-	MemorySize *int64 `json:"MemorySize,omitempty" name:"MemorySize"`
-
-	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
-	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
-
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
-	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
-
-	// Function environment variable
-	Environment *Environment `json:"Environment,omitempty" name:"Environment"`
-
-	// Function namespace
-	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
-
-	// Function VPC configuration
-	VpcConfig *VpcConfig `json:"VpcConfig,omitempty" name:"VpcConfig"`
-
-	// Role bound to the function
-	Role *string `json:"Role,omitempty" name:"Role"`
-
-	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
-	InstallDependency *string `json:"InstallDependency,omitempty" name:"InstallDependency"`
-
-	// CLS logset ID to which logs are shipped
-	ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
-
-	// CLS Topic ID to which logs are shipped
-	ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
-
-	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
-	Publish *string `json:"Publish,omitempty" name:"Publish"`
-
-	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
-	L5Enable *string `json:"L5Enable,omitempty" name:"L5Enable"`
-
-	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
-	Layers []*LayerVersionSimple `json:"Layers,omitempty" name:"Layers"`
-
-	// Information of a dead letter queue associated with a function
-	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitempty" name:"DeadLetterConfig"`
-
-	// Public network access configuration
-	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitempty" name:"PublicNetConfig"`
-
-	// File system configuration input parameter, which is used for the function to bind the CFS file system
-	CfsConfig *CfsConfig `json:"CfsConfig,omitempty" name:"CfsConfig"`
-
-	// The function initialization timeout period
-	InitTimeout *int64 `json:"InitTimeout,omitempty" name:"InitTimeout"`
-
-	// Parameters of the specified protocol
-	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitempty" name:"ProtocolParams"`
-}
-
-func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateFunctionConfigurationRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FunctionName")
-	delete(f, "Description")
-	delete(f, "MemorySize")
-	delete(f, "Timeout")
-	delete(f, "Runtime")
-	delete(f, "Environment")
-	delete(f, "Namespace")
-	delete(f, "VpcConfig")
-	delete(f, "Role")
-	delete(f, "InstallDependency")
-	delete(f, "ClsLogsetId")
-	delete(f, "ClsTopicId")
-	delete(f, "Publish")
-	delete(f, "L5Enable")
-	delete(f, "Layers")
-	delete(f, "DeadLetterConfig")
-	delete(f, "PublicNetConfig")
-	delete(f, "CfsConfig")
-	delete(f, "InitTimeout")
-	delete(f, "ProtocolParams")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateFunctionConfigurationRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type UpdateFunctionConfigurationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *UpdateFunctionConfigurationResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateFunctionConfigurationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type UpdateFunctionEventInvokeConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -3923,15 +3359,6 @@ type UsageInfo struct {
 	UserConcurrencyMemLimit *int64 `json:"UserConcurrencyMemLimit,omitempty" name:"UserConcurrencyMemLimit"`
 }
 
-type Variable struct {
-
-	// Variable name
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Variable value
-	Value *string `json:"Value,omitempty" name:"Value"`
-}
-
 type VersionMatch struct {
 
 	// Function version name
@@ -3983,20 +3410,4 @@ type VersionWeight struct {
 
 	// Version weight
 	Weight *float64 `json:"Weight,omitempty" name:"Weight"`
-}
-
-type VpcConfig struct {
-
-	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
-
-	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
-}
-
-type WSParams struct {
-
-	// Idle timeout period in seconds. Default: 15; range: 1 to 1800
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	IdleTimeOut *uint64 `json:"IdleTimeOut,omitempty" name:"IdleTimeOut"`
 }
