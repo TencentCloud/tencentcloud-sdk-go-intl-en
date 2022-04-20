@@ -210,90 +210,6 @@ func (r *ApplyConfigToMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type AsyncContextTask struct {
-
-	// Logset ID
-	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Creation time, which is a timestamp accurate down to the millisecond
-	CreateTime *int64 `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Status. Valid values: `0`: to be started; `1`: running; `2`: completed; `-1`: failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// Offline context search task ID
-	AsyncContextTaskId *string `json:"AsyncContextTaskId,omitempty" name:"AsyncContextTaskId"`
-
-	// Error message of task failure
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
-
-	// Log package number
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PkgId *string `json:"PkgId,omitempty" name:"PkgId"`
-
-	// Log number in log package
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PkgLogId *string `json:"PkgLogId,omitempty" name:"PkgLogId"`
-
-	// Log time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Time *int64 `json:"Time,omitempty" name:"Time"`
-
-	// Task completion time, which is a timestamp accurate down to the millisecond
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	FinishTime *int64 `json:"FinishTime,omitempty" name:"FinishTime"`
-
-	// Associated offline search ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AsyncSearchTaskId *string `json:"AsyncSearchTaskId,omitempty" name:"AsyncSearchTaskId"`
-}
-
-type AsyncSearchTask struct {
-
-	// Logset ID
-	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Status. Valid values: `0`: to be started; `1`: running; `2`: completed; `-1`: failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// Offline search task ID
-	AsyncSearchTaskId *string `json:"AsyncSearchTaskId,omitempty" name:"AsyncSearchTaskId"`
-
-	// Query statement
-	Query *string `json:"Query,omitempty" name:"Query"`
-
-	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
-	From *int64 `json:"From,omitempty" name:"From"`
-
-	// End time of the log to be queried, which is a Unix timestamp in milliseconds
-	To *int64 `json:"To,omitempty" name:"To"`
-
-	// Log scan order. Valid values: `asc`: ascending; `desc`: descending
-	Sort *string `json:"Sort,omitempty" name:"Sort"`
-
-	// Error message of task failure
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ErrorMessage *string `json:"ErrorMessage,omitempty" name:"ErrorMessage"`
-
-	// Total number of logs matched in offline search task
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	LogCount *int64 `json:"LogCount,omitempty" name:"LogCount"`
-
-	// Task completion time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
-}
-
 type CallBackInfo struct {
 
 	// `Body` during callback
@@ -389,6 +305,10 @@ type ConsumerContent struct {
 	// List of metadata to ship. Currently, only __SOURCE__, __FILENAME__, and __TIMESTAMP__ are supported.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
+
+	// This parameter is required if `EnableTag` is `true`, and is used to specify whether the tag information is JSON tiled. Valid values: `true` (not tiled); `false` (tiled)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TagJsonNotTiled *bool `json:"TagJsonNotTiled,omitempty" name:"TagJsonNotTiled"`
 }
 
 type ContentInfo struct {
@@ -408,19 +328,19 @@ type ContentInfo struct {
 type CreateAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 
-	// Alarm template name
+	// Notification group name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Alarm template type. Valid values:
-	// <br><li> `Trigger`: alarm triggered
-	// <br><li> `Recovery`: alarm cleared
-	// <br><li> `All`: alarm triggered and alarm cleared
+	// Notification type. Valid values:
+	// <li> `Trigger`: alarm triggered
+	// <li> `Recovery`: alarm cleared
+	// <li> `All`: alarm triggered and alarm cleared
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Information of the recipient in alarm template
+	// Notification recipient
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitempty" name:"NoticeReceivers"`
 
-	// Alarm template callback information
+	// API callback information (including WeCom)
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitempty" name:"WebCallbacks"`
 }
 
@@ -558,141 +478,6 @@ func (r *CreateAlarmResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateAsyncContextTaskRequest struct {
-	*tchttp.BaseRequest
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Log time in milliseconds
-	Time *int64 `json:"Time,omitempty" name:"Time"`
-
-	// Log package number
-	PkgId *string `json:"PkgId,omitempty" name:"PkgId"`
-
-	// Log number in log package
-	PkgLogId *string `json:"PkgLogId,omitempty" name:"PkgLogId"`
-
-	// Logset ID
-	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
-
-	// Offline search task ID
-	AsyncSearchTaskId *string `json:"AsyncSearchTaskId,omitempty" name:"AsyncSearchTaskId"`
-}
-
-func (r *CreateAsyncContextTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAsyncContextTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TopicId")
-	delete(f, "Time")
-	delete(f, "PkgId")
-	delete(f, "PkgLogId")
-	delete(f, "LogsetId")
-	delete(f, "AsyncSearchTaskId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAsyncContextTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateAsyncContextTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Offline context search task ID
-		AsyncContextTaskId *string `json:"AsyncContextTaskId,omitempty" name:"AsyncContextTaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateAsyncContextTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAsyncContextTaskResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateAsyncSearchTaskRequest struct {
-	*tchttp.BaseRequest
-
-	// Logset ID
-	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
-
-	// Log topic ID. Currently, only log topics whose `StorageType` is `cold` are supported.
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Query statement. Maximum length: 1024
-	Query *string `json:"Query,omitempty" name:"Query"`
-
-	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
-	From *int64 `json:"From,omitempty" name:"From"`
-
-	// End time of the log to be queried, which is a Unix timestamp in milliseconds
-	To *int64 `json:"To,omitempty" name:"To"`
-
-	// Log scan order. Valid values: `asc`: ascending; `desc`: descending. Default value: desc
-	Sort *string `json:"Sort,omitempty" name:"Sort"`
-}
-
-func (r *CreateAsyncSearchTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAsyncSearchTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "LogsetId")
-	delete(f, "TopicId")
-	delete(f, "Query")
-	delete(f, "From")
-	delete(f, "To")
-	delete(f, "Sort")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAsyncSearchTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateAsyncSearchTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateAsyncSearchTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAsyncSearchTaskResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateConfigRequest struct {
 	*tchttp.BaseRequest
 
@@ -827,14 +612,14 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 type CreateExportRequest struct {
 	*tchttp.BaseRequest
 
-	// Log topic
+	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Log export search statement
-	Query *string `json:"Query,omitempty" name:"Query"`
-
-	// Number of logs to be exported. Maximum value: 10 million
+	// Number of logs to be exported. Maximum value: 50 million
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Search statements for log export. <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statements]</a> are not supported.
+	Query *string `json:"Query,omitempty" name:"Query"`
 
 	// Start time of the log to be exported, which is a timestamp in milliseconds
 	From *int64 `json:"From,omitempty" name:"From"`
@@ -862,8 +647,8 @@ func (r *CreateExportRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "TopicId")
-	delete(f, "Query")
 	delete(f, "Count")
+	delete(f, "Query")
 	delete(f, "From")
 	delete(f, "To")
 	delete(f, "Order")
@@ -1077,91 +862,6 @@ func (r *CreateMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateShipperRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the log topic to which the shipping rule to be created belongs
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Destination bucket in the shipping rule to be created
-	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
-
-	// Prefix of the shipping directory in the shipping rule to be created
-	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
-
-	// Shipping rule name
-	ShipperName *string `json:"ShipperName,omitempty" name:"ShipperName"`
-
-	// Shipping time interval in seconds. Default value: 300. Value range: 300–900
-	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
-
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
-	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
-
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped
-	FilterRules []*FilterRuleInfo `json:"FilterRules,omitempty" name:"FilterRules"`
-
-	// Partition rule of shipped log, which can be represented in `strftime` time format
-	Partition *string `json:"Partition,omitempty" name:"Partition"`
-
-	// Compression configuration of shipped log
-	Compress *CompressInfo `json:"Compress,omitempty" name:"Compress"`
-
-	// Format configuration of shipped log content
-	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
-}
-
-func (r *CreateShipperRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateShipperRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TopicId")
-	delete(f, "Bucket")
-	delete(f, "Prefix")
-	delete(f, "ShipperName")
-	delete(f, "Interval")
-	delete(f, "MaxSize")
-	delete(f, "FilterRules")
-	delete(f, "Partition")
-	delete(f, "Compress")
-	delete(f, "Content")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateShipperRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateShipperResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Shipping rule ID
-		ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateShipperResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateShipperResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
 
@@ -1183,10 +883,10 @@ type CreateTopicRequest struct {
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
 
-	// Log topic storage class. Valid values: `hot`: real-time storage; `cold`: offline storage. Default value: `hot`. If `cold` is passed in, please contact the customer service to add the log topic to the allowlist first.
+	// Log topic storage type. Valid values: `hot` (real-time storage); `cold` (IA storage). Default value: `hot`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// Lifecycle in days. Value range: 1–366. Default value: 30
+	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -1261,7 +961,7 @@ type CsvInfo struct {
 type DeleteAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 
-	// Alarm notification template
+	// Notification group ID
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
 }
 
@@ -1347,106 +1047,6 @@ func (r *DeleteAlarmResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteAlarmResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteAsyncContextTaskRequest struct {
-	*tchttp.BaseRequest
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Offline context search task ID
-	AsyncContextTaskId *string `json:"AsyncContextTaskId,omitempty" name:"AsyncContextTaskId"`
-}
-
-func (r *DeleteAsyncContextTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAsyncContextTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TopicId")
-	delete(f, "AsyncContextTaskId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAsyncContextTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteAsyncContextTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteAsyncContextTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAsyncContextTaskResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteAsyncSearchTaskRequest struct {
-	*tchttp.BaseRequest
-
-	// Offline search task ID
-	AsyncSearchTaskId *string `json:"AsyncSearchTaskId,omitempty" name:"AsyncSearchTaskId"`
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-}
-
-func (r *DeleteAsyncSearchTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAsyncSearchTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AsyncSearchTaskId")
-	delete(f, "TopicId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAsyncSearchTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteAsyncSearchTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteAsyncSearchTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAsyncSearchTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1871,37 +1471,24 @@ func (r *DeleteTopicResponse) FromJsonString(s string) error {
 type DescribeAlarmNoticesRequest struct {
 	*tchttp.BaseRequest
 
-	// <br><li> name
-	// 
-	// Filter by **alarm notification template name**.
+	// <li> name
+	// Filter by **notification group name**.
 	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> alarmNoticeId
-	// 
-	// Filter by **alarm notification template ID**.
+	// Required: No
+	// <li> alarmNoticeId
+	// Filter by **notification group ID**.
 	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> uid
-	// 
+	// Required: No
+	// <li> uid
 	// Filter by **recipient ID**.
-	// 
 	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> groupId
-	// 
-	// Filter by **user group ID**.
-	// 
+	// Required: No
+	// <li> groupId
+	// Filter by **recipient ID**.
 	// Type: String
+	// Required: No
 	// 
-	// Required: no
-	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -2048,302 +1635,6 @@ func (r *DescribeAlarmsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAlarmsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncContextResultRequest struct {
-	*tchttp.BaseRequest
-
-	// Offline search task ID
-	AsyncContextTaskId *string `json:"AsyncContextTaskId,omitempty" name:"AsyncContextTaskId"`
-
-	// Log package number
-	PkgId *string `json:"PkgId,omitempty" name:"PkgId"`
-
-	// Log number in log package
-	PkgLogId *string `json:"PkgLogId,omitempty" name:"PkgLogId"`
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Number of previous logs. Default value: 10
-	PrevLogs *int64 `json:"PrevLogs,omitempty" name:"PrevLogs"`
-
-	// Number of next logs. Default value: 10
-	NextLogs *int64 `json:"NextLogs,omitempty" name:"NextLogs"`
-}
-
-func (r *DescribeAsyncContextResultRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncContextResultRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AsyncContextTaskId")
-	delete(f, "PkgId")
-	delete(f, "PkgLogId")
-	delete(f, "TopicId")
-	delete(f, "PrevLogs")
-	delete(f, "NextLogs")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsyncContextResultRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncContextResultResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the previous logs have been returned
-		PrevOver *bool `json:"PrevOver,omitempty" name:"PrevOver"`
-
-		// Whether the next logs have been returned
-		NextOver *bool `json:"NextOver,omitempty" name:"NextOver"`
-
-		// Log content
-		Results []*LogInfo `json:"Results,omitempty" name:"Results"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAsyncContextResultResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncContextResultResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncContextTasksRequest struct {
-	*tchttp.BaseRequest
-
-	// Page offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number of entries per page. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// <br><li> topicId
-	// 
-	// Filter by **log topic ID**.
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> logsetId
-	// 
-	// Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-	// 
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeAsyncContextTasksRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncContextTasksRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsyncContextTasksRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncContextTasksResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Offline context search task list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AsyncContextTasks []*AsyncContextTask `json:"AsyncContextTasks,omitempty" name:"AsyncContextTasks"`
-
-		// Total number of offline context search tasks
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAsyncContextTasksResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncContextTasksResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncSearchResultRequest struct {
-	*tchttp.BaseRequest
-
-	// Offline search task ID
-	AsyncSearchTaskId *string `json:"AsyncSearchTaskId,omitempty" name:"AsyncSearchTaskId"`
-
-	// Logset ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
-	Context *string `json:"Context,omitempty" name:"Context"`
-
-	// Number of logs returned in a single call. Default value: 20. Maximum value: 500
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribeAsyncSearchResultRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncSearchResultRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AsyncSearchTaskId")
-	delete(f, "TopicId")
-	delete(f, "Context")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsyncSearchResultRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncSearchResultResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// `Context` for loading subsequent content
-		Context *string `json:"Context,omitempty" name:"Context"`
-
-		// Whether all log query results are returned
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// Log content
-		Results []*LogInfo `json:"Results,omitempty" name:"Results"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAsyncSearchResultResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncSearchResultResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncSearchTasksRequest struct {
-	*tchttp.BaseRequest
-
-	// Page offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number of entries per page. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// <br><li> topicId
-	// 
-	// Filter by **log topic ID**.
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> logsetId
-	// 
-	// Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-	// 
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeAsyncSearchTasksRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncSearchTasksRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsyncSearchTasksRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAsyncSearchTasksResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Offline search task list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AsyncSearchTasks []*AsyncSearchTask `json:"AsyncSearchTasks,omitempty" name:"AsyncSearchTasks"`
-
-		// Total number of offline search tasks
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAsyncSearchTasksResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAsyncSearchTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2664,7 +1955,7 @@ type DescribeLogContextRequest struct {
 	// Log topic ID to be queried
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Log time in the format of `YYYY-mm-dd HH:MM:SS`
+	// Log time in the format of YYYY-mm-dd HH:MM:SS.FFF
 	BTime *string `json:"BTime,omitempty" name:"BTime"`
 
 	// Log package number
@@ -2730,6 +2021,77 @@ func (r *DescribeLogContextResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLogContextResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLogHistogramRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the log topic to be queried
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
+	From *int64 `json:"From,omitempty" name:"From"`
+
+	// End time of the log to be queried, which is a Unix timestamp in milliseconds
+	To *int64 `json:"To,omitempty" name:"To"`
+
+	// Query statement
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// Time interval in milliseconds
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+}
+
+func (r *DescribeLogHistogramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogHistogramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "From")
+	delete(f, "To")
+	delete(f, "Query")
+	delete(f, "Interval")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogHistogramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLogHistogramResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Statistical period in milliseconds
+		Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+
+		// The number of logs that hit the keywords
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Statistical result details within the period
+		HistogramInfos []*HistogramInfo `json:"HistogramInfos,omitempty" name:"HistogramInfos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLogHistogramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogHistogramResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3006,7 +2368,7 @@ type DescribeMachinesResponse struct {
 		// Preset end time of automatic update of machine group
 		UpdateEndTime *string `json:"UpdateEndTime,omitempty" name:"UpdateEndTime"`
 
-		// Latest LogListener version available to the current user
+		// Latest LogListener version available to the current user
 		LatestAgentVersion *string `json:"LatestAgentVersion,omitempty" name:"LatestAgentVersion"`
 
 		// Whether to enable the service log
@@ -3221,53 +2583,7 @@ func (r *DescribeShippersResponse) FromJsonString(s string) error {
 type DescribeTopicsRequest struct {
 	*tchttp.BaseRequest
 
-	// <br><li> topicName
-	// 
-	// Filter by **log topic name**.
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> topicId
-	// 
-	// Filter by **log topic ID**.
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> logsetId
-	// 
-	// Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset.
-	// 
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> tagKey
-	// 
-	// Filter by **tag key**.
-	// 
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> tag:tagKey
-	// 
-	// Filter by **tag key-value pair**. The `tag-key` should be replaced with a specified tag key. For more information on how to use it, please see sample 2.
-	// 
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// <br><li> storageType
-	// 
-	// Filter by **log topic storage class**. Valid values: `hot`: real-time storage; `cold`: offline storage.
-	// Type: String
-	// 
-	// Required: no
-	// 
-	// 
-	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call DescribeLogsets to query the list of created logsets or log in to the console to view them. You can also call CreateLogset to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as tag:exampleKey. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (real-time storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -3464,7 +2780,7 @@ type GetAlarmLogRequest struct {
 	// Query statement. Maximum length: 1024
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// Number of logs returned in a single query. Maximum value: 100
+	// Number of logs returned in a single query. Maximum value: 1000
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
@@ -3551,13 +2867,22 @@ func (r *GetAlarmLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type HistogramInfo struct {
+
+	// The number of logs within the statistical period
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Unix timestamp rounded by `period`, in milliseconds
+	BTime *int64 `json:"BTime,omitempty" name:"BTime"`
+}
+
 type JsonInfo struct {
 
 	// Enablement flag
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
 
-	// Metadata information list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Metadata information list. Valid values: __SOURCE__; __FILENAME__; __TIMESTAMP__
+	// Note: This field may return `null`, indicating that no valid value was found.
 	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
 }
 
@@ -3572,7 +2897,7 @@ type KeyRegexInfo struct {
 
 type KeyValueInfo struct {
 
-	// The field that needs to be configured with a key value or metafield index
+	// When a key value or metafield index needs to be configured for a field, the metafield `Key` does not need to be prefixed with `__TAG__.` and is consistent with the one when logs are uploaded. `__TAG__.` will be prefixed automatically for display in the console.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
 	// Field index description information
@@ -3792,22 +3117,22 @@ func (r *MergePartitionResponse) FromJsonString(s string) error {
 type ModifyAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 
-	// Alarm notification template ID
+	// Notification group ID
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
 
-	// Alarm template name
+	// Notification group name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Alarm template type. Valid values:
-	// <br><li> `Trigger`: alarm triggered
-	// <br><li> `Recovery`: alarm cleared
-	// <br><li> `All`: alarm triggered and alarm cleared
+	// Notification type. Valid values:
+	// <li> `Trigger`: alarm triggered
+	// <li> `Recovery`: alarm cleared
+	// <li> `All`: alarm triggered and alarm cleared
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Information of the recipient in alarm template
+	// Notification recipient
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitempty" name:"NoticeReceivers"`
 
-	// Alarm template callback information
+	// API callback information (including WeCom)
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitempty" name:"WebCallbacks"`
 }
 
@@ -4024,7 +3349,7 @@ type ModifyConsumerRequest struct {
 	// Log topic ID bound to the task
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Whether to enable the shipping task
+	// Whether the shipping task takes effect (default: no)
 	Effective *bool `json:"Effective,omitempty" name:"Effective"`
 
 	// Whether to ship metadata. Default value: `false`
@@ -4089,8 +3414,14 @@ type ModifyIndexRequest struct {
 	// It does not take effect by default
 	Status *bool `json:"Status,omitempty" name:"Status"`
 
-	// Index rule. Either `Rule` or `Effective` must exist.
+	// Index rule
 	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
+
+	// 
+	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+	// 
+	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
 func (r *ModifyIndexRequest) ToJsonString() string {
@@ -4108,6 +3439,8 @@ func (r *ModifyIndexRequest) FromJsonString(s string) error {
 	delete(f, "TopicId")
 	delete(f, "Status")
 	delete(f, "Rule")
+	delete(f, "IncludeInternalFields")
+	delete(f, "MetadataFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIndexRequest has unknown keys!", "")
 	}
@@ -4348,76 +3681,6 @@ func (r *ModifyShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyTopicRequest struct {
-	*tchttp.BaseRequest
-
-	// Log topic ID
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Log topic name
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-	// Whether to start collection for this log topic
-	Status *bool `json:"Status,omitempty" name:"Status"`
-
-	// Whether to enable automatic split
-	AutoSplit *bool `json:"AutoSplit,omitempty" name:"AutoSplit"`
-
-	// Maximum number of partitions to split into for this topic if automatic split is enabled
-	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
-
-	// Lifecycle in days. Value range: 1–366
-	Period *int64 `json:"Period,omitempty" name:"Period"`
-}
-
-func (r *ModifyTopicRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyTopicRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TopicId")
-	delete(f, "TopicName")
-	delete(f, "Tags")
-	delete(f, "Status")
-	delete(f, "AutoSplit")
-	delete(f, "MaxSplitPartitions")
-	delete(f, "Period")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyTopicResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyTopicResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyTopicResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type MonitorTime struct {
 
 	// Valid values:
@@ -4558,35 +3821,47 @@ type RuleTagInfo struct {
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
-	// Field information in tag index configuration
+	// Field information in the metafield index configuration
 	KeyValues []*KeyValueInfo `json:"KeyValues,omitempty" name:"KeyValues"`
 }
 
 type SearchLogRequest struct {
 	*tchttp.BaseRequest
 
-	// Log topic ID to be queried
+	// ID of the log topic to be searched
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
+	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
 	From *int64 `json:"From,omitempty" name:"From"`
 
-	// End time of the log to be queried, which is a Unix timestamp in milliseconds
+	// End time of the log to be searched, which is a Unix timestamp in milliseconds
 	To *int64 `json:"To,omitempty" name:"To"`
 
-	// Query statement. Maximum length: 4096
+	// Statement for search and analysis. Maximum length: 12 KB
+	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// Number of raw logs returned in a single query. Maximum value: 100. If the query statement (Query) contains an SQL query, you need to specify the number of SQL query results in `Query`. For more information, please visit https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1
+	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To limit the number of analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// This parameter is used to load more logs. Pass through the last `Context` value returned to get more log content. Up to 10,000 raw logs can be obtained in total. This parameter expires in 1 hour.
+	// You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+	// Time order of the logs returned. Valid values: `asc` (ascending); `desc`: (descending). Default value: `desc`
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To sort the analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY Syntax</a>.
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
+	// If the value is `true`, the new response method will be used, and the output parameters `AnalysisRecords` and `Columns` will be valid.
+	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
+	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
 }
 
@@ -4620,33 +3895,38 @@ type SearchLogResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// `Context` for loading subsequent content. It will expire after 1 hour.
+		// You can pass through the `Context` value (validity: 1 hour) returned by this API to continue to get more logs.
 		Context *string `json:"Context,omitempty" name:"Context"`
 
-		// Whether to return all raw log query results. This parameter is meaningless if the query statement (Query) contains an SQL query.
+		// Whether to return all raw log query results. If not, you can use `Context` to continue to get logs.
+	// Note: This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
 		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
 
-		// Whether the return is the analysis result
+		// Whether the returned data is the analysis (SQL) result
 		Analysis *bool `json:"Analysis,omitempty" name:"Analysis"`
 
-		// If `Analysis` is `true`, column name of the analysis result will be returned; otherwise, empty content will be returned.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
-
-		// Log query result. If `Analysis` is `True`, `null` may be returned
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Raw logs that meet the search conditions
+	// Note: This field may return `null`, indicating that no valid value was found.
 		Results []*LogInfo `json:"Results,omitempty" name:"Results"`
 
-		// Log analysis result. If `Analysis` is `False`, `null` may be returned
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Column names of log analysis
+	// This parameter is valid only when `UseNewAnalysis` is `false`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+		ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
+
+		// Log analysis result
+	// This parameter is valid only when `UseNewAnalysis` is `false`.
+	// Note: This field may return `null`, indicating that no valid value was found.
 		AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
 
-		// New log analysis result, which will be valid if `UseNewAnalysis` is `true`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Log analysis result
+	// This parameter is valid only when `UseNewAnalysis` is `true`.
+	// Note: This field may return `null`, indicating that no valid value was found.
 		AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
 
-		// Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Column attributes of log analysis
+	// This parameter is valid only when `UseNewAnalysis` is `true`.
+	// Note: This field may return `null`, indicating that no valid value was found.
 		Columns []*Column `json:"Columns,omitempty" name:"Columns"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4849,8 +4129,8 @@ type TopicInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// Lifecycle in days
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	// Note: This field may return `null`, indicating that no valid value was found.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -4930,23 +4210,25 @@ type WebCallback struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Callback type. Valid values:
-	// <br><li> WeCom
-	// <br><li> Http
+	// <li> WeCom
+	// <li> Http
 	CallbackType *string `json:"CallbackType,omitempty" name:"CallbackType"`
 
 	// Callback method. Valid values:
-	// <br><li> POST
-	// <br><li> PUT
+	// <li> POST
+	// <li> PUT
 	// Default value: `POST`. This parameter is required if `CallbackType` is `Http`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
 	// Request header
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This parameter is disused. To specify request headers, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	Headers []*string `json:"Headers,omitempty" name:"Headers"`
 
-	// Request content, which is required when `CallbackType` is `Http`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Request content
+	// Note: This parameter is disused. To specify request content, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
+	// Note: This field may return `null`, indicating that no valid value was found.
 	Body *string `json:"Body,omitempty" name:"Body"`
 
 	// Number

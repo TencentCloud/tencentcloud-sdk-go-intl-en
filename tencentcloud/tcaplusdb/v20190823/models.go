@@ -20,67 +20,6 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
-type Application struct {
-
-	// Application ID
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
-
-	// Application type
-	ApplicationType *int64 `json:"ApplicationType,omitempty" name:"ApplicationType"`
-
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
-
-	// Table group name
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	TableGroupName *string `json:"TableGroupName,omitempty" name:"TableGroupName"`
-
-	// Table name
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
-
-	// Applicant
-	Applicant *string `json:"Applicant,omitempty" name:"Applicant"`
-
-	// The creation time of the application
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-	// Status. Valid values: `-1` (canceled), `0` (pending approval), `1` (application approved and task submitted), `2` (rejected)
-	ApplicationStatus *int64 `json:"ApplicationStatus,omitempty" name:"ApplicationStatus"`
-
-	// Table group ID
-	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
-
-	// ID of the submitted task (if the application is not approved, this parameter is `0`)
-	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-	// Globally unique table ID
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
-
-	// Update time
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Approver
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ExecuteUser *string `json:"ExecuteUser,omitempty" name:"ExecuteUser"`
-
-	// Execution status
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ExecuteStatus *string `json:"ExecuteStatus,omitempty" name:"ExecuteStatus"`
-
-	// Whether the application can be approved by the API caller
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	CanCensor *bool `json:"CanCensor,omitempty" name:"CanCensor"`
-
-	// Whether the application can be canceled by the API caller
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	CanWithdrawal *bool `json:"CanWithdrawal,omitempty" name:"CanWithdrawal"`
-}
-
 type ApplyResult struct {
 
 	// Application ID
@@ -264,6 +203,18 @@ type ClusterInfo struct {
 	// CKafka information when data subscription is enabled
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	KafkaInfo *KafkaInfo `json:"KafkaInfo,omitempty" name:"KafkaInfo"`
+
+	// The number of days after which the cluster Txh backup file will expire and be deleted.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TxhBackupExpireDay *uint64 `json:"TxhBackupExpireDay,omitempty" name:"TxhBackupExpireDay"`
+
+	// The number of days after which the cluster Ulog backup file will expire and be deleted.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UlogBackupExpireDay *uint64 `json:"UlogBackupExpireDay,omitempty" name:"UlogBackupExpireDay"`
+
+	// Whether the expiration policy of cluster Ulog backup file is read-only. `0`: Yes; `1`: No.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsReadOnlyUlogBackupExpireDay *uint64 `json:"IsReadOnlyUlogBackupExpireDay,omitempty" name:"IsReadOnlyUlogBackupExpireDay"`
 }
 
 type CompareIdlFilesRequest struct {
@@ -1071,86 +1022,6 @@ func (r *DeleteTablesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteTablesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeApplicationsRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the cluster whose applications will be queried
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// The maximum number of results returned per page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Pagination offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Application status used as a filter condition
-	CensorStatus *int64 `json:"CensorStatus,omitempty" name:"CensorStatus"`
-
-	// Table group ID used as a filter condition
-	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
-
-	// Table name used as a filter condition
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
-
-	// Applicant UIN used as a filter condition
-	Applicant *string `json:"Applicant,omitempty" name:"Applicant"`
-
-	// Application type used as a filter condition
-	ApplyType *int64 `json:"ApplyType,omitempty" name:"ApplyType"`
-}
-
-func (r *DescribeApplicationsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeApplicationsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ClusterId")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "CensorStatus")
-	delete(f, "TableGroupId")
-	delete(f, "TableName")
-	delete(f, "Applicant")
-	delete(f, "ApplyType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeApplicationsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Application list
-		Applications []*Application `json:"Applications,omitempty" name:"Applications"`
-
-		// Total number of applications
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeApplicationsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeApplicationsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3701,6 +3572,10 @@ type TableInfoNew struct {
 	// Information about global indexes, table caching, or data subscription
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DbClusterInfoStruct *string `json:"DbClusterInfoStruct,omitempty" name:"DbClusterInfoStruct"`
+
+	// The number of days after which the table Txh backup files will be expire and deleted.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TxhBackupExpireDay *uint64 `json:"TxhBackupExpireDay,omitempty" name:"TxhBackupExpireDay"`
 }
 
 type TableResultNew struct {

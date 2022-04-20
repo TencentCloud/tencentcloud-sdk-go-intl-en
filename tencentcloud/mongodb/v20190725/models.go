@@ -1935,6 +1935,68 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyDBInstanceNetworkAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Old IP retention period in minutes. The old IP will be released after the specified time, and both the old and new IPs can be accessed before the release. The value `0` indicates that the old IP will be reclaimed immediately.
+	OldIpExpiredTime *uint64 `json:"OldIpExpiredTime,omitempty" name:"OldIpExpiredTime"`
+
+	// ID of the VPC to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+	NewUniqVpcId *string `json:"NewUniqVpcId,omitempty" name:"NewUniqVpcId"`
+
+	// ID of the subnet to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+	NewUniqSubnetId *string `json:"NewUniqSubnetId,omitempty" name:"NewUniqSubnetId"`
+
+	// IP information to be modified
+	NetworkAddresses []*ModifyNetworkAddress `json:"NetworkAddresses,omitempty" name:"NetworkAddresses"`
+}
+
+func (r *ModifyDBInstanceNetworkAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceNetworkAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "OldIpExpiredTime")
+	delete(f, "NewUniqVpcId")
+	delete(f, "NewUniqSubnetId")
+	delete(f, "NetworkAddresses")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceNetworkAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDBInstanceNetworkAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDBInstanceNetworkAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceNetworkAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyDBInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -2056,6 +2118,15 @@ func (r *ModifyDBInstanceSpecResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyNetworkAddress struct {
+
+	// New IP
+	NewIPAddress *string `json:"NewIPAddress,omitempty" name:"NewIPAddress"`
+
+	// Old IP
+	OldIpAddress *string `json:"OldIpAddress,omitempty" name:"OldIpAddress"`
 }
 
 type OfflineIsolatedDBInstanceRequest struct {

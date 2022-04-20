@@ -1112,6 +1112,7 @@ func NewInquirePriceCreateDBInstancesResponse() (response *InquirePriceCreateDBI
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_REPLICASETNUMERROR = "InvalidParameterValue.ReplicaSetNumError"
+//  INVALIDPARAMETERVALUE_SPECNOTONSALE = "InvalidParameterValue.SpecNotOnSale"
 //  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
 func (c *Client) InquirePriceCreateDBInstances(request *InquirePriceCreateDBInstancesRequest) (response *InquirePriceCreateDBInstancesResponse, err error) {
     return c.InquirePriceCreateDBInstancesWithContext(context.Background(), request)
@@ -1125,6 +1126,7 @@ func (c *Client) InquirePriceCreateDBInstances(request *InquirePriceCreateDBInst
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_REPLICASETNUMERROR = "InvalidParameterValue.ReplicaSetNumError"
+//  INVALIDPARAMETERVALUE_SPECNOTONSALE = "InvalidParameterValue.SpecNotOnSale"
 //  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
 func (c *Client) InquirePriceCreateDBInstancesWithContext(ctx context.Context, request *InquirePriceCreateDBInstancesRequest) (response *InquirePriceCreateDBInstancesResponse, err error) {
     if request == nil {
@@ -1305,6 +1307,63 @@ func (c *Client) IsolateDBInstanceWithContext(ctx context.Context, request *Isol
     request.SetContext(ctx)
     
     response = NewIsolateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceNetworkAddressRequest() (request *ModifyDBInstanceNetworkAddressRequest) {
+    request = &ModifyDBInstanceNetworkAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mongodb", APIVersion, "ModifyDBInstanceNetworkAddress")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceNetworkAddressResponse() (response *ModifyDBInstanceNetworkAddressResponse) {
+    response = &ModifyDBInstanceNetworkAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBInstanceNetworkAddress
+// This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDVIP = "InvalidParameter.InvalidVip"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
+func (c *Client) ModifyDBInstanceNetworkAddress(request *ModifyDBInstanceNetworkAddressRequest) (response *ModifyDBInstanceNetworkAddressResponse, err error) {
+    return c.ModifyDBInstanceNetworkAddressWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceNetworkAddress
+// This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDVIP = "InvalidParameter.InvalidVip"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
+//  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
+func (c *Client) ModifyDBInstanceNetworkAddressWithContext(ctx context.Context, request *ModifyDBInstanceNetworkAddressRequest) (response *ModifyDBInstanceNetworkAddressResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceNetworkAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceNetworkAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceNetworkAddressResponse()
     err = c.Send(request, response)
     return
 }

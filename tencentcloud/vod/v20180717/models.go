@@ -3704,6 +3704,56 @@ func (r *CreateSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateStorageRegionRequest struct {
+	*tchttp.BaseRequest
+
+	// The region to enable storage in, which must be a storage region supported by VOD.
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *CreateStorageRegionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStorageRegionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StorageRegion")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStorageRegionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateStorageRegionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateStorageRegionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStorageRegionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateSubAppIdRequest struct {
 	*tchttp.BaseRequest
 
@@ -6549,6 +6599,55 @@ func (r *DescribeStorageDetailsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStorageRegionsRequest struct {
+	*tchttp.BaseRequest
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeStorageRegionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStorageRegionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStorageRegionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeStorageRegionsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The information of the storage regions.
+		StorageRegionInfos []*StorageRegionInfo `json:"StorageRegionInfos,omitempty" name:"StorageRegionInfos"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeStorageRegionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStorageRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9673,6 +9772,56 @@ func (r *ModifyContentReviewTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyContentReviewTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDefaultStorageRegionRequest struct {
+	*tchttp.BaseRequest
+
+	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ModifyDefaultStorageRegionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDefaultStorageRegionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StorageRegion")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDefaultStorageRegionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyDefaultStorageRegionResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyDefaultStorageRegionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDefaultStorageRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12909,6 +13058,23 @@ type StickerTrackItem struct {
 	// Operation on sticker such as image rotation.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations"`
+}
+
+type StorageRegionInfo struct {
+
+	// Storage region.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Description of the storage region.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Whether storage is enabled in the region. Valid values:
+	// <li>opened: Enabled</li>
+	// <li>unopened: Not enabled</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Whether the region is the default storage region. Valid values: true, false.
+	IsDefault *bool `json:"IsDefault,omitempty" name:"IsDefault"`
 }
 
 type StorageStatData struct {

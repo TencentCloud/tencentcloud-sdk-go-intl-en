@@ -242,134 +242,6 @@ func (c *Client) CreateAlarmNoticeWithContext(ctx context.Context, request *Crea
     return
 }
 
-func NewCreateAsyncContextTaskRequest() (request *CreateAsyncContextTaskRequest) {
-    request = &CreateAsyncContextTaskRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "CreateAsyncContextTask")
-    
-    
-    return
-}
-
-func NewCreateAsyncContextTaskResponse() (response *CreateAsyncContextTaskResponse) {
-    response = &CreateAsyncContextTaskResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateAsyncContextTask
-// This API is used to create an offline context search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
-//  LIMITEXCEEDED_ASYNCTASK = "LimitExceeded.AsyncTask"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateAsyncContextTask(request *CreateAsyncContextTaskRequest) (response *CreateAsyncContextTaskResponse, err error) {
-    return c.CreateAsyncContextTaskWithContext(context.Background(), request)
-}
-
-// CreateAsyncContextTask
-// This API is used to create an offline context search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
-//  LIMITEXCEEDED_ASYNCTASK = "LimitExceeded.AsyncTask"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateAsyncContextTaskWithContext(ctx context.Context, request *CreateAsyncContextTaskRequest) (response *CreateAsyncContextTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateAsyncContextTaskRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateAsyncContextTask require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateAsyncContextTaskResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateAsyncSearchTaskRequest() (request *CreateAsyncSearchTaskRequest) {
-    request = &CreateAsyncSearchTaskRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "CreateAsyncSearchTask")
-    
-    
-    return
-}
-
-func NewCreateAsyncSearchTaskResponse() (response *CreateAsyncSearchTaskResponse) {
-    response = &CreateAsyncSearchTaskResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateAsyncSearchTask
-// This API is used to create an offline search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
-//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_ASYNCSEARCHTASK = "LimitExceeded.AsyncSearchTask"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateAsyncSearchTask(request *CreateAsyncSearchTaskRequest) (response *CreateAsyncSearchTaskResponse, err error) {
-    return c.CreateAsyncSearchTaskWithContext(context.Background(), request)
-}
-
-// CreateAsyncSearchTask
-// This API is used to create an offline search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
-//  FAILEDOPERATION_TOPICNOTSUPPORT = "FailedOperation.TopicNotSupport"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_ASYNCSEARCHTASK = "LimitExceeded.AsyncSearchTask"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateAsyncSearchTaskWithContext(ctx context.Context, request *CreateAsyncSearchTaskRequest) (response *CreateAsyncSearchTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateAsyncSearchTaskRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateAsyncSearchTask require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateAsyncSearchTaskResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateConfigRequest() (request *CreateConfigRequest) {
     request = &CreateConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -403,6 +275,7 @@ func NewCreateConfigResponse() (response *CreateConfigResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateConfig(request *CreateConfigRequest) (response *CreateConfigResponse, err error) {
     return c.CreateConfigWithContext(context.Background(), request)
@@ -424,6 +297,7 @@ func (c *Client) CreateConfig(request *CreateConfigRequest) (response *CreateCon
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) CreateConfigWithContext(ctx context.Context, request *CreateConfigRequest) (response *CreateConfigResponse, err error) {
     if request == nil {
@@ -524,7 +398,7 @@ func NewCreateExportResponse() (response *CreateExportResponse) {
 }
 
 // CreateExport
-// This API is used to create a log download task.
+// This API is used to create a download task to export raw logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -542,7 +416,7 @@ func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExp
 }
 
 // CreateExport
-// This API is used to create a log download task.
+// This API is used to create a download task to export raw logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -593,6 +467,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -613,6 +488,7 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -782,79 +658,6 @@ func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateMachineGroupResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateShipperRequest() (request *CreateShipperRequest) {
-    request = &CreateShipperRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "CreateShipper")
-    
-    
-    return
-}
-
-func NewCreateShipperResponse() (response *CreateShipperResponse) {
-    response = &CreateShipperResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateShipper
-// This API is used to create a shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_SHIPPER = "LimitExceeded.Shipper"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateShipper(request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
-    return c.CreateShipperWithContext(context.Background(), request)
-}
-
-// CreateShipper
-// This API is used to create a shipping rule. To use this API, you need to grant CLS the write permission of the specified bucket.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_SHIPPER = "LimitExceeded.Shipper"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) CreateShipperWithContext(ctx context.Context, request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
-    if request == nil {
-        request = NewCreateShipperRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateShipper require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateShipperResponse()
     err = c.Send(request, response)
     return
 }
@@ -1054,120 +857,6 @@ func (c *Client) DeleteAlarmNoticeWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteAlarmNoticeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteAsyncContextTaskRequest() (request *DeleteAsyncContextTaskRequest) {
-    request = &DeleteAsyncContextTaskRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DeleteAsyncContextTask")
-    
-    
-    return
-}
-
-func NewDeleteAsyncContextTaskResponse() (response *DeleteAsyncContextTaskResponse) {
-    response = &DeleteAsyncContextTaskResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteAsyncContextTask
-// This API is used to delete an offline context search task.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) DeleteAsyncContextTask(request *DeleteAsyncContextTaskRequest) (response *DeleteAsyncContextTaskResponse, err error) {
-    return c.DeleteAsyncContextTaskWithContext(context.Background(), request)
-}
-
-// DeleteAsyncContextTask
-// This API is used to delete an offline context search task.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) DeleteAsyncContextTaskWithContext(ctx context.Context, request *DeleteAsyncContextTaskRequest) (response *DeleteAsyncContextTaskResponse, err error) {
-    if request == nil {
-        request = NewDeleteAsyncContextTaskRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteAsyncContextTask require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteAsyncContextTaskResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteAsyncSearchTaskRequest() (request *DeleteAsyncSearchTaskRequest) {
-    request = &DeleteAsyncSearchTaskRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DeleteAsyncSearchTask")
-    
-    
-    return
-}
-
-func NewDeleteAsyncSearchTaskResponse() (response *DeleteAsyncSearchTaskResponse) {
-    response = &DeleteAsyncSearchTaskResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteAsyncSearchTask
-// This API is used to delete an offline search task.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) DeleteAsyncSearchTask(request *DeleteAsyncSearchTaskRequest) (response *DeleteAsyncSearchTaskResponse, err error) {
-    return c.DeleteAsyncSearchTaskWithContext(context.Background(), request)
-}
-
-// DeleteAsyncSearchTask
-// This API is used to delete an offline search task.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) DeleteAsyncSearchTaskWithContext(ctx context.Context, request *DeleteAsyncSearchTaskRequest) (response *DeleteAsyncSearchTaskResponse, err error) {
-    if request == nil {
-        request = NewDeleteAsyncSearchTaskRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteAsyncSearchTask require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteAsyncSearchTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -1452,7 +1141,7 @@ func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
 }
 
 // DeleteIndex
-// This API is used to delete the index configuration of a log topic.
+// This API is used to delete the index configuration of a log topic. After deleting, you cannot retrieve or query the collected logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1471,7 +1160,7 @@ func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndex
 }
 
 // DeleteIndex
-// This API is used to delete the index configuration of a log topic.
+// This API is used to delete the index configuration of a log topic. After deleting, you cannot retrieve or query the collected logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1792,6 +1481,7 @@ func NewDescribeAlarmNoticesResponse() (response *DescribeAlarmNoticesResponse) 
 // This API is used to get the notification group list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1808,6 +1498,7 @@ func (c *Client) DescribeAlarmNotices(request *DescribeAlarmNoticesRequest) (res
 // This API is used to get the notification group list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1853,6 +1544,7 @@ func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
 // This API is used to get the alarm policy list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
@@ -1865,6 +1557,7 @@ func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *Descr
 // This API is used to get the alarm policy list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
@@ -1881,236 +1574,6 @@ func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeAlarmsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAsyncContextResultRequest() (request *DescribeAsyncContextResultRequest) {
-    request = &DescribeAsyncContextResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DescribeAsyncContextResult")
-    
-    
-    return
-}
-
-func NewDescribeAsyncContextResultResponse() (response *DescribeAsyncContextResultResponse) {
-    response = &DescribeAsyncContextResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAsyncContextResult
-// This API is used to get the result of an offline context search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-func (c *Client) DescribeAsyncContextResult(request *DescribeAsyncContextResultRequest) (response *DescribeAsyncContextResultResponse, err error) {
-    return c.DescribeAsyncContextResultWithContext(context.Background(), request)
-}
-
-// DescribeAsyncContextResult
-// This API is used to get the result of an offline context search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-func (c *Client) DescribeAsyncContextResultWithContext(ctx context.Context, request *DescribeAsyncContextResultRequest) (response *DescribeAsyncContextResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncContextResultRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAsyncContextResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAsyncContextResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAsyncContextTasksRequest() (request *DescribeAsyncContextTasksRequest) {
-    request = &DescribeAsyncContextTasksRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DescribeAsyncContextTasks")
-    
-    
-    return
-}
-
-func NewDescribeAsyncContextTasksResponse() (response *DescribeAsyncContextTasksResponse) {
-    response = &DescribeAsyncContextTasksResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAsyncContextTasks
-// This API is used to get the list of offline context search tasks.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-func (c *Client) DescribeAsyncContextTasks(request *DescribeAsyncContextTasksRequest) (response *DescribeAsyncContextTasksResponse, err error) {
-    return c.DescribeAsyncContextTasksWithContext(context.Background(), request)
-}
-
-// DescribeAsyncContextTasks
-// This API is used to get the list of offline context search tasks.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-func (c *Client) DescribeAsyncContextTasksWithContext(ctx context.Context, request *DescribeAsyncContextTasksRequest) (response *DescribeAsyncContextTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncContextTasksRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAsyncContextTasks require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAsyncContextTasksResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAsyncSearchResultRequest() (request *DescribeAsyncSearchResultRequest) {
-    request = &DescribeAsyncSearchResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DescribeAsyncSearchResult")
-    
-    
-    return
-}
-
-func NewDescribeAsyncSearchResultResponse() (response *DescribeAsyncSearchResultResponse) {
-    response = &DescribeAsyncSearchResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAsyncSearchResult
-// This API is used to get the result of an offline search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-func (c *Client) DescribeAsyncSearchResult(request *DescribeAsyncSearchResultRequest) (response *DescribeAsyncSearchResultResponse, err error) {
-    return c.DescribeAsyncSearchResultWithContext(context.Background(), request)
-}
-
-// DescribeAsyncSearchResult
-// This API is used to get the result of an offline search task.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ASYNCSEARCHNOTCOMPLETED = "FailedOperation.AsyncSearchNotCompleted"
-//  FAILEDOPERATION_ASYNCTASKNOTCOMPLETED = "FailedOperation.AsyncTaskNotCompleted"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_ASYNCSEARCHTASKNOTEXIST = "ResourceNotFound.AsyncSearchTaskNotExist"
-//  RESOURCENOTFOUND_ASYNCTASKNOTEXIST = "ResourceNotFound.AsyncTaskNotExist"
-func (c *Client) DescribeAsyncSearchResultWithContext(ctx context.Context, request *DescribeAsyncSearchResultRequest) (response *DescribeAsyncSearchResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncSearchResultRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAsyncSearchResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAsyncSearchResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAsyncSearchTasksRequest() (request *DescribeAsyncSearchTasksRequest) {
-    request = &DescribeAsyncSearchTasksRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "DescribeAsyncSearchTasks")
-    
-    
-    return
-}
-
-func NewDescribeAsyncSearchTasksResponse() (response *DescribeAsyncSearchTasksResponse) {
-    response = &DescribeAsyncSearchTasksResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAsyncSearchTasks
-// This API is used to get the list of offline search tasks.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
-func (c *Client) DescribeAsyncSearchTasks(request *DescribeAsyncSearchTasksRequest) (response *DescribeAsyncSearchTasksResponse, err error) {
-    return c.DescribeAsyncSearchTasksWithContext(context.Background(), request)
-}
-
-// DescribeAsyncSearchTasks
-// This API is used to get the list of offline search tasks.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
-func (c *Client) DescribeAsyncSearchTasksWithContext(ctx context.Context, request *DescribeAsyncSearchTasksRequest) (response *DescribeAsyncSearchTasksResponse, err error) {
-    if request == nil {
-        request = NewDescribeAsyncSearchTasksRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAsyncSearchTasks require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAsyncSearchTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -2279,6 +1742,7 @@ func NewDescribeConsumerResponse() (response *DescribeConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeConsumer(request *DescribeConsumerRequest) (response *DescribeConsumerResponse, err error) {
     return c.DescribeConsumerWithContext(context.Background(), request)
 }
@@ -2296,6 +1760,7 @@ func (c *Client) DescribeConsumer(request *DescribeConsumerRequest) (response *D
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeConsumerWithContext(ctx context.Context, request *DescribeConsumerRequest) (response *DescribeConsumerResponse, err error) {
     if request == nil {
         request = NewDescribeConsumerRequest()
@@ -2334,6 +1799,7 @@ func NewDescribeExportsResponse() (response *DescribeExportsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2352,6 +1818,7 @@ func (c *Client) DescribeExports(request *DescribeExportsRequest) (response *Des
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2475,6 +1942,7 @@ func NewDescribeLogContextResponse() (response *DescribeLogContextResponse) {
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
@@ -2497,6 +1965,7 @@ func (c *Client) DescribeLogContext(request *DescribeLogContextRequest) (respons
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
@@ -2515,6 +1984,81 @@ func (c *Client) DescribeLogContextWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeLogContextResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogHistogramRequest() (request *DescribeLogHistogramRequest) {
+    request = &DescribeLogHistogramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeLogHistogram")
+    
+    
+    return
+}
+
+func NewDescribeLogHistogramResponse() (response *DescribeLogHistogramResponse) {
+    response = &DescribeLogHistogramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLogHistogram
+// This API is used to build a histogram.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDCONTEXT = "FailedOperation.InvalidContext"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeLogHistogram(request *DescribeLogHistogramRequest) (response *DescribeLogHistogramResponse, err error) {
+    return c.DescribeLogHistogramWithContext(context.Background(), request)
+}
+
+// DescribeLogHistogram
+// This API is used to build a histogram.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDCONTEXT = "FailedOperation.InvalidContext"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeLogHistogramWithContext(ctx context.Context, request *DescribeLogHistogramRequest) (response *DescribeLogHistogramResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogHistogramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogHistogram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogHistogramResponse()
     err = c.Send(request, response)
     return
 }
@@ -2541,6 +2085,7 @@ func NewDescribeLogsetsResponse() (response *DescribeLogsetsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2560,6 +2105,7 @@ func (c *Client) DescribeLogsets(request *DescribeLogsetsRequest) (response *Des
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2674,6 +2220,7 @@ func NewDescribeMachineGroupsResponse() (response *DescribeMachineGroupsResponse
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2691,6 +2238,7 @@ func (c *Client) DescribeMachineGroups(request *DescribeMachineGroupsRequest) (r
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3010,6 +2558,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3029,6 +2578,7 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3497,6 +3047,7 @@ func NewModifyIndexResponse() (response *ModifyIndexResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3517,6 +3068,7 @@ func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndex
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3755,81 +3307,6 @@ func (c *Client) ModifyShipperWithContext(ctx context.Context, request *ModifySh
     return
 }
 
-func NewModifyTopicRequest() (request *ModifyTopicRequest) {
-    request = &ModifyTopicRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cls", APIVersion, "ModifyTopic")
-    
-    
-    return
-}
-
-func NewModifyTopicResponse() (response *ModifyTopicResponse) {
-    response = &ModifyTopicResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyTopic
-// This API is used to modify a log topic.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
-//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
-//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
-    return c.ModifyTopicWithContext(context.Background(), request)
-}
-
-// ModifyTopic
-// This API is used to modify a log topic.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
-//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
-//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
-//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
-//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
-//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
-func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
-    if request == nil {
-        request = NewModifyTopicRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyTopic require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyTopicResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRetryShipperTaskRequest() (request *RetryShipperTaskRequest) {
     request = &RetryShipperTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3921,7 +3398,7 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 }
 
 // SearchLog
-// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
+// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3933,18 +3410,20 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  LIMITEXCEEDED_SEARCHRESULTTOOLARGE = "LimitExceeded.SearchResultTooLarge"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_OPERATIONNOTSUPPORTINSEARCHLOW = "OperationDenied.OperationNotSupportInSearchLow"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogResponse, err error) {
     return c.SearchLogWithContext(context.Background(), request)
 }
 
 // SearchLog
-// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent calls to the same log topic cannot exceed 15.
+// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3956,11 +3435,13 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
+//  LIMITEXCEEDED_SEARCHRESULTTOOLARGE = "LimitExceeded.SearchResultTooLarge"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_OPERATIONNOTSUPPORTINSEARCHLOW = "OperationDenied.OperationNotSupportInSearchLow"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) SearchLogWithContext(ctx context.Context, request *SearchLogRequest) (response *SearchLogResponse, err error) {
     if request == nil {
@@ -4073,6 +3554,20 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 }
 
 // UploadLog
+// ## Note
+//
+// To ensure log data reliability and help you use CLS more efficiently, you are advised to use the optimized API [Uploading Structured Logs](https://intl.cloud.tencent.com/document/api/614/16873) to upload logs.
+//
+// 
+//
+// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Collection via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
+//
+// 
+//
+// `UploadLog` allows you to synchronously upload log data. If you still want to continue to use this API instead of the optimized one, read this document.
+//
+// 
+//
 // ## Feature Description
 //
 // 
@@ -4089,7 +3584,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where the sequential consumption is not needed.
+// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where sequential consumption is not needed.
 //
 // 
 //
@@ -4097,7 +3592,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// In this mode, data will be written to a target partition that meets the range requirements based on the hash value (`X-CLS-HashKey`) carried by data. For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
+// In this mode, data will be written to a target partition that meets the range requirements based on the carried hash value (`X-CLS-HashKey`). For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
 //
 // 
 //
@@ -4129,7 +3624,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 //
 // | filename    | No       | Log filename                                                   |
 //
@@ -4189,7 +3684,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
@@ -4197,7 +3692,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 //
 // 
 //
@@ -4243,7 +3738,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// A pb description file is an agreed-on data interchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+// A pb description file is an agreed-on data interchange format for communication. To upload logs, compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
@@ -4333,7 +3828,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation commands:
+// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
 //
 // 
 //
@@ -4349,7 +3844,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and `cls.pb.cc` code implementation file as shown below:
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
 //
 // 
 //
@@ -4397,6 +3892,20 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 }
 
 // UploadLog
+// ## Note
+//
+// To ensure log data reliability and help you use CLS more efficiently, you are advised to use the optimized API [Uploading Structured Logs](https://intl.cloud.tencent.com/document/api/614/16873) to upload logs.
+//
+// 
+//
+// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Collection via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
+//
+// 
+//
+// `UploadLog` allows you to synchronously upload log data. If you still want to continue to use this API instead of the optimized one, read this document.
+//
+// 
+//
 // ## Feature Description
 //
 // 
@@ -4413,7 +3922,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where the sequential consumption is not needed.
+// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where sequential consumption is not needed.
 //
 // 
 //
@@ -4421,7 +3930,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// In this mode, data will be written to a target partition that meets the range requirements based on the hash value (`X-CLS-HashKey`) carried by data. For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
+// In this mode, data will be written to a target partition that meets the range requirements based on the carried hash value (`X-CLS-HashKey`). For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
 //
 // 
 //
@@ -4453,7 +3962,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: a 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 //
 // | filename    | No       | Log filename                                                   |
 //
@@ -4513,7 +4022,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
@@ -4521,7 +4030,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and enter the directory:
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 //
 // 
 //
@@ -4567,7 +4076,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// A pb description file is an agreed-on data interchange format for communication. To upload logs, please compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, please see [protoc](https://github.com/protocolbuffers/protobuf).
+// A pb description file is an agreed-on data interchange format for communication. To upload logs, compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
@@ -4657,7 +4166,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation commands:
+// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
 //
 // 
 //
@@ -4673,7 +4182,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and `cls.pb.cc` code implementation file as shown below:
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
 //
 // 
 //

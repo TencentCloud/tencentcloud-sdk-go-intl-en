@@ -66,11 +66,15 @@ func NewAddResourceTagResponse() (response *AddResourceTagResponse) {
 // This API is used to associate resources with tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
 //  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
 //  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
 //  RESOURCEINUSE_TAGKEYATTACHED = "ResourceInUse.TagKeyAttached"
@@ -82,11 +86,15 @@ func (c *Client) AddResourceTag(request *AddResourceTagRequest) (response *AddRe
 // This API is used to associate resources with tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
 //  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
 //  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
 //  RESOURCEINUSE_TAGKEYATTACHED = "ResourceInUse.TagKeyAttached"
@@ -128,13 +136,19 @@ func NewAttachResourcesTagResponse() (response *AttachResourcesTagResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 //  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  OPERATIONDENIED = "OperationDenied"
@@ -149,13 +163,19 @@ func (c *Client) AttachResourcesTag(request *AttachResourcesTagRequest) (respons
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 //  LIMITEXCEEDED_RESOURCEATTACHEDTAGS = "LimitExceeded.ResourceAttachedTags"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  OPERATIONDENIED = "OperationDenied"
@@ -198,12 +218,14 @@ func NewCreateTagResponse() (response *CreateTagResponse) {
 // This API is used to create a tag key and tag value pair.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
 //  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
 //  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
 //  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
@@ -216,12 +238,14 @@ func (c *Client) CreateTag(request *CreateTagRequest) (response *CreateTagRespon
 // This API is used to create a tag key and tag value pair.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
 //  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
 //  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
 //  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
@@ -238,6 +262,77 @@ func (c *Client) CreateTagWithContext(ctx context.Context, request *CreateTagReq
     request.SetContext(ctx)
     
     response = NewCreateTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTagsRequest() (request *CreateTagsRequest) {
+    request = &CreateTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "CreateTags")
+    
+    
+    return
+}
+
+func NewCreateTagsResponse() (response *CreateTagsResponse) {
+    response = &CreateTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateTags
+// This API is used to create multiple tag key-value pairs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+//  RESOURCEINUSE_TAGDUPLICATE = "ResourceInUse.TagDuplicate"
+func (c *Client) CreateTags(request *CreateTagsRequest) (response *CreateTagsResponse, err error) {
+    return c.CreateTagsWithContext(context.Background(), request)
+}
+
+// CreateTags
+// This API is used to create multiple tag key-value pairs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_TAGKEY = "LimitExceeded.TagKey"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+//  RESOURCEINUSE_TAGDUPLICATE = "ResourceInUse.TagDuplicate"
+func (c *Client) CreateTagsWithContext(ctx context.Context, request *CreateTagsRequest) (response *CreateTagsResponse, err error) {
+    if request == nil {
+        request = NewCreateTagsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTags require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTagsResponse()
     err = c.Send(request, response)
     return
 }
@@ -263,8 +358,11 @@ func NewDeleteResourceTagResponse() (response *DeleteResourceTagResponse) {
 // This API is used to unassociate tags and resources.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 func (c *Client) DeleteResourceTag(request *DeleteResourceTagRequest) (response *DeleteResourceTagResponse, err error) {
@@ -275,8 +373,11 @@ func (c *Client) DeleteResourceTag(request *DeleteResourceTagRequest) (response 
 // This API is used to unassociate tags and resources.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
 //  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 func (c *Client) DeleteResourceTagWithContext(ctx context.Context, request *DeleteResourceTagRequest) (response *DeleteResourceTagResponse, err error) {
@@ -317,6 +418,10 @@ func NewDeleteTagResponse() (response *DeleteTagResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
 //  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
 func (c *Client) DeleteTag(request *DeleteTagRequest) (response *DeleteTagResponse, err error) {
     return c.DeleteTagWithContext(context.Background(), request)
@@ -327,6 +432,10 @@ func (c *Client) DeleteTag(request *DeleteTagRequest) (response *DeleteTagRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
 //  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
 func (c *Client) DeleteTagWithContext(ctx context.Context, request *DeleteTagRequest) (response *DeleteTagResponse, err error) {
     if request == nil {
@@ -340,6 +449,73 @@ func (c *Client) DeleteTagWithContext(ctx context.Context, request *DeleteTagReq
     request.SetContext(ctx)
     
     response = NewDeleteTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTagsRequest() (request *DeleteTagsRequest) {
+    request = &DeleteTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "DeleteTags")
+    
+    
+    return
+}
+
+func NewDeleteTagsResponse() (response *DeleteTagsResponse) {
+    response = &DeleteTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteTags
+// This API is used to delete multiple tag key-value pairs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) DeleteTags(request *DeleteTagsRequest) (response *DeleteTagsResponse, err error) {
+    return c.DeleteTagsWithContext(context.Background(), request)
+}
+
+// DeleteTags
+// This API is used to delete multiple tag key-value pairs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+func (c *Client) DeleteTagsWithContext(ctx context.Context, request *DeleteTagsRequest) (response *DeleteTagsResponse, err error) {
+    if request == nil {
+        request = NewDeleteTagsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTags require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTagsResponse()
     err = c.Send(request, response)
     return
 }
@@ -365,8 +541,7 @@ func NewDescribeResourceTagsResponse() (response *DescribeResourceTagsResponse) 
 // This API is used to query the tags associated with a resource.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
-//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeResourceTags(request *DescribeResourceTagsRequest) (response *DescribeResourceTagsResponse, err error) {
     return c.DescribeResourceTagsWithContext(context.Background(), request)
 }
@@ -375,8 +550,7 @@ func (c *Client) DescribeResourceTags(request *DescribeResourceTagsRequest) (res
 // This API is used to query the tags associated with a resource.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_TAGATTACHEDRESOURCE = "FailedOperation.TagAttachedResource"
-//  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeResourceTagsWithContext(ctx context.Context, request *DescribeResourceTagsRequest) (response *DescribeResourceTagsResponse, err error) {
     if request == nil {
         request = NewDescribeResourceTagsRequest()
@@ -411,9 +585,10 @@ func NewDescribeResourceTagsByResourceIdsResponse() (response *DescribeResourceT
 }
 
 // DescribeResourceTagsByResourceIds
-// This API is used to query tag key and value pairs for existing resources.
+// This API is used to query the tag key-value pairs associated with an existing resource.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
@@ -424,9 +599,10 @@ func (c *Client) DescribeResourceTagsByResourceIds(request *DescribeResourceTags
 }
 
 // DescribeResourceTagsByResourceIds
-// This API is used to query tag key and value pairs for existing resources.
+// This API is used to query the tag key-value pairs associated with an existing resource.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
@@ -526,6 +702,7 @@ func NewDescribeResourceTagsByTagKeysResponse() (response *DescribeResourceTagsB
 // This API is used to get resource tags based on tag keys.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
@@ -541,6 +718,7 @@ func (c *Client) DescribeResourceTagsByTagKeys(request *DescribeResourceTagsByTa
 // This API is used to get resource tags based on tag keys.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
@@ -585,6 +763,7 @@ func NewDescribeResourcesByTagsResponse() (response *DescribeResourcesByTagsResp
 // This API is used to query resources by tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
 //  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
@@ -596,6 +775,7 @@ func (c *Client) DescribeResourcesByTags(request *DescribeResourcesByTagsRequest
 // This API is used to query resources by tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
 //  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
@@ -636,6 +816,7 @@ func NewDescribeResourcesByTagsUnionResponse() (response *DescribeResourcesByTag
 // This API is used to query resource list by tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
 //  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
@@ -647,6 +828,7 @@ func (c *Client) DescribeResourcesByTagsUnion(request *DescribeResourcesByTagsUn
 // This API is used to query resource list by tags.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_TAGFILTERS = "InvalidParameterValue.TagFilters"
 //  INVALIDPARAMETERVALUE_TAGFILTERSLENGTHEXCEEDED = "InvalidParameterValue.TagFiltersLengthExceeded"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
@@ -687,6 +869,7 @@ func NewDescribeTagKeysResponse() (response *DescribeTagKeysResponse) {
 // This API is used to query tag keys in an existing tag list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTagKeys(request *DescribeTagKeysRequest) (response *DescribeTagKeysResponse, err error) {
     return c.DescribeTagKeysWithContext(context.Background(), request)
@@ -696,6 +879,7 @@ func (c *Client) DescribeTagKeys(request *DescribeTagKeysRequest) (response *Des
 // This API is used to query tag keys in an existing tag list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTagKeysWithContext(ctx context.Context, request *DescribeTagKeysRequest) (response *DescribeTagKeysResponse, err error) {
     if request == nil {
@@ -734,6 +918,7 @@ func NewDescribeTagValuesResponse() (response *DescribeTagValuesResponse) {
 // This API is used to query tag values in an existing tag list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTagValues(request *DescribeTagValuesRequest) (response *DescribeTagValuesResponse, err error) {
     return c.DescribeTagValuesWithContext(context.Background(), request)
@@ -743,6 +928,7 @@ func (c *Client) DescribeTagValues(request *DescribeTagValuesRequest) (response 
 // This API is used to query tag values in an existing tag list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTagValuesWithContext(ctx context.Context, request *DescribeTagValuesRequest) (response *DescribeTagValuesResponse, err error) {
     if request == nil {
@@ -830,6 +1016,7 @@ func NewDescribeTagsResponse() (response *DescribeTagsResponse) {
 // This API is used to query existing tag lists.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeTagsResponse, err error) {
     return c.DescribeTagsWithContext(context.Background(), request)
@@ -839,6 +1026,7 @@ func (c *Client) DescribeTags(request *DescribeTagsRequest) (response *DescribeT
 // This API is used to query existing tag lists.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 func (c *Client) DescribeTagsWithContext(ctx context.Context, request *DescribeTagsRequest) (response *DescribeTagsResponse, err error) {
     if request == nil {
@@ -927,12 +1115,15 @@ func NewDetachResourcesTagResponse() (response *DetachResourcesTagResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 func (c *Client) DetachResourcesTag(request *DetachResourcesTagRequest) (response *DetachResourcesTagResponse, err error) {
@@ -944,12 +1135,15 @@ func (c *Client) DetachResourcesTag(request *DetachResourcesTagRequest) (respons
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 func (c *Client) DetachResourcesTagWithContext(ctx context.Context, request *DetachResourcesTagRequest) (response *DetachResourcesTagResponse, err error) {
@@ -964,6 +1158,246 @@ func (c *Client) DetachResourcesTagWithContext(ctx context.Context, request *Det
     request.SetContext(ctx)
     
     response = NewDetachResourcesTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetResourcesRequest() (request *GetResourcesRequest) {
+    request = &GetResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "GetResources")
+    
+    
+    return
+}
+
+func NewGetResourcesResponse() (response *GetResourcesResponse) {
+    response = &GetResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetResources
+// This API is used to query the list of resources associated with a tag.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+func (c *Client) GetResources(request *GetResourcesRequest) (response *GetResourcesResponse, err error) {
+    return c.GetResourcesWithContext(context.Background(), request)
+}
+
+// GetResources
+// This API is used to query the list of resources associated with a tag.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+func (c *Client) GetResourcesWithContext(ctx context.Context, request *GetResourcesRequest) (response *GetResourcesResponse, err error) {
+    if request == nil {
+        request = NewGetResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTagKeysRequest() (request *GetTagKeysRequest) {
+    request = &GetTagKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "GetTagKeys")
+    
+    
+    return
+}
+
+func NewGetTagKeysResponse() (response *GetTagKeysResponse) {
+    response = &GetTagKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetTagKeys
+// This API is used to query the list of tag keys.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) GetTagKeys(request *GetTagKeysRequest) (response *GetTagKeysResponse, err error) {
+    return c.GetTagKeysWithContext(context.Background(), request)
+}
+
+// GetTagKeys
+// This API is used to query the list of tag keys.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) GetTagKeysWithContext(ctx context.Context, request *GetTagKeysRequest) (response *GetTagKeysResponse, err error) {
+    if request == nil {
+        request = NewGetTagKeysRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTagKeys require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTagKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTagValuesRequest() (request *GetTagValuesRequest) {
+    request = &GetTagValuesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "GetTagValues")
+    
+    
+    return
+}
+
+func NewGetTagValuesResponse() (response *GetTagValuesResponse) {
+    response = &GetTagValuesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetTagValues
+// This API is used to query tag values in the list of created tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetTagValues(request *GetTagValuesRequest) (response *GetTagValuesResponse, err error) {
+    return c.GetTagValuesWithContext(context.Background(), request)
+}
+
+// GetTagValues
+// This API is used to query tag values in the list of created tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETERVALUE_RESERVEDTAGKEY = "InvalidParameterValue.ReservedTagKey"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetTagValuesWithContext(ctx context.Context, request *GetTagValuesRequest) (response *GetTagValuesResponse, err error) {
+    if request == nil {
+        request = NewGetTagValuesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTagValues require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTagValuesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTagsRequest() (request *GetTagsRequest) {
+    request = &GetTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "GetTags")
+    
+    
+    return
+}
+
+func NewGetTagsResponse() (response *GetTagsResponse) {
+    response = &GetTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetTags
+// This API is used to get the list of created tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) GetTags(request *GetTagsRequest) (response *GetTagsResponse, err error) {
+    return c.GetTagsWithContext(context.Background(), request)
+}
+
+// GetTags
+// This API is used to get the list of created tags.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) GetTagsWithContext(ctx context.Context, request *GetTagsRequest) (response *GetTagsResponse, err error) {
+    if request == nil {
+        request = NewGetTagsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTags require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTagsResponse()
     err = c.Send(request, response)
     return
 }
@@ -989,6 +1423,7 @@ func NewModifyResourceTagsResponse() (response *ModifyResourceTagsResponse) {
 // This API is used to modify all tags associated with a resource.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
 //  INVALIDPARAMETERVALUE_DELETETAGSPARAMERROR = "InvalidParameterValue.DeleteTagsParamError"
@@ -1009,6 +1444,7 @@ func (c *Client) ModifyResourceTags(request *ModifyResourceTagsRequest) (respons
 // This API is used to modify all tags associated with a resource.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
 //  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
 //  INVALIDPARAMETERVALUE_DELETETAGSPARAMERROR = "InvalidParameterValue.DeleteTagsParamError"
@@ -1059,6 +1495,7 @@ func NewModifyResourcesTagValueResponse() (response *ModifyResourcesTagValueResp
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
@@ -1066,6 +1503,10 @@ func NewModifyResourcesTagValueResponse() (response *ModifyResourcesTagValueResp
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 //  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
@@ -1078,6 +1519,7 @@ func (c *Client) ModifyResourcesTagValue(request *ModifyResourcesTagValueRequest
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_REGIONINVALID = "InvalidParameterValue.RegionInvalid"
@@ -1085,6 +1527,10 @@ func (c *Client) ModifyResourcesTagValue(request *ModifyResourcesTagValueRequest
 //  INVALIDPARAMETERVALUE_RESOURCEIDINVALID = "InvalidParameterValue.ResourceIdInvalid"
 //  INVALIDPARAMETERVALUE_RESOURCEPREFIXINVALID = "InvalidParameterValue.ResourcePrefixInvalid"
 //  INVALIDPARAMETERVALUE_SERVICETYPEINVALID = "InvalidParameterValue.ServiceTypeInvalid"
+//  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  INVALIDPARAMETERVALUE_UININVALID = "InvalidParameterValue.UinInvalid"
 //  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
 //  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 //  RESOURCENOTFOUND_TAGNONEXIST = "ResourceNotFound.TagNonExist"
@@ -1100,6 +1546,156 @@ func (c *Client) ModifyResourcesTagValueWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyResourcesTagValueResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTagResourcesRequest() (request *TagResourcesRequest) {
+    request = &TagResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "TagResources")
+    
+    
+    return
+}
+
+func NewTagResourcesResponse() (response *TagResourcesResponse) {
+    response = &TagResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// TagResources
+// This API is used to create and bind a tag uniformly to multiple specified resources of multiple Tencent Cloud services.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+func (c *Client) TagResources(request *TagResourcesRequest) (response *TagResourcesResponse, err error) {
+    return c.TagResourcesWithContext(context.Background(), request)
+}
+
+// TagResources
+// This API is used to create and bind a tag uniformly to multiple specified resources of multiple Tencent Cloud services.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETER_UNSUPPORTEDSERVICE = "InvalidParameter.UnsupportedService"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  INVALIDPARAMETERVALUE_TAGVALUEEMPTY = "InvalidParameterValue.TagValueEmpty"
+//  INVALIDPARAMETERVALUE_TAGVALUELENGTHEXCEEDED = "InvalidParameterValue.TagValueLengthExceeded"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+//  LIMITEXCEEDED_TAGVALUE = "LimitExceeded.TagValue"
+func (c *Client) TagResourcesWithContext(ctx context.Context, request *TagResourcesRequest) (response *TagResourcesResponse, err error) {
+    if request == nil {
+        request = NewTagResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TagResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTagResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnTagResourcesRequest() (request *UnTagResourcesRequest) {
+    request = &UnTagResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tag", APIVersion, "UnTagResources")
+    
+    
+    return
+}
+
+func NewUnTagResourcesResponse() (response *UnTagResourcesResponse) {
+    response = &UnTagResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UnTagResources
+// This API is used to unbind a tag uniformly from multiple specified resources of multiple Tencent Cloud services.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+func (c *Client) UnTagResources(request *UnTagResourcesRequest) (response *UnTagResourcesResponse, err error) {
+    return c.UnTagResourcesWithContext(context.Background(), request)
+}
+
+// UnTagResources
+// This API is used to unbind a tag uniformly from multiple specified resources of multiple Tencent Cloud services.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCETAGPROCESSING = "FailedOperation.ResourceTagProcessing"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RESERVEDTAGKEY = "InvalidParameter.ReservedTagKey"
+//  INVALIDPARAMETER_TAG = "InvalidParameter.Tag"
+//  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
+//  INVALIDPARAMETERVALUE_TAGKEYDUPLICATE = "InvalidParameterValue.TagKeyDuplicate"
+//  INVALIDPARAMETERVALUE_TAGKEYEMPTY = "InvalidParameterValue.TagKeyEmpty"
+//  INVALIDPARAMETERVALUE_TAGKEYLENGTHEXCEEDED = "InvalidParameterValue.TagKeyLengthExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
+//  LIMITEXCEEDED_RESOURCENUMPERREQUEST = "LimitExceeded.ResourceNumPerRequest"
+//  LIMITEXCEEDED_TAGNUMPERREQUEST = "LimitExceeded.TagNumPerRequest"
+func (c *Client) UnTagResourcesWithContext(ctx context.Context, request *UnTagResourcesRequest) (response *UnTagResourcesResponse, err error) {
+    if request == nil {
+        request = NewUnTagResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnTagResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnTagResourcesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1125,6 +1721,7 @@ func NewUpdateResourceTagValueResponse() (response *UpdateResourceTagValueRespon
 // This API is used to modify the values of tags associated with a resource (the tag key does not change).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"
@@ -1139,6 +1736,7 @@ func (c *Client) UpdateResourceTagValue(request *UpdateResourceTagValueRequest) 
 // This API is used to modify the values of tags associated with a resource (the tag key does not change).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_RESOURCEDESCRIPTIONERROR = "InvalidParameterValue.ResourceDescriptionError"
 //  INVALIDPARAMETERVALUE_TAGKEYCHARACTERILLEGAL = "InvalidParameterValue.TagKeyCharacterIllegal"
 //  INVALIDPARAMETERVALUE_TAGVALUECHARACTERILLEGAL = "InvalidParameterValue.TagValueCharacterIllegal"

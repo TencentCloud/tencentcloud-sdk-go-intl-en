@@ -857,63 +857,6 @@ func (c *Client) DeleteTablesWithContext(ctx context.Context, request *DeleteTab
     return
 }
 
-func NewDescribeApplicationsRequest() (request *DescribeApplicationsRequest) {
-    request = &DescribeApplicationsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DescribeApplications")
-    
-    
-    return
-}
-
-func NewDescribeApplicationsResponse() (response *DescribeApplicationsResponse) {
-    response = &DescribeApplicationsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeApplications
-// This API is used to query the list of cluster operation applications.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeApplications(request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
-    return c.DescribeApplicationsWithContext(context.Background(), request)
-}
-
-// DescribeApplications
-// This API is used to query the list of cluster operation applications.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeApplicationsWithContext(ctx context.Context, request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
-    if request == nil {
-        request = NewDescribeApplicationsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeApplications require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeApplicationsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeClusterTagsRequest() (request *DescribeClusterTagsRequest) {
     request = &DescribeClusterTagsRequest{
         BaseRequest: &tchttp.BaseRequest{},

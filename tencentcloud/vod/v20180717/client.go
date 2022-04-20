@@ -1137,6 +1137,75 @@ func (c *Client) CreateSnapshotByTimeOffsetTemplateWithContext(ctx context.Conte
     return
 }
 
+func NewCreateStorageRegionRequest() (request *CreateStorageRegionRequest) {
+    request = &CreateStorageRegionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "CreateStorageRegion")
+    
+    
+    return
+}
+
+func NewCreateStorageRegionResponse() (response *CreateStorageRegionResponse) {
+    response = &CreateStorageRegionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateStorageRegion
+// This API is used to enable storage in a region.
+//
+//   1. When you activate VOD, the system will enable storage for you in certain regions. If you need to store data in another region, you can use this API to enable storage in that region.
+//
+//   2. You can use the `DescribeStorageRegions` API to query all supported storage regions and the regions you have storage access to currently.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_USERSTATUSINAVLID = "FailedOperation.UserStatusInavlid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateStorageRegion(request *CreateStorageRegionRequest) (response *CreateStorageRegionResponse, err error) {
+    return c.CreateStorageRegionWithContext(context.Background(), request)
+}
+
+// CreateStorageRegion
+// This API is used to enable storage in a region.
+//
+//   1. When you activate VOD, the system will enable storage for you in certain regions. If you need to store data in another region, you can use this API to enable storage in that region.
+//
+//   2. You can use the `DescribeStorageRegions` API to query all supported storage regions and the regions you have storage access to currently.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_USERSTATUSINAVLID = "FailedOperation.UserStatusInavlid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateStorageRegionWithContext(ctx context.Context, request *CreateStorageRegionRequest) (response *CreateStorageRegionResponse, err error) {
+    if request == nil {
+        request = NewCreateStorageRegionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStorageRegion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStorageRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSubAppIdRequest() (request *CreateSubAppIdRequest) {
     request = &CreateSubAppIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3889,6 +3958,69 @@ func (c *Client) DescribeStorageDetailsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeStorageRegionsRequest() (request *DescribeStorageRegionsRequest) {
+    request = &DescribeStorageRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeStorageRegions")
+    
+    
+    return
+}
+
+func NewDescribeStorageRegionsResponse() (response *DescribeStorageRegionsResponse) {
+    response = &DescribeStorageRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStorageRegions
+// This API is used to query the following information:
+//
+//   1. All supported storage regions.
+//
+//   2. The regions you have storage access to currently.
+//
+//   3. The default storage region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeStorageRegions(request *DescribeStorageRegionsRequest) (response *DescribeStorageRegionsResponse, err error) {
+    return c.DescribeStorageRegionsWithContext(context.Background(), request)
+}
+
+// DescribeStorageRegions
+// This API is used to query the following information:
+//
+//   1. All supported storage regions.
+//
+//   2. The regions you have storage access to currently.
+//
+//   3. The default storage region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeStorageRegionsWithContext(ctx context.Context, request *DescribeStorageRegionsRequest) (response *DescribeStorageRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStorageRegionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStorageRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStorageRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSubAppIdsRequest() (request *DescribeSubAppIdsRequest) {
     request = &DescribeSubAppIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5030,6 +5162,7 @@ func NewModifyClassResponse() (response *ModifyClassResponse) {
 // This API is used to modify the category of a media file.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSNAMEDUPLICATE = "FailedOperation.ClassNameDuplicate"
 //  FAILEDOPERATION_CLASSNOFOUND = "FailedOperation.ClassNoFound"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
@@ -5045,6 +5178,7 @@ func (c *Client) ModifyClass(request *ModifyClassRequest) (response *ModifyClass
 // This API is used to modify the category of a media file.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSNAMEDUPLICATE = "FailedOperation.ClassNameDuplicate"
 //  FAILEDOPERATION_CLASSNOFOUND = "FailedOperation.ClassNoFound"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
@@ -5137,6 +5271,65 @@ func (c *Client) ModifyContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewModifyContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDefaultStorageRegionRequest() (request *ModifyDefaultStorageRegionRequest) {
+    request = &ModifyDefaultStorageRegionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyDefaultStorageRegion")
+    
+    
+    return
+}
+
+func NewModifyDefaultStorageRegionResponse() (response *ModifyDefaultStorageRegionResponse) {
+    response = &ModifyDefaultStorageRegionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDefaultStorageRegion
+// This API is used to set the default storage region. A file will be stored in the default region if no region is specified for file upload.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyDefaultStorageRegion(request *ModifyDefaultStorageRegionRequest) (response *ModifyDefaultStorageRegionResponse, err error) {
+    return c.ModifyDefaultStorageRegionWithContext(context.Background(), request)
+}
+
+// ModifyDefaultStorageRegion
+// This API is used to set the default storage region. A file will be stored in the default region if no region is specified for file upload.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyDefaultStorageRegionWithContext(ctx context.Context, request *ModifyDefaultStorageRegionRequest) (response *ModifyDefaultStorageRegionResponse, err error) {
+    if request == nil {
+        request = NewModifyDefaultStorageRegionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDefaultStorageRegion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDefaultStorageRegionResponse()
     err = c.Send(request, response)
     return
 }

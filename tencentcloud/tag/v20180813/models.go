@@ -29,7 +29,7 @@ type AddResourceTagRequest struct {
 	// Tag value.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 
-	// [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 }
 
@@ -77,7 +77,7 @@ func (r *AddResourceTagResponse) FromJsonString(s string) error {
 type AttachResourcesTagRequest struct {
 	*tchttp.BaseRequest
 
-	// Resource service name
+	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
@@ -89,10 +89,10 @@ type AttachResourcesTagRequest struct {
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 
-	// Resource region. This field is not required for resources that do not have the region attribute
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
-	// Resource prefix, which is not required for COS buckets
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 }
 
@@ -190,13 +190,60 @@ func (r *CreateTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// Tag list.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *CreateTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTagsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTagsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTagsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteResourceTagRequest struct {
 	*tchttp.BaseRequest
 
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 }
 
@@ -290,6 +337,53 @@ func (r *DeleteTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// Tag list.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *DeleteTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTagsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTagsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTagsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeResourceTagsByResourceIdsRequest struct {
 	*tchttp.BaseRequest
 
@@ -299,7 +393,7 @@ type DescribeResourceTagsByResourceIdsRequest struct {
 	// Resource prefix.
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 
-	// Unique resource ID.
+	// Array of resource IDs (up to 50)
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
 	// The resource's region.
@@ -543,7 +637,7 @@ type DescribeResourceTagsRequest struct {
 	// Resource prefix
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 
-	// Unique resource ID
+	// Unique resource ID. Queries with `ResourceId` only may be slow or fail to return results. We recommend you also enter `ServiceType`, `ResourcePrefix`, and `ResourceRegion` (which can be ignored for resources that don't have the region attribute) when entering `ResourceId`.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
@@ -552,7 +646,7 @@ type DescribeResourceTagsRequest struct {
 	// Number of entries per page. Default value: 15
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Whether it is a COS resource ID
+	// Whether it is a COS resource (0 or 1). This parameter is required when the entered `ResourceId` is a COS resource.
 	CosResourceId *uint64 `json:"CosResourceId,omitempty" name:"CosResourceId"`
 }
 
@@ -1165,7 +1259,7 @@ func (r *DescribeTagsSeqResponse) FromJsonString(s string) error {
 type DetachResourcesTagRequest struct {
 	*tchttp.BaseRequest
 
-	// Resource service name
+	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
@@ -1174,10 +1268,10 @@ type DetachResourcesTagRequest struct {
 	// Tag key to be unbound
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// Resource region. This field is not required for resources that do not have the region attribute
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
-	// Resource prefix, which is not required for COS buckets
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 }
 
@@ -1224,16 +1318,286 @@ func (r *DetachResourcesTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type FailedResource struct {
+
+	// Six-segment descriptions of failed resources
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+
+	// Error code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Error message
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type GetResourcesRequest struct {
+	*tchttp.BaseRequest
+
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// If this parameter is passed in, the list of all matching resources will be returned, and the specified `MaxResults` will become invalid.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key and value.
+	// If multiple tags are specified, resources bound to all such tags will be queried.
+	// Value range of N: 0–5
+	// There can be up to 10 `TagValues` in each `TagFilters`.
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 200).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
+func (r *GetResourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetResourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceList")
+	delete(f, "TagFilters")
+	delete(f, "PaginationToken")
+	delete(f, "MaxResults")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetResourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Token value obtained for the next page
+		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+		// List of resources and their associated tags (key-value pairs)
+		ResourceTagMappingList []*ResourceTagMapping `json:"ResourceTagMappingList,omitempty" name:"ResourceTagMappingList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetResourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetResourcesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagKeysRequest struct {
+	*tchttp.BaseRequest
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
+func (r *GetTagKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagKeysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PaginationToken")
+	delete(f, "MaxResults")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagKeysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Token value obtained for the next page
+		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+		// Tag key information.
+		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetTagKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagKeysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagValuesRequest struct {
+	*tchttp.BaseRequest
+
+	// Tag key.
+	// All tag values corresponding to the list of tag keys.
+	// Maximum length: 20
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
+func (r *GetTagValuesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagValuesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TagKeys")
+	delete(f, "PaginationToken")
+	delete(f, "MaxResults")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagValuesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagValuesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Token value obtained for the next page
+		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+		// Tag list.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetTagValuesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagValuesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagsRequest struct {
+	*tchttp.BaseRequest
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// Tag key.
+	// All tags corresponding to the list of tag keys.
+	// Maximum length: 20
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+}
+
+func (r *GetTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PaginationToken")
+	delete(f, "MaxResults")
+	delete(f, "TagKeys")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Token value obtained for the next page
+		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+		// Tag list.
+		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTagsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyResourceTagsRequest struct {
 	*tchttp.BaseRequest
 
-	// [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
-	// The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
+	// The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
 	ReplaceTags []*Tag `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
 
-	// The tags to be unassociated. This API must contain either `ReplaceTags` or `DeleteTag`. And these two parameters cannot include the same tag keys.
+	// The tags to be disassociated. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
 	DeleteTags []*TagKeyObject `json:"DeleteTags,omitempty" name:"DeleteTags"`
 }
 
@@ -1281,7 +1645,7 @@ func (r *ModifyResourceTagsResponse) FromJsonString(s string) error {
 type ModifyResourcesTagValueRequest struct {
 	*tchttp.BaseRequest
 
-	// Resource service name
+	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
@@ -1293,10 +1657,10 @@ type ModifyResourcesTagValueRequest struct {
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 
-	// Resource region. This field is not required for resources that do not have the region attribute
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
 
-	// Resource prefix, which is not required for COS buckets
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
 	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
 }
 
@@ -1378,6 +1742,16 @@ type ResourceTag struct {
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
+type ResourceTagMapping struct {
+
+	// Six-segment resource description. Tencent Cloud uses a six-segment value to describe a resource.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+
+	// List of tags associated with the resource
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type Tag struct {
 
 	// Tag key.
@@ -1424,6 +1798,67 @@ type TagResource struct {
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
+type TagResourcesRequest struct {
+	*tchttp.BaseRequest
+
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key and value.
+	// If multiple tags are specified, all such tags will be created and bound to the specified resources.
+	// For each resource, each tag key can have only one value. If you try to add an existing tag key, the corresponding tag value will be updated to the new value.
+	// Non-existent tags will be automatically created.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *TagResourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TagResourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceList")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TagResourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type TagResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of failed resources.
+	// When tag creating and binding succeeds, the returned `FailedResources` will be empty.
+	// When tag creating and binding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
+		FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *TagResourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TagResourcesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type TagWithDelete struct {
 
 	// Tag key.
@@ -1436,6 +1871,64 @@ type TagWithDelete struct {
 	CanDelete *uint64 `json:"CanDelete,omitempty" name:"CanDelete"`
 }
 
+type UnTagResourcesRequest struct {
+	*tchttp.BaseRequest
+
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key.
+	// Value range: 0–9
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+}
+
+func (r *UnTagResourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnTagResourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceList")
+	delete(f, "TagKeys")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnTagResourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UnTagResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Information of failed resources.
+	// When tag unbinding succeeds, the returned `FailedResources` will be empty.
+	// When tag unbinding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
+		FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UnTagResourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnTagResourcesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type UpdateResourceTagValueRequest struct {
 	*tchttp.BaseRequest
 
@@ -1445,7 +1938,7 @@ type UpdateResourceTagValueRequest struct {
 	// Modified tag value.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 
-	// [Six-segment resource description](https://cloud.tencent.com/document/product/598/10606)
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 }
 
