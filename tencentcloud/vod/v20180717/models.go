@@ -475,16 +475,16 @@ type AiAnalysisTaskTagResult struct {
 type AiContentReviewResult struct {
 
 	// Task type. Valid values:
-	// <li>`Porn`: recognition of pornographic content in images</li>
-	// <li>`Terrorism`: recognition of terrorism content in images</li>
-	// <li>`Political`: recognition of politically sensitive content in images</li>
-	// <li>`Porn.Asr`: ASR-based recognition of pornographic content</li>
-	// <li>`Porn.Ocr`: OCR-based recognition of pornographic content</li>
-	// <li>`Political.Asr`: ASR-based recognition of politically sensitive content</li>
-	// <li>`Political.Ocr`: OCR-based recognition of politically sensitive content</li>
-	// <li>`Terrorism.Ocr`: OCR-based recognition of terrorism content</li>
-	// <li>`Prohibited.Asr`: ASR-based recognition of banned content</li>
-	// <li>`Prohibited.Ocr`: OCR-based recognition of banned content</li>
+	// <li>`Porn`: porn information recognition in images</li>
+	// <li>`Terrorism`: terrorism information recognition in images</li>
+	// <li>`Political`: politically sensitive information recognition in images</li>
+	// <li>`Porn.Asr`: ASR-based porn information recognition in speech</li>
+	// <li>`Porn.Ocr`: OCR-based porn information recognition in text</li>
+	// <li>`Political.Asr`: ASR-based politically sensitive information recognition in speech</li>
+	// <li>`Political.Ocr`: OCR-based politically sensitive information recognition in text</li>
+	// <li>`Terrorism.Ocr`: OCR-based terrorism information recognition in text</li>
+	// <li>`Prohibited.Asr`: ASR-based prohibited information recognition in speech</li>
+	// <li>`Prohibited.Ocr`: OCR-based prohibited information recognition in text</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Result for intelligent recognition of pornographic content in images. This parameter is valid when `Type` is `Porn`.
