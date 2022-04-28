@@ -29,30 +29,6 @@ type Account struct {
 	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
-type AccountInfo struct {
-
-	// Account remarks
-	Notes *string `json:"Notes,omitempty" name:"Notes"`
-
-	// Account domain name
-	Host *string `json:"Host,omitempty" name:"Host"`
-
-	// Account name
-	User *string `json:"User,omitempty" name:"User"`
-
-	// Account information modification time
-	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-
-	// Password modification time
-	ModifyPasswordTime *string `json:"ModifyPasswordTime,omitempty" name:"ModifyPasswordTime"`
-
-	// This parameter is no longer supported.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// The maximum number of instance connections supported by an account
-	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
-}
-
 type AddTimeWindowRequest struct {
 	*tchttp.BaseRequest
 
@@ -79,6 +55,9 @@ type AddTimeWindowRequest struct {
 
 	// Maintenance window on Sunday. At least one time window is required in a week.
 	Sunday []*string `json:"Sunday,omitempty" name:"Sunday"`
+
+	// Maximum delay threshold, which takes effect only for source instances and disaster recovery instances.
+	MaxDelayTime *uint64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
 }
 
 func (r *AddTimeWindowRequest) ToJsonString() string {
@@ -101,6 +80,7 @@ func (r *AddTimeWindowRequest) FromJsonString(s string) error {
 	delete(f, "Friday")
 	delete(f, "Saturday")
 	delete(f, "Sunday")
+	delete(f, "MaxDelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddTimeWindowRequest has unknown keys!", "")
 	}
@@ -174,7 +154,7 @@ type ApplyCDBProxyRequest struct {
 	// Security group
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
-	// Description
+	// Description (up to 256 characters)
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 }
 
@@ -280,6 +260,88 @@ func (r *AssociateSecurityGroupsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AuditFilter struct {
+
+	// Filter parameter names. Valid values:
+	// SrcIp: Client IP;
+	// User: Database account;
+	// DB: Database name.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Filter match type. Valid value:
+	// `INC`: Include;
+	// `EXC`: Exclude;
+	// `EQ`: Equal to;
+	// `NEQ`: Not equal to.
+	Compare *string `json:"Compare,omitempty" name:"Compare"`
+
+	// Filter match value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type AuditPolicy struct {
+
+	// Audit policy ID.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Audit policy status. Valid values:
+	// `creating`;
+	// `running`,
+	// `paused`;
+	// `failed`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Database instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Creation time of audit policy in the format of 2019-03-20 17:09:13
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last modified time of audit policy in the format of 2019-03-20 17:09:13
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Audit policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Audit rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Audit rule name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Database instance name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
+type AuditRule struct {
+
+	// Audit rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Creation time of audit rule in the format of 2019-03-20 17:09:13
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last modified time of audit rule in the format of 2019-03-20 17:09:13
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Audit rule name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Audit rule description
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Audit rule filters
+	// Note: This field may return `null`, indicating that no valid value was found.
+	RuleFilters []*AuditFilter `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// Whether to enable full audit
+	AuditAll *bool `json:"AuditAll,omitempty" name:"AuditAll"`
 }
 
 type BackupConfig struct {
@@ -537,7 +599,7 @@ type CloseCDBProxyRequest struct {
 	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
 
-	// Whether only to disable read/write separation. Valid values: `true`, `false`
+	// Whether only to disable read/write separation. Valid values: `true`, `false`. Default value: `false`.
 	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
 }
 
@@ -683,71 +745,6 @@ type ConnectionPoolInfo struct {
 	// Connection persistence timeout in seconds
 	// Note: this field may return `null`, indicating that no valid value can be found.
 	PoolConnectionTimeOut *int64 `json:"PoolConnectionTimeOut,omitempty" name:"PoolConnectionTimeOut"`
-}
-
-type CreateAccountsRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// TencentDB account.
-	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
-
-	// Password of the new account
-	Password *string `json:"Password,omitempty" name:"Password"`
-
-	// Remarks
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
-	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
-}
-
-func (r *CreateAccountsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAccountsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "Accounts")
-	delete(f, "Password")
-	delete(f, "Description")
-	delete(f, "MaxUserConnections")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateAccountsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task request ID, which can be used to query the execution result of an async task.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateAccountsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateAccountsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateAuditPolicyRequest struct {
@@ -943,6 +940,9 @@ type CreateCloneInstanceRequest struct {
 
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitempty" name:"CageId"`
+
+	// Project ID. Default value: 0.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 func (r *CreateCloneInstanceRequest) ToJsonString() string {
@@ -977,6 +977,7 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DeployGroupId")
 	delete(f, "DryRun")
 	delete(f, "CageId")
+	delete(f, "ProjectId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
 	}
@@ -1150,7 +1151,7 @@ type CreateDBInstanceHourRequest struct {
 	// Placement group ID.
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
 
-	// A string that is used to guarantee the idempotency of the request, which is generated by the user and must be unique in each request on the same day. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
 	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
@@ -1182,6 +1183,9 @@ type CreateDBInstanceHourRequest struct {
 
 	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -1231,6 +1235,7 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "ParamTemplateType")
 	delete(f, "AlarmPolicyIdList")
 	delete(f, "DryRun")
+	delete(f, "Vips")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -1260,71 +1265,6 @@ func (r *CreateDBInstanceHourResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateDeployGroupRequest struct {
-	*tchttp.BaseRequest
-
-	// Name of a placement group, which can contain up to 60 characters.
-	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
-
-	// Description of a placement group, which can contain up to 200 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Affinity policy of placement group. Currently, the value of this parameter can only be 1. Policy 1 indicates the upper limit of instances on one physical machine.
-	Affinity []*int64 `json:"Affinity,omitempty" name:"Affinity"`
-
-	// Upper limit of instances on one physical machine as defined in affinity policy 1 of placement group.
-	LimitNum *int64 `json:"LimitNum,omitempty" name:"LimitNum"`
-
-	// Model attribute of placement group. Valid values: SH12+SH02, TS85.
-	DevClass []*string `json:"DevClass,omitempty" name:"DevClass"`
-}
-
-func (r *CreateDeployGroupRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateDeployGroupRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DeployGroupName")
-	delete(f, "Description")
-	delete(f, "Affinity")
-	delete(f, "LimitNum")
-	delete(f, "DevClass")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDeployGroupRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateDeployGroupResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Placement group ID.
-		DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateDeployGroupResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateDeployGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1616,52 +1556,6 @@ func (r *DeleteBackupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteDeployGroupsRequest struct {
-	*tchttp.BaseRequest
-
-	// List of IDs of placement groups to be deleted.
-	DeployGroupIds []*string `json:"DeployGroupIds,omitempty" name:"DeployGroupIds"`
-}
-
-func (r *DeleteDeployGroupsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteDeployGroupsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DeployGroupIds")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDeployGroupsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteDeployGroupsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteDeployGroupsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteDeployGroupsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DeleteParamTemplateRequest struct {
 	*tchttp.BaseRequest
 
@@ -1754,36 +1648,6 @@ func (r *DeleteTimeWindowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeployGroupInfo struct {
-
-	// ID of a placement group.
-	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
-
-	// Name of a placement group.
-	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
-
-	// Creation time.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Instance quota of placement group, indicating the maximum number of instances that can be placed in one placement group.
-	Quota *int64 `json:"Quota,omitempty" name:"Quota"`
-
-	// Affinity policy of placement group. Currently, only policy 1 is supported, indicating to distribute instances across physical machines.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Affinity *string `json:"Affinity,omitempty" name:"Affinity"`
-
-	// Upper limit of instances in one placement group on one physical machine as defined in affinity policy 1 of placement group.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LimitNum *int64 `json:"LimitNum,omitempty" name:"LimitNum"`
-
-	// Placement group details.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Physical model attribute of placement group.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	DevClass *string `json:"DevClass,omitempty" name:"DevClass"`
-}
-
 type DescribeAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 
@@ -1850,73 +1714,6 @@ func (r *DescribeAccountPrivilegesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeAccountsRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Record offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned for a single request. Value range: 1-100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Regular expression for matching account names, which complies with the rules at MySQL official website.
-	AccountRegexp *string `json:"AccountRegexp,omitempty" name:"AccountRegexp"`
-}
-
-func (r *DescribeAccountsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAccountsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "AccountRegexp")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAccountsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible accounts.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Details of eligible accounts.
-		Items []*AccountInfo `json:"Items,omitempty" name:"Items"`
-
-		// The maximum number of instance connections (set by the MySQL parameter `max_connections`)
-		MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAccountsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAccountsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeAsyncRequestInfoRequest struct {
 	*tchttp.BaseRequest
 
@@ -1968,6 +1765,149 @@ func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAuditPoliciesRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Audit policy ID.
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Audit policy name. Fuzzy match query is supported.
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Number of entries per page. Value range: 1-100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Audit rule ID, which can be used to query its associated audit policies.
+	// Note: At least one of the parameters (“RuleId”, “PolicyId”, PolicyId”, or “PolicyName”) must be passed in.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
+func (r *DescribeAuditPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditPoliciesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "PolicyId")
+	delete(f, "PolicyName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "RuleId")
+	delete(f, "InstanceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditPoliciesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAuditPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible audit policies
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Audit policy details
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Items []*AuditPolicy `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAuditPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditPoliciesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAuditRulesRequest struct {
+	*tchttp.BaseRequest
+
+	// Audit rule ID.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Audit rule name. Fuzzy match query is supported.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Number of entries per page. Value range: 1-100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeAuditRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "RuleName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAuditRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible audit rules
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Audit rule details
+	// Note: This field may return `null`, indicating that no valid value was found.
+		Items []*AuditRule `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeAuditRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2396,7 +2336,7 @@ type DescribeCDBProxyRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Proxy ID
+	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
 }
 
@@ -2924,7 +2864,7 @@ type DescribeDBInstancesRequest struct {
 	// Subnet ID.
 	SubnetIds []*uint64 `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
-	// Lock flag.
+	// Whether to lock disk write. Valid values: `0`(unlock), `1`(lock). Default value: 0.
 	CdbErrors []*int64 `json:"CdbErrors,omitempty" name:"CdbErrors"`
 
 	// Sort by field of the returned result set. Currently, supported values include "InstanceId", "InstanceName", "CreateTime", and "DeadlineTime".
@@ -2965,6 +2905,15 @@ type DescribeDBInstancesRequest struct {
 
 	// Financial cage IDs.
 	CageIds []*string `json:"CageIds,omitempty" name:"CageIds"`
+
+	// Tag value
+	TagValues []*string `json:"TagValues,omitempty" name:"TagValues"`
+
+	// VPC character vpcId
+	UniqueVpcIds []*string `json:"UniqueVpcIds,omitempty" name:"UniqueVpcIds"`
+
+	// VPC character subnetId
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -3007,6 +2956,9 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DeployGroupIds")
 	delete(f, "TagKeysForSearch")
 	delete(f, "CageIds")
+	delete(f, "TagValues")
+	delete(f, "UniqueVpcIds")
+	delete(f, "UniqSubnetIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -3387,71 +3339,6 @@ func (r *DescribeDefaultParamsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDeployGroupListRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of a placement group.
-	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
-
-	// Name of a placement group.
-	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
-
-	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-func (r *DescribeDeployGroupListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDeployGroupListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DeployGroupId")
-	delete(f, "DeployGroupName")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDeployGroupListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeDeployGroupListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// List of returned results.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		Items []*DeployGroupInfo `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeDeployGroupListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDeployGroupListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeDeviceMonitorInfoRequest struct {
 	*tchttp.BaseRequest
 
@@ -3597,10 +3484,10 @@ type DescribeInstanceParamRecordsRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Pagination offset.
+	// Pagination offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of entries per page.
+	// Number of entries per page. Default value: 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -3803,7 +3690,7 @@ type DescribeParamTemplateInfoResponse struct {
 		// Parameter template description
 		Description *string `json:"Description,omitempty" name:"Description"`
 
-		// Parameter template type. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+		// Type of the parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 		TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4769,6 +4656,9 @@ type DescribeTimeWindowResponse struct {
 		// List of maintenance time windows on Sunday.
 		Sunday []*string `json:"Sunday,omitempty" name:"Sunday"`
 
+		// Maximum data delay threshold
+		MaxDelayTime *uint64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -5596,23 +5486,23 @@ type ModifyAccountPrivilegesRequest struct {
 	// Database account, including username and domain name.
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
-	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER","CREATE USER","RELOAD","REPLICATION CLIENT","REPLICATION SLAVE","UPDATE".
-	// Note: If this parameter is not passed in, it means to clear the permission.
+	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE", "UPDATE".
+	// Note: When “ModifyAction” is empty, if `GlobalPrivileges` is not passed in, it indicates the global permission will become ineffective.
 	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
 
-	// Database permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", 	"DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
-	// Note: if this parameter is not passed in, it means to clear the permission.
+	// Database permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
+	// Note: When “ModifyAction” is empty, if `DatabasePrivileges` is not passed in, it indicates the permission of the database will become ineffective.
 	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
 
-	// Table permission in the database. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", 	"DROP", "REFERENCES", "INDEX", "ALTER", "CREATE VIEW", "SHOW VIEW", "TRIGGER".
-	// Note: if this parameter is not passed in, it means to clear the permission.
+	// Table permission in the database. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "REFERENCES", "INDEX", "ALTER", "CREATE VIEW", "SHOW VIEW", "TRIGGER".
+	// Note: When “ModifyAction” is empty, if `TablePrivileges` is not passed in, it indicates the permission of the table will become ineffective.
 	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
 
-	// Column permission in table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
-	// Note: if this parameter is not passed in, it means to clear the permission.
+	// Column permission in the table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
+	// Note: When “ModifyAction” is empty, if `ColumnPrivileges` is not passed in, it indicates the permission of the column will become ineffective.
 	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges"`
 
-	// If this parameter is specified, permissions are modified in batches. Valid values: `grant`, `revoke`.
+	// When this parameter is not empty, it indicates that the permission will be modified. Valid values: `grant` (grant permission), `revoke` (revoke permission)
 	ModifyAction *string `json:"ModifyAction,omitempty" name:"ModifyAction"`
 }
 
@@ -5966,10 +5856,10 @@ type ModifyCDBProxyRequest struct {
 	// Unique ID of the database proxy group
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
 
-	// Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`
+	// Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`. Default value: `false`.
 	IsKickout *bool `json:"IsKickout,omitempty" name:"IsKickout"`
 
-	// The minimum number of read-only instances allowed by the proxy group
+	// The minimum number of read-only instances allowed by the proxy group. Minimum value: 1; maximum value: The number of instances.
 	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
 
 	// Delay threshold. If `IsKickOut` is set to `true`, this parameter is required.
@@ -5981,10 +5871,10 @@ type ModifyCDBProxyRequest struct {
 	// Read-Only weight of an instance
 	RoWeightValues *RoWeight `json:"RoWeightValues,omitempty" name:"RoWeightValues"`
 
-	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`
+	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`. Default value: `false`.
 	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
 
-	// Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false`
+	// Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false` Default value: `false`.
 	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
 }
 
@@ -6254,76 +6144,6 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyDBInstanceVipVportRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Destination IP. Either this parameter or `DstPort` must be passed in.
-	DstIp *string `json:"DstIp,omitempty" name:"DstIp"`
-
-	// Destination port number. Value range: [1024-65535]. Either this parameter or `DstIp` must be passed in.
-	DstPort *int64 `json:"DstPort,omitempty" name:"DstPort"`
-
-	// Unified VPC ID
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
-
-	// Unified subnet ID.
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
-
-	// Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
-	ReleaseDuration *int64 `json:"ReleaseDuration,omitempty" name:"ReleaseDuration"`
-}
-
-func (r *ModifyDBInstanceVipVportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDBInstanceVipVportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "DstIp")
-	delete(f, "DstPort")
-	delete(f, "UniqVpcId")
-	delete(f, "UniqSubnetId")
-	delete(f, "ReleaseDuration")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceVipVportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyDBInstanceVipVportResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task ID. (This returned field has been disused)
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyDBInstanceVipVportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDBInstanceVipVportResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type ModifyInstanceParamRequest struct {
 	*tchttp.BaseRequest
 
@@ -6493,70 +6313,16 @@ func (r *ModifyLocalBinlogConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ModifyNameOrDescByDpIdRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of a placement group.
-	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
-
-	// Name of a placement group, which can contain up to 60 characters. The placement group name and description cannot both be empty.
-	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
-
-	// Description of a placement group, which can contain up to 200 characters. The placement group name and description cannot both be empty.
-	Description *string `json:"Description,omitempty" name:"Description"`
-}
-
-func (r *ModifyNameOrDescByDpIdRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyNameOrDescByDpIdRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DeployGroupId")
-	delete(f, "DeployGroupName")
-	delete(f, "Description")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNameOrDescByDpIdRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ModifyNameOrDescByDpIdResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ModifyNameOrDescByDpIdResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyNameOrDescByDpIdResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type ModifyParamTemplateRequest struct {
 	*tchttp.BaseRequest
 
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Template name.
+	// Template name (up to 64 characters)
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Template description.
+	// Template description (up to 255 characters)
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// List of parameters.
@@ -6682,6 +6448,9 @@ type ModifyTimeWindowRequest struct {
 
 	// Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
 	Weekdays []*string `json:"Weekdays,omitempty" name:"Weekdays"`
+
+	// Data delay threshold. It takes effect only for source instance and disaster recovery instance. Default value: 10.
+	MaxDelayTime *uint64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
 }
 
 func (r *ModifyTimeWindowRequest) ToJsonString() string {
@@ -6699,6 +6468,7 @@ func (r *ModifyTimeWindowRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "TimeRanges")
 	delete(f, "Weekdays")
+	delete(f, "MaxDelayTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTimeWindowRequest has unknown keys!", "")
 	}
@@ -7328,6 +7098,52 @@ func (r *ReloadBalanceProxyNodeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetRootAccountRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ResetRootAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetRootAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetRootAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetRootAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResetRootAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetRootAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8431,10 +8247,10 @@ type UpgradeCDBProxyRequest struct {
 	// Database proxy ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
 
-	// Number of proxy nodes
+	// The number of proxy nodes
 	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
 
-	// Number of CPU cores per proxy node
+	// The number of CPU cores per proxy node
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// Memory per proxy node

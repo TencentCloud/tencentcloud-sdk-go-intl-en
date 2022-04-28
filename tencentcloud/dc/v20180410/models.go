@@ -169,6 +169,15 @@ func (r *ApplyInternetAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BFDInfo struct {
+
+	// Number of health checks
+	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitempty" name:"ProbeFailedTimes"`
+
+	// Health check interval
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+}
+
 type BgpPeer struct {
 
 	// User-side BGP Asn.
@@ -360,6 +369,18 @@ type CreateDirectConnectTunnelRequest struct {
 
 	// Cloud Attached Connection Service ID
 	CloudAttachId *string `json:"CloudAttachId,omitempty" name:"CloudAttachId"`
+
+	// Whether to enable BFD
+	BfdEnable *int64 `json:"BfdEnable,omitempty" name:"BfdEnable"`
+
+	// Whether to enable NQA
+	NqaEnable *int64 `json:"NqaEnable,omitempty" name:"NqaEnable"`
+
+	// BFD configuration information
+	BfdInfo *BFDInfo `json:"BfdInfo,omitempty" name:"BfdInfo"`
+
+	// NQA configuration information
+	NqaInfo *NQAInfo `json:"NqaInfo,omitempty" name:"NqaInfo"`
 }
 
 func (r *CreateDirectConnectTunnelRequest) ToJsonString() string {
@@ -390,6 +411,10 @@ func (r *CreateDirectConnectTunnelRequest) FromJsonString(s string) error {
 	delete(f, "CustomerAddress")
 	delete(f, "TencentBackupAddress")
 	delete(f, "CloudAttachId")
+	delete(f, "BfdEnable")
+	delete(f, "NqaEnable")
+	delete(f, "BfdInfo")
+	delete(f, "NqaInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDirectConnectTunnelRequest has unknown keys!", "")
 	}
@@ -1459,6 +1484,18 @@ func (r *ModifyDirectConnectTunnelAttributeResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyDirectConnectTunnelAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type NQAInfo struct {
+
+	// Number of health checks
+	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitempty" name:"ProbeFailedTimes"`
+
+	// Health check interval
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+
+	// IP address for the health check
+	DestinationIp *string `json:"DestinationIp,omitempty" name:"DestinationIp"`
 }
 
 type RejectDirectConnectTunnelRequest struct {

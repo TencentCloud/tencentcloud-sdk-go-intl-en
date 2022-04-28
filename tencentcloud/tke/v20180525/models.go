@@ -449,10 +449,12 @@ type Cluster struct {
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	EnableExternalNode *bool `json:"EnableExternalNode,omitempty" name:"EnableExternalNode"`
 
-	// 
+	// Cluster models. It’s valid for managed clusters.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
 
-	// 
+	// The target cluster model for auto-upgrade
+	// Note: this field may return null, indicating that no valid value is obtained.
 	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
 }
 
@@ -683,6 +685,64 @@ type ClusterExtraArgs struct {
 	// etcd custom parameter, which is only effective for self-deployed cluster.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Etcd []*string `json:"Etcd,omitempty" name:"Etcd"`
+}
+
+type ClusterLevelAttribute struct {
+
+	// Cluster model
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Model name
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+
+	// Number of nodes
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Number of Pods
+	PodCount *uint64 `json:"PodCount,omitempty" name:"PodCount"`
+
+	// Number of ConfigMap
+	ConfigMapCount *uint64 `json:"ConfigMapCount,omitempty" name:"ConfigMapCount"`
+
+	// Number of CRDs
+	CRDCount *uint64 `json:"CRDCount,omitempty" name:"CRDCount"`
+
+	// Whether it is enabled
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Number of other resources
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OtherCount *uint64 `json:"OtherCount,omitempty" name:"OtherCount"`
+}
+
+type ClusterLevelChangeRecord struct {
+
+	// Record ID
+	ID *string `json:"ID,omitempty" name:"ID"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Status (valid values: `trading`, `upgrading`, `success`, `failed`)
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Status description
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Original model
+	OldLevel *string `json:"OldLevel,omitempty" name:"OldLevel"`
+
+	// New model
+	NewLevel *string `json:"NewLevel,omitempty" name:"NewLevel"`
+
+	// Trigger type (valid values: `manual`, `auto`)
+	TriggerType *string `json:"TriggerType,omitempty" name:"TriggerType"`
+
+	// Start time
+	StartedAt *string `json:"StartedAt,omitempty" name:"StartedAt"`
+
+	// End time
+	EndedAt *string `json:"EndedAt,omitempty" name:"EndedAt"`
 }
 
 type ClusterNetworkSettings struct {
@@ -1371,8 +1431,8 @@ type DataDisk struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	MountTarget *string `json:"MountTarget,omitempty" name:"MountTarget"`
 
-	// The name of the device or partition to mount
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// Mounted device name or partition name (only required when adding an existing node)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DiskPartition *string `json:"DiskPartition,omitempty" name:"DiskPartition"`
 }
 
@@ -2369,6 +2429,126 @@ func (r *DescribeClusterKubeconfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeClusterLevelAttributeRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID (available for cluster model adjustment)
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+}
+
+func (r *DescribeClusterLevelAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterLevelAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterLevelAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterLevelAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Cluster model
+		Items []*ClusterLevelAttribute `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterLevelAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterLevelAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterLevelChangeRecordsRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Start time
+	StartAt *string `json:"StartAt,omitempty" name:"StartAt"`
+
+	// End time
+	EndAt *string `json:"EndAt,omitempty" name:"EndAt"`
+
+	// Offset. Default value: `0`
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: `20`
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeClusterLevelChangeRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterLevelChangeRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "StartAt")
+	delete(f, "EndAt")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterLevelChangeRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeClusterLevelChangeRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Cluster model
+		Items []*ClusterLevelChangeRecord `json:"Items,omitempty" name:"Items"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeClusterLevelChangeRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterLevelChangeRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeClusterNodePoolDetailRequest struct {
 	*tchttp.BaseRequest
 
@@ -3142,6 +3322,64 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeResourceUsageRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeResourceUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourceUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourceUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeResourceUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// CRD usage
+		CRDUsage *ResourceUsage `json:"CRDUsage,omitempty" name:"CRDUsage"`
+
+		// Pod usage
+		PodUsage *uint64 `json:"PodUsage,omitempty" name:"PodUsage"`
+
+		// ConfigMap usage
+		ConfigMapUsage *uint64 `json:"ConfigMapUsage,omitempty" name:"ConfigMapUsage"`
+
+		// Other resource usage
+		OtherUsage *ResourceUsage `json:"OtherUsage,omitempty" name:"OtherUsage"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeResourceUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourceUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeRouteTableConflictsRequest struct {
 	*tchttp.BaseRequest
 
@@ -3645,6 +3883,58 @@ type Filter struct {
 
 	// Filter values.
 	Values []*string `json:"Values,omitempty" name:"Values"`
+}
+
+type GetClusterLevelPriceRequest struct {
+	*tchttp.BaseRequest
+
+	// The cluster model. It’s used for price query.
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+}
+
+func (r *GetClusterLevelPriceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetClusterLevelPriceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterLevel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetClusterLevelPriceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GetClusterLevelPriceResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Discount price (unit: US cent)
+		Cost *uint64 `json:"Cost,omitempty" name:"Cost"`
+
+		// Original price (unit: US cent)
+		TotalCost *uint64 `json:"TotalCost,omitempty" name:"TotalCost"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *GetClusterLevelPriceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetClusterLevelPriceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type GetUpgradeInstanceProgressRequest struct {
@@ -4782,6 +5072,27 @@ type ResourceDeleteOption struct {
 
 	// Specifies the policy to deal with resources in the cluster when the cluster is deleted. It can be `terminate` or `retain`.
 	DeleteMode *string `json:"DeleteMode,omitempty" name:"DeleteMode"`
+}
+
+type ResourceUsage struct {
+
+	// Resource type
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Resource usage
+	Usage *uint64 `json:"Usage,omitempty" name:"Usage"`
+
+	// Resource usage details
+	Details []*ResourceUsageDetail `json:"Details,omitempty" name:"Details"`
+}
+
+type ResourceUsageDetail struct {
+
+	// Resource name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Resource usage
+	Usage *uint64 `json:"Usage,omitempty" name:"Usage"`
 }
 
 type RouteInfo struct {

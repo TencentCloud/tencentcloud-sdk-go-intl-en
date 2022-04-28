@@ -314,7 +314,7 @@ const (
 	// Invalid password. The specified password does not meet the complexity requirements (e.g., too long or too short)
 	INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
 
-	// 
+	// The Region ID is unavailable.
 	INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 
 	// Incorrect UserData format. Use the Base64-encoded format.

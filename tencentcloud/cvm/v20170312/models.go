@@ -687,6 +687,12 @@ type DeleteImagesRequest struct {
 
 	// List of the IDs of the instances to be deleted.
 	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds"`
+
+	// Whether to delete the snapshot associated with the image
+	DeleteBindedSnap *bool `json:"DeleteBindedSnap,omitempty" name:"DeleteBindedSnap"`
+
+	// Check whether deleting an image is supported
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 }
 
 func (r *DeleteImagesRequest) ToJsonString() string {
@@ -702,6 +708,8 @@ func (r *DeleteImagesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ImageIds")
+	delete(f, "DeleteBindedSnap")
+	delete(f, "DryRun")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteImagesRequest has unknown keys!", "")
 	}
@@ -1161,7 +1169,7 @@ type DescribeImagesRequest struct {
 	// List of image IDs, such as `img-gvbnzy6f`. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1). You can obtain the image IDs in two ways: <br><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response. <br><li>View the image IDs in the [Image Console](https://console.cloud.tencent.com/cvm/image).
 	ImageIds []*string `json:"ImageIds,omitempty" name:"ImageIds"`
 
-	// Filters. Each request can have up to 10 `Filters` and 5 `Filters.Values`. You cannot specify `ImageIds` and `Filters` at the same time. Specific filters:
+	// Filters. Each request can have up to 10 `Filters`, and 5 `Filters.Values` for each filter. `ImageIds` and `Filters` cannot be specified at the same time. See details:
 	// 
 	// <li><strong>image-id</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>image ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
@@ -1170,9 +1178,11 @@ type DescribeImagesRequest struct {
 	// <li><strong>image-name</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>image name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>platform</strong></li>
-	// <p style="padding-left: 30px;">Filter by the <strong>image operating system</strong>, such as CentOS.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <p style="padding-left: 30px;">Filter by the <strong>image operating system</strong>, such as `CentOS`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>tag-key</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>tag key</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>tag-value</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>tag value</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// <li><strong>tag:tag-key</strong></li>
 	// <p style="padding-left: 30px;">Filter by the <strong>tag key-value pair</strong>. Replace “tag-key” with the actual value. </p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
@@ -2372,6 +2382,10 @@ type Image struct {
 	// Information on the snapshots associated with the image
 	// Note: This field may return null, indicating that no valid value is found.
 	SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet"`
+
+	// The list of tags bound to the image.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type ImageOsList struct {
@@ -4670,6 +4684,9 @@ type SyncImagesRequest struct {
 
 	// List of destination regions for synchronization. A destination region must meet the following requirements: <br><li>It cannot be the source region. <br><li>It must be valid. <br><li>Currently some regions do not support image synchronization. <br>For specific regions, see [Region](https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1).
 	DestinationRegions []*string `json:"DestinationRegions,omitempty" name:"DestinationRegions"`
+
+	// Checks whether image synchronization can be initiated 
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 }
 
 func (r *SyncImagesRequest) ToJsonString() string {
@@ -4686,6 +4703,7 @@ func (r *SyncImagesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ImageIds")
 	delete(f, "DestinationRegions")
+	delete(f, "DryRun")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncImagesRequest has unknown keys!", "")
 	}

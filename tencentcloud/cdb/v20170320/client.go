@@ -66,6 +66,7 @@ func NewAddTimeWindowResponse() (response *AddTimeWindowResponse) {
 // This API (AddTimeWindow) is used to add a maintenance time window for a TencentDB instance, so as to specify when the instance can automatically perform access switch operations.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
@@ -77,6 +78,7 @@ func (c *Client) AddTimeWindow(request *AddTimeWindowRequest) (response *AddTime
 // This API (AddTimeWindow) is used to add a maintenance time window for a TencentDB instance, so as to specify when the instance can automatically perform access switch operations.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
@@ -224,6 +226,7 @@ func NewBalanceRoGroupLoadResponse() (response *BalanceRoGroupLoadResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
@@ -237,6 +240,7 @@ func (c *Client) BalanceRoGroupLoad(request *BalanceRoGroupLoadRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
@@ -278,6 +282,7 @@ func NewCloseCDBProxyResponse() (response *CloseCDBProxyResponse) {
 // This API is used to disable database proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
 func (c *Client) CloseCDBProxy(request *CloseCDBProxyRequest) (response *CloseCDBProxyResponse, err error) {
     return c.CloseCDBProxyWithContext(context.Background(), request)
@@ -287,6 +292,7 @@ func (c *Client) CloseCDBProxy(request *CloseCDBProxyRequest) (response *CloseCD
 // This API is used to disable database proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
 func (c *Client) CloseCDBProxyWithContext(ctx context.Context, request *CloseCDBProxyRequest) (response *CloseCDBProxyResponse, err error) {
     if request == nil {
@@ -357,113 +363,6 @@ func (c *Client) CloseWanServiceWithContext(ctx context.Context, request *CloseW
     request.SetContext(ctx)
     
     response = NewCloseWanServiceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateAccountsRequest() (request *CreateAccountsRequest) {
-    request = &CreateAccountsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "CreateAccounts")
-    
-    
-    return
-}
-
-func NewCreateAccountsResponse() (response *CreateAccountsResponse) {
-    response = &CreateAccountsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateAccounts
-// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
-//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
-//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
-//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
-//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
-//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
-//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
-//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
-//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
-//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
-//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
-//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
-//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
-func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *CreateAccountsResponse, err error) {
-    return c.CreateAccountsWithContext(context.Background(), request)
-}
-
-// CreateAccounts
-// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
-//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
-//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
-//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
-//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
-//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
-//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
-//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
-//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
-//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
-//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
-//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
-//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
-//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
-//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
-func (c *Client) CreateAccountsWithContext(ctx context.Context, request *CreateAccountsRequest) (response *CreateAccountsResponse, err error) {
-    if request == nil {
-        request = NewCreateAccountsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateAccounts require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateAccountsResponse()
     err = c.Send(request, response)
     return
 }
@@ -672,6 +571,7 @@ func NewCreateCloneInstanceResponse() (response *CreateCloneInstanceResponse) {
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -690,6 +590,7 @@ func (c *Client) CreateCloneInstance(request *CreateCloneInstanceRequest) (respo
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -823,6 +724,7 @@ func NewCreateDBInstanceHourResponse() (response *CreateDBInstanceHourResponse) 
 // error code that may be returned:
 //  CDBERROR = "CdbError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
@@ -860,6 +762,7 @@ func (c *Client) CreateDBInstanceHour(request *CreateDBInstanceHourRequest) (res
 // error code that may be returned:
 //  CDBERROR = "CdbError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
@@ -887,65 +790,6 @@ func (c *Client) CreateDBInstanceHourWithContext(ctx context.Context, request *C
     return
 }
 
-func NewCreateDeployGroupRequest() (request *CreateDeployGroupRequest) {
-    request = &CreateDeployGroupRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "CreateDeployGroup")
-    
-    
-    return
-}
-
-func NewCreateDeployGroupResponse() (response *CreateDeployGroupResponse) {
-    response = &CreateDeployGroupResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateDeployGroup
-// This API is used to create a placement group for placing instances.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-func (c *Client) CreateDeployGroup(request *CreateDeployGroupRequest) (response *CreateDeployGroupResponse, err error) {
-    return c.CreateDeployGroupWithContext(context.Background(), request)
-}
-
-// CreateDeployGroup
-// This API is used to create a placement group for placing instances.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-func (c *Client) CreateDeployGroupWithContext(ctx context.Context, request *CreateDeployGroupRequest) (response *CreateDeployGroupResponse, err error) {
-    if request == nil {
-        request = NewCreateDeployGroupRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateDeployGroup require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateDeployGroupResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateParamTemplateRequest() (request *CreateParamTemplateRequest) {
     request = &CreateParamTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -967,6 +811,7 @@ func NewCreateParamTemplateResponse() (response *CreateParamTemplateResponse) {
 // This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -982,6 +827,7 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
 // This API is used to create a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -1111,6 +957,7 @@ func NewDeleteAccountsResponse() (response *DeleteAccountsResponse) {
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
@@ -1147,6 +994,7 @@ func (c *Client) DeleteAccounts(request *DeleteAccountsRequest) (response *Delet
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
@@ -1234,65 +1082,6 @@ func (c *Client) DeleteBackupWithContext(ctx context.Context, request *DeleteBac
     request.SetContext(ctx)
     
     response = NewDeleteBackupResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteDeployGroupsRequest() (request *DeleteDeployGroupsRequest) {
-    request = &DeleteDeployGroupsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "DeleteDeployGroups")
-    
-    
-    return
-}
-
-func NewDeleteDeployGroupsResponse() (response *DeleteDeployGroupsResponse) {
-    response = &DeleteDeployGroupsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteDeployGroups
-// This API is used to delete placement groups by placement group ID (a placement group cannot be deleted if it contains resources).
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-func (c *Client) DeleteDeployGroups(request *DeleteDeployGroupsRequest) (response *DeleteDeployGroupsResponse, err error) {
-    return c.DeleteDeployGroupsWithContext(context.Background(), request)
-}
-
-// DeleteDeployGroups
-// This API is used to delete placement groups by placement group ID (a placement group cannot be deleted if it contains resources).
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-func (c *Client) DeleteDeployGroupsWithContext(ctx context.Context, request *DeleteDeployGroupsRequest) (response *DeleteDeployGroupsResponse, err error) {
-    if request == nil {
-        request = NewDeleteDeployGroupsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteDeployGroups require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteDeployGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1502,117 +1291,6 @@ func (c *Client) DescribeAccountPrivilegesWithContext(ctx context.Context, reque
     return
 }
 
-func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
-    request = &DescribeAccountsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeAccounts")
-    
-    
-    return
-}
-
-func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
-    response = &DescribeAccountsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAccounts
-// This API (DescribeAccounts) is used to query information of all TencentDB accounts.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
-//  FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
-//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
-//  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
-//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
-//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
-//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
-//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
-//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
-//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
-//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
-//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
-//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
-//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
-func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
-    return c.DescribeAccountsWithContext(context.Background(), request)
-}
-
-// DescribeAccounts
-// This API (DescribeAccounts) is used to query information of all TencentDB accounts.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
-//  FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
-//  FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
-//  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
-//  FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
-//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
-//  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
-//  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
-//  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
-//  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPASSWORDERROR = "InvalidParameterValue.VerifyAccountPasswordError"
-//  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
-//  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
-//  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
-//  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
-//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
-//  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
-func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccountsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAccounts require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAccountsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeAsyncRequestInfoRequest() (request *DescribeAsyncRequestInfoRequest) {
     request = &DescribeAsyncRequestInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1668,6 +1346,126 @@ func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeAsyncRequestInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditPoliciesRequest() (request *DescribeAuditPoliciesRequest) {
+    request = &DescribeAuditPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeAuditPolicies")
+    
+    
+    return
+}
+
+func NewDescribeAuditPoliciesResponse() (response *DescribeAuditPoliciesResponse) {
+    response = &DescribeAuditPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAuditPolicies
+// This API is used to query the audit policies of a TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_TRANSACTIONBEGINERROR = "InternalError.TransactionBeginError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+func (c *Client) DescribeAuditPolicies(request *DescribeAuditPoliciesRequest) (response *DescribeAuditPoliciesResponse, err error) {
+    return c.DescribeAuditPoliciesWithContext(context.Background(), request)
+}
+
+// DescribeAuditPolicies
+// This API is used to query the audit policies of a TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_TRANSACTIONBEGINERROR = "InternalError.TransactionBeginError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
+func (c *Client) DescribeAuditPoliciesWithContext(ctx context.Context, request *DescribeAuditPoliciesRequest) (response *DescribeAuditPoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditPoliciesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditPolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAuditRulesRequest() (request *DescribeAuditRulesRequest) {
+    request = &DescribeAuditRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeAuditRules")
+    
+    
+    return
+}
+
+func NewDescribeAuditRulesResponse() (response *DescribeAuditRulesResponse) {
+    response = &DescribeAuditRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAuditRules
+// This API is used to query the audit rules in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_AUDITRULENOTEXISTERROR = "OperationDenied.AuditRuleNotExistError"
+func (c *Client) DescribeAuditRules(request *DescribeAuditRulesRequest) (response *DescribeAuditRulesResponse, err error) {
+    return c.DescribeAuditRulesWithContext(context.Background(), request)
+}
+
+// DescribeAuditRules
+// This API is used to query the audit rules in the current region.
+//
+// error code that may be returned:
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_AUDITRULENOTEXISTERROR = "OperationDenied.AuditRuleNotExistError"
+func (c *Client) DescribeAuditRulesWithContext(ctx context.Context, request *DescribeAuditRulesRequest) (response *DescribeAuditRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2032,6 +1830,7 @@ func NewDescribeBinlogsResponse() (response *DescribeBinlogsResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *DescribeBinlogsResponse, err error) {
     return c.DescribeBinlogsWithContext(context.Background(), request)
@@ -2046,6 +1845,7 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) DescribeBinlogsWithContext(ctx context.Context, request *DescribeBinlogsRequest) (response *DescribeBinlogsResponse, err error) {
     if request == nil {
@@ -2358,6 +2158,7 @@ func NewDescribeDBInstanceGTIDResponse() (response *DescribeDBInstanceGTIDRespon
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSERROR = "InternalError.OssError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2371,6 +2172,7 @@ func (c *Client) DescribeDBInstanceGTID(request *DescribeDBInstanceGTIDRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSERROR = "InternalError.OssError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2883,6 +2685,7 @@ func NewDescribeDefaultParamsResponse() (response *DescribeDefaultParamsResponse
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDefaultParams(request *DescribeDefaultParamsRequest) (response *DescribeDefaultParamsResponse, err error) {
     return c.DescribeDefaultParamsWithContext(context.Background(), request)
 }
@@ -2896,6 +2699,7 @@ func (c *Client) DescribeDefaultParams(request *DescribeDefaultParamsRequest) (r
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDefaultParamsWithContext(ctx context.Context, request *DescribeDefaultParamsRequest) (response *DescribeDefaultParamsResponse, err error) {
     if request == nil {
         request = NewDescribeDefaultParamsRequest()
@@ -2908,65 +2712,6 @@ func (c *Client) DescribeDefaultParamsWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeDefaultParamsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeDeployGroupListRequest() (request *DescribeDeployGroupListRequest) {
-    request = &DescribeDeployGroupListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeDeployGroupList")
-    
-    
-    return
-}
-
-func NewDescribeDeployGroupListResponse() (response *DescribeDeployGroupListResponse) {
-    response = &DescribeDeployGroupListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeDeployGroupList
-// This API is used to query the list of placement groups of a user. You can specify the placement group ID or name.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-func (c *Client) DescribeDeployGroupList(request *DescribeDeployGroupListRequest) (response *DescribeDeployGroupListResponse, err error) {
-    return c.DescribeDeployGroupListWithContext(context.Background(), request)
-}
-
-// DescribeDeployGroupList
-// This API is used to query the list of placement groups of a user. You can specify the placement group ID or name.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
-func (c *Client) DescribeDeployGroupListWithContext(ctx context.Context, request *DescribeDeployGroupListRequest) (response *DescribeDeployGroupListResponse, err error) {
-    if request == nil {
-        request = NewDescribeDeployGroupListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDeployGroupList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDeployGroupListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3195,8 +2940,10 @@ func NewDescribeInstanceParamsResponse() (response *DescribeInstanceParamsRespon
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
 func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) (response *DescribeInstanceParamsResponse, err error) {
     return c.DescribeInstanceParamsWithContext(context.Background(), request)
 }
@@ -3209,8 +2956,10 @@ func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) 
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
 func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request *DescribeInstanceParamsRequest) (response *DescribeInstanceParamsResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceParamsRequest()
@@ -3248,12 +2997,7 @@ func NewDescribeLocalBinlogConfigResponse() (response *DescribeLocalBinlogConfig
 // This API is used to query the retention policy of local binlog of an instance.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) DescribeLocalBinlogConfig(request *DescribeLocalBinlogConfigRequest) (response *DescribeLocalBinlogConfigResponse, err error) {
     return c.DescribeLocalBinlogConfigWithContext(context.Background(), request)
 }
@@ -3262,12 +3006,7 @@ func (c *Client) DescribeLocalBinlogConfig(request *DescribeLocalBinlogConfigReq
 // This API is used to query the retention policy of local binlog of an instance.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) DescribeLocalBinlogConfigWithContext(ctx context.Context, request *DescribeLocalBinlogConfigRequest) (response *DescribeLocalBinlogConfigResponse, err error) {
     if request == nil {
         request = NewDescribeLocalBinlogConfigRequest()
@@ -3360,6 +3099,7 @@ func NewDescribeParamTemplatesResponse() (response *DescribeParamTemplatesRespon
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
     return c.DescribeParamTemplatesWithContext(context.Background(), request)
@@ -3371,6 +3111,7 @@ func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) 
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
+//  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeParamTemplatesWithContext(ctx context.Context, request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
     if request == nil {
@@ -3466,12 +3207,7 @@ func NewDescribeProxyConnectionPoolConfResponse() (response *DescribeProxyConnec
 // This API is used to query the connection pool configuration of database proxy.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
-//  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
-//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeProxyConnectionPoolConf(request *DescribeProxyConnectionPoolConfRequest) (response *DescribeProxyConnectionPoolConfResponse, err error) {
     return c.DescribeProxyConnectionPoolConfWithContext(context.Background(), request)
 }
@@ -3480,12 +3216,7 @@ func (c *Client) DescribeProxyConnectionPoolConf(request *DescribeProxyConnectio
 // This API is used to query the connection pool configuration of database proxy.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
-//  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
-//  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeProxyConnectionPoolConfWithContext(ctx context.Context, request *DescribeProxyConnectionPoolConfRequest) (response *DescribeProxyConnectionPoolConfResponse, err error) {
     if request == nil {
         request = NewDescribeProxyConnectionPoolConfRequest()
@@ -4794,6 +4525,7 @@ func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResp
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
 //  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
@@ -4838,6 +4570,7 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDCHARACTERERROR = "InvalidParameterValue.AccountPasswordCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDLENGTHERROR = "InvalidParameterValue.AccountPasswordLengthError"
 //  INVALIDPARAMETERVALUE_ACCOUNTPASSWORDRULEERROR = "InvalidParameterValue.AccountPasswordRuleError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_USERNAMERULEERROR = "InvalidParameterValue.UserNameRuleError"
 //  INVALIDPARAMETERVALUE_USERNOTEXISTERROR = "InvalidParameterValue.UserNotExistError"
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
@@ -4996,6 +4729,7 @@ func NewModifyBackupDownloadRestrictionResponse() (response *ModifyBackupDownloa
 //  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
     return c.ModifyBackupDownloadRestrictionWithContext(context.Background(), request)
 }
@@ -5007,6 +4741,7 @@ func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRe
 //  INTERNALERROR_AUTHERROR = "InternalError.AuthError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyBackupDownloadRestrictionWithContext(ctx context.Context, request *ModifyBackupDownloadRestrictionRequest) (response *ModifyBackupDownloadRestrictionResponse, err error) {
     if request == nil {
         request = NewModifyBackupDownloadRestrictionRequest()
@@ -5045,6 +4780,7 @@ func NewModifyCDBProxyResponse() (response *ModifyCDBProxyResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxy(request *ModifyCDBProxyRequest) (response *ModifyCDBProxyResponse, err error) {
     return c.ModifyCDBProxyWithContext(context.Background(), request)
 }
@@ -5054,6 +4790,7 @@ func (c *Client) ModifyCDBProxy(request *ModifyCDBProxyRequest) (response *Modif
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxyWithContext(ctx context.Context, request *ModifyCDBProxyRequest) (response *ModifyCDBProxyResponse, err error) {
     if request == nil {
         request = NewModifyCDBProxyRequest()
@@ -5092,6 +4829,7 @@ func NewModifyCDBProxyConnectionPoolResponse() (response *ModifyCDBProxyConnecti
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
     return c.ModifyCDBProxyConnectionPoolWithContext(context.Background(), request)
 }
@@ -5101,6 +4839,7 @@ func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionP
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxyConnectionPoolWithContext(ctx context.Context, request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
     if request == nil {
         request = NewModifyCDBProxyConnectionPoolRequest()
@@ -5139,6 +4878,7 @@ func NewModifyCDBProxyDescResponse() (response *ModifyCDBProxyDescResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
     return c.ModifyCDBProxyDescWithContext(context.Background(), request)
 }
@@ -5148,6 +4888,7 @@ func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyCDBProxyDescWithContext(ctx context.Context, request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
     if request == nil {
         request = NewModifyCDBProxyDescRequest()
@@ -5338,6 +5079,7 @@ func NewModifyDBInstanceSecurityGroupsResponse() (response *ModifyDBInstanceSecu
 // This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
 //  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
@@ -5351,6 +5093,7 @@ func (c *Client) ModifyDBInstanceSecurityGroups(request *ModifyDBInstanceSecurit
 // This API (ModifyDBInstanceSecurityGroups) is used to modify the security groups bound to a TencentDB instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
 //  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
@@ -5368,59 +5111,6 @@ func (c *Client) ModifyDBInstanceSecurityGroupsWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewModifyDBInstanceSecurityGroupsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyDBInstanceVipVportRequest() (request *ModifyDBInstanceVipVportRequest) {
-    request = &ModifyDBInstanceVipVportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyDBInstanceVipVport")
-    
-    
-    return
-}
-
-func NewModifyDBInstanceVipVportResponse() (response *ModifyDBInstanceVipVportResponse) {
-    response = &ModifyDBInstanceVipVportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyDBInstanceVipVport
-// This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) ModifyDBInstanceVipVport(request *ModifyDBInstanceVipVportRequest) (response *ModifyDBInstanceVipVportResponse, err error) {
-    return c.ModifyDBInstanceVipVportWithContext(context.Background(), request)
-}
-
-// ModifyDBInstanceVipVport
-// This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
-//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) ModifyDBInstanceVipVportWithContext(ctx context.Context, request *ModifyDBInstanceVipVportRequest) (response *ModifyDBInstanceVipVportResponse, err error) {
-    if request == nil {
-        request = NewModifyDBInstanceVipVportRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyDBInstanceVipVport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyDBInstanceVipVportResponse()
     err = c.Send(request, response)
     return
 }
@@ -5456,6 +5146,7 @@ func NewModifyInstanceParamResponse() (response *ModifyInstanceParamResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (response *ModifyInstanceParamResponse, err error) {
     return c.ModifyInstanceParamWithContext(context.Background(), request)
 }
@@ -5474,6 +5165,7 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 func (c *Client) ModifyInstanceParamWithContext(ctx context.Context, request *ModifyInstanceParamRequest) (response *ModifyInstanceParamResponse, err error) {
     if request == nil {
         request = NewModifyInstanceParamRequest()
@@ -5610,63 +5302,6 @@ func (c *Client) ModifyLocalBinlogConfigWithContext(ctx context.Context, request
     return
 }
 
-func NewModifyNameOrDescByDpIdRequest() (request *ModifyNameOrDescByDpIdRequest) {
-    request = &ModifyNameOrDescByDpIdRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyNameOrDescByDpId")
-    
-    
-    return
-}
-
-func NewModifyNameOrDescByDpIdResponse() (response *ModifyNameOrDescByDpIdResponse) {
-    response = &ModifyNameOrDescByDpIdResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyNameOrDescByDpId
-// This API is used to modify the name or description of a placement group.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-func (c *Client) ModifyNameOrDescByDpId(request *ModifyNameOrDescByDpIdRequest) (response *ModifyNameOrDescByDpIdResponse, err error) {
-    return c.ModifyNameOrDescByDpIdWithContext(context.Background(), request)
-}
-
-// ModifyNameOrDescByDpId
-// This API is used to modify the name or description of a placement group.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
-//  INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
-//  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
-//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
-func (c *Client) ModifyNameOrDescByDpIdWithContext(ctx context.Context, request *ModifyNameOrDescByDpIdRequest) (response *ModifyNameOrDescByDpIdResponse, err error) {
-    if request == nil {
-        request = NewModifyNameOrDescByDpIdRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyNameOrDescByDpId require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyNameOrDescByDpIdResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewModifyParamTemplateRequest() (request *ModifyParamTemplateRequest) {
     request = &ModifyParamTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5743,6 +5378,7 @@ func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
 // This API is used to update the information of a TencentDB RO group, such as configuring a read-only instance removal policy in case of excessive delay, setting read weights of read-only instances, and setting the replication delay.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -5763,6 +5399,7 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
 // This API is used to update the information of a TencentDB RO group, such as configuring a read-only instance removal policy in case of excessive delay, setting read weights of read-only instances, and setting the replication delay.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -6055,6 +5692,8 @@ func NewQueryCDBProxyResponse() (response *QueryCDBProxyResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) QueryCDBProxy(request *QueryCDBProxyRequest) (response *QueryCDBProxyResponse, err error) {
     return c.QueryCDBProxyWithContext(context.Background(), request)
 }
@@ -6064,6 +5703,8 @@ func (c *Client) QueryCDBProxy(request *QueryCDBProxyRequest) (response *QueryCD
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) QueryCDBProxyWithContext(ctx context.Context, request *QueryCDBProxyRequest) (response *QueryCDBProxyResponse, err error) {
     if request == nil {
         request = NewQueryCDBProxyRequest()
@@ -6180,6 +5821,57 @@ func (c *Client) ReloadBalanceProxyNodeWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewReloadBalanceProxyNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetRootAccountRequest() (request *ResetRootAccountRequest) {
+    request = &ResetRootAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "ResetRootAccount")
+    
+    
+    return
+}
+
+func NewResetRootAccountResponse() (response *ResetRootAccountResponse) {
+    response = &ResetRootAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ResetRootAccount
+// This API is used to reset the root account and initialize the account permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) ResetRootAccount(request *ResetRootAccountRequest) (response *ResetRootAccountResponse, err error) {
+    return c.ResetRootAccountWithContext(context.Background(), request)
+}
+
+// ResetRootAccount
+// This API is used to reset the root account and initialize the account permissions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+func (c *Client) ResetRootAccountWithContext(ctx context.Context, request *ResetRootAccountRequest) (response *ResetRootAccountResponse, err error) {
+    if request == nil {
+        request = NewResetRootAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetRootAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetRootAccountResponse()
     err = c.Send(request, response)
     return
 }
@@ -6565,13 +6257,7 @@ func NewSwitchCDBProxyResponse() (response *SwitchCDBProxyResponse) {
 // This API is used to switch database proxy after the proxy configuration is modified or the proxy version is upgraded.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
-//  CDBERROR_TASKERROR = "CdbError.TaskError"
-//  INTERNALERROR_ASYNCREQUESTERROR = "InternalError.AsyncRequestError"
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INTERNALERROR_DESERROR = "InternalError.DesError"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) SwitchCDBProxy(request *SwitchCDBProxyRequest) (response *SwitchCDBProxyResponse, err error) {
     return c.SwitchCDBProxyWithContext(context.Background(), request)
 }
@@ -6580,13 +6266,7 @@ func (c *Client) SwitchCDBProxy(request *SwitchCDBProxyRequest) (response *Switc
 // This API is used to switch database proxy after the proxy configuration is modified or the proxy version is upgraded.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
-//  CDBERROR_TASKERROR = "CdbError.TaskError"
-//  INTERNALERROR_ASYNCREQUESTERROR = "InternalError.AsyncRequestError"
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INTERNALERROR_DESERROR = "InternalError.DesError"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) SwitchCDBProxyWithContext(ctx context.Context, request *SwitchCDBProxyRequest) (response *SwitchCDBProxyResponse, err error) {
     if request == nil {
         request = NewSwitchCDBProxyRequest()
@@ -6844,10 +6524,7 @@ func NewUpgradeCDBProxyVersionResponse() (response *UpgradeCDBProxyVersionRespon
 // This API is used to upgrade the version of database proxy.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) UpgradeCDBProxyVersion(request *UpgradeCDBProxyVersionRequest) (response *UpgradeCDBProxyVersionResponse, err error) {
     return c.UpgradeCDBProxyVersionWithContext(context.Background(), request)
 }
@@ -6856,10 +6533,7 @@ func (c *Client) UpgradeCDBProxyVersion(request *UpgradeCDBProxyVersionRequest) 
 // This API is used to upgrade the version of database proxy.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 func (c *Client) UpgradeCDBProxyVersionWithContext(ctx context.Context, request *UpgradeCDBProxyVersionRequest) (response *UpgradeCDBProxyVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeCDBProxyVersionRequest()
@@ -6899,8 +6573,10 @@ func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
 // error code that may be returned:
 //  CDBERROR = "CdbError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
@@ -6916,8 +6592,10 @@ func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response 
 // error code that may be returned:
 //  CDBERROR = "CdbError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
@@ -6963,6 +6641,7 @@ func NewUpgradeDBInstanceEngineVersionResponse() (response *UpgradeDBInstanceEng
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -6980,6 +6659,7 @@ func (c *Client) UpgradeDBInstanceEngineVersion(request *UpgradeDBInstanceEngine
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"

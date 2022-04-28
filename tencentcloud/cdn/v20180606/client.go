@@ -76,6 +76,7 @@ func NewCreateScdnFailedLogTaskResponse() (response *CreateScdnFailedLogTaskResp
 //  LIMITEXCEEDED_SCDNLOGTASKEXCEEDDAYLIMIT = "LimitExceeded.ScdnLogTaskExceedDayLimit"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
 func (c *Client) CreateScdnFailedLogTask(request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
     return c.CreateScdnFailedLogTaskWithContext(context.Background(), request)
 }
@@ -94,6 +95,7 @@ func (c *Client) CreateScdnFailedLogTask(request *CreateScdnFailedLogTaskRequest
 //  LIMITEXCEEDED_SCDNLOGTASKEXCEEDDAYLIMIT = "LimitExceeded.ScdnLogTaskExceedDayLimit"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
 func (c *Client) CreateScdnFailedLogTaskWithContext(ctx context.Context, request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
     if request == nil {
         request = NewCreateScdnFailedLogTaskRequest()
@@ -106,6 +108,419 @@ func (c *Client) CreateScdnFailedLogTaskWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateScdnFailedLogTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillingDataRequest() (request *DescribeBillingDataRequest) {
+    request = &DescribeBillingDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeBillingData")
+    
+    
+    return
+}
+
+func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
+    response = &DescribeBillingDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillingData
+// This API is used to query billing data details.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeBillingData(request *DescribeBillingDataRequest) (response *DescribeBillingDataResponse, err error) {
+    return c.DescribeBillingDataWithContext(context.Background(), request)
+}
+
+// DescribeBillingData
+// This API is used to query billing data details.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeBillingDataWithContext(ctx context.Context, request *DescribeBillingDataRequest) (response *DescribeBillingDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillingDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillingData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillingDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCdnDataRequest() (request *DescribeCdnDataRequest) {
+    request = &DescribeCdnDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeCdnData")
+    
+    
+    return
+}
+
+func NewDescribeCdnDataResponse() (response *DescribeCdnDataResponse) {
+    response = &DescribeCdnDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCdnData
+// This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+//
+// 
+//
+// + Traffic (in bytes)
+//
+// + Bandwidth (in bps)
+//
+// + Number of requests
+//
+// + Number of hit requests
+//
+// + Request hit rate (in %)
+//
+// + Hit traffic (in bytes)
+//
+// + Traffic hit rate (in %)
+//
+// + Aggregate list of 2xx status codes and the details of status codes starting with 2 (in entries)
+//
+// + Aggregate list of 3xx status codes and the details of status codes starting with 3 (in entries)
+//
+// + Aggregate list of 4xx status codes and the details of status codes starting with 4 (in entries)
+//
+// + Aggregate list of 5xx status codes and the details of status codes starting with 5 (in entries)
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_COSTDATASYSTEMERROR = "InternalError.CostDataSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNINVALIDPARAMMETRIC = "InvalidParameter.CdnInvalidParamMetric"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_CDNSTATTOOMANYDOMAINS = "InvalidParameter.CdnStatTooManyDomains"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_CSRFERROR = "UnauthorizedOperation.CsrfError"
+//  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeCdnData(request *DescribeCdnDataRequest) (response *DescribeCdnDataResponse, err error) {
+    return c.DescribeCdnDataWithContext(context.Background(), request)
+}
+
+// DescribeCdnData
+// This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+//
+// 
+//
+// + Traffic (in bytes)
+//
+// + Bandwidth (in bps)
+//
+// + Number of requests
+//
+// + Number of hit requests
+//
+// + Request hit rate (in %)
+//
+// + Hit traffic (in bytes)
+//
+// + Traffic hit rate (in %)
+//
+// + Aggregate list of 2xx status codes and the details of status codes starting with 2 (in entries)
+//
+// + Aggregate list of 3xx status codes and the details of status codes starting with 3 (in entries)
+//
+// + Aggregate list of 4xx status codes and the details of status codes starting with 4 (in entries)
+//
+// + Aggregate list of 5xx status codes and the details of status codes starting with 5 (in entries)
+//
+// error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_COSTDATASYSTEMERROR = "InternalError.CostDataSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNINVALIDPARAMMETRIC = "InvalidParameter.CdnInvalidParamMetric"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_CDNSTATTOOMANYDOMAINS = "InvalidParameter.CdnStatTooManyDomains"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_CSRFERROR = "UnauthorizedOperation.CsrfError"
+//  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeCdnDataWithContext(ctx context.Context, request *DescribeCdnDataRequest) (response *DescribeCdnDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeCdnDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdnData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCdnDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeOriginDataRequest() (request *DescribeOriginDataRequest) {
+    request = &DescribeOriginDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdn", APIVersion, "DescribeOriginData")
+    
+    
+    return
+}
+
+func NewDescribeOriginDataResponse() (response *DescribeOriginDataResponse) {
+    response = &DescribeOriginDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeOriginData
+// This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+//
+// 
+//
+// + Origin-pull traffic (in bytes)
+//
+// + Origin-pull bandwidth (in bps)
+//
+// + Number of origin-pull requests
+//
+// + Number of failed origin-pull requests
+//
+// + Origin-pull failure rate (in % with two decimal digits)
+//
+// + Aggregate list of 2xx origin-pull status codes and the details of origin-pull status codes starting with 2 (in entries)
+//
+// + Aggregate list of 3xx origin-pull status codes and the details of origin-pull status codes starting with 3 (in entries)
+//
+// + Aggregate list of 4xx origin-pull status codes and the details of origin-pull status codes starting with 4 (in entries)
+//
+// + Aggregate list of 5xx origin-pull status codes and the details of origin-pull status codes starting with 5 (in entries)
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDMIDDLECONFIG = "InvalidParameter.CdnHostInvalidMiddleConfig"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNINVALIDPARAMMETRIC = "InvalidParameter.CdnInvalidParamMetric"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_CDNSTATTOOMANYDOMAINS = "InvalidParameter.CdnStatTooManyDomains"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  RESOURCENOTFOUND_CDNUSERTOOMANYHOSTS = "ResourceNotFound.CdnUserTooManyHosts"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeOriginData(request *DescribeOriginDataRequest) (response *DescribeOriginDataResponse, err error) {
+    return c.DescribeOriginDataWithContext(context.Background(), request)
+}
+
+// DescribeOriginData
+// This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+//
+// 
+//
+// + Origin-pull traffic (in bytes)
+//
+// + Origin-pull bandwidth (in bps)
+//
+// + Number of origin-pull requests
+//
+// + Number of failed origin-pull requests
+//
+// + Origin-pull failure rate (in % with two decimal digits)
+//
+// + Aggregate list of 2xx origin-pull status codes and the details of origin-pull status codes starting with 2 (in entries)
+//
+// + Aggregate list of 3xx origin-pull status codes and the details of origin-pull status codes starting with 3 (in entries)
+//
+// + Aggregate list of 4xx origin-pull status codes and the details of origin-pull status codes starting with 4 (in entries)
+//
+// + Aggregate list of 5xx origin-pull status codes and the details of origin-pull status codes starting with 5 (in entries)
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
+//  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
+//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INTERNALERROR_INVALIDERRORCODE = "InternalError.InvalidErrorCode"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
+//  INVALIDPARAMETER_CDNHOSTINVALIDMIDDLECONFIG = "InvalidParameter.CdnHostInvalidMiddleConfig"
+//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
+//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INVALIDPARAMETER_CDNINVALIDPARAMMETRIC = "InvalidParameter.CdnInvalidParamMetric"
+//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
+//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
+//  INVALIDPARAMETER_CDNSTATINVALIDMETRIC = "InvalidParameter.CdnStatInvalidMetric"
+//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETER_CDNSTATTOOMANYDOMAINS = "InvalidParameter.CdnStatTooManyDomains"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
+//  RESOURCENOTFOUND_CDNPROJECTNOTEXISTS = "ResourceNotFound.CdnProjectNotExists"
+//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
+//  RESOURCENOTFOUND_CDNUSERTOOMANYHOSTS = "ResourceNotFound.CdnUserTooManyHosts"
+//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNPROJECTUNAUTHORIZED = "UnauthorizedOperation.CdnProjectUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
+//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
+//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
+func (c *Client) DescribeOriginDataWithContext(ctx context.Context, request *DescribeOriginDataRequest) (response *DescribeOriginDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeOriginDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOriginData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOriginDataResponse()
     err = c.Send(request, response)
     return
 }

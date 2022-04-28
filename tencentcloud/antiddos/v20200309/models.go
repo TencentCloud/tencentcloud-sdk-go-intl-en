@@ -1202,7 +1202,9 @@ func (r *CreateProtocolBlockConfigResponse) FromJsonString(s string) error {
 type CreateSchedulingDomainRequest struct {
 	*tchttp.BaseRequest
 
-	// 
+	// Indicates whether a hybrid cloud product is used.
+	// `hybrid`: Anti-DDoS Service Platform
+	// For other products, leave this field empty.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -1359,9 +1361,9 @@ type DDoSAIRelation struct {
 type DDoSGeoIPBlockConfig struct {
 
 	// Region type. Valid values:
-	// oversea: outside the Chinese mainland
-	// `china`: the Chinese mainland
-	// `customized`: custom region
+	// `oversea`: Outside the Chinese mainland
+	// `china`: The Chinese mainland
+	// `customized`: User-specified region
 	// ]
 	RegionType *string `json:"RegionType,omitempty" name:"RegionType"`
 
@@ -4111,35 +4113,59 @@ func (r *ModifyPacketFilterConfigResponse) FromJsonString(s string) error {
 
 type NewL7RuleEntry struct {
 
-	// Session persistence duration, in seconds.
-	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
-
-	// Load balancing method. Valid value: `1` (weighed polling).
-	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
-
-	// List of origins
-	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
-
-	// Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
-	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+	// Forwarding protocol. Valid values: `http` and `https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Forwarding domain name.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Forwarding protocol. Valid values: `http` and `https`.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	// Load balancing method. Valid value: `1` (weighed polling).
+	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
+
+	// Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+
+	// Session persistence duration, in seconds.
+	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
 
 	// Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
 	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
 
-	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). It defaults to `0`.
-	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
+	// List of origins
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
+
+	// Region code.
+	Region *uint64 `json:"Region,omitempty" name:"Region"`
+
+	// Resource ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Anti-DDoS instance IP address.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule description.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
+	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
+
+	// [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 
 	// Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// CC protection level based on HTTPS.
-	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
+	// CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+	CCStatus *uint64 `json:"CCStatus,omitempty" name:"CCStatus"`
 
 	// CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
 	CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
@@ -4147,42 +4173,24 @@ type NewL7RuleEntry struct {
 	// CC protection threshold based on HTTPS.
 	CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
 
-	// Region code.
-	Region *uint64 `json:"Region,omitempty" name:"Region"`
-
-	// Rule description.
-	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
-
-	// [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
-	Cert *string `json:"Cert,omitempty" name:"Cert"`
+	// CC protection level based on HTTPS.
+	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
 
 	// Modification time.
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 
-	// Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
-	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-	// Anti-DDoS instance IP address.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
-	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
-
-	// Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
-	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disabled) and `1` (enabled). It defaults to `0`.
+	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
 
 	// Access port number.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	VirtualPort *uint64 `json:"VirtualPort,omitempty" name:"VirtualPort"`
 
-	// CC protection status. Valid values: `0` (disabled) and `1` (enabled).
-	CCStatus *uint64 `json:"CCStatus,omitempty" name:"CCStatus"`
+	// Specifies whether to forcibly redirect HTTP to HTTPS. `1`: Enable. `0`: Disable.
+	RewriteHttps *uint64 `json:"RewriteHttps,omitempty" name:"RewriteHttps"`
 
-	// When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
-	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
-
-	// Resource ID.
-	Id *string `json:"Id,omitempty" name:"Id"`
+	// Returns an error code when the rule configuration fails (only valid when `Status=2`). `1001`: The certificate does not exist. `1002`: Failed to obtain the certificate. `1003`: Failed to upload the certificate. `1004`: The certificate has expired.
+	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
 }
 
 type PackInfo struct {

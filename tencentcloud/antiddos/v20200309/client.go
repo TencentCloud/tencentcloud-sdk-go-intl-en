@@ -891,6 +891,7 @@ func NewCreatePacketFilterConfigResponse() (response *CreatePacketFilterConfigRe
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {
@@ -902,6 +903,7 @@ func (c *Client) CreatePacketFilterConfig(request *CreatePacketFilterConfigReque
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreatePacketFilterConfigWithContext(ctx context.Context, request *CreatePacketFilterConfigRequest) (response *CreatePacketFilterConfigResponse, err error) {

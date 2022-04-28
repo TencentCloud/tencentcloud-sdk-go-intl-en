@@ -66,6 +66,8 @@ func NewAcquireClusterAdminRoleResponse() (response *AcquireClusterAdminRoleResp
 // This API can be called to acquire the ClusterRole tke:admin. By setting a CAM policy, you can grant permission of this API to a sub-account that has higher permission in CAM. In this way, this sub-account can call this API directly to acquire the admin role of a Kubernetes cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
@@ -87,6 +89,8 @@ func (c *Client) AcquireClusterAdminRole(request *AcquireClusterAdminRoleRequest
 // This API can be called to acquire the ClusterRole tke:admin. By setting a CAM policy, you can grant permission of this API to a sub-account that has higher permission in CAM. In this way, this sub-account can call this API directly to acquire the admin role of a Kubernetes cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
@@ -137,6 +141,11 @@ func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
 // This API is used to add one or more existing instances to a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXNODLIMIT = "FailedOperation.QuotaMaxNodLimit"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
 //  INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
@@ -144,6 +153,7 @@ func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
 //  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_QUOTAMAXNODLIMIT = "InternalError.QuotaMaxNodLimit"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -156,6 +166,11 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
 // This API is used to add one or more existing instances to a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXNODLIMIT = "FailedOperation.QuotaMaxNodLimit"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
 //  INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
@@ -163,6 +178,7 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
 //  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_QUOTAMAXNODLIMIT = "InternalError.QuotaMaxNodLimit"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -251,6 +267,7 @@ func NewAddVpcCniSubnetsResponse() (response *AddVpcCniSubnetsResponse) {
 // This API is used to add subnets in the container network for a VPC-CNI cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -269,6 +286,7 @@ func (c *Client) AddVpcCniSubnets(request *AddVpcCniSubnetsRequest) (response *A
 // This API is used to add subnets in the container network for a VPC-CNI cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -324,6 +342,7 @@ func NewCheckInstancesUpgradeAbleResponse() (response *CheckInstancesUpgradeAble
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleRequest) (response *CheckInstancesUpgradeAbleResponse, err error) {
     return c.CheckInstancesUpgradeAbleWithContext(context.Background(), request)
@@ -341,6 +360,7 @@ func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleReq
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) CheckInstancesUpgradeAbleWithContext(ctx context.Context, request *CheckInstancesUpgradeAbleRequest) (response *CheckInstancesUpgradeAbleResponse, err error) {
     if request == nil {
@@ -379,6 +399,19 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 // This API is used to create a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTCOMMON = "FailedOperation.AccountCommon"
+//  FAILEDOPERATION_ACCOUNTUSERNOTAUTHENTICATED = "FailedOperation.AccountUserNotAuthenticated"
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_CVMVPCIDNOTMATCH = "FailedOperation.CvmVpcidNotMatch"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_DFWGETUSGQUOTA = "FailedOperation.DfwGetUSGQuota"
+//  FAILEDOPERATION_OSNOTSUPPORT = "FailedOperation.OsNotSupport"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXCLSLIMIT = "FailedOperation.QuotaMaxClsLimit"
+//  FAILEDOPERATION_QUOTAUSGLIMIT = "FailedOperation.QuotaUSGLimit"
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCOMMON = "InternalError.AccountCommon"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -430,6 +463,19 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
 // This API is used to create a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTCOMMON = "FailedOperation.AccountCommon"
+//  FAILEDOPERATION_ACCOUNTUSERNOTAUTHENTICATED = "FailedOperation.AccountUserNotAuthenticated"
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_CVMVPCIDNOTMATCH = "FailedOperation.CvmVpcidNotMatch"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_DFWGETUSGQUOTA = "FailedOperation.DfwGetUSGQuota"
+//  FAILEDOPERATION_OSNOTSUPPORT = "FailedOperation.OsNotSupport"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXCLSLIMIT = "FailedOperation.QuotaMaxClsLimit"
+//  FAILEDOPERATION_QUOTAUSGLIMIT = "FailedOperation.QuotaUSGLimit"
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCOMMON = "InternalError.AccountCommon"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -511,6 +557,8 @@ func NewCreateClusterAsGroupResponse() (response *CreateClusterAsGroupResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -537,6 +585,8 @@ func (c *Client) CreateClusterAsGroup(request *CreateClusterAsGroupRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -756,6 +806,12 @@ func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXNODLIMIT = "FailedOperation.QuotaMaxNodLimit"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCOMMON = "InternalError.AccountCommon"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -795,6 +851,12 @@ func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_QUOTAMAXNODLIMIT = "FailedOperation.QuotaMaxNodLimit"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCOMMON = "InternalError.AccountCommon"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -862,6 +924,7 @@ func NewCreateClusterNodePoolResponse() (response *CreateClusterNodePoolResponse
 // This API is used to create a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -878,6 +941,7 @@ func (c *Client) CreateClusterNodePool(request *CreateClusterNodePoolRequest) (r
 // This API is used to create a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -924,6 +988,8 @@ func NewCreateClusterNodePoolFromExistingAsgResponse() (response *CreateClusterN
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
     return c.CreateClusterNodePoolFromExistingAsgWithContext(context.Background(), request)
 }
@@ -933,6 +999,8 @@ func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNode
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateClusterNodePoolFromExistingAsgWithContext(ctx context.Context, request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
     if request == nil {
         request = NewCreateClusterNodePoolFromExistingAsgRequest()
@@ -1099,6 +1167,8 @@ func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -1120,6 +1190,8 @@ func (c *Client) DeleteCluster(request *DeleteClusterRequest) (response *DeleteC
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -1170,6 +1242,7 @@ func NewDeleteClusterAsGroupsResponse() (response *DeleteClusterAsGroupsResponse
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1195,6 +1268,7 @@ func (c *Client) DeleteClusterAsGroups(request *DeleteClusterAsGroupsRequest) (r
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1420,6 +1494,9 @@ func NewDeleteClusterInstancesResponse() (response *DeleteClusterInstancesRespon
 // This API is used to delete one or more nodes from a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -1439,6 +1516,9 @@ func (c *Client) DeleteClusterInstances(request *DeleteClusterInstancesRequest) 
 // This API is used to delete one or more nodes from a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -1490,6 +1570,7 @@ func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (response *DeleteClusterNodePoolResponse, err error) {
     return c.DeleteClusterNodePoolWithContext(context.Background(), request)
 }
@@ -1501,6 +1582,7 @@ func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (r
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteClusterNodePoolWithContext(ctx context.Context, request *DeleteClusterNodePoolRequest) (response *DeleteClusterNodePoolResponse, err error) {
     if request == nil {
         request = NewDeleteClusterNodePoolRequest()
@@ -1712,6 +1794,7 @@ func NewDescribeAvailableClusterVersionResponse() (response *DescribeAvailableCl
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 func (c *Client) DescribeAvailableClusterVersion(request *DescribeAvailableClusterVersionRequest) (response *DescribeAvailableClusterVersionResponse, err error) {
     return c.DescribeAvailableClusterVersionWithContext(context.Background(), request)
 }
@@ -1727,6 +1810,7 @@ func (c *Client) DescribeAvailableClusterVersion(request *DescribeAvailableClust
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 func (c *Client) DescribeAvailableClusterVersionWithContext(ctx context.Context, request *DescribeAvailableClusterVersionRequest) (response *DescribeAvailableClusterVersionResponse, err error) {
     if request == nil {
         request = NewDescribeAvailableClusterVersionRequest()
@@ -1765,6 +1849,8 @@ func NewDescribeClusterAsGroupOptionResponse() (response *DescribeClusterAsGroup
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1784,6 +1870,8 @@ func (c *Client) DescribeClusterAsGroupOption(request *DescribeClusterAsGroupOpt
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1832,6 +1920,9 @@ func NewDescribeClusterAsGroupsResponse() (response *DescribeClusterAsGroupsResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1853,6 +1944,9 @@ func (c *Client) DescribeClusterAsGroups(request *DescribeClusterAsGroupsRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -1960,6 +2054,7 @@ func NewDescribeClusterCommonNamesResponse() (response *DescribeClusterCommonNam
 //  INTERNALERROR_WHITELISTUNEXPECTEDERROR = "InternalError.WhitelistUnexpectedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
@@ -1977,6 +2072,7 @@ func (c *Client) DescribeClusterCommonNames(request *DescribeClusterCommonNamesR
 //  INTERNALERROR_WHITELISTUNEXPECTEDERROR = "InternalError.WhitelistUnexpectedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
@@ -2019,6 +2115,8 @@ func NewDescribeClusterEndpointStatusResponse() (response *DescribeClusterEndpoi
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -2049,6 +2147,8 @@ func (c *Client) DescribeClusterEndpointStatus(request *DescribeClusterEndpointS
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -2263,6 +2363,7 @@ func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfig
 // This API is used to obtain the cluster kubeconfig file. Different sub-accounts have their own kubeconfig files. The kubeconfig file contains the kube-apiserver client certificate of the corresponding sub-account. By default, the client certificate is created when this API is called for the first time, and the certificate is valid for 20 years with no permissions granted. For the cluster owner or primary account, the cluster-admin permission is granted by default.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -2279,6 +2380,7 @@ func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfig
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_KUBERNETESRESOURCENOTFOUND = "ResourceNotFound.KubernetesResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigRequest) (response *DescribeClusterKubeconfigResponse, err error) {
     return c.DescribeClusterKubeconfigWithContext(context.Background(), request)
@@ -2288,6 +2390,7 @@ func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigReq
 // This API is used to obtain the cluster kubeconfig file. Different sub-accounts have their own kubeconfig files. The kubeconfig file contains the kube-apiserver client certificate of the corresponding sub-account. By default, the client certificate is created when this API is called for the first time, and the certificate is valid for 20 years with no permissions granted. For the cluster owner or primary account, the cluster-admin permission is granted by default.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -2304,6 +2407,7 @@ func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigReq
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_KUBERNETESRESOURCENOTFOUND = "ResourceNotFound.KubernetesResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeClusterKubeconfigWithContext(ctx context.Context, request *DescribeClusterKubeconfigRequest) (response *DescribeClusterKubeconfigResponse, err error) {
     if request == nil {
@@ -2317,6 +2421,108 @@ func (c *Client) DescribeClusterKubeconfigWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeClusterKubeconfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterLevelAttributeRequest() (request *DescribeClusterLevelAttributeRequest) {
+    request = &DescribeClusterLevelAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterLevelAttribute")
+    
+    
+    return
+}
+
+func NewDescribeClusterLevelAttributeResponse() (response *DescribeClusterLevelAttributeResponse) {
+    response = &DescribeClusterLevelAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterLevelAttribute
+// This API is used to obtain the cluster model.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeClusterLevelAttribute(request *DescribeClusterLevelAttributeRequest) (response *DescribeClusterLevelAttributeResponse, err error) {
+    return c.DescribeClusterLevelAttributeWithContext(context.Background(), request)
+}
+
+// DescribeClusterLevelAttribute
+// This API is used to obtain the cluster model.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeClusterLevelAttributeWithContext(ctx context.Context, request *DescribeClusterLevelAttributeRequest) (response *DescribeClusterLevelAttributeResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterLevelAttributeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterLevelAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterLevelAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterLevelChangeRecordsRequest() (request *DescribeClusterLevelChangeRecordsRequest) {
+    request = &DescribeClusterLevelChangeRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterLevelChangeRecords")
+    
+    
+    return
+}
+
+func NewDescribeClusterLevelChangeRecordsResponse() (response *DescribeClusterLevelChangeRecordsResponse) {
+    response = &DescribeClusterLevelChangeRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterLevelChangeRecords
+// This API is used to query the cluster model adjustment history.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeClusterLevelChangeRecords(request *DescribeClusterLevelChangeRecordsRequest) (response *DescribeClusterLevelChangeRecordsResponse, err error) {
+    return c.DescribeClusterLevelChangeRecordsWithContext(context.Background(), request)
+}
+
+// DescribeClusterLevelChangeRecords
+// This API is used to query the cluster model adjustment history.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeClusterLevelChangeRecordsWithContext(ctx context.Context, request *DescribeClusterLevelChangeRecordsRequest) (response *DescribeClusterLevelChangeRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterLevelChangeRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterLevelChangeRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterLevelChangeRecordsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2551,6 +2757,10 @@ func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -2584,6 +2794,10 @@ func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -2646,6 +2860,8 @@ func NewDescribeClusterStatusResponse() (response *DescribeClusterStatusResponse
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMNOAUTH = "FailedOperation.CamNoAuth"
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -2666,6 +2882,8 @@ func (c *Client) DescribeClusterStatus(request *DescribeClusterStatusRequest) (r
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMNOAUTH = "FailedOperation.CamNoAuth"
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -2837,6 +3055,11 @@ func NewDescribeExistedInstancesResponse() (response *DescribeExistedInstancesRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -2874,6 +3097,11 @@ func (c *Client) DescribeExistedInstances(request *DescribeExistedInstancesReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -3029,6 +3257,7 @@ func NewDescribePrometheusInstanceResponse() (response *DescribePrometheusInstan
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusInstance(request *DescribePrometheusInstanceRequest) (response *DescribePrometheusInstanceResponse, err error) {
     return c.DescribePrometheusInstanceWithContext(context.Background(), request)
@@ -3045,6 +3274,7 @@ func (c *Client) DescribePrometheusInstance(request *DescribePrometheusInstanceR
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusInstanceWithContext(ctx context.Context, request *DescribePrometheusInstanceRequest) (response *DescribePrometheusInstanceResponse, err error) {
     if request == nil {
@@ -3139,6 +3369,63 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeResourceUsageRequest() (request *DescribeResourceUsageRequest) {
+    request = &DescribeResourceUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeResourceUsage")
+    
+    
+    return
+}
+
+func NewDescribeResourceUsageResponse() (response *DescribeResourceUsageResponse) {
+    response = &DescribeResourceUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeResourceUsage
+// This API is used to query the cluster resource usage.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeResourceUsage(request *DescribeResourceUsageRequest) (response *DescribeResourceUsageResponse, err error) {
+    return c.DescribeResourceUsageWithContext(context.Background(), request)
+}
+
+// DescribeResourceUsage
+// This API is used to query the cluster resource usage.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeResourceUsageWithContext(ctx context.Context, request *DescribeResourceUsageRequest) (response *DescribeResourceUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeResourceUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourceUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRouteTableConflictsRequest() (request *DescribeRouteTableConflictsRequest) {
     request = &DescribeRouteTableConflictsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3160,6 +3447,7 @@ func NewDescribeRouteTableConflictsResponse() (response *DescribeRouteTableConfl
 // This API is used to query the list of route table conflicts.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"
@@ -3175,6 +3463,7 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
 // This API is used to query the list of route table conflicts.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"
@@ -3286,6 +3575,7 @@ func NewDescribeVersionsResponse() (response *DescribeVersionsResponse) {
 // This API is used to query cluster version information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -3312,6 +3602,7 @@ func (c *Client) DescribeVersions(request *DescribeVersionsRequest) (response *D
 // This API is used to query cluster version information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -3568,6 +3859,53 @@ func (c *Client) EnableVpcCniNetworkTypeWithContext(ctx context.Context, request
     return
 }
 
+func NewGetClusterLevelPriceRequest() (request *GetClusterLevelPriceRequest) {
+    request = &GetClusterLevelPriceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tke", APIVersion, "GetClusterLevelPrice")
+    
+    
+    return
+}
+
+func NewGetClusterLevelPriceResponse() (response *GetClusterLevelPriceResponse) {
+    response = &GetClusterLevelPriceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetClusterLevelPrice
+// Obtaining the price of specified cluster model
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADECOMMON = "InternalError.TradeCommon"
+func (c *Client) GetClusterLevelPrice(request *GetClusterLevelPriceRequest) (response *GetClusterLevelPriceResponse, err error) {
+    return c.GetClusterLevelPriceWithContext(context.Background(), request)
+}
+
+// GetClusterLevelPrice
+// Obtaining the price of specified cluster model
+//
+// error code that may be returned:
+//  INTERNALERROR_TRADECOMMON = "InternalError.TradeCommon"
+func (c *Client) GetClusterLevelPriceWithContext(ctx context.Context, request *GetClusterLevelPriceRequest) (response *GetClusterLevelPriceResponse, err error) {
+    if request == nil {
+        request = NewGetClusterLevelPriceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetClusterLevelPrice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetClusterLevelPriceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgressRequest) {
     request = &GetUpgradeInstanceProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3804,6 +4142,7 @@ func NewModifyClusterAttributeResponse() (response *ModifyClusterAttributeRespon
 // This API is used to modify cluster attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -3827,6 +4166,7 @@ func (c *Client) ModifyClusterAttribute(request *ModifyClusterAttributeRequest) 
 // This API is used to modify cluster attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -3881,6 +4221,7 @@ func NewModifyClusterAuthenticationOptionsResponse() (response *ModifyClusterAut
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) ModifyClusterAuthenticationOptions(request *ModifyClusterAuthenticationOptionsRequest) (response *ModifyClusterAuthenticationOptionsResponse, err error) {
@@ -3893,6 +4234,7 @@ func (c *Client) ModifyClusterAuthenticationOptions(request *ModifyClusterAuthen
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) ModifyClusterAuthenticationOptionsWithContext(ctx context.Context, request *ModifyClusterAuthenticationOptionsRequest) (response *ModifyClusterAuthenticationOptionsResponse, err error) {
@@ -3933,6 +4275,7 @@ func NewModifyClusterEndpointSPResponse() (response *ModifyClusterEndpointSPResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLBUNEXPECTEDERROR = "FailedOperation.CLBUnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -3960,6 +4303,7 @@ func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLBUNEXPECTEDERROR = "FailedOperation.CLBUnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -4306,12 +4650,14 @@ func NewUpdateClusterVersionResponse() (response *UpdateClusterVersionResponse) 
 // This API is used to upgrade the master component of the cluster to the specified version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpdateClusterVersion(request *UpdateClusterVersionRequest) (response *UpdateClusterVersionResponse, err error) {
     return c.UpdateClusterVersionWithContext(context.Background(), request)
@@ -4321,12 +4667,14 @@ func (c *Client) UpdateClusterVersion(request *UpdateClusterVersionRequest) (res
 // This API is used to upgrade the master component of the cluster to the specified version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpdateClusterVersionWithContext(ctx context.Context, request *UpdateClusterVersionRequest) (response *UpdateClusterVersionResponse, err error) {
     if request == nil {
@@ -4365,6 +4713,7 @@ func NewUpgradeClusterInstancesResponse() (response *UpgradeClusterInstancesResp
 // This API is used to upgrade one or more work nodes in the cluster. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TASKALREADYRUNNING = "FailedOperation.TaskAlreadyRunning"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_TASKALREADYRUNNING = "InternalError.TaskAlreadyRunning"
@@ -4372,6 +4721,7 @@ func NewUpgradeClusterInstancesResponse() (response *UpgradeClusterInstancesResp
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest) (response *UpgradeClusterInstancesResponse, err error) {
     return c.UpgradeClusterInstancesWithContext(context.Background(), request)
@@ -4381,6 +4731,7 @@ func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest
 // This API is used to upgrade one or more work nodes in the cluster. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TASKALREADYRUNNING = "FailedOperation.TaskAlreadyRunning"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_TASKALREADYRUNNING = "InternalError.TaskAlreadyRunning"
@@ -4388,6 +4739,7 @@ func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 func (c *Client) UpgradeClusterInstancesWithContext(ctx context.Context, request *UpgradeClusterInstancesRequest) (response *UpgradeClusterInstancesResponse, err error) {
     if request == nil {
