@@ -17,6 +17,9 @@ package v20210408
 const (
 	// error codes for specific actions
 
+	// This device has been transferred and cannot be created again.
+	FAILEDOPERATION_ALREADYDISTRIBUTIONDEVICE = "FailedOperation.AlreadyDistributionDevice"
+
 	// You cannot create devices as allowlist authentication is not enabled. IoT Hub will create devices automatically by the names carried during authentication.
 	FAILEDOPERATION_TIDWHITELISTNOTOPEN = "FailedOperation.TidWhiteListNotOpen"
 
@@ -82,6 +85,9 @@ const (
 
 	// You can create only LoRa devices under this product type.
 	UNAUTHORIZEDOPERATION_PRODUCTCANTHAVENOTLORADEVICE = "UnauthorizedOperation.ProductCantHaveNotLoRaDevice"
+
+	// This feature has been disabled for the product.
+	UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
 
 	// The product does not support key authentication.
 	UNAUTHORIZEDOPERATION_PRODUCTNOTSUPPORTPSK = "UnauthorizedOperation.ProductNotSupportPSK"

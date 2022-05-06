@@ -1447,6 +1447,7 @@ func NewCreateVodDomainResponse() (response *CreateVodDomainResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1462,6 +1463,7 @@ func (c *Client) CreateVodDomain(request *CreateVodDomainRequest) (response *Cre
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INVALIDPARAMETER = "InvalidParameter"

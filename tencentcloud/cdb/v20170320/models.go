@@ -402,6 +402,9 @@ type BackupInfo struct {
 
 	// Manual backup alias
 	ManualBackupName *string `json:"ManualBackupName,omitempty" name:"ManualBackupName"`
+
+	// Backup retention type. Valid values: `save_mode_regular` (non-archive backup), save_mode_period`(archive backup).
+	SaveMode *string `json:"SaveMode,omitempty" name:"SaveMode"`
 }
 
 type BackupItem struct {
@@ -1175,7 +1178,7 @@ type CreateDBInstanceHourRequest struct {
 	// Financial cage ID.
 	CageId *string `json:"CageId,omitempty" name:"CageId"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template). Default value: `HIGH_STABILITY`.
 	ParamTemplateType *string `json:"ParamTemplateType,omitempty" name:"ParamTemplateType"`
 
 	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
@@ -1958,6 +1961,21 @@ type DescribeBackupConfigResponse struct {
 
 		// Time window for automatic instance backup.
 		BackupTimeWindow *CommonTimeWindow `json:"BackupTimeWindow,omitempty" name:"BackupTimeWindow"`
+
+		// Switch for archive backup retention. Valid values: `off` (disable), `on` (enable). Default value:`off`.
+		EnableBackupPeriodSave *string `json:"EnableBackupPeriodSave,omitempty" name:"EnableBackupPeriodSave"`
+
+		// Maximum days of archive backup retention. Valid range: 90-3650. Default value: 1080.
+		BackupPeriodSaveDays *int64 `json:"BackupPeriodSaveDays,omitempty" name:"BackupPeriodSaveDays"`
+
+		// Archive backup retention period. Valid values: `weekly` (a week), `monthly` (a month), `quarterly` (a quarter), `yearly` (a year). Default value: `monthly`.
+		BackupPeriodSaveInterval *string `json:"BackupPeriodSaveInterval,omitempty" name:"BackupPeriodSaveInterval"`
+
+		// Number of archive backups. Minimum value: `1`, Maximum value: Number of non-archive backups in archive backup retention period. Default value: `1`.
+		BackupPeriodSaveCount *int64 `json:"BackupPeriodSaveCount,omitempty" name:"BackupPeriodSaveCount"`
+
+		// The start time in the format: yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
+		StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitempty" name:"StartBackupPeriodSaveDate"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5116,7 +5134,7 @@ type InstanceInfo struct {
 	// Port number
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
 
-	// Lock flag
+	// Whether the disk write is locked (It depends on whether the instance data in disk exceeds its quota). Valid values: `0` (unlocked), `1` (locked).
 	CdbError *int64 `json:"CdbError,omitempty" name:"CdbError"`
 
 	// VPC descriptor, such as "vpc-5v8wn9mg"
@@ -5610,7 +5628,7 @@ type ModifyBackupConfigRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup file retention period in days. Value range: 7-732.
+	// Backup file retention period in days. Value range: 7-1830.
 	ExpireDays *int64 `json:"ExpireDays,omitempty" name:"ExpireDays"`
 
 	// (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00-06:00, with the start time and end time on the hour. Valid values: 00:00-12:00, 02:00-06:00, 06:00-10:00, 10:00-14:00, 14:00-18:00, 18:00-22:00, 22:00-02:00.
@@ -5619,11 +5637,29 @@ type ModifyBackupConfigRequest struct {
 	// Automatic backup mode. Only `physical` (physical cold backup) is supported
 	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
 
-	// Binlog retention period in days. Value range: 7-732. It cannot be greater than the retention period of backup files.
+	// Binlog retention period in days. Value range: 7-1830. It can’t be greater than the retention period of backup files.
 	BinlogExpireDays *int64 `json:"BinlogExpireDays,omitempty" name:"BinlogExpireDays"`
 
 	// Backup time window; for example, to set up backup between 10:00 and 14:00 on every Tuesday and Sunday, you should set this parameter as follows: {"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"} (Note: You can set up backup on different days, but the backup time windows need to be the same. If this field is set, the `StartTime` field will be ignored)
 	BackupTimeWindow *CommonTimeWindow `json:"BackupTimeWindow,omitempty" name:"BackupTimeWindow"`
+
+	// Switch for archive backup retention. Valid values: `off` (disable), `on` (enable). Default value:`off`.
+	EnableBackupPeriodSave *string `json:"EnableBackupPeriodSave,omitempty" name:"EnableBackupPeriodSave"`
+
+	// Switch for long-term backup retention (This field can be ignored, for its feature hasn’t been launched). Valid values: `off` (disable), `on` (enable). Default value: `off`. Once enabled, the parameters (BackupPeriodSaveDays, BackupPeriodSaveInterval, and BackupPeriodSaveCount) will be invalid.
+	EnableBackupPeriodLongTermSave *string `json:"EnableBackupPeriodLongTermSave,omitempty" name:"EnableBackupPeriodLongTermSave"`
+
+	// Maximum days of archive backup retention. Valid range: 90-3650. Default value: 1080.
+	BackupPeriodSaveDays *int64 `json:"BackupPeriodSaveDays,omitempty" name:"BackupPeriodSaveDays"`
+
+	// Archive backup retention period. Valid values: `weekly` (a week), `monthly` (a month), `quarterly` (a quarter), `yearly` (a year). Default value: `monthly`.
+	BackupPeriodSaveInterval *string `json:"BackupPeriodSaveInterval,omitempty" name:"BackupPeriodSaveInterval"`
+
+	// Number of archive backups. Minimum value: `1`, Maximum value: Number of non-archive backups in archive backup retention period. Default value: `1`.
+	BackupPeriodSaveCount *int64 `json:"BackupPeriodSaveCount,omitempty" name:"BackupPeriodSaveCount"`
+
+	// The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
+	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitempty" name:"StartBackupPeriodSaveDate"`
 }
 
 func (r *ModifyBackupConfigRequest) ToJsonString() string {
@@ -5644,6 +5680,12 @@ func (r *ModifyBackupConfigRequest) FromJsonString(s string) error {
 	delete(f, "BackupMethod")
 	delete(f, "BinlogExpireDays")
 	delete(f, "BackupTimeWindow")
+	delete(f, "EnableBackupPeriodSave")
+	delete(f, "EnableBackupPeriodLongTermSave")
+	delete(f, "BackupPeriodSaveDays")
+	delete(f, "BackupPeriodSaveInterval")
+	delete(f, "BackupPeriodSaveCount")
+	delete(f, "StartBackupPeriodSaveDate")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupConfigRequest has unknown keys!", "")
 	}
@@ -8247,10 +8289,10 @@ type UpgradeCDBProxyRequest struct {
 	// Database proxy ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
 
-	// The number of proxy nodes
+	// Number of proxy nodes
 	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
 
-	// The number of CPU cores per proxy node
+	// Number of CPU cores per proxy node
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// Memory per proxy node

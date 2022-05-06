@@ -66,11 +66,13 @@ func NewCreateDeviceResponse() (response *CreateDeviceResponse) {
 // This API is used to create an IoT Hub device. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ALREADYDISTRIBUTIONDEVICE = "FailedOperation.AlreadyDistributionDevice"
 //  FAILEDOPERATION_TIDWHITELISTNOTOPEN = "FailedOperation.TidWhiteListNotOpen"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DEFINEDPSKNOTBASE64 = "InvalidParameterValue.DefinedPskNotBase64"
 //  INVALIDPARAMETERVALUE_DEVICEALREADYEXIST = "InvalidParameterValue.DeviceAlreadyExist"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
 //  LIMITEXCEEDED_DEVICEEXCEEDLIMIT = "LimitExceeded.DeviceExceedLimit"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVELORADEVICE = "UnauthorizedOperation.ProductCantHaveLoRaDevice"
@@ -86,11 +88,13 @@ func (c *Client) CreateDevice(request *CreateDeviceRequest) (response *CreateDev
 // This API is used to create an IoT Hub device. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ALREADYDISTRIBUTIONDEVICE = "FailedOperation.AlreadyDistributionDevice"
 //  FAILEDOPERATION_TIDWHITELISTNOTOPEN = "FailedOperation.TidWhiteListNotOpen"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DEFINEDPSKNOTBASE64 = "InvalidParameterValue.DefinedPskNotBase64"
 //  INVALIDPARAMETERVALUE_DEVICEALREADYEXIST = "InvalidParameterValue.DeviceAlreadyExist"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
 //  LIMITEXCEEDED_DEVICEEXCEEDLIMIT = "LimitExceeded.DeviceExceedLimit"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVELORADEVICE = "UnauthorizedOperation.ProductCantHaveLoRaDevice"
@@ -189,6 +193,7 @@ func NewDeleteDeviceResponse() (response *DeleteDeviceResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEHASALREADYBINDGATEWAY = "UnauthorizedOperation.DeviceHasAlreadyBindGateway"
 //  UNAUTHORIZEDOPERATION_GATEWAYHASBINDEDDEVICES = "UnauthorizedOperation.GatewayHasBindedDevices"
 //  UNSUPPORTEDOPERATION_DEVICEOTATASKINPROGRESS = "UnsupportedOperation.DeviceOtaTaskInProgress"
@@ -203,6 +208,7 @@ func (c *Client) DeleteDevice(request *DeleteDeviceRequest) (response *DeleteDev
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEHASALREADYBINDGATEWAY = "UnauthorizedOperation.DeviceHasAlreadyBindGateway"
 //  UNAUTHORIZEDOPERATION_GATEWAYHASBINDEDDEVICES = "UnauthorizedOperation.GatewayHasBindedDevices"
 //  UNSUPPORTEDOPERATION_DEVICEOTATASKINPROGRESS = "UnsupportedOperation.DeviceOtaTaskInProgress"
@@ -877,6 +883,59 @@ func (c *Client) UpdatePrivateCAWithContext(ctx context.Context, request *Update
     request.SetContext(ctx)
     
     response = NewUpdatePrivateCAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateProductDynamicRegisterRequest() (request *UpdateProductDynamicRegisterRequest) {
+    request = &UpdateProductDynamicRegisterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("iotcloud", APIVersion, "UpdateProductDynamicRegister")
+    
+    
+    return
+}
+
+func NewUpdateProductDynamicRegisterResponse() (response *UpdateProductDynamicRegisterResponse) {
+    response = &UpdateProductDynamicRegisterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateProductDynamicRegister
+// This API is used to update the configuration of product dynamic registration. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
+func (c *Client) UpdateProductDynamicRegister(request *UpdateProductDynamicRegisterRequest) (response *UpdateProductDynamicRegisterResponse, err error) {
+    return c.UpdateProductDynamicRegisterWithContext(context.Background(), request)
+}
+
+// UpdateProductDynamicRegister
+// This API is used to update the configuration of product dynamic registration. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
+//  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
+func (c *Client) UpdateProductDynamicRegisterWithContext(ctx context.Context, request *UpdateProductDynamicRegisterRequest) (response *UpdateProductDynamicRegisterResponse, err error) {
+    if request == nil {
+        request = NewUpdateProductDynamicRegisterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateProductDynamicRegister require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateProductDynamicRegisterResponse()
     err = c.Send(request, response)
     return
 }

@@ -45,6 +45,77 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBatchSendEmailRequest() (request *BatchSendEmailRequest) {
+    request = &BatchSendEmailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "BatchSendEmail")
+    
+    
+    return
+}
+
+func NewBatchSendEmailResponse() (response *BatchSendEmailResponse) {
+    response = &BatchSendEmailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchSendEmail
+// This API is used to send a TEXT or HTML email to multiple recipients at a time for marketing or notification purposes. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature. You need to create a recipient group with email addresses first and then send emails by group ID. SES supports scheduled and recurring email sending tasks. You need to pass in `TimedParam` for a scheduled task and `CycleParam` for a recurring one.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_SUBJECTLENGTHERROR = "InvalidParameterValue.SubjectLengthError"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
+//  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
+//  MISSINGPARAMETER_TIMEDPARAMNECESSARY = "MissingParameter.TimedParamNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+//  OPERATIONDENIED_RECEIVERSTATUSERROR = "OperationDenied.ReceiverStatusError"
+//  OPERATIONDENIED_SENDADDRESSSTATUSERROR = "OperationDenied.SendAddressStatusError"
+//  OPERATIONDENIED_TEMPLATESTATUSERROR = "OperationDenied.TemplateStatusError"
+func (c *Client) BatchSendEmail(request *BatchSendEmailRequest) (response *BatchSendEmailResponse, err error) {
+    return c.BatchSendEmailWithContext(context.Background(), request)
+}
+
+// BatchSendEmail
+// This API is used to send a TEXT or HTML email to multiple recipients at a time for marketing or notification purposes. By default, you can send emails using a template only. To send custom content, please contact your sales rep to enable this feature. You need to create a recipient group with email addresses first and then send emails by group ID. SES supports scheduled and recurring email sending tasks. You need to pass in `TimedParam` for a scheduled task and `CycleParam` for a recurring one.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILCONTENTTOOLARGE = "FailedOperation.EmailContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_BEGINTIMEBEFORENOW = "InvalidParameterValue.BeginTimeBeforeNow"
+//  INVALIDPARAMETERVALUE_EMAILCONTENTISWRONG = "InvalidParameterValue.EmailContentIsWrong"
+//  INVALIDPARAMETERVALUE_SUBJECTLENGTHERROR = "InvalidParameterValue.SubjectLengthError"
+//  INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
+//  MISSINGPARAMETER_CYCLEPARAMNECESSARY = "MissingParameter.CycleParamNecessary"
+//  MISSINGPARAMETER_SENDPARAMNECESSARY = "MissingParameter.SendParamNecessary"
+//  MISSINGPARAMETER_TIMEDPARAMNECESSARY = "MissingParameter.TimedParamNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
+//  OPERATIONDENIED_RECEIVERSTATUSERROR = "OperationDenied.ReceiverStatusError"
+//  OPERATIONDENIED_SENDADDRESSSTATUSERROR = "OperationDenied.SendAddressStatusError"
+//  OPERATIONDENIED_TEMPLATESTATUSERROR = "OperationDenied.TemplateStatusError"
+func (c *Client) BatchSendEmailWithContext(ctx context.Context, request *BatchSendEmailRequest) (response *BatchSendEmailResponse, err error) {
+    if request == nil {
+        request = NewBatchSendEmailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchSendEmail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchSendEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateEmailAddressRequest() (request *CreateEmailAddressRequest) {
     request = &CreateEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -175,6 +246,77 @@ func (c *Client) CreateEmailIdentityWithContext(ctx context.Context, request *Cr
     request.SetContext(ctx)
     
     response = NewCreateEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEmailTemplateRequest() (request *CreateEmailTemplateRequest) {
+    request = &CreateEmailTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "CreateEmailTemplate")
+    
+    
+    return
+}
+
+func NewCreateEmailTemplateResponse() (response *CreateEmailTemplateResponse) {
+    response = &CreateEmailTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateEmailTemplate
+// This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
+//
+// Note: Only an approved template can be used to send emails.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
+//  FAILEDOPERATION_TEMPLATECONTENTTOOLARGE = "FailedOperation.TemplateContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateEmailTemplate(request *CreateEmailTemplateRequest) (response *CreateEmailTemplateResponse, err error) {
+    return c.CreateEmailTemplateWithContext(context.Background(), request)
+}
+
+// CreateEmailTemplate
+// This API is used to create a TEXT or HTML email template. To create an HTML template, ensure that it does not include external CSS files. You can use {{variable name}} to specify a variable in the template.
+//
+// Note: Only an approved template can be used to send emails.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXCEEDTEMPLATELIMIT = "FailedOperation.ExceedTemplateLimit"
+//  FAILEDOPERATION_TEMPLATECONTENTTOOLARGE = "FailedOperation.TemplateContentToolarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateEmailTemplateWithContext(ctx context.Context, request *CreateEmailTemplateRequest) (response *CreateEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateEmailTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEmailTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEmailTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -550,6 +692,7 @@ func NewDeleteReceiverResponse() (response *DeleteReceiverResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
 func (c *Client) DeleteReceiver(request *DeleteReceiverRequest) (response *DeleteReceiverResponse, err error) {
     return c.DeleteReceiverWithContext(context.Background(), request)
 }
@@ -560,6 +703,7 @@ func (c *Client) DeleteReceiver(request *DeleteReceiverRequest) (response *Delet
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER_RECEIVERIDNECESSARY = "MissingParameter.ReceiverIdNecessary"
+//  OPERATIONDENIED_RECEIVERNOTEXIST = "OperationDenied.ReceiverNotExist"
 func (c *Client) DeleteReceiverWithContext(ctx context.Context, request *DeleteReceiverRequest) (response *DeleteReceiverResponse, err error) {
     if request == nil {
         request = NewDeleteReceiverRequest()
@@ -1267,6 +1411,73 @@ func (c *Client) UpdateEmailIdentityWithContext(ctx context.Context, request *Up
     request.SetContext(ctx)
     
     response = NewUpdateEmailIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateEmailTemplateRequest() (request *UpdateEmailTemplateRequest) {
+    request = &UpdateEmailTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("ses", APIVersion, "UpdateEmailTemplate")
+    
+    
+    return
+}
+
+func NewUpdateEmailTemplateResponse() (response *UpdateEmailTemplateResponse) {
+    response = &UpdateEmailTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateEmailTemplate
+// This API is used to update an email template. An updated template must be approved again before it can be used.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEISNULL = "InvalidParameterValue.TemplateNameIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATENOTEXIST = "InvalidParameterValue.TemplateNotExist"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) UpdateEmailTemplate(request *UpdateEmailTemplateRequest) (response *UpdateEmailTemplateResponse, err error) {
+    return c.UpdateEmailTemplateWithContext(context.Background(), request)
+}
+
+// UpdateEmailTemplate
+// This API is used to update an email template. An updated template must be approved again before it can be used.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISNULL = "InvalidParameterValue.TemplateContentIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATECONTENTISWRONG = "InvalidParameterValue.TemplateContentIsWrong"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
+//  INVALIDPARAMETERVALUE_TEMPLATENAMEISNULL = "InvalidParameterValue.TemplateNameIsNULL"
+//  INVALIDPARAMETERVALUE_TEMPLATENOTEXIST = "InvalidParameterValue.TemplateNotExist"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) UpdateEmailTemplateWithContext(ctx context.Context, request *UpdateEmailTemplateRequest) (response *UpdateEmailTemplateResponse, err error) {
+    if request == nil {
+        request = NewUpdateEmailTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateEmailTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateEmailTemplateResponse()
     err = c.Send(request, response)
     return
 }

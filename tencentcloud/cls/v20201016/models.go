@@ -111,10 +111,10 @@ type AlarmTarget struct {
 	// Monitoring object number, which is incremental from 1.
 	Number *int64 `json:"Number,omitempty" name:"Number"`
 
-	// Offset of the query start time from the current time in minutes. The value cannot be positive. Value range: -1440–0.
+	// Offset of the query start time from the alarm execution time in minutes. The value cannot be positive. Value range: -1440–0.
 	StartTimeOffset *int64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
-	// Offset of the query end time from the current time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
+	// Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
 	EndTimeOffset *int64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
 	// Logset ID
@@ -141,10 +141,10 @@ type AlarmTargetInfo struct {
 	// Monitoring object number
 	Number *int64 `json:"Number,omitempty" name:"Number"`
 
-	// Offset of the query start time from the current time. The value cannot be positive. Value range: -1440–0.
+	// Offset of the query start time from the alarm execution time in minutes. The value cannot be positive. Value range: -1440–0.
 	StartTimeOffset *int64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
-	// Offset of the query end time from the current time. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
+	// Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
 	EndTimeOffset *int64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
@@ -239,6 +239,52 @@ type Ckafka struct {
 
 	// CKafka topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+type CloseKafkaConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// CLS topic identifier
+	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+}
+
+func (r *CloseKafkaConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseKafkaConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromTopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseKafkaConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CloseKafkaConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CloseKafkaConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseKafkaConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Column struct {
@@ -693,6 +739,12 @@ type CreateIndexRequest struct {
 
 	// Whether to take effect. Default value: true
 	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
 func (r *CreateIndexRequest) ToJsonString() string {
@@ -710,6 +762,8 @@ func (r *CreateIndexRequest) FromJsonString(s string) error {
 	delete(f, "TopicId")
 	delete(f, "Rule")
 	delete(f, "Status")
+	delete(f, "IncludeInternalFields")
+	delete(f, "MetadataFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIndexRequest has unknown keys!", "")
 	}
@@ -859,6 +913,91 @@ func (r *CreateMachineGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMachineGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateShipperRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the log topic to which the shipping rule to be created belongs
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Destination bucket in the shipping rule to be created
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Prefix of the shipping directory in the shipping rule to be created
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// Shipping rule name
+	ShipperName *string `json:"ShipperName,omitempty" name:"ShipperName"`
+
+	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	FilterRules []*FilterRuleInfo `json:"FilterRules,omitempty" name:"FilterRules"`
+
+	// Rules for partitioning logs to be shipped. `strftime` can be used to define the presentation of time format.
+	Partition *string `json:"Partition,omitempty" name:"Partition"`
+
+	// Compression configuration of shipped log
+	Compress *CompressInfo `json:"Compress,omitempty" name:"Compress"`
+
+	// Format configuration of shipped log content
+	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+}
+
+func (r *CreateShipperRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateShipperRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Bucket")
+	delete(f, "Prefix")
+	delete(f, "ShipperName")
+	delete(f, "Interval")
+	delete(f, "MaxSize")
+	delete(f, "FilterRules")
+	delete(f, "Partition")
+	delete(f, "Compress")
+	delete(f, "Content")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateShipperRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateShipperResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Shipping rule ID
+		ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateShipperResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1933,6 +2072,14 @@ type DescribeIndexResponse struct {
 		// Index modification time. The default value is the index creation time.
 		ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 
+		// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Note: This field may return `null`, indicating that no valid value was found.
+		IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+		// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Note: This field may return `null`, indicating that no valid value was found.
+		MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -2923,6 +3070,10 @@ type LogContextInfo struct {
 
 	// Log timestamp
 	BTime *int64 `json:"BTime,omitempty" name:"BTime"`
+
+	// Source host name of logs
+	// Note: This field may return `null`, indicating that no valid value was found.
+	HostName *string `json:"HostName,omitempty" name:"HostName"`
 }
 
 type LogInfo struct {
@@ -2951,6 +3102,10 @@ type LogInfo struct {
 	// Serialized JSON string of log content
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LogJson *string `json:"LogJson,omitempty" name:"LogJson"`
+
+	// Source host name of logs
+	// Note: This field may return `null`, indicating that no valid value was found.
+	HostName *string `json:"HostName,omitempty" name:"HostName"`
 }
 
 type LogItem struct {
@@ -3417,10 +3572,10 @@ type ModifyIndexRequest struct {
 	// Index rule
 	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
 
-	// 
+	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// 
+	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
@@ -3681,6 +3836,76 @@ func (r *ModifyShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyTopicRequest struct {
+	*tchttp.BaseRequest
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to start collection for this log topic
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Whether to enable automatic split
+	AutoSplit *bool `json:"AutoSplit,omitempty" name:"AutoSplit"`
+
+	// Maximum number of partitions to split into for this topic if automatic split is enabled
+	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
+
+	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
+func (r *ModifyTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TopicName")
+	delete(f, "Tags")
+	delete(f, "Status")
+	delete(f, "AutoSplit")
+	delete(f, "MaxSplitPartitions")
+	delete(f, "Period")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MonitorTime struct {
 
 	// Valid values:
@@ -3718,6 +3943,55 @@ type NoticeReceiver struct {
 
 	// Index
 	Index *int64 `json:"Index,omitempty" name:"Index"`
+}
+
+type OpenKafkaConsumerRequest struct {
+	*tchttp.BaseRequest
+
+	// `TopicId` created by the CLS console
+	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+}
+
+func (r *OpenKafkaConsumerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromTopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenKafkaConsumerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type OpenKafkaConsumerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// `TopicId` to be consumed
+		TopicID *string `json:"TopicID,omitempty" name:"TopicID"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *OpenKafkaConsumerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenKafkaConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type PartitionInfo struct {

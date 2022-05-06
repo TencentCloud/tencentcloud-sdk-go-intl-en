@@ -7341,12 +7341,24 @@ type DrmStreamingsInfo struct {
 
 	// ID of the adaptive bitrate streaming template whose protection type is SimpleAES.
 	SimpleAesDefinition *uint64 `json:"SimpleAesDefinition,omitempty" name:"SimpleAesDefinition"`
+
+	// The ID of the adaptive bitrate streaming template that encrypts the streams by Widewine.
+	WidevineDefinition *uint64 `json:"WidevineDefinition,omitempty" name:"WidevineDefinition"`
+
+	// The ID of the adaptive bitrate streaming template that encrypts the streams by FairPlay.
+	FairPlayDefinition *uint64 `json:"FairPlayDefinition,omitempty" name:"FairPlayDefinition"`
 }
 
 type DrmStreamingsInfoForUpdate struct {
 
 	// ID of the adaptive bitrate streaming template whose protection type is SimpleAES.
 	SimpleAesDefinition *uint64 `json:"SimpleAesDefinition,omitempty" name:"SimpleAesDefinition"`
+
+	// The ID of the adaptive bitrate streaming template that encrypts the streams by Widewine.
+	WidevineDefinition *uint64 `json:"WidevineDefinition,omitempty" name:"WidevineDefinition"`
+
+	// The ID of the adaptive bitrate streaming template that encrypts the streams by FairPlay.
+	FairPlayDefinition *uint64 `json:"FairPlayDefinition,omitempty" name:"FairPlayDefinition"`
 }
 
 type EditMediaFileInfo struct {
@@ -12542,8 +12554,8 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10.</li>
 	SourceTypes []*string `json:"SourceTypes,omitempty" name:"SourceTypes"`
 
-	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) set. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
+	// The live stream code array. A media file will be returned if it matches any element in the array.
+	// <li>Array length limit: 10</li>
 	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds"`
 
 	// Unique ID of LVB recording file. Any element in the set can be matched.
@@ -12607,8 +12619,8 @@ type SearchMediaRequest struct {
 	// Media file source. For valid values, please see [SourceType](https://intl.cloud.tencent.com/document/product/266/31773?from_cn_redirect=1#MediaSourceData).
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
-	// (This is not recommended. `StreamIds` should be used instead)
-	// [Stream ID](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1).
+	// (Not recommended. Consider using `StreamIds` instead.)
+	// The live stream code.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
 	// (This is not recommended. `Vids` should be used instead)

@@ -284,6 +284,7 @@ func NewCloseCDBProxyResponse() (response *CloseCDBProxyResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) CloseCDBProxy(request *CloseCDBProxyRequest) (response *CloseCDBProxyResponse, err error) {
     return c.CloseCDBProxyWithContext(context.Background(), request)
 }
@@ -294,6 +295,7 @@ func (c *Client) CloseCDBProxy(request *CloseCDBProxyRequest) (response *CloseCD
 // error code that may be returned:
 //  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) CloseCDBProxyWithContext(ctx context.Context, request *CloseCDBProxyRequest) (response *CloseCDBProxyResponse, err error) {
     if request == nil {
         request = NewCloseCDBProxyRequest()
@@ -1881,7 +1883,7 @@ func NewDescribeCDBProxyResponse() (response *DescribeCDBProxyResponse) {
 }
 
 // DescribeCDBProxy
-// This API is used to query the information of database proxy.
+// This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -1890,7 +1892,7 @@ func (c *Client) DescribeCDBProxy(request *DescribeCDBProxyRequest) (response *D
 }
 
 // DescribeCDBProxy
-// This API is used to query the information of database proxy.
+// This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
@@ -3155,6 +3157,7 @@ func NewDescribeProjectSecurityGroupsResponse() (response *DescribeProjectSecuri
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
 //  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityGroupsRequest) (response *DescribeProjectSecurityGroupsResponse, err error) {
     return c.DescribeProjectSecurityGroupsWithContext(context.Background(), request)
@@ -3169,6 +3172,7 @@ func (c *Client) DescribeProjectSecurityGroups(request *DescribeProjectSecurityG
 //  INTERNALERROR_DFWERROR = "InternalError.DfwError"
 //  INTERNALERROR_RESOURCENOTUNIQUE = "InternalError.ResourceNotUnique"
 //  INTERNALERROR_SECURITYGROUPERROR = "InternalError.SecurityGroupError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, request *DescribeProjectSecurityGroupsRequest) (response *DescribeProjectSecurityGroupsResponse, err error) {
     if request == nil {
@@ -4828,8 +4832,7 @@ func NewModifyCDBProxyConnectionPoolResponse() (response *ModifyCDBProxyConnecti
 // This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
     return c.ModifyCDBProxyConnectionPoolWithContext(context.Background(), request)
 }
@@ -4838,8 +4841,7 @@ func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionP
 // This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) ModifyCDBProxyConnectionPoolWithContext(ctx context.Context, request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
     if request == nil {
         request = NewModifyCDBProxyConnectionPoolRequest()
@@ -4877,8 +4879,7 @@ func NewModifyCDBProxyDescResponse() (response *ModifyCDBProxyDescResponse) {
 // This API is used to modify the description of database proxy.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
     return c.ModifyCDBProxyDescWithContext(context.Background(), request)
 }
@@ -4887,8 +4888,7 @@ func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (respons
 // This API is used to modify the description of database proxy.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 func (c *Client) ModifyCDBProxyDescWithContext(ctx context.Context, request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
     if request == nil {
         request = NewModifyCDBProxyDescRequest()
@@ -5910,6 +5910,7 @@ func NewRestartDBInstancesResponse() (response *RestartDBInstancesResponse) {
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) RestartDBInstances(request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
@@ -5933,6 +5934,7 @@ func (c *Client) RestartDBInstances(request *RestartDBInstancesRequest) (respons
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) RestartDBInstancesWithContext(ctx context.Context, request *RestartDBInstancesRequest) (response *RestartDBInstancesResponse, err error) {
@@ -6258,6 +6260,7 @@ func NewSwitchCDBProxyResponse() (response *SwitchCDBProxyResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) SwitchCDBProxy(request *SwitchCDBProxyRequest) (response *SwitchCDBProxyResponse, err error) {
     return c.SwitchCDBProxyWithContext(context.Background(), request)
 }
@@ -6267,6 +6270,7 @@ func (c *Client) SwitchCDBProxy(request *SwitchCDBProxyRequest) (response *Switc
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) SwitchCDBProxyWithContext(ctx context.Context, request *SwitchCDBProxyRequest) (response *SwitchCDBProxyResponse, err error) {
     if request == nil {
         request = NewSwitchCDBProxyRequest()
@@ -6471,10 +6475,7 @@ func NewUpgradeCDBProxyResponse() (response *UpgradeCDBProxyResponse) {
 // This API is used to upgrade the configuration of database proxy.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) UpgradeCDBProxy(request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
     return c.UpgradeCDBProxyWithContext(context.Background(), request)
 }
@@ -6483,10 +6484,7 @@ func (c *Client) UpgradeCDBProxy(request *UpgradeCDBProxyRequest) (response *Upg
 // This API is used to upgrade the configuration of database proxy.
 //
 // error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) UpgradeCDBProxyWithContext(ctx context.Context, request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
     if request == nil {
         request = NewUpgradeCDBProxyRequest()

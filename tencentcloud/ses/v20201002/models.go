@@ -29,6 +29,101 @@ type Attachment struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+type BatchSendEmailRequest struct {
+	*tchttp.BaseRequest
+
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:
+	// Sender <email address>, for example:
+	// Tencent Cloud team <noreply@mail.qcloud.com>
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Email subject
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
+
+	// Template when emails are sent using a template
+	Template *Template `json:"Template,omitempty" name:"Template"`
+
+	// Email content when emails are sent by calling the API. This parameter is currently unavailable.
+	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
+
+	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
+	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
+
+	// Parameter required for a recurring sending task
+	CycleParam *CycleEmailParam `json:"CycleParam,omitempty" name:"CycleParam"`
+
+	// Parameter required for a scheduled sending task
+	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
+
+	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
+
+	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
+	ADLocation *uint64 `json:"ADLocation,omitempty" name:"ADLocation"`
+}
+
+func (r *BatchSendEmailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchSendEmailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromEmailAddress")
+	delete(f, "ReceiverId")
+	delete(f, "Subject")
+	delete(f, "TaskType")
+	delete(f, "ReplyToAddresses")
+	delete(f, "Template")
+	delete(f, "Simple")
+	delete(f, "Attachments")
+	delete(f, "CycleParam")
+	delete(f, "TimedParam")
+	delete(f, "Unsubscribe")
+	delete(f, "ADLocation")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchSendEmailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchSendEmailResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Sending task ID
+		TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *BatchSendEmailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchSendEmailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type BlackEmailAddress struct {
 
 	// Time when the email address is blocklisted.
@@ -140,6 +235,59 @@ func (r *CreateEmailIdentityResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateEmailIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateEmailTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Template content.
+	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
+}
+
+func (r *CreateEmailTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEmailTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateName")
+	delete(f, "TemplateContent")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEmailTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateEmailTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Template ID
+		TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateEmailTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1314,6 +1462,60 @@ func (r *UpdateEmailIdentityResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateEmailIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateEmailTemplateRequest struct {
+	*tchttp.BaseRequest
+
+	// Template content.
+	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
+
+	// Template ID.
+	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+
+	// Template name
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+}
+
+func (r *UpdateEmailTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEmailTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateContent")
+	delete(f, "TemplateID")
+	delete(f, "TemplateName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateEmailTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateEmailTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateEmailTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

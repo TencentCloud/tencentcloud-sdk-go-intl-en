@@ -1219,3 +1219,66 @@ func (r *UpdatePrivateCAResponse) ToJsonString() string {
 func (r *UpdatePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
+
+type UpdateProductDynamicRegisterRequest struct {
+	*tchttp.BaseRequest
+
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+	RegisterType *uint64 `json:"RegisterType,omitempty" name:"RegisterType"`
+
+	// Maximum dynamically registered devices
+	RegisterLimit *uint64 `json:"RegisterLimit,omitempty" name:"RegisterLimit"`
+}
+
+func (r *UpdateProductDynamicRegisterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateProductDynamicRegisterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductId")
+	delete(f, "RegisterType")
+	delete(f, "RegisterLimit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateProductDynamicRegisterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateProductDynamicRegisterResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+		RegisterType *uint64 `json:"RegisterType,omitempty" name:"RegisterType"`
+
+		// Product key for dynamic registration
+		ProductSecret *string `json:"ProductSecret,omitempty" name:"ProductSecret"`
+
+		// Maximum dynamically registered devices
+		RegisterLimit *uint64 `json:"RegisterLimit,omitempty" name:"RegisterLimit"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateProductDynamicRegisterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateProductDynamicRegisterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}

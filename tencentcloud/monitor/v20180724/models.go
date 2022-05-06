@@ -3345,7 +3345,12 @@ type DescribeStatisticDataRequest struct {
 	// Dimension condition. The `=` and `in` operators are supported
 	Conditions []*MidQueryCondition `json:"Conditions,omitempty" name:"Conditions"`
 
-	// Statistical granularity in s. Default value: 300
+	// Statistical period in seconds. Default value: 300. Optional values: 60, 300, 3,600, and 86,400.
+	// Due to the storage period limit, the statistical period is subject to the time range of statistics:
+	// 60s: The time range is less than 12 hours, and the timespan between `StartTime` and the current time cannot exceed 15 days.
+	// 300s: The time range is less than three days, and the timespan between `StartTime` and the current time cannot exceed 31 days.
+	// 3,600s: The time range is less than 30 days, and the timespan between `StartTime` and the current time cannot exceed 93 days.
+	// 86,400s: The time range is less than 186 days, and the timespan between `StartTime` and the current time cannot exceed 186 days.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Start time, which is the current time by default, such as 2020-12-08T19:51:23+08:00
@@ -4651,6 +4656,10 @@ type URLNotice struct {
 	// End time of the notification in seconds, which is calculated from 00:00:00.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Notification cycle. The values 1-7 indicate Monday to Sunday.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Weekday []*int64 `json:"Weekday,omitempty" name:"Weekday"`
 }
 
 type UnBindingAllPolicyObjectRequest struct {
@@ -4818,4 +4827,8 @@ type UserNotice struct {
 	// Dial type. `SYNC` (simultaneous dial), `CIRCLE` (polled dial). Default value: `CIRCLE`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PhoneCallType *string `json:"PhoneCallType,omitempty" name:"PhoneCallType"`
+
+	// Notification cycle. The values 1-7 indicate Monday to Sunday.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Weekday []*int64 `json:"Weekday,omitempty" name:"Weekday"`
 }

@@ -1524,6 +1524,9 @@ type CreateApiRequest struct {
 
 	// EIAM application ID.
 	EIAMAppId *string `json:"EIAMAppId,omitempty" name:"EIAMAppId"`
+
+	// Owner of the resource
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
 }
 
 func (r *CreateApiRequest) ToJsonString() string {
@@ -1590,6 +1593,7 @@ func (r *CreateApiRequest) FromJsonString(s string) error {
 	delete(f, "EIAMAuthType")
 	delete(f, "TokenTimeout")
 	delete(f, "EIAMAppId")
+	delete(f, "Owner")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApiRequest has unknown keys!", "")
 	}
@@ -1719,7 +1723,7 @@ type CreatePluginRequest struct {
 	// Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
 	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
 
-	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`.
+	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`, `CircuitBreaker`, `ProxyCache`
 	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
 
 	// Plugin definition statement in json format
@@ -1727,6 +1731,9 @@ type CreatePluginRequest struct {
 
 	// Plugin description within 200 characters
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Label
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreatePluginRequest) ToJsonString() string {
@@ -1745,6 +1752,7 @@ func (r *CreatePluginRequest) FromJsonString(s string) error {
 	delete(f, "PluginType")
 	delete(f, "PluginData")
 	delete(f, "Description")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePluginRequest has unknown keys!", "")
 	}
@@ -1888,31 +1896,40 @@ func (r *CreateServiceResponse) FromJsonString(s string) error {
 type CreateUpstreamRequest struct {
 	*tchttp.BaseRequest
 
-	// Backend protocol. Values: `HTTP`, `HTTPS`
+	// Backend protocol. Valid values: `HTTP`, `HTTPS`
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
-	// The balancing method can only be `ROUND_ROBIN`.
+	// Load balancing algorithm. Valid value: `ROUND-ROBIN`
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
 	// Unique VPC ID
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// Name of the upstream 
+	// Upstream name
 	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
 
-	// Description of the upstream
+	// Upstream description
 	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Upstream access type. Valid values: `IP_PORT`, `K8S`
+	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
 
 	// Retry attempts. It defaults to `3`.
 	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
 
-	// The host header in the request sending to the backend
+	// The Host request header that forwarded from the gateway to backend
 	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
 
 	// Backend nodes
 	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
 
-	// The location of K8s service
+	// Label
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Health check configuration
+	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
+
+	// Configuration of TKE service
 	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
 }
 
@@ -1933,9 +1950,12 @@ func (r *CreateUpstreamRequest) FromJsonString(s string) error {
 	delete(f, "UniqVpcId")
 	delete(f, "UpstreamName")
 	delete(f, "UpstreamDescription")
+	delete(f, "UpstreamType")
 	delete(f, "Retries")
 	delete(f, "UpstreamHost")
 	delete(f, "Nodes")
+	delete(f, "Tags")
+	delete(f, "HealthChecker")
 	delete(f, "K8sService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUpstreamRequest has unknown keys!", "")
@@ -1947,8 +1967,8 @@ type CreateUpstreamResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// The unique upstream IP returned
-	// Note: This field may return `null`, indicating that no valid value was found.
+		// The unique upstream ID returned
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2449,7 +2469,7 @@ func (r *DeleteServiceSubDomainMappingResponse) FromJsonString(s string) error {
 type DeleteUpstreamRequest struct {
 	*tchttp.BaseRequest
 
-	// ID of the upstream to delete
+	// ID of the upstream to be deleted
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 }
 
@@ -2476,8 +2496,8 @@ type DeleteUpstreamResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// ID of the upstream deleted
-	// Note: This field may return `null`, indicating that no valid value was found.
+		// ID of the deleted upstream
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4398,8 +4418,8 @@ type DescribeServiceResponse struct {
 	// Note: this field may return null, indicating that no valid values found.
 		DeploymentType *string `json:"DeploymentType,omitempty" name:"DeploymentType"`
 
-		// Whether it’s for special usage
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+		// Whether the service if for special usage. Valid values: `DEFAULT` (general usage), `HTTP_DNS`.
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 		SpecialUse *string `json:"SpecialUse,omitempty" name:"SpecialUse"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4656,10 +4676,10 @@ type DescribeUpstreamBindApis struct {
 type DescribeUpstreamBindApisRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of results returned in a page
+	// Number of entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page offset
+	// The starting position of paging
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Upstream ID
@@ -4726,13 +4746,13 @@ type DescribeUpstreamInfo struct {
 type DescribeUpstreamsRequest struct {
 	*tchttp.BaseRequest
 
-	// Number of results returned in a page
+	// Number of entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page offset
+	// The starting position of paging
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Filters
+	// Filters. Valid values: `UpstreamId` and `UpstreamName`
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6324,19 +6344,22 @@ func (r *ModifySubDomainResponse) FromJsonString(s string) error {
 type ModifyUpstreamRequest struct {
 	*tchttp.BaseRequest
 
-	// Unique ID of the upstream
+	// Unique upstream ID
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
-	// Name of the upstream 
+	// Upstream name
 	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
 
-	// Description of the upstream
+	// Upstream description
 	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
 
-	// Backend protocol. Values: `HTTP`, `HTTPS`
+	// Backend protocol. Valid values: `HTTP`, `HTTPS`
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
-	// The balancing method can only be `ROUND_ROBIN`.
+	// Upstream access type. Valid values: `IP_PORT`, `K8S`
+	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
+
+	// Load balancing algorithm. Valid value: `ROUND_ROBIN`
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
 	// Unique VPC ID.
@@ -6345,13 +6368,16 @@ type ModifyUpstreamRequest struct {
 	// Retry attempts. It defaults to `3`.
 	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
 
-	// The host header in the request sending to the backend
+	// Gateway forwarding to the upstream Host request header
 	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
 
 	// List of backend nodes
 	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
 
-	// Configuration of K8s service
+	// Health check configuration
+	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
+
+	// Configuration of TKE service
 	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
 }
 
@@ -6371,11 +6397,13 @@ func (r *ModifyUpstreamRequest) FromJsonString(s string) error {
 	delete(f, "UpstreamName")
 	delete(f, "UpstreamDescription")
 	delete(f, "Scheme")
+	delete(f, "UpstreamType")
 	delete(f, "Algorithm")
 	delete(f, "UniqVpcId")
 	delete(f, "Retries")
 	delete(f, "UpstreamHost")
 	delete(f, "Nodes")
+	delete(f, "HealthChecker")
 	delete(f, "K8sService")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUpstreamRequest has unknown keys!", "")
@@ -6387,8 +6415,8 @@ type ModifyUpstreamResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Information of the upstream after the modification
-	// Note: This field may return `null`, indicating that no valid value was found.
+		// Return modified upstream information
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 		Result *UpstreamInfo `json:"Result,omitempty" name:"Result"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6812,6 +6840,10 @@ type ServiceConfig struct {
 
 	// API backend service request method, such as `GET`, which is required if `ServiceType` is `HTTP`. The frontend and backend methods can be different
 	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// It’s required for `upstream`.
+	// Note: This field may return `NULL`, indicating that no valid value was found.
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
 	// API backend COS configuration. It’s required if the `ServiceType` is ·`COS`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -7581,25 +7613,25 @@ type UpstreamHealthCheckerReqHeaders struct {
 
 type UpstreamInfo struct {
 
-	// Unique ID of the upstream
+	// Unique upstream ID
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
-	// Name of the upstream 
+	// Upstream name
 	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
 
-	// Description of the upstream
+	// Upstream description
 	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
 
-	// Protocol
+	// Backend protocol. Valid values: `HTTP`, `HTTPS`
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
-	// Load balancing algorithm
+	// Load balancing algorithm. Valid value: `ROUND_ROBIN`
 	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
 
-	// Unique VPC ID.
+	// Unique VPC ID
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// Number of retried attempts
+	// Number of retry attempts
 	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
 
 	// Backend nodes
@@ -7616,21 +7648,21 @@ type UpstreamInfo struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
 
-	// Type of the upstream
+	// Upstream type. Valid values: `IP_PORT`, `K8S`
 	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
 
-	// Configuration of K8s service
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Configuration of TKE service
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	K8sServices []*K8sService `json:"K8sServices,omitempty" name:"K8sServices"`
 
-	// Host of the upstream
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// The Host header that the gateway forwards to the upstream
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
 }
 
 type UpstreamNode struct {
 
-	// IP or domain name of the host
+	// IP or domain name
 	Host *string `json:"Host,omitempty" name:"Host"`
 
 	// The port number. Range: [0, 65535]
@@ -7639,32 +7671,32 @@ type UpstreamNode struct {
 	// Value range: [0, 100]. `0` refers to disable it.
 	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
 
-	// VM instance ID
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// CVM Instance ID
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	VmInstanceId *string `json:"VmInstanceId,omitempty" name:"VmInstanceId"`
 
 	// Tag
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
-	// Health status of the node. Value: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Health status of the node. Values: `OFF`, `HEALTHY`, `UNHEALTHY` and `NO_DATA`. It’s not required for creating and editing actions. It only supports VPC upstreams.
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	Healthy *string `json:"Healthy,omitempty" name:"Healthy"`
 
-	// The K8s service name
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// TKE container name
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
-	// K8s namespace
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// TKE namespace
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	NameSpace *string `json:"NameSpace,omitempty" name:"NameSpace"`
 
 	// ID of the TKE cluster
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Source of the node
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Node source. Valid value: `K8S`
+	// Note: This field may return `NULL`, indicating that no valid value was found.
 	Source *string `json:"Source,omitempty" name:"Source"`
 
 	// The unique service name in API Gateway

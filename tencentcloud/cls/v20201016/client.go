@@ -112,6 +112,71 @@ func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, reque
     return
 }
 
+func NewCloseKafkaConsumerRequest() (request *CloseKafkaConsumerRequest) {
+    request = &CloseKafkaConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "CloseKafkaConsumer")
+    
+    
+    return
+}
+
+func NewCloseKafkaConsumerResponse() (response *CloseKafkaConsumerResponse) {
+    response = &CloseKafkaConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CloseKafkaConsumer
+// This API is used to disable Kafka consumption.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CloseKafkaConsumer(request *CloseKafkaConsumerRequest) (response *CloseKafkaConsumerResponse, err error) {
+    return c.CloseKafkaConsumerWithContext(context.Background(), request)
+}
+
+// CloseKafkaConsumer
+// This API is used to disable Kafka consumption.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CloseKafkaConsumerWithContext(ctx context.Context, request *CloseKafkaConsumerRequest) (response *CloseKafkaConsumerResponse, err error) {
+    if request == nil {
+        request = NewCloseKafkaConsumerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseKafkaConsumer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAlarmRequest() (request *CreateAlarmRequest) {
     request = &CreateAlarmRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -658,6 +723,79 @@ func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateShipperRequest() (request *CreateShipperRequest) {
+    request = &CreateShipperRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "CreateShipper")
+    
+    
+    return
+}
+
+func NewCreateShipperResponse() (response *CreateShipperResponse) {
+    response = &CreateShipperResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateShipper
+// This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_SHIPPER = "LimitExceeded.Shipper"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateShipper(request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
+    return c.CreateShipperWithContext(context.Background(), request)
+}
+
+// CreateShipper
+// This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_SHIPPER = "LimitExceeded.Shipper"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateShipperWithContext(ctx context.Context, request *CreateShipperRequest) (response *CreateShipperResponse, err error) {
+    if request == nil {
+        request = NewCreateShipperRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateShipper require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateShipperResponse()
     err = c.Send(request, response)
     return
 }
@@ -1414,6 +1552,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 // This API is used to delete a log topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -1433,6 +1572,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 // This API is used to delete a log topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -3303,6 +3443,152 @@ func (c *Client) ModifyShipperWithContext(ctx context.Context, request *ModifySh
     request.SetContext(ctx)
     
     response = NewModifyShipperResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTopicRequest() (request *ModifyTopicRequest) {
+    request = &ModifyTopicRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyTopic")
+    
+    
+    return
+}
+
+func NewModifyTopicResponse() (response *ModifyTopicResponse) {
+    response = &ModifyTopicResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyTopic
+// This API is used to modify a log topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
+    return c.ModifyTopicWithContext(context.Background(), request)
+}
+
+// ModifyTopic
+// This API is used to modify a log topic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
+    if request == nil {
+        request = NewModifyTopicRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTopic require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenKafkaConsumerRequest() (request *OpenKafkaConsumerRequest) {
+    request = &OpenKafkaConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cls", APIVersion, "OpenKafkaConsumer")
+    
+    
+    return
+}
+
+func NewOpenKafkaConsumerResponse() (response *OpenKafkaConsumerResponse) {
+    response = &OpenKafkaConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// OpenKafkaConsumer
+// This API is used to enable the Kafka consumption feature.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) OpenKafkaConsumer(request *OpenKafkaConsumerRequest) (response *OpenKafkaConsumerResponse, err error) {
+    return c.OpenKafkaConsumerWithContext(context.Background(), request)
+}
+
+// OpenKafkaConsumer
+// This API is used to enable the Kafka consumption feature.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) OpenKafkaConsumerWithContext(ctx context.Context, request *OpenKafkaConsumerRequest) (response *OpenKafkaConsumerResponse, err error) {
+    if request == nil {
+        request = NewOpenKafkaConsumerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenKafkaConsumer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenKafkaConsumerResponse()
     err = c.Send(request, response)
     return
 }

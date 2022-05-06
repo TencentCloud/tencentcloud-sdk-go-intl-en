@@ -636,7 +636,7 @@ func NewDescribeAlarmHistoriesResponse() (response *DescribeAlarmHistoriesRespon
 //
 // 
 //
-// Note: **If you query the alarm records as a sub-user, you can only query those of authorized projects** or those of products which are not categorized by projects. For information on how to grant a sub-account the project permission, see [Project & Tag](https://intl.cloud.tencent.com/document/product/598/32738?from_cn_redirect=1).
+// Note: **If you use a sub-account, you can only query the alarm records of authorized projects** or uncategorized products.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -654,7 +654,7 @@ func (c *Client) DescribeAlarmHistories(request *DescribeAlarmHistoriesRequest) 
 //
 // 
 //
-// Note: **If you query the alarm records as a sub-user, you can only query those of authorized projects** or those of products which are not categorized by projects. For information on how to grant a sub-account the project permission, see [Project & Tag](https://intl.cloud.tencent.com/document/product/598/32738?from_cn_redirect=1).
+// Note: **If you use a sub-account, you can only query the alarm records of authorized projects** or uncategorized products.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

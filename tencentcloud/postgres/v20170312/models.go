@@ -603,7 +603,7 @@ type CreateInstancesRequest struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
@@ -639,14 +639,23 @@ type CreateInstancesRequest struct {
 	// Security group IDs
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+	// PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 
 	// Instance node information, which is required if you purchase a multi-AZ deployed instance.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+	NeedSupportTDE *uint64 `json:"NeedSupportTDE,omitempty" name:"NeedSupportTDE"`
+
+	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+	KMSKeyId *string `json:"KMSKeyId,omitempty" name:"KMSKeyId"`
+
+	// The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -685,6 +694,9 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DBMajorVersion")
 	delete(f, "DBKernelVersion")
 	delete(f, "DBNodeSet")
+	delete(f, "NeedSupportTDE")
+	delete(f, "KMSKeyId")
+	delete(f, "KMSRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -777,7 +789,7 @@ type CreateReadOnlyDBInstanceRequest struct {
 	// RO group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 
-	// The information of tags to be associated with instances. This parameter is left empty by default.
+	// The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
 	TagList *Tag `json:"TagList,omitempty" name:"TagList"`
 
 	// Security group ID
@@ -1245,6 +1257,10 @@ type DBInstance struct {
 	// Instance node information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Whether the instance supports TDE data encryption. Valid values: 0 (no), 1 (yes)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsSupportTDE *int64 `json:"IsSupportTDE,omitempty" name:"IsSupportTDE"`
 }
 
 type DBInstanceNetInfo struct {
@@ -4748,6 +4764,10 @@ type SpecInfo struct {
 
 	// Specification details list
 	SpecItemInfoList []*SpecItemInfo `json:"SpecItemInfoList,omitempty" name:"SpecItemInfoList"`
+
+	// Regions where KMS is supported
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SupportKMSRegions []*string `json:"SupportKMSRegions,omitempty" name:"SupportKMSRegions"`
 }
 
 type SpecItemInfo struct {
@@ -4789,6 +4809,10 @@ type SpecItemInfo struct {
 	// PostgreSQL kernel version number
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	KernelVersion *string `json:"KernelVersion,omitempty" name:"KernelVersion"`
+
+	// Whether TDE data encryption is supported. Valid values: 0 (no), 1 (yes)
+	// Note: This field may return `null`, indicating that no valid value was found.
+	IsSupportTDE *int64 `json:"IsSupportTDE,omitempty" name:"IsSupportTDE"`
 }
 
 type Tag struct {
