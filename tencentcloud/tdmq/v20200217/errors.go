@@ -77,9 +77,6 @@ const (
 	// Failed to delete the topic.
 	FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
 
-	// Failed to query the subscription data.
-	FAILEDOPERATION_DESCRIBESUBSCRIPTION = "FailedOperation.DescribeSubscription"
-
 	// Failed to get the environment attributes.
 	FAILEDOPERATION_GETENVIRONMENTATTRIBUTESFAILED = "FailedOperation.GetEnvironmentAttributesFailed"
 
@@ -115,6 +112,9 @@ const (
 
 	// Failed to send the message.
 	FAILEDOPERATION_SENDMSGFAILED = "FailedOperation.SendMsgFailed"
+
+	// 
+	FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
 
 	// Failed to configure the message TTL.
 	FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
@@ -209,9 +209,6 @@ const (
 	// A required parameter is missing.
 	MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 
-	// The subscription is still being consumed.
-	OPERATIONDENIED_CONSUMERRUNNING = "OperationDenied.ConsumerRunning"
-
 	// Operations on the default environment are not allowed.
 	OPERATIONDENIED_DEFAULTENVIRONMENT = "OperationDenied.DefaultEnvironment"
 
@@ -277,19 +274,4 @@ const (
 
 	// You must top up before proceeding.
 	RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
-
-	// The system is being upgraded.
-	RESOURCEUNAVAILABLE_SYSTEMUPGRADE = "ResourceUnavailable.SystemUpgrade"
-
-	// The resources have been sold out.
-	RESOURCESSOLDOUT = "ResourcesSoldOut"
-
-	// Unauthorized operation.
-	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-
-	// Unknown parameter.
-	UNKNOWNPARAMETER = "UnknownParameter"
-
-	// Unsupported operation.
-	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

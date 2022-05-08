@@ -132,6 +132,7 @@ func NewClearCmqQueueResponse() (response *ClearCmqQueueResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ClearCmqQueue(request *ClearCmqQueueRequest) (response *ClearCmqQueueResponse, err error) {
     return c.ClearCmqQueueWithContext(context.Background(), request)
 }
@@ -141,6 +142,7 @@ func (c *Client) ClearCmqQueue(request *ClearCmqQueueRequest) (response *ClearCm
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ClearCmqQueueWithContext(ctx context.Context, request *ClearCmqQueueRequest) (response *ClearCmqQueueResponse, err error) {
     if request == nil {
         request = NewClearCmqQueueRequest()
@@ -296,6 +298,7 @@ func NewCreateCmqQueueResponse() (response *CreateCmqQueueResponse) {
 //  RESOURCEINUSE_QUEUE = "ResourceInUse.Queue"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     return c.CreateCmqQueueWithContext(context.Background(), request)
 }
@@ -312,6 +315,7 @@ func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *Creat
 //  RESOURCEINUSE_QUEUE = "ResourceInUse.Queue"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 func (c *Client) CreateCmqQueueWithContext(ctx context.Context, request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     if request == nil {
         request = NewCreateCmqQueueRequest()
@@ -350,6 +354,7 @@ func NewCreateCmqSubscribeResponse() (response *CreateCmqSubscribeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATESUBSCRIPTION = "FailedOperation.CreateSubscription"
 //  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
 func (c *Client) CreateCmqSubscribe(request *CreateCmqSubscribeRequest) (response *CreateCmqSubscribeResponse, err error) {
     return c.CreateCmqSubscribeWithContext(context.Background(), request)
@@ -360,6 +365,7 @@ func (c *Client) CreateCmqSubscribe(request *CreateCmqSubscribeRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATESUBSCRIPTION = "FailedOperation.CreateSubscription"
 //  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
 func (c *Client) CreateCmqSubscribeWithContext(ctx context.Context, request *CreateCmqSubscribeRequest) (response *CreateCmqSubscribeResponse, err error) {
     if request == nil {
@@ -400,8 +406,12 @@ func NewCreateCmqTopicResponse() (response *CreateCmqTopicResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATECLUSTER = "FailedOperation.CreateCluster"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
+//  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
 //  RESOURCEINUSE_TOPIC = "ResourceInUse.Topic"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 func (c *Client) CreateCmqTopic(request *CreateCmqTopicRequest) (response *CreateCmqTopicResponse, err error) {
     return c.CreateCmqTopicWithContext(context.Background(), request)
 }
@@ -412,8 +422,12 @@ func (c *Client) CreateCmqTopic(request *CreateCmqTopicRequest) (response *Creat
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATECLUSTER = "FailedOperation.CreateCluster"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
+//  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
 //  RESOURCEINUSE_TOPIC = "ResourceInUse.Topic"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 func (c *Client) CreateCmqTopicWithContext(ctx context.Context, request *CreateCmqTopicRequest) (response *CreateCmqTopicResponse, err error) {
     if request == nil {
         request = NewCreateCmqTopicRequest()
@@ -596,6 +610,7 @@ func NewCreateRocketMQClusterResponse() (response *CreateRocketMQClusterResponse
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateRocketMQCluster(request *CreateRocketMQClusterRequest) (response *CreateRocketMQClusterResponse, err error) {
     return c.CreateRocketMQClusterWithContext(context.Background(), request)
 }
@@ -613,6 +628,7 @@ func (c *Client) CreateRocketMQCluster(request *CreateRocketMQClusterRequest) (r
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) CreateRocketMQClusterWithContext(ctx context.Context, request *CreateRocketMQClusterRequest) (response *CreateRocketMQClusterResponse, err error) {
     if request == nil {
         request = NewCreateRocketMQClusterRequest()
@@ -715,6 +731,7 @@ func NewCreateRocketMQNamespaceResponse() (response *CreateRocketMQNamespaceResp
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) CreateRocketMQNamespace(request *CreateRocketMQNamespaceRequest) (response *CreateRocketMQNamespaceResponse, err error) {
     return c.CreateRocketMQNamespaceWithContext(context.Background(), request)
 }
@@ -731,6 +748,7 @@ func (c *Client) CreateRocketMQNamespace(request *CreateRocketMQNamespaceRequest
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) CreateRocketMQNamespaceWithContext(ctx context.Context, request *CreateRocketMQNamespaceRequest) (response *CreateRocketMQNamespaceResponse, err error) {
     if request == nil {
         request = NewCreateRocketMQNamespaceRequest()
@@ -775,6 +793,7 @@ func NewCreateRocketMQTopicResponse() (response *CreateRocketMQTopicResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 func (c *Client) CreateRocketMQTopic(request *CreateRocketMQTopicRequest) (response *CreateRocketMQTopicResponse, err error) {
     return c.CreateRocketMQTopicWithContext(context.Background(), request)
@@ -791,6 +810,7 @@ func (c *Client) CreateRocketMQTopic(request *CreateRocketMQTopicRequest) (respo
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 func (c *Client) CreateRocketMQTopicWithContext(ctx context.Context, request *CreateRocketMQTopicRequest) (response *CreateRocketMQTopicResponse, err error) {
     if request == nil {
@@ -1145,6 +1165,7 @@ func NewDeleteCmqSubscribeResponse() (response *DeleteCmqSubscribeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
 //  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
 func (c *Client) DeleteCmqSubscribe(request *DeleteCmqSubscribeRequest) (response *DeleteCmqSubscribeResponse, err error) {
     return c.DeleteCmqSubscribeWithContext(context.Background(), request)
@@ -1155,6 +1176,7 @@ func (c *Client) DeleteCmqSubscribe(request *DeleteCmqSubscribeRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
 //  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
 func (c *Client) DeleteCmqSubscribeWithContext(ctx context.Context, request *DeleteCmqSubscribeRequest) (response *DeleteCmqSubscribeResponse, err error) {
     if request == nil {
@@ -1628,199 +1650,6 @@ func (c *Client) DeleteRolesWithContext(ctx context.Context, request *DeleteRole
     return
 }
 
-func NewDeleteSubscriptionsRequest() (request *DeleteSubscriptionsRequest) {
-    request = &DeleteSubscriptionsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DeleteSubscriptions")
-    
-    
-    return
-}
-
-func NewDeleteSubscriptionsResponse() (response *DeleteSubscriptionsResponse) {
-    response = &DeleteSubscriptionsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteSubscriptions
-// This API is used to delete a subscription.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
-//  FAILEDOPERATION_GETTOPICPARTITIONSFAILED = "FailedOperation.GetTopicPartitionsFailed"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  OPERATIONDENIED_CONSUMERRUNNING = "OperationDenied.ConsumerRunning"
-//  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_SUBSCRIPTION = "ResourceNotFound.Subscription"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DeleteSubscriptions(request *DeleteSubscriptionsRequest) (response *DeleteSubscriptionsResponse, err error) {
-    return c.DeleteSubscriptionsWithContext(context.Background(), request)
-}
-
-// DeleteSubscriptions
-// This API is used to delete a subscription.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
-//  FAILEDOPERATION_GETTOPICPARTITIONSFAILED = "FailedOperation.GetTopicPartitionsFailed"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  OPERATIONDENIED_CONSUMERRUNNING = "OperationDenied.ConsumerRunning"
-//  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_SUBSCRIPTION = "ResourceNotFound.Subscription"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DeleteSubscriptionsWithContext(ctx context.Context, request *DeleteSubscriptionsRequest) (response *DeleteSubscriptionsResponse, err error) {
-    if request == nil {
-        request = NewDeleteSubscriptionsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteSubscriptions require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteSubscriptionsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteTopicsRequest() (request *DeleteTopicsRequest) {
-    request = &DeleteTopicsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DeleteTopics")
-    
-    
-    return
-}
-
-func NewDeleteTopicsResponse() (response *DeleteTopicsResponse) {
-    response = &DeleteTopicsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteTopics
-// This API is used to batch delete topics.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  OPERATIONDENIED_DEFAULTENVIRONMENT = "OperationDenied.DefaultEnvironment"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DeleteTopics(request *DeleteTopicsRequest) (response *DeleteTopicsResponse, err error) {
-    return c.DeleteTopicsWithContext(context.Background(), request)
-}
-
-// DeleteTopics
-// This API is used to batch delete topics.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  OPERATIONDENIED_DEFAULTENVIRONMENT = "OperationDenied.DefaultEnvironment"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DeleteTopicsWithContext(ctx context.Context, request *DeleteTopicsRequest) (response *DeleteTopicsResponse, err error) {
-    if request == nil {
-        request = NewDeleteTopicsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteTopics require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteTopicsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeBindClustersRequest() (request *DescribeBindClustersRequest) {
-    request = &DescribeBindClustersRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeBindClusters")
-    
-    
-    return
-}
-
-func NewDescribeBindClustersResponse() (response *DescribeBindClustersResponse) {
-    response = &DescribeBindClustersResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeBindClusters
-// This API is used to get the list of dedicated clusters bound to a user.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCEUNAVAILABLE_SYSTEMUPGRADE = "ResourceUnavailable.SystemUpgrade"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeBindClusters(request *DescribeBindClustersRequest) (response *DescribeBindClustersResponse, err error) {
-    return c.DescribeBindClustersWithContext(context.Background(), request)
-}
-
-// DescribeBindClusters
-// This API is used to get the list of dedicated clusters bound to a user.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCEUNAVAILABLE_SYSTEMUPGRADE = "ResourceUnavailable.SystemUpgrade"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeBindClustersWithContext(ctx context.Context, request *DescribeBindClustersRequest) (response *DescribeBindClustersResponse, err error) {
-    if request == nil {
-        request = NewDescribeBindClustersRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeBindClusters require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeBindClustersResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeBindVpcsRequest() (request *DescribeBindVpcsRequest) {
     request = &DescribeBindVpcsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1848,6 +1677,7 @@ func NewDescribeBindVpcsResponse() (response *DescribeBindVpcsResponse) {
 //  INVALIDPARAMETERVALUE_NEEDMOREPARAMS = "InvalidParameterValue.NeedMoreParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) DescribeBindVpcs(request *DescribeBindVpcsRequest) (response *DescribeBindVpcsResponse, err error) {
     return c.DescribeBindVpcsWithContext(context.Background(), request)
 }
@@ -1862,6 +1692,7 @@ func (c *Client) DescribeBindVpcs(request *DescribeBindVpcsRequest) (response *D
 //  INVALIDPARAMETERVALUE_NEEDMOREPARAMS = "InvalidParameterValue.NeedMoreParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) DescribeBindVpcsWithContext(ctx context.Context, request *DescribeBindVpcsRequest) (response *DescribeBindVpcsResponse, err error) {
     if request == nil {
         request = NewDescribeBindVpcsRequest()
@@ -1921,53 +1752,6 @@ func (c *Client) DescribeClusterDetailWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeClusterDetailResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
-    request = &DescribeClustersRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeClusters")
-    
-    
-    return
-}
-
-func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
-    response = &DescribeClustersResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeClusters
-// This API is used to get the list of clusters.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *DescribeClustersResponse, err error) {
-    return c.DescribeClustersWithContext(context.Background(), request)
-}
-
-// DescribeClusters
-// This API is used to get the list of clusters.
-//
-// error code that may be returned:
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-func (c *Client) DescribeClustersWithContext(ctx context.Context, request *DescribeClustersRequest) (response *DescribeClustersResponse, err error) {
-    if request == nil {
-        request = NewDescribeClustersRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeClusters require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeClustersResponse()
     err = c.Send(request, response)
     return
 }
@@ -2064,53 +1848,6 @@ func (c *Client) DescribeCmqQueueDetailWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeCmqQueueDetailResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeCmqQueuesRequest() (request *DescribeCmqQueuesRequest) {
-    request = &DescribeCmqQueuesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeCmqQueues")
-    
-    
-    return
-}
-
-func NewDescribeCmqQueuesResponse() (response *DescribeCmqQueuesResponse) {
-    response = &DescribeCmqQueuesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCmqQueues
-// This API is used to query all CMQ queues.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) DescribeCmqQueues(request *DescribeCmqQueuesRequest) (response *DescribeCmqQueuesResponse, err error) {
-    return c.DescribeCmqQueuesWithContext(context.Background(), request)
-}
-
-// DescribeCmqQueues
-// This API is used to query all CMQ queues.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-func (c *Client) DescribeCmqQueuesWithContext(ctx context.Context, request *DescribeCmqQueuesRequest) (response *DescribeCmqQueuesResponse, err error) {
-    if request == nil {
-        request = NewDescribeCmqQueuesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCmqQueues require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCmqQueuesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2213,55 +1950,6 @@ func (c *Client) DescribeCmqTopicDetailWithContext(ctx context.Context, request 
     return
 }
 
-func NewDescribeCmqTopicsRequest() (request *DescribeCmqTopicsRequest) {
-    request = &DescribeCmqTopicsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeCmqTopics")
-    
-    
-    return
-}
-
-func NewDescribeCmqTopicsResponse() (response *DescribeCmqTopicsResponse) {
-    response = &DescribeCmqTopicsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCmqTopics
-// This API is used to enumerate all CMQ topics.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
-func (c *Client) DescribeCmqTopics(request *DescribeCmqTopicsRequest) (response *DescribeCmqTopicsResponse, err error) {
-    return c.DescribeCmqTopicsWithContext(context.Background(), request)
-}
-
-// DescribeCmqTopics
-// This API is used to enumerate all CMQ topics.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
-func (c *Client) DescribeCmqTopicsWithContext(ctx context.Context, request *DescribeCmqTopicsRequest) (response *DescribeCmqTopicsResponse, err error) {
-    if request == nil {
-        request = NewDescribeCmqTopicsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCmqTopics require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCmqTopicsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeEnvironmentAttributesRequest() (request *DescribeEnvironmentAttributesRequest) {
     request = &DescribeEnvironmentAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2321,120 +2009,6 @@ func (c *Client) DescribeEnvironmentAttributesWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeEnvironmentAttributesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeEnvironmentRolesRequest() (request *DescribeEnvironmentRolesRequest) {
-    request = &DescribeEnvironmentRolesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeEnvironmentRoles")
-    
-    
-    return
-}
-
-func NewDescribeEnvironmentRolesResponse() (response *DescribeEnvironmentRolesResponse) {
-    response = &DescribeEnvironmentRolesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeEnvironmentRoles
-// This API is used to get the list of namespace roles.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-func (c *Client) DescribeEnvironmentRoles(request *DescribeEnvironmentRolesRequest) (response *DescribeEnvironmentRolesResponse, err error) {
-    return c.DescribeEnvironmentRolesWithContext(context.Background(), request)
-}
-
-// DescribeEnvironmentRoles
-// This API is used to get the list of namespace roles.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
-func (c *Client) DescribeEnvironmentRolesWithContext(ctx context.Context, request *DescribeEnvironmentRolesRequest) (response *DescribeEnvironmentRolesResponse, err error) {
-    if request == nil {
-        request = NewDescribeEnvironmentRolesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeEnvironmentRoles require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeEnvironmentRolesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeEnvironmentsRequest() (request *DescribeEnvironmentsRequest) {
-    request = &DescribeEnvironmentsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeEnvironments")
-    
-    
-    return
-}
-
-func NewDescribeEnvironmentsResponse() (response *DescribeEnvironmentsResponse) {
-    response = &DescribeEnvironmentsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeEnvironments
-// This API is used to get the list of namespaces under a tenant.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-func (c *Client) DescribeEnvironments(request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
-    return c.DescribeEnvironmentsWithContext(context.Background(), request)
-}
-
-// DescribeEnvironments
-// This API is used to get the list of namespaces under a tenant.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *DescribeEnvironmentsRequest) (response *DescribeEnvironmentsResponse, err error) {
-    if request == nil {
-        request = NewDescribeEnvironmentsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeEnvironments require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeEnvironmentsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2588,222 +2162,6 @@ func (c *Client) DescribeRocketMQClusterWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeRocketMQClustersRequest() (request *DescribeRocketMQClustersRequest) {
-    request = &DescribeRocketMQClustersRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQClusters")
-    
-    
-    return
-}
-
-func NewDescribeRocketMQClustersResponse() (response *DescribeRocketMQClustersResponse) {
-    response = &DescribeRocketMQClustersResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRocketMQClusters
-// This API is used to get the list of RocketMQ clusters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQClusters(request *DescribeRocketMQClustersRequest) (response *DescribeRocketMQClustersResponse, err error) {
-    return c.DescribeRocketMQClustersWithContext(context.Background(), request)
-}
-
-// DescribeRocketMQClusters
-// This API is used to get the list of RocketMQ clusters.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQClustersWithContext(ctx context.Context, request *DescribeRocketMQClustersRequest) (response *DescribeRocketMQClustersResponse, err error) {
-    if request == nil {
-        request = NewDescribeRocketMQClustersRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeRocketMQClusters require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeRocketMQClustersResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRocketMQGroupsRequest() (request *DescribeRocketMQGroupsRequest) {
-    request = &DescribeRocketMQGroupsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQGroups")
-    
-    
-    return
-}
-
-func NewDescribeRocketMQGroupsResponse() (response *DescribeRocketMQGroupsResponse) {
-    response = &DescribeRocketMQGroupsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRocketMQGroups
-// This API is used to get the list of RocketMQ consumer groups.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQGroups(request *DescribeRocketMQGroupsRequest) (response *DescribeRocketMQGroupsResponse, err error) {
-    return c.DescribeRocketMQGroupsWithContext(context.Background(), request)
-}
-
-// DescribeRocketMQGroups
-// This API is used to get the list of RocketMQ consumer groups.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQGroupsWithContext(ctx context.Context, request *DescribeRocketMQGroupsRequest) (response *DescribeRocketMQGroupsResponse, err error) {
-    if request == nil {
-        request = NewDescribeRocketMQGroupsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeRocketMQGroups require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeRocketMQGroupsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRocketMQNamespacesRequest() (request *DescribeRocketMQNamespacesRequest) {
-    request = &DescribeRocketMQNamespacesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQNamespaces")
-    
-    
-    return
-}
-
-func NewDescribeRocketMQNamespacesResponse() (response *DescribeRocketMQNamespacesResponse) {
-    response = &DescribeRocketMQNamespacesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRocketMQNamespaces
-// This API is used to get the list of RocketMQ namespaces.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQNamespaces(request *DescribeRocketMQNamespacesRequest) (response *DescribeRocketMQNamespacesResponse, err error) {
-    return c.DescribeRocketMQNamespacesWithContext(context.Background(), request)
-}
-
-// DescribeRocketMQNamespaces
-// This API is used to get the list of RocketMQ namespaces.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQNamespacesWithContext(ctx context.Context, request *DescribeRocketMQNamespacesRequest) (response *DescribeRocketMQNamespacesResponse, err error) {
-    if request == nil {
-        request = NewDescribeRocketMQNamespacesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeRocketMQNamespaces require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeRocketMQNamespacesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeRocketMQTopicsRequest() (request *DescribeRocketMQTopicsRequest) {
-    request = &DescribeRocketMQTopicsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQTopics")
-    
-    
-    return
-}
-
-func NewDescribeRocketMQTopicsResponse() (response *DescribeRocketMQTopicsResponse) {
-    response = &DescribeRocketMQTopicsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeRocketMQTopics
-// This API is used to get the list of RocketMQ topics.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQTopics(request *DescribeRocketMQTopicsRequest) (response *DescribeRocketMQTopicsResponse, err error) {
-    return c.DescribeRocketMQTopicsWithContext(context.Background(), request)
-}
-
-// DescribeRocketMQTopics
-// This API is used to get the list of RocketMQ topics.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeRocketMQTopicsWithContext(ctx context.Context, request *DescribeRocketMQTopicsRequest) (response *DescribeRocketMQTopicsResponse, err error) {
-    if request == nil {
-        request = NewDescribeRocketMQTopicsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeRocketMQTopics require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeRocketMQTopicsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeRolesRequest() (request *DescribeRolesRequest) {
     request = &DescribeRolesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2857,130 +2215,6 @@ func (c *Client) DescribeRolesWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeRolesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeSubscriptionsRequest() (request *DescribeSubscriptionsRequest) {
-    request = &DescribeSubscriptionsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeSubscriptions")
-    
-    
-    return
-}
-
-func NewDescribeSubscriptionsResponse() (response *DescribeSubscriptionsResponse) {
-    response = &DescribeSubscriptionsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeSubscriptions
-// This API is used to query the list of subscribers under the specified environment and topic.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DESCRIBESUBSCRIPTION = "FailedOperation.DescribeSubscription"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DescribeSubscriptions(request *DescribeSubscriptionsRequest) (response *DescribeSubscriptionsResponse, err error) {
-    return c.DescribeSubscriptionsWithContext(context.Background(), request)
-}
-
-// DescribeSubscriptions
-// This API is used to query the list of subscribers under the specified environment and topic.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DESCRIBESUBSCRIPTION = "FailedOperation.DescribeSubscription"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
-func (c *Client) DescribeSubscriptionsWithContext(ctx context.Context, request *DescribeSubscriptionsRequest) (response *DescribeSubscriptionsResponse, err error) {
-    if request == nil {
-        request = NewDescribeSubscriptionsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeSubscriptions require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeSubscriptionsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeTopicsRequest() (request *DescribeTopicsRequest) {
-    request = &DescribeTopicsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeTopics")
-    
-    
-    return
-}
-
-func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
-    response = &DescribeTopicsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeTopics
-// This API is used to get the list of topics under an environment.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
-    return c.DescribeTopicsWithContext(context.Background(), request)
-}
-
-// DescribeTopics
-// This API is used to get the list of topics under an environment.
-//
-// error code that may be returned:
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
-//  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
-//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
-//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
-func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
-    if request == nil {
-        request = NewDescribeTopicsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeTopics require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeTopicsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3058,7 +2292,10 @@ func NewModifyCmqQueueAttributeResponse() (response *ModifyCmqQueueAttributeResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
+//  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     return c.ModifyCmqQueueAttributeWithContext(context.Background(), request)
 }
@@ -3068,7 +2305,10 @@ func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
+//  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
+//  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 func (c *Client) ModifyCmqQueueAttributeWithContext(ctx context.Context, request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCmqQueueAttributeRequest()
@@ -3201,6 +2441,7 @@ func NewModifyEnvironmentAttributesResponse() (response *ModifyEnvironmentAttrib
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  FAILEDOPERATION_UPDATEENVIRONMENT = "FailedOperation.UpdateEnvironment"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
@@ -3222,6 +2463,7 @@ func (c *Client) ModifyEnvironmentAttributes(request *ModifyEnvironmentAttribute
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  FAILEDOPERATION_UPDATEENVIRONMENT = "FailedOperation.UpdateEnvironment"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
@@ -3333,6 +2575,7 @@ func NewModifyRocketMQClusterResponse() (response *ModifyRocketMQClusterResponse
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) ModifyRocketMQCluster(request *ModifyRocketMQClusterRequest) (response *ModifyRocketMQClusterResponse, err error) {
     return c.ModifyRocketMQClusterWithContext(context.Background(), request)
 }
@@ -3348,6 +2591,7 @@ func (c *Client) ModifyRocketMQCluster(request *ModifyRocketMQClusterRequest) (r
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 func (c *Client) ModifyRocketMQClusterWithContext(ctx context.Context, request *ModifyRocketMQClusterRequest) (response *ModifyRocketMQClusterResponse, err error) {
     if request == nil {
         request = NewModifyRocketMQClusterRequest()
@@ -3793,6 +3037,7 @@ func NewResetMsgSubOffsetByTimestampResponse() (response *ResetMsgSubOffsetByTim
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_SUBSCRIPTION = "ResourceNotFound.Subscription"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ResetMsgSubOffsetByTimestamp(request *ResetMsgSubOffsetByTimestampRequest) (response *ResetMsgSubOffsetByTimestampResponse, err error) {
     return c.ResetMsgSubOffsetByTimestampWithContext(context.Background(), request)
 }
@@ -3810,6 +3055,7 @@ func (c *Client) ResetMsgSubOffsetByTimestamp(request *ResetMsgSubOffsetByTimest
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_SUBSCRIPTION = "ResourceNotFound.Subscription"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ResetMsgSubOffsetByTimestampWithContext(ctx context.Context, request *ResetMsgSubOffsetByTimestampRequest) (response *ResetMsgSubOffsetByTimestampResponse, err error) {
     if request == nil {
         request = NewResetMsgSubOffsetByTimestampRequest()
@@ -3822,6 +3068,59 @@ func (c *Client) ResetMsgSubOffsetByTimestampWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewResetMsgSubOffsetByTimestampResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetRocketMQConsumerOffSetRequest() (request *ResetRocketMQConsumerOffSetRequest) {
+    request = &ResetRocketMQConsumerOffSetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tdmq", APIVersion, "ResetRocketMQConsumerOffSet")
+    
+    
+    return
+}
+
+func NewResetRocketMQConsumerOffSetResponse() (response *ResetRocketMQConsumerOffSetResponse) {
+    response = &ResetRocketMQConsumerOffSetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ResetRocketMQConsumerOffSet
+// This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ResetRocketMQConsumerOffSet(request *ResetRocketMQConsumerOffSetRequest) (response *ResetRocketMQConsumerOffSetResponse, err error) {
+    return c.ResetRocketMQConsumerOffSetWithContext(context.Background(), request)
+}
+
+// ResetRocketMQConsumerOffSet
+// This API is used to reset the consumption offset of a specified consumer group to a specified timestamp.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ResetRocketMQConsumerOffSetWithContext(ctx context.Context, request *ResetRocketMQConsumerOffSetRequest) (response *ResetRocketMQConsumerOffSetResponse, err error) {
+    if request == nil {
+        request = NewResetRocketMQConsumerOffSetRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetRocketMQConsumerOffSet require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetRocketMQConsumerOffSetResponse()
     err = c.Send(request, response)
     return
 }

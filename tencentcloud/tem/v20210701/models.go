@@ -50,104 +50,6 @@ type CosToken struct {
 	FullPath *string `json:"FullPath,omitempty" name:"FullPath"`
 }
 
-type CreateApplicationRequest struct {
-	*tchttp.BaseRequest
-
-	// Application name
-	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
-
-	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Whether to use the default image service. 1: yes; 0: no
-	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitempty" name:"UseDefaultImageService"`
-
-	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
-	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
-
-	// Instance ID of Enterprise Edition image service
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Address of the bound image server
-	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
-
-	// Name of the bound image repository
-	RepoName *string `json:"RepoName,omitempty" name:"RepoName"`
-
-	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
-
-	// Application subnet
-	SubnetList []*string `json:"SubnetList,omitempty" name:"SubnetList"`
-
-	// Programming language 
-	// - JAVA
-	// - OTHER
-	CodingLanguage *string `json:"CodingLanguage,omitempty" name:"CodingLanguage"`
-
-	// Deployment mode 
-	// - IMAGE
-	// - JAR
-	// - WAR
-	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
-
-	// Whether to enable the call chain feature
-	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
-}
-
-func (r *CreateApplicationRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateApplicationRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ApplicationName")
-	delete(f, "Description")
-	delete(f, "UseDefaultImageService")
-	delete(f, "RepoType")
-	delete(f, "InstanceId")
-	delete(f, "RepoServer")
-	delete(f, "RepoName")
-	delete(f, "SourceChannel")
-	delete(f, "SubnetList")
-	delete(f, "CodingLanguage")
-	delete(f, "DeployMode")
-	delete(f, "EnableTracing")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateApplicationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Service code
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateApplicationResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateApplicationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateCosTokenRequest struct {
 	*tchttp.BaseRequest
 
@@ -302,6 +204,12 @@ type CreateResourceRequest struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Source of the resource. Values: `existing` (choose an existing resource), `creating` (create a new resource)
+	ResourceFrom *string `json:"ResourceFrom,omitempty" name:"ResourceFrom"`
+
+	// Resource extra configuration
+	ResourceConfig *string `json:"ResourceConfig,omitempty" name:"ResourceConfig"`
 }
 
 func (r *CreateResourceRequest) ToJsonString() string {
@@ -320,6 +228,8 @@ func (r *CreateResourceRequest) FromJsonString(s string) error {
 	delete(f, "ResourceType")
 	delete(f, "ResourceId")
 	delete(f, "SourceChannel")
+	delete(f, "ResourceFrom")
+	delete(f, "ResourceConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateResourceRequest has unknown keys!", "")
 	}
@@ -383,67 +293,6 @@ type CronHorizontalAutoscalerSchedule struct {
 	// Number of target pods (less than 50)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TargetReplicas *int64 `json:"TargetReplicas,omitempty" name:"TargetReplicas"`
-}
-
-type DeleteApplicationRequest struct {
-	*tchttp.BaseRequest
-
-	// Service ID
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
-
-	// Environment ID
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Retain as default
-	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
-
-	// Whether to delete this application automatically when there is no running version.
-	DeleteApplicationIfNoRunningVersion *bool `json:"DeleteApplicationIfNoRunningVersion,omitempty" name:"DeleteApplicationIfNoRunningVersion"`
-}
-
-func (r *DeleteApplicationRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteApplicationRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ApplicationId")
-	delete(f, "EnvironmentId")
-	delete(f, "SourceChannel")
-	delete(f, "DeleteApplicationIfNoRunningVersion")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApplicationRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteApplicationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteApplicationResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteApplicationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type DeleteIngressRequest struct {
@@ -640,6 +489,9 @@ type DeployApplicationRequest struct {
 	// - ALPINE
 	// - TENCENTOS
 	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
+
+	// Specifies whether to enable Prometheus metric
+	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
 }
 
 func (r *DeployApplicationRequest) ToJsonString() string {
@@ -693,6 +545,7 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	delete(f, "SpeedUp")
 	delete(f, "StartupProbe")
 	delete(f, "OsFlavour")
+	delete(f, "EnablePrometheusConf")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployApplicationRequest has unknown keys!", "")
 	}
@@ -730,7 +583,7 @@ type DeployStrategyConf struct {
 	// Number of pods for the beta batch
 	BetaBatchNum *int64 `json:"BetaBatchNum,omitempty" name:"BetaBatchNum"`
 
-	// Batch deployment policy. `0`: automatically; `1`: manually; `2`: beta batch (manual)
+	// Batch deployment policy. `0`: automatically; `1`: manually; `2`: beta batch (manual), `3`: initial release
 	DeployStrategyType *int64 `json:"DeployStrategyType,omitempty" name:"DeployStrategyType"`
 
 	// Interval between batches
@@ -1126,6 +979,15 @@ type EksService struct {
 	PortMappings []*PortMapping `json:"PortMappings,omitempty" name:"PortMappings"`
 }
 
+type EnablePrometheusConf struct {
+
+	// The listening port of the applicaiton
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// URL path for monitoring
+	Path *string `json:"Path,omitempty" name:"Path"`
+}
+
 type EsInfo struct {
 
 	// Minimum number of instances
@@ -1288,6 +1150,12 @@ type IngressInfo struct {
 
 	// Whether to listen on both the HTTP 80 port and HTTPS 443 port. The default value is `false`. The optional value `true` means listening on both the HTTP 80 port and HTTPS 443 port.
 	Mixed *bool `json:"Mixed,omitempty" name:"Mixed"`
+
+	// Redirection mode. Values:
+	// - `AUTO` (automatically redirect HTTP to HTTPS)
+	// - `NONE` (no redirection)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RewriteType *string `json:"RewriteType,omitempty" name:"RewriteType"`
 }
 
 type IngressRule struct {
@@ -1553,6 +1421,9 @@ type MountedSettingConf struct {
 
 	// Configuration content
 	Data []*Pair `json:"Data,omitempty" name:"Data"`
+
+	// Encrypt configuration name
+	SecretDataName *string `json:"SecretDataName,omitempty" name:"SecretDataName"`
 }
 
 type NamespacePage struct {
@@ -1585,6 +1456,10 @@ type Pair struct {
 	// Configuration name
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// Encrypt configuration name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Secret *string `json:"Secret,omitempty" name:"Secret"`
 }
 
 type PortMapping struct {

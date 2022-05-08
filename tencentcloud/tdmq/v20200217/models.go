@@ -78,12 +78,6 @@ func (r *AcknowledgeMessageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type BindCluster struct {
-
-	// Physical cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
-}
-
 type ClearCmqQueueRequest struct {
 	*tchttp.BaseRequest
 
@@ -429,6 +423,10 @@ type CmqQueue struct {
 	// Maximum size of heaped messages in bytes.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	MaxMsgBacklogSize *int64 `json:"MaxMsgBacklogSize,omitempty" name:"MaxMsgBacklogSize"`
+
+	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
 type CmqSubscription struct {
@@ -545,6 +543,10 @@ type CmqTopic struct {
 	// Namespace name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type CmqTransactionPolicy struct {
@@ -556,54 +558,6 @@ type CmqTransactionPolicy struct {
 	// Maximum number of queries.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
-}
-
-type Consumer struct {
-
-	// The time when the consumer started connecting.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConnectedSince *string `json:"ConnectedSince,omitempty" name:"ConnectedSince"`
-
-	// Consumer address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerAddr *string `json:"ConsumerAddr,omitempty" name:"ConsumerAddr"`
-
-	// Consumer name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerName *string `json:"ConsumerName,omitempty" name:"ConsumerName"`
-
-	// Consumer version.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClientVersion *string `json:"ClientVersion,omitempty" name:"ClientVersion"`
-
-	// Serial number of the topic partition connected to the consumer.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
-}
-
-type ConsumersSchedule struct {
-
-	// Current partition ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
-
-	// Number of messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	NumberOfEntries *uint64 `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
-
-	// Number of retained messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgBacklog *uint64 `json:"MsgBacklog,omitempty" name:"MsgBacklog"`
-
-	// Sum of the numbers of messages delivered by the consumer per second.
-	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
-
-	// Number of bytes of messages consumed by the consumer per second.
-	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
-
-	// Percentage of messages discarded due to timeout.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateExpired *string `json:"MsgRateExpired,omitempty" name:"MsgRateExpired"`
 }
 
 type CreateClusterRequest struct {
@@ -689,10 +643,10 @@ type CreateCmqQueueRequest struct {
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
 	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
 
-	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
+	// The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
 	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
 
-	// Whether to enable the message rewinding feature for a queue. Value range: 0–msgRetentionSeconds, where 0 means not to enable this feature, while `msgRetentionSeconds` indicates that the maximum rewindable period is the message retention period of the queue.
+	// Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
 
 	// 1: transaction queue; 0: general queue
@@ -721,6 +675,9 @@ type CreateCmqQueueRequest struct {
 
 	// Tag array.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
 func (r *CreateCmqQueueRequest) ToJsonString() string {
@@ -751,6 +708,7 @@ func (r *CreateCmqQueueRequest) FromJsonString(s string) error {
 	delete(f, "MaxTimeToLive")
 	delete(f, "Trace")
 	delete(f, "Tags")
+	delete(f, "RetentionSizeInMB")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCmqQueueRequest has unknown keys!", "")
 	}
@@ -2102,176 +2060,6 @@ func (r *DeleteRolesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DeleteSubscriptionsRequest struct {
-	*tchttp.BaseRequest
-
-	// Set of subscriptions. Up to 20 subscriptions can be deleted at a time.
-	SubscriptionTopicSets []*SubscriptionTopic `json:"SubscriptionTopicSets,omitempty" name:"SubscriptionTopicSets"`
-
-	// Pulsar cluster ID.
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Whether to force deletion. Default value: false
-	Force *bool `json:"Force,omitempty" name:"Force"`
-}
-
-func (r *DeleteSubscriptionsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteSubscriptionsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "SubscriptionTopicSets")
-	delete(f, "ClusterId")
-	delete(f, "EnvironmentId")
-	delete(f, "Force")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSubscriptionsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteSubscriptionsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of successfully deleted subscriptions.
-		SubscriptionTopicSets []*SubscriptionTopic `json:"SubscriptionTopicSets,omitempty" name:"SubscriptionTopicSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteSubscriptionsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteSubscriptionsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteTopicsRequest struct {
-	*tchttp.BaseRequest
-
-	// Set of topics. Up to 20 topics can be deleted at a time.
-	TopicSets []*TopicRecord `json:"TopicSets,omitempty" name:"TopicSets"`
-
-	// Pulsar cluster ID.
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Whether to force deletion. Default value: false
-	Force *bool `json:"Force,omitempty" name:"Force"`
-}
-
-func (r *DeleteTopicsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteTopicsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TopicSets")
-	delete(f, "ClusterId")
-	delete(f, "EnvironmentId")
-	delete(f, "Force")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTopicsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DeleteTopicsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of deleted topics.
-		TopicSets []*TopicRecord `json:"TopicSets,omitempty" name:"TopicSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DeleteTopicsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteTopicsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeBindClustersRequest struct {
-	*tchttp.BaseRequest
-}
-
-func (r *DescribeBindClustersRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBindClustersRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBindClustersRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeBindClustersResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of dedicated clusters
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of dedicated clusters
-		ClusterSet []*BindCluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeBindClustersResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBindClustersResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeBindVpcsRequest struct {
 	*tchttp.BaseRequest
 
@@ -2378,74 +2166,6 @@ func (r *DescribeClusterDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClusterDetailResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeClustersRequest struct {
-	*tchttp.BaseRequest
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filter by list of cluster IDs
-	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
-
-	// Whether to filter by tag
-	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
-
-	// Filter. Currently, you can filter only by tag.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeClustersRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeClustersRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "ClusterIdList")
-	delete(f, "IsTagFilter")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClustersRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeClustersResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of clusters
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of cluster information
-		ClusterSet []*Cluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeClustersResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2559,79 +2279,6 @@ func (r *DescribeCmqQueueDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCmqQueueDetailResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCmqQueuesRequest struct {
-	*tchttp.BaseRequest
-
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filter by `QueueName`
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
-
-	// List of CMQ queue names
-	QueueNameList []*string `json:"QueueNameList,omitempty" name:"QueueNameList"`
-
-	// For filtering by tag, this must be configured to `true`.
-	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
-
-	// Filter. Currently, you can filter only by tag.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeCmqQueuesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCmqQueuesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "QueueName")
-	delete(f, "QueueNameList")
-	delete(f, "IsTagFilter")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCmqQueuesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCmqQueuesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of queues
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		QueueList []*CmqQueue `json:"QueueList,omitempty" name:"QueueList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeCmqQueuesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCmqQueuesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2749,79 +2396,6 @@ func (r *DescribeCmqTopicDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeCmqTopicsRequest struct {
-	*tchttp.BaseRequest
-
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Fuzzy search by `TopicName`
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Filter by list of CMQ topic names
-	TopicNameList []*string `json:"TopicNameList,omitempty" name:"TopicNameList"`
-
-	// For filtering by tag, this must be configured to `true`.
-	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
-
-	// Filter. Currently, you can filter only by tag.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeCmqTopicsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCmqTopicsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "TopicName")
-	delete(f, "TopicNameList")
-	delete(f, "IsTagFilter")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCmqTopicsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeCmqTopicsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TopicList []*CmqTopic `json:"TopicList,omitempty" name:"TopicList"`
-
-		// Total number of topics
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeCmqTopicsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCmqTopicsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeEnvironmentAttributesRequest struct {
 	*tchttp.BaseRequest
 
@@ -2893,152 +2467,6 @@ func (r *DescribeEnvironmentAttributesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeEnvironmentAttributesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeEnvironmentRolesRequest struct {
-	*tchttp.BaseRequest
-
-	// Environment (namespace) name (required).
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Pulsar cluster ID (required)
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Role name
-	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
-
-	// * RoleName
-	// Filter by role name for exact query.
-	// Type: String
-	// Required: no
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeEnvironmentRolesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEnvironmentRolesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "EnvironmentId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "ClusterId")
-	delete(f, "RoleName")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentRolesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeEnvironmentRolesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of records.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Set of namespace roles.
-		EnvironmentRoleSets []*EnvironmentRole `json:"EnvironmentRoleSets,omitempty" name:"EnvironmentRoleSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeEnvironmentRolesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEnvironmentRolesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeEnvironmentsRequest struct {
-	*tchttp.BaseRequest
-
-	// Fuzzy search by namespace name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Pulsar cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// * EnvironmentId
-	// Filter by namespace for exact query.
-	// Type: String
-	// Required: no
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeEnvironmentsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEnvironmentsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "EnvironmentId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "ClusterId")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeEnvironmentsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of namespaces.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Array set of namespaces.
-		EnvironmentSet []*Environment `json:"EnvironmentSet,omitempty" name:"EnvironmentSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeEnvironmentsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEnvironmentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3245,303 +2673,6 @@ func (r *DescribeRocketMQClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeRocketMQClustersRequest struct {
-	*tchttp.BaseRequest
-
-	// Offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Search by cluster ID
-	IdKeyword *string `json:"IdKeyword,omitempty" name:"IdKeyword"`
-
-	// Search by cluster name
-	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
-
-	// Filter by list of cluster IDs
-	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
-
-	// For filtering by tag, this must be configured to `true`
-	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
-
-	// Filter. Currently, you can filter only by tag.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeRocketMQClustersRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQClustersRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "IdKeyword")
-	delete(f, "NameKeyword")
-	delete(f, "ClusterIdList")
-	delete(f, "IsTagFilter")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQClustersRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQClustersResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster information
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ClusterList []*RocketMQClusterDetail `json:"ClusterList,omitempty" name:"ClusterList"`
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRocketMQClustersResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQClustersResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQGroupsRequest struct {
-	*tchttp.BaseRequest
-
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Namespace
-	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-	// Offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Topic name, which can be used to query all subscription groups under the topic
-	FilterTopic *string `json:"FilterTopic,omitempty" name:"FilterTopic"`
-
-	// Consumer group query by consumer group name. Fuzzy query is supported
-	FilterGroup *string `json:"FilterGroup,omitempty" name:"FilterGroup"`
-
-	// Sort by specified field. Valid values: tps, accumulative.
-	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
-
-	// Sort in ascending or descending order. Valid values: asc, desc.
-	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
-
-	// Subscription group name. After it is specified, only the information of the corresponding subscription group will be returned.
-	FilterOneGroup *string `json:"FilterOneGroup,omitempty" name:"FilterOneGroup"`
-}
-
-func (r *DescribeRocketMQGroupsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQGroupsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ClusterId")
-	delete(f, "NamespaceId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "FilterTopic")
-	delete(f, "FilterGroup")
-	delete(f, "SortedBy")
-	delete(f, "SortOrder")
-	delete(f, "FilterOneGroup")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQGroupsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQGroupsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of subscription groups
-		Groups []*RocketMQGroup `json:"Groups,omitempty" name:"Groups"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRocketMQGroupsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQGroupsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQNamespacesRequest struct {
-	*tchttp.BaseRequest
-
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Search by name
-	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
-}
-
-func (r *DescribeRocketMQNamespacesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQNamespacesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ClusterId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "NameKeyword")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQNamespacesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQNamespacesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of namespaces
-		Namespaces []*RocketMQNamespace `json:"Namespaces,omitempty" name:"Namespaces"`
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRocketMQNamespacesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQNamespacesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQTopicsRequest struct {
-	*tchttp.BaseRequest
-
-	// Query offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Query limit
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Namespace
-	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-	// Filter by topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction.
-	FilterType []*string `json:"FilterType,omitempty" name:"FilterType"`
-
-	// Search by topic name. Fuzzy query is supported.
-	FilterName *string `json:"FilterName,omitempty" name:"FilterName"`
-}
-
-func (r *DescribeRocketMQTopicsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQTopicsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "ClusterId")
-	delete(f, "NamespaceId")
-	delete(f, "FilterType")
-	delete(f, "FilterName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQTopicsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeRocketMQTopicsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of records
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of topic information
-		Topics []*RocketMQTopic `json:"Topics,omitempty" name:"Topics"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeRocketMQTopicsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeRocketMQTopicsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeRolesRequest struct {
 	*tchttp.BaseRequest
 
@@ -3613,220 +2744,6 @@ func (r *DescribeRolesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeSubscriptionsRequest struct {
-	*tchttp.BaseRequest
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Fuzzy match by subscriber name.
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
-
-	// Data filter.
-	Filters []*FilterSubscription `json:"Filters,omitempty" name:"Filters"`
-
-	// Pulsar cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-}
-
-func (r *DescribeSubscriptionsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSubscriptionsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "EnvironmentId")
-	delete(f, "TopicName")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "SubscriptionName")
-	delete(f, "Filters")
-	delete(f, "ClusterId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubscriptionsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeSubscriptionsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array set of subscribers.
-		SubscriptionSets []*Subscription `json:"SubscriptionSets,omitempty" name:"SubscriptionSets"`
-
-		// Quantity.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeSubscriptionsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSubscriptionsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeTopicsRequest struct {
-	*tchttp.BaseRequest
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Fuzzy match by topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Offset. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Topic type description:
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
-	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
-
-	// Pulsar cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// * TopicName
-	// Query by topic name for exact search.
-	// Type: String
-	// Required: no
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeTopicsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTopicsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "EnvironmentId")
-	delete(f, "TopicName")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "TopicType")
-	delete(f, "ClusterId")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeTopicsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array set of topics.
-		TopicSets []*Topic `json:"TopicSets,omitempty" name:"TopicSets"`
-
-		// Number of topics.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeTopicsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTopicsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type Environment struct {
-
-	// Namespace name
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Remarks
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days)
-	MsgTTL *int64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
-
-	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Namespace ID
-	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
-
-	// Number of topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
-
-	// Message retention policy
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
-}
-
-type EnvironmentRole struct {
-
-	// Environment (namespace).
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Role name.
-	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
-
-	// Permissions, which is a non-empty string array of `produce` and `consume` at the most.
-	Permissions []*string `json:"Permissions,omitempty" name:"Permissions"`
-
-	// Role description.
-	RoleDescribe *string `json:"RoleDescribe,omitempty" name:"RoleDescribe"`
-
-	// Creation time.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Update time.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-}
-
 type Filter struct {
 
 	// Filter parameter name
@@ -3834,21 +2751,6 @@ type Filter struct {
 
 	// Value
 	Values []*string `json:"Values,omitempty" name:"Values"`
-}
-
-type FilterSubscription struct {
-
-	// Whether to display only subscriptions that include real consumers.
-	ConsumerHasCount *bool `json:"ConsumerHasCount,omitempty" name:"ConsumerHasCount"`
-
-	// Whether to display only subscriptions with retained messages.
-	ConsumerHasBacklog *bool `json:"ConsumerHasBacklog,omitempty" name:"ConsumerHasBacklog"`
-
-	// Whether to display only subscriptions with messages discarded after expiration.
-	ConsumerHasExpired *bool `json:"ConsumerHasExpired,omitempty" name:"ConsumerHasExpired"`
-
-	// Filter by subscription name for exact search.
-	SubscriptionNames []*string `json:"SubscriptionNames,omitempty" name:"SubscriptionNames"`
 }
 
 type ModifyClusterRequest struct {
@@ -3927,13 +2829,13 @@ type ModifyCmqQueueAttributeRequest struct {
 	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
 	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
 
-	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+	// Max message size, which defaults to 1,024 KB for the queue of TDMQ for CMQ and cannot be modified.
 	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
 
-	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
+	// The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
 	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
 
-	// Maximum message rewindable period. Value range: 0–msgRetentionSeconds (maximum message retention period of the queue). 0 indicates not to enable message rewinding.
+	// Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
 
 	// First query time
@@ -3959,6 +2861,9 @@ type ModifyCmqQueueAttributeRequest struct {
 
 	// Whether to enable transaction. 1: yes; 0: no
 	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
+
+	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
 func (r *ModifyCmqQueueAttributeRequest) ToJsonString() string {
@@ -3988,6 +2893,7 @@ func (r *ModifyCmqQueueAttributeRequest) FromJsonString(s string) error {
 	delete(f, "Policy")
 	delete(f, "Trace")
 	delete(f, "Transaction")
+	delete(f, "RetentionSizeInMB")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCmqQueueAttributeRequest has unknown keys!", "")
 	}
@@ -4646,61 +3552,6 @@ func (r *ModifyTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type PartitionsTopic struct {
-
-	// Average size of the messages published in the last interval in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AverageMsgSize *string `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
-
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
-
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastConfirmedEntry *string `json:"LastConfirmedEntry,omitempty" name:"LastConfirmedEntry"`
-
-	// Time when the last ledger was created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastLedgerCreatedTimestamp *string `json:"LastLedgerCreatedTimestamp,omitempty" name:"LastLedgerCreatedTimestamp"`
-
-	// Number of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateIn *string `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
-
-	// Sum of the numbers of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
-
-	// Number of bytes of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputIn *string `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
-
-	// Number of bytes of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
-
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	NumberOfEntries *string `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
-
-	// Subpartition ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions *int64 `json:"Partitions,omitempty" name:"Partitions"`
-
-	// Number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProducerCount *string `json:"ProducerCount,omitempty" name:"ProducerCount"`
-
-	// Total amount of all stored messages in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalSize *string `json:"TotalSize,omitempty" name:"TotalSize"`
-
-	// Topic type description.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
-}
-
 type PublishCmqMsgRequest struct {
 	*tchttp.BaseRequest
 
@@ -4941,6 +3792,72 @@ func (r *ResetMsgSubOffsetByTimestampResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ResetRocketMQConsumerOffSetRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Consumer group name.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Topic name.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Reset method. 0: Start from the latest offset; 1: Start from specified time point.
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// The specified timestamp that has been reset, in milliseconds. This parameter only takes effect when the value of `Type` is `1`.
+	ResetTimestamp *uint64 `json:"ResetTimestamp,omitempty" name:"ResetTimestamp"`
+}
+
+func (r *ResetRocketMQConsumerOffSetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetRocketMQConsumerOffSetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NamespaceId")
+	delete(f, "GroupId")
+	delete(f, "Topic")
+	delete(f, "Type")
+	delete(f, "ResetTimestamp")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetRocketMQConsumerOffSetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ResetRocketMQConsumerOffSetResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ResetRocketMQConsumerOffSetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetRocketMQConsumerOffSetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RetentionPolicy struct {
 
 	// Message retention period
@@ -5030,19 +3947,6 @@ type RocketMQClusterConfig struct {
 	MaxLatencyTime *uint64 `json:"MaxLatencyTime,omitempty" name:"MaxLatencyTime"`
 }
 
-type RocketMQClusterDetail struct {
-
-	// Cluster's basic information
-	Info *RocketMQClusterInfo `json:"Info,omitempty" name:"Info"`
-
-	// Cluster configuration information
-	Config *RocketMQClusterConfig `json:"Config,omitempty" name:"Config"`
-
-	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
-
 type RocketMQClusterInfo struct {
 
 	// Cluster ID
@@ -5066,6 +3970,10 @@ type RocketMQClusterInfo struct {
 
 	// VPC access address
 	VpcEndPoint *string `json:"VpcEndPoint,omitempty" name:"VpcEndPoint"`
+
+	// Whether the namespace access point is supported.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SupportNamespaceEndpoint *bool `json:"SupportNamespaceEndpoint,omitempty" name:"SupportNamespaceEndpoint"`
 }
 
 type RocketMQClusterRecentStats struct {
@@ -5081,86 +3989,6 @@ type RocketMQClusterRecentStats struct {
 
 	// Number of retained messages
 	AccumulativeMsgNum *uint64 `json:"AccumulativeMsgNum,omitempty" name:"AccumulativeMsgNum"`
-}
-
-type RocketMQGroup struct {
-
-	// Consumer group name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Number of online consumers
-	ConsumerNum *uint64 `json:"ConsumerNum,omitempty" name:"ConsumerNum"`
-
-	// Consumption TPS
-	TPS *uint64 `json:"TPS,omitempty" name:"TPS"`
-
-	// Total number of retained messages
-	TotalAccumulative *int64 `json:"TotalAccumulative,omitempty" name:"TotalAccumulative"`
-
-	// 0: cluster consumption mode; 1: broadcast consumption mode; -1: unknown
-	ConsumptionMode *int64 `json:"ConsumptionMode,omitempty" name:"ConsumptionMode"`
-
-	// Whether to allow consumption
-	ReadEnabled *bool `json:"ReadEnabled,omitempty" name:"ReadEnabled"`
-
-	// Number of partitions in the retry letter topic
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	RetryPartitionNum *uint64 `json:"RetryPartitionNum,omitempty" name:"RetryPartitionNum"`
-
-	// Creation time in milliseconds
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time in milliseconds
-	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Client protocol
-	ClientProtocol *string `json:"ClientProtocol,omitempty" name:"ClientProtocol"`
-
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// Consumer type. Enumerated values: ACTIVELY, PASSIVELY
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerType *string `json:"ConsumerType,omitempty" name:"ConsumerType"`
-
-	// Whether to enable broadcast consumption
-	BroadcastEnabled *bool `json:"BroadcastEnabled,omitempty" name:"BroadcastEnabled"`
-}
-
-type RocketMQNamespace struct {
-
-	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
-	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-	// Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days.
-	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
-
-	// Retention period for persisted messages in milliseconds
-	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
-
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-}
-
-type RocketMQTopic struct {
-
-	// Topic name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// Number of read/write partitions
-	PartitionNum *uint64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
-
-	// Creation time in milliseconds
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Creation time in milliseconds
-	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type Role struct {
@@ -5468,99 +4296,6 @@ type Sort struct {
 	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
-type Subscription struct {
-
-	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// The time when the consumer started connecting.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConnectedSince *string `json:"ConnectedSince,omitempty" name:"ConnectedSince"`
-
-	// Consumer address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerAddr *string `json:"ConsumerAddr,omitempty" name:"ConsumerAddr"`
-
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
-
-	// Consumer name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerName *string `json:"ConsumerName,omitempty" name:"ConsumerName"`
-
-	// Number of retained messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgBacklog *string `json:"MsgBacklog,omitempty" name:"MsgBacklog"`
-
-	// Proportion of messages under this subscription that were discarded but not sent after TTL.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateExpired *string `json:"MsgRateExpired,omitempty" name:"MsgRateExpired"`
-
-	// Sum of the numbers of messages delivered by the consumer per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
-
-	// Number of bytes of messages consumed by the consumer per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
-
-	// Subscription name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
-
-	// Set of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerSets []*Consumer `json:"ConsumerSets,omitempty" name:"ConsumerSets"`
-
-	// Whether it is online.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsOnline *bool `json:"IsOnline,omitempty" name:"IsOnline"`
-
-	// Set of consumption progress information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumersScheduleSets []*ConsumersSchedule `json:"ConsumersScheduleSets,omitempty" name:"ConsumersScheduleSets"`
-
-	// Remarks.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// Creation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
-
-	// Whether messages are blocked as the limit of unacknowledged messages has been reached.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	BlockedSubscriptionOnUnackedMsgs *bool `json:"BlockedSubscriptionOnUnackedMsgs,omitempty" name:"BlockedSubscriptionOnUnackedMsgs"`
-
-	// Maximum number of unacknowledged messages.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	MaxUnackedMsgNum *int64 `json:"MaxUnackedMsgNum,omitempty" name:"MaxUnackedMsgNum"`
-}
-
-type SubscriptionTopic struct {
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Subscription name.
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
-}
-
 type Tag struct {
 
 	// Value of the tag key
@@ -5568,115 +4303,6 @@ type Tag struct {
 
 	// Value of the tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
-}
-
-type Topic struct {
-
-	// Average size of the messages published in the last interval in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	AverageMsgSize *string `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
-
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
-
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastConfirmedEntry *string `json:"LastConfirmedEntry,omitempty" name:"LastConfirmedEntry"`
-
-	// Time when the last ledger was created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastLedgerCreatedTimestamp *string `json:"LastLedgerCreatedTimestamp,omitempty" name:"LastLedgerCreatedTimestamp"`
-
-	// Number of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateIn *string `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
-
-	// Sum of the numbers of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
-
-	// Number of bytes of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputIn *string `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
-
-	// Number of bytes of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
-
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	NumberOfEntries *string `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
-
-	// Number of partitions ≤ 0: there are no subpartitions in the topic.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Partitions *int64 `json:"Partitions,omitempty" name:"Partitions"`
-
-	// Number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProducerCount *string `json:"ProducerCount,omitempty" name:"ProducerCount"`
-
-	// Total amount of all stored messages in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalSize *string `json:"TotalSize,omitempty" name:"TotalSize"`
-
-	// Subpartitions in a partitioned topic.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubTopicSets []*PartitionsTopic `json:"SubTopicSets,omitempty" name:"SubTopicSets"`
-
-	// Topic type description:
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
-
-	// Environment (namespace) name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Topic name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
-
-	// Remarks (up to 128 characters).
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-	// Creation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// Maximum number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProducerLimit *string `json:"ProducerLimit,omitempty" name:"ProducerLimit"`
-
-	// Maximum number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ConsumerLimit *string `json:"ConsumerLimit,omitempty" name:"ConsumerLimit"`
-
-	// `0`: Non-persistent and non-partitioned
-	// `1`: Non-persistent and partitioned
-	// `2`: Persistent and non-partitioned
-	// `3`: Persistent and partitioned
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	PulsarTopicType *int64 `json:"PulsarTopicType,omitempty" name:"PulsarTopicType"`
-}
-
-type TopicRecord struct {
-
-	// Environment (namespace) name.
-	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-	// Topic name.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
 type UnbindCmqDeadLetterRequest struct {

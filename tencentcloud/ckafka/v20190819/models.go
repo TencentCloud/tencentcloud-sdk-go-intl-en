@@ -811,11 +811,14 @@ type CreateTopicRequest struct {
 	// Whether to allow an unsynced replica to be elected as leader. false: no, true: yes. Default value: false
 	UncleanLeaderElectionEnable *int64 `json:"UncleanLeaderElectionEnable,omitempty" name:"UncleanLeaderElectionEnable"`
 
-	// Message retention period in ms, which is optional. The current minimum value is 60,000 ms
+	// Message retention period in milliseconds, which is optional. Min value: 60,000 ms.
 	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
 
 	// Segment rolling duration in ms. The current minimum value is 3,600,000 ms
 	SegmentMs *int64 `json:"SegmentMs,omitempty" name:"SegmentMs"`
+
+	// Max message size in bytes. Value range: 1,024 bytes (1 KB) to 8,388,608 bytes (8 MB).
+	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitempty" name:"MaxMessageBytes"`
 
 	// Preset ACL rule. `1`: enable, `0`: disable. Default value: `0`.
 	EnableAclRule *int64 `json:"EnableAclRule,omitempty" name:"EnableAclRule"`
@@ -854,6 +857,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "UncleanLeaderElectionEnable")
 	delete(f, "RetentionMs")
 	delete(f, "SegmentMs")
+	delete(f, "MaxMessageBytes")
 	delete(f, "EnableAclRule")
 	delete(f, "AclRuleName")
 	delete(f, "RetentionBytes")
@@ -1727,11 +1731,14 @@ type DescribeInstancesDetailRequest struct {
 	// Tag key match.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-	// Filter.
+	// Filter. Valid values of `filter.Name` include `Ip`, `VpcId`, `SubNetId`, `InstanceType`, and `InstanceId`. Up to 10 values can be passed for `filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// This parameter has been deprecated and replaced with `InstanceIdList`.
 	InstanceIds *string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Filter by instance ID.
+	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 }
 
 func (r *DescribeInstancesDetailRequest) ToJsonString() string {
@@ -1754,6 +1761,7 @@ func (r *DescribeInstancesDetailRequest) FromJsonString(s string) error {
 	delete(f, "TagKey")
 	delete(f, "Filters")
 	delete(f, "InstanceIds")
+	delete(f, "InstanceIdList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesDetailRequest has unknown keys!", "")
 	}
@@ -3105,7 +3113,7 @@ type ModifyTopicAttributesRequest struct {
 	// Segment rolling duration in ms. The current minimum value is 86,400,000 ms.
 	SegmentMs *int64 `json:"SegmentMs,omitempty" name:"SegmentMs"`
 
-	// Maximum topic message length in bytes. The maximum value is 8,388,608 bytes (i.e., 8 MB).
+	// Max message size in bytes. Max value: 8,388,608 bytes (8 MB).
 	MaxMessageBytes *int64 `json:"MaxMessageBytes,omitempty" name:"MaxMessageBytes"`
 
 	// Message deletion policy. Valid values: delete, compact
@@ -3277,7 +3285,7 @@ type Route struct {
 	// Route ID
 	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
 
-	// VIP network type (1: public network TGW; 2: classic network; 3: VPC; 4: supporting network (Standard Edition); 5: SSL public network access; 6: BM VPC; 7: supporting network (Pro Edition))
+	// VIP network type (1: Public network TGW; 2: Classic network; 3: VPC; 4: Supporting network (IDC environment); 5: SSL public network access; 6: BM VPC; 7: Supporting network (CVM environment)).
 	VipType *int64 `json:"VipType,omitempty" name:"VipType"`
 
 	// Virtual IP list

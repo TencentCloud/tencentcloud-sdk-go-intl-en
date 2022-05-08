@@ -45,59 +45,6 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
-    request = &CreateApplicationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tem", APIVersion, "CreateApplication")
-    
-    
-    return
-}
-
-func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
-    response = &CreateApplicationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateApplication
-// This API is used to create an application.
-//
-// error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
-    return c.CreateApplicationWithContext(context.Background(), request)
-}
-
-// CreateApplication
-// This API is used to create an application.
-//
-// error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
-//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
-    if request == nil {
-        request = NewCreateApplicationRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateApplication require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateApplicationResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateCosTokenRequest() (request *CreateCosTokenRequest) {
     request = &CreateCosTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -221,6 +168,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
+//  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
 //  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     return c.CreateResourceWithContext(context.Background(), request)
@@ -232,6 +180,7 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
+//  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
 //  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
 func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     if request == nil {
@@ -245,85 +194,6 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteApplicationRequest() (request *DeleteApplicationRequest) {
-    request = &DeleteApplicationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("tem", APIVersion, "DeleteApplication")
-    
-    
-    return
-}
-
-func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
-    response = &DeleteApplicationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteApplication
-// This API is used to delete an application.
-//
-//   - Stop the application if it’s running
-//
-//   - Delete resources associated with this application
-//
-//   - Delele the application
-//
-// error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
-//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
-//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
-//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
-//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
-//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
-//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
-//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
-func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
-    return c.DeleteApplicationWithContext(context.Background(), request)
-}
-
-// DeleteApplication
-// This API is used to delete an application.
-//
-//   - Stop the application if it’s running
-//
-//   - Delete resources associated with this application
-//
-//   - Delele the application
-//
-// error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
-//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
-//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
-//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
-//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
-//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
-//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
-//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
-func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
-    if request == nil {
-        request = NewDeleteApplicationRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteApplication require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteApplicationResponse()
     err = c.Send(request, response)
     return
 }
@@ -349,17 +219,10 @@ func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
 // This API is used to delete an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
-//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
-//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
-//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
-//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
-//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
-//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
-//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
+//  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
+//  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
+//  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
 func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
     return c.DeleteIngressWithContext(context.Background(), request)
 }
@@ -368,17 +231,10 @@ func (c *Client) DeleteIngress(request *DeleteIngressRequest) (response *DeleteI
 // This API is used to delete an ingress rule.
 //
 // error code that may be returned:
-//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
-//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
-//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
-//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
-//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
-//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
-//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
-//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
-//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
-//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
-//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+//  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
+//  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
+//  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
+//  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
 func (c *Client) DeleteIngressWithContext(ctx context.Context, request *DeleteIngressRequest) (response *DeleteIngressResponse, err error) {
     if request == nil {
         request = NewDeleteIngressRequest()
@@ -419,11 +275,14 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_AUTOSCALERLARGERTHANONE = "InvalidParameterValue.AutoScalerLargerThanOne"
 //  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
 //  INVALIDPARAMETERVALUE_TRAITSTRACINGNOTSUPPORTED = "InvalidParameterValue.TraitsTracingNotSupported"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
+//  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) DeployApplication(request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
@@ -437,11 +296,14 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
+//  INVALIDPARAMETERVALUE_AUTOSCALERLARGERTHANONE = "InvalidParameterValue.AutoScalerLargerThanOne"
 //  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
 //  INVALIDPARAMETERVALUE_TRAITSTRACINGNOTSUPPORTED = "InvalidParameterValue.TraitsTracingNotSupported"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
+//  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) DeployApplicationWithContext(ctx context.Context, request *DeployApplicationRequest) (response *DeployApplicationResponse, err error) {
@@ -483,8 +345,10 @@ func NewDescribeApplicationPodsResponse() (response *DescribeApplicationPodsResp
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
     return c.DescribeApplicationPodsWithContext(context.Background(), request)
 }
@@ -495,8 +359,10 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request *DescribeApplicationPodsRequest) (response *DescribeApplicationPodsResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationPodsRequest()
@@ -631,6 +497,8 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
 //
 // error code that may be returned:
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
     return c.DescribeIngressesWithContext(context.Background(), request)
 }
@@ -640,6 +508,8 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
 //
 // error code that may be returned:
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeIngressesWithContext(ctx context.Context, request *DescribeIngressesRequest) (response *DescribeIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeIngressesRequest()
@@ -677,7 +547,12 @@ func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesRe
 // This API is used to query the list of ingress rules associated with the application.
 //
 // error code that may be returned:
+//  INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
     return c.DescribeRelatedIngressesWithContext(context.Background(), request)
 }
@@ -686,7 +561,12 @@ func (c *Client) DescribeRelatedIngresses(request *DescribeRelatedIngressesReque
 // This API is used to query the list of ingress rules associated with the application.
 //
 // error code that may be returned:
+//  INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeRelatedIngressesWithContext(ctx context.Context, request *DescribeRelatedIngressesRequest) (response *DescribeRelatedIngressesResponse, err error) {
     if request == nil {
         request = NewDescribeRelatedIngressesRequest()
@@ -724,7 +604,12 @@ func NewGenerateApplicationPackageDownloadUrlResponse() (response *GenerateAppli
 // This API is used to generate the pre-signed download URL for the specified application package.
 //
 // error code that may be returned:
+//  INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
     return c.GenerateApplicationPackageDownloadUrlWithContext(context.Background(), request)
 }
@@ -733,7 +618,12 @@ func (c *Client) GenerateApplicationPackageDownloadUrl(request *GenerateApplicat
 // This API is used to generate the pre-signed download URL for the specified application package.
 //
 // error code that may be returned:
+//  INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) GenerateApplicationPackageDownloadUrlWithContext(ctx context.Context, request *GenerateApplicationPackageDownloadUrlRequest) (response *GenerateApplicationPackageDownloadUrlResponse, err error) {
     if request == nil {
         request = NewGenerateApplicationPackageDownloadUrlRequest()
@@ -914,6 +804,7 @@ func NewRestartApplicationResponse() (response *RestartApplicationResponse) {
 // error code that may be returned:
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) RestartApplication(request *RestartApplicationRequest) (response *RestartApplicationResponse, err error) {
     return c.RestartApplicationWithContext(context.Background(), request)
@@ -925,6 +816,7 @@ func (c *Client) RestartApplication(request *RestartApplicationRequest) (respons
 // error code that may be returned:
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) RestartApplicationWithContext(ctx context.Context, request *RestartApplicationRequest) (response *RestartApplicationResponse, err error) {
     if request == nil {
@@ -965,6 +857,7 @@ func NewRestartApplicationPodResponse() (response *RestartApplicationPodResponse
 // error code that may be returned:
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
     return c.RestartApplicationPodWithContext(context.Background(), request)
@@ -976,6 +869,7 @@ func (c *Client) RestartApplicationPod(request *RestartApplicationPodRequest) (r
 // error code that may be returned:
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) RestartApplicationPodWithContext(ctx context.Context, request *RestartApplicationPodRequest) (response *RestartApplicationPodResponse, err error) {
     if request == nil {
@@ -1017,9 +911,11 @@ func NewRollingUpdateApplicationByVersionResponse() (response *RollingUpdateAppl
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
 //  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) RollingUpdateApplicationByVersion(request *RollingUpdateApplicationByVersionRequest) (response *RollingUpdateApplicationByVersionResponse, err error) {
     return c.RollingUpdateApplicationByVersionWithContext(context.Background(), request)
 }
@@ -1031,9 +927,11 @@ func (c *Client) RollingUpdateApplicationByVersion(request *RollingUpdateApplica
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
 //  INVALIDPARAMETERVALUE_INVALIDDEPLOYVERSION = "InvalidParameterValue.InvalidDeployVersion"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCEUNAVAILABLE_WAITFORKRUISE = "ResourceUnavailable.WaitForKruise"
 func (c *Client) RollingUpdateApplicationByVersionWithContext(ctx context.Context, request *RollingUpdateApplicationByVersionRequest) (response *RollingUpdateApplicationByVersionResponse, err error) {
     if request == nil {
         request = NewRollingUpdateApplicationByVersionRequest()
