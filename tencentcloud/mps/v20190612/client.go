@@ -889,27 +889,29 @@ func NewCreateWorkflowResponse() (response *CreateWorkflowResponse) {
 }
 
 // CreateWorkflow
-// This API is used to set a processing rule for media files uploaded to the specified directory of a COS bucket, including:
+// This API is used to create a workflow for media files uploaded to a specified COS bucket. A workflow may include the following tasks:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screencapturing
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screencapturing
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Video conversion to adaptive bitrate streaming;
+// 6. Adaptive bitrate streaming
 //
-// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
 //
-// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, frame-specific labeling)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
 // 
 //
-// Note: Once successfully created, a workflow is disabled by default and needs to be enabled manually.
+// Note: A workflow is disabled upon creation. You need to manually enable it.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
@@ -924,27 +926,29 @@ func (c *Client) CreateWorkflow(request *CreateWorkflowRequest) (response *Creat
 }
 
 // CreateWorkflow
-// This API is used to set a processing rule for media files uploaded to the specified directory of a COS bucket, including:
+// This API is used to create a workflow for media files uploaded to a specified COS bucket. A workflow may include the following tasks:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screencapturing
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screencapturing
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Video conversion to adaptive bitrate streaming;
+// 6. Adaptive bitrate streaming
 //
-// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
 //
-// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, frame-specific labeling)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
 // 
 //
-// Note: Once successfully created, a workflow is disabled by default and needs to be enabled manually.
+// Note: A workflow is disabled upon creation. You need to manually enable it.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
@@ -1846,6 +1850,7 @@ func NewDescribeAnimatedGraphicsTemplatesResponse() (response *DescribeAnimatedG
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGraphicsTemplatesRequest) (response *DescribeAnimatedGraphicsTemplatesResponse, err error) {
     return c.DescribeAnimatedGraphicsTemplatesWithContext(context.Background(), request)
 }
@@ -1857,6 +1862,7 @@ func (c *Client) DescribeAnimatedGraphicsTemplates(request *DescribeAnimatedGrap
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Context, request *DescribeAnimatedGraphicsTemplatesRequest) (response *DescribeAnimatedGraphicsTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeAnimatedGraphicsTemplatesRequest()
@@ -1954,6 +1960,7 @@ func NewDescribeImageSpriteTemplatesResponse() (response *DescribeImageSpriteTem
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTemplatesRequest) (response *DescribeImageSpriteTemplatesResponse, err error) {
     return c.DescribeImageSpriteTemplatesWithContext(context.Background(), request)
 }
@@ -1965,6 +1972,7 @@ func (c *Client) DescribeImageSpriteTemplates(request *DescribeImageSpriteTempla
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, request *DescribeImageSpriteTemplatesRequest) (response *DescribeImageSpriteTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeImageSpriteTemplatesRequest()
@@ -2109,6 +2117,7 @@ func NewDescribeSampleSnapshotTemplatesResponse() (response *DescribeSampleSnaps
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeSampleSnapshotTemplates(request *DescribeSampleSnapshotTemplatesRequest) (response *DescribeSampleSnapshotTemplatesResponse, err error) {
     return c.DescribeSampleSnapshotTemplatesWithContext(context.Background(), request)
 }
@@ -2120,6 +2129,7 @@ func (c *Client) DescribeSampleSnapshotTemplates(request *DescribeSampleSnapshot
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeSampleSnapshotTemplatesWithContext(ctx context.Context, request *DescribeSampleSnapshotTemplatesRequest) (response *DescribeSampleSnapshotTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeSampleSnapshotTemplatesRequest()
@@ -2160,6 +2170,7 @@ func NewDescribeSnapshotByTimeOffsetTemplatesResponse() (response *DescribeSnaps
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshotByTimeOffsetTemplatesRequest) (response *DescribeSnapshotByTimeOffsetTemplatesResponse, err error) {
     return c.DescribeSnapshotByTimeOffsetTemplatesWithContext(context.Background(), request)
 }
@@ -2171,6 +2182,7 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplates(request *DescribeSnapshot
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 func (c *Client) DescribeSnapshotByTimeOffsetTemplatesWithContext(ctx context.Context, request *DescribeSnapshotByTimeOffsetTemplatesRequest) (response *DescribeSnapshotByTimeOffsetTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeSnapshotByTimeOffsetTemplatesRequest()
@@ -2329,6 +2341,7 @@ func NewDescribeTranscodeTemplatesResponse() (response *DescribeTranscodeTemplat
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesRequest) (response *DescribeTranscodeTemplatesResponse, err error) {
     return c.DescribeTranscodeTemplatesWithContext(context.Background(), request)
@@ -2345,6 +2358,7 @@ func (c *Client) DescribeTranscodeTemplates(request *DescribeTranscodeTemplatesR
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DescribeTranscodeTemplatesWithContext(ctx context.Context, request *DescribeTranscodeTemplatesRequest) (response *DescribeTranscodeTemplatesResponse, err error) {
     if request == nil {
@@ -3219,6 +3233,7 @@ func NewModifyImageSpriteTemplateResponse() (response *ModifyImageSpriteTemplate
 //  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
 //  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
 //  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
 //  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
@@ -3237,6 +3252,7 @@ func (c *Client) ModifyImageSpriteTemplate(request *ModifyImageSpriteTemplateReq
 //  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
 //  INVALIDPARAMETERVALUE_ROWCOUNT = "InvalidParameterValue.RowCount"
 //  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
 //  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
@@ -3339,9 +3355,11 @@ func NewModifySampleSnapshotTemplateResponse() (response *ModifySampleSnapshotTe
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
 //  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
 //  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
 //  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
 //  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
@@ -3357,9 +3375,11 @@ func (c *Client) ModifySampleSnapshotTemplate(request *ModifySampleSnapshotTempl
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
 //  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
 //  INVALIDPARAMETERVALUE_SAMPLEINTERVAL = "InvalidParameterValue.SampleInterval"
 //  INVALIDPARAMETERVALUE_SAMPLETYPE = "InvalidParameterValue.SampleType"
 //  INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"
@@ -3404,6 +3424,7 @@ func NewModifySnapshotByTimeOffsetTemplateResponse() (response *ModifySnapshotBy
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
 //  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
@@ -3420,6 +3441,7 @@ func (c *Client) ModifySnapshotByTimeOffsetTemplate(request *ModifySnapshotByTim
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_FILLTYPE = "InvalidParameterValue.FillType"
 //  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
@@ -3782,11 +3804,11 @@ func NewProcessLiveStreamResponse() (response *ProcessLiveStreamResponse) {
 }
 
 // ProcessLiveStream
-// This API is used to initiate tasks to process live streaming media files. Such tasks include:
+// This API is used to initiate live stream processing tasks. Such tasks may include the following:
 //
 // 
 //
-// * Intelligent content moderation (detecting porn, terrorism, and politically sensitive information in image and porn information in speech)
+// * Intelligent content moderation (detection of pornographic content in images and speech, detection of sensitive information)
 //
 // * Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
@@ -3806,11 +3828,11 @@ func (c *Client) ProcessLiveStream(request *ProcessLiveStreamRequest) (response 
 }
 
 // ProcessLiveStream
-// This API is used to initiate tasks to process live streaming media files. Such tasks include:
+// This API is used to initiate live stream processing tasks. Such tasks may include the following:
 //
 // 
 //
-// * Intelligent content moderation (detecting porn, terrorism, and politically sensitive information in image and porn information in speech)
+// * Intelligent content moderation (detection of pornographic content in images and speech, detection of sensitive information)
 //
 // * Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
@@ -3859,23 +3881,25 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for media files in COS, including:
+// This API is used to initiate processing tasks for media files in COS. Such tasks may include the following:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screencapturing
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screencapturing
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Video conversion to adaptive bitrate streaming;
+// 6. Adaptive bitrate streaming
 //
-// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
 //
-// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, frame-specific labeling)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3889,23 +3913,25 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for media files in COS, including:
+// This API is used to initiate processing tasks for media files in COS. Such tasks may include the following:
 //
-// 1. Video transcoding (with watermark);
+// 1. Video transcoding (with watermark)
 //
-// 2. Animated image generating;
+// 2. Animated image generating
 //
-// 3. Time point screencapturing;
+// 3. Time point screencapturing
 //
-// 4. Sampled screencapturing;
+// 4. Sampled screencapturing
 //
-// 5. Image sprite generating;
+// 5. Image sprite generating
 //
-// 6. Video conversion to adaptive bitrate streaming;
+// 6. Adaptive bitrate streaming
 //
-// 7. Intelligent content audit (detection of porn, terrorism, and politically sensitive information);
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
 //
-// 8. Intelligent content recognition (face recognition, full text recognition, text keyword recognition, full speech recognition, and speech keyword recognition).
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, frame-specific labeling)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"

@@ -352,14 +352,16 @@ type AiAnalysisTaskTagResult struct {
 type AiContentReviewResult struct {
 
 	// Task type. Valid values:
-	// <li>Porn: Porn information detection in image</li>
-	// <li>Terrorism: Terrorism information detection in image</li>
-	// <li>Political: Politically sensitive information detection in image</li>
-	// <li>Porn.Asr: ASR-based porn information detection in text</li>
-	// <li>Porn.Ocr: OCR-based porn information detection in text</li>
-	// <li>Porn.Voice: Porn information detection in speech</li>
-	// <li>Political.Asr: ASR-based politically sensitive information detection in text</li>
-	// <li>Political.Ocr: OCR-based politically sensitive information detection in text</li>
+	// <li>Porn (in images)</li>
+	// <li>Terrorism (in images)</li>
+	// <li>Political (in images)</li>
+	// <li>Porn.Asr</li>
+	// <li>Porn.Ocr</li>
+	// <li>Political.Asr</li>
+	// <li>Political.Ocr</li>
+	// <li>Terrorism.Ocr</li>
+	// <li>Prohibited.Asr</li>
+	// <li>Prohibited.Ocr</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Sample rate, which indicates the number of video frames captured per second for audit
@@ -372,12 +374,12 @@ type AiContentReviewResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PornTask *AiReviewTaskPornResult `json:"PornTask,omitempty" name:"PornTask"`
 
-	// Query result of an intelligent terrorism information detection in image task in video content audit, which is valid when task type is `Terrorism`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The result of detecting terrorism content in images, which is valid when the task type is `Terrorism`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TerrorismTask *AiReviewTaskTerrorismResult `json:"TerrorismTask,omitempty" name:"TerrorismTask"`
 
-	// Query result of an intelligent politically sensitive information detection in image task in video content audit, which is valid when task type is `Political`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The result of detecting politically sensitive information in images, which is valid when the task type is `Political`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PoliticalTask *AiReviewTaskPoliticalResult `json:"PoliticalTask,omitempty" name:"PoliticalTask"`
 
 	// Query result of an ASR-based porn information detection in text task in video content audit, which is valid when task type is `Porn.Asr`.
@@ -388,15 +390,16 @@ type AiContentReviewResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PornOcrTask *AiReviewTaskPornOcrResult `json:"PornOcrTask,omitempty" name:"PornOcrTask"`
 
-	// Query result of an ASR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Asr`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The result of detecting politically sensitive information based on ASR, which is valid when the task type is `Political.Asr`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PoliticalAsrTask *AiReviewTaskPoliticalAsrResult `json:"PoliticalAsrTask,omitempty" name:"PoliticalAsrTask"`
 
-	// Query result of an OCR-based politically sensitive information detection in text task in video content audit, which is valid when task type is `Political.Ocr`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The result of detecting politically sensitive information based on OCR, which is valid when the task type is `Political.Ocr`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PoliticalOcrTask *AiReviewTaskPoliticalOcrResult `json:"PoliticalOcrTask,omitempty" name:"PoliticalOcrTask"`
 
-	// Query result of OCR-based terrorism information detection in text task in video content audit, which is valid if task type is `Terrorism.Ocr`.
+	// The result of detecting terrorism content based on OCR, which is valid when task type is `Terrorism.Ocr`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TerrorismOcrTask *AiReviewTaskTerrorismOcrResult `json:"TerrorismOcrTask,omitempty" name:"TerrorismOcrTask"`
 
 	// Query result of ASR-based prohibited information detection in speech task in video content audit, which is valid if task type is `Prohibited.Asr`.
@@ -750,71 +753,71 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 
 type AiReviewPoliticalAsrTaskInput struct {
 
-	// ID of a politically sensitive information detection template.
+	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalAsrTaskOutput struct {
 
-	// Score of the ASR-detected politically sensitive information in text from 0 to 100.
+	// The confidence score for the ASR-based detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for the ASR-detected politically sensitive information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive information detected based on ASR. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain ASR-detected politically sensitive information in text.
+	// The video segments that contain sensitive information detected based on ASR.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
 
-	// ID of a politically sensitive information detection template.
+	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalOcrTaskOutput struct {
 
-	// Score of the OCR-detected politically sensitive information in text from 0 to 100.
+	// The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for the OCR-detected politically sensitive information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive information detected based on OCR. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected politically sensitive information in text.
+	// The video segments that contain sensitive information detected based on OCR.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPoliticalTaskInput struct {
 
-	// ID of a politically sensitive information detection template.
+	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalTaskOutput struct {
 
-	// Score of the detected politically sensitive information in video from 0 to 100.
+	// The confidence score for the detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for the detected politically sensitive information. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive information detected. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for the results of video politically sensitive information detection. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and this parameter is as follows:
+	// The labels for the detected sensitive content. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) is as follows:
 	// violation_photo:
-	// <li>violation_photo: violating photo.</li>
+	// <li>violation_photo (banned icons)</li>
 	// Other values (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
-	// <li>politician: political figure.</li>
+	// <li>politician</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain the detected politically sensitive information.
+	// The video segments that contain sensitive information.
 	SegmentSet []*MediaContentReviewPoliticalSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
@@ -944,11 +947,11 @@ type AiReviewTaskPoliticalAsrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input for an ASR-based politically sensitive information detection in text task during content audit.
+	// The input parameter for ASR-based detection of politically sensitive information.
 	Input *AiReviewPoliticalAsrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of an ASR-based politically sensitive information detection in text task during content audit.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The output of ASR-based detection of politically sensitive information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Output *AiReviewPoliticalAsrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -967,11 +970,11 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input for an OCR-based politically sensitive information detection in text task during content audit.
+	// The input parameter for OCR-based detection of politically sensitive information.
 	Input *AiReviewPoliticalOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of an OCR-based politically sensitive information detection in text task during content audit.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The output of OCR-based detection of politically sensitive information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Output *AiReviewPoliticalOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -989,11 +992,11 @@ type AiReviewTaskPoliticalResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input for a politically sensitive information detection task during content audit.
+	// The input parameter for sensitive information detection.
 	Input *AiReviewPoliticalTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of a politically sensitive information detection task during content audit.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The output of sensitive information detection.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Output *AiReviewPoliticalTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1129,10 +1132,11 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input of OCR-based terrorism information detection in text task in content audit.
+	// The input parameter for OCR-based detection of terrorism content.
 	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of OCR-based terrorism information detection in text task in content audit.
+	// The output of OCR-based detection of terrorism content.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
@@ -1150,65 +1154,65 @@ type AiReviewTaskTerrorismResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// Input for a terrorism information detection task during content audit.
+	// The input parameter for sensitive information detection.
 	Input *AiReviewTerrorismTaskInput `json:"Input,omitempty" name:"Input"`
 
-	// Output of a terrorism information detection task during content audit.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The output of sensitive information detection.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiReviewTerrorismOcrTaskInput struct {
 
-	// Terrorism information detection template ID.
+	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
 
-	// Score of OCR-detected terrorism information in text between 0 and 100.
+	// The confidence score for the OCR-based detection of sensitive information. Value range: 1-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for OCR-detected terrorism information in text. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive information detected based on OCR. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// List of video segments that contain OCR-detected terrorism information in text.
+	// The video segments that contain sensitive information detected based on OCR.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewTerrorismTaskInput struct {
 
-	// ID of a terrorism information detection template.
+	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismTaskOutput struct {
 
-	// Score of the detected terrorism information in a video from 0 to 100.
+	// The confidence score for the detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for the detected terrorism information. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive information detected. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tags for detected terrorism information in a video. Valid values:
-	// <li>`guns`: weapons and guns</li>
-	// <li>`crowd`: crowds</li>
-	// <li>`police`: police forces</li>
-	// <li>`bloody`: bloodiness</li>
-	// <li>`banners`: terrorism flags</li>
-	// <li>`militant`: militants</li>
-	// <li>`explosion`: explosions and fires</li>
-	// <li>`terrorists`: terrorists</li>
-	// <li>`scenario`: terrorism images</li>
+	// The labels for the detected sensitive content. Valid values:
+	// <li>guns</li>
+	// <li>crowd</li>
+	// <li>police</li>
+	// <li>bloody</li>
+	// <li>banners (sensitive flags)</li>
+	// <li>militant</li>
+	// <li>explosion</li>
+	// <li>terrorists</li>
+	// <li>scenario (sensitive scenes) </li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// List of video segments that contain the detected terrorism information.
+	// The video segments that contain sensitive information.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
@@ -1544,12 +1548,12 @@ type ContentReviewTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
 
-	// Terrorism information detection control parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
 
-	// Politically sensitive information detection control parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -4642,10 +4646,10 @@ type FaceConfigureInfo struct {
 	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100. Default value: 95.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
-	// <li>entertainment: Entertainment celebrity;</li>
-	// <li>sport: Sports celebrity;</li>
-	// <li>politician: Politically sensitive figure.</li>
+	// The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>entertainment (people in the entertainment industry)</li>
+	// <li>sport (sports celebrities)</li>
+	// <li>politician</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
@@ -4670,10 +4674,10 @@ type FaceConfigureInfoForUpdate struct {
 	// Face recognition filter score. If this score is reached or exceeded, a recognition result will be returned. Value range: 0-100.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Default figure filter tag, which specifies the default figure tag that needs to be returned. If this parameter is left empty or an empty value is entered, all results of the default figures will be returned. Valid values:
-	// <li>entertainment: Entertainment celebrity;</li>
-	// <li>sport: Sports celebrity;</li>
-	// <li>politician: Politically sensitive figure.</li>
+	// The default face filter labels, which specify the types of faces to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>entertainment (people in the entertainment industry)</li>
+	// <li>sport (sports celebrities)</li>
+	// <li>politician</li>
 	DefaultLibraryLabelSet []*string `json:"DefaultLibraryLabelSet,omitempty" name:"DefaultLibraryLabelSet"`
 
 	// Custom face tags for filter, which specify the face recognition results to return. If this parameter is not specified or left empty, the recognition results for all custom face tags are returned.
@@ -4900,7 +4904,7 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	// End PTS time of a suspected segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Score of a suspected politically sensitive segment.
+	// The confidence score for the detected sensitive segments.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
 	// Suggestion for porn information detection of a suspected segment. Valid values:
@@ -4909,15 +4913,15 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of the detected politically sensitive information in video. Valid values:
-	// <li>politician: Politically sensitive figure.</li>
-	// <li>violation_photo: Violating photo.</li>
+	// The labels for the detected sensitive information. Valid values:
+	// <li>politician</li>
+	// <li>violation_photo (banned icons)</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// Name of a politically sensitive figure or violating photo.
+	// The name of a sensitive person or banned icon.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+	// The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// URL of a suspected image (which will not be permanently stored
@@ -4968,24 +4972,24 @@ type LiveStreamAiReviewImageTerrorismResult struct {
 	// End PTS time of a suspected segment in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
 
-	// Score of a suspected terrorism segment.
+	// The confidence score for the detected sensitive segments.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for terrorism information detection of a suspected segment. Valid values:
+	// The suggestion for handling the sensitive segments. Valid values:
 	// <li>pass</li>
 	// <li>review</li>
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Tag of the detected terrorism information in a video. Valid values:
-	// <li>guns: Weapons and guns.</li>
-	// <li>crowd: Crowd.</li>
-	// <li>police: Police force.</li>
-	// <li>bloody: Bloody scenes.</li>
-	// <li>banners: Terrorism flags.</li>
-	// <li>militant: Militants.</li>
-	// <li>explosion: Explosions and fires.</li>
-	// <li>terrorists: Terrorists.</li>
+	// The labels for the detected sensitive content. Valid values:
+	// <li>guns</li>
+	// <li>crowd</li>
+	// <li>police</li>
+	// <li>bloody</li>
+	// <li>banners (sensitive flags)</li>
+	// <li>militant</li>
+	// <li>explosion</li>
+	// <li>terrorists</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// URL of a suspected image (which will not be permanently stored
@@ -5004,20 +5008,20 @@ type LiveStreamAiReviewResultInfo struct {
 
 type LiveStreamAiReviewResultItem struct {
 
-	// Content audit type. Valid values:
-	// <li>ImagePorn: Porn information detection in image</li>
-	// <li>ImageTerrorism: Terrorism information detection in image</li>
-	// <li>ImagePolitical: Politically sensitive information detection in image</li>
-	// <li>PornVoice: Porn information detection in speech</li>
+	// The type of the moderation result. Valid values:
+	// <li>ImagePorn</li>
+	// <li>ImageTerrorism</li>
+	// <li>ImagePolitical</li>
+	// <li>PornVoice (pornographic content in speech)</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Result of porn information detection in image, which is valid when `Type` is `ImagePorn`.
 	ImagePornResultSet []*LiveStreamAiReviewImagePornResult `json:"ImagePornResultSet,omitempty" name:"ImagePornResultSet"`
 
-	// Result of terrorism information detection in image, which is valid when `Type` is `ImageTerrorism`.
+	// The result of detecting sensitive information in images, which is valid if `Type` is `ImageTerrorism`.
 	ImageTerrorismResultSet []*LiveStreamAiReviewImageTerrorismResult `json:"ImageTerrorismResultSet,omitempty" name:"ImageTerrorismResultSet"`
 
-	// Result of politically sensitive information detection in image, which is valid when `Type` is `ImagePolitical`.
+	// The result of detecting sensitive information in images, which is valid if `Type` is `ImagePolitical`.
 	ImagePoliticalResultSet []*LiveStreamAiReviewImagePoliticalResult `json:"ImagePoliticalResultSet,omitempty" name:"ImagePoliticalResultSet"`
 
 	// Result of porn information detection in speech, which is valid when `Type` is `PornVoice`.
@@ -5410,49 +5414,49 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// End time offset of a suspected segment in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
-	// Score of a suspected politically sensitive segment.
+	// The confidence score for the detected sensitive segments.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
-	// Suggestion for politically sensitive information detection of a suspected segment. Valid values:
-	// <li>pass.</li>
-	// <li>review.</li>
-	// <li>block.</li>
+	// The suggestion for handling the sensitive segments. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// Name of a politically sensitive figure or violating photo.
+	// The name of a sensitive person or banned icon.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Tags for the results of politically sensitive information detection of suspected video segments. The relationship between the `LabelSet` parameter in the content audit template [controlling tasks of video politically sensitive information detection](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and this parameter is as follows:
+	// The labels for the detected sensitive segments. The relationship between the values of this parameter and those of the `LabelSet` parameter in [PoliticalImgReviewTemplateInfo](https://intl.cloud.tencent.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) is as follows:
 	// violation_photo:
-	// <li>violation_photo: violating photo.</li>
+	// <li>violation_photo (banned icons)</li>
 	// politician:
-	// <li>nation_politician: head of state/government;</li>
-	// <li>province_politician: province/state leader;</li>
-	// <li>bureau_politician: ministry leader;</li>
-	// <li>county_politician: county/city leader;</li>
-	// <li>rural_politician: town leader;</li>
-	// <li>sensitive_politician: politically sensitive figure.</li>
-	// <li>foreign_politician: head of a foreign country/government.</li>
+	// <li>nation_politician (state leader)</li>
+	// <li>province_politician (provincial officials)</li>
+	// <li>bureau_politician (bureau-level officials)</li>
+	// <li>county_politician (county-level officials)</li>
+	// <li>rural_politician (township-level officials)</li>
+	// <li>sensitive_politician (sensitive people)</li>
+	// <li>foreign_politician (state leaders of other countries)</li>
 	// entertainment:
-	// <li>sensitive_entertainment: sensitive entertainment celebrity.</li>
+	// <li>sensitive_entertainment (sensitive people in the entertainment industry</li>
 	// sport:
-	// <li>sensitive_sport: sensitive sports figure.</li>
+	// <li>sensitive_sport (sensitive sports celebrities)</li>
 	// entrepreneur:
-	// <li>sensitive_entrepreneur: sensitive business figure.</li>
+	// <li>sensitive_entrepreneur</li>
 	// scholar:
-	// <li>sensitive_scholar: sensitive educator.</li>
+	// <li>sensitive_scholar</li>
 	// celebrity:
-	// <li>sensitive_celebrity: sensitive well-known figure;</li>
-	// <li>historical_celebrity: well-known historical figure.</li>
+	// <li>sensitive_celebrity</li>
+	// <li>historical_celebrity (sensitive historical figures)</li>
 	// military:
-	// <li>sensitive_military: militarily sensitive figure.</li>
+	// <li>sensitive_military (sensitive people in military)</li>
 	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// URL of a suspected image (which will not be permanently stored
 	//  and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Zone coordinates (at the pixel level) of a politically sensitive figure or violating photo: [x1, y1, x2, y2], i.e., the coordinates of the top-left and bottom-right corners.
+	// The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
@@ -5805,7 +5809,7 @@ type MediaSnapshotByTimeOffsetItem struct {
 
 type MediaSnapshotByTimePicInfoItem struct {
 
-	// Time offset corresponding to the screenshot in the video in <font color=red>milliseconds</font>.
+	// The timestamp (seconds) of the screenshot.
 	TimeOffset *float64 `json:"TimeOffset,omitempty" name:"TimeOffset"`
 
 	// Path to the screenshot.
@@ -7125,9 +7129,9 @@ func (r *ParseNotificationResponse) FromJsonString(s string) error {
 
 type PoliticalAsrReviewTemplateInfo struct {
 
-	// Switch of a politically sensitive information detection in speech task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in speech task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in speech task.</li>
+	// Whether to detect sensitive information based on ASR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
@@ -7139,9 +7143,9 @@ type PoliticalAsrReviewTemplateInfo struct {
 
 type PoliticalAsrReviewTemplateInfoForUpdate struct {
 
-	// Switch of a politically sensitive information detection in speech task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in speech task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in speech task.</li>
+	// Whether to detect sensitive information based on ASR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
@@ -7153,47 +7157,44 @@ type PoliticalAsrReviewTemplateInfoForUpdate struct {
 
 type PoliticalConfigureInfo struct {
 
-	// Control parameter of politically sensitive information detection in image.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *PoliticalImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in speech.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information based on ASR.
 	AsrReviewInfo *PoliticalAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in text.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information based on OCR.
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PoliticalConfigureInfoForUpdate struct {
 
-	// Control parameter of politically sensitive information detection in image.
+	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *PoliticalImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in speech.
+	// The parameters for detecting sensitive information based on ASR.
 	AsrReviewInfo *PoliticalAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
-	// Control parameter of politically sensitive information detection in text.
+	// The parameters for detecting sensitive information based on OCR.
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type PoliticalImgReviewTemplateInfo struct {
 
-	// Switch of a politically sensitive information detection in image task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in image task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in image task.</li>
+	// Whether to detect sensitive information in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: violating photo;</li>
-	// <li>politician: political figure;</li>
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports figure;</li>
-	// <li>entrepreneur: business figure;</li>
-	// <li>scholar: educator;</li>
-	// <li>celebrity: well-known figure;</li>
-	// <li>military: military figure.</li>
+	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>violation_photo (banned icons)</li>
+	// <li>politician</li>
+	// <li>entertainment (people in the entertainment industry)</li>
+	// <li>sport (people in the sports industry)</li>
+	// <li>entrepreneur</li>
+	// <li>scholar</li>
+	// <li>celebrity</li>
+	// <li>military (people in military)</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 97 will be used by default. Value range: 0-100.
@@ -7205,20 +7206,20 @@ type PoliticalImgReviewTemplateInfo struct {
 
 type PoliticalImgReviewTemplateInfoForUpdate struct {
 
-	// Switch of a politically sensitive information detection in image task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in image task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in image task.</li>
+	// Whether to detect sensitive information in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for politically sensitive information detection of video images. If an audit result contains the selected tag, it will be returned; if the filter tag is empty, all audit results will be returned. Valid values:
-	// <li>violation_photo: violating photo;</li>
-	// <li>politician: political figure;</li>
-	// <li>entertainment: entertainment celebrity;</li>
-	// <li>sport: sports figure;</li>
-	// <li>entrepreneur: business figure;</li>
-	// <li>scholar: educator;</li>
-	// <li>celebrity: well-known figure;</li>
-	// <li>military: military figure.</li>
+	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>violation_photo (banned icons)</li>
+	// <li>politician</li>
+	// <li>entertainment (people in the entertainment industry)</li>
+	// <li>sport (people in the sports industry)</li>
+	// <li>entrepreneur</li>
+	// <li>scholar</li>
+	// <li>celebrity</li>
+	// <li>military (people in military)</li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
@@ -7230,9 +7231,9 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 
 type PoliticalOcrReviewTemplateInfo struct {
 
-	// Switch of a politically sensitive information detection in text task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in text task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in text task.</li>
+	// Whether to detect sensitive information based on OCR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0-100.
@@ -7244,9 +7245,9 @@ type PoliticalOcrReviewTemplateInfo struct {
 
 type PoliticalOcrReviewTemplateInfoForUpdate struct {
 
-	// Switch of a politically sensitive information detection in text task. Valid values:
-	// <li>ON: Enables a politically sensitive information detection in text task;</li>
-	// <li>OFF: Disables a politically sensitive information detection in text task.</li>
+	// Whether to detect sensitive information based on OCR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
@@ -8098,40 +8099,39 @@ type TaskSimpleInfo struct {
 
 type TerrorismConfigureInfo struct {
 
-	// Control parameter of a terrorism information detection in image task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of terrorism information detection in text task.
+	// The parameters for detecting sensitive information based on OCR.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {
 
-	// Control parameter of a terrorism information detection in image task.
+	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
-	// Control parameter of terrorism information detection in text task.
+	// The parameters for detecting sensitive information based on OCR.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
 type TerrorismImgReviewTemplateInfo struct {
 
-	// Switch of a terrorism information detection in image task. Valid values:
-	// <li>ON: Enables a terrorism information detection in image task;</li>
-	// <li>OFF: Disables a terrorism information detection in image task.</li>
+	// Whether to detect sensitive information in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
-	// <li>`guns`: weapons and guns</li>
-	// <li>`crowd`: crowds</li>
-	// <li>`bloody`: bloodiness</li>
-	// <li>`police`: police forces</li>
-	// <li>`banners`: terrorism flags</li>
-	// <li>`militant`: militants</li>
-	// <li>`explosion`: explosions and fires</li>
-	// <li>`terrorists`: terrorists</li>
-	// <li>`scenario`: terrorism images</li>
+	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>guns</li>
+	// <li>crowd</li>
+	// <li>bloody</li>
+	// <li>police</li>
+	// <li>banners (sensitive flags)</li>
+	// <li>militant</li>
+	// <li>explosion</li>
+	// <li>terrorists</li>
+	// <li>scenario (sensitive scenes) </li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
@@ -8143,21 +8143,21 @@ type TerrorismImgReviewTemplateInfo struct {
 
 type TerrorismImgReviewTemplateInfoForUpdate struct {
 
-	// Switch of a terrorism information detection in image task. Valid values:
-	// <li>ON: Enables a terrorism information detection in image task;</li>
-	// <li>OFF: Disables a terrorism information detection in image task.</li>
+	// Whether to detect sensitive information in images. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Filter tags for terrorism information detection in images. If a specified tag is detected, the tag is returned. If no filter tag is specified, all detected tags are returned. Valid values:
-	// <li>`guns`: weapons and guns</li>
-	// <li>`crowd`: crowds</li>
-	// <li>`bloody`: bloodiness</li>
-	// <li>`police`: police forces</li>
-	// <li>`banners`: terrorism flags</li>
-	// <li>`militant`: militants</li>
-	// <li>`explosion`: explosions and fires</li>
-	// <li>`terrorists`: terrorists</li>
-	// <li>`scenario`: terrorism images</li>
+	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
+	// <li>guns</li>
+	// <li>crowd</li>
+	// <li>bloody</li>
+	// <li>police</li>
+	// <li>banners (sensitive flags)</li>
+	// <li>militant</li>
+	// <li>explosion</li>
+	// <li>terrorists</li>
+	// <li>scenario (sensitive scenes) </li>
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
@@ -8169,9 +8169,9 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 
 type TerrorismOcrReviewTemplateInfo struct {
 
-	// Switch of terrorism information detection in text task. Valid values:
-	// <li>ON: enables terrorism information detection in text task;</li>
-	// <li>OFF: disables terrorism information detection in text task.</li>
+	// Whether to detect sensitive information based on OCR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
@@ -8183,9 +8183,9 @@ type TerrorismOcrReviewTemplateInfo struct {
 
 type TerrorismOcrReviewTemplateInfoForUpdate struct {
 
-	// Switch of terrorism information detection in text task. Valid values:
-	// <li>ON: enables terrorism information detection in text task;</li>
-	// <li>OFF: disables terrorism information detection in text task.</li>
+	// Whether to detect sensitive information based on OCR. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 100 will be used by default. Value range: 0–100.
@@ -8583,6 +8583,12 @@ type VideoTemplateInfoForUpdate struct {
 	// The control factor of video constant bitrate. Value range: [0, 51]. This parameter will be disabled if you enter `0`.
 	// It is not recommended to specify this parameter if there are no special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
+
+	// Whether to enable adaptive encoding. Valid values:
+	// <li>0: Disable</li>
+	// <li>1: Enable</li>
+	// Default value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
+	ContentAdaptStream *uint64 `json:"ContentAdaptStream,omitempty" name:"ContentAdaptStream"`
 }
 
 type WatermarkInput struct {
