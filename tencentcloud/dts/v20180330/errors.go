@@ -53,7 +53,7 @@ const (
 	// Communication protocol error.
 	INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 
-	// 
+	// Internal error.
 	INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 
 	// Unknown internal error.
@@ -76,6 +76,9 @@ const (
 
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
+
+	// The operation was denied as the condition was not met.
+	OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 
 	// Task operation failure.
 	OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"

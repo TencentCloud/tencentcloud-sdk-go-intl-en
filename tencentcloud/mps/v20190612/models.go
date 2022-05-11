@@ -1571,6 +1571,9 @@ type ContentReviewTemplateItem struct {
 
 	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// 
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type CosFileUploadTrigger struct {
@@ -4921,7 +4924,7 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	// The name of a sensitive person or banned icon.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+	// The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// URL of a suspected image (which will not be permanently stored
@@ -5456,7 +5459,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	//  and will be deleted after `PicUrlExpireTime`).
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// The coordinates (pixel) of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+	// The pixel coordinates of the detected sensitive people or banned icons. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// Expiration time of a suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).

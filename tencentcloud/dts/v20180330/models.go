@@ -233,6 +233,12 @@ type CreateMigrateJobRequest struct {
 
 	// Tag of the instance to be migrated.
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// Source instance type. `simple`: Primary/Secondary node; `cluster`: Cluster node. If this field is left empty, the value defaults to primary/secondary node.
+	SrcNodeType *string `json:"SrcNodeType,omitempty" name:"SrcNodeType"`
+
+	// Source instance information, which is correlated with the migration task type.
+	SrcInfoMulti []*SrcInfo `json:"SrcInfoMulti,omitempty" name:"SrcInfoMulti"`
 }
 
 func (r *CreateMigrateJobRequest) ToJsonString() string {
@@ -257,6 +263,8 @@ func (r *CreateMigrateJobRequest) FromJsonString(s string) error {
 	delete(f, "DstInfo")
 	delete(f, "DatabaseInfo")
 	delete(f, "Tags")
+	delete(f, "SrcNodeType")
+	delete(f, "SrcInfoMulti")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMigrateJobRequest has unknown keys!", "")
 	}
@@ -306,6 +314,9 @@ type CreateSubscribeRequest struct {
 
 	// Instance resource tags
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// A custom instance name.
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 func (r *CreateSubscribeRequest) ToJsonString() string {
@@ -326,6 +337,7 @@ func (r *CreateSubscribeRequest) FromJsonString(s string) error {
 	delete(f, "Count")
 	delete(f, "AutoRenew")
 	delete(f, "Tags")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubscribeRequest has unknown keys!", "")
 	}
@@ -749,6 +761,13 @@ type DescribeSubscribeConfResponse struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 		AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
+		// Data subscription edition. `txdts`: Legacy edition; `kafka`: Kafka edition.
+		SubscribeVersion *string `json:"SubscribeVersion,omitempty" name:"SubscribeVersion"`
+
+		// Error message.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		Errors []*SubsErr `json:"Errors,omitempty" name:"Errors"`
+
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 	} `json:"Response"`
@@ -1021,6 +1040,10 @@ type MigrateJobInfo struct {
 	// Tag
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// Information of the source instance, a cluster edition instance whose access type is not `cdb`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SrcInfoMulti []*SrcInfo `json:"SrcInfoMulti,omitempty" name:"SrcInfoMulti"`
 }
 
 type MigrateOption struct {
@@ -1117,6 +1140,12 @@ type ModifyMigrateJobRequest struct {
 	// 
 	// This field does not need to be set when the entire instance is to be migrated
 	DatabaseInfo *string `json:"DatabaseInfo,omitempty" name:"DatabaseInfo"`
+
+	// Source instance type. `simple`: Primary/Secondary node; `cluster`: Cluster node. If this field is left empty, the value defaults to primary/secondary node.
+	SrcNodeType *string `json:"SrcNodeType,omitempty" name:"SrcNodeType"`
+
+	// Source instance information, which is correlated with the migration task type.
+	SrcInfoMulti []*SrcInfo `json:"SrcInfoMulti,omitempty" name:"SrcInfoMulti"`
 }
 
 func (r *ModifyMigrateJobRequest) ToJsonString() string {
@@ -1139,6 +1168,8 @@ func (r *ModifyMigrateJobRequest) FromJsonString(s string) error {
 	delete(f, "DstAccessType")
 	delete(f, "DstInfo")
 	delete(f, "DatabaseInfo")
+	delete(f, "SrcNodeType")
+	delete(f, "SrcInfoMulti")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMigrateJobRequest has unknown keys!", "")
 	}
@@ -1614,6 +1645,13 @@ func (r *StopMigrateJobResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StopMigrateJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SubsErr struct {
+
+	// Error message.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
 type SubscribeInfo struct {

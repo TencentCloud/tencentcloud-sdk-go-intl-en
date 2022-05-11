@@ -71,6 +71,7 @@ func NewActivateSubscribeResponse() (response *ActivateSubscribeResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -87,6 +88,7 @@ func (c *Client) ActivateSubscribe(request *ActivateSubscribeRequest) (response 
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -136,8 +138,10 @@ func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
@@ -157,8 +161,10 @@ func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (respons
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CompleteMigrateJobWithContext(ctx context.Context, request *CompleteMigrateJobRequest) (response *CompleteMigrateJobResponse, err error) {
@@ -197,9 +203,13 @@ func NewCreateMigrateCheckJobResponse() (response *CreateMigrateCheckJobResponse
 // CreateMigrateCheckJob
 // This API is used to create a migration check task.
 //
-// Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the DescribeMigrateCheckJob API.
+// Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the `DescribeMigrateCheckJob` API.
 //
 // After successful check, if the migration task needs to be modified, a new check task should be created and migration will begin only after the new check succeeds.
+//
+// 
+//
+// For a finance zone link, use the domain name https://dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
@@ -209,11 +219,15 @@ func NewCreateMigrateCheckJobResponse() (response *CreateMigrateCheckJobResponse
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_LOCKERROR = "InternalError.LockError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CreateMigrateCheckJob(request *CreateMigrateCheckJobRequest) (response *CreateMigrateCheckJobResponse, err error) {
     return c.CreateMigrateCheckJobWithContext(context.Background(), request)
 }
@@ -221,9 +235,13 @@ func (c *Client) CreateMigrateCheckJob(request *CreateMigrateCheckJobRequest) (r
 // CreateMigrateCheckJob
 // This API is used to create a migration check task.
 //
-// Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the DescribeMigrateCheckJob API.
+// Before migration, you should call this API to create a check. Migration will start only if the check succeeds. You can view the check result through the `DescribeMigrateCheckJob` API.
 //
 // After successful check, if the migration task needs to be modified, a new check task should be created and migration will begin only after the new check succeeds.
+//
+// 
+//
+// For a finance zone link, use the domain name https://dts.ap-shenzhen-fsi.tencentcloudapi.com.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
@@ -233,11 +251,15 @@ func (c *Client) CreateMigrateCheckJob(request *CreateMigrateCheckJobRequest) (r
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_LOCKERROR = "InternalError.LockError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) CreateMigrateCheckJobWithContext(ctx context.Context, request *CreateMigrateCheckJobRequest) (response *CreateMigrateCheckJobResponse, err error) {
     if request == nil {
         request = NewCreateMigrateCheckJobRequest()
@@ -478,6 +500,7 @@ func NewDescribeAsyncRequestInfoResponse() (response *DescribeAsyncRequestInfoRe
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -491,6 +514,7 @@ func (c *Client) DescribeAsyncRequestInfo(request *DescribeAsyncRequestInfoReque
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -540,6 +564,7 @@ func NewDescribeMigrateCheckJobResponse() (response *DescribeMigrateCheckJobResp
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DescribeMigrateCheckJob(request *DescribeMigrateCheckJobRequest) (response *DescribeMigrateCheckJobResponse, err error) {
     return c.DescribeMigrateCheckJobWithContext(context.Background(), request)
 }
@@ -557,6 +582,7 @@ func (c *Client) DescribeMigrateCheckJob(request *DescribeMigrateCheckJobRequest
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) DescribeMigrateCheckJobWithContext(ctx context.Context, request *DescribeMigrateCheckJobRequest) (response *DescribeMigrateCheckJobResponse, err error) {
     if request == nil {
         request = NewDescribeMigrateCheckJobRequest()
@@ -600,6 +626,7 @@ func NewDescribeMigrateJobsResponse() (response *DescribeMigrateJobsResponse) {
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
@@ -617,6 +644,7 @@ func (c *Client) DescribeMigrateJobs(request *DescribeMigrateJobsRequest) (respo
 //  FAILEDOPERATION_NOTALLOWOPERATION = "FailedOperation.NotAllowOperation"
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
@@ -712,6 +740,7 @@ func NewDescribeSubscribeConfResponse() (response *DescribeSubscribeConfResponse
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) DescribeSubscribeConf(request *DescribeSubscribeConfRequest) (response *DescribeSubscribeConfResponse, err error) {
     return c.DescribeSubscribeConfWithContext(context.Background(), request)
@@ -725,6 +754,7 @@ func (c *Client) DescribeSubscribeConf(request *DescribeSubscribeConfRequest) (r
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 func (c *Client) DescribeSubscribeConfWithContext(ctx context.Context, request *DescribeSubscribeConfRequest) (response *DescribeSubscribeConfResponse, err error) {
     if request == nil {
@@ -1051,6 +1081,7 @@ func NewModifySubscribeObjectsResponse() (response *ModifySubscribeObjectsRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 func (c *Client) ModifySubscribeObjects(request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
     return c.ModifySubscribeObjectsWithContext(context.Background(), request)
 }
@@ -1064,6 +1095,7 @@ func (c *Client) ModifySubscribeObjects(request *ModifySubscribeObjectsRequest) 
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BIZRESOURCENOTFOUNDERROR = "ResourceNotFound.BizResourceNotFoundError"
 func (c *Client) ModifySubscribeObjectsWithContext(ctx context.Context, request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
     if request == nil {
         request = NewModifySubscribeObjectsRequest()
@@ -1272,10 +1304,13 @@ func NewStartMigrateJobResponse() (response *StartMigrateJobResponse) {
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_LOCKERROR = "InternalError.LockError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) StartMigrateJob(request *StartMigrateJobRequest) (response *StartMigrateJobResponse, err error) {
     return c.StartMigrateJobWithContext(context.Background(), request)
 }
@@ -1294,10 +1329,13 @@ func (c *Client) StartMigrateJob(request *StartMigrateJobRequest) (response *Sta
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_LOCKERROR = "InternalError.LockError"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_MAXUNUSEDJOBS = "LimitExceeded.MaxUnusedJobs"
+//  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) StartMigrateJobWithContext(ctx context.Context, request *StartMigrateJobRequest) (response *StartMigrateJobResponse, err error) {
     if request == nil {
         request = NewStartMigrateJobRequest()
@@ -1342,9 +1380,11 @@ func NewStopMigrateJobResponse() (response *StopMigrateJobResponse) {
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopMigrateJobResponse, err error) {
     return c.StopMigrateJobWithContext(context.Background(), request)
 }
@@ -1360,9 +1400,11 @@ func (c *Client) StopMigrateJob(request *StopMigrateJobRequest) (response *StopM
 //  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
 //  INTERNALERROR_DUPLICATEJOB = "InternalError.DuplicateJob"
 //  INTERNALERROR_PROTOCOLERROR = "InternalError.ProtocolError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED_JOBOPERATIONDENIEDERROR = "OperationDenied.JobOperationDeniedError"
 //  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  UNAUTHORIZEDOPERATION_NOTENOUGHPRIVILEGES = "UnauthorizedOperation.NotEnoughPrivileges"
 func (c *Client) StopMigrateJobWithContext(ctx context.Context, request *StopMigrateJobRequest) (response *StopMigrateJobResponse, err error) {
     if request == nil {
         request = NewStopMigrateJobRequest()
