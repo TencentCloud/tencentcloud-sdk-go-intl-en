@@ -214,6 +214,12 @@ type AutoScalingAdvice struct {
 	// Scaling group ID
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
 
+	// Scaling group warning level. Valid values:<br>
+	// <li>NORMAL: Normal<br>
+	// <li>WARNING: Warning<br>
+	// <li>CRITICAL: Serious warning<br>
+	Level *string `json:"Level,omitempty" name:"Level"`
+
 	// A collection of suggestions for scaling group configurations.
 	Advices []*Advice `json:"Advices,omitempty" name:"Advices"`
 }
@@ -226,7 +232,17 @@ type AutoScalingGroup struct {
 	// Auto scaling group name
 	AutoScalingGroupName *string `json:"AutoScalingGroupName,omitempty" name:"AutoScalingGroupName"`
 
-	// Current status of the auto scaling group. Value range: <br><li>NORMAL: normal <br><li>CVM_ABNORMAL: Exception with the launch configuration <br><li>LB_ABNORMAL: exception with the load balancer <br><li>VPC_ABNORMAL: exception with the VPC <br><li>INSUFFICIENT_BALANCE: insufficient balance <br><li>LB_BACKEND_REGION_NOT_MATCH: the backend region of the CLB instance is not the same as the one of AS service.<br>
+	// Current scaling group status. Valid values:<br>
+	// <li>NORMAL: Normal<br>
+	// <li>CVM_ABNORMAL: Abnormal launch configuration<br>
+	// <li>LB_ABNORMAL: Abnormal load balancer<br>
+	// <li>LB_LISTENER_ABNORMAL: Abnormal load balancer listener<br>
+	// <li>LB_LOCATION_ABNORMAL: Abnormal forwarding configuration of the load balancer listener<br>
+	// <li>VPC_ABNORMAL: VPC network error<br>
+	// <li>SUBNET_ABNORMAL: VPC subnet exception<br>
+	// <li>INSUFFICIENT_BALANCE: Insufficient account balance<br>
+	// <li>LB_BACKEND_REGION_NOT_MATCH: The CLB backend and the AS service are not in the same region.<br>
+	// <li>LB_BACKEND_VPC_NOT_MATCH: The CLB instance and the scaling group are not in the same VPC.
 	AutoScalingGroupStatus *string `json:"AutoScalingGroupStatus,omitempty" name:"AutoScalingGroupStatus"`
 
 	// Creation time in UTC format
@@ -319,15 +335,6 @@ type AutoScalingGroup struct {
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
 	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitempty" name:"CapacityRebalance"`
-}
-
-type AutoScalingGroupAbstract struct {
-
-	// Auto scaling group ID.
-	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
-
-	// Auto scaling group name.
-	AutoScalingGroupName *string `json:"AutoScalingGroupName,omitempty" name:"AutoScalingGroupName"`
 }
 
 type AutoScalingNotification struct {
@@ -707,148 +714,6 @@ func (r *CreateAutoScalingGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateLaunchConfigurationRequest struct {
-	*tchttp.BaseRequest
-
-	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
-	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
-
-	// Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
-	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
-
-	// Project ID of the launch configuration. The default project is used if it’s left blank.
-	// Note that this project ID is not the same as the project ID of the scaling group. 
-	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
-	// Instance model. Different instance models specify different resource specifications. The specific value can be obtained by calling the [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) API to get the latest specification table or referring to the descriptions in [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1).
-	// `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
-
-	// System disk configuration of the instance. If this parameter is not specified, the default value will be assigned to it.
-	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
-
-	// Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
-
-	// Configuration information of public network bandwidth. If this parameter is not specified, the default public network bandwidth is 0 Mbps.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
-
-	// Login settings of the instance. This parameter is used to set the login password and key for the instance, or to keep the original login settings for the image. By default, a random password is generated and sent to the user via the internal message.
-	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
-
-	// The security group to which the instance belongs. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
-
-	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
-	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
-
-	// Base64-encoded custom data of up to 16 KB.
-	UserData *string `json:"UserData,omitempty" name:"UserData"`
-
-	// Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
-	// Market-related options of the instance, such as the parameters related to stop instances. If the billing method of instance is specified as bidding, this parameter must be passed in.
-	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
-
-	// List of instance models. Different instance models specify different resource specifications. Up to 10 instance models can be supported.
-	// `InstanceType` and `InstanceTypes` are mutually exclusive, and one and only one of them must be entered.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
-
-	// Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
-	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
-	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitempty" name:"InstanceTypesCheckPolicy"`
-
-	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
-
-	// CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
-	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
-
-	// CVM HostName settings.
-	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
-
-	// Settings of CVM instance names
-	// If this field is configured in a launch configuration, the `InstanceName` of a CVM created by the scaling group will be generated according to the configuration; otherwise, it will be in the `as-{{AutoScalingGroupName }}` format.
-	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
-
-	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
-	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
-}
-
-func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLaunchConfigurationRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "LaunchConfigurationName")
-	delete(f, "ImageId")
-	delete(f, "ProjectId")
-	delete(f, "InstanceType")
-	delete(f, "SystemDisk")
-	delete(f, "DataDisks")
-	delete(f, "InternetAccessible")
-	delete(f, "LoginSettings")
-	delete(f, "SecurityGroupIds")
-	delete(f, "EnhancedService")
-	delete(f, "UserData")
-	delete(f, "InstanceChargeType")
-	delete(f, "InstanceMarketOptions")
-	delete(f, "InstanceTypes")
-	delete(f, "InstanceTypesCheckPolicy")
-	delete(f, "InstanceTags")
-	delete(f, "CamRoleName")
-	delete(f, "HostNameSettings")
-	delete(f, "InstanceNameSettings")
-	delete(f, "InstanceChargePrepaid")
-	delete(f, "DiskTypePolicy")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchConfigurationRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateLaunchConfigurationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// This parameter is returned when a launch configuration is created through this API, indicating the launch configuration ID.
-		LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateLaunchConfigurationResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLaunchConfigurationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateLifecycleHookRequest struct {
 	*tchttp.BaseRequest
 
@@ -1160,8 +1025,8 @@ func (r *CreateScheduledActionResponse) FromJsonString(s string) error {
 
 type DataDisk struct {
 
-	// Data disk type. For more information on limits of data disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: local disk <br><li>`LOCAL_SSD`: local SSD disk <br><li>`CLOUD_BASIC`: HDD cloud disk <br><li>`CLOUD_PREMIUM`: premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk <br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Data disk type. See [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: Local disk<br><li>`LOCAL_SSD`: Local SSD disk<br><li>`CLOUD_BASIC`: HDD cloud disk<br><li>`CLOUD_PREMIUM`: Premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk<br><li>`CLOUD_HSSD`: Enhanced SSD<br><li>`CLOUD_TSSD`: Tremendous SSD<br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
@@ -1175,6 +1040,15 @@ type DataDisk struct {
 	// Specifies whether the data disk is terminated along with the termination of the associated CVM instance.  Values: <br><li>`TRUE` (only available for pay-as-you-go cloud disks that are billed by hour) and `FALSE`.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
+
+	// Data disk encryption. Valid values: <br><li>`TRUE`: Encrypted<br><li>`FALSE`: Not encrypted
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/document/product/362/51896?from_cn_redirect=1#. E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96 .E6.80.A7.E8.83.BD).
+	// This feature is only available to enhanced SSD (`CLOUD_HSSD`) and tremendous SSD (`CLOUD_TSSD`) disks with a capacity greater than 460 GB.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitempty" name:"ThroughputPerformance"`
 }
 
 type DeleteAutoScalingGroupRequest struct {
@@ -1821,74 +1695,6 @@ func (r *DescribeAutoScalingInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeLaunchConfigurationsRequest struct {
-	*tchttp.BaseRequest
-
-	// Queries by one or more launch configuration IDs in the format of `asc-ouy1ax38`. The maximum quantity per request is 100. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
-	LaunchConfigurationIds []*string `json:"LaunchConfigurationIds,omitempty" name:"LaunchConfigurationIds"`
-
-	// Filters.
-	// <li> launch-configuration-id - String - Required: No - (Filter) Filter by launch configuration ID.</li>
-	// <li> launch-configuration-name - String - Required: No - (Filter) Filter by launch configuration name.</li>
-	// <li> launch-configuration-name - String - Required: No - (Filter) Fuzzy search by launch configuration name.</li>
-	// The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `LaunchConfigurationIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-func (r *DescribeLaunchConfigurationsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLaunchConfigurationsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "LaunchConfigurationIds")
-	delete(f, "Filters")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLaunchConfigurationsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeLaunchConfigurationsResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible launch configurations.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of launch configuration details.
-		LaunchConfigurationSet []*LaunchConfiguration `json:"LaunchConfigurationSet,omitempty" name:"LaunchConfigurationSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeLaunchConfigurationsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLaunchConfigurationsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeLifecycleHooksRequest struct {
 	*tchttp.BaseRequest
 
@@ -2293,52 +2099,6 @@ type DetailedStatusMessage struct {
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
-type DisableAutoScalingGroupRequest struct {
-	*tchttp.BaseRequest
-
-	// Auto scaling group ID
-	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
-}
-
-func (r *DisableAutoScalingGroupRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DisableAutoScalingGroupRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AutoScalingGroupId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableAutoScalingGroupRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DisableAutoScalingGroupResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DisableAutoScalingGroupResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DisableAutoScalingGroupResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type EnableAutoScalingGroupRequest struct {
 	*tchttp.BaseRequest
 
@@ -2596,15 +2356,6 @@ type InstanceNameSettings struct {
 	InstanceNameStyle *string `json:"InstanceNameStyle,omitempty" name:"InstanceNameStyle"`
 }
 
-type InstanceTag struct {
-
-	// Tag key
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Tag value
-	Value *string `json:"Value,omitempty" name:"Value"`
-}
-
 type InternetAccessible struct {
 
 	// Network billing method. Value range: <br><li>BANDWIDTH_PREPAID: Prepaid by bandwidth <br><li>TRAFFIC_POSTPAID_BY_HOUR: Postpaid by traffic on a per hour basis <br><li>BANDWIDTH_POSTPAID_BY_HOUR: Postpaid by bandwidth on a per hour basis <br><li>BANDWIDTH_PACKAGE: BWP user <br>Default value: TRAFFIC_POSTPAID_BY_HOUR.
@@ -2622,96 +2373,6 @@ type InternetAccessible struct {
 	// Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) API.
 	// Note: this field may return null, indicating that no valid value was found.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
-}
-
-type LaunchConfiguration struct {
-
-	// Project ID of the instance.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
-	// Launch configuration ID.
-	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
-
-	// Launch configuration name.
-	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
-
-	// Instance model.
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
-
-	// Information of the instance's system disk configuration.
-	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
-
-	// Information of the instance's data disk configuration.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
-
-	// Instance login settings.
-	LoginSettings *LimitedLoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
-
-	// Information of the public network bandwidth configuration.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
-
-	// Security group of the instance.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
-
-	// Auto scaling group associated with the launch configuration.
-	AutoScalingGroupAbstractSet []*AutoScalingGroupAbstract `json:"AutoScalingGroupAbstractSet,omitempty" name:"AutoScalingGroupAbstractSet"`
-
-	// Custom data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserData *string `json:"UserData,omitempty" name:"UserData"`
-
-	// Creation time of the launch configuration.
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-	// Conditions of enhancement services for the instance and their settings.
-	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
-
-	// Image ID.
-	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
-
-	// Current status of the launch configuration. Value range: <br><li>NORMAL: normal <br><li>IMAGE_ABNORMAL: Exception with the image of the launch configuration <br><li>CBS_SNAP_ABNORMAL: Exception with the data disk snapshot of the launch configuration <br><li>SECURITY_GROUP_ABNORMAL: Exception with the security group of the launch configuration<br>
-	LaunchConfigurationStatus *string `json:"LaunchConfigurationStatus,omitempty" name:"LaunchConfigurationStatus"`
-
-	// Instance billing type. CVM instances are POSTPAID_BY_HOUR by default.
-	// <br><li>POSTPAID_BY_HOUR: Pay-as-you-go on an hourly basis
-	// <br><li>SPOTPAID: Bidding
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
-	// Market-related options of the instance, such as the parameters related to stop instances. If the billing method of instance is specified as bidding, this parameter must be passed in.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
-
-	// List of instance models.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
-
-	// List of tags.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
-
-	// Version number.
-	VersionNumber *int64 `json:"VersionNumber,omitempty" name:"VersionNumber"`
-
-	// Update time.
-	UpdatedTime *string `json:"UpdatedTime,omitempty" name:"UpdatedTime"`
-
-	// CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
-	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
-
-	// Value of InstanceTypesCheckPolicy upon the last operation.
-	LastOperationInstanceTypesCheckPolicy *string `json:"LastOperationInstanceTypesCheckPolicy,omitempty" name:"LastOperationInstanceTypesCheckPolicy"`
-
-	// CVM HostName settings.
-	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
-
-	// Settings of CVM instance names.
-	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
-
-	// Sets prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-
-	// Specifies how to select the cloud disk type. 
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
-	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -2763,26 +2424,6 @@ type LifecycleHook struct {
 
 	// Applicable scenario of the lifecycle hook
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
-}
-
-type LimitedLoginSettings struct {
-
-	// List of key IDs.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
-}
-
-type LoginSettings struct {
-
-	// Login password of the instance. The rule of password complexity varies by operating system: <br><li>For Linux instances, the password must be a combination of 8-16 characters comprised of at least two of the following types: [a-z, A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]. <br><li>For Windows instances, the password must be a combination of 12-16 characters comprised of at least three of the following types: [a-z], [A-Z], [0-9] and [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]. <br><br>If this parameter is not specified, a password will be randomly generated and sent to you via internal message.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Password *string `json:"Password,omitempty" name:"Password"`
-
-	// List of key IDs. An instance associated with the key can be accessed using the corresponding private key. KeyId can be obtained via the API DescribeKeyPairs. A key and a password cannot be specified at the same time, and specifying the key is not supported in Windows. You can specify only one key when purchasing an instance.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
-
-	// Keep the original settings for an image. You cannot specify this parameter if Password or KeyIds.N is specified. You can specify this parameter to TRUE only when you create an instance using a custom image, shared image, or image imported from external resources. Value range: <br><li>TRUE: Keep the login settings for the image <br><li>FALSE: Do not keep the login settings for the image <br><br>Default value: FALSE.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	KeepImageLogin *bool `json:"KeepImageLogin,omitempty" name:"KeepImageLogin"`
 }
 
 type MetricAlarm struct {
@@ -3151,6 +2792,84 @@ func (r *ModifyLaunchConfigurationAttributesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyLaunchConfigurationAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLifecycleHookRequest struct {
+	*tchttp.BaseRequest
+
+	// Lifecycle hook ID.
+	LifecycleHookId *string `json:"LifecycleHookId,omitempty" name:"LifecycleHookId"`
+
+	// Lifecycle hook name.
+	LifecycleHookName *string `json:"LifecycleHookName,omitempty" name:"LifecycleHookName"`
+
+	// The time when the lifecycle hook is applied. Valid values:
+	// <li> `INSTANCE_LAUNCHING`: After the instance launch
+	// <li> `INSTANCE_TERMINATING`: Before the instance termination
+	LifecycleTransition *string `json:"LifecycleTransition,omitempty" name:"LifecycleTransition"`
+
+	// Actions after the lifecycle hook times out. Valid values:
+	// <li> `CONTINUE`: Continue the scaling activity after the timeout
+	// <li> `ABANDON`: Terminate the scaling activity after the timeout
+	DefaultResult *string `json:"DefaultResult,omitempty" name:"DefaultResult"`
+
+	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30 - 7,200 seconds.
+	HeartbeatTimeout *uint64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
+
+	// Additional information sent by AS to the notification target.
+	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
+
+	// The scenario where the lifecycle hook is applied. `EXTENSION`: The lifecycle hook will be triggered when `AttachInstances`, `DetachInstances` or `RemoveInstances` is called. `NORMAL`: The lifecycle hook is not triggered by the above APIs.
+	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Information of the notification target.
+	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
+}
+
+func (r *ModifyLifecycleHookRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLifecycleHookRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LifecycleHookId")
+	delete(f, "LifecycleHookName")
+	delete(f, "LifecycleTransition")
+	delete(f, "DefaultResult")
+	delete(f, "HeartbeatTimeout")
+	delete(f, "NotificationMetadata")
+	delete(f, "LifecycleTransitionType")
+	delete(f, "NotificationTarget")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLifecycleHookRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyLifecycleHookResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyLifecycleHookResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLifecycleHookResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3566,112 +3285,6 @@ type RunSecurityServiceEnabled struct {
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
 }
 
-type ScaleInInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Scaling group ID
-	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
-
-	// Number of instances to be reduced
-	ScaleInNumber *uint64 `json:"ScaleInNumber,omitempty" name:"ScaleInNumber"`
-}
-
-func (r *ScaleInInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ScaleInInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AutoScalingGroupId")
-	delete(f, "ScaleInNumber")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleInInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ScaleInInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Scaling activity ID
-		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ScaleInInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ScaleInInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ScaleOutInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Scaling group ID
-	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
-
-	// Number of instances to be added
-	ScaleOutNumber *uint64 `json:"ScaleOutNumber,omitempty" name:"ScaleOutNumber"`
-}
-
-func (r *ScaleOutInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ScaleOutInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "AutoScalingGroupId")
-	delete(f, "ScaleOutNumber")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ScaleOutInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Scaling activity ID
-		ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *ScaleOutInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ScaleOutInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type ScalingPolicy struct {
 
 	// Auto scaling group ID.
@@ -3984,141 +3597,6 @@ type TargetAttribute struct {
 
 	// Weight
 	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
-}
-
-type UpgradeLaunchConfigurationRequest struct {
-	*tchttp.BaseRequest
-
-	// Launch configuration ID.
-	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
-
-	// Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
-	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
-
-	// List of instance models. Different instance models specify different resource specifications. Up to 5 instance models can be supported.
-	InstanceTypes []*string `json:"InstanceTypes,omitempty" name:"InstanceTypes"`
-
-	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
-	LaunchConfigurationName *string `json:"LaunchConfigurationName,omitempty" name:"LaunchConfigurationName"`
-
-	// Information of the instance's data disk configuration. If this parameter is not specified, no data disk is purchased by default. Up to 11 data disks can be supported.
-	DataDisks []*DataDisk `json:"DataDisks,omitempty" name:"DataDisks"`
-
-	// Enhanced service. This parameter is used to specify whether to enable Cloud Security, Cloud Monitoring and other services. If this parameter is not specified, Cloud Monitoring and Cloud Security will be enabled by default.
-	EnhancedService *EnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
-
-	// Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
-	// Market-related options of the instance, such as the parameters related to stop instances. If the billing method of instance is specified as bidding, this parameter must be passed in.
-	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitempty" name:"InstanceMarketOptions"`
-
-	// Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
-	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type and the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been deactivated, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
-	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitempty" name:"InstanceTypesCheckPolicy"`
-
-	// Configuration information of public network bandwidth. If this parameter is not specified, the default public network bandwidth is 0 Mbps.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
-
-	// Login settings of the instance. This parameter is used to set the login password and key for the instance, or to keep the original login settings for the image. By default, a random password is generated and sent to the user via the internal message.
-	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
-
-	// Project ID of the instance. Leave it blank as the default.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
-	// The security group of instance. This parameter can be obtained by calling the `SecurityGroupId` field in the returned value of [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1). If this parameter is not specified, no security group will be bound by default.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
-
-	// System disk configuration of the instance. If this parameter is not specified, the default value will be assigned to it.
-	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
-
-	// Base64-encoded custom data of up to 16 KB.
-	UserData *string `json:"UserData,omitempty" name:"UserData"`
-
-	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
-	InstanceTags []*InstanceTag `json:"InstanceTags,omitempty" name:"InstanceTags"`
-
-	// CAM role name, which can be obtained from the roleName field in the return value of the DescribeRoleList API.
-	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
-
-	// CVM HostName settings.
-	HostNameSettings *HostNameSettings `json:"HostNameSettings,omitempty" name:"HostNameSettings"`
-
-	// Settings of CVM instance names.
-	InstanceNameSettings *InstanceNameSettings `json:"InstanceNameSettings,omitempty" name:"InstanceNameSettings"`
-
-	// Advance payment mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
-	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
-}
-
-func (r *UpgradeLaunchConfigurationRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpgradeLaunchConfigurationRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "LaunchConfigurationId")
-	delete(f, "ImageId")
-	delete(f, "InstanceTypes")
-	delete(f, "LaunchConfigurationName")
-	delete(f, "DataDisks")
-	delete(f, "EnhancedService")
-	delete(f, "InstanceChargeType")
-	delete(f, "InstanceMarketOptions")
-	delete(f, "InstanceTypesCheckPolicy")
-	delete(f, "InternetAccessible")
-	delete(f, "LoginSettings")
-	delete(f, "ProjectId")
-	delete(f, "SecurityGroupIds")
-	delete(f, "SystemDisk")
-	delete(f, "UserData")
-	delete(f, "InstanceTags")
-	delete(f, "CamRoleName")
-	delete(f, "HostNameSettings")
-	delete(f, "InstanceNameSettings")
-	delete(f, "InstanceChargePrepaid")
-	delete(f, "DiskTypePolicy")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeLaunchConfigurationRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type UpgradeLaunchConfigurationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *UpgradeLaunchConfigurationResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpgradeLaunchConfigurationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type UpgradeLifecycleHookRequest struct {

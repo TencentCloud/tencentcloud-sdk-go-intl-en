@@ -78,6 +78,7 @@ func NewAttachInstancesResponse() (response *AttachInstancesResponse) {
 //  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
 //  RESOURCEUNAVAILABLE_CVMVPCINCONSISTENT = "ResourceUnavailable.CvmVpcInconsistent"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_INSTANCESALREADYINAUTOSCALINGGROUP = "ResourceUnavailable.InstancesAlreadyInAutoScalingGroup"
 //  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
 func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *AttachInstancesResponse, err error) {
@@ -100,6 +101,7 @@ func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *Att
 //  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
 //  RESOURCEUNAVAILABLE_CVMVPCINCONSISTENT = "ResourceUnavailable.CvmVpcInconsistent"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_INSTANCESALREADYINAUTOSCALINGGROUP = "ResourceUnavailable.InstancesAlreadyInAutoScalingGroup"
 //  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
 func (c *Client) AttachInstancesWithContext(ctx context.Context, request *AttachInstancesRequest) (response *AttachInstancesResponse, err error) {
@@ -482,6 +484,7 @@ func NewCreateAutoScalingGroupFromInstanceResponse() (response *CreateAutoScalin
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
 //  INVALIDPARAMETERVALUE_DUPLICATEDSUBNET = "InvalidParameterValue.DuplicatedSubnet"
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
@@ -516,6 +519,7 @@ func (c *Client) CreateAutoScalingGroupFromInstance(request *CreateAutoScalingGr
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLVPCERROR = "InternalError.CallVpcError"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
 //  INVALIDPARAMETERVALUE_DUPLICATEDSUBNET = "InvalidParameterValue.DuplicatedSubnet"
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
@@ -545,117 +549,6 @@ func (c *Client) CreateAutoScalingGroupFromInstanceWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewCreateAutoScalingGroupFromInstanceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateLaunchConfigurationRequest() (request *CreateLaunchConfigurationRequest) {
-    request = &CreateLaunchConfigurationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "CreateLaunchConfiguration")
-    
-    
-    return
-}
-
-func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfigurationResponse) {
-    response = &CreateLaunchConfigurationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateLaunchConfiguration
-// This API (CreateLaunchConfiguration) is used to create a launch configuration.
-//
-// 
-//
-// * A few fields of a launch configuration can be modified through `ModifyLaunchConfigurationAttributes`. To use a new launch configuration, it is recommended to create it from scratch.
-//
-// 
-//
-// * You can create up to 20 launch configurations for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
-//  INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
-//  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
-//  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
-//  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
-//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
-//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
-//  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATION = "InvalidParameterValue.InvalidLaunchConfiguration"
-//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTID = "InvalidParameterValue.InvalidSnapshotId"
-//  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
-//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
-//  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
-//  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
-//  INVALIDPERMISSION = "InvalidPermission"
-//  LIMITEXCEEDED_LAUNCHCONFIGURATIONQUOTANOTENOUGH = "LimitExceeded.LaunchConfigurationQuotaNotEnough"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
-func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationRequest) (response *CreateLaunchConfigurationResponse, err error) {
-    return c.CreateLaunchConfigurationWithContext(context.Background(), request)
-}
-
-// CreateLaunchConfiguration
-// This API (CreateLaunchConfiguration) is used to create a launch configuration.
-//
-// 
-//
-// * A few fields of a launch configuration can be modified through `ModifyLaunchConfigurationAttributes`. To use a new launch configuration, it is recommended to create it from scratch.
-//
-// 
-//
-// * You can create up to 20 launch configurations for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
-//  INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
-//  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
-//  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
-//  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
-//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
-//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
-//  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATION = "InvalidParameterValue.InvalidLaunchConfiguration"
-//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTID = "InvalidParameterValue.InvalidSnapshotId"
-//  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
-//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
-//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
-//  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
-//  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
-//  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
-//  INVALIDPERMISSION = "InvalidPermission"
-//  LIMITEXCEEDED_LAUNCHCONFIGURATIONQUOTANOTENOUGH = "LimitExceeded.LaunchConfigurationQuotaNotEnough"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
-func (c *Client) CreateLaunchConfigurationWithContext(ctx context.Context, request *CreateLaunchConfigurationRequest) (response *CreateLaunchConfigurationResponse, err error) {
-    if request == nil {
-        request = NewCreateLaunchConfigurationRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateLaunchConfiguration require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateLaunchConfigurationResponse()
     err = c.Send(request, response)
     return
 }
@@ -1816,75 +1709,6 @@ func (c *Client) DescribeAutoScalingInstancesWithContext(ctx context.Context, re
     return
 }
 
-func NewDescribeLaunchConfigurationsRequest() (request *DescribeLaunchConfigurationsRequest) {
-    request = &DescribeLaunchConfigurationsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "DescribeLaunchConfigurations")
-    
-    
-    return
-}
-
-func NewDescribeLaunchConfigurationsResponse() (response *DescribeLaunchConfigurationsResponse) {
-    response = &DescribeLaunchConfigurationsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeLaunchConfigurations
-// This API (DescribeLaunchConfigurations) is used to query the information of launch configurations.
-//
-// 
-//
-// * You can query the launch configuration details based on information such as launch configuration ID and name. For more information on filters, see `Filter`.
-//
-// * If the parameter is empty, a certain number (specified by `Limit` and 20 by default) of launch configurations of the current user will be returned.
-//
-// error code that may be returned:
-//  INVALIDLAUNCHCONFIGURATION = "InvalidLaunchConfiguration"
-//  INVALIDLAUNCHCONFIGURATIONID = "InvalidLaunchConfigurationId"
-//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
-//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
-//  INVALIDPERMISSION = "InvalidPermission"
-func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
-    return c.DescribeLaunchConfigurationsWithContext(context.Background(), request)
-}
-
-// DescribeLaunchConfigurations
-// This API (DescribeLaunchConfigurations) is used to query the information of launch configurations.
-//
-// 
-//
-// * You can query the launch configuration details based on information such as launch configuration ID and name. For more information on filters, see `Filter`.
-//
-// * If the parameter is empty, a certain number (specified by `Limit` and 20 by default) of launch configurations of the current user will be returned.
-//
-// error code that may be returned:
-//  INVALIDLAUNCHCONFIGURATION = "InvalidLaunchConfiguration"
-//  INVALIDLAUNCHCONFIGURATIONID = "InvalidLaunchConfigurationId"
-//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
-//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
-//  INVALIDPERMISSION = "InvalidPermission"
-func (c *Client) DescribeLaunchConfigurationsWithContext(ctx context.Context, request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
-    if request == nil {
-        request = NewDescribeLaunchConfigurationsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeLaunchConfigurations require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeLaunchConfigurationsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeLifecycleHooksRequest() (request *DescribeLifecycleHooksRequest) {
     request = &DescribeLifecycleHooksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2321,57 +2145,6 @@ func (c *Client) DetachLoadBalancersWithContext(ctx context.Context, request *De
     return
 }
 
-func NewDisableAutoScalingGroupRequest() (request *DisableAutoScalingGroupRequest) {
-    request = &DisableAutoScalingGroupRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "DisableAutoScalingGroup")
-    
-    
-    return
-}
-
-func NewDisableAutoScalingGroupResponse() (response *DisableAutoScalingGroupResponse) {
-    response = &DisableAutoScalingGroupResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DisableAutoScalingGroup
-// This API (DisableAutoScalingGroup) is used to disable the specified auto scaling group.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-func (c *Client) DisableAutoScalingGroup(request *DisableAutoScalingGroupRequest) (response *DisableAutoScalingGroupResponse, err error) {
-    return c.DisableAutoScalingGroupWithContext(context.Background(), request)
-}
-
-// DisableAutoScalingGroup
-// This API (DisableAutoScalingGroup) is used to disable the specified auto scaling group.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-func (c *Client) DisableAutoScalingGroupWithContext(ctx context.Context, request *DisableAutoScalingGroupRequest) (response *DisableAutoScalingGroupResponse, err error) {
-    if request == nil {
-        request = NewDisableAutoScalingGroupRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DisableAutoScalingGroup require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDisableAutoScalingGroupResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewEnableAutoScalingGroupRequest() (request *EnableAutoScalingGroupRequest) {
     request = &EnableAutoScalingGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2703,6 +2476,8 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
 //  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
 //  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2738,6 +2513,8 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
 //  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
 //  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2755,6 +2532,67 @@ func (c *Client) ModifyLaunchConfigurationAttributesWithContext(ctx context.Cont
     request.SetContext(ctx)
     
     response = NewModifyLaunchConfigurationAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLifecycleHookRequest() (request *ModifyLifecycleHookRequest) {
+    request = &ModifyLifecycleHookRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("as", APIVersion, "ModifyLifecycleHook")
+    
+    
+    return
+}
+
+func NewModifyLifecycleHookResponse() (response *ModifyLifecycleHookResponse) {
+    response = &ModifyLifecycleHookResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyLifecycleHook
+// This API is used to modify the lifecycle hook.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
+//  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
+//  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
+//  RESOURCEUNAVAILABLE_TDMQCMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.TDMQCMQTopicHasNoSubscriber"
+func (c *Client) ModifyLifecycleHook(request *ModifyLifecycleHookRequest) (response *ModifyLifecycleHookResponse, err error) {
+    return c.ModifyLifecycleHookWithContext(context.Background(), request)
+}
+
+// ModifyLifecycleHook
+// This API is used to modify the lifecycle hook.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
+//  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
+//  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
+//  RESOURCEUNAVAILABLE_TDMQCMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.TDMQCMQTopicHasNoSubscriber"
+func (c *Client) ModifyLifecycleHookWithContext(ctx context.Context, request *ModifyLifecycleHookRequest) (response *ModifyLifecycleHookResponse, err error) {
+    if request == nil {
+        request = NewModifyLifecycleHookRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLifecycleHook require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLifecycleHookResponse()
     err = c.Send(request, response)
     return
 }
@@ -2882,6 +2720,7 @@ func NewModifyLoadBalancersResponse() (response *ModifyLoadBalancersResponse) {
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
 //  INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
+//  INVALIDPARAMETERVALUE_DUPLICATEDFORWARDLB = "InvalidParameterValue.DuplicatedForwardLb"
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
@@ -2917,6 +2756,7 @@ func (c *Client) ModifyLoadBalancers(request *ModifyLoadBalancersRequest) (respo
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
 //  INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
+//  INVALIDPARAMETERVALUE_DUPLICATEDFORWARDLB = "InvalidParameterValue.DuplicatedForwardLb"
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
@@ -3223,152 +3063,6 @@ func (c *Client) RemoveInstancesWithContext(ctx context.Context, request *Remove
     return
 }
 
-func NewScaleInInstancesRequest() (request *ScaleInInstancesRequest) {
-    request = &ScaleInInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "ScaleInInstances")
-    
-    
-    return
-}
-
-func NewScaleInInstancesResponse() (response *ScaleInInstancesResponse) {
-    response = &ScaleInInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ScaleInInstances
-// This API is used to reduce the specified number of instances from the scaling group, which returns the scaling activity ID `ActivityId`.
-//
-// * The scaling group is not active.
-//
-// * The scale-in instances will be selected according to the `TerminationPolicies` policy as described in [Reducing Capacity](https://intl.cloud.tencent.com/document/product/377/8563?from_cn_redirect=1).
-//
-// * Only the `IN_SERVICE` instances will be reduced. To reduce instances in other statues, use the [`DetachInstances`](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1) or [`RemoveInstances`](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1) API.
-//
-// * The desired capacity will be reduced accordingly. The new desired capacity should be no less than the minimum capacity.
-//
-// * If the scale-in activity failed or partially succeeded, the final desired capacity only deducts the instances that have been reduced successfully.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPBELOWMINSIZE = "ResourceInsufficient.AutoScalingGroupBelowMinSize"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
-func (c *Client) ScaleInInstances(request *ScaleInInstancesRequest) (response *ScaleInInstancesResponse, err error) {
-    return c.ScaleInInstancesWithContext(context.Background(), request)
-}
-
-// ScaleInInstances
-// This API is used to reduce the specified number of instances from the scaling group, which returns the scaling activity ID `ActivityId`.
-//
-// * The scaling group is not active.
-//
-// * The scale-in instances will be selected according to the `TerminationPolicies` policy as described in [Reducing Capacity](https://intl.cloud.tencent.com/document/product/377/8563?from_cn_redirect=1).
-//
-// * Only the `IN_SERVICE` instances will be reduced. To reduce instances in other statues, use the [`DetachInstances`](https://intl.cloud.tencent.com/document/api/377/20436?from_cn_redirect=1) or [`RemoveInstances`](https://intl.cloud.tencent.com/document/api/377/20431?from_cn_redirect=1) API.
-//
-// * The desired capacity will be reduced accordingly. The new desired capacity should be no less than the minimum capacity.
-//
-// * If the scale-in activity failed or partially succeeded, the final desired capacity only deducts the instances that have been reduced successfully.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPBELOWMINSIZE = "ResourceInsufficient.AutoScalingGroupBelowMinSize"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
-func (c *Client) ScaleInInstancesWithContext(ctx context.Context, request *ScaleInInstancesRequest) (response *ScaleInInstancesResponse, err error) {
-    if request == nil {
-        request = NewScaleInInstancesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ScaleInInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewScaleInInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewScaleOutInstancesRequest() (request *ScaleOutInstancesRequest) {
-    request = &ScaleOutInstancesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "ScaleOutInstances")
-    
-    
-    return
-}
-
-func NewScaleOutInstancesResponse() (response *ScaleOutInstancesResponse) {
-    response = &ScaleOutInstancesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ScaleOutInstances
-// This API is used to add the specified number of instances to the scaling group, which returns the scaling activity ID `ActivityId`.
-//
-// * The scaling group is not active.
-//
-// * The desired capacity will be increased accordingly. The new desired capacity should be no more than the maximum capacity.
-//
-// * If the scale-out activity failed or partially succeeded, the final desired capacity only includes the instances that have been added successfully.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  LIMITEXCEEDED_DESIREDCAPACITYLIMITEXCEEDED = "LimitExceeded.DesiredCapacityLimitExceeded"
-//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPABOVEMAXSIZE = "ResourceInsufficient.AutoScalingGroupAboveMaxSize"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
-func (c *Client) ScaleOutInstances(request *ScaleOutInstancesRequest) (response *ScaleOutInstancesResponse, err error) {
-    return c.ScaleOutInstancesWithContext(context.Background(), request)
-}
-
-// ScaleOutInstances
-// This API is used to add the specified number of instances to the scaling group, which returns the scaling activity ID `ActivityId`.
-//
-// * The scaling group is not active.
-//
-// * The desired capacity will be increased accordingly. The new desired capacity should be no more than the maximum capacity.
-//
-// * If the scale-out activity failed or partially succeeded, the final desired capacity only includes the instances that have been added successfully.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  LIMITEXCEEDED_DESIREDCAPACITYLIMITEXCEEDED = "LimitExceeded.DesiredCapacityLimitExceeded"
-//  RESOURCEINSUFFICIENT_AUTOSCALINGGROUPABOVEMAXSIZE = "ResourceInsufficient.AutoScalingGroupAboveMaxSize"
-//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
-//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
-func (c *Client) ScaleOutInstancesWithContext(ctx context.Context, request *ScaleOutInstancesRequest) (response *ScaleOutInstancesResponse, err error) {
-    if request == nil {
-        request = NewScaleOutInstancesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ScaleOutInstances require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewScaleOutInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewSetInstancesProtectionRequest() (request *SetInstancesProtectionRequest) {
     request = &SetInstancesProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3528,6 +3222,7 @@ func NewStopAutoScalingInstancesResponse() (response *StopAutoScalingInstancesRe
 // error code that may be returned:
 //  CALLCVMERROR = "CallCvmError"
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
@@ -3557,6 +3252,7 @@ func (c *Client) StopAutoScalingInstances(request *StopAutoScalingInstancesReque
 // error code that may be returned:
 //  CALLCVMERROR = "CallCvmError"
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
@@ -3580,109 +3276,6 @@ func (c *Client) StopAutoScalingInstancesWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewStopAutoScalingInstancesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpgradeLaunchConfigurationRequest() (request *UpgradeLaunchConfigurationRequest) {
-    request = &UpgradeLaunchConfigurationRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("as", APIVersion, "UpgradeLaunchConfiguration")
-    
-    
-    return
-}
-
-func NewUpgradeLaunchConfigurationResponse() (response *UpgradeLaunchConfigurationResponse) {
-    response = &UpgradeLaunchConfigurationResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// UpgradeLaunchConfiguration
-// This API (UpgradeLaunchConfiguration) is used to upgrade a launch configuration.
-//
-// 
-//
-// * This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
-//
-// * After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
-//
-// error code that may be returned:
-//  CALLCVMERROR = "CallCvmError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
-//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
-//  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
-//  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
-//  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
-//  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
-//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
-//  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
-//  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
-//  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
-//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
-//  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_LAUNCHCONFIGURATIONIDNOTFOUND = "ResourceNotFound.LaunchConfigurationIdNotFound"
-func (c *Client) UpgradeLaunchConfiguration(request *UpgradeLaunchConfigurationRequest) (response *UpgradeLaunchConfigurationResponse, err error) {
-    return c.UpgradeLaunchConfigurationWithContext(context.Background(), request)
-}
-
-// UpgradeLaunchConfiguration
-// This API (UpgradeLaunchConfiguration) is used to upgrade a launch configuration.
-//
-// 
-//
-// * This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
-//
-// * After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
-//
-// error code that may be returned:
-//  CALLCVMERROR = "CallCvmError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
-//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
-//  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
-//  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
-//  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
-//  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
-//  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
-//  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
-//  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
-//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
-//  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
-//  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
-//  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
-//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
-//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
-//  INVALIDPARAMETERVALUE_USERDATAFORMATERROR = "InvalidParameterValue.UserDataFormatError"
-//  INVALIDPARAMETERVALUE_USERDATASIZEEXCEEDED = "InvalidParameterValue.UserDataSizeExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_LAUNCHCONFIGURATIONIDNOTFOUND = "ResourceNotFound.LaunchConfigurationIdNotFound"
-func (c *Client) UpgradeLaunchConfigurationWithContext(ctx context.Context, request *UpgradeLaunchConfigurationRequest) (response *UpgradeLaunchConfigurationResponse, err error) {
-    if request == nil {
-        request = NewUpgradeLaunchConfigurationRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("UpgradeLaunchConfiguration require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewUpgradeLaunchConfigurationResponse()
     err = c.Send(request, response)
     return
 }

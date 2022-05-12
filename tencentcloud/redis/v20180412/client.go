@@ -45,6 +45,120 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAllocateWanAddressRequest() (request *AllocateWanAddressRequest) {
+    request = &AllocateWanAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "AllocateWanAddress")
+    
+    
+    return
+}
+
+func NewAllocateWanAddressResponse() (response *AllocateWanAddressResponse) {
+    response = &AllocateWanAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AllocateWanAddress
+// This API is used to enable public network access.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
+    return c.AllocateWanAddressWithContext(context.Background(), request)
+}
+
+// AllocateWanAddress
+// This API is used to enable public network access.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) AllocateWanAddressWithContext(ctx context.Context, request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
+    if request == nil {
+        request = NewAllocateWanAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AllocateWanAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAllocateWanAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewChangeReplicaToMasterRequest() (request *ChangeReplicaToMasterRequest) {
+    request = &ChangeReplicaToMasterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ChangeReplicaToMaster")
+    
+    
+    return
+}
+
+func NewChangeReplicaToMasterResponse() (response *ChangeReplicaToMasterResponse) {
+    response = &ChangeReplicaToMasterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ChangeReplicaToMaster
+// This API is used to promote a replica node group of a multi-AZ deployed instance to master node group or a replica node of a single-AZ deployed instance to master node.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+func (c *Client) ChangeReplicaToMaster(request *ChangeReplicaToMasterRequest) (response *ChangeReplicaToMasterResponse, err error) {
+    return c.ChangeReplicaToMasterWithContext(context.Background(), request)
+}
+
+// ChangeReplicaToMaster
+// This API is used to promote a replica node group of a multi-AZ deployed instance to master node group or a replica node of a single-AZ deployed instance to master node.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+func (c *Client) ChangeReplicaToMasterWithContext(ctx context.Context, request *ChangeReplicaToMasterRequest) (response *ChangeReplicaToMasterResponse, err error) {
+    if request == nil {
+        request = NewChangeReplicaToMasterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChangeReplicaToMaster require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChangeReplicaToMasterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceAccountRequest() (request *DescribeInstanceAccountRequest) {
     request = &DescribeInstanceAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -68,6 +182,7 @@ func NewDescribeInstanceAccountResponse() (response *DescribeInstanceAccountResp
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) DescribeInstanceAccount(request *DescribeInstanceAccountRequest) (response *DescribeInstanceAccountResponse, err error) {
@@ -80,6 +195,7 @@ func (c *Client) DescribeInstanceAccount(request *DescribeInstanceAccountRequest
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) DescribeInstanceAccountWithContext(ctx context.Context, request *DescribeInstanceAccountRequest) (response *DescribeInstanceAccountResponse, err error) {
@@ -474,6 +590,59 @@ func (c *Client) DescribeInstanceMonitorTopNCmdTookWithContext(ctx context.Conte
     return
 }
 
+func NewDescribeInstanceNodeInfoRequest() (request *DescribeInstanceNodeInfoRequest) {
+    request = &DescribeInstanceNodeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeInstanceNodeInfo")
+    
+    
+    return
+}
+
+func NewDescribeInstanceNodeInfoResponse() (response *DescribeInstanceNodeInfoResponse) {
+    response = &DescribeInstanceNodeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceNodeInfo
+// This API is used to query instance node information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeInstanceNodeInfo(request *DescribeInstanceNodeInfoRequest) (response *DescribeInstanceNodeInfoResponse, err error) {
+    return c.DescribeInstanceNodeInfoWithContext(context.Background(), request)
+}
+
+// DescribeInstanceNodeInfo
+// This API is used to query instance node information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeInstanceNodeInfoWithContext(ctx context.Context, request *DescribeInstanceNodeInfoRequest) (response *DescribeInstanceNodeInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceNodeInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceNodeInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceNodeInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMaintenanceWindowRequest() (request *DescribeMaintenanceWindowRequest) {
     request = &DescribeMaintenanceWindowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -863,6 +1032,53 @@ func (c *Client) ModfiyInstancePasswordWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModfiyInstancePasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReleaseWanAddressRequest() (request *ReleaseWanAddressRequest) {
+    request = &ReleaseWanAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ReleaseWanAddress")
+    
+    
+    return
+}
+
+func NewReleaseWanAddressResponse() (response *ReleaseWanAddressResponse) {
+    response = &ReleaseWanAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReleaseWanAddress
+// This API is used to disable public network access.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) ReleaseWanAddress(request *ReleaseWanAddressRequest) (response *ReleaseWanAddressResponse, err error) {
+    return c.ReleaseWanAddressWithContext(context.Background(), request)
+}
+
+// ReleaseWanAddress
+// This API is used to disable public network access.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) ReleaseWanAddressWithContext(ctx context.Context, request *ReleaseWanAddressRequest) (response *ReleaseWanAddressResponse, err error) {
+    if request == nil {
+        request = NewReleaseWanAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReleaseWanAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReleaseWanAddressResponse()
     err = c.Send(request, response)
     return
 }

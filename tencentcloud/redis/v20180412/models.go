@@ -47,6 +47,58 @@ type Account struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
+type AllocateWanAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *AllocateWanAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateWanAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AllocateWanAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AllocateWanAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// Status of enabling public network access
+		WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AllocateWanAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateWanAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type BigKeyInfo struct {
 
 	// Database
@@ -78,6 +130,59 @@ type BigKeyTypeInfo struct {
 
 	// Timestamp
 	Updatetime *int64 `json:"Updatetime,omitempty" name:"Updatetime"`
+}
+
+type ChangeReplicaToMasterRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Replica group ID, which is required for multi-AZ instances.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+func (r *ChangeReplicaToMasterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeReplicaToMasterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangeReplicaToMasterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ChangeReplicaToMasterResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ChangeReplicaToMasterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeReplicaToMasterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CommandTake struct {
@@ -594,6 +699,81 @@ func (r *DescribeInstanceMonitorTopNCmdTookResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstanceMonitorTopNCmdTookResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceNodeInfoRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List size
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The offset value
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeInstanceNodeInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceNodeInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceNodeInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstanceNodeInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The number of proxy nodes
+		ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+		// Proxy node information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		Proxy []*ProxyNodes `json:"Proxy,omitempty" name:"Proxy"`
+
+		// The number of redis nodes
+		RedisCount *int64 `json:"RedisCount,omitempty" name:"RedisCount"`
+
+		// Redis node information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		Redis []*RedisNodes `json:"Redis,omitempty" name:"Redis"`
+
+		// The number of tendis nodes
+		TendisCount *int64 `json:"TendisCount,omitempty" name:"TendisCount"`
+
+		// Tendis node information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+		Tendis []*TendisNodes `json:"Tendis,omitempty" name:"Tendis"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstanceNodeInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1206,6 +1386,28 @@ type ProductConf struct {
 	EnableRepicaReadOnly *bool `json:"EnableRepicaReadOnly,omitempty" name:"EnableRepicaReadOnly"`
 }
 
+type ProxyNodes struct {
+
+	// Node ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+}
+
+type RedisNodes struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role
+	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
+
+	// Shard ID
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// AZ ID
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+}
+
 type RegionConf struct {
 
 	// Region ID
@@ -1222,6 +1424,58 @@ type RegionConf struct {
 
 	// AZ information
 	ZoneSet []*ZoneCapacityConf `json:"ZoneSet,omitempty" name:"ZoneSet"`
+}
+
+type ReleaseWanAddressRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ReleaseWanAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseWanAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReleaseWanAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReleaseWanAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Async task ID
+		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+		// Status of disabling public network access
+		WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ReleaseWanAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseWanAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SourceCommand struct {
@@ -1243,6 +1497,15 @@ type SourceInfo struct {
 
 	// Command
 	Cmd *int64 `json:"Cmd,omitempty" name:"Cmd"`
+}
+
+type TendisNodes struct {
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role
+	NodeRole *string `json:"NodeRole,omitempty" name:"NodeRole"`
 }
 
 type ZoneCapacityConf struct {
