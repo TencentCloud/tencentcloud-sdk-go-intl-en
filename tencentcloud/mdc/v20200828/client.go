@@ -102,6 +102,65 @@ func (c *Client) CreateStreamLinkFlowWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateStreamLinkOutputInfoRequest() (request *CreateStreamLinkOutputInfoRequest) {
+    request = &CreateStreamLinkOutputInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkOutputInfo")
+    
+    
+    return
+}
+
+func NewCreateStreamLinkOutputInfoResponse() (response *CreateStreamLinkOutputInfoResponse) {
+    response = &CreateStreamLinkOutputInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateStreamLinkOutputInfo
+// This API is used to create a StreamLink output.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) CreateStreamLinkOutputInfo(request *CreateStreamLinkOutputInfoRequest) (response *CreateStreamLinkOutputInfoResponse, err error) {
+    return c.CreateStreamLinkOutputInfoWithContext(context.Background(), request)
+}
+
+// CreateStreamLinkOutputInfo
+// This API is used to create a StreamLink output.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) CreateStreamLinkOutputInfoWithContext(ctx context.Context, request *CreateStreamLinkOutputInfoRequest) (response *CreateStreamLinkOutputInfoResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLinkOutputInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLinkOutputInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamLinkOutputInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
     request = &DeleteStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -249,6 +308,311 @@ func (c *Client) DescribeStreamLinkFlowWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeStreamLinkFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLinkFlowLogsRequest() (request *DescribeStreamLinkFlowLogsRequest) {
+    request = &DescribeStreamLinkFlowLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowLogs")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkFlowLogsResponse() (response *DescribeStreamLinkFlowLogsResponse) {
+    response = &DescribeStreamLinkFlowLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkFlowLogs
+// This API is used to query the logs of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_SORTTYPE = "InvalidParameter.SortType"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowLogs(request *DescribeStreamLinkFlowLogsRequest) (response *DescribeStreamLinkFlowLogsResponse, err error) {
+    return c.DescribeStreamLinkFlowLogsWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkFlowLogs
+// This API is used to query the logs of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_SORTTYPE = "InvalidParameter.SortType"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowLogsWithContext(ctx context.Context, request *DescribeStreamLinkFlowLogsRequest) (response *DescribeStreamLinkFlowLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkFlowLogsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlowLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkFlowLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLinkFlowMediaStatisticsRequest() (request *DescribeStreamLinkFlowMediaStatisticsRequest) {
+    request = &DescribeStreamLinkFlowMediaStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowMediaStatistics")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkFlowMediaStatisticsResponse() (response *DescribeStreamLinkFlowMediaStatisticsResponse) {
+    response = &DescribeStreamLinkFlowMediaStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkFlowMediaStatistics
+// This API is used to query the media quality of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowMediaStatistics(request *DescribeStreamLinkFlowMediaStatisticsRequest) (response *DescribeStreamLinkFlowMediaStatisticsResponse, err error) {
+    return c.DescribeStreamLinkFlowMediaStatisticsWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkFlowMediaStatistics
+// This API is used to query the media quality of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowMediaStatisticsWithContext(ctx context.Context, request *DescribeStreamLinkFlowMediaStatisticsRequest) (response *DescribeStreamLinkFlowMediaStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkFlowMediaStatisticsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlowMediaStatistics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkFlowMediaStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLinkFlowRealtimeStatusRequest() (request *DescribeStreamLinkFlowRealtimeStatusRequest) {
+    request = &DescribeStreamLinkFlowRealtimeStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowRealtimeStatus")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkFlowRealtimeStatusResponse() (response *DescribeStreamLinkFlowRealtimeStatusResponse) {
+    response = &DescribeStreamLinkFlowRealtimeStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkFlowRealtimeStatus
+// This API is used to query the current status of a flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLinkFlowRealtimeStatus(request *DescribeStreamLinkFlowRealtimeStatusRequest) (response *DescribeStreamLinkFlowRealtimeStatusResponse, err error) {
+    return c.DescribeStreamLinkFlowRealtimeStatusWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkFlowRealtimeStatus
+// This API is used to query the current status of a flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLinkFlowRealtimeStatusWithContext(ctx context.Context, request *DescribeStreamLinkFlowRealtimeStatusRequest) (response *DescribeStreamLinkFlowRealtimeStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkFlowRealtimeStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlowRealtimeStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkFlowRealtimeStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLinkFlowSRTStatisticsRequest() (request *DescribeStreamLinkFlowSRTStatisticsRequest) {
+    request = &DescribeStreamLinkFlowSRTStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowSRTStatistics")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkFlowSRTStatisticsResponse() (response *DescribeStreamLinkFlowSRTStatisticsResponse) {
+    response = &DescribeStreamLinkFlowSRTStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkFlowSRTStatistics
+// This API is used to query the SRT streaming performance of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowSRTStatistics(request *DescribeStreamLinkFlowSRTStatisticsRequest) (response *DescribeStreamLinkFlowSRTStatisticsResponse, err error) {
+    return c.DescribeStreamLinkFlowSRTStatisticsWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkFlowSRTStatistics
+// This API is used to query the SRT streaming performance of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowSRTStatisticsWithContext(ctx context.Context, request *DescribeStreamLinkFlowSRTStatisticsRequest) (response *DescribeStreamLinkFlowSRTStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkFlowSRTStatisticsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlowSRTStatistics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkFlowSRTStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamLinkFlowStatisticsRequest() (request *DescribeStreamLinkFlowStatisticsRequest) {
+    request = &DescribeStreamLinkFlowStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowStatistics")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkFlowStatisticsResponse() (response *DescribeStreamLinkFlowStatisticsResponse) {
+    response = &DescribeStreamLinkFlowStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamLinkFlowStatistics
+// This API is used to query the media quality of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowStatistics(request *DescribeStreamLinkFlowStatisticsRequest) (response *DescribeStreamLinkFlowStatisticsResponse, err error) {
+    return c.DescribeStreamLinkFlowStatisticsWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkFlowStatistics
+// This API is used to query the media quality of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUTOUTPUTID = "InvalidParameter.InputOutputId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PERIOD = "InvalidParameter.Period"
+//  INVALIDPARAMETER_PIPELINE = "InvalidParameter.Pipeline"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+func (c *Client) DescribeStreamLinkFlowStatisticsWithContext(ctx context.Context, request *DescribeStreamLinkFlowStatisticsRequest) (response *DescribeStreamLinkFlowStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkFlowStatisticsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkFlowStatistics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkFlowStatisticsResponse()
     err = c.Send(request, response)
     return
 }
@@ -402,6 +766,118 @@ func (c *Client) ModifyStreamLinkFlowWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyStreamLinkFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamLinkInputRequest() (request *ModifyStreamLinkInputRequest) {
+    request = &ModifyStreamLinkInputRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkInput")
+    
+    
+    return
+}
+
+func NewModifyStreamLinkInputResponse() (response *ModifyStreamLinkInputResponse) {
+    response = &ModifyStreamLinkInputResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyStreamLinkInput
+// This API is used to modify an input of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) ModifyStreamLinkInput(request *ModifyStreamLinkInputRequest) (response *ModifyStreamLinkInputResponse, err error) {
+    return c.ModifyStreamLinkInputWithContext(context.Background(), request)
+}
+
+// ModifyStreamLinkInput
+// This API is used to modify an input of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_INPUT = "InvalidParameter.Input"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) ModifyStreamLinkInputWithContext(ctx context.Context, request *ModifyStreamLinkInputRequest) (response *ModifyStreamLinkInputResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLinkInputRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLinkInput require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamLinkInputResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamLinkOutputInfoRequest() (request *ModifyStreamLinkOutputInfoRequest) {
+    request = &ModifyStreamLinkOutputInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkOutputInfo")
+    
+    
+    return
+}
+
+func NewModifyStreamLinkOutputInfoResponse() (response *ModifyStreamLinkOutputInfoResponse) {
+    response = &ModifyStreamLinkOutputInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyStreamLinkOutputInfo
+// This API is used to modify an output of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_OUTPUTID = "InvalidParameter.OutputId"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) ModifyStreamLinkOutputInfo(request *ModifyStreamLinkOutputInfoRequest) (response *ModifyStreamLinkOutputInfoResponse, err error) {
+    return c.ModifyStreamLinkOutputInfoWithContext(context.Background(), request)
+}
+
+// ModifyStreamLinkOutputInfo
+// This API is used to modify an output of a StreamLink flow.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_OUTPUT = "InvalidParameter.Output"
+//  INVALIDPARAMETER_OUTPUTID = "InvalidParameter.OutputId"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+//  INVALIDPARAMETER_STATE = "InvalidParameter.State"
+func (c *Client) ModifyStreamLinkOutputInfoWithContext(ctx context.Context, request *ModifyStreamLinkOutputInfoRequest) (response *ModifyStreamLinkOutputInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamLinkOutputInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamLinkOutputInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamLinkOutputInfoResponse()
     err = c.Send(request, response)
     return
 }

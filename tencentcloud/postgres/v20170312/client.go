@@ -446,6 +446,7 @@ func NewCreateDBInstanceNetworkAccessResponse() (response *CreateDBInstanceNetwo
 //  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
 //  FLOWERROR = "FlowError"
 //  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  OPERATIONDENIED_INSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.InstanceIpv6NotSupportedError"
@@ -473,6 +474,7 @@ func (c *Client) CreateDBInstanceNetworkAccess(request *CreateDBInstanceNetworkA
 //  FAILEDOPERATION_SERVERLESSNOTSUPPORTEDERROR = "FailedOperation.ServerlessNotSupportedError"
 //  FLOWERROR = "FlowError"
 //  INTERNALERROR_MARSHALERROR = "InternalError.MarshalError"
+//  INVALIDPARAMETER_VPCNOTFOUNDERROR = "InvalidParameter.VpcNotFoundError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  OPERATIONDENIED_INSTANCEIPV6NOTSUPPORTEDERROR = "OperationDenied.InstanceIpv6NotSupportedError"
@@ -2524,6 +2526,53 @@ func (c *Client) DescribeDatabasesWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeEncryptionKeysRequest() (request *DescribeEncryptionKeysRequest) {
+    request = &DescribeEncryptionKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeEncryptionKeys")
+    
+    
+    return
+}
+
+func NewDescribeEncryptionKeysResponse() (response *DescribeEncryptionKeysResponse) {
+    response = &DescribeEncryptionKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEncryptionKeys
+// This API is used to get instance key list.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeEncryptionKeys(request *DescribeEncryptionKeysRequest) (response *DescribeEncryptionKeysResponse, err error) {
+    return c.DescribeEncryptionKeysWithContext(context.Background(), request)
+}
+
+// DescribeEncryptionKeys
+// This API is used to get instance key list.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeEncryptionKeysWithContext(ctx context.Context, request *DescribeEncryptionKeysRequest) (response *DescribeEncryptionKeysResponse, err error) {
+    if request == nil {
+        request = NewDescribeEncryptionKeysRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEncryptionKeys require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEncryptionKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOrdersRequest() (request *DescribeOrdersRequest) {
     request = &DescribeOrdersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2751,6 +2800,7 @@ func NewDescribeReadOnlyGroupsResponse() (response *DescribeReadOnlyGroupsRespon
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
@@ -2771,6 +2821,7 @@ func (c *Client) DescribeReadOnlyGroups(request *DescribeReadOnlyGroupsRequest) 
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_INTERFACENAMENOTFOUND = "InvalidParameterValue.InterfaceNameNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"

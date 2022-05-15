@@ -2276,6 +2276,56 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeEncryptionKeysRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
+func (r *DescribeEncryptionKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEncryptionKeysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEncryptionKeysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeEncryptionKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Instance key list
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		EncryptionKeys []*EncryptionKey `json:"EncryptionKeys,omitempty" name:"EncryptionKeys"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeEncryptionKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEncryptionKeysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeOrdersRequest struct {
 	*tchttp.BaseRequest
 
@@ -2948,6 +2998,33 @@ type DurationAnalysis struct {
 
 	// The number of slow query statements whose execution time falls within the time range
 	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
+type EncryptionKey struct {
+
+	// Encrypted KeyId of KMS instance
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Encryption key alias of KMS instance 
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	KeyAlias *string `json:"KeyAlias,omitempty" name:"KeyAlias"`
+
+	// Instance DEK ciphertext
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DEKCipherTextBlob *string `json:"DEKCipherTextBlob,omitempty" name:"DEKCipherTextBlob"`
+
+	// Whether the key is enabled. Valid values: `1` (yes), `0` (no)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IsEnabled *int64 `json:"IsEnabled,omitempty" name:"IsEnabled"`
+
+	// Region where KMS key resides
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	KeyRegion *string `json:"KeyRegion,omitempty" name:"KeyRegion"`
+
+	// DEK key creation time
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type ErrLogDetail struct {
