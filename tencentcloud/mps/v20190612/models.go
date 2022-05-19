@@ -48,6 +48,12 @@ type AIAnalysisTemplateItem struct {
 
 	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The template type. Valid values:
+	// * Preset
+	// * Custom
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type AIRecognitionTemplateItem struct {
@@ -86,6 +92,12 @@ type AIRecognitionTemplateItem struct {
 
 	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The template type. Valid values:
+	// * Preset
+	// * Custom
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type AdaptiveDynamicStreamingInfoItem struct {
@@ -1572,7 +1584,10 @@ type ContentReviewTemplateItem struct {
 	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// 
+	// The template type. Valid values:
+	// * Preset
+	// * Custom
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -3290,6 +3305,11 @@ type DescribeAIAnalysisTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 func (r *DescribeAIAnalysisTemplatesRequest) ToJsonString() string {
@@ -3307,6 +3327,7 @@ func (r *DescribeAIAnalysisTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIAnalysisTemplatesRequest has unknown keys!", "")
 	}
@@ -3350,6 +3371,11 @@ type DescribeAIRecognitionTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 func (r *DescribeAIRecognitionTemplatesRequest) ToJsonString() string {
@@ -3367,6 +3393,7 @@ func (r *DescribeAIRecognitionTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIRecognitionTemplatesRequest has unknown keys!", "")
 	}
@@ -3542,6 +3569,11 @@ type DescribeContentReviewTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 func (r *DescribeContentReviewTemplatesRequest) ToJsonString() string {
@@ -3559,6 +3591,7 @@ func (r *DescribeContentReviewTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeContentReviewTemplatesRequest has unknown keys!", "")
 	}

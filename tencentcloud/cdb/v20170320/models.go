@@ -1187,6 +1187,9 @@ type CreateDBInstanceHourRequest struct {
 	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
 
+	// Instance engine type. Valid values: `InnoDB` (default); `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
 	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
 	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 }
@@ -1238,6 +1241,7 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "ParamTemplateType")
 	delete(f, "AlarmPolicyIdList")
 	delete(f, "DryRun")
+	delete(f, "EngineType")
 	delete(f, "Vips")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")

@@ -180,11 +180,11 @@ type AdaptiveDynamicStreamingTemplate struct {
 	// <li>HLS.</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
-	// DRM type. Valid values:
-	// <li>FairPlay;</li>
-	// <li>SimpleAES;</li>
-	// <li>Widevine.</li>
-	// If this field is a blank string, DRM will not be performed on the video.
+	// The DRM type. Valid values:
+	// <li>SimpleAES</li>
+	// <li>Widevine</li>
+	// <li>FairPlay</li>
+	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
 	// Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
@@ -2896,9 +2896,11 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// DRM scheme type. Valid values:
-	// <li>SimpleAES.</li>
-	// If this field is an empty string, DRM will not be performed on the video.
+	// The DRM type. Valid values:
+	// <li>SimpleAES</li>
+	// <li>Widevine</li>
+	// <li>FairPlay</li>
+	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
@@ -5821,6 +5823,63 @@ func (r *DescribeDailyPlayStatFileListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeImageReviewUsageDataRequest struct {
+	*tchttp.BaseRequest
+
+	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeImageReviewUsageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageReviewUsageDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageReviewUsageDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeImageReviewUsageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The image recognition usage statistics (the number of times the image recognition feature is used in the time period specified).
+		ImageReviewUsageDataSet []*ImageReviewUsageDataItem `json:"ImageReviewUsageDataSet,omitempty" name:"ImageReviewUsageDataSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeImageReviewUsageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageReviewUsageDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 
@@ -5888,6 +5947,68 @@ func (r *DescribeImageSpriteTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeImageSpriteTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLicenseUsageDataRequest struct {
+	*tchttp.BaseRequest
+
+	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The license type, which is DRM by default. Valid values:
+	// <li> DRM</li>
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeLicenseUsageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLicenseUsageDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "LicenseType")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLicenseUsageDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeLicenseUsageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The license request statistics (the number of license requests in the time period specified)
+		LicenseUsageDataSet []*LicenseUsageDataItem `json:"LicenseUsageDataSet,omitempty" name:"LicenseUsageDataSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeLicenseUsageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLicenseUsageDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6038,14 +6159,15 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Type of media processing task. Valid values:
-	// <li>`Transcoding`: basic transcoding</li>
-	// <li>`Transcoding-TESHD`: TESHD transcoding</li>
-	// <li>`Editing`: video editing</li>
-	// <li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
-	// <li>`ContentAudit`: content moderation</li>
-	// <li>`RemoveWatermark`: watermark removal</li>
-	// <li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
+	// The type of media processing task. Valid values:
+	// <li>Transcoding: General transcoding</li>
+	// <li>Transcoding-TESHD: TESHD transcoding</li>
+	// <li>Editing: Video editing</li>
+	// <li>Editing-TESHD: TESHD editing</li>
+	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+	// <li>ContentAudit: Content moderation</li>
+	// <li>RemoveWatermark: Watermark removal</li>
+	// <li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
@@ -6819,21 +6941,22 @@ type DescribeTaskDetailResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
 
-		// Task type. Valid values:
-	// <li>Procedure: video processing task</li>
-	// <li>EditMedia: video editing task</li>
-	// <li>SplitMedia: video splitting task</li>
-	// <li>ComposeMedia: media file producing task</li>
-	// <li>WechatPublish: WeChat publishing task</li>
-	// <li>WechatMiniProgramPublish: video publishing on WeChat Mini Program</li>
-	// <li>PullUpload: pulling media files for upload</li>
+		// The task type. Valid values:
+	// <li>Procedure: Video processing</li>
+	// <li>EditMedia: Video editing</li>
+	// <li>SplitMedia: Video splitting</li>
+	// <li>ComposeMedia: Media file producing</li>
+	// <li>WechatPublish: WeChat publishing</li>
+	// <li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
+	// <li>PullUpload: Pulling media files for upload</li>
+	// <li>FastClipMedia: Quick clipping</li>
 	// 
-	// Support v2017 task types:
-	// <li>Transcode: transcoding task</li>
-	// <li>SnapshotByTimeOffset: screencapturing task</li>
-	// <li>Concat: video splicing task</li>
-	// <li>Clip: video clipping task</li>
-	// <li>ImageSprites: image sprite generating task</li>
+	// Task types for v2017:
+	// <li>Transcode: Transcoding</li>
+	// <li>SnapshotByTimeOffset: Screencapturing</li>
+	// <li>Concat: Video splicing</li>
+	// <li>Clip: Video clipping</li>
+	// <li>ImageSprites: Image sprite generating</li>
 		TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 		// Task status. Valid values:
@@ -7857,6 +7980,15 @@ type ImageContentReviewInput struct {
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
+type ImageReviewUsageDataItem struct {
+
+	// The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// The number of times the image recognition feature is used.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
 type ImageSpriteTaskInput struct {
 
 	// Image sprite generating template ID.
@@ -8010,6 +8142,15 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
+}
+
+type LicenseUsageDataItem struct {
+
+	// The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// The number of license requests.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
 type LiveRealTimeClipRequest struct {
@@ -12440,6 +12581,63 @@ type RestoreMediaTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+type ReviewImageRequest struct {
+	*tchttp.BaseRequest
+
+	// The unique ID of the media file. For this API to work, the file must be an image.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The ID of the image recognition template. Currently, this can only be `10`.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ReviewImageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewImageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReviewImageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReviewImageResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The image recognition result.
+		ReviewResultSet []*ContentReviewResult `json:"ReviewResultSet,omitempty" name:"ReviewResultSet"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ReviewImageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewImageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SampleSnapshotTaskInput struct {
 
 	// Sampled screencapturing template ID.
@@ -13277,21 +13475,22 @@ type TaskSimpleInfo struct {
 
 type TaskStatData struct {
 
-	// Task type
-	// <li>`Transcoding`: basic transcoding</li>
-	// <li>`Transcoding-TESHD`: TESHD transcoding</li>
-	// <li>`Editing`: video editing</li>
-	// <li>`AdaptiveBitrateStreaming`: adaptive bitrate streaming</li>
-	// <li>`ContentAudit`: content moderation</li>
-	// <li>`RemoveWatermark`: watermark removal</li>
-	// <li>`Transcode`: transcoding, including basic transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
+	// The task type.
+	// <li>Transcoding: General transcoding</li>
+	// <li>Transcoding-TESHD: TESHD transcoding</li>
+	// <li>Editing: Video editing</li>
+	// <li>Editing-TESHD: TESHD editing</li>
+	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+	// <li>ContentAudit: Content moderation</li>
+	// <li>RemoveWatermark: Watermark removal</li>
+	// <li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).
 	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary"`
 
-	// Detailed statistics of different tasks
-	// Transcoding statistics:
+	// The detailed statistics of different tasks.
+	// Transcoding:
 	// <li>Remuxing</li>
 	// <li>Audio</li>
 	// <li>Standard.H264.SD</li>
@@ -13325,13 +13524,23 @@ type TaskStatData struct {
 	// <li>Edit.H265.FHD</li>
 	// <li>Edit.H265.2K</li>
 	// <li>Edit.H265.4K</li>
+	// <li>Edit.TESHD-10.H264.SD</li>
+	// <li>Edit.TESHD-10.H264.HD</li>
+	// <li>Edit.TESHD-10.H264.FHD</li>
+	// <li>Edit.TESHD-10.H264.2K</li>
+	// <li>Edit.TESHD-10.H264.4K</li>
+	// <li>Edit.TESHD-10.H265.SD</li>
+	// <li>Edit.TESHD-10.H265.HD</li>
+	// <li>Edit.TESHD-10.H265.FHD</li>
+	// <li>Edit.TESHD-10.H265.2K</li>
+	// <li>Edit.TESHD-10.H265.4K</li>
 	// Watermark removal:
-	// <li>`480P`: 640 × 480 and below</li>
-	// <li>`720P`: 1280 × 720 and below</li>
-	// <li>`1080P`: 1920 × 1080 and below</li>
-	// <li>`2K`: 2560 × 1440 and below</li>
-	// <li>`4K`: 3840 × 2160 and below</li>
-	// <li>`8K`: 7680 × 4320 and below</li>
+	// <li>480P: 640 x 480 and below</li>
+	// <li>720P: 1280 x 720 and below</li>
+	// <li>1080P: 1920 x 1080 and below</li>
+	// <li>2K: 2560 x 1440 and below</li>
+	// <li>4K: 3840 x 2160 and below</li>
+	// <li>8K: 7680 x 4320 and below</li>
 	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details"`
 }
 
@@ -13872,11 +14081,14 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 
 type VideoTemplateInfo struct {
 
-	// Video stream encoder. Valid values:
+	// The video codec. Valid values:
 	// <li>libx264: H.264</li>
 	// <li>libx265: H.265</li>
 	// <li>av1: AOMedia Video 1</li>
-	// Currently, a resolution within 640x480 must be specified for H.265. and the `av1` container only supports mp4.
+	// <li>H.266: H.266</li>
+	// <font color=red>Notes:</font>
+	// <li>The AOMedia Video 1 and H.266 codecs can only be used for MP4 files.</li>
+	// <li> Only CRF is supported for H.266 currently.</li>
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Video frame rate in Hz. Value range: [0,100].
@@ -13920,9 +14132,12 @@ type VideoTemplateInfo struct {
 	// Default value: black
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// Video Constant Rate Factor (CRF). Value range: 1-51.
-	// If this parameter is specified, CRF will be used to control video bitrate for transcoding and the original video bitrate will not be used.
-	// We don’t recommend specifying this parameter unless you have special requirements.
+	// The video constant rate factor (CRF). Value range: 1-51.
+	// 
+	// <font color=red>Notes:</font>
+	// <li>If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.</li>
+	// <li>If `Codec` is `H.266`, this parameter is required (`28` is recommended).</li>
+	// <li>We don’t recommend using this parameter unless you have special requirements.</li>
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 
 	// I-frame interval in frames. Valid values: 0 and 1-100000.

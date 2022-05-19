@@ -3231,6 +3231,71 @@ func (c *Client) DescribeDailyPlayStatFileListWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeImageReviewUsageDataRequest() (request *DescribeImageReviewUsageDataRequest) {
+    request = &DescribeImageReviewUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeImageReviewUsageData")
+    
+    
+    return
+}
+
+func NewDescribeImageReviewUsageDataResponse() (response *DescribeImageReviewUsageDataResponse) {
+    response = &DescribeImageReviewUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImageReviewUsageData
+// This API is used to query your daily usage of the image recognition feature in a specified time period.
+//
+//    1. You can query statistics from the last 365 days.
+//
+//    2. The maximum query period is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeImageReviewUsageData(request *DescribeImageReviewUsageDataRequest) (response *DescribeImageReviewUsageDataResponse, err error) {
+    return c.DescribeImageReviewUsageDataWithContext(context.Background(), request)
+}
+
+// DescribeImageReviewUsageData
+// This API is used to query your daily usage of the image recognition feature in a specified time period.
+//
+//    1. You can query statistics from the last 365 days.
+//
+//    2. The maximum query period is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeImageReviewUsageDataWithContext(ctx context.Context, request *DescribeImageReviewUsageDataRequest) (response *DescribeImageReviewUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageReviewUsageDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageReviewUsageData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageReviewUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImageSpriteTemplatesRequest() (request *DescribeImageSpriteTemplatesRequest) {
     request = &DescribeImageSpriteTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3286,6 +3351,71 @@ func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeImageSpriteTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLicenseUsageDataRequest() (request *DescribeLicenseUsageDataRequest) {
+    request = &DescribeLicenseUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeLicenseUsageData")
+    
+    
+    return
+}
+
+func NewDescribeLicenseUsageDataResponse() (response *DescribeLicenseUsageDataResponse) {
+    response = &DescribeLicenseUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLicenseUsageData
+// This API is used to query daily playback license requests in a specified time period.
+//
+//    1. You can query statistics from the last 365 days.
+//
+//    2. The maximum query period is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeLicenseUsageData(request *DescribeLicenseUsageDataRequest) (response *DescribeLicenseUsageDataResponse, err error) {
+    return c.DescribeLicenseUsageDataWithContext(context.Background(), request)
+}
+
+// DescribeLicenseUsageData
+// This API is used to query daily playback license requests in a specified time period.
+//
+//    1. You can query statistics from the last 365 days.
+//
+//    2. The maximum query period is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeLicenseUsageDataWithContext(ctx context.Context, request *DescribeLicenseUsageDataRequest) (response *DescribeLicenseUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeLicenseUsageDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLicenseUsageData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLicenseUsageDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -6379,11 +6509,15 @@ func NewProcessImageResponse() (response *ProcessImageResponse) {
 }
 
 // ProcessImage
+// This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// 
+//
 // This API is used to initiate an image processing task. Image processing operations include the following:
 //
 // 
 //
-// 1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+// 1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
 //
 // 
 //
@@ -6405,11 +6539,15 @@ func (c *Client) ProcessImage(request *ProcessImageRequest) (response *ProcessIm
 }
 
 // ProcessImage
+// This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// 
+//
 // This API is used to initiate an image processing task. Image processing operations include the following:
 //
 // 
 //
-// 1. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+// 1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
 //
 // 
 //
@@ -6993,6 +7131,79 @@ func (c *Client) ResetProcedureTemplateWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewResetProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReviewImageRequest() (request *ReviewImageRequest) {
+    request = &ReviewImageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "ReviewImage")
+    
+    
+    return
+}
+
+func NewReviewImageResponse() (response *ReviewImageResponse) {
+    response = &ReviewImageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReviewImage
+// This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
+//
+// 
+//
+// ><li>File size: < 5 MB</li>
+//
+// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+//
+// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewImage(request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
+    return c.ReviewImageWithContext(context.Background(), request)
+}
+
+// ReviewImage
+// This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
+//
+// 
+//
+// ><li>File size: < 5 MB</li>
+//
+// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
+//
+// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewImageWithContext(ctx context.Context, request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
+    if request == nil {
+        request = NewReviewImageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReviewImage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReviewImageResponse()
     err = c.Send(request, response)
     return
 }

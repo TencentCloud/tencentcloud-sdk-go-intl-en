@@ -369,6 +369,10 @@ type ContentInfo struct {
 	// JSON format content description
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Json *JsonInfo `json:"Json,omitempty" name:"Json"`
+
+	// `Parquet` format description
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Parquet *ParquetInfo `json:"Parquet,omitempty" name:"Parquet"`
 }
 
 type CreateAlarmNoticeRequest struct {
@@ -1022,7 +1026,7 @@ type CreateTopicRequest struct {
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
 
-	// Log topic storage type. Valid values: `hot` (real-time storage); `cold` (IA storage). Default value: `hot`.
+	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
 	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
@@ -2730,7 +2734,7 @@ func (r *DescribeShippersResponse) FromJsonString(s string) error {
 type DescribeTopicsRequest struct {
 	*tchttp.BaseRequest
 
-	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call DescribeLogsets to query the list of created logsets or log in to the console to view them. You can also call CreateLogset to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as tag:exampleKey. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (real-time storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -3992,6 +3996,25 @@ func (r *OpenKafkaConsumerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *OpenKafkaConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ParquetInfo struct {
+
+	// `ParquetKeyInfo` array
+	ParquetKeyInfo []*ParquetKeyInfo `json:"ParquetKeyInfo,omitempty" name:"ParquetKeyInfo"`
+}
+
+type ParquetKeyInfo struct {
+
+	// Key name
+	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
+
+	// Supported data types: string, boolean, int32, int64, float, and double
+	KeyType *string `json:"KeyType,omitempty" name:"KeyType"`
+
+	// Assignment information returned upon resolution failure
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	KeyNonExistingField *string `json:"KeyNonExistingField,omitempty" name:"KeyNonExistingField"`
 }
 
 type PartitionInfo struct {

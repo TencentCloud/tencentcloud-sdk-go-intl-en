@@ -416,37 +416,31 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 }
 
 // CloneLoadBalancer
-// This API is used to create a CLB instance with the same forwarding rules and binding relation as the source CLB instance. Note that this API is asynchronous, which means that changes to the source CLB after the invocation are not cloned.
+// This API is used to create a clone of the source CLB instance with the same forwarding rules and binding relations. Note that this API is asynchronous, which means that changes to the source CLB after invocation of the API are not included in the clone.
 //
 // 
 //
 // Use limits:
 //
-// Classic network-based CLBs, Classic CLBs, IPv6 CLBs, and NAT64 CLBs are not supported.
+// Unsupported instance types: Classic network CLB, Classic CLB, IPv6 CLB, and NAT64 CLB.
 //
-// Monthly-subscribed CLB instances are not supported.
+// Monthly subscribed CLB instances are not supported.
 //
 // QUIC and port listeners are not supported.
 //
-// The CLB backend server cannot be bound to a target group or an SCF function.
+// The CLB backend service cannot be a target group or an SCF function.
 //
-// The following settings will not be cloned automatically: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
-//
-// 
-//
-// Permissions:
-//
-// The required permissions are as follows: `CreateLoadBalancer`, `CreateLoadBalancerListeners`, `CreateListenerRules`, `BatchRegisterTargets`, `SetLoadBalancerSecurityGroups`, `ModifyLoadBalancerAttributes`, `SetLoadBalancerClsLog`, and `DeleteLoadBalancer`. Note that `DeleteLoadBalancer` is used to roll back in case of cloning failures. If you do not have the permission, the failure data will remain.
+// The following settings will not be cloned automatically and require manual configuration: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
 //
 // 
 //
 // Notes:
 //
-// For a BGP bandwidth package, you need to pass the package ID.
+// If you are using a BGP bandwidth package, you need to pass the package ID.
 //
-// To clone a dedicated CLB cluster, specify it in the parameter, otherwise a shared CLB cluster is created.
+// To create a dedicated cluster-based CLB by cloning the source CLB, you need to pass the cluster ID. Otherwise, a normal CLB is created.
 //
-// This API is only available for beta users. To try it out, [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
+// This API is only available for beta users. If you want to try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -474,37 +468,31 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 }
 
 // CloneLoadBalancer
-// This API is used to create a CLB instance with the same forwarding rules and binding relation as the source CLB instance. Note that this API is asynchronous, which means that changes to the source CLB after the invocation are not cloned.
+// This API is used to create a clone of the source CLB instance with the same forwarding rules and binding relations. Note that this API is asynchronous, which means that changes to the source CLB after invocation of the API are not included in the clone.
 //
 // 
 //
 // Use limits:
 //
-// Classic network-based CLBs, Classic CLBs, IPv6 CLBs, and NAT64 CLBs are not supported.
+// Unsupported instance types: Classic network CLB, Classic CLB, IPv6 CLB, and NAT64 CLB.
 //
-// Monthly-subscribed CLB instances are not supported.
+// Monthly subscribed CLB instances are not supported.
 //
 // QUIC and port listeners are not supported.
 //
-// The CLB backend server cannot be bound to a target group or an SCF function.
+// The CLB backend service cannot be a target group or an SCF function.
 //
-// The following settings will not be cloned automatically: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
-//
-// 
-//
-// Permissions:
-//
-// The required permissions are as follows: `CreateLoadBalancer`, `CreateLoadBalancerListeners`, `CreateListenerRules`, `BatchRegisterTargets`, `SetLoadBalancerSecurityGroups`, `ModifyLoadBalancerAttributes`, `SetLoadBalancerClsLog`, and `DeleteLoadBalancer`. Note that `DeleteLoadBalancer` is used to roll back in case of cloning failures. If you do not have the permission, the failure data will remain.
+// The following settings will not be cloned automatically and require manual configuration: "Custom Configuration", "Redirection Configuration" and "Allow Traffic by Default in Security Group".
 //
 // 
 //
 // Notes:
 //
-// For a BGP bandwidth package, you need to pass the package ID.
+// If you are using a BGP bandwidth package, you need to pass the package ID.
 //
-// To clone a dedicated CLB cluster, specify it in the parameter, otherwise a shared CLB cluster is created.
+// To create a dedicated cluster-based CLB by cloning the source CLB, you need to pass the cluster ID. Otherwise, a normal CLB is created.
 //
-// This API is only available for beta users. To try it out, [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
+// This API is only available for beta users. If you want to try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&step=1).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1726,6 +1714,7 @@ func NewDescribeBlockIPTaskResponse() (response *DescribeBlockIPTaskResponse) {
 // This API is used to query the execution status of an async IP blocking (blocklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBlockIPTask(request *DescribeBlockIPTaskRequest) (response *DescribeBlockIPTaskResponse, err error) {
@@ -1736,6 +1725,7 @@ func (c *Client) DescribeBlockIPTask(request *DescribeBlockIPTaskRequest) (respo
 // This API is used to query the execution status of an async IP blocking (blocklisting) task by the async task ID returned by the `ModifyBlockIPList` API. (This API is in beta test. To use it, please submit a ticket.)
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBlockIPTaskWithContext(ctx context.Context, request *DescribeBlockIPTaskRequest) (response *DescribeBlockIPTaskResponse, err error) {
@@ -2293,6 +2283,7 @@ func NewDescribeLBListenersResponse() (response *DescribeLBListenersResponse) {
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
 //  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2310,6 +2301,7 @@ func (c *Client) DescribeLBListeners(request *DescribeLBListenersRequest) (respo
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
 //  INVALIDPARAMETER_LISTENERIDNOTFOUND = "InvalidParameter.ListenerIdNotFound"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2356,6 +2348,7 @@ func NewDescribeListenersResponse() (response *DescribeListenersResponse) {
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeListeners(request *DescribeListenersRequest) (response *DescribeListenersResponse, err error) {
@@ -2372,6 +2365,7 @@ func (c *Client) DescribeListeners(request *DescribeListenersRequest) (response 
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeListenersWithContext(ctx context.Context, request *DescribeListenersRequest) (response *DescribeListenersResponse, err error) {
@@ -3495,6 +3489,7 @@ func NewModifyDomainAttributesResponse() (response *ModifyDomainAttributesRespon
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyDomainAttributes(request *ModifyDomainAttributesRequest) (response *ModifyDomainAttributesResponse, err error) {
@@ -3513,6 +3508,7 @@ func (c *Client) ModifyDomainAttributes(request *ModifyDomainAttributesRequest) 
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ModifyDomainAttributesWithContext(ctx context.Context, request *ModifyDomainAttributesRequest) (response *ModifyDomainAttributesResponse, err error) {

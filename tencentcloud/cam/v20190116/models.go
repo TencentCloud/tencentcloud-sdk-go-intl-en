@@ -568,6 +568,68 @@ func (r *CreateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// IdP URL.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Public key for signature, which must be Base64-encoded.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID.
+	ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityUrl")
+	delete(f, "IdentityKey")
+	delete(f, "ClientId")
+	delete(f, "Name")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOIDCConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreatePolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1034,6 +1096,52 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// OIDC IdP name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DeleteOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOIDCConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeletePolicyRequest struct {
 	*tchttp.BaseRequest
 
@@ -1418,6 +1526,73 @@ func (r *DeleteUserResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DescribeOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// IdP type. 11: Role IdP.
+		ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
+
+		// IdP URL.
+		IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+		// Public key for signature.
+		IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+		// Client ID.
+		ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+		// Status. 0: Not set; 2: Disabled; 11: Enabled.
+		Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+		// Description.
+		Description *string `json:"Description,omitempty" name:"Description"`
+
+		// Name.
+		Name *string `json:"Name,omitempty" name:"Name"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4156,6 +4331,68 @@ func (r *UpdateGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateOIDCConfigRequest struct {
+	*tchttp.BaseRequest
+
+	// IdP URL.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Public key for signature, which must be Base64-encoded.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID.
+	ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *UpdateOIDCConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOIDCConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityUrl")
+	delete(f, "IdentityKey")
+	delete(f, "ClientId")
+	delete(f, "Name")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateOIDCConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateOIDCConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateOIDCConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

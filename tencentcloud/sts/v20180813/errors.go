@@ -83,6 +83,9 @@ const (
 	// Invalid temporary code.
 	INVALIDPARAMETER_TEMPCODENOTAVALIABLE = "InvalidParameter.TempCodeNotAvaliable"
 
+	// WebIdentityToken parameter error
+	INVALIDPARAMETER_WEBIDENTITYTOKENERROR = "InvalidParameter.WebIdentityTokenError"
+
 	// The role corresponding to the account does not exist.
 	RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 

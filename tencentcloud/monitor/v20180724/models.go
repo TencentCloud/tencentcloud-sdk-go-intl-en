@@ -298,6 +298,14 @@ type AlarmPolicy struct {
 	// Information on the filter dimension associated with a policy.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	FilterDimensionsParam *string `json:"FilterDimensionsParam,omitempty" name:"FilterDimensionsParam"`
+
+	// Whether it is a quick alarm policy.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsOneClick *int64 `json:"IsOneClick,omitempty" name:"IsOneClick"`
+
+	// Whether the quick alarm policy is enabled.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OneClickStatus *int64 `json:"OneClickStatus,omitempty" name:"OneClickStatus"`
 }
 
 type AlarmPolicyCondition struct {
@@ -1680,6 +1688,9 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// Filter alarm policy by triggered task (such as auto scaling task). Up to 10 tasks can be specified.
 	TriggerTasks []*AlarmPolicyTriggerTask `json:"TriggerTasks,omitempty" name:"TriggerTasks"`
+
+	// Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
+	OneClickPolicyType []*string `json:"OneClickPolicyType,omitempty" name:"OneClickPolicyType"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -1714,6 +1725,7 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceGroupId")
 	delete(f, "NeedCorrespondence")
 	delete(f, "TriggerTasks")
+	delete(f, "OneClickPolicyType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}

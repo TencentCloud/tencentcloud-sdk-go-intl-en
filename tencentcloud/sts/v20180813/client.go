@@ -210,13 +210,60 @@ func (c *Client) AssumeRoleWithSAMLWithContext(ctx context.Context, request *Ass
         request = NewAssumeRoleWithSAMLRequest()
     }
     
-    if c.GetCredential() == nil {
-        return nil, errors.New("AssumeRoleWithSAML require credential")
-    }
-
     request.SetContext(ctx)
     
     response = NewAssumeRoleWithSAMLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssumeRoleWithWebIdentityRequest() (request *AssumeRoleWithWebIdentityRequest) {
+    request = &AssumeRoleWithWebIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("sts", APIVersion, "AssumeRoleWithWebIdentity")
+    
+    
+    return
+}
+
+func NewAssumeRoleWithWebIdentityResponse() (response *AssumeRoleWithWebIdentityResponse) {
+    response = &AssumeRoleWithWebIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AssumeRoleWithWebIdentity
+// This API is used to apply for an OIDC role credential.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_WEBIDENTITYTOKENERROR = "InvalidParameter.WebIdentityTokenError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AssumeRoleWithWebIdentity(request *AssumeRoleWithWebIdentityRequest) (response *AssumeRoleWithWebIdentityResponse, err error) {
+    return c.AssumeRoleWithWebIdentityWithContext(context.Background(), request)
+}
+
+// AssumeRoleWithWebIdentity
+// This API is used to apply for an OIDC role credential.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_WEBIDENTITYTOKENERROR = "InvalidParameter.WebIdentityTokenError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AssumeRoleWithWebIdentityWithContext(ctx context.Context, request *AssumeRoleWithWebIdentityRequest) (response *AssumeRoleWithWebIdentityResponse, err error) {
+    if request == nil {
+        request = NewAssumeRoleWithWebIdentityRequest()
+    }
+    
+    request.SetContext(ctx)
+    
+    response = NewAssumeRoleWithWebIdentityResponse()
     err = c.Send(request, response)
     return
 }

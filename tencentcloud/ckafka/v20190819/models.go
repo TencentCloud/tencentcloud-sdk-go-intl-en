@@ -1027,6 +1027,67 @@ func (r *DeleteAclResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteRouteRequest struct {
+	*tchttp.BaseRequest
+
+	// Unique instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Route ID.
+	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
+
+	// AppId of the caller.
+	CallerAppid *int64 `json:"CallerAppid,omitempty" name:"CallerAppid"`
+
+	// The time when a route was deleted.
+	DeleteRouteTime *string `json:"DeleteRouteTime,omitempty" name:"DeleteRouteTime"`
+}
+
+func (r *DeleteRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RouteId")
+	delete(f, "CallerAppid")
+	delete(f, "DeleteRouteTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned result.
+		Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteRouteTriggerTimeRequest struct {
 	*tchttp.BaseRequest
 
@@ -2392,7 +2453,7 @@ type FetchMessageByOffsetRequest struct {
 	// Partition ID
 	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
 
-	// Offset information
+	// Offset information, which is required.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 

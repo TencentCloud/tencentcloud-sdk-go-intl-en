@@ -20,6 +20,9 @@ const (
 	// Request timed out
 	INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 
+	// 
+	INTERNALERROR_ADDNEWNODEERROR = "InternalError.AddNewNodeError"
+
 	// Failed to create the APM resource
 	INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 
@@ -32,6 +35,9 @@ const (
 	// The server is busy. Retry later.
 	INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 
+	// 
+	INTERNALERROR_DELETEINGRESSERROR = "InternalError.DeleteIngressError"
+
 	// Failed to invoke the version deployment
 	INTERNALERROR_DEPLOYVERSIONERROR = "InternalError.DeployVersionError"
 
@@ -41,13 +47,16 @@ const (
 	// Failed to query the list of ingress associated with the service.
 	INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
 
+	// 
+	INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
+
 	// Failed to restart
 	INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 
 	// Failed to update the ingress
 	INTERNALERROR_UPDATEINGRESSERROR = "InternalError.UpdateIngressError"
 
-	// 
+	// Only one auto scaler can be specified.
 	INVALIDPARAMETERVALUE_AUTOSCALERLARGERTHANONE = "InvalidParameterValue.AutoScalerLargerThanOne"
 
 	// The version number is invalid.
@@ -65,6 +74,9 @@ const (
 	// Failed to create the environment. The upper limit of environment is reached.
 	INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 
+	// 
+	INVALIDPARAMETERVALUE_SERVICEPODREACHMAXIMUM = "InvalidParameterValue.ServicePodReachMaximum"
+
 	// Linkage tracing is not available for non-JAVA applications.
 	INVALIDPARAMETERVALUE_TRAITSTRACINGNOTSUPPORTED = "InvalidParameterValue.TraitsTracingNotSupported"
 
@@ -77,7 +89,7 @@ const (
 	// The environment ID can not be left empty.
 	MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 
-	// 
+	// The package name cannot be left empty.
 	MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 
 	// The service ID cannot be empty.

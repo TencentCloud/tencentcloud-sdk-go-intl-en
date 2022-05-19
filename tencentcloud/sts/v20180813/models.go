@@ -47,6 +47,9 @@ type AssumeRoleRequest struct {
 	// External role ID, which can be obtained by clicking the role name in the [CAM console](https://console.cloud.tencent.com/cam/role).
 	// It can contain 2-128 letters, digits, and symbols (=,.@:/-). Regex: [\w+=,.@:\/-]*
 	ExternalId *string `json:"ExternalId,omitempty" name:"ExternalId"`
+
+	// List of session tags. Up to 50 tags are allowed. The tag keys can not duplicate.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *AssumeRoleRequest) ToJsonString() string {
@@ -66,6 +69,7 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 	delete(f, "DurationSeconds")
 	delete(f, "Policy")
 	delete(f, "ExternalId")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleRequest has unknown keys!", "")
 	}
@@ -169,6 +173,77 @@ func (r *AssumeRoleWithSAMLResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AssumeRoleWithSAMLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AssumeRoleWithWebIdentityRequest struct {
+	*tchttp.BaseRequest
+
+	// Identity provider name
+	ProviderId *string `json:"ProviderId,omitempty" name:"ProviderId"`
+
+	// OIDC token issued by the IdP
+	WebIdentityToken *string `json:"WebIdentityToken,omitempty" name:"WebIdentityToken"`
+
+	// Role access description name
+	RoleArn *string `json:"RoleArn,omitempty" name:"RoleArn"`
+
+	// Session name
+	RoleSessionName *string `json:"RoleSessionName,omitempty" name:"RoleSessionName"`
+
+	// The validity period of the temporary credential in seconds. Default value: 7,200s. Maximum value: 43,200s.
+	DurationSeconds *int64 `json:"DurationSeconds,omitempty" name:"DurationSeconds"`
+}
+
+func (r *AssumeRoleWithWebIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssumeRoleWithWebIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProviderId")
+	delete(f, "WebIdentityToken")
+	delete(f, "RoleArn")
+	delete(f, "RoleSessionName")
+	delete(f, "DurationSeconds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleWithWebIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AssumeRoleWithWebIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Expiration time of the temporary credential (timestamp)
+		ExpiredTime *uint64 `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
+
+		// Expiration time of the temporary credential
+		Expiration *string `json:"Expiration,omitempty" name:"Expiration"`
+
+		// Temporary credential
+		Credentials *Credentials `json:"Credentials,omitempty" name:"Credentials"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AssumeRoleWithWebIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssumeRoleWithWebIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -312,4 +387,13 @@ func (r *GetFederationTokenResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetFederationTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Tag struct {
+
+	// Tag key. It’s up to 128 characters and case-sensitive.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value. It’s up to 256 characters and case-sensitive.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }

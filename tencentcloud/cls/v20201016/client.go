@@ -463,7 +463,7 @@ func NewCreateExportResponse() (response *CreateExportResponse) {
 }
 
 // CreateExport
-// This API is used to create a download task to export raw logs.
+// This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -481,7 +481,7 @@ func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExp
 }
 
 // CreateExport
-// This API is used to create a download task to export raw logs.
+// This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
