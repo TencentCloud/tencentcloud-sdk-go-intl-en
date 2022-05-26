@@ -7821,10 +7821,23 @@ type FaceConfigureInfoForUpdate struct {
 	FaceLibrary *string `json:"FaceLibrary,omitempty" name:"FaceLibrary"`
 }
 
+type FileDeleteResultItem struct {
+
+	// The ID of the file deleted.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The type of the file deleted.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts"`
+}
+
 type FileDeleteTask struct {
 
 	// List of IDs of deleted files.
 	FileIdSet []*string `json:"FileIdSet,omitempty" name:"FileIdSet"`
+
+	// The information of the files deleted.
+	FileDeleteResultInfo []*FileDeleteResultItem `json:"FileDeleteResultInfo,omitempty" name:"FileDeleteResultInfo"`
 }
 
 type FileUploadTask struct {
@@ -8156,7 +8169,7 @@ type LicenseUsageDataItem struct {
 type LiveRealTimeClipRequest struct {
 	*tchttp.BaseRequest
 
-	// [LVB code](https://intl.cloud.tencent.com/document/product/267/5959?from_cn_redirect=1) of a stream.
+	// The live stream code.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
 	// Start time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
@@ -14147,11 +14160,14 @@ type VideoTemplateInfo struct {
 
 type VideoTemplateInfoForUpdate struct {
 
-	// Video stream encoder. Valid values:
+	// The video codec. Valid values:
 	// <li>libx264: H.264</li>
 	// <li>libx265: H.265</li>
 	// <li>av1: AOMedia Video 1</li>
-	// Currently, a resolution within 640x480 must be specified for H.265. and the `av1` container only supports mp4.
+	// <li>H.266: H.266</li>
+	// <font color=red>Notes:</font>
+	// <li>The AOMedia Video 1 and H.266 codecs can only be used for MP4 files.</li>
+	// <li> Only CRF is supported for H.266 currently.</li>
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Video frame rate in Hz. Value range: [0,100].
@@ -14184,8 +14200,12 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>gauss: applies Gaussian blur to the uncovered area, without changing the image's aspect ratio.</li>
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
-	// Video Constant Rate Factor (CRF). Value range: 0-51. This parameter will be disabled if you enter 0.
-	// We don’t recommend specifying this parameter unless you have special requirements.
+	// The video constant rate factor (CRF). Value range: 1-51. `0` means to disable this parameter.
+	// 
+	// <font color=red>Notes:</font>
+	// <li>If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.</li>
+	// <li>If `Codec` is `H.266`, this parameter is required (`28` is recommended).</li>
+	// <li>We don’t recommend using this parameter unless you have special requirements.</li>
 	Vcrf *uint64 `json:"Vcrf,omitempty" name:"Vcrf"`
 
 	// I-frame interval in frames. Valid values: 0 and 1-100000.

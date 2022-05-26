@@ -66,6 +66,7 @@ func NewAllocateWanAddressResponse() (response *AllocateWanAddressResponse) {
 // This API is used to enable public network access.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
@@ -76,6 +77,7 @@ func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (respons
 // This API is used to enable public network access.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) AllocateWanAddressWithContext(ctx context.Context, request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
@@ -936,8 +938,10 @@ func NewInquiryPriceUpgradeInstanceResponse() (response *InquiryPriceUpgradeInst
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_REDUCECAPACITYNOTALLOWED = "InvalidParameterValue.ReduceCapacityNotAllowed"
+//  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
 //  LIMITEXCEEDED_MEMSIZENOTINRANGE = "LimitExceeded.MemSizeNotInRange"
 //  RESOURCEUNAVAILABLE_INSTANCESTATEERROR = "ResourceUnavailable.InstanceStateError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -950,8 +954,10 @@ func (c *Client) InquiryPriceUpgradeInstance(request *InquiryPriceUpgradeInstanc
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_REDUCECAPACITYNOTALLOWED = "InvalidParameterValue.ReduceCapacityNotAllowed"
+//  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
 //  LIMITEXCEEDED_MEMSIZENOTINRANGE = "LimitExceeded.MemSizeNotInRange"
 //  RESOURCEUNAVAILABLE_INSTANCESTATEERROR = "ResourceUnavailable.InstanceStateError"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -1032,6 +1038,63 @@ func (c *Client) ModfiyInstancePasswordWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModfiyInstancePasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceReadOnlyRequest() (request *ModifyInstanceReadOnlyRequest) {
+    request = &ModifyInstanceReadOnlyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyInstanceReadOnly")
+    
+    
+    return
+}
+
+func NewModifyInstanceReadOnlyResponse() (response *ModifyInstanceReadOnlyResponse) {
+    response = &ModifyInstanceReadOnlyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstanceReadOnly
+// This API is used to set instance input mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyInstanceReadOnly(request *ModifyInstanceReadOnlyRequest) (response *ModifyInstanceReadOnlyResponse, err error) {
+    return c.ModifyInstanceReadOnlyWithContext(context.Background(), request)
+}
+
+// ModifyInstanceReadOnly
+// This API is used to set instance input mode.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyInstanceReadOnlyWithContext(ctx context.Context, request *ModifyInstanceReadOnlyRequest) (response *ModifyInstanceReadOnlyResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceReadOnlyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceReadOnly require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceReadOnlyResponse()
     err = c.Send(request, response)
     return
 }
