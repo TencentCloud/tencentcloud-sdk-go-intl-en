@@ -20,6 +20,52 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AddUsersForUserManagerRequest struct {
+	*tchttp.BaseRequest
+
+	// User information list
+	UserManagerUserList []*UserInfoForUserManager `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
+}
+
+func (r *AddUsersForUserManagerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddUsersForUserManagerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserManagerUserList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddUsersForUserManagerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AddUsersForUserManagerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *AddUsersForUserManagerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddUsersForUserManagerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type COSSettings struct {
 
 	// COS `SecretId`
@@ -290,6 +336,22 @@ type ClusterInstancesInfo struct {
 	// Cluster dependency
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ClusterExternalServiceInfo []*ClusterExternalServiceInfo `json:"ClusterExternalServiceInfo,omitempty" name:"ClusterExternalServiceInfo"`
+
+	// The VPC ID string type of the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// The subnet ID string type of the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Node information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TopologyInfoList []*TopologyInfo `json:"TopologyInfoList,omitempty" name:"TopologyInfoList"`
+
+	// Multi-AZ cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
 }
 
 type CreateInstanceRequest struct {
@@ -318,15 +380,9 @@ type CreateInstanceRequest struct {
 	// <li>30: EMR v2.6.0</li>
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 
-	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
-	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
-
 	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
 	// Enter an instance value: `hive` or `flink`.
 	Software []*string `json:"Software,omitempty" name:"Software"`
-
-	// Node resource specification.
-	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
 
 	// Whether to enable high node availability. Valid values:
 	// <li>0: does not enable high availability of node.</li>
@@ -341,9 +397,6 @@ type CreateInstanceRequest struct {
 	// Instance billing mode. Valid values:
 	// <li>0: pay-as-you-go.</li>
 	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
-
-	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
-	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
 
 	// Purchase duration of instance, which needs to be used together with `TimeUnit`.
 	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
@@ -360,8 +413,17 @@ type CreateInstanceRequest struct {
 	// <li>If the key is not set, the password will be used for login to all purchased nodes and the native component WebUI.</li>
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
+	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
+	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
+
+	// Node resource specification.
+	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+
 	// Parameter required for enabling COS access.
 	COSSettings *COSSettings `json:"COSSettings,omitempty" name:"COSSettings"`
+
+	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
 
 	// Security group to which an instance belongs in the format of `sg-xxxxxxxx`. This parameter can be obtained from the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) API.
 	SgId *string `json:"SgId,omitempty" name:"SgId"`
@@ -425,6 +487,15 @@ type CreateInstanceRequest struct {
 
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
+
+	// 
+	VersionID *int64 `json:"VersionID,omitempty" name:"VersionID"`
+
+	// `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
+	MultiZone *bool `json:"MultiZone,omitempty" name:"MultiZone"`
+
+	// Node resource specs. The actual number of AZs is set, with the first AZ as the primary AZ, the second as the backup AZ, and the third as the arbitrator AZ. If the multi-AZ mode is not enabled, set the value to `1`.
+	MultiZoneSettings []*MultiZoneSetting `json:"MultiZoneSettings,omitempty" name:"MultiZoneSettings"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -440,17 +511,17 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ProductId")
-	delete(f, "VPCSettings")
 	delete(f, "Software")
-	delete(f, "ResourceSpec")
 	delete(f, "SupportHA")
 	delete(f, "InstanceName")
 	delete(f, "PayMode")
-	delete(f, "Placement")
 	delete(f, "TimeSpan")
 	delete(f, "TimeUnit")
 	delete(f, "LoginSettings")
+	delete(f, "VPCSettings")
+	delete(f, "ResourceSpec")
 	delete(f, "COSSettings")
+	delete(f, "Placement")
 	delete(f, "SgId")
 	delete(f, "PreExecutedFileSettings")
 	delete(f, "AutoRenew")
@@ -468,6 +539,9 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ApplicationRole")
 	delete(f, "SceneName")
 	delete(f, "ExternalService")
+	delete(f, "VersionID")
+	delete(f, "MultiZone")
+	delete(f, "MultiZoneSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -605,6 +679,78 @@ func (r *DescribeClusterNodesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClusterNodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstancesListRequest struct {
+	*tchttp.BaseRequest
+
+	// Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
+	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
+
+	// Page number. Default value: `0`, indicating the first page.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: `10`; maximum value: `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting field. Valid values: <li>clusterId: Sorting by instance ID. </li><li>addTime: Sorting by instance creation time.</li><li>status: Sorting by instance status code.</li>
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sort ascending or descending based on `OrderField`. Valid values:<li>0: Descending.</li><li>1: Ascending.</li>Default value: `0`.
+	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
+
+	// Custom query
+	Filters []*Filters `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeInstancesListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancesListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DisplayStrategy")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OrderField")
+	delete(f, "Asc")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeInstancesListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Number of eligible instances.
+		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+		// Cluster instance list.
+		InstancesList []*EmrListInstance `json:"InstancesList,omitempty" name:"InstancesList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeInstancesListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancesListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -755,6 +901,153 @@ func (r *DescribeResourceScheduleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeUsersForUserManagerRequest struct {
+	*tchttp.BaseRequest
+
+	// Whether the Keytab file information is required. This field is only valid for clusters with Kerberos enabled and defaults to `false`.
+	NeedKeytabInfo *bool `json:"NeedKeytabInfo,omitempty" name:"NeedKeytabInfo"`
+}
+
+func (r *DescribeUsersForUserManagerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsersForUserManagerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NeedKeytabInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsersForUserManagerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeUsersForUserManagerResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeUsersForUserManagerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsersForUserManagerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EmrListInstance struct {
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Status description
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster region
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// User APPID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Creation time
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Running time
+	RunTime *string `json:"RunTime,omitempty" name:"RunTime"`
+
+	// Cluster IP
+	MasterIp *string `json:"MasterIp,omitempty" name:"MasterIp"`
+
+	// Cluster version
+	EmrVersion *string `json:"EmrVersion,omitempty" name:"EmrVersion"`
+
+	// Cluster billing mode
+	ChargeType *uint64 `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// EMR ID
+	Id *uint64 `json:"Id,omitempty" name:"Id"`
+
+	// Product ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Project ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Region
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Subnet ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetId *uint64 `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	VpcId *uint64 `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Region
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Status code
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance tag
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Alarm information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AlarmInfo *string `json:"AlarmInfo,omitempty" name:"AlarmInfo"`
+
+	// Whether it is a Woodpecker cluster
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IsWoodpeckerCluster *uint64 `json:"IsWoodpeckerCluster,omitempty" name:"IsWoodpeckerCluster"`
+
+	// VPC name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// Subnet name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// VPC ID string
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Subnet ID string
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Cluster type
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterClass *string `json:"ClusterClass,omitempty" name:"ClusterClass"`
+
+	// Whether it is a multi-AZ cluster
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
+}
+
 type EmrProductConfigOutter struct {
 
 	// Software information
@@ -849,6 +1142,15 @@ type ExternalService struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
+type Filters struct {
+
+	// Field name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Filters by the field value
+	Values []*string `json:"Values,omitempty" name:"Values"`
+}
+
 type InquiryPriceCreateInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -860,9 +1162,6 @@ type InquiryPriceCreateInstanceRequest struct {
 	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
 	// <li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
 	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
-
-	// Node specification queried for price.
-	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
 
 	// Currency.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
@@ -882,6 +1181,9 @@ type InquiryPriceCreateInstanceRequest struct {
 	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
 	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
 	Software []*string `json:"Software,omitempty" name:"Software"`
+
+	// Node specification queried for price.
+	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
 
 	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
@@ -917,6 +1219,12 @@ type InquiryPriceCreateInstanceRequest struct {
 
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
+
+	// 
+	VersionID *uint64 `json:"VersionID,omitempty" name:"VersionID"`
+
+	// AZ specs
+	MultiZoneSettings []*MultiZoneSetting `json:"MultiZoneSettings,omitempty" name:"MultiZoneSettings"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -933,11 +1241,11 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "TimeUnit")
 	delete(f, "TimeSpan")
-	delete(f, "ResourceSpec")
 	delete(f, "Currency")
 	delete(f, "PayMode")
 	delete(f, "SupportHA")
 	delete(f, "Software")
+	delete(f, "ResourceSpec")
 	delete(f, "Placement")
 	delete(f, "VPCSettings")
 	delete(f, "MetaType")
@@ -946,6 +1254,8 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ProductId")
 	delete(f, "SceneName")
 	delete(f, "ExternalService")
+	delete(f, "VersionID")
+	delete(f, "MultiZoneSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
 	}
@@ -1315,6 +1625,22 @@ type MultiDiskMC struct {
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 }
 
+type MultiZoneSetting struct {
+
+	// "master", "standby", "third-party"
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ZoneTag *string `json:"ZoneTag,omitempty" name:"ZoneTag"`
+
+	// None
+	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
+
+	// None
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// None
+	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+}
+
 type NewResourceSpec struct {
 
 	// Describes master node resource
@@ -1503,6 +1829,22 @@ type NodeHardwareInfo struct {
 	// Whether to support billing mode change. `0`: no; `1`: yes
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SupportModifyPayMode *int64 `json:"SupportModifyPayMode,omitempty" name:"SupportModifyPayMode"`
+
+	// System disk type
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RootStorageType *int64 `json:"RootStorageType,omitempty" name:"RootStorageType"`
+
+	// AZ information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Subnet
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetInfo *SubnetInfo `json:"SubnetInfo,omitempty" name:"SubnetInfo"`
+
+	// Client
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Clients *string `json:"Clients,omitempty" name:"Clients"`
 }
 
 type OutterResource struct {
@@ -1662,6 +2004,28 @@ type SearchItem struct {
 	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
 }
 
+type ShortNodeInfo struct {
+
+	// Node type: Master/Core/Task/Router/Common
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// Number of nodes
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NodeSize *uint64 `json:"NodeSize,omitempty" name:"NodeSize"`
+}
+
+type SubnetInfo struct {
+
+	// Subnet information (name)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// Subnet information (ID)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
 type Tag struct {
 
 	// Tag key
@@ -1721,6 +2085,25 @@ func (r *TerminateTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type TopologyInfo struct {
+
+	// AZ ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// AZ information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Subnet information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SubnetInfoList []*SubnetInfo `json:"SubnetInfoList,omitempty" name:"SubnetInfoList"`
+
+	// Node information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NodeInfoList []*ShortNodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
+}
+
 type UpdateInstanceSettings struct {
 
 	// Memory capacity in GB
@@ -1734,6 +2117,21 @@ type UpdateInstanceSettings struct {
 
 	// Target machine specification
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+}
+
+type UserInfoForUserManager struct {
+
+	// Username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// The group to which the user belongs
+	UserGroup *string `json:"UserGroup,omitempty" name:"UserGroup"`
+
+	// 
+	PassWord *string `json:"PassWord,omitempty" name:"PassWord"`
+
+	// 
+	ReMark *string `json:"ReMark,omitempty" name:"ReMark"`
 }
 
 type VPCSettings struct {

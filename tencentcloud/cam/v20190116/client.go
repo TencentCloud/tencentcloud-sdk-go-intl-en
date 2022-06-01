@@ -631,6 +631,7 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 // This API is used to add a policy version. After creating a policy version, you can easily change the policy by changing the policy version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONFULL = "FailedOperation.PolicyVersionFull"
@@ -673,6 +674,7 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
 // This API is used to add a policy version. After creating a policy version, you can easily change the policy by changing the policy version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_POLICYFULL = "FailedOperation.PolicyFull"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONFULL = "FailedOperation.PolicyVersionFull"
@@ -1228,6 +1230,7 @@ func NewDeletePolicyVersionResponse() (response *DeletePolicyVersionResponse) {
 // This API is used to delete a policy version of a policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -1261,6 +1264,7 @@ func (c *Client) DeletePolicyVersion(request *DeletePolicyVersionRequest) (respo
 // This API is used to delete a policy version of a policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_POLICYNAMEINUSE = "FailedOperation.PolicyNameInUse"
 //  FAILEDOPERATION_POLICYVERSIONALREADYDEFAULT = "FailedOperation.PolicyVersionAlreadyDefault"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -3122,10 +3126,7 @@ func NewListGroupsResponse() (response *ListGroupsResponse) {
 // This API is used to query the list of user groups.
 //
 // error code that may be returned:
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_ENTITYFILTERERROR = "InvalidParameter.EntityFilterError"
-//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
-//  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ListGroups(request *ListGroupsRequest) (response *ListGroupsResponse, err error) {
     return c.ListGroupsWithContext(context.Background(), request)
 }
@@ -3134,10 +3135,7 @@ func (c *Client) ListGroups(request *ListGroupsRequest) (response *ListGroupsRes
 // This API is used to query the list of user groups.
 //
 // error code that may be returned:
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER_ENTITYFILTERERROR = "InvalidParameter.EntityFilterError"
-//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
-//  INVALIDPARAMETER_POLICYIDERROR = "InvalidParameter.PolicyIdError"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ListGroupsWithContext(ctx context.Context, request *ListGroupsRequest) (response *ListGroupsResponse, err error) {
     if request == nil {
         request = NewListGroupsRequest()
@@ -3175,6 +3173,7 @@ func NewListGroupsForUserResponse() (response *ListGroupsForUserResponse) {
 // This API is used to list user groups associated with a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response *ListGroupsForUserResponse, err error) {
     return c.ListGroupsForUserWithContext(context.Background(), request)
@@ -3184,6 +3183,7 @@ func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response 
 // This API is used to list user groups associated with a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListGroupsForUserWithContext(ctx context.Context, request *ListGroupsForUserRequest) (response *ListGroupsForUserResponse, err error) {
     if request == nil {
@@ -3434,6 +3434,7 @@ func NewListUsersForGroupResponse() (response *ListUsersForGroupResponse) {
 // This API is used to query the list of users associated with a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) ListUsersForGroup(request *ListUsersForGroupRequest) (response *ListUsersForGroupResponse, err error) {
     return c.ListUsersForGroupWithContext(context.Background(), request)
@@ -3443,6 +3444,7 @@ func (c *Client) ListUsersForGroup(request *ListUsersForGroupRequest) (response 
 // This API is used to query the list of users associated with a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) ListUsersForGroupWithContext(ctx context.Context, request *ListUsersForGroupRequest) (response *ListUsersForGroupResponse, err error) {
     if request == nil {

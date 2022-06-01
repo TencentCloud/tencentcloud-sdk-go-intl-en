@@ -664,6 +664,38 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateInstancePreData struct {
+
+	// The value returned by `CreateInstancePre` is 0, which is fixed and cannot be used as the query condition of `CheckTaskStatus`. It is only used to ensure the consistency with the backend data structure.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Order number list.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Instance ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type CreateInstancePreResp struct {
+
+	// Returned code. 0: Normal; other values: Error.
+	ReturnCode *string `json:"ReturnCode,omitempty" name:"ReturnCode"`
+
+	// The message indicating whether the operation is successful.
+	ReturnMessage *string `json:"ReturnMessage,omitempty" name:"ReturnMessage"`
+
+	// Data returned by the operation.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Data *CreateInstancePreData `json:"Data,omitempty" name:"Data"`
+
+	// Deletion time.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitempty" name:"DeleteRouteTimestamp"`
+}
+
 type CreatePartitionRequest struct {
 	*tchttp.BaseRequest
 
@@ -3083,6 +3115,67 @@ func (r *ModifyInstanceAttributesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyInstanceAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyInstancePreRequest struct {
+	*tchttp.BaseRequest
+
+	// Instance name.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Estimated disk capacity, which can be increased by increment.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Estimated bandwidth, which can be increased by increment.
+	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+
+	// Estimated partition count, which can be increased by increment.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+}
+
+func (r *ModifyInstancePreRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancePreRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DiskSize")
+	delete(f, "BandWidth")
+	delete(f, "Partition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstancePreRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyInstancePreResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Response structure of modifying the configurations of a prepaid instance.
+		Result *CreateInstancePreResp `json:"Result,omitempty" name:"Result"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *ModifyInstancePreResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancePreResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

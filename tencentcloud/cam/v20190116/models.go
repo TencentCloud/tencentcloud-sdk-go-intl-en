@@ -762,6 +762,9 @@ type CreateRoleRequest struct {
 
 	// The maximum validity period of the temporary key for creating a role (range: 0-43200)
 	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
+
+	// Tags bound to the role.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateRoleRequest) ToJsonString() string {
@@ -781,6 +784,7 @@ func (r *CreateRoleRequest) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "ConsoleLogin")
 	delete(f, "SessionDuration")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoleRequest has unknown keys!", "")
 	}
@@ -879,6 +883,9 @@ type CreateServiceLinkedRoleRequest struct {
 
 	// Role description.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Tags bound to the role.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateServiceLinkedRoleRequest) ToJsonString() string {
@@ -896,6 +903,7 @@ func (r *CreateServiceLinkedRoleRequest) FromJsonString(s string) error {
 	delete(f, "QCSServiceName")
 	delete(f, "CustomSuffix")
 	delete(f, "Description")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceLinkedRoleRequest has unknown keys!", "")
 	}
@@ -1604,6 +1612,9 @@ type DescribeRoleListRequest struct {
 
 	// Number of lines per page, no greater than 200
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// A parameter used to filter the list of roles under a tag.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeRoleListRequest) ToJsonString() string {
@@ -1620,6 +1631,7 @@ func (r *DescribeRoleListRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Page")
 	delete(f, "Rp")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRoleListRequest has unknown keys!", "")
 	}
@@ -3975,6 +3987,19 @@ type RoleInfo struct {
 	// Task identifier for deleting a service-linked role 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
+
+	// Tags.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
+}
+
+type RoleTags struct {
+
+	// Tag key.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type SAMLProviderInfo struct {

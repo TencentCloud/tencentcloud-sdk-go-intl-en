@@ -7438,6 +7438,10 @@ type NetworkInterface struct {
 
 	// ECM region (EcmRegion)
 	EcmRegion *string `json:"EcmRegion,omitempty" name:"EcmRegion"`
+
+	// Type of the resource bound with an ENI. Valid values: `cvm` and `eks`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Business *string `json:"Business,omitempty" name:"Business"`
 }
 
 type NetworkInterfaceAttachment struct {
