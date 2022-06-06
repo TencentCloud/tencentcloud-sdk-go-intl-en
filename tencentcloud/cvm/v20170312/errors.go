@@ -50,6 +50,9 @@ const (
 	// The EMR instance `ins-xxxxxxxx` does not support this operation.
 	FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 
+	// No available IPs in the subnet.
+	FAILEDOPERATION_NOAVAILABLEIPADDRESSCOUNTINSUBNET = "FailedOperation.NoAvailableIpAddressCountInSubnet"
+
 	// This instance does not bind an EIP.
 	FAILEDOPERATION_NOTFOUNDEIP = "FailedOperation.NotFoundEIP"
 
@@ -62,6 +65,9 @@ const (
 	// The configuration or billing mode of the CVM instances purchased during the promotion period cannot be modified.
 	FAILEDOPERATION_PROMOTIONALPERIORESTRICTION = "FailedOperation.PromotionalPerioRestriction"
 
+	// The service is not available in this country/region.
+	FAILEDOPERATION_PROMOTIONALREGIONRESTRICTION = "FailedOperation.PromotionalRegionRestriction"
+
 	// Image sharing failed.
 	FAILEDOPERATION_QIMAGESHAREFAILED = "FailedOperation.QImageShareFailed"
 
@@ -71,6 +77,12 @@ const (
 	// Security group operation failed.
 	FAILEDOPERATION_SECURITYGROUPACTIONFAILED = "FailedOperation.SecurityGroupActionFailed"
 
+	// The snapshot size is larger than the disk capacity. You need a larger disk space.
+	FAILEDOPERATION_SNAPSHOTSIZELARGERTHANDATASIZE = "FailedOperation.SnapshotSizeLargerThanDataSize"
+
+	// The snapshot size should be larger than the cloud disk capacity.
+	FAILEDOPERATION_SNAPSHOTSIZELESSTHANDATASIZE = "FailedOperation.SnapshotSizeLessThanDataSize"
+
 	// The tag key specified in the request is reserved for the system.
 	FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 
@@ -79,6 +91,9 @@ const (
 
 	// The image quota has been exceeded.
 	IMAGEQUOTALIMITEXCEEDED = "ImageQuotaLimitExceeded"
+
+	// You are trying to create more instances than your remaining quota allows.
+	INSTANCESQUOTALIMITEXCEEDED = "InstancesQuotaLimitExceeded"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -197,6 +212,9 @@ const (
 	// Only one system disk snapshot can be included.
 	INVALIDPARAMETER_DUPLICATESYSTEMSNAPSHOTS = "InvalidParameter.DuplicateSystemSnapshots"
 
+	// This operation is not supported under the current status of the CVM.
+	INVALIDPARAMETER_HOSTIDSTATUSNOTSUPPORT = "InvalidParameter.HostIdStatusNotSupport"
+
 	// The specified HostName is invalid.
 	INVALIDPARAMETER_HOSTNAMEILLEGAL = "InvalidParameter.HostNameIllegal"
 
@@ -214,6 +232,9 @@ const (
 
 	// Invalid URL.
 	INVALIDPARAMETER_INVALIDPARAMETERURLERROR = "InvalidParameter.InvalidParameterUrlError"
+
+	// `CoreCount` and `ThreadPerCore` must be specified at the same time.
+	INVALIDPARAMETER_LACKCORECOUNTORTHREADPERCORE = "InvalidParameter.LackCoreCountOrThreadPerCore"
 
 	// Local data disks cannot be used to create instance images.
 	INVALIDPARAMETER_LOCALDATADISKNOTSUPPORT = "InvalidParameter.LocalDataDiskNotSupport"
@@ -251,11 +272,26 @@ const (
 	// The shared bandwidth package ID is invalid. Please provide a standard shared bandwidth package ID in the format similar to bwp-xxxxxxxx. In this format, the letter x stands for a lowercase character or a number.
 	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 
+	// The specified bandwidth package does not exist.
+	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDNOTFOUND = "InvalidParameterValue.BandwidthPackageIdNotFound"
+
+	// 
+	INVALIDPARAMETERVALUE_CAMROLENAMEMALFORMED = "InvalidParameterValue.CamRoleNameMalformed"
+
+	// Corresponding CHC hosts not found
+	INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
+
 	// The minimum capacity of a SSD data disk is 100 GB.
 	INVALIDPARAMETERVALUE_CLOUDSSDDATADISKSIZETOOSMALL = "InvalidParameterValue.CloudSsdDataDiskSizeTooSmall"
 
+	// Illegal core count.
+	INVALIDPARAMETERVALUE_CORECOUNTVALUE = "InvalidParameterValue.CoreCountValue"
+
 	// Incorrect placement group ID format.
 	INVALIDPARAMETERVALUE_DISASTERRECOVERGROUPIDMALFORMED = "InvalidParameterValue.DisasterRecoverGroupIdMalformed"
+
+	// Duplicate parameter value
+	INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 
 	// Non-GPU instances cannot be changed to the GPU instance.
 	INVALIDPARAMETERVALUE_GPUINSTANCEFAMILY = "InvalidParameterValue.GPUInstanceFamily"
@@ -275,6 +311,15 @@ const (
 	// This type of instances cannot be added to the HPC cluster.
 	INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTHPCCLUSTER = "InvalidParameterValue.InstanceTypeNotSupportHpcCluster"
 
+	// The HPC cluster needs to be specified for the high-performance computing instance.
+	INVALIDPARAMETERVALUE_INSTANCETYPEREQUIREDHPCCLUSTER = "InvalidParameterValue.InstanceTypeRequiredHpcCluster"
+
+	// The spot instance is out of stock.
+	INVALIDPARAMETERVALUE_INSUFFICIENTOFFERING = "InvalidParameterValue.InsufficientOffering"
+
+	// The bid is lower than the market price.
+	INVALIDPARAMETERVALUE_INSUFFICIENTPRICE = "InvalidParameterValue.InsufficientPrice"
+
 	// Invalid AppID
 	INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 
@@ -283,6 +328,9 @@ const (
 
 	// The specified image does not support the specified instance type.
 	INVALIDPARAMETERVALUE_INVALIDIMAGEFORGIVENINSTANCETYPE = "InvalidParameterValue.InvalidImageForGivenInstanceType"
+
+	// A RAW image cannot be used to create a CVM. Choose another image.
+	INVALIDPARAMETERVALUE_INVALIDIMAGEFORMAT = "InvalidParameterValue.InvalidImageFormat"
 
 	// The image does not support this operation.
 	INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
@@ -308,6 +356,9 @@ const (
 	// Incorrect format of instance launch template version description.
 	INVALIDPARAMETERVALUE_INVALIDLAUNCHTEMPLATEVERSIONDESCRIPTION = "InvalidParameterValue.InvalidLaunchTemplateVersionDescription"
 
+	// 
+	INVALIDPARAMETERVALUE_INVALIDLICENSETYPE = "InvalidParameterValue.InvalidLicenseType"
+
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 
@@ -316,6 +367,9 @@ const (
 
 	// The Region ID is unavailable.
 	INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+
+	// Incorrect time format.
+	INVALIDPARAMETERVALUE_INVALIDTIMEFORMAT = "InvalidParameterValue.InvalidTimeFormat"
 
 	// Incorrect UserData format. Use the Base64-encoded format.
 	INVALIDPARAMETERVALUE_INVALIDUSERDATAFORMAT = "InvalidParameterValue.InvalidUserDataFormat"
@@ -356,6 +410,9 @@ const (
 	// The parameter value must be a DHCP-enabled VPC.
 	INVALIDPARAMETERVALUE_MUSTDHCPENABLEDVPC = "InvalidParameterValue.MustDhcpEnabledVpc"
 
+	// 
+	INVALIDPARAMETERVALUE_NOTCDCSUBNET = "InvalidParameterValue.NotCdcSubnet"
+
 	// Unsupported operation.
 	INVALIDPARAMETERVALUE_NOTSUPPORTED = "InvalidParameterValue.NotSupported"
 
@@ -386,8 +443,14 @@ const (
 	// The VPC ID `xxx` is invalid. Please provide a VPC ID in the format of vpc-xxxxxxxx, where “x” can be a lowercase letter or number.
 	INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
 
+	// The specified VpcId doesn't exist.
+	INVALIDPARAMETERVALUE_VPCIDNOTEXIST = "InvalidParameterValue.VpcIdNotExist"
+
 	// The VPC and instance must be in the same availability zone.
 	INVALIDPARAMETERVALUE_VPCIDZONEIDNOTMATCH = "InvalidParameterValue.VpcIdZoneIdNotMatch"
+
+	// This VPC does not support the IPv6 addresses.
+	INVALIDPARAMETERVALUE_VPCNOTSUPPORTIPV6ADDRESS = "InvalidParameterValue.VpcNotSupportIpv6Address"
 
 	// The availability zone does not support this operation.
 	INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
@@ -437,8 +500,17 @@ const (
 	// The CVM ENIs associated with the security group has exceeded the limit.
 	LIMITEXCEEDED_CVMSVIFSPERSECGROUPLIMITEXCEEDED = "LimitExceeded.CvmsVifsPerSecGroupLimitExceeded"
 
+	// The quota of the specified placement group is insufficient.
+	LIMITEXCEEDED_DISASTERRECOVERGROUP = "LimitExceeded.DisasterRecoverGroup"
+
 	// The number of ENIs on a specified instance exceeds the maximum ENIs allowed for the target instance type. Delete some ENIs and try again.
 	LIMITEXCEEDED_ENINUMLIMIT = "LimitExceeded.EniNumLimit"
+
+	// Number of IPs on this ENI reached the upper limit
+	LIMITEXCEEDED_IPV6ADDRESSNUM = "LimitExceeded.IPv6AddressNum"
+
+	// Reached the upper limit of the ENIs for the instance.
+	LIMITEXCEEDED_INSTANCEENINUMLIMIT = "LimitExceeded.InstanceEniNumLimit"
 
 	// You are short of the instance quota.
 	LIMITEXCEEDED_INSTANCEQUOTA = "LimitExceeded.InstanceQuota"
@@ -451,6 +523,9 @@ const (
 
 	// The number of instance launch template versions exceeds the limit.
 	LIMITEXCEEDED_LAUNCHTEMPLATEVERSIONQUOTA = "LimitExceeded.LaunchTemplateVersionQuota"
+
+	// Your quota for monthly-subscribed instances is full. Increase your quota and try again.
+	LIMITEXCEEDED_PREPAYQUOTA = "LimitExceeded.PrepayQuota"
 
 	// The number of security groups exceeds the quota limit.
 	LIMITEXCEEDED_SINGLEUSGQUOTA = "LimitExceeded.SingleUSGQuota"
@@ -659,6 +734,9 @@ const (
 	// The current operation is only supported for Tencent Cloud International users.
 	UNSUPPORTEDOPERATION_INVALIDPERMISSIONNONINTERNATIONALACCOUNT = "UnsupportedOperation.InvalidPermissionNonInternationalAccount"
 
+	// Encrypted disks are not available in the selected regions.
+	UNSUPPORTEDOPERATION_INVALIDREGIONDISKENCRYPT = "UnsupportedOperation.InvalidRegionDiskEncrypt"
+
 	// Key-pair login is not available to Windows instances.
 	UNSUPPORTEDOPERATION_KEYPAIRUNSUPPORTEDWINDOWS = "UnsupportedOperation.KeyPairUnsupportedWindows"
 
@@ -674,11 +752,17 @@ const (
 	// This instance type does not support spot instances.
 	UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
 
+	// Failed to configure the scheduled action for the current instance. 
+	UNSUPPORTEDOPERATION_NOTSUPPORTIMPORTINSTANCESACTIONTIMER = "UnsupportedOperation.NotSupportImportInstancesActionTimer"
+
 	// The instance does not support this operation.
 	UNSUPPORTEDOPERATION_NOTSUPPORTINSTANCEIMAGE = "UnsupportedOperation.NotSupportInstanceImage"
 
 	// Only a prepaid account supports this operation.
 	UNSUPPORTEDOPERATION_ONLYFORPREPAIDACCOUNT = "UnsupportedOperation.OnlyForPrepaidAccount"
+
+	// 
+	UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
 
 	// This image does not support instance reinstallation.
 	UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
@@ -709,6 +793,9 @@ const (
 
 	// Changing to this model type for this instance is not allowed.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"
+
+	// A Tencent Cloud International account does not support this operation.
+	UNSUPPORTEDOPERATION_UNSUPPORTEDINTERNATIONALUSER = "UnsupportedOperation.UnsupportedInternationalUser"
 
 	// The quota of user limit operations is insufficient.
 	UNSUPPORTEDOPERATION_USERLIMITOPERATIONEXCEEDQUOTA = "UnsupportedOperation.UserLimitOperationExceedQuota"

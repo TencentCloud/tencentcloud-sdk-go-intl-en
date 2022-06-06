@@ -36,6 +36,9 @@ type AccountCreateInfo struct {
 
 	// Whether it is an admin account. Default value: no
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
+
+	// Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`.
+	Authentication *string `json:"Authentication,omitempty" name:"Authentication"`
 }
 
 type AccountDetail struct {
@@ -66,6 +69,12 @@ type AccountDetail struct {
 
 	// Whether it is an admin account
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
+
+	// Valid values: `win-windows authentication`, `sql-sqlserver authentication`.
+	Authentication *string `json:"Authentication,omitempty" name:"Authentication"`
+
+	// The host required for `win-windows authentication` account
+	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
 type AccountPassword struct {
@@ -93,6 +102,9 @@ type AccountPrivilegeModifyInfo struct {
 
 	// Account permission change information
 	DBPrivileges []*DBPrivilegeModifyInfo `json:"DBPrivileges,omitempty" name:"DBPrivileges"`
+
+	// Whether it is an admin account
+	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
 }
 
 type AccountRemark struct {
@@ -144,6 +156,9 @@ type Backup struct {
 
 	// Group ID of unarchived backup files, which can be used as a request parameter in the `DescribeBackupFiles` API to get details of unarchived backup files in the specified group. This parameter is invalid for archived backup files.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Backup file format. Valid values:`pkg` (archive file), `single` (unarchived files).
+	BackupFormat *string `json:"BackupFormat,omitempty" name:"BackupFormat"`
 }
 
 type BackupFile struct {
@@ -880,6 +895,22 @@ type DBInstance struct {
 	// Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node (default value)), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node (valid for Always On clusters)), `slave_no_pkg` (do not archive the backup files of the replica node (valid for Always On clusters)). This parameter is invalid for read-only instances.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BackupModel *string `json:"BackupModel,omitempty" name:"BackupModel"`
+
+	// Instance backup info
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InstanceNote *string `json:"InstanceNote,omitempty" name:"InstanceNote"`
+
+	// Backup cycle
+	BackupCycle []*int64 `json:"BackupCycle,omitempty" name:"BackupCycle"`
+
+	// Backup cycle type. Valid values: `daily`, `weekly`, `monthly`.
+	BackupCycleType *string `json:"BackupCycleType,omitempty" name:"BackupCycleType"`
+
+	// Data (log) backup retention period
+	BackupSaveDays *int64 `json:"BackupSaveDays,omitempty" name:"BackupSaveDays"`
+
+	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 type DBPrivilege struct {
@@ -1396,6 +1427,9 @@ type DescribeBackupFilesRequest struct {
 
 	// Filter backups by database name. If the parameter is left empty, this filter criterion will not take effect.
 	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// List items sorting by backup size. Valid values: `desc`(descending order), `asc` (ascending order). Default value: `desc`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 }
 
 func (r *DescribeBackupFilesRequest) ToJsonString() string {
@@ -1415,6 +1449,7 @@ func (r *DescribeBackupFilesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "DatabaseName")
+	delete(f, "OrderBy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupFilesRequest has unknown keys!", "")
 	}
@@ -1631,6 +1666,12 @@ type DescribeBackupsRequest struct {
 
 	// Whether to group backup files by backup task. Valid value: `0` (no), `1` (yes). Default value: `0`. This parameter is valid only for unarchived backup files.
 	Group *int64 `json:"Group,omitempty" name:"Group"`
+
+	// Backup type. Valid values: `1` (data backup), `2` (log backup). Default value: `1`.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Filter by backup file format. Valid values: `pkg` (archive file), `single` (Unarchived files).
+	BackupFormat *string `json:"BackupFormat,omitempty" name:"BackupFormat"`
 }
 
 func (r *DescribeBackupsRequest) ToJsonString() string {
@@ -1656,6 +1697,8 @@ func (r *DescribeBackupsRequest) FromJsonString(s string) error {
 	delete(f, "BackupId")
 	delete(f, "DatabaseName")
 	delete(f, "Group")
+	delete(f, "Type")
+	delete(f, "BackupFormat")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupsRequest has unknown keys!", "")
 	}
@@ -1796,6 +1839,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Unique Uid of an instance
 	UidSet []*string `json:"UidSet,omitempty" name:"UidSet"`
+
+	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -1825,6 +1871,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "TagKeys")
 	delete(f, "SearchKey")
 	delete(f, "UidSet")
+	delete(f, "InstanceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -3307,7 +3354,7 @@ type ModifyBackupStrategyRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup mode, which supports daily backup only. Valid value: daily.
+	// Backup type. Valid values: `weekly` (when length(BackupDay) <=7 && length(BackupDay) >=2), `daily` (when length(BackupDay)=1). Default value: `daily`.
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 
 	// Backup time. Value range: an integer from 0 to 23.
@@ -3318,6 +3365,12 @@ type ModifyBackupStrategyRequest struct {
 
 	// Backup mode. Valid values: `master_pkg` (archive the backup files of the primary node), `master_no_pkg` (do not archive the backup files of the primary node), `slave_pkg` (archive the backup files of the replica node), `slave_no_pkg` (do not archive the backup files of the replica node). Backup files of the replica node are supported only when Always On disaster recovery is enabled.
 	BackupModel *string `json:"BackupModel,omitempty" name:"BackupModel"`
+
+	// The days of the week on which backup will be performed when “BackupType” is `weekly`. If data backup retention period is less than 7 days, the values will be 1-7, indicating that backup will be performed everyday by default; if data backup retention period is greater than or equal to 7 days, the values will be at least any two days, indicating that backup will be performed at least twice in a week by default.
+	BackupCycle []*uint64 `json:"BackupCycle,omitempty" name:"BackupCycle"`
+
+	// Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
+	BackupSaveDays *uint64 `json:"BackupSaveDays,omitempty" name:"BackupSaveDays"`
 }
 
 func (r *ModifyBackupStrategyRequest) ToJsonString() string {
@@ -3337,6 +3390,8 @@ func (r *ModifyBackupStrategyRequest) FromJsonString(s string) error {
 	delete(f, "BackupTime")
 	delete(f, "BackupDay")
 	delete(f, "BackupModel")
+	delete(f, "BackupCycle")
+	delete(f, "BackupSaveDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupStrategyRequest has unknown keys!", "")
 	}
@@ -4703,6 +4758,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// Change the instance deployment scheme. Valid values: `SameZones` (change to single-AZ deployment, which does not support cross-AZ disaster recovery), `MultiZones` (change to multi-AZ deployment, which supports cross-AZ disaster recovery).
 	MultiZones *string `json:"MultiZones,omitempty" name:"MultiZones"`
+
+	// The time when configuration adjustment task is performed. Valid values: `0` (execute immediately), `1` (execute during maintenance time). Default value: `1`.
+	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -4726,6 +4784,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DBVersion")
 	delete(f, "HAType")
 	delete(f, "MultiZones")
+	delete(f, "WaitSwitch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}
