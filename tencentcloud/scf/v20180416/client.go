@@ -78,6 +78,7 @@ func NewCopyFunctionResponse() (response *CopyFunctionResponse) {
 // You can manually configure the function after replication as required.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COPYASYNCRUN = "FailedOperation.CopyAsyncRun"
 //  FAILEDOPERATION_COPYFAILED = "FailedOperation.CopyFailed"
 //  FAILEDOPERATION_COPYFUNCTION = "FailedOperation.CopyFunction"
 //  INTERNALERROR = "InternalError"
@@ -119,6 +120,7 @@ func (c *Client) CopyFunction(request *CopyFunctionRequest) (response *CopyFunct
 // You can manually configure the function after replication as required.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COPYASYNCRUN = "FailedOperation.CopyAsyncRun"
 //  FAILEDOPERATION_COPYFAILED = "FailedOperation.CopyFailed"
 //  FAILEDOPERATION_COPYFUNCTION = "FailedOperation.CopyFunction"
 //  INTERNALERROR = "InternalError"
@@ -372,6 +374,7 @@ func NewCreateTriggerResponse() (response *CreateTriggerResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CREATETRIGGER = "UnauthorizedOperation.CreateTrigger"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -431,6 +434,7 @@ func (c *Client) CreateTrigger(request *CreateTriggerRequest) (response *CreateT
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_CREATETRIGGER = "UnauthorizedOperation.CreateTrigger"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -1285,14 +1289,19 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHFAILURE = "FailedOperation.AuthFailure"
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
+//  INVALIDPARAMETER_ROLECHECK = "InvalidParameter.RoleCheck"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
+//  INVALIDPARAMETERVALUE_FUNCTIONTYPE = "InvalidParameterValue.FunctionType"
+//  INVALIDPARAMETERVALUE_IMAGETYPE = "InvalidParameterValue.ImageType"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
@@ -1312,14 +1321,19 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHFAILURE = "FailedOperation.AuthFailure"
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
+//  INVALIDPARAMETER_ROLECHECK = "InvalidParameter.RoleCheck"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
+//  INVALIDPARAMETERVALUE_FUNCTIONTYPE = "InvalidParameterValue.FunctionType"
+//  INVALIDPARAMETERVALUE_IMAGETYPE = "InvalidParameterValue.ImageType"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
@@ -1493,6 +1507,7 @@ func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
 //  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_FUNCTIONREQUESTID = "InvalidParameterValue.FunctionRequestId"
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
@@ -1514,6 +1529,7 @@ func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *G
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
 //  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_FUNCTIONREQUESTID = "InvalidParameterValue.FunctionRequestId"
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
@@ -1691,6 +1707,7 @@ func NewInvokeFunctionResponse() (response *InvokeFunctionResponse) {
 //  INVALIDPARAMETER_FUNCTIONNAME = "InvalidParameter.FunctionName"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CLIENTCONTEXT = "InvalidParameterValue.ClientContext"
+//  INVALIDPARAMETERVALUE_FUNCTIONTYPE = "InvalidParameterValue.FunctionType"
 //  INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
 //  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -1713,6 +1730,7 @@ func (c *Client) InvokeFunction(request *InvokeFunctionRequest) (response *Invok
 //  INVALIDPARAMETER_FUNCTIONNAME = "InvalidParameter.FunctionName"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_CLIENTCONTEXT = "InvalidParameterValue.ClientContext"
+//  INVALIDPARAMETERVALUE_FUNCTIONTYPE = "InvalidParameterValue.FunctionType"
 //  INVALIDPARAMETERVALUE_PARAM = "InvalidParameterValue.Param"
 //  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -1889,6 +1907,7 @@ func NewListFunctionsResponse() (response *ListFunctionsResponse) {
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
+//  INVALIDPARAMETERVALUE_QUERYVERSION = "InvalidParameterValue.QueryVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
@@ -1910,6 +1929,7 @@ func (c *Client) ListFunctions(request *ListFunctionsRequest) (response *ListFun
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_OFFSET = "InvalidParameterValue.Offset"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
+//  INVALIDPARAMETERVALUE_QUERYVERSION = "InvalidParameterValue.QueryVersion"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
@@ -2396,7 +2416,10 @@ func NewPutProvisionedConcurrencyConfigResponse() (response *PutProvisionedConcu
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_PROVISIONCREATETIMER = "FailedOperation.ProvisionCreateTimer"
 //  FAILEDOPERATION_PROVISIONDELETETIMER = "FailedOperation.ProvisionDeleteTimer"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDAVAILABLE = "FailedOperation.ProvisionedExceedAvailable"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDRESERVED = "FailedOperation.ProvisionedExceedReserved"
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
+//  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2414,6 +2437,7 @@ func NewPutProvisionedConcurrencyConfigResponse() (response *PutProvisionedConcu
 //  LIMITEXCEEDED_FUNCTIONPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionTotalProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYNUM = "LimitExceeded.FunctionTotalProvisionedConcurrencyNum"
+//  LIMITEXCEEDED_MAXCAPACITY = "LimitExceeded.MaxCapacity"
 //  LIMITEXCEEDED_PROVISIONTRIGGERACTION = "LimitExceeded.ProvisionTriggerAction"
 //  LIMITEXCEEDED_PROVISIONTRIGGERINTERVAL = "LimitExceeded.ProvisionTriggerInterval"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2436,7 +2460,10 @@ func (c *Client) PutProvisionedConcurrencyConfig(request *PutProvisionedConcurre
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_PROVISIONCREATETIMER = "FailedOperation.ProvisionCreateTimer"
 //  FAILEDOPERATION_PROVISIONDELETETIMER = "FailedOperation.ProvisionDeleteTimer"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDAVAILABLE = "FailedOperation.ProvisionedExceedAvailable"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDRESERVED = "FailedOperation.ProvisionedExceedReserved"
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
+//  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  FAILEDOPERATION_UNOPENEDSERVICE = "FailedOperation.UnOpenedService"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2454,6 +2481,7 @@ func (c *Client) PutProvisionedConcurrencyConfig(request *PutProvisionedConcurre
 //  LIMITEXCEEDED_FUNCTIONPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYMEMORY = "LimitExceeded.FunctionTotalProvisionedConcurrencyMemory"
 //  LIMITEXCEEDED_FUNCTIONTOTALPROVISIONEDCONCURRENCYNUM = "LimitExceeded.FunctionTotalProvisionedConcurrencyNum"
+//  LIMITEXCEEDED_MAXCAPACITY = "LimitExceeded.MaxCapacity"
 //  LIMITEXCEEDED_PROVISIONTRIGGERACTION = "LimitExceeded.ProvisionTriggerAction"
 //  LIMITEXCEEDED_PROVISIONTRIGGERINTERVAL = "LimitExceeded.ProvisionTriggerInterval"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2503,7 +2531,9 @@ func NewPutReservedConcurrencyConfigResponse() (response *PutReservedConcurrency
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
 //  FAILEDOPERATION_FUNCTIONVERSIONSTATUSNOTACTIVE = "FailedOperation.FunctionVersionStatusNotActive"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDRESERVED = "FailedOperation.ProvisionedExceedReserved"
 //  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
+//  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED_FUNCTIONRESERVEDCONCURRENCYMEMORY = "LimitExceeded.FunctionReservedConcurrencyMemory"
@@ -2523,7 +2553,9 @@ func (c *Client) PutReservedConcurrencyConfig(request *PutReservedConcurrencyCon
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
 //  FAILEDOPERATION_FUNCTIONVERSIONSTATUSNOTACTIVE = "FailedOperation.FunctionVersionStatusNotActive"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_PROVISIONEDEXCEEDRESERVED = "FailedOperation.ProvisionedExceedReserved"
 //  FAILEDOPERATION_RESERVEDINPROGRESS = "FailedOperation.ReservedInProgress"
+//  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED_FUNCTIONRESERVEDCONCURRENCYMEMORY = "LimitExceeded.FunctionReservedConcurrencyMemory"
@@ -2570,6 +2602,7 @@ func NewPutTotalConcurrencyConfigResponse() (response *PutTotalConcurrencyConfig
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RESERVEDEXCEEDTOTAL = "FailedOperation.ReservedExceedTotal"
 //  FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2579,6 +2612,7 @@ func NewPutTotalConcurrencyConfigResponse() (response *PutTotalConcurrencyConfig
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_TOTALCONCURRENCYMEMORY = "ResourceNotFound.TotalConcurrencyMemory"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) PutTotalConcurrencyConfig(request *PutTotalConcurrencyConfigRequest) (response *PutTotalConcurrencyConfigResponse, err error) {
     return c.PutTotalConcurrencyConfigWithContext(context.Background(), request)
 }
@@ -2588,6 +2622,7 @@ func (c *Client) PutTotalConcurrencyConfig(request *PutTotalConcurrencyConfigReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RESERVEDEXCEEDTOTAL = "FailedOperation.ReservedExceedTotal"
 //  FAILEDOPERATION_TOTALCONCURRENCYMEMORYINPROGRESS = "FailedOperation.TotalConcurrencyMemoryInProgress"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2597,6 +2632,7 @@ func (c *Client) PutTotalConcurrencyConfig(request *PutTotalConcurrencyConfigReq
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  RESOURCENOTFOUND_TOTALCONCURRENCYMEMORY = "ResourceNotFound.TotalConcurrencyMemory"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) PutTotalConcurrencyConfigWithContext(ctx context.Context, request *PutTotalConcurrencyConfigRequest) (response *PutTotalConcurrencyConfigResponse, err error) {
     if request == nil {
         request = NewPutTotalConcurrencyConfigRequest()
@@ -2763,6 +2799,7 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLROLEFAILED = "FailedOperation.CallRoleFailed"
 //  FAILEDOPERATION_FUNCTIONSTATUSERROR = "FailedOperation.FunctionStatusError"
 //  FAILEDOPERATION_OPERATIONCONFLICT = "FailedOperation.OperationConflict"
 //  FAILEDOPERATION_UPDATEFUNCTIONCODE = "FailedOperation.UpdateFunctionCode"
@@ -2778,6 +2815,9 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //  INVALIDPARAMETERVALUE_COSBUCKETNAME = "InvalidParameterValue.CosBucketName"
 //  INVALIDPARAMETERVALUE_COSBUCKETREGION = "InvalidParameterValue.CosBucketRegion"
 //  INVALIDPARAMETERVALUE_COSOBJECTNAME = "InvalidParameterValue.CosObjectName"
+//  INVALIDPARAMETERVALUE_DEMO = "InvalidParameterValue.Demo"
+//  INVALIDPARAMETERVALUE_DEMOID = "InvalidParameterValue.DemoId"
+//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_GITBRANCH = "InvalidParameterValue.GitBranch"
 //  INVALIDPARAMETERVALUE_GITDIRECTORY = "InvalidParameterValue.GitDirectory"
@@ -2794,6 +2834,7 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
@@ -2808,6 +2849,7 @@ func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLROLEFAILED = "FailedOperation.CallRoleFailed"
 //  FAILEDOPERATION_FUNCTIONSTATUSERROR = "FailedOperation.FunctionStatusError"
 //  FAILEDOPERATION_OPERATIONCONFLICT = "FailedOperation.OperationConflict"
 //  FAILEDOPERATION_UPDATEFUNCTIONCODE = "FailedOperation.UpdateFunctionCode"
@@ -2823,6 +2865,9 @@ func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (respons
 //  INVALIDPARAMETERVALUE_COSBUCKETNAME = "InvalidParameterValue.CosBucketName"
 //  INVALIDPARAMETERVALUE_COSBUCKETREGION = "InvalidParameterValue.CosBucketRegion"
 //  INVALIDPARAMETERVALUE_COSOBJECTNAME = "InvalidParameterValue.CosObjectName"
+//  INVALIDPARAMETERVALUE_DEMO = "InvalidParameterValue.Demo"
+//  INVALIDPARAMETERVALUE_DEMOID = "InvalidParameterValue.DemoId"
+//  INVALIDPARAMETERVALUE_DNSINFO = "InvalidParameterValue.DnsInfo"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_GITBRANCH = "InvalidParameterValue.GitBranch"
 //  INVALIDPARAMETERVALUE_GITDIRECTORY = "InvalidParameterValue.GitDirectory"
@@ -2839,6 +2884,7 @@ func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (respons
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"

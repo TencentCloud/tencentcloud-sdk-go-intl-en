@@ -2449,9 +2449,13 @@ type NamespaceUsage struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TotalConcurrencyMem *int64 `json:"TotalConcurrencyMem,omitempty" name:"TotalConcurrencyMem"`
 
-	// Memory usage of the namespace
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Concurrency usage of the namespace
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TotalAllocatedConcurrencyMem *int64 `json:"TotalAllocatedConcurrencyMem,omitempty" name:"TotalAllocatedConcurrencyMem"`
+
+	// Provisioned concurrency usage of the namespace
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TotalAllocatedProvisionedMem *int64 `json:"TotalAllocatedProvisionedMem,omitempty" name:"TotalAllocatedProvisionedMem"`
 }
 
 type PublishLayerVersionRequest struct {
