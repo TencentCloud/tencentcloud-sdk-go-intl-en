@@ -249,6 +249,9 @@ type CreateFileSystemRequest struct {
 
 	// List of Ranger service addresses (empty array by default)
 	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitempty" name:"RangerServiceAddresses"`
+
+	// Multiple resource tags, which can be an empty array
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateFileSystemRequest) ToJsonString() string {
@@ -272,6 +275,7 @@ func (r *CreateFileSystemRequest) FromJsonString(s string) error {
 	delete(f, "RootInodeGroup")
 	delete(f, "EnableRanger")
 	delete(f, "RangerServiceAddresses")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFileSystemRequest has unknown keys!", "")
 	}

@@ -78,6 +78,7 @@ func NewCreateDeviceResponse() (response *CreateDeviceResponse) {
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVELORADEVICE = "UnauthorizedOperation.ProductCantHaveLoRaDevice"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVENORMALDEVICE = "UnauthorizedOperation.ProductCantHaveNormalDevice"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVENOTLORADEVICE = "UnauthorizedOperation.ProductCantHaveNotLoRaDevice"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
 //  UNAUTHORIZEDOPERATION_PRODUCTNOTSUPPORTPSK = "UnauthorizedOperation.ProductNotSupportPSK"
 //  UNSUPPORTEDOPERATION_SUITETOKENNOCREATE = "UnsupportedOperation.SuiteTokenNoCreate"
 func (c *Client) CreateDevice(request *CreateDeviceRequest) (response *CreateDeviceResponse, err error) {
@@ -100,6 +101,7 @@ func (c *Client) CreateDevice(request *CreateDeviceRequest) (response *CreateDev
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVELORADEVICE = "UnauthorizedOperation.ProductCantHaveLoRaDevice"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVENORMALDEVICE = "UnauthorizedOperation.ProductCantHaveNormalDevice"
 //  UNAUTHORIZEDOPERATION_PRODUCTCANTHAVENOTLORADEVICE = "UnauthorizedOperation.ProductCantHaveNotLoRaDevice"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
 //  UNAUTHORIZEDOPERATION_PRODUCTNOTSUPPORTPSK = "UnauthorizedOperation.ProductNotSupportPSK"
 //  UNSUPPORTEDOPERATION_SUITETOKENNOCREATE = "UnsupportedOperation.SuiteTokenNoCreate"
 func (c *Client) CreateDeviceWithContext(ctx context.Context, request *CreateDeviceRequest) (response *CreateDeviceResponse, err error) {
@@ -141,6 +143,7 @@ func NewCreatePrivateCAResponse() (response *CreatePrivateCAResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
 //  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
+//  LIMITEXCEEDED_CACERTNAMEREPEAT = "LimitExceeded.CACertNameRepeat"
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
 func (c *Client) CreatePrivateCA(request *CreatePrivateCARequest) (response *CreatePrivateCAResponse, err error) {
     return c.CreatePrivateCAWithContext(context.Background(), request)
@@ -152,6 +155,7 @@ func (c *Client) CreatePrivateCA(request *CreatePrivateCARequest) (response *Cre
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
 //  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
+//  LIMITEXCEEDED_CACERTNAMEREPEAT = "LimitExceeded.CACertNameRepeat"
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
 func (c *Client) CreatePrivateCAWithContext(ctx context.Context, request *CreatePrivateCARequest) (response *CreatePrivateCAResponse, err error) {
     if request == nil {
@@ -165,6 +169,67 @@ func (c *Client) CreatePrivateCAWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreatePrivateCAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProductRequest() (request *CreateProductRequest) {
+    request = &CreateProductRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("iotcloud", APIVersion, "CreateProduct")
+    
+    
+    return
+}
+
+func NewCreateProductResponse() (response *CreateProductResponse) {
+    response = &CreateProductResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateProduct
+// This API is used to create a new IoT communication product. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PRODUCTALREADYEXIST = "InvalidParameterValue.ProductAlreadyExist"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
+//  INVALIDPARAMETERVALUE_TIDPRODUCTALREADYEXIST = "InvalidParameterValue.TidProductAlreadyExist"
+//  LIMITEXCEEDED_PRODUCTEXCEEDLIMIT = "LimitExceeded.ProductExceedLimit"
+//  RESOURCENOTFOUND_THINGMODELNOTEXIST = "ResourceNotFound.ThingModelNotExist"
+//  UNAUTHORIZEDOPERATION_USERNOTAUTHENTICAED = "UnauthorizedOperation.UserNotAuthenticaed"
+func (c *Client) CreateProduct(request *CreateProductRequest) (response *CreateProductResponse, err error) {
+    return c.CreateProductWithContext(context.Background(), request)
+}
+
+// CreateProduct
+// This API is used to create a new IoT communication product. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_PRODUCTALREADYEXIST = "InvalidParameterValue.ProductAlreadyExist"
+//  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
+//  INVALIDPARAMETERVALUE_TIDPRODUCTALREADYEXIST = "InvalidParameterValue.TidProductAlreadyExist"
+//  LIMITEXCEEDED_PRODUCTEXCEEDLIMIT = "LimitExceeded.ProductExceedLimit"
+//  RESOURCENOTFOUND_THINGMODELNOTEXIST = "ResourceNotFound.ThingModelNotExist"
+//  UNAUTHORIZEDOPERATION_USERNOTAUTHENTICAED = "UnauthorizedOperation.UserNotAuthenticaed"
+func (c *Client) CreateProductWithContext(ctx context.Context, request *CreateProductRequest) (response *CreateProductResponse, err error) {
+    if request == nil {
+        request = NewCreateProductRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProduct require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProductResponse()
     err = c.Send(request, response)
     return
 }
@@ -683,6 +748,55 @@ func (c *Client) DescribeProductCAWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeProductsRequest() (request *DescribeProductsRequest) {
+    request = &DescribeProductsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeProducts")
+    
+    
+    return
+}
+
+func NewDescribeProductsResponse() (response *DescribeProductsResponse) {
+    response = &DescribeProductsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeProducts
+// This API is used to obtain the product list. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeProducts(request *DescribeProductsRequest) (response *DescribeProductsResponse, err error) {
+    return c.DescribeProductsWithContext(context.Background(), request)
+}
+
+// DescribeProducts
+// This API is used to obtain the product list. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeProductsWithContext(ctx context.Context, request *DescribeProductsRequest) (response *DescribeProductsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProductsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProducts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProductsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetProductsForbiddenStatusRequest() (request *SetProductsForbiddenStatusRequest) {
     request = &SetProductsForbiddenStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -861,7 +975,10 @@ func NewUpdatePrivateCAResponse() (response *UpdatePrivateCAResponse) {
 // This API is used to update a private CA certificate.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
+//  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
+//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) UpdatePrivateCA(request *UpdatePrivateCARequest) (response *UpdatePrivateCAResponse, err error) {
     return c.UpdatePrivateCAWithContext(context.Background(), request)
 }
@@ -870,7 +987,10 @@ func (c *Client) UpdatePrivateCA(request *UpdatePrivateCARequest) (response *Upd
 // This API is used to update a private CA certificate.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
+//  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
 //  LIMITEXCEEDED_CAREPEAT = "LimitExceeded.CARepeat"
+//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) UpdatePrivateCAWithContext(ctx context.Context, request *UpdatePrivateCARequest) (response *UpdatePrivateCAResponse, err error) {
     if request == nil {
         request = NewUpdatePrivateCARequest()

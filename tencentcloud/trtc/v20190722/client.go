@@ -214,6 +214,7 @@ func NewDeleteCloudRecordingResponse() (response *DeleteCloudRecordingResponse) 
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteCloudRecording(request *DeleteCloudRecordingRequest) (response *DeleteCloudRecordingResponse, err error) {
     return c.DeleteCloudRecordingWithContext(context.Background(), request)
 }
@@ -233,6 +234,7 @@ func (c *Client) DeleteCloudRecording(request *DeleteCloudRecordingRequest) (res
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteCloudRecordingWithContext(ctx context.Context, request *DeleteCloudRecordingRequest) (response *DeleteCloudRecordingResponse, err error) {
     if request == nil {
         request = NewDeleteCloudRecordingRequest()

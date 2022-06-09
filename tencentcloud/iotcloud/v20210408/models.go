@@ -226,6 +226,69 @@ func (r *CreatePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateProductRequest struct {
+	*tchttp.BaseRequest
+
+	// Product name, which cannot be same as that of an existing product. Naming rule: [a-zA-Z0-9:_-]{1,32}.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Product properties
+	ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
+
+	// Skey, which is required to create a CLAA product.
+	Skey *string `json:"Skey,omitempty" name:"Skey"`
+}
+
+func (r *CreateProductRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProductRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductName")
+	delete(f, "ProductProperties")
+	delete(f, "Skey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProductRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateProductResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Product name
+		ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+		// Product ID, the globally unique ID assigned by Tencent Cloud.
+		ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+		// Product properties
+		ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateProductResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProductResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteDeviceRequest struct {
 	*tchttp.BaseRequest
 
@@ -841,6 +904,62 @@ func (r *DescribeProductResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeProductsRequest struct {
+	*tchttp.BaseRequest
+
+	// Offset, starting from 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries returned per page. Valid range: 10–250.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeProductsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProductsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProductsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeProductsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total number of products
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of product details
+		Products []*ProductInfo `json:"Products,omitempty" name:"Products"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeProductsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProductsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeviceInfo struct {
 
 	// Device name
@@ -948,6 +1067,21 @@ type DeviceTag struct {
 	// Attribute description
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type ProductInfo struct {
+
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Product name
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Product metadata
+	ProductMetadata *ProductMetadata `json:"ProductMetadata,omitempty" name:"ProductMetadata"`
+
+	// Product properties
+	ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
 }
 
 type ProductMetadata struct {

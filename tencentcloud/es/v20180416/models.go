@@ -20,6 +20,29 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type BackingIndexMetaField struct {
+
+	// Backing index name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Backing index status
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexStatus *string `json:"IndexStatus,omitempty" name:"IndexStatus"`
+
+	// Backing index size
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexStorage *int64 `json:"IndexStorage,omitempty" name:"IndexStorage"`
+
+	// Current lifecycle phase of backing index
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexPhrase *string `json:"IndexPhrase,omitempty" name:"IndexPhrase"`
+
+	// Backing index creation time
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexCreateTime *string `json:"IndexCreateTime,omitempty" name:"IndexCreateTime"`
+}
+
 type ClusterView struct {
 
 	// Cluster health status
@@ -98,6 +121,72 @@ type CosBackup struct {
 
 	// Auto-backup time (accurate down to the hour), such as "22:00"
 	BackupTime *string `json:"BackupTime,omitempty" name:"BackupTime"`
+}
+
+type CreateIndexRequest struct {
+	*tchttp.BaseRequest
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to create. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to create
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// JSON-formatted index metadata to create, such as `mappings` and `settings`
+	IndexMetaJson *string `json:"IndexMetaJson,omitempty" name:"IndexMetaJson"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+func (r *CreateIndexRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateIndexRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IndexType")
+	delete(f, "IndexName")
+	delete(f, "IndexMetaJson")
+	delete(f, "Username")
+	delete(f, "Password")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIndexRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreateIndexResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateIndexResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CreateInstanceRequest struct {
@@ -277,6 +366,72 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteIndexRequest struct {
+	*tchttp.BaseRequest
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to delete. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to delete
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Backing index name
+	BackingIndexName *string `json:"BackingIndexName,omitempty" name:"BackingIndexName"`
+}
+
+func (r *DeleteIndexRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteIndexRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IndexType")
+	delete(f, "IndexName")
+	delete(f, "Username")
+	delete(f, "Password")
+	delete(f, "BackingIndexName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteIndexRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeleteIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DeleteIndexResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteIndexResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeleteInstanceRequest struct {
 	*tchttp.BaseRequest
 
@@ -320,6 +475,162 @@ func (r *DeleteInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIndexListRequest struct {
+	*tchttp.BaseRequest
+
+	// Index type. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Index name. `null` indicates that all indexes are requested.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// The starting position of paging
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of results per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting condition field, which can be `IndexName`, `IndexStorage`, or `IndexCreateTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Filtering by index status
+	IndexStatusList []*string `json:"IndexStatusList,omitempty" name:"IndexStatusList"`
+
+	// Sorting mode, which can be `asc` and `desc`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+func (r *DescribeIndexListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIndexListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IndexType")
+	delete(f, "InstanceId")
+	delete(f, "IndexName")
+	delete(f, "Username")
+	delete(f, "Password")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OrderBy")
+	delete(f, "IndexStatusList")
+	delete(f, "Order")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIndexListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIndexListResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Index metadata field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		IndexMetaFields []*IndexMetaField `json:"IndexMetaFields,omitempty" name:"IndexMetaFields"`
+
+		// Total number of results
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIndexListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIndexListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIndexMetaRequest struct {
+	*tchttp.BaseRequest
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Index type. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Index name. `null` indicates that all indexes are requested.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+func (r *DescribeIndexMetaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIndexMetaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IndexType")
+	delete(f, "IndexName")
+	delete(f, "Username")
+	delete(f, "Password")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIndexMetaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeIndexMetaResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Index metadata field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		IndexMetaField *IndexMetaField `json:"IndexMetaField,omitempty" name:"IndexMetaField"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeIndexMetaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIndexMetaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -648,6 +959,15 @@ type EsAcl struct {
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
 }
 
+type EsConfigSetInfo struct {
+
+	// Configuration set type, such as `LDAP` and `AD`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// "{\"order\":0,\"url\":\"ldap://10.0.1.72:389\",\"bind_dn\":\"cn=admin,dc=tencent,dc=com\",\"user_search.base_dn\":\"dc=tencent,dc=com\",\"user_search.filter\":\"(cn={0})\",\"group_search.base_dn\":\"dc=tencent,dc=com\"}"
+	EsConfig *string `json:"EsConfig,omitempty" name:"EsConfig"`
+}
+
 type EsDictionaryInfo struct {
 
 	// List of non-stop words
@@ -722,6 +1042,134 @@ func (r *GetRequestTargetNodeTypesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetRequestTargetNodeTypesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type IndexMetaField struct {
+
+	// Index type
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Index name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Index status
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexStatus *string `json:"IndexStatus,omitempty" name:"IndexStatus"`
+
+	// Index size (in byte)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexStorage *int64 `json:"IndexStorage,omitempty" name:"IndexStorage"`
+
+	// Index creation time
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexCreateTime *string `json:"IndexCreateTime,omitempty" name:"IndexCreateTime"`
+
+	// Backing index
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	BackingIndices []*BackingIndexMetaField `json:"BackingIndices,omitempty" name:"BackingIndices"`
+
+	// Cluster ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster version
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterVersion *string `json:"ClusterVersion,omitempty" name:"ClusterVersion"`
+
+	// Index lifecycle policy field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexPolicyField *IndexPolicyField `json:"IndexPolicyField,omitempty" name:"IndexPolicyField"`
+
+	// Index automation field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexOptionsField *IndexOptionsField `json:"IndexOptionsField,omitempty" name:"IndexOptionsField"`
+
+	// Index setting field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexSettingsField *IndexSettingsField `json:"IndexSettingsField,omitempty" name:"IndexSettingsField"`
+
+	// Cluster APP ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+}
+
+type IndexOptionsField struct {
+
+	// Max age for expiry purpose
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ExpireMaxAge *string `json:"ExpireMaxAge,omitempty" name:"ExpireMaxAge"`
+
+	// Max size for expiry purpose
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ExpireMaxSize *string `json:"ExpireMaxSize,omitempty" name:"ExpireMaxSize"`
+
+	// Rollover cycle
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RolloverMaxAge *string `json:"RolloverMaxAge,omitempty" name:"RolloverMaxAge"`
+
+	// Whether to enable the dynamic rollover
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RolloverDynamic *string `json:"RolloverDynamic,omitempty" name:"RolloverDynamic"`
+
+	// Whether to enable dynamic sharding
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ShardNumDynamic *string `json:"ShardNumDynamic,omitempty" name:"ShardNumDynamic"`
+
+	// Timestamp field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TimestampField *string `json:"TimestampField,omitempty" name:"TimestampField"`
+
+	// Write mode
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	WriteMode *string `json:"WriteMode,omitempty" name:"WriteMode"`
+}
+
+type IndexPolicyField struct {
+
+	// Whether to enable the warm phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	WarmEnable *string `json:"WarmEnable,omitempty" name:"WarmEnable"`
+
+	// Min age before data transitions to the warm phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	WarmMinAge *string `json:"WarmMinAge,omitempty" name:"WarmMinAge"`
+
+	// Whether to enable the cold phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ColdEnable *string `json:"ColdEnable,omitempty" name:"ColdEnable"`
+
+	// Min age before data transitions to the cold phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ColdMinAge *string `json:"ColdMinAge,omitempty" name:"ColdMinAge"`
+
+	// Whether to enable the frozen phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FrozenEnable *string `json:"FrozenEnable,omitempty" name:"FrozenEnable"`
+
+	// Min age before data transitions to the frozen phase
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FrozenMinAge *string `json:"FrozenMinAge,omitempty" name:"FrozenMinAge"`
+}
+
+type IndexSettingsField struct {
+
+	// Number of primary shards
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NumberOfShards *string `json:"NumberOfShards,omitempty" name:"NumberOfShards"`
+
+	// Number of replica shards
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	NumberOfReplicas *string `json:"NumberOfReplicas,omitempty" name:"NumberOfReplicas"`
+
+	// Index refresh interval
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RefreshInterval *string `json:"RefreshInterval,omitempty" name:"RefreshInterval"`
 }
 
 type InstanceInfo struct {
@@ -1436,10 +1884,10 @@ type UpdateDictionariesRequest struct {
 	// COS address of the QQ dictionary
 	QQDict []*string `json:"QQDict,omitempty" name:"QQDict"`
 
-	// 0: Install; 1: Delete
+	// `0` (default): Install, `1`: Delete
 	UpdateType *int64 `json:"UpdateType,omitempty" name:"UpdateType"`
 
-	// Whether to force restart the cluster
+	// Whether to force restart the cluster. The default value is `false`.
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
 }
 
@@ -1485,6 +1933,72 @@ func (r *UpdateDictionariesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateDictionariesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateIndexRequest struct {
+	*tchttp.BaseRequest
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to update. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to update
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// JSON-formatted index metadata to update, such as `mappings` and `settings`.
+	UpdateMetaJson *string `json:"UpdateMetaJson,omitempty" name:"UpdateMetaJson"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+func (r *UpdateIndexRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateIndexRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IndexType")
+	delete(f, "IndexName")
+	delete(f, "UpdateMetaJson")
+	delete(f, "Username")
+	delete(f, "Password")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateIndexRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *UpdateIndexResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1583,6 +2097,9 @@ type UpdateInstanceRequest struct {
 
 	// Cerebro private network access status
 	CerebroPrivateAccess *string `json:"CerebroPrivateAccess,omitempty" name:"CerebroPrivateAccess"`
+
+	// Added or modified configuration set information
+	EsConfigSet *EsConfigSetInfo `json:"EsConfigSet,omitempty" name:"EsConfigSet"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -1626,6 +2143,7 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "EnableCerebro")
 	delete(f, "CerebroPublicAccess")
 	delete(f, "CerebroPrivateAccess")
+	delete(f, "EsConfigSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateInstanceRequest has unknown keys!", "")
 	}
@@ -1668,10 +2186,10 @@ type UpdatePluginsRequest struct {
 	// List of names of the plugins to be uninstalled
 	RemovePluginList []*string `json:"RemovePluginList,omitempty" name:"RemovePluginList"`
 
-	// Whether to force restart
+	// Whether to force restart the cluster. The default value is `false`.
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
 
-	// Whether to reinstall
+	// Whether to reinstall the cluster. The default value is `false`.
 	ForceUpdate *bool `json:"ForceUpdate,omitempty" name:"ForceUpdate"`
 
 	// 0: system plugin

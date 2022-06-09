@@ -395,15 +395,6 @@ type CcnAttachedInstance struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
-type ContainerEnv struct {
-
-	// Environment variable key
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Environment variable value
-	Value *string `json:"Value,omitempty" name:"Value"`
-}
-
 type CreateBlueprintRequest struct {
 	*tchttp.BaseRequest
 
@@ -568,97 +559,6 @@ func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// ID of the Lighthouse package
-	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
-
-	// ID of the Lighthouse image
-	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
-
-	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-
-	// The display name of the Lighthouse instance
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-	// Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
-	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
-
-	// List of availability zones. A random AZ is selected by default.
-	Zones []*string `json:"Zones,omitempty" name:"Zones"`
-
-	// Whether the request is a dry run only.
-	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
-	// If the dry run fails, the corresponding error code will be returned.
-	// If the dry run succeeds, the RequestId will be returned.
-	// `false` (default value): send a normal request and create instance(s) if all the requirements are met.
-	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
-
-	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
-	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
-
-	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
-	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitempty" name:"LoginConfiguration"`
-
-	// Configuration of the containers to create
-	Containers []*DockerContainerConfiguration `json:"Containers,omitempty" name:"Containers"`
-}
-
-func (r *CreateInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "BundleId")
-	delete(f, "BlueprintId")
-	delete(f, "InstanceChargePrepaid")
-	delete(f, "InstanceName")
-	delete(f, "InstanceCount")
-	delete(f, "Zones")
-	delete(f, "DryRun")
-	delete(f, "ClientToken")
-	delete(f, "LoginConfiguration")
-	delete(f, "Containers")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
-	// 
-	// You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
-		InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateKeyPairRequest struct {
 	*tchttp.BaseRequest
 
@@ -706,24 +606,6 @@ func (r *CreateKeyPairResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type DataDiskPrice struct {
-
-	// Cloud disk ID.
-	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
-
-	// Cloud disk unit price.
-	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitempty" name:"OriginalDiskPrice"`
-
-	// Total cloud disk price.
-	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
-	// Discount.
-	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
-
-	// Discounted total price.
-	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 }
 
 type DeleteBlueprintsRequest struct {
@@ -1664,55 +1546,6 @@ func (r *DescribeFirewallRulesTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeGeneralResourceQuotasRequest struct {
-	*tchttp.BaseRequest
-
-	// List of resource names. Valid values: USER_KEY_PAIR, INSTANCE, SNAPSHOT.
-	ResourceNames []*string `json:"ResourceNames,omitempty" name:"ResourceNames"`
-}
-
-func (r *DescribeGeneralResourceQuotasRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeGeneralResourceQuotasRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ResourceNames")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGeneralResourceQuotasRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeGeneralResourceQuotasResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of general resource quota details.
-		GeneralResourceQuotaSet []*GeneralResourceQuota `json:"GeneralResourceQuotaSet,omitempty" name:"GeneralResourceQuotaSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeGeneralResourceQuotasResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeGeneralResourceQuotasResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeInstanceLoginKeyPairAttributeRequest struct {
 	*tchttp.BaseRequest
 
@@ -1909,86 +1742,6 @@ func (r *DescribeInstancesDiskNumResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-	// Filter list
-	// <li>instance-name</li>Filter by the instance name
-	// Type: String
-	// Required: no
-	// <li>private-ip-address</li>Filter by the private IP of instance primary ENI
-	// Type: String
-	// Required: no
-	// <li>public-ip-address</li>Filter by the public IP of instance primary ENI
-	// Type: String
-	// Required: no
-	// <li>zone</li>Filter by the availability zone
-	// Type: String
-	// Required: no
-	// <li>instance-state</li>Filter by **instance status**.
-	// Type: String
-	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-}
-
-func (r *DescribeInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceIds")
-	delete(f, "Filters")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of instance details.
-		InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2515,6 +2268,18 @@ func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
 
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
+
+	// Sorting field. Valid values:
+	// <li>`ZONE`: Sort by the availability zone.
+	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+	// The default value is `ZONE`.
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Specifies how availability zones are listed. Valid values:
+	// <li>ASC: Ascending sort. 
+	// <li>DESC: Descending sort.
+	// The default value is `ASC`.
+	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -2529,6 +2294,8 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "OrderField")
+	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZonesRequest has unknown keys!", "")
 	}
@@ -2855,53 +2622,6 @@ type DiskReturnable struct {
 	ReturnFailMessage *string `json:"ReturnFailMessage,omitempty" name:"ReturnFailMessage"`
 }
 
-type DockerContainerConfiguration struct {
-
-	// Container image address
-	ContainerImage *string `json:"ContainerImage,omitempty" name:"ContainerImage"`
-
-	// Container name
-	ContainerName *string `json:"ContainerName,omitempty" name:"ContainerName"`
-
-	// List of environment variables
-	Envs []*ContainerEnv `json:"Envs,omitempty" name:"Envs"`
-
-	// List of mappings of container ports and host ports
-	PublishPorts []*DockerContainerPublishPort `json:"PublishPorts,omitempty" name:"PublishPorts"`
-
-	// List of container mount volumes
-	Volumes []*DockerContainerVolume `json:"Volumes,omitempty" name:"Volumes"`
-
-	// The command to run
-	Command *string `json:"Command,omitempty" name:"Command"`
-}
-
-type DockerContainerPublishPort struct {
-
-	// Host port
-	HostPort *int64 `json:"HostPort,omitempty" name:"HostPort"`
-
-	// Container port
-	ContainerPort *int64 `json:"ContainerPort,omitempty" name:"ContainerPort"`
-
-	// External IP. It defaults to 0.0.0.0.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-	// The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-}
-
-type DockerContainerVolume struct {
-
-	// Container path
-	ContainerPath *string `json:"ContainerPath,omitempty" name:"ContainerPath"`
-
-	// Host path
-	HostPath *string `json:"HostPath,omitempty" name:"HostPath"`
-}
-
 type Filter struct {
 
 	// Field to be filtered.
@@ -2948,18 +2668,6 @@ type FirewallRuleInfo struct {
 
 	// Firewall rule description.
 	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitempty" name:"FirewallRuleDescription"`
-}
-
-type GeneralResourceQuota struct {
-
-	// Resource name.
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
-
-	// Number of available resources.
-	ResourceQuotaAvailable *int64 `json:"ResourceQuotaAvailable,omitempty" name:"ResourceQuotaAvailable"`
-
-	// Total number of resources.
-	ResourceQuotaTotal *int64 `json:"ResourceQuotaTotal,omitempty" name:"ResourceQuotaTotal"`
 }
 
 type ImportKeyPairRequest struct {
@@ -3239,169 +2947,6 @@ func (r *InquirePriceRenewDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type InquirePriceRenewInstancesRequest struct {
-	*tchttp.BaseRequest
-
-	// Instance to be renewed.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
-
-	// Whether to renew the data disk
-	RenewDataDisk *bool `json:"RenewDataDisk,omitempty" name:"RenewDataDisk"`
-
-	// Whether the data disk has the same expiration time as the instance
-	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitempty" name:"AlignInstanceExpiredTime"`
-}
-
-func (r *InquirePriceRenewInstancesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *InquirePriceRenewInstancesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceIds")
-	delete(f, "InstanceChargePrepaid")
-	delete(f, "RenewDataDisk")
-	delete(f, "AlignInstanceExpiredTime")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceRenewInstancesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type InquirePriceRenewInstancesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Price query information.
-		Price *Price `json:"Price,omitempty" name:"Price"`
-
-		// List of data disk price information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitempty" name:"DataDiskPriceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *InquirePriceRenewInstancesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *InquirePriceRenewInstancesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type Instance struct {
-
-	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Package ID.
-	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
-
-	// Image ID.
-	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
-
-	// Number of instance CPU cores.
-	CPU *int64 `json:"CPU,omitempty" name:"CPU"`
-
-	// Instance memory capacity in GB.
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
-
-	// Instance name.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-	// Instance billing mode. Valid values: 
-	// PREPAID: prepaid (i.e., monthly subscription).
-	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
-
-	// Instance system disk information.
-	SystemDisk *SystemDisk `json:"SystemDisk,omitempty" name:"SystemDisk"`
-
-	// Private IP of instance primary ENI. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	PrivateAddresses []*string `json:"PrivateAddresses,omitempty" name:"PrivateAddresses"`
-
-	// Public IP of instance primary ENI. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	PublicAddresses []*string `json:"PublicAddresses,omitempty" name:"PublicAddresses"`
-
-	// Instance bandwidth information.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
-
-	// Auto-Renewal flag. Valid values: 
-	// NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically  
-	// NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
-	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
-
-	// Instance login settings.
-	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
-
-	// Instance status. Valid values: 
-	// <li>PENDING: creating</li><li>LAUNCH_FAILED: creation failed</li><li>RUNNING: running</li><li>STOPPED: shut down</li><li>STARTING: starting</li><li>STOPPING: shutting down</li><li>REBOOTING: rebooting</li><li>SHUTDOWN: shut down and to be terminated</li><li>TERMINATING: terminating</li>
-	InstanceState *string `json:"InstanceState,omitempty" name:"InstanceState"`
-
-	// Globally unique ID of instance.
-	Uuid *string `json:"Uuid,omitempty" name:"Uuid"`
-
-	// Last instance operation, such as `StopInstances` and `ResetInstance`. Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperation *string `json:"LatestOperation,omitempty" name:"LatestOperation"`
-
-	// Last instance operation status. Valid values: 
-	// SUCCESS: operation succeeded 
-	// OPERATING: the operation is being executed 
-	// FAILED: operation failed 
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationState *string `json:"LatestOperationState,omitempty" name:"LatestOperationState"`
-
-	// Unique request ID for the last operation of the instance. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
-
-	// Isolation time according to ISO 8601 standard. UTC time is used. 
-	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsolatedTime *string `json:"IsolatedTime,omitempty" name:"IsolatedTime"`
-
-	// Creation time according to ISO 8601 standard. UTC time is used. 
-	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-	// Expiration time according to ISO 8601 standard. UTC time is used. 
-	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
-
-	// OS type, such as LINUX_UNIX and WINDOWS.
-	PlatformType *string `json:"PlatformType,omitempty" name:"PlatformType"`
-
-	// OS type.
-	Platform *string `json:"Platform,omitempty" name:"Platform"`
-
-	// OS name.
-	OsName *string `json:"OsName,omitempty" name:"OsName"`
-
-	// AZ.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
-
-	// The list of tags associated with the instance
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-}
-
 type InstanceChargePrepaid struct {
 
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
@@ -3460,20 +3005,6 @@ type InstanceTrafficPackage struct {
 	TrafficPackageSet []*TrafficPackage `json:"TrafficPackageSet,omitempty" name:"TrafficPackageSet"`
 }
 
-type InternetAccessible struct {
-
-	// Network billing mode. Valid values:
-	// <li>Bill by traffic package: TRAFFIC_POSTPAID_BY_HOUR</li>
-	// <li>Bill by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
-	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
-
-	// Public network outbound bandwidth cap in Mbps.
-	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
-
-	// Whether to assign a public IP.
-	PublicIpAssigned *bool `json:"PublicIpAssigned,omitempty" name:"PublicIpAssigned"`
-}
-
 type KeyPair struct {
 
 	// Key pair ID, which is the unique identifier of a key pair.
@@ -3496,15 +3027,6 @@ type KeyPair struct {
 	// Private key of key pair.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
-}
-
-type LoginConfiguration struct {
-}
-
-type LoginSettings struct {
-
-	// Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
-	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
 
 type ModifyBlueprintAttributeRequest struct {
@@ -4422,30 +3944,6 @@ func (r *StopInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StopInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type SystemDisk struct {
-
-	// System disk type.
-	// Valid values: 
-	// <li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
-	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
-
-	// System disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
-
-	// System disk ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
-}
-
-type Tag struct {
-
-	// Tag key.
-	Key *string `json:"Key,omitempty" name:"Key"`
-
-	// Tag value.
-	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type TerminateDisksRequest struct {

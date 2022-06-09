@@ -2021,6 +2021,7 @@ func NewGetMonitorDataResponse() (response *GetMonitorDataResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetMonitorData(request *GetMonitorDataRequest) (response *GetMonitorDataResponse, err error) {
     return c.GetMonitorDataWithContext(context.Background(), request)
 }
@@ -2037,6 +2038,7 @@ func (c *Client) GetMonitorData(request *GetMonitorDataRequest) (response *GetMo
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetMonitorDataWithContext(ctx context.Context, request *GetMonitorDataRequest) (response *GetMonitorDataResponse, err error) {
     if request == nil {
         request = NewGetMonitorDataRequest()

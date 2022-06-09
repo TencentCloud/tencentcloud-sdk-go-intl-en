@@ -306,6 +306,10 @@ type AlarmPolicy struct {
 	// Whether the quick alarm policy is enabled.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	OneClickStatus *int64 `json:"OneClickStatus,omitempty" name:"OneClickStatus"`
+
+	// The number of advanced metrics.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AdvancedMetricNumber *int64 `json:"AdvancedMetricNumber,omitempty" name:"AdvancedMetricNumber"`
 }
 
 type AlarmPolicyCondition struct {
@@ -400,6 +404,18 @@ type AlarmPolicyRule struct {
 	// Trigger condition type. `STATIC`: static threshold; `dynamic`: dynamic threshold. If you do not specify this parameter when creating or editing a policy, `STATIC` is used by default.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Whether it is an advanced metric. 0: No; 1: Yes.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsAdvanced *int64 `json:"IsAdvanced,omitempty" name:"IsAdvanced"`
+
+	// Whether the advanced metric feature is enabled. 0: No; 1: Yes.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsOpen *int64 `json:"IsOpen,omitempty" name:"IsOpen"`
+
+	// Integration center product ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 }
 
 type AlarmPolicyTriggerTask struct {
@@ -3601,6 +3617,18 @@ type Metric struct {
 	// Metric configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MetricConfig *MetricConfig `json:"MetricConfig,omitempty" name:"MetricConfig"`
+
+	// Whether it is an advanced metric. 1: Yes; 0: No.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsAdvanced *int64 `json:"IsAdvanced,omitempty" name:"IsAdvanced"`
+
+	// Whether the advanced metric feature is enabled. 1: Yes; 0: No.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IsOpen *int64 `json:"IsOpen,omitempty" name:"IsOpen"`
+
+	// Integration center product ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
 }
 
 type MetricConfig struct {
