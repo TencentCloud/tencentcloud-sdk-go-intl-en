@@ -45,6 +45,61 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
+    request = &CreateUploadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("faceid", APIVersion, "CreateUploadUrl")
+    
+    
+    return
+}
+
+func NewCreateUploadUrlResponse() (response *CreateUploadUrlResponse) {
+    response = &CreateUploadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateUploadUrl
+// This API is used to generate a temporary `UploadUrl` for uploading resource files (with the `HTTP PUT` method). After resource upload, `ResourceUrl` will be passed to the `TargetAction` API to complete the resource passing (specific fields vary by case). 
+//
+// The data will be stored in a COS bucket in the region specified by the parameter `Region` for two hours.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateUploadUrl(request *CreateUploadUrlRequest) (response *CreateUploadUrlResponse, err error) {
+    return c.CreateUploadUrlWithContext(context.Background(), request)
+}
+
+// CreateUploadUrl
+// This API is used to generate a temporary `UploadUrl` for uploading resource files (with the `HTTP PUT` method). After resource upload, `ResourceUrl` will be passed to the `TargetAction` API to complete the resource passing (specific fields vary by case). 
+//
+// The data will be stored in a COS bucket in the region specified by the parameter `Region` for two hours.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) CreateUploadUrlWithContext(ctx context.Context, request *CreateUploadUrlRequest) (response *CreateUploadUrlResponse, err error) {
+    if request == nil {
+        request = NewCreateUploadUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateUploadUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateUploadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDetectReflectLivenessAndCompareRequest() (request *DetectReflectLivenessAndCompareRequest) {
     request = &DetectReflectLivenessAndCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -140,6 +195,59 @@ func (c *Client) DetectReflectLivenessAndCompareWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDetectReflectLivenessAndCompareResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGenerateReflectSequenceRequest() (request *GenerateReflectSequenceRequest) {
+    request = &GenerateReflectSequenceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("faceid", APIVersion, "GenerateReflectSequence")
+    
+    
+    return
+}
+
+func NewGenerateReflectSequenceResponse() (response *GenerateReflectSequenceResponse) {
+    response = &GenerateReflectSequenceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GenerateReflectSequence
+// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+//
+// The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
+func (c *Client) GenerateReflectSequence(request *GenerateReflectSequenceRequest) (response *GenerateReflectSequenceResponse, err error) {
+    return c.GenerateReflectSequenceWithContext(context.Background(), request)
+}
+
+// GenerateReflectSequence
+// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+//
+// The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_DOWNLOADTIMEOUTERROR = "FailedOperation.DownLoadTimeoutError"
+func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request *GenerateReflectSequenceRequest) (response *GenerateReflectSequenceResponse, err error) {
+    if request == nil {
+        request = NewGenerateReflectSequenceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GenerateReflectSequence require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGenerateReflectSequenceResponse()
     err = c.Send(request, response)
     return
 }
