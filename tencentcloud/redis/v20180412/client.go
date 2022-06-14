@@ -1120,6 +1120,7 @@ func NewReleaseWanAddressResponse() (response *ReleaseWanAddressResponse) {
 // This API is used to disable public network access.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) ReleaseWanAddress(request *ReleaseWanAddressRequest) (response *ReleaseWanAddressResponse, err error) {
     return c.ReleaseWanAddressWithContext(context.Background(), request)
@@ -1129,6 +1130,7 @@ func (c *Client) ReleaseWanAddress(request *ReleaseWanAddressRequest) (response 
 // This API is used to disable public network access.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) ReleaseWanAddressWithContext(ctx context.Context, request *ReleaseWanAddressRequest) (response *ReleaseWanAddressResponse, err error) {
     if request == nil {
@@ -1142,6 +1144,104 @@ func (c *Client) ReleaseWanAddressWithContext(ctx context.Context, request *Rele
     request.SetContext(ctx)
     
     response = NewReleaseWanAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeProxyVersionRequest() (request *UpgradeProxyVersionRequest) {
+    request = &UpgradeProxyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "UpgradeProxyVersion")
+    
+    
+    return
+}
+
+func NewUpgradeProxyVersionResponse() (response *UpgradeProxyVersionResponse) {
+    response = &UpgradeProxyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeProxyVersion
+// This API is used to upgrade instance proxy version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
+    return c.UpgradeProxyVersionWithContext(context.Background(), request)
+}
+
+// UpgradeProxyVersion
+// This API is used to upgrade instance proxy version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeProxyVersionWithContext(ctx context.Context, request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeProxyVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeProxyVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeProxyVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeSmallVersionRequest() (request *UpgradeSmallVersionRequest) {
+    request = &UpgradeSmallVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "UpgradeSmallVersion")
+    
+    
+    return
+}
+
+func NewUpgradeSmallVersionResponse() (response *UpgradeSmallVersionResponse) {
+    response = &UpgradeSmallVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeSmallVersion
+// This API is used to upgrade instance minor version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
+    return c.UpgradeSmallVersionWithContext(context.Background(), request)
+}
+
+// UpgradeSmallVersion
+// This API is used to upgrade instance minor version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+func (c *Client) UpgradeSmallVersionWithContext(ctx context.Context, request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeSmallVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeSmallVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeSmallVersionResponse()
     err = c.Send(request, response)
     return
 }

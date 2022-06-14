@@ -2936,6 +2936,9 @@ type DescribeDBInstancesRequest struct {
 
 	// VPC character subnetId
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
+
+	// Tag key value
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -2981,6 +2984,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "TagValues")
 	delete(f, "UniqueVpcIds")
 	delete(f, "UniqSubnetIds")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -5508,7 +5512,7 @@ type ModifyAccountPrivilegesRequest struct {
 	// Database account, including username and domain name.
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
-	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE", "UPDATE".
+	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE".
 	// Note: When “ModifyAction” is empty, if `GlobalPrivileges` is not passed in, it indicates the global permission will become ineffective.
 	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
 
@@ -7592,6 +7596,10 @@ type SellConfig struct {
 	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	DeviceTypeName *string `json:"DeviceTypeName,omitempty" name:"DeviceTypeName"`
+
+	// Engine type. Valid values: `Innodb`,`RocksDB`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
 }
 
 type SellType struct {
@@ -8189,6 +8197,15 @@ type TablePrivilege struct {
 
 	// Permission information
 	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+}
+
+type Tag struct {
+
+	// Tag key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type TagInfo struct {
