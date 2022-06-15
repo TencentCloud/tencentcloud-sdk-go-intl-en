@@ -442,6 +442,7 @@ func NewCreateCommonMixStreamResponse() (response *CreateCommonMixStreamResponse
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CALLOTHERSVRERROR = "FailedOperation.CallOtherSvrError"
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_CANCELSESSIONNOTEXIST = "FailedOperation.CancelSessionNotExist"
 //  FAILEDOPERATION_GETPICTUREURLERROR = "FailedOperation.GetPictureUrlError"
 //  FAILEDOPERATION_GETSTREAMRESOLUTIONERROR = "FailedOperation.GetStreamResolutionError"
 //  FAILEDOPERATION_PROCESSMIXERROR = "FailedOperation.ProcessMixError"
@@ -477,6 +478,7 @@ func (c *Client) CreateCommonMixStream(request *CreateCommonMixStreamRequest) (r
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CALLOTHERSVRERROR = "FailedOperation.CallOtherSvrError"
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_CANCELSESSIONNOTEXIST = "FailedOperation.CancelSessionNotExist"
 //  FAILEDOPERATION_GETPICTUREURLERROR = "FailedOperation.GetPictureUrlError"
 //  FAILEDOPERATION_GETSTREAMRESOLUTIONERROR = "FailedOperation.GetStreamResolutionError"
 //  FAILEDOPERATION_PROCESSMIXERROR = "FailedOperation.ProcessMixError"
@@ -2469,110 +2471,6 @@ func (c *Client) DeleteRecordTaskWithContext(ctx context.Context, request *Delet
     return
 }
 
-func NewDescribeAllStreamPlayInfoListRequest() (request *DescribeAllStreamPlayInfoListRequest) {
-    request = &DescribeAllStreamPlayInfoListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeAllStreamPlayInfoList")
-    
-    
-    return
-}
-
-func NewDescribeAllStreamPlayInfoListResponse() (response *DescribeAllStreamPlayInfoListResponse) {
-    response = &DescribeAllStreamPlayInfoListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAllStreamPlayInfoList
-// This API is used to query the downstream information of all streams at a specified point in time (at a 1-minute granularity).
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeAllStreamPlayInfoList(request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
-    return c.DescribeAllStreamPlayInfoListWithContext(context.Background(), request)
-}
-
-// DescribeAllStreamPlayInfoList
-// This API is used to query the downstream information of all streams at a specified point in time (at a 1-minute granularity).
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeAllStreamPlayInfoListWithContext(ctx context.Context, request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
-    if request == nil {
-        request = NewDescribeAllStreamPlayInfoListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAllStreamPlayInfoList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAllStreamPlayInfoListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAreaBillBandwidthAndFluxListRequest() (request *DescribeAreaBillBandwidthAndFluxListRequest) {
-    request = &DescribeAreaBillBandwidthAndFluxListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeAreaBillBandwidthAndFluxList")
-    
-    
-    return
-}
-
-func NewDescribeAreaBillBandwidthAndFluxListResponse() (response *DescribeAreaBillBandwidthAndFluxListResponse) {
-    response = &DescribeAreaBillBandwidthAndFluxListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeAreaBillBandwidthAndFluxList
-// This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeAreaBillBandwidthAndFluxList(request *DescribeAreaBillBandwidthAndFluxListRequest) (response *DescribeAreaBillBandwidthAndFluxListResponse, err error) {
-    return c.DescribeAreaBillBandwidthAndFluxListWithContext(context.Background(), request)
-}
-
-// DescribeAreaBillBandwidthAndFluxList
-// This API is used to query the billable LVB bandwidth and traffic data outside Chinese mainland.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeAreaBillBandwidthAndFluxListWithContext(ctx context.Context, request *DescribeAreaBillBandwidthAndFluxListRequest) (response *DescribeAreaBillBandwidthAndFluxListResponse, err error) {
-    if request == nil {
-        request = NewDescribeAreaBillBandwidthAndFluxListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAreaBillBandwidthAndFluxList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAreaBillBandwidthAndFluxListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeConcurrentRecordStreamNumRequest() (request *DescribeConcurrentRecordStreamNumRequest) {
     request = &DescribeConcurrentRecordStreamNumRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3289,57 +3187,6 @@ func (c *Client) DescribeLiveDomainCertWithContext(ctx context.Context, request 
     return
 }
 
-func NewDescribeLiveDomainPlayInfoListRequest() (request *DescribeLiveDomainPlayInfoListRequest) {
-    request = &DescribeLiveDomainPlayInfoListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainPlayInfoList")
-    
-    
-    return
-}
-
-func NewDescribeLiveDomainPlayInfoListResponse() (response *DescribeLiveDomainPlayInfoListResponse) {
-    response = &DescribeLiveDomainPlayInfoListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeLiveDomainPlayInfoList
-// This API is used to query the real-time downstream playback data at the domain name level. As it takes certain time to process data, the API queries quasi-real-time data generated 4 minutes ago by default.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeLiveDomainPlayInfoList(request *DescribeLiveDomainPlayInfoListRequest) (response *DescribeLiveDomainPlayInfoListResponse, err error) {
-    return c.DescribeLiveDomainPlayInfoListWithContext(context.Background(), request)
-}
-
-// DescribeLiveDomainPlayInfoList
-// This API is used to query the real-time downstream playback data at the domain name level. As it takes certain time to process data, the API queries quasi-real-time data generated 4 minutes ago by default.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeLiveDomainPlayInfoListWithContext(ctx context.Context, request *DescribeLiveDomainPlayInfoListRequest) (response *DescribeLiveDomainPlayInfoListResponse, err error) {
-    if request == nil {
-        request = NewDescribeLiveDomainPlayInfoListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeLiveDomainPlayInfoList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeLiveDomainPlayInfoListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeLiveDomainRefererRequest() (request *DescribeLiveDomainRefererRequest) {
     request = &DescribeLiveDomainRefererRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3426,6 +3273,7 @@ func NewDescribeLiveDomainsResponse() (response *DescribeLiveDomainsResponse) {
 // This API is used to query domain names by domain name status and type.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -3439,6 +3287,7 @@ func (c *Client) DescribeLiveDomains(request *DescribeLiveDomainsRequest) (respo
 // This API is used to query domain names by domain name status and type.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -3961,6 +3810,7 @@ func NewDescribeLiveSnapshotTemplateResponse() (response *DescribeLiveSnapshotTe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) DescribeLiveSnapshotTemplate(request *DescribeLiveSnapshotTemplateRequest) (response *DescribeLiveSnapshotTemplateResponse, err error) {
     return c.DescribeLiveSnapshotTemplateWithContext(context.Background(), request)
 }
@@ -3984,6 +3834,7 @@ func (c *Client) DescribeLiveSnapshotTemplate(request *DescribeLiveSnapshotTempl
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) DescribeLiveSnapshotTemplateWithContext(ctx context.Context, request *DescribeLiveSnapshotTemplateRequest) (response *DescribeLiveSnapshotTemplateResponse, err error) {
     if request == nil {
         request = NewDescribeLiveSnapshotTemplateRequest()
@@ -4778,6 +4629,7 @@ func NewDescribeLiveTranscodeTotalInfoResponse() (response *DescribeLiveTranscod
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLiveTranscodeTotalInfo(request *DescribeLiveTranscodeTotalInfoRequest) (response *DescribeLiveTranscodeTotalInfoResponse, err error) {
     return c.DescribeLiveTranscodeTotalInfoWithContext(context.Background(), request)
 }
@@ -4795,6 +4647,7 @@ func (c *Client) DescribeLiveTranscodeTotalInfo(request *DescribeLiveTranscodeTo
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLiveTranscodeTotalInfoWithContext(ctx context.Context, request *DescribeLiveTranscodeTotalInfoRequest) (response *DescribeLiveTranscodeTotalInfoResponse, err error) {
     if request == nil {
         request = NewDescribeLiveTranscodeTotalInfoRequest()
@@ -5122,57 +4975,6 @@ func (c *Client) DescribePlayErrorCodeSumInfoListWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewDescribePlayErrorCodeSumInfoListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeProIspPlaySumInfoListRequest() (request *DescribeProIspPlaySumInfoListRequest) {
-    request = &DescribeProIspPlaySumInfoListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DescribeProIspPlaySumInfoList")
-    
-    
-    return
-}
-
-func NewDescribeProIspPlaySumInfoListResponse() (response *DescribeProIspPlaySumInfoListResponse) {
-    response = &DescribeProIspPlaySumInfoListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeProIspPlaySumInfoList
-// This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeProIspPlaySumInfoList(request *DescribeProIspPlaySumInfoListRequest) (response *DescribeProIspPlaySumInfoListResponse, err error) {
-    return c.DescribeProIspPlaySumInfoListWithContext(context.Background(), request)
-}
-
-// DescribeProIspPlaySumInfoList
-// This API is used to query the average traffic per second, total traffic, and number of total requests by country/region, district, and ISP in a certain period of time.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeProIspPlaySumInfoListWithContext(ctx context.Context, request *DescribeProIspPlaySumInfoListRequest) (response *DescribeProIspPlaySumInfoListResponse, err error) {
-    if request == nil {
-        request = NewDescribeProIspPlaySumInfoListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeProIspPlaySumInfoList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeProIspPlaySumInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -5556,83 +5358,6 @@ func (c *Client) DescribeVisitTopSumInfoListWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeVisitTopSumInfoListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDropLiveStreamRequest() (request *DropLiveStreamRequest) {
-    request = &DropLiveStreamRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("live", APIVersion, "DropLiveStream")
-    
-    
-    return
-}
-
-func NewDropLiveStreamResponse() (response *DropLiveStreamResponse) {
-    response = &DropLiveStreamResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DropLiveStream
-// This API is used to disconnect the push connection, which can be resumed.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
-//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
-//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
-//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
-//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
-//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
-//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
-//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_STREAMNOTALIVE = "ResourceNotFound.StreamNotAlive"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DropLiveStream(request *DropLiveStreamRequest) (response *DropLiveStreamResponse, err error) {
-    return c.DropLiveStreamWithContext(context.Background(), request)
-}
-
-// DropLiveStream
-// This API is used to disconnect the push connection, which can be resumed.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
-//  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
-//  INTERNALERROR_GETBIZIDERROR = "InternalError.GetBizidError"
-//  INTERNALERROR_GETSTREAMINFOERROR = "InternalError.GetStreamInfoError"
-//  INTERNALERROR_GETUPSTREAMINFOERROR = "InternalError.GetUpstreamInfoError"
-//  INTERNALERROR_NOTPERMMITOPERAT = "InternalError.NotPermmitOperat"
-//  INTERNALERROR_STREAMSTATUSERROR = "InternalError.StreamStatusError"
-//  INTERNALERROR_UPDATEDATAERROR = "InternalError.UpdateDataError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_STREAMNOTALIVE = "ResourceNotFound.StreamNotAlive"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DropLiveStreamWithContext(ctx context.Context, request *DropLiveStreamRequest) (response *DropLiveStreamResponse, err error) {
-    if request == nil {
-        request = NewDropLiveStreamRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DropLiveStream require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDropLiveStreamResponse()
     err = c.Send(request, response)
     return
 }
@@ -6181,6 +5906,7 @@ func NewModifyLivePlayDomainResponse() (response *ModifyLivePlayDomainResponse) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DOMAINGSLBFAIL = "InternalError.DomainGslbFail"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -6188,6 +5914,7 @@ func NewModifyLivePlayDomainResponse() (response *ModifyLivePlayDomainResponse) 
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_DOMAINNORECORD = "ResourceNotFound.DomainNoRecord"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+//  RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
 func (c *Client) ModifyLivePlayDomain(request *ModifyLivePlayDomainRequest) (response *ModifyLivePlayDomainResponse, err error) {
     return c.ModifyLivePlayDomainWithContext(context.Background(), request)
 }
@@ -6197,6 +5924,7 @@ func (c *Client) ModifyLivePlayDomain(request *ModifyLivePlayDomainRequest) (res
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DOMAINGSLBFAIL = "InternalError.DomainGslbFail"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -6204,6 +5932,7 @@ func (c *Client) ModifyLivePlayDomain(request *ModifyLivePlayDomainRequest) (res
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_DOMAINNORECORD = "ResourceNotFound.DomainNoRecord"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+//  RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
 func (c *Client) ModifyLivePlayDomainWithContext(ctx context.Context, request *ModifyLivePlayDomainRequest) (response *ModifyLivePlayDomainResponse, err error) {
     if request == nil {
         request = NewModifyLivePlayDomainRequest()
@@ -6389,6 +6118,7 @@ func NewModifyLiveSnapshotTemplateResponse() (response *ModifyLiveSnapshotTempla
 //  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) ModifyLiveSnapshotTemplate(request *ModifyLiveSnapshotTemplateRequest) (response *ModifyLiveSnapshotTemplateResponse, err error) {
     return c.ModifyLiveSnapshotTemplateWithContext(context.Background(), request)
 }
@@ -6411,6 +6141,7 @@ func (c *Client) ModifyLiveSnapshotTemplate(request *ModifyLiveSnapshotTemplateR
 //  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) ModifyLiveSnapshotTemplateWithContext(ctx context.Context, request *ModifyLiveSnapshotTemplateRequest) (response *ModifyLiveSnapshotTemplateResponse, err error) {
     if request == nil {
         request = NewModifyLiveSnapshotTemplateRequest()
@@ -6523,6 +6254,7 @@ func NewResumeDelayLiveStreamResponse() (response *ResumeDelayLiveStreamResponse
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
 //  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"
@@ -6553,6 +6285,7 @@ func (c *Client) ResumeDelayLiveStream(request *ResumeDelayLiveStreamRequest) (r
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLOTHERSVRERROR = "InternalError.CallOtherSvrError"
 //  INTERNALERROR_CONFIGNOTEXIST = "InternalError.ConfigNotExist"

@@ -23,6 +23,9 @@ import (
 type AddUsersForUserManagerRequest struct {
 	*tchttp.BaseRequest
 
+	// Cluster string ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
 	// User information list
 	UserManagerUserList []*UserInfoForUserManager `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
 }
@@ -39,6 +42,7 @@ func (r *AddUsersForUserManagerRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "InstanceId")
 	delete(f, "UserManagerUserList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddUsersForUserManagerRequest has unknown keys!", "")
@@ -49,6 +53,14 @@ func (r *AddUsersForUserManagerRequest) FromJsonString(s string) error {
 type AddUsersForUserManagerResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// The user list that is successfully added
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		SuccessUserList []*string `json:"SuccessUserList,omitempty" name:"SuccessUserList"`
+
+		// The user list that is not successfully added
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		FailedUserList []*string `json:"FailedUserList,omitempty" name:"FailedUserList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -904,6 +916,18 @@ func (r *DescribeResourceScheduleResponse) FromJsonString(s string) error {
 type DescribeUsersForUserManagerRequest struct {
 	*tchttp.BaseRequest
 
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Page number
+	PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+	// Page size
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// User list query filter
+	UserManagerFilter *UserManagerFilter `json:"UserManagerFilter,omitempty" name:"UserManagerFilter"`
+
 	// Whether the Keytab file information is required. This field is only valid for clusters with Kerberos enabled and defaults to `false`.
 	NeedKeytabInfo *bool `json:"NeedKeytabInfo,omitempty" name:"NeedKeytabInfo"`
 }
@@ -920,6 +944,10 @@ func (r *DescribeUsersForUserManagerRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "InstanceId")
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "UserManagerFilter")
 	delete(f, "NeedKeytabInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsersForUserManagerRequest has unknown keys!", "")
@@ -930,6 +958,13 @@ func (r *DescribeUsersForUserManagerRequest) FromJsonString(s string) error {
 type DescribeUsersForUserManagerResponse struct {
 	*tchttp.BaseResponse
 	Response *struct {
+
+		// Total number
+		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+		// User information list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+		UserManagerUserList []*UserManagerUserBriefInfo `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
 
 		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2132,6 +2167,36 @@ type UserInfoForUserManager struct {
 
 	// 
 	ReMark *string `json:"ReMark,omitempty" name:"ReMark"`
+}
+
+type UserManagerFilter struct {
+
+	// Username
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+}
+
+type UserManagerUserBriefInfo struct {
+
+	// Username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// The group to which the user belongs
+	UserGroup *string `json:"UserGroup,omitempty" name:"UserGroup"`
+
+	// `Manager` represents an admin, and `NormalUser` represents a general user.
+	UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+	// Account creation time
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether the corresponding Keytab file of the user is available for download. This parameter applies only to a Kerberos-enabled cluster.
+	SupportDownLoadKeyTab *bool `json:"SupportDownLoadKeyTab,omitempty" name:"SupportDownLoadKeyTab"`
+
+	// Download link of the Keytab file
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	DownLoadKeyTabUrl *string `json:"DownLoadKeyTabUrl,omitempty" name:"DownLoadKeyTabUrl"`
 }
 
 type VPCSettings struct {

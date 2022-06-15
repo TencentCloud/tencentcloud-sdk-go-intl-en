@@ -63,22 +63,30 @@ func NewAddUsersForUserManagerResponse() (response *AddUsersForUserManagerRespon
 }
 
 // AddUsersForUserManager
+// This API is available for clusters with OpenLDAP components configured.
+//
 // This API is used to add user lists (user management).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) AddUsersForUserManager(request *AddUsersForUserManagerRequest) (response *AddUsersForUserManagerResponse, err error) {
     return c.AddUsersForUserManagerWithContext(context.Background(), request)
 }
 
 // AddUsersForUserManager
+// This API is available for clusters with OpenLDAP components configured.
+//
 // This API is used to add user lists (user management).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) AddUsersForUserManagerWithContext(ctx context.Context, request *AddUsersForUserManagerRequest) (response *AddUsersForUserManagerResponse, err error) {
     if request == nil {
@@ -633,7 +641,9 @@ func NewDescribeUsersForUserManagerResponse() (response *DescribeUsersForUserMan
 }
 
 // DescribeUsersForUserManager
-// This API is used to export users in batches.
+// This API is available for clusters with OpenLDAP components configured.
+//
+// This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -643,7 +653,9 @@ func (c *Client) DescribeUsersForUserManager(request *DescribeUsersForUserManage
 }
 
 // DescribeUsersForUserManager
-// This API is used to export users in batches.
+// This API is available for clusters with OpenLDAP components configured.
+//
+// This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

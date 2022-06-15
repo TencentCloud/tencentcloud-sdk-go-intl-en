@@ -242,39 +242,6 @@ type BandwidthInfo struct {
 	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
-type BillAreaInfo struct {
-
-	// Region name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Detailed country information
-	Countrys []*BillCountryInfo `json:"Countrys,omitempty" name:"Countrys"`
-}
-
-type BillCountryInfo struct {
-
-	// Country
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Detailed bandwidth information
-	BandInfoList []*BillDataInfo `json:"BandInfoList,omitempty" name:"BandInfoList"`
-}
-
-type BillDataInfo struct {
-
-	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitempty" name:"Time"`
-
-	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
-
-	// Traffic in MB.
-	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
-
-	// Time point of peak value in the format of `yyyy-mm-dd HH:MM:SS`. As raw data is at a 5-minute granularity, if data at a 1-hour or 1-day granularity is queried, the time point of peak bandwidth value at the corresponding granularity will be returned.
-	PeakTime *string `json:"PeakTime,omitempty" name:"PeakTime"`
-}
-
 type BindLiveDomainCertRequest struct {
 	*tchttp.BaseRequest
 
@@ -1129,6 +1096,9 @@ type CreateLiveRecordTemplateRequest struct {
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
 	RemoveWatermark *bool `json:"RemoveWatermark,omitempty" name:"RemoveWatermark"`
+
+	// A special parameter for FLV recording.
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitempty" name:"FlvSpecialParam"`
 }
 
 func (r *CreateLiveRecordTemplateRequest) ToJsonString() string {
@@ -1153,6 +1123,7 @@ func (r *CreateLiveRecordTemplateRequest) FromJsonString(s string) error {
 	delete(f, "HlsSpecialParam")
 	delete(f, "Mp3Param")
 	delete(f, "RemoveWatermark")
+	delete(f, "FlvSpecialParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLiveRecordTemplateRequest has unknown keys!", "")
 	}
@@ -2442,119 +2413,6 @@ func (r *DeleteRecordTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeAllStreamPlayInfoListRequest struct {
-	*tchttp.BaseRequest
-
-	// Query time point accurate to the minute. You can query data within the last month. As there is a 5-minute delay in the data, you're advised to pass in a time point 5 minutes earlier than needed. Format: yyyy-mm-dd HH:MM:00. As the accuracy is to the minute, please set the value of second to `00`.
-	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
-
-	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
-}
-
-func (r *DescribeAllStreamPlayInfoListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAllStreamPlayInfoListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "QueryTime")
-	delete(f, "PlayDomains")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllStreamPlayInfoListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAllStreamPlayInfoListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Query point in time in the returned input parameters.
-		QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
-
-		// Data information list.
-		DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAllStreamPlayInfoListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAllStreamPlayInfoListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAreaBillBandwidthAndFluxListRequest struct {
-	*tchttp.BaseRequest
-
-	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 1 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// LVB playback domain name. If it is left blank, the full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
-}
-
-func (r *DescribeAreaBillBandwidthAndFluxListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAreaBillBandwidthAndFluxListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "PlayDomains")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAreaBillBandwidthAndFluxListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAreaBillBandwidthAndFluxListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Detailed data information.
-		DataInfoList []*BillAreaInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeAreaBillBandwidthAndFluxListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAreaBillBandwidthAndFluxListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeConcurrentRecordStreamNumRequest struct {
 	*tchttp.BaseRequest
 
@@ -3132,70 +2990,6 @@ func (r *DescribeLiveDomainCertResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLiveDomainCertResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeLiveDomainPlayInfoListRequest struct {
-	*tchttp.BaseRequest
-
-	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
-}
-
-func (r *DescribeLiveDomainPlayInfoListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLiveDomainPlayInfoListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "PlayDomains")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLiveDomainPlayInfoListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeLiveDomainPlayInfoListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Data time in the format of `yyyy-mm-dd HH:MM:SS`.
-		Time *string `json:"Time,omitempty" name:"Time"`
-
-		// Real-time total bandwidth.
-		TotalBandwidth *float64 `json:"TotalBandwidth,omitempty" name:"TotalBandwidth"`
-
-		// Real-time total traffic.
-		TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
-
-		// Total number of requests.
-		TotalRequest *uint64 `json:"TotalRequest,omitempty" name:"TotalRequest"`
-
-		// Real-time total number of connections.
-		TotalOnline *uint64 `json:"TotalOnline,omitempty" name:"TotalOnline"`
-
-		// Data by domain name.
-		DomainInfoList []*DomainInfoList `json:"DomainInfoList,omitempty" name:"DomainInfoList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeLiveDomainPlayInfoListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLiveDomainPlayInfoListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4897,110 +4691,6 @@ func (r *DescribePlayErrorCodeSumInfoListResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeProIspPlaySumInfoListRequest struct {
-	*tchttp.BaseRequest
-
-	// Start time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Statistics type. Valid values: Province (district), Isp (ISP), CountryOrArea (country or region).
-	StatType *string `json:"StatType,omitempty" name:"StatType"`
-
-	// Playback domain name list. If it is left empty, it refers to all playback domain names.
-	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
-
-	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
-
-	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
-
-	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
-
-	// Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
-	OutLanguage *string `json:"OutLanguage,omitempty" name:"OutLanguage"`
-}
-
-func (r *DescribeProIspPlaySumInfoListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeProIspPlaySumInfoListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "StatType")
-	delete(f, "PlayDomains")
-	delete(f, "PageNum")
-	delete(f, "PageSize")
-	delete(f, "MainlandOrOversea")
-	delete(f, "OutLanguage")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProIspPlaySumInfoListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeProIspPlaySumInfoListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total traffic.
-		TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
-
-		// Total number of requests.
-		TotalRequest *uint64 `json:"TotalRequest,omitempty" name:"TotalRequest"`
-
-		// Statistics type.
-		StatType *string `json:"StatType,omitempty" name:"StatType"`
-
-		// Number of results per page.
-		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Page number.
-		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
-
-		// Total number of results.
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Total number of pages.
-		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
-
-		// Aggregated data list by district, ISP, or country/region.
-		DataInfoList []*ProIspPlaySumInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
-
-		// Download speed in MB/s. Calculation method: total traffic/total duration.
-		AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitempty" name:"AvgFluxPerSecond"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DescribeProIspPlaySumInfoListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeProIspPlaySumInfoListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type DescribeProvinceIspPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 
@@ -5616,26 +5306,6 @@ type DomainCertInfo struct {
 	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
 }
 
-type DomainDetailInfo struct {
-
-	// In or outside Mainland China:
-	// Mainland: data in Mainland China.
-	// Oversea: data outside Mainland China.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
-
-	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
-
-	// Traffic in MB.
-	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
-
-	// Number of viewers.
-	Online *uint64 `json:"Online,omitempty" name:"Online"`
-
-	// Number of requests.
-	Request *uint64 `json:"Request,omitempty" name:"Request"`
-}
-
 type DomainInfo struct {
 
 	// LVB domain name.
@@ -5688,69 +5358,6 @@ type DomainInfo struct {
 	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
 }
 
-type DomainInfoList struct {
-
-	// Domain name.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Details.
-	DetailInfoList []*DomainDetailInfo `json:"DetailInfoList,omitempty" name:"DetailInfoList"`
-}
-
-type DropLiveStreamRequest struct {
-	*tchttp.BaseRequest
-
-	// Stream name.
-	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
-
-	// Your acceleration domain name.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitempty" name:"AppName"`
-}
-
-func (r *DropLiveStreamRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DropLiveStreamRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StreamName")
-	delete(f, "DomainName")
-	delete(f, "AppName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DropLiveStreamRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DropLiveStreamResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *DropLiveStreamResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DropLiveStreamResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type EnableLiveDomainRequest struct {
 	*tchttp.BaseRequest
 
@@ -5795,6 +5402,12 @@ func (r *EnableLiveDomainResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *EnableLiveDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type FlvSpecialParam struct {
+
+	// Whether to enable upload while recording. This parameter is only valid for FLV recording.
+	UploadInRecording *bool `json:"UploadInRecording,omitempty" name:"UploadInRecording"`
 }
 
 type ForbidLiveDomainRequest struct {
@@ -5855,10 +5468,10 @@ type ForbidLiveStreamRequest struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Time to resume the stream in UTC format, such as 2018-11-29T19:00:00Z.
+	// The time (in UTC format) to resume the stream, such as 2018-11-29T19:00:00Z.
 	// Notes:
-	// 1. The duration of forbidding is 7 days by default and can be up to 90 days.
-	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// 1. The default stream disabling period is seven days. A stream can be disabled for up to 90 days.
+	// 2. Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
 	ResumeTime *string `json:"ResumeTime,omitempty" name:"ResumeTime"`
 
 	// Reason for forbidding.
@@ -6456,6 +6069,9 @@ type ModifyLiveRecordTemplateRequest struct {
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
 	RemoveWatermark *bool `json:"RemoveWatermark,omitempty" name:"RemoveWatermark"`
+
+	// A special parameter for FLV recording.
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitempty" name:"FlvSpecialParam"`
 }
 
 func (r *ModifyLiveRecordTemplateRequest) ToJsonString() string {
@@ -6480,6 +6096,7 @@ func (r *ModifyLiveRecordTemplateRequest) FromJsonString(s string) error {
 	delete(f, "HlsSpecialParam")
 	delete(f, "Mp3Param")
 	delete(f, "RemoveWatermark")
+	delete(f, "FlvSpecialParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveRecordTemplateRequest has unknown keys!", "")
 	}
@@ -6740,30 +6357,6 @@ func (r *ModifyLiveTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type MonitorStreamPlayInfo struct {
-
-	// Playback domain name.
-	PlayDomain *string `json:"PlayDomain,omitempty" name:"PlayDomain"`
-
-	// Stream ID.
-	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
-
-	// Playback bitrate. 0 indicates the original bitrate.
-	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
-
-	// Playback protocol. Valid values: Unknown, Flv, Hls, Rtmp, Huyap2p.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
-
-	// Number of online viewers. A data point is sampled per minute, and the number of TCP connections across the sample points is calculated.
-	Online *uint64 `json:"Online,omitempty" name:"Online"`
-
-	// Number of requests.
-	Request *uint64 `json:"Request,omitempty" name:"Request"`
-}
-
 type PlayAuthKeyInfo struct {
 
 	// Domain name.
@@ -6852,21 +6445,6 @@ type ProIspPlayCodeDataInfo struct {
 
 	// Occurrences of 5xx error codes.
 	Code5xx *uint64 `json:"Code5xx,omitempty" name:"Code5xx"`
-}
-
-type ProIspPlaySumInfo struct {
-
-	// District/ISP/country/region.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Total traffic in MB.
-	TotalFlux *float64 `json:"TotalFlux,omitempty" name:"TotalFlux"`
-
-	// Total number of requests.
-	TotalRequest *uint64 `json:"TotalRequest,omitempty" name:"TotalRequest"`
-
-	// Average download traffic in MB/s.
-	AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitempty" name:"AvgFluxPerSecond"`
 }
 
 type PublishTime struct {
@@ -7032,7 +6610,7 @@ type RecordTemplateInfo struct {
 	// 1: LCB.
 	IsDelayLive *int64 `json:"IsDelayLive,omitempty" name:"IsDelayLive"`
 
-	// Custom HLS recording parameter
+	// A special parameter for HLS recording.
 	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitempty" name:"HlsSpecialParam"`
 
 	// MP3 recording parameter.
@@ -7041,6 +6619,10 @@ type RecordTemplateInfo struct {
 	// Whether the watermark is removed.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	RemoveWatermark *bool `json:"RemoveWatermark,omitempty" name:"RemoveWatermark"`
+
+	// A special parameter for FLV recording.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitempty" name:"FlvSpecialParam"`
 }
 
 type RefererAuthConfig struct {

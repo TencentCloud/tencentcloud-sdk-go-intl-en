@@ -2510,6 +2510,9 @@ type SpecificationInfo struct {
 
 	// Purchasable specification information
 	SpecItems []*SpecItem `json:"SpecItems,omitempty" name:"SpecItems"`
+
+	// Whether cross-AZ deployment is supported. Valid values: `1` (yes), `0` (no).
+	SupportMultiAZ *int64 `json:"SupportMultiAZ,omitempty" name:"SupportMultiAZ"`
 }
 
 type TagInfo struct {

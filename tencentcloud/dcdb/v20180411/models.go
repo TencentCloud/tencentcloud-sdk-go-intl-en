@@ -978,6 +978,28 @@ type DcnDetailItem struct {
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
+type Deal struct {
+
+	// Order ID.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Account
+	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+	// Number of items
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// The associated process ID, which can be used to query the process execution status.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The ID of the created instance, which is required only for the order that creates an instance.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Billing mode. Valid values: `0` (postpaid), `1` (prepaid).
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+}
+
 type DeleteAccountRequest struct {
 	*tchttp.BaseRequest
 
@@ -1291,6 +1313,67 @@ func (r *DescribeDBParametersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBParametersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+
+	// Database engine name. Valid value: `dcdb`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSecurityGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDBSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Security group details
+		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
+
+		// Instance VIP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+		VIP *string `json:"VIP,omitempty" name:"VIP"`
+
+		// Instance Port
+	// Note: This field may return null, indicating that no valid value can be obtained.
+		VPort *string `json:"VPort,omitempty" name:"VPort"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeDBSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2040,6 +2123,58 @@ func (r *DescribeFlowResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeFlowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeOrdersRequest struct {
+	*tchttp.BaseRequest
+
+	// List of long order IDs to be queried, which are returned by the APIs for creating, renewing, or scaling instances.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+}
+
+func (r *DescribeOrdersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOrdersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DealNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOrdersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeOrdersResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Returned number of orders
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// Order information list
+		Deals []*Deal `json:"Deals,omitempty" name:"Deals"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribeOrdersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOrdersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
