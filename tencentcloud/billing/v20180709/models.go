@@ -198,6 +198,34 @@ type BillDetailComponent struct {
 
 	// Contract price
 	ContractPrice *string `json:"ContractPrice,omitempty" name:"ContractPrice"`
+
+	// The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The usage duration deducted by a reserved instance. The unit of measurement for deduction is the same as that for usage duration.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RiTimeSpan *string `json:"RiTimeSpan,omitempty" name:"RiTimeSpan"`
+
+	// The amount deducted by a reserved instance based on the original component cost.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	OriginalCostWithRI *string `json:"OriginalCostWithRI,omitempty" name:"OriginalCostWithRI"`
+
+	// The discount multiplier that applies to the component based on the remaining commitment of the savings plan.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SPDeductionRate *string `json:"SPDeductionRate,omitempty" name:"SPDeductionRate"`
+
+	// The savings plan deduction amount.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SPDeduction *string `json:"SPDeduction,omitempty" name:"SPDeduction"`
+
+	// The amount deducted by a savings plan based on the original component cost.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitempty" name:"OriginalCostWithSP"`
+
+	// The blended discount multiplier that combines the official website discount, reserved instance discount, and savings plan discount. If no reserved instance and savings plan discounts are available, the blended discount multiplier equals the discount multiplier.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	BlendedDiscount *string `json:"BlendedDiscount,omitempty" name:"BlendedDiscount"`
 }
 
 type BillResourceSummary struct {
@@ -302,6 +330,26 @@ type BillResourceSummary struct {
 
 	// 
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
+	// 
+	// ri=Standard RI
+	// 
+	// svp=Savings Plan
+	// 
+	// si=Spot Instances
+	// 
+	// rp=Resource Pack
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The amount deducted by a reserved instance based on the original component cost.
+	OriginalCostWithRI *string `json:"OriginalCostWithRI,omitempty" name:"OriginalCostWithRI"`
+
+	// The savings plan deduction amount.
+	SPDeduction *string `json:"SPDeduction,omitempty" name:"SPDeduction"`
+
+	// The amount deducted by a savings plan based on the original component cost.
+	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitempty" name:"OriginalCostWithSP"`
 }
 
 type BillTagInfo struct {

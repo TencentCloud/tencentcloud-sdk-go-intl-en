@@ -44,6 +44,9 @@ const (
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// The account does not have CAM permission.
+	UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+
 	// Operation unsupported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )
