@@ -3282,6 +3282,10 @@ type KeyPair struct {
 
 	// Creation time, which follows the `ISO8601` standard and uses `UTC` time in the format of `YYYY-MM-DDThh:mm:ssZ`.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// The list of tags bound to the key.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type LaunchTemplate struct {

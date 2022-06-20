@@ -20,6 +20,73 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type CreatePrefetchTaskRequest struct {
+	*tchttp.BaseRequest
+
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of resources to be pre-warmed, for example:
+	// http://www.example.com/example.txt
+	Targets []*string `json:"Targets,omitempty" name:"Targets"`
+
+	// Specifies whether to encode the URL
+	// Note that if it’s enabled, the purging is based on the converted URLs.
+	EncodeUrl *bool `json:"EncodeUrl,omitempty" name:"EncodeUrl"`
+
+	// HTTP header information
+	Headers []*Header `json:"Headers,omitempty" name:"Headers"`
+}
+
+func (r *CreatePrefetchTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrefetchTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Targets")
+	delete(f, "EncodeUrl")
+	delete(f, "Headers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrefetchTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreatePrefetchTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Task ID
+		JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+		// List of failed tasks
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *CreatePrefetchTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrefetchTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreatePurgeTaskRequest struct {
 	*tchttp.BaseRequest
 
@@ -33,7 +100,15 @@ type CreatePurgeTaskRequest struct {
 	// - `purge_all`: Purge all cached contents
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// The target resource to be purged. One target per line.
+	// Target resource to be purged, which depends on the `Type` field.
+	// 1. When `Type = purge_host`:
+	// Hostnames are purged, such as www.example.com and foo.bar.example.com.
+	// 2. When `Type = purge_prefix`:
+	// Prefixes are purged, such as http://www.example.com/example.
+	// 3. When `Type = purge_url`:
+	// URLs are purged, such as https://www.example.com/example.jpg.
+	// 4. When `Type = purge_all`: All types of resources are purged.
+	// `Targets` is not a required field.
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -87,6 +162,91 @@ func (r *CreatePurgeTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePurgeTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePrefetchTasksRequest struct {
+	*tchttp.BaseRequest
+
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Start time of the query
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Offset of the query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of results returned
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Statuses of tasks to be queried. Values:
+	// `processing`, `success`, `failed`, `timeout` and `invalid`
+	Statuses []*string `json:"Statuses,omitempty" name:"Statuses"`
+
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of domain names queried
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Resources queried
+	Target *string `json:"Target,omitempty" name:"Target"`
+}
+
+func (r *DescribePrefetchTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrefetchTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Statuses")
+	delete(f, "ZoneId")
+	delete(f, "Domains")
+	delete(f, "Target")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrefetchTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePrefetchTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Total entries that match the specified query condition
+		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+		// List of tasks returned
+		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DescribePrefetchTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -240,13 +400,132 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DownloadL7LogsRequest struct {
+	*tchttp.BaseRequest
+
+	// Start time. It must conform to the RFC3339 standard.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time. It must conform to the RFC3339 standard.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Current page
+	PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+	// List of sites
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// List of domain names
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+}
+
+func (r *DownloadL7LogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DownloadL7LogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PageSize")
+	delete(f, "PageNo")
+	delete(f, "Zones")
+	delete(f, "Domains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DownloadL7LogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DownloadL7LogsResponse struct {
+	*tchttp.BaseResponse
+	Response *struct {
+
+		// Layer-7 offline log data
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		Data []*L7OfflineLog `json:"Data,omitempty" name:"Data"`
+
+		// Page size
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+		// Page number
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+		// Total number of pages
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		Pages *int64 `json:"Pages,omitempty" name:"Pages"`
+
+		// Total number of entries
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+		TotalSize *int64 `json:"TotalSize,omitempty" name:"TotalSize"`
+
+		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	} `json:"Response"`
+}
+
+func (r *DownloadL7LogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DownloadL7LogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type FailReason struct {
 
 	// Failure reason
 	Reason *string `json:"Reason,omitempty" name:"Reason"`
 
-	// List of resources failed to be purged
+	// List of resources failed to be processed. 
+	//  
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
+}
+
+type Header struct {
+
+	// HTTP header name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// HTTP header value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type L7OfflineLog struct {
+
+	// Start time of the log packaging
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	LogTime *int64 `json:"LogTime,omitempty" name:"LogTime"`
+
+	// Site name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Log size, in bytes
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// Download address
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Log package name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	LogPacketName *string `json:"LogPacketName,omitempty" name:"LogPacketName"`
 }
 
 type Task struct {

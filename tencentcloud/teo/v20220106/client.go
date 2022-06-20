@@ -45,6 +45,73 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCreatePrefetchTaskRequest() (request *CreatePrefetchTaskRequest) {
+    request = &CreatePrefetchTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("teo", APIVersion, "CreatePrefetchTask")
+    
+    
+    return
+}
+
+func NewCreatePrefetchTaskResponse() (response *CreatePrefetchTaskResponse) {
+    response = &CreatePrefetchTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrefetchTask
+// This API is used to create a pre-warming task.
+//
+// error code that may be returned:
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INTERNALERROR_FAILEDTOGENERATEURL = "InternalError.FailedToGenerateUrl"
+//  INTERNALERROR_QUOTASYSTEM = "InternalError.QuotaSystem"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  INVALIDPARAMETER_TARGET = "InvalidParameter.Target"
+//  INVALIDPARAMETER_TASKNOTGENERATED = "InvalidParameter.TaskNotGenerated"
+//  INVALIDPARAMETER_UPLOADURL = "InvalidParameter.UploadUrl"
+//  LIMITEXCEEDED_BATCHQUOTA = "LimitExceeded.BatchQuota"
+//  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
+func (c *Client) CreatePrefetchTask(request *CreatePrefetchTaskRequest) (response *CreatePrefetchTaskResponse, err error) {
+    return c.CreatePrefetchTaskWithContext(context.Background(), request)
+}
+
+// CreatePrefetchTask
+// This API is used to create a pre-warming task.
+//
+// error code that may be returned:
+//  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
+//  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INTERNALERROR_FAILEDTOGENERATEURL = "InternalError.FailedToGenerateUrl"
+//  INTERNALERROR_QUOTASYSTEM = "InternalError.QuotaSystem"
+//  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+//  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  INVALIDPARAMETER_TARGET = "InvalidParameter.Target"
+//  INVALIDPARAMETER_TASKNOTGENERATED = "InvalidParameter.TaskNotGenerated"
+//  INVALIDPARAMETER_UPLOADURL = "InvalidParameter.UploadUrl"
+//  LIMITEXCEEDED_BATCHQUOTA = "LimitExceeded.BatchQuota"
+//  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
+func (c *Client) CreatePrefetchTaskWithContext(ctx context.Context, request *CreatePrefetchTaskRequest) (response *CreatePrefetchTaskResponse, err error) {
+    if request == nil {
+        request = NewCreatePrefetchTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrefetchTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrefetchTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePurgeTaskRequest() (request *CreatePurgeTaskRequest) {
     request = &CreatePurgeTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -106,6 +173,57 @@ func (c *Client) CreatePurgeTaskWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreatePurgeTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrefetchTasksRequest() (request *DescribePrefetchTasksRequest) {
+    request = &DescribePrefetchTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("teo", APIVersion, "DescribePrefetchTasks")
+    
+    
+    return
+}
+
+func NewDescribePrefetchTasksResponse() (response *DescribePrefetchTasksResponse) {
+    response = &DescribePrefetchTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrefetchTasks
+// This API is used to query the pre-warming task status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  UNAUTHORIZEDOPERATION_DOMAINEMPTY = "UnauthorizedOperation.DomainEmpty"
+func (c *Client) DescribePrefetchTasks(request *DescribePrefetchTasksRequest) (response *DescribePrefetchTasksResponse, err error) {
+    return c.DescribePrefetchTasksWithContext(context.Background(), request)
+}
+
+// DescribePrefetchTasks
+// This API is used to query the pre-warming task status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  UNAUTHORIZEDOPERATION_DOMAINEMPTY = "UnauthorizedOperation.DomainEmpty"
+func (c *Client) DescribePrefetchTasksWithContext(ctx context.Context, request *DescribePrefetchTasksRequest) (response *DescribePrefetchTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribePrefetchTasksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrefetchTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrefetchTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -204,6 +322,55 @@ func (c *Client) DescribeZonesWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeZonesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDownloadL7LogsRequest() (request *DownloadL7LogsRequest) {
+    request = &DownloadL7LogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("teo", APIVersion, "DownloadL7Logs")
+    
+    
+    return
+}
+
+func NewDownloadL7LogsResponse() (response *DownloadL7LogsResponse) {
+    response = &DownloadL7LogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DownloadL7Logs
+// This API is used to query layer-7 logs.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) DownloadL7Logs(request *DownloadL7LogsRequest) (response *DownloadL7LogsResponse, err error) {
+    return c.DownloadL7LogsWithContext(context.Background(), request)
+}
+
+// DownloadL7Logs
+// This API is used to query layer-7 logs.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) DownloadL7LogsWithContext(ctx context.Context, request *DownloadL7LogsRequest) (response *DownloadL7LogsResponse, err error) {
+    if request == nil {
+        request = NewDownloadL7LogsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DownloadL7Logs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDownloadL7LogsResponse()
     err = c.Send(request, response)
     return
 }

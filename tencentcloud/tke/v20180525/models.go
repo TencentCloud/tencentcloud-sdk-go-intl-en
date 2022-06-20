@@ -100,6 +100,9 @@ type AddExistedInstancesRequest struct {
 	// 
 	// The array length of `InstanceAdvancedSettingsOverride` should be the same as the array length of `InstanceIds`. If its array length is greater than the `InstanceIds` array length, an error will be reported. If its array length is less than the `InstanceIds` array length, the instance without corresponding configuration will use the default configuration.
 	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides"`
+
+	// Node image (it is required when creating a node)
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 }
 
 func (r *AddExistedInstancesRequest) ToJsonString() string {
@@ -124,6 +127,7 @@ func (r *AddExistedInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NodePool")
 	delete(f, "SkipValidateOptions")
 	delete(f, "InstanceAdvancedSettingsOverrides")
+	delete(f, "ImageId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddExistedInstancesRequest has unknown keys!", "")
 	}
@@ -631,7 +635,7 @@ type ClusterBasicSettings struct {
 	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 
-	// Whether to enable the node’s default security group (default: `No`, Aphla feature)
+	// Whether to enable the node’s default security group (default: `No`, Alpha feature)
 	NeedWorkSecurityGroup *bool `json:"NeedWorkSecurityGroup,omitempty" name:"NeedWorkSecurityGroup"`
 
 	// When the Cilium Overlay add-on is selected, TKE will take two IPs from the subnet to create the private network CLB.
@@ -666,6 +670,9 @@ type ClusterCIDRSettings struct {
 
 	// Repossession time of ENI IP addresses in VPC-CNI network mode, whose range is [300,15768000)
 	ClaimExpiredSeconds *int64 `json:"ClaimExpiredSeconds,omitempty" name:"ClaimExpiredSeconds"`
+
+	// Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
+	IgnoreServiceCIDRConflict *bool `json:"IgnoreServiceCIDRConflict,omitempty" name:"IgnoreServiceCIDRConflict"`
 }
 
 type ClusterExtraArgs struct {
@@ -779,6 +786,10 @@ type ClusterNetworkSettings struct {
 	// The container subnet associated with the cluster
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	Subnets []*string `json:"Subnets,omitempty" name:"Subnets"`
+
+	// Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IgnoreServiceCIDRConflict *bool `json:"IgnoreServiceCIDRConflict,omitempty" name:"IgnoreServiceCIDRConflict"`
 }
 
 type ClusterStatus struct {
@@ -839,74 +850,6 @@ type CommonName struct {
 	CN *string `json:"CN,omitempty" name:"CN"`
 }
 
-type CreateClusterAsGroupRequest struct {
-	*tchttp.BaseRequest
-
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// The pass-through parameters for scaling group creation, in the format of a JSON string. For more information, see the [CreateAutoScalingGroup](https://intl.cloud.tencent.com/document/api/377/20440?from_cn_redirect=1) API. The **LaunchConfigurationId** is created with the LaunchConfigurePara parameter, which does not support data entry.
-	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
-
-	// The pass-through parameters for launch configuration creation, in the format of a JSON string. For more information, see the [CreateLaunchConfiguration](https://intl.cloud.tencent.com/document/api/377/20447?from_cn_redirect=1) API. **ImageId** is not required as it is already included in the cluster dimension. **UserData** is not required as it's set through the **UserScript**.
-	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
-
-	// Advanced configuration information of the node
-	InstanceAdvancedSettings *InstanceAdvancedSettings `json:"InstanceAdvancedSettings,omitempty" name:"InstanceAdvancedSettings"`
-
-	// Node label array
-	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
-}
-
-func (r *CreateClusterAsGroupRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateClusterAsGroupRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ClusterId")
-	delete(f, "AutoScalingGroupPara")
-	delete(f, "LaunchConfigurePara")
-	delete(f, "InstanceAdvancedSettings")
-	delete(f, "Labels")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterAsGroupRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type CreateClusterAsGroupResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Launch configuration ID
-		LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
-
-		// Scaling group ID
-		AutoScalingGroupId *string `json:"AutoScalingGroupId,omitempty" name:"AutoScalingGroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
-}
-
-func (r *CreateClusterAsGroupResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateClusterAsGroupResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type CreateClusterEndpointRequest struct {
 	*tchttp.BaseRequest
 
@@ -918,6 +861,15 @@ type CreateClusterEndpointRequest struct {
 
 	// Whether public network access is enabled or not (True = public network access, FALSE = private network access, with the default value as FALSE).
 	IsExtranet *bool `json:"IsExtranet,omitempty" name:"IsExtranet"`
+
+	// The domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The security group in use. Required only for public network access.
+	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The LB parameter. Required only for public network access.
+	ExtensiveParameters *string `json:"ExtensiveParameters,omitempty" name:"ExtensiveParameters"`
 }
 
 func (r *CreateClusterEndpointRequest) ToJsonString() string {
@@ -935,6 +887,9 @@ func (r *CreateClusterEndpointRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "SubnetId")
 	delete(f, "IsExtranet")
+	delete(f, "Domain")
+	delete(f, "SecurityGroup")
+	delete(f, "ExtensiveParameters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterEndpointRequest has unknown keys!", "")
 	}
@@ -1155,6 +1110,12 @@ type CreateClusterNodePoolRequest struct {
 	// Taints
 	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 
+	// Node pool runtime type and version
+	ContainerRuntime *string `json:"ContainerRuntime,omitempty" name:"ContainerRuntime"`
+
+	// Runtime version
+	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
+
 	// Operating system of the node pool
 	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
 
@@ -1185,6 +1146,8 @@ func (r *CreateClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Labels")
 	delete(f, "Taints")
+	delete(f, "ContainerRuntime")
+	delete(f, "RuntimeVersion")
 	delete(f, "NodePoolOs")
 	delete(f, "OsCustomizeType")
 	delete(f, "Tags")
@@ -4106,6 +4069,10 @@ type InstanceAdvancedSettings struct {
 	// Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PreStartUserScript *string `json:"PreStartUserScript,omitempty" name:"PreStartUserScript"`
+
+	// Node taint
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 }
 
 type InstanceDataDiskMountSetting struct {
