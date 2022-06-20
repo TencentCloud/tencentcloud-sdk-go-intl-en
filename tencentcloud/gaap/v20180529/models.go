@@ -1335,7 +1335,7 @@ type CreateRuleRequest struct {
 	// If this field is not passed in, it indicates that the ForwardProtocol of the corresponding listener will be used.
 	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
 
-	// The forwarding host. If it’s not specified, the default host is used, that is the host with which the client initiates HTTP requests.
+	// The host to which the acceleration connection forwards. If this parameter is not specified, the default host will be used, i.e., the host with which the client initiates HTTP requests.
 	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
 
 	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
@@ -6113,16 +6113,17 @@ type ProxyInfo struct {
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
 	// Connection status. Valid values:
-	// `RUNNING`: running
-	// `CREATING`: creating
-	// `DESTROYING`: terminating
-	// `OPENING`: enabling
-	// `CLOSING`: disabling
-	// `CLOSED`: disabled
-	// `ADJUSTING`: adjusting configuration
-	// `ISOLATING`: isolating
-	// `ISOLATED`: isolated
-	// `CLONING`: copying
+	// `RUNNING`: Running
+	// `CREATING`: Creating
+	// `DESTROYING`: Terminating
+	// `OPENING`: Enabling
+	// `CLOSING`: Disabling
+	// `CLOSED`: Disabled
+	// `ADJUSTING`: Adjusting configuration
+	// `ISOLATING`: Isolating
+	// `ISOLATED`: Isolated
+	// `CLONING`: Copying
+	// `RECOVERING`: Maintaining
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Accessed domain name.
@@ -6195,8 +6196,8 @@ type ProxyInfo struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
-	// Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland); `secure_eip`: custom security EIP.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
 
 	// Package type of connections. Valid values: `Thunder` (general connection), `Accelerator` (silver connection), 

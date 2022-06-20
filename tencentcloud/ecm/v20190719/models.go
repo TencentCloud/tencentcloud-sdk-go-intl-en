@@ -207,6 +207,12 @@ type AssignIpv6AddressesRequest struct {
 
 	// Number of automatically assigned IPv6 addresses. The total number of private IP addresses cannot exceed the quota. The quota is calculated together with that of `Ipv6Addresses`, a required input parameter alternative to this one.
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+
+	// Ipv6 ISP. Valid values:
+	// `CTCC`: China Telecom
+	// `CUCC`: China Unicom
+	// `CMCC`: China Mobile
+	Ipv6ISP *string `json:"Ipv6ISP,omitempty" name:"Ipv6ISP"`
 }
 
 func (r *AssignIpv6AddressesRequest) ToJsonString() string {
@@ -225,6 +231,7 @@ func (r *AssignIpv6AddressesRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "Ipv6Addresses")
 	delete(f, "Ipv6AddressCount")
+	delete(f, "Ipv6ISP")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignIpv6AddressesRequest has unknown keys!", "")
 	}

@@ -66,7 +66,9 @@ func NewAddRealServersResponse() (response *AddRealServersResponse) {
 // This API is used to add the information of the origin server (server), which supports IP or the domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -86,7 +88,9 @@ func (c *Client) AddRealServers(request *AddRealServersRequest) (response *AddRe
 // This API is used to add the information of the origin server (server), which supports IP or the domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -137,11 +141,15 @@ func NewBindListenerRealServersResponse() (response *BindListenerRealServersResp
 // Note: This API unbinds the previously bound origin servers, and binds the origin servers selected for this call. For example, the previously bound origin servers are A, B and C, and the origin servers selected for this call are C, D and E, then the origin servers bound after this call will be C, D and E.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITREALSERVERNUM = "FailedOperation.LimitRealServerNum"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -162,11 +170,15 @@ func (c *Client) BindListenerRealServers(request *BindListenerRealServersRequest
 // Note: This API unbinds the previously bound origin servers, and binds the origin servers selected for this call. For example, the previously bound origin servers are A, B and C, and the origin servers selected for this call are C, D and E, then the origin servers bound after this call will be C, D and E.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITREALSERVERNUM = "FailedOperation.LimitRealServerNum"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -214,12 +226,16 @@ func NewBindRuleRealServersResponse() (response *BindRuleRealServersResponse) {
 // This API is used to bind an origin server to the forwarding rules of layer-7 listeners. Note: This API unbinds all previously bound origin servers before binding those selected.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
@@ -239,12 +255,16 @@ func (c *Client) BindRuleRealServers(request *BindRuleRealServersRequest) (respo
 // This API is used to bind an origin server to the forwarding rules of layer-7 listeners. Note: This API unbinds all previously bound origin servers before binding those selected.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
@@ -293,6 +313,9 @@ func NewCheckProxyCreateResponse() (response *CheckProxyCreateResponse) {
 // This API (CheckProxyCreate) is used to query whether an acceleration connection with the specified configuration can be created.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -311,6 +334,9 @@ func (c *Client) CheckProxyCreate(request *CheckProxyCreateRequest) (response *C
 // This API (CheckProxyCreate) is used to query whether an acceleration connection with the specified configuration can be created.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -358,6 +384,9 @@ func NewCloseProxiesResponse() (response *CloseProxiesResponse) {
 // This API (CloseProxies) is used to disable connections. If disabled, no traffic will be generated, but the basic configuration fee will still be incurred.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -379,6 +408,9 @@ func (c *Client) CloseProxies(request *CloseProxiesRequest) (response *CloseProx
 // This API (CloseProxies) is used to disable connections. If disabled, no traffic will be generated, but the basic configuration fee will still be incurred.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -429,6 +461,9 @@ func NewCloseProxyGroupResponse() (response *CloseProxyGroupResponse) {
 // This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -448,6 +483,9 @@ func (c *Client) CloseProxyGroup(request *CloseProxyGroupRequest) (response *Clo
 // This API is used to disable a connection group. Once disabled, the connection group will no longer generate traffic, but the basic connection configuration fees will still be incurred every day.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -496,6 +534,9 @@ func NewCloseSecurityPolicyResponse() (response *CloseSecurityPolicyResponse) {
 // This API is used to disable security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_PROXYSECURITYALREADYCLOSE = "FailedOperation.ProxySecurityAlreadyClose"
@@ -516,6 +557,9 @@ func (c *Client) CloseSecurityPolicy(request *CloseSecurityPolicyRequest) (respo
 // This API is used to disable security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_PROXYSECURITYALREADYCLOSE = "FailedOperation.ProxySecurityAlreadyClose"
@@ -565,7 +609,9 @@ func NewCreateCertificateResponse() (response *CreateCertificateResponse) {
 // This API (CreateCertificate) is used to create the GAAP certificates and configuration files, including basic authentication configuration files, client CA certificates, server SSL certificates, GAAP SSL certificates, and origin server CA certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -584,7 +630,9 @@ func (c *Client) CreateCertificate(request *CreateCertificateRequest) (response 
 // This API (CreateCertificate) is used to create the GAAP certificates and configuration files, including basic authentication configuration files, client CA certificates, server SSL certificates, GAAP SSL certificates, and origin server CA certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -632,11 +680,15 @@ func NewCreateCustomHeaderResponse() (response *CreateCustomHeaderResponse) {
 // This API is used to create a custom header of the HTTP/HTTPS listener. When client requests reach the listener, they will be forwarded to the origin with this custom hearer.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -651,11 +703,15 @@ func (c *Client) CreateCustomHeader(request *CreateCustomHeaderRequest) (respons
 // This API is used to create a custom header of the HTTP/HTTPS listener. When client requests reach the listener, they will be forwarded to the origin with this custom hearer.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -701,16 +757,21 @@ func NewCreateDomainResponse() (response *CreateDomainResponse) {
 // This API only supports connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CERTIFICATENOTMATCHDOMAIN = "InvalidParameterValue.CertificateNotMatchDomain"
 //  INVALIDPARAMETERVALUE_DOMAININICPBLACKLIST = "InvalidParameterValue.DomainInIcpBlacklist"
 //  INVALIDPARAMETERVALUE_DOMAINNOTREGISTER = "InvalidParameterValue.DomainNotRegister"
 //  INVALIDPARAMETERVALUE_L7DOMAINHITBANBLACKLIST = "InvalidParameterValue.L7DomainHitBanBlacklist"
@@ -726,16 +787,21 @@ func (c *Client) CreateDomain(request *CreateDomainRequest) (response *CreateDom
 // This API only supports connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYVERSIONNOTSUPPORT = "FailedOperation.ProxyVersionNotSupport"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CERTIFICATENOTMATCHDOMAIN = "InvalidParameterValue.CertificateNotMatchDomain"
 //  INVALIDPARAMETERVALUE_DOMAININICPBLACKLIST = "InvalidParameterValue.DomainInIcpBlacklist"
 //  INVALIDPARAMETERVALUE_DOMAINNOTREGISTER = "InvalidParameterValue.DomainNotRegister"
 //  INVALIDPARAMETERVALUE_L7DOMAINHITBANBLACKLIST = "InvalidParameterValue.L7DomainHitBanBlacklist"
@@ -778,6 +844,9 @@ func NewCreateDomainErrorPageInfoResponse() (response *CreateDomainErrorPageInfo
 // This API is used to customize the error code of an error response to the specified domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -797,6 +866,9 @@ func (c *Client) CreateDomainErrorPageInfo(request *CreateDomainErrorPageInfoReq
 // This API is used to customize the error code of an error response to the specified domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -845,12 +917,15 @@ func NewCreateHTTPListenerResponse() (response *CreateHTTPListenerResponse) {
 // This API (CreateHTTPListener) is used to create an HTTP listener in the connection instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
@@ -871,12 +946,15 @@ func (c *Client) CreateHTTPListener(request *CreateHTTPListenerRequest) (respons
 // This API (CreateHTTPListener) is used to create an HTTP listener in the connection instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
@@ -926,11 +1004,15 @@ func NewCreateHTTPSListenerResponse() (response *CreateHTTPSListenerResponse) {
 // This API (CreateHTTPListener) is used to create an HTTPS listener in the connection instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -951,11 +1033,15 @@ func (c *Client) CreateHTTPSListener(request *CreateHTTPSListenerRequest) (respo
 // This API (CreateHTTPListener) is used to create an HTTPS listener in the connection instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1005,7 +1091,9 @@ func NewCreateProxyResponse() (response *CreateProxyResponse) {
 // This API (CreateProxy) is used to create an acceleration connection with specified configuration.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -1036,7 +1124,9 @@ func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxy
 // This API (CreateProxy) is used to create an acceleration connection with specified configuration.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -1096,6 +1186,9 @@ func NewCreateProxyGroupResponse() (response *CreateProxyGroupResponse) {
 // This API (CreateProxyGroup) is used to create a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LIMITNUMOFPROXIESINGROUP = "FailedOperation.LimitNumofProxiesInGroup"
 //  INTERNALERROR = "InternalError"
@@ -1117,6 +1210,9 @@ func (c *Client) CreateProxyGroup(request *CreateProxyGroupRequest) (response *C
 // This API (CreateProxyGroup) is used to create a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LIMITNUMOFPROXIESINGROUP = "FailedOperation.LimitNumofProxiesInGroup"
 //  INTERNALERROR = "InternalError"
@@ -1167,6 +1263,9 @@ func NewCreateProxyGroupDomainResponse() (response *CreateProxyGroupDomainRespon
 // This API (CreateProxyGroupDomain) is used to create the connection group domain name, and enable the domain name resolution.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1185,6 +1284,9 @@ func (c *Client) CreateProxyGroupDomain(request *CreateProxyGroupDomainRequest) 
 // This API (CreateProxyGroupDomain) is used to create the connection group domain name, and enable the domain name resolution.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1232,13 +1334,16 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 // This API (CreateRule) is used to create the forwarding rules of HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFRULES = "FailedOperation.LimitNumofRules"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
 //  INTERNALERROR = "InternalError"
@@ -1256,13 +1361,16 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 // This API (CreateRule) is used to create the forwarding rules of HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFRULES = "FailedOperation.LimitNumofRules"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
 //  INTERNALERROR = "InternalError"
@@ -1309,8 +1417,11 @@ func NewCreateSecurityPolicyResponse() (response *CreateSecurityPolicyResponse) 
 // This API is used to create security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYEXISTED = "FailedOperation.ProxySecurityPolicyExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1329,8 +1440,11 @@ func (c *Client) CreateSecurityPolicy(request *CreateSecurityPolicyRequest) (res
 // This API is used to create security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYEXISTED = "FailedOperation.ProxySecurityPolicyExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1378,9 +1492,14 @@ func NewCreateSecurityRulesResponse() (response *CreateSecurityRulesResponse) {
 // This API is used to add security policy rules.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYOPERATING = "FailedOperation.ProxySecurityPolicyOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1398,9 +1517,14 @@ func (c *Client) CreateSecurityRules(request *CreateSecurityRulesRequest) (respo
 // This API is used to add security policy rules.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
+//  FAILEDOPERATION_PROXYSECURITYPOLICYOPERATING = "FailedOperation.ProxySecurityPolicyOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1447,13 +1571,16 @@ func NewCreateTCPListenersResponse() (response *CreateTCPListenersResponse) {
 // This API (CreateTCPListeners) is used to batch create TCP listeners of single connections or connection groups.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
@@ -1475,13 +1602,16 @@ func (c *Client) CreateTCPListeners(request *CreateTCPListenersRequest) (respons
 // This API (CreateTCPListeners) is used to batch create TCP listeners of single connections or connection groups.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
@@ -1532,11 +1662,15 @@ func NewCreateUDPListenersResponse() (response *CreateUDPListenersResponse) {
 // This API (CreateTCPListeners) is used to batch create UDP listeners of single connections or connection groups.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1556,11 +1690,15 @@ func (c *Client) CreateUDPListeners(request *CreateUDPListenersRequest) (respons
 // This API (CreateTCPListeners) is used to batch create UDP listeners of single connections or connection groups.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_OPERATELIMITNUMOFLISTENER = "FailedOperation.OperateLimitNumofListener"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1609,6 +1747,9 @@ func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
 // This API (DeleteCertificate) is used to delete certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1627,6 +1768,9 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
 // This API (DeleteCertificate) is used to delete certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1674,11 +1818,15 @@ func NewDeleteDomainResponse() (response *DeleteDomainResponse) {
 // This API (DeleteDomain) is only applicable to layer-7 listeners. It is used to delete the domain names of this listener, and all the rules under the domain name. All rules bound to the origin server are unbound automatically.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -1695,11 +1843,15 @@ func (c *Client) DeleteDomain(request *DeleteDomainRequest) (response *DeleteDom
 // This API (DeleteDomain) is only applicable to layer-7 listeners. It is used to delete the domain names of this listener, and all the rules under the domain name. All rules bound to the origin server are unbound automatically.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -1745,6 +1897,9 @@ func NewDeleteDomainErrorPageInfoResponse() (response *DeleteDomainErrorPageInfo
 // This API is used to delete a custom error code for a domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
@@ -1763,6 +1918,9 @@ func (c *Client) DeleteDomainErrorPageInfo(request *DeleteDomainErrorPageInfoReq
 // This API is used to delete a custom error code for a domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
@@ -1810,10 +1968,14 @@ func NewDeleteListenersResponse() (response *DeleteListenersResponse) {
 // This API (DeleteListeners) is used to batch delete the listeners of a connection or connection group, including layer-4/7 listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1830,10 +1992,14 @@ func (c *Client) DeleteListeners(request *DeleteListenersRequest) (response *Del
 // This API (DeleteListeners) is used to batch delete the listeners of a connection or connection group, including layer-4/7 listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1879,6 +2045,9 @@ func NewDeleteProxyGroupResponse() (response *DeleteProxyGroupResponse) {
 // This API (DeleteProxyGroup) is used to delete a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEPROXYGROUPPROXYREMAINED = "FailedOperation.DeleteProxyGroupProxyRemained"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
@@ -1899,6 +2068,9 @@ func (c *Client) DeleteProxyGroup(request *DeleteProxyGroupRequest) (response *D
 // This API (DeleteProxyGroup) is used to delete a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEPROXYGROUPPROXYREMAINED = "FailedOperation.DeleteProxyGroupProxyRemained"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
@@ -1948,11 +2120,15 @@ func NewDeleteRuleResponse() (response *DeleteRuleResponse) {
 // This API (DeleteRule) is used to delete the forwarding rules of HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -1969,11 +2145,15 @@ func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleRes
 // This API (DeleteRule) is used to delete the forwarding rules of HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -2019,6 +2199,9 @@ func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) 
 // This API is used to delete security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2038,6 +2221,9 @@ func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (res
 // This API is used to delete security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2086,7 +2272,11 @@ func NewDeleteSecurityRulesResponse() (response *DeleteSecurityRulesResponse) {
 // This API is used to delete security policy rules.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2104,7 +2294,11 @@ func (c *Client) DeleteSecurityRules(request *DeleteSecurityRulesRequest) (respo
 // This API is used to delete security policy rules.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2151,7 +2345,9 @@ func NewDescribeAccessRegionsResponse() (response *DescribeAccessRegionsResponse
 // This API (DescribeAccessRegions) is used to query acceleration region (client access region).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -2169,7 +2365,9 @@ func (c *Client) DescribeAccessRegions(request *DescribeAccessRegionsRequest) (r
 // This API (DescribeAccessRegions) is used to query acceleration region (client access region).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -2216,6 +2414,9 @@ func NewDescribeAccessRegionsByDestRegionResponse() (response *DescribeAccessReg
 // This API is used to query the available accelerator region based on the origin server region.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2233,6 +2434,9 @@ func (c *Client) DescribeAccessRegionsByDestRegion(request *DescribeAccessRegion
 // This API is used to query the available accelerator region based on the origin server region.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2279,7 +2483,9 @@ func NewDescribeBlackHeaderResponse() (response *DescribeBlackHeaderResponse) {
 // This API is used to query names of blocked custom headers.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2296,7 +2502,9 @@ func (c *Client) DescribeBlackHeader(request *DescribeBlackHeaderRequest) (respo
 // This API is used to query names of blocked custom headers.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2342,7 +2550,9 @@ func NewDescribeCertificateDetailResponse() (response *DescribeCertificateDetail
 // This API (DescribeCertificateDetail) is used to query certificate details, including the certificate ID, name, type, content, key, and other information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2360,7 +2570,9 @@ func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailReq
 // This API (DescribeCertificateDetail) is used to query certificate details, including the certificate ID, name, type, content, key, and other information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2407,7 +2619,9 @@ func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) 
 // This API (DescribeCertificates) is used to query the list of available certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2425,7 +2639,9 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
 // This API (DescribeCertificates) is used to query the list of available certificates.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2472,7 +2688,9 @@ func NewDescribeCountryAreaMappingResponse() (response *DescribeCountryAreaMappi
 // This API (DescribeCountryAreaMapping) is used to obtain the country/region code mapping table.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2491,7 +2709,9 @@ func (c *Client) DescribeCountryAreaMapping(request *DescribeCountryAreaMappingR
 // This API (DescribeCountryAreaMapping) is used to obtain the country/region code mapping table.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2539,7 +2759,9 @@ func NewDescribeCustomHeaderResponse() (response *DescribeCustomHeaderResponse) 
 // This API is used to query the list of custom headers.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2556,7 +2778,9 @@ func (c *Client) DescribeCustomHeader(request *DescribeCustomHeaderRequest) (res
 // This API is used to query the list of custom headers.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2602,7 +2826,9 @@ func NewDescribeDestRegionsResponse() (response *DescribeDestRegionsResponse) {
 // This API (DescribeDestRegions) is used to query an origin server region (i.e., the region in which the origin server locates).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2619,7 +2845,9 @@ func (c *Client) DescribeDestRegions(request *DescribeDestRegionsRequest) (respo
 // This API (DescribeDestRegions) is used to query an origin server region (i.e., the region in which the origin server locates).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2665,11 +2893,15 @@ func NewDescribeDomainErrorPageInfoResponse() (response *DescribeDomainErrorPage
 // This API is used to query the custom error response to a domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
 func (c *Client) DescribeDomainErrorPageInfo(request *DescribeDomainErrorPageInfoRequest) (response *DescribeDomainErrorPageInfoResponse, err error) {
     return c.DescribeDomainErrorPageInfoWithContext(context.Background(), request)
@@ -2679,11 +2911,15 @@ func (c *Client) DescribeDomainErrorPageInfo(request *DescribeDomainErrorPageInf
 // This API is used to query the custom error response to a domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
 func (c *Client) DescribeDomainErrorPageInfoWithContext(ctx context.Context, request *DescribeDomainErrorPageInfoRequest) (response *DescribeDomainErrorPageInfoResponse, err error) {
     if request == nil {
@@ -2722,6 +2958,9 @@ func NewDescribeDomainErrorPageInfoByIdsResponse() (response *DescribeDomainErro
 // This API is used to query the corresponding error response by a custom error ID.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
@@ -2736,6 +2975,9 @@ func (c *Client) DescribeDomainErrorPageInfoByIds(request *DescribeDomainErrorPa
 // This API is used to query the corresponding error response by a custom error ID.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
@@ -2779,6 +3021,9 @@ func NewDescribeGroupAndStatisticsProxyResponse() (response *DescribeGroupAndSta
 // This is an internal API. It is used to query the information of connections and connection groups from which the statistics can be derived.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -2796,6 +3041,9 @@ func (c *Client) DescribeGroupAndStatisticsProxy(request *DescribeGroupAndStatis
 // This is an internal API. It is used to query the information of connections and connection groups from which the statistics can be derived.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -2842,7 +3090,9 @@ func NewDescribeGroupDomainConfigResponse() (response *DescribeGroupDomainConfig
 // This API (DescribeGroupDomainConfig) is used to obtain the domain name resolution configuration details of a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -2862,7 +3112,9 @@ func (c *Client) DescribeGroupDomainConfig(request *DescribeGroupDomainConfigReq
 // This API (DescribeGroupDomainConfig) is used to obtain the domain name resolution configuration details of a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -2911,7 +3163,9 @@ func NewDescribeHTTPListenersResponse() (response *DescribeHTTPListenersResponse
 // This API (DescribeHTTPListeners) is used to query HTTP listener information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
@@ -2931,7 +3185,9 @@ func (c *Client) DescribeHTTPListeners(request *DescribeHTTPListenersRequest) (r
 // This API (DescribeHTTPListeners) is used to query HTTP listener information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
@@ -2980,7 +3236,9 @@ func NewDescribeHTTPSListenersResponse() (response *DescribeHTTPSListenersRespon
 // This API (DescribeHTTPSListeners) is used to query HTTPS listener information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
@@ -2999,7 +3257,9 @@ func (c *Client) DescribeHTTPSListeners(request *DescribeHTTPSListenersRequest) 
 // This API (DescribeHTTPSListeners) is used to query HTTPS listener information.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
@@ -3047,7 +3307,9 @@ func NewDescribeListenerRealServersResponse() (response *DescribeListenerRealSer
 // This API (DescribeListenerRealServers) is used to query the origin server list of TCP/UDP listeners, including the list of bound origin servers and origin servers that can be bound.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3064,7 +3326,9 @@ func (c *Client) DescribeListenerRealServers(request *DescribeListenerRealServer
 // This API (DescribeListenerRealServers) is used to query the origin server list of TCP/UDP listeners, including the list of bound origin servers and origin servers that can be bound.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3110,7 +3374,9 @@ func NewDescribeListenerStatisticsResponse() (response *DescribeListenerStatisti
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3128,7 +3394,9 @@ func (c *Client) DescribeListenerStatistics(request *DescribeListenerStatisticsR
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3175,7 +3443,9 @@ func NewDescribeProxiesResponse() (response *DescribeProxiesResponse) {
 // This API (DescribeProxies) is used to query the connection instance list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3193,7 +3463,9 @@ func (c *Client) DescribeProxies(request *DescribeProxiesRequest) (response *Des
 // This API (DescribeProxies) is used to query the connection instance list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3240,7 +3512,9 @@ func NewDescribeProxiesStatusResponse() (response *DescribeProxiesStatusResponse
 // This API (DescribeProxiesStatus) is used to query the connection status list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  INTERNALERROR = "InternalError"
@@ -3259,7 +3533,9 @@ func (c *Client) DescribeProxiesStatus(request *DescribeProxiesStatusRequest) (r
 // This API (DescribeProxiesStatus) is used to query the connection status list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  INTERNALERROR = "InternalError"
@@ -3307,7 +3583,9 @@ func NewDescribeProxyAndStatisticsListenersResponse() (response *DescribeProxyAn
 // This is an internal API. It is used to query the information of connections and listeners from which the statistics can be derived.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3323,7 +3601,9 @@ func (c *Client) DescribeProxyAndStatisticsListeners(request *DescribeProxyAndSt
 // This is an internal API. It is used to query the information of connections and listeners from which the statistics can be derived.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3368,7 +3648,9 @@ func NewDescribeProxyDetailResponse() (response *DescribeProxyDetailResponse) {
 // This API (DescribeProxyDetail) is used to query connection details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
@@ -3390,7 +3672,9 @@ func (c *Client) DescribeProxyDetail(request *DescribeProxyDetailRequest) (respo
 // This API (DescribeProxyDetail) is used to query connection details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_ACTIONOPERATETOOQUICKLY = "FailedOperation.ActionOperateTooQuickly"
@@ -3441,7 +3725,9 @@ func NewDescribeProxyGroupDetailsResponse() (response *DescribeProxyGroupDetails
 // This API (DescribeProxyGroupDetails) is used to query connection group details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3460,7 +3746,9 @@ func (c *Client) DescribeProxyGroupDetails(request *DescribeProxyGroupDetailsReq
 // This API (DescribeProxyGroupDetails) is used to query connection group details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3508,7 +3796,9 @@ func NewDescribeProxyGroupListResponse() (response *DescribeProxyGroupListRespon
 // This API (DescribeProxyGroupList) is used to pull the list of connection groups and the basic information of each connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3527,7 +3817,9 @@ func (c *Client) DescribeProxyGroupList(request *DescribeProxyGroupListRequest) 
 // This API (DescribeProxyGroupList) is used to pull the list of connection groups and the basic information of each connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3575,6 +3867,9 @@ func NewDescribeProxyGroupStatisticsResponse() (response *DescribeProxyGroupStat
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3592,6 +3887,9 @@ func (c *Client) DescribeProxyGroupStatistics(request *DescribeProxyGroupStatist
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, and concurrence data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3638,7 +3936,9 @@ func NewDescribeProxyStatisticsResponse() (response *DescribeProxyStatisticsResp
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, concurrence, packet loss, and latency data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3656,7 +3956,9 @@ func (c *Client) DescribeProxyStatistics(request *DescribeProxyStatisticsRequest
 // This API is used to query listener statistics, including inbound/outbound bandwidth, inbound/outbound packets, concurrence, packet loss, and latency data. It supports granularities of 300, 3,600, and 86,400. Default value is the highest within the granularity range.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -3703,6 +4005,9 @@ func NewDescribeRealServerStatisticsResponse() (response *DescribeRealServerStat
 // This API is used to query the statistics of an origin server's health check results. Origin server status is displayed as 1 (normal) or 0 (exceptional). The queried origin server must be bound to a listener or rule, and the ID of the bound listener or rule must be specified for the query. This API supports displaying origin server status statistics at a 1-minute granularity.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3718,6 +4023,9 @@ func (c *Client) DescribeRealServerStatistics(request *DescribeRealServerStatist
 // This API is used to query the statistics of an origin server's health check results. Origin server status is displayed as 1 (normal) or 0 (exceptional). The queried origin server must be bound to a listener or rule, and the ID of the bound listener or rule must be specified for the query. This API supports displaying origin server status statistics at a 1-minute granularity.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3762,7 +4070,9 @@ func NewDescribeRealServersResponse() (response *DescribeRealServersResponse) {
 // This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3779,7 +4089,9 @@ func (c *Client) DescribeRealServers(request *DescribeRealServersRequest) (respo
 // This API is used to query origin server information. It can query all origin servers under the specified project name, and supports fuzzy query by specified IPs or domain names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3825,6 +4137,9 @@ func NewDescribeRealServersStatusResponse() (response *DescribeRealServersStatus
 // This API (DescribeRealServersStatus) is used to query whether an origin server has been bound to a rule or listener.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERNOTINPROJECT = "FailedOperation.RealServerNotInProject"
 //  INTERNALERROR = "InternalError"
@@ -3842,6 +4157,9 @@ func (c *Client) DescribeRealServersStatus(request *DescribeRealServersStatusReq
 // This API (DescribeRealServersStatus) is used to query whether an origin server has been bound to a rule or listener.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERNOTINPROJECT = "FailedOperation.RealServerNotInProject"
 //  INTERNALERROR = "InternalError"
@@ -3888,7 +4206,9 @@ func NewDescribeRegionAndPriceResponse() (response *DescribeRegionAndPriceRespon
 // This API (DescribeRegionAndPrice) is used to obtain the origin server regions and the bandwidth price gradient.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3905,7 +4225,9 @@ func (c *Client) DescribeRegionAndPrice(request *DescribeRegionAndPriceRequest) 
 // This API (DescribeRegionAndPrice) is used to obtain the origin server regions and the bandwidth price gradient.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3951,7 +4273,9 @@ func NewDescribeResourcesByTagResponse() (response *DescribeResourcesByTagRespon
 // This API (DescribeResourcesByTag) is used to query corresponding resource information by tags, including connection, connection group, and origin server.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3968,7 +4292,9 @@ func (c *Client) DescribeResourcesByTag(request *DescribeResourcesByTagRequest) 
 // This API (DescribeResourcesByTag) is used to query corresponding resource information by tags, including connection, connection group, and origin server.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4014,7 +4340,9 @@ func NewDescribeRuleRealServersResponse() (response *DescribeRuleRealServersResp
 // This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -4031,7 +4359,9 @@ func (c *Client) DescribeRuleRealServers(request *DescribeRuleRealServersRequest
 // This API (DescribeRuleRealServers) is used to query forwarding rules-related origin server information, including information of origin servers that can be bound and have been bound.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -4077,7 +4407,9 @@ func NewDescribeRulesResponse() (response *DescribeRulesResponse) {
 // This API (DescribeRules) is used to query all rule information of a listener, including the domain names, paths, and list of bound origin servers. For version 3.0 connections, this API returns the advanced authentication configuration information of the domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4094,7 +4426,9 @@ func (c *Client) DescribeRules(request *DescribeRulesRequest) (response *Describ
 // This API (DescribeRules) is used to query all rule information of a listener, including the domain names, paths, and list of bound origin servers. For version 3.0 connections, this API returns the advanced authentication configuration information of the domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4140,6 +4474,9 @@ func NewDescribeRulesByRuleIdsResponse() (response *DescribeRulesByRuleIdsRespon
 // This API is used to pull the list of rules based on rule ID. It supports pulling 1 to 10 rules at a time.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -4160,6 +4497,9 @@ func (c *Client) DescribeRulesByRuleIds(request *DescribeRulesByRuleIdsRequest) 
 // This API is used to pull the list of rules based on rule ID. It supports pulling 1 to 10 rules at a time.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -4209,7 +4549,9 @@ func NewDescribeSecurityPolicyDetailResponse() (response *DescribeSecurityPolicy
 // This API is used to obtain security policy details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4228,7 +4570,9 @@ func (c *Client) DescribeSecurityPolicyDetail(request *DescribeSecurityPolicyDet
 // This API is used to obtain security policy details.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4276,7 +4620,9 @@ func NewDescribeSecurityRulesResponse() (response *DescribeSecurityRulesResponse
 // This API is used to query the list of security rules based on security rule ID. It supports querying 1 to 20 security rules at a time.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -4297,7 +4643,9 @@ func (c *Client) DescribeSecurityRules(request *DescribeSecurityRulesRequest) (r
 // This API is used to query the list of security rules based on security rule ID. It supports querying 1 to 20 security rules at a time.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
@@ -4347,7 +4695,9 @@ func NewDescribeTCPListenersResponse() (response *DescribeTCPListenersResponse) 
 // This API (DescribeTCPListeners) is used to query the TCP listener information of a single connection or connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4365,7 +4715,9 @@ func (c *Client) DescribeTCPListeners(request *DescribeTCPListenersRequest) (res
 // This API (DescribeTCPListeners) is used to query the TCP listener information of a single connection or connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4412,7 +4764,9 @@ func NewDescribeUDPListenersResponse() (response *DescribeUDPListenersResponse) 
 // This API (DescribeUDPListeners) is used to query the UDP listener information of a single connection or connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4429,7 +4783,9 @@ func (c *Client) DescribeUDPListeners(request *DescribeUDPListenersRequest) (res
 // This API (DescribeUDPListeners) is used to query the UDP listener information of a single connection or connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4475,11 +4831,15 @@ func NewDestroyProxiesResponse() (response *DestroyProxiesResponse) {
 // This API (DestroyProxies) is used to terminate a connection. If terminated, no fees will be incurred.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_BELONGDIFFERENTGROUP = "FailedOperation.BelongDifferentGroup"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4499,11 +4859,15 @@ func (c *Client) DestroyProxies(request *DestroyProxiesRequest) (response *Destr
 // This API (DestroyProxies) is used to terminate a connection. If terminated, no fees will be incurred.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_BELONGDIFFERENTGROUP = "FailedOperation.BelongDifferentGroup"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4552,6 +4916,9 @@ func NewInquiryPriceCreateProxyResponse() (response *InquiryPriceCreateProxyResp
 // This API (InquiryPriceCreateProxy) is used to create the price inquiries of acceleration connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -4575,6 +4942,9 @@ func (c *Client) InquiryPriceCreateProxy(request *InquiryPriceCreateProxyRequest
 // This API (InquiryPriceCreateProxy) is used to create the price inquiries of acceleration connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_RESOURCEUPGRADING = "FailedOperation.ResourceUpgrading"
 //  INTERNALERROR = "InternalError"
@@ -4627,6 +4997,9 @@ func NewModifyCertificateResponse() (response *ModifyCertificateResponse) {
 // This API (ModifyCertificate) is used to modify a domain name certificate of a listener. domain name certificate. This API is only applicable to connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -4649,6 +5022,9 @@ func (c *Client) ModifyCertificate(request *ModifyCertificateRequest) (response 
 // This API (ModifyCertificate) is used to modify a domain name certificate of a listener. domain name certificate. This API is only applicable to connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -4700,6 +5076,9 @@ func NewModifyCertificateAttributesResponse() (response *ModifyCertificateAttrib
 // This API is used to modify certificate name and content.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4718,6 +5097,9 @@ func (c *Client) ModifyCertificateAttributes(request *ModifyCertificateAttribute
 // This API is used to modify certificate name and content.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CERTIFICATEISUSING = "FailedOperation.CertificateIsUsing"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4765,12 +5147,16 @@ func NewModifyDomainResponse() (response *ModifyDomainResponse) {
 // This API (ModifyDomain) is used to modify domain names of listeners. For connections of version 3.0, it supports modifying certificates of the domain names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4789,12 +5175,16 @@ func (c *Client) ModifyDomain(request *ModifyDomainRequest) (response *ModifyDom
 // This API (ModifyDomain) is used to modify domain names of listeners. For connections of version 3.0, it supports modifying certificates of the domain names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINALREADYEXISTED = "FailedOperation.DomainAlreadyExisted"
 //  FAILEDOPERATION_DOMAINSTATUSNOTINRUNNING = "FailedOperation.DomainStatusNotInRunning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_INVALIDLISTENERPROTOCOL = "FailedOperation.InvalidListenerProtocol"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSTATUSNOTINRUNING = "FailedOperation.ProxyStatusNotInRuning"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4842,6 +5232,9 @@ func NewModifyGroupDomainConfigResponse() (response *ModifyGroupDomainConfigResp
 // This API (ModifyGroupDomainConfig) is used to configure the nearest access domain name of a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4860,6 +5253,9 @@ func (c *Client) ModifyGroupDomainConfig(request *ModifyGroupDomainConfigRequest
 // This API (ModifyGroupDomainConfig) is used to configure the nearest access domain name of a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4909,8 +5305,12 @@ func NewModifyHTTPListenerAttributeResponse() (response *ModifyHTTPListenerAttri
 // Note: Grouped connections currently do not support HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
@@ -4929,8 +5329,12 @@ func (c *Client) ModifyHTTPListenerAttribute(request *ModifyHTTPListenerAttribut
 // Note: Grouped connections currently do not support HTTP/HTTPS listeners.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  FAILEDOPERATION_NOTSUPPORTPROXYGROUP = "FailedOperation.NotSupportProxyGroup"
 //  INTERNALERROR = "InternalError"
@@ -4976,10 +5380,14 @@ func NewModifyHTTPSListenerAttributeResponse() (response *ModifyHTTPSListenerAtt
 // This API (ModifyHTTPSListenerAttribute) is used to modify HTTPS listener configurations. It currently do not support connection groups and connections of version 1.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4996,10 +5404,14 @@ func (c *Client) ModifyHTTPSListenerAttribute(request *ModifyHTTPSListenerAttrib
 // This API (ModifyHTTPSListenerAttribute) is used to modify HTTPS listener configurations. It currently do not support connection groups and connections of version 1.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTOLDVERSIONPROXY = "FailedOperation.NotSupportOldVersionProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5045,9 +5457,13 @@ func NewModifyProxiesAttributeResponse() (response *ModifyProxiesAttributeRespon
 // This API (ModifyProxiesAttribute) is used to modify instance attributes (currently only supports modifying connection name).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5066,9 +5482,13 @@ func (c *Client) ModifyProxiesAttribute(request *ModifyProxiesAttributeRequest) 
 // This API (ModifyProxiesAttribute) is used to modify instance attributes (currently only supports modifying connection name).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_RESOURCECANNOTACCESS = "FailedOperation.ResourceCanNotAccess"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5116,6 +5536,9 @@ func NewModifyProxiesProjectResponse() (response *ModifyProxiesProjectResponse) 
 // This API (ModifyProxiesProject) is used to modify the project to which a connection belongs.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5137,6 +5560,9 @@ func (c *Client) ModifyProxiesProject(request *ModifyProxiesProjectRequest) (res
 // This API (ModifyProxiesProject) is used to modify the project to which a connection belongs.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5187,9 +5613,14 @@ func NewModifyProxyConfigurationResponse() (response *ModifyProxyConfigurationRe
 // This API (ModifyProxyConfiguration) is used to modify connection configurations. You can expand or reduce the capacity based on current business requirements. It only supports connections with a Scalarable of 1. Scalarable can be obtained via DescribeProxies API.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_MIGRATION = "FailedOperation.Migration"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTSCALAR = "FailedOperation.NotSupportScalar"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -5209,9 +5640,14 @@ func (c *Client) ModifyProxyConfiguration(request *ModifyProxyConfigurationReque
 // This API (ModifyProxyConfiguration) is used to modify connection configurations. You can expand or reduce the capacity based on current business requirements. It only supports connections with a Scalarable of 1. Scalarable can be obtained via DescribeProxies API.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
+//  FAILEDOPERATION_MIGRATION = "FailedOperation.Migration"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_NOTSUPPORTSCALAR = "FailedOperation.NotSupportScalar"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -5260,6 +5696,9 @@ func NewModifyProxyGroupAttributeResponse() (response *ModifyProxyGroupAttribute
 // This API (ModifyProxyGroupAttribute) is used to modify connection group attributes. It currently only supports modifying connection group name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5278,6 +5717,9 @@ func (c *Client) ModifyProxyGroupAttribute(request *ModifyProxyGroupAttributeReq
 // This API (ModifyProxyGroupAttribute) is used to modify connection group attributes. It currently only supports modifying connection group name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5325,6 +5767,9 @@ func NewModifyRealServerNameResponse() (response *ModifyRealServerNameResponse) 
 // This API (ModifyRealServerName) is used to modify origin server names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5341,6 +5786,9 @@ func (c *Client) ModifyRealServerName(request *ModifyRealServerNameRequest) (res
 // This API (ModifyRealServerName) is used to modify origin server names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5386,9 +5834,13 @@ func NewModifyRuleAttributeResponse() (response *ModifyRuleAttributeResponse) {
 // This API (ModifyRuleAttribute) is used to modify forwarding rule information, including health check configuration and forwarding policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5404,9 +5856,13 @@ func (c *Client) ModifyRuleAttribute(request *ModifyRuleAttributeRequest) (respo
 // This API (ModifyRuleAttribute) is used to modify forwarding rule information, including health check configuration and forwarding policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5451,7 +5907,11 @@ func NewModifySecurityRuleResponse() (response *ModifySecurityRuleResponse) {
 // This API is used to modify security policy rule names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
 //  INTERNALERROR = "InternalError"
@@ -5471,7 +5931,11 @@ func (c *Client) ModifySecurityRule(request *ModifySecurityRuleRequest) (respons
 // This API is used to modify security policy rule names.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDEFAULTRULE = "FailedOperation.ProxySecurityPolicyDefaultRule"
 //  FAILEDOPERATION_PROXYSECURITYPOLICYDUPLICATEDRULE = "FailedOperation.ProxySecurityPolicyDuplicatedRule"
 //  INTERNALERROR = "InternalError"
@@ -5520,11 +5984,15 @@ func NewModifyTCPListenerAttributeResponse() (response *ModifyTCPListenerAttribu
 // This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5540,11 +6008,15 @@ func (c *Client) ModifyTCPListenerAttribute(request *ModifyTCPListenerAttributeR
 // This API (ModifyTCPListenerAttribute) is used to modify the TCP listener configuration of a connection instance, including health check configuration and scheduling policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5589,11 +6061,15 @@ func NewModifyUDPListenerAttributeResponse() (response *ModifyUDPListenerAttribu
 // This API (ModifyUDPListenerAttribute) is used to modify the UDP listener configuration of a connection instance, including modification of listener names and scheduling policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5609,11 +6085,15 @@ func (c *Client) ModifyUDPListenerAttribute(request *ModifyUDPListenerAttributeR
 // This API (ModifyUDPListenerAttribute) is used to modify the UDP listener configuration of a connection instance, including modification of listener names and scheduling policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GROUPSTATUSNOTINRUNING = "FailedOperation.GroupStatusNotInRuning"
 //  FAILEDOPERATION_INSTANCESTATUSNOTINRUNING = "FailedOperation.InstanceStatusNotInRuning"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
 //  FAILEDOPERATION_LISTENERSTATUSERROR = "FailedOperation.ListenerStatusError"
+//  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5658,7 +6138,9 @@ func NewOpenProxiesResponse() (response *OpenProxiesResponse) {
 // This API (OpenProxies) is used to enable one or more connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5680,7 +6162,9 @@ func (c *Client) OpenProxies(request *OpenProxiesRequest) (response *OpenProxies
 // This API (OpenProxies) is used to enable one or more connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5731,6 +6215,9 @@ func NewOpenProxyGroupResponse() (response *OpenProxyGroupResponse) {
 // This API is used to enable all connections in a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5749,6 +6236,9 @@ func (c *Client) OpenProxyGroup(request *OpenProxyGroupRequest) (response *OpenP
 // This API is used to enable all connections in a connection group.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCOUNTBALANCEINSUFFICIENT = "FailedOperation.AccountBalanceInsufficient"
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
@@ -5796,6 +6286,9 @@ func NewOpenSecurityPolicyResponse() (response *OpenSecurityPolicyResponse) {
 // This API is used to enable security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_PROXYSECURITYALREADYOPEN = "FailedOperation.ProxySecurityAlreadyOpen"
@@ -5816,6 +6309,9 @@ func (c *Client) OpenSecurityPolicy(request *OpenSecurityPolicyRequest) (respons
 // This API is used to enable security policies.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_PROXYSECURITYALREADYOPEN = "FailedOperation.ProxySecurityAlreadyOpen"
@@ -5865,6 +6361,9 @@ func NewRemoveRealServersResponse() (response *RemoveRealServersResponse) {
 // This API is used to delete the added origin server (server) IP or domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -5883,6 +6382,9 @@ func (c *Client) RemoveRealServers(request *RemoveRealServersRequest) (response 
 // This API is used to delete the added origin server (server) IP or domain name.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
 //  INTERNALERROR = "InternalError"
@@ -5930,6 +6432,9 @@ func NewSetAuthenticationResponse() (response *SetAuthenticationResponse) {
 // This API (SetAuthentication) is used for the advanced authentication configuration of connections, including authentication methods and their certificates. If only supports connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"
@@ -5954,6 +6459,9 @@ func (c *Client) SetAuthentication(request *SetAuthenticationRequest) (response 
 // This API (SetAuthentication) is used for the advanced authentication configuration of connections, including authentication methods and their certificates. If only supports connections of version 3.0.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACTIONISDOING = "FailedOperation.ActionIsDoing"
 //  FAILEDOPERATION_LISTENERHASTASK = "FailedOperation.ListenerHasTask"

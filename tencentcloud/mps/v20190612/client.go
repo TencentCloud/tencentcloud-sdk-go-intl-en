@@ -353,7 +353,7 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
 }
 
 // CreateContentReviewTemplate
-// This API is used to create a custom template for intelligent content recognition. Up to 50 templates can be created.
+// This API is used to create a custom content moderation template. Up to 50 templates can be created in total.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -371,7 +371,7 @@ func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplat
 }
 
 // CreateContentReviewTemplate
-// This API is used to create a custom template for intelligent content recognition. Up to 50 templates can be created.
+// This API is used to create a custom content moderation template. Up to 50 templates can be created in total.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -1111,6 +1111,7 @@ func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdapti
 // This API is used to delete an adaptive bitrate streaming template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
@@ -1122,6 +1123,7 @@ func (c *Client) DeleteAdaptiveDynamicStreamingTemplate(request *DeleteAdaptiveD
 // This API is used to delete an adaptive bitrate streaming template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
@@ -1210,7 +1212,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete a custom intelligent content recognition template.
+// This API is used to delete a custom content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1222,7 +1224,7 @@ func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplat
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete a custom intelligent content recognition template.
+// This API is used to delete a custom content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1897,7 +1899,7 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
 }
 
 // DescribeContentReviewTemplates
-// This API is used to get the list of intelligent content recognition templates using their unique ID. The returned result includes all custom templates that meet the conditions as well as preset intelligent content recognition templates.
+// This API is used to query content moderation templates by template ID. Both custom and preset templates that match the template IDs passed in will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -1911,7 +1913,7 @@ func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTe
 }
 
 // DescribeContentReviewTemplates
-// This API is used to get the list of intelligent content recognition templates using their unique ID. The returned result includes all custom templates that meet the conditions as well as preset intelligent content recognition templates.
+// This API is used to query content moderation templates by template ID. Both custom and preset templates that match the template IDs passed in will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2740,7 +2742,7 @@ func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
 }
 
 // ExecuteFunction
-// This API is only used in unique custom development scenarios. Unless requested by Media Processing Service customer service, please do not call it.
+// This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
@@ -2753,7 +2755,7 @@ func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *Exe
 }
 
 // ExecuteFunction
-// This API is only used in unique custom development scenarios. Unless requested by Media Processing Service customer service, please do not call it.
+// This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
@@ -3162,7 +3164,7 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
 }
 
 // ModifyContentReviewTemplate
-// This API is used to modify a custom intelligent content recognition template.
+// This API is used to modify a custom content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3179,7 +3181,7 @@ func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplat
 }
 
 // ModifyContentReviewTemplate
-// This API is used to modify a custom intelligent content recognition template.
+// This API is used to modify a custom content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
