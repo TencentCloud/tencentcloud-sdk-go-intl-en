@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AllocateCustomerCreditRequestParams struct {
+	// Specific value of the credit allocated to the customer
+	AddedCredit *float64 `json:"AddedCredit,omitempty" name:"AddedCredit"`
+
+	// Customer UIN
+	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+}
+
 type AllocateCustomerCreditRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Specific value of the credit allocated to the customer
 	AddedCredit *float64 `json:"AddedCredit,omitempty" name:"AddedCredit"`
 
@@ -50,13 +59,15 @@ func (r *AllocateCustomerCreditRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AllocateCustomerCreditResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AllocateCustomerCreditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AllocateCustomerCreditResponseParams `json:"Response"`
 }
 
 func (r *AllocateCustomerCreditResponse) ToJsonString() string {
@@ -71,7 +82,6 @@ func (r *AllocateCustomerCreditResponse) FromJsonString(s string) error {
 }
 
 type CountryCodeItem struct {
-
 	// Country/region name in English
 	EnName *string `json:"EnName,omitempty" name:"EnName"`
 
@@ -88,9 +98,40 @@ type CountryCodeItem struct {
 	Code *string `json:"Code,omitempty" name:"Code"`
 }
 
+// Predefined struct for user
+type CreateAccountRequestParams struct {
+	// Account type of a new customer. Valid value: `business`.
+	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
+
+	// Registered email address, which should be valid and correct.
+	// For example, account@qq.com.
+	Mail *string `json:"Mail,omitempty" name:"Mail"`
+
+	// Account password
+	// Length limit: 8-20 characters
+	// A password must contain numbers, letters, and special symbols [!@#$%^&*()]. Spaces are not allowed.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Confirm the password. It must be the same as the `Password` field.
+	ConfirmPassword *string `json:"ConfirmPassword,omitempty" name:"ConfirmPassword"`
+
+	// Customer mobile number, which should be valid and correct.
+	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
+	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+
+	// Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
+	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+
+	// ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Expanded field, which is left empty by default.
+	Extended *string `json:"Extended,omitempty" name:"Extended"`
+}
+
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Account type of a new customer. Valid value: `business`.
 	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 
@@ -146,16 +187,18 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAccountResponseParams struct {
+	// Account UIN
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAccountResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Account UIN
-		Uin *string `json:"Uin,omitempty" name:"Uin"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAccountResponseParams `json:"Response"`
 }
 
 func (r *CreateAccountResponse) ToJsonString() string {
@@ -169,8 +212,14 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetCountryCodesRequestParams struct {
+
+}
+
 type GetCountryCodesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *GetCountryCodesRequest) ToJsonString() string {
@@ -185,22 +234,25 @@ func (r *GetCountryCodesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCountryCodesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetCountryCodesResponseParams struct {
+	// List of country/region codes
+	Data []*CountryCodeItem `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetCountryCodesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of country/region codes
-		Data []*CountryCodeItem `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetCountryCodesResponseParams `json:"Response"`
 }
 
 func (r *GetCountryCodesResponse) ToJsonString() string {
@@ -215,7 +267,6 @@ func (r *GetCountryCodesResponse) FromJsonString(s string) error {
 }
 
 type QueryCreditAllocationHistoryData struct {
-
 	// Allocation time
 	AllocatedTime *string `json:"AllocatedTime,omitempty" name:"AllocatedTime"`
 
@@ -226,9 +277,21 @@ type QueryCreditAllocationHistoryData struct {
 	Credit *float64 `json:"Credit,omitempty" name:"Credit"`
 }
 
+// Predefined struct for user
+type QueryCreditAllocationHistoryRequestParams struct {
+	// Customer UIN
+	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+
+	// Page number
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of data entries per page
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
 type QueryCreditAllocationHistoryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Customer UIN
 	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
 
@@ -260,21 +323,23 @@ func (r *QueryCreditAllocationHistoryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type QueryCreditAllocationHistoryResponseParams struct {
+	// Total number of records
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// List of record details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	History []*QueryCreditAllocationHistoryData `json:"History,omitempty" name:"History"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type QueryCreditAllocationHistoryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of records
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// List of record details
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		History []*QueryCreditAllocationHistoryData `json:"History,omitempty" name:"History"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *QueryCreditAllocationHistoryResponseParams `json:"Response"`
 }
 
 func (r *QueryCreditAllocationHistoryResponse) ToJsonString() string {
@@ -289,7 +354,6 @@ func (r *QueryCreditAllocationHistoryResponse) FromJsonString(s string) error {
 }
 
 type QueryCustomersCreditData struct {
-
 	// Name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -321,8 +385,14 @@ type QueryCustomersCreditData struct {
 	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
 }
 
+// Predefined struct for user
+type QueryCustomersCreditRequestParams struct {
+
+}
+
 type QueryCustomersCreditRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *QueryCustomersCreditRequest) ToJsonString() string {
@@ -337,26 +407,29 @@ func (r *QueryCustomersCreditRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryCustomersCreditRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type QueryCustomersCreditResponseParams struct {
+	// Queries the list of customers
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Data []*QueryCustomersCreditData `json:"Data,omitempty" name:"Data"`
+
+	// Number of customers
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type QueryCustomersCreditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Queries the list of customers
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Data []*QueryCustomersCreditData `json:"Data,omitempty" name:"Data"`
-
-		// Number of customers
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *QueryCustomersCreditResponseParams `json:"Response"`
 }
 
 func (r *QueryCustomersCreditResponse) ToJsonString() string {
@@ -370,8 +443,14 @@ func (r *QueryCustomersCreditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type QueryPartnerCreditRequestParams struct {
+
+}
+
 type QueryPartnerCreditRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *QueryPartnerCreditRequest) ToJsonString() string {
@@ -386,28 +465,31 @@ func (r *QueryPartnerCreditRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryPartnerCreditRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type QueryPartnerCreditResponseParams struct {
+	// Allocated credit
+	AllocatedCredit *float64 `json:"AllocatedCredit,omitempty" name:"AllocatedCredit"`
+
+	// Total credit
+	TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
+
+	// Remaining credit
+	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type QueryPartnerCreditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Allocated credit
-		AllocatedCredit *float64 `json:"AllocatedCredit,omitempty" name:"AllocatedCredit"`
-
-		// Total credit
-		TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
-
-		// Remaining credit
-		RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *QueryPartnerCreditResponseParams `json:"Response"`
 }
 
 func (r *QueryPartnerCreditResponse) ToJsonString() string {

@@ -21,13 +21,11 @@ import (
 )
 
 type Attribute struct {
-
 	// Attribute list
 	Tags []*DeviceTag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type BindProductInfo struct {
-
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -36,7 +34,6 @@ type BindProductInfo struct {
 }
 
 type CertInfo struct {
-
 	// Certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
@@ -62,9 +59,45 @@ type CertInfo struct {
 	CertText *string `json:"CertText,omitempty" name:"CertText"`
 }
 
+// Predefined struct for user
+type CreateDeviceRequestParams struct {
+	// Product ID, globally unique ID assigned by Tencent Cloud during product creation
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device name. It is a string of 1 to 48 characters. Letters, digits, and :_- are allowed.
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Device attribute
+	Attribute *Attribute `json:"Attribute,omitempty" name:"Attribute"`
+
+	// Whether to use custom PSK, no by default
+	DefinedPsk *string `json:"DefinedPsk,omitempty" name:"DefinedPsk"`
+
+	// ISP, required for a NB-IoT product. `1`: China Telecom; `2`: China Mobile; `3`: China Unicom
+	Isp *uint64 `json:"Isp,omitempty" name:"Isp"`
+
+	// IMEI, required for a NB-IoT product
+	Imei *string `json:"Imei,omitempty" name:"Imei"`
+
+	// DevEUI of a LoRa device, required when you create a LoRa device
+	LoraDevEui *string `json:"LoraDevEui,omitempty" name:"LoraDevEui"`
+
+	// MoteType of a LoRa device
+	LoraMoteType *uint64 `json:"LoraMoteType,omitempty" name:"LoraMoteType"`
+
+	// Skey, required when you create a LoRa device
+	Skey *string `json:"Skey,omitempty" name:"Skey"`
+
+	// AppKey of a LoRa device
+	LoraAppKey *string `json:"LoraAppKey,omitempty" name:"LoraAppKey"`
+
+	// Private CA certificate
+	TlsCrt *string `json:"TlsCrt,omitempty" name:"TlsCrt"`
+}
+
 type CreateDeviceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID, globally unique ID assigned by Tencent Cloud during product creation
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -128,37 +161,39 @@ func (r *CreateDeviceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDeviceResponseParams struct {
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Base64-encoded symmetric encryption key, which is returned if symmetric encryption is used
+	DevicePsk *string `json:"DevicePsk,omitempty" name:"DevicePsk"`
+
+	// Device certificate, which authenticates client identity during TLS connection establishment and is returned if asymmetric encryption is used
+	DeviceCert *string `json:"DeviceCert,omitempty" name:"DeviceCert"`
+
+	// Device private key, which authenticates client identity during TLS connection establishment and is returned if asymmetric encryption is used. Tencent Cloud does not store the key. Please store it by yourself properly.
+	DevicePrivateKey *string `json:"DevicePrivateKey,omitempty" name:"DevicePrivateKey"`
+
+	// DevEUI of a LoRa device, which is returned for a LoRa device
+	LoraDevEui *string `json:"LoraDevEui,omitempty" name:"LoraDevEui"`
+
+	// MoteType of a LoRa device, which is returned for a LoRa device
+	LoraMoteType *uint64 `json:"LoraMoteType,omitempty" name:"LoraMoteType"`
+
+	// AppKey of a LoRa device, which is returned for a LoRa device
+	LoraAppKey *string `json:"LoraAppKey,omitempty" name:"LoraAppKey"`
+
+	// NwkKey of a LoRa device, which is returned for a LoRa device
+	LoraNwkKey *string `json:"LoraNwkKey,omitempty" name:"LoraNwkKey"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDeviceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Device name
-		DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
-
-		// Base64-encoded symmetric encryption key, which is returned if symmetric encryption is used
-		DevicePsk *string `json:"DevicePsk,omitempty" name:"DevicePsk"`
-
-		// Device certificate, which authenticates client identity during TLS connection establishment and is returned if asymmetric encryption is used
-		DeviceCert *string `json:"DeviceCert,omitempty" name:"DeviceCert"`
-
-		// Device private key, which authenticates client identity during TLS connection establishment and is returned if asymmetric encryption is used. Tencent Cloud does not store the key. Please store it by yourself properly.
-		DevicePrivateKey *string `json:"DevicePrivateKey,omitempty" name:"DevicePrivateKey"`
-
-		// DevEUI of a LoRa device, which is returned for a LoRa device
-		LoraDevEui *string `json:"LoraDevEui,omitempty" name:"LoraDevEui"`
-
-		// MoteType of a LoRa device, which is returned for a LoRa device
-		LoraMoteType *uint64 `json:"LoraMoteType,omitempty" name:"LoraMoteType"`
-
-		// AppKey of a LoRa device, which is returned for a LoRa device
-		LoraAppKey *string `json:"LoraAppKey,omitempty" name:"LoraAppKey"`
-
-		// NwkKey of a LoRa device, which is returned for a LoRa device
-		LoraNwkKey *string `json:"LoraNwkKey,omitempty" name:"LoraNwkKey"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDeviceResponseParams `json:"Response"`
 }
 
 func (r *CreateDeviceResponse) ToJsonString() string {
@@ -172,9 +207,21 @@ func (r *CreateDeviceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateCARequestParams struct {
+	// CA certificate name
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// CA certificate content
+	CertText *string `json:"CertText,omitempty" name:"CertText"`
+
+	// Content verifying the CA certificate
+	VerifyCertText *string `json:"VerifyCertText,omitempty" name:"VerifyCertText"`
+}
+
 type CreatePrivateCARequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CA certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
@@ -206,13 +253,15 @@ func (r *CreatePrivateCARequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateCAResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePrivateCAResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePrivateCAResponseParams `json:"Response"`
 }
 
 func (r *CreatePrivateCAResponse) ToJsonString() string {
@@ -226,9 +275,21 @@ func (r *CreatePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProductRequestParams struct {
+	// Product name, which cannot be same as that of an existing product. Naming rule: [a-zA-Z0-9:_-]{1,32}.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Product properties
+	ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
+
+	// Skey, which is required to create a CLAA product.
+	Skey *string `json:"Skey,omitempty" name:"Skey"`
+}
+
 type CreateProductRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product name, which cannot be same as that of an existing product. Naming rule: [a-zA-Z0-9:_-]{1,32}.
 	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 
@@ -260,22 +321,24 @@ func (r *CreateProductRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProductResponseParams struct {
+	// Product name
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Product ID, the globally unique ID assigned by Tencent Cloud.
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Product properties
+	ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateProductResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Product name
-		ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
-
-		// Product ID, the globally unique ID assigned by Tencent Cloud.
-		ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
-
-		// Product properties
-		ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateProductResponseParams `json:"Response"`
 }
 
 func (r *CreateProductResponse) ToJsonString() string {
@@ -289,9 +352,21 @@ func (r *CreateProductResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDeviceRequestParams struct {
+	// ID of the product to which the device belongs
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Name of the device to delete
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Skey, which is required to delete a LoRa device or LoRa gateway device
+	Skey *string `json:"Skey,omitempty" name:"Skey"`
+}
+
 type DeleteDeviceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the product to which the device belongs
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -323,13 +398,15 @@ func (r *DeleteDeviceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDeviceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDeviceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDeviceResponseParams `json:"Response"`
 }
 
 func (r *DeleteDeviceResponse) ToJsonString() string {
@@ -343,9 +420,15 @@ func (r *DeleteDeviceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePrivateCARequestParams struct {
+	// Private CA certificate name
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+}
+
 type DeletePrivateCARequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private CA certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 }
@@ -369,13 +452,15 @@ func (r *DeletePrivateCARequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePrivateCAResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePrivateCAResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePrivateCAResponseParams `json:"Response"`
 }
 
 func (r *DeletePrivateCAResponse) ToJsonString() string {
@@ -389,9 +474,18 @@ func (r *DeletePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteProductRequestParams struct {
+	// ID of the product to delete
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Skey, which is required to delete a LoRa product
+	Skey *string `json:"Skey,omitempty" name:"Skey"`
+}
+
 type DeleteProductRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the product to delete
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -419,13 +513,15 @@ func (r *DeleteProductRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteProductResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteProductResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteProductResponseParams `json:"Response"`
 }
 
 func (r *DeleteProductResponse) ToJsonString() string {
@@ -439,9 +535,18 @@ func (r *DeleteProductResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDeviceRequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+}
+
 type DescribeDeviceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -469,98 +574,100 @@ func (r *DescribeDeviceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDeviceResponseParams struct {
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Whether the device is online. `0`: offline; `1`: online
+	Online *uint64 `json:"Online,omitempty" name:"Online"`
+
+	// Device login time
+	LoginTime *uint64 `json:"LoginTime,omitempty" name:"LoginTime"`
+
+	// Device firmware version
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Last updated time of the device
+	LastUpdateTime *uint64 `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
+
+	// Device certificate
+	DeviceCert *string `json:"DeviceCert,omitempty" name:"DeviceCert"`
+
+	// Device key
+	DevicePsk *string `json:"DevicePsk,omitempty" name:"DevicePsk"`
+
+	// Device attribute
+	Tags []*DeviceTag `json:"Tags,omitempty" name:"Tags"`
+
+	// Device type
+	DeviceType *uint64 `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// International Mobile Equipment Identity (IMEI)
+	Imei *string `json:"Imei,omitempty" name:"Imei"`
+
+	// ISP
+	Isp *uint64 `json:"Isp,omitempty" name:"Isp"`
+
+	// IP address
+	ConnIP *uint64 `json:"ConnIP,omitempty" name:"ConnIP"`
+
+	// Device ID at the NB-IoT ISP
+	NbiotDeviceID *string `json:"NbiotDeviceID,omitempty" name:"NbiotDeviceID"`
+
+	// DevEUI of a LoRa device
+	LoraDevEui *string `json:"LoraDevEui,omitempty" name:"LoraDevEui"`
+
+	// MoteType of a LoRa device
+	LoraMoteType *uint64 `json:"LoraMoteType,omitempty" name:"LoraMoteType"`
+
+	// SDK log level of the device
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	LogLevel *uint64 `json:"LogLevel,omitempty" name:"LogLevel"`
+
+	// The first time when the device went online
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FirstOnlineTime *uint64 `json:"FirstOnlineTime,omitempty" name:"FirstOnlineTime"`
+
+	// The last time when the device went offline
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	LastOfflineTime *uint64 `json:"LastOfflineTime,omitempty" name:"LastOfflineTime"`
+
+	// Device creation time
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether the device certificate has been obtained. `0`: no; `1`: yes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	CertState *uint64 `json:"CertState,omitempty" name:"CertState"`
+
+	// Whether the device is enabled
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	EnableState *uint64 `json:"EnableState,omitempty" name:"EnableState"`
+
+	// Device tags
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Labels []*DeviceLabel `json:"Labels,omitempty" name:"Labels"`
+
+	// IP address of the MQTT client
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ClientIP *string `json:"ClientIP,omitempty" name:"ClientIP"`
+
+	// Firmware update time of the device
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FirmwareUpdateTime *uint64 `json:"FirmwareUpdateTime,omitempty" name:"FirmwareUpdateTime"`
+
+	// Account ID of the creator
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CreateUserId *uint64 `json:"CreateUserId,omitempty" name:"CreateUserId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDeviceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Device name
-		DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
-
-		// Whether the device is online. `0`: offline; `1`: online
-		Online *uint64 `json:"Online,omitempty" name:"Online"`
-
-		// Device login time
-		LoginTime *uint64 `json:"LoginTime,omitempty" name:"LoginTime"`
-
-		// Device firmware version
-		Version *string `json:"Version,omitempty" name:"Version"`
-
-		// Last updated time of the device
-		LastUpdateTime *uint64 `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
-
-		// Device certificate
-		DeviceCert *string `json:"DeviceCert,omitempty" name:"DeviceCert"`
-
-		// Device key
-		DevicePsk *string `json:"DevicePsk,omitempty" name:"DevicePsk"`
-
-		// Device attribute
-		Tags []*DeviceTag `json:"Tags,omitempty" name:"Tags"`
-
-		// Device type
-		DeviceType *uint64 `json:"DeviceType,omitempty" name:"DeviceType"`
-
-		// International Mobile Equipment Identity (IMEI)
-		Imei *string `json:"Imei,omitempty" name:"Imei"`
-
-		// ISP
-		Isp *uint64 `json:"Isp,omitempty" name:"Isp"`
-
-		// IP address
-		ConnIP *uint64 `json:"ConnIP,omitempty" name:"ConnIP"`
-
-		// Device ID at the NB-IoT ISP
-		NbiotDeviceID *string `json:"NbiotDeviceID,omitempty" name:"NbiotDeviceID"`
-
-		// DevEUI of a LoRa device
-		LoraDevEui *string `json:"LoraDevEui,omitempty" name:"LoraDevEui"`
-
-		// MoteType of a LoRa device
-		LoraMoteType *uint64 `json:"LoraMoteType,omitempty" name:"LoraMoteType"`
-
-		// SDK log level of the device
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		LogLevel *uint64 `json:"LogLevel,omitempty" name:"LogLevel"`
-
-		// The first time when the device went online
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		FirstOnlineTime *uint64 `json:"FirstOnlineTime,omitempty" name:"FirstOnlineTime"`
-
-		// The last time when the device went offline
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		LastOfflineTime *uint64 `json:"LastOfflineTime,omitempty" name:"LastOfflineTime"`
-
-		// Device creation time
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
-
-		// Whether the device certificate has been obtained. `0`: no; `1`: yes
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		CertState *uint64 `json:"CertState,omitempty" name:"CertState"`
-
-		// Whether the device is enabled
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		EnableState *uint64 `json:"EnableState,omitempty" name:"EnableState"`
-
-		// Device tags
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Labels []*DeviceLabel `json:"Labels,omitempty" name:"Labels"`
-
-		// IP address of the MQTT client
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		ClientIP *string `json:"ClientIP,omitempty" name:"ClientIP"`
-
-		// Firmware update time of the device
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		FirmwareUpdateTime *uint64 `json:"FirmwareUpdateTime,omitempty" name:"FirmwareUpdateTime"`
-
-		// Account ID of the creator
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		CreateUserId *uint64 `json:"CreateUserId,omitempty" name:"CreateUserId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDeviceResponseParams `json:"Response"`
 }
 
 func (r *DescribeDeviceResponse) ToJsonString() string {
@@ -574,9 +681,30 @@ func (r *DescribeDeviceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDevicesRequestParams struct {
+	// ID of the product whose devices are queried
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Offset, which starts from 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. Value range: 10-250
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Device firmware version. If no value is passed in, devices of all firmware versions are returned. If `None-FirmwareVersion` is passed in, devices without version numbers are returned.
+	FirmwareVersion *string `json:"FirmwareVersion,omitempty" name:"FirmwareVersion"`
+
+	// Device name to query
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Whether to query enabled or disabled devices. `0`: disabled devices; `1`: enabled devices. By default, both enabled and disabled devices are queried.
+	EnableState *uint64 `json:"EnableState,omitempty" name:"EnableState"`
+}
+
 type DescribeDevicesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the product whose devices are queried
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -620,19 +748,21 @@ func (r *DescribeDevicesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDevicesResponseParams struct {
+	// Total number of the devices returned
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of device details
+	Devices []*DeviceInfo `json:"Devices,omitempty" name:"Devices"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDevicesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of the devices returned
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of device details
-		Devices []*DeviceInfo `json:"Devices,omitempty" name:"Devices"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDevicesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDevicesResponse) ToJsonString() string {
@@ -646,9 +776,21 @@ func (r *DescribeDevicesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCABindedProductsRequestParams struct {
+	// Certificate name
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of records to return, which is 20 by default and cannot exceed 200
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribePrivateCABindedProductsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
@@ -680,16 +822,18 @@ func (r *DescribePrivateCABindedProductsRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCABindedProductsResponseParams struct {
+	// List of the products bound to the private CA certificate
+	Products []*BindProductInfo `json:"Products,omitempty" name:"Products"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrivateCABindedProductsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the products bound to the private CA certificate
-		Products []*BindProductInfo `json:"Products,omitempty" name:"Products"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrivateCABindedProductsResponseParams `json:"Response"`
 }
 
 func (r *DescribePrivateCABindedProductsResponse) ToJsonString() string {
@@ -703,9 +847,15 @@ func (r *DescribePrivateCABindedProductsResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCARequestParams struct {
+	// Name of the private CA certificate to query
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+}
+
 type DescribePrivateCARequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the private CA certificate to query
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 }
@@ -729,16 +879,18 @@ func (r *DescribePrivateCARequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCAResponseParams struct {
+	// Details of the private CA certificate
+	CA *CertInfo `json:"CA,omitempty" name:"CA"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrivateCAResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of the private CA certificate
-		CA *CertInfo `json:"CA,omitempty" name:"CA"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrivateCAResponseParams `json:"Response"`
 }
 
 func (r *DescribePrivateCAResponse) ToJsonString() string {
@@ -752,8 +904,14 @@ func (r *DescribePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCAsRequestParams struct {
+
+}
+
 type DescribePrivateCAsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribePrivateCAsRequest) ToJsonString() string {
@@ -768,22 +926,25 @@ func (r *DescribePrivateCAsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateCAsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateCAsResponseParams struct {
+	// List of private CA certificates
+	CAs []*CertInfo `json:"CAs,omitempty" name:"CAs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrivateCAsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of private CA certificates
-		CAs []*CertInfo `json:"CAs,omitempty" name:"CAs"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrivateCAsResponseParams `json:"Response"`
 }
 
 func (r *DescribePrivateCAsResponse) ToJsonString() string {
@@ -797,9 +958,15 @@ func (r *DescribePrivateCAsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductCARequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+}
+
 type DescribeProductCARequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 }
@@ -823,16 +990,18 @@ func (r *DescribeProductCARequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductCAResponseParams struct {
+	// List of CA certificates bound to the product
+	CAs []*CertInfo `json:"CAs,omitempty" name:"CAs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProductCAResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of CA certificates bound to the product
-		CAs []*CertInfo `json:"CAs,omitempty" name:"CAs"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProductCAResponseParams `json:"Response"`
 }
 
 func (r *DescribeProductCAResponse) ToJsonString() string {
@@ -846,9 +1015,15 @@ func (r *DescribeProductCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductRequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+}
+
 type DescribeProductRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 }
@@ -872,25 +1047,27 @@ func (r *DescribeProductRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductResponseParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Product name
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Product metadata
+	ProductMetadata *ProductMetadata `json:"ProductMetadata,omitempty" name:"ProductMetadata"`
+
+	// Product properties
+	ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProductResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Product ID
-		ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
-
-		// Product name
-		ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
-
-		// Product metadata
-		ProductMetadata *ProductMetadata `json:"ProductMetadata,omitempty" name:"ProductMetadata"`
-
-		// Product properties
-		ProductProperties *ProductProperties `json:"ProductProperties,omitempty" name:"ProductProperties"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProductResponseParams `json:"Response"`
 }
 
 func (r *DescribeProductResponse) ToJsonString() string {
@@ -904,9 +1081,18 @@ func (r *DescribeProductResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductsRequestParams struct {
+	// Offset, starting from 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries returned per page. Valid range: 10–250.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeProductsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset, starting from 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -934,19 +1120,21 @@ func (r *DescribeProductsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductsResponseParams struct {
+	// Total number of products
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of product details
+	Products []*ProductInfo `json:"Products,omitempty" name:"Products"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProductsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of products
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of product details
-		Products []*ProductInfo `json:"Products,omitempty" name:"Products"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProductsResponseParams `json:"Response"`
 }
 
 func (r *DescribeProductsResponse) ToJsonString() string {
@@ -961,7 +1149,6 @@ func (r *DescribeProductsResponse) FromJsonString(s string) error {
 }
 
 type DeviceInfo struct {
-
 	// Device name
 	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
 
@@ -1045,7 +1232,6 @@ type DeviceInfo struct {
 }
 
 type DeviceLabel struct {
-
 	// Tag key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1054,7 +1240,6 @@ type DeviceLabel struct {
 }
 
 type DeviceTag struct {
-
 	// Attribute name
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
@@ -1070,7 +1255,6 @@ type DeviceTag struct {
 }
 
 type ProductInfo struct {
-
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -1085,13 +1269,11 @@ type ProductInfo struct {
 }
 
 type ProductMetadata struct {
-
 	// Product creation time
 	CreationDate *uint64 `json:"CreationDate,omitempty" name:"CreationDate"`
 }
 
 type ProductProperties struct {
-
 	// Product description
 	ProductDescription *string `json:"ProductDescription,omitempty" name:"ProductDescription"`
 
@@ -1142,9 +1324,18 @@ type ProductProperties struct {
 	OriginUserId *uint64 `json:"OriginUserId,omitempty" name:"OriginUserId"`
 }
 
+// Predefined struct for user
+type SetProductsForbiddenStatusRequestParams struct {
+	// List of products to enable or disable
+	ProductId []*string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// `0`: enable; `1`: disable
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
 type SetProductsForbiddenStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of products to enable or disable
 	ProductId []*string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -1172,13 +1363,15 @@ func (r *SetProductsForbiddenStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetProductsForbiddenStatusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetProductsForbiddenStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetProductsForbiddenStatusResponseParams `json:"Response"`
 }
 
 func (r *SetProductsForbiddenStatusResponse) ToJsonString() string {
@@ -1192,9 +1385,21 @@ func (r *SetProductsForbiddenStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDeviceLogLevelRequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Log level. `0`: disable; `1`: error; `2`: warning; `3`: information; `4`: debugging
+	LogLevel *uint64 `json:"LogLevel,omitempty" name:"LogLevel"`
+}
+
 type UpdateDeviceLogLevelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -1226,13 +1431,15 @@ func (r *UpdateDeviceLogLevelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDeviceLogLevelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateDeviceLogLevelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateDeviceLogLevelResponseParams `json:"Response"`
 }
 
 func (r *UpdateDeviceLogLevelResponse) ToJsonString() string {
@@ -1246,9 +1453,21 @@ func (r *UpdateDeviceLogLevelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDevicesEnableStateRequestParams struct {
+	// ID of the product to which the device belongs
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device names
+	DeviceNames []*string `json:"DeviceNames,omitempty" name:"DeviceNames"`
+
+	// New status of the devices. `0`: disabled; `1`: enabled
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
 type UpdateDevicesEnableStateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the product to which the device belongs
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -1280,13 +1499,15 @@ func (r *UpdateDevicesEnableStateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDevicesEnableStateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateDevicesEnableStateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateDevicesEnableStateResponseParams `json:"Response"`
 }
 
 func (r *UpdateDevicesEnableStateResponse) ToJsonString() string {
@@ -1300,9 +1521,21 @@ func (r *UpdateDevicesEnableStateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePrivateCARequestParams struct {
+	// CA certificate name
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// CA certificate content
+	CertText *string `json:"CertText,omitempty" name:"CertText"`
+
+	// Content verifying the CA certificate
+	VerifyCertText *string `json:"VerifyCertText,omitempty" name:"VerifyCertText"`
+}
+
 type UpdatePrivateCARequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CA certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
@@ -1334,13 +1567,15 @@ func (r *UpdatePrivateCARequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePrivateCAResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdatePrivateCAResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdatePrivateCAResponseParams `json:"Response"`
 }
 
 func (r *UpdatePrivateCAResponse) ToJsonString() string {
@@ -1354,9 +1589,21 @@ func (r *UpdatePrivateCAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateProductDynamicRegisterRequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+	RegisterType *uint64 `json:"RegisterType,omitempty" name:"RegisterType"`
+
+	// Maximum dynamically registered devices
+	RegisterLimit *uint64 `json:"RegisterLimit,omitempty" name:"RegisterLimit"`
+}
+
 type UpdateProductDynamicRegisterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Product ID
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
@@ -1388,22 +1635,24 @@ func (r *UpdateProductDynamicRegisterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateProductDynamicRegisterResponseParams struct {
+	// Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
+	RegisterType *uint64 `json:"RegisterType,omitempty" name:"RegisterType"`
+
+	// Product key for dynamic registration
+	ProductSecret *string `json:"ProductSecret,omitempty" name:"ProductSecret"`
+
+	// Maximum dynamically registered devices
+	RegisterLimit *uint64 `json:"RegisterLimit,omitempty" name:"RegisterLimit"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateProductDynamicRegisterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Dynamic registration type. Valid values: 0 - disabled; 1 - pre-create device; 2 - auto-create device.
-		RegisterType *uint64 `json:"RegisterType,omitempty" name:"RegisterType"`
-
-		// Product key for dynamic registration
-		ProductSecret *string `json:"ProductSecret,omitempty" name:"ProductSecret"`
-
-		// Maximum dynamically registered devices
-		RegisterLimit *uint64 `json:"RegisterLimit,omitempty" name:"RegisterLimit"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateProductDynamicRegisterResponseParams `json:"Response"`
 }
 
 func (r *UpdateProductDynamicRegisterResponse) ToJsonString() string {

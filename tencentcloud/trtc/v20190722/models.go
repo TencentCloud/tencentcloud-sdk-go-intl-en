@@ -21,7 +21,6 @@ import (
 )
 
 type AudioParams struct {
-
 	// The audio sample rate.
 	// 1: 48000 Hz (default)
 	// 2: 44100 Hz
@@ -38,7 +37,6 @@ type AudioParams struct {
 }
 
 type CloudStorage struct {
-
 	// The cloud storage provider.
 	// 0: Tencent Cloud COS. The storage services of other providers are not supported currently.
 	Vendor *uint64 `json:"Vendor,omitempty" name:"Vendor"`
@@ -60,14 +58,51 @@ type CloudStorage struct {
 }
 
 type CloudVod struct {
-
 	// The Tencent Cloud VOD parameters.
 	TencentVod *TencentVod `json:"TencentVod,omitempty" name:"TencentVod"`
 }
 
+// Predefined struct for user
+type CreateCloudRecordingRequestParams struct {
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include this user ID in the room ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The signature (similar to login password) required for the recording robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
+
+	// The on-cloud recording parameters.
+	RecordParams *RecordParams `json:"RecordParams,omitempty" name:"RecordParams"`
+
+	// The cloud storage parameters.
+	StorageParams *StorageParams `json:"StorageParams,omitempty" name:"StorageParams"`
+
+	// The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
+	// 0: String
+	// 1: 32-bit integer (default)
+	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
+
+	// The stream mixing parameters, which are valid if the mixed-stream recording mode is used.
+	MixTranscodeParams *MixTranscodeParams `json:"MixTranscodeParams,omitempty" name:"MixTranscodeParams"`
+
+	// The layout parameters, which are valid if the mixed-stream recording mode is used.
+	MixLayoutParams *MixLayoutParams `json:"MixLayoutParams,omitempty" name:"MixLayoutParams"`
+
+	// The amount of time (in hours) during which API requests can be made after recording starts. Calculation starts when a recording task is started (when the recording task ID is returned). Once the period elapses, the query, modification, and stop recording APIs can no longer be called, but the recording task will continue. The default value is `72` (three days), and the maximum and minimum values allowed are `720` (30 days) and `6` respectively. If you do not set this parameter, the query, modification, and stop recording APIs can be called within 72 hours after recording starts.
+	ResourceExpiredHour *uint64 `json:"ResourceExpiredHour,omitempty" name:"ResourceExpiredHour"`
+
+	// The permission ticket for a TRTC room. This parameter is required if advanced permission control is enabled in the console, in which case the TRTC backend will verify users’ [PrivateMapKey](https://intl.cloud.tencent.com/document/product/647/32240?from_cn_redirect=1), which include an encrypted room ID and permission bit list. A user providing only `UserSig` and not `PrivateMapKey` will be unable to enter the room.
+	PrivateMapKey *string `json:"PrivateMapKey,omitempty" name:"PrivateMapKey"`
+}
+
 type CreateCloudRecordingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -133,16 +168,18 @@ func (r *CreateCloudRecordingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCloudRecordingResponseParams struct {
+	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends. After a recording task starts, if you want to perform other actions on the task, you need to specify the task ID when making API requests.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCloudRecordingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends. After a recording task starts, if you want to perform other actions on the task, you need to specify the task ID when making API requests.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCloudRecordingResponseParams `json:"Response"`
 }
 
 func (r *CreateCloudRecordingResponse) ToJsonString() string {
@@ -156,9 +193,18 @@ func (r *CreateCloudRecordingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCloudRecordingRequestParams struct {
+	// The `SDKAppID` of the room whose streams are recorded.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The unique ID of the recording task, which is returned after recording starts successfully.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type DeleteCloudRecordingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `SDKAppID` of the room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -186,16 +232,18 @@ func (r *DeleteCloudRecordingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCloudRecordingResponseParams struct {
+	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCloudRecordingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCloudRecordingResponseParams `json:"Response"`
 }
 
 func (r *DeleteCloudRecordingResponse) ToJsonString() string {
@@ -209,9 +257,18 @@ func (r *DeleteCloudRecordingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCloudRecordingRequestParams struct {
+	// The `SDKAppID` of the room whose streams are recorded.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The unique ID of the recording task, which is returned after recording starts successfully.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type DescribeCloudRecordingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `SDKAppID` of the room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -239,26 +296,28 @@ func (r *DescribeCloudRecordingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeCloudRecordingResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeCloudRecordingResponseParams struct {
+	// The unique ID of the recording task.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-		// The unique ID of the recording task.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The status of the on-cloud recording task.
+	// The status of the on-cloud recording task.
 	// Idle: The task is idle.
 	// InProgress: The task is in progress.
 	// Exited: The task is being ended.
-		Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitempty" name:"Status"`
 
-		// The information of the recording files.
+	// The information of the recording files.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		StorageFileList []*StorageFile `json:"StorageFileList,omitempty" name:"StorageFileList"`
+	StorageFileList []*StorageFile `json:"StorageFileList,omitempty" name:"StorageFileList"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudRecordingResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudRecordingResponseParams `json:"Response"`
 }
 
 func (r *DescribeCloudRecordingResponse) ToJsonString() string {
@@ -272,9 +331,18 @@ func (r *DescribeCloudRecordingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DismissRoomByStrRoomIdRequestParams struct {
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
 type DismissRoomByStrRoomIdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `SDKAppId` of TRTC
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -302,13 +370,15 @@ func (r *DismissRoomByStrRoomIdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DismissRoomByStrRoomIdResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DismissRoomByStrRoomIdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DismissRoomByStrRoomIdResponseParams `json:"Response"`
 }
 
 func (r *DismissRoomByStrRoomIdResponse) ToJsonString() string {
@@ -322,9 +392,18 @@ func (r *DismissRoomByStrRoomIdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DismissRoomRequestParams struct {
+	// `SDKAppId` of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room number.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+}
+
 type DismissRoomRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `SDKAppId` of TRTC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -352,13 +431,15 @@ func (r *DismissRoomRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DismissRoomResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DismissRoomResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DismissRoomResponseParams `json:"Response"`
 }
 
 func (r *DismissRoomResponse) ToJsonString() string {
@@ -373,7 +454,6 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 }
 
 type MixLayout struct {
-
 	// The Y axis of the window’s top-left corner. Value range: [0, 1920]. The value cannot be larger than the canvas height.
 	Top *uint64 `json:"Top,omitempty" name:"Top"`
 
@@ -414,7 +494,6 @@ type MixLayout struct {
 }
 
 type MixLayoutParams struct {
-
 	// Layout mode:
 	// 1: Floating
 	// 2: Screen sharing
@@ -462,7 +541,6 @@ type MixLayoutParams struct {
 }
 
 type MixTranscodeParams struct {
-
 	// The video transcoding parameters for recording. If you set this parameter, you must specify all its fields. If you do not set it, the default will be used.
 	VideoParams *VideoParams `json:"VideoParams,omitempty" name:"VideoParams"`
 
@@ -470,9 +548,24 @@ type MixTranscodeParams struct {
 	AudioParams *AudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
 }
 
+// Predefined struct for user
+type ModifyCloudRecordingRequestParams struct {
+	// The `SDKAppID` of the room whose streams are recorded.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The unique ID of the recording task, which is returned after recording starts successfully.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The new stream mixing layout to use.
+	MixLayoutParams *MixLayoutParams `json:"MixLayoutParams,omitempty" name:"MixLayoutParams"`
+
+	// The allowlist/blocklist for stream subscription.
+	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitempty" name:"SubscribeStreamUserIds"`
+}
+
 type ModifyCloudRecordingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `SDKAppID` of the room whose streams are recorded.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -508,16 +601,18 @@ func (r *ModifyCloudRecordingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCloudRecordingResponseParams struct {
+	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCloudRecordingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCloudRecordingResponseParams `json:"Response"`
 }
 
 func (r *ModifyCloudRecordingResponse) ToJsonString() string {
@@ -532,7 +627,6 @@ func (r *ModifyCloudRecordingResponse) FromJsonString(s string) error {
 }
 
 type RecordParams struct {
-
 	// The recording mode.
 	// 1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files (M3U8/TS) to the cloud.
 	// 2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files (M3U8/TS) to the cloud.
@@ -554,9 +648,21 @@ type RecordParams struct {
 	OutputFormat *uint64 `json:"OutputFormat,omitempty" name:"OutputFormat"`
 }
 
+// Predefined struct for user
+type RemoveUserByStrRoomIdRequestParams struct {
+	// `SDKAppId` of TRTC
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// List of up to 10 users to be removed
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+}
+
 type RemoveUserByStrRoomIdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `SDKAppId` of TRTC
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -588,13 +694,15 @@ func (r *RemoveUserByStrRoomIdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveUserByStrRoomIdResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveUserByStrRoomIdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveUserByStrRoomIdResponseParams `json:"Response"`
 }
 
 func (r *RemoveUserByStrRoomIdResponse) ToJsonString() string {
@@ -608,9 +716,21 @@ func (r *RemoveUserByStrRoomIdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveUserRequestParams struct {
+	// `SDKAppId` of TRTC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// Room number.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// List of up to 10 users to be removed.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+}
+
 type RemoveUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `SDKAppId` of TRTC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
@@ -642,13 +762,15 @@ func (r *RemoveUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveUserResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveUserResponseParams `json:"Response"`
 }
 
 func (r *RemoveUserResponse) ToJsonString() string {
@@ -663,7 +785,6 @@ func (r *RemoveUserResponse) FromJsonString(s string) error {
 }
 
 type StorageFile struct {
-
 	// The user whose stream is recorded into the file. In the mixed-stream recording mode, this parameter will be empty.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
@@ -683,7 +804,6 @@ type StorageFile struct {
 }
 
 type StorageParams struct {
-
 	// The cloud storage information.
 	CloudStorage *CloudStorage `json:"CloudStorage,omitempty" name:"CloudStorage"`
 
@@ -692,7 +812,6 @@ type StorageParams struct {
 }
 
 type SubscribeStreamUserIds struct {
-
 	// The allowlist for audio subscription. For example, `["1", "2", "3"]` means to only subscribe to the audios of users 1, 2, and 3, and ["1.*$"] means to only subscribe to the audios of users whose ID prefix is `1`. If this parameter is left empty, the audios of all anchors in the room will be received. The array can contain at most 32 elements.
 	SubscribeAudioUserIds []*string `json:"SubscribeAudioUserIds,omitempty" name:"SubscribeAudioUserIds"`
 
@@ -707,7 +826,6 @@ type SubscribeStreamUserIds struct {
 }
 
 type TencentVod struct {
-
 	// The operation to perform on the media uploaded. The value of this parameter is the name of a task flow template. You can create a custom task flow template in Tencent Cloud VOD.
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
@@ -732,7 +850,6 @@ type TencentVod struct {
 }
 
 type VideoParams struct {
-
 	// The video width in pixels. The value of this parameter cannot be larger than 1920, and the result of multiplying `Width` and `Height` cannot exceed 1920 x 1080. The default value is `360`.
 	Width *uint64 `json:"Width,omitempty" name:"Width"`
 
@@ -750,7 +867,6 @@ type VideoParams struct {
 }
 
 type WaterMark struct {
-
 	// The watermark type. 0 (default): image; 1: text (not supported yet).
 	WaterMarkType *uint64 `json:"WaterMarkType,omitempty" name:"WaterMarkType"`
 
@@ -759,7 +875,6 @@ type WaterMark struct {
 }
 
 type WaterMarkImage struct {
-
 	// The download URLs of the watermark images, which must be in JPG or PNG format and cannot be larger than 5 MB.
 	WaterMarkUrl *string `json:"WaterMarkUrl,omitempty" name:"WaterMarkUrl"`
 

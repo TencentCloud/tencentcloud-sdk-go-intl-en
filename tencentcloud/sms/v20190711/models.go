@@ -21,7 +21,6 @@ import (
 )
 
 type AddSignStatus struct {
-
 	// Signature ID.
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 
@@ -29,9 +28,57 @@ type AddSignStatus struct {
 	SignApplyId *uint64 `json:"SignApplyId,omitempty" name:"SignApplyId"`
 }
 
+// Predefined struct for user
+type AddSmsSignRequestParams struct {
+	// Signature name.
+	SignName *string `json:"SignName,omitempty" name:"SignName"`
+
+	// Signature type. Each of these types is followed by their `DocumentType` (identity document type) option:
+	// 0: company (0, 1, 2, 3).
+	// 1: app (0, 1, 2, 3, 4).
+	// 2: website (0, 1, 2, 3, 5).
+	// 3: WeChat Official Account or WeChat Mini Program (0, 1, 2, 3, 6).
+	// 4: trademark (7).
+	// 5: governmental/public institution or others (2, 3).
+	// Note: the identity document type must be selected according to the correspondence; otherwise, the review will fail.
+	SignType *uint64 `json:"SignType,omitempty" name:"SignType"`
+
+	// Identity document type:
+	// 0: 3-in-1 license.
+	// 1: business license.
+	// 2: organization code certificate.
+	// 3: certificate of unified social credit code.
+	// 4: screenshot of application backend management (for personal app).
+	// 5: screenshot of website ICP filing backend (for personal website).
+	// 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
+	// 7: trademark registration certificate.
+	DocumentType *uint64 `json:"DocumentType,omitempty" name:"DocumentType"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Signature use:
+	// 0: for self-use.
+	// 1: for others.
+	UsedMethod *uint64 `json:"UsedMethod,omitempty" name:"UsedMethod"`
+
+	// You should Base64-encode the image of the identity document corresponding to the signature first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+	ProofImage *string `json:"ProofImage,omitempty" name:"ProofImage"`
+
+	// Authorization letter, which should be submitted if `UsedMethod` is for others.
+	// You should Base64-encode the image first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+	// Note: this field will take effect only when `UsedMethod` is 1 (for others).
+	CommissionImage *string `json:"CommissionImage,omitempty" name:"CommissionImage"`
+
+	// Signature application remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type AddSmsSignRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Signature name.
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
@@ -104,16 +151,18 @@ func (r *AddSmsSignRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddSmsSignResponseParams struct {
+	// Signature addition response
+	AddSignStatus *AddSignStatus `json:"AddSignStatus,omitempty" name:"AddSignStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddSmsSignResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Signature addition response
-		AddSignStatus *AddSignStatus `json:"AddSignStatus,omitempty" name:"AddSignStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddSmsSignResponseParams `json:"Response"`
 }
 
 func (r *AddSmsSignResponse) ToJsonString() string {
@@ -127,9 +176,29 @@ func (r *AddSmsSignResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddSmsTemplateRequestParams struct {
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Template content.
+	TemplateContent *string `json:"TemplateContent,omitempty" name:"TemplateContent"`
+
+	// SMS type. 0: ordinary SMS, 1: marketing SMS.
+	SmsType *uint64 `json:"SmsType,omitempty" name:"SmsType"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Template remarks, such as reason for application and use case.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type AddSmsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template name.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
@@ -171,16 +240,18 @@ func (r *AddSmsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddSmsTemplateResponseParams struct {
+	// SMS template addition response packet body
+	AddTemplateStatus *AddTemplateStatus `json:"AddTemplateStatus,omitempty" name:"AddTemplateStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddSmsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SMS template addition response packet body
-		AddTemplateStatus *AddTemplateStatus `json:"AddTemplateStatus,omitempty" name:"AddTemplateStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddSmsTemplateResponseParams `json:"Response"`
 }
 
 func (r *AddSmsTemplateResponse) ToJsonString() string {
@@ -195,13 +266,11 @@ func (r *AddSmsTemplateResponse) FromJsonString(s string) error {
 }
 
 type AddTemplateStatus struct {
-
 	// Template parameter
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type CallbackStatusStatistics struct {
-
 	// SMS receipts.
 	CallbackCount *uint64 `json:"CallbackCount,omitempty" name:"CallbackCount"`
 
@@ -230,9 +299,30 @@ type CallbackStatusStatistics struct {
 	FrequencyLimitCount *uint64 `json:"FrequencyLimitCount,omitempty" name:"FrequencyLimitCount"`
 }
 
+// Predefined struct for user
+type CallbackStatusStatisticsRequestParams struct {
+	// Start time of pull in the format of `yyyymmddhh` accurate to the hour.
+	StartDateTime *uint64 `json:"StartDateTime,omitempty" name:"StartDateTime"`
+
+	// End time of pull in the format of `yyyymmddhh` accurate to the hour.
+	// Note: `EndDataTime` must be later than `StartDateTime`.
+	EndDataTime *uint64 `json:"EndDataTime,omitempty" name:"EndDataTime"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// Upper limit.
+	// Note: this parameter is currently fixed at 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: this parameter is currently fixed at 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type CallbackStatusStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time of pull in the format of `yyyymmddhh` accurate to the hour.
 	StartDateTime *uint64 `json:"StartDateTime,omitempty" name:"StartDateTime"`
 
@@ -275,16 +365,18 @@ func (r *CallbackStatusStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CallbackStatusStatisticsResponseParams struct {
+	// Receipt statistics response packet body.
+	CallbackStatusStatistics *CallbackStatusStatistics `json:"CallbackStatusStatistics,omitempty" name:"CallbackStatusStatistics"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CallbackStatusStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Receipt statistics response packet body.
-		CallbackStatusStatistics *CallbackStatusStatistics `json:"CallbackStatusStatistics,omitempty" name:"CallbackStatusStatistics"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CallbackStatusStatisticsResponseParams `json:"Response"`
 }
 
 func (r *CallbackStatusStatisticsResponse) ToJsonString() string {
@@ -299,7 +391,6 @@ func (r *CallbackStatusStatisticsResponse) FromJsonString(s string) error {
 }
 
 type DeleteSignStatus struct {
-
 	// Deletion status information.
 	DeleteStatus *string `json:"DeleteStatus,omitempty" name:"DeleteStatus"`
 
@@ -307,9 +398,15 @@ type DeleteSignStatus struct {
 	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
 }
 
+// Predefined struct for user
+type DeleteSmsSignRequestParams struct {
+	// ID of signature to be deleted.
+	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
+}
+
 type DeleteSmsSignRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of signature to be deleted.
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 }
@@ -333,16 +430,18 @@ func (r *DeleteSmsSignRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSmsSignResponseParams struct {
+	// Signature deletion response.
+	DeleteSignStatus *DeleteSignStatus `json:"DeleteSignStatus,omitempty" name:"DeleteSignStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSmsSignResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Signature deletion response.
-		DeleteSignStatus *DeleteSignStatus `json:"DeleteSignStatus,omitempty" name:"DeleteSignStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSmsSignResponseParams `json:"Response"`
 }
 
 func (r *DeleteSmsSignResponse) ToJsonString() string {
@@ -356,9 +455,15 @@ func (r *DeleteSmsSignResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSmsTemplateRequestParams struct {
+	// ID of template to be deleted.
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
 type DeleteSmsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of template to be deleted.
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
@@ -382,16 +487,18 @@ func (r *DeleteSmsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSmsTemplateResponseParams struct {
+	// Template deletion response.
+	DeleteTemplateStatus *DeleteTemplateStatus `json:"DeleteTemplateStatus,omitempty" name:"DeleteTemplateStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSmsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Template deletion response.
-		DeleteTemplateStatus *DeleteTemplateStatus `json:"DeleteTemplateStatus,omitempty" name:"DeleteTemplateStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSmsTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteSmsTemplateResponse) ToJsonString() string {
@@ -406,7 +513,6 @@ func (r *DeleteSmsTemplateResponse) FromJsonString(s string) error {
 }
 
 type DeleteTemplateStatus struct {
-
 	// Deletion status information.
 	DeleteStatus *string `json:"DeleteStatus,omitempty" name:"DeleteStatus"`
 
@@ -415,7 +521,6 @@ type DeleteTemplateStatus struct {
 }
 
 type DescribeSignListStatus struct {
-
 	// Signature ID
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 
@@ -439,9 +544,20 @@ type DescribeSignListStatus struct {
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+// Predefined struct for user
+type DescribeSmsSignListRequestParams struct {
+	// Signature ID array.
+	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+}
+
 type DescribeSmsSignListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Signature ID array.
 	SignIdSet []*uint64 `json:"SignIdSet,omitempty" name:"SignIdSet"`
 
@@ -471,16 +587,18 @@ func (r *DescribeSmsSignListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSmsSignListResponseParams struct {
+	// Response for getting signature information
+	DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSmsSignListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Response for getting signature information
-		DescribeSignListStatusSet []*DescribeSignListStatus `json:"DescribeSignListStatusSet,omitempty" name:"DescribeSignListStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSmsSignListResponseParams `json:"Response"`
 }
 
 func (r *DescribeSmsSignListResponse) ToJsonString() string {
@@ -494,9 +612,20 @@ func (r *DescribeSmsSignListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSmsTemplateListRequestParams struct {
+	// Template ID array.
+	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+}
+
 type DescribeSmsTemplateListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template ID array.
 	TemplateIdSet []*uint64 `json:"TemplateIdSet,omitempty" name:"TemplateIdSet"`
 
@@ -526,16 +655,18 @@ func (r *DescribeSmsTemplateListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSmsTemplateListResponseParams struct {
+	// Response for getting SMS signature information
+	DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSmsTemplateListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Response for getting SMS signature information
-		DescribeTemplateStatusSet []*DescribeTemplateListStatus `json:"DescribeTemplateStatusSet,omitempty" name:"DescribeTemplateStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSmsTemplateListResponseParams `json:"Response"`
 }
 
 func (r *DescribeSmsTemplateListResponse) ToJsonString() string {
@@ -550,7 +681,6 @@ func (r *DescribeSmsTemplateListResponse) FromJsonString(s string) error {
 }
 
 type DescribeTemplateListStatus struct {
-
 	// Template ID
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
@@ -575,7 +705,6 @@ type DescribeTemplateListStatus struct {
 }
 
 type ModifySignStatus struct {
-
 	// Signature ID
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 
@@ -583,9 +712,60 @@ type ModifySignStatus struct {
 	SignApplyId *string `json:"SignApplyId,omitempty" name:"SignApplyId"`
 }
 
+// Predefined struct for user
+type ModifySmsSignRequestParams struct {
+	// ID of signature to be modified.
+	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
+
+	// Signature name.
+	SignName *string `json:"SignName,omitempty" name:"SignName"`
+
+	// Signature type. Each of these types is followed by their `DocumentType` (identity document type) option:
+	// 0: company (0, 1, 2, 3).
+	// 1: app (0, 1, 2, 3, 4).
+	// 2: website (0, 1, 2, 3, 5).
+	// 3: WeChat Official Account or WeChat Mini Program (0, 1, 2, 3, 6).
+	// 4: trademark (7).
+	// 5: governmental/public institution or others (2, 3).
+	// Note: the identity document type must be selected according to the correspondence; otherwise, the review will fail.
+	SignType *uint64 `json:"SignType,omitempty" name:"SignType"`
+
+	// Identity document type:
+	// 0: 3-in-1 license.
+	// 1: business license.
+	// 2: organization code certificate.
+	// 3: certificate of unified social credit code.
+	// 4: screenshot of application backend management (for personal app).
+	// 5: screenshot of website ICP filing backend (for personal website).
+	// 6: screenshot of WeChat Mini Program settings page (for personal WeChat Mini Program).
+	// 7: trademark registration certificate.
+	DocumentType *uint64 `json:"DocumentType,omitempty" name:"DocumentType"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Signature use:
+	// 0: for self-use.
+	// 1: for others.
+	UsedMethod *uint64 `json:"UsedMethod,omitempty" name:"UsedMethod"`
+
+	// You should Base64-encode the image of the identity document corresponding to the signature first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+	ProofImage *string `json:"ProofImage,omitempty" name:"ProofImage"`
+
+	// Authorization letter, which should be submitted if `UsedMethod` is for others.
+	// You should Base64-encode the image first, remove the prefix `data:image/jpeg;base64,` from the resulted string, and then use it as the value of this parameter.
+	// Note: this field will take effect only when `UsedMethod` is 1 (for others).
+	CommissionImage *string `json:"CommissionImage,omitempty" name:"CommissionImage"`
+
+	// Signature application remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type ModifySmsSignRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of signature to be modified.
 	SignId *uint64 `json:"SignId,omitempty" name:"SignId"`
 
@@ -662,16 +842,18 @@ func (r *ModifySmsSignRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySmsSignResponseParams struct {
+	// Signature modification response
+	ModifySignStatus *ModifySignStatus `json:"ModifySignStatus,omitempty" name:"ModifySignStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySmsSignResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Signature modification response
-		ModifySignStatus *ModifySignStatus `json:"ModifySignStatus,omitempty" name:"ModifySignStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySmsSignResponseParams `json:"Response"`
 }
 
 func (r *ModifySmsSignResponse) ToJsonString() string {
@@ -685,9 +867,32 @@ func (r *ModifySmsSignResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySmsTemplateRequestParams struct {
+	// ID of template to be modified.
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// New template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// New template content.
+	TemplateContent *string `json:"TemplateContent,omitempty" name:"TemplateContent"`
+
+	// SMS type. 0: ordinary SMS, 1: marketing SMS.
+	SmsType *uint64 `json:"SmsType,omitempty" name:"SmsType"`
+
+	// Whether it is Global SMS:
+	// 0: Mainland China SMS.
+	// 1: Global SMS.
+	International *uint64 `json:"International,omitempty" name:"International"`
+
+	// Template remarks, such as reason for application and use case.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type ModifySmsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of template to be modified.
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
@@ -733,16 +938,18 @@ func (r *ModifySmsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySmsTemplateResponseParams struct {
+	// Template parameter modification response
+	ModifyTemplateStatus *ModifyTemplateStatus `json:"ModifyTemplateStatus,omitempty" name:"ModifyTemplateStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySmsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Template parameter modification response
-		ModifyTemplateStatus *ModifyTemplateStatus `json:"ModifyTemplateStatus,omitempty" name:"ModifyTemplateStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySmsTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifySmsTemplateResponse) ToJsonString() string {
@@ -757,13 +964,11 @@ func (r *ModifySmsTemplateResponse) FromJsonString(s string) error {
 }
 
 type ModifyTemplateStatus struct {
-
 	// Template parameter
 	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type PullSmsReplyStatus struct {
-
 	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
@@ -786,9 +991,31 @@ type PullSmsReplyStatus struct {
 	ReplyUnixTime *uint64 `json:"ReplyUnixTime,omitempty" name:"ReplyUnixTime"`
 }
 
+// Predefined struct for user
+type PullSmsReplyStatusByPhoneNumberRequestParams struct {
+	// Pull start time in seconds in the format of UNIX timestamp.
+	SendDateTime *uint64 `json:"SendDateTime,omitempty" name:"SendDateTime"`
+
+	// Offset.
+	// Note: this parameter is currently fixed at 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of pulled entries. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Target mobile number in the e.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// Pull end time in UNIX timestamp accurate to seconds.
+	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
+}
+
 type PullSmsReplyStatusByPhoneNumberRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pull start time in seconds in the format of UNIX timestamp.
 	SendDateTime *uint64 `json:"SendDateTime,omitempty" name:"SendDateTime"`
 
@@ -833,16 +1060,18 @@ func (r *PullSmsReplyStatusByPhoneNumberRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsReplyStatusByPhoneNumberResponseParams struct {
+	// Reply status response set.
+	PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PullSmsReplyStatusByPhoneNumberResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PullSmsReplyStatusByPhoneNumberResponseParams `json:"Response"`
 }
 
 func (r *PullSmsReplyStatusByPhoneNumberResponse) ToJsonString() string {
@@ -856,9 +1085,18 @@ func (r *PullSmsReplyStatusByPhoneNumberResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsReplyStatusRequestParams struct {
+	// Maximum number of pulled entries. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+}
+
 type PullSmsReplyStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Maximum number of pulled entries. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -886,16 +1124,18 @@ func (r *PullSmsReplyStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsReplyStatusResponseParams struct {
+	// Reply status response set.
+	PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PullSmsReplyStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Reply status response set.
-		PullSmsReplyStatusSet []*PullSmsReplyStatus `json:"PullSmsReplyStatusSet,omitempty" name:"PullSmsReplyStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PullSmsReplyStatusResponseParams `json:"Response"`
 }
 
 func (r *PullSmsReplyStatusResponse) ToJsonString() string {
@@ -910,7 +1150,6 @@ func (r *PullSmsReplyStatusResponse) FromJsonString(s string) error {
 }
 
 type PullSmsSendStatus struct {
-
 	// Actual time of SMS receipt by user.
 	UserReceiveTime *string `json:"UserReceiveTime,omitempty" name:"UserReceiveTime"`
 
@@ -936,9 +1175,31 @@ type PullSmsSendStatus struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+// Predefined struct for user
+type PullSmsSendStatusByPhoneNumberRequestParams struct {
+	// Pull start time in seconds in the format of UNIX timestamp.
+	SendDateTime *uint64 `json:"SendDateTime,omitempty" name:"SendDateTime"`
+
+	// Offset.
+	// Note: this parameter is currently fixed at 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of pulled entries. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Target mobile number in the e.164 standard (+[country/region code][mobile number]), such as +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// Pull end time in UNIX timestamp accurate to seconds.
+	EndDateTime *uint64 `json:"EndDateTime,omitempty" name:"EndDateTime"`
+}
+
 type PullSmsSendStatusByPhoneNumberRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pull start time in seconds in the format of UNIX timestamp.
 	SendDateTime *uint64 `json:"SendDateTime,omitempty" name:"SendDateTime"`
 
@@ -983,16 +1244,18 @@ func (r *PullSmsSendStatusByPhoneNumberRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsSendStatusByPhoneNumberResponseParams struct {
+	// Delivery status response set.
+	PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PullSmsSendStatusByPhoneNumberResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PullSmsSendStatusByPhoneNumberResponseParams `json:"Response"`
 }
 
 func (r *PullSmsSendStatusByPhoneNumberResponse) ToJsonString() string {
@@ -1006,9 +1269,18 @@ func (r *PullSmsSendStatusByPhoneNumberResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsSendStatusRequestParams struct {
+	// Maximum number of pulled entries. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+}
+
 type PullSmsSendStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Maximum number of pulled entries. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -1036,16 +1308,18 @@ func (r *PullSmsSendStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PullSmsSendStatusResponseParams struct {
+	// Delivery status response set.
+	PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PullSmsSendStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Delivery status response set.
-		PullSmsSendStatusSet []*PullSmsSendStatus `json:"PullSmsSendStatusSet,omitempty" name:"PullSmsSendStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PullSmsSendStatusResponseParams `json:"Response"`
 }
 
 func (r *PullSmsSendStatusResponse) ToJsonString() string {
@@ -1059,9 +1333,37 @@ func (r *PullSmsSendStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendSmsRequestParams struct {
+	// Target mobile number in the e.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
+	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
+
+	// Template ID. You must enter the ID of an approved template, which can be viewed in the [SMS Console](https://console.cloud.tencent.com/sms/smslist).
+	TemplateID *string `json:"TemplateID,omitempty" name:"TemplateID"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// The content of SMS signature should be encoded in UTF-8. You must enter an approved signature, which can be viewed in the [SMS Console](https://console.cloud.tencent.com/sms/smslist). Note: this parameter is required for Mainland China SMS.
+	Sign *string `json:"Sign,omitempty" name:"Sign"`
+
+	// Template parameter. If there is no template parameter, leave this parameter blank.
+	TemplateParamSet []*string `json:"TemplateParamSet,omitempty" name:"TemplateParamSet"`
+
+	// SMS code number extension, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1).
+	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
+
+	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// `senderid` for Global SMS, which is not activated by default. If you need to activate it, please contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1) for assistance. This parameter should be empty for Mainland China SMS.
+	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
+}
+
 type SendSmsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Target mobile number in the e.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Mainland China mobile numbers or all global mobile numbers).
 	// Example: +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
@@ -1114,16 +1416,18 @@ func (r *SendSmsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendSmsResponseParams struct {
+	// SMS delivery status.
+	SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendSmsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SMS delivery status.
-		SendStatusSet []*SendStatus `json:"SendStatusSet,omitempty" name:"SendStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendSmsResponseParams `json:"Response"`
 }
 
 func (r *SendSmsResponse) ToJsonString() string {
@@ -1138,7 +1442,6 @@ func (r *SendSmsResponse) FromJsonString(s string) error {
 }
 
 type SendStatus struct {
-
 	// Delivery serial number.
 	SerialNo *string `json:"SerialNo,omitempty" name:"SerialNo"`
 
@@ -1162,7 +1465,6 @@ type SendStatus struct {
 }
 
 type SendStatusStatistics struct {
-
 	// Billable SMS message quantity; for example, in 100 successfully submitted SMS messages, if 20 are long messages (over 80 characters) and split into two messages each, then the billable quantity will be 80 * 1 + 20 * 2 = 120.
 	FeeCount *uint64 `json:"FeeCount,omitempty" name:"FeeCount"`
 
@@ -1173,9 +1475,30 @@ type SendStatusStatistics struct {
 	RequestSuccessCount *uint64 `json:"RequestSuccessCount,omitempty" name:"RequestSuccessCount"`
 }
 
+// Predefined struct for user
+type SendStatusStatisticsRequestParams struct {
+	// Start time of pull in the format of `yyyymmddhh` accurate to the hour.
+	StartDateTime *uint64 `json:"StartDateTime,omitempty" name:"StartDateTime"`
+
+	// End time of pull in the format of `yyyymmddhh` accurate to the hour
+	// Note: `EndDataTime` must be later than `StartDateTime`.
+	EndDataTime *uint64 `json:"EndDataTime,omitempty" name:"EndDataTime"`
+
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// Upper limit.
+	// Note: this parameter is currently fixed at 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: this parameter is currently fixed at 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type SendStatusStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time of pull in the format of `yyyymmddhh` accurate to the hour.
 	StartDateTime *uint64 `json:"StartDateTime,omitempty" name:"StartDateTime"`
 
@@ -1218,16 +1541,18 @@ func (r *SendStatusStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendStatusStatisticsResponseParams struct {
+	// Delivery statistics response packet.
+	SendStatusStatistics *SendStatusStatistics `json:"SendStatusStatistics,omitempty" name:"SendStatusStatistics"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendStatusStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Delivery statistics response packet.
-		SendStatusStatistics *SendStatusStatistics `json:"SendStatusStatistics,omitempty" name:"SendStatusStatistics"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendStatusStatisticsResponseParams `json:"Response"`
 }
 
 func (r *SendStatusStatisticsResponse) ToJsonString() string {
@@ -1242,7 +1567,6 @@ func (r *SendStatusStatisticsResponse) FromJsonString(s string) error {
 }
 
 type SmsPackagesStatistics struct {
-
 	// Package creation time in standard time format, such as 2019-10-08 17:18:37.
 	PackageCreateTime *string `json:"PackageCreateTime,omitempty" name:"PackageCreateTime"`
 
@@ -1274,9 +1598,22 @@ type SmsPackagesStatistics struct {
 	CurrentUsage *uint64 `json:"CurrentUsage,omitempty" name:"CurrentUsage"`
 }
 
+// Predefined struct for user
+type SmsPackagesStatisticsRequestParams struct {
+	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
+	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
+
+	// Upper limit (number of packages to be pulled).
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset.
+	// Note: this parameter is currently fixed at 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type SmsPackagesStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SMS `SdkAppid` actually generated after an application is added in the [SMS Console](https://console.cloud.tencent.com/sms/smslist), such as 1400006666.
 	SmsSdkAppid *string `json:"SmsSdkAppid,omitempty" name:"SmsSdkAppid"`
 
@@ -1309,16 +1646,18 @@ func (r *SmsPackagesStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SmsPackagesStatisticsResponseParams struct {
+	// Delivery statistics response packet body.
+	SmsPackagesStatisticsSet []*SmsPackagesStatistics `json:"SmsPackagesStatisticsSet,omitempty" name:"SmsPackagesStatisticsSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SmsPackagesStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Delivery statistics response packet body.
-		SmsPackagesStatisticsSet []*SmsPackagesStatistics `json:"SmsPackagesStatisticsSet,omitempty" name:"SmsPackagesStatisticsSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SmsPackagesStatisticsResponseParams `json:"Response"`
 }
 
 func (r *SmsPackagesStatisticsResponse) ToJsonString() string {

@@ -20,9 +20,21 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AddResourceTagRequestParams struct {
+	// Tag key.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+}
+
 type AddResourceTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -54,13 +66,15 @@ func (r *AddResourceTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddResourceTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddResourceTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddResourceTagResponseParams `json:"Response"`
 }
 
 func (r *AddResourceTagResponse) ToJsonString() string {
@@ -74,9 +88,30 @@ func (r *AddResourceTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachResourcesTagRequestParams struct {
+	// Resource service name (the third segment in the six-segment resource description)
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource ID array, which can contain up to 50 resources
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+}
+
 type AttachResourcesTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -120,13 +155,15 @@ func (r *AttachResourcesTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachResourcesTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachResourcesTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachResourcesTagResponseParams `json:"Response"`
 }
 
 func (r *AttachResourcesTagResponse) ToJsonString() string {
@@ -140,9 +177,18 @@ func (r *AttachResourcesTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTagRequestParams struct {
+	// Tag key.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type CreateTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -170,13 +216,15 @@ func (r *CreateTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTagResponseParams `json:"Response"`
 }
 
 func (r *CreateTagResponse) ToJsonString() string {
@@ -190,9 +238,16 @@ func (r *CreateTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTagsRequestParams struct {
+	// Tag list.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag list.
 	// Value range of N: 0–9
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
@@ -217,13 +272,15 @@ func (r *CreateTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTagsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTagsResponseParams `json:"Response"`
 }
 
 func (r *CreateTagsResponse) ToJsonString() string {
@@ -237,9 +294,18 @@ func (r *CreateTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteResourceTagRequestParams struct {
+	// Tag key.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+}
+
 type DeleteResourceTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -267,13 +333,15 @@ func (r *DeleteResourceTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteResourceTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteResourceTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteResourceTagResponseParams `json:"Response"`
 }
 
 func (r *DeleteResourceTagResponse) ToJsonString() string {
@@ -287,9 +355,18 @@ func (r *DeleteResourceTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTagRequestParams struct {
+	// The tag key to be deleted.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// The tag value to be deleted.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type DeleteTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The tag key to be deleted.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -317,13 +394,15 @@ func (r *DeleteTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTagResponseParams `json:"Response"`
 }
 
 func (r *DeleteTagResponse) ToJsonString() string {
@@ -337,9 +416,16 @@ func (r *DeleteTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTagsRequestParams struct {
+	// Tag list.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type DeleteTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag list.
 	// Value range of N: 0–9
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
@@ -364,13 +450,15 @@ func (r *DeleteTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTagsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTagsResponseParams `json:"Response"`
 }
 
 func (r *DeleteTagsResponse) ToJsonString() string {
@@ -384,9 +472,30 @@ func (r *DeleteTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByResourceIdsRequestParams struct {
+	// Service type.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource prefix.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Array of resource IDs (up to 50)
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// The resource's region.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeResourceTagsByResourceIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service type.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -430,25 +539,27 @@ func (r *DescribeResourceTagsByResourceIdsRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByResourceIdsResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list.
+	Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourceTagsByResourceIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Page size.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list.
-		Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourceTagsByResourceIdsResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceTagsByResourceIdsResponse) ToJsonString() string {
@@ -462,9 +573,30 @@ func (r *DescribeResourceTagsByResourceIdsResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByResourceIdsSeqRequestParams struct {
+	// Service type
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource prefix
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Unique resource ID
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Resource region
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 15
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeResourceTagsByResourceIdsSeqRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service type
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -508,25 +640,27 @@ func (r *DescribeResourceTagsByResourceIdsSeqRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByResourceIdsSeqResponseParams struct {
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list
+	Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourceTagsByResourceIdsSeqResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list
-		Tags []*TagResource `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourceTagsByResourceIdsSeqResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceTagsByResourceIdsSeqResponse) ToJsonString() string {
@@ -540,9 +674,33 @@ func (r *DescribeResourceTagsByResourceIdsSeqResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByTagKeysRequestParams struct {
+	// Service type
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource prefix
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Resource region
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Unique resource ID
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Resource tag key
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Number of entries per page. Default value: 400
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeResourceTagsByTagKeysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service type
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -590,25 +748,27 @@ func (r *DescribeResourceTagsByTagKeysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsByTagKeysResponseParams struct {
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource tag
+	Rows []*ResourceIdTag `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourceTagsByTagKeysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Resource tag
-		Rows []*ResourceIdTag `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourceTagsByTagKeysResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceTagsByTagKeysResponse) ToJsonString() string {
@@ -622,9 +782,36 @@ func (r *DescribeResourceTagsByTagKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsRequestParams struct {
+	// Creator `uin`
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Resource region.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Service type.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource prefix
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Unique resource ID. Queries with `ResourceId` only may be slow or fail to return results. We recommend you also enter `ServiceType`, `ResourcePrefix`, and `ResourceRegion` (which can be ignored for resources that don't have the region attribute) when entering `ResourceId`.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 15
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Whether it is a COS resource (0 or 1). This parameter is required when the entered `ResourceId` is a COS resource.
+	CosResourceId *uint64 `json:"CosResourceId,omitempty" name:"CosResourceId"`
+}
+
 type DescribeResourceTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Creator `uin`
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
@@ -676,26 +863,28 @@ func (r *DescribeResourceTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceTagsResponseParams struct {
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource tag
+	Rows []*TagResource `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourceTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Resource tag
-		Rows []*TagResource `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourceTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceTagsResponse) ToJsonString() string {
@@ -709,9 +898,36 @@ func (r *DescribeResourceTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagsRequestParams struct {
+	// Tag filtering arrays.
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// Tag creator uin.
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 15.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource prefix.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Unique resource ID.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// The resource's region.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Service type.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+}
+
 type DescribeResourcesByTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag filtering arrays.
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
@@ -763,26 +979,28 @@ func (r *DescribeResourcesByTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagsResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	// Note: This field may return null, indicating that no valid value is found.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource tag.
+	Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourcesByTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page.
-	// Note: This field may return null, indicating that no valid value is found.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Resource tag.
-		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourcesByTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourcesByTagsResponse) ToJsonString() string {
@@ -796,9 +1014,36 @@ func (r *DescribeResourcesByTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagsUnionRequestParams struct {
+	// Tag filtering arrays.
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// Tag creator uin.
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 15.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource prefix.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+
+	// Unique resource ID.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// The resource’s region.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Service type
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+}
+
 type DescribeResourcesByTagsUnionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag filtering arrays.
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
 
@@ -850,25 +1095,27 @@ func (r *DescribeResourcesByTagsUnionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagsUnionResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The size of each page.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource tag.
+	Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourcesByTagsUnionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// The size of each page.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Resource tag.
-		Rows []*ResourceTag `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourcesByTagsUnionResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourcesByTagsUnionResponse) ToJsonString() string {
@@ -882,9 +1129,24 @@ func (r *DescribeResourcesByTagsUnionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagKeysRequestParams struct {
+	// Creator `Uin`. If not specified, `Uin` is only used as the query condition.
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Whether to show project
+	ShowProject *uint64 `json:"ShowProject,omitempty" name:"ShowProject"`
+}
+
 type DescribeTagKeysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Creator `Uin`. If not specified, `Uin` is only used as the query condition.
 	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
 
@@ -920,25 +1182,27 @@ func (r *DescribeTagKeysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagKeysResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTagKeysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Page size.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list.
-		Tags []*string `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTagKeysResponseParams `json:"Response"`
 }
 
 func (r *DescribeTagKeysResponse) ToJsonString() string {
@@ -952,9 +1216,24 @@ func (r *DescribeTagKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagValuesRequestParams struct {
+	// Tag key list.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Creator `Uin`. If not specified, `Uin` is only used as the query condition.
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTagValuesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key list.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
@@ -990,25 +1269,27 @@ func (r *DescribeTagValuesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagValuesResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTagValuesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Page size.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTagValuesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTagValuesResponse) ToJsonString() string {
@@ -1022,9 +1303,24 @@ func (r *DescribeTagValuesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagValuesSeqRequestParams struct {
+	// Tag key list
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Creator `Uin`. If this parameter is blank or left empty, only `Uin` will be used as a condition for query
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 15
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTagValuesSeqRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key list
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
@@ -1060,25 +1356,27 @@ func (r *DescribeTagValuesSeqRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagValuesSeqResponseParams struct {
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTagValuesSeqResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTagValuesSeqResponseParams `json:"Response"`
 }
 
 func (r *DescribeTagValuesSeqResponse) ToJsonString() string {
@@ -1092,9 +1390,33 @@ func (r *DescribeTagValuesSeqResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagsRequestParams struct {
+	// Tag key. Either exists or does not exist alongside the tag value. If it does not exist, all of the user's tags will be queried.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value. Either exists or does not exist alongside the tag key. If it does not exist, all of the user's tags will be queried.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size. The default value is 0.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Creator `Uin`. If not specified, `Uin` is only used as the query condition.
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Tag key array, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried. If it is passed in together with `TagKey`, it will be used and the `TagKey` will be ignored.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Whether to show project tag
+	ShowProject *uint64 `json:"ShowProject,omitempty" name:"ShowProject"`
+}
+
 type DescribeTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key. Either exists or does not exist alongside the tag value. If it does not exist, all of the user's tags will be queried.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1142,25 +1464,27 @@ func (r *DescribeTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagsResponseParams struct {
+	// Total number of results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page size.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list.
+	Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset.
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Page size.
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list.
-		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeTagsResponse) ToJsonString() string {
@@ -1174,9 +1498,33 @@ func (r *DescribeTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagsSeqRequestParams struct {
+	// Tag key, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value, which either exists or does not exist with the tag key. If it does not exist, all tags of the user will be queried
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// Data offset. Default value: 0. It must be an integer multiple of the `Limit` parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 15
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Creator `Uin`. If this parameter is blank or left empty, only `Uin` will be used as a condition for query
+	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+
+	// Tag key array, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried. If it is passed in together with `TagKey`, it will be used and the `TagKey` will be ignored.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Whether to show project tag
+	ShowProject *uint64 `json:"ShowProject,omitempty" name:"ShowProject"`
+}
+
 type DescribeTagsSeqRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key, which either exists or does not exist with the tag value. If it does not exist, all tags of the user will be queried
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1224,25 +1572,27 @@ func (r *DescribeTagsSeqRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTagsSeqResponseParams struct {
+	// Total number of results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list
+	Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTagsSeqResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data offset
-		Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-		// Number of entries per page
-		Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-		// Tag list
-		Tags []*TagWithDelete `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTagsSeqResponseParams `json:"Response"`
 }
 
 func (r *DescribeTagsSeqResponse) ToJsonString() string {
@@ -1256,9 +1606,27 @@ func (r *DescribeTagsSeqResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachResourcesTagRequestParams struct {
+	// Resource service name (the third segment in the six-segment resource description)
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource ID array, which can contain up to 50 resources
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Tag key to be unbound
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+}
+
 type DetachResourcesTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -1298,13 +1666,15 @@ func (r *DetachResourcesTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachResourcesTagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachResourcesTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachResourcesTagResponseParams `json:"Response"`
 }
 
 func (r *DetachResourcesTagResponse) ToJsonString() string {
@@ -1319,7 +1689,6 @@ func (r *DetachResourcesTagResponse) FromJsonString(s string) error {
 }
 
 type FailedResource struct {
-
 	// Six-segment descriptions of failed resources
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
@@ -1330,9 +1699,32 @@ type FailedResource struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+// Predefined struct for user
+type GetResourcesRequestParams struct {
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// If this parameter is passed in, the list of all matching resources will be returned, and the specified `MaxResults` will become invalid.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key and value.
+	// If multiple tags are specified, resources bound to all such tags will be queried.
+	// Value range of N: 0–5
+	// There can be up to 10 `TagValues` in each `TagFilters`.
+	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 200).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
 type GetResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource.
 	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
 	// If this parameter is passed in, the list of all matching resources will be returned, and the specified `MaxResults` will become invalid.
@@ -1376,19 +1768,21 @@ func (r *GetResourcesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetResourcesResponseParams struct {
+	// Token value obtained for the next page
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// List of resources and their associated tags (key-value pairs)
+	ResourceTagMappingList []*ResourceTagMapping `json:"ResourceTagMappingList,omitempty" name:"ResourceTagMappingList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetResourcesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Token value obtained for the next page
-		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
-
-		// List of resources and their associated tags (key-value pairs)
-		ResourceTagMappingList []*ResourceTagMapping `json:"ResourceTagMappingList,omitempty" name:"ResourceTagMappingList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetResourcesResponseParams `json:"Response"`
 }
 
 func (r *GetResourcesResponse) ToJsonString() string {
@@ -1402,9 +1796,20 @@ func (r *GetResourcesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagKeysRequestParams struct {
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
 type GetTagKeysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The token value of the next page obtained from the response of the previous page.
 	// Leave it empty for the first request.
 	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
@@ -1434,19 +1839,21 @@ func (r *GetTagKeysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagKeysResponseParams struct {
+	// Token value obtained for the next page
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Tag key information.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetTagKeysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Token value obtained for the next page
-		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
-
-		// Tag key information.
-		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetTagKeysResponseParams `json:"Response"`
 }
 
 func (r *GetTagKeysResponse) ToJsonString() string {
@@ -1460,9 +1867,25 @@ func (r *GetTagKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagValuesRequestParams struct {
+	// Tag key.
+	// All tag values corresponding to the list of tag keys.
+	// Maximum length: 20
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+}
+
 type GetTagValuesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	// All tag values corresponding to the list of tag keys.
 	// Maximum length: 20
@@ -1498,19 +1921,21 @@ func (r *GetTagValuesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagValuesResponseParams struct {
+	// Token value obtained for the next page
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Tag list.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetTagValuesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Token value obtained for the next page
-		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
-
-		// Tag list.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetTagValuesResponseParams `json:"Response"`
 }
 
 func (r *GetTagValuesResponse) ToJsonString() string {
@@ -1524,9 +1949,25 @@ func (r *GetTagValuesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagsRequestParams struct {
+	// The token value of the next page obtained from the response of the previous page.
+	// Leave it empty for the first request.
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Number of data entries to return per page (up to 1,000).
+	// Default value: 50.
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// Tag key.
+	// All tags corresponding to the list of tag keys.
+	// Maximum length: 20
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+}
+
 type GetTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The token value of the next page obtained from the response of the previous page.
 	// Leave it empty for the first request.
 	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
@@ -1562,19 +2003,21 @@ func (r *GetTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTagsResponseParams struct {
+	// Token value obtained for the next page
+	PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
+
+	// Tag list.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Token value obtained for the next page
-		PaginationToken *string `json:"PaginationToken,omitempty" name:"PaginationToken"`
-
-		// Tag list.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetTagsResponseParams `json:"Response"`
 }
 
 func (r *GetTagsResponse) ToJsonString() string {
@@ -1588,9 +2031,21 @@ func (r *GetTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceTagsRequestParams struct {
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+
+	// The tags to be added or modified. If the resource described by `Resource` is not associated with the input tag keys, an association will be added. If the tag keys are already associated, the values corresponding to the associated tag keys will be modified to the input values. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
+	ReplaceTags []*Tag `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
+
+	// The tags to be disassociated. This API must contain either `ReplaceTags` or `DeleteTag`, and these two parameters cannot include the same tag keys. This parameter can be omitted, but it cannot be an empty array.
+	DeleteTags []*TagKeyObject `json:"DeleteTags,omitempty" name:"DeleteTags"`
+}
+
 type ModifyResourceTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
@@ -1622,13 +2077,15 @@ func (r *ModifyResourceTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceTagsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResourceTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResourceTagsResponseParams `json:"Response"`
 }
 
 func (r *ModifyResourceTagsResponse) ToJsonString() string {
@@ -1642,9 +2099,30 @@ func (r *ModifyResourceTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourcesTagValueRequestParams struct {
+	// Resource service name (the third segment in the six-segment resource description)
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Resource ID array, which can contain up to 50 resources
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
+
+	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
+	ResourcePrefix *string `json:"ResourcePrefix,omitempty" name:"ResourcePrefix"`
+}
+
 type ModifyResourcesTagValueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Resource service name (the third segment in the six-segment resource description)
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 
@@ -1688,13 +2166,15 @@ func (r *ModifyResourcesTagValueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourcesTagValueResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResourcesTagValueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResourcesTagValueResponseParams `json:"Response"`
 }
 
 func (r *ModifyResourcesTagValueResponse) ToJsonString() string {
@@ -1709,7 +2189,6 @@ func (r *ModifyResourcesTagValueResponse) FromJsonString(s string) error {
 }
 
 type ResourceIdTag struct {
-
 	// Unique resource ID
 	// Note: this field may return null, indicating that no valid values can be obtained
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
@@ -1720,7 +2199,6 @@ type ResourceIdTag struct {
 }
 
 type ResourceTag struct {
-
 	// The resource's region.
 	// Note: This field may return null, indicating that no valid value is found.
 	ResourceRegion *string `json:"ResourceRegion,omitempty" name:"ResourceRegion"`
@@ -1743,7 +2221,6 @@ type ResourceTag struct {
 }
 
 type ResourceTagMapping struct {
-
 	// Six-segment resource description. Tencent Cloud uses a six-segment value to describe a resource.
 	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
@@ -1753,7 +2230,6 @@ type ResourceTagMapping struct {
 }
 
 type Tag struct {
-
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1762,7 +2238,6 @@ type Tag struct {
 }
 
 type TagFilter struct {
-
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1771,13 +2246,11 @@ type TagFilter struct {
 }
 
 type TagKeyObject struct {
-
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 }
 
 type TagResource struct {
-
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1798,9 +2271,24 @@ type TagResource struct {
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
+// Predefined struct for user
+type TagResourcesRequestParams struct {
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key and value.
+	// If multiple tags are specified, all such tags will be created and bound to the specified resources.
+	// For each resource, each tag key can have only one value. If you try to add an existing tag key, the corresponding tag value will be updated to the new value.
+	// Non-existent tags will be automatically created.
+	// Value range of N: 0–9
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type TagResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
 	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
 	// Value range of N: 0–9
@@ -1834,18 +2322,20 @@ func (r *TagResourcesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type TagResourcesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of failed resources.
+// Predefined struct for user
+type TagResourcesResponseParams struct {
+	// Information of failed resources.
 	// When tag creating and binding succeeds, the returned `FailedResources` will be empty.
 	// When tag creating and binding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
-		FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
+	FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TagResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *TagResourcesResponseParams `json:"Response"`
 }
 
 func (r *TagResourcesResponse) ToJsonString() string {
@@ -1860,7 +2350,6 @@ func (r *TagResourcesResponse) FromJsonString(s string) error {
 }
 
 type TagWithDelete struct {
-
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1871,9 +2360,21 @@ type TagWithDelete struct {
 	CanDelete *uint64 `json:"CanDelete,omitempty" name:"CanDelete"`
 }
 
+// Predefined struct for user
+type UnTagResourcesRequestParams struct {
+	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
+	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// Value range of N: 0–9
+	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
+
+	// Tag key.
+	// Value range: 0–9
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+}
+
 type UnTagResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
 	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
 	// Value range of N: 0–9
@@ -1904,18 +2405,20 @@ func (r *UnTagResourcesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type UnTagResourcesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of failed resources.
+// Predefined struct for user
+type UnTagResourcesResponseParams struct {
+	// Information of failed resources.
 	// When tag unbinding succeeds, the returned `FailedResources` will be empty.
 	// When tag unbinding partially or completely fails, the returned `FailedResources` will display the details of failed resources.
-		FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
+	FailedResources []*FailedResource `json:"FailedResources,omitempty" name:"FailedResources"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UnTagResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *UnTagResourcesResponseParams `json:"Response"`
 }
 
 func (r *UnTagResourcesResponse) ToJsonString() string {
@@ -1929,9 +2432,21 @@ func (r *UnTagResourcesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateResourceTagValueRequestParams struct {
+	// Tag key associated with the resource.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Modified tag value.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	Resource *string `json:"Resource,omitempty" name:"Resource"`
+}
+
 type UpdateResourceTagValueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key associated with the resource.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1963,13 +2478,15 @@ func (r *UpdateResourceTagValueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateResourceTagValueResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateResourceTagValueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateResourceTagValueResponseParams `json:"Response"`
 }
 
 func (r *UpdateResourceTagValueResponse) ToJsonString() string {

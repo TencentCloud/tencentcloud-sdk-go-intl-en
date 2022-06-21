@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type ApplyInstanceSnapshotRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Snapshot ID.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+}
+
 type ApplyInstanceSnapshotRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -50,13 +59,15 @@ func (r *ApplyInstanceSnapshotRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ApplyInstanceSnapshotResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ApplyInstanceSnapshotResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ApplyInstanceSnapshotResponseParams `json:"Response"`
 }
 
 func (r *ApplyInstanceSnapshotResponse) ToJsonString() string {
@@ -70,9 +81,18 @@ func (r *ApplyInstanceSnapshotResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateInstancesKeyPairsRequestParams struct {
+	// Key pair ID list. Each request can contain up to 100 key pairs.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
+
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type AssociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair ID list. Each request can contain up to 100 key pairs.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
@@ -100,13 +120,15 @@ func (r *AssociateInstancesKeyPairsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateInstancesKeyPairsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssociateInstancesKeyPairsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssociateInstancesKeyPairsResponseParams `json:"Response"`
 }
 
 func (r *AssociateInstancesKeyPairsResponse) ToJsonString() string {
@@ -120,9 +142,15 @@ func (r *AssociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachCcnRequestParams struct {
+	// CCN instance ID.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type AttachCcnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CCN instance ID.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
@@ -146,13 +174,15 @@ func (r *AttachCcnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachCcnResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachCcnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachCcnResponseParams `json:"Response"`
 }
 
 func (r *AttachCcnResponse) ToJsonString() string {
@@ -167,7 +197,6 @@ func (r *AttachCcnResponse) FromJsonString(s string) error {
 }
 
 type AttachDetail struct {
-
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -178,9 +207,21 @@ type AttachDetail struct {
 	MaxAttachCount *int64 `json:"MaxAttachCount,omitempty" name:"MaxAttachCount"`
 }
 
+// Predefined struct for user
+type AttachDisksRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
 type AttachDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -212,13 +253,15 @@ func (r *AttachDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachDisksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachDisksResponseParams `json:"Response"`
 }
 
 func (r *AttachDisksResponse) ToJsonString() string {
@@ -233,7 +276,6 @@ func (r *AttachDisksResponse) FromJsonString(s string) error {
 }
 
 type Blueprint struct {
-
 	// Image ID, which is the unique identifier of `Blueprint`.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
@@ -287,7 +329,6 @@ type Blueprint struct {
 }
 
 type BlueprintInstance struct {
-
 	// Image information.
 	Blueprint *Blueprint `json:"Blueprint,omitempty" name:"Blueprint"`
 
@@ -299,7 +340,6 @@ type BlueprintInstance struct {
 }
 
 type BlueprintPrice struct {
-
 	// Original image unit price in USD.
 	OriginalBlueprintPrice *float64 `json:"OriginalBlueprintPrice,omitempty" name:"OriginalBlueprintPrice"`
 
@@ -314,7 +354,6 @@ type BlueprintPrice struct {
 }
 
 type Bundle struct {
-
 	// Package ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
@@ -367,7 +406,6 @@ type Bundle struct {
 }
 
 type CcnAttachedInstance struct {
-
 	// CCN instance ID.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -395,9 +433,21 @@ type CcnAttachedInstance struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+// Predefined struct for user
+type CreateBlueprintRequestParams struct {
+	// Image name, which can contain up to 60 characters.
+	BlueprintName *string `json:"BlueprintName,omitempty" name:"BlueprintName"`
+
+	// Image description, which can contain up to 60 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// ID of the instance for which to make an image.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type CreateBlueprintRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image name, which can contain up to 60 characters.
 	BlueprintName *string `json:"BlueprintName,omitempty" name:"BlueprintName"`
 
@@ -429,16 +479,18 @@ func (r *CreateBlueprintRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBlueprintResponseParams struct {
+	// Custom image ID.
+	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBlueprintResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom image ID.
-		BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBlueprintResponseParams `json:"Response"`
 }
 
 func (r *CreateBlueprintResponse) ToJsonString() string {
@@ -452,9 +504,21 @@ func (r *CreateBlueprintResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateFirewallRulesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Firewall rule list.
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitempty" name:"FirewallRules"`
+
+	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
+	FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
+}
+
 type CreateFirewallRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -486,13 +550,15 @@ func (r *CreateFirewallRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateFirewallRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateFirewallRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateFirewallRulesResponseParams `json:"Response"`
 }
 
 func (r *CreateFirewallRulesResponse) ToJsonString() string {
@@ -506,9 +572,18 @@ func (r *CreateFirewallRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceSnapshotRequestParams struct {
+	// ID of the instance for which to create a snapshot.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Snapshot name, which can contain up to 60 characters.
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+}
+
 type CreateInstanceSnapshotRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the instance for which to create a snapshot.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -536,16 +611,18 @@ func (r *CreateInstanceSnapshotRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceSnapshotResponseParams struct {
+	// Snapshot ID.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstanceSnapshotResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Snapshot ID.
-		SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstanceSnapshotResponseParams `json:"Response"`
 }
 
 func (r *CreateInstanceSnapshotResponse) ToJsonString() string {
@@ -559,9 +636,15 @@ func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateKeyPairRequestParams struct {
+	// Key pair name, which can contain up to 25 digits, letters, and underscores.
+	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
+}
+
 type CreateKeyPairRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
 	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
 }
@@ -585,16 +668,18 @@ func (r *CreateKeyPairRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateKeyPairResponseParams struct {
+	// Key pair information.
+	KeyPair *KeyPair `json:"KeyPair,omitempty" name:"KeyPair"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateKeyPairResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Key pair information.
-		KeyPair *KeyPair `json:"KeyPair,omitempty" name:"KeyPair"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateKeyPairResponseParams `json:"Response"`
 }
 
 func (r *CreateKeyPairResponse) ToJsonString() string {
@@ -608,9 +693,15 @@ func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteBlueprintsRequestParams struct {
+	// Image ID list, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+	BlueprintIds []*string `json:"BlueprintIds,omitempty" name:"BlueprintIds"`
+}
+
 type DeleteBlueprintsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image ID list, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintIds []*string `json:"BlueprintIds,omitempty" name:"BlueprintIds"`
 }
@@ -634,13 +725,15 @@ func (r *DeleteBlueprintsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteBlueprintsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteBlueprintsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteBlueprintsResponseParams `json:"Response"`
 }
 
 func (r *DeleteBlueprintsResponse) ToJsonString() string {
@@ -654,9 +747,21 @@ func (r *DeleteBlueprintsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFirewallRulesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Firewall rule list.
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitempty" name:"FirewallRules"`
+
+	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
+	FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
+}
+
 type DeleteFirewallRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -688,13 +793,15 @@ func (r *DeleteFirewallRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFirewallRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteFirewallRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteFirewallRulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteFirewallRulesResponse) ToJsonString() string {
@@ -708,9 +815,15 @@ func (r *DeleteFirewallRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteKeyPairsRequestParams struct {
+	// Key pair ID list. Each request can contain up to 10 key pairs.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
+}
+
 type DeleteKeyPairsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair ID list. Each request can contain up to 10 key pairs.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 }
@@ -734,13 +847,15 @@ func (r *DeleteKeyPairsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteKeyPairsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteKeyPairsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteKeyPairsResponseParams `json:"Response"`
 }
 
 func (r *DeleteKeyPairsResponse) ToJsonString() string {
@@ -754,9 +869,15 @@ func (r *DeleteKeyPairsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotsRequestParams struct {
+	// List of IDs of snapshots to be deleted, which can be queried through `DescribeSnapshots`.
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
+}
+
 type DeleteSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of IDs of snapshots to be deleted, which can be queried through `DescribeSnapshots`.
 	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 }
@@ -780,13 +901,15 @@ func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *DeleteSnapshotsResponse) ToJsonString() string {
@@ -801,7 +924,6 @@ func (r *DeleteSnapshotsResponse) FromJsonString(s string) error {
 }
 
 type DeniedAction struct {
-
 	// Restricted operation name.
 	Action *string `json:"Action,omitempty" name:"Action"`
 
@@ -812,9 +934,15 @@ type DeniedAction struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+// Predefined struct for user
+type DescribeBlueprintInstancesRequestParams struct {
+	// Instance ID list, which currently can contain only one instance.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type DescribeBlueprintInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list, which currently can contain only one instance.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -838,19 +966,21 @@ func (r *DescribeBlueprintInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBlueprintInstancesResponseParams struct {
+	// Number of eligible image instances.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Image instance list information.
+	BlueprintInstanceSet []*BlueprintInstance `json:"BlueprintInstanceSet,omitempty" name:"BlueprintInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBlueprintInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible image instances.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Image instance list information.
-		BlueprintInstanceSet []*BlueprintInstance `json:"BlueprintInstanceSet,omitempty" name:"BlueprintInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBlueprintInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeBlueprintInstancesResponse) ToJsonString() string {
@@ -864,9 +994,43 @@ func (r *DescribeBlueprintInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBlueprintsRequestParams struct {
+	// Image ID list.
+	BlueprintIds []*string `json:"BlueprintIds,omitempty" name:"BlueprintIds"`
+
+	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter list
+	// <li>blueprint-id</li>Filter by **image ID**.
+	// Type: String
+	// Required: no
+	// <li>blueprint-type</li>Filter by **image type**.
+	// Valid values: `APP_OS`: application image; `PURE_OS`: system image; `PRIVATE`: custom image; `SHARED`: shared image
+	// Type: String
+	// Required: no
+	// <li>platform-type</li>Filter by **image platform type**.
+	// Valid values: `LINUX_UNIX`: Linux or Unix; `WINDOWS`: Windows
+	// Type: String
+	// Required: no
+	// <li>blueprint-name</li>Filter by **image name**.
+	// Type: String
+	// Required: no
+	// <li>blueprint-state</li>Filter by **image status**.
+	// Type: String
+	// Required: no
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeBlueprintsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image ID list.
 	BlueprintIds []*string `json:"BlueprintIds,omitempty" name:"BlueprintIds"`
 
@@ -921,19 +1085,21 @@ func (r *DescribeBlueprintsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBlueprintsResponseParams struct {
+	// Number of eligible images.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Image details list.
+	BlueprintSet []*Blueprint `json:"BlueprintSet,omitempty" name:"BlueprintSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBlueprintsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible images.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Image details list.
-		BlueprintSet []*Blueprint `json:"BlueprintSet,omitempty" name:"BlueprintSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBlueprintsResponseParams `json:"Response"`
 }
 
 func (r *DescribeBlueprintsResponse) ToJsonString() string {
@@ -947,9 +1113,15 @@ func (r *DescribeBlueprintsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBundleDiscountRequestParams struct {
+	// Package ID.
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+}
+
 type DescribeBundleDiscountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Package ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 }
@@ -973,19 +1145,21 @@ func (r *DescribeBundleDiscountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBundleDiscountResponseParams struct {
+	// Currency: CNY, USD.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBundleDiscountResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Currency: CNY, USD.
-		Currency *string `json:"Currency,omitempty" name:"Currency"`
-
-		// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
-		DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBundleDiscountResponseParams `json:"Response"`
 }
 
 func (r *DescribeBundleDiscountResponse) ToJsonString() string {
@@ -999,9 +1173,35 @@ func (r *DescribeBundleDiscountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBundlesRequestParams struct {
+	// Package ID list.
+	BundleIds []*string `json:"BundleIds,omitempty" name:"BundleIds"`
+
+	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter list.
+	// <li>bundle-id</li>Filter by **package ID**.
+	// Type: String
+	// Required: no
+	// <li>support-platform-type</li>Filter by **system type**.
+	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// AZ list, which contains all AZs by default.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+}
+
 type DescribeBundlesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Package ID list.
 	BundleIds []*string `json:"BundleIds,omitempty" name:"BundleIds"`
 
@@ -1049,19 +1249,21 @@ func (r *DescribeBundlesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBundlesResponseParams struct {
+	// List of package details.
+	BundleSet []*Bundle `json:"BundleSet,omitempty" name:"BundleSet"`
+
+	// Total number of eligible packages, which is used for pagination.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBundlesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of package details.
-		BundleSet []*Bundle `json:"BundleSet,omitempty" name:"BundleSet"`
-
-		// Total number of eligible packages, which is used for pagination.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBundlesResponseParams `json:"Response"`
 }
 
 func (r *DescribeBundlesResponse) ToJsonString() string {
@@ -1075,8 +1277,14 @@ func (r *DescribeBundlesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnAttachedInstancesRequestParams struct {
+
+}
+
 type DescribeCcnAttachedInstancesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCcnAttachedInstancesRequest) ToJsonString() string {
@@ -1091,23 +1299,26 @@ func (r *DescribeCcnAttachedInstancesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCcnAttachedInstancesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnAttachedInstancesResponseParams struct {
+	// List of instances associated with the CCN instance.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CcnAttachedInstanceSet []*CcnAttachedInstance `json:"CcnAttachedInstanceSet,omitempty" name:"CcnAttachedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCcnAttachedInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of instances associated with the CCN instance.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		CcnAttachedInstanceSet []*CcnAttachedInstance `json:"CcnAttachedInstanceSet,omitempty" name:"CcnAttachedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCcnAttachedInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCcnAttachedInstancesResponse) ToJsonString() string {
@@ -1121,9 +1332,18 @@ func (r *DescribeCcnAttachedInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiskConfigsRequestParams struct {
+	// Filter list.
+	// <li>zone</li>Filter by availability zone.
+	// Type: String
+	// Required: no
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeDiskConfigsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter list.
 	// <li>zone</li>Filter by availability zone.
 	// Type: String
@@ -1150,16 +1370,18 @@ func (r *DescribeDiskConfigsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiskConfigsResponseParams struct {
+	// List of cloud disk configurations.
+	DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitempty" name:"DiskConfigSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDiskConfigsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of cloud disk configurations.
-		DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitempty" name:"DiskConfigSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDiskConfigsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDiskConfigsResponse) ToJsonString() string {
@@ -1173,9 +1395,18 @@ func (r *DescribeDiskConfigsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiskDiscountRequestParams struct {
+	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Cloud disk size.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
 type DescribeDiskDiscountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
@@ -1203,19 +1434,21 @@ func (r *DescribeDiskDiscountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiskDiscountResponseParams struct {
+	// Currency: CNY, USD.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDiskDiscountResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Currency: CNY, USD.
-		Currency *string `json:"Currency,omitempty" name:"Currency"`
-
-		// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
-		DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDiskDiscountResponseParams `json:"Response"`
 }
 
 func (r *DescribeDiskDiscountResponse) ToJsonString() string {
@@ -1229,9 +1462,15 @@ func (r *DescribeDiskDiscountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksDeniedActionsRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
 type DescribeDisksDeniedActionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 }
@@ -1255,16 +1494,18 @@ func (r *DescribeDisksDeniedActionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksDeniedActionsResponseParams struct {
+	// List of operation limits of cloud disks.
+	DiskDeniedActionSet []*DiskDeniedActions `json:"DiskDeniedActionSet,omitempty" name:"DiskDeniedActionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDisksDeniedActionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of operation limits of cloud disks.
-		DiskDeniedActionSet []*DiskDeniedActions `json:"DiskDeniedActionSet,omitempty" name:"DiskDeniedActionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDisksDeniedActionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDisksDeniedActionsResponse) ToJsonString() string {
@@ -1278,9 +1519,55 @@ func (r *DescribeDisksDeniedActionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Filter list.
+	// disk-id
+	// Filter by **cloud disk ID**.
+	// Type: String
+	// Required: no
+	// instance-id
+	// Filter by **instance ID**.
+	// Type: String
+	// Required: no
+	// disk-name
+	// Filter by **cloud disk name**.
+	// Type: String
+	// Required: no
+	// zone
+	// Filter by **availability zone**.
+	// Type: String
+	// Required: no
+	// disk-usage
+	// Filter by **cloud disk type**.
+	// Type: String
+	// Required: no
+	// disk-state
+	// Filter by **cloud disk status**.
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The field by which the cloud disks are sorted. Valid values: "CREATED_TIME" (creation time), "EXPIRED_TIME" (expiration time), "DISK_SIZE" (size of cloud disks). Default value: "CREATED_TIME".
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sorting order of the output cloud disks. Valid values: "ASC" (ascending order), "DESC" (descending order). Default value: "DESC".
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 type DescribeDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -1349,19 +1636,21 @@ func (r *DescribeDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksResponseParams struct {
+	// List of cloud disk information.
+	DiskSet []*Disk `json:"DiskSet,omitempty" name:"DiskSet"`
+
+	// Number of eligible cloud disks.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of cloud disk information.
-		DiskSet []*Disk `json:"DiskSet,omitempty" name:"DiskSet"`
-
-		// Number of eligible cloud disks.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDisksResponseParams `json:"Response"`
 }
 
 func (r *DescribeDisksResponse) ToJsonString() string {
@@ -1375,9 +1664,21 @@ func (r *DescribeDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksReturnableRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDisksReturnableRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -1409,19 +1710,21 @@ func (r *DescribeDisksReturnableRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDisksReturnableResponseParams struct {
+	// List of returnable cloud disks.
+	DiskReturnableSet []*DiskReturnable `json:"DiskReturnableSet,omitempty" name:"DiskReturnableSet"`
+
+	// Number of eligible cloud disks.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDisksReturnableResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of returnable cloud disks.
-		DiskReturnableSet []*DiskReturnable `json:"DiskReturnableSet,omitempty" name:"DiskReturnableSet"`
-
-		// Number of eligible cloud disks.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDisksReturnableResponseParams `json:"Response"`
 }
 
 func (r *DescribeDisksReturnableResponse) ToJsonString() string {
@@ -1435,9 +1738,21 @@ func (r *DescribeDisksReturnableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFirewallRulesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeFirewallRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1469,22 +1784,24 @@ func (r *DescribeFirewallRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFirewallRulesResponseParams struct {
+	// Number of eligible firewall rules.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Firewall rule details list.
+	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitempty" name:"FirewallRuleSet"`
+
+	// Firewall version number.
+	FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeFirewallRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible firewall rules.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Firewall rule details list.
-		FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitempty" name:"FirewallRuleSet"`
-
-		// Firewall version number.
-		FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeFirewallRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeFirewallRulesResponse) ToJsonString() string {
@@ -1498,8 +1815,14 @@ func (r *DescribeFirewallRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFirewallRulesTemplateRequestParams struct {
+
+}
+
 type DescribeFirewallRulesTemplateRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeFirewallRulesTemplateRequest) ToJsonString() string {
@@ -1514,25 +1837,28 @@ func (r *DescribeFirewallRulesTemplateRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFirewallRulesTemplateRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFirewallRulesTemplateResponseParams struct {
+	// Number of eligible firewall rules.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Firewall rule details list.
+	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitempty" name:"FirewallRuleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeFirewallRulesTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible firewall rules.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Firewall rule details list.
-		FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitempty" name:"FirewallRuleSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeFirewallRulesTemplateResponseParams `json:"Response"`
 }
 
 func (r *DescribeFirewallRulesTemplateResponse) ToJsonString() string {
@@ -1546,9 +1872,15 @@ func (r *DescribeFirewallRulesTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceLoginKeyPairAttributeRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeInstanceLoginKeyPairAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1572,16 +1904,18 @@ func (r *DescribeInstanceLoginKeyPairAttributeRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceLoginKeyPairAttributeResponseParams struct {
+	// Whether to allow login with the default key pair. Valid values: YES, NO.
+	PermitLogin *string `json:"PermitLogin,omitempty" name:"PermitLogin"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceLoginKeyPairAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether to allow login with the default key pair. Valid values: YES, NO.
-		PermitLogin *string `json:"PermitLogin,omitempty" name:"PermitLogin"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceLoginKeyPairAttributeResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceLoginKeyPairAttributeResponse) ToJsonString() string {
@@ -1595,9 +1929,15 @@ func (r *DescribeInstanceLoginKeyPairAttributeResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceVncUrlRequestParams struct {
+	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeInstanceVncUrlRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1621,16 +1961,18 @@ func (r *DescribeInstanceVncUrlRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceVncUrlResponseParams struct {
+	// Instance VNC URL.
+	InstanceVncUrl *string `json:"InstanceVncUrl,omitempty" name:"InstanceVncUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceVncUrlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance VNC URL.
-		InstanceVncUrl *string `json:"InstanceVncUrl,omitempty" name:"InstanceVncUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceVncUrlResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceVncUrlResponse) ToJsonString() string {
@@ -1644,9 +1986,15 @@ func (r *DescribeInstanceVncUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesDeniedActionsRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type DescribeInstancesDeniedActionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -1670,16 +2018,18 @@ func (r *DescribeInstancesDeniedActionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesDeniedActionsResponseParams struct {
+	// List of instance operation limit details.
+	InstanceDeniedActionSet []*InstanceDeniedActions `json:"InstanceDeniedActionSet,omitempty" name:"InstanceDeniedActionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesDeniedActionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of instance operation limit details.
-		InstanceDeniedActionSet []*InstanceDeniedActions `json:"InstanceDeniedActionSet,omitempty" name:"InstanceDeniedActionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesDeniedActionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesDeniedActionsResponse) ToJsonString() string {
@@ -1693,9 +2043,15 @@ func (r *DescribeInstancesDeniedActionsResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesDiskNumRequestParams struct {
+	// List of instance IDs.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type DescribeInstancesDiskNumRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of instance IDs.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -1719,19 +2075,21 @@ func (r *DescribeInstancesDiskNumRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesDiskNumResponseParams struct {
+	// Information of all attached disks
+	AttachDetailSet []*AttachDetail `json:"AttachDetailSet,omitempty" name:"AttachDetailSet"`
+
+	// Number of attached cloud disks
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesDiskNumResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of all attached disks
-		AttachDetailSet []*AttachDetail `json:"AttachDetailSet,omitempty" name:"AttachDetailSet"`
-
-		// Number of attached cloud disks
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesDiskNumResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesDiskNumResponse) ToJsonString() string {
@@ -1745,9 +2103,21 @@ func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesReturnableRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeInstancesReturnableRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -1779,19 +2149,21 @@ func (r *DescribeInstancesReturnableRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesReturnableResponseParams struct {
+	// Number of eligible instances.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of returnable instance details.
+	InstanceReturnableSet []*InstanceReturnable `json:"InstanceReturnableSet,omitempty" name:"InstanceReturnableSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesReturnableResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of returnable instance details.
-		InstanceReturnableSet []*InstanceReturnable `json:"InstanceReturnableSet,omitempty" name:"InstanceReturnableSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesReturnableResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesReturnableResponse) ToJsonString() string {
@@ -1805,9 +2177,21 @@ func (r *DescribeInstancesReturnableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesTrafficPackagesRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeInstancesTrafficPackagesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -1839,19 +2223,21 @@ func (r *DescribeInstancesTrafficPackagesRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesTrafficPackagesResponseParams struct {
+	// Number of eligible instance traffic package details.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of instance traffic package details.
+	InstanceTrafficPackageSet []*InstanceTrafficPackage `json:"InstanceTrafficPackageSet,omitempty" name:"InstanceTrafficPackageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesTrafficPackagesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instance traffic package details.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of instance traffic package details.
-		InstanceTrafficPackageSet []*InstanceTrafficPackage `json:"InstanceTrafficPackageSet,omitempty" name:"InstanceTrafficPackageSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesTrafficPackagesResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesTrafficPackagesResponse) ToJsonString() string {
@@ -1865,9 +2251,31 @@ func (r *DescribeInstancesTrafficPackagesResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeKeyPairsRequestParams struct {
+	// Key pair ID list.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter list
+	// <li>key-id</li>Filter by **key pair ID**.
+	// Type: String
+	// Required: no
+	// <li>key-name</li>Filter by **key pair name**.
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `KeyIds` and `Filters` cannot be specified at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeKeyPairsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair ID list.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
@@ -1910,19 +2318,21 @@ func (r *DescribeKeyPairsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeKeyPairsResponseParams struct {
+	// Number of eligible key pairs.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of key pair details.
+	KeyPairSet []*KeyPair `json:"KeyPairSet,omitempty" name:"KeyPairSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeKeyPairsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible key pairs.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of key pair details.
-		KeyPairSet []*KeyPair `json:"KeyPairSet,omitempty" name:"KeyPairSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeKeyPairsResponseParams `json:"Response"`
 }
 
 func (r *DescribeKeyPairsResponse) ToJsonString() string {
@@ -1936,9 +2346,32 @@ func (r *DescribeKeyPairsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeModifyInstanceBundlesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter list.
+	// <li>bundle-id</li>Filter by **package ID**.
+	// Type: String
+	// Required: no
+	// <li>support-platform-type</li>Filter by **system type**.
+	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeModifyInstanceBundlesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1982,19 +2415,21 @@ func (r *DescribeModifyInstanceBundlesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeModifyInstanceBundlesResponseParams struct {
+	// Number of matched instances.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// New package details
+	ModifyBundleSet []*ModifyBundle `json:"ModifyBundleSet,omitempty" name:"ModifyBundleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeModifyInstanceBundlesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of matched instances.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// New package details
-		ModifyBundleSet []*ModifyBundle `json:"ModifyBundleSet,omitempty" name:"ModifyBundleSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeModifyInstanceBundlesResponseParams `json:"Response"`
 }
 
 func (r *DescribeModifyInstanceBundlesResponse) ToJsonString() string {
@@ -2008,8 +2443,14 @@ func (r *DescribeModifyInstanceBundlesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsRequestParams struct {
+
+}
+
 type DescribeRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeRegionsRequest) ToJsonString() string {
@@ -2024,25 +2465,28 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsResponseParams struct {
+	// Number of regions.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Region information list.
+	RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of regions.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Region information list.
-		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRegionsResponse) ToJsonString() string {
@@ -2056,9 +2500,43 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResetInstanceBlueprintsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter list
+	// <li>blueprint-id</li>Filter by **image ID**.
+	// Type: String
+	// Required: no
+	// <li>blueprint-type</li>Filter by **image type**.
+	// Valid values: `APP_OS`: application image; `PURE_OS`: system image; `PRIVATE`: custom image
+	// Type: String
+	// Required: no
+	// <li>platform-type</li>Filter by **image platform type**.
+	// Valid values: `LINUX_UNIX`: Linux or Unix; `WINDOWS`: Windows
+	// Type: String
+	// Required: no
+	// <li>blueprint-name</li>Filter by **image name**.
+	// Type: String
+	// Required: no
+	// <li>blueprint-state</li>Filter by **image status**.
+	// Type: String
+	// Required: no
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeResetInstanceBlueprintsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2113,19 +2591,21 @@ func (r *DescribeResetInstanceBlueprintsRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResetInstanceBlueprintsResponseParams struct {
+	// Number of eligible images.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Image reset information list
+	ResetInstanceBlueprintSet []*ResetInstanceBlueprint `json:"ResetInstanceBlueprintSet,omitempty" name:"ResetInstanceBlueprintSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResetInstanceBlueprintsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible images.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Image reset information list
-		ResetInstanceBlueprintSet []*ResetInstanceBlueprint `json:"ResetInstanceBlueprintSet,omitempty" name:"ResetInstanceBlueprintSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResetInstanceBlueprintsResponseParams `json:"Response"`
 }
 
 func (r *DescribeResetInstanceBlueprintsResponse) ToJsonString() string {
@@ -2139,9 +2619,15 @@ func (r *DescribeResetInstanceBlueprintsResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsDeniedActionsRequestParams struct {
+	// Snapshot ID list, which can be queried through `DescribeSnapshots`.
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
+}
+
 type DescribeSnapshotsDeniedActionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Snapshot ID list, which can be queried through `DescribeSnapshots`.
 	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
 }
@@ -2165,16 +2651,18 @@ func (r *DescribeSnapshotsDeniedActionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsDeniedActionsResponseParams struct {
+	// List of snapshot operation limit details.
+	SnapshotDeniedActionSet []*SnapshotDeniedActions `json:"SnapshotDeniedActionSet,omitempty" name:"SnapshotDeniedActionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSnapshotsDeniedActionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of snapshot operation limit details.
-		SnapshotDeniedActionSet []*SnapshotDeniedActions `json:"SnapshotDeniedActionSet,omitempty" name:"SnapshotDeniedActionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSnapshotsDeniedActionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSnapshotsDeniedActionsResponse) ToJsonString() string {
@@ -2188,9 +2676,38 @@ func (r *DescribeSnapshotsDeniedActionsResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsRequestParams struct {
+	// List of IDs of snapshots to be queried.
+	// You cannot specify `SnapshotIds` and `Filters` at the same time.
+	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
+
+	// Filter list.
+	// <li>snapshot-id</li>Filter by **snapshot ID**.
+	// Type: String
+	// Required: no
+	// <li>disk-id</li>Filter by **disk ID**.
+	// Type: String
+	// Required: no
+	// <li>snapshot-name</li>Filter by **snapshot name**.
+	// Type: String
+	// Required: no
+	// <li>instance-id</li>Filter by **instance ID**.
+	// Type: String
+	// Required: no
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `SnapshotIds` and `Filters` at the same time.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of IDs of snapshots to be queried.
 	// You cannot specify `SnapshotIds` and `Filters` at the same time.
 	SnapshotIds []*string `json:"SnapshotIds,omitempty" name:"SnapshotIds"`
@@ -2240,19 +2757,21 @@ func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsResponseParams struct {
+	// Number of snapshots.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of snapshot details.
+	SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of snapshots.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of snapshot details.
-		SnapshotSet []*Snapshot `json:"SnapshotSet,omitempty" name:"SnapshotSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSnapshotsResponse) ToJsonString() string {
@@ -2266,9 +2785,24 @@ func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesRequestParams struct {
+	// Sorting field. Valid values:
+	// <li>`ZONE`: Sort by the availability zone.
+	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+	// The default value is `ZONE`.
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Specifies how availability zones are listed. Valid values:
+	// <li>ASC: Ascending sort. 
+	// <li>DESC: Descending sort.
+	// The default value is `ASC`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sorting field. Valid values:
 	// <li>`ZONE`: Sort by the availability zone.
 	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
@@ -2302,19 +2836,21 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesResponseParams struct {
+	// Number of AZs
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of AZ details
+	ZoneInfoSet []*ZoneInfo `json:"ZoneInfoSet,omitempty" name:"ZoneInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeZonesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of AZs
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of AZ details
-		ZoneInfoSet []*ZoneInfo `json:"ZoneInfoSet,omitempty" name:"ZoneInfoSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeZonesResponseParams `json:"Response"`
 }
 
 func (r *DescribeZonesResponse) ToJsonString() string {
@@ -2328,9 +2864,15 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachCcnRequestParams struct {
+	// CCN instance ID.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type DetachCcnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CCN instance ID.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
@@ -2354,13 +2896,15 @@ func (r *DetachCcnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachCcnResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachCcnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachCcnResponseParams `json:"Response"`
 }
 
 func (r *DetachCcnResponse) ToJsonString() string {
@@ -2374,9 +2918,15 @@ func (r *DetachCcnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachDisksRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
 type DetachDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 }
@@ -2400,13 +2950,15 @@ func (r *DetachDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachDisksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachDisksResponseParams `json:"Response"`
 }
 
 func (r *DetachDisksResponse) ToJsonString() string {
@@ -2420,9 +2972,18 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateInstancesKeyPairsRequestParams struct {
+	// Key pair ID list. Each request can contain up to 100 key pairs.
+	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
+
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type DisassociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair ID list. Each request can contain up to 100 key pairs.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
@@ -2450,13 +3011,15 @@ func (r *DisassociateInstancesKeyPairsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateInstancesKeyPairsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisassociateInstancesKeyPairsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisassociateInstancesKeyPairsResponseParams `json:"Response"`
 }
 
 func (r *DisassociateInstancesKeyPairsResponse) ToJsonString() string {
@@ -2471,7 +3034,6 @@ func (r *DisassociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 }
 
 type DiscountDetail struct {
-
 	// Billing duration.
 	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
@@ -2492,7 +3054,6 @@ type DiscountDetail struct {
 }
 
 type Disk struct {
-
 	// Disk ID
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
@@ -2551,7 +3112,6 @@ type Disk struct {
 }
 
 type DiskChargePrepaid struct {
-
 	// Purchase duration.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
@@ -2563,7 +3123,6 @@ type DiskChargePrepaid struct {
 }
 
 type DiskConfig struct {
-
 	// Availability zone.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -2584,7 +3143,6 @@ type DiskConfig struct {
 }
 
 type DiskDeniedActions struct {
-
 	// Cloud disk ID.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
@@ -2593,7 +3151,6 @@ type DiskDeniedActions struct {
 }
 
 type DiskPrice struct {
-
 	// Cloud disk unit price.
 	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitempty" name:"OriginalDiskPrice"`
 
@@ -2608,7 +3165,6 @@ type DiskPrice struct {
 }
 
 type DiskReturnable struct {
-
 	// Cloud disk ID.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
@@ -2623,7 +3179,6 @@ type DiskReturnable struct {
 }
 
 type Filter struct {
-
 	// Field to be filtered.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2632,7 +3187,6 @@ type Filter struct {
 }
 
 type FirewallRule struct {
-
 	// Protocol. Valid values: TCP, UDP, ICMP, ALL.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -2650,7 +3204,6 @@ type FirewallRule struct {
 }
 
 type FirewallRuleInfo struct {
-
 	// Application type. Valid values: custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
 	AppType *string `json:"AppType,omitempty" name:"AppType"`
 
@@ -2670,9 +3223,18 @@ type FirewallRuleInfo struct {
 	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitempty" name:"FirewallRuleDescription"`
 }
 
+// Predefined struct for user
+type ImportKeyPairRequestParams struct {
+	// Key pair name, which can contain up to 25 digits, letters, and underscores.
+	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
+
+	// Public key content of the key pair, which is in the OpenSSH RSA format.
+	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+}
+
 type ImportKeyPairRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
 	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
 
@@ -2700,16 +3262,18 @@ func (r *ImportKeyPairRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ImportKeyPairResponseParams struct {
+	// Key pair ID.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ImportKeyPairResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Key pair ID.
-		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ImportKeyPairResponseParams `json:"Response"`
 }
 
 func (r *ImportKeyPairResponse) ToJsonString() string {
@@ -2723,9 +3287,15 @@ func (r *ImportKeyPairResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateBlueprintRequestParams struct {
+	// Number of custom images. Default value: 1.
+	BlueprintCount *int64 `json:"BlueprintCount,omitempty" name:"BlueprintCount"`
+}
+
 type InquirePriceCreateBlueprintRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of custom images. Default value: 1.
 	BlueprintCount *int64 `json:"BlueprintCount,omitempty" name:"BlueprintCount"`
 }
@@ -2749,16 +3319,18 @@ func (r *InquirePriceCreateBlueprintRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateBlueprintResponseParams struct {
+	// Custom image price.
+	BlueprintPrice *BlueprintPrice `json:"BlueprintPrice,omitempty" name:"BlueprintPrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceCreateBlueprintResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom image price.
-		BlueprintPrice *BlueprintPrice `json:"BlueprintPrice,omitempty" name:"BlueprintPrice"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceCreateBlueprintResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceCreateBlueprintResponse) ToJsonString() string {
@@ -2772,9 +3344,24 @@ func (r *InquirePriceCreateBlueprintResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateDisksRequestParams struct {
+	// Cloud disk size in GB.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Parameter settings for purchasing the monthly subscribed cloud disk.
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitempty" name:"DiskChargePrepaid"`
+
+	// Number of cloud disks. Default value: 1.
+	DiskCount *int64 `json:"DiskCount,omitempty" name:"DiskCount"`
+}
+
 type InquirePriceCreateDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cloud disk size in GB.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
@@ -2810,16 +3397,18 @@ func (r *InquirePriceCreateDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateDisksResponseParams struct {
+	// Cloud disk price.
+	DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceCreateDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cloud disk price.
-		DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceCreateDisksResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceCreateDisksResponse) ToJsonString() string {
@@ -2833,9 +3422,24 @@ func (r *InquirePriceCreateDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateInstancesRequestParams struct {
+	// Instance package ID.
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+
+	// Number of instances to be created. Default value: 1.
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
+}
+
 type InquirePriceCreateInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance package ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
@@ -2871,16 +3475,18 @@ func (r *InquirePriceCreateInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateInstancesResponseParams struct {
+	// Price query information.
+	Price *Price `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceCreateInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Price query information.
-		Price *Price `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceCreateInstancesResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceCreateInstancesResponse) ToJsonString() string {
@@ -2894,9 +3500,18 @@ func (r *InquirePriceCreateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceRenewDisksRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Parameter settings for renewing the monthly subscribed cloud disk.
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitempty" name:"RenewDiskChargePrepaid"`
+}
+
 type InquirePriceRenewDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -2924,16 +3539,18 @@ func (r *InquirePriceRenewDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceRenewDisksResponseParams struct {
+	// Cloud disk price.
+	DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceRenewDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cloud disk price.
-		DiskPrice *DiskPrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceRenewDisksResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceRenewDisksResponse) ToJsonString() string {
@@ -2948,7 +3565,6 @@ func (r *InquirePriceRenewDisksResponse) FromJsonString(s string) error {
 }
 
 type InstanceChargePrepaid struct {
-
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
@@ -2957,7 +3573,6 @@ type InstanceChargePrepaid struct {
 }
 
 type InstanceDeniedActions struct {
-
 	// Instance ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2967,7 +3582,6 @@ type InstanceDeniedActions struct {
 }
 
 type InstancePrice struct {
-
 	// Original package unit price.
 	OriginalBundlePrice *float64 `json:"OriginalBundlePrice,omitempty" name:"OriginalBundlePrice"`
 
@@ -2982,7 +3596,6 @@ type InstancePrice struct {
 }
 
 type InstanceReturnable struct {
-
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2997,7 +3610,6 @@ type InstanceReturnable struct {
 }
 
 type InstanceTrafficPackage struct {
-
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -3006,7 +3618,6 @@ type InstanceTrafficPackage struct {
 }
 
 type KeyPair struct {
-
 	// Key pair ID, which is the unique identifier of a key pair.
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
@@ -3029,9 +3640,21 @@ type KeyPair struct {
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 }
 
+// Predefined struct for user
+type ModifyBlueprintAttributeRequestParams struct {
+	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
+
+	// New image name, which can contain up to 60 characters.
+	BlueprintName *string `json:"BlueprintName,omitempty" name:"BlueprintName"`
+
+	// New image description, which can contain up to 60 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type ModifyBlueprintAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
@@ -3063,13 +3686,15 @@ func (r *ModifyBlueprintAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyBlueprintAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyBlueprintAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyBlueprintAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyBlueprintAttributeResponse) ToJsonString() string {
@@ -3084,7 +3709,6 @@ func (r *ModifyBlueprintAttributeResponse) FromJsonString(s string) error {
 }
 
 type ModifyBundle struct {
-
 	// Price difference that you need to pay for the new instance package after change.
 	ModifyPrice *Price `json:"ModifyPrice,omitempty" name:"ModifyPrice"`
 
@@ -3102,9 +3726,18 @@ type ModifyBundle struct {
 	NotSupportModifyMessage *string `json:"NotSupportModifyMessage,omitempty" name:"NotSupportModifyMessage"`
 }
 
+// Predefined struct for user
+type ModifyDisksAttributeRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Cloud disk name.
+	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
+}
+
 type ModifyDisksAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -3132,13 +3765,15 @@ func (r *ModifyDisksAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDisksAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDisksAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDisksAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyDisksAttributeResponse) ToJsonString() string {
@@ -3152,9 +3787,18 @@ func (r *ModifyDisksAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDisksRenewFlagRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+
+	// Whether Auto-Renewal is enabled 
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
 type ModifyDisksRenewFlagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
@@ -3182,13 +3826,15 @@ func (r *ModifyDisksRenewFlagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDisksRenewFlagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDisksRenewFlagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDisksRenewFlagResponseParams `json:"Response"`
 }
 
 func (r *ModifyDisksRenewFlagResponse) ToJsonString() string {
@@ -3202,9 +3848,21 @@ func (r *ModifyDisksRenewFlagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFirewallRuleDescriptionRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Firewall rule.
+	FirewallRule *FirewallRule `json:"FirewallRule,omitempty" name:"FirewallRule"`
+
+	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
+	FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
+}
+
 type ModifyFirewallRuleDescriptionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -3236,13 +3894,15 @@ func (r *ModifyFirewallRuleDescriptionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFirewallRuleDescriptionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyFirewallRuleDescriptionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyFirewallRuleDescriptionResponseParams `json:"Response"`
 }
 
 func (r *ModifyFirewallRuleDescriptionResponse) ToJsonString() string {
@@ -3256,9 +3916,21 @@ func (r *ModifyFirewallRuleDescriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFirewallRulesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Firewall rule list.
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitempty" name:"FirewallRules"`
+
+	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
+	FirewallVersion *uint64 `json:"FirewallVersion,omitempty" name:"FirewallVersion"`
+}
+
 type ModifyFirewallRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -3290,13 +3962,15 @@ func (r *ModifyFirewallRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFirewallRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyFirewallRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyFirewallRulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyFirewallRulesResponse) ToJsonString() string {
@@ -3310,9 +3984,18 @@ func (r *ModifyFirewallRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesAttributeRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Instance name, which is customizable and can contain up to 60 characters.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
 type ModifyInstancesAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3340,13 +4023,15 @@ func (r *ModifyInstancesAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyInstancesAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyInstancesAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyInstancesAttributeResponse) ToJsonString() string {
@@ -3360,9 +4045,18 @@ func (r *ModifyInstancesAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesLoginKeyPairAttributeRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Whether to allow login with the default key pair. Valid values: YES: yes; NO: no.
+	PermitLogin *string `json:"PermitLogin,omitempty" name:"PermitLogin"`
+}
+
 type ModifyInstancesLoginKeyPairAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3390,13 +4084,15 @@ func (r *ModifyInstancesLoginKeyPairAttributeRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesLoginKeyPairAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyInstancesLoginKeyPairAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyInstancesLoginKeyPairAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyInstancesLoginKeyPairAttributeResponse) ToJsonString() string {
@@ -3410,9 +4106,18 @@ func (r *ModifyInstancesLoginKeyPairAttributeResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesRenewFlagRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Auto-Renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed monthly if the account balance is sufficient.
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
 type ModifyInstancesRenewFlagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3440,13 +4145,15 @@ func (r *ModifyInstancesRenewFlagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstancesRenewFlagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyInstancesRenewFlagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyInstancesRenewFlagResponseParams `json:"Response"`
 }
 
 func (r *ModifyInstancesRenewFlagResponse) ToJsonString() string {
@@ -3460,9 +4167,18 @@ func (r *ModifyInstancesRenewFlagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotAttributeRequestParams struct {
+	// Snapshot ID, which can be queried through `DescribeSnapshots`.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// New snapshot name, which can contain up to 60 characters.
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+}
+
 type ModifySnapshotAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Snapshot ID, which can be queried through `DescribeSnapshots`.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
@@ -3490,13 +4206,15 @@ func (r *ModifySnapshotAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySnapshotAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySnapshotAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifySnapshotAttributeResponse) ToJsonString() string {
@@ -3511,7 +4229,6 @@ func (r *ModifySnapshotAttributeResponse) FromJsonString(s string) error {
 }
 
 type PolicyDetail struct {
-
 	// User discount.
 	UserDiscount *int64 `json:"UserDiscount,omitempty" name:"UserDiscount"`
 
@@ -3523,14 +4240,19 @@ type PolicyDetail struct {
 }
 
 type Price struct {
-
 	// Instance price.
 	InstancePrice *InstancePrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
 }
 
+// Predefined struct for user
+type RebootInstancesRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type RebootInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -3554,13 +4276,15 @@ func (r *RebootInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RebootInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RebootInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RebootInstancesResponseParams `json:"Response"`
 }
 
 func (r *RebootInstancesResponse) ToJsonString() string {
@@ -3575,7 +4299,6 @@ func (r *RebootInstancesResponse) FromJsonString(s string) error {
 }
 
 type RegionInfo struct {
-
 	// Region name, such as `ap-guangzhou`.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -3590,7 +4313,6 @@ type RegionInfo struct {
 }
 
 type RenewDiskChargePrepaid struct {
-
 	// Purchase duration.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
@@ -3604,9 +4326,15 @@ type RenewDiskChargePrepaid struct {
 	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitempty" name:"CurInstanceDeadline"`
 }
 
+// Predefined struct for user
+type ResetAttachCcnRequestParams struct {
+	// CCN instance ID.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type ResetAttachCcnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CCN instance ID.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
@@ -3630,13 +4358,15 @@ func (r *ResetAttachCcnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAttachCcnResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetAttachCcnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetAttachCcnResponseParams `json:"Response"`
 }
 
 func (r *ResetAttachCcnResponse) ToJsonString() string {
@@ -3651,7 +4381,6 @@ func (r *ResetAttachCcnResponse) FromJsonString(s string) error {
 }
 
 type ResetInstanceBlueprint struct {
-
 	// Image details
 	BlueprintInfo *Blueprint `json:"BlueprintInfo,omitempty" name:"BlueprintInfo"`
 
@@ -3662,9 +4391,18 @@ type ResetInstanceBlueprint struct {
 	NonResettableMessage *string `json:"NonResettableMessage,omitempty" name:"NonResettableMessage"`
 }
 
+// Predefined struct for user
+type ResetInstanceRequestParams struct {
+	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
+	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
+}
+
 type ResetInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -3692,13 +4430,15 @@ func (r *ResetInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetInstanceResponseParams `json:"Response"`
 }
 
 func (r *ResetInstanceResponse) ToJsonString() string {
@@ -3712,9 +4452,23 @@ func (r *ResetInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetInstancesPasswordRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Login password of the instance(s). The password requirements vary among different operating systems:
+	// The password of a `LINUX_UNIX` instance must contain 8–30 characters (above 12 characters preferably) in at least three of the following types and cannot begin with "/": <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
+	// The password of a `WINDOWS` instance must contain 12–30 characters in at least three of the following types and cannot begin with "/" or include the username: <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>If both `LINUX_UNIX` and `WINDOWS` instances exist, the requirements for password complexity of `WINDOWS` instances shall prevail.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// OS username of the instance for which you want to reset the password, which can contain up to 64 characters.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+}
+
 type ResetInstancesPasswordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3748,13 +4502,15 @@ func (r *ResetInstancesPasswordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetInstancesPasswordResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetInstancesPasswordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetInstancesPasswordResponseParams `json:"Response"`
 }
 
 func (r *ResetInstancesPasswordResponse) ToJsonString() string {
@@ -3769,7 +4525,6 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 }
 
 type Snapshot struct {
-
 	// Snapshot ID.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
@@ -3816,7 +4571,6 @@ type Snapshot struct {
 }
 
 type SnapshotDeniedActions struct {
-
 	// Snapshot ID.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
@@ -3825,7 +4579,6 @@ type SnapshotDeniedActions struct {
 }
 
 type Software struct {
-
 	// Software name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3843,7 +4596,6 @@ type Software struct {
 }
 
 type SoftwareDetail struct {
-
 	// Unique detail key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -3854,9 +4606,15 @@ type SoftwareDetail struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type StartInstancesRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type StartInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -3880,13 +4638,15 @@ func (r *StartInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartInstancesResponseParams `json:"Response"`
 }
 
 func (r *StartInstancesResponse) ToJsonString() string {
@@ -3900,9 +4660,15 @@ func (r *StartInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopInstancesRequestParams struct {
+	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type StopInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -3926,13 +4692,15 @@ func (r *StopInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopInstancesResponseParams `json:"Response"`
 }
 
 func (r *StopInstancesResponse) ToJsonString() string {
@@ -3946,9 +4714,15 @@ func (r *StopInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TerminateDisksRequestParams struct {
+	// List of cloud disk IDs.
+	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
+}
+
 type TerminateDisksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 }
@@ -3972,13 +4746,15 @@ func (r *TerminateDisksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TerminateDisksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TerminateDisksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TerminateDisksResponseParams `json:"Response"`
 }
 
 func (r *TerminateDisksResponse) ToJsonString() string {
@@ -3992,9 +4768,15 @@ func (r *TerminateDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TerminateInstancesRequestParams struct {
+	// Instance ID list, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type TerminateInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID list, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
@@ -4018,13 +4800,15 @@ func (r *TerminateInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TerminateInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TerminateInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TerminateInstancesResponseParams `json:"Response"`
 }
 
 func (r *TerminateInstancesResponse) ToJsonString() string {
@@ -4039,7 +4823,6 @@ func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 }
 
 type TrafficPackage struct {
-
 	// Traffic package ID.
 	TrafficPackageId *string `json:"TrafficPackageId,omitempty" name:"TrafficPackageId"`
 
@@ -4077,7 +4860,6 @@ type TrafficPackage struct {
 }
 
 type ZoneInfo struct {
-
 	// AZ
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 

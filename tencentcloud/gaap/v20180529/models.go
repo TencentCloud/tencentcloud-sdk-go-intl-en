@@ -21,7 +21,6 @@ import (
 )
 
 type AccessConfiguration struct {
-
 	// Acceleration region.
 	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
 
@@ -36,7 +35,6 @@ type AccessConfiguration struct {
 }
 
 type AccessRegionDetial struct {
-
 	// Region ID
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
@@ -74,7 +72,6 @@ type AccessRegionDetial struct {
 }
 
 type AccessRegionDomainConf struct {
-
 	// Region ID.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
@@ -82,9 +79,24 @@ type AccessRegionDomainConf struct {
 	NationCountryInnerList []*string `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList"`
 }
 
+// Predefined struct for user
+type AddRealServersRequestParams struct {
+	// Project ID corresponding to origin server
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// IP or domain name corresponding to origin server
+	RealServerIP []*string `json:"RealServerIP,omitempty" name:"RealServerIP"`
+
+	// Origin server name
+	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
+
+	// Tag list
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+}
+
 type AddRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Project ID corresponding to origin server
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -120,16 +132,18 @@ func (r *AddRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddRealServersResponseParams struct {
+	// Origin server information list
+	RealServerSet []*NewRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Origin server information list
-		RealServerSet []*NewRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddRealServersResponseParams `json:"Response"`
 }
 
 func (r *AddRealServersResponse) ToJsonString() string {
@@ -144,7 +158,6 @@ func (r *AddRealServersResponse) FromJsonString(s string) error {
 }
 
 type BandwidthPriceGradient struct {
-
 	// Bandwidth range.
 	BandwidthRange []*int64 `json:"BandwidthRange,omitempty" name:"BandwidthRange"`
 
@@ -155,9 +168,18 @@ type BandwidthPriceGradient struct {
 	DiscountBandwidthUnitPrice *float64 `json:"DiscountBandwidthUnitPrice,omitempty" name:"DiscountBandwidthUnitPrice"`
 }
 
+// Predefined struct for user
+type BindListenerRealServersRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// List of origin servers to be bound. If the origin server scheduling policy type of this listener is weighted round robin, you need to enter the `RealServerWeight`, i.e., the origin server weight. If this field is left empty or for other scheduling types, the default origin server weight is 1.
+	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet"`
+}
+
 type BindListenerRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -185,13 +207,15 @@ func (r *BindListenerRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindListenerRealServersResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindListenerRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindListenerRealServersResponseParams `json:"Response"`
 }
 
 func (r *BindListenerRealServersResponse) ToJsonString() string {
@@ -206,7 +230,6 @@ func (r *BindListenerRealServersResponse) FromJsonString(s string) error {
 }
 
 type BindRealServer struct {
-
 	// Origin server ID
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
@@ -232,7 +255,6 @@ type BindRealServer struct {
 }
 
 type BindRealServerInfo struct {
-
 	// Origin server IP or domain name
 	RealServerIP *string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 
@@ -250,9 +272,21 @@ type BindRealServerInfo struct {
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 }
 
+// Predefined struct for user
+type BindRuleRealServersRequestParams struct {
+	// Forwarding rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// An information list of the origin servers to bind.
+	// If there are origin servers bound already, they will be replaced by this new origin server list.
+	// If this field is empty, it indicates unbinding all origin servers of this rule.
+	// If the origin server scheduling policy type of this rule is weighted round robin, you need to enter `RealServerWeight`, i.e., the origin server weight. If this field is left empty or for other scheduling types, the default origin server weight is 1.
+	RealServerBindSet []*RealServerBindSetReq `json:"RealServerBindSet,omitempty" name:"RealServerBindSet"`
+}
+
 type BindRuleRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Forwarding rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -283,13 +317,15 @@ func (r *BindRuleRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindRuleRealServersResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindRuleRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindRuleRealServersResponseParams `json:"Response"`
 }
 
 func (r *BindRuleRealServersResponse) ToJsonString() string {
@@ -304,7 +340,6 @@ func (r *BindRuleRealServersResponse) FromJsonString(s string) error {
 }
 
 type Certificate struct {
-
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
@@ -339,7 +374,6 @@ type Certificate struct {
 }
 
 type CertificateAliasInfo struct {
-
 	// Certificate ID.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
@@ -348,7 +382,6 @@ type CertificateAliasInfo struct {
 }
 
 type CertificateDetail struct {
-
 	// Certificate ID.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
@@ -387,9 +420,39 @@ type CertificateDetail struct {
 	SubjectCN *string `json:"SubjectCN,omitempty" name:"SubjectCN"`
 }
 
+// Predefined struct for user
+type CheckProxyCreateRequestParams struct {
+	// Access (acceleration) region of the connection. The value can be obtained via the DescribeAccessRegionsByDestRegion API.
+	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
+
+	// Origin server region of the connection. The value can be obtained via the DescribeDestRegions API.
+	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
+
+	// Connection bandwidth cap. Unit: Mbps.
+	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Connection concurrence cap, which indicates the maximum number of simultaneous online connections. Unit: 10,000 connections.
+	Concurrent *uint64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// Connection group ID that needs to be entered when a connection is created in a connection group
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type CheckProxyCreateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Access (acceleration) region of the connection. The value can be obtained via the DescribeAccessRegionsByDestRegion API.
 	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
 
@@ -445,16 +508,18 @@ func (r *CheckProxyCreateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckProxyCreateResponseParams struct {
+	// Queries whether a connection with the specified configuration can be created. 1: yes; 0: no.
+	CheckFlag *uint64 `json:"CheckFlag,omitempty" name:"CheckFlag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CheckProxyCreateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Queries whether a connection with the specified configuration can be created. 1: yes; 0: no.
-		CheckFlag *uint64 `json:"CheckFlag,omitempty" name:"CheckFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CheckProxyCreateResponseParams `json:"Response"`
 }
 
 func (r *CheckProxyCreateResponse) ToJsonString() string {
@@ -468,9 +533,22 @@ func (r *CheckProxyCreateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseProxiesRequestParams struct {
+	// Connection instance ID; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Connection instance ID; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type CloseProxiesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection instance ID; It's an old parameter, please switch to ProxyIds.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -503,19 +581,21 @@ func (r *CloseProxiesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseProxiesResponseParams struct {
+	// Only the running connection instance ID lists can be enabled.
+	InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
+
+	// ID list of connection instances failed to be enabled.
+	OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseProxiesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Only the running connection instance ID lists can be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
-
-		// ID list of connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseProxiesResponseParams `json:"Response"`
 }
 
 func (r *CloseProxiesResponse) ToJsonString() string {
@@ -529,9 +609,15 @@ func (r *CloseProxiesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseProxyGroupRequestParams struct {
+	// Connection group instance ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type CloseProxyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group instance ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -555,19 +641,21 @@ func (r *CloseProxyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseProxyGroupResponseParams struct {
+	// List of IDs of the connection instances that are not running, which cannot be enabled.
+	InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
+
+	// List of IDs of the connection instances failed to be enabled.
+	OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseProxyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of IDs of the connection instances that are not running, which cannot be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
-
-		// List of IDs of the connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseProxyGroupResponseParams `json:"Response"`
 }
 
 func (r *CloseProxyGroupResponse) ToJsonString() string {
@@ -581,9 +669,18 @@ func (r *CloseProxyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseSecurityPolicyRequestParams struct {
+	// Connection ID
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Security group policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type CloseSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -611,16 +708,18 @@ func (r *CloseSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseSecurityPolicyResponseParams struct {
+	// Async Process ID. Using DescribeAsyncTaskStatus to query process and status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async Process ID. Using DescribeAsyncTaskStatus to query process and status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *CloseSecurityPolicyResponse) ToJsonString() string {
@@ -635,7 +734,6 @@ func (r *CloseSecurityPolicyResponse) FromJsonString(s string) error {
 }
 
 type CountryAreaMap struct {
-
 	// Country name.
 	NationCountryName *string `json:"NationCountryName,omitempty" name:"NationCountryName"`
 
@@ -655,9 +753,31 @@ type CountryAreaMap struct {
 	ContinentInnerCode *string `json:"ContinentInnerCode,omitempty" name:"ContinentInnerCode"`
 }
 
+// Predefined struct for user
+type CreateCertificateRequestParams struct {
+	// Certificate type. Where:
+	// 0: basic authentication configuration;
+	// 1: indicates client CA certificate;
+	// 2: server SSL certificate;
+	// 3: origin server CA certificate;
+	// 4: connection SSL certificate.
+	CertificateType *int64 `json:"CertificateType,omitempty" name:"CertificateType"`
+
+	// Certificate content. URL encoding. Where:
+	// If the certificate type is basic authentication, enter username/password pair for this parameter. Format: 'username:password', for example, root:FSGdT. The password is `htpasswd` or `openssl`, for example, openssl passwd -crypt 123456.
+	// When the certificate type is CA/SSL certificate, enter the certificate content for this parameter in the format of `pem`.
+	CertificateContent *string `json:"CertificateContent,omitempty" name:"CertificateContent"`
+
+	// Certificate name
+	CertificateAlias *string `json:"CertificateAlias,omitempty" name:"CertificateAlias"`
+
+	// Key content. URL encoding. This parameter is required only when the certificate type is SSL certificate. The format is `pem`.
+	CertificateKey *string `json:"CertificateKey,omitempty" name:"CertificateKey"`
+}
+
 type CreateCertificateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Certificate type. Where:
 	// 0: basic authentication configuration;
 	// 1: indicates client CA certificate;
@@ -700,16 +820,18 @@ func (r *CreateCertificateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCertificateResponseParams struct {
+	// Certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCertificateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Certificate ID
-		CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCertificateResponseParams `json:"Response"`
 }
 
 func (r *CreateCertificateResponse) ToJsonString() string {
@@ -723,9 +845,18 @@ func (r *CreateCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCustomHeaderRequestParams struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Custom header name and content list. `‘’$remote_addr‘’` will be resolved and replaced with the client IP. Other values will be directly passed to the origin server.
+	Headers []*HttpHeaderParam `json:"Headers,omitempty" name:"Headers"`
+}
+
 type CreateCustomHeaderRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -753,13 +884,15 @@ func (r *CreateCustomHeaderRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCustomHeaderResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCustomHeaderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCustomHeaderResponseParams `json:"Response"`
 }
 
 func (r *CreateCustomHeaderResponse) ToJsonString() string {
@@ -773,9 +906,33 @@ func (r *CreateCustomHeaderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDomainErrorPageInfoRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Original error code
+	ErrorNos []*int64 `json:"ErrorNos,omitempty" name:"ErrorNos"`
+
+	// New response packet
+	Body *string `json:"Body,omitempty" name:"Body"`
+
+	// New error code
+	NewErrorNo *int64 `json:"NewErrorNo,omitempty" name:"NewErrorNo"`
+
+	// Response header to be deleted
+	ClearHeaders []*string `json:"ClearHeaders,omitempty" name:"ClearHeaders"`
+
+	// Response header to be set
+	SetHeaders []*HttpHeaderParam `json:"SetHeaders,omitempty" name:"SetHeaders"`
+}
+
 type CreateDomainErrorPageInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -823,16 +980,18 @@ func (r *CreateDomainErrorPageInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDomainErrorPageInfoResponseParams struct {
+	// Configuration ID of a custom error response
+	ErrorPageId *string `json:"ErrorPageId,omitempty" name:"ErrorPageId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDomainErrorPageInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration ID of a custom error response
-		ErrorPageId *string `json:"ErrorPageId,omitempty" name:"ErrorPageId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDomainErrorPageInfoResponseParams `json:"Response"`
 }
 
 func (r *CreateDomainErrorPageInfoResponse) ToJsonString() string {
@@ -846,9 +1005,35 @@ func (r *CreateDomainErrorPageInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDomainRequestParams struct {
+	// Listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name to be created. Each listener supports up to 100 domain names.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Server certificate, which is used for the HTTPS interaction between client and GAAP.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Client CA certificate, which is used for the HTTPS interaction between client and GAAP.
+	// This field is required only when the mutual authentication method is adopted.
+	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
+
+	// Client CA certificate, which is used for the HTTPS interaction between the client and GAAP.
+	// This field or the `ClientCertificateId` field is required for mutual authentication only.
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// HTTP3 is not enabled by default. You can enable it with this field SetDomainHttp3.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type CreateDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -897,13 +1082,15 @@ func (r *CreateDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDomainResponseParams `json:"Response"`
 }
 
 func (r *CreateDomainResponse) ToJsonString() string {
@@ -917,9 +1104,24 @@ func (r *CreateDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHTTPListenerRequestParams struct {
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Listener port, which is based on the listeners of same transport layer protocol (TCP or UDP). The port must be unique.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Connection ID, which cannot be set together with `GroupId` at the same time. A listener will be created for the corresponding connection.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type CreateHTTPListenerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
@@ -955,16 +1157,18 @@ func (r *CreateHTTPListenerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHTTPListenerResponseParams struct {
+	// Created listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateHTTPListenerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Created listener ID
-		ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateHTTPListenerResponseParams `json:"Response"`
 }
 
 func (r *CreateHTTPListenerResponse) ToJsonString() string {
@@ -978,9 +1182,49 @@ func (r *CreateHTTPListenerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHTTPSListenerRequestParams struct {
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Listener port, which is based on the listeners of same transport layer protocol (TCP or UDP). The port must be unique.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Server certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Protocol types of the forwarding from acceleration connection to origin server: HTTP | HTTPS
+	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
+
+	// Connection ID, which cannot be set together with `GroupId` at the same time. A listener will be created for the corresponding connection.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Authentication type, where:
+	// 0: one-way authentication;
+	// 1: mutual authentication.
+	// The one-way authentication is used by default.
+	AuthType *uint64 `json:"AuthType,omitempty" name:"AuthType"`
+
+	// Client CA certificate ID, which is required only when the mutual authentication is adopted.
+	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
+
+	// IDs of multiple new client CA certificates. This field or the `ClientCertificateId` field is required for mutual authentication only.
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+
+	// Connection group ID, which cannot be set together with `ProxyId` at the same time. A listener will be created for the corresponding connection group.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type CreateHTTPSListenerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
@@ -1047,16 +1291,18 @@ func (r *CreateHTTPSListenerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHTTPSListenerResponseParams struct {
+	// Created listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateHTTPSListenerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Created listener ID
-		ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateHTTPSListenerResponseParams `json:"Response"`
 }
 
 func (r *CreateHTTPSListenerResponse) ToJsonString() string {
@@ -1070,9 +1316,15 @@ func (r *CreateHTTPSListenerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyGroupDomainRequestParams struct {
+	// Connection group ID of the domain name to be enabled.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type CreateProxyGroupDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group ID of the domain name to be enabled.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -1096,16 +1348,18 @@ func (r *CreateProxyGroupDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyGroupDomainResponseParams struct {
+	// Connection group ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateProxyGroupDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection group ID.
-		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateProxyGroupDomainResponseParams `json:"Response"`
 }
 
 func (r *CreateProxyGroupDomainResponse) ToJsonString() string {
@@ -1119,9 +1373,40 @@ func (r *CreateProxyGroupDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyGroupRequestParams struct {
+	// Project ID of connection group
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Alias of connection group
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Origin server region; Reference API: DescribeDestRegions; It returnes the `RegionId` of the parameter `RegionDetail`.
+	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
+
+	// Tag list
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+
+	// List of acceleration regions, including their names, bandwidth, and concurrence configuration.
+	AccessRegionSet []*AccessConfiguration `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type CreateProxyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Project ID of connection group
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -1177,16 +1462,18 @@ func (r *CreateProxyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyGroupResponseParams struct {
+	// Connection Group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateProxyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection Group ID
-		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateProxyGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateProxyGroupResponse) ToJsonString() string {
@@ -1200,9 +1487,59 @@ func (r *CreateProxyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyRequestParams struct {
+	// Project ID of connection.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Connection name.
+	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
+
+	// Access region.
+	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
+
+	// Connection bandwidth cap. Unit: Mbps.
+	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Connection concurrence cap, which indicates the maximum number of simultaneous online connections. Unit: 10,000 connections.
+	Concurrent *uint64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// Origin server region. If GroupId exists, the origin server region is the one of connection group, and this field is not required. If GroupId does not exist, this field is reuqired.
+	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Connection group ID. This parameter is required when the connection is created in the connection group. Otherwise, this field is ignored.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// List of tags to be added for connection.
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+
+	// ID of the replicated connection. Only a running connection can be replicated.
+	// The connection is to be replicated if this parameter is set.
+	ClonedProxyId *string `json:"ClonedProxyId,omitempty" name:"ClonedProxyId"`
+
+	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. `normal`: general BGP; `cn2`: dedicated BGP; `triple`: Non-BGP (provided by the top 3 ISPs in the Chinese mainland).
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type CreateProxyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Project ID of connection.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -1284,16 +1621,18 @@ func (r *CreateProxyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxyResponseParams struct {
+	// Instance ID of connection.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateProxyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID of connection.
-		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateProxyResponseParams `json:"Response"`
 }
 
 func (r *CreateProxyResponse) ToJsonString() string {
@@ -1307,9 +1646,46 @@ func (r *CreateProxyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRuleRequestParams struct {
+	// Layer-7 listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name of the forwarding rule
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Path of the forwarding rule
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// The origin server type of the forwarding rule, which supports IP and DOMAIN types.
+	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
+
+	// Forwarding rules of origin server, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Whether the health check is enabled for rules. 1: enabled; 0: disabled.
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// Parameters related to origin server health check
+	CheckParams *RuleCheckParams `json:"CheckParams,omitempty" name:"CheckParams"`
+
+	// Protocol types of the forwarding from acceleration connection to origin server, which supports HTTP or HTTPS.
+	// If this field is not passed in, it indicates that the ForwardProtocol of the corresponding listener will be used.
+	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
+
+	// The host to which the acceleration connection forwards. If this parameter is not specified, the default host will be used, i.e., the host with which the client initiates HTTP requests.
+	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
+
+	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+	ServerNameIndicationSwitch *string `json:"ServerNameIndicationSwitch,omitempty" name:"ServerNameIndicationSwitch"`
+
+	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+}
+
 type CreateRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Layer-7 listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -1374,16 +1750,18 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRuleResponseParams struct {
+	// The ID of the successfully created forwarding rule
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The ID of the successfully created forwarding rule
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRuleResponseParams `json:"Response"`
 }
 
 func (r *CreateRuleResponse) ToJsonString() string {
@@ -1397,9 +1775,21 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityPolicyRequestParams struct {
+	// Default policy: ACCEPT or DROP
+	DefaultAction *string `json:"DefaultAction,omitempty" name:"DefaultAction"`
+
+	// Acceleration connection ID
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type CreateSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Default policy: ACCEPT or DROP
 	DefaultAction *string `json:"DefaultAction,omitempty" name:"DefaultAction"`
 
@@ -1431,16 +1821,18 @@ func (r *CreateSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityPolicyResponseParams struct {
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security policy ID
-		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityPolicyResponse) ToJsonString() string {
@@ -1454,9 +1846,18 @@ func (r *CreateSecurityPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityRulesRequestParams struct {
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// List of access rules
+	RuleList []*SecurityPolicyRuleIn `json:"RuleList,omitempty" name:"RuleList"`
+}
+
 type CreateSecurityRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -1484,16 +1885,18 @@ func (r *CreateSecurityRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityRulesResponseParams struct {
+	// List of rule IDs
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of rule IDs
-		RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityRulesResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityRulesResponse) ToJsonString() string {
@@ -1507,9 +1910,54 @@ func (r *CreateSecurityRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTCPListenersRequestParams struct {
+	// Listener name.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// List of listener ports.
+	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
+
+	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Whether origin server has the health check enabled. 1: enabled; 0: disabled. UDP listeners do not support health check.
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The origin server type of listeners, supporting IP or DOMAIN type. The DOMAIN origin servers do not support the weighted round robin.
+	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
+
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
+	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
+
+	// Listener methods of getting client IPs. 0: TOA; 1: Proxy Protocol.
+	ClientIPMethod *int64 `json:"ClientIPMethod,omitempty" name:"ClientIPMethod"`
+
+	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+}
+
 type CreateTCPListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener name.
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
@@ -1585,16 +2033,18 @@ func (r *CreateTCPListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTCPListenersResponseParams struct {
+	// Returns the listener ID
+	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTCPListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returns the listener ID
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTCPListenersResponseParams `json:"Response"`
 }
 
 func (r *CreateTCPListenersResponse) ToJsonString() string {
@@ -1608,9 +2058,33 @@ func (r *CreateTCPListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUDPListenersRequestParams struct {
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// List of listener ports
+	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
+
+	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Origin server type of listeners, which supports IP or DOMAIN type.
+	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
+
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
+	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
+}
+
 type CreateUDPListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
@@ -1658,16 +2132,18 @@ func (r *CreateUDPListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUDPListenersResponseParams struct {
+	// Returns the listener ID
+	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUDPListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returns the listener ID
-		ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUDPListenersResponseParams `json:"Response"`
 }
 
 func (r *CreateUDPListenersResponse) ToJsonString() string {
@@ -1681,9 +2157,15 @@ func (r *CreateUDPListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCertificateRequestParams struct {
+	// ID of the certificate to be deleted.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+}
+
 type DeleteCertificateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the certificate to be deleted.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
@@ -1707,13 +2189,15 @@ func (r *DeleteCertificateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCertificateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCertificateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCertificateResponseParams `json:"Response"`
 }
 
 func (r *DeleteCertificateResponse) ToJsonString() string {
@@ -1727,9 +2211,15 @@ func (r *DeleteCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDomainErrorPageInfoRequestParams struct {
+	// Unique ID of a custom error page. For more information, please see the response to CreateDomainErrorPageInfo.
+	ErrorPageId *string `json:"ErrorPageId,omitempty" name:"ErrorPageId"`
+}
+
 type DeleteDomainErrorPageInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a custom error page. For more information, please see the response to CreateDomainErrorPageInfo.
 	ErrorPageId *string `json:"ErrorPageId,omitempty" name:"ErrorPageId"`
 }
@@ -1753,13 +2243,15 @@ func (r *DeleteDomainErrorPageInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDomainErrorPageInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDomainErrorPageInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDomainErrorPageInfoResponseParams `json:"Response"`
 }
 
 func (r *DeleteDomainErrorPageInfoResponse) ToJsonString() string {
@@ -1773,9 +2265,22 @@ func (r *DeleteDomainErrorPageInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDomainRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name to be deleted
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Whether to make a forced deletion of forwarding rules that have been bound to origin servers. 0: no; 1: yes.
+	// When not making a forced deletion, if there are rules bound to origin servers, they will not be deleted.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
+}
+
 type DeleteDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -1808,13 +2313,15 @@ func (r *DeleteDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDomainResponseParams `json:"Response"`
 }
 
 func (r *DeleteDomainResponse) ToJsonString() string {
@@ -1828,9 +2335,24 @@ func (r *DeleteDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteListenersRequestParams struct {
+	// ID list of listeners to be deleted
+	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
+
+	// Whether to allow a forced deletion of listeners that have been bound to origin servers. 1: allowed; 0: not allow.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
+
+	// Connection group ID; Either this parameter or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Connection ID; Either this parameter or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+}
+
 type DeleteListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID list of listeners to be deleted
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
@@ -1866,22 +2388,24 @@ func (r *DeleteListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteListenersResponseParams struct {
+	// ID list of listeners failed to be deleted
+	OperationFailedListenerSet []*string `json:"OperationFailedListenerSet,omitempty" name:"OperationFailedListenerSet"`
+
+	// ID list of listeners deleted successfully
+	OperationSucceedListenerSet []*string `json:"OperationSucceedListenerSet,omitempty" name:"OperationSucceedListenerSet"`
+
+	// ID list of invalid listeners. For example: the listener does not exist, or the instance corresponding to the listener does not match.
+	InvalidStatusListenerSet []*string `json:"InvalidStatusListenerSet,omitempty" name:"InvalidStatusListenerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID list of listeners failed to be deleted
-		OperationFailedListenerSet []*string `json:"OperationFailedListenerSet,omitempty" name:"OperationFailedListenerSet"`
-
-		// ID list of listeners deleted successfully
-		OperationSucceedListenerSet []*string `json:"OperationSucceedListenerSet,omitempty" name:"OperationSucceedListenerSet"`
-
-		// ID list of invalid listeners. For example: the listener does not exist, or the instance corresponding to the listener does not match.
-		InvalidStatusListenerSet []*string `json:"InvalidStatusListenerSet,omitempty" name:"InvalidStatusListenerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteListenersResponseParams `json:"Response"`
 }
 
 func (r *DeleteListenersResponse) ToJsonString() string {
@@ -1895,9 +2419,21 @@ func (r *DeleteListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteProxyGroupRequestParams struct {
+	// ID of the connection group to be deleted.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether to enable forced deletion. Valid values:
+	// 0: no;
+	// 1: yes.
+	// Default value: 0. If there is a connection or listener/rule bound to an origin server in the connection group and `Force` is 0, the operation will return a failure.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
+}
+
 type DeleteProxyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the connection group to be deleted.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1928,13 +2464,15 @@ func (r *DeleteProxyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteProxyGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteProxyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteProxyGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteProxyGroupResponse) ToJsonString() string {
@@ -1948,9 +2486,21 @@ func (r *DeleteProxyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleRequestParams struct {
+	// Layer-7 listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Forwarding rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Whether to make a forced deletion of forwarding rules that have been bound to origin servers. 0: no; 1: yes.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
+}
+
 type DeleteRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Layer-7 listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -1982,13 +2532,15 @@ func (r *DeleteRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRuleResponseParams `json:"Response"`
 }
 
 func (r *DeleteRuleResponse) ToJsonString() string {
@@ -2002,9 +2554,15 @@ func (r *DeleteRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type DeleteSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
@@ -2028,13 +2586,15 @@ func (r *DeleteSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *DeleteSecurityPolicyResponse) ToJsonString() string {
@@ -2048,9 +2608,18 @@ func (r *DeleteSecurityPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityRulesRequestParams struct {
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// List of access rule IDs
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
 type DeleteSecurityRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -2078,13 +2647,15 @@ func (r *DeleteSecurityRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSecurityRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSecurityRulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteSecurityRulesResponse) ToJsonString() string {
@@ -2098,9 +2669,21 @@ func (r *DeleteSecurityRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccessRegionsByDestRegionRequestParams struct {
+	// Origin server region: the DescribeDestRegions API returns the value of `RegionId` field of `DestRegionSet`.
+	DestRegion *string `json:"DestRegion,omitempty" name:"DestRegion"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+}
+
 type DescribeAccessRegionsByDestRegionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Origin server region: the DescribeDestRegions API returns the value of `RegionId` field of `DestRegionSet`.
 	DestRegion *string `json:"DestRegion,omitempty" name:"DestRegion"`
 
@@ -2132,19 +2715,21 @@ func (r *DescribeAccessRegionsByDestRegionRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccessRegionsByDestRegionResponseParams struct {
+	// The number of available acceleration regions
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of available acceleration region information
+	AccessRegionSet []*AccessRegionDetial `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAccessRegionsByDestRegionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of available acceleration regions
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of available acceleration region information
-		AccessRegionSet []*AccessRegionDetial `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAccessRegionsByDestRegionResponseParams `json:"Response"`
 }
 
 func (r *DescribeAccessRegionsByDestRegionResponse) ToJsonString() string {
@@ -2158,8 +2743,14 @@ func (r *DescribeAccessRegionsByDestRegionResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccessRegionsRequestParams struct {
+
+}
+
 type DescribeAccessRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeAccessRegionsRequest) ToJsonString() string {
@@ -2174,25 +2765,28 @@ func (r *DescribeAccessRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccessRegionsResponseParams struct {
+	// Total quantity of acceleration regions
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Acceleration region details list
+	AccessRegionSet []*RegionDetail `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAccessRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total quantity of acceleration regions
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Acceleration region details list
-		AccessRegionSet []*RegionDetail `json:"AccessRegionSet,omitempty" name:"AccessRegionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAccessRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeAccessRegionsResponse) ToJsonString() string {
@@ -2206,8 +2800,14 @@ func (r *DescribeAccessRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBlackHeaderRequestParams struct {
+
+}
+
 type DescribeBlackHeaderRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeBlackHeaderRequest) ToJsonString() string {
@@ -2222,23 +2822,26 @@ func (r *DescribeBlackHeaderRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBlackHeaderRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBlackHeaderResponseParams struct {
+	// List of blocked custom headers
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BlackHeaders []*string `json:"BlackHeaders,omitempty" name:"BlackHeaders"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBlackHeaderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of blocked custom headers
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		BlackHeaders []*string `json:"BlackHeaders,omitempty" name:"BlackHeaders"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBlackHeaderResponseParams `json:"Response"`
 }
 
 func (r *DescribeBlackHeaderResponse) ToJsonString() string {
@@ -2252,9 +2855,15 @@ func (r *DescribeBlackHeaderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCertificateDetailRequestParams struct {
+	// Certificate ID.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+}
+
 type DescribeCertificateDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Certificate ID.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
@@ -2278,16 +2887,18 @@ func (r *DescribeCertificateDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCertificateDetailResponseParams struct {
+	// Certificate Details.
+	CertificateDetail *CertificateDetail `json:"CertificateDetail,omitempty" name:"CertificateDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCertificateDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Certificate Details.
-		CertificateDetail *CertificateDetail `json:"CertificateDetail,omitempty" name:"CertificateDetail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCertificateDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeCertificateDetailResponse) ToJsonString() string {
@@ -2301,9 +2912,28 @@ func (r *DescribeCertificateDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCertificatesRequestParams struct {
+	// Certificate type. Where:
+	// 0: basic authentication configuration;
+	// 1: client CA certificate;
+	// 2: server SSL certificate;
+	// 3: origin server CA certificate;
+	// 4: connection SSL certificate.
+	// -1: all types.
+	// The default value is -1.
+	CertificateType *int64 `json:"CertificateType,omitempty" name:"CertificateType"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity limit. The default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeCertificatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Certificate type. Where:
 	// 0: basic authentication configuration;
 	// 1: client CA certificate;
@@ -2342,19 +2972,21 @@ func (r *DescribeCertificatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCertificatesResponseParams struct {
+	// Server certificate list, which includes certificate ID and certificate name.
+	CertificateSet []*Certificate `json:"CertificateSet,omitempty" name:"CertificateSet"`
+
+	// Total quantity of server certificates that match the query conditions.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCertificatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Server certificate list, which includes certificate ID and certificate name.
-		CertificateSet []*Certificate `json:"CertificateSet,omitempty" name:"CertificateSet"`
-
-		// Total quantity of server certificates that match the query conditions.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCertificatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCertificatesResponse) ToJsonString() string {
@@ -2368,8 +3000,14 @@ func (r *DescribeCertificatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCountryAreaMappingRequestParams struct {
+
+}
+
 type DescribeCountryAreaMappingRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCountryAreaMappingRequest) ToJsonString() string {
@@ -2384,22 +3022,25 @@ func (r *DescribeCountryAreaMappingRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCountryAreaMappingRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCountryAreaMappingResponseParams struct {
+	// Country/region code mapping table
+	CountryAreaMappingList []*CountryAreaMap `json:"CountryAreaMappingList,omitempty" name:"CountryAreaMappingList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCountryAreaMappingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Country/region code mapping table
-		CountryAreaMappingList []*CountryAreaMap `json:"CountryAreaMappingList,omitempty" name:"CountryAreaMappingList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCountryAreaMappingResponseParams `json:"Response"`
 }
 
 func (r *DescribeCountryAreaMappingResponse) ToJsonString() string {
@@ -2413,8 +3054,14 @@ func (r *DescribeCountryAreaMappingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomHeaderRequestParams struct {
+
+}
+
 type DescribeCustomHeaderRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCustomHeaderRequest) ToJsonString() string {
@@ -2429,27 +3076,30 @@ func (r *DescribeCustomHeaderRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomHeaderRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomHeaderResponseParams struct {
+	// Rule ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// List of custom headers
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Headers []*HttpHeaderParam `json:"Headers,omitempty" name:"Headers"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCustomHeaderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// List of custom headers
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Headers []*HttpHeaderParam `json:"Headers,omitempty" name:"Headers"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCustomHeaderResponseParams `json:"Response"`
 }
 
 func (r *DescribeCustomHeaderResponse) ToJsonString() string {
@@ -2463,8 +3113,14 @@ func (r *DescribeCustomHeaderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDestRegionsRequestParams struct {
+
+}
+
 type DescribeDestRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeDestRegionsRequest) ToJsonString() string {
@@ -2479,25 +3135,28 @@ func (r *DescribeDestRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDestRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDestRegionsResponseParams struct {
+	// Total number of origin server regions
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of origin server region details
+	DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDestRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of origin server regions
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of origin server region details
-		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDestRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDestRegionsResponse) ToJsonString() string {
@@ -2511,9 +3170,15 @@ func (r *DescribeDestRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainErrorPageInfoByIdsRequestParams struct {
+	// List of custom error IDs. Up to 10 IDs are supported
+	ErrorPageIds []*string `json:"ErrorPageIds,omitempty" name:"ErrorPageIds"`
+}
+
 type DescribeDomainErrorPageInfoByIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of custom error IDs. Up to 10 IDs are supported
 	ErrorPageIds []*string `json:"ErrorPageIds,omitempty" name:"ErrorPageIds"`
 }
@@ -2537,17 +3202,19 @@ func (r *DescribeDomainErrorPageInfoByIdsRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainErrorPageInfoByIdsResponseParams struct {
+	// Configuration set of custom error responses
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDomainErrorPageInfoByIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration set of custom error responses
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDomainErrorPageInfoByIdsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDomainErrorPageInfoByIdsResponse) ToJsonString() string {
@@ -2561,9 +3228,18 @@ func (r *DescribeDomainErrorPageInfoByIdsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainErrorPageInfoRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DescribeDomainErrorPageInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -2591,17 +3267,19 @@ func (r *DescribeDomainErrorPageInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainErrorPageInfoResponseParams struct {
+	// Configuration set of a custom error response
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDomainErrorPageInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration set of a custom error response
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		ErrorPageSet []*DomainErrorPageInfo `json:"ErrorPageSet,omitempty" name:"ErrorPageSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDomainErrorPageInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeDomainErrorPageInfoResponse) ToJsonString() string {
@@ -2615,9 +3293,15 @@ func (r *DescribeDomainErrorPageInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGroupAndStatisticsProxyRequestParams struct {
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
 type DescribeGroupAndStatisticsProxyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
@@ -2641,19 +3325,21 @@ func (r *DescribeGroupAndStatisticsProxyRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGroupAndStatisticsProxyResponseParams struct {
+	// Information of connection groups that the statistics can be derived from
+	GroupSet []*GroupStatisticsInfo `json:"GroupSet,omitempty" name:"GroupSet"`
+
+	// Connection group quantity
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGroupAndStatisticsProxyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of connection groups that the statistics can be derived from
-		GroupSet []*GroupStatisticsInfo `json:"GroupSet,omitempty" name:"GroupSet"`
-
-		// Connection group quantity
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGroupAndStatisticsProxyResponseParams `json:"Response"`
 }
 
 func (r *DescribeGroupAndStatisticsProxyResponse) ToJsonString() string {
@@ -2667,9 +3353,15 @@ func (r *DescribeGroupAndStatisticsProxyResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGroupDomainConfigRequestParams struct {
+	// Connection group ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DescribeGroupDomainConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -2693,25 +3385,27 @@ func (r *DescribeGroupDomainConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGroupDomainConfigResponseParams struct {
+	// Nearest access configuration list of domain name resolution.
+	AccessRegionList []*DomainAccessRegionDict `json:"AccessRegionList,omitempty" name:"AccessRegionList"`
+
+	// Default accesses Ip.
+	DefaultDnsIp *string `json:"DefaultDnsIp,omitempty" name:"DefaultDnsIp"`
+
+	// Connection group ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Total number of configuration of access regions.
+	AccessRegionCount *int64 `json:"AccessRegionCount,omitempty" name:"AccessRegionCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGroupDomainConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Nearest access configuration list of domain name resolution.
-		AccessRegionList []*DomainAccessRegionDict `json:"AccessRegionList,omitempty" name:"AccessRegionList"`
-
-		// Default accesses Ip.
-		DefaultDnsIp *string `json:"DefaultDnsIp,omitempty" name:"DefaultDnsIp"`
-
-		// Connection group ID.
-		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
-
-		// Total number of configuration of access regions.
-		AccessRegionCount *int64 `json:"AccessRegionCount,omitempty" name:"AccessRegionCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGroupDomainConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeGroupDomainConfigResponse) ToJsonString() string {
@@ -2725,9 +3419,36 @@ func (r *DescribeGroupDomainConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHTTPListenersRequestParams struct {
+	// Connection ID
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Filter condition. Exact query by listener IDs.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Filter condition. Exact query by listener names.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Filter condition. Exact query by listener ports.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity limit. The default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition. It supports fuzzy query by ports or listener names. This parameter cannot be used with `ListenerName` or `Port`.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+
+	// Connection group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DescribeHTTPListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -2779,19 +3500,21 @@ func (r *DescribeHTTPListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHTTPListenersResponseParams struct {
+	// Quantity of listeners
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// HTTP listener list
+	ListenerSet []*HTTPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeHTTPListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity of listeners
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// HTTP listener list
-		ListenerSet []*HTTPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeHTTPListenersResponseParams `json:"Response"`
 }
 
 func (r *DescribeHTTPListenersResponse) ToJsonString() string {
@@ -2805,9 +3528,43 @@ func (r *DescribeHTTPListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHTTPSListenersRequestParams struct {
+	// Filter condition. Connection ID.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Filter condition. Exact query by listener IDs.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Filter condition. Exact query by listener names.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Filter condition. Exact query by listener ports.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Offset. The default value is 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity limit. The default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition. It supports fuzzy query by ports or listener names.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+
+	// Connection group ID as a filter
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Specifies whether to enable HTTP3. Valid values:
+	// `0`: disable HTTP3;
+	// `1`: enable HTTP3.
+	// Note: If HTTP3 is enabled for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+	// After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type DescribeHTTPSListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition. Connection ID.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -2867,19 +3624,21 @@ func (r *DescribeHTTPSListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHTTPSListenersResponseParams struct {
+	// Quantity of listeners
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// HTTPS listener list
+	ListenerSet []*HTTPSListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeHTTPSListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity of listeners
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// HTTPS listener list
-		ListenerSet []*HTTPSListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeHTTPSListenersResponseParams `json:"Response"`
 }
 
 func (r *DescribeHTTPSListenersResponse) ToJsonString() string {
@@ -2893,9 +3652,15 @@ func (r *DescribeHTTPSListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeListenerRealServersRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+}
+
 type DescribeListenerRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 }
@@ -2919,25 +3684,27 @@ func (r *DescribeListenerRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeListenerRealServersResponseParams struct {
+	// Number of origin servers that can be bound
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// An information list of origin servers
+	RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
+
+	// Number of bound origin servers
+	BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
+
+	// Information list of bound origin servers
+	BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeListenerRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of origin servers that can be bound
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// An information list of origin servers
-		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
-
-		// Number of bound origin servers
-		BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
-
-		// Information list of bound origin servers
-		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeListenerRealServersResponseParams `json:"Response"`
 }
 
 func (r *DescribeListenerRealServersResponse) ToJsonString() string {
@@ -2951,9 +3718,30 @@ func (r *DescribeListenerRealServersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeListenerStatisticsRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric name list. It supports:["InBandwidth", "OutBandwidth", "Concurrent", "InPackets", "OutPackets"]
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// Monitoring granularity. It currently supports: 300, 3,600, and 86,400. Unit: seconds.
+	// Time range: <= 1 day, supported minimum granularity: 300 seconds;
+	// Time range: <= 7 days, supported minimum granularity:3,600 seconds;
+	// Time range: > 7 days, supported minimum granularity:86,400 seconds;
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+}
+
 type DescribeListenerStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -2996,16 +3784,18 @@ func (r *DescribeListenerStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeListenerStatisticsResponseParams struct {
+	// Connection group statistics
+	StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeListenerStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection group statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeListenerStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeListenerStatisticsResponse) ToJsonString() string {
@@ -3019,9 +3809,57 @@ func (r *DescribeListenerStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxiesRequestParams struct {
+	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. The default value is 20, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition   
+	// The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` with this parameter. 
+	// ProjectId - String - Required: No - Filter by project ID.   
+	// AccessRegion - String - Required: No - Filter by access region.    
+	// RealServerRegion - String - Required: No - Filter by origin server region.
+	// GroupId - String - Required: No - Filter by connection group ID.
+	// IPAddressVersion - String - Required: No - Filter by IP version.
+	// PackageType - String - Required: No - Filter by package type of connection groups.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's a new parameter, and replaces InstanceIds.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+
+	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
+	// It supports up to 5 tags. If there are two or more tags, the connections tagged any of them will be pulled.
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+
+	// When this field is 1, only not-grouped connections are pulled.
+	// When this field is 0, only grouped connections are pulled.
+	// When this field does not exist, all connections are pulled, including both not-grouped and grouped connections.
+	Independent *int64 `json:"Independent,omitempty" name:"Independent"`
+
+	// Specifies how connections are listed. Valid values:
+	// `asc`: ascending order
+	// `desc`: descending order
+	// Default: `desc`
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field. Valid values:
+	// `create_time`: sort by the creation time
+	// `proxy_id`: sort by the connection ID
+	// `bandwidth`:sort by the bandwidth limit
+	// `concurrent_connections`: sort by the number of concurrent connections
+	// Default: `create_time`
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+}
+
 type DescribeProxiesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queries by one or multiple instance IDs. The upper limit on the number of instances for each request is 100. This parameter does not support specifying InstanceIds and Filters at the same time. It's an old parameter, please switch to ProxyIds.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3095,22 +3933,24 @@ func (r *DescribeProxiesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxiesResponseParams struct {
+	// Number of connections.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Connection instance information list; It's an old parameter, please switch to ProxySet.
+	InstanceSet []*ProxyInfo `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// Connection instance information list; It's a new parameter.
+	ProxySet []*ProxyInfo `json:"ProxySet,omitempty" name:"ProxySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxiesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of connections.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Connection instance information list; It's an old parameter, please switch to ProxySet.
-		InstanceSet []*ProxyInfo `json:"InstanceSet,omitempty" name:"InstanceSet"`
-
-		// Connection instance information list; It's a new parameter.
-		ProxySet []*ProxyInfo `json:"ProxySet,omitempty" name:"ProxySet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxiesResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxiesResponse) ToJsonString() string {
@@ -3124,9 +3964,18 @@ func (r *DescribeProxiesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxiesStatusRequestParams struct {
+	// Connection ID list; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Connection ID list; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type DescribeProxiesStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID list; It's an old parameter, please switch to ProxyIds.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -3154,16 +4003,18 @@ func (r *DescribeProxiesStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxiesStatusResponseParams struct {
+	// Connection status list.
+	InstanceStatusSet []*ProxyStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxiesStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection status list.
-		InstanceStatusSet []*ProxyStatus `json:"InstanceStatusSet,omitempty" name:"InstanceStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxiesStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxiesStatusResponse) ToJsonString() string {
@@ -3177,9 +4028,15 @@ func (r *DescribeProxiesStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyAndStatisticsListenersRequestParams struct {
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
 type DescribeProxyAndStatisticsListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
@@ -3203,19 +4060,21 @@ func (r *DescribeProxyAndStatisticsListenersRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyAndStatisticsListenersResponseParams struct {
+	// Information of connections that the statistics can be derived from
+	ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet"`
+
+	// Quantity of connections
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyAndStatisticsListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of connections that the statistics can be derived from
-		ProxySet []*ProxySimpleInfo `json:"ProxySet,omitempty" name:"ProxySet"`
-
-		// Quantity of connections
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyAndStatisticsListenersResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyAndStatisticsListenersResponse) ToJsonString() string {
@@ -3229,9 +4088,15 @@ func (r *DescribeProxyAndStatisticsListenersResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyDetailRequestParams struct {
+	// Connection ID to be queried.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+}
+
 type DescribeProxyDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID to be queried.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 }
@@ -3255,16 +4120,18 @@ func (r *DescribeProxyDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyDetailResponseParams struct {
+	// Connection details
+	ProxyDetail *ProxyInfo `json:"ProxyDetail,omitempty" name:"ProxyDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection details
-		ProxyDetail *ProxyInfo `json:"ProxyDetail,omitempty" name:"ProxyDetail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyDetailResponse) ToJsonString() string {
@@ -3278,9 +4145,15 @@ func (r *DescribeProxyDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupDetailsRequestParams struct {
+	// Connection group ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DescribeProxyGroupDetailsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -3304,16 +4177,18 @@ func (r *DescribeProxyGroupDetailsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupDetailsResponseParams struct {
+	// Connection group details
+	ProxyGroupDetail *ProxyGroupDetail `json:"ProxyGroupDetail,omitempty" name:"ProxyGroupDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyGroupDetailsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection group details
-		ProxyGroupDetail *ProxyGroupDetail `json:"ProxyGroupDetail,omitempty" name:"ProxyGroupDetail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyGroupDetailsResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyGroupDetailsResponse) ToJsonString() string {
@@ -3327,9 +4202,34 @@ func (r *DescribeProxyGroupDetailsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupListRequestParams struct {
+	// Offset. The default value is 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. The default value is 20. The maximum value is 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Project ID. Value range:
+	// -1: all projects of this user
+	// 0: default project
+	// Other values: specified project
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Filter condition   
+	// Each request can have a maximum of 5 filter conditions for `Filter.Values`.
+	// `RealServerRegion` - String - Required: No - Filter by origin server region. You can also check the value of `RegionId` returned by the `DescribeDestRegions` API.
+	// `PackageType` - String - Required: No - Filter by type of connection groups, which can be `Thunder` (general connection group) or `Accelerator` (silver connection group).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
+	// It supports up to 5 tags. If there are two or more tags, the connection groups tagged any of them will be pulled.
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+}
+
 type DescribeProxyGroupListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset. The default value is 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -3376,20 +4276,22 @@ func (r *DescribeProxyGroupListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupListResponseParams struct {
+	// Total number of connection groups.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of connection groups.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProxyGroupList []*ProxyGroupInfo `json:"ProxyGroupList,omitempty" name:"ProxyGroupList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyGroupListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of connection groups.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of connection groups.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		ProxyGroupList []*ProxyGroupInfo `json:"ProxyGroupList,omitempty" name:"ProxyGroupList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyGroupListResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyGroupListResponse) ToJsonString() string {
@@ -3403,9 +4305,30 @@ func (r *DescribeProxyGroupListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupStatisticsRequestParams struct {
+	// Connection group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric name list. Values: InBandwidth (inbound bandwidth); OutBandwidth (outbound bandwidth); Concurrent (concurrence); InPackets (inbound packets); OutPackets (outbound packets).
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// Monitoring granularity. It currently supports: 60, 300, 3,600, 86,400. Unit: seconds.
+	// Time range: <= 1 day, supported minimum granularity: 60 seconds;
+	// Time range: <= 7 days, supported minimum granularity: 3,600 seconds;
+	// Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+}
+
 type DescribeProxyGroupStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -3448,16 +4371,18 @@ func (r *DescribeProxyGroupStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyGroupStatisticsResponseParams struct {
+	// Connection group statistics
+	StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyGroupStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection group statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyGroupStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyGroupStatisticsResponse) ToJsonString() string {
@@ -3471,9 +4396,33 @@ func (r *DescribeProxyGroupStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyStatisticsRequestParams struct {
+	// Connection ID
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Start time (2019-03-25 12:00:00)
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time (2019-03-25 12:00:00)
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric name list. Valid values: `InBandwidth` (inbound bandwidth); `OutBandwidth` (outbound bandwidth); Concurrent (concurrence); `InPackets` (inbound packets); `OutPackets` (outbound packets); `PacketLoss` (packet loss rate); `Latency` (latency); `HttpQPS` (the number of HTTP requests); `HttpsQPS` (the number of HTTPS requests).
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// Monitoring granularity. It currently supports: 60, 300, 3,600, and 86,400. Unit: seconds.
+	// Time range: <= 1 day, supported minimum granularity: 60 seconds;
+	// Time range: <= 7 days, supported minimum granularity: 3,600 seconds;
+	// Time range: <= 30 days, supported minimum granularity: 86,400 seconds;
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+
+	// Specifies the ISP. Valid values: `CMCC`, `CUCC`, and `CTCC`. If it is not specified, all ISP data will be returned. Note that this field is valid only when a non-BGP connection is used.
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
+}
+
 type DescribeProxyStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -3520,16 +4469,18 @@ func (r *DescribeProxyStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxyStatisticsResponseParams struct {
+	// Connection statistics
+	StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxyStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection statistics
-		StatisticsData []*MetricStatisticsInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxyStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxyStatisticsResponse) ToJsonString() string {
@@ -3543,9 +4494,33 @@ func (r *DescribeProxyStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServerStatisticsRequestParams struct {
+	// Origin server ID
+	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
+
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Layer-7 rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Statistics duration. Unit: hours. It only supports querying statistics for the past 1, 3, 6, 12, and 24 hours.
+	WithinTime *uint64 `json:"WithinTime,omitempty" name:"WithinTime"`
+
+	// Statistics start time, such as `2020-08-19 00:00:00`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, such as `2020-08-19 23:59:59`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistics granularity in seconds. Only 1-minute (60-second) and 5-minute (300-second) granularities are supported.
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+}
+
 type DescribeRealServerStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Origin server ID
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
@@ -3593,19 +4568,21 @@ func (r *DescribeRealServerStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServerStatisticsResponseParams struct {
+	// Origin server status statistics of specified listener
+	StatisticsData []*StatisticsDataInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
+
+	// Status statistics of multiple origin servers
+	RsStatisticsData []*MetricStatisticsInfo `json:"RsStatisticsData,omitempty" name:"RsStatisticsData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRealServerStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Origin server status statistics of specified listener
-		StatisticsData []*StatisticsDataInfo `json:"StatisticsData,omitempty" name:"StatisticsData"`
-
-		// Status statistics of multiple origin servers
-		RsStatisticsData []*MetricStatisticsInfo `json:"RsStatisticsData,omitempty" name:"RsStatisticsData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRealServerStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRealServerStatisticsResponse) ToJsonString() string {
@@ -3619,9 +4596,31 @@ func (r *DescribeRealServerStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServersRequestParams struct {
+	// Queries the project ID to which the origin server belongs. -1: all projects.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Origin server IP or domain name to be queried. The fuzzy match is supported.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+
+	// Offset, which is 0 by default.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity of values to return. The default value is 20 and the maximum value is 50.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Tag list. If this field exists, the list of the resources with the tag will be pulled.
+	// It supports up to 5 tags. If there are two or more tags, the origin servers tagged any of them will be pulled.
+	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Filter conditions. The value of the `name` of the `filter` (RealServerName, RealServerIP)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queries the project ID to which the origin server belongs. -1: all projects.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -3666,19 +4665,21 @@ func (r *DescribeRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServersResponseParams struct {
+	// An information list of origin server
+	RealServerSet []*BindRealServerInfo `json:"RealServerSet,omitempty" name:"RealServerSet"`
+
+	// The quantity of origin servers
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// An information list of origin server
-		RealServerSet []*BindRealServerInfo `json:"RealServerSet,omitempty" name:"RealServerSet"`
-
-		// The quantity of origin servers
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRealServersResponseParams `json:"Response"`
 }
 
 func (r *DescribeRealServersResponse) ToJsonString() string {
@@ -3692,9 +4693,15 @@ func (r *DescribeRealServersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServersStatusRequestParams struct {
+	// List of origin server IDs
+	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
+}
+
 type DescribeRealServersStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of origin server IDs
 	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
 }
@@ -3718,19 +4725,21 @@ func (r *DescribeRealServersStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRealServersStatusResponseParams struct {
+	// Quantity of origin server query results returned
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Binding status list of origin servers
+	RealServerStatusSet []*RealServerStatus `json:"RealServerStatusSet,omitempty" name:"RealServerStatusSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRealServersStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity of origin server query results returned
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Binding status list of origin servers
-		RealServerStatusSet []*RealServerStatus `json:"RealServerStatusSet,omitempty" name:"RealServerStatusSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRealServersStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeRealServersStatusResponse) ToJsonString() string {
@@ -3744,9 +4753,18 @@ func (r *DescribeRealServersStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionAndPriceRequestParams struct {
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+}
+
 type DescribeRegionAndPriceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IP version. Valid values: `IPv4` (default), `IPv6`.
 	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
 
@@ -3774,27 +4792,29 @@ func (r *DescribeRegionAndPriceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeRegionAndPriceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeRegionAndPriceResponseParams struct {
+	// Total number of origin server regions
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// Total number of origin server regions
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	// List of origin server region details
+	DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
 
-		// List of origin server region details
-		DestRegionSet []*RegionDetail `json:"DestRegionSet,omitempty" name:"DestRegionSet"`
+	// Connection bandwidth price gradient
+	BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
 
-		// Connection bandwidth price gradient
-		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
-
-		// Currency type of bandwidth price:
+	// Currency type of bandwidth price:
 	// CNY (Chinese Yuan)
 	// USD (United States Dollar)
-		Currency *string `json:"Currency,omitempty" name:"Currency"`
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRegionAndPriceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRegionAndPriceResponseParams `json:"Response"`
 }
 
 func (r *DescribeRegionAndPriceResponse) ToJsonString() string {
@@ -3808,9 +4828,25 @@ func (r *DescribeRegionAndPriceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagRequestParams struct {
+	// Tag key.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+
+	// Resource type, including:
+	// Proxy (connection);
+	// ProxyGroup (connection group);
+	// RealServer (origin server).
+	// If this field is not specified, all resources with the tag will be queried.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+}
+
 type DescribeResourcesByTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -3846,19 +4882,21 @@ func (r *DescribeResourcesByTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourcesByTagResponseParams struct {
+	// Total resources
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Resource list corresponding to the tag
+	ResourceSet []*TagResourceInfo `json:"ResourceSet,omitempty" name:"ResourceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourcesByTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total resources
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Resource list corresponding to the tag
-		ResourceSet []*TagResourceInfo `json:"ResourceSet,omitempty" name:"ResourceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourcesByTagResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourcesByTagResponse) ToJsonString() string {
@@ -3872,9 +4910,21 @@ func (r *DescribeResourcesByTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleRealServersRequestParams struct {
+	// Forwarding rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 1000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeRuleRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Forwarding rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -3906,25 +4956,27 @@ func (r *DescribeRuleRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleRealServersResponseParams struct {
+	// Quantity of origin servers that can be bound
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information list of origin servers that can be bound
+	RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
+
+	// Quantity of bound origin servers
+	BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
+
+	// Bound origin server information list
+	BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRuleRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity of origin servers that can be bound
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Information list of origin servers that can be bound
-		RealServerSet []*RealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
-
-		// Quantity of bound origin servers
-		BindRealServerTotalCount *uint64 `json:"BindRealServerTotalCount,omitempty" name:"BindRealServerTotalCount"`
-
-		// Bound origin server information list
-		BindRealServerSet []*BindRealServer `json:"BindRealServerSet,omitempty" name:"BindRealServerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRuleRealServersResponseParams `json:"Response"`
 }
 
 func (r *DescribeRuleRealServersResponse) ToJsonString() string {
@@ -3938,9 +4990,15 @@ func (r *DescribeRuleRealServersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesByRuleIdsRequestParams struct {
+	// List of rule IDs. Up to 10 rules are supported.
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+}
+
 type DescribeRulesByRuleIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of rule IDs. Up to 10 rules are supported.
 	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
 }
@@ -3964,19 +5022,21 @@ func (r *DescribeRulesByRuleIdsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesByRuleIdsResponseParams struct {
+	// The number of returned rules.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of returned rules.
+	RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRulesByRuleIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of returned rules.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of returned rules.
-		RuleSet []*RuleInfo `json:"RuleSet,omitempty" name:"RuleSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRulesByRuleIdsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRulesByRuleIdsResponse) ToJsonString() string {
@@ -3990,9 +5050,15 @@ func (r *DescribeRulesByRuleIdsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesRequestParams struct {
+	// Layer-7 listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+}
+
 type DescribeRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Layer-7 listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 }
@@ -4016,19 +5082,21 @@ func (r *DescribeRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesResponseParams struct {
+	// Rule information list classified by domain name type
+	DomainRuleSet []*DomainRuleSet `json:"DomainRuleSet,omitempty" name:"DomainRuleSet"`
+
+	// Total quantity of domain names under this listener
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule information list classified by domain name type
-		DomainRuleSet []*DomainRuleSet `json:"DomainRuleSet,omitempty" name:"DomainRuleSet"`
-
-		// Total quantity of domain names under this listener
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeRulesResponse) ToJsonString() string {
@@ -4042,9 +5110,15 @@ func (r *DescribeRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityPolicyDetailRequestParams struct {
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type DescribeSecurityPolicyDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
@@ -4068,33 +5142,35 @@ func (r *DescribeSecurityPolicyDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeSecurityPolicyDetailResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connection ID
+// Predefined struct for user
+type DescribeSecurityPolicyDetailResponseParams struct {
+	// Connection ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
-		// Security policy status:
+	// Security policy status:
 	// BOUND (security policies enabled)
 	// UNBIND (security policies disabled)
 	// BINDING (enabling security policies)
 	// UNBINDING (disabling security policies)
-		Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitempty" name:"Status"`
 
-		// Default policy: ACCEPT or DROP.
-		DefaultAction *string `json:"DefaultAction,omitempty" name:"DefaultAction"`
+	// Default policy: ACCEPT or DROP.
+	DefaultAction *string `json:"DefaultAction,omitempty" name:"DefaultAction"`
 
-		// Policy ID
-		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
-		// List of rules
-		RuleList []*SecurityPolicyRuleOut `json:"RuleList,omitempty" name:"RuleList"`
+	// List of rules
+	RuleList []*SecurityPolicyRuleOut `json:"RuleList,omitempty" name:"RuleList"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityPolicyDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityPolicyDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityPolicyDetailResponse) ToJsonString() string {
@@ -4108,9 +5184,15 @@ func (r *DescribeSecurityPolicyDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityRulesRequestParams struct {
+	// List of security rule IDs. Up to 20 security rules are supported.
+	SecurityRuleIds []*string `json:"SecurityRuleIds,omitempty" name:"SecurityRuleIds"`
+}
+
 type DescribeSecurityRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of security rule IDs. Up to 20 security rules are supported.
 	SecurityRuleIds []*string `json:"SecurityRuleIds,omitempty" name:"SecurityRuleIds"`
 }
@@ -4134,19 +5216,21 @@ func (r *DescribeSecurityRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityRulesResponseParams struct {
+	// The number of returned security rules.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of returned security rules.
+	SecurityRuleSet []*SecurityPolicyRuleOut `json:"SecurityRuleSet,omitempty" name:"SecurityRuleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of returned security rules.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of returned security rules.
-		SecurityRuleSet []*SecurityPolicyRuleOut `json:"SecurityRuleSet,omitempty" name:"SecurityRuleSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityRulesResponse) ToJsonString() string {
@@ -4160,9 +5244,36 @@ func (r *DescribeSecurityRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTCPListenersRequestParams struct {
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Filter condition. Exact query by listener IDs.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Filter condition. Exact query by listener names.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Filter condition. Exact query by listener ports.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity limit. The default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Filter condition. It supports fuzzy query by ports or listener names. This parameter cannot be used with `ListenerName` or `Port`.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+}
+
 type DescribeTCPListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -4214,19 +5325,21 @@ func (r *DescribeTCPListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTCPListenersResponseParams struct {
+	// Total quantity of listeners that matches the conditions
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// TCP listener list
+	ListenerSet []*TCPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTCPListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total quantity of listeners that matches the conditions
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// TCP listener list
-		ListenerSet []*TCPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTCPListenersResponseParams `json:"Response"`
 }
 
 func (r *DescribeTCPListenersResponse) ToJsonString() string {
@@ -4240,9 +5353,36 @@ func (r *DescribeTCPListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUDPListenersRequestParams struct {
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Filter condition. Exact query by listener IDs.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Filter condition. Exact query by listener names.
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Filter condition. Exact query by listener ports.
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity limit. The default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Filter condition. It supports fuzzy query by ports or listener names. This parameter cannot be used with `ListenerName` or `Port`.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+}
+
 type DescribeUDPListenersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -4294,19 +5434,21 @@ func (r *DescribeUDPListenersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUDPListenersResponseParams struct {
+	// Quantity of listeners
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// UDP listener list
+	ListenerSet []*UDPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUDPListenersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quantity of listeners
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// UDP listener list
-		ListenerSet []*UDPListener `json:"ListenerSet,omitempty" name:"ListenerSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUDPListenersResponseParams `json:"Response"`
 }
 
 func (r *DescribeUDPListenersResponse) ToJsonString() string {
@@ -4320,9 +5462,28 @@ func (r *DescribeUDPListenersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DestroyProxiesRequestParams struct {
+	// The identifier for forced deletion
+	// 1: this connection list is deleted forcibly regardless of whether the origin server has been bound.
+	// 0: this connection list cannot be deleted if the origin server has been bound.
+	// If this identifier is 0, the deletion can be performed only when all the connections have not been bound to any origin servers.
+	Force *int64 `json:"Force,omitempty" name:"Force"`
+
+	// List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// List of connection instance IDs; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type DestroyProxiesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The identifier for forced deletion
 	// 1: this connection list is deleted forcibly regardless of whether the origin server has been bound.
 	// 0: this connection list cannot be deleted if the origin server has been bound.
@@ -4362,19 +5523,21 @@ func (r *DestroyProxiesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DestroyProxiesResponseParams struct {
+	// ID list of connection instances that cannot be terminated.
+	InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
+
+	// ID list of connection instances that failed to be terminated.
+	OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DestroyProxiesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID list of connection instances that cannot be terminated.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
-
-		// ID list of connection instances that failed to be terminated.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DestroyProxiesResponseParams `json:"Response"`
 }
 
 func (r *DestroyProxiesResponse) ToJsonString() string {
@@ -4389,7 +5552,6 @@ func (r *DestroyProxiesResponse) FromJsonString(s string) error {
 }
 
 type DomainAccessRegionDict struct {
-
 	// Nearest access region
 	NationCountryInnerList []*NationCountryInnerInfo `json:"NationCountryInnerList,omitempty" name:"NationCountryInnerList"`
 
@@ -4410,7 +5572,6 @@ type DomainAccessRegionDict struct {
 }
 
 type DomainErrorPageInfo struct {
-
 	// Configuration ID of a custom error response
 	ErrorPageId *string `json:"ErrorPageId,omitempty" name:"ErrorPageId"`
 
@@ -4445,7 +5606,6 @@ type DomainErrorPageInfo struct {
 }
 
 type DomainRuleSet struct {
-
 	// Forwarding rule domain name.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -4541,7 +5701,6 @@ type DomainRuleSet struct {
 }
 
 type Filter struct {
-
 	// Filter conditions
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4550,7 +5709,6 @@ type Filter struct {
 }
 
 type GroupStatisticsInfo struct {
-
 	// Connection group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -4562,7 +5720,6 @@ type GroupStatisticsInfo struct {
 }
 
 type HTTPListener struct {
-
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -4588,7 +5745,6 @@ type HTTPListener struct {
 }
 
 type HTTPSListener struct {
-
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -4642,7 +5798,6 @@ type HTTPSListener struct {
 }
 
 type HttpHeaderParam struct {
-
 	// HTTP header name
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
 
@@ -4651,7 +5806,6 @@ type HttpHeaderParam struct {
 }
 
 type IPDetail struct {
-
 	// IP string
 	IP *string `json:"IP,omitempty" name:"IP"`
 
@@ -4662,9 +5816,45 @@ type IPDetail struct {
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
+// Predefined struct for user
+type InquiryPriceCreateProxyRequestParams struct {
+	// Acceleration region name.
+	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
+
+	// Connection bandwidth cap. Unit: Mbps.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Origin server region name. It's an old parameter, please switch to RealServerRegion.
+	DestRegion *string `json:"DestRegion,omitempty" name:"DestRegion"`
+
+	// Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It's an old parameter, please switch to Concurrent.
+	Concurrency *int64 `json:"Concurrency,omitempty" name:"Concurrency"`
+
+	// Origin server region name; It's a new parameter.
+	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
+
+	// Upper limit of connection concurrence, which indicates a number of simultaneous online connections. Unit: 10,000 connections. It's a new parameter.
+	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// Billing mode. Valid values: 0: bill-by-bandwidth (default value); 1: bill-by-traffic.
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
+
+	// IP version. Valid values: `IPv4` (default), `IPv6`.
+	IPAddressVersion *string `json:"IPAddressVersion,omitempty" name:"IPAddressVersion"`
+
+	// Network type. Valid values: `normal` (default), `cn2`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+
+	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+}
+
 type InquiryPriceCreateProxyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Acceleration region name.
 	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
 
@@ -4728,42 +5918,44 @@ func (r *InquiryPriceCreateProxyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceCreateProxyResponseParams struct {
+	// Basic price of connection in USD/day.
+	ProxyDailyPrice *float64 `json:"ProxyDailyPrice,omitempty" name:"ProxyDailyPrice"`
+
+	// Tiered price of connection bandwidth.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
+
+	// Discounted basic price of connection in USD/day.
+	DiscountProxyDailyPrice *float64 `json:"DiscountProxyDailyPrice,omitempty" name:"DiscountProxyDailyPrice"`
+
+	// Currency, which supports CNY, USD, etc.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Connection traffic price in USD/GB.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FlowUnitPrice *float64 `json:"FlowUnitPrice,omitempty" name:"FlowUnitPrice"`
+
+	// Discounted connection traffic price in USD/GB.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiscountFlowUnitPrice *float64 `json:"DiscountFlowUnitPrice,omitempty" name:"DiscountFlowUnitPrice"`
+
+	// Dedicated BGP bandwidth price. Unit: USD/Mbps/day
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Cn2BandwidthPrice *float64 `json:"Cn2BandwidthPrice,omitempty" name:"Cn2BandwidthPrice"`
+
+	// Dedicated BGP bandwidth discount price. Unit: USD/Mbps/day
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Cn2BandwidthPriceWithDiscount *float64 `json:"Cn2BandwidthPriceWithDiscount,omitempty" name:"Cn2BandwidthPriceWithDiscount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceCreateProxyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Basic price of connection in USD/day.
-		ProxyDailyPrice *float64 `json:"ProxyDailyPrice,omitempty" name:"ProxyDailyPrice"`
-
-		// Tiered price of connection bandwidth.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		BandwidthUnitPrice []*BandwidthPriceGradient `json:"BandwidthUnitPrice,omitempty" name:"BandwidthUnitPrice"`
-
-		// Discounted basic price of connection in USD/day.
-		DiscountProxyDailyPrice *float64 `json:"DiscountProxyDailyPrice,omitempty" name:"DiscountProxyDailyPrice"`
-
-		// Currency, which supports CNY, USD, etc.
-		Currency *string `json:"Currency,omitempty" name:"Currency"`
-
-		// Connection traffic price in USD/GB.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FlowUnitPrice *float64 `json:"FlowUnitPrice,omitempty" name:"FlowUnitPrice"`
-
-		// Discounted connection traffic price in USD/GB.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DiscountFlowUnitPrice *float64 `json:"DiscountFlowUnitPrice,omitempty" name:"DiscountFlowUnitPrice"`
-
-		// Dedicated BGP bandwidth price. Unit: USD/Mbps/day
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
-		Cn2BandwidthPrice *float64 `json:"Cn2BandwidthPrice,omitempty" name:"Cn2BandwidthPrice"`
-
-		// Dedicated BGP bandwidth discount price. Unit: USD/Mbps/day
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
-		Cn2BandwidthPriceWithDiscount *float64 `json:"Cn2BandwidthPriceWithDiscount,omitempty" name:"Cn2BandwidthPriceWithDiscount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceCreateProxyResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceCreateProxyResponse) ToJsonString() string {
@@ -4778,7 +5970,6 @@ func (r *InquiryPriceCreateProxyResponse) FromJsonString(s string) error {
 }
 
 type ListenerInfo struct {
-
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -4793,7 +5984,6 @@ type ListenerInfo struct {
 }
 
 type MetricStatisticsInfo struct {
-
 	// Metric name
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
@@ -4801,9 +5991,18 @@ type MetricStatisticsInfo struct {
 	MetricData []*StatisticsDataInfo `json:"MetricData,omitempty" name:"MetricData"`
 }
 
+// Predefined struct for user
+type ModifyCertificateAttributesRequestParams struct {
+	// Certificate ID.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Certificate name. Up to 50 characters.
+	CertificateAlias *string `json:"CertificateAlias,omitempty" name:"CertificateAlias"`
+}
+
 type ModifyCertificateAttributesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Certificate ID.
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 
@@ -4831,13 +6030,15 @@ func (r *ModifyCertificateAttributesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCertificateAttributesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCertificateAttributesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCertificateAttributesResponseParams `json:"Response"`
 }
 
 func (r *ModifyCertificateAttributesResponse) ToJsonString() string {
@@ -4851,9 +6052,31 @@ func (r *ModifyCertificateAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCertificateRequestParams struct {
+	// Listener instance ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Domain name whose certificate needs to be modified
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// New server certificate ID:
+	// If CertificateId=default, using the listener certificate.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// New client certificate ID:
+	// If ClientCertificateId=default, using the listener certificate.
+	// This parameter is required only when the mutual authentication is adopted.
+	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
+
+	// List of new IDs of multiple client certificates, where:
+	// This parameter or the `ClientCertificateId` parameter is required for mutual authentication only.
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+}
+
 type ModifyCertificateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener instance ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -4897,13 +6120,15 @@ func (r *ModifyCertificateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCertificateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCertificateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCertificateResponseParams `json:"Response"`
 }
 
 func (r *ModifyCertificateResponse) ToJsonString() string {
@@ -4917,9 +6142,39 @@ func (r *ModifyCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDomainRequestParams struct {
+	// Layer-7 listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Original domain name information
+	OldDomain *string `json:"OldDomain,omitempty" name:"OldDomain"`
+
+	// New domain name information
+	NewDomain *string `json:"NewDomain,omitempty" name:"NewDomain"`
+
+	// Server SSL certificate ID. It's only applicable to the connections of version 3.0:
+	// If this field is not passed in, the original certificate will be used;
+	// If this field is passed in, and CertificateId=default, the listener certificate will be used;
+	// For other cases, the certificate specified by CertificateId will be used.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Client CA certificate ID. It's only applicable to the connections of version 3.0:
+	// If this field is not passed in, the original certificate will be used;
+	// If this field is passed in, and ClientCertificateId=default, the listener certificate will be used;
+	// For other cases, the certificate specified by ClientCertificateId will be used.
+	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
+
+	// Client CA certificate ID. It is only applicable to connections on version 3.0, where:
+	// If this field and `ClientCertificateId` are not included, the original certificate will be used;
+	// If this field is included, and ClientCertificateId=default, then the listener certificate will be used;
+	// In other cases, the certificate specified by `ClientCertificateId` or `PolyClientCertificateIds` will be used.
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+}
+
 type ModifyDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Layer-7 listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -4972,13 +6227,15 @@ func (r *ModifyDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDomainResponseParams `json:"Response"`
 }
 
 func (r *ModifyDomainResponse) ToJsonString() string {
@@ -4992,9 +6249,21 @@ func (r *ModifyDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyGroupDomainConfigRequestParams struct {
+	// Connection group ID.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Default access IP or domain name of domain name resolution
+	DefaultDnsIp *string `json:"DefaultDnsIp,omitempty" name:"DefaultDnsIp"`
+
+	// Nearest access region configuration.
+	AccessRegionList []*AccessRegionDomainConf `json:"AccessRegionList,omitempty" name:"AccessRegionList"`
+}
+
 type ModifyGroupDomainConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -5026,13 +6295,15 @@ func (r *ModifyGroupDomainConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyGroupDomainConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyGroupDomainConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyGroupDomainConfigResponseParams `json:"Response"`
 }
 
 func (r *ModifyGroupDomainConfigResponse) ToJsonString() string {
@@ -5046,9 +6317,21 @@ func (r *ModifyGroupDomainConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHTTPListenerAttributeRequestParams struct {
+	// Listener ID to be modified
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// New listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Connection ID
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+}
+
 type ModifyHTTPListenerAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID to be modified
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -5080,13 +6363,15 @@ func (r *ModifyHTTPListenerAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHTTPListenerAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyHTTPListenerAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyHTTPListenerAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyHTTPListenerAttributeResponse) ToJsonString() string {
@@ -5100,9 +6385,33 @@ func (r *ModifyHTTPListenerAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHTTPSListenerAttributeRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Connection ID. This field is required if using a single connection listener.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// New listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Type of the protocol used in the forwarding from connections to origin servers
+	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
+
+	// New listener server certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// New listener client certificate ID
+	ClientCertificateId *string `json:"ClientCertificateId,omitempty" name:"ClientCertificateId"`
+
+	// Client certificate ID of the listener after modification, which is a new field.
+	PolyClientCertificateIds []*string `json:"PolyClientCertificateIds,omitempty" name:"PolyClientCertificateIds"`
+}
+
 type ModifyHTTPSListenerAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -5150,13 +6459,15 @@ func (r *ModifyHTTPSListenerAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHTTPSListenerAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyHTTPSListenerAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyHTTPSListenerAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyHTTPSListenerAttributeResponse) ToJsonString() string {
@@ -5170,9 +6481,25 @@ func (r *ModifyHTTPSListenerAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxiesAttributeRequestParams struct {
+	// ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Connection name. Up to 30 characters.
+	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// ID of one or multiple connections to be operated; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type ModifyProxiesAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -5209,13 +6536,15 @@ func (r *ModifyProxiesAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxiesAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyProxiesAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyProxiesAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyProxiesAttributeResponse) ToJsonString() string {
@@ -5229,9 +6558,25 @@ func (r *ModifyProxiesAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxiesProjectRequestParams struct {
+	// The target project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// ID of one or multiple connections to be operated; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// ID of one or multiple connections to be operated; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type ModifyProxiesProjectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The target project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -5268,13 +6613,15 @@ func (r *ModifyProxiesProjectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxiesProjectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyProxiesProjectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyProxiesProjectResponseParams `json:"Response"`
 }
 
 func (r *ModifyProxiesProjectResponse) ToJsonString() string {
@@ -5288,9 +6635,33 @@ func (r *ModifyProxiesProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxyConfigurationRequestParams struct {
+	// Connection instance ID; It's an old parameter, please switch to ProxyId.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Target bandwidth. Unit: Mbps.
+	// Bandwidth or Concurrent must be set. Use the DescribeAccessRegionsByDestRegion API to obtain the value range.
+	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Target concurrence value. Unit: 10,000 connections.
+	// Bandwidth or Concurrent must be set. Use the DescribeAccessRegionsByDestRegion API to obtain the value range.
+	Concurrent *uint64 `json:"Concurrent,omitempty" name:"Concurrent"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Connection instance ID; It's a new parameter.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Billing mode (0: bill-by-bandwidth, 1: bill-by-traffic. Default value: bill-by-bandwidth)
+	BillingType *int64 `json:"BillingType,omitempty" name:"BillingType"`
+}
+
 type ModifyProxyConfigurationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection instance ID; It's an old parameter, please switch to ProxyId.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -5337,13 +6708,15 @@ func (r *ModifyProxyConfigurationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxyConfigurationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyProxyConfigurationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyProxyConfigurationResponseParams `json:"Response"`
 }
 
 func (r *ModifyProxyConfigurationResponse) ToJsonString() string {
@@ -5357,9 +6730,21 @@ func (r *ModifyProxyConfigurationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxyGroupAttributeRequestParams struct {
+	// ID of the connection group to be modified.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// New connection group name. Up to 30 characters. The extra characters will be truncated.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
 type ModifyProxyGroupAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the connection group to be modified.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -5391,13 +6776,15 @@ func (r *ModifyProxyGroupAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyProxyGroupAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyProxyGroupAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyProxyGroupAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyProxyGroupAttributeResponse) ToJsonString() string {
@@ -5411,9 +6798,18 @@ func (r *ModifyProxyGroupAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRealServerNameRequestParams struct {
+	// Origin server name
+	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
+
+	// Origin server ID
+	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
+}
+
 type ModifyRealServerNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Origin server name
 	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
 
@@ -5441,13 +6837,15 @@ func (r *ModifyRealServerNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRealServerNameResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRealServerNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRealServerNameResponseParams `json:"Response"`
 }
 
 func (r *ModifyRealServerNameResponse) ToJsonString() string {
@@ -5461,9 +6859,49 @@ func (r *ModifyRealServerNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRuleAttributeRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Forwarding rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Scheduling policy:
+	// rr: round robin;
+	// wrr: weighted round robin;
+	// lc: least connections.
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Whether to enable the origin server health check:
+	// 1: enable;
+	// 0: disable.
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// Health check configuration parameters
+	CheckParams *RuleCheckParams `json:"CheckParams,omitempty" name:"CheckParams"`
+
+	// Forwarding rule path
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Protocol types of the forwarding from acceleration connection to origin server, which supports default, HTTP and HTTPS.
+	// If `ForwardProtocol=default`, the `ForwardProtocol` of the listener will be used.
+	ForwardProtocol *string `json:"ForwardProtocol,omitempty" name:"ForwardProtocol"`
+
+	// The forwarding host, which is carried in the request forwarded from the acceleration connection to the origin server.
+	// If `ForwardHost=default`, the domain name configured with the forwarding rule will be used. For other cases, the value set in this field will be used.
+	ForwardHost *string `json:"ForwardHost,omitempty" name:"ForwardHost"`
+
+	// Specifies whether to enable Server Name Indication (SNI). Valid values: `ON` (enable) and `OFF` (disable).
+	ServerNameIndicationSwitch *string `json:"ServerNameIndicationSwitch,omitempty" name:"ServerNameIndicationSwitch"`
+
+	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
+	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+}
+
 type ModifyRuleAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -5530,13 +6968,15 @@ func (r *ModifyRuleAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRuleAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRuleAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRuleAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyRuleAttributeResponse) ToJsonString() string {
@@ -5550,9 +6990,37 @@ func (r *ModifyRuleAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityRuleRequestParams struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule name: up to 30 characters. The extra characters will be truncated.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Security rule action
+	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+
+	// A CIDR IP address associated with the rule
+	SourceCidr *string `json:"SourceCidr,omitempty" name:"SourceCidr"`
+
+	// Protocol type
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port range. Valid values:
+	// A single port: 80
+	// Multiple ports: 80 and 443
+	// Consecutive ports: 3306-20000
+	// All ports: ALL
+	DestPortRange *string `json:"DestPortRange,omitempty" name:"DestPortRange"`
+}
+
 type ModifySecurityRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -5604,13 +7072,15 @@ func (r *ModifySecurityRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySecurityRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySecurityRuleResponseParams `json:"Response"`
 }
 
 func (r *ModifySecurityRuleResponse) ToJsonString() string {
@@ -5624,9 +7094,45 @@ func (r *ModifySecurityRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTCPListenerAttributeRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Whether to enable health check. 1: enable; 0: disable.
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// Whether to enable the primary/secondary origin server mode. Valid values: 1 (enable) and 0 (disable). It cannot be enabled for domain name origin servers.
+	FailoverSwitch *uint64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 -10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+}
+
 type ModifyTCPListenerAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -5690,13 +7196,15 @@ func (r *ModifyTCPListenerAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTCPListenerAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTCPListenerAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTCPListenerAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyTCPListenerAttributeResponse) ToJsonString() string {
@@ -5710,9 +7218,27 @@ func (r *ModifyTCPListenerAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUDPListenerAttributeRequestParams struct {
+	// Listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// Connection group ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Listener name
+	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
+
+	// Origin server scheduling policy of listeners
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+}
+
 type ModifyUDPListenerAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -5752,13 +7278,15 @@ func (r *ModifyUDPListenerAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUDPListenerAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyUDPListenerAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyUDPListenerAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyUDPListenerAttributeResponse) ToJsonString() string {
@@ -5773,7 +7301,6 @@ func (r *ModifyUDPListenerAttributeResponse) FromJsonString(s string) error {
 }
 
 type NationCountryInnerInfo struct {
-
 	// Country name
 	NationCountryName *string `json:"NationCountryName,omitempty" name:"NationCountryName"`
 
@@ -5782,7 +7309,6 @@ type NationCountryInnerInfo struct {
 }
 
 type NewRealServer struct {
-
 	// Origin server ID
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
@@ -5790,9 +7316,22 @@ type NewRealServer struct {
 	RealServerIP *string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 }
 
+// Predefined struct for user
+type OpenProxiesRequestParams struct {
+	// List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// For more information, please see How to Ensure Idempotence.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// List of connection instance IDs; It's a new parameter.
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+}
+
 type OpenProxiesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of connection instance IDs; It's an old parameter, please switch to ProxyIds.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -5825,19 +7364,21 @@ func (r *OpenProxiesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenProxiesResponseParams struct {
+	// The connection instance ID list cannot be enabled if it's not disabled.
+	InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
+
+	// ID list of connection instances failed to be enabled.
+	OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenProxiesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The connection instance ID list cannot be enabled if it's not disabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
-
-		// ID list of connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenProxiesResponseParams `json:"Response"`
 }
 
 func (r *OpenProxiesResponse) ToJsonString() string {
@@ -5851,9 +7392,15 @@ func (r *OpenProxiesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenProxyGroupRequestParams struct {
+	// Connection group instance ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type OpenProxyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connection group instance ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -5877,19 +7424,21 @@ func (r *OpenProxyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenProxyGroupResponseParams struct {
+	// List of IDs of the connection instances that are not disabled, which cannot be enabled.
+	InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
+
+	// List of IDs of the connection instances failed to be enabled.
+	OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenProxyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of IDs of the connection instances that are not disabled, which cannot be enabled.
-		InvalidStatusInstanceSet []*string `json:"InvalidStatusInstanceSet,omitempty" name:"InvalidStatusInstanceSet"`
-
-		// List of IDs of the connection instances failed to be enabled.
-		OperationFailedInstanceSet []*string `json:"OperationFailedInstanceSet,omitempty" name:"OperationFailedInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenProxyGroupResponseParams `json:"Response"`
 }
 
 func (r *OpenProxyGroupResponse) ToJsonString() string {
@@ -5903,9 +7452,18 @@ func (r *OpenProxyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenSecurityPolicyRequestParams struct {
+	// ID of the connections requiring enabled security policies.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Security policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type OpenSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the connections requiring enabled security policies.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -5933,16 +7491,18 @@ func (r *OpenSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenSecurityPolicyResponseParams struct {
+	// Async Process ID. Using DescribeAsyncTaskStatus to query process and status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async Process ID. Using DescribeAsyncTaskStatus to query process and status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *OpenSecurityPolicyResponse) ToJsonString() string {
@@ -5957,7 +7517,6 @@ func (r *OpenSecurityPolicyResponse) FromJsonString(s string) error {
 }
 
 type ProxyGroupDetail struct {
-
 	// Creation time
 	CreateTime *int64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
@@ -6031,7 +7590,6 @@ type ProxyGroupDetail struct {
 }
 
 type ProxyGroupInfo struct {
-
 	// Connection group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -6080,13 +7638,11 @@ type ProxyGroupInfo struct {
 }
 
 type ProxyIdDict struct {
-
 	// Connection ID
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 }
 
 type ProxyInfo struct {
-
 	// Connection instance ID; It's an old parameter, please switch to ProxyId.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -6209,7 +7765,7 @@ type ProxyInfo struct {
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	BanStatus *string `json:"BanStatus,omitempty" name:"BanStatus"`
 
-	// 
+
 	IPList []*IPDetail `json:"IPList,omitempty" name:"IPList"`
 
 	// Specifies whether to enable HTTP3. Valid values:
@@ -6224,7 +7780,6 @@ type ProxyInfo struct {
 }
 
 type ProxySimpleInfo struct {
-
 	// Connection ID
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
@@ -6236,7 +7791,6 @@ type ProxySimpleInfo struct {
 }
 
 type ProxyStatus struct {
-
 	// Connection instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -6255,7 +7809,6 @@ type ProxyStatus struct {
 }
 
 type RealServer struct {
-
 	// Origin server IP or domain name
 	RealServerIP *string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 
@@ -6273,7 +7826,6 @@ type RealServer struct {
 }
 
 type RealServerBindSetReq struct {
-
 	// Origin server ID
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
@@ -6291,7 +7843,6 @@ type RealServerBindSetReq struct {
 }
 
 type RealServerStatus struct {
-
 	// Origin server ID.
 	RealServerId *string `json:"RealServerId,omitempty" name:"RealServerId"`
 
@@ -6307,7 +7858,6 @@ type RealServerStatus struct {
 }
 
 type RegionDetail struct {
-
 	// Region ID
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
@@ -6338,9 +7888,15 @@ type RegionDetail struct {
 	FeatureBitmap *uint64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
+// Predefined struct for user
+type RemoveRealServersRequestParams struct {
+	// List of origin server IDs
+	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
+}
+
 type RemoveRealServersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of origin server IDs
 	RealServerIds []*string `json:"RealServerIds,omitempty" name:"RealServerIds"`
 }
@@ -6364,13 +7920,15 @@ func (r *RemoveRealServersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveRealServersResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveRealServersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveRealServersResponseParams `json:"Response"`
 }
 
 func (r *RemoveRealServersResponse) ToJsonString() string {
@@ -6385,7 +7943,6 @@ func (r *RemoveRealServersResponse) FromJsonString(s string) error {
 }
 
 type RuleCheckParams struct {
-
 	// Time interval of health check
 	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
 
@@ -6419,7 +7976,6 @@ type RuleCheckParams struct {
 }
 
 type RuleInfo struct {
-
 	// Rule information
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -6471,7 +8027,6 @@ type RuleInfo struct {
 }
 
 type SecurityPolicyRuleIn struct {
-
 	// Source IP or IP range of the request.
 	SourceCidr *string `json:"SourceCidr,omitempty" name:"SourceCidr"`
 
@@ -6493,7 +8048,6 @@ type SecurityPolicyRuleIn struct {
 }
 
 type SecurityPolicyRuleOut struct {
-
 	// Policy: Allow (ACCEPT) or reject (DROP).
 	Action *string `json:"Action,omitempty" name:"Action"`
 
@@ -6518,9 +8072,51 @@ type SecurityPolicyRuleOut struct {
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 }
 
+// Predefined struct for user
+type SetAuthenticationRequestParams struct {
+	// Listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// The domain name requiring advanced configuration, i.e., the domain name of the listener's forwarding rules.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Whether to enable the basic authentication:
+	// 0: disable basic authentication;
+	// 1: enable basic authentication.
+	// The default value is 0.
+	BasicAuth *int64 `json:"BasicAuth,omitempty" name:"BasicAuth"`
+
+	// Whether to enable the connection authentication, which is for the origin server to authenticate GAAP.
+	// 0: disable;
+	// 1: enable.
+	// The default value is 0.
+	GaapAuth *int64 `json:"GaapAuth,omitempty" name:"GaapAuth"`
+
+	// Whether to enable the origin server authentication, which is for GAAP to authenticate the server.
+	// 0: disable;
+	// 1: enable.
+	// The default value is 0.
+	RealServerAuth *int64 `json:"RealServerAuth,omitempty" name:"RealServerAuth"`
+
+	// Basic authentication configuration ID, which is obtained from the certificate management page.
+	BasicAuthConfId *string `json:"BasicAuthConfId,omitempty" name:"BasicAuthConfId"`
+
+	// Connection SSL certificate ID, which is obtained from the certificate management page.
+	GaapCertificateId *string `json:"GaapCertificateId,omitempty" name:"GaapCertificateId"`
+
+	// CA certificate ID of the origin server, which is obtained from the certificate management page. When authenticating the origin server, enter this parameter or the `RealServerCertificateIds` parameter.
+	RealServerCertificateId *string `json:"RealServerCertificateId,omitempty" name:"RealServerCertificateId"`
+
+	// This field has been disused. Use ServerNameIndication instead.
+	RealServerCertificateDomain *string `json:"RealServerCertificateDomain,omitempty" name:"RealServerCertificateDomain"`
+
+	// CA certificate IDs of multiple origin servers, which are obtained from the certificate management page. When authenticating the origin servers, enter this parameter or the `RealServerCertificateId` parameter.
+	PolyRealServerCertificateIds []*string `json:"PolyRealServerCertificateIds,omitempty" name:"PolyRealServerCertificateIds"`
+}
+
 type SetAuthenticationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -6589,13 +8185,15 @@ func (r *SetAuthenticationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetAuthenticationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetAuthenticationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetAuthenticationResponseParams `json:"Response"`
 }
 
 func (r *SetAuthenticationResponse) ToJsonString() string {
@@ -6610,7 +8208,6 @@ func (r *SetAuthenticationResponse) FromJsonString(s string) error {
 }
 
 type StatisticsDataInfo struct {
-
 	// Corresponding time point
 	Time *uint64 `json:"Time,omitempty" name:"Time"`
 
@@ -6620,7 +8217,6 @@ type StatisticsDataInfo struct {
 }
 
 type TCPListener struct {
-
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
@@ -6699,7 +8295,6 @@ type TCPListener struct {
 }
 
 type TagPair struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -6708,7 +8303,6 @@ type TagPair struct {
 }
 
 type TagResourceInfo struct {
-
 	// Resource types:
 	// `Proxy`: connections;
 	// `ProxyGroup`: connection groups;
@@ -6720,7 +8314,6 @@ type TagResourceInfo struct {
 }
 
 type UDPListener struct {
-
 	// Listener ID
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 

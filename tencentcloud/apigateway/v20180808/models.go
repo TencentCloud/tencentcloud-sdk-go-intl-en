@@ -21,7 +21,6 @@ import (
 )
 
 type APIDoc struct {
-
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 
@@ -33,7 +32,6 @@ type APIDoc struct {
 }
 
 type APIDocInfo struct {
-
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 
@@ -78,7 +76,6 @@ type APIDocInfo struct {
 }
 
 type APIDocs struct {
-
 	// Number of API documents
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -87,7 +84,6 @@ type APIDocs struct {
 }
 
 type ApiAppApiInfo struct {
-
 	// Application name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
@@ -121,7 +117,6 @@ type ApiAppApiInfo struct {
 }
 
 type ApiAppApiInfos struct {
-
 	// Quantity
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -131,7 +126,6 @@ type ApiAppApiInfos struct {
 }
 
 type ApiAppInfo struct {
-
 	// Application name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
@@ -161,7 +155,6 @@ type ApiAppInfo struct {
 }
 
 type ApiAppInfos struct {
-
 	// Number of applications
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -171,7 +164,6 @@ type ApiAppInfos struct {
 }
 
 type ApiEnvironmentStrategy struct {
-
 	// Unique API ID.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
@@ -189,7 +181,6 @@ type ApiEnvironmentStrategy struct {
 }
 
 type ApiEnvironmentStrategyStataus struct {
-
 	// Number of throttling policies bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -200,7 +191,6 @@ type ApiEnvironmentStrategyStataus struct {
 }
 
 type ApiIdStatus struct {
-
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -268,7 +258,6 @@ type ApiIdStatus struct {
 }
 
 type ApiInfo struct {
-
 	// Unique service ID of API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
@@ -475,7 +464,6 @@ type ApiInfo struct {
 }
 
 type ApiInfoSummary struct {
-
 	// Total number of APIs that can use this plugin
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -484,7 +472,6 @@ type ApiInfoSummary struct {
 }
 
 type ApiKey struct {
-
 	// Created API key ID.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 
@@ -508,7 +495,6 @@ type ApiKey struct {
 }
 
 type ApiKeysStatus struct {
-
 	// Number of eligible API keys.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -519,7 +505,6 @@ type ApiKeysStatus struct {
 }
 
 type ApiRequestConfig struct {
-
 	// path
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -528,7 +513,6 @@ type ApiRequestConfig struct {
 }
 
 type ApiUsagePlan struct {
-
 	// Unique service ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
@@ -591,7 +575,6 @@ type ApiUsagePlan struct {
 }
 
 type ApiUsagePlanSet struct {
-
 	// Total number of usage plans bound to API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -602,7 +585,6 @@ type ApiUsagePlanSet struct {
 }
 
 type ApisStatus struct {
-
 	// Number of eligible APIs.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -610,9 +592,24 @@ type ApisStatus struct {
 	ApiIdStatusSet []*DesApisStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
 }
 
+// Predefined struct for user
+type AttachPluginRequestParams struct {
+	// ID of the plugin to be bound
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API environment
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// List of APIs bound with the plugin
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type AttachPluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be bound
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -648,16 +645,18 @@ func (r *AttachPluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachPluginResponseParams struct {
+	// Whether binding succeeded.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachPluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachPluginResponseParams `json:"Response"`
 }
 
 func (r *AttachPluginResponse) ToJsonString() string {
@@ -672,7 +671,6 @@ func (r *AttachPluginResponse) FromJsonString(s string) error {
 }
 
 type AttachedApiInfo struct {
-
 	// ID of the service to which the API belongs
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -701,7 +699,6 @@ type AttachedApiInfo struct {
 }
 
 type AttachedApiSummary struct {
-
 	// Number of APIs bound with the plugin
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -710,7 +707,6 @@ type AttachedApiSummary struct {
 }
 
 type AvailableApiInfo struct {
-
 	// API ID
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
@@ -736,7 +732,6 @@ type AvailableApiInfo struct {
 }
 
 type Base64EncodedTriggerRule struct {
-
 	// Header for triggering encoding. Valid values are `Accept` and `Content_Type`, corresponding to the `Accept` and `Content-Type` headers in the data stream request, respectively.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -751,9 +746,24 @@ type Base64EncodedTriggerRule struct {
 	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type BindApiAppRequestParams struct {
+	// Unique ID of the application to be bound.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Environment to be bound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the API to be bound.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
 type BindApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the application to be bound.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 
@@ -789,17 +799,19 @@ func (r *BindApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindApiAppResponseParams struct {
+	// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindApiAppResponseParams `json:"Response"`
 }
 
 func (r *BindApiAppResponse) ToJsonString() string {
@@ -814,7 +826,6 @@ func (r *BindApiAppResponse) FromJsonString(s string) error {
 }
 
 type BindApiInfo struct {
-
 	// Unique API ID.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
@@ -833,9 +844,27 @@ type BindApiInfo struct {
 	BindTime *string `json:"BindTime,omitempty" name:"BindTime"`
 }
 
+// Predefined struct for user
+type BindEnvironmentRequestParams struct {
+	// List of unique IDs of the usage plans to be bound.
+	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds"`
+
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
+	BindType *string `json:"BindType,omitempty" name:"BindType"`
+
+	// Environment to be bound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID array, which is required if `bindType` is `API`.
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type BindEnvironmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of unique IDs of the usage plans to be bound.
 	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds"`
 
@@ -875,17 +904,19 @@ func (r *BindEnvironmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindEnvironmentResponseParams struct {
+	// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindEnvironmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindEnvironmentResponseParams `json:"Response"`
 }
 
 func (r *BindEnvironmentResponse) ToJsonString() string {
@@ -899,9 +930,24 @@ func (r *BindEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindIPStrategyRequestParams struct {
+	// Unique service ID of the IP policy to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the IP policy to be bound.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Environment to be bound to IP policy.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// List of APIs to be bound to IP policy.
+	BindApiIds []*string `json:"BindApiIds,omitempty" name:"BindApiIds"`
+}
+
 type BindIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of the IP policy to be bound.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -937,17 +983,19 @@ func (r *BindIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindIPStrategyResponseParams struct {
+	// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *BindIPStrategyResponse) ToJsonString() string {
@@ -961,9 +1009,18 @@ func (r *BindIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindSecretIdsRequestParams struct {
+	// Unique ID of the usage plan to be bound.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Array of IDs of the keys to be bound.
+	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds"`
+}
+
 type BindSecretIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the usage plan to be bound.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -991,17 +1048,19 @@ func (r *BindSecretIdsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindSecretIdsResponseParams struct {
+	// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindSecretIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindSecretIdsResponseParams `json:"Response"`
 }
 
 func (r *BindSecretIdsResponse) ToJsonString() string {
@@ -1015,9 +1074,39 @@ func (r *BindSecretIdsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindSubDomainRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom domain name to be bound.
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+
+	// Protocol supported by service. Valid values: http, https, http&https.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Network type. Valid values: OUTER, INNER.
+	NetType *string `json:"NetType,omitempty" name:"NetType"`
+
+	// Whether the default path mapping is used. The default value is `true`. If the value is `false`, the custom path mapping will be used and `PathMappingSet` will be required in this case.
+	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
+
+	// Default domain name.
+	NetSubDomain *string `json:"NetSubDomain,omitempty" name:"NetSubDomain"`
+
+	// Unique certificate ID of the custom domain name to be bound. The certificate can be uploaded if `Protocol` is `https` or `http&https`.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Custom domain name path mapping. It can contain up to 3 `Environment` values which can be set to only `test`, `prepub`, and `release`, respectively.
+	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet"`
+
+	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
+}
+
 type BindSubDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -1073,17 +1162,19 @@ func (r *BindSubDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindSubDomainResponseParams struct {
+	// Whether binding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindSubDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether binding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindSubDomainResponseParams `json:"Response"`
 }
 
 func (r *BindSubDomainResponse) ToJsonString() string {
@@ -1097,9 +1188,15 @@ func (r *BindSubDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BuildAPIDocRequestParams struct {
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
 type BuildAPIDocRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 }
@@ -1123,16 +1220,18 @@ func (r *BuildAPIDocRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BuildAPIDocResponseParams struct {
+	// Whether the operation succeeded
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BuildAPIDocResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the operation succeeded
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BuildAPIDocResponseParams `json:"Response"`
 }
 
 func (r *BuildAPIDocResponse) ToJsonString() string {
@@ -1147,7 +1246,6 @@ func (r *BuildAPIDocResponse) FromJsonString(s string) error {
 }
 
 type ConstantParameter struct {
-
 	// Constant parameter name, which is used only if `ServiceType` is `HTTP`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1162,7 +1260,6 @@ type ConstantParameter struct {
 }
 
 type CosConfig struct {
-
 	// Specifies how the backend COS bucket is called by the API. The frontend request method and Action can be:
 	// GET：GetObject
 	// PUT：PutObject
@@ -1189,9 +1286,24 @@ type CosConfig struct {
 	PathMatchMode *string `json:"PathMatchMode,omitempty" name:"PathMatchMode"`
 }
 
+// Predefined struct for user
+type CreateAPIDocRequestParams struct {
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// Service name
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// List of APIs for which to generate documents
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type CreateAPIDocRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document name
 	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
 
@@ -1227,16 +1339,18 @@ func (r *CreateAPIDocRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAPIDocResponseParams struct {
+	// Basic information of API document
+	Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAPIDocResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Basic information of API document
-		Result *APIDoc `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAPIDocResponseParams `json:"Response"`
 }
 
 func (r *CreateAPIDocResponse) ToJsonString() string {
@@ -1250,9 +1364,18 @@ func (r *CreateAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiAppRequestParams struct {
+	// Custom application name.
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Application description
+	ApiAppDesc *string `json:"ApiAppDesc,omitempty" name:"ApiAppDesc"`
+}
+
 type CreateApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom application name.
 	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
 
@@ -1280,17 +1403,19 @@ func (r *CreateApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiAppResponseParams struct {
+	// New application details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiAppInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// New application details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiAppInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateApiAppResponseParams `json:"Response"`
 }
 
 func (r *CreateApiAppResponse) ToJsonString() string {
@@ -1304,9 +1429,24 @@ func (r *CreateApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiKeyRequestParams struct {
+	// Custom key name.
+	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+
+	// Key type. Valid values: auto, manual (custom key). Default value: auto.
+	AccessKeyType *string `json:"AccessKeyType,omitempty" name:"AccessKeyType"`
+
+	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
+	AccessKeySecret *string `json:"AccessKeySecret,omitempty" name:"AccessKeySecret"`
+}
+
 type CreateApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom key name.
 	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
 
@@ -1342,17 +1482,19 @@ func (r *CreateApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiKeyResponseParams struct {
+	// New key details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiKey `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// New key details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiKey `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateApiKeyResponseParams `json:"Response"`
 }
 
 func (r *CreateApiKeyResponse) ToJsonString() string {
@@ -1366,9 +1508,171 @@ func (r *CreateApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API backend service type. Valid values: HTTP, MOCK, TSF, SCF, WEBSOCKET, TARGET (in beta test).
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// API backend service timeout period in seconds.
+	ServiceTimeout *int64 `json:"ServiceTimeout,omitempty" name:"ServiceTimeout"`
+
+	// API frontend request protocol. Valid values: HTTPS, WEBSOCKET.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Request frontend configuration.
+	RequestConfig *ApiRequestConfig `json:"RequestConfig,omitempty" name:"RequestConfig"`
+
+	// Custom API name.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// Custom API description.
+	ApiDesc *string `json:"ApiDesc,omitempty" name:"ApiDesc"`
+
+	// API type. Valid values: NORMAL (general API), TSF (microservice API). Default value: NORMAL.
+	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
+
+	// API authentication type. Valid values: SECRET (key pair authentication), NONE (no authentication), OAUTH, APP (application authentication). Default value: NONE.
+	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
+
+	// Whether to enable CORS.
+	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
+
+	// Constant parameter.
+	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters"`
+
+	// Frontend request parameter.
+	RequestParameters []*RequestParameter `json:"RequestParameters,omitempty" name:"RequestParameters"`
+
+	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
+	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
+
+	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
+	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
+
+	// List of microservices bound to API.
+	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices"`
+
+	// Load balancing configuration of microservice.
+	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
+
+	// Health check configuration of microservice.
+	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
+
+	// `target` type backend resource information (in beta test).
+	TargetServices []*TargetServicesReq `json:"TargetServices,omitempty" name:"TargetServices"`
+
+	// `target` type load balancing configuration (in beta test).
+	TargetServicesLoadBalanceConf *int64 `json:"TargetServicesLoadBalanceConf,omitempty" name:"TargetServicesLoadBalanceConf"`
+
+	// `target` health check configuration (in beta test).
+	TargetServicesHealthCheckConf *HealthCheckConf `json:"TargetServicesHealthCheckConf,omitempty" name:"TargetServicesHealthCheckConf"`
+
+	// SCF function name, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionName *string `json:"ServiceScfFunctionName,omitempty" name:"ServiceScfFunctionName"`
+
+	// SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionName *string `json:"ServiceWebsocketRegisterFunctionName,omitempty" name:"ServiceWebsocketRegisterFunctionName"`
+
+	// SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionName *string `json:"ServiceWebsocketCleanupFunctionName,omitempty" name:"ServiceWebsocketCleanupFunctionName"`
+
+	// SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionName *string `json:"ServiceWebsocketTransportFunctionName,omitempty" name:"ServiceWebsocketTransportFunctionName"`
+
+	// SCF function namespace, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionNamespace *string `json:"ServiceScfFunctionNamespace,omitempty" name:"ServiceScfFunctionNamespace"`
+
+	// SCF function version, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionQualifier *string `json:"ServiceScfFunctionQualifier,omitempty" name:"ServiceScfFunctionQualifier"`
+
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionNamespace *string `json:"ServiceWebsocketRegisterFunctionNamespace,omitempty" name:"ServiceWebsocketRegisterFunctionNamespace"`
+
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionQualifier *string `json:"ServiceWebsocketRegisterFunctionQualifier,omitempty" name:"ServiceWebsocketRegisterFunctionQualifier"`
+
+	// SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionNamespace *string `json:"ServiceWebsocketTransportFunctionNamespace,omitempty" name:"ServiceWebsocketTransportFunctionNamespace"`
+
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionQualifier *string `json:"ServiceWebsocketTransportFunctionQualifier,omitempty" name:"ServiceWebsocketTransportFunctionQualifier"`
+
+	// SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionNamespace *string `json:"ServiceWebsocketCleanupFunctionNamespace,omitempty" name:"ServiceWebsocketCleanupFunctionNamespace"`
+
+	// SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionQualifier *string `json:"ServiceWebsocketCleanupFunctionQualifier,omitempty" name:"ServiceWebsocketCleanupFunctionQualifier"`
+
+	// Whether to enable response integration, which takes effect if the backend type is `SCF`.
+	ServiceScfIsIntegratedResponse *bool `json:"ServiceScfIsIntegratedResponse,omitempty" name:"ServiceScfIsIntegratedResponse"`
+
+	// Billing after debugging starts (reserved field for marketplace).
+	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
+
+	// Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+	IsDeleteResponseErrorCodes *bool `json:"IsDeleteResponseErrorCodes,omitempty" name:"IsDeleteResponseErrorCodes"`
+
+	// Return type.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Sample response for successful custom response configuration.
+	ResponseSuccessExample *string `json:"ResponseSuccessExample,omitempty" name:"ResponseSuccessExample"`
+
+	// Sample response for failed custom response configuration.
+	ResponseFailExample *string `json:"ResponseFailExample,omitempty" name:"ResponseFailExample"`
+
+	// API backend service configuration.
+	ServiceConfig *ServiceConfig `json:"ServiceConfig,omitempty" name:"ServiceConfig"`
+
+	// Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
+
+	// API backend service parameter.
+	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters"`
+
+	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
+	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
+
+	// Custom error code configuration.
+	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes"`
+
+	// TSF Serverless namespace ID (in beta test).
+	TargetNamespaceId *string `json:"TargetNamespaceId,omitempty" name:"TargetNamespaceId"`
+
+	// User type.
+	UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
+
+	// Event bus ID.
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// SCF function type, which takes effect if the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
+	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
+
+	// EIAM application type.
+	EIAMAppType *string `json:"EIAMAppType,omitempty" name:"EIAMAppType"`
+
+	// EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+	EIAMAuthType *string `json:"EIAMAuthType,omitempty" name:"EIAMAuthType"`
+
+	// Validity of the EIAM application token. Unit: second. Default value: `7200`.
+	TokenTimeout *int64 `json:"TokenTimeout,omitempty" name:"TokenTimeout"`
+
+	// EIAM application ID.
+	EIAMAppId *string `json:"EIAMAppId,omitempty" name:"EIAMAppId"`
+
+	// Owner of the resource
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+}
+
 type CreateApiRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -1600,17 +1904,19 @@ func (r *CreateApiRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateApiResponseParams struct {
+	// API information
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *CreateApiRsp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateApiResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API information
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *CreateApiRsp `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateApiResponseParams `json:"Response"`
 }
 
 func (r *CreateApiResponse) ToJsonString() string {
@@ -1625,7 +1931,6 @@ func (r *CreateApiResponse) FromJsonString(s string) error {
 }
 
 type CreateApiRsp struct {
-
 	// API ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
@@ -1655,9 +1960,24 @@ type CreateApiRsp struct {
 	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
 }
 
+// Predefined struct for user
+type CreateIPStrategyRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom policy name.
+	StrategyName *string `json:"StrategyName,omitempty" name:"StrategyName"`
+
+	// Policy type. Valid values: WHITE (allowlist), BLACK (blocklist).
+	StrategyType *string `json:"StrategyType,omitempty" name:"StrategyType"`
+
+	// Policy details. Multiple IPs are separated with \n.
+	StrategyData *string `json:"StrategyData,omitempty" name:"StrategyData"`
+}
+
 type CreateIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -1693,17 +2013,19 @@ func (r *CreateIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateIPStrategyResponseParams struct {
+	// New IP policy details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *IPStrategy `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// New IP policy details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *IPStrategy `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *CreateIPStrategyResponse) ToJsonString() string {
@@ -1717,9 +2039,27 @@ func (r *CreateIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePluginRequestParams struct {
+	// Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin type. Valid values: `IPControl`, `TrafficControl`, `Cors`, `CustomReq`, `CustomAuth`, `Routing`, `TrafficControlByParameter`, `CircuitBreaker`, `ProxyCache`
+	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
+
+	// Plugin definition statement in json format
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+
+	// Plugin description within 200 characters
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Label
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreatePluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom plugin name. A plugin name should contain 2-50 characters out of a-z, A-Z, 0-9, and _, which must begin with a letter and end with a letter or a number.
 	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
 
@@ -1759,16 +2099,18 @@ func (r *CreatePluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePluginResponseParams struct {
+	// Details of the new plugin
+	Result *Plugin `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of the new plugin
-		Result *Plugin `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePluginResponseParams `json:"Response"`
 }
 
 func (r *CreatePluginResponse) ToJsonString() string {
@@ -1782,9 +2124,45 @@ func (r *CreatePluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceRequestParams struct {
+	// Custom service name.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Service frontend request type, such as `http`, `https`, and `http&https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Custom service description.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Dedicated cluster name, which is used to specify the dedicated cluster where the service is to be created.
+	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
+
+	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+
+	// IP version number. Valid values: IPv4, IPv6. Default value: IPv4.
+	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+	// Cluster name, which is reserved and used by the `tsf serverless` type.
+	SetServerName *string `json:"SetServerName,omitempty" name:"SetServerName"`
+
+	// User type, which is reserved and can be used by `serverless` users.
+	AppIdType *string `json:"AppIdType,omitempty" name:"AppIdType"`
+
+	// Tag information.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Dedicated instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// VPC attribute
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+}
+
 type CreateServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom service name.
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
@@ -1848,38 +2226,40 @@ func (r *CreateServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceResponseParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom service name.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Custom service description.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Default public domain name.
+	OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
+
+	// Default VPC domain name.
+	InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
+
+	// Service creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Network type list. INNER: private network access; OUTER: public network access.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+
+	// IP version number.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique service ID.
-		ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
-
-		// Custom service name.
-		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-		// Custom service description.
-		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
-
-		// Default public domain name.
-		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
-
-		// Default VPC domain name.
-		InnerSubDomain *string `json:"InnerSubDomain,omitempty" name:"InnerSubDomain"`
-
-		// Service creation time in the format of `YYYY-MM-DDThh:mm:ssZ` according to ISO 8601 standard. UTC time is used.
-		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-		// Network type list. INNER: private network access; OUTER: public network access.
-		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
-
-		// IP version number.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateServiceResponseParams `json:"Response"`
 }
 
 func (r *CreateServiceResponse) ToJsonString() string {
@@ -1893,9 +2273,48 @@ func (r *CreateServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUpstreamRequestParams struct {
+	// Backend protocol. Valid values: `HTTP`, `HTTPS`
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// Load balancing algorithm. Valid value: `ROUND-ROBIN`
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Unique VPC ID
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Upstream name
+	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
+
+	// Upstream description
+	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Upstream access type. Valid values: `IP_PORT`, `K8S`
+	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
+
+	// Retry attempts. It defaults to `3`.
+	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
+
+	// The Host request header that forwarded from the gateway to backend
+	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
+
+	// Backend nodes
+	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// Label
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Health check configuration
+	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
+
+	// Configuration of TKE service
+	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
+}
+
 type CreateUpstreamRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Backend protocol. Valid values: `HTTP`, `HTTPS`
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
@@ -1963,17 +2382,19 @@ func (r *CreateUpstreamRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUpstreamResponseParams struct {
+	// The unique upstream ID returned
+	// Note: This field may return `NULL`, indicating that no valid value was found.
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUpstreamResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique upstream ID returned
-	// Note: This field may return `NULL`, indicating that no valid value was found.
-		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUpstreamResponseParams `json:"Response"`
 }
 
 func (r *CreateUpstreamResponse) ToJsonString() string {
@@ -1987,9 +2408,24 @@ func (r *CreateUpstreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUsagePlanRequestParams struct {
+	// Custom usage plan name.
+	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
+
+	// Custom usage plan description.
+	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
+
+	// Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is `-1`, which indicates no limit.
+	MaxRequestNum *int64 `json:"MaxRequestNum,omitempty" name:"MaxRequestNum"`
+
+	// Limit of requests per second. Valid values: -1, [1,2000]. The default value is `-1`, which indicates no limit.
+	MaxRequestNumPreSec *int64 `json:"MaxRequestNumPreSec,omitempty" name:"MaxRequestNumPreSec"`
+}
+
 type CreateUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom usage plan name.
 	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
 
@@ -2025,17 +2461,19 @@ func (r *CreateUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUsagePlanResponseParams struct {
+	// Usage plan details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Usage plan details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *CreateUsagePlanResponse) ToJsonString() string {
@@ -2049,9 +2487,15 @@ func (r *CreateUsagePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAPIDocRequestParams struct {
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
 type DeleteAPIDocRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 }
@@ -2075,16 +2519,18 @@ func (r *DeleteAPIDocRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAPIDocResponseParams struct {
+	// Whether the operation succeeded
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAPIDocResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the operation succeeded
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAPIDocResponseParams `json:"Response"`
 }
 
 func (r *DeleteAPIDocResponse) ToJsonString() string {
@@ -2098,9 +2544,15 @@ func (r *DeleteAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiAppRequestParams struct {
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+}
+
 type DeleteApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique application ID.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 }
@@ -2124,17 +2576,19 @@ func (r *DeleteApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiAppResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteApiAppResponseParams `json:"Response"`
 }
 
 func (r *DeleteApiAppResponse) ToJsonString() string {
@@ -2148,9 +2602,15 @@ func (r *DeleteApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiKeyRequestParams struct {
+	// ID of the key to be deleted.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+}
+
 type DeleteApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the key to be deleted.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 }
@@ -2174,17 +2634,19 @@ func (r *DeleteApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiKeyResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteApiKeyResponseParams `json:"Response"`
 }
 
 func (r *DeleteApiKeyResponse) ToJsonString() string {
@@ -2198,9 +2660,18 @@ func (r *DeleteApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
 type DeleteApiRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2228,17 +2699,19 @@ func (r *DeleteApiRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteApiResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteApiResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteApiResponseParams `json:"Response"`
 }
 
 func (r *DeleteApiResponse) ToJsonString() string {
@@ -2252,9 +2725,18 @@ func (r *DeleteApiResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIPStrategyRequestParams struct {
+	// Unique service ID of the IP policy to be deleted.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the IP policy to be deleted.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+}
+
 type DeleteIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of the IP policy to be deleted.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2282,17 +2764,19 @@ func (r *DeleteIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIPStrategyResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *DeleteIPStrategyResponse) ToJsonString() string {
@@ -2306,9 +2790,15 @@ func (r *DeleteIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePluginRequestParams struct {
+	// ID of the plugin to be deleted
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+}
+
 type DeletePluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be deleted
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 }
@@ -2332,16 +2822,18 @@ func (r *DeletePluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePluginResponseParams struct {
+	// Result of the deletion action
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Result of the deletion action
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePluginResponseParams `json:"Response"`
 }
 
 func (r *DeletePluginResponse) ToJsonString() string {
@@ -2355,9 +2847,18 @@ func (r *DeletePluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceRequestParams struct {
+	// Unique ID of the service to be deleted.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// A parameter used to set to skip the deletion precondition verification (only supported for services on dedicated instances).
+	SkipVerification *int64 `json:"SkipVerification,omitempty" name:"SkipVerification"`
+}
+
 type DeleteServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be deleted.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2385,17 +2886,19 @@ func (r *DeleteServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServiceResponseParams `json:"Response"`
 }
 
 func (r *DeleteServiceResponse) ToJsonString() string {
@@ -2409,9 +2912,21 @@ func (r *DeleteServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceSubDomainMappingRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom domain name bound to service.
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+
+	// Name of the environment whose mapping is to be deleted. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+}
+
 type DeleteServiceSubDomainMappingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2443,16 +2958,18 @@ func (r *DeleteServiceSubDomainMappingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceSubDomainMappingResponseParams struct {
+	// Whether the path mapping of the custom domain name is successfully deleted.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServiceSubDomainMappingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the path mapping of the custom domain name is successfully deleted.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServiceSubDomainMappingResponseParams `json:"Response"`
 }
 
 func (r *DeleteServiceSubDomainMappingResponse) ToJsonString() string {
@@ -2466,9 +2983,15 @@ func (r *DeleteServiceSubDomainMappingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUpstreamRequestParams struct {
+	// ID of the upstream to be deleted
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+}
+
 type DeleteUpstreamRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the upstream to be deleted
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 }
@@ -2492,17 +3015,19 @@ func (r *DeleteUpstreamRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUpstreamResponseParams struct {
+	// ID of the deleted upstream
+	// Note: This field may return `NULL`, indicating that no valid value was found.
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteUpstreamResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID of the deleted upstream
-	// Note: This field may return `NULL`, indicating that no valid value was found.
-		UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteUpstreamResponseParams `json:"Response"`
 }
 
 func (r *DeleteUpstreamResponse) ToJsonString() string {
@@ -2516,9 +3041,15 @@ func (r *DeleteUpstreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUsagePlanRequestParams struct {
+	// Unique ID of the usage plan to be deleted.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+}
+
 type DeleteUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the usage plan to be deleted.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 }
@@ -2542,17 +3073,19 @@ func (r *DeleteUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUsagePlanResponseParams struct {
+	// Whether deletion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *DeleteUsagePlanResponse) ToJsonString() string {
@@ -2566,9 +3099,21 @@ func (r *DeleteUsagePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DemoteServiceUsagePlanRequestParams struct {
+	// Usage plan ID.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Unique ID of the service to be demoted.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+}
+
 type DemoteServiceUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Usage plan ID.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -2600,17 +3145,19 @@ func (r *DemoteServiceUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DemoteServiceUsagePlanResponseParams struct {
+	// Whether demotion succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DemoteServiceUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether demotion succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DemoteServiceUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *DemoteServiceUsagePlanResponse) ToJsonString() string {
@@ -2625,7 +3172,6 @@ func (r *DemoteServiceUsagePlanResponse) FromJsonString(s string) error {
 }
 
 type DesApisStatus struct {
-
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2701,9 +3247,15 @@ type DesApisStatus struct {
 	Method *string `json:"Method,omitempty" name:"Method"`
 }
 
+// Predefined struct for user
+type DescribeAPIDocDetailRequestParams struct {
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
 type DescribeAPIDocDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 }
@@ -2727,16 +3279,18 @@ func (r *DescribeAPIDocDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAPIDocDetailResponseParams struct {
+	// API document details
+	Result *APIDocInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAPIDocDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API document details
-		Result *APIDocInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAPIDocDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeAPIDocDetailResponse) ToJsonString() string {
@@ -2750,9 +3304,18 @@ func (r *DescribeAPIDocDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAPIDocsRequestParams struct {
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeAPIDocsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -2780,16 +3343,18 @@ func (r *DescribeAPIDocsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAPIDocsResponseParams struct {
+	// API document list information
+	Result *APIDocs `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAPIDocsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API document list information
-		Result *APIDocs `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAPIDocsResponseParams `json:"Response"`
 }
 
 func (r *DescribeAPIDocsResponse) ToJsonString() string {
@@ -2803,9 +3368,27 @@ func (r *DescribeAPIDocsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllPluginApisRequestParams struct {
+	// ID of the service to be queried
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Environment information
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeAllPluginApisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the service to be queried
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -2845,16 +3428,18 @@ func (r *DescribeAllPluginApisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllPluginApisResponseParams struct {
+	// List of APIs that ca use this plugin
+	Result *ApiInfoSummary `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAllPluginApisResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of APIs that ca use this plugin
-		Result *ApiInfoSummary `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAllPluginApisResponseParams `json:"Response"`
 }
 
 func (r *DescribeAllPluginApisResponse) ToJsonString() string {
@@ -2868,9 +3453,24 @@ func (r *DescribeAllPluginApisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppBindApisStatusRequestParams struct {
+	// Application ID
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiId, ApiName, ServiceId, Environment, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeApiAppBindApisStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 
@@ -2906,17 +3506,19 @@ func (r *DescribeApiAppBindApisStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppBindApisStatusResponseParams struct {
+	// List of APIs bound to the application.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiAppBindApisStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of APIs bound to the application.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiAppBindApisStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiAppBindApisStatusResponse) ToJsonString() string {
@@ -2930,9 +3532,15 @@ func (r *DescribeApiAppBindApisStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppRequestParams struct {
+	// Application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+}
+
 type DescribeApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 }
@@ -2956,17 +3564,19 @@ func (r *DescribeApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppResponseParams struct {
+	// Application details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Application details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiAppResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiAppResponse) ToJsonString() string {
@@ -2980,9 +3590,21 @@ func (r *DescribeApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppsStatusRequestParams struct {
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiAppId, ApiAppName, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeApiAppsStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -3014,17 +3636,19 @@ func (r *DescribeApiAppsStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiAppsStatusResponseParams struct {
+	// Application list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiAppsStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Application list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiAppInfos `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiAppsStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiAppsStatusResponse) ToJsonString() string {
@@ -3038,9 +3662,27 @@ func (r *DescribeApiAppsStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiBindApiAppsStatusRequestParams struct {
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Array of API IDs
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiAppId, Environment, KeyWord (match with `name` or ID).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeApiBindApiAppsStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service ID
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3080,17 +3722,19 @@ func (r *DescribeApiBindApiAppsStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiBindApiAppsStatusResponseParams struct {
+	// List of APIs bound to the application.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiBindApiAppsStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of APIs bound to the application.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiAppApiInfos `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiBindApiAppsStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiBindApiAppsStatusResponse) ToJsonString() string {
@@ -3104,9 +3748,27 @@ func (r *DescribeApiBindApiAppsStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiEnvironmentStrategyRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment list.
+	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames"`
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3146,17 +3808,19 @@ func (r *DescribeApiEnvironmentStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiEnvironmentStrategyResponseParams struct {
+	// Details of policies bound to API
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiEnvironmentStrategyStataus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiEnvironmentStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of policies bound to API
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiEnvironmentStrategyStataus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiEnvironmentStrategyResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiEnvironmentStrategyResponse) ToJsonString() string {
@@ -3170,9 +3834,21 @@ func (r *DescribeApiEnvironmentStrategyResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiForApiAppRequestParams struct {
+	// Unique service ID of the API
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// API region
+	ApiRegion *string `json:"ApiRegion,omitempty" name:"ApiRegion"`
+}
+
 type DescribeApiForApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of the API
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3204,16 +3880,18 @@ func (r *DescribeApiForApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiForApiAppResponseParams struct {
+	// API details.
+	Result *ApiInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiForApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API details.
-		Result *ApiInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiForApiAppResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiForApiAppResponse) ToJsonString() string {
@@ -3227,9 +3905,15 @@ func (r *DescribeApiForApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiKeyRequestParams struct {
+	// API key ID.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+}
+
 type DescribeApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API key ID.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 }
@@ -3253,17 +3937,19 @@ func (r *DescribeApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiKeyResponseParams struct {
+	// Key details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiKey `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Key details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiKey `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiKeyResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiKeyResponse) ToJsonString() string {
@@ -3277,9 +3963,21 @@ func (r *DescribeApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiKeysStatusRequestParams struct {
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: AccessKeyId, AccessKeySecret, SecretName, NotUsagePlanId, Status, KeyWord (match with `name` or `path`).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeApiKeysStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -3311,17 +4009,19 @@ func (r *DescribeApiKeysStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiKeysStatusResponseParams struct {
+	// Key list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiKeysStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiKeysStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Key list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiKeysStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiKeysStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiKeysStatusResponse) ToJsonString() string {
@@ -3335,9 +4035,18 @@ func (r *DescribeApiKeysStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
 type DescribeApiRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3365,16 +4074,18 @@ func (r *DescribeApiRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiResponseParams struct {
+	// API details.
+	Result *ApiInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API details.
-		Result *ApiInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiResponse) ToJsonString() string {
@@ -3388,9 +4099,21 @@ func (r *DescribeApiResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiUsagePlanRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeApiUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3422,17 +4145,19 @@ func (r *DescribeApiUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApiUsagePlanResponseParams struct {
+	// List of usage plans bound to API.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiUsagePlanSet `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApiUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of usage plans bound to API.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiUsagePlanSet `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApiUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *DescribeApiUsagePlanResponse) ToJsonString() string {
@@ -3446,9 +4171,24 @@ func (r *DescribeApiUsagePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApisStatusRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeApisStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3484,16 +4224,18 @@ func (r *DescribeApisStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApisStatusResponseParams struct {
+	// List of API details.
+	Result *ApisStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApisStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of API details.
-		Result *ApisStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApisStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeApisStatusResponse) ToJsonString() string {
@@ -3507,9 +4249,30 @@ func (r *DescribeApisStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategyApisStatusRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique policy ID.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Policy environment.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: ApiPath, ApiName, KeyWord (fuzzy search by `Path` and `Name`).
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeIPStrategyApisStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3553,17 +4316,19 @@ func (r *DescribeIPStrategyApisStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategyApisStatusResponseParams struct {
+	// List of APIs bound to environment.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *IPStrategyApiStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIPStrategyApisStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of APIs bound to environment.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *IPStrategyApiStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIPStrategyApisStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeIPStrategyApisStatusResponse) ToJsonString() string {
@@ -3577,9 +4342,30 @@ func (r *DescribeIPStrategyApisStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategyRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique IP policy ID.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Environment associated with policy.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter, which is a reserved field. Filtering is not supported currently.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3623,17 +4409,19 @@ func (r *DescribeIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategyResponseParams struct {
+	// IP policy details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *IPStrategy `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// IP policy details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *IPStrategy `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *DescribeIPStrategyResponse) ToJsonString() string {
@@ -3647,9 +4435,18 @@ func (r *DescribeIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategysStatusRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Filter. Valid values: StrategyName.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeIPStrategysStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3677,17 +4474,19 @@ func (r *DescribeIPStrategysStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPStrategysStatusResponseParams struct {
+	// List of eligible policies.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *IPStrategysStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIPStrategysStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of eligible policies.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *IPStrategysStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIPStrategysStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeIPStrategysStatusResponse) ToJsonString() string {
@@ -3701,9 +4500,49 @@ func (r *DescribeIPStrategysStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogSearchRequestParams struct {
+	// Log start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Reserved field
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Number of logs to be returned at a time. Maximum value: 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Subsequent content can be obtained based on the `ConText` returned last time. Up to 10,000 data entries can be obtained
+	ConText *string `json:"ConText,omitempty" name:"ConText"`
+
+	// Sorting by time. Valid values: asc (ascending), desc (descending). Default value: desc
+	Sort *string `json:"Sort,omitempty" name:"Sort"`
+
+	// Reserved field
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// Search criterion. Valid values:
+	// req_id: "="
+	// api_id: "="
+	// cip: "="
+	// uip: ":"
+	// err_msg: ":"
+	// rsp_st: "=", "!=", ":", ">", "<"
+	// req_t: ">=", "<="
+	// 
+	// Note:
+	// ":" indicates included, and "!=" indicates not equal to. For the meanings of fields, please see the `LogSet` description of the output parameter
+	LogQuerys []*LogQuery `json:"LogQuerys,omitempty" name:"LogQuerys"`
+}
+
 type DescribeLogSearchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -3769,14 +4608,12 @@ func (r *DescribeLogSearchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeLogSearchResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeLogSearchResponseParams struct {
+	// Cursor for getting more search results. If the value is `""`, there will be no subsequent results
+	ConText *string `json:"ConText,omitempty" name:"ConText"`
 
-		// Cursor for getting more search results. If the value is `""`, there will be no subsequent results
-		ConText *string `json:"ConText,omitempty" name:"ConText"`
-
-		// The returned result contains any number of logs, which are in the following format:
+	// The returned result contains any number of logs, which are in the following format:
 	// '[$app_id][$env_name][$service_id][$http_host][$api_id][$uri][$scheme][rsp_st:$status][ups_st:$upstream_status]'
 	// '[cip:$remote_addr][uip:$upstream_addr][vip:$server_addr][rsp_len:$bytes_sent][req_len:$request_length]'
 	// '[req_t:$request_time][ups_rsp_t:$upstream_response_time][ups_conn_t:$upstream_connect_time][ups_head_t:$upstream_header_time]’
@@ -3804,14 +4641,18 @@ type DescribeLogSearchResponse struct {
 	// err_msg: error message.
 	// tcp_rtt: client TCP connection information. RTT (Round Trip Time) consists of three parts: link propagation delay, end system processing delay, and queuing delay in router cache.
 	// req_id: request ID.
-		LogSet []*string `json:"LogSet,omitempty" name:"LogSet"`
+	LogSet []*string `json:"LogSet,omitempty" name:"LogSet"`
 
-		// Number of logs returned for one search (`TotalCount <= Limit`)
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	// Number of logs returned for one search (`TotalCount <= Limit`)
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLogSearchResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogSearchResponseParams `json:"Response"`
 }
 
 func (r *DescribeLogSearchResponse) ToJsonString() string {
@@ -3825,9 +4666,21 @@ func (r *DescribeLogSearchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePluginApisRequestParams struct {
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribePluginApisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be queried
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -3859,16 +4712,18 @@ func (r *DescribePluginApisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePluginApisResponseParams struct {
+	// List of APIs bound with the plugin
+	Result *AttachedApiSummary `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePluginApisResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of APIs bound with the plugin
-		Result *AttachedApiSummary `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePluginApisResponseParams `json:"Response"`
 }
 
 func (r *DescribePluginApisResponse) ToJsonString() string {
@@ -3882,9 +4737,21 @@ func (r *DescribePluginApisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePluginRequestParams struct {
+	// ID of the plugin to be queried
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribePluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be queried
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -3916,16 +4783,18 @@ func (r *DescribePluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePluginResponseParams struct {
+	// Plugin details
+	Result *Plugin `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Plugin details
-		Result *Plugin `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePluginResponseParams `json:"Response"`
 }
 
 func (r *DescribePluginResponse) ToJsonString() string {
@@ -3939,9 +4808,21 @@ func (r *DescribePluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentListRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceEnvironmentListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -3973,17 +4854,19 @@ func (r *DescribeServiceEnvironmentListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentListResponseParams struct {
+	// Details of environments bound to service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServiceEnvironmentSet `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceEnvironmentListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of environments bound to service.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServiceEnvironmentSet `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceEnvironmentListResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceEnvironmentListResponse) ToJsonString() string {
@@ -3997,9 +4880,24 @@ func (r *DescribeServiceEnvironmentListResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentReleaseHistoryRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceEnvironmentReleaseHistoryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4035,17 +4933,19 @@ func (r *DescribeServiceEnvironmentReleaseHistoryRequest) FromJsonString(s strin
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentReleaseHistoryResponseParams struct {
+	// Service release history.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServiceReleaseHistory `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceEnvironmentReleaseHistoryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Service release history.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServiceReleaseHistory `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceEnvironmentReleaseHistoryResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceEnvironmentReleaseHistoryResponse) ToJsonString() string {
@@ -4059,9 +4959,21 @@ func (r *DescribeServiceEnvironmentReleaseHistoryResponse) FromJsonString(s stri
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentStrategyRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4093,17 +5005,19 @@ func (r *DescribeServiceEnvironmentStrategyRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceEnvironmentStrategyResponseParams struct {
+	// Throttling policy list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServiceEnvironmentStrategyStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceEnvironmentStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Throttling policy list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServiceEnvironmentStrategyStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceEnvironmentStrategyResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceEnvironmentStrategyResponse) ToJsonString() string {
@@ -4117,9 +5031,18 @@ func (r *DescribeServiceEnvironmentStrategyResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceForApiAppRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Service region.
+	ApiRegion *string `json:"ApiRegion,omitempty" name:"ApiRegion"`
+}
+
 type DescribeServiceForApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4147,90 +5070,92 @@ func (r *DescribeServiceForApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceForApiAppResponseParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Service environment list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
+
+	// Service name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Service description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Protocol supported by service. Valid values: http, https, http&https.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Service creation time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Service modification time.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Self-Deployed cluster name.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
+
+	// Network type list. INNER: private network access; OUTER: public network access.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+
+	// Subdomain name for private network access.
+	InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
+
+	// Subdomain name for public network access.
+	OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
+
+	// Service port number for HTTP access over private network.
+	InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
+
+	// Port number for HTTPS access over private network.
+	InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
+
+	// Total number of APIs.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiTotalCount *int64 `json:"ApiTotalCount,omitempty" name:"ApiTotalCount"`
+
+	// API list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
+
+	// Total number of usage plans.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
+
+	// Usage plan array.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
+
+	// IP version.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+	// Service user type.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+	// Reserved field.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SetId *int64 `json:"SetId,omitempty" name:"SetId"`
+
+	// Tag bound to the service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceForApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique service ID.
-		ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
-
-		// Service environment list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
-
-		// Service name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-		// Service description.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
-
-		// Protocol supported by service. Valid values: http, https, http&https.
-		Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-		// Service creation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-		// Service modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
-
-		// Self-Deployed cluster name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
-
-		// Network type list. INNER: private network access; OUTER: public network access.
-		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
-
-		// Subdomain name for private network access.
-		InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
-
-		// Subdomain name for public network access.
-		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
-
-		// Service port number for HTTP access over private network.
-		InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
-
-		// Port number for HTTPS access over private network.
-		InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
-
-		// Total number of APIs.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ApiTotalCount *int64 `json:"ApiTotalCount,omitempty" name:"ApiTotalCount"`
-
-		// API list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
-
-		// Total number of usage plans.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
-
-		// Usage plan array.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
-
-		// IP version.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
-
-		// Service user type.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UserType *string `json:"UserType,omitempty" name:"UserType"`
-
-		// Reserved field.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SetId *int64 `json:"SetId,omitempty" name:"SetId"`
-
-		// Tag bound to the service.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceForApiAppResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceForApiAppResponse) ToJsonString() string {
@@ -4244,9 +5169,21 @@ func (r *DescribeServiceForApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceReleaseVersionRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceReleaseVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4278,17 +5215,19 @@ func (r *DescribeServiceReleaseVersionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceReleaseVersionResponseParams struct {
+	// Service release version list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServiceReleaseVersion `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceReleaseVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Service release version list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServiceReleaseVersion `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceReleaseVersionResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceReleaseVersionResponse) ToJsonString() string {
@@ -4302,9 +5241,15 @@ func (r *DescribeServiceReleaseVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+}
+
 type DescribeServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 }
@@ -4328,103 +5273,105 @@ func (r *DescribeServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceResponseParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Service environment list.
+	AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
+
+	// Service name.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Service description.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Protocol supported by service. Valid values: http, https, http&https.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Service creation time.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Service modification time.
+	ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
+
+	// Dedicated cluster name.
+	ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
+
+	// Network type list. INNER: private network access; OUTER: public network access.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+
+	// Subdomain name for private network access.
+	InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
+
+	// Subdomain name for public network access.
+	OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
+
+	// Service port number for HTTP access over private network.
+	InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
+
+	// Port number for HTTPS access over private network.
+	InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
+
+	// Total number of APIs.
+	ApiTotalCount *int64 `json:"ApiTotalCount,omitempty" name:"ApiTotalCount"`
+
+	// API list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
+
+	// Total number of usage plans.
+	UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
+
+	// Usage plan array.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
+
+	// IP version.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
+
+	// Service user type.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UserType *string `json:"UserType,omitempty" name:"UserType"`
+
+	// Reserved field.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SetId *int64 `json:"SetId,omitempty" name:"SetId"`
+
+	// Tags bound to a service.
+	// Note: this field may return null, indicating that no valid values found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Dedicated instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Dedicated instance name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Cluster type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SetType *string `json:"SetType,omitempty" name:"SetType"`
+
+	// Cluster type for service deployment
+	// Note: this field may return null, indicating that no valid values found.
+	DeploymentType *string `json:"DeploymentType,omitempty" name:"DeploymentType"`
+
+	// Whether the service if for special usage. Valid values: `DEFAULT` (general usage), `HTTP_DNS`.
+	// Note: This field may return `NULL`, indicating that no valid value was found.
+	SpecialUse *string `json:"SpecialUse,omitempty" name:"SpecialUse"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique service ID.
-		ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
-
-		// Service environment list.
-		AvailableEnvironments []*string `json:"AvailableEnvironments,omitempty" name:"AvailableEnvironments"`
-
-		// Service name.
-		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-		// Service description.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
-
-		// Protocol supported by service. Valid values: http, https, http&https.
-		Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
-
-		// Service creation time.
-		CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
-
-		// Service modification time.
-		ModifiedTime *string `json:"ModifiedTime,omitempty" name:"ModifiedTime"`
-
-		// Dedicated cluster name.
-		ExclusiveSetName *string `json:"ExclusiveSetName,omitempty" name:"ExclusiveSetName"`
-
-		// Network type list. INNER: private network access; OUTER: public network access.
-		NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
-
-		// Subdomain name for private network access.
-		InternalSubDomain *string `json:"InternalSubDomain,omitempty" name:"InternalSubDomain"`
-
-		// Subdomain name for public network access.
-		OuterSubDomain *string `json:"OuterSubDomain,omitempty" name:"OuterSubDomain"`
-
-		// Service port number for HTTP access over private network.
-		InnerHttpPort *int64 `json:"InnerHttpPort,omitempty" name:"InnerHttpPort"`
-
-		// Port number for HTTPS access over private network.
-		InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
-
-		// Total number of APIs.
-		ApiTotalCount *int64 `json:"ApiTotalCount,omitempty" name:"ApiTotalCount"`
-
-		// API list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ApiIdStatusSet []*ApiIdStatus `json:"ApiIdStatusSet,omitempty" name:"ApiIdStatusSet"`
-
-		// Total number of usage plans.
-		UsagePlanTotalCount *int64 `json:"UsagePlanTotalCount,omitempty" name:"UsagePlanTotalCount"`
-
-		// Usage plan array.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UsagePlanList []*UsagePlan `json:"UsagePlanList,omitempty" name:"UsagePlanList"`
-
-		// IP version.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpVersion *string `json:"IpVersion,omitempty" name:"IpVersion"`
-
-		// Service user type.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UserType *string `json:"UserType,omitempty" name:"UserType"`
-
-		// Reserved field.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SetId *int64 `json:"SetId,omitempty" name:"SetId"`
-
-		// Tags bound to a service.
-	// Note: this field may return null, indicating that no valid values found.
-		Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
-
-		// Dedicated instance ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-		// Dedicated instance name
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
-
-		// Cluster type
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SetType *string `json:"SetType,omitempty" name:"SetType"`
-
-		// Cluster type for service deployment
-	// Note: this field may return null, indicating that no valid values found.
-		DeploymentType *string `json:"DeploymentType,omitempty" name:"DeploymentType"`
-
-		// Whether the service if for special usage. Valid values: `DEFAULT` (general usage), `HTTP_DNS`.
-	// Note: This field may return `NULL`, indicating that no valid value was found.
-		SpecialUse *string `json:"SpecialUse,omitempty" name:"SpecialUse"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceResponse) ToJsonString() string {
@@ -4438,9 +5385,18 @@ func (r *DescribeServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceSubDomainMappingsRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom domain name bound to service.
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+}
+
 type DescribeServiceSubDomainMappingsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4468,16 +5424,18 @@ func (r *DescribeServiceSubDomainMappingsRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceSubDomainMappingsResponseParams struct {
+	// Custom path mapping list.
+	Result *ServiceSubDomainMappings `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceSubDomainMappingsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom path mapping list.
-		Result *ServiceSubDomainMappings `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceSubDomainMappingsResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceSubDomainMappingsResponse) ToJsonString() string {
@@ -4491,9 +5449,21 @@ func (r *DescribeServiceSubDomainMappingsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceSubDomainsRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceSubDomainsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4525,16 +5495,18 @@ func (r *DescribeServiceSubDomainsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceSubDomainsResponseParams struct {
+	// Custom service domain name query.
+	Result *DomainSets `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceSubDomainsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom service domain name query.
-		Result *DomainSets `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceSubDomainsResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceSubDomainsResponse) ToJsonString() string {
@@ -4548,9 +5520,21 @@ func (r *DescribeServiceSubDomainsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceUsagePlanRequestParams struct {
+	// Unique ID of the service to be queried.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeServiceUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be queried.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -4582,17 +5566,19 @@ func (r *DescribeServiceUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceUsagePlanResponseParams struct {
+	// List of usage plans bound to service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServiceUsagePlanSet `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of usage plans bound to service.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServiceUsagePlanSet `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceUsagePlanResponse) ToJsonString() string {
@@ -4606,9 +5592,21 @@ func (r *DescribeServiceUsagePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServicesStatusRequestParams struct {
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter. Valid values: `ServiceId`, `ServiceName`, `NotUsagePlanId`, `Environment`, `IpVersion`, `InstanceId`, `NetType`, `EIAMAppId`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeServicesStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -4640,17 +5638,19 @@ func (r *DescribeServicesStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServicesStatusResponseParams struct {
+	// Service list query result.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ServicesStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServicesStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Service list query result.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ServicesStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServicesStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeServicesStatusResponse) ToJsonString() string {
@@ -4665,7 +5665,6 @@ func (r *DescribeServicesStatusResponse) FromJsonString(s string) error {
 }
 
 type DescribeUpstreamBindApis struct {
-
 	// Total number
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -4673,9 +5672,24 @@ type DescribeUpstreamBindApis struct {
 	BindApiSet []*BindApiInfo `json:"BindApiSet,omitempty" name:"BindApiSet"`
 }
 
+// Predefined struct for user
+type DescribeUpstreamBindApisRequestParams struct {
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The starting position of paging
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Upstream ID
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// Filters the results by `ServiceId` and `ApiId`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeUpstreamBindApisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -4711,16 +5725,18 @@ func (r *DescribeUpstreamBindApisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUpstreamBindApisResponseParams struct {
+	// Query results
+	Result *DescribeUpstreamBindApis `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUpstreamBindApisResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Query results
-		Result *DescribeUpstreamBindApis `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUpstreamBindApisResponseParams `json:"Response"`
 }
 
 func (r *DescribeUpstreamBindApisResponse) ToJsonString() string {
@@ -4735,7 +5751,6 @@ func (r *DescribeUpstreamBindApisResponse) FromJsonString(s string) error {
 }
 
 type DescribeUpstreamInfo struct {
-
 	// Total number of results
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -4743,9 +5758,21 @@ type DescribeUpstreamInfo struct {
 	UpstreamSet []*UpstreamInfo `json:"UpstreamSet,omitempty" name:"UpstreamSet"`
 }
 
+// Predefined struct for user
+type DescribeUpstreamsRequestParams struct {
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The starting position of paging
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filters. Valid values: `UpstreamId` and `UpstreamName`
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeUpstreamsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -4777,16 +5804,18 @@ func (r *DescribeUpstreamsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUpstreamsResponseParams struct {
+	// Query results
+	Result *DescribeUpstreamInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUpstreamsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Query results
-		Result *DescribeUpstreamInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUpstreamsResponseParams `json:"Response"`
 }
 
 func (r *DescribeUpstreamsResponse) ToJsonString() string {
@@ -4800,9 +5829,24 @@ func (r *DescribeUpstreamsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanEnvironmentsRequestParams struct {
+	// Unique ID of the usage plan to be queried.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
+	BindType *string `json:"BindType,omitempty" name:"BindType"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeUsagePlanEnvironmentsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the usage plan to be queried.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -4838,17 +5882,19 @@ func (r *DescribeUsagePlanEnvironmentsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanEnvironmentsResponseParams struct {
+	// Usage plan binding details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlanEnvironmentStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUsagePlanEnvironmentsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Usage plan binding details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlanEnvironmentStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUsagePlanEnvironmentsResponseParams `json:"Response"`
 }
 
 func (r *DescribeUsagePlanEnvironmentsResponse) ToJsonString() string {
@@ -4862,9 +5908,15 @@ func (r *DescribeUsagePlanEnvironmentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanRequestParams struct {
+	// Unique ID of the usage plan to be queried.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+}
+
 type DescribeUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the usage plan to be queried.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 }
@@ -4888,17 +5940,19 @@ func (r *DescribeUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanResponseParams struct {
+	// Usage plan details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Usage plan details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *DescribeUsagePlanResponse) ToJsonString() string {
@@ -4912,9 +5966,21 @@ func (r *DescribeUsagePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanSecretIdsRequestParams struct {
+	// Unique ID of bound usage plan.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeUsagePlanSecretIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of bound usage plan.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -4946,17 +6012,19 @@ func (r *DescribeUsagePlanSecretIdsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlanSecretIdsResponseParams struct {
+	// List of keys bound to usage plan.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlanBindSecretStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUsagePlanSecretIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of keys bound to usage plan.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlanBindSecretStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUsagePlanSecretIdsResponseParams `json:"Response"`
 }
 
 func (r *DescribeUsagePlanSecretIdsResponse) ToJsonString() string {
@@ -4970,9 +6038,21 @@ func (r *DescribeUsagePlanSecretIdsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlansStatusRequestParams struct {
+	// Number of results to be returned. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Usage plan filter. Valid values: UsagePlanId, UsagePlanName, NotServiceId, NotApiId, Environment.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeUsagePlansStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -5004,17 +6084,19 @@ func (r *DescribeUsagePlansStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsagePlansStatusResponseParams struct {
+	// Usage plan list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlansStatus `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUsagePlansStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Usage plan list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlansStatus `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUsagePlansStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeUsagePlansStatusResponse) ToJsonString() string {
@@ -5028,9 +6110,24 @@ func (r *DescribeUsagePlansStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachPluginRequestParams struct {
+	// ID of the plugin to be unbound
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API environment
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// ID of the API to unbind from the plugin
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
 type DetachPluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be unbound
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -5066,16 +6163,18 @@ func (r *DetachPluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachPluginResponseParams struct {
+	// Whether unbinding succeeded.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachPluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether unbinding succeeded.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachPluginResponseParams `json:"Response"`
 }
 
 func (r *DetachPluginResponse) ToJsonString() string {
@@ -5089,9 +6188,15 @@ func (r *DetachPluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableApiKeyRequestParams struct {
+	// ID of the key to be disabled.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+}
+
 type DisableApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the key to be disabled.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 }
@@ -5115,17 +6220,19 @@ func (r *DisableApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableApiKeyResponseParams struct {
+	// Whether the key is successfully disabled.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the key is successfully disabled.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableApiKeyResponseParams `json:"Response"`
 }
 
 func (r *DisableApiKeyResponse) ToJsonString() string {
@@ -5140,7 +6247,6 @@ func (r *DisableApiKeyResponse) FromJsonString(s string) error {
 }
 
 type DocumentSDK struct {
-
 	// Download link of generated file. Generated documents will be stored in COS.
 	DocumentURL *string `json:"DocumentURL,omitempty" name:"DocumentURL"`
 
@@ -5149,7 +6255,6 @@ type DocumentSDK struct {
 }
 
 type DomainSetList struct {
-
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
@@ -5176,7 +6281,6 @@ type DomainSetList struct {
 }
 
 type DomainSets struct {
-
 	// Number of custom domain names under service
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
@@ -5184,9 +6288,15 @@ type DomainSets struct {
 	DomainSet []*DomainSetList `json:"DomainSet,omitempty" name:"DomainSet"`
 }
 
+// Predefined struct for user
+type EnableApiKeyRequestParams struct {
+	// ID of the key to be enabled.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+}
+
 type EnableApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the key to be enabled.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 }
@@ -5210,17 +6320,19 @@ func (r *EnableApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableApiKeyResponseParams struct {
+	// Whether the key is successfully enabled.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the key is successfully enabled.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableApiKeyResponseParams `json:"Response"`
 }
 
 func (r *EnableApiKeyResponse) ToJsonString() string {
@@ -5235,7 +6347,6 @@ func (r *EnableApiKeyResponse) FromJsonString(s string) error {
 }
 
 type Environment struct {
-
 	// Environment name.
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
@@ -5250,7 +6361,6 @@ type Environment struct {
 }
 
 type EnvironmentStrategy struct {
-
 	// Environment name
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
@@ -5263,7 +6373,6 @@ type EnvironmentStrategy struct {
 }
 
 type ErrorCodes struct {
-
 	// Custom response configuration error code.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Code *int64 `json:"Code,omitempty" name:"Code"`
@@ -5286,7 +6395,6 @@ type ErrorCodes struct {
 }
 
 type Filter struct {
-
 	// Field to be filtered.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -5294,9 +6402,21 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
+// Predefined struct for user
+type GenerateApiDocumentRequestParams struct {
+	// Unique service ID of the document to be created.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment of the service for which to create an SDK.
+	GenEnvironment *string `json:"GenEnvironment,omitempty" name:"GenEnvironment"`
+
+	// Programming language of the SDK to be created. Currently, only Python and JavaScript are supported.
+	GenLanguage *string `json:"GenLanguage,omitempty" name:"GenLanguage"`
+}
+
 type GenerateApiDocumentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of the document to be created.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -5328,16 +6448,18 @@ func (r *GenerateApiDocumentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GenerateApiDocumentResponseParams struct {
+	// API document and SDK link.
+	Result *DocumentSDK `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GenerateApiDocumentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// API document and SDK link.
-		Result *DocumentSDK `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GenerateApiDocumentResponseParams `json:"Response"`
 }
 
 func (r *GenerateApiDocumentResponse) ToJsonString() string {
@@ -5352,7 +6474,6 @@ func (r *GenerateApiDocumentResponse) FromJsonString(s string) error {
 }
 
 type HealthCheckConf struct {
-
 	// Whether health check is enabled.
 	IsHealthCheck *bool `json:"IsHealthCheck,omitempty" name:"IsHealthCheck"`
 
@@ -5367,7 +6488,6 @@ type HealthCheckConf struct {
 }
 
 type IPStrategy struct {
-
 	// Unique policy ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
@@ -5406,7 +6526,6 @@ type IPStrategy struct {
 }
 
 type IPStrategyApi struct {
-
 	// Unique API ID.
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
@@ -5430,7 +6549,6 @@ type IPStrategyApi struct {
 }
 
 type IPStrategyApiStatus struct {
-
 	// Number of APIs bound to environment.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -5441,7 +6559,6 @@ type IPStrategyApiStatus struct {
 }
 
 type IPStrategysStatus struct {
-
 	// Number of policies.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -5452,7 +6569,6 @@ type IPStrategysStatus struct {
 }
 
 type K8sLabel struct {
-
 	// Key of the label
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -5461,7 +6577,6 @@ type K8sLabel struct {
 }
 
 type K8sService struct {
-
 	// Weight
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
@@ -5485,7 +6600,6 @@ type K8sService struct {
 }
 
 type LogQuery struct {
-
 	// Search field
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -5497,7 +6611,6 @@ type LogQuery struct {
 }
 
 type MicroService struct {
-
 	// Microservice cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -5509,7 +6622,6 @@ type MicroService struct {
 }
 
 type MicroServiceReq struct {
-
 	// Microservice cluster.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -5520,9 +6632,27 @@ type MicroServiceReq struct {
 	MicroServiceName *string `json:"MicroServiceName,omitempty" name:"MicroServiceName"`
 }
 
+// Predefined struct for user
+type ModifyAPIDocRequestParams struct {
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+
+	// API document name
+	ApiDocName *string `json:"ApiDocName,omitempty" name:"ApiDocName"`
+
+	// Service name
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment name
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// List of APIs for which to generate documents
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type ModifyAPIDocRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 
@@ -5562,16 +6692,18 @@ func (r *ModifyAPIDocRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAPIDocResponseParams struct {
+	// Basic information of API document
+	Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAPIDocResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Basic information of API document
-		Result *APIDoc `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAPIDocResponseParams `json:"Response"`
 }
 
 func (r *ModifyAPIDocResponse) ToJsonString() string {
@@ -5585,9 +6717,21 @@ func (r *ModifyAPIDocResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiAppRequestParams struct {
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Modified application name
+	ApiAppName *string `json:"ApiAppName,omitempty" name:"ApiAppName"`
+
+	// Modified application description
+	ApiAppDesc *string `json:"ApiAppDesc,omitempty" name:"ApiAppDesc"`
+}
+
 type ModifyApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique application ID.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 
@@ -5619,17 +6763,19 @@ func (r *ModifyApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiAppResponseParams struct {
+	// Whether modification succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether modification succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyApiAppResponseParams `json:"Response"`
 }
 
 func (r *ModifyApiAppResponse) ToJsonString() string {
@@ -5643,9 +6789,24 @@ func (r *ModifyApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiEnvironmentStrategyRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Throttling value.
+	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
+
+	// Environment name.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// API list.
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type ModifyApiEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -5681,17 +6842,19 @@ func (r *ModifyApiEnvironmentStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiEnvironmentStrategyResponseParams struct {
+	// Whether modification succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyApiEnvironmentStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether modification succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyApiEnvironmentStrategyResponseParams `json:"Response"`
 }
 
 func (r *ModifyApiEnvironmentStrategyResponse) ToJsonString() string {
@@ -5705,9 +6868,27 @@ func (r *ModifyApiEnvironmentStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiIncrementRequestParams struct {
+	// Service ID
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API ID
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// Authorization type of the API to be modified (you can select `OAUTH`, i.e., authorization API)
+	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+
+	// Public key value to be modified by OAuth API
+	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+
+	// OAuth API redirect address
+	LoginRedirectUrl *string `json:"LoginRedirectUrl,omitempty" name:"LoginRedirectUrl"`
+}
+
 type ModifyApiIncrementRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service ID
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -5747,13 +6928,15 @@ func (r *ModifyApiIncrementRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiIncrementResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyApiIncrementResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyApiIncrementResponseParams `json:"Response"`
 }
 
 func (r *ModifyApiIncrementResponse) ToJsonString() string {
@@ -5767,9 +6950,174 @@ func (r *ModifyApiIncrementResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiRequestParams struct {
+	// Unique service ID of API.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// API backend service type. Valid values: HTTP, MOCK, TSF, CLB, SCF, WEBSOCKET, TARGET (in beta test).
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Request frontend configuration.
+	RequestConfig *RequestConfig `json:"RequestConfig,omitempty" name:"RequestConfig"`
+
+	// Unique API ID.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// Custom API name.
+	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
+
+	// Custom API description.
+	ApiDesc *string `json:"ApiDesc,omitempty" name:"ApiDesc"`
+
+	// API type. Valid values: NORMAL, TSF. Default value: NORMAL.
+	ApiType *string `json:"ApiType,omitempty" name:"ApiType"`
+
+	// API authentication type. Valid values: SECRET, NONE, OAUTH, APP. Default value: NONE.
+	AuthType *string `json:"AuthType,omitempty" name:"AuthType"`
+
+	// Whether signature authentication is required. True: yes; False: no. This parameter is to be disused.
+	AuthRequired *bool `json:"AuthRequired,omitempty" name:"AuthRequired"`
+
+	// API backend service timeout period in seconds.
+	ServiceTimeout *int64 `json:"ServiceTimeout,omitempty" name:"ServiceTimeout"`
+
+	// API frontend request type, such as HTTP, HTTPS, or HTTP and HTTPS.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Whether to enable CORS. True: yes; False: no.
+	EnableCORS *bool `json:"EnableCORS,omitempty" name:"EnableCORS"`
+
+	// Constant parameter.
+	ConstantParameters []*ConstantParameter `json:"ConstantParameters,omitempty" name:"ConstantParameters"`
+
+	// Frontend request parameter.
+	RequestParameters []*ReqParameter `json:"RequestParameters,omitempty" name:"RequestParameters"`
+
+	// This field is valid if `AuthType` is `OAUTH`. NORMAL: business API; OAUTH: authorization API.
+	ApiBusinessType *string `json:"ApiBusinessType,omitempty" name:"ApiBusinessType"`
+
+	// Returned message of API backend Mock, which is required if `ServiceType` is `Mock`.
+	ServiceMockReturnMessage *string `json:"ServiceMockReturnMessage,omitempty" name:"ServiceMockReturnMessage"`
+
+	// List of microservices bound to API.
+	MicroServices []*MicroServiceReq `json:"MicroServices,omitempty" name:"MicroServices"`
+
+	// Load balancing configuration of microservice.
+	ServiceTsfLoadBalanceConf *TsfLoadBalanceConfResp `json:"ServiceTsfLoadBalanceConf,omitempty" name:"ServiceTsfLoadBalanceConf"`
+
+	// Health check configuration of microservice.
+	ServiceTsfHealthCheckConf *HealthCheckConf `json:"ServiceTsfHealthCheckConf,omitempty" name:"ServiceTsfHealthCheckConf"`
+
+	// `target` type load balancing configuration (in beta test).
+	TargetServicesLoadBalanceConf *int64 `json:"TargetServicesLoadBalanceConf,omitempty" name:"TargetServicesLoadBalanceConf"`
+
+	// `target` health check configuration (in beta test).
+	TargetServicesHealthCheckConf *HealthCheckConf `json:"TargetServicesHealthCheckConf,omitempty" name:"TargetServicesHealthCheckConf"`
+
+	// SCF function name, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionName *string `json:"ServiceScfFunctionName,omitempty" name:"ServiceScfFunctionName"`
+
+	// SCF WebSocket registration function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionName *string `json:"ServiceWebsocketRegisterFunctionName,omitempty" name:"ServiceWebsocketRegisterFunctionName"`
+
+	// SCF WebSocket cleanup function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionName *string `json:"ServiceWebsocketCleanupFunctionName,omitempty" name:"ServiceWebsocketCleanupFunctionName"`
+
+	// SCF WebSocket transfer function, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionName *string `json:"ServiceWebsocketTransportFunctionName,omitempty" name:"ServiceWebsocketTransportFunctionName"`
+
+	// SCF function namespace, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionNamespace *string `json:"ServiceScfFunctionNamespace,omitempty" name:"ServiceScfFunctionNamespace"`
+
+	// SCF function version, which takes effect if the backend type is `SCF`.
+	ServiceScfFunctionQualifier *string `json:"ServiceScfFunctionQualifier,omitempty" name:"ServiceScfFunctionQualifier"`
+
+	// SCF WebSocket registration function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionNamespace *string `json:"ServiceWebsocketRegisterFunctionNamespace,omitempty" name:"ServiceWebsocketRegisterFunctionNamespace"`
+
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketRegisterFunctionQualifier *string `json:"ServiceWebsocketRegisterFunctionQualifier,omitempty" name:"ServiceWebsocketRegisterFunctionQualifier"`
+
+	// SCF WebSocket transfer function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionNamespace *string `json:"ServiceWebsocketTransportFunctionNamespace,omitempty" name:"ServiceWebsocketTransportFunctionNamespace"`
+
+	// SCF WebSocket transfer function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketTransportFunctionQualifier *string `json:"ServiceWebsocketTransportFunctionQualifier,omitempty" name:"ServiceWebsocketTransportFunctionQualifier"`
+
+	// SCF WebSocket cleanup function namespace, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionNamespace *string `json:"ServiceWebsocketCleanupFunctionNamespace,omitempty" name:"ServiceWebsocketCleanupFunctionNamespace"`
+
+	// SCF WebSocket cleanup function version, which takes effect if the frontend type is `WEBSOCKET` and the backend type is `SCF`.
+	ServiceWebsocketCleanupFunctionQualifier *string `json:"ServiceWebsocketCleanupFunctionQualifier,omitempty" name:"ServiceWebsocketCleanupFunctionQualifier"`
+
+	// Whether to enable response integration, which takes effect if the backend type is `SCF`.
+	ServiceScfIsIntegratedResponse *bool `json:"ServiceScfIsIntegratedResponse,omitempty" name:"ServiceScfIsIntegratedResponse"`
+
+	// Billing after debugging starts (reserved field for marketplace).
+	IsDebugAfterCharge *bool `json:"IsDebugAfterCharge,omitempty" name:"IsDebugAfterCharge"`
+
+	// Tag.
+	TagSpecifications *Tag `json:"TagSpecifications,omitempty" name:"TagSpecifications"`
+
+	// Whether to delete the error codes for custom response configuration. If the value is left empty or `False`, the error codes will not be deleted. If the value is `True`, all custom response configuration error codes of the API will be deleted.
+	IsDeleteResponseErrorCodes *bool `json:"IsDeleteResponseErrorCodes,omitempty" name:"IsDeleteResponseErrorCodes"`
+
+	// Return type.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Sample response for successful custom response configuration.
+	ResponseSuccessExample *string `json:"ResponseSuccessExample,omitempty" name:"ResponseSuccessExample"`
+
+	// Sample response for failed custom response configuration.
+	ResponseFailExample *string `json:"ResponseFailExample,omitempty" name:"ResponseFailExample"`
+
+	// API backend service configuration.
+	ServiceConfig *ServiceConfig `json:"ServiceConfig,omitempty" name:"ServiceConfig"`
+
+	// Unique ID of associated authorization API, which takes effect only if `AuthType` is `OAUTH` and `ApiBusinessType` is `NORMAL`. It is the unique ID of the OAuth 2.0 authorization API bound to the business API.
+	AuthRelationApiId *string `json:"AuthRelationApiId,omitempty" name:"AuthRelationApiId"`
+
+	// API backend service parameter.
+	ServiceParameters []*ServiceParameter `json:"ServiceParameters,omitempty" name:"ServiceParameters"`
+
+	// OAuth configuration, which takes effect if `AuthType` is `OAUTH`.
+	OauthConfig *OauthConfig `json:"OauthConfig,omitempty" name:"OauthConfig"`
+
+	// Custom error code configuration.
+	ResponseErrorCodes []*ResponseErrorCodeReq `json:"ResponseErrorCodes,omitempty" name:"ResponseErrorCodes"`
+
+	// Whether to enable Base64 encoding. This parameter takes effect only when the backend is SCF.
+	IsBase64Encoded *bool `json:"IsBase64Encoded,omitempty" name:"IsBase64Encoded"`
+
+	// Whether to trigger Base64 encoding by header. This parameter takes effect only when the backend is SCF.
+	IsBase64Trigger *bool `json:"IsBase64Trigger,omitempty" name:"IsBase64Trigger"`
+
+	// Header trigger rules. The number of rules cannot exceed 10.
+	Base64EncodedTriggerRules []*Base64EncodedTriggerRule `json:"Base64EncodedTriggerRules,omitempty" name:"Base64EncodedTriggerRules"`
+
+	// Event bus ID.
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// SCF function type, which takes effect when the backend type is `SCF`. Valid values: `EVENT` and `HTTP`.
+	ServiceScfFunctionType *string `json:"ServiceScfFunctionType,omitempty" name:"ServiceScfFunctionType"`
+
+	// EIAM application type.
+	EIAMAppType *string `json:"EIAMAppType,omitempty" name:"EIAMAppType"`
+
+	// EIAM application authentication type. Valid values: `AuthenticationOnly`, `Authentication`, `Authorization`.
+	EIAMAuthType *string `json:"EIAMAuthType,omitempty" name:"EIAMAuthType"`
+
+	// Validity of the EIAM application token. Unit: second. Default value: `7200`.
+	EIAMAppId *string `json:"EIAMAppId,omitempty" name:"EIAMAppId"`
+
+	// EIAM application ID.
+	TokenTimeout *int64 `json:"TokenTimeout,omitempty" name:"TokenTimeout"`
+}
+
 type ModifyApiRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of API.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6005,13 +7353,15 @@ func (r *ModifyApiRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApiResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyApiResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyApiResponseParams `json:"Response"`
 }
 
 func (r *ModifyApiResponse) ToJsonString() string {
@@ -6025,9 +7375,21 @@ func (r *ModifyApiResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIPStrategyRequestParams struct {
+	// Unique service ID of the policy to be modified.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the policy to be modified.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Details of the policy to be modified.
+	StrategyData *string `json:"StrategyData,omitempty" name:"StrategyData"`
+}
+
 type ModifyIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID of the policy to be modified.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6059,17 +7421,19 @@ func (r *ModifyIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIPStrategyResponseParams struct {
+	// Whether modification succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether modification succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *ModifyIPStrategyResponse) ToJsonString() string {
@@ -6083,9 +7447,24 @@ func (r *ModifyIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPluginRequestParams struct {
+	// ID of the plugin to be modified
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Plugin name to be modified. A plugin name can contain up to 50 characters out of `a-z`, `A-Z`, `0-9`, and `_`, which must begin with a letter and end with a letter or a number.
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin description to be modified. A description is within 200 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Plugin definition statement to be modified. The json format is supported.
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+}
+
 type ModifyPluginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the plugin to be modified
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -6121,16 +7500,18 @@ func (r *ModifyPluginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPluginResponseParams struct {
+	// Whether modification succeeded.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPluginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether modification succeeded.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPluginResponseParams `json:"Response"`
 }
 
 func (r *ModifyPluginResponse) ToJsonString() string {
@@ -6144,9 +7525,21 @@ func (r *ModifyPluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceEnvironmentStrategyRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Throttling value.
+	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
+
+	// Environment list.
+	EnvironmentNames []*string `json:"EnvironmentNames,omitempty" name:"EnvironmentNames"`
+}
+
 type ModifyServiceEnvironmentStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6178,17 +7571,19 @@ func (r *ModifyServiceEnvironmentStrategyRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceEnvironmentStrategyResponseParams struct {
+	// Whether modification succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyServiceEnvironmentStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether modification succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyServiceEnvironmentStrategyResponseParams `json:"Response"`
 }
 
 func (r *ModifyServiceEnvironmentStrategyResponse) ToJsonString() string {
@@ -6202,9 +7597,27 @@ func (r *ModifyServiceEnvironmentStrategyResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceRequestParams struct {
+	// Unique ID of the service to be modified.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Service name after modification.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Service description after modification.
+	ServiceDesc *string `json:"ServiceDesc,omitempty" name:"ServiceDesc"`
+
+	// Service frontend request type after modification, such as `http`, `https`, and `http&https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Network type list, which is used to specify the supported network types. INNER: private network access; OUTER: public network access. Default value: OUTER.
+	NetTypes []*string `json:"NetTypes,omitempty" name:"NetTypes"`
+}
+
 type ModifyServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be modified.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6244,13 +7657,15 @@ func (r *ModifyServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyServiceResponseParams `json:"Response"`
 }
 
 func (r *ModifyServiceResponse) ToJsonString() string {
@@ -6264,9 +7679,36 @@ func (r *ModifyServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySubDomainRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom domain name whose path mapping is to be modified.
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+
+	// Whether to change to the default path mapping. true: use the default path mapping; false: use the custom path mapping.
+	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
+
+	// Certificate ID, which is required if the HTTPS protocol is included.
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Custom domain name protocol type after modification. Valid values: http, https, http&https.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Path mapping list after modification.
+	PathMappingSet []*PathMapping `json:"PathMappingSet,omitempty" name:"PathMappingSet"`
+
+	// Network type. Valid values: INNER, OUTER.
+	NetType *string `json:"NetType,omitempty" name:"NetType"`
+
+	// Whether to force HTTP requests to redirect to HTTPS. Default value: `false`. When this parameter is `true`, API Gateway will redirect all requests using the custom domain name over the HTTP protocol to the HTTPS protocol for forwarding.
+	IsForcedHttps *bool `json:"IsForcedHttps,omitempty" name:"IsForcedHttps"`
+}
+
 type ModifySubDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6318,16 +7760,18 @@ func (r *ModifySubDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySubDomainResponseParams struct {
+	// Whether the custom domain name is successfully modified.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySubDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the custom domain name is successfully modified.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySubDomainResponseParams `json:"Response"`
 }
 
 func (r *ModifySubDomainResponse) ToJsonString() string {
@@ -6341,9 +7785,48 @@ func (r *ModifySubDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUpstreamRequestParams struct {
+	// Unique upstream ID
+	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
+
+	// Upstream name
+	UpstreamName *string `json:"UpstreamName,omitempty" name:"UpstreamName"`
+
+	// Upstream description
+	UpstreamDescription *string `json:"UpstreamDescription,omitempty" name:"UpstreamDescription"`
+
+	// Backend protocol. Valid values: `HTTP`, `HTTPS`
+	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// Upstream access type. Valid values: `IP_PORT`, `K8S`
+	UpstreamType *string `json:"UpstreamType,omitempty" name:"UpstreamType"`
+
+	// Load balancing algorithm. Valid value: `ROUND_ROBIN`
+	Algorithm *string `json:"Algorithm,omitempty" name:"Algorithm"`
+
+	// Unique VPC ID.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Retry attempts. It defaults to `3`.
+	Retries *uint64 `json:"Retries,omitempty" name:"Retries"`
+
+	// Gateway forwarding to the upstream Host request header
+	UpstreamHost *string `json:"UpstreamHost,omitempty" name:"UpstreamHost"`
+
+	// List of backend nodes
+	Nodes []*UpstreamNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// Health check configuration
+	HealthChecker *UpstreamHealthChecker `json:"HealthChecker,omitempty" name:"HealthChecker"`
+
+	// Configuration of TKE service
+	K8sService []*K8sService `json:"K8sService,omitempty" name:"K8sService"`
+}
+
 type ModifyUpstreamRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique upstream ID
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
@@ -6411,17 +7894,19 @@ func (r *ModifyUpstreamRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUpstreamResponseParams struct {
+	// Return modified upstream information
+	// Note: This field may return `NULL`, indicating that no valid value was found.
+	Result *UpstreamInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyUpstreamResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Return modified upstream information
-	// Note: This field may return `NULL`, indicating that no valid value was found.
-		Result *UpstreamInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyUpstreamResponseParams `json:"Response"`
 }
 
 func (r *ModifyUpstreamResponse) ToJsonString() string {
@@ -6435,9 +7920,27 @@ func (r *ModifyUpstreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUsagePlanRequestParams struct {
+	// Unique usage plan ID.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Custom usage plan name after modification.
+	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
+
+	// Custom usage plan description after modification.
+	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
+
+	// Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is `-1`, which indicates no limit.
+	MaxRequestNum *int64 `json:"MaxRequestNum,omitempty" name:"MaxRequestNum"`
+
+	// Limit of requests per second. Valid values: -1, [1,2000]. The default value is `-1`, which indicates no limit.
+	MaxRequestNumPreSec *int64 `json:"MaxRequestNumPreSec,omitempty" name:"MaxRequestNumPreSec"`
+}
+
 type ModifyUsagePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique usage plan ID.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -6477,17 +7980,19 @@ func (r *ModifyUsagePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyUsagePlanResponseParams struct {
+	// Usage plan details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyUsagePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Usage plan details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *UsagePlanInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyUsagePlanResponseParams `json:"Response"`
 }
 
 func (r *ModifyUsagePlanResponse) ToJsonString() string {
@@ -6502,7 +8007,6 @@ func (r *ModifyUsagePlanResponse) FromJsonString(s string) error {
 }
 
 type OauthConfig struct {
-
 	// Public key for user token verification.
 	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
 
@@ -6514,7 +8018,6 @@ type OauthConfig struct {
 }
 
 type PathMapping struct {
-
 	// Path.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -6523,7 +8026,6 @@ type PathMapping struct {
 }
 
 type Plugin struct {
-
 	// Plugin ID
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 
@@ -6556,7 +8058,6 @@ type Plugin struct {
 }
 
 type ReleaseService struct {
-
 	// Release remarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ReleaseDesc *string `json:"ReleaseDesc,omitempty" name:"ReleaseDesc"`
@@ -6566,9 +8067,24 @@ type ReleaseService struct {
 	ReleaseVersion *string `json:"ReleaseVersion,omitempty" name:"ReleaseVersion"`
 }
 
+// Predefined struct for user
+type ReleaseServiceRequestParams struct {
+	// Unique ID of the service to be published.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Name of the environment to be published. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Release description.
+	ReleaseDesc *string `json:"ReleaseDesc,omitempty" name:"ReleaseDesc"`
+
+	// `apiId` list, which is reserved. Full API release is used by default.
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type ReleaseServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be published.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -6604,16 +8120,18 @@ func (r *ReleaseServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReleaseServiceResponseParams struct {
+	// Release information.
+	Result *ReleaseService `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReleaseServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Release information.
-		Result *ReleaseService `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReleaseServiceResponseParams `json:"Response"`
 }
 
 func (r *ReleaseServiceResponse) ToJsonString() string {
@@ -6628,7 +8146,6 @@ func (r *ReleaseServiceResponse) FromJsonString(s string) error {
 }
 
 type ReqParameter struct {
-
 	// API frontend parameter name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -6649,7 +8166,6 @@ type ReqParameter struct {
 }
 
 type RequestConfig struct {
-
 	// API path, such as `/path`.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -6658,7 +8174,6 @@ type RequestConfig struct {
 }
 
 type RequestParameter struct {
-
 	// Request parameter name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -6678,9 +8193,15 @@ type RequestParameter struct {
 	Required *bool `json:"Required,omitempty" name:"Required"`
 }
 
+// Predefined struct for user
+type ResetAPIDocPasswordRequestParams struct {
+	// API document ID
+	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
+}
+
 type ResetAPIDocPasswordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// API document ID
 	ApiDocId *string `json:"ApiDocId,omitempty" name:"ApiDocId"`
 }
@@ -6704,16 +8225,18 @@ func (r *ResetAPIDocPasswordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAPIDocPasswordResponseParams struct {
+	// Basic information of API document
+	Result *APIDoc `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetAPIDocPasswordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Basic information of API document
-		Result *APIDoc `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetAPIDocPasswordResponseParams `json:"Response"`
 }
 
 func (r *ResetAPIDocPasswordResponse) ToJsonString() string {
@@ -6728,7 +8251,6 @@ func (r *ResetAPIDocPasswordResponse) FromJsonString(s string) error {
 }
 
 type ResponseErrorCodeReq struct {
-
 	// Custom response configuration error code.
 	Code *int64 `json:"Code,omitempty" name:"Code"`
 
@@ -6746,7 +8268,6 @@ type ResponseErrorCodeReq struct {
 }
 
 type Service struct {
-
 	// Port for HTTPS access over private network.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InnerHttpsPort *int64 `json:"InnerHttpsPort,omitempty" name:"InnerHttpsPort"`
@@ -6825,7 +8346,6 @@ type Service struct {
 }
 
 type ServiceConfig struct {
-
 	// The backend type. It’s available when `vpc` is enabled. Values: `clb`, `cvm` and `upstream`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
@@ -6851,7 +8371,6 @@ type ServiceConfig struct {
 }
 
 type ServiceEnvironmentSet struct {
-
 	// Total number of environments bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6862,7 +8381,6 @@ type ServiceEnvironmentSet struct {
 }
 
 type ServiceEnvironmentStrategy struct {
-
 	// Environment name.
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
@@ -6885,7 +8403,6 @@ type ServiceEnvironmentStrategy struct {
 }
 
 type ServiceEnvironmentStrategyStatus struct {
-
 	// Number of throttling policies.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6896,7 +8413,6 @@ type ServiceEnvironmentStrategyStatus struct {
 }
 
 type ServiceParameter struct {
-
 	// API backend service parameter name, which is used only if `ServiceType` is `HTTP`. The frontend and backend parameter names can be different.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -6927,7 +8443,6 @@ type ServiceParameter struct {
 }
 
 type ServiceReleaseHistory struct {
-
 	// Total number of published versions.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6938,7 +8453,6 @@ type ServiceReleaseHistory struct {
 }
 
 type ServiceReleaseHistoryInfo struct {
-
 	// Version ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
@@ -6953,7 +8467,6 @@ type ServiceReleaseHistoryInfo struct {
 }
 
 type ServiceReleaseVersion struct {
-
 	// Total number of published versions.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6964,7 +8477,6 @@ type ServiceReleaseVersion struct {
 }
 
 type ServiceSubDomainMappings struct {
-
 	// Whether the default path mapping is used. true: use the default path mapping; false: use the custom path mapping (`PathMappingSet` is required in this case).
 	IsDefaultMapping *bool `json:"IsDefaultMapping,omitempty" name:"IsDefaultMapping"`
 
@@ -6973,7 +8485,6 @@ type ServiceSubDomainMappings struct {
 }
 
 type ServiceUsagePlanSet struct {
-
 	// Total number of usage plans bound to service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6984,7 +8495,6 @@ type ServiceUsagePlanSet struct {
 }
 
 type ServicesStatus struct {
-
 	// Total number of services in list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -6995,7 +8505,6 @@ type ServicesStatus struct {
 }
 
 type Tag struct {
-
 	// Tag key.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -7004,7 +8513,6 @@ type Tag struct {
 }
 
 type TargetServicesReq struct {
-
 	// VM IP
 	VmIp *string `json:"VmIp,omitempty" name:"VmIp"`
 
@@ -7022,7 +8530,6 @@ type TargetServicesReq struct {
 }
 
 type TsfLoadBalanceConfResp struct {
-
 	// Whether load balancing is enabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsLoadBalance *bool `json:"IsLoadBalance,omitempty" name:"IsLoadBalance"`
@@ -7040,9 +8547,27 @@ type TsfLoadBalanceConfResp struct {
 	SessionStickTimeout *int64 `json:"SessionStickTimeout,omitempty" name:"SessionStickTimeout"`
 }
 
+// Predefined struct for user
+type UnBindEnvironmentRequestParams struct {
+	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
+	BindType *string `json:"BindType,omitempty" name:"BindType"`
+
+	// List of unique IDs of the usage plans to be bound.
+	UsagePlanIds []*string `json:"UsagePlanIds,omitempty" name:"UsagePlanIds"`
+
+	// Service environment to be unbound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be unbound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique API ID array, which is required if `BindType` is `API`.
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type UnBindEnvironmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Binding type. Valid values: API, SERVICE. Default value: SERVICE.
 	BindType *string `json:"BindType,omitempty" name:"BindType"`
 
@@ -7082,17 +8607,19 @@ func (r *UnBindEnvironmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindEnvironmentResponseParams struct {
+	// Whether unbinding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnBindEnvironmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether unbinding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnBindEnvironmentResponseParams `json:"Response"`
 }
 
 func (r *UnBindEnvironmentResponse) ToJsonString() string {
@@ -7106,9 +8633,24 @@ func (r *UnBindEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindIPStrategyRequestParams struct {
+	// Unique ID of the service to be unbound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the IP policy to be unbound.
+	StrategyId *string `json:"StrategyId,omitempty" name:"StrategyId"`
+
+	// Environment to be unbound.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// List of APIs to be unbound.
+	UnBindApiIds []*string `json:"UnBindApiIds,omitempty" name:"UnBindApiIds"`
+}
+
 type UnBindIPStrategyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be unbound.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -7144,17 +8686,19 @@ func (r *UnBindIPStrategyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindIPStrategyResponseParams struct {
+	// Whether unbinding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnBindIPStrategyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether unbinding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnBindIPStrategyResponseParams `json:"Response"`
 }
 
 func (r *UnBindIPStrategyResponse) ToJsonString() string {
@@ -7168,9 +8712,18 @@ func (r *UnBindIPStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindSecretIdsRequestParams struct {
+	// Unique ID of the usage plan to be unbound.
+	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
+
+	// Array of IDs of the keys to be unbound.
+	AccessKeyIds []*string `json:"AccessKeyIds,omitempty" name:"AccessKeyIds"`
+}
+
 type UnBindSecretIdsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the usage plan to be unbound.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
 
@@ -7198,17 +8751,19 @@ func (r *UnBindSecretIdsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindSecretIdsResponseParams struct {
+	// Whether unbinding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnBindSecretIdsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether unbinding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnBindSecretIdsResponseParams `json:"Response"`
 }
 
 func (r *UnBindSecretIdsResponse) ToJsonString() string {
@@ -7222,9 +8777,18 @@ func (r *UnBindSecretIdsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindSubDomainRequestParams struct {
+	// Unique service ID.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Custom domain name to be unbound.
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+}
+
 type UnBindSubDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique service ID.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -7252,16 +8816,18 @@ func (r *UnBindSubDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnBindSubDomainResponseParams struct {
+	// Whether the custom domain name is successfully unbound.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnBindSubDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the custom domain name is successfully unbound.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnBindSubDomainResponseParams `json:"Response"`
 }
 
 func (r *UnBindSubDomainResponse) ToJsonString() string {
@@ -7275,9 +8841,21 @@ func (r *UnBindSubDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnReleaseServiceRequestParams struct {
+	// Unique ID of the service to be deactivated.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Name of the environment to be deactivated. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// List of APIs to be deactivated, which is a reserved field.
+	ApiIds []*string `json:"ApiIds,omitempty" name:"ApiIds"`
+}
+
 type UnReleaseServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be deactivated.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -7309,17 +8887,19 @@ func (r *UnReleaseServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnReleaseServiceResponseParams struct {
+	// Whether deactivation succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnReleaseServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deactivation succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnReleaseServiceResponseParams `json:"Response"`
 }
 
 func (r *UnReleaseServiceResponse) ToJsonString() string {
@@ -7333,9 +8913,24 @@ func (r *UnReleaseServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnbindApiAppRequestParams struct {
+	// Unique ID of the application to be bound.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Environment to be bound.
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Unique ID of the service to be bound.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Unique ID of the API to be bound.
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+}
+
 type UnbindApiAppRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the application to be bound.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 
@@ -7371,17 +8966,19 @@ func (r *UnbindApiAppRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnbindApiAppResponseParams struct {
+	// Whether unbinding succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnbindApiAppResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether unbinding succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnbindApiAppResponseParams `json:"Response"`
 }
 
 func (r *UnbindApiAppResponse) ToJsonString() string {
@@ -7395,9 +8992,21 @@ func (r *UnbindApiAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateApiAppKeyRequestParams struct {
+	// Unique application ID.
+	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
+
+	// Application Key.
+	ApiAppKey *string `json:"ApiAppKey,omitempty" name:"ApiAppKey"`
+
+	// Application Secret.
+	ApiAppSecret *string `json:"ApiAppSecret,omitempty" name:"ApiAppSecret"`
+}
+
 type UpdateApiAppKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique application ID.
 	ApiAppId *string `json:"ApiAppId,omitempty" name:"ApiAppId"`
 
@@ -7429,17 +9038,19 @@ func (r *UpdateApiAppKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateApiAppKeyResponseParams struct {
+	// Whether update succeeded.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateApiAppKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether update succeeded.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateApiAppKeyResponseParams `json:"Response"`
 }
 
 func (r *UpdateApiAppKeyResponse) ToJsonString() string {
@@ -7453,9 +9064,18 @@ func (r *UpdateApiAppKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateApiKeyRequestParams struct {
+	// ID of the key to be changed.
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
+	AccessKeySecret *string `json:"AccessKeySecret,omitempty" name:"AccessKeySecret"`
+}
+
 type UpdateApiKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the key to be changed.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 
@@ -7483,17 +9103,19 @@ func (r *UpdateApiKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateApiKeyResponseParams struct {
+	// Key details after change.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *ApiKey `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateApiKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Key details after change.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *ApiKey `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateApiKeyResponseParams `json:"Response"`
 }
 
 func (r *UpdateApiKeyResponse) ToJsonString() string {
@@ -7507,9 +9129,24 @@ func (r *UpdateApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateServiceRequestParams struct {
+	// Unique ID of the service to be switch.
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Name of the environment to be switched to. Valid values: test (test environment), prepub (pre-release environment), release (release environment).
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of the version to be switched to.
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// Switch description.
+	UpdateDesc *string `json:"UpdateDesc,omitempty" name:"UpdateDesc"`
+}
+
 type UpdateServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the service to be switch.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -7545,17 +9182,19 @@ func (r *UpdateServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateServiceResponseParams struct {
+	// Whether the version is successfully switched.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the version is successfully switched.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateServiceResponseParams `json:"Response"`
 }
 
 func (r *UpdateServiceResponse) ToJsonString() string {
@@ -7570,7 +9209,6 @@ func (r *UpdateServiceResponse) FromJsonString(s string) error {
 }
 
 type UpstreamHealthChecker struct {
-
 	// Specifies whether to enable active health check
 	EnableActiveCheck *bool `json:"EnableActiveCheck,omitempty" name:"EnableActiveCheck"`
 
@@ -7609,10 +9247,10 @@ type UpstreamHealthChecker struct {
 }
 
 type UpstreamHealthCheckerReqHeaders struct {
+
 }
 
 type UpstreamInfo struct {
-
 	// Unique upstream ID
 	UpstreamId *string `json:"UpstreamId,omitempty" name:"UpstreamId"`
 
@@ -7661,7 +9299,6 @@ type UpstreamInfo struct {
 }
 
 type UpstreamNode struct {
-
 	// IP or domain name
 	Host *string `json:"Host,omitempty" name:"Host"`
 
@@ -7705,7 +9342,6 @@ type UpstreamNode struct {
 }
 
 type UsagePlan struct {
-
 	// Environment name.
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
 
@@ -7729,7 +9365,6 @@ type UsagePlan struct {
 }
 
 type UsagePlanBindEnvironment struct {
-
 	// Environment name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
@@ -7740,7 +9375,6 @@ type UsagePlanBindEnvironment struct {
 }
 
 type UsagePlanBindSecret struct {
-
 	// Key ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
@@ -7755,7 +9389,6 @@ type UsagePlanBindSecret struct {
 }
 
 type UsagePlanBindSecretStatus struct {
-
 	// Number of keys bound to usage plan.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7766,7 +9399,6 @@ type UsagePlanBindSecretStatus struct {
 }
 
 type UsagePlanEnvironment struct {
-
 	// Unique ID of bound service.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
@@ -7817,7 +9449,6 @@ type UsagePlanEnvironment struct {
 }
 
 type UsagePlanEnvironmentStatus struct {
-
 	// Number of environments of the service bound to usage plan.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -7828,7 +9459,6 @@ type UsagePlanEnvironmentStatus struct {
 }
 
 type UsagePlanInfo struct {
-
 	// Unique usage plan ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
@@ -7883,7 +9513,6 @@ type UsagePlanInfo struct {
 }
 
 type UsagePlanStatusInfo struct {
-
 	// Unique usage plan ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UsagePlanId *string `json:"UsagePlanId,omitempty" name:"UsagePlanId"`
@@ -7914,7 +9543,6 @@ type UsagePlanStatusInfo struct {
 }
 
 type UsagePlansStatus struct {
-
 	// Number of eligible usage plans.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`

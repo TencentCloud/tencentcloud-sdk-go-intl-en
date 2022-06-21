@@ -21,7 +21,6 @@ import (
 )
 
 type Attachment struct {
-
 	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types](https://intl.cloud.tencent.com/document/product/1288/51951?from_cn_redirect=1).
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
@@ -29,9 +28,50 @@ type Attachment struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+// Predefined struct for user
+type BatchSendEmailRequestParams struct {
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:
+	// Sender <email address>, for example:
+	// Tencent Cloud team <noreply@mail.qcloud.com>
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Email subject
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
+
+	// Template when emails are sent using a template
+	Template *Template `json:"Template,omitempty" name:"Template"`
+
+	// Email content when emails are sent by calling the API. This parameter is currently unavailable.
+	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
+
+	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
+	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
+
+	// Parameter required for a recurring sending task
+	CycleParam *CycleEmailParam `json:"CycleParam,omitempty" name:"CycleParam"`
+
+	// Parameter required for a scheduled sending task
+	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
+
+	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
+
+	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
+	ADLocation *uint64 `json:"ADLocation,omitempty" name:"ADLocation"`
+}
+
 type BatchSendEmailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com. To display the sender name, enter the address in the following format:
 	// Sender <email address>, for example:
 	// Tencent Cloud team <noreply@mail.qcloud.com>
@@ -101,16 +141,18 @@ func (r *BatchSendEmailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BatchSendEmailResponseParams struct {
+	// Sending task ID
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BatchSendEmailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Sending task ID
-		TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BatchSendEmailResponseParams `json:"Response"`
 }
 
 func (r *BatchSendEmailResponse) ToJsonString() string {
@@ -125,7 +167,6 @@ func (r *BatchSendEmailResponse) FromJsonString(s string) error {
 }
 
 type BlackEmailAddress struct {
-
 	// Time when the email address is blocklisted.
 	BounceTime *string `json:"BounceTime,omitempty" name:"BounceTime"`
 
@@ -133,9 +174,18 @@ type BlackEmailAddress struct {
 	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
 }
 
+// Predefined struct for user
+type CreateEmailAddressRequestParams struct {
+	// Your sender address. (You can create up to 10 sender addresses for each domain.)
+	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
+
+	// Sender name.
+	EmailSenderName *string `json:"EmailSenderName,omitempty" name:"EmailSenderName"`
+}
+
 type CreateEmailAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Your sender address. (You can create up to 10 sender addresses for each domain.)
 	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
 
@@ -163,13 +213,15 @@ func (r *CreateEmailAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmailAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEmailAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEmailAddressResponseParams `json:"Response"`
 }
 
 func (r *CreateEmailAddressResponse) ToJsonString() string {
@@ -183,9 +235,15 @@ func (r *CreateEmailAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmailIdentityRequestParams struct {
+	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
+}
+
 type CreateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
 	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
 }
@@ -209,22 +267,24 @@ func (r *CreateEmailIdentityRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmailIdentityResponseParams struct {
+	// Verification type. The value is fixed to `DOMAIN`.
+	IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
+
+	// Verification passed or not.
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
+
+	// DNS information that needs to be configured.
+	Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEmailIdentityResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Verification type. The value is fixed to `DOMAIN`.
-		IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
-
-		// Verification passed or not.
-		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
-
-		// DNS information that needs to be configured.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEmailIdentityResponseParams `json:"Response"`
 }
 
 func (r *CreateEmailIdentityResponse) ToJsonString() string {
@@ -238,9 +298,18 @@ func (r *CreateEmailIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmailTemplateRequestParams struct {
+	// Template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Template content.
+	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
+}
+
 type CreateEmailTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template name.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
@@ -268,16 +337,18 @@ func (r *CreateEmailTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEmailTemplateResponseParams struct {
+	// Template ID
+	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEmailTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Template ID
-		TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEmailTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateEmailTemplateResponse) ToJsonString() string {
@@ -291,9 +362,18 @@ func (r *CreateEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReceiverDetailRequestParams struct {
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Email address
+	Emails []*string `json:"Emails,omitempty" name:"Emails"`
+}
+
 type CreateReceiverDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Recipient group ID
 	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
 
@@ -321,13 +401,15 @@ func (r *CreateReceiverDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReceiverDetailResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReceiverDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReceiverDetailResponseParams `json:"Response"`
 }
 
 func (r *CreateReceiverDetailResponse) ToJsonString() string {
@@ -341,9 +423,18 @@ func (r *CreateReceiverDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReceiverRequestParams struct {
+	// Recipient group name
+	ReceiversName *string `json:"ReceiversName,omitempty" name:"ReceiversName"`
+
+	// Recipient group description
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
 type CreateReceiverRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Recipient group name
 	ReceiversName *string `json:"ReceiversName,omitempty" name:"ReceiversName"`
 
@@ -371,16 +462,18 @@ func (r *CreateReceiverRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReceiverResponseParams struct {
+	// Recipient group ID, by which recipient email addresses are uploaded
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReceiverResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Recipient group ID, by which recipient email addresses are uploaded
-		ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReceiverResponseParams `json:"Response"`
 }
 
 func (r *CreateReceiverResponse) ToJsonString() string {
@@ -395,7 +488,6 @@ func (r *CreateReceiverResponse) FromJsonString(s string) error {
 }
 
 type CycleEmailParam struct {
-
 	// Start time of the task
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -404,7 +496,6 @@ type CycleEmailParam struct {
 }
 
 type DNSAttributes struct {
-
 	// Record types: CNAME, A, TXT, and MX.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -421,9 +512,15 @@ type DNSAttributes struct {
 	Status *bool `json:"Status,omitempty" name:"Status"`
 }
 
+// Predefined struct for user
+type DeleteBlackListRequestParams struct {
+	// List of email addresses to be unblocklisted. Enter at least one address.
+	EmailAddressList []*string `json:"EmailAddressList,omitempty" name:"EmailAddressList"`
+}
+
 type DeleteBlackListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of email addresses to be unblocklisted. Enter at least one address.
 	EmailAddressList []*string `json:"EmailAddressList,omitempty" name:"EmailAddressList"`
 }
@@ -447,13 +544,15 @@ func (r *DeleteBlackListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteBlackListResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteBlackListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteBlackListResponseParams `json:"Response"`
 }
 
 func (r *DeleteBlackListResponse) ToJsonString() string {
@@ -467,9 +566,15 @@ func (r *DeleteBlackListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailAddressRequestParams struct {
+	// Sender address.
+	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
+}
+
 type DeleteEmailAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender address.
 	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
 }
@@ -493,13 +598,15 @@ func (r *DeleteEmailAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEmailAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEmailAddressResponseParams `json:"Response"`
 }
 
 func (r *DeleteEmailAddressResponse) ToJsonString() string {
@@ -513,9 +620,15 @@ func (r *DeleteEmailAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailIdentityRequestParams struct {
+	// Sender domain.
+	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
+}
+
 type DeleteEmailIdentityRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender domain.
 	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
 }
@@ -539,13 +652,15 @@ func (r *DeleteEmailIdentityRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailIdentityResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEmailIdentityResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEmailIdentityResponseParams `json:"Response"`
 }
 
 func (r *DeleteEmailIdentityResponse) ToJsonString() string {
@@ -559,9 +674,15 @@ func (r *DeleteEmailIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailTemplateRequestParams struct {
+	// Template ID
+	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+}
+
 type DeleteEmailTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template ID
 	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
 }
@@ -585,13 +706,15 @@ func (r *DeleteEmailTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEmailTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEmailTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEmailTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteEmailTemplateResponse) ToJsonString() string {
@@ -605,9 +728,15 @@ func (r *DeleteEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReceiverRequestParams struct {
+	// Recipient group ID, which is returned when a recipient group is created.
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+}
+
 type DeleteReceiverRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Recipient group ID, which is returned when a recipient group is created.
 	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
 }
@@ -631,13 +760,15 @@ func (r *DeleteReceiverRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReceiverResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteReceiverResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteReceiverResponseParams `json:"Response"`
 }
 
 func (r *DeleteReceiverResponse) ToJsonString() string {
@@ -652,7 +783,6 @@ func (r *DeleteReceiverResponse) FromJsonString(s string) error {
 }
 
 type EmailIdentity struct {
-
 	// Sender domain.
 	IdentityName *string `json:"IdentityName,omitempty" name:"IdentityName"`
 
@@ -664,7 +794,6 @@ type EmailIdentity struct {
 }
 
 type EmailSender struct {
-
 	// Sender address.
 	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
 
@@ -677,9 +806,15 @@ type EmailSender struct {
 	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitempty" name:"CreatedTimestamp"`
 }
 
+// Predefined struct for user
+type GetEmailIdentityRequestParams struct {
+	// Sender domain.
+	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
+}
+
 type GetEmailIdentityRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender domain.
 	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
 }
@@ -703,22 +838,24 @@ func (r *GetEmailIdentityRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetEmailIdentityResponseParams struct {
+	// Verification type. The value is fixed to `DOMAIN`.
+	IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
+
+	// Verification passed or not.
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
+
+	// DNS configuration details.
+	Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetEmailIdentityResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Verification type. The value is fixed to `DOMAIN`.
-		IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
-
-		// Verification passed or not.
-		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
-
-		// DNS configuration details.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetEmailIdentityResponseParams `json:"Response"`
 }
 
 func (r *GetEmailIdentityResponse) ToJsonString() string {
@@ -732,9 +869,15 @@ func (r *GetEmailIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetEmailTemplateRequestParams struct {
+	// Template ID.
+	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+}
+
 type GetEmailTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template ID.
 	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
 }
@@ -758,16 +901,18 @@ func (r *GetEmailTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetEmailTemplateResponseParams struct {
+	// Template content.
+	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetEmailTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Template content.
-		TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetEmailTemplateResponseParams `json:"Response"`
 }
 
 func (r *GetEmailTemplateResponse) ToJsonString() string {
@@ -781,9 +926,24 @@ func (r *GetEmailTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetStatisticsReportRequestParams struct {
+	// Start date.
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// End date.
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Sender domain.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Recipient address type, for example, gmail.com.
+	ReceivingMailboxType *string `json:"ReceivingMailboxType,omitempty" name:"ReceivingMailboxType"`
+}
+
 type GetStatisticsReportRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start date.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
@@ -819,19 +979,21 @@ func (r *GetStatisticsReportRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetStatisticsReportResponseParams struct {
+	// Daily email sending statistics.
+	DailyVolumes []*Volume `json:"DailyVolumes,omitempty" name:"DailyVolumes"`
+
+	// Overall email sending statistics.
+	OverallVolume *Volume `json:"OverallVolume,omitempty" name:"OverallVolume"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetStatisticsReportResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Daily email sending statistics.
-		DailyVolumes []*Volume `json:"DailyVolumes,omitempty" name:"DailyVolumes"`
-
-		// Overall email sending statistics.
-		OverallVolume *Volume `json:"OverallVolume,omitempty" name:"OverallVolume"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetStatisticsReportResponseParams `json:"Response"`
 }
 
 func (r *GetStatisticsReportResponse) ToJsonString() string {
@@ -845,9 +1007,30 @@ func (r *GetStatisticsReportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListBlackEmailAddressRequestParams struct {
+	// Start date in the format of `YYYY-MM-DD`
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// End date in the format of `YYYY-MM-DD`
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Common parameter. It must be used with `Offset`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Common parameter. It must be used with `Limit`. Maximum value of `Limit`: `100`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// You can specify an email address to query.
+	EmailAddress *string `json:"EmailAddress,omitempty" name:"EmailAddress"`
+
+	// You can specify a task ID to query.
+	TaskID *string `json:"TaskID,omitempty" name:"TaskID"`
+}
+
 type ListBlackEmailAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start date in the format of `YYYY-MM-DD`
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
@@ -891,19 +1074,21 @@ func (r *ListBlackEmailAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListBlackEmailAddressResponseParams struct {
+	// List of blocklisted addresses.
+	BlackList []*BlackEmailAddress `json:"BlackList,omitempty" name:"BlackList"`
+
+	// Total number of blocklisted addresses.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListBlackEmailAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of blocklisted addresses.
-		BlackList []*BlackEmailAddress `json:"BlackList,omitempty" name:"BlackList"`
-
-		// Total number of blocklisted addresses.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListBlackEmailAddressResponseParams `json:"Response"`
 }
 
 func (r *ListBlackEmailAddressResponse) ToJsonString() string {
@@ -917,8 +1102,14 @@ func (r *ListBlackEmailAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailAddressRequestParams struct {
+
+}
+
 type ListEmailAddressRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ListEmailAddressRequest) ToJsonString() string {
@@ -933,23 +1124,26 @@ func (r *ListEmailAddressRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListEmailAddressRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailAddressResponseParams struct {
+	// Details of sender addresses.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EmailSenders []*EmailSender `json:"EmailSenders,omitempty" name:"EmailSenders"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListEmailAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of sender addresses.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		EmailSenders []*EmailSender `json:"EmailSenders,omitempty" name:"EmailSenders"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListEmailAddressResponseParams `json:"Response"`
 }
 
 func (r *ListEmailAddressResponse) ToJsonString() string {
@@ -963,8 +1157,14 @@ func (r *ListEmailAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailIdentitiesRequestParams struct {
+
+}
+
 type ListEmailIdentitiesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ListEmailIdentitiesRequest) ToJsonString() string {
@@ -979,22 +1179,25 @@ func (r *ListEmailIdentitiesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListEmailIdentitiesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailIdentitiesResponseParams struct {
+	// List of sender domains.
+	EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitempty" name:"EmailIdentities"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListEmailIdentitiesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of sender domains.
-		EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitempty" name:"EmailIdentities"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListEmailIdentitiesResponseParams `json:"Response"`
 }
 
 func (r *ListEmailIdentitiesResponse) ToJsonString() string {
@@ -1008,9 +1211,18 @@ func (r *ListEmailIdentitiesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailTemplatesRequestParams struct {
+	// Number of templates to get. This parameter is used for pagination.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template offset to get. This parameter is used for pagination.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type ListEmailTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of templates to get. This parameter is used for pagination.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -1038,19 +1250,21 @@ func (r *ListEmailTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEmailTemplatesResponseParams struct {
+	// List of email templates.
+	TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitempty" name:"TemplatesMetadata"`
+
+	// Total number of templates.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListEmailTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of email templates.
-		TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitempty" name:"TemplatesMetadata"`
-
-		// Total number of templates.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListEmailTemplatesResponseParams `json:"Response"`
 }
 
 func (r *ListEmailTemplatesResponse) ToJsonString() string {
@@ -1064,9 +1278,24 @@ func (r *ListEmailTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListReceiversRequestParams struct {
+	// Offset, starting from 0. The value is an integer.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of records to query. The value is an integer not exceeding 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded). To query groups in all states, do not pass in this parameter.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Group name keyword for fuzzy query
+	KeyWord *string `json:"KeyWord,omitempty" name:"KeyWord"`
+}
+
 type ListReceiversRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset, starting from 0. The value is an integer.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -1102,19 +1331,21 @@ func (r *ListReceiversRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListReceiversResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data record
+	Data []*ReceiverData `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListReceiversResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data record
-		Data []*ReceiverData `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListReceiversResponseParams `json:"Response"`
 }
 
 func (r *ListReceiversResponse) ToJsonString() string {
@@ -1128,9 +1359,27 @@ func (r *ListReceiversResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListSendTasksRequestParams struct {
+	// Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of records to query. The value is an integer not exceeding 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Recipient group ID
+	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
+	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
+}
+
 type ListSendTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -1170,19 +1419,21 @@ func (r *ListSendTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListSendTasksResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Data record
+	Data []*SendTaskData `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListSendTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Data record
-		Data []*SendTaskData `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListSendTasksResponseParams `json:"Response"`
 }
 
 func (r *ListSendTasksResponse) ToJsonString() string {
@@ -1197,7 +1448,6 @@ func (r *ListSendTasksResponse) FromJsonString(s string) error {
 }
 
 type ReceiverData struct {
-
 	// Recipient group ID
 	ReceiverId *uint64 `json:"ReceiverId,omitempty" name:"ReceiverId"`
 
@@ -1219,9 +1469,41 @@ type ReceiverData struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+// Predefined struct for user
+type SendEmailRequestParams struct {
+	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
+	// To display the sender name, enter the address in the following format: 
+	// Sender <email address>
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
+	Destination []*string `json:"Destination,omitempty" name:"Destination"`
+
+	// Email subject.
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
+
+	// Template when sending emails using a template.
+	Template *Template `json:"Template,omitempty" name:"Template"`
+
+	// Email content when sending emails by calling the API.
+	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
+
+	// Email attachments
+	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
+
+	// Unsubscribe option. `1`: provides an unsubscribe link; `0`: does not provide an unsubscribe link
+	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
+
+	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
+	TriggerType *uint64 `json:"TriggerType,omitempty" name:"TriggerType"`
+}
+
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
 	// To display the sender name, enter the address in the following format: 
 	// Sender <email address>
@@ -1279,16 +1561,18 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendEmailResponseParams struct {
+	// Unique ID generated when receiving the message
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendEmailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID generated when receiving the message
-		MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendEmailResponseParams `json:"Response"`
 }
 
 func (r *SendEmailResponse) ToJsonString() string {
@@ -1303,7 +1587,6 @@ func (r *SendEmailResponse) FromJsonString(s string) error {
 }
 
 type SendTaskData struct {
-
 	// Task ID
 	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -1358,7 +1641,6 @@ type SendTaskData struct {
 }
 
 type Simple struct {
-
 	// HTML code after base64 encoding. To ensure correct display, this parameter should include all code information and cannot contain external CSS.
 	Html *string `json:"Html,omitempty" name:"Html"`
 
@@ -1367,7 +1649,6 @@ type Simple struct {
 }
 
 type Template struct {
-
 	// Template ID. If you don’t have any template, please create one.
 	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
 
@@ -1378,7 +1659,6 @@ type Template struct {
 }
 
 type TemplateContent struct {
-
 	// HTML code after base64 encoding.
 	Html *string `json:"Html,omitempty" name:"Html"`
 
@@ -1387,7 +1667,6 @@ type TemplateContent struct {
 }
 
 type TemplatesMetadata struct {
-
 	// Creation time.
 	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitempty" name:"CreatedTimestamp"`
 
@@ -1405,14 +1684,19 @@ type TemplatesMetadata struct {
 }
 
 type TimedEmailParam struct {
-
 	// Start time of a scheduled sending task
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 }
 
+// Predefined struct for user
+type UpdateEmailIdentityRequestParams struct {
+	// Domain to be verified.
+	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
+}
+
 type UpdateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain to be verified.
 	EmailIdentity *string `json:"EmailIdentity,omitempty" name:"EmailIdentity"`
 }
@@ -1436,22 +1720,24 @@ func (r *UpdateEmailIdentityRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateEmailIdentityResponseParams struct {
+	// Verification type. The value is fixed to `DOMAIN`.
+	IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
+
+	// Verification passed or not.
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
+
+	// DNS information that needs to be configured.
+	Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateEmailIdentityResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Verification type. The value is fixed to `DOMAIN`.
-		IdentityType *string `json:"IdentityType,omitempty" name:"IdentityType"`
-
-		// Verification passed or not.
-		VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitempty" name:"VerifiedForSendingStatus"`
-
-		// DNS information that needs to be configured.
-		Attributes []*DNSAttributes `json:"Attributes,omitempty" name:"Attributes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateEmailIdentityResponseParams `json:"Response"`
 }
 
 func (r *UpdateEmailIdentityResponse) ToJsonString() string {
@@ -1465,9 +1751,21 @@ func (r *UpdateEmailIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateEmailTemplateRequestParams struct {
+	// Template content.
+	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
+
+	// Template ID.
+	TemplateID *uint64 `json:"TemplateID,omitempty" name:"TemplateID"`
+
+	// Template name
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+}
+
 type UpdateEmailTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template content.
 	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
 
@@ -1499,13 +1797,15 @@ func (r *UpdateEmailTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateEmailTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateEmailTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateEmailTemplateResponseParams `json:"Response"`
 }
 
 func (r *UpdateEmailTemplateResponse) ToJsonString() string {
@@ -1520,7 +1820,6 @@ func (r *UpdateEmailTemplateResponse) FromJsonString(s string) error {
 }
 
 type Volume struct {
-
 	// Date
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SendDate *string `json:"SendDate,omitempty" name:"SendDate"`

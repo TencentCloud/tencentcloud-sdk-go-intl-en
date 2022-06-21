@@ -20,9 +20,15 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type CheckInstanceRequestParams struct {
+	// ID of the instance to be verified.
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+}
+
 type CheckInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the instance to be verified.
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 }
@@ -46,19 +52,21 @@ func (r *CheckInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckInstanceResponseParams struct {
+	// Verification result. true: valid, false: invalid
+	IsValidated *bool `json:"IsValidated,omitempty" name:"IsValidated"`
+
+	// ID of the region where the instance is located.
+	RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CheckInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Verification result. true: valid, false: invalid
-		IsValidated *bool `json:"IsValidated,omitempty" name:"IsValidated"`
-
-		// ID of the region where the instance is located.
-		RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CheckInstanceResponseParams `json:"Response"`
 }
 
 func (r *CheckInstanceResponse) ToJsonString() string {
@@ -72,9 +80,21 @@ func (r *CheckInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateImmutableTagRulesRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Namespace
+	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Rule
+	Rule *ImmutableTagRule `json:"Rule,omitempty" name:"Rule"`
+}
+
 type CreateImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -106,13 +126,15 @@ func (r *CreateImmutableTagRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateImmutableTagRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateImmutableTagRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateImmutableTagRulesResponseParams `json:"Response"`
 }
 
 func (r *CreateImmutableTagRulesResponse) ToJsonString() string {
@@ -126,9 +148,21 @@ func (r *CreateImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceTokenRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Access credential type. Values: `longterm` and `temp` (default, valid for one hour)
+	TokenType *string `json:"TokenType,omitempty" name:"TokenType"`
+
+	// Description of the long-term access credential
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+}
+
 type CreateInstanceTokenRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -160,27 +194,29 @@ func (r *CreateInstanceTokenRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceTokenResponseParams struct {
+	// Username
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Access credential
+	Token *string `json:"Token,omitempty" name:"Token"`
+
+	// Expiration timestamp of access credential. It is a string of numbers without unit.
+	ExpTime *int64 `json:"ExpTime,omitempty" name:"ExpTime"`
+
+	// Token ID of long-term access credential. It is not available to temporary access credential.
+	// Note: this field may return `null`, indicating that no valid value can be found.
+	TokenId *string `json:"TokenId,omitempty" name:"TokenId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstanceTokenResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Username
-	// Note: this field may return `null`, indicating that no valid value can be found.
-		Username *string `json:"Username,omitempty" name:"Username"`
-
-		// Access credential
-		Token *string `json:"Token,omitempty" name:"Token"`
-
-		// Expiration timestamp of access credential. It is a string of numbers without unit.
-		ExpTime *int64 `json:"ExpTime,omitempty" name:"ExpTime"`
-
-		// Token ID of long-term access credential. It is not available to temporary access credential.
-	// Note: this field may return `null`, indicating that no valid value can be found.
-		TokenId *string `json:"TokenId,omitempty" name:"TokenId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstanceTokenResponseParams `json:"Response"`
 }
 
 func (r *CreateInstanceTokenResponse) ToJsonString() string {
@@ -194,9 +230,18 @@ func (r *CreateInstanceTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMultipleSecurityPolicyRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Security group policy
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+}
+
 type CreateMultipleSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -224,16 +269,18 @@ func (r *CreateMultipleSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMultipleSecurityPolicyResponseParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateMultipleSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID
-		RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateMultipleSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *CreateMultipleSecurityPolicyResponse) ToJsonString() string {
@@ -247,9 +294,21 @@ func (r *CreateMultipleSecurityPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReplicationInstanceRequestParams struct {
+	// Master instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+
+	// Region name of the replication instance
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitempty" name:"ReplicationRegionName"`
+}
+
 type CreateReplicationInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Master instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -281,16 +340,18 @@ func (r *CreateReplicationInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReplicationInstanceResponseParams struct {
+	// Enterprise Registry Instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReplicationInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Enterprise Registry Instance ID
-		ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReplicationInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateReplicationInstanceResponse) ToJsonString() string {
@@ -304,9 +365,21 @@ func (r *CreateReplicationInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteImmutableTagRulesRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Namespace
+	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Rule ID
+	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type DeleteImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -338,13 +411,15 @@ func (r *DeleteImmutableTagRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteImmutableTagRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteImmutableTagRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteImmutableTagRulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteImmutableTagRulesResponse) ToJsonString() string {
@@ -358,9 +433,18 @@ func (r *DeleteImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMultipleSecurityPolicyRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Security group policy
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+}
+
 type DeleteMultipleSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -388,16 +472,18 @@ func (r *DeleteMultipleSecurityPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMultipleSecurityPolicyResponseParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteMultipleSecurityPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID
-		RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteMultipleSecurityPolicyResponseParams `json:"Response"`
 }
 
 func (r *DeleteMultipleSecurityPolicyResponse) ToJsonString() string {
@@ -411,9 +497,15 @@ func (r *DeleteMultipleSecurityPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeImmutableTagRulesRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+}
+
 type DescribeImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 }
@@ -437,24 +529,26 @@ func (r *DescribeImmutableTagRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeImmutableTagRulesResponseParams struct {
+	// Rule list
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Rules []*ImmutableTagRule `json:"Rules,omitempty" name:"Rules"`
+
+	// Namespace with no rules created
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	EmptyNs []*string `json:"EmptyNs,omitempty" name:"EmptyNs"`
+
+	// Total rules
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeImmutableTagRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule list
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
-		Rules []*ImmutableTagRule `json:"Rules,omitempty" name:"Rules"`
-
-		// Namespace with no rules created
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
-		EmptyNs []*string `json:"EmptyNs,omitempty" name:"EmptyNs"`
-
-		// Total rules
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeImmutableTagRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeImmutableTagRulesResponse) ToJsonString() string {
@@ -468,9 +562,18 @@ func (r *DescribeImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstanceCreateTasksRequestParams struct {
+	// Replication instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+}
+
 type DescribeReplicationInstanceCreateTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Replication instance ID
 	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
 
@@ -498,19 +601,21 @@ func (r *DescribeReplicationInstanceCreateTasksRequest) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstanceCreateTasksResponseParams struct {
+	// Task details
+	TaskDetail []*TaskDetail `json:"TaskDetail,omitempty" name:"TaskDetail"`
+
+	// Overall task status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeReplicationInstanceCreateTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task details
-		TaskDetail []*TaskDetail `json:"TaskDetail,omitempty" name:"TaskDetail"`
-
-		// Overall task status
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeReplicationInstanceCreateTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeReplicationInstanceCreateTasksResponse) ToJsonString() string {
@@ -524,9 +629,30 @@ func (r *DescribeReplicationInstanceCreateTasksResponse) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstanceSyncStatusRequestParams struct {
+	// Master instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Replication instance ID
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitempty" name:"ReplicationRegistryId"`
+
+	// Region ID of the replication instance
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitempty" name:"ReplicationRegionId"`
+
+	// Whether to show the synchronization log
+	ShowReplicationLog *bool `json:"ShowReplicationLog,omitempty" name:"ShowReplicationLog"`
+
+	// Page offset for log display. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: 5, maximum value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeReplicationInstanceSyncStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Master instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -570,23 +696,25 @@ func (r *DescribeReplicationInstanceSyncStatusRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstanceSyncStatusResponseParams struct {
+	// Synchronization status
+	ReplicationStatus *string `json:"ReplicationStatus,omitempty" name:"ReplicationStatus"`
+
+	// Synchronization completion time
+	ReplicationTime *string `json:"ReplicationTime,omitempty" name:"ReplicationTime"`
+
+	// Synchronization log
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReplicationLog *ReplicationLog `json:"ReplicationLog,omitempty" name:"ReplicationLog"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeReplicationInstanceSyncStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Synchronization status
-		ReplicationStatus *string `json:"ReplicationStatus,omitempty" name:"ReplicationStatus"`
-
-		// Synchronization completion time
-		ReplicationTime *string `json:"ReplicationTime,omitempty" name:"ReplicationTime"`
-
-		// Synchronization log
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ReplicationLog *ReplicationLog `json:"ReplicationLog,omitempty" name:"ReplicationLog"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeReplicationInstanceSyncStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeReplicationInstanceSyncStatusResponse) ToJsonString() string {
@@ -600,9 +728,21 @@ func (r *DescribeReplicationInstanceSyncStatusResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstancesRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: 20, maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeReplicationInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -634,20 +774,22 @@ func (r *DescribeReplicationInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReplicationInstancesResponseParams struct {
+	// Total number of instances
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Replication instance list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ReplicationRegistries []*ReplicationRegistry `json:"ReplicationRegistries,omitempty" name:"ReplicationRegistries"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeReplicationInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of instances
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Replication instance list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ReplicationRegistries []*ReplicationRegistry `json:"ReplicationRegistries,omitempty" name:"ReplicationRegistries"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeReplicationInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeReplicationInstancesResponse) ToJsonString() string {
@@ -662,7 +804,6 @@ func (r *DescribeReplicationInstancesResponse) FromJsonString(s string) error {
 }
 
 type ImmutableTagRule struct {
-
 	// Repository matching rule
 	RepositoryPattern *string `json:"RepositoryPattern,omitempty" name:"RepositoryPattern"`
 
@@ -685,9 +826,30 @@ type ImmutableTagRule struct {
 	NsName *string `json:"NsName,omitempty" name:"NsName"`
 }
 
+// Predefined struct for user
+type ManageReplicationRequestParams struct {
+	// Source instance ID
+	SourceRegistryId *string `json:"SourceRegistryId,omitempty" name:"SourceRegistryId"`
+
+	// Destination instance ID
+	DestinationRegistryId *string `json:"DestinationRegistryId,omitempty" name:"DestinationRegistryId"`
+
+	// Synchronization rule
+	Rule *ReplicationRule `json:"Rule,omitempty" name:"Rule"`
+
+	// Rule description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Region ID of the destination instance. For example, `1` represents Guangzhou
+	DestinationRegionId *uint64 `json:"DestinationRegionId,omitempty" name:"DestinationRegionId"`
+
+	// Configuration of the synchronization rule
+	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitempty" name:"PeerReplicationOption"`
+}
+
 type ManageReplicationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Source instance ID
 	SourceRegistryId *string `json:"SourceRegistryId,omitempty" name:"SourceRegistryId"`
 
@@ -731,13 +893,15 @@ func (r *ManageReplicationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ManageReplicationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ManageReplicationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ManageReplicationResponseParams `json:"Response"`
 }
 
 func (r *ManageReplicationResponse) ToJsonString() string {
@@ -751,9 +915,24 @@ func (r *ManageReplicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyImmutableTagRulesRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Namespace
+	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Rule ID
+	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule
+	Rule *ImmutableTagRule `json:"Rule,omitempty" name:"Rule"`
+}
+
 type ModifyImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -789,13 +968,15 @@ func (r *ModifyImmutableTagRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyImmutableTagRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyImmutableTagRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyImmutableTagRulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyImmutableTagRulesResponse) ToJsonString() string {
@@ -809,9 +990,18 @@ func (r *ModifyImmutableTagRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstanceRequestParams struct {
+	// Instance ID
+	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
+
+	// Instance specification
+	RegistryType *string `json:"RegistryType,omitempty" name:"RegistryType"`
+}
+
 type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -839,13 +1029,15 @@ func (r *ModifyInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyInstanceResponseParams `json:"Response"`
 }
 
 func (r *ModifyInstanceResponse) ToJsonString() string {
@@ -860,7 +1052,6 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
 }
 
 type PeerReplicationOption struct {
-
 	// UIN of the destination instance
 	PeerRegistryUin *string `json:"PeerRegistryUin,omitempty" name:"PeerRegistryUin"`
 
@@ -872,7 +1063,6 @@ type PeerReplicationOption struct {
 }
 
 type ReplicationFilter struct {
-
 	// Type (`name`, `tag` and `resource`)
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -881,7 +1071,6 @@ type ReplicationFilter struct {
 }
 
 type ReplicationLog struct {
-
 	// Resource type
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
@@ -908,7 +1097,6 @@ type ReplicationLog struct {
 }
 
 type ReplicationRegistry struct {
-
 	// Master instance ID
 	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
 
@@ -929,7 +1117,6 @@ type ReplicationRegistry struct {
 }
 
 type ReplicationRule struct {
-
 	// Name of synchronization rule
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -944,7 +1131,6 @@ type ReplicationRule struct {
 }
 
 type SecurityPolicy struct {
-
 	// Policy index
 	PolicyIndex *int64 `json:"PolicyIndex,omitempty" name:"PolicyIndex"`
 
@@ -959,7 +1145,6 @@ type SecurityPolicy struct {
 }
 
 type TaskDetail struct {
-
 	// Task
 	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
 

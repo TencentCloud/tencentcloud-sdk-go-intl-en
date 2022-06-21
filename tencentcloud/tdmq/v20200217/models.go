@@ -20,9 +20,21 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AcknowledgeMessageRequestParams struct {
+	// Unique ID used to identify the message, which can be obtained from the returned value of `receiveMessage`.
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Topic name, which can be obtained from the returned value of `receiveMessage` and is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+	AckTopic *string `json:"AckTopic,omitempty" name:"AckTopic"`
+
+	// Subscriber name, which can be obtained from the returned value of `receiveMessage`. Make sure that it is the same as the subscriber name identified in `receiveMessage`; otherwise, the received message cannot be correctly acknowledged.
+	SubName *string `json:"SubName,omitempty" name:"SubName"`
+}
+
 type AcknowledgeMessageRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID used to identify the message, which can be obtained from the returned value of `receiveMessage`.
 	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
 
@@ -54,17 +66,19 @@ func (r *AcknowledgeMessageRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AcknowledgeMessageResponseParams struct {
+	// If it is an empty string, no error occurred.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AcknowledgeMessageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// If it is an empty string, no error occurred.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AcknowledgeMessageResponseParams `json:"Response"`
 }
 
 func (r *AcknowledgeMessageResponse) ToJsonString() string {
@@ -78,9 +92,15 @@ func (r *AcknowledgeMessageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ClearCmqQueueRequestParams struct {
+	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+}
+
 type ClearCmqQueueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 }
@@ -104,13 +124,15 @@ func (r *ClearCmqQueueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ClearCmqQueueResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ClearCmqQueueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ClearCmqQueueResponseParams `json:"Response"`
 }
 
 func (r *ClearCmqQueueResponse) ToJsonString() string {
@@ -124,9 +146,18 @@ func (r *ClearCmqQueueResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ClearCmqSubscriptionFilterTagsRequestParams struct {
+	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+}
+
 type ClearCmqSubscriptionFilterTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -154,13 +185,15 @@ func (r *ClearCmqSubscriptionFilterTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ClearCmqSubscriptionFilterTagsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ClearCmqSubscriptionFilterTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ClearCmqSubscriptionFilterTagsResponseParams `json:"Response"`
 }
 
 func (r *ClearCmqSubscriptionFilterTagsResponse) ToJsonString() string {
@@ -175,7 +208,6 @@ func (r *ClearCmqSubscriptionFilterTagsResponse) FromJsonString(s string) error 
 }
 
 type Cluster struct {
-
 	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -276,7 +308,6 @@ type Cluster struct {
 }
 
 type CmqDeadLetterPolicy struct {
-
 	// Dead letter queue.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeadLetterQueue *string `json:"DeadLetterQueue,omitempty" name:"DeadLetterQueue"`
@@ -295,7 +326,6 @@ type CmqDeadLetterPolicy struct {
 }
 
 type CmqDeadLetterSource struct {
-
 	// Message queue ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
@@ -306,7 +336,6 @@ type CmqDeadLetterSource struct {
 }
 
 type CmqQueue struct {
-
 	// Message queue ID.
 	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
 
@@ -430,7 +459,6 @@ type CmqQueue struct {
 }
 
 type CmqSubscription struct {
-
 	// Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
@@ -485,7 +513,6 @@ type CmqSubscription struct {
 }
 
 type CmqTopic struct {
-
 	// Topic ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
@@ -550,7 +577,6 @@ type CmqTopic struct {
 }
 
 type CmqTransactionPolicy struct {
-
 	// First lookback time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
@@ -560,9 +586,27 @@ type CmqTransactionPolicy struct {
 	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
 }
 
+// Predefined struct for user
+type CreateClusterRequestParams struct {
+	// Cluster name, which can contain up to 16 letters, digits, hyphens, and underscores.
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// ID of your dedicated physical cluster. If it is not passed in, cluster resources will be created in a public cluster by default.
+	BindClusterId *uint64 `json:"BindClusterId,omitempty" name:"BindClusterId"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Cluster tag list (deprecated).
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to enable public network access. If this parameter is left empty, the feature will be enabled by default
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
+}
+
 type CreateClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 
@@ -602,16 +646,18 @@ func (r *CreateClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateClusterResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateClusterResponseParams `json:"Response"`
 }
 
 func (r *CreateClusterResponse) ToJsonString() string {
@@ -625,9 +671,63 @@ func (r *CreateClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqQueueRequestParams struct {
+	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+
+	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+
+	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+
+	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+
+	// The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+
+	// Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+
+	// 1: transaction queue; 0: general queue
+	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
+
+	// First lookback interval
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+
+	// Maximum number of lookbacks
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+
+	// Dead letter queue name
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+
+	// Dead letter policy. 0: message has been consumed multiple times but not deleted; 1: `Time-To-Live` has elapsed
+	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+
+	// Maximum receipt times. Value range: 1–1000
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+
+	// Maximum period in seconds before an unconsumed message expires, which is required if `policy` is 1. Value range: 300–43200. This value should be smaller than `msgRetentionSeconds` (maximum message retention period)
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+
+	// Whether to enable message trace. true: yes; false: no. If this field is not configured, the feature will not be enabled
+	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+
+	// Tag array.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
+}
+
 type CreateCmqQueueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
@@ -715,16 +815,18 @@ func (r *CreateCmqQueueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqQueueResponseParams struct {
+	// `queueId` of a successfully created queue
+	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCmqQueueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `queueId` of a successfully created queue
-		QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCmqQueueResponseParams `json:"Response"`
 }
 
 func (r *CreateCmqQueueResponse) ToJsonString() string {
@@ -738,9 +840,36 @@ func (r *CreateCmqQueueResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqSubscribeRequestParams struct {
+	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+
+	// Subscription protocol. Currently, two protocols are supported: HTTP and queue. To use the HTTP protocol, you need to build your own web server to receive messages. With the queue protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// `Endpoint` for notification receipt, which is distinguished by `Protocol`. For `http`, `Endpoint` must begin with `http://` and `host` can be a domain name or IP. For `Queue`, enter `QueueName`. Note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for `Endpoint`, pushed messages will not be received. Currently, messages can be pushed only to the public network and classic network.
+	Endpoint *string `json:"Endpoint,omitempty" name:"Endpoint"`
+
+	// CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values: 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
+	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+
+	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
+	FilterTag []*string `json:"FilterTag,omitempty" name:"FilterTag"`
+
+	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
+	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+
+	// Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+}
+
 type CreateCmqSubscribeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -792,16 +921,18 @@ func (r *CreateCmqSubscribeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqSubscribeResponseParams struct {
+	// Subscription ID
+	SubscriptionId *string `json:"SubscriptionId,omitempty" name:"SubscriptionId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCmqSubscribeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Subscription ID
-		SubscriptionId *string `json:"SubscriptionId,omitempty" name:"SubscriptionId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCmqSubscribeResponseParams `json:"Response"`
 }
 
 func (r *CreateCmqSubscribeResponse) ToJsonString() string {
@@ -815,9 +946,30 @@ func (r *CreateCmqSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqTopicRequestParams struct {
+	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+
+	// Used to specify the message match policy for the topic. 1: tag match policy (default value); 2: routing match policy.
+	FilterType *uint64 `json:"FilterType,omitempty" name:"FilterType"`
+
+	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+
+	// Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
+	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+
+	// Tag array.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateCmqTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -861,16 +1013,18 @@ func (r *CreateCmqTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCmqTopicResponseParams struct {
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCmqTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Topic ID
-		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCmqTopicResponseParams `json:"Response"`
 }
 
 func (r *CreateCmqTopicResponse) ToJsonString() string {
@@ -884,9 +1038,27 @@ func (r *CreateCmqTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentRequestParams struct {
+	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Unconsumed message expiration time in seconds. Minimum value: 60; maximum value: 1296000 (15 days).
+	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Message retention policy
+	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+}
+
 type CreateEnvironmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -926,26 +1098,28 @@ func (r *CreateEnvironmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentResponseParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// TTL for unconsumed messages in seconds.
+	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+
+	// Remarks (up to 128 characters).
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Namespace ID
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEnvironmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Environment (namespace) name.
-		EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-		// TTL for unconsumed messages in seconds.
-		MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
-
-		// Remarks (up to 128 characters).
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// Namespace ID
-		NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEnvironmentResponseParams `json:"Response"`
 }
 
 func (r *CreateEnvironmentResponse) ToJsonString() string {
@@ -959,9 +1133,24 @@ func (r *CreateEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentRoleRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Role name.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Permissions, which is a non-empty string array of `produce` and `consume` at the most.
+	Permissions []*string `json:"Permissions,omitempty" name:"Permissions"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type CreateEnvironmentRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -997,13 +1186,15 @@ func (r *CreateEnvironmentRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentRoleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEnvironmentRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEnvironmentRoleResponseParams `json:"Response"`
 }
 
 func (r *CreateEnvironmentRoleResponse) ToJsonString() string {
@@ -1017,9 +1208,18 @@ func (r *CreateEnvironmentRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQClusterRequestParams struct {
+	// Cluster name, which can contain 3–64 letters, digits, hyphens, and underscores
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Cluster description (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type CreateRocketMQClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster name, which can contain 3–64 letters, digits, hyphens, and underscores
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1047,16 +1247,18 @@ func (r *CreateRocketMQClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQClusterResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRocketMQClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRocketMQClusterResponseParams `json:"Response"`
 }
 
 func (r *CreateRocketMQClusterResponse) ToJsonString() string {
@@ -1070,9 +1272,30 @@ func (r *CreateRocketMQClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQGroupRequestParams struct {
+	// Group name (8–64 characters)
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Namespace. Currently, only one namespace is supported
+	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces"`
+
+	// Whether to enable consumption
+	ReadEnable *bool `json:"ReadEnable,omitempty" name:"ReadEnable"`
+
+	// Whether to enable broadcast consumption
+	BroadcastEnable *bool `json:"BroadcastEnable,omitempty" name:"BroadcastEnable"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type CreateRocketMQGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group name (8–64 characters)
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1116,13 +1339,15 @@ func (r *CreateRocketMQGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRocketMQGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRocketMQGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateRocketMQGroupResponse) ToJsonString() string {
@@ -1136,9 +1361,27 @@ func (r *CreateRocketMQGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQNamespaceRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
+
+	// Retention time of persisted messages in milliseconds
+	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type CreateRocketMQNamespaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1178,13 +1421,15 @@ func (r *CreateRocketMQNamespaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQNamespaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRocketMQNamespaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRocketMQNamespaceResponseParams `json:"Response"`
 }
 
 func (r *CreateRocketMQNamespaceResponse) ToJsonString() string {
@@ -1198,9 +1443,30 @@ func (r *CreateRocketMQNamespaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQTopicRequestParams struct {
+	// Topic name, which can contain 3–64 letters, digits, hyphens, and underscores
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Topic namespace. Currently, you can create topics only in one single namespace.
+	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces"`
+
+	// Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Topic remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Number of partitions, which doesn't take effect for globally sequential messages
+	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+}
+
 type CreateRocketMQTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which can contain 3–64 letters, digits, hyphens, and underscores
 	Topic *string `json:"Topic,omitempty" name:"Topic"`
 
@@ -1244,13 +1510,15 @@ func (r *CreateRocketMQTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRocketMQTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRocketMQTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRocketMQTopicResponseParams `json:"Response"`
 }
 
 func (r *CreateRocketMQTopicResponse) ToJsonString() string {
@@ -1264,9 +1532,21 @@ func (r *CreateRocketMQTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoleRequestParams struct {
+	// Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type CreateRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
@@ -1298,23 +1578,25 @@ func (r *CreateRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoleResponseParams struct {
+	// Role name
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Role token
+	Token *string `json:"Token,omitempty" name:"Token"`
+
+	// Remarks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role name
-		RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
-
-		// Role token
-		Token *string `json:"Token,omitempty" name:"Token"`
-
-		// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRoleResponseParams `json:"Response"`
 }
 
 func (r *CreateRoleResponse) ToJsonString() string {
@@ -1328,9 +1610,36 @@ func (r *CreateRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubscriptionRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscriber name, which can contain up to 150 letters, digits, hyphens, and underscores.
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+
+	// Whether the creation is idempotent; if not, you cannot create subscriptions with the same name.
+	IsIdempotent *bool `json:"IsIdempotent,omitempty" name:"IsIdempotent"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Whether to automatically create a dead letter topic and a retry letter topic. true: yes (default value); false: no.
+	AutoCreatePolicyTopic *bool `json:"AutoCreatePolicyTopic,omitempty" name:"AutoCreatePolicyTopic"`
+
+	// Naming convention for dead letter and retry letter topics. `LEGACY` indicates to use the legacy naming convention, and `COMMUNITY` indicates to use the naming convention in the Pulsar community.
+	PostFixPattern *string `json:"PostFixPattern,omitempty" name:"PostFixPattern"`
+}
+
 type CreateSubscriptionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -1382,16 +1691,18 @@ func (r *CreateSubscriptionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubscriptionResponseParams struct {
+	// Creation result.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSubscriptionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Creation result.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSubscriptionResponseParams `json:"Response"`
 }
 
 func (r *CreateSubscriptionResponse) ToJsonString() string {
@@ -1405,9 +1716,41 @@ func (r *CreateSubscriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTopicRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name, which can contain up to 64 letters, digits, hyphens, and underscores.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic (up to 128).
+	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// 0: general message;
+	// 1: globally sequential message;
+	// 2: partitionally sequential message;
+	// 3: retry letter queue;
+	// 4: dead letter queue.
+	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Pulsar topic type.
+	// `0`: Non-persistent and non-partitioned
+	// `1`: Non-persistent and partitioned
+	// `2`: Persistent and non-partitioned
+	// `3`: Persistent and partitioned
+	PulsarTopicType *int64 `json:"PulsarTopicType,omitempty" name:"PulsarTopicType"`
+}
+
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -1463,35 +1806,37 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateTopicResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type CreateTopicResponseParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-		// Environment (namespace) name.
-		EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+	// Topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-		// Topic name.
-		TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic.
+	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
-		// 0: non-partitioned topic; other values: number of partitions in the partitioned topic.
-		Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
-
-		// Remarks (up to 128 characters).
+	// Remarks (up to 128 characters).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-		// 0: general message;
+	// 0: general message;
 	// 1: globally sequential message;
 	// 2: partitionally sequential message;
 	// 3: retry letter queue;
 	// 4: dead letter queue;
 	// 5: transaction message.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
+	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateTopicResponseParams `json:"Response"`
 }
 
 func (r *CreateTopicResponse) ToJsonString() string {
@@ -1505,9 +1850,15 @@ func (r *CreateTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteClusterRequestParams struct {
+	// ID of the cluster to be deleted.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster to be deleted.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -1531,16 +1882,18 @@ func (r *DeleteClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteClusterResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteClusterResponseParams `json:"Response"`
 }
 
 func (r *DeleteClusterResponse) ToJsonString() string {
@@ -1554,9 +1907,15 @@ func (r *DeleteClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqQueueRequestParams struct {
+	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+}
+
 type DeleteCmqQueueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 }
@@ -1580,13 +1939,15 @@ func (r *DeleteCmqQueueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqQueueResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCmqQueueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCmqQueueResponseParams `json:"Response"`
 }
 
 func (r *DeleteCmqQueueResponse) ToJsonString() string {
@@ -1600,9 +1961,18 @@ func (r *DeleteCmqQueueResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqSubscribeRequestParams struct {
+	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+}
+
 type DeleteCmqSubscribeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -1630,13 +2000,15 @@ func (r *DeleteCmqSubscribeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqSubscribeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCmqSubscribeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCmqSubscribeResponseParams `json:"Response"`
 }
 
 func (r *DeleteCmqSubscribeResponse) ToJsonString() string {
@@ -1650,9 +2022,15 @@ func (r *DeleteCmqSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqTopicRequestParams struct {
+	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
 type DeleteCmqTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
@@ -1676,13 +2054,15 @@ func (r *DeleteCmqTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCmqTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCmqTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCmqTopicResponseParams `json:"Response"`
 }
 
 func (r *DeleteCmqTopicResponse) ToJsonString() string {
@@ -1696,9 +2076,21 @@ func (r *DeleteCmqTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEnvironmentRolesRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Array of role names.
+	RoleNames []*string `json:"RoleNames,omitempty" name:"RoleNames"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteEnvironmentRolesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -1730,13 +2122,15 @@ func (r *DeleteEnvironmentRolesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEnvironmentRolesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEnvironmentRolesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEnvironmentRolesResponseParams `json:"Response"`
 }
 
 func (r *DeleteEnvironmentRolesResponse) ToJsonString() string {
@@ -1750,9 +2144,18 @@ func (r *DeleteEnvironmentRolesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEnvironmentsRequestParams struct {
+	// Array of environments (namespaces). Up to 20 environments can be deleted at a time.
+	EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteEnvironmentsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array of environments (namespaces). Up to 20 environments can be deleted at a time.
 	EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
 
@@ -1780,16 +2183,18 @@ func (r *DeleteEnvironmentsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEnvironmentsResponseParams struct {
+	// Array of environments (namespaces) successfully deleted.
+	EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEnvironmentsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of environments (namespaces) successfully deleted.
-		EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEnvironmentsResponseParams `json:"Response"`
 }
 
 func (r *DeleteEnvironmentsResponse) ToJsonString() string {
@@ -1803,9 +2208,15 @@ func (r *DeleteEnvironmentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQClusterRequestParams struct {
+	// ID of the cluster to be deleted.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteRocketMQClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster to be deleted.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -1829,13 +2240,15 @@ func (r *DeleteRocketMQClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQClusterResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRocketMQClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRocketMQClusterResponseParams `json:"Response"`
 }
 
 func (r *DeleteRocketMQClusterResponse) ToJsonString() string {
@@ -1849,9 +2262,21 @@ func (r *DeleteRocketMQClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQGroupRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Consumer group name
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DeleteRocketMQGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1883,13 +2308,15 @@ func (r *DeleteRocketMQGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRocketMQGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRocketMQGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteRocketMQGroupResponse) ToJsonString() string {
@@ -1903,9 +2330,18 @@ func (r *DeleteRocketMQGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQNamespaceRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+}
+
 type DeleteRocketMQNamespaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1933,13 +2369,15 @@ func (r *DeleteRocketMQNamespaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQNamespaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRocketMQNamespaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRocketMQNamespaceResponseParams `json:"Response"`
 }
 
 func (r *DeleteRocketMQNamespaceResponse) ToJsonString() string {
@@ -1953,9 +2391,21 @@ func (r *DeleteRocketMQNamespaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQTopicRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+}
+
 type DeleteRocketMQTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1987,13 +2437,15 @@ func (r *DeleteRocketMQTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRocketMQTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRocketMQTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRocketMQTopicResponseParams `json:"Response"`
 }
 
 func (r *DeleteRocketMQTopicResponse) ToJsonString() string {
@@ -2007,9 +2459,18 @@ func (r *DeleteRocketMQTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRolesRequestParams struct {
+	// Array of role names.
+	RoleNames []*string `json:"RoleNames,omitempty" name:"RoleNames"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteRolesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array of role names.
 	RoleNames []*string `json:"RoleNames,omitempty" name:"RoleNames"`
 
@@ -2037,16 +2498,18 @@ func (r *DeleteRolesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRolesResponseParams struct {
+	// Name array of roles successfully deleted.
+	RoleNames []*string `json:"RoleNames,omitempty" name:"RoleNames"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRolesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Name array of roles successfully deleted.
-		RoleNames []*string `json:"RoleNames,omitempty" name:"RoleNames"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRolesResponseParams `json:"Response"`
 }
 
 func (r *DeleteRolesResponse) ToJsonString() string {
@@ -2060,9 +2523,21 @@ func (r *DeleteRolesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBindVpcsRequestParams struct {
+	// Offset. If this parameter is left empty, 0 will be used by default.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DescribeBindVpcsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -2094,19 +2569,21 @@ func (r *DescribeBindVpcsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBindVpcsResponseParams struct {
+	// Number of records.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Set of VPCs.
+	VpcSets []*VpcBindRecord `json:"VpcSets,omitempty" name:"VpcSets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBindVpcsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of records.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Set of VPCs.
-		VpcSets []*VpcBindRecord `json:"VpcSets,omitempty" name:"VpcSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBindVpcsResponseParams `json:"Response"`
 }
 
 func (r *DescribeBindVpcsResponse) ToJsonString() string {
@@ -2120,9 +2597,15 @@ func (r *DescribeBindVpcsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClusterDetailRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DescribeClusterDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -2146,16 +2629,18 @@ func (r *DescribeClusterDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClusterDetailResponseParams struct {
+	// Cluster details
+	ClusterSet *Cluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClusterDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster details
-		ClusterSet *Cluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClusterDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeClusterDetailResponse) ToJsonString() string {
@@ -2169,9 +2654,24 @@ func (r *DescribeClusterDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqDeadLetterSourceQueuesRequestParams struct {
+	// Dead letter queue name
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+
+	// Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter by `SourceQueueName`
+	SourceQueueName *string `json:"SourceQueueName,omitempty" name:"SourceQueueName"`
+}
+
 type DescribeCmqDeadLetterSourceQueuesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Dead letter queue name
 	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
 
@@ -2207,19 +2707,21 @@ func (r *DescribeCmqDeadLetterSourceQueuesRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqDeadLetterSourceQueuesResponseParams struct {
+	// Number of eligible queues
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Source queues of dead letter queue
+	QueueSet []*CmqDeadLetterSource `json:"QueueSet,omitempty" name:"QueueSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCmqDeadLetterSourceQueuesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible queues
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Source queues of dead letter queue
-		QueueSet []*CmqDeadLetterSource `json:"QueueSet,omitempty" name:"QueueSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCmqDeadLetterSourceQueuesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCmqDeadLetterSourceQueuesResponse) ToJsonString() string {
@@ -2233,9 +2735,15 @@ func (r *DescribeCmqDeadLetterSourceQueuesResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqQueueDetailRequestParams struct {
+	// Exact match by `QueueName`
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+}
+
 type DescribeCmqQueueDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Exact match by `QueueName`
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 }
@@ -2259,16 +2767,18 @@ func (r *DescribeCmqQueueDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqQueueDetailResponseParams struct {
+	// List of queue details.
+	QueueDescribe *CmqQueue `json:"QueueDescribe,omitempty" name:"QueueDescribe"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCmqQueueDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of queue details.
-		QueueDescribe *CmqQueue `json:"QueueDescribe,omitempty" name:"QueueDescribe"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCmqQueueDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeCmqQueueDetailResponse) ToJsonString() string {
@@ -2282,9 +2792,24 @@ func (r *DescribeCmqQueueDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqSubscriptionDetailRequestParams struct {
+	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Starting position of the list of topics to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Fuzzy search by `SubscriptionName`
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+}
+
 type DescribeCmqSubscriptionDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -2320,20 +2845,22 @@ func (r *DescribeCmqSubscriptionDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqSubscriptionDetailResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Set of subscription attributes
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SubscriptionSet []*CmqSubscription `json:"SubscriptionSet,omitempty" name:"SubscriptionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCmqSubscriptionDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Set of subscription attributes
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubscriptionSet []*CmqSubscription `json:"SubscriptionSet,omitempty" name:"SubscriptionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCmqSubscriptionDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeCmqSubscriptionDetailResponse) ToJsonString() string {
@@ -2347,9 +2874,15 @@ func (r *DescribeCmqSubscriptionDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqTopicDetailRequestParams struct {
+	// Exact match by `TopicName`.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
 type DescribeCmqTopicDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Exact match by `TopicName`.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
@@ -2373,16 +2906,18 @@ func (r *DescribeCmqTopicDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCmqTopicDetailResponseParams struct {
+	// Topic details
+	TopicDescribe *CmqTopic `json:"TopicDescribe,omitempty" name:"TopicDescribe"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCmqTopicDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Topic details
-		TopicDescribe *CmqTopic `json:"TopicDescribe,omitempty" name:"TopicDescribe"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCmqTopicDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeCmqTopicDetailResponse) ToJsonString() string {
@@ -2396,9 +2931,18 @@ func (r *DescribeCmqTopicDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEnvironmentAttributesRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DescribeEnvironmentAttributesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -2426,37 +2970,39 @@ func (r *DescribeEnvironmentAttributesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEnvironmentAttributesResponseParams struct {
+	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days).
+	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+
+	// Consumption rate limit in bytes/second. 0: unlimited.
+	RateInByte *uint64 `json:"RateInByte,omitempty" name:"RateInByte"`
+
+	// Consumption rate limit in messages/second. 0: unlimited.
+	RateInSize *uint64 `json:"RateInSize,omitempty" name:"RateInSize"`
+
+	// Retention policy for consumed messages in hours. 0: deleted immediately after consumption.
+	RetentionHours *uint64 `json:"RetentionHours,omitempty" name:"RetentionHours"`
+
+	// Retention policy for consumed messages in GB. 0: deleted immediately after consumption.
+	RetentionSize *uint64 `json:"RetentionSize,omitempty" name:"RetentionSize"`
+
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Number of replicas.
+	Replicas *uint64 `json:"Replicas,omitempty" name:"Replicas"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEnvironmentAttributesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days).
-		MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
-
-		// Consumption rate limit in bytes/second. 0: unlimited.
-		RateInByte *uint64 `json:"RateInByte,omitempty" name:"RateInByte"`
-
-		// Consumption rate limit in messages/second. 0: unlimited.
-		RateInSize *uint64 `json:"RateInSize,omitempty" name:"RateInSize"`
-
-		// Retention policy for consumed messages in hours. 0: deleted immediately after consumption.
-		RetentionHours *uint64 `json:"RetentionHours,omitempty" name:"RetentionHours"`
-
-		// Retention policy for consumed messages in GB. 0: deleted immediately after consumption.
-		RetentionSize *uint64 `json:"RetentionSize,omitempty" name:"RetentionSize"`
-
-		// Environment (namespace) name.
-		EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-		// Number of replicas.
-		Replicas *uint64 `json:"Replicas,omitempty" name:"Replicas"`
-
-		// Remarks.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEnvironmentAttributesResponseParams `json:"Response"`
 }
 
 func (r *DescribeEnvironmentAttributesResponse) ToJsonString() string {
@@ -2470,9 +3016,21 @@ func (r *DescribeEnvironmentAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePublisherSummaryRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Topic name.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+}
+
 type DescribePublisherSummaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2504,29 +3062,31 @@ func (r *DescribePublisherSummaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePublisherSummaryResponseParams struct {
+	// Production rate (messages/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MsgRateIn *float64 `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
+
+	// Production rate (byte/sec).
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MsgThroughputIn *float64 `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
+
+	// The number of producers.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PublisherCount *int64 `json:"PublisherCount,omitempty" name:"PublisherCount"`
+
+	// Message storage size in bytes.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	StorageSize *int64 `json:"StorageSize,omitempty" name:"StorageSize"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePublisherSummaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Production rate (messages/sec).
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		MsgRateIn *float64 `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
-
-		// Production rate (byte/sec).
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		MsgThroughputIn *float64 `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
-
-		// The number of producers.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		PublisherCount *int64 `json:"PublisherCount,omitempty" name:"PublisherCount"`
-
-		// Message storage size in bytes.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		StorageSize *int64 `json:"StorageSize,omitempty" name:"StorageSize"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePublisherSummaryResponseParams `json:"Response"`
 }
 
 func (r *DescribePublisherSummaryResponse) ToJsonString() string {
@@ -2540,9 +3100,33 @@ func (r *DescribePublisherSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePublishersRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Topic name.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Parameter filter. The `ProducerName` and `Address` fields are supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset for query. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of query results displayed per page. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sort by field.
+	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+}
+
 type DescribePublishersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2590,20 +3174,22 @@ func (r *DescribePublishersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePublishersResponseParams struct {
+	// Total number of query results.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of producer information.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Publishers []*Publisher `json:"Publishers,omitempty" name:"Publishers"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePublishersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of query results.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of producer information.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Publishers []*Publisher `json:"Publishers,omitempty" name:"Publishers"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePublishersResponseParams `json:"Response"`
 }
 
 func (r *DescribePublishersResponse) ToJsonString() string {
@@ -2617,9 +3203,15 @@ func (r *DescribePublishersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRocketMQClusterRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DescribeRocketMQClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -2643,23 +3235,25 @@ func (r *DescribeRocketMQClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRocketMQClusterResponseParams struct {
+	// Cluster information
+	ClusterInfo *RocketMQClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo"`
+
+	// Cluster configuration
+	ClusterConfig *RocketMQClusterConfig `json:"ClusterConfig,omitempty" name:"ClusterConfig"`
+
+	// Recent cluster usage
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterStats *RocketMQClusterRecentStats `json:"ClusterStats,omitempty" name:"ClusterStats"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRocketMQClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster information
-		ClusterInfo *RocketMQClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo"`
-
-		// Cluster configuration
-		ClusterConfig *RocketMQClusterConfig `json:"ClusterConfig,omitempty" name:"ClusterConfig"`
-
-		// Recent cluster usage
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ClusterStats *RocketMQClusterRecentStats `json:"ClusterStats,omitempty" name:"ClusterStats"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRocketMQClusterResponseParams `json:"Response"`
 }
 
 func (r *DescribeRocketMQClusterResponse) ToJsonString() string {
@@ -2673,9 +3267,30 @@ func (r *DescribeRocketMQClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRolesRequestParams struct {
+	// Fuzzy query by role name
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Offset. If this parameter is left empty, 0 will be used by default.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// * RoleName
+	// Filter by role name for exact query.
+	// Type: String
+	// Required: no
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeRolesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Fuzzy query by role name
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
@@ -2718,19 +3333,21 @@ func (r *DescribeRolesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRolesResponseParams struct {
+	// Number of records.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Array of roles.
+	RoleSets []*Role `json:"RoleSets,omitempty" name:"RoleSets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRolesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of records.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Array of roles.
-		RoleSets []*Role `json:"RoleSets,omitempty" name:"RoleSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRolesResponseParams `json:"Response"`
 }
 
 func (r *DescribeRolesResponse) ToJsonString() string {
@@ -2745,7 +3362,6 @@ func (r *DescribeRolesResponse) FromJsonString(s string) error {
 }
 
 type Filter struct {
-
 	// Filter parameter name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2753,9 +3369,24 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
+// Predefined struct for user
+type ModifyClusterRequestParams struct {
+	// ID of the Pulsar cluster to be updated.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Updated cluster name.
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Enables public network access, which can only be `true`.
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
+}
+
 type ModifyClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the Pulsar cluster to be updated.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2791,16 +3422,18 @@ func (r *ModifyClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterResponseParams struct {
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Pulsar cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyClusterResponseParams `json:"Response"`
 }
 
 func (r *ModifyClusterResponse) ToJsonString() string {
@@ -2814,9 +3447,60 @@ func (r *ModifyClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqQueueAttributeRequestParams struct {
+	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+
+	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+
+	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+
+	// Max message size, which defaults to 1,024 KB for the queue of TDMQ for CMQ and cannot be modified.
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+
+	// The max period during which a message is retained before it is automatically acknowledged. Value range: 30-43,200 seconds (30 seconds to 12 hours). Default value: 3600 seconds (1 hour).
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+
+	// Rewindable time of messages in the queue. Value range: 0-1,296,000s (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+
+	// First query time
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+
+	// Maximum number of queries
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+
+	// Dead letter queue name
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+
+	// Maximum period in seconds before an unconsumed message expires, which is required if `MaxTimeToLivepolicy` is 1. Value range: 300–43200. This value should be smaller than `MsgRetentionSeconds` (maximum message retention period)
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+
+	// Maximum number of receipts
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+
+	// Dead letter queue policy
+	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+
+	// Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
+	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+
+	// Whether to enable transaction. 1: yes; 0: no
+	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
+
+	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
+}
+
 type ModifyCmqQueueAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
@@ -2900,13 +3584,15 @@ func (r *ModifyCmqQueueAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqQueueAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCmqQueueAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCmqQueueAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCmqQueueAttributeResponse) ToJsonString() string {
@@ -2920,9 +3606,32 @@ func (r *ModifyCmqQueueAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqSubscriptionAttributeRequestParams struct {
+	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscription name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+
+	// CMQ push server retry policy in case an error occurs while pushing a message to the endpoint. Valid values:
+	// (1) BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
+	// (2) EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
+	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+
+	// Push content format. Valid values: 1. JSON; 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `HTTP`, both values are acceptable, and the default value is `JSON`.
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+
+	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not configured, no matter whether `MsgTag` is configured, the subscription will receive all messages published to the topic; 2. If the array of `FilterTag` values has a value, only when at least one of the values in the array also exists in the array of `MsgTag` values (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the array of `FilterTag` values has a value, but `MsgTag` is not configured, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
+	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
+
+	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
+	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+}
+
 type ModifyCmqSubscriptionAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique in the same topic under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -2968,13 +3677,15 @@ func (r *ModifyCmqSubscriptionAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqSubscriptionAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCmqSubscriptionAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCmqSubscriptionAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCmqSubscriptionAttributeResponse) ToJsonString() string {
@@ -2988,9 +3699,24 @@ func (r *ModifyCmqSubscriptionAttributeResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqTopicAttributeRequestParams struct {
+	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+
+	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+
+	// Whether to enable message trace. true: yes; false: no. If this field is left empty, the feature will not be enabled.
+	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+}
+
 type ModifyCmqTopicAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -3026,13 +3752,15 @@ func (r *ModifyCmqTopicAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCmqTopicAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCmqTopicAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCmqTopicAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCmqTopicAttributeResponse) ToJsonString() string {
@@ -3046,9 +3774,27 @@ func (r *ModifyCmqTopicAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentAttributesRequestParams struct {
+	// Namespace name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds.
+	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Message retention policy
+	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+}
+
 type ModifyEnvironmentAttributesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -3088,27 +3834,29 @@ func (r *ModifyEnvironmentAttributesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentAttributesResponseParams struct {
+	// Namespace name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// TTL for unconsumed messages in seconds.
+	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
+
+	// Remarks (up to 128 characters).
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Namespace ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyEnvironmentAttributesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Namespace name.
-		EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
-
-		// TTL for unconsumed messages in seconds.
-		MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
-
-		// Remarks (up to 128 characters).
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// Namespace ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyEnvironmentAttributesResponseParams `json:"Response"`
 }
 
 func (r *ModifyEnvironmentAttributesResponse) ToJsonString() string {
@@ -3122,9 +3870,24 @@ func (r *ModifyEnvironmentAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentRoleRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Role name.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Permissions, which is a non-empty string array of `produce` and `consume` at the most.
+	Permissions []*string `json:"Permissions,omitempty" name:"Permissions"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type ModifyEnvironmentRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -3160,13 +3923,15 @@ func (r *ModifyEnvironmentRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentRoleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyEnvironmentRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyEnvironmentRoleResponseParams `json:"Response"`
 }
 
 func (r *ModifyEnvironmentRoleResponse) ToJsonString() string {
@@ -3180,9 +3945,21 @@ func (r *ModifyEnvironmentRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQClusterRequestParams struct {
+	// RocketMQ cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// 3–64 letters, digits, hyphens, and underscores
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type ModifyRocketMQClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RocketMQ cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3214,13 +3991,15 @@ func (r *ModifyRocketMQClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQClusterResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRocketMQClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRocketMQClusterResponseParams `json:"Response"`
 }
 
 func (r *ModifyRocketMQClusterResponse) ToJsonString() string {
@@ -3234,9 +4013,30 @@ func (r *ModifyRocketMQClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQGroupRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Consumer group name
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable consumption
+	ReadEnable *bool `json:"ReadEnable,omitempty" name:"ReadEnable"`
+
+	// Whether to enable broadcast consumption
+	BroadcastEnable *bool `json:"BroadcastEnable,omitempty" name:"BroadcastEnable"`
+}
+
 type ModifyRocketMQGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3280,13 +4080,15 @@ func (r *ModifyRocketMQGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRocketMQGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRocketMQGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyRocketMQGroupResponse) ToJsonString() string {
@@ -3300,9 +4102,27 @@ func (r *ModifyRocketMQGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQNamespaceRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
+
+	// Retention time for persisted messages in milliseconds
+	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type ModifyRocketMQNamespaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3342,13 +4162,15 @@ func (r *ModifyRocketMQNamespaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQNamespaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRocketMQNamespaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRocketMQNamespaceResponseParams `json:"Response"`
 }
 
 func (r *ModifyRocketMQNamespaceResponse) ToJsonString() string {
@@ -3362,9 +4184,27 @@ func (r *ModifyRocketMQNamespaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQTopicRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Remarks (up to 128 characters)
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Number of partitions, which is invalid for globally sequential messages and cannot be less than the current number of partitions.
+	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+}
+
 type ModifyRocketMQTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3404,13 +4244,15 @@ func (r *ModifyRocketMQTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRocketMQTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRocketMQTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRocketMQTopicResponseParams `json:"Response"`
 }
 
 func (r *ModifyRocketMQTopicResponse) ToJsonString() string {
@@ -3424,9 +4266,21 @@ func (r *ModifyRocketMQTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRoleRequestParams struct {
+	// Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Cluster ID (required)
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type ModifyRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role name, which can contain up to 32 letters, digits, hyphens, and underscores.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
@@ -3458,19 +4312,21 @@ func (r *ModifyRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRoleResponseParams struct {
+	// Role name
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role name
-		RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
-
-		// Remarks
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRoleResponseParams `json:"Response"`
 }
 
 func (r *ModifyRoleResponse) ToJsonString() string {
@@ -3484,9 +4340,27 @@ func (r *ModifyRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTopicRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Number of partitions, which must be equal to or greater than the original number of partitions. To maintain the original number of partitions, enter the original number. Modifying the number of partitions will take effect only for non-globally sequential messages. There can be up to 128 partitions.
+	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type ModifyTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -3526,19 +4400,21 @@ func (r *ModifyTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTopicResponseParams struct {
+	// Number of partitions
+	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
+
+	// Remarks (up to 128 characters).
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of partitions
-		Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
-
-		// Remarks (up to 128 characters).
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTopicResponseParams `json:"Response"`
 }
 
 func (r *ModifyTopicResponse) ToJsonString() string {
@@ -3552,9 +4428,21 @@ func (r *ModifyTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PublishCmqMsgRequestParams struct {
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message content
+	MsgContent *string `json:"MsgContent,omitempty" name:"MsgContent"`
+
+	// Message tag
+	MsgTag []*string `json:"MsgTag,omitempty" name:"MsgTag"`
+}
+
 type PublishCmqMsgRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -3586,19 +4474,21 @@ func (r *PublishCmqMsgRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PublishCmqMsgResponseParams struct {
+	// `true` indicates that the sending is successful
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// Message ID
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PublishCmqMsgResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `true` indicates that the sending is successful
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// Message ID
-		MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PublishCmqMsgResponseParams `json:"Response"`
 }
 
 func (r *PublishCmqMsgResponse) ToJsonString() string {
@@ -3613,7 +4503,6 @@ func (r *PublishCmqMsgResponse) FromJsonString(s string) error {
 }
 
 type Publisher struct {
-
 	// Producer ID.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ProducerId *int64 `json:"ProducerId,omitempty" name:"ProducerId"`
@@ -3651,9 +4540,24 @@ type Publisher struct {
 	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
 }
 
+// Predefined struct for user
+type ReceiveMessageRequestParams struct {
+	// Name of the topic which receives the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Subscriber name
+	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+
+	// Default value: 1000. Messages received by the consumer will first be stored in the `receiverQueueSize` queue to tune the message receiving rate.
+	ReceiverQueueSize *int64 `json:"ReceiverQueueSize,omitempty" name:"ReceiverQueueSize"`
+
+	// Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
+	SubInitialPosition *string `json:"SubInitialPosition,omitempty" name:"SubInitialPosition"`
+}
+
 type ReceiveMessageRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the topic which receives the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
 	Topic *string `json:"Topic,omitempty" name:"Topic"`
 
@@ -3689,30 +4593,32 @@ func (r *ReceiveMessageRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReceiveMessageResponseParams struct {
+	// Unique primary key used to identify the message
+	MessageID *string `json:"MessageID,omitempty" name:"MessageID"`
+
+	// Content of the received message
+	MessagePayload *string `json:"MessagePayload,omitempty" name:"MessagePayload"`
+
+	// Provided to the `Ack` API and used to acknowledge messages in the topic
+	AckTopic *string `json:"AckTopic,omitempty" name:"AckTopic"`
+
+	// Returned error message. If it is an empty string, no error occurred.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// Returned subscriber name, which will be used when an acknowledgment consumer is created.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	SubName *string `json:"SubName,omitempty" name:"SubName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReceiveMessageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique primary key used to identify the message
-		MessageID *string `json:"MessageID,omitempty" name:"MessageID"`
-
-		// Content of the received message
-		MessagePayload *string `json:"MessagePayload,omitempty" name:"MessagePayload"`
-
-		// Provided to the `Ack` API and used to acknowledge messages in the topic
-		AckTopic *string `json:"AckTopic,omitempty" name:"AckTopic"`
-
-		// Returned error message. If it is an empty string, no error occurred.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
-
-		// Returned subscriber name, which will be used when an acknowledgment consumer is created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		SubName *string `json:"SubName,omitempty" name:"SubName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReceiveMessageResponseParams `json:"Response"`
 }
 
 func (r *ReceiveMessageResponse) ToJsonString() string {
@@ -3726,9 +4632,27 @@ func (r *ReceiveMessageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetMsgSubOffsetByTimestampRequestParams struct {
+	// Namespace name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Subscriber name.
+	Subscription *string `json:"Subscription,omitempty" name:"Subscription"`
+
+	// Timestamp, accurate down to the millisecond.
+	ToTimestamp *uint64 `json:"ToTimestamp,omitempty" name:"ToTimestamp"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type ResetMsgSubOffsetByTimestampRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -3768,17 +4692,19 @@ func (r *ResetMsgSubOffsetByTimestampRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetMsgSubOffsetByTimestampResponseParams struct {
+	// Result.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetMsgSubOffsetByTimestampResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Result.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetMsgSubOffsetByTimestampResponseParams `json:"Response"`
 }
 
 func (r *ResetMsgSubOffsetByTimestampResponse) ToJsonString() string {
@@ -3792,9 +4718,30 @@ func (r *ResetMsgSubOffsetByTimestampResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetRocketMQConsumerOffSetRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace name.
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Consumer group name.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Topic name.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Reset method. 0: Start from the latest offset; 1: Start from specified time point.
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// The specified timestamp that has been reset, in milliseconds. This parameter only takes effect when the value of `Type` is `1`.
+	ResetTimestamp *uint64 `json:"ResetTimestamp,omitempty" name:"ResetTimestamp"`
+}
+
 type ResetRocketMQConsumerOffSetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3838,13 +4785,15 @@ func (r *ResetRocketMQConsumerOffSetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetRocketMQConsumerOffSetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetRocketMQConsumerOffSetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetRocketMQConsumerOffSetResponseParams `json:"Response"`
 }
 
 func (r *ResetRocketMQConsumerOffSetResponse) ToJsonString() string {
@@ -3859,7 +4808,6 @@ func (r *ResetRocketMQConsumerOffSetResponse) FromJsonString(s string) error {
 }
 
 type RetentionPolicy struct {
-
 	// Message retention period
 	TimeInMinutes *int64 `json:"TimeInMinutes,omitempty" name:"TimeInMinutes"`
 
@@ -3867,9 +4815,18 @@ type RetentionPolicy struct {
 	SizeInMB *int64 `json:"SizeInMB,omitempty" name:"SizeInMB"`
 }
 
+// Predefined struct for user
+type RewindCmqQueueRequestParams struct {
+	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// After this time is configured, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
+	StartConsumeTime *uint64 `json:"StartConsumeTime,omitempty" name:"StartConsumeTime"`
+}
+
 type RewindCmqQueueRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
@@ -3897,13 +4854,15 @@ func (r *RewindCmqQueueRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RewindCmqQueueResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RewindCmqQueueResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RewindCmqQueueResponseParams `json:"Response"`
 }
 
 func (r *RewindCmqQueueResponse) ToJsonString() string {
@@ -3918,7 +4877,6 @@ func (r *RewindCmqQueueResponse) FromJsonString(s string) error {
 }
 
 type RocketMQClusterConfig struct {
-
 	// Maximum TPS per namespace
 	MaxTpsPerNamespace *uint64 `json:"MaxTpsPerNamespace,omitempty" name:"MaxTpsPerNamespace"`
 
@@ -3948,7 +4906,6 @@ type RocketMQClusterConfig struct {
 }
 
 type RocketMQClusterInfo struct {
-
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3977,7 +4934,6 @@ type RocketMQClusterInfo struct {
 }
 
 type RocketMQClusterRecentStats struct {
-
 	// Number of topics
 	TopicNum *uint64 `json:"TopicNum,omitempty" name:"TopicNum"`
 
@@ -3992,7 +4948,6 @@ type RocketMQClusterRecentStats struct {
 }
 
 type Role struct {
-
 	// Role name.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
@@ -4009,9 +4964,39 @@ type Role struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+// Predefined struct for user
+type SendBatchMessagesRequestParams struct {
+	// Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Content of the message to be sent
+	Payload *string `json:"Payload,omitempty" name:"Payload"`
+
+	// String-Type token, which is optional and will be automatically obtained by the system.
+	StringToken *string `json:"StringToken,omitempty" name:"StringToken"`
+
+	// Producer name, which must be globally unique. If it is not configured, the system will automatically generate one.
+	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
+
+	// Message sending timeout period in seconds. Default value: 30s
+	SendTimeout *int64 `json:"SendTimeout,omitempty" name:"SendTimeout"`
+
+	// Maximum number of produced messages which can be cached in the memory. Default value: 1000
+	MaxPendingMessages *int64 `json:"MaxPendingMessages,omitempty" name:"MaxPendingMessages"`
+
+	// Maximum number of messages in each batch. Default value: 1000 messages/batch
+	BatchingMaxMessages *int64 `json:"BatchingMaxMessages,omitempty" name:"BatchingMaxMessages"`
+
+	// Maximum wait time for each batch, after which the batch will be sent no matter whether the specified number or size of messages in the batch is reached. Default value: 10 ms
+	BatchingMaxPublishDelay *int64 `json:"BatchingMaxPublishDelay,omitempty" name:"BatchingMaxPublishDelay"`
+
+	// Maximum allowed size of messages in each batch. Default value: 128 KB
+	BatchingMaxBytes *int64 `json:"BatchingMaxBytes,omitempty" name:"BatchingMaxBytes"`
+}
+
 type SendBatchMessagesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
 	Topic *string `json:"Topic,omitempty" name:"Topic"`
 
@@ -4067,21 +5052,23 @@ func (r *SendBatchMessagesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendBatchMessagesResponseParams struct {
+	// Unique message ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Error message. If an empty string is returned, no error occurred.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendBatchMessagesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique message ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
-
-		// Error message. If an empty string is returned, no error occurred.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendBatchMessagesResponseParams `json:"Response"`
 }
 
 func (r *SendBatchMessagesResponse) ToJsonString() string {
@@ -4095,9 +5082,21 @@ func (r *SendBatchMessagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendCmqMsgRequestParams struct {
+	// Queue name
+	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+
+	// Message content
+	MsgContent *string `json:"MsgContent,omitempty" name:"MsgContent"`
+
+	// Delay time
+	DelaySeconds *int64 `json:"DelaySeconds,omitempty" name:"DelaySeconds"`
+}
+
 type SendCmqMsgRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queue name
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
@@ -4129,19 +5128,21 @@ func (r *SendCmqMsgRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendCmqMsgResponseParams struct {
+	// `true` indicates that the sending is successful
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// Message ID
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendCmqMsgResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `true` indicates that the sending is successful
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// Message ID
-		MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendCmqMsgResponseParams `json:"Response"`
 }
 
 func (r *SendCmqMsgResponse) ToJsonString() string {
@@ -4155,9 +5156,30 @@ func (r *SendCmqMsgResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendMessagesRequestParams struct {
+	// Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Content of the message to be sent
+	Payload *string `json:"Payload,omitempty" name:"Payload"`
+
+	// Token used for authentication, which is optional and will be automatically obtained by the system.
+	StringToken *string `json:"StringToken,omitempty" name:"StringToken"`
+
+	// Producer name, which must be globally unique. If it is not configured, the system will randomly generate one.
+	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
+
+	// Message sending timeout period, which is 30s by default.
+	SendTimeout *int64 `json:"SendTimeout,omitempty" name:"SendTimeout"`
+
+	// Maximum number of produced messages which can be cached in the memory. Default value: 1000
+	MaxPendingMessages *int64 `json:"MaxPendingMessages,omitempty" name:"MaxPendingMessages"`
+}
+
 type SendMessagesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the topic to which to send the message. It is better to be the full path of the topic, such as `tenant/namespace/topic`. If it is not specified, `public/default` will be used by default.
 	Topic *string `json:"Topic,omitempty" name:"Topic"`
 
@@ -4201,21 +5223,23 @@ func (r *SendMessagesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendMessagesResponseParams struct {
+	// messageID, which must be globally unique and is the metadata information used to identify the message.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Returned error message. If an empty string is returned, no error occurred.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendMessagesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// messageID, which must be globally unique and is the metadata information used to identify the message.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
-
-		// Returned error message. If an empty string is returned, no error occurred.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendMessagesResponseParams `json:"Response"`
 }
 
 func (r *SendMessagesResponse) ToJsonString() string {
@@ -4229,9 +5253,24 @@ func (r *SendMessagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendMsgRequestParams struct {
+	// Environment (namespace) name.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name. If the topic is a partitioned topic, you need to specify the partition; otherwise, messages will be sent to partition 0 by default, such as `my_topic-partition-0`.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message content, which cannot be empty and can contain up to 5,242,880 bytes.
+	MsgContent *string `json:"MsgContent,omitempty" name:"MsgContent"`
+
+	// Pulsar cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type SendMsgRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -4267,13 +5306,15 @@ func (r *SendMsgRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendMsgResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendMsgResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendMsgResponseParams `json:"Response"`
 }
 
 func (r *SendMsgResponse) ToJsonString() string {
@@ -4288,7 +5329,6 @@ func (r *SendMsgResponse) FromJsonString(s string) error {
 }
 
 type Sort struct {
-
 	// Sorting field.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4297,7 +5337,6 @@ type Sort struct {
 }
 
 type Tag struct {
-
 	// Value of the tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -4305,9 +5344,15 @@ type Tag struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+// Predefined struct for user
+type UnbindCmqDeadLetterRequestParams struct {
+	// Source queue name of dead letter policy. Calling this API will clear the dead letter queue policy of this queue.
+	SourceQueueName *string `json:"SourceQueueName,omitempty" name:"SourceQueueName"`
+}
+
 type UnbindCmqDeadLetterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Source queue name of dead letter policy. Calling this API will clear the dead letter queue policy of this queue.
 	SourceQueueName *string `json:"SourceQueueName,omitempty" name:"SourceQueueName"`
 }
@@ -4331,13 +5376,15 @@ func (r *UnbindCmqDeadLetterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnbindCmqDeadLetterResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnbindCmqDeadLetterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnbindCmqDeadLetterResponseParams `json:"Response"`
 }
 
 func (r *UnbindCmqDeadLetterResponse) ToJsonString() string {
@@ -4352,7 +5399,6 @@ func (r *UnbindCmqDeadLetterResponse) FromJsonString(s string) error {
 }
 
 type VpcBindRecord struct {
-
 	// Tenant VPC ID
 	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
 

@@ -20,9 +20,42 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AnalyzeFaceRequestParams struct {
+	// Detection mode. 0: detect all faces that appear; 1: detect the largest face. Default value: 0. The facial feature localization information (facial keypoints) of up to 10 faces can be returned.
+	Mode *uint64 `json:"Mode,omitempty" name:"Mode"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type AnalyzeFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Detection mode. 0: detect all faces that appear; 1: detect the largest face. Default value: 0. The facial feature localization information (facial keypoints) of up to 10 faces can be returned.
 	Mode *uint64 `json:"Mode,omitempty" name:"Mode"`
 
@@ -77,25 +110,27 @@ func (r *AnalyzeFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AnalyzeFaceResponseParams struct {
+	// Width of requested image.
+	ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// Height of requested image.
+	ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// Specific information of facial feature localization (facial keypoints).
+	FaceShapeSet []*FaceShape `json:"FaceShapeSet,omitempty" name:"FaceShapeSet"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AnalyzeFaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Width of requested image.
-		ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
-
-		// Height of requested image.
-		ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
-
-		// Specific information of facial feature localization (facial keypoints).
-		FaceShapeSet []*FaceShape `json:"FaceShapeSet,omitempty" name:"FaceShapeSet"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AnalyzeFaceResponseParams `json:"Response"`
 }
 
 func (r *AnalyzeFaceResponse) ToJsonString() string {
@@ -110,7 +145,6 @@ func (r *AnalyzeFaceResponse) FromJsonString(s string) error {
 }
 
 type AttributeItem struct {
-
 	// Attribute value
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
@@ -119,7 +153,6 @@ type AttributeItem struct {
 }
 
 type Candidate struct {
-
 	// Person ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -148,9 +181,66 @@ type Candidate struct {
 	PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos"`
 }
 
+// Predefined struct for user
+type CompareFaceRequestParams struct {
+	// Base64-encoded data of image A, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	ImageA *string `json:"ImageA,omitempty" name:"ImageA"`
+
+	// Base64-encoded data of image B, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	ImageB *string `json:"ImageB,omitempty" name:"ImageB"`
+
+	// URL of image A. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` of image A must be provided; if both are provided, only `Url` will be used. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	UrlA *string `json:"UrlA,omitempty" name:"UrlA"`
+
+	// URL of image B. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` of image B must be provided; if both are provided, only `Url` will be used. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	UrlB *string `json:"UrlB,omitempty" name:"UrlB"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type CompareFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Base64-encoded data of image A, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
 	// If there are multiple faces in the image, only the face with the largest size will be selected.
@@ -231,23 +321,25 @@ func (r *CompareFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CompareFaceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Face similarity score between two images.
+// Predefined struct for user
+type CompareFaceResponseParams struct {
+	// Face similarity score between two images.
 	// The returned similarity score varies by algorithm version. 
 	// If you need to verify whether the faces in the two images are the same person, then the 0.1%, 0.01%, and 0.001% FARs on v3.0 correspond to scores of 40, 50, and 60, respectively. Generally, if the score is above 50, it can be judged that they are the same person. 
 	// The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90, respectively. Generally, if the score is above 80, it can be judged that they are the same person. 
 	// If you need to verify whether the faces in the two images are the same person, we recommend using the `VerifyFace` API.
-		Score *float64 `json:"Score,omitempty" name:"Score"`
+	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CompareFaceResponse struct {
+	*tchttp.BaseResponse
+	Response *CompareFaceResponseParams `json:"Response"`
 }
 
 func (r *CompareFaceResponse) ToJsonString() string {
@@ -261,9 +353,18 @@ func (r *CompareFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CopyPersonRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// List of groups to join. The array element value is the `GroupId` in the `CreateGroup` API.
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+}
+
 type CopyPersonRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -291,19 +392,21 @@ func (r *CopyPersonRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CopyPersonResponseParams struct {
+	// Number of groups successfully added to.
+	SucGroupNum *uint64 `json:"SucGroupNum,omitempty" name:"SucGroupNum"`
+
+	// List of groups successfully added to.
+	SucGroupIds []*string `json:"SucGroupIds,omitempty" name:"SucGroupIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CopyPersonResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of groups successfully added to.
-		SucGroupNum *uint64 `json:"SucGroupNum,omitempty" name:"SucGroupNum"`
-
-		// List of groups successfully added to.
-		SucGroupIds []*string `json:"SucGroupIds,omitempty" name:"SucGroupIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CopyPersonResponseParams `json:"Response"`
 }
 
 func (r *CopyPersonResponse) ToJsonString() string {
@@ -317,9 +420,49 @@ func (r *CopyPersonResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateFaceRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// A person can have up to 5 face images.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Images []*string `json:"Images,omitempty" name:"Images"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	// A person can have up to 5 face images.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+
+	// Only faces whose similarity to an existing face of the person is above the value of `FaceMatchThreshold` can be added successfully. 
+	// Default value: 60. Value range: [0,100].
+	FaceMatchThreshold *float64 `json:"FaceMatchThreshold,omitempty" name:"FaceMatchThreshold"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type CreateFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -382,35 +525,37 @@ func (r *CreateFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CreateFaceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type CreateFaceResponseParams struct {
+	// Number of successfully added faces
+	SucFaceNum *uint64 `json:"SucFaceNum,omitempty" name:"SucFaceNum"`
 
-		// Number of successfully added faces
-		SucFaceNum *uint64 `json:"SucFaceNum,omitempty" name:"SucFaceNum"`
+	// List of IDs of successfully added faces
+	SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
 
-		// List of IDs of successfully added faces
-		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
-
-		// Adding result for each face image. -1101: no face detected; -1102: image decoding failed; 
+	// Adding result for each face image. -1101: no face detected; -1102: image decoding failed; 
 	// -1601: the image quality control requirement is not met; -1604: the face similarity is not above `FaceMatchThreshold`. 
 	// Other non-zero values: algorithm service exception. 
 	// The order of `RetCode` values is the same as the order of `Images` or `Urls` in the input parameter.
-		RetCode []*int64 `json:"RetCode,omitempty" name:"RetCode"`
+	RetCode []*int64 `json:"RetCode,omitempty" name:"RetCode"`
 
-		// Indexes of successfully added faces. The order of indexes is the same as the order of `Images` or `Urls` in the input parameter. 
+	// Indexes of successfully added faces. The order of indexes is the same as the order of `Images` or `Urls` in the input parameter. 
 	// For example, if there are 3 URLs in `Urls`, and the second URL fails, then the value of `SucIndexes` will be [0,2].
-		SucIndexes []*uint64 `json:"SucIndexes,omitempty" name:"SucIndexes"`
+	SucIndexes []*uint64 `json:"SucIndexes,omitempty" name:"SucIndexes"`
 
-		// Frame positions of successfully added faces. The order is the same as the order of `Images` or `Urls` in the input parameter.
-		SucFaceRects []*FaceRect `json:"SucFaceRects,omitempty" name:"SucFaceRects"`
+	// Frame positions of successfully added faces. The order is the same as the order of `Images` or `Urls` in the input parameter.
+	SucFaceRects []*FaceRect `json:"SucFaceRects,omitempty" name:"SucFaceRects"`
 
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateFaceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateFaceResponseParams `json:"Response"`
 }
 
 func (r *CreateFaceResponse) ToJsonString() string {
@@ -424,9 +569,41 @@ func (r *CreateFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGroupRequestParams struct {
+	// Group name, which is modifiable, must be unique, and can contain 1 to 60 characters.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Group ID, which is unmodifiable, must be unique, and can contain letters, digits, and special symbols (-%@#&_) of up to 64 B.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Custom group description field that describes the person attributes in the group, which will be applied to all persons in the group. 
+	// Up to 5 ones can be created. 
+	// Each custom description field can contain 1 to 30 characters. 
+	// The custom description field must be unique in the group. 
+	// Example: if you set the "custom description field" of a group to ["student ID","employee ID","mobile number"], 
+	// then all the persons in the group will have description fields named "student ID", "employee ID", and "mobile number". 
+	// You can enter content in the corresponding field to register a person's student ID, employee ID, and mobile number.
+	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
+
+	// Group remarks, which can contain 0 to 40 characters.
+	Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
 type CreateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group name, which is modifiable, must be unique, and can contain 1 to 60 characters.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -480,16 +657,18 @@ func (r *CreateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGroupResponseParams struct {
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateGroupResponse) ToJsonString() string {
@@ -503,9 +682,65 @@ func (r *CreateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePersonRequestParams struct {
+	// ID of the group to join, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Person name, which can contain 1 to 60 characters and is modifiable and repeatable.
+	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
+
+	// Person ID, which is unmodifiable, must be unique under a Tencent Cloud account, and can contain letters, digits, and special symbols (-%@#&_) of up to 64 B.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// 0: empty; 1: male; 2: female.
+	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
+
+	// Content of person description field, which is a `key-value` pair, can contain 0 to 60 characters, and is modifiable and repeatable.
+	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// This parameter is used to control the judgment whether the face contained in the image in `Image` or `Url` corresponds to an existing person in the group. 
+	// If it is judged that a duplicate person exists in the group, no new person will be created, and information of the suspected duplicate person will be returned. 
+	// Otherwise, the new person will be created. 
+	// 0: do not judge, i.e., the person will be created no matter whether a duplicate person exists in the group. 
+	// 1: low duplicate person judgment requirement (1% FAR); 
+	// 2: average duplicate person judgment requirement (0.1% FAR); 
+	// 3: high duplicate person judgment requirement (0.01% FAR); 
+	// 4: very high duplicate person judgment requirement (0.001% FAR). 
+	// Default value: 0.  
+	// Note: the higher the requirement, the lower the probability of duplicate person. The FARs corresponding to different requirements are for reference only and can be adjusted as needed.
+	UniquePersonControl *uint64 `json:"UniquePersonControl,omitempty" name:"UniquePersonControl"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type CreatePersonRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the group to join, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -588,27 +823,29 @@ func (r *CreatePersonRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePersonResponseParams struct {
+	// Unique ID of face image.
+	FaceId *string `json:"FaceId,omitempty" name:"FaceId"`
+
+	// Position of detected face frame.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
+
+	// `PersonId` of suspected duplicate person. 
+	// This parameter is meaningful only if the `UniquePersonControl` parameter is not 0 and there is a suspected duplicate person in the group.
+	SimilarPersonId *string `json:"SimilarPersonId,omitempty" name:"SimilarPersonId"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePersonResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of face image.
-		FaceId *string `json:"FaceId,omitempty" name:"FaceId"`
-
-		// Position of detected face frame.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
-
-		// `PersonId` of suspected duplicate person. 
-	// This parameter is meaningful only if the `UniquePersonControl` parameter is not 0 and there is a suspected duplicate person in the group.
-		SimilarPersonId *string `json:"SimilarPersonId,omitempty" name:"SimilarPersonId"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePersonResponseParams `json:"Response"`
 }
 
 func (r *CreatePersonResponse) ToJsonString() string {
@@ -622,9 +859,18 @@ func (r *CreatePersonResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFaceRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// List of IDs of the faces to be deleted. The array element value is the `FaceId` returned by the `CreateFace` API.
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
+}
+
 type DeleteFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -652,19 +898,21 @@ func (r *DeleteFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFaceResponseParams struct {
+	// Number of successfully deleted faces
+	SucDeletedNum *uint64 `json:"SucDeletedNum,omitempty" name:"SucDeletedNum"`
+
+	// List of IDs of successfully deleted faces
+	SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteFaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of successfully deleted faces
-		SucDeletedNum *uint64 `json:"SucDeletedNum,omitempty" name:"SucDeletedNum"`
-
-		// List of IDs of successfully deleted faces
-		SucFaceIds []*string `json:"SucFaceIds,omitempty" name:"SucFaceIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteFaceResponseParams `json:"Response"`
 }
 
 func (r *DeleteFaceResponse) ToJsonString() string {
@@ -678,9 +926,15 @@ func (r *DeleteFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteGroupRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DeleteGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -704,13 +958,15 @@ func (r *DeleteGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteGroupResponse) ToJsonString() string {
@@ -724,9 +980,18 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonFromGroupRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DeletePersonFromGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -754,13 +1019,15 @@ func (r *DeletePersonFromGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonFromGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePersonFromGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePersonFromGroupResponseParams `json:"Response"`
 }
 
 func (r *DeletePersonFromGroupResponse) ToJsonString() string {
@@ -774,9 +1041,15 @@ func (r *DeletePersonFromGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+}
+
 type DeletePersonRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 }
@@ -800,13 +1073,15 @@ func (r *DeletePersonRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePersonResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePersonResponseParams `json:"Response"`
 }
 
 func (r *DeletePersonResponse) ToJsonString() string {
@@ -820,9 +1095,46 @@ func (r *DeletePersonResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectFaceAttributesRequestParams struct {
+	// Maximum number of processable faces. 
+	// Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
+	// This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats. 
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. 
+	// The image cannot exceed 5 MB in size after being Base64-encoded. 
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low. 
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Whether to return attributes such as age, gender, and emotion. 
+	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
+	// Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
+	// Default value: None, indicating that no attributes need to be returned. 
+	// You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
+	// For more information on the attributes, please see the output parameters as described below. 
+	// The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
+	FaceAttributesType *string `json:"FaceAttributesType,omitempty" name:"FaceAttributesType"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image is not rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+
+	// Algorithm model version used by the Face Recognition service. You can enter only `3.0` for this API.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
 type DetectFaceAttributesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Maximum number of processable faces. 
 	// Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
 	// This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
@@ -882,25 +1194,27 @@ func (r *DetectFaceAttributesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectFaceAttributesResponseParams struct {
+	// Width of requested image.
+	ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// Height of requested image.
+	ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// Face information list.
+	FaceDetailInfos []*FaceDetailInfo `json:"FaceDetailInfos,omitempty" name:"FaceDetailInfos"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetectFaceAttributesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Width of requested image.
-		ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
-
-		// Height of requested image.
-		ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
-
-		// Face information list.
-		FaceDetailInfos []*FaceDetailInfo `json:"FaceDetailInfos,omitempty" name:"FaceDetailInfos"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetectFaceAttributesResponseParams `json:"Response"`
 }
 
 func (r *DetectFaceAttributesResponse) ToJsonString() string {
@@ -914,9 +1228,60 @@ func (r *DetectFaceAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectFaceRequestParams struct {
+	// Maximum number of processable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
+	// This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Minimum height and width of face in px.
+	// Default value: 34. We recommend keeping it at or above 34.
+	// Faces below the `MinFaceSize` value will not be detected.
+	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Whether the face attribute information (FaceAttributesInfo) needs to be returned. 0: no; 1: yes. Default value: 0. 
+	// If the value is not 1, it will be deemed as no need to return, and `FaceAttributesInfo` is meaningless in this case.  
+	// The face attribute information of up to 5 largest faces in the image will be returned, and `FaceAttributesInfo` of the 6th and rest faces is meaningless.  
+	// Extracting face attribute information is quite time-consuming. If face attribute information is not required, we recommend disabling this feature to speed up face detection.
+	NeedFaceAttributes *uint64 `json:"NeedFaceAttributes,omitempty" name:"NeedFaceAttributes"`
+
+	// Whether to enable quality detection. 0: no; 1: yes. Default value: 0. 
+	// If the value is not 1, it will be deemed not to perform quality detection.
+	// The face quality score information of up to 30 largest faces in the image will be returned, and `FaceQualityInfo` of the 31st and rest faces is meaningless.  
+	// We recommend enabling this feature for the face adding operation.
+	NeedQualityDetection *uint64 `json:"NeedQualityDetection,omitempty" name:"NeedQualityDetection"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type DetectFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Maximum number of processable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 120. 
 	// This parameter is used to control the number of faces in the image to be detected. The smaller the value, the faster the processing.
 	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
@@ -992,25 +1357,27 @@ func (r *DetectFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectFaceResponseParams struct {
+	// Width of requested image.
+	ImageWidth *int64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// Height of requested image.
+	ImageHeight *int64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// Face information list, including face coordinate information, attribute information (if needed), and quality score information (if needed).
+	FaceInfos []*FaceInfo `json:"FaceInfos,omitempty" name:"FaceInfos"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetectFaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Width of requested image.
-		ImageWidth *int64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
-
-		// Height of requested image.
-		ImageHeight *int64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
-
-		// Face information list, including face coordinate information, attribute information (if needed), and quality score information (if needed).
-		FaceInfos []*FaceInfo `json:"FaceInfos,omitempty" name:"FaceInfos"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetectFaceResponseParams `json:"Response"`
 }
 
 func (r *DetectFaceResponse) ToJsonString() string {
@@ -1024,9 +1391,37 @@ func (r *DetectFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectLiveFaceRequestParams struct {
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats (the aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless).
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// (The aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless.) 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// 
+	// Currently, `2.0` and `3.0` are supported.
+	// 
+	// This parameter is `3.0` by default starting from April 2, 2020. If it is left empty for accounts that used this API, `2.0` will be used by default.
+	// 
+	// The parameter can be set only to `3.0` for accounts that purchase the service after November 26, 2020.
+	// 
+	// Different algorithm model versions correspond to different face recognition algorithms. The 3.0 version has a better overall effect than the legacy version and is recommended.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
 type DetectLiveFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats (the aspect ratio of the image should be close to 3:4 (width:height); otherwise, the score returned for the image will be meaningless).
 	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
@@ -1074,24 +1469,26 @@ func (r *DetectLiveFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetectLiveFaceResponseParams struct {
+	// Liveness score. Value range: [0,100]. The score is generally between 80 and 100, but 0 is also a common value. As a recommendation, when the score is greater than 87, it can be judged that the person in the image is alive. You can adjust the threshold according to your specific scenario.
+	// This field is meaningful only if `FaceModelVersion` is 2.0.
+	Score *float64 `json:"Score,omitempty" name:"Score"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// Whether liveness detection is passed.
+	// This field is meaningful only if `FaceModelVersion` is 3.0.
+	IsLiveness *bool `json:"IsLiveness,omitempty" name:"IsLiveness"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetectLiveFaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Liveness score. Value range: [0,100]. The score is generally between 80 and 100, but 0 is also a common value. As a recommendation, when the score is greater than 87, it can be judged that the person in the image is alive. You can adjust the threshold according to your specific scenario.
-	// This field is meaningful only if `FaceModelVersion` is 2.0.
-		Score *float64 `json:"Score,omitempty" name:"Score"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// Whether liveness detection is passed.
-	// This field is meaningful only if `FaceModelVersion` is 3.0.
-		IsLiveness *bool `json:"IsLiveness,omitempty" name:"IsLiveness"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetectLiveFaceResponseParams `json:"Response"`
 }
 
 func (r *DetectLiveFaceResponse) ToJsonString() string {
@@ -1106,7 +1503,6 @@ func (r *DetectLiveFaceResponse) FromJsonString(s string) error {
 }
 
 type Eye struct {
-
 	// Whether glasses are worn.
 	// The `Type` values of the `AttributeItem` include: 0: no glasses; 1: general glasses; 2: sunglasses.
 	Glass *AttributeItem `json:"Glass,omitempty" name:"Glass"`
@@ -1125,7 +1521,6 @@ type Eye struct {
 }
 
 type Eyebrow struct {
-
 	// Eyebrow thickness.
 	// The `Type` values of the `AttributeItem` include: 0: light; 1: thick.
 	EyebrowDensity *AttributeItem `json:"EyebrowDensity,omitempty" name:"EyebrowDensity"`
@@ -1140,7 +1535,6 @@ type Eyebrow struct {
 }
 
 type FaceAttributesInfo struct {
-
 	// Gender. The gender is female for the value range [0,49] and male for the value range [50,100]. The closer the value to 0 or 100, the higher the confidence. If `NeedFaceAttributes` is not 1 or more than 5 faces are detected, this parameter will still be returned but meaningless.
 	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
 
@@ -1186,7 +1580,6 @@ type FaceAttributesInfo struct {
 }
 
 type FaceDetailAttributesInfo struct {
-
 	// Age. Value range: [0,65], where 65 indicates 65 years old or above. 
 	// If `FaceAttributesType` does not include `Age` or more than 5 faces are detected, this parameter will still be returned but meaningless.
 	Age *int64 `json:"Age,omitempty" name:"Age"`
@@ -1260,7 +1653,6 @@ type FaceDetailAttributesInfo struct {
 }
 
 type FaceDetailInfo struct {
-
 	// Position of the detected face frame.
 	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
 
@@ -1273,7 +1665,6 @@ type FaceDetailInfo struct {
 }
 
 type FaceHairAttributesInfo struct {
-
 	// 0: shaved head, 1: short hair, 2: medium hair, 3: long hair, 4: braid
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Length *int64 `json:"Length,omitempty" name:"Length"`
@@ -1288,7 +1679,6 @@ type FaceHairAttributesInfo struct {
 }
 
 type FaceInfo struct {
-
 	// Horizontal coordinate of the top-left vertex of the face frame.
 	// The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
 	// If you want to capture a complete face, you can set the negative coordinates to 0 if the `completeness` score meets the requirement.
@@ -1315,7 +1705,6 @@ type FaceInfo struct {
 }
 
 type FaceQualityCompleteness struct {
-
 	// Eyebrow completeness. Value range: [0,100]. The higher the score, the higher the completeness. 
 	// Reference range: [0,80], which means incomplete.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1348,7 +1737,6 @@ type FaceQualityCompleteness struct {
 }
 
 type FaceQualityInfo struct {
-
 	// Quality score. Value range: [0,100]. It comprehensively evaluates whether the image quality is suitable for face recognition; the higher the score, the higher the quality. 
 	// In normal cases, you only need to use `Score` as the overall quality standard score. Specific item scores such as `Sharpness`, `Brightness`, `Completeness` are for reference only.
 	// Reference range: [0,40]: poor; [40,60]: fine; [60,80]: good; [80,100]: excellent. 
@@ -1374,7 +1762,6 @@ type FaceQualityInfo struct {
 }
 
 type FaceRect struct {
-
 	// Horizontal coordinate of the top-left vertex of face frame. 
 	// The face frame encompasses the facial features and is extended accordingly. If it is larger than the image, the coordinates will be negative. 
 	// If you want to capture a complete face, you can set the negative coordinates to 0 if the completeness score meets the requirement.
@@ -1393,7 +1780,6 @@ type FaceRect struct {
 }
 
 type FaceShape struct {
-
 	// 21 points that describe the face contour.
 	FaceProfile []*Point `json:"FaceProfile,omitempty" name:"FaceProfile"`
 
@@ -1422,9 +1808,15 @@ type FaceShape struct {
 	RightPupil []*Point `json:"RightPupil,omitempty" name:"RightPupil"`
 }
 
+// Predefined struct for user
+type GetGroupInfoRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type GetGroupInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -1448,31 +1840,33 @@ func (r *GetGroupInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGroupInfoResponseParams struct {
+	// Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Custom group description field
+	GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
+
+	// Group remarks
+	Tag *string `json:"Tag,omitempty" name:"Tag"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// Group creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time.
+	CreationTimestamp *uint64 `json:"CreationTimestamp,omitempty" name:"CreationTimestamp"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetGroupInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Group name
-		GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
-
-		// Group ID
-		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
-
-		// Custom group description field
-		GroupExDescriptions []*string `json:"GroupExDescriptions,omitempty" name:"GroupExDescriptions"`
-
-		// Group remarks
-		Tag *string `json:"Tag,omitempty" name:"Tag"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// Group creation time and date (`CreationTimestamp`), whose value is the number of milliseconds between the UNIX epoch time and the group creation time.
-		CreationTimestamp *uint64 `json:"CreationTimestamp,omitempty" name:"CreationTimestamp"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetGroupInfoResponseParams `json:"Response"`
 }
 
 func (r *GetGroupInfoResponse) ToJsonString() string {
@@ -1486,9 +1880,18 @@ func (r *GetGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGroupListRequestParams struct {
+	// Starting number. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 10. Maximum value: 1000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type GetGroupListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Starting number. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -1516,20 +1919,22 @@ func (r *GetGroupListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGroupListResponseParams struct {
+	// Returned group information
+	GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
+
+	// Total number of groups
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetGroupListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned group information
-		GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
-
-		// Total number of groups
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetGroupListResponseParams `json:"Response"`
 }
 
 func (r *GetGroupListResponse) ToJsonString() string {
@@ -1543,9 +1948,15 @@ func (r *GetGroupListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonBaseInfoRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+}
+
 type GetPersonBaseInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 }
@@ -1569,22 +1980,24 @@ func (r *GetPersonBaseInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonBaseInfoResponseParams struct {
+	// Person name
+	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
+
+	// Person gender. 0: empty; 1: male; 2: female.
+	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
+
+	// List of the IDs of included faces
+	FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPersonBaseInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Person name
-		PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
-
-		// Person gender. 0: empty; 1: male; 2: female.
-		Gender *int64 `json:"Gender,omitempty" name:"Gender"`
-
-		// List of the IDs of included faces
-		FaceIds []*string `json:"FaceIds,omitempty" name:"FaceIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPersonBaseInfoResponseParams `json:"Response"`
 }
 
 func (r *GetPersonBaseInfoResponse) ToJsonString() string {
@@ -1598,9 +2011,21 @@ func (r *GetPersonBaseInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonGroupInfoRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Starting number. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type GetPersonGroupInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -1632,24 +2057,26 @@ func (r *GetPersonGroupInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonGroupInfoResponseParams struct {
+	// List of groups containing this person and their description fields
+	PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos"`
+
+	// Total number of groups
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
+
+	// Algorithm model version used by the Face Recognition service.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPersonGroupInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of groups containing this person and their description fields
-		PersonGroupInfos []*PersonGroupInfo `json:"PersonGroupInfos,omitempty" name:"PersonGroupInfos"`
-
-		// Total number of groups
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
-
-		// Algorithm model version used by the Face Recognition service.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPersonGroupInfoResponseParams `json:"Response"`
 }
 
 func (r *GetPersonGroupInfoResponse) ToJsonString() string {
@@ -1663,9 +2090,15 @@ func (r *GetPersonGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonListNumRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type GetPersonListNumRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -1689,19 +2122,21 @@ func (r *GetPersonListNumRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonListNumResponseParams struct {
+	// Number of persons
+	PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
+
+	// Number of faces
+	FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPersonListNumResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of persons
-		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
-
-		// Number of faces
-		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPersonListNumResponseParams `json:"Response"`
 }
 
 func (r *GetPersonListNumResponse) ToJsonString() string {
@@ -1715,9 +2150,21 @@ func (r *GetPersonListNumResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonListRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Starting number. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 10. Maximum value: 1000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type GetPersonListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1749,28 +2196,30 @@ func (r *GetPersonListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPersonListResponseParams struct {
+	// Returned person information
+	PersonInfos []*PersonInfo `json:"PersonInfos,omitempty" name:"PersonInfos"`
+
+	// Number of persons in the group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
+
+	// Number of faces in the group
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
+
+	// Algorithm model version used for face recognition.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPersonListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned person information
-		PersonInfos []*PersonInfo `json:"PersonInfos,omitempty" name:"PersonInfos"`
-
-		// Number of persons in the group
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
-
-		// Number of faces in the group
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
-
-		// Algorithm model version used for face recognition.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPersonListResponseParams `json:"Response"`
 }
 
 func (r *GetPersonListResponse) ToJsonString() string {
@@ -1785,7 +2234,6 @@ func (r *GetPersonListResponse) FromJsonString(s string) error {
 }
 
 type GroupCandidate struct {
-
 	// Group ID.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1794,7 +2242,6 @@ type GroupCandidate struct {
 }
 
 type GroupExDescriptionInfo struct {
-
 	// Custom group description field index, whose value starts from 0.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	GroupExDescriptionIndex *uint64 `json:"GroupExDescriptionIndex,omitempty" name:"GroupExDescriptionIndex"`
@@ -1804,7 +2251,6 @@ type GroupExDescriptionInfo struct {
 }
 
 type GroupInfo struct {
-
 	// Group name
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -1830,7 +2276,6 @@ type GroupInfo struct {
 }
 
 type Hair struct {
-
 	// Hair length information.
 	// The `Type` values of the `AttributeItem` include: 0: bald, 1: short hair, 2: medium hair, 3: long hair, 4: braid.
 	Length *AttributeItem `json:"Length,omitempty" name:"Length"`
@@ -1845,7 +2290,6 @@ type Hair struct {
 }
 
 type Hat struct {
-
 	// Hat wearing status information.
 	// The `Type` values of the `AttributeItem` include: 0: no hat; 1: general hat; 2: helmet; 3: security guard hat.
 	Style *AttributeItem `json:"Style,omitempty" name:"Style"`
@@ -1856,7 +2300,6 @@ type Hat struct {
 }
 
 type HeadPose struct {
-
 	// Pitch. Value range: [-30,30].
 	Pitch *int64 `json:"Pitch,omitempty" name:"Pitch"`
 
@@ -1867,9 +2310,24 @@ type HeadPose struct {
 	Roll *int64 `json:"Roll,omitempty" name:"Roll"`
 }
 
+// Predefined struct for user
+type ModifyGroupRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Custom description field of the group to be modified, which is a `key-value` pair.
+	GroupExDescriptionInfos []*GroupExDescriptionInfo `json:"GroupExDescriptionInfos,omitempty" name:"GroupExDescriptionInfos"`
+
+	// Group remarks
+	Tag *string `json:"Tag,omitempty" name:"Tag"`
+}
+
 type ModifyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1905,13 +2363,15 @@ func (r *ModifyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyGroupResponse) ToJsonString() string {
@@ -1925,9 +2385,21 @@ func (r *ModifyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonBaseInfoRequestParams struct {
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Name of the person to be modified
+	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
+
+	// Gender of the person to be modified. 1: male; 2: female.
+	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
+}
+
 type ModifyPersonBaseInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Person ID, which is the `PersonId` in the `CreatePerson` API.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -1959,13 +2431,15 @@ func (r *ModifyPersonBaseInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonBaseInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPersonBaseInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPersonBaseInfoResponseParams `json:"Response"`
 }
 
 func (r *ModifyPersonBaseInfoResponse) ToJsonString() string {
@@ -1979,9 +2453,21 @@ func (r *ModifyPersonBaseInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonGroupInfoRequestParams struct {
+	// Group ID, which is the `GroupId` in the `CreateGroup` API.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Person ID, which is the `PersonId` in the `CreatePerson` API.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Custom description field of the person to be modified, which is a `key-value` pair.
+	PersonExDescriptionInfos []*PersonExDescriptionInfo `json:"PersonExDescriptionInfos,omitempty" name:"PersonExDescriptionInfos"`
+}
+
 type ModifyPersonGroupInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -2013,13 +2499,15 @@ func (r *ModifyPersonGroupInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonGroupInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPersonGroupInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPersonGroupInfoResponseParams `json:"Response"`
 }
 
 func (r *ModifyPersonGroupInfoResponse) ToJsonString() string {
@@ -2034,14 +2522,12 @@ func (r *ModifyPersonGroupInfoResponse) FromJsonString(s string) error {
 }
 
 type Mouth struct {
-
 	// Whether the mouth is open.
 	// The `Type` values of the `AttributeItem` include: 0: closed; 1: open.
 	MouthOpen *AttributeItem `json:"MouthOpen,omitempty" name:"MouthOpen"`
 }
 
 type PersonExDescriptionInfo struct {
-
 	// Person description field index, whose value starts from 0.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PersonExDescriptionIndex *uint64 `json:"PersonExDescriptionIndex,omitempty" name:"PersonExDescriptionIndex"`
@@ -2051,7 +2537,6 @@ type PersonExDescriptionInfo struct {
 }
 
 type PersonGroupInfo struct {
-
 	// ID of the group that contains this person
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -2060,7 +2545,6 @@ type PersonGroupInfo struct {
 }
 
 type PersonInfo struct {
-
 	// Person name
 	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
 
@@ -2082,7 +2566,6 @@ type PersonInfo struct {
 }
 
 type Point struct {
-
 	// X coordinate
 	X *int64 `json:"X,omitempty" name:"X"`
 
@@ -2091,7 +2574,6 @@ type Point struct {
 }
 
 type Result struct {
-
 	// Most matching candidate recognized
 	Candidates []*Candidate `json:"Candidates,omitempty" name:"Candidates"`
 
@@ -2104,7 +2586,6 @@ type Result struct {
 }
 
 type ResultsReturnsByGroup struct {
-
 	// Position of detected face frame
 	FaceRect *FaceRect `json:"FaceRect,omitempty" name:"FaceRect"`
 
@@ -2116,9 +2597,61 @@ type ResultsReturnsByGroup struct {
 	RetCode *int64 `json:"RetCode,omitempty" name:"RetCode"`
 }
 
+// Predefined struct for user
+type SearchFacesRequestParams struct {
+	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
+	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10. 
+	// `MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized. 
+	// For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Minimum height and width of face in px. Default value: 34. Face images whose value is below 34 cannot be recognized. We recommend setting this parameter to 80.
+	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
+
+	// Number of the most similar persons returned for one single recognized face image. Default value: 5. Maximum value: 100. 
+	// For example, if `MaxFaceNum` is 1 and `MaxPersonNum` is 8, information of the top 8 most similar persons will be returned.
+	// The greater the value, the longer the processing time. We recommend setting a value below 10.
+	MaxPersonNum *uint64 `json:"MaxPersonNum,omitempty" name:"MaxPersonNum"`
+
+	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
+	NeedPersonInfo *int64 `json:"NeedPersonInfo,omitempty" name:"NeedPersonInfo"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// In the output parameter `Score`, the result will be returned only if the result value is above the `FaceMatchThreshold` value. Default value: 0.
+	FaceMatchThreshold *float64 `json:"FaceMatchThreshold,omitempty" name:"FaceMatchThreshold"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type SearchFacesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
 	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
@@ -2197,22 +2730,24 @@ func (r *SearchFacesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchFacesResponseParams struct {
+	// Recognition result.
+	Results []*Result `json:"Results,omitempty" name:"Results"`
+
+	// Number of faces included in searched groups.
+	FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchFacesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Recognition result.
-		Results []*Result `json:"Results,omitempty" name:"Results"`
-
-		// Number of faces included in searched groups.
-		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchFacesResponseParams `json:"Response"`
 }
 
 func (r *SearchFacesResponse) ToJsonString() string {
@@ -2226,9 +2761,62 @@ func (r *SearchFacesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchFacesReturnsByGroupRequestParams struct {
+	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
+	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
+	// `MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
+	// For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. We recommend setting this parameter to 80.
+	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
+
+	// Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
+	// For example, if `MaxFaceNum` is 3 and `MaxPersonNum` is 5, up to 15 (3 * 5) persons will be returned.
+	MaxPersonNumPerGroup *uint64 `json:"MaxPersonNumPerGroup,omitempty" name:"MaxPersonNumPerGroup"`
+
+	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
+	NeedPersonInfo *int64 `json:"NeedPersonInfo,omitempty" name:"NeedPersonInfo"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// In the output parameter `Score`, the result will be returned only if the result value is greater than or equal to the `FaceMatchThreshold` value.
+	// Default value: 0.
+	// Value range: [0.0,100.0).
+	FaceMatchThreshold *float64 `json:"FaceMatchThreshold,omitempty" name:"FaceMatchThreshold"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type SearchFacesReturnsByGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
 	// You cannot search for groups using different algorithm model versions (`FaceModelVersion`) at a time.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
@@ -2308,22 +2896,24 @@ func (r *SearchFacesReturnsByGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchFacesReturnsByGroupResponseParams struct {
+	// Number of faces included in searched groups.
+	FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
+
+	// Recognition result.
+	ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchFacesReturnsByGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of faces included in searched groups.
-		FaceNum *uint64 `json:"FaceNum,omitempty" name:"FaceNum"`
-
-		// Recognition result.
-		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchFacesReturnsByGroupResponseParams `json:"Response"`
 }
 
 func (r *SearchFacesReturnsByGroupResponse) ToJsonString() string {
@@ -2337,9 +2927,61 @@ func (r *SearchFacesReturnsByGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchPersonsRequestParams struct {
+	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
+	// `MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
+	// For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. We recommend setting this parameter to 80.
+	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
+
+	// Number of the most similar persons returned for one single recognized face image. Default value: 5. Maximum value: 100.
+	// For example, if `MaxFaceNum` is 1 and `MaxPersonNum` is 8, information of the top 8 most similar persons will be returned.
+	// The greater the value, the longer the processing time. We recommend setting a value below 10.
+	MaxPersonNum *uint64 `json:"MaxPersonNum,omitempty" name:"MaxPersonNum"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// In the output parameter `Score`, the result will be returned only if the result value is greater than or equal to the `FaceMatchThreshold` value. Default value: 0. Value range: [0.0,100.0).
+	FaceMatchThreshold *float64 `json:"FaceMatchThreshold,omitempty" name:"FaceMatchThreshold"`
+
+	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
+	NeedPersonInfo *int64 `json:"NeedPersonInfo,omitempty" name:"NeedPersonInfo"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type SearchPersonsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of groups to be searched in (up to 100). The array element value is the `GroupId` in the `CreateGroup` API.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
@@ -2418,23 +3060,25 @@ func (r *SearchPersonsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchPersonsResponseParams struct {
+	// Recognition result.
+	Results []*Result `json:"Results,omitempty" name:"Results"`
+
+	// Number of the persons included in searched groups. If the quality of all faces in the input image does not meet the requirement, 0 will be returned.
+	PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
+
+	// Algorithm model version used for face recognition.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchPersonsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Recognition result.
-		Results []*Result `json:"Results,omitempty" name:"Results"`
-
-		// Number of the persons included in searched groups. If the quality of all faces in the input image does not meet the requirement, 0 will be returned.
-		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
-
-		// Algorithm model version used for face recognition.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchPersonsResponseParams `json:"Response"`
 }
 
 func (r *SearchPersonsResponse) ToJsonString() string {
@@ -2448,9 +3092,59 @@ func (r *SearchPersonsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchPersonsReturnsByGroupRequestParams struct {
+	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
+	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Maximum number of recognizable faces. Default value: 1 (i.e., detecting only the face with the largest size in the image). Maximum value: 10.
+	// `MaxFaceNum` is used to control the number of faces to be searched for if there are multiple faces in the input image to be recognized.
+	// For example, if the input image in `Image` or `Url` contains multiple faces and `MaxFaceNum` is 5, top 5 faces with the largest size in the image will be recognized.
+	MaxFaceNum *uint64 `json:"MaxFaceNum,omitempty" name:"MaxFaceNum"`
+
+	// Minimum height and width of face in px. Default value: 34. A value below 34 will affect the search accuracy. We recommend setting this parameter to 80.
+	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
+
+	// Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
+	// For example, if `MaxFaceNum` is 3, `MaxPersonNumPerGroup` is 5, and the `GroupIds` length is 3, up to 45 (3 * 5 * 3) persons will be returned.
+	MaxPersonNumPerGroup *uint64 `json:"MaxPersonNumPerGroup,omitempty" name:"MaxPersonNumPerGroup"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// In the output parameter `Score`, the result will be returned only if the result value is above the `FaceMatchThreshold` value. Default value: 0.
+	FaceMatchThreshold *float64 `json:"FaceMatchThreshold,omitempty" name:"FaceMatchThreshold"`
+
+	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
+	NeedPersonInfo *int64 `json:"NeedPersonInfo,omitempty" name:"NeedPersonInfo"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type SearchPersonsReturnsByGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of groups to be searched in (up to 60). The array element value is the `GroupId` in the `CreateGroup` API.
 	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
 
@@ -2527,22 +3221,24 @@ func (r *SearchPersonsReturnsByGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchPersonsReturnsByGroupResponseParams struct {
+	// Number of the persons included in searched groups. If the quality of all faces in the input image does not meet the requirement, 0 will be returned.
+	PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
+
+	// Recognition result.
+	ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchPersonsReturnsByGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of the persons included in searched groups. If the quality of all faces in the input image does not meet the requirement, 0 will be returned.
-		PersonNum *uint64 `json:"PersonNum,omitempty" name:"PersonNum"`
-
-		// Recognition result.
-		ResultsReturnsByGroup []*ResultsReturnsByGroup `json:"ResultsReturnsByGroup,omitempty" name:"ResultsReturnsByGroup"`
-
-		// Algorithm model version used for face recognition.
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchPersonsReturnsByGroupResponseParams `json:"Response"`
 }
 
 func (r *SearchPersonsReturnsByGroupResponse) ToJsonString() string {
@@ -2556,9 +3252,43 @@ func (r *SearchPersonsReturnsByGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type VerifyFaceRequestParams struct {
+	// ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used.  
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type VerifyFaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -2614,26 +3344,28 @@ func (r *VerifyFaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type VerifyFaceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, the score of the highest similarity will be returned.
+// Predefined struct for user
+type VerifyFaceResponseParams struct {
+	// Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, the score of the highest similarity will be returned.
 	// 
 	// The returned similarity score varies by algorithm version.
 	// If you need to verify whether the faces in the two images are the same person, then the 0.1%, 0.01%, and 0.001% FARs on v3.0 correspond to scores of 40, 50, and 60, respectively. Generally, if the score is above 50, it can be judged that they are the same person.
 	// The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90, respectively. Generally, if the score is above 80, it can be judged that they are the same person.
-		Score *float64 `json:"Score,omitempty" name:"Score"`
+	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-		// Whether the person in the image matches the `PersonId`.
-		IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
+	// Whether the person in the image matches the `PersonId`.
+	IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
 
-		// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type VerifyFaceResponse struct {
+	*tchttp.BaseResponse
+	Response *VerifyFaceResponseParams `json:"Response"`
 }
 
 func (r *VerifyFaceResponse) ToJsonString() string {
@@ -2647,9 +3379,43 @@ func (r *VerifyFaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type VerifyPersonRequestParams struct {
+	// ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Base64-encoded data of the image.
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL 
+	// The long side cannot exceed 4,000 px for images in JPG format or 2,000 px for images in other formats.
+	//  Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. 
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	// If there are multiple faces in the image, only the face with the largest size will be selected.
+	// PNG, JPG, JPEG, and BMP images are supported, while GIF images are not.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Image quality control. 
+	// 0: no control. 
+	// 1: low quality requirement. The image has one or more of the following problems: extreme blurriness, covered eyes, covered nose, and covered mouth. 
+	// 2: average quality requirement. The image has at least three of the following problems: excessive brightness, excessive dimness, blurriness or average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 3: high-quality requirement. The image has one to two of the following problems: excessive brightness, excessive dimness, average blurriness, covered eyebrows, covered cheeks, and covered chin. 
+	// 4: very high-quality requirement. The image is optimal in all dimensions or only has a slight problem in one dimension. 
+	// Default value: 0. 
+	// If the image quality does not meet the requirement, the returned result will prompt that the detected image quality is unsatisfactory.
+	QualityControl *uint64 `json:"QualityControl,omitempty" name:"QualityControl"`
+
+	// Whether to enable the support for rotated image recognition. 0: no; 1: yes. Default value: 0. When the face in the image is rotated and the image has no EXIF information, if this parameter is not enabled, the face in the image cannot be correctly detected and recognized. If you are sure that the input image contains EXIF information or the face in the image will not be rotated, do not enable this parameter, as the overall time consumption may increase by hundreds of milliseconds after it is enabled.
+	NeedRotateDetection *uint64 `json:"NeedRotateDetection,omitempty" name:"NeedRotateDetection"`
+}
+
 type VerifyPersonRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the person to be verified. For more information on `PersonId`, please see the group management APIs.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -2705,22 +3471,24 @@ func (r *VerifyPersonRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type VerifyPersonResponseParams struct {
+	// Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, their information will be fused for verification.
+	Score *float64 `json:"Score,omitempty" name:"Score"`
+
+	// Whether the person in the image matches the `PersonId`.
+	IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
+
+	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type VerifyPersonResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Similarity between given face image and `PersonId`. If there are multiple faces under the `PersonId`, their information will be fused for verification.
-		Score *float64 `json:"Score,omitempty" name:"Score"`
-
-		// Whether the person in the image matches the `PersonId`.
-		IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
-
-		// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
-		FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *VerifyPersonResponseParams `json:"Response"`
 }
 
 func (r *VerifyPersonResponse) ToJsonString() string {

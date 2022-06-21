@@ -21,7 +21,6 @@ import (
 )
 
 type AVTemplate struct {
-
 	// Name of an audio/video transcoding template, which can contain 1-20 case-sensitive letters and digits
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -67,7 +66,6 @@ type AVTemplate struct {
 }
 
 type AttachedInput struct {
-
 	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -85,13 +83,11 @@ type AttachedInput struct {
 }
 
 type AudioPidSelectionInfo struct {
-
 	// Audio `Pid`. Default value: 0.
 	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
 }
 
 type AudioPipelineInputStatistics struct {
-
 	// Audio FPS.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -103,7 +99,6 @@ type AudioPipelineInputStatistics struct {
 }
 
 type AudioSelectorInfo struct {
-
 	// Audio name, which can contain 1-32 letters, digits, and underscores.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -112,7 +107,6 @@ type AudioSelectorInfo struct {
 }
 
 type AudioTemplateInfo struct {
-
 	// Only `AttachedInputs.AudioSelectors.Name` can be selected. This parameter is required for RTP_PUSH and UDP_PUSH.
 	AudioSelectorName *string `json:"AudioSelectorName,omitempty" name:"AudioSelectorName"`
 
@@ -131,7 +125,6 @@ type AudioTemplateInfo struct {
 }
 
 type ChannelAlertInfos struct {
-
 	// Alarm details of pipeline 0 under this channel.
 	Pipeline0 []*ChannelPipelineAlerts `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
@@ -140,7 +133,6 @@ type ChannelAlertInfos struct {
 }
 
 type ChannelInputStatistics struct {
-
 	// Input ID.
 	InputId *string `json:"InputId,omitempty" name:"InputId"`
 
@@ -149,7 +141,6 @@ type ChannelInputStatistics struct {
 }
 
 type ChannelOutputsStatistics struct {
-
 	// Output group name.
 	OutputGroupName *string `json:"OutputGroupName,omitempty" name:"OutputGroupName"`
 
@@ -158,7 +149,6 @@ type ChannelOutputsStatistics struct {
 }
 
 type ChannelPipelineAlerts struct {
-
 	// Alarm start time in UTC time.
 	SetTime *string `json:"SetTime,omitempty" name:"SetTime"`
 
@@ -174,7 +164,6 @@ type ChannelPipelineAlerts struct {
 }
 
 type CreateImageSettings struct {
-
 	// Image file format. Valid values: png, jpg.
 	ImageType *string `json:"ImageType,omitempty" name:"ImageType"`
 
@@ -201,9 +190,33 @@ type CreateImageSettings struct {
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
+// Predefined struct for user
+type CreateStreamLiveChannelRequestParams struct {
+	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Inputs to attach. You can attach 1 to 5 inputs.
+	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
+
+	// Configuration information of the channel’s output groups. Quantity: [1, 10]
+	OutputGroups []*StreamLiveOutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
+
+	// Audio transcoding templates. Quantity: [1, 20]
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
+
+	// Video transcoding templates. Quantity: [1, 10]
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
+
+	// Audio/Video transcoding templates. Quantity: [1, 10]
+	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+
+	// Event settings
+	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+}
+
 type CreateStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -251,16 +264,18 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveChannelResponseParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLiveChannelResponse) ToJsonString() string {
@@ -274,9 +289,26 @@ func (r *CreateStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveInputRequestParams struct {
+	// Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Input type
+	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// ID of the input security group to attach
+	// You can attach only one security group to an input.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
+}
+
 type CreateStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -314,16 +346,18 @@ func (r *CreateStreamLiveInputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveInputResponseParams struct {
+	// Input ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Input ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLiveInputResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLiveInputResponse) ToJsonString() string {
@@ -337,9 +371,18 @@ func (r *CreateStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveInputSecurityGroupRequestParams struct {
+	// Input security group name, which can contain case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Allowlist entries. Quantity: [1, 10]
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
+}
+
 type CreateStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input security group name, which can contain case-sensitive letters, digits, and underscores and must be unique at the region level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -367,16 +410,18 @@ func (r *CreateStreamLiveInputSecurityGroupRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveInputSecurityGroupResponseParams struct {
+	// Security group ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLiveInputSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLiveInputSecurityGroupResponse) ToJsonString() string {
@@ -390,9 +435,18 @@ func (r *CreateStreamLiveInputSecurityGroupResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLivePlanRequestParams struct {
+	// ID of the channel for which you want to configure an event
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Event configuration
+	Plan *PlanReq `json:"Plan,omitempty" name:"Plan"`
+}
+
 type CreateStreamLivePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the channel for which you want to configure an event
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -420,13 +474,15 @@ func (r *CreateStreamLivePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLivePlanResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLivePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLivePlanResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLivePlanResponse) ToJsonString() string {
@@ -440,9 +496,24 @@ func (r *CreateStreamLivePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveWatermarkRequestParams struct {
+	// Watermark name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Watermark type. Valid values: STATIC_IMAGE, TEXT.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+	ImageSettings *CreateImageSettings `json:"ImageSettings,omitempty" name:"ImageSettings"`
+
+	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+	TextSettings *CreateTextSettings `json:"TextSettings,omitempty" name:"TextSettings"`
+}
+
 type CreateStreamLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Watermark name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -478,16 +549,18 @@ func (r *CreateStreamLiveWatermarkRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLiveWatermarkResponseParams struct {
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLiveWatermarkResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Watermark ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLiveWatermarkResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLiveWatermarkResponse) ToJsonString() string {
@@ -502,7 +575,6 @@ func (r *CreateStreamLiveWatermarkResponse) FromJsonString(s string) error {
 }
 
 type CreateTextSettings struct {
-
 	// Text
 	Text *string `json:"Text,omitempty" name:"Text"`
 
@@ -523,7 +595,6 @@ type CreateTextSettings struct {
 }
 
 type DashRemuxSettingsInfo struct {
-
 	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
 	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
 
@@ -534,9 +605,15 @@ type DashRemuxSettingsInfo struct {
 	PeriodTriggers *string `json:"PeriodTriggers,omitempty" name:"PeriodTriggers"`
 }
 
+// Predefined struct for user
+type DeleteStreamLiveChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DeleteStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -560,13 +637,15 @@ func (r *DeleteStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLiveChannelResponse) ToJsonString() string {
@@ -580,9 +659,15 @@ func (r *DeleteStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveInputRequestParams struct {
+	// Input ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DeleteStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -606,13 +691,15 @@ func (r *DeleteStreamLiveInputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveInputResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLiveInputResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLiveInputResponse) ToJsonString() string {
@@ -626,9 +713,15 @@ func (r *DeleteStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveInputSecurityGroupRequestParams struct {
+	// Input security group ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DeleteStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -652,13 +745,15 @@ func (r *DeleteStreamLiveInputSecurityGroupRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveInputSecurityGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLiveInputSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLiveInputSecurityGroupResponse) ToJsonString() string {
@@ -672,9 +767,18 @@ func (r *DeleteStreamLiveInputSecurityGroupResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLivePlanRequestParams struct {
+	// ID of the channel whose event is to be deleted
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Name of the event to delete
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+}
+
 type DeleteStreamLivePlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the channel whose event is to be deleted
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -702,13 +806,15 @@ func (r *DeleteStreamLivePlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLivePlanResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLivePlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLivePlanResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLivePlanResponse) ToJsonString() string {
@@ -722,9 +828,15 @@ func (r *DeleteStreamLivePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveWatermarkRequestParams struct {
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DeleteStreamLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Watermark ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -748,13 +860,15 @@ func (r *DeleteStreamLiveWatermarkRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLiveWatermarkResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLiveWatermarkResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLiveWatermarkResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLiveWatermarkResponse) ToJsonString() string {
@@ -769,7 +883,6 @@ func (r *DeleteStreamLiveWatermarkResponse) FromJsonString(s string) error {
 }
 
 type DescribeImageSettings struct {
-
 	// Origin
 	Location *string `json:"Location,omitempty" name:"Location"`
 
@@ -786,9 +899,15 @@ type DescribeImageSettings struct {
 	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelAlertsRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+}
+
 type DescribeStreamLiveChannelAlertsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 }
@@ -812,16 +931,18 @@ func (r *DescribeStreamLiveChannelAlertsRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelAlertsResponseParams struct {
+	// Alarm information of the channel’s two pipelines
+	Infos *ChannelAlertInfos `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelAlertsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Alarm information of the channel’s two pipelines
-		Infos *ChannelAlertInfos `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelAlertsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelAlertsResponse) ToJsonString() string {
@@ -835,9 +956,26 @@ func (r *DescribeStreamLiveChannelAlertsResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelInputStatisticsRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Data collection interval. Valid values: `5s`, `1min` (default), `5min`, `15min`
+	Period *string `json:"Period,omitempty" name:"Period"`
+}
+
 type DescribeStreamLiveChannelInputStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -875,16 +1013,18 @@ func (r *DescribeStreamLiveChannelInputStatisticsRequest) FromJsonString(s strin
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelInputStatisticsResponseParams struct {
+	// Channel input statistics
+	Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelInputStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel input statistics
-		Infos []*ChannelInputStatistics `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelInputStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelInputStatisticsResponse) ToJsonString() string {
@@ -898,9 +1038,23 @@ func (r *DescribeStreamLiveChannelInputStatisticsResponse) FromJsonString(s stri
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelLogsRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Start time for query, which is 1 hour ago by default. You can query logs in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeStreamLiveChannelLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -934,16 +1088,18 @@ func (r *DescribeStreamLiveChannelLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelLogsResponseParams struct {
+	// Pipeline push information
+	Infos *PipelineLogInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Pipeline push information
-		Infos *PipelineLogInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelLogsResponse) ToJsonString() string {
@@ -957,9 +1113,26 @@ func (r *DescribeStreamLiveChannelLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelOutputStatisticsRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for query, which is 1 hour after `StartTime` by default
+	// UTC time, such as `2020-01-01T12:00:00Z`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Data collection interval. Valid values: `5s`, `1min` (default), `5min`, `15min`
+	Period *string `json:"Period,omitempty" name:"Period"`
+}
+
 type DescribeStreamLiveChannelOutputStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -997,16 +1170,18 @@ func (r *DescribeStreamLiveChannelOutputStatisticsRequest) FromJsonString(s stri
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelOutputStatisticsResponseParams struct {
+	// Channel output information
+	Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelOutputStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel output information
-		Infos []*ChannelOutputsStatistics `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelOutputStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelOutputStatisticsResponse) ToJsonString() string {
@@ -1020,9 +1195,15 @@ func (r *DescribeStreamLiveChannelOutputStatisticsResponse) FromJsonString(s str
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -1046,16 +1227,18 @@ func (r *DescribeStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelResponseParams struct {
+	// Channel information
+	Info *StreamLiveChannelInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel information
-		Info *StreamLiveChannelInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelResponse) ToJsonString() string {
@@ -1069,8 +1252,14 @@ func (r *DescribeStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelsRequestParams struct {
+
+}
+
 type DescribeStreamLiveChannelsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLiveChannelsRequest) ToJsonString() string {
@@ -1085,23 +1274,26 @@ func (r *DescribeStreamLiveChannelsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveChannelsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveChannelsResponseParams struct {
+	// List of channel information
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Infos []*StreamLiveChannelInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveChannelsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of channel information
-	// Note: this field may return `null`, indicating that no valid value was found.
-		Infos []*StreamLiveChannelInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveChannelsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveChannelsResponse) ToJsonString() string {
@@ -1115,9 +1307,15 @@ func (r *DescribeStreamLiveChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputRequestParams struct {
+	// Input ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -1141,16 +1339,18 @@ func (r *DescribeStreamLiveInputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputResponseParams struct {
+	// Input information
+	Info *InputInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Input information
-		Info *InputInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveInputResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveInputResponse) ToJsonString() string {
@@ -1164,9 +1364,15 @@ func (r *DescribeStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputSecurityGroupRequestParams struct {
+	// Input security group ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -1190,16 +1396,18 @@ func (r *DescribeStreamLiveInputSecurityGroupRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputSecurityGroupResponseParams struct {
+	// Input security group information
+	Info *InputSecurityGroupInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Input security group information
-		Info *InputSecurityGroupInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveInputSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveInputSecurityGroupResponse) ToJsonString() string {
@@ -1213,8 +1421,14 @@ func (r *DescribeStreamLiveInputSecurityGroupResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputSecurityGroupsRequestParams struct {
+
+}
+
 type DescribeStreamLiveInputSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLiveInputSecurityGroupsRequest) ToJsonString() string {
@@ -1229,22 +1443,25 @@ func (r *DescribeStreamLiveInputSecurityGroupsRequest) FromJsonString(s string) 
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputSecurityGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputSecurityGroupsResponseParams struct {
+	// List of input security group information
+	Infos []*InputSecurityGroupInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveInputSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of input security group information
-		Infos []*InputSecurityGroupInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveInputSecurityGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveInputSecurityGroupsResponse) ToJsonString() string {
@@ -1258,8 +1475,14 @@ func (r *DescribeStreamLiveInputSecurityGroupsResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputsRequestParams struct {
+
+}
+
 type DescribeStreamLiveInputsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLiveInputsRequest) ToJsonString() string {
@@ -1274,23 +1497,26 @@ func (r *DescribeStreamLiveInputsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveInputsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveInputsResponseParams struct {
+	// List of input information
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Infos []*InputInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveInputsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of input information
-	// Note: this field may return `null`, indicating that no valid value was found.
-		Infos []*InputInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveInputsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveInputsResponse) ToJsonString() string {
@@ -1304,9 +1530,15 @@ func (r *DescribeStreamLiveInputsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLivePlansRequestParams struct {
+	// ID of the channel whose events you want to query
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+}
+
 type DescribeStreamLivePlansRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the channel whose events you want to query
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 }
@@ -1330,17 +1562,19 @@ func (r *DescribeStreamLivePlansRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLivePlansResponseParams struct {
+	// List of event information
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Infos []*PlanResp `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLivePlansResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of event information
-	// Note: this field may return `null`, indicating that no valid value was found.
-		Infos []*PlanResp `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLivePlansResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLivePlansResponse) ToJsonString() string {
@@ -1354,8 +1588,14 @@ func (r *DescribeStreamLivePlansResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveRegionsRequestParams struct {
+
+}
+
 type DescribeStreamLiveRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLiveRegionsRequest) ToJsonString() string {
@@ -1370,22 +1610,25 @@ func (r *DescribeStreamLiveRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveRegionsResponseParams struct {
+	// StreamLive region information
+	Info *StreamLiveRegionInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// StreamLive region information
-		Info *StreamLiveRegionInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveRegionsResponse) ToJsonString() string {
@@ -1399,9 +1642,31 @@ func (r *DescribeStreamLiveRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveTranscodeDetailRequestParams struct {
+	// The query start time (UTC+8) in the format of yyyy-MM-dd.
+	// You can only query data in the last month (not including the current day).
+	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
+
+	// The query end time (UTC+8) in the format of yyyy-MM-dd.
+	// You can only query data in the last month (not including the current day).
+	EndDayTime *string `json:"EndDayTime,omitempty" name:"EndDayTime"`
+
+	// The channel ID (optional).
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// The number of pages. Default value: 1.
+	// The value cannot exceed 100.
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The number of records per page. Default value: 10.
+	// Value range: 1-1000.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
 type DescribeStreamLiveTranscodeDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The query start time (UTC+8) in the format of yyyy-MM-dd.
 	// You can only query data in the last month (not including the current day).
 	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
@@ -1445,28 +1710,30 @@ func (r *DescribeStreamLiveTranscodeDetailRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveTranscodeDetailResponseParams struct {
+	// A list of the transcoding information.
+	Infos []*DescribeTranscodeDetailInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The number of the current page.
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The number of records per page.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// The total number of records.
+	TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The total number of pages.
+	TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveTranscodeDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of the transcoding information.
-		Infos []*DescribeTranscodeDetailInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The number of the current page.
-		PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
-
-		// The number of records per page.
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// The total number of records.
-		TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The total number of pages.
-		TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveTranscodeDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveTranscodeDetailResponse) ToJsonString() string {
@@ -1480,9 +1747,15 @@ func (r *DescribeStreamLiveTranscodeDetailResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveWatermarkRequestParams struct {
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeStreamLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Watermark ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -1506,16 +1779,18 @@ func (r *DescribeStreamLiveWatermarkRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveWatermarkResponseParams struct {
+	// Watermark information
+	Info *DescribeWatermarkInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveWatermarkResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Watermark information
-		Info *DescribeWatermarkInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveWatermarkResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveWatermarkResponse) ToJsonString() string {
@@ -1529,8 +1804,14 @@ func (r *DescribeStreamLiveWatermarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveWatermarksRequestParams struct {
+
+}
+
 type DescribeStreamLiveWatermarksRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLiveWatermarksRequest) ToJsonString() string {
@@ -1545,22 +1826,25 @@ func (r *DescribeStreamLiveWatermarksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLiveWatermarksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLiveWatermarksResponseParams struct {
+	// List of watermark information
+	Infos []*DescribeWatermarkInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLiveWatermarksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of watermark information
-		Infos []*DescribeWatermarkInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLiveWatermarksResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLiveWatermarksResponse) ToJsonString() string {
@@ -1575,7 +1859,6 @@ func (r *DescribeStreamLiveWatermarksResponse) FromJsonString(s string) error {
 }
 
 type DescribeTextSettings struct {
-
 	// Text
 	Text *string `json:"Text,omitempty" name:"Text"`
 
@@ -1596,7 +1879,6 @@ type DescribeTextSettings struct {
 }
 
 type DescribeTranscodeDetailInfo struct {
-
 	// The channel ID.
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -1631,7 +1913,6 @@ type DescribeTranscodeDetailInfo struct {
 }
 
 type DescribeWatermarkInfo struct {
-
 	// Watermark ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -1659,7 +1940,6 @@ type DescribeWatermarkInfo struct {
 }
 
 type DestinationInfo struct {
-
 	// Relay destination address. Length limit: [1,512].
 	OutputUrl *string `json:"OutputUrl,omitempty" name:"OutputUrl"`
 
@@ -1677,7 +1957,6 @@ type DestinationInfo struct {
 }
 
 type DrmKey struct {
-
 	// DRM key, which is a 32-bit hexadecimal string.
 	// Note: uppercase letters in the string will be automatically converted to lowercase ones.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -1701,7 +1980,6 @@ type DrmKey struct {
 }
 
 type DrmSettingsInfo struct {
-
 	// Whether to enable DRM encryption. Valid values: `CLOSE` (disable), `OPEN` (enable). Default value: `CLOSE`
 	// DRM encryption is supported only for HLS, DASH, HLS_ARCHIVE, DASH_ARCHIVE, HLS_MEDIAPACKAGE, and DASH_MEDIAPACKAGE outputs.
 	State *string `json:"State,omitempty" name:"State"`
@@ -1725,19 +2003,16 @@ type DrmSettingsInfo struct {
 }
 
 type EventSettingsDestinationReq struct {
-
 	// URL of the COS bucket to save recording files
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type EventSettingsDestinationResp struct {
-
 	// URL of the COS bucket where recording files are saved
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type EventSettingsReq struct {
-
 	// Valid values: `INPUT_SWITCH`, `TIMED_RECORD`. If it is not specified, `INPUT_SWITCH` will be used.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
@@ -1755,7 +2030,6 @@ type EventSettingsReq struct {
 }
 
 type EventSettingsResp struct {
-
 	// Only `INPUT_SWITCH` is supported currently.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
@@ -1773,7 +2047,6 @@ type EventSettingsResp struct {
 }
 
 type FailOverSettings struct {
-
 	// ID of the backup input
 	// Note: this field may return `null`, indicating that no valid value was found.
 	SecondaryInputId *string `json:"SecondaryInputId,omitempty" name:"SecondaryInputId"`
@@ -1786,7 +2059,6 @@ type FailOverSettings struct {
 }
 
 type HlsRemuxSettingsInfo struct {
-
 	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
 	SegmentDuration *uint64 `json:"SegmentDuration,omitempty" name:"SegmentDuration"`
 
@@ -1804,7 +2076,6 @@ type HlsRemuxSettingsInfo struct {
 }
 
 type InputInfo struct {
-
 	// Input region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -1829,7 +2100,6 @@ type InputInfo struct {
 }
 
 type InputSecurityGroupInfo struct {
-
 	// Input security group ID.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -1848,7 +2118,6 @@ type InputSecurityGroupInfo struct {
 }
 
 type InputSettingInfo struct {
-
 	// Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
@@ -1877,7 +2146,6 @@ type InputSettingInfo struct {
 }
 
 type InputStatistics struct {
-
 	// Input statistics of pipeline 0.
 	Pipeline0 []*PipelineInputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
@@ -1886,7 +2154,6 @@ type InputStatistics struct {
 }
 
 type LogInfo struct {
-
 	// Log type.
 	// It contains the value of `StreamStart` which refers to the push information.
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -1899,15 +2166,41 @@ type LogInfo struct {
 }
 
 type LogMessageInfo struct {
-
 	// Push information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StreamInfo *StreamInfo `json:"StreamInfo,omitempty" name:"StreamInfo"`
 }
 
+// Predefined struct for user
+type ModifyStreamLiveChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Channel name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Inputs to attach. You can attach 1 to 5 inputs.
+	AttachedInputs []*AttachedInput `json:"AttachedInputs,omitempty" name:"AttachedInputs"`
+
+	// Configuration information of the channel’s output groups. Quantity: [1, 10]
+	OutputGroups []*StreamLiveOutputGroupsInfo `json:"OutputGroups,omitempty" name:"OutputGroups"`
+
+	// Audio transcoding templates. Quantity: [1, 20]
+	AudioTemplates []*AudioTemplateInfo `json:"AudioTemplates,omitempty" name:"AudioTemplates"`
+
+	// Video transcoding templates. Quantity: [1, 10]
+	VideoTemplates []*VideoTemplateInfo `json:"VideoTemplates,omitempty" name:"VideoTemplates"`
+
+	// Audio/Video transcoding templates. Quantity: [1, 10]
+	AVTemplates []*AVTemplate `json:"AVTemplates,omitempty" name:"AVTemplates"`
+
+	// Event settings
+	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+}
+
 type ModifyStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -1959,13 +2252,15 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLiveChannelResponse) ToJsonString() string {
@@ -1979,9 +2274,27 @@ func (r *ModifyStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveInputRequestParams struct {
+	// Input ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Input name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of the IDs of the security groups to attach
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Input settings
+	// For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// This parameter can be left empty for RTP_PUSH and UDP_PUSH inputs.
+	// Note: If this parameter is not specified or empty, the original input settings will be used.
+	InputSettings []*InputSettingInfo `json:"InputSettings,omitempty" name:"InputSettings"`
+}
+
 type ModifyStreamLiveInputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -2020,13 +2333,15 @@ func (r *ModifyStreamLiveInputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveInputResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLiveInputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLiveInputResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLiveInputResponse) ToJsonString() string {
@@ -2040,9 +2355,21 @@ func (r *ModifyStreamLiveInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveInputSecurityGroupRequestParams struct {
+	// Input security group ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Input security group name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the region level
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Allowlist entries (max: 10)
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
+}
+
 type ModifyStreamLiveInputSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input security group ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -2074,13 +2401,15 @@ func (r *ModifyStreamLiveInputSecurityGroupRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveInputSecurityGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLiveInputSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLiveInputSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLiveInputSecurityGroupResponse) ToJsonString() string {
@@ -2094,9 +2423,24 @@ func (r *ModifyStreamLiveInputSecurityGroupResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveWatermarkRequestParams struct {
+	// Watermark ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Watermark name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Watermark image settings. This parameter is valid if `Type` is `STATIC_IMAGE`.
+	ImageSettings *CreateImageSettings `json:"ImageSettings,omitempty" name:"ImageSettings"`
+
+	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
+	TextSettings *CreateTextSettings `json:"TextSettings,omitempty" name:"TextSettings"`
+}
+
 type ModifyStreamLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Watermark ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -2132,13 +2476,15 @@ func (r *ModifyStreamLiveWatermarkRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLiveWatermarkResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLiveWatermarkResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLiveWatermarkResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLiveWatermarkResponse) ToJsonString() string {
@@ -2153,7 +2499,6 @@ func (r *ModifyStreamLiveWatermarkResponse) FromJsonString(s string) error {
 }
 
 type OutputInfo struct {
-
 	// Output name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2175,7 +2520,6 @@ type OutputInfo struct {
 }
 
 type OutputsStatistics struct {
-
 	// Output information of pipeline 0.
 	Pipeline0 []*PipelineOutputStatistics `json:"Pipeline0,omitempty" name:"Pipeline0"`
 
@@ -2184,7 +2528,6 @@ type OutputsStatistics struct {
 }
 
 type PipelineInputStatistics struct {
-
 	// Data timestamp in seconds.
 	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
@@ -2203,7 +2546,6 @@ type PipelineInputStatistics struct {
 }
 
 type PipelineLogInfo struct {
-
 	// Log information of pipeline 0.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pipeline0 []*LogInfo `json:"Pipeline0,omitempty" name:"Pipeline0"`
@@ -2214,7 +2556,6 @@ type PipelineLogInfo struct {
 }
 
 type PipelineOutputStatistics struct {
-
 	// Timestamp.
 	// In seconds, indicating data time.
 	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
@@ -2224,7 +2565,6 @@ type PipelineOutputStatistics struct {
 }
 
 type PlanReq struct {
-
 	// Event name
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
@@ -2236,7 +2576,6 @@ type PlanReq struct {
 }
 
 type PlanResp struct {
-
 	// Event name
 	EventName *string `json:"EventName,omitempty" name:"EventName"`
 
@@ -2248,20 +2587,17 @@ type PlanResp struct {
 }
 
 type PlanSettings struct {
-
 	// Timed recording settings
 	// Note: This field may return `null`, indicating that no valid value was found.
 	TimedRecordSettings *TimedRecordSettings `json:"TimedRecordSettings,omitempty" name:"TimedRecordSettings"`
 }
 
 type RegionInfo struct {
-
 	// Region name
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type SDMCSettingsInfo struct {
-
 	// User ID in the SDMC DRM system
 	Uid *string `json:"Uid,omitempty" name:"Uid"`
 
@@ -2289,14 +2625,19 @@ type SDMCSettingsInfo struct {
 }
 
 type Scte35SettingsInfo struct {
-
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
 	Behavior *string `json:"Behavior,omitempty" name:"Behavior"`
 }
 
+// Predefined struct for user
+type StartStreamLiveChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type StartStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -2320,13 +2661,15 @@ func (r *StartStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartStreamLiveChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *StartStreamLiveChannelResponse) ToJsonString() string {
@@ -2340,9 +2683,15 @@ func (r *StartStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopStreamLiveChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type StopStreamLiveChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -2366,13 +2715,15 @@ func (r *StopStreamLiveChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopStreamLiveChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopStreamLiveChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopStreamLiveChannelResponseParams `json:"Response"`
 }
 
 func (r *StopStreamLiveChannelResponse) ToJsonString() string {
@@ -2387,7 +2738,6 @@ func (r *StopStreamLiveChannelResponse) FromJsonString(s string) error {
 }
 
 type StreamAudioInfo struct {
-
 	// Audio `Pid`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
@@ -2410,7 +2760,6 @@ type StreamAudioInfo struct {
 }
 
 type StreamInfo struct {
-
 	// Client IP.
 	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
 
@@ -2425,7 +2774,6 @@ type StreamInfo struct {
 }
 
 type StreamLiveChannelInfo struct {
-
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -2459,7 +2807,6 @@ type StreamLiveChannelInfo struct {
 }
 
 type StreamLiveOutputGroupsInfo struct {
-
 	// Output group name, which can contain 1-32 case-sensitive letters, digits, and underscores and must be unique at the channel level
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2496,26 +2843,22 @@ type StreamLiveOutputGroupsInfo struct {
 }
 
 type StreamLiveRegionInfo struct {
-
 	// List of StreamLive regions
 	Regions []*RegionInfo `json:"Regions,omitempty" name:"Regions"`
 }
 
 type StreamPackageSettingsInfo struct {
-
 	// Channel ID in StreamPackage
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
 
 type StreamScte35Info struct {
-
 	// SCTE-35 `Pid`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
 }
 
 type StreamVideoInfo struct {
-
 	// Video `Pid`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
@@ -2542,7 +2885,6 @@ type StreamVideoInfo struct {
 }
 
 type TimeShiftSettingsInfo struct {
-
 	// Whether to enable time shifting. Valid values: `OPEN`; `CLOSE`
 	// Note: This field may return `null`, indicating that no valid value was found.
 	State *string `json:"State,omitempty" name:"State"`
@@ -2557,7 +2899,6 @@ type TimeShiftSettingsInfo struct {
 }
 
 type TimedRecordSettings struct {
-
 	// Whether to automatically delete finished recording events. Valid values: `CLOSE`, `OPEN`. If this parameter is left empty, `CLOSE` will be used.
 	// If it is set to `OPEN`, a recording event will be deleted 7 days after it is finished.
 	// Note: This field may return `null`, indicating that no valid value was found.
@@ -2565,7 +2906,6 @@ type TimedRecordSettings struct {
 }
 
 type TimingSettingsReq struct {
-
 	// Event trigger type. Valid values: `FIXED_TIME`, `IMMEDIATE`. This parameter is required if `EventType` is `INPUT_SWITCH`.
 	StartType *string `json:"StartType,omitempty" name:"StartType"`
 
@@ -2583,7 +2923,6 @@ type TimingSettingsReq struct {
 }
 
 type TimingSettingsResp struct {
-
 	// Event trigger type
 	StartType *string `json:"StartType,omitempty" name:"StartType"`
 
@@ -2601,7 +2940,6 @@ type TimingSettingsResp struct {
 }
 
 type VideoPipelineInputStatistics struct {
-
 	// Video FPS.
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -2613,7 +2951,6 @@ type VideoPipelineInputStatistics struct {
 }
 
 type VideoTemplateInfo struct {
-
 	// Video transcoding template name, which can contain 1-20 letters and digits.
 	Name *string `json:"Name,omitempty" name:"Name"`
 

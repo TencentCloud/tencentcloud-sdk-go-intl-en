@@ -21,7 +21,6 @@ import (
 )
 
 type ActionSummaryOverviewItem struct {
-
 	// Transaction type
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
@@ -51,7 +50,6 @@ type ActionSummaryOverviewItem struct {
 }
 
 type ApplicableProducts struct {
-
 	// Valid values: `all products` or names of the applicable products (string). Multiple names are separated by commas.
 	GoodsName *string `json:"GoodsName,omitempty" name:"GoodsName"`
 
@@ -60,7 +58,6 @@ type ApplicableProducts struct {
 }
 
 type BillDetail struct {
-
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
@@ -131,7 +128,7 @@ type BillDetail struct {
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
-	// 
+
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Project ID: ID of the project to which the resource belongs
@@ -139,7 +136,6 @@ type BillDetail struct {
 }
 
 type BillDetailComponent struct {
-
 	// Component type: type of a resource component, e.g. memory, disk, etc.
 	ComponentCodeName *string `json:"ComponentCodeName,omitempty" name:"ComponentCodeName"`
 
@@ -229,7 +225,6 @@ type BillDetailComponent struct {
 }
 
 type BillResourceSummary struct {
-
 	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
@@ -328,7 +323,7 @@ type BillResourceSummary struct {
 	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
-	// 
+
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
 	// The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
@@ -353,7 +348,6 @@ type BillResourceSummary struct {
 }
 
 type BillTagInfo struct {
-
 	// Cost allocation tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -362,7 +356,6 @@ type BillTagInfo struct {
 }
 
 type BusinessSummaryOverviewItem struct {
-
 	// Product code
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
@@ -393,7 +386,6 @@ type BusinessSummaryOverviewItem struct {
 }
 
 type BusinessSummaryTotal struct {
-
 	// Total cost
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
@@ -410,9 +402,73 @@ type BusinessSummaryTotal struct {
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
+// Predefined struct for user
+type DescribeBillDetailRequestParams struct {
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity, maximum is 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
+	PeriodType *string `json:"PeriodType,omitempty" name:"PeriodType"`
+
+	// Month; format: yyyy-mm. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// The start time of the period; format: Y-m-d H:i:s. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. BeginTime and EndTime must be inputted as a pair. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The end time of the period; format: Y-m-d H:i:s. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. BeginTime and EndTime must be inputted as a pair. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
+	// 1 = yes, 0 = no
+	NeedRecordNum *int64 `json:"NeedRecordNum,omitempty" name:"NeedRecordNum"`
+
+	// Queries information on a specified product
+	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
+
+	// Billing mode: prePay/postPay
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Queries information on a specified resource
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Action type to query. Valid values:
+	// Purchase
+	// Renewal
+	// Modify
+	// Refund
+	// Deduction
+	// Hourly settlement
+	// Daily settlement
+	// Monthly settlement
+	// Offline project deduction
+	// Offline deduction
+	// adjust-CR
+	// adjust-DR
+	// One-off RI Fee
+	// Spot
+	// Hourly RI fee
+	// New monthly subscription
+	// Monthly subscription renewal
+	// Monthly subscription specification adjustment
+	// Monthly subscription specification adjustment
+	// Monthly subscription refund
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// Project ID: ID of the project to which the resource belongs
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Product code
+	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+}
+
 type DescribeBillDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -506,20 +562,22 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillDetailResponseParams struct {
+	// Details list
+	DetailSet []*BillDetail `json:"DetailSet,omitempty" name:"DetailSet"`
+
+	// Total number of records
+	// Note: This field may return null, indicating that no valid value was found.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details list
-		DetailSet []*BillDetail `json:"DetailSet,omitempty" name:"DetailSet"`
-
-		// Total number of records
-	// Note: This field may return null, indicating that no valid value was found.
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillDetailResponse) ToJsonString() string {
@@ -533,9 +591,60 @@ func (r *DescribeBillDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillResourceSummaryRequestParams struct {
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity, maximum is 1000
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Month; format: yyyy-mm. This value cannot be earlier than the month when Bill 2.0 is enabled. Last 24 months data are available.
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	PeriodType *string `json:"PeriodType,omitempty" name:"PeriodType"`
+
+	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
+	// 1 = yes, 0 = no
+	NeedRecordNum *int64 `json:"NeedRecordNum,omitempty" name:"NeedRecordNum"`
+
+	// Action type to query. Valid values:
+	// Purchase
+	// Renewal
+	// Modify
+	// Refund
+	// Deduction
+	// Hourly settlement
+	// Daily settlement
+	// Monthly settlement
+	// Offline project deduction
+	// Offline deduction
+	// adjust-CR
+	// adjust-DR
+	// One-off RI Fee
+	// Spot
+	// Hourly RI fee
+	// New monthly subscription
+	// Monthly subscription renewal
+	// Monthly subscription specification adjustment
+	// Monthly subscription refund
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// ID of the instance to be queried
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Product code
+	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+}
+
 type DescribeBillResourceSummaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -612,20 +721,22 @@ func (r *DescribeBillResourceSummaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillResourceSummaryResponseParams struct {
+	// Resource summary list
+	ResourceSummarySet []*BillResourceSummary `json:"ResourceSummarySet,omitempty" name:"ResourceSummarySet"`
+
+	// Total number of resource summary lists
+	// Note: This field may return null, indicating that no valid value was found.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillResourceSummaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Resource summary list
-		ResourceSummarySet []*BillResourceSummary `json:"ResourceSummarySet,omitempty" name:"ResourceSummarySet"`
-
-		// Total number of resource summary lists
-	// Note: This field may return null, indicating that no valid value was found.
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillResourceSummaryResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillResourceSummaryResponse) ToJsonString() string {
@@ -639,9 +750,21 @@ func (r *DescribeBillResourceSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByPayModeRequestParams struct {
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Query bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+}
+
 type DescribeBillSummaryByPayModeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -673,20 +796,22 @@ func (r *DescribeBillSummaryByPayModeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByPayModeResponseParams struct {
+	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Detailed cost distribution for all billing modes
+	// Note: This field may return null, indicating that no valid value was found.
+	SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillSummaryByPayModeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
-		Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
-
-		// Detailed cost distribution for all billing modes
-	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillSummaryByPayModeResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillSummaryByPayModeResponse) ToJsonString() string {
@@ -700,9 +825,29 @@ func (r *DescribeBillSummaryByPayModeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByProductRequestParams struct {
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+
+	// A bill type, which corresponds to a subtotal type of L0 bills.
+	// This parameter has become valid since v3.0 bills took effect in May 2021.
+	// Valid values:
+	// `consume`: consumption
+	// `refund`: refund
+	// `adjustment`: bill adjustment
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+}
+
 type DescribeBillSummaryByProductRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -743,24 +888,26 @@ func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByProductResponseParams struct {
+	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Total cost details
+	// Note: This field may return null, indicating that no valid value was found.
+	SummaryTotal *BusinessSummaryTotal `json:"SummaryTotal,omitempty" name:"SummaryTotal"`
+
+	// Cost distribution of all products
+	// Note: This field may return null, indicating that no valid value was found.
+	SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillSummaryByProductResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
-		Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
-
-		// Total cost details
-	// Note: This field may return null, indicating that no valid value was found.
-		SummaryTotal *BusinessSummaryTotal `json:"SummaryTotal,omitempty" name:"SummaryTotal"`
-
-		// Cost distribution of all products
-	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillSummaryByProductResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillSummaryByProductResponse) ToJsonString() string {
@@ -774,9 +921,21 @@ func (r *DescribeBillSummaryByProductResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByProjectRequestParams struct {
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+}
+
 type DescribeBillSummaryByProjectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -808,20 +967,22 @@ func (r *DescribeBillSummaryByProjectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByProjectResponseParams struct {
+	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Detailed cost distribution for all projects
+	// Note: This field may return null, indicating that no valid value was found.
+	SummaryOverview []*ProjectSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillSummaryByProjectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
-		Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
-
-		// Detailed cost distribution for all projects
-	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*ProjectSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillSummaryByProjectResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillSummaryByProjectResponse) ToJsonString() string {
@@ -835,9 +996,21 @@ func (r *DescribeBillSummaryByProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByRegionRequestParams struct {
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queries bill data user's UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+}
+
 type DescribeBillSummaryByRegionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -869,20 +1042,22 @@ func (r *DescribeBillSummaryByRegionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByRegionResponseParams struct {
+	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Detailed cost distribution for all regions
+	// Note: This field may return null, indicating that no valid value was found.
+	SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillSummaryByRegionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
-		Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
-
-		// Detailed cost distribution for all regions
-	// Note: This field may return null, indicating that no valid value was found.
-		SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillSummaryByRegionResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillSummaryByRegionResponse) ToJsonString() string {
@@ -896,9 +1071,27 @@ func (r *DescribeBillSummaryByRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByTagRequestParams struct {
+	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Cost allocation tag key
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Payer UIN
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
+
+	// Resource tag value
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
 type DescribeBillSummaryByTagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value must be of the same month as `EndTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -938,24 +1131,26 @@ func (r *DescribeBillSummaryByTagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBillSummaryByTagResponseParams struct {
+	// Indicates whether or not the data is ready. `0`: not ready; `1`: ready.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Details about cost distribution over different tags
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SummaryOverview []*TagSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// Total cost
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SummaryTotal *SummaryTotal `json:"SummaryTotal,omitempty" name:"SummaryTotal"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBillSummaryByTagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Indicates whether or not the data is ready. `0`: not ready; `1`: ready.
-		Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
-
-		// Details about cost distribution over different tags
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		SummaryOverview []*TagSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
-
-		// Total cost
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SummaryTotal *SummaryTotal `json:"SummaryTotal,omitempty" name:"SummaryTotal"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBillSummaryByTagResponseParams `json:"Response"`
 }
 
 func (r *DescribeBillSummaryByTagResponse) ToJsonString() string {
@@ -969,9 +1164,57 @@ func (r *DescribeBillSummaryByTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVoucherInfoRequestParams struct {
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page number the records start from. The default is 1.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The voucher status. Valid values: `unUsed`, `used`, `delivered`, `cancel`, `overdue`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The voucher ID.
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// The voucher order ID.
+	CodeId *string `json:"CodeId,omitempty" name:"CodeId"`
+
+	// The product code.
+	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
+
+	// The campaign ID.
+	ActivityId *string `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// The voucher name.
+	VoucherName *string `json:"VoucherName,omitempty" name:"VoucherName"`
+
+	// The start time of the promotional campaign.
+	TimeFrom *string `json:"TimeFrom,omitempty" name:"TimeFrom"`
+
+	// The end time of the promotional campaign.
+	TimeTo *string `json:"TimeTo,omitempty" name:"TimeTo"`
+
+	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
+	SortField *string `json:"SortField,omitempty" name:"SortField"`
+
+	// Whether to sort the records in ascending or descending order. Valid values: desc, asc.
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
+
+	// The payment mode. Valid values: `postPay`: pay-as-you-go; `prePay`: prepaid; `riPay`: reserved instance; empty or `*`: all. If this parameter is empty or `*`, `productCode` and `subProductCode` must also be empty.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// If `PayMode` is `postPay`, this parameter may be `spotpay` (spot instance) or `settle account` (regular pay-as-you-go). If `PayMode` is `prePay`, this parameter may be `purchase`, `renew`, or `modify` (downgrade/upgrade). If `PayMode` is `riPay`, this parameter may be `oneOffFee` (prepayment of reserved instance) or `hourlyFee` (hourly billing of reserved instance). `*` means to query vouchers that support all billing scenarios.
+	PayScene *string `json:"PayScene,omitempty" name:"PayScene"`
+
+	// The operator. The default is the UIN of the current user.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
 type DescribeVoucherInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The number of records per page. The default is 20, and the maximum is 1,000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -1051,23 +1294,25 @@ func (r *DescribeVoucherInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVoucherInfoResponseParams struct {
+	// The total number of vouchers.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The total voucher balance. The value of this parameter is the total balance (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	TotalBalance *int64 `json:"TotalBalance,omitempty" name:"TotalBalance"`
+
+	// The voucher information.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	VoucherInfos []*VoucherInfos `json:"VoucherInfos,omitempty" name:"VoucherInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVoucherInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of vouchers.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The total voucher balance. The value of this parameter is the total balance (USD, rounded to 8 decimal places) multiplied by 100,000,000.
-		TotalBalance *int64 `json:"TotalBalance,omitempty" name:"TotalBalance"`
-
-		// The voucher information.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		VoucherInfos []*VoucherInfos `json:"VoucherInfos,omitempty" name:"VoucherInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVoucherInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeVoucherInfoResponse) ToJsonString() string {
@@ -1081,9 +1326,24 @@ func (r *DescribeVoucherInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVoucherUsageDetailsRequestParams struct {
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page number the records start from. The default is 1.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The voucher ID.
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// The operator. The default is the UIN of the current.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
 type DescribeVoucherUsageDetailsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The number of records per page. The default is 20, and the maximum is 1,000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -1119,23 +1379,25 @@ func (r *DescribeVoucherUsageDetailsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVoucherUsageDetailsResponseParams struct {
+	// The total number of vouchers.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The total amount used. The value of this parameter is the total amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
+	TotalUsedAmount *int64 `json:"TotalUsedAmount,omitempty" name:"TotalUsedAmount"`
+
+	// The usage details.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UsageRecords []*UsageRecords `json:"UsageRecords,omitempty" name:"UsageRecords"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVoucherUsageDetailsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of vouchers.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The total amount used. The value of this parameter is the total amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
-		TotalUsedAmount *int64 `json:"TotalUsedAmount,omitempty" name:"TotalUsedAmount"`
-
-		// The usage details.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		UsageRecords []*UsageRecords `json:"UsageRecords,omitempty" name:"UsageRecords"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVoucherUsageDetailsResponseParams `json:"Response"`
 }
 
 func (r *DescribeVoucherUsageDetailsResponse) ToJsonString() string {
@@ -1150,7 +1412,6 @@ func (r *DescribeVoucherUsageDetailsResponse) FromJsonString(s string) error {
 }
 
 type ExcludedProducts struct {
-
 	// The names of non-applicable products.
 	GoodsName *string `json:"GoodsName,omitempty" name:"GoodsName"`
 
@@ -1159,7 +1420,6 @@ type ExcludedProducts struct {
 }
 
 type PayModeSummaryOverviewItem struct {
-
 	// Billing mode
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
 
@@ -1189,7 +1449,6 @@ type PayModeSummaryOverviewItem struct {
 }
 
 type ProjectSummaryOverviewItem struct {
-
 	// Project ID
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -1219,7 +1478,6 @@ type ProjectSummaryOverviewItem struct {
 }
 
 type RegionSummaryOverviewItem struct {
-
 	// Region ID
 	// Note: This field may return null, indicating that no valid value was found.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
@@ -1250,7 +1508,6 @@ type RegionSummaryOverviewItem struct {
 }
 
 type SummaryTotal struct {
-
 	// Total cost
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
@@ -1261,7 +1518,6 @@ type SummaryTotal struct {
 }
 
 type TagSummaryOverviewItem struct {
-
 	// Tag value
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
@@ -1280,17 +1536,15 @@ type TagSummaryOverviewItem struct {
 }
 
 type UsageDetails struct {
-
 	// The name of the product.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 
-	// 
+
 	SubProductName *string `json:"SubProductName,omitempty" name:"SubProductName"`
 }
 
 type UsageRecords struct {
-
 	// The amount used. The value of this parameter is the amount used (USD, rounded to 8 decimal places) multiplied by 100,000,000.
 	UsedAmount *int64 `json:"UsedAmount,omitempty" name:"UsedAmount"`
 
@@ -1303,7 +1557,6 @@ type UsageRecords struct {
 }
 
 type VoucherInfos struct {
-
 	// The owner of the voucher.
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 

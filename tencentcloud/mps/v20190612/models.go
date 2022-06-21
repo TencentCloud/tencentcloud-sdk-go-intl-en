@@ -21,7 +21,6 @@ import (
 )
 
 type AIAnalysisTemplateItem struct {
-
 	// Unique ID of intelligent analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -57,7 +56,6 @@ type AIAnalysisTemplateItem struct {
 }
 
 type AIRecognitionTemplateItem struct {
-
 	// Unique ID of a video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -101,7 +99,6 @@ type AIRecognitionTemplateItem struct {
 }
 
 type AdaptiveDynamicStreamingInfoItem struct {
-
 	// Adaptive bitrate streaming specification.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -116,7 +113,6 @@ type AdaptiveDynamicStreamingInfoItem struct {
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
-
 	// Adaptive bitrate streaming template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -138,7 +134,6 @@ type AdaptiveDynamicStreamingTaskInput struct {
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
-
 	// Unique ID of an adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -179,7 +174,6 @@ type AdaptiveDynamicStreamingTemplate struct {
 }
 
 type AdaptiveStreamTemplate struct {
-
 	// Video parameter information.
 	Video *VideoTemplateInfo `json:"Video,omitempty" name:"Video"`
 
@@ -198,7 +192,6 @@ type AdaptiveStreamTemplate struct {
 }
 
 type AiAnalysisResult struct {
-
 	// Task type. Valid values:
 	// <li>Classification: intelligent categorization</li>
 	// <li>Cover: intelligent cover generating</li>
@@ -221,19 +214,16 @@ type AiAnalysisResult struct {
 }
 
 type AiAnalysisTaskClassificationInput struct {
-
 	// Intelligent video categorization template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiAnalysisTaskClassificationOutput struct {
-
 	// List of intelligently generated video categories.
 	ClassificationSet []*MediaAiAnalysisClassificationItem `json:"ClassificationSet,omitempty" name:"ClassificationSet"`
 }
 
 type AiAnalysisTaskClassificationResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -254,13 +244,11 @@ type AiAnalysisTaskClassificationResult struct {
 }
 
 type AiAnalysisTaskCoverInput struct {
-
 	// Intelligent video cover generating template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiAnalysisTaskCoverOutput struct {
-
 	// List of intelligently generated covers.
 	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitempty" name:"CoverSet"`
 
@@ -269,7 +257,6 @@ type AiAnalysisTaskCoverOutput struct {
 }
 
 type AiAnalysisTaskCoverResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -290,19 +277,16 @@ type AiAnalysisTaskCoverResult struct {
 }
 
 type AiAnalysisTaskFrameTagInput struct {
-
 	// Intelligent frame-specific video tagging template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiAnalysisTaskFrameTagOutput struct {
-
 	// List of frame-specific video tags.
 	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiAnalysisTaskFrameTagResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -323,25 +307,21 @@ type AiAnalysisTaskFrameTagResult struct {
 }
 
 type AiAnalysisTaskInput struct {
-
 	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiAnalysisTaskTagInput struct {
-
 	// Intelligent video tagging template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiAnalysisTaskTagOutput struct {
-
 	// List of intelligently generated video tags.
 	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type AiAnalysisTaskTagResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -362,7 +342,6 @@ type AiAnalysisTaskTagResult struct {
 }
 
 type AiContentReviewResult struct {
-
 	// Task type. Valid values:
 	// <li>Porn (in images)</li>
 	// <li>Terrorism (in images)</li>
@@ -422,13 +401,11 @@ type AiContentReviewResult struct {
 }
 
 type AiContentReviewTaskInput struct {
-
 	// Video content audit template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionResult struct {
-
 	// Task type. Valid values:
 	// <li>FaceRecognition: Face recognition,</li>
 	// <li>AsrWordsRecognition: Speech keyword recognition,</li>
@@ -466,7 +443,6 @@ type AiRecognitionResult struct {
 }
 
 type AiRecognitionTaskAsrFullTextResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -488,13 +464,11 @@ type AiRecognitionTaskAsrFullTextResult struct {
 }
 
 type AiRecognitionTaskAsrFullTextResultInput struct {
-
 	// Full speech recognition template ID.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskAsrFullTextResultOutput struct {
-
 	// List of full speech recognition segments.
 	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 
@@ -506,7 +480,6 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 }
 
 type AiRecognitionTaskAsrFullTextSegmentItem struct {
-
 	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -521,7 +494,6 @@ type AiRecognitionTaskAsrFullTextSegmentItem struct {
 }
 
 type AiRecognitionTaskAsrWordsResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -543,13 +515,11 @@ type AiRecognitionTaskAsrWordsResult struct {
 }
 
 type AiRecognitionTaskAsrWordsResultInput struct {
-
 	// Speech keyword recognition template ID.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskAsrWordsResultItem struct {
-
 	// Speech keyword.
 	Word *string `json:"Word,omitempty" name:"Word"`
 
@@ -558,13 +528,11 @@ type AiRecognitionTaskAsrWordsResultItem struct {
 }
 
 type AiRecognitionTaskAsrWordsResultOutput struct {
-
 	// Speech keyword recognition result set.
 	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskAsrWordsSegmentItem struct {
-
 	// Start time offset of a recognition segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -576,7 +544,6 @@ type AiRecognitionTaskAsrWordsSegmentItem struct {
 }
 
 type AiRecognitionTaskFaceResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -598,13 +565,11 @@ type AiRecognitionTaskFaceResult struct {
 }
 
 type AiRecognitionTaskFaceResultInput struct {
-
 	// Face recognition template ID.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskFaceResultItem struct {
-
 	// Unique ID of a figure.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -663,13 +628,11 @@ type AiRecognitionTaskFaceResultItem struct {
 }
 
 type AiRecognitionTaskFaceResultOutput struct {
-
 	// Intelligent face recognition result set.
 	ResultSet []*AiRecognitionTaskFaceResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskFaceSegmentItem struct {
-
 	// Start time offset of a recognition segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -684,13 +647,11 @@ type AiRecognitionTaskFaceSegmentItem struct {
 }
 
 type AiRecognitionTaskInput struct {
-
 	// Intelligent video recognition template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskOcrFullTextResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -712,19 +673,16 @@ type AiRecognitionTaskOcrFullTextResult struct {
 }
 
 type AiRecognitionTaskOcrFullTextResultInput struct {
-
 	// Full text recognition template ID.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskOcrFullTextResultOutput struct {
-
 	// Full text recognition result set.
 	SegmentSet []*AiRecognitionTaskOcrFullTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskOcrFullTextSegmentItem struct {
-
 	// Start time offset of a recognition segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -736,7 +694,6 @@ type AiRecognitionTaskOcrFullTextSegmentItem struct {
 }
 
 type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
-
 	// Confidence of a recognition segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -748,7 +705,6 @@ type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
 }
 
 type AiRecognitionTaskOcrWordsResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -770,13 +726,11 @@ type AiRecognitionTaskOcrWordsResult struct {
 }
 
 type AiRecognitionTaskOcrWordsResultInput struct {
-
 	// Text keyword recognition template ID.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskOcrWordsResultItem struct {
-
 	// Text keyword.
 	Word *string `json:"Word,omitempty" name:"Word"`
 
@@ -785,13 +739,11 @@ type AiRecognitionTaskOcrWordsResultItem struct {
 }
 
 type AiRecognitionTaskOcrWordsResultOutput struct {
-
 	// Text keyword recognition result set.
 	ResultSet []*AiRecognitionTaskOcrWordsResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type AiRecognitionTaskOcrWordsSegmentItem struct {
-
 	// Start time offset of a recognition segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -806,13 +758,11 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 }
 
 type AiReviewPoliticalAsrTaskInput struct {
-
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalAsrTaskOutput struct {
-
 	// The confidence score for the ASR-based detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -827,13 +777,11 @@ type AiReviewPoliticalAsrTaskOutput struct {
 }
 
 type AiReviewPoliticalOcrTaskInput struct {
-
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalOcrTaskOutput struct {
-
 	// The confidence score for the OCR-based detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -848,13 +796,11 @@ type AiReviewPoliticalOcrTaskOutput struct {
 }
 
 type AiReviewPoliticalTaskInput struct {
-
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPoliticalTaskOutput struct {
-
 	// The confidence score for the detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -876,13 +822,11 @@ type AiReviewPoliticalTaskOutput struct {
 }
 
 type AiReviewPornAsrTaskInput struct {
-
 	// ID of a porn information detection template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornAsrTaskOutput struct {
-
 	// Score of the ASR-detected porn information in text from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -897,13 +841,11 @@ type AiReviewPornAsrTaskOutput struct {
 }
 
 type AiReviewPornOcrTaskInput struct {
-
 	// ID of a porn information detection template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornOcrTaskOutput struct {
-
 	// Score of the OCR-detected porn information in text from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -918,13 +860,11 @@ type AiReviewPornOcrTaskOutput struct {
 }
 
 type AiReviewPornTaskInput struct {
-
 	// ID of a porn information detection template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewPornTaskOutput struct {
-
 	// Score of the detected porn information in video from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -946,13 +886,11 @@ type AiReviewPornTaskOutput struct {
 }
 
 type AiReviewProhibitedAsrTaskInput struct {
-
 	// Prohibited information detection template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewProhibitedAsrTaskOutput struct {
-
 	// Score of ASR-detected prohibited information in speech between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -967,13 +905,11 @@ type AiReviewProhibitedAsrTaskOutput struct {
 }
 
 type AiReviewProhibitedOcrTaskInput struct {
-
 	// Prohibited information detection template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewProhibitedOcrTaskOutput struct {
-
 	// Score of OCR-detected prohibited information in text between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -988,7 +924,6 @@ type AiReviewProhibitedOcrTaskOutput struct {
 }
 
 type AiReviewTaskPoliticalAsrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1010,7 +945,6 @@ type AiReviewTaskPoliticalAsrResult struct {
 }
 
 type AiReviewTaskPoliticalOcrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1033,7 +967,6 @@ type AiReviewTaskPoliticalOcrResult struct {
 }
 
 type AiReviewTaskPoliticalResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1055,7 +988,6 @@ type AiReviewTaskPoliticalResult struct {
 }
 
 type AiReviewTaskPornAsrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1077,7 +1009,6 @@ type AiReviewTaskPornAsrResult struct {
 }
 
 type AiReviewTaskPornOcrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1099,7 +1030,6 @@ type AiReviewTaskPornOcrResult struct {
 }
 
 type AiReviewTaskPornResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1122,7 +1052,6 @@ type AiReviewTaskPornResult struct {
 }
 
 type AiReviewTaskProhibitedAsrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1146,7 +1075,6 @@ type AiReviewTaskProhibitedAsrResult struct {
 }
 
 type AiReviewTaskProhibitedOcrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1170,7 +1098,6 @@ type AiReviewTaskProhibitedOcrResult struct {
 }
 
 type AiReviewTaskTerrorismOcrResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1195,7 +1122,6 @@ type AiReviewTaskTerrorismOcrResult struct {
 }
 
 type AiReviewTaskTerrorismResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1217,13 +1143,11 @@ type AiReviewTaskTerrorismResult struct {
 }
 
 type AiReviewTerrorismOcrTaskInput struct {
-
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
-
 	// The confidence score for the OCR-based detection of sensitive information. Value range: 1-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -1238,13 +1162,11 @@ type AiReviewTerrorismOcrTaskOutput struct {
 }
 
 type AiReviewTerrorismTaskInput struct {
-
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type AiReviewTerrorismTaskOutput struct {
-
 	// The confidence score for the detection of sensitive information. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
 
@@ -1271,7 +1193,6 @@ type AiReviewTerrorismTaskOutput struct {
 }
 
 type AiSampleFaceInfo struct {
-
 	// Face image ID.
 	FaceId *string `json:"FaceId,omitempty" name:"FaceId"`
 
@@ -1280,7 +1201,6 @@ type AiSampleFaceInfo struct {
 }
 
 type AiSampleFaceOperation struct {
-
 	// Operation type. Valid values: add, delete, reset. The `reset` operation will clear the existing face data of a figure and add `FaceContents` as the specified face data.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -1295,7 +1215,6 @@ type AiSampleFaceOperation struct {
 }
 
 type AiSampleFailFaceInfo struct {
-
 	// Corresponds to incorrect image subscripts in the `FaceContents` input parameter, starting from 0.
 	Index *uint64 `json:"Index,omitempty" name:"Index"`
 
@@ -1309,7 +1228,6 @@ type AiSampleFailFaceInfo struct {
 }
 
 type AiSamplePerson struct {
-
 	// Figure ID.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -1336,7 +1254,6 @@ type AiSamplePerson struct {
 }
 
 type AiSampleTagOperation struct {
-
 	// Operation type. Valid values: add, delete, reset.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -1345,7 +1262,6 @@ type AiSampleTagOperation struct {
 }
 
 type AiSampleWord struct {
-
 	// Keyword.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
@@ -1363,7 +1279,6 @@ type AiSampleWord struct {
 }
 
 type AiSampleWordInfo struct {
-
 	// Keyword. Length limit: 20 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
@@ -1374,7 +1289,6 @@ type AiSampleWordInfo struct {
 }
 
 type AnimatedGraphicTaskInput struct {
-
 	// Animated image generating template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -1393,7 +1307,6 @@ type AnimatedGraphicTaskInput struct {
 }
 
 type AnimatedGraphicsTemplate struct {
-
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -1447,7 +1360,6 @@ type AnimatedGraphicsTemplate struct {
 }
 
 type AsrFullTextConfigureInfo struct {
-
 	// Switch of a full speech recognition task. Valid values:
 	// <li>ON: Enables an intelligent full speech recognition task;</li>
 	// <li>OFF: Disables an intelligent full speech recognition task.</li>
@@ -1459,7 +1371,6 @@ type AsrFullTextConfigureInfo struct {
 }
 
 type AsrFullTextConfigureInfoForUpdate struct {
-
 	// Switch of a full speech recognition task. Valid values:
 	// <li>ON: Enables an intelligent full speech recognition task;</li>
 	// <li>OFF: Disables an intelligent full speech recognition task.</li>
@@ -1471,7 +1382,6 @@ type AsrFullTextConfigureInfoForUpdate struct {
 }
 
 type AsrWordsConfigureInfo struct {
-
 	// Switch of a speech keyword recognition task. Valid values:
 	// <li>ON: Enables a speech keyword recognition task;</li>
 	// <li>OFF: Disables a speech keyword recognition task.</li>
@@ -1483,7 +1393,6 @@ type AsrWordsConfigureInfo struct {
 }
 
 type AsrWordsConfigureInfoForUpdate struct {
-
 	// Switch of a speech keyword recognition task. Valid values:
 	// <li>ON: Enables a speech keyword recognition task;</li>
 	// <li>OFF: Disables a speech keyword recognition task.</li>
@@ -1495,7 +1404,6 @@ type AsrWordsConfigureInfoForUpdate struct {
 }
 
 type AudioTemplateInfo struct {
-
 	// Audio stream codec.
 	// When the outer `Container` parameter is `mp3`, the valid value is:
 	// <li>libmp3lame.</li>
@@ -1534,7 +1442,6 @@ type AudioTemplateInfo struct {
 }
 
 type AudioTemplateInfoForUpdate struct {
-
 	// Audio stream codec.
 	// When the outer `Container` parameter is `mp3`, the valid value is:
 	// <li>libmp3lame.</li>
@@ -1572,7 +1479,6 @@ type AudioTemplateInfoForUpdate struct {
 }
 
 type ClassificationConfigureInfo struct {
-
 	// Switch of intelligent categorization task. Valid values:
 	// <li>ON: enables intelligent categorization task;</li>
 	// <li>OFF: disables intelligent categorization task.</li>
@@ -1580,7 +1486,6 @@ type ClassificationConfigureInfo struct {
 }
 
 type ClassificationConfigureInfoForUpdate struct {
-
 	// Switch of intelligent categorization task. Valid values:
 	// <li>ON: enables intelligent categorization task;</li>
 	// <li>OFF: disables intelligent categorization task.</li>
@@ -1588,7 +1493,6 @@ type ClassificationConfigureInfoForUpdate struct {
 }
 
 type ContentReviewTemplateItem struct {
-
 	// Unique ID of a content audit template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -1634,7 +1538,6 @@ type ContentReviewTemplateItem struct {
 }
 
 type CosFileUploadTrigger struct {
-
 	// Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
@@ -1649,7 +1552,6 @@ type CosFileUploadTrigger struct {
 }
 
 type CosInputInfo struct {
-
 	// The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
@@ -1661,7 +1563,6 @@ type CosInputInfo struct {
 }
 
 type CosOutputStorage struct {
-
 	// The bucket to which the output file of media processing is saved, such as `TopRankVideo-125xxx88`. If this parameter is left empty, the value of the upper layer will be inherited.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
@@ -1670,7 +1571,6 @@ type CosOutputStorage struct {
 }
 
 type CoverConfigureInfo struct {
-
 	// Switch of intelligent cover generating task. Valid values:
 	// <li>ON: enables intelligent cover generating task;</li>
 	// <li>OFF: disables intelligent cover generating task.</li>
@@ -1678,16 +1578,36 @@ type CoverConfigureInfo struct {
 }
 
 type CoverConfigureInfoForUpdate struct {
-
 	// Switch of intelligent cover generating task. Valid values:
 	// <li>ON: enables intelligent cover generating task;</li>
 	// <li>OFF: disables intelligent cover generating task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+// Predefined struct for user
+type CreateAIAnalysisTemplateRequestParams struct {
+	// Video content analysis template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Video content analysis template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter of intelligent categorization task.
+	ClassificationConfigure *ClassificationConfigureInfo `json:"ClassificationConfigure,omitempty" name:"ClassificationConfigure"`
+
+	// Control parameter of intelligent tagging task.
+	TagConfigure *TagConfigureInfo `json:"TagConfigure,omitempty" name:"TagConfigure"`
+
+	// Control parameter of intelligent cover generating task.
+	CoverConfigure *CoverConfigureInfo `json:"CoverConfigure,omitempty" name:"CoverConfigure"`
+
+	// Control parameter of intelligent frame-specific tagging task.
+	FrameTagConfigure *FrameTagConfigureInfo `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
+}
+
 type CreateAIAnalysisTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Video content analysis template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1731,16 +1651,18 @@ func (r *CreateAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAIAnalysisTemplateResponseParams struct {
+	// Unique ID of video content analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAIAnalysisTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of video content analysis template.
-		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAIAnalysisTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateAIAnalysisTemplateResponse) ToJsonString() string {
@@ -1754,9 +1676,33 @@ func (r *CreateAIAnalysisTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAIRecognitionTemplateRequestParams struct {
+	// Name of a video content recognition template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description of a video content recognition template. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Face recognition control parameter.
+	FaceConfigure *FaceConfigureInfo `json:"FaceConfigure,omitempty" name:"FaceConfigure"`
+
+	// Full text recognition control parameter.
+	OcrFullTextConfigure *OcrFullTextConfigureInfo `json:"OcrFullTextConfigure,omitempty" name:"OcrFullTextConfigure"`
+
+	// Text keyword recognition control parameter.
+	OcrWordsConfigure *OcrWordsConfigureInfo `json:"OcrWordsConfigure,omitempty" name:"OcrWordsConfigure"`
+
+	// Full speech recognition control parameter.
+	AsrFullTextConfigure *AsrFullTextConfigureInfo `json:"AsrFullTextConfigure,omitempty" name:"AsrFullTextConfigure"`
+
+	// Speech keyword recognition control parameter.
+	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitempty" name:"AsrWordsConfigure"`
+}
+
 type CreateAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of a video content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1804,16 +1750,18 @@ func (r *CreateAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAIRecognitionTemplateResponseParams struct {
+	// Unique ID of a video content recognition template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAIRecognitionTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of a video content recognition template.
-		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAIRecognitionTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateAIRecognitionTemplateResponse) ToJsonString() string {
@@ -1827,9 +1775,39 @@ func (r *CreateAIRecognitionTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
+	// Adaptive bitrate streaming format. Valid values:
+	// <li>HLS,</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Parameter information of output substreams for transcoding to adaptive bitrate streaming. Up to 10 substreams can be output.
+	// Note: the frame rate of each substream must be consistent; otherwise, the frame rate of the first substream is used as the output frame rate.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
+
+	// Template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	// Default value: 0.
+	DisableHigherVideoBitrate *uint64 `json:"DisableHigherVideoBitrate,omitempty" name:"DisableHigherVideoBitrate"`
+
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	// Default value: 0.
+	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Adaptive bitrate streaming format. Valid values:
 	// <li>HLS,</li>
 	// <li>MPEG-DASH.</li>
@@ -1882,16 +1860,18 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAdaptiveDynamicStreamingTemplateResponseParams struct {
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAdaptiveDynamicStreamingTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of an adaptive bitrate streaming template.
-		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAdaptiveDynamicStreamingTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
@@ -1905,9 +1885,49 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAnimatedGraphicsTemplateRequestParams struct {
+	// Video frame rate in Hz. Value range: [1, 30].
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
+	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// Default value: 0.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// Default value: 0.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Animated image format. Valid values: gif; webp. Default value: gif.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Image quality. Value range: [1, 100]. Default value: 75.
+	Quality *float64 `json:"Quality,omitempty" name:"Quality"`
+
+	// Name of an animated image generating template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type CreateAnimatedGraphicsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Video frame rate in Hz. Value range: [1, 30].
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -1972,16 +1992,18 @@ func (r *CreateAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAnimatedGraphicsTemplateResponseParams struct {
+	// Unique ID of an animated image generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAnimatedGraphicsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of an animated image generating template.
-		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAnimatedGraphicsTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateAnimatedGraphicsTemplateResponse) ToJsonString() string {
@@ -1995,9 +2017,36 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateContentReviewTemplateRequestParams struct {
+	// The name of the content moderation template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter for porn information
+	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitempty" name:"PornConfigure"`
+
+	// Control parameter for terrorism information
+	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
+
+	// Control parameter for politically sensitive information
+	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
+
+	// Control parameter of prohibited information detection. Prohibited information includes:
+	// <li>Abusive;</li>
+	// <li>Drug-related.</li>
+	// Note: this parameter is not supported yet.
+	ProhibitedConfigure *ProhibitedConfigureInfo `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
+
+	// Custom content moderation parameters.
+	UserDefineConfigure *UserDefineConfigureInfo `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
+}
+
 type CreateContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The name of the content moderation template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2048,16 +2097,18 @@ func (r *CreateContentReviewTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateContentReviewTemplateResponseParams struct {
+	// The unique ID of the content moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateContentReviewTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique ID of the content moderation template.
-		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateContentReviewTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateContentReviewTemplateResponse) ToJsonString() string {
@@ -2071,9 +2122,52 @@ func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateImageSpriteTemplateRequestParams struct {
+	// Sampling type. Valid values:
+	// <li>Percent: By percent.</li>
+	// <li>Time: By time interval.</li>
+	SampleType *string `json:"SampleType,omitempty" name:"SampleType"`
+
+	// Sampling interval.
+	// <li>If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage.</li>
+	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
+	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
+
+	// Subimage row count of an image sprite.
+	RowCount *uint64 `json:"RowCount,omitempty" name:"RowCount"`
+
+	// Subimage column count of an image sprite.
+	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
+
+	// Name of an image sprite generating template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subimage width of an image sprite in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Subimage height of an image sprite in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type CreateImageSpriteTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sampling type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -2143,16 +2237,18 @@ func (r *CreateImageSpriteTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateImageSpriteTemplateResponseParams struct {
+	// Unique ID of an image sprite generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateImageSpriteTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of an image sprite generating template.
-		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateImageSpriteTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateImageSpriteTemplateResponse) ToJsonString() string {
@@ -2166,9 +2262,33 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePersonSampleRequestParams struct {
+	// Name of an image. Length limit: 20 characters
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Image usage. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: equivalent to 1+2
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
+
+	// Image description. Length limit: 1,024 characters
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// [Base64](https://tools.ietf.org/html/rfc4648) string converted from an image. Only JPEG and PNG images are supported. Array length limit: 5 images
+	// Note: the image must be a relatively clear facial feature photo of one person with a size of at least 200 x 200 pixels.
+	FaceContents []*string `json:"FaceContents,omitempty" name:"FaceContents"`
+
+	// Image tag
+	// <li>Array length limit: 20 tags</li>
+	// <li>Tag length limit: 128 characters</li>
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreatePersonSampleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of an image. Length limit: 20 characters
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2214,19 +2334,21 @@ func (r *CreatePersonSampleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePersonSampleResponseParams struct {
+	// Image information
+	Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
+
+	// Information of images that failed the verification by facial feature positioning
+	FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePersonSampleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Image information
-		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
-
-		// Information of images that failed the verification by facial feature positioning
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePersonSampleResponseParams `json:"Response"`
 }
 
 func (r *CreatePersonSampleResponse) ToJsonString() string {
@@ -2240,9 +2362,51 @@ func (r *CreatePersonSampleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSampleSnapshotTemplateRequestParams struct {
+	// Sampled screencapturing type. Valid values:
+	// <li>Percent: By percent.</li>
+	// <li>Time: By time interval.</li>
+	SampleType *string `json:"SampleType,omitempty" name:"SampleType"`
+
+	// Sampling interval.
+	// <li>If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage.</li>
+	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
+	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
+
+	// Name of a sampled screencapturing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Image width in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Image height in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Image format. Valid values: jpg; png. Default value: jpg.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
 type CreateSampleSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sampled screencapturing type. Valid values:
 	// <li>Percent: By percent.</li>
 	// <li>Time: By time interval.</li>
@@ -2310,16 +2474,18 @@ func (r *CreateSampleSnapshotTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSampleSnapshotTemplateResponseParams struct {
+	// Unique ID of a sampled screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSampleSnapshotTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of a sampled screencapturing template.
-		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSampleSnapshotTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateSampleSnapshotTemplateResponse) ToJsonString() string {
@@ -2333,9 +2499,41 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
+	// Name of a time point screencapturing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Image width in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Image height in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Image format. Valid values: jpg; png. Default value: jpg.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
 type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2391,16 +2589,18 @@ func (r *CreateSnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSnapshotByTimeOffsetTemplateResponseParams struct {
+	// Unique ID of a time point screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSnapshotByTimeOffsetTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of a time point screencapturing template.
-		Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSnapshotByTimeOffsetTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateSnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
@@ -2414,9 +2614,42 @@ func (r *CreateSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTranscodeTemplateRequestParams struct {
+	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// Name of a transcoding template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Whether to remove video data. Valid values:
+	// <li>0: Retain</li>
+	// <li>1: Remove</li>
+	// Default value: 0.
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>0: Retain</li>
+	// <li>1: Remove</li>
+	// Default value: 0.
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitempty" name:"AudioTemplate"`
+
+	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+}
+
 type CreateTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
@@ -2474,16 +2707,18 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTranscodeTemplateResponseParams struct {
+	// Unique ID of a transcoding template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTranscodeTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of a transcoding template.
-		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTranscodeTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateTranscodeTemplateResponse) ToJsonString() string {
@@ -2497,9 +2732,53 @@ func (r *CreateTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWatermarkTemplateRequestParams struct {
+	// Watermarking type. Valid values:
+	// <li>image: Image watermark;</li>
+	// <li>text: Text watermark;</li>
+	// <li>svg: SVG watermark.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Watermarking template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Origin position. Valid values:
+	// <li>TopLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
+	// <li>TopRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
+	// <li>BottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
+	// <li>BottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
+	// Default value: TopLeft.
+	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
+
+	// The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+	// Default value: 0 px.
+	XPos *string `json:"XPos,omitempty" name:"XPos"`
+
+	// The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+	// Default value: 0 px.
+	YPos *string `json:"YPos,omitempty" name:"YPos"`
+
+	// Image watermarking template. This field is required and valid only when `Type` is `image`.
+	ImageTemplate *ImageWatermarkInput `json:"ImageTemplate,omitempty" name:"ImageTemplate"`
+
+	// Text watermarking template. This field is required and valid only when `Type` is `text`.
+	TextTemplate *TextWatermarkTemplateInput `json:"TextTemplate,omitempty" name:"TextTemplate"`
+
+	// SVG watermarking template. This field is required and valid only when `Type` is `svg`.
+	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
+}
+
 type CreateWatermarkTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Watermarking type. Valid values:
 	// <li>image: Image watermark;</li>
 	// <li>text: Text watermark;</li>
@@ -2569,19 +2848,21 @@ func (r *CreateWatermarkTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWatermarkTemplateResponseParams struct {
+	// Unique ID of a watermarking template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Watermark image address. This field is valid only when `Type` is `image`.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateWatermarkTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Unique ID of a watermarking template.
-		Definition *int64 `json:"Definition,omitempty" name:"Definition"`
-
-		// Watermark image address. This field is valid only when `Type` is `image`.
-		ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateWatermarkTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateWatermarkTemplateResponse) ToJsonString() string {
@@ -2595,9 +2876,26 @@ func (r *CreateWatermarkTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWordSamplesRequestParams struct {
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: ASR- and OCR-based content recognition and inappropriate information detection; equivalent to 1+2+3+4
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
+
+	// Keyword. Array length limit: 100.
+	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words"`
+}
+
 type CreateWordSamplesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
 	// 2. Recognition.Asr: ASR-based content recognition
@@ -2633,13 +2931,15 @@ func (r *CreateWordSamplesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWordSamplesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateWordSamplesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateWordSamplesResponseParams `json:"Response"`
 }
 
 func (r *CreateWordSamplesResponse) ToJsonString() string {
@@ -2653,9 +2953,42 @@ func (r *CreateWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWorkflowRequestParams struct {
+	// Workflow name of up to 128 characters, which must be unique for the same user.
+	WorkflowName *string `json:"WorkflowName,omitempty" name:"WorkflowName"`
+
+	// Triggering rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The location to save the output file of media processing. If this parameter is left empty, the storage location in `Trigger` will be inherited.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the output file will be saved to the same directory where the source file is located.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The media processing parameters to use.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
+
+	// Type parameter of a video content audit task.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
+
+	// Type parameter of a video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
+
+	// Event notification configuration for a task. If this parameter is left empty, no event notifications will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// Workflow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TaskPriority *int64 `json:"TaskPriority,omitempty" name:"TaskPriority"`
+}
+
 type CreateWorkflowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow name of up to 128 characters, which must be unique for the same user.
 	WorkflowName *string `json:"WorkflowName,omitempty" name:"WorkflowName"`
 
@@ -2715,16 +3048,18 @@ func (r *CreateWorkflowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWorkflowResponseParams struct {
+	// Workflow ID.
+	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateWorkflowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Workflow ID.
-		WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateWorkflowResponseParams `json:"Response"`
 }
 
 func (r *CreateWorkflowResponse) ToJsonString() string {
@@ -2738,9 +3073,15 @@ func (r *CreateWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAIAnalysisTemplateRequestParams struct {
+	// Unique ID of video content analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteAIAnalysisTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2764,13 +3105,15 @@ func (r *DeleteAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAIAnalysisTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAIAnalysisTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAIAnalysisTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteAIAnalysisTemplateResponse) ToJsonString() string {
@@ -2784,9 +3127,15 @@ func (r *DeleteAIAnalysisTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAIRecognitionTemplateRequestParams struct {
+	// Unique ID of a video content recognition template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2810,13 +3159,15 @@ func (r *DeleteAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAIRecognitionTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAIRecognitionTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAIRecognitionTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteAIRecognitionTemplateResponse) ToJsonString() string {
@@ -2830,9 +3181,15 @@ func (r *DeleteAIRecognitionTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAdaptiveDynamicStreamingTemplateRequestParams struct {
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2856,13 +3213,15 @@ func (r *DeleteAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAdaptiveDynamicStreamingTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAdaptiveDynamicStreamingTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAdaptiveDynamicStreamingTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
@@ -2876,9 +3235,15 @@ func (r *DeleteAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAnimatedGraphicsTemplateRequestParams struct {
+	// Unique ID of an animated image generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteAnimatedGraphicsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2902,13 +3267,15 @@ func (r *DeleteAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAnimatedGraphicsTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAnimatedGraphicsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAnimatedGraphicsTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteAnimatedGraphicsTemplateResponse) ToJsonString() string {
@@ -2922,9 +3289,15 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteContentReviewTemplateRequestParams struct {
+	// The unique ID of the content moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2948,13 +3321,15 @@ func (r *DeleteContentReviewTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteContentReviewTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteContentReviewTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteContentReviewTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteContentReviewTemplateResponse) ToJsonString() string {
@@ -2968,9 +3343,15 @@ func (r *DeleteContentReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteImageSpriteTemplateRequestParams struct {
+	// Unique ID of an image sprite generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteImageSpriteTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -2994,13 +3375,15 @@ func (r *DeleteImageSpriteTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteImageSpriteTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteImageSpriteTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteImageSpriteTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteImageSpriteTemplateResponse) ToJsonString() string {
@@ -3014,9 +3397,15 @@ func (r *DeleteImageSpriteTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonSampleRequestParams struct {
+	// Image ID
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+}
+
 type DeletePersonSampleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 }
@@ -3040,13 +3429,15 @@ func (r *DeletePersonSampleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePersonSampleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePersonSampleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePersonSampleResponseParams `json:"Response"`
 }
 
 func (r *DeletePersonSampleResponse) ToJsonString() string {
@@ -3060,9 +3451,15 @@ func (r *DeletePersonSampleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSampleSnapshotTemplateRequestParams struct {
+	// Unique ID of a sampled screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteSampleSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -3086,13 +3483,15 @@ func (r *DeleteSampleSnapshotTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSampleSnapshotTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSampleSnapshotTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSampleSnapshotTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteSampleSnapshotTemplateResponse) ToJsonString() string {
@@ -3106,9 +3505,15 @@ func (r *DeleteSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotByTimeOffsetTemplateRequestParams struct {
+	// Unique ID of a time point screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteSnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -3132,13 +3537,15 @@ func (r *DeleteSnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotByTimeOffsetTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSnapshotByTimeOffsetTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSnapshotByTimeOffsetTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteSnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
@@ -3152,9 +3559,15 @@ func (r *DeleteSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTranscodeTemplateRequestParams struct {
+	// Unique ID of a transcoding template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -3178,13 +3591,15 @@ func (r *DeleteTranscodeTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTranscodeTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTranscodeTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTranscodeTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteTranscodeTemplateResponse) ToJsonString() string {
@@ -3198,9 +3613,15 @@ func (r *DeleteTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWatermarkTemplateRequestParams struct {
+	// Unique ID of a watermarking template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type DeleteWatermarkTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
@@ -3224,13 +3645,15 @@ func (r *DeleteWatermarkTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWatermarkTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteWatermarkTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteWatermarkTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteWatermarkTemplateResponse) ToJsonString() string {
@@ -3244,9 +3667,15 @@ func (r *DeleteWatermarkTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWordSamplesRequestParams struct {
+	// Keyword. Array length limit: 100 words.
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
+}
+
 type DeleteWordSamplesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 }
@@ -3270,13 +3699,15 @@ func (r *DeleteWordSamplesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWordSamplesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteWordSamplesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteWordSamplesResponseParams `json:"Response"`
 }
 
 func (r *DeleteWordSamplesResponse) ToJsonString() string {
@@ -3290,9 +3721,15 @@ func (r *DeleteWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWorkflowRequestParams struct {
+	// Workflow ID.
+	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
+}
+
 type DeleteWorkflowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
 }
@@ -3316,13 +3753,15 @@ func (r *DeleteWorkflowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteWorkflowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteWorkflowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteWorkflowResponseParams `json:"Response"`
 }
 
 func (r *DeleteWorkflowResponse) ToJsonString() string {
@@ -3336,9 +3775,26 @@ func (r *DeleteWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAIAnalysisTemplatesRequestParams struct {
+	// Unique ID filter of video content analysis templates. Array length limit: 10.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of video content analysis templates. Array length limit: 10.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3376,19 +3832,21 @@ func (r *DescribeAIAnalysisTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAIAnalysisTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of video content analysis template details.
+	AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAIAnalysisTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of video content analysis template details.
-		AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitempty" name:"AIAnalysisTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAIAnalysisTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAIAnalysisTemplatesResponse) ToJsonString() string {
@@ -3402,9 +3860,26 @@ func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAIRecognitionTemplatesRequestParams struct {
+	// Unique ID filter of video content recognition templates. Array length limit: 10.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 50.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of video content recognition templates. Array length limit: 10.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3442,19 +3917,21 @@ func (r *DescribeAIRecognitionTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAIRecognitionTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of video content recognition template details.
+	AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAIRecognitionTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of video content recognition template details.
-		AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitempty" name:"AIRecognitionTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAIRecognitionTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAIRecognitionTemplatesResponse) ToJsonString() string {
@@ -3468,9 +3945,26 @@ func (r *DescribeAIRecognitionTemplatesResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
+	// Unique ID filter of adaptive bitrate streaming templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: preset template;</li>
+	// <li>Custom: custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of adaptive bitrate streaming templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3508,19 +4002,21 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) FromJsonString(s stri
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAdaptiveDynamicStreamingTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of adaptive bitrate streaming template details.
+	AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAdaptiveDynamicStreamingTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of adaptive bitrate streaming template details.
-		AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitempty" name:"AdaptiveDynamicStreamingTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAdaptiveDynamicStreamingTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) ToJsonString() string {
@@ -3534,9 +4030,26 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s str
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAnimatedGraphicsTemplatesRequestParams struct {
+	// Unique ID filter of animated image generating templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: Preset template;</li>
+	// <li>Custom: Custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeAnimatedGraphicsTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3574,19 +4087,21 @@ func (r *DescribeAnimatedGraphicsTemplatesRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAnimatedGraphicsTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of animated image generating template details.
+	AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAnimatedGraphicsTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of animated image generating template details.
-		AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitempty" name:"AnimatedGraphicsTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAnimatedGraphicsTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAnimatedGraphicsTemplatesResponse) ToJsonString() string {
@@ -3600,9 +4115,26 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeContentReviewTemplatesRequestParams struct {
+	// The IDs of the content moderation templates to query. Array length limit: 50.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 50.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The filter for querying templates. If this parameter is left empty, both preset and custom templates are returned. Valid values:
+	// * Preset
+	// * Custom
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The IDs of the content moderation templates to query. Array length limit: 50.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3640,19 +4172,21 @@ func (r *DescribeContentReviewTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeContentReviewTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of content audit template details.
+	ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeContentReviewTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of content audit template details.
-		ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitempty" name:"ContentReviewTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeContentReviewTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeContentReviewTemplatesResponse) ToJsonString() string {
@@ -3666,9 +4200,26 @@ func (r *DescribeContentReviewTemplatesResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeImageSpriteTemplatesRequestParams struct {
+	// Unique ID filter of image sprite generating templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: Preset template;</li>
+	// <li>Custom: Custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3706,19 +4257,21 @@ func (r *DescribeImageSpriteTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeImageSpriteTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of image sprite generating template details.
+	ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeImageSpriteTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of image sprite generating template details.
-		ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitempty" name:"ImageSpriteTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeImageSpriteTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeImageSpriteTemplatesResponse) ToJsonString() string {
@@ -3732,9 +4285,15 @@ func (r *DescribeImageSpriteTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMediaMetaDataRequestParams struct {
+	// Input information of file for metadata getting.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+}
+
 type DescribeMediaMetaDataRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Input information of file for metadata getting.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 }
@@ -3758,16 +4317,18 @@ func (r *DescribeMediaMetaDataRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMediaMetaDataResponseParams struct {
+	// Media metadata.
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMediaMetaDataResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Media metadata.
-		MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMediaMetaDataResponseParams `json:"Response"`
 }
 
 func (r *DescribeMediaMetaDataResponse) ToJsonString() string {
@@ -3781,9 +4342,35 @@ func (r *DescribeMediaMetaDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePersonSamplesRequestParams struct {
+	// Type of images to pull. Valid values:
+	// <li>UserDefine: custom image library</li>
+	// <li>Default: default image library</li>
+	// 
+	// Default value: UserDefine. Samples in the custom image library will be pulled.
+	// Note: you can pull the default image library only using the image name or a combination of the image name and ID, and only one face image is returned.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Image ID. Array length limit: 100
+	PersonIds []*string `json:"PersonIds,omitempty" name:"PersonIds"`
+
+	// Image name. Array length limit: 20
+	Names []*string `json:"Names,omitempty" name:"Names"`
+
+	// Image tag. Array length limit: 20
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 100. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Type of images to pull. Valid values:
 	// <li>UserDefine: custom image library</li>
 	// <li>Default: default image library</li>
@@ -3832,19 +4419,21 @@ func (r *DescribePersonSamplesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePersonSamplesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Image information
+	PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePersonSamplesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Image information
-		PersonSet []*AiSamplePerson `json:"PersonSet,omitempty" name:"PersonSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePersonSamplesResponseParams `json:"Response"`
 }
 
 func (r *DescribePersonSamplesResponse) ToJsonString() string {
@@ -3858,9 +4447,26 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSampleSnapshotTemplatesRequestParams struct {
+	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: Preset template;</li>
+	// <li>Custom: Custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3898,19 +4504,21 @@ func (r *DescribeSampleSnapshotTemplatesRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSampleSnapshotTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of sampled screencapturing template details.
+	SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSampleSnapshotTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of sampled screencapturing template details.
-		SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitempty" name:"SampleSnapshotTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSampleSnapshotTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeSampleSnapshotTemplatesResponse) ToJsonString() string {
@@ -3924,9 +4532,26 @@ func (r *DescribeSampleSnapshotTemplatesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
+	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: Preset template;</li>
+	// <li>Custom: Custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -3964,19 +4589,21 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotByTimeOffsetTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of time point screencapturing template details.
+	SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSnapshotByTimeOffsetTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of time point screencapturing template details.
-		SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitempty" name:"SnapshotByTimeOffsetTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSnapshotByTimeOffsetTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) ToJsonString() string {
@@ -3990,9 +4617,15 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTaskDetailRequestParams struct {
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type DescribeTaskDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
@@ -4016,60 +4649,62 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeTaskDetailResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task type. Currently valid values:
+// Predefined struct for user
+type DescribeTaskDetailResponseParams struct {
+	// Task type. Currently valid values:
 	// <li>WorkflowTask: Video workflow processing task.</li>
 	// <li>LiveStreamProcessTask: Live stream processing task.</li>
-		TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
-		// Task status. Valid values:
+	// Task status. Valid values:
 	// <li>WAITING: Waiting;</li>
 	// <li>PROCESSING: Processing;</li>
 	// <li>FINISH: Completed.</li>
-		Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitempty" name:"Status"`
 
-		// Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	// Creation time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-		// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-		BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
+	// Start time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
 
-		// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-		FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+	// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
-		// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
+	// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		WorkflowTask *WorkflowTask `json:"WorkflowTask,omitempty" name:"WorkflowTask"`
+	WorkflowTask *WorkflowTask `json:"WorkflowTask,omitempty" name:"WorkflowTask"`
 
-		// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
-		EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
+	// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+	EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
 
-		// Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
+	// Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		LiveStreamProcessTask *LiveStreamProcessTask `json:"LiveStreamProcessTask,omitempty" name:"LiveStreamProcessTask"`
+	LiveStreamProcessTask *LiveStreamProcessTask `json:"LiveStreamProcessTask,omitempty" name:"LiveStreamProcessTask"`
 
-		// Event notification information of a task.
+	// Event notification information of a task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
 
-		// Task flow priority. Value range: [-10, 10].
-		TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+	// Task flow priority. Value range: [-10, 10].
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
-		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
-		SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-		// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-		SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-		// Extended information field, used in specific scenarios.
-		ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+	// Extended information field, used in specific scenarios.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTaskDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeTaskDetailResponse) ToJsonString() string {
@@ -4083,9 +4718,21 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksRequestParams struct {
+	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
+	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
+}
+
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -4117,19 +4764,21 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksResponseParams struct {
+	// Task overview list.
+	TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet"`
+
+	// Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.
+	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task overview list.
-		TaskSet []*TaskSimpleInfo `json:"TaskSet,omitempty" name:"TaskSet"`
-
-		// Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.
-		ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeTasksResponse) ToJsonString() string {
@@ -4143,9 +4792,36 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTranscodeTemplatesRequestParams struct {
+	// Unique ID filter of transcoding templates. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Template type filter. Valid values:
+	// <li>Preset: Preset template;</li>
+	// <li>Custom: Custom template.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Container format filter. Valid values:
+	// <li>Video: Video container format that can contain both video stream and audio stream;</li>
+	// <li>PureAudio: Audio container format that can contain only audio stream.</li>
+	ContainerType *string `json:"ContainerType,omitempty" name:"ContainerType"`
+
+	// TESHD filter, which is used to filter common transcoding or ultra-fast HD transcoding templates. Valid values:
+	// <li>Common: Common transcoding template;</li>
+	// <li>TEHD: TESHD template.</li>
+	TEHDType *string `json:"TEHDType,omitempty" name:"TEHDType"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of transcoding templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -4195,19 +4871,21 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTranscodeTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of transcoding template details.
+	TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTranscodeTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of transcoding template details.
-		TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitempty" name:"TranscodeTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTranscodeTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTranscodeTemplatesResponse) ToJsonString() string {
@@ -4221,9 +4899,28 @@ func (r *DescribeTranscodeTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWatermarkTemplatesRequestParams struct {
+	// Unique ID filter of watermarking templates. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// Watermark type filter. Valid values:
+	// <li>image: Image watermark;</li>
+	// <li>text: Text watermark.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries
+	// <li>Default value: 10;</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID filter of watermarking templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -4263,19 +4960,21 @@ func (r *DescribeWatermarkTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWatermarkTemplatesResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of watermarking template details.
+	WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeWatermarkTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of watermarking template details.
-		WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitempty" name:"WatermarkTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeWatermarkTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeWatermarkTemplatesResponse) ToJsonString() string {
@@ -4289,9 +4988,35 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWordSamplesRequestParams struct {
+	// Keyword filter. Array length limit: 100 words.
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
+
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// You can select multiple elements, which are connected by OR logic. If a usage contains any element in this parameter, the keyword sample will be used.
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
+
+	// Tag filter. Array length limit: 20 words.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 100. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Keyword filter. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
@@ -4339,21 +5064,23 @@ func (r *DescribeWordSamplesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWordSamplesResponseParams struct {
+	// Number of eligible entries.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Keyword information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeWordSamplesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Keyword information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		WordSet []*AiSampleWord `json:"WordSet,omitempty" name:"WordSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeWordSamplesResponseParams `json:"Response"`
 }
 
 func (r *DescribeWordSamplesResponse) ToJsonString() string {
@@ -4367,9 +5094,27 @@ func (r *DescribeWordSamplesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWorkflowsRequestParams struct {
+	// Workflow ID filter. Array length limit: 100.
+	WorkflowIds []*int64 `json:"WorkflowIds,omitempty" name:"WorkflowIds"`
+
+	// Workflow status. Valid values:
+	// <li>Enabled: Enabled,</li>
+	// <li>Disabled: Disabled.</li>
+	// If this parameter is left empty, the workflow status will not be distinguished.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Paging offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeWorkflowsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow ID filter. Array length limit: 100.
 	WorkflowIds []*int64 `json:"WorkflowIds,omitempty" name:"WorkflowIds"`
 
@@ -4408,19 +5153,21 @@ func (r *DescribeWorkflowsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWorkflowsResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Workflow information array.
+	WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitempty" name:"WorkflowInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeWorkflowsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Workflow information array.
-		WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitempty" name:"WorkflowInfoSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeWorkflowsResponseParams `json:"Response"`
 }
 
 func (r *DescribeWorkflowsResponse) ToJsonString() string {
@@ -4434,9 +5181,15 @@ func (r *DescribeWorkflowsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableWorkflowRequestParams struct {
+	// Workflow ID.
+	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
+}
+
 type DisableWorkflowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
 }
@@ -4460,13 +5213,15 @@ func (r *DisableWorkflowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableWorkflowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableWorkflowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableWorkflowResponseParams `json:"Response"`
 }
 
 func (r *DisableWorkflowResponse) ToJsonString() string {
@@ -4481,7 +5236,6 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 }
 
 type EditMediaFileInfo struct {
-
 	// Video input information.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 
@@ -4493,14 +5247,40 @@ type EditMediaFileInfo struct {
 }
 
 type EditMediaOutputConfig struct {
-
 	// Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`
 	Container *string `json:"Container,omitempty" name:"Container"`
 }
 
+// Predefined struct for user
+type EditMediaRequestParams struct {
+	// Information of input video file.
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos"`
+
+	// The storage location of the media processing output file.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The path to save the media processing output file.
+	OutputObjectPath *string `json:"OutputObjectPath,omitempty" name:"OutputObjectPath"`
+
+	// Configuration for output files of video editing
+	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitempty" name:"OutputConfig"`
+
+	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// Task priority. The higher the value, the higher the priority. Value range: -10–10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
 type EditMediaRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Information of input video file.
 	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitempty" name:"FileInfos"`
 
@@ -4552,16 +5332,18 @@ func (r *EditMediaRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EditMediaResponseParams struct {
+	// Video editing task ID, which can be used to query the status of an editing task.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EditMediaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Video editing task ID, which can be used to query the status of an editing task.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EditMediaResponseParams `json:"Response"`
 }
 
 func (r *EditMediaResponse) ToJsonString() string {
@@ -4576,7 +5358,6 @@ func (r *EditMediaResponse) FromJsonString(s string) error {
 }
 
 type EditMediaTask struct {
-
 	// Task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -4601,13 +5382,11 @@ type EditMediaTask struct {
 }
 
 type EditMediaTaskInput struct {
-
 	// Information of input video file.
 	FileInfoSet []*EditMediaFileInfo `json:"FileInfoSet,omitempty" name:"FileInfoSet"`
 }
 
 type EditMediaTaskOutput struct {
-
 	// Target storage of edited file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
@@ -4615,9 +5394,15 @@ type EditMediaTaskOutput struct {
 	Path *string `json:"Path,omitempty" name:"Path"`
 }
 
+// Predefined struct for user
+type EnableWorkflowRequestParams struct {
+	// Workflow ID.
+	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
+}
+
 type EnableWorkflowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
 }
@@ -4641,13 +5426,15 @@ func (r *EnableWorkflowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableWorkflowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableWorkflowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableWorkflowResponseParams `json:"Response"`
 }
 
 func (r *EnableWorkflowResponse) ToJsonString() string {
@@ -4661,9 +5448,18 @@ func (r *EnableWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ExecuteFunctionRequestParams struct {
+	// Name of called backend API.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// API parameter. Parameter format will depend on the actual function definition.
+	FunctionArg *string `json:"FunctionArg,omitempty" name:"FunctionArg"`
+}
+
 type ExecuteFunctionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of called backend API.
 	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
 
@@ -4691,16 +5487,18 @@ func (r *ExecuteFunctionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ExecuteFunctionResponseParams struct {
+	// Packed string, which will vary according to the custom API.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ExecuteFunctionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Packed string, which will vary according to the custom API.
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ExecuteFunctionResponseParams `json:"Response"`
 }
 
 func (r *ExecuteFunctionResponse) ToJsonString() string {
@@ -4715,7 +5513,6 @@ func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 }
 
 type FaceConfigureInfo struct {
-
 	// Switch of a face recognition task. Valid values:
 	// <li>ON: Enables an intelligent face recognition task;</li>
 	// <li>OFF: Disables an intelligent face recognition task.</li>
@@ -4743,7 +5540,6 @@ type FaceConfigureInfo struct {
 }
 
 type FaceConfigureInfoForUpdate struct {
-
 	// Switch of a face recognition task. Valid values:
 	// <li>ON: Enables an intelligent face recognition task;</li>
 	// <li>OFF: Disables an intelligent face recognition task.</li>
@@ -4770,7 +5566,6 @@ type FaceConfigureInfoForUpdate struct {
 }
 
 type FrameTagConfigureInfo struct {
-
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
 	// <li>OFF: disables intelligent frame-specific tagging task.</li>
@@ -4778,7 +5573,6 @@ type FrameTagConfigureInfo struct {
 }
 
 type FrameTagConfigureInfoForUpdate struct {
-
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
 	// <li>OFF: disables intelligent frame-specific tagging task.</li>
@@ -4786,7 +5580,6 @@ type FrameTagConfigureInfoForUpdate struct {
 }
 
 type HeadTailParameter struct {
-
 	// Opening credits list
 	HeadSet []*MediaInputInfo `json:"HeadSet,omitempty" name:"HeadSet"`
 
@@ -4795,7 +5588,6 @@ type HeadTailParameter struct {
 }
 
 type ImageSpriteTaskInput struct {
-
 	// ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -4815,7 +5607,6 @@ type ImageSpriteTaskInput struct {
 }
 
 type ImageSpriteTemplate struct {
-
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -4868,7 +5659,6 @@ type ImageSpriteTemplate struct {
 }
 
 type ImageWatermarkInput struct {
-
 	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
@@ -4892,7 +5682,6 @@ type ImageWatermarkInput struct {
 }
 
 type ImageWatermarkInputForUpdate struct {
-
 	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
 	ImageContent *string `json:"ImageContent,omitempty" name:"ImageContent"`
 
@@ -4915,7 +5704,6 @@ type ImageWatermarkInputForUpdate struct {
 }
 
 type ImageWatermarkTemplate struct {
-
 	// Watermark image address.
 	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
 
@@ -4938,13 +5726,11 @@ type ImageWatermarkTemplate struct {
 }
 
 type LiveStreamAiRecognitionResultInfo struct {
-
 	// Content recognition result list.
 	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type LiveStreamAiRecognitionResultItem struct {
-
 	// Result type. Valid values:
 	// <li>FaceRecognition: face recognition,</li>
 	// <li>AsrWordsRecognition: speech keyword recognition,</li>
@@ -4975,7 +5761,6 @@ type LiveStreamAiRecognitionResultItem struct {
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
-
 	// Start PTS time of a suspected segment in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
 
@@ -5011,7 +5796,6 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 }
 
 type LiveStreamAiReviewImagePornResult struct {
-
 	// Start PTS time of a suspected segment in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
 
@@ -5043,7 +5827,6 @@ type LiveStreamAiReviewImagePornResult struct {
 }
 
 type LiveStreamAiReviewImageTerrorismResult struct {
-
 	// Start PTS time of a suspected segment in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
 
@@ -5079,13 +5862,11 @@ type LiveStreamAiReviewImageTerrorismResult struct {
 }
 
 type LiveStreamAiReviewResultInfo struct {
-
 	// List of content audit results.
 	ResultSet []*LiveStreamAiReviewResultItem `json:"ResultSet,omitempty" name:"ResultSet"`
 }
 
 type LiveStreamAiReviewResultItem struct {
-
 	// The type of the moderation result. Valid values:
 	// <li>ImagePorn</li>
 	// <li>ImageTerrorism</li>
@@ -5107,7 +5888,6 @@ type LiveStreamAiReviewResultItem struct {
 }
 
 type LiveStreamAiReviewVoicePornResult struct {
-
 	// Start PTS time of a suspected segment in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
 
@@ -5129,7 +5909,6 @@ type LiveStreamAiReviewVoicePornResult struct {
 }
 
 type LiveStreamAsrFullTextRecognitionResult struct {
-
 	// Recognized text.
 	Text *string `json:"Text,omitempty" name:"Text"`
 
@@ -5144,7 +5923,6 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 }
 
 type LiveStreamAsrWordsRecognitionResult struct {
-
 	// Speech keyword.
 	Word *string `json:"Word,omitempty" name:"Word"`
 
@@ -5159,7 +5937,6 @@ type LiveStreamAsrWordsRecognitionResult struct {
 }
 
 type LiveStreamFaceRecognitionResult struct {
-
 	// Unique ID of figure.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -5184,7 +5961,6 @@ type LiveStreamFaceRecognitionResult struct {
 }
 
 type LiveStreamOcrFullTextRecognitionResult struct {
-
 	// Speech text.
 	Text *string `json:"Text,omitempty" name:"Text"`
 
@@ -5202,7 +5978,6 @@ type LiveStreamOcrFullTextRecognitionResult struct {
 }
 
 type LiveStreamOcrWordsRecognitionResult struct {
-
 	// Text keyword.
 	Word *string `json:"Word,omitempty" name:"Word"`
 
@@ -5220,7 +5995,6 @@ type LiveStreamOcrWordsRecognitionResult struct {
 }
 
 type LiveStreamProcessErrorInfo struct {
-
 	// Error code:
 	// <li>0: No error;</li>
 	// <li>If this parameter is not 0, an error has occurred. Please see the error message (`Message`).</li>
@@ -5231,7 +6005,6 @@ type LiveStreamProcessErrorInfo struct {
 }
 
 type LiveStreamProcessTask struct {
-
 	// The media processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -5251,7 +6024,6 @@ type LiveStreamProcessTask struct {
 }
 
 type LiveStreamTaskNotifyConfig struct {
-
 	// CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
 	CmqModel *string `json:"CmqModel,omitempty" name:"CmqModel"`
 
@@ -5271,9 +6043,23 @@ type LiveStreamTaskNotifyConfig struct {
 	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
 }
 
+// Predefined struct for user
+type ManageTaskRequestParams struct {
+	// Operation type. Valid values:
+	// <ul>
+	// <li>Abort: task termination. Description:
+	// <ul><li>If the [task type](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is live stream processing (`LiveStreamProcessTask`), tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` or `PROCESSING` can be terminated.</li>
+	// <li>For other [task types](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0), only tasks whose [task status](https://intl.cloud.tencent.com/document/product/862/37614?from_cn_redirect=1#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) is `WAITING` can be terminated.</li></ul>
+	// </li></ul>
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type ManageTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Operation type. Valid values:
 	// <ul>
 	// <li>Abort: task termination. Description:
@@ -5306,13 +6092,15 @@ func (r *ManageTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ManageTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ManageTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ManageTaskResponseParams `json:"Response"`
 }
 
 func (r *ManageTaskResponse) ToJsonString() string {
@@ -5327,7 +6115,6 @@ func (r *ManageTaskResponse) FromJsonString(s string) error {
 }
 
 type MediaAiAnalysisClassificationItem struct {
-
 	// Name of intelligently generated category.
 	Classification *string `json:"Classification,omitempty" name:"Classification"`
 
@@ -5336,7 +6123,6 @@ type MediaAiAnalysisClassificationItem struct {
 }
 
 type MediaAiAnalysisCoverItem struct {
-
 	// Storage path of intelligently generated cover.
 	CoverPath *string `json:"CoverPath,omitempty" name:"CoverPath"`
 
@@ -5345,11 +6131,10 @@ type MediaAiAnalysisCoverItem struct {
 }
 
 type MediaAiAnalysisFrameTagItem struct {
-
 	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
-	// 
+
 	CategorySet []*string `json:"CategorySet,omitempty" name:"CategorySet"`
 
 	// Confidence of intelligently generated frame-specific tag between 0 and 100.
@@ -5357,7 +6142,6 @@ type MediaAiAnalysisFrameTagItem struct {
 }
 
 type MediaAiAnalysisFrameTagSegmentItem struct {
-
 	// Start time offset of frame-specific tag.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -5369,7 +6153,6 @@ type MediaAiAnalysisFrameTagSegmentItem struct {
 }
 
 type MediaAiAnalysisTagItem struct {
-
 	// Tag name.
 	Tag *string `json:"Tag,omitempty" name:"Tag"`
 
@@ -5378,7 +6161,6 @@ type MediaAiAnalysisTagItem struct {
 }
 
 type MediaAnimatedGraphicsItem struct {
-
 	// Storage location of a generated animated image file.
 	Storage *TaskOutputStorage `json:"Storage,omitempty" name:"Storage"`
 
@@ -5414,7 +6196,6 @@ type MediaAnimatedGraphicsItem struct {
 }
 
 type MediaAudioStreamItem struct {
-
 	// Bitrate of an audio stream in bps.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Bitrate *int64 `json:"Bitrate,omitempty" name:"Bitrate"`
@@ -5433,7 +6214,6 @@ type MediaAudioStreamItem struct {
 }
 
 type MediaContentReviewAsrTextSegmentItem struct {
-
 	// Start time offset of a suspected segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -5454,7 +6234,6 @@ type MediaContentReviewAsrTextSegmentItem struct {
 }
 
 type MediaContentReviewOcrTextSegmentItem struct {
-
 	// Start time offset of a suspected segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -5485,7 +6264,6 @@ type MediaContentReviewOcrTextSegmentItem struct {
 }
 
 type MediaContentReviewPoliticalSegmentItem struct {
-
 	// Start time offset of a suspected segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -5542,7 +6320,6 @@ type MediaContentReviewPoliticalSegmentItem struct {
 }
 
 type MediaContentReviewSegmentItem struct {
-
 	// Start time offset of a suspected segment in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -5570,7 +6347,6 @@ type MediaContentReviewSegmentItem struct {
 }
 
 type MediaImageSpriteItem struct {
-
 	// Image sprite specification. For more information, please see [Image Sprite Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -5594,7 +6370,6 @@ type MediaImageSpriteItem struct {
 }
 
 type MediaInputInfo struct {
-
 	// The type of video processing input object, which supports COS and URL.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -5607,7 +6382,6 @@ type MediaInputInfo struct {
 }
 
 type MediaMetaData struct {
-
 	// Size of an uploaded media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Size *int64 `json:"Size,omitempty" name:"Size"`
@@ -5654,7 +6428,6 @@ type MediaMetaData struct {
 }
 
 type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5676,7 +6449,6 @@ type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
 }
 
 type MediaProcessTaskAnimatedGraphicResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5698,7 +6470,6 @@ type MediaProcessTaskAnimatedGraphicResult struct {
 }
 
 type MediaProcessTaskImageSpriteResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5720,7 +6491,6 @@ type MediaProcessTaskImageSpriteResult struct {
 }
 
 type MediaProcessTaskInput struct {
-
 	// List of transcoding tasks.
 	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitempty" name:"TranscodeTaskSet"`
 
@@ -5741,7 +6511,6 @@ type MediaProcessTaskInput struct {
 }
 
 type MediaProcessTaskResult struct {
-
 	// Task type. Valid values:
 	// <li>Transcode: Transcoding</li>
 	// <li>AnimatedGraphics: Animated image generating</li>
@@ -5778,7 +6547,6 @@ type MediaProcessTaskResult struct {
 }
 
 type MediaProcessTaskSampleSnapshotResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5801,7 +6569,6 @@ type MediaProcessTaskSampleSnapshotResult struct {
 }
 
 type MediaProcessTaskSnapshotByTimeOffsetResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5823,7 +6590,6 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 }
 
 type MediaProcessTaskTranscodeResult struct {
-
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -5849,7 +6615,6 @@ type MediaProcessTaskTranscodeResult struct {
 }
 
 type MediaSampleSnapshotItem struct {
-
 	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -5874,7 +6639,6 @@ type MediaSampleSnapshotItem struct {
 }
 
 type MediaSnapshotByTimeOffsetItem struct {
-
 	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -5886,7 +6650,6 @@ type MediaSnapshotByTimeOffsetItem struct {
 }
 
 type MediaSnapshotByTimePicInfoItem struct {
-
 	// The timestamp (seconds) of the screenshot.
 	TimeOffset *float64 `json:"TimeOffset,omitempty" name:"TimeOffset"`
 
@@ -5898,7 +6661,6 @@ type MediaSnapshotByTimePicInfoItem struct {
 }
 
 type MediaTranscodeItem struct {
-
 	// Target bucket of an output file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
@@ -5939,7 +6701,6 @@ type MediaTranscodeItem struct {
 }
 
 type MediaVideoStreamItem struct {
-
 	// Bitrate of a video stream in bps.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Bitrate *int64 `json:"Bitrate,omitempty" name:"Bitrate"`
@@ -5977,9 +6738,33 @@ type MediaVideoStreamItem struct {
 	HdrType *string `json:"HdrType,omitempty" name:"HdrType"`
 }
 
+// Predefined struct for user
+type ModifyAIAnalysisTemplateRequestParams struct {
+	// Unique ID of video content analysis template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Video content analysis template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Video content analysis template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter of intelligent categorization task.
+	ClassificationConfigure *ClassificationConfigureInfoForUpdate `json:"ClassificationConfigure,omitempty" name:"ClassificationConfigure"`
+
+	// Control parameter of intelligent tagging task.
+	TagConfigure *TagConfigureInfoForUpdate `json:"TagConfigure,omitempty" name:"TagConfigure"`
+
+	// Control parameter of intelligent cover generating task.
+	CoverConfigure *CoverConfigureInfoForUpdate `json:"CoverConfigure,omitempty" name:"CoverConfigure"`
+
+	// Control parameter of intelligent frame-specific tagging task.
+	FrameTagConfigure *FrameTagConfigureInfoForUpdate `json:"FrameTagConfigure,omitempty" name:"FrameTagConfigure"`
+}
+
 type ModifyAIAnalysisTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6027,13 +6812,15 @@ func (r *ModifyAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAIAnalysisTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAIAnalysisTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAIAnalysisTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyAIAnalysisTemplateResponse) ToJsonString() string {
@@ -6047,9 +6834,36 @@ func (r *ModifyAIAnalysisTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAIRecognitionTemplateRequestParams struct {
+	// Unique ID of a video content recognition template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Name of a video content recognition template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description of a video content recognition template. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Face recognition control parameter.
+	FaceConfigure *FaceConfigureInfoForUpdate `json:"FaceConfigure,omitempty" name:"FaceConfigure"`
+
+	// Full text recognition control parameter.
+	OcrFullTextConfigure *OcrFullTextConfigureInfoForUpdate `json:"OcrFullTextConfigure,omitempty" name:"OcrFullTextConfigure"`
+
+	// Text keyword recognition control parameter.
+	OcrWordsConfigure *OcrWordsConfigureInfoForUpdate `json:"OcrWordsConfigure,omitempty" name:"OcrWordsConfigure"`
+
+	// Full speech recognition control parameter.
+	AsrFullTextConfigure *AsrFullTextConfigureInfoForUpdate `json:"AsrFullTextConfigure,omitempty" name:"AsrFullTextConfigure"`
+
+	// Speech keyword recognition control parameter.
+	AsrWordsConfigure *AsrWordsConfigureInfoForUpdate `json:"AsrWordsConfigure,omitempty" name:"AsrWordsConfigure"`
+}
+
 type ModifyAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6101,13 +6915,15 @@ func (r *ModifyAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAIRecognitionTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAIRecognitionTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAIRecognitionTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyAIRecognitionTemplateResponse) ToJsonString() string {
@@ -6121,9 +6937,40 @@ func (r *ModifyAIRecognitionTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
+	// Unique ID of an adaptive bitrate streaming template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Adaptive bitrate streaming format. Valid values:
+	// <li>HLS,</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Whether to prohibit transcoding from low bitrate to high bitrate. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoBitrate *uint64 `json:"DisableHigherVideoBitrate,omitempty" name:"DisableHigherVideoBitrate"`
+
+	// Whether to prohibit transcoding from low resolution to high resolution. Valid values:
+	// <li>0: no,</li>
+	// <li>1: yes.</li>
+	DisableHigherVideoResolution *uint64 `json:"DisableHigherVideoResolution,omitempty" name:"DisableHigherVideoResolution"`
+
+	// Parameter information of input streams for transcoding to adaptive bitrate streaming. Up to 10 streams can be input.
+	// Note: the frame rate of each stream must be consistent; otherwise, the frame rate of the first stream is used as the output frame rate.
+	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6178,13 +7025,15 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAdaptiveDynamicStreamingTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAdaptiveDynamicStreamingTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAdaptiveDynamicStreamingTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
@@ -6198,9 +7047,52 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAnimatedGraphicsTemplateRequestParams struct {
+	// Unique ID of an animated image generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Name of an animated image generating template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
+	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// Default value: 0.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
+	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
+	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
+	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// Default value: 0.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Animated image format. Valid values: gif, webp.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Video frame rate in Hz. Value range: [1, 30].
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// Image quality. Value range: [1, 100]. Default value: 75.
+	Quality *float64 `json:"Quality,omitempty" name:"Quality"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type ModifyAnimatedGraphicsTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6269,13 +7161,15 @@ func (r *ModifyAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAnimatedGraphicsTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAnimatedGraphicsTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAnimatedGraphicsTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyAnimatedGraphicsTemplateResponse) ToJsonString() string {
@@ -6289,9 +7183,39 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyContentReviewTemplateRequestParams struct {
+	// The unique ID of the content moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The name of the content moderation template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Control parameter for porn information
+	PornConfigure *PornConfigureInfoForUpdate `json:"PornConfigure,omitempty" name:"PornConfigure"`
+
+	// Control parameter for terrorism information
+	TerrorismConfigure *TerrorismConfigureInfoForUpdate `json:"TerrorismConfigure,omitempty" name:"TerrorismConfigure"`
+
+	// Control parameter for politically sensitive information
+	PoliticalConfigure *PoliticalConfigureInfoForUpdate `json:"PoliticalConfigure,omitempty" name:"PoliticalConfigure"`
+
+	// Control parameter of prohibited information detection. Prohibited information includes:
+	// <li>Abusive;</li>
+	// <li>Drug-related.</li>
+	// Note: this parameter is not supported yet.
+	ProhibitedConfigure *ProhibitedConfigureInfoForUpdate `json:"ProhibitedConfigure,omitempty" name:"ProhibitedConfigure"`
+
+	// Custom content moderation parameters.
+	UserDefineConfigure *UserDefineConfigureInfoForUpdate `json:"UserDefineConfigure,omitempty" name:"UserDefineConfigure"`
+}
+
 type ModifyContentReviewTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6346,13 +7270,15 @@ func (r *ModifyContentReviewTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyContentReviewTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyContentReviewTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyContentReviewTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyContentReviewTemplateResponse) ToJsonString() string {
@@ -6366,9 +7292,55 @@ func (r *ModifyContentReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyImageSpriteTemplateRequestParams struct {
+	// Unique ID of an image sprite generating template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Name of an image sprite generating template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subimage width of an image sprite in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Subimage height of an image sprite in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Sampling type. Valid values:
+	// <li>Percent: By percent.</li>
+	// <li>Time: By time interval.</li>
+	SampleType *string `json:"SampleType,omitempty" name:"SampleType"`
+
+	// Sampling interval.
+	// <li>If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage.</li>
+	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
+	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
+
+	// Subimage row count of an image sprite.
+	RowCount *uint64 `json:"RowCount,omitempty" name:"RowCount"`
+
+	// Subimage column count of an image sprite.
+	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type ModifyImageSpriteTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6442,13 +7414,15 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyImageSpriteTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyImageSpriteTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyImageSpriteTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyImageSpriteTemplateResponse) ToJsonString() string {
@@ -6462,9 +7436,33 @@ func (r *ModifyImageSpriteTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonSampleRequestParams struct {
+	// Image ID
+	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
+
+	// Name. Length limit: 128 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description. Length limit: 1,024 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Image usage. Valid values:
+	// 1. Recognition: used for content recognition; equivalent to `Recognition.Face`
+	// 2. Review: used for inappropriate information recognition; equivalent to `Review.Face`
+	// 3. All: used for content recognition and inappropriate information recognition; equivalent to 1+2
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
+
+	// Information of operations on facial features
+	FaceOperationInfo *AiSampleFaceOperation `json:"FaceOperationInfo,omitempty" name:"FaceOperationInfo"`
+
+	// Tag operation information.
+	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
+}
+
 type ModifyPersonSampleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Image ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
@@ -6511,20 +7509,22 @@ func (r *ModifyPersonSampleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPersonSampleResponseParams struct {
+	// Image information
+	Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
+
+	// Information of images that failed the verification by facial feature positioning.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPersonSampleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Image information
-		Person *AiSamplePerson `json:"Person,omitempty" name:"Person"`
-
-		// Information of images that failed the verification by facial feature positioning.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitempty" name:"FailFaceInfoSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPersonSampleResponseParams `json:"Response"`
 }
 
 func (r *ModifyPersonSampleResponse) ToJsonString() string {
@@ -6538,9 +7538,54 @@ func (r *ModifyPersonSampleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySampleSnapshotTemplateRequestParams struct {
+	// Unique ID of a sampled screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Name of a sampled screencapturing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Image width in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Image height in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Sampled screencapturing type. Valid values:
+	// <li>Percent: By percent.</li>
+	// <li>Time: By time interval.</li>
+	SampleType *string `json:"SampleType,omitempty" name:"SampleType"`
+
+	// Sampling interval.
+	// <li>If `SampleType` is `Percent`, sampling will be performed at an interval of the specified percentage.</li>
+	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
+	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
+
+	// Image format. Valid values: jpg; png.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
 type ModifySampleSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6612,13 +7657,15 @@ func (r *ModifySampleSnapshotTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySampleSnapshotTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySampleSnapshotTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySampleSnapshotTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifySampleSnapshotTemplateResponse) ToJsonString() string {
@@ -6632,9 +7679,44 @@ func (r *ModifySampleSnapshotTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
+	// Unique ID of a time point screencapturing template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Name of a time point screencapturing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Image width in px. Value range: [128, 4,096].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// Image height in px. Value range: [128, 4,096].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// Resolution adaption. Valid values:
+	// <li>open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
+	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// Image format. Valid values: jpg, png.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
+	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
+	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
+	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
+	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// Default value: black.
+	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
 type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6694,13 +7776,15 @@ func (r *ModifySnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotByTimeOffsetTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySnapshotByTimeOffsetTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySnapshotByTimeOffsetTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifySnapshotByTimeOffsetTemplateResponse) ToJsonString() string {
@@ -6714,9 +7798,43 @@ func (r *ModifySnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTranscodeTemplateRequestParams struct {
+	// Unique ID of a transcoding template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// Name of a transcoding template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Whether to remove video data. Valid values:
+	// <li>0: Retain</li>
+	// <li>1: Remove</li>
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>0: Retain</li>
+	// <li>1: Remove</li>
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// Video stream configuration parameter.
+	VideoTemplate *VideoTemplateInfoForUpdate `json:"VideoTemplate,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameter.
+	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitempty" name:"AudioTemplate"`
+
+	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+}
+
 type ModifyTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6776,13 +7894,15 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTranscodeTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTranscodeTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTranscodeTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyTranscodeTemplateResponse) ToJsonString() string {
@@ -6796,9 +7916,47 @@ func (r *ModifyTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyWatermarkTemplateRequestParams struct {
+	// Unique ID of a watermarking template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// Watermarking template name. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// Origin position. Valid values:
+	// <li>TopLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
+	// <li>TopRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
+	// <li>BottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
+	// <li>BottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
+	CoordinateOrigin *string `json:"CoordinateOrigin,omitempty" name:"CoordinateOrigin"`
+
+	// The horizontal position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `XPos` of the watermark will be the specified percentage of the video width; for example, `10%` means that `XPos` is 10% of the video width;</li>
+	// <li>If the string ends in px, the `XPos` of the watermark will be the specified px; for example, `100px` means that `XPos` is 100 px.</li>
+	XPos *string `json:"XPos,omitempty" name:"XPos"`
+
+	// The vertical position of the origin of the watermark relative to the origin of coordinates of the video. % and px formats are supported:
+	// <li>If the string ends in %, the `YPos` of the watermark will be the specified percentage of the video height; for example, `10%` means that `YPos` is 10% of the video height;</li>
+	// <li>If the string ends in px, the `YPos` of the watermark will be the specified px; for example, `100px` means that `YPos` is 100 px.</li>
+	YPos *string `json:"YPos,omitempty" name:"YPos"`
+
+	// Image watermarking template. This field is valid only for image watermarking templates.
+	ImageTemplate *ImageWatermarkInputForUpdate `json:"ImageTemplate,omitempty" name:"ImageTemplate"`
+
+	// Text watermarking template. This field is valid only for text watermarking templates.
+	TextTemplate *TextWatermarkTemplateInputForUpdate `json:"TextTemplate,omitempty" name:"TextTemplate"`
+
+	// SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
+	SvgTemplate *SvgWatermarkInputForUpdate `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
+}
+
 type ModifyWatermarkTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of a watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -6862,16 +8020,18 @@ func (r *ModifyWatermarkTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyWatermarkTemplateResponseParams struct {
+	// Image watermark address. This field is valid only when `ImageTemplate.ImageContent` is non-empty.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyWatermarkTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Image watermark address. This field is valid only when `ImageTemplate.ImageContent` is non-empty.
-		ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyWatermarkTemplateResponseParams `json:"Response"`
 }
 
 func (r *ModifyWatermarkTemplateResponse) ToJsonString() string {
@@ -6885,9 +8045,29 @@ func (r *ModifyWatermarkTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyWordSampleRequestParams struct {
+	// Keyword. Length limit: 128 characters.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// <b>Keyword usage. Valid values:</b>
+	// 1. Recognition.Ocr: OCR-based content recognition
+	// 2. Recognition.Asr: ASR-based content recognition
+	// 3. Review.Ocr: OCR-based inappropriate information recognition
+	// 4. Review.Asr: ASR-based inappropriate information recognition
+	// <b>Valid values can also be:</b>
+	// 5. Recognition: ASR- and OCR-based content recognition; equivalent to 1+2
+	// 6. Review: ASR- and OCR-based inappropriate information recognition; equivalent to 3+4
+	// 7. All: equivalent to 1+2+3+4
+	Usages []*string `json:"Usages,omitempty" name:"Usages"`
+
+	// Tag operation information.
+	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
+}
+
 type ModifyWordSampleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
@@ -6927,13 +8107,15 @@ func (r *ModifyWordSampleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyWordSampleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyWordSampleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyWordSampleResponseParams `json:"Response"`
 }
 
 func (r *ModifyWordSampleResponse) ToJsonString() string {
@@ -6948,7 +8130,6 @@ func (r *ModifyWordSampleResponse) FromJsonString(s string) error {
 }
 
 type MosaicInput struct {
-
 	// Origin position, which currently can only be:
 	// <li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the blur is in the top-left corner of the image or text.</li>
 	// Default value: TopLeft.
@@ -6992,7 +8173,6 @@ type MosaicInput struct {
 }
 
 type NumberFormat struct {
-
 	// Start value of the `{number}` variable. Default value: 0.
 	InitialValue *uint64 `json:"InitialValue,omitempty" name:"InitialValue"`
 
@@ -7007,7 +8187,6 @@ type NumberFormat struct {
 }
 
 type OcrFullTextConfigureInfo struct {
-
 	// Switch of a full text recognition task. Valid values:
 	// <li>ON: Enables an intelligent full text recognition task;</li>
 	// <li>OFF: Disables an intelligent full text recognition task.</li>
@@ -7015,7 +8194,6 @@ type OcrFullTextConfigureInfo struct {
 }
 
 type OcrFullTextConfigureInfoForUpdate struct {
-
 	// Switch of a full text recognition task. Valid values:
 	// <li>ON: Enables an intelligent full text recognition task;</li>
 	// <li>OFF: Disables an intelligent full text recognition task.</li>
@@ -7023,7 +8201,6 @@ type OcrFullTextConfigureInfoForUpdate struct {
 }
 
 type OcrWordsConfigureInfo struct {
-
 	// Switch of a text keyword recognition task. Valid values:
 	// <li>ON: Enables a text keyword recognition task;</li>
 	// <li>OFF: Disables a text keyword recognition task.</li>
@@ -7035,7 +8212,6 @@ type OcrWordsConfigureInfo struct {
 }
 
 type OcrWordsConfigureInfoForUpdate struct {
-
 	// Switch of a text keyword recognition task. Valid values:
 	// <li>ON: Enables a text keyword recognition task;</li>
 	// <li>OFF: Disables a text keyword recognition task.</li>
@@ -7047,7 +8223,6 @@ type OcrWordsConfigureInfoForUpdate struct {
 }
 
 type OverrideTranscodeParameter struct {
-
 	// Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, and m4a; mp3, flac, ogg, and m4a are formats of audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
@@ -7071,9 +8246,15 @@ type OverrideTranscodeParameter struct {
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 }
 
+// Predefined struct for user
+type ParseLiveStreamProcessNotificationRequestParams struct {
+	// Live stream event notification obtained from CMQ.
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
 type ParseLiveStreamProcessNotificationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Live stream event notification obtained from CMQ.
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
@@ -7097,38 +8278,40 @@ func (r *ParseLiveStreamProcessNotificationRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ParseLiveStreamProcessNotificationResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Result type of live stream processing. Valid values:
+// Predefined struct for user
+type ParseLiveStreamProcessNotificationResponseParams struct {
+	// Result type of live stream processing. Valid values:
 	// <li>AiReviewResult: Content audit result;</li>
 	// <li>ProcessEof: Live stream processing has been completed.</li>
-		NotificationType *string `json:"NotificationType,omitempty" name:"NotificationType"`
+	NotificationType *string `json:"NotificationType,omitempty" name:"NotificationType"`
 
-		// Video processing task ID.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-		// Information of a live stream processing error, which is valid when `NotificationType` is `ProcessEof`.
+	// Information of a live stream processing error, which is valid when `NotificationType` is `ProcessEof`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		ProcessEofInfo *LiveStreamProcessErrorInfo `json:"ProcessEofInfo,omitempty" name:"ProcessEofInfo"`
+	ProcessEofInfo *LiveStreamProcessErrorInfo `json:"ProcessEofInfo,omitempty" name:"ProcessEofInfo"`
 
-		// Content audit result, which is valid when `NotificationType` is `AiReviewResult`.
+	// Content audit result, which is valid when `NotificationType` is `AiReviewResult`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-		AiReviewResultInfo *LiveStreamAiReviewResultInfo `json:"AiReviewResultInfo,omitempty" name:"AiReviewResultInfo"`
+	AiReviewResultInfo *LiveStreamAiReviewResultInfo `json:"AiReviewResultInfo,omitempty" name:"AiReviewResultInfo"`
 
-		// Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
-		AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitempty" name:"AiRecognitionResultInfo"`
+	// Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
+	AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitempty" name:"AiRecognitionResultInfo"`
 
-		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
-		SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-		// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-		SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ParseLiveStreamProcessNotificationResponse struct {
+	*tchttp.BaseResponse
+	Response *ParseLiveStreamProcessNotificationResponseParams `json:"Response"`
 }
 
 func (r *ParseLiveStreamProcessNotificationResponse) ToJsonString() string {
@@ -7142,9 +8325,15 @@ func (r *ParseLiveStreamProcessNotificationResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ParseNotificationRequestParams struct {
+	// Event notification obtained from CMQ.
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
 type ParseNotificationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event notification obtained from CMQ.
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
@@ -7168,30 +8357,32 @@ func (r *ParseNotificationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ParseNotificationResponseParams struct {
+	// Supported event type. Valid values:
+	// <li>WorkflowTask: Video workflow processing task.</li>
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitempty" name:"WorkflowTaskEvent"`
+
+	// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+	EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitempty" name:"EditMediaTaskEvent"`
+
+	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ParseNotificationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Supported event type. Valid values:
-	// <li>WorkflowTask: Video workflow processing task.</li>
-		EventType *string `json:"EventType,omitempty" name:"EventType"`
-
-		// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitempty" name:"WorkflowTaskEvent"`
-
-		// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
-		EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitempty" name:"EditMediaTaskEvent"`
-
-		// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
-		SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
-
-		// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-		SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ParseNotificationResponseParams `json:"Response"`
 }
 
 func (r *ParseNotificationResponse) ToJsonString() string {
@@ -7206,7 +8397,6 @@ func (r *ParseNotificationResponse) FromJsonString(s string) error {
 }
 
 type PoliticalAsrReviewTemplateInfo struct {
-
 	// Whether to detect sensitive information based on ASR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7220,7 +8410,6 @@ type PoliticalAsrReviewTemplateInfo struct {
 }
 
 type PoliticalAsrReviewTemplateInfoForUpdate struct {
-
 	// Whether to detect sensitive information based on ASR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7234,7 +8423,6 @@ type PoliticalAsrReviewTemplateInfoForUpdate struct {
 }
 
 type PoliticalConfigureInfo struct {
-
 	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *PoliticalImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
@@ -7246,7 +8434,6 @@ type PoliticalConfigureInfo struct {
 }
 
 type PoliticalConfigureInfoForUpdate struct {
-
 	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *PoliticalImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
@@ -7258,7 +8445,6 @@ type PoliticalConfigureInfoForUpdate struct {
 }
 
 type PoliticalImgReviewTemplateInfo struct {
-
 	// Whether to detect sensitive information in images. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7283,7 +8469,6 @@ type PoliticalImgReviewTemplateInfo struct {
 }
 
 type PoliticalImgReviewTemplateInfoForUpdate struct {
-
 	// Whether to detect sensitive information in images. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7308,7 +8493,6 @@ type PoliticalImgReviewTemplateInfoForUpdate struct {
 }
 
 type PoliticalOcrReviewTemplateInfo struct {
-
 	// Whether to detect sensitive information based on OCR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7322,7 +8506,6 @@ type PoliticalOcrReviewTemplateInfo struct {
 }
 
 type PoliticalOcrReviewTemplateInfoForUpdate struct {
-
 	// Whether to detect sensitive information based on OCR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -7336,7 +8519,6 @@ type PoliticalOcrReviewTemplateInfoForUpdate struct {
 }
 
 type PornAsrReviewTemplateInfo struct {
-
 	// Switch of a porn information detection in speech task. Valid values:
 	// <li>ON: Enables a porn information detection in speech task;</li>
 	// <li>OFF: Disables a porn information detection in speech task.</li>
@@ -7350,7 +8532,6 @@ type PornAsrReviewTemplateInfo struct {
 }
 
 type PornAsrReviewTemplateInfoForUpdate struct {
-
 	// Switch of a porn information detection in speech task. Valid values:
 	// <li>ON: Enables a porn information detection in speech task;</li>
 	// <li>OFF: Disables a porn information detection in speech task.</li>
@@ -7364,7 +8545,6 @@ type PornAsrReviewTemplateInfoForUpdate struct {
 }
 
 type PornConfigureInfo struct {
-
 	// Control parameter of porn information detection in image.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImgReviewInfo *PornImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
@@ -7379,7 +8559,6 @@ type PornConfigureInfo struct {
 }
 
 type PornConfigureInfoForUpdate struct {
-
 	// Control parameter of porn information detection in image.
 	ImgReviewInfo *PornImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
@@ -7391,7 +8570,6 @@ type PornConfigureInfoForUpdate struct {
 }
 
 type PornImgReviewTemplateInfo struct {
-
 	// Switch of a porn information detection in image task. Valid values:
 	// <li>ON: Enables a porn information detection in image task;</li>
 	// <li>OFF: Disables a porn information detection in image task.</li>
@@ -7412,7 +8590,6 @@ type PornImgReviewTemplateInfo struct {
 }
 
 type PornImgReviewTemplateInfoForUpdate struct {
-
 	// Switch of a porn information detection in image task. Valid values:
 	// <li>ON: Enables a porn information detection in image task;</li>
 	// <li>OFF: Disables a porn information detection in image task.</li>
@@ -7433,7 +8610,6 @@ type PornImgReviewTemplateInfoForUpdate struct {
 }
 
 type PornOcrReviewTemplateInfo struct {
-
 	// Switch of a porn information detection in text task. Valid values:
 	// <li>ON: Enables a porn information detection in text task;</li>
 	// <li>OFF: Disables a porn information detection in text task.</li>
@@ -7447,7 +8623,6 @@ type PornOcrReviewTemplateInfo struct {
 }
 
 type PornOcrReviewTemplateInfoForUpdate struct {
-
 	// Switch of a porn information detection in text task. Valid values:
 	// <li>ON: Enables a porn information detection in text task;</li>
 	// <li>OFF: Disables a porn information detection in text task.</li>
@@ -7460,9 +8635,36 @@ type PornOcrReviewTemplateInfoForUpdate struct {
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
+// Predefined struct for user
+type ProcessLiveStreamRequestParams struct {
+	// Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Event notification information of a task, which is used to specify the live stream processing result.
+	TaskNotifyConfig *LiveStreamTaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// Target bucket of a live stream processing output file. This parameter is required if a file will be output.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// Target directory of a live stream processing output file, such as `/movie/201909/`. If this parameter is left empty, the `/` directory will be used.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// Type parameter of a video content audit task.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
+
+	// Type parameter of video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
+
+	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
@@ -7514,16 +8716,18 @@ func (r *ProcessLiveStreamRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ProcessLiveStreamResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ProcessLiveStreamResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ProcessLiveStreamResponseParams `json:"Response"`
 }
 
 func (r *ProcessLiveStreamResponse) ToJsonString() string {
@@ -7537,9 +8741,45 @@ func (r *ProcessLiveStreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ProcessMediaRequestParams struct {
+	// The information of the file to process.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+
+	// The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be saved to the directory in `InputInfo`.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The media processing parameters to use.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
+
+	// Type parameter of a video content audit task.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
+
+	// Type parameter of a video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
+
+	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
 type ProcessMediaRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The information of the file to process.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 
@@ -7603,16 +8843,18 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ProcessMediaResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ProcessMediaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ProcessMediaResponseParams `json:"Response"`
 }
 
 func (r *ProcessMediaResponse) ToJsonString() string {
@@ -7627,7 +8869,6 @@ func (r *ProcessMediaResponse) FromJsonString(s string) error {
 }
 
 type ProhibitedAsrReviewTemplateInfo struct {
-
 	// Switch of prohibited information detection in speech task. Valid values:
 	// <li>ON: enables prohibited information detection in speech task;</li>
 	// <li>OFF: disables prohibited information detection in speech task.</li>
@@ -7641,7 +8882,6 @@ type ProhibitedAsrReviewTemplateInfo struct {
 }
 
 type ProhibitedAsrReviewTemplateInfoForUpdate struct {
-
 	// Switch of prohibited information detection in speech task. Valid values:
 	// <li>ON: enables prohibited information detection in speech task;</li>
 	// <li>OFF: disables prohibited information detection in speech task.</li>
@@ -7655,7 +8895,6 @@ type ProhibitedAsrReviewTemplateInfoForUpdate struct {
 }
 
 type ProhibitedConfigureInfo struct {
-
 	// Control parameter of prohibited information detection in speech.
 	AsrReviewInfo *ProhibitedAsrReviewTemplateInfo `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
@@ -7664,7 +8903,6 @@ type ProhibitedConfigureInfo struct {
 }
 
 type ProhibitedConfigureInfoForUpdate struct {
-
 	// Control parameter of prohibited information detection in speech.
 	AsrReviewInfo *ProhibitedAsrReviewTemplateInfoForUpdate `json:"AsrReviewInfo,omitempty" name:"AsrReviewInfo"`
 
@@ -7673,7 +8911,6 @@ type ProhibitedConfigureInfoForUpdate struct {
 }
 
 type ProhibitedOcrReviewTemplateInfo struct {
-
 	// Switch of prohibited information detection in text task. Valid values:
 	// <li>ON: enables prohibited information detection in text task;</li>
 	// <li>OFF: disables prohibited information detection in text task.</li>
@@ -7687,7 +8924,6 @@ type ProhibitedOcrReviewTemplateInfo struct {
 }
 
 type ProhibitedOcrReviewTemplateInfoForUpdate struct {
-
 	// Switch of prohibited information detection in text task. Valid values:
 	// <li>ON: enables prohibited information detection in text task;</li>
 	// <li>OFF: disables prohibited information detection in text task.</li>
@@ -7701,7 +8937,6 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 }
 
 type RawImageWatermarkInput struct {
-
 	// Input content of watermark image. JPEG and PNG images are supported.
 	ImageContent *MediaInputInfo `json:"ImageContent,omitempty" name:"ImageContent"`
 
@@ -7725,7 +8960,6 @@ type RawImageWatermarkInput struct {
 }
 
 type RawTranscodeParameter struct {
-
 	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
@@ -7752,7 +8986,6 @@ type RawTranscodeParameter struct {
 }
 
 type RawWatermarkParameter struct {
-
 	// Watermark type. Valid values:
 	// <li>image: image watermark.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -7778,9 +9011,45 @@ type RawWatermarkParameter struct {
 	ImageTemplate *RawImageWatermarkInput `json:"ImageTemplate,omitempty" name:"ImageTemplate"`
 }
 
+// Predefined struct for user
+type ResetWorkflowRequestParams struct {
+	// Workflow ID.
+	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
+
+	// Workflow name of up to 128 characters, which must be unique for the same user.
+	WorkflowName *string `json:"WorkflowName,omitempty" name:"WorkflowName"`
+
+	// Triggering rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// Output configuration of a video processing output file. If this parameter is left empty, the storage location in `Trigger` will be inherited.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory where the source file is located, i.e.; `{inputDir}`.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// Parameter of a video processing task.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
+
+	// Type parameter of a video content audit task.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
+
+	// Type parameter of a video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
+
+	// Workflow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TaskPriority *int64 `json:"TaskPriority,omitempty" name:"TaskPriority"`
+
+	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+}
+
 type ResetWorkflowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
 
@@ -7844,13 +9113,15 @@ func (r *ResetWorkflowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetWorkflowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetWorkflowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetWorkflowResponseParams `json:"Response"`
 }
 
 func (r *ResetWorkflowResponse) ToJsonString() string {
@@ -7865,7 +9136,6 @@ func (r *ResetWorkflowResponse) FromJsonString(s string) error {
 }
 
 type SampleSnapshotTaskInput struct {
-
 	// Sampled screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -7886,7 +9156,6 @@ type SampleSnapshotTaskInput struct {
 }
 
 type SampleSnapshotTemplate struct {
-
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -7948,7 +9217,6 @@ type SampleSnapshotTemplate struct {
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
-
 	// ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -7977,7 +9245,6 @@ type SnapshotByTimeOffsetTaskInput struct {
 }
 
 type SnapshotByTimeOffsetTemplate struct {
-
 	// Unique ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -8033,7 +9300,6 @@ type SnapshotByTimeOffsetTemplate struct {
 }
 
 type SvgWatermarkInput struct {
-
 	// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
 	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
 	//  and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
@@ -8058,7 +9324,6 @@ type SvgWatermarkInput struct {
 }
 
 type SvgWatermarkInputForUpdate struct {
-
 	// Watermark width, which supports six formats of px, %, W%, H%, S%, and L%:
 	// <li>If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered
 	//  and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;</li>
@@ -8083,7 +9348,6 @@ type SvgWatermarkInputForUpdate struct {
 }
 
 type TEHDConfig struct {
-
 	// TESHD type. Valid values:
 	// <li>TEHD-100: TESHD-100.</li>
 	// If this parameter is left empty, TESHD will not be enabled.
@@ -8095,7 +9359,6 @@ type TEHDConfig struct {
 }
 
 type TEHDConfigForUpdate struct {
-
 	// TESHD type. Valid values:
 	// <li>TEHD-100: TESHD-100.</li>
 	// If this parameter is left blank, no modification will be made.
@@ -8106,7 +9369,6 @@ type TEHDConfigForUpdate struct {
 }
 
 type TagConfigureInfo struct {
-
 	// Switch of intelligent tagging task. Valid values:
 	// <li>ON: enables intelligent tagging task;</li>
 	// <li>OFF: disables intelligent tagging task.</li>
@@ -8114,7 +9376,6 @@ type TagConfigureInfo struct {
 }
 
 type TagConfigureInfoForUpdate struct {
-
 	// Switch of intelligent tagging task. Valid values:
 	// <li>ON: enables intelligent tagging task;</li>
 	// <li>OFF: disables intelligent tagging task.</li>
@@ -8122,7 +9383,6 @@ type TagConfigureInfoForUpdate struct {
 }
 
 type TaskNotifyConfig struct {
-
 	// The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
 	CmqModel *string `json:"CmqModel,omitempty" name:"CmqModel"`
 
@@ -8150,7 +9410,6 @@ type TaskNotifyConfig struct {
 }
 
 type TaskOutputStorage struct {
-
 	// The type of storage location for the media processing output object. Only COS is supported currently.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -8160,7 +9419,6 @@ type TaskOutputStorage struct {
 }
 
 type TaskSimpleInfo struct {
-
 	// Task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -8180,7 +9438,6 @@ type TaskSimpleInfo struct {
 }
 
 type TerrorismConfigureInfo struct {
-
 	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
@@ -8189,7 +9446,6 @@ type TerrorismConfigureInfo struct {
 }
 
 type TerrorismConfigureInfoForUpdate struct {
-
 	// The parameters for detecting sensitive information in images.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfoForUpdate `json:"ImgReviewInfo,omitempty" name:"ImgReviewInfo"`
 
@@ -8198,7 +9454,6 @@ type TerrorismConfigureInfoForUpdate struct {
 }
 
 type TerrorismImgReviewTemplateInfo struct {
-
 	// Whether to detect sensitive information in images. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -8224,7 +9479,6 @@ type TerrorismImgReviewTemplateInfo struct {
 }
 
 type TerrorismImgReviewTemplateInfoForUpdate struct {
-
 	// Whether to detect sensitive information in images. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -8250,7 +9504,6 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 }
 
 type TerrorismOcrReviewTemplateInfo struct {
-
 	// Whether to detect sensitive information based on OCR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -8264,7 +9517,6 @@ type TerrorismOcrReviewTemplateInfo struct {
 }
 
 type TerrorismOcrReviewTemplateInfoForUpdate struct {
-
 	// Whether to detect sensitive information based on OCR. Valid values:
 	// <li>ON</li>
 	// <li>OFF</li>
@@ -8278,7 +9530,6 @@ type TerrorismOcrReviewTemplateInfoForUpdate struct {
 }
 
 type TextWatermarkTemplateInput struct {
-
 	// Font type. Currently, two types are supported:
 	// <li>simkai.ttf: Both Chinese and English are supported;</li>
 	// <li>arial.ttf: Only English is supported.</li>
@@ -8298,7 +9549,6 @@ type TextWatermarkTemplateInput struct {
 }
 
 type TextWatermarkTemplateInputForUpdate struct {
-
 	// Font type. Currently, two types are supported:
 	// <li>simkai.ttf: Both Chinese and English are supported;</li>
 	// <li>arial.ttf: Only English is supported.</li>
@@ -8317,7 +9567,6 @@ type TextWatermarkTemplateInputForUpdate struct {
 }
 
 type TranscodeTaskInput struct {
-
 	// ID of a video transcoding template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -8370,7 +9619,6 @@ type TranscodeTaskInput struct {
 }
 
 type TranscodeTemplate struct {
-
 	// Unique ID of a transcoding template.
 	Definition *string `json:"Definition,omitempty" name:"Definition"`
 
@@ -8425,13 +9673,11 @@ type TranscodeTemplate struct {
 }
 
 type UrlInputInfo struct {
-
 	// URL of a video.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type UserDefineAsrTextReviewTemplateInfo struct {
-
 	// Switch of a custom speech audit task. Valid values:
 	// <li>ON: Enables a custom speech audit task;</li>
 	// <li>OFF: Disables a custom speech audit task.</li>
@@ -8449,7 +9695,6 @@ type UserDefineAsrTextReviewTemplateInfo struct {
 }
 
 type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
-
 	// Switch of a custom speech audit task. Valid values:
 	// <li>ON: Enables a custom speech audit task;</li>
 	// <li>OFF: Disables a custom speech audit task.</li>
@@ -8467,7 +9712,6 @@ type UserDefineAsrTextReviewTemplateInfoForUpdate struct {
 }
 
 type UserDefineConfigureInfo struct {
-
 	// Control parameter of custom figure audit.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FaceReviewInfo *UserDefineFaceReviewTemplateInfo `json:"FaceReviewInfo,omitempty" name:"FaceReviewInfo"`
@@ -8482,7 +9726,6 @@ type UserDefineConfigureInfo struct {
 }
 
 type UserDefineConfigureInfoForUpdate struct {
-
 	// Control parameter of custom figure audit.
 	FaceReviewInfo *UserDefineFaceReviewTemplateInfoForUpdate `json:"FaceReviewInfo,omitempty" name:"FaceReviewInfo"`
 
@@ -8494,7 +9737,6 @@ type UserDefineConfigureInfoForUpdate struct {
 }
 
 type UserDefineFaceReviewTemplateInfo struct {
-
 	// Switch of a custom figure audit task. Valid values:
 	// <li>ON: Enables a custom figure audit task;</li>
 	// <li>OFF: Disables a custom figure audit task.</li>
@@ -8512,7 +9754,6 @@ type UserDefineFaceReviewTemplateInfo struct {
 }
 
 type UserDefineFaceReviewTemplateInfoForUpdate struct {
-
 	// Switch of a custom figure audit task. Valid values:
 	// <li>ON: Enables a custom figure audit task;</li>
 	// <li>OFF: Disables a custom figure audit task.</li>
@@ -8530,7 +9771,6 @@ type UserDefineFaceReviewTemplateInfoForUpdate struct {
 }
 
 type UserDefineOcrTextReviewTemplateInfo struct {
-
 	// Switch of a custom text audit task. Valid values:
 	// <li>ON: Enables a custom text audit task;</li>
 	// <li>OFF: Disables a custom text audit task.</li>
@@ -8548,7 +9788,6 @@ type UserDefineOcrTextReviewTemplateInfo struct {
 }
 
 type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
-
 	// Switch of a custom text audit task. Valid values:
 	// <li>ON: Enables a custom text audit task;</li>
 	// <li>OFF: Disables a custom text audit task.</li>
@@ -8566,7 +9805,6 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 }
 
 type VideoTemplateInfo struct {
-
 	// Video stream codec. Valid values:
 	// <li>`libx264`: H.264</li>
 	// <li>`libx265`: H.265</li>
@@ -8622,7 +9860,6 @@ type VideoTemplateInfo struct {
 }
 
 type VideoTemplateInfoForUpdate struct {
-
 	// Video stream codec. Valid values:
 	// <li>libx264: H.264</li>
 	// <li>libx265: H.265</li>
@@ -8674,7 +9911,6 @@ type VideoTemplateInfoForUpdate struct {
 }
 
 type WatermarkInput struct {
-
 	// ID of a watermarking template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -8705,7 +9941,6 @@ type WatermarkInput struct {
 }
 
 type WatermarkTemplate struct {
-
 	// Unique ID of a watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
@@ -8757,7 +9992,6 @@ type WatermarkTemplate struct {
 }
 
 type WorkflowInfo struct {
-
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
 
@@ -8809,7 +10043,6 @@ type WorkflowInfo struct {
 }
 
 type WorkflowTask struct {
-
 	// The media processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -8846,7 +10079,6 @@ type WorkflowTask struct {
 }
 
 type WorkflowTrigger struct {
-
 	// Trigger type. Only `CosFileUpload` is supported currently.
 	Type *string `json:"Type,omitempty" name:"Type"`
 

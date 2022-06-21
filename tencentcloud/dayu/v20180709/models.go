@@ -21,7 +21,6 @@ import (
 )
 
 type BaradData struct {
-
 	// Metric name (connum: number of active TCP connections;
 	// new_conn: number of new TCP connections;
 	// inactive_conn: number of inactive connections;
@@ -40,7 +39,6 @@ type BaradData struct {
 }
 
 type BoundIpInfo struct {
-
 	// IP address
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -55,13 +53,11 @@ type BoundIpInfo struct {
 }
 
 type CCAlarmThreshold struct {
-
 	// CC alarm threshold
 	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
 }
 
 type CCEventRecord struct {
-
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -104,7 +100,6 @@ type CCEventRecord struct {
 }
 
 type CCFrequencyRule struct {
-
 	// ID of the access frequency control rule for CC protection
 	CCFrequencyRuleId *string `json:"CCFrequencyRuleId,omitempty" name:"CCFrequencyRuleId"`
 
@@ -134,7 +129,6 @@ type CCFrequencyRule struct {
 }
 
 type CCPolicy struct {
-
 	// Policy name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -173,7 +167,6 @@ type CCPolicy struct {
 }
 
 type CCRule struct {
-
 	// Key of the policy. Valid values: `host`, `cgi`, `ua`, `referer`
 	Skey *string `json:"Skey,omitempty" name:"Skey"`
 
@@ -185,7 +178,6 @@ type CCRule struct {
 }
 
 type CCRuleConfig struct {
-
 	// Reference period in seconds. Valid values: [10, 30, 60]
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
@@ -199,9 +191,24 @@ type CCRuleConfig struct {
 	ExeDuration *uint64 `json:"ExeDuration,omitempty" name:"ExeDuration"`
 }
 
+// Predefined struct for user
+type CreateBasicDDoSAlarmThresholdRequestParams struct {
+	// Anti-DDoS service type (`basic`: Anti-DDoS Basic)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// `get`: read alarm threshold, `set`: set alarm threshold
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Alarm threshold type. 1: inbound traffic, 2: cleansed traffic. This field is required if `Method` is `set`;
+	AlarmType *uint64 `json:"AlarmType,omitempty" name:"AlarmType"`
+
+	// Alarm threshold. It is required if `Method` is `set`. If it is set to 0, it means to clear the alarm threshold configuration;
+	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
+}
+
 type CreateBasicDDoSAlarmThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`basic`: Anti-DDoS Basic)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -237,19 +244,21 @@ func (r *CreateBasicDDoSAlarmThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBasicDDoSAlarmThresholdResponseParams struct {
+	// If there is an alarm threshold configuration, the returned alarm threshold will be greater than 0; otherwise, the returned alarm threshold will be 0;
+	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
+
+	// Alarm threshold type. 1: inbound traffic, 2: cleansed traffic. This field is valid if `AlarmThreshold` is above 0;
+	AlarmType *uint64 `json:"AlarmType,omitempty" name:"AlarmType"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBasicDDoSAlarmThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// If there is an alarm threshold configuration, the returned alarm threshold will be greater than 0; otherwise, the returned alarm threshold will be 0;
-		AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
-
-		// Alarm threshold type. 1: inbound traffic, 2: cleansed traffic. This field is valid if `AlarmThreshold` is above 0;
-		AlarmType *uint64 `json:"AlarmType,omitempty" name:"AlarmType"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBasicDDoSAlarmThresholdResponseParams `json:"Response"`
 }
 
 func (r *CreateBasicDDoSAlarmThresholdResponse) ToJsonString() string {
@@ -263,9 +272,27 @@ func (r *CreateBasicDDoSAlarmThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBoundIPRequestParams struct {
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Array of IPs to be bound to the Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, this array can contain only one IP. If there are no IPs to bind, it can be empty; however, either `BoundDevList` or `UnBoundDevList` must not be empty;
+	BoundDevList []*BoundIpInfo `json:"BoundDevList,omitempty" name:"BoundDevList"`
+
+	// Array of IPs to be unbound from Anti-DDoS instance. For Anti-DDoS Pro Single IP instance, this array can contain only one IP; if there are no IPs to unbind, it can be empty; however, either `BoundDevList` or `UnBoundDevList` must not be empty;
+	UnBoundDevList []*BoundIpInfo `json:"UnBoundDevList,omitempty" name:"UnBoundDevList"`
+
+	// [Disused]
+	CopyPolicy *string `json:"CopyPolicy,omitempty" name:"CopyPolicy"`
+}
+
 type CreateBoundIPRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -305,16 +332,18 @@ func (r *CreateBoundIPRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBoundIPResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBoundIPResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBoundIPResponseParams `json:"Response"`
 }
 
 func (r *CreateBoundIPResponse) ToJsonString() string {
@@ -328,9 +357,45 @@ func (r *CreateBoundIPResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCCFrequencyRulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Layer-7 forwarding rule ID, which can be obtained through the `DescribleL7Rules` API
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Matching rule. Valid values: ["include" (prefix match), "equal" (exact match)]
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+
+	// Reference period in seconds. Valid values: [10, 30, 60]
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of access requests. Value range: [1-10000]
+	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
+
+	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
+	Act *string `json:"Act,omitempty" name:"Act"`
+
+	// Execution duration in seconds. Valid range: [1-900]
+	ExeDuration *uint64 `json:"ExeDuration,omitempty" name:"ExeDuration"`
+
+	// URI string, which must start with `/`, such as `/abc/a.php`. Length limit: 31. If URI is `/`, only prefix match can be selected as the matching mode;
+	Uri *string `json:"Uri,omitempty" name:"Uri"`
+
+	// `User-Agent` string. Length limit: 80
+	UserAgent *string `json:"UserAgent,omitempty" name:"UserAgent"`
+
+	// Cookie string. Length limit: 40
+	Cookie *string `json:"Cookie,omitempty" name:"Cookie"`
+}
+
 type CreateCCFrequencyRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -394,16 +459,18 @@ func (r *CreateCCFrequencyRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCCFrequencyRulesResponseParams struct {
+	// Access frequency control rule ID for CC protection
+	CCFrequencyRuleId *string `json:"CCFrequencyRuleId,omitempty" name:"CCFrequencyRuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCCFrequencyRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Access frequency control rule ID for CC protection
-		CCFrequencyRuleId *string `json:"CCFrequencyRuleId,omitempty" name:"CCFrequencyRuleId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCCFrequencyRulesResponseParams `json:"Response"`
 }
 
 func (r *CreateCCFrequencyRulesResponse) ToJsonString() string {
@@ -417,9 +484,21 @@ func (r *CreateCCFrequencyRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCCSelfDefinePolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Details of the CC protection policy
+	Policy *CCPolicy `json:"Policy,omitempty" name:"Policy"`
+}
+
 type CreateCCSelfDefinePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -451,16 +530,18 @@ func (r *CreateCCSelfDefinePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCCSelfDefinePolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCCSelfDefinePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCCSelfDefinePolicyResponseParams `json:"Response"`
 }
 
 func (r *CreateCCSelfDefinePolicyResponse) ToJsonString() string {
@@ -474,9 +555,84 @@ func (r *CreateCCSelfDefinePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDDoSPolicyCaseRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy scenario name string. Length limit: 64
+	CaseName *string `json:"CaseName,omitempty" name:"CaseName"`
+
+	// Development platform. Valid values: [PC (PC client), MOBILE (mobile device), TV (TV), SERVER (server)]
+	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes"`
+
+	// Category. Valid values: [WEB (website), GAME (game), APP (application), OTHER (other)]
+	AppType *string `json:"AppType,omitempty" name:"AppType"`
+
+	// Application protocol. Valid values: [tcp (TCP protocol), udp (UDP protocol), icmp (ICMP protocol), all (other protocols)]
+	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols"`
+
+	// TCP start port. Value range: (0, 65535]
+	TcpSportStart *string `json:"TcpSportStart,omitempty" name:"TcpSportStart"`
+
+	// TCP end port. Value range: (0, 65535). It must be greater than or equal to the TCP start port.
+	TcpSportEnd *string `json:"TcpSportEnd,omitempty" name:"TcpSportEnd"`
+
+	// UDP start port. Value range: (0, 65535]
+	UdpSportStart *string `json:"UdpSportStart,omitempty" name:"UdpSportStart"`
+
+	// UDP end port. Value range: (0, 65535). It must be greater than or equal to the UDP start port.
+	UdpSportEnd *string `json:"UdpSportEnd,omitempty" name:"UdpSportEnd"`
+
+	// Whether there are customers outside China. Valid values: [no, yes]
+	HasAbroad *string `json:"HasAbroad,omitempty" name:"HasAbroad"`
+
+	// Whether to actively initiate outbound TCP requests. Valid values: [no, yes]
+	HasInitiateTcp *string `json:"HasInitiateTcp,omitempty" name:"HasInitiateTcp"`
+
+	// Whether to actively initiate outbound UDP requests. Valid values: [no, yes]
+	HasInitiateUdp *string `json:"HasInitiateUdp,omitempty" name:"HasInitiateUdp"`
+
+	// Port that actively initiates TCP requests. Value range: (0, 65535]
+	PeerTcpPort *string `json:"PeerTcpPort,omitempty" name:"PeerTcpPort"`
+
+	// Port that actively initiates UDP requests. Value range: (0, 65535]
+	PeerUdpPort *string `json:"PeerUdpPort,omitempty" name:"PeerUdpPort"`
+
+	// Fixed feature code of TCP payload. Max string length: 512
+	TcpFootprint *string `json:"TcpFootprint,omitempty" name:"TcpFootprint"`
+
+	// Fixed feature code of UDP payload. Max string length: 512
+	UdpFootprint *string `json:"UdpFootprint,omitempty" name:"UdpFootprint"`
+
+	// Web application API URL
+	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl"`
+
+	// Minimum length of TCP packet. Value range: (0, 1500)
+	MinTcpPackageLen *string `json:"MinTcpPackageLen,omitempty" name:"MinTcpPackageLen"`
+
+	// Maximum length of TCP packet. Value range: (0, 1500). It must be greater than or equal to the minimum length of TCP packet
+	MaxTcpPackageLen *string `json:"MaxTcpPackageLen,omitempty" name:"MaxTcpPackageLen"`
+
+	// Minimum length of UDP packet. Value range: (0, 1500)
+	MinUdpPackageLen *string `json:"MinUdpPackageLen,omitempty" name:"MinUdpPackageLen"`
+
+	// Maximum length of UDP packet. Value range: (0, 1500). It must be greater than or equal to the minimum length of UDP packet
+	MaxUdpPackageLen *string `json:"MaxUdpPackageLen,omitempty" name:"MaxUdpPackageLen"`
+
+	// Whether there are applications using VPN. Valid values: [no, yes]
+	HasVPN *string `json:"HasVPN,omitempty" name:"HasVPN"`
+
+	// TCP port list. You can enter a single port, or a port range. Format: 80,443,700-800,53,1000-3000.
+	TcpPortList *string `json:"TcpPortList,omitempty" name:"TcpPortList"`
+
+	// UDP port list. You can enter a single port, or a port range. Format: 80,443,700-800,53,1000-3000.
+	UdpPortList *string `json:"UdpPortList,omitempty" name:"UdpPortList"`
+}
+
 type CreateDDoSPolicyCaseRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -592,16 +748,18 @@ func (r *CreateDDoSPolicyCaseRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDDoSPolicyCaseResponseParams struct {
+	// Policy scenario ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDDoSPolicyCaseResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy scenario ID
-		SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDDoSPolicyCaseResponseParams `json:"Response"`
 }
 
 func (r *CreateDDoSPolicyCaseResponse) ToJsonString() string {
@@ -615,9 +773,33 @@ func (r *CreateDDoSPolicyCaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDDoSPolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Protocol disablement, which must be entered, and the array length must be 1
+	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions"`
+
+	// Policy name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Ports to be closed. If no ports are to be closed, enter an empty array
+	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits"`
+
+	// Request source IP blocklist/allowlist, which should be an empty array if there are no blocked or allowed IPs.
+	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys"`
+
+	// Packet filter. Enter an empty array if there are no packets to filter
+	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters"`
+
+	// Watermarking policy parameters. Enter an empty array if the watermarking feature is not enabled. Only one watermarking policy can be passed in (that is, the size of the array cannot exceed 1)
+	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint"`
+}
+
 type CreateDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -665,16 +847,18 @@ func (r *CreateDDoSPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDDoSPolicyResponseParams struct {
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDDoSPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy ID
-		PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDDoSPolicyResponseParams `json:"Response"`
 }
 
 func (r *CreateDDoSPolicyResponse) ToJsonString() string {
@@ -688,9 +872,21 @@ func (r *CreateDDoSPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceNameRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Instance name. Length limit: 32 characters
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type CreateInstanceNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -722,16 +918,18 @@ func (r *CreateInstanceNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceNameResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstanceNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstanceNameResponseParams `json:"Response"`
 }
 
 func (r *CreateInstanceNameResponse) ToJsonString() string {
@@ -745,9 +943,21 @@ func (r *CreateInstanceNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL4HealthConfigRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Layer-4 health check configuration array
+	HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
+}
+
 type CreateL4HealthConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -779,16 +989,18 @@ func (r *CreateL4HealthConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL4HealthConfigResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL4HealthConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL4HealthConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateL4HealthConfigResponse) ToJsonString() string {
@@ -802,9 +1014,21 @@ func (r *CreateL4HealthConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL4RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule list
+	Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules"`
+}
+
 type CreateL4RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -836,16 +1060,18 @@ func (r *CreateL4RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL4RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL4RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL4RulesResponseParams `json:"Response"`
 }
 
 func (r *CreateL4RulesResponse) ToJsonString() string {
@@ -859,9 +1085,27 @@ func (r *CreateL4RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7CCRuleRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Operation. Valid values: [query (query), add (add), del (delete)]
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Layer-7 forwarding rule ID, such as rule-0000001
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Custom layer-7 CC protection rule. If the `Method` is `query`, this field can be left empty; if the `Method` is `add` or `del`, it is required, and the array length can only be 1;
+	RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig"`
+}
+
 type CreateL7CCRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -901,16 +1145,18 @@ func (r *CreateL7CCRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7CCRuleResponseParams struct {
+	// Custom layer-7 CC protection rule parameters. If custom CC protection rule is not enabled, an empty array will be returned.
+	RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL7CCRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom layer-7 CC protection rule parameters. If custom CC protection rule is not enabled, an empty array will be returned.
-		RuleConfig []*CCRuleConfig `json:"RuleConfig,omitempty" name:"RuleConfig"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL7CCRuleResponseParams `json:"Response"`
 }
 
 func (r *CreateL7CCRuleResponse) ToJsonString() string {
@@ -924,9 +1170,21 @@ func (r *CreateL7CCRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7HealthConfigRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Layer-7 health check configuration array
+	HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
+}
+
 type CreateL7HealthConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -958,16 +1216,18 @@ func (r *CreateL7HealthConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7HealthConfigResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL7HealthConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL7HealthConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateL7HealthConfigResponse) ToJsonString() string {
@@ -981,9 +1241,33 @@ func (r *CreateL7HealthConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RuleCertRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// The resource instance ID, such as the ID of an Anti-DDoS Advanced instance or the ID of an Anti-DDoS Ultimate instance.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Certificate type, which is required if the protocol is HTTPS. Valid value: [2 (Tencent Cloud-hosted certificate)]
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// If the certificate is a Tencent Cloud-hosted certificate, this field must be entered with the hosted certificate ID.
+	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
+
+	// [Disused] If the certificate is an external certificate, this field must be entered with the certificate content. 
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// [Disused] If the certificate is an external certificate, this field must be entered with the certificate key. 
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+}
+
 type CreateL7RuleCertRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1031,16 +1315,18 @@ func (r *CreateL7RuleCertRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RuleCertResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL7RuleCertResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL7RuleCertResponseParams `json:"Response"`
 }
 
 func (r *CreateL7RuleCertResponse) ToJsonString() string {
@@ -1054,9 +1340,21 @@ func (r *CreateL7RuleCertResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule list
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+}
+
 type CreateL7RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1088,16 +1386,18 @@ func (r *CreateL7RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL7RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL7RulesResponseParams `json:"Response"`
 }
 
 func (r *CreateL7RulesResponse) ToJsonString() string {
@@ -1111,9 +1411,21 @@ func (r *CreateL7RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RulesUploadRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule list
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+}
+
 type CreateL7RulesUploadRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1145,16 +1457,18 @@ func (r *CreateL7RulesUploadRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateL7RulesUploadResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateL7RulesUploadResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateL7RulesUploadResponseParams `json:"Response"`
 }
 
 func (r *CreateL7RulesUploadResponse) ToJsonString() string {
@@ -1168,9 +1482,18 @@ func (r *CreateL7RulesUploadResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetReturnRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type CreateNetReturnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1198,13 +1521,15 @@ func (r *CreateNetReturnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetReturnResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateNetReturnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateNetReturnResponseParams `json:"Response"`
 }
 
 func (r *CreateNetReturnResponse) ToJsonString() string {
@@ -1218,9 +1543,24 @@ func (r *CreateNetReturnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNewL7RulesUploadRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID list.
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+
+	// Resource IP address list.
+	VipList []*string `json:"VipList,omitempty" name:"VipList"`
+
+	// Rule list.
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+}
+
 type CreateNewL7RulesUploadRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1256,16 +1596,18 @@ func (r *CreateNewL7RulesUploadRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNewL7RulesUploadResponseParams struct {
+	// Success code.
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateNewL7RulesUploadResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code.
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateNewL7RulesUploadResponseParams `json:"Response"`
 }
 
 func (r *CreateNewL7RulesUploadResponse) ToJsonString() string {
@@ -1279,9 +1621,18 @@ func (r *CreateNewL7RulesUploadResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUnblockIpRequestParams struct {
+	// IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Type of the unblocking action (`user`: self-service unblocking, `auto`: automatic unblocking, `update`: unblocking by service upgrading, `bind`: unblocking by binding Anti-DDoS Pro instance)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+}
+
 type CreateUnblockIpRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1309,22 +1660,24 @@ func (r *CreateUnblockIpRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUnblockIpResponseParams struct {
+	// IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Type of the unblocking action (`user`: self-service unblocking, `auto`: automatic unblocking, `update`: unblocking by service upgrading, `bind`: unblocking by binding Anti-DDoS Pro instance)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// Unblocked time (estimated)
+	UnblockTime *string `json:"UnblockTime,omitempty" name:"UnblockTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUnblockIpResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-		// Type of the unblocking action (`user`: self-service unblocking, `auto`: automatic unblocking, `update`: unblocking by service upgrading, `bind`: unblocking by binding Anti-DDoS Pro instance)
-		ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
-
-		// Unblocked time (estimated)
-		UnblockTime *string `json:"UnblockTime,omitempty" name:"UnblockTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUnblockIpResponseParams `json:"Response"`
 }
 
 func (r *CreateUnblockIpResponse) ToJsonString() string {
@@ -1339,7 +1692,6 @@ func (r *CreateUnblockIpResponse) FromJsonString(s string) error {
 }
 
 type DDoSAlarmThreshold struct {
-
 	// Alarm threshold type. 1: inbound traffic, 2: cleansed traffic
 	AlarmType *uint64 `json:"AlarmType,omitempty" name:"AlarmType"`
 
@@ -1348,7 +1700,6 @@ type DDoSAlarmThreshold struct {
 }
 
 type DDoSAttackSourceRecord struct {
-
 	// Attack source IP
 	SrcIp *string `json:"SrcIp,omitempty" name:"SrcIp"`
 
@@ -1366,7 +1717,6 @@ type DDoSAttackSourceRecord struct {
 }
 
 type DDoSEventRecord struct {
-
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1410,7 +1760,6 @@ type DDoSEventRecord struct {
 }
 
 type DDoSPolicyDropOption struct {
-
 	// Blocks all TCP traffic. Valid values: [0,1]
 	DropTcp *uint64 `json:"DropTcp,omitempty" name:"DropTcp"`
 
@@ -1470,7 +1819,6 @@ type DDoSPolicyDropOption struct {
 }
 
 type DDoSPolicyPacketFilter struct {
-
 	// Protocol. Valid values: [tcp, udp, icmp, all]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -1520,7 +1868,6 @@ type DDoSPolicyPacketFilter struct {
 }
 
 type DDoSPolicyPortLimit struct {
-
 	// Protocol. Valid values: [tcp, udp, all]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -1548,7 +1895,6 @@ type DDoSPolicyPortLimit struct {
 }
 
 type DDosPolicy struct {
-
 	// Resource bound to policy
 	Resources []*ResourceIp `json:"Resources,omitempty" name:"Resources"`
 
@@ -1588,9 +1934,18 @@ type DDosPolicy struct {
 	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
 }
 
+// Predefined struct for user
+type DeleteCCFrequencyRulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Access frequency control rule ID for CC protection
+	CCFrequencyRuleId *string `json:"CCFrequencyRuleId,omitempty" name:"CCFrequencyRuleId"`
+}
+
 type DeleteCCFrequencyRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1618,16 +1973,18 @@ func (r *DeleteCCFrequencyRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCCFrequencyRulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCCFrequencyRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCCFrequencyRulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteCCFrequencyRulesResponse) ToJsonString() string {
@@ -1641,9 +1998,21 @@ func (r *DeleteCCFrequencyRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCCSelfDefinePolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Policy ID
+	SetId *string `json:"SetId,omitempty" name:"SetId"`
+}
+
 type DeleteCCSelfDefinePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1675,16 +2044,18 @@ func (r *DeleteCCSelfDefinePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCCSelfDefinePolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCCSelfDefinePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCCSelfDefinePolicyResponseParams `json:"Response"`
 }
 
 func (r *DeleteCCSelfDefinePolicyResponse) ToJsonString() string {
@@ -1698,9 +2069,18 @@ func (r *DeleteCCSelfDefinePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDDoSPolicyCaseRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy scenario ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+}
+
 type DeleteDDoSPolicyCaseRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1728,16 +2108,18 @@ func (r *DeleteDDoSPolicyCaseRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDDoSPolicyCaseResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDDoSPolicyCaseResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDDoSPolicyCaseResponseParams `json:"Response"`
 }
 
 func (r *DeleteDDoSPolicyCaseResponse) ToJsonString() string {
@@ -1751,9 +2133,18 @@ func (r *DeleteDDoSPolicyCaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDDoSPolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type DeleteDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1781,16 +2172,18 @@ func (r *DeleteDDoSPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDDoSPolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDDoSPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDDoSPolicyResponseParams `json:"Response"`
 }
 
 func (r *DeleteDDoSPolicyResponse) ToJsonString() string {
@@ -1804,9 +2197,21 @@ func (r *DeleteDDoSPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteL4RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID list
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
 type DeleteL4RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1838,16 +2243,18 @@ func (r *DeleteL4RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteL4RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteL4RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteL4RulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteL4RulesResponse) ToJsonString() string {
@@ -1861,9 +2268,21 @@ func (r *DeleteL4RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteL7RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID list
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
 type DeleteL7RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -1895,16 +2314,18 @@ func (r *DeleteL7RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteL7RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteL7RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteL7RulesResponseParams `json:"Response"`
 }
 
 func (r *DeleteL7RulesResponse) ToJsonString() string {
@@ -1918,9 +2339,30 @@ func (r *DeleteL7RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeActionLogRequestParams struct {
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Search value, which can only be resource ID or user `UIN`
+	Filter *string `json:"Filter,omitempty" name:"Filter"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeActionLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -1964,19 +2406,21 @@ func (r *DescribeActionLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeActionLogResponseParams struct {
+	// Total number of records
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Record array
+	Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeActionLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of records
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Record array
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeActionLogResponseParams `json:"Response"`
 }
 
 func (r *DescribeActionLogResponse) ToJsonString() string {
@@ -1990,9 +2434,18 @@ func (r *DescribeActionLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBGPIPL7RuleMaxCntRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeBGPIPL7RuleMaxCntRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2020,16 +2473,18 @@ func (r *DescribeBGPIPL7RuleMaxCntRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBGPIPL7RuleMaxCntResponseParams struct {
+	// Maximum number of layer-7 rules that can be added for Anti-DDoS Advanced
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBGPIPL7RuleMaxCntResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Maximum number of layer-7 rules that can be added for Anti-DDoS Advanced
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBGPIPL7RuleMaxCntResponseParams `json:"Response"`
 }
 
 func (r *DescribeBGPIPL7RuleMaxCntResponse) ToJsonString() string {
@@ -2043,9 +2498,50 @@ func (r *DescribeBGPIPL7RuleMaxCntResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBaradDataRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Metric name. Valid values:
+	// connum: number of active TCP connections;
+	// new_conn: number of new TCP connections;
+	// inactive_conn: number of inactive connections;
+	// intraffic: inbound traffic;
+	// outtraffic: outbound traffic;
+	// alltraffic: sum of inbound and outbound traffic;
+	// inpkg: inbound packet rate;
+	// outpkg: outbound packet rate;
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical time granularity in seconds (300: 5-minute, 3600: hourly, 86400: daily)
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time. The second part is kept at 0, and the minute part is a multiple of 5
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time. The second part is kept at 0, and the minute part is a multiple of 5
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical method. Valid values:
+	// max: maximum value;
+	// min: minimum value;
+	// avg: average;
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Protocol port array
+	ProtocolPort []*ProtocolPort `json:"ProtocolPort,omitempty" name:"ProtocolPort"`
+
+	// Resource instance IP, which is required only if `Business` is `net` (Anti-DDoS Ultimate), because an Anti-DDoS Ultimate instance has multiple IPs;
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+}
+
 type DescribeBaradDataRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2112,16 +2608,18 @@ func (r *DescribeBaradDataRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBaradDataResponseParams struct {
+	// Returned metric value
+	DataList []*BaradData `json:"DataList,omitempty" name:"DataList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBaradDataResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned metric value
-		DataList []*BaradData `json:"DataList,omitempty" name:"DataList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBaradDataResponseParams `json:"Response"`
 }
 
 func (r *DescribeBaradDataResponse) ToJsonString() string {
@@ -2135,9 +2633,30 @@ func (r *DescribeBaradDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBasicCCThresholdRequestParams struct {
+	// Queried IP address, such as 1.1.1.1
+	BasicIp *string `json:"BasicIp,omitempty" name:"BasicIp"`
+
+	// IP region. Valid values: region abbreviations such as gz, bj, sh, and hk
+	BasicRegion *string `json:"BasicRegion,omitempty" name:"BasicRegion"`
+
+	// Zone type. Valid values: public (public cloud zone), bm (BM zone), nat (NAT server zone), channel (internet channel).
+	BasicBizType *string `json:"BasicBizType,omitempty" name:"BasicBizType"`
+
+	// Device type. Valid values: cvm (CVM), clb (public CLB), lb (BM CLB), nat (NAT server), channel (internet channel).
+	BasicDeviceType *string `json:"BasicDeviceType,omitempty" name:"BasicDeviceType"`
+
+	// IPInstance Nat gateway, which is optional. (If the device type to be queried is a NAT server, this parameter is required, which can be obtained through the NAT resource query API)
+	BasicIpInstance *string `json:"BasicIpInstance,omitempty" name:"BasicIpInstance"`
+
+	// ISP line, which is optional. (If the device type to be queried is a NAT server, this parameter should be 5)
+	BasicIspCode *uint64 `json:"BasicIspCode,omitempty" name:"BasicIspCode"`
+}
+
 type DescribeBasicCCThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queried IP address, such as 1.1.1.1
 	BasicIp *string `json:"BasicIp,omitempty" name:"BasicIp"`
 
@@ -2181,19 +2700,21 @@ func (r *DescribeBasicCCThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBasicCCThresholdResponseParams struct {
+	// CC status (0: disabled, 1: enabled)
+	CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
+
+	// CC protection threshold
+	CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBasicCCThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// CC status (0: disabled, 1: enabled)
-		CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
-
-		// CC protection threshold
-		CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBasicCCThresholdResponseParams `json:"Response"`
 }
 
 func (r *DescribeBasicCCThresholdResponse) ToJsonString() string {
@@ -2207,9 +2728,33 @@ func (r *DescribeBasicCCThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBasicDeviceThresholdRequestParams struct {
+	// Queried IP address, such as 1.1.1.1
+	BasicIp *string `json:"BasicIp,omitempty" name:"BasicIp"`
+
+	// IP region. Valid values: region abbreviations such as gz, bj, sh, and hk
+	BasicRegion *string `json:"BasicRegion,omitempty" name:"BasicRegion"`
+
+	// Zone type. Valid values: public (public cloud zone), bm (BM zone), nat (NAT server zone), channel (internet channel).
+	BasicBizType *string `json:"BasicBizType,omitempty" name:"BasicBizType"`
+
+	// Device type. Valid values: cvm (CVM), clb (public CLB), lb (BM CLB), nat (NAT server), channel (internet channel).
+	BasicDeviceType *string `json:"BasicDeviceType,omitempty" name:"BasicDeviceType"`
+
+	// Validity check. Valid value: 1
+	BasicCheckFlag *uint64 `json:"BasicCheckFlag,omitempty" name:"BasicCheckFlag"`
+
+	// IPInstance Nat gateway, which is optional. (If the device type to be queried is a NAT server, this parameter is required, which can be obtained through the NAT resource query API)
+	BasicIpInstance *string `json:"BasicIpInstance,omitempty" name:"BasicIpInstance"`
+
+	// ISP line, which is optional. (If the device type to be queried is a NAT server, this parameter should be 5)
+	BasicIspCode *uint64 `json:"BasicIspCode,omitempty" name:"BasicIspCode"`
+}
+
 type DescribeBasicDeviceThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queried IP address, such as 1.1.1.1
 	BasicIp *string `json:"BasicIp,omitempty" name:"BasicIp"`
 
@@ -2257,16 +2802,18 @@ func (r *DescribeBasicDeviceThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBasicDeviceThresholdResponseParams struct {
+	// Blackhole blocking value
+	Threshold *uint64 `json:"Threshold,omitempty" name:"Threshold"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBasicDeviceThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Blackhole blocking value
-		Threshold *uint64 `json:"Threshold,omitempty" name:"Threshold"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBasicDeviceThresholdResponseParams `json:"Response"`
 }
 
 func (r *DescribeBasicDeviceThresholdResponse) ToJsonString() string {
@@ -2280,9 +2827,36 @@ func (r *DescribeBasicDeviceThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBizHttpStatusRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Statistical period in seconds. Valid values: 300, 1800, 3600, 21600, and 86400.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical mode, which only supports sum.
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Protocol and port list, which is valid when the statistical dimension is the number of connections. Valid protocols: TCP, UDP, HTTP, and HTTPS.
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo"`
+
+	// Specific domain name query
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DescribeBizHttpStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2334,16 +2908,18 @@ func (r *DescribeBizHttpStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBizHttpStatusResponseParams struct {
+	// Statistics on the HTTP status codes of business traffic
+	HttpStatusMap *HttpStatusMap `json:"HttpStatusMap,omitempty" name:"HttpStatusMap"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBizHttpStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Statistics on the HTTP status codes of business traffic
-		HttpStatusMap *HttpStatusMap `json:"HttpStatusMap,omitempty" name:"HttpStatusMap"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBizHttpStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeBizHttpStatusResponse) ToJsonString() string {
@@ -2357,9 +2933,18 @@ func (r *DescribeBizHttpStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCAlarmThresholdRequestParams struct {
+	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	RsId *string `json:"RsId,omitempty" name:"RsId"`
+}
+
 type DescribeCCAlarmThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2387,16 +2972,18 @@ func (r *DescribeCCAlarmThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCAlarmThresholdResponseParams struct {
+	// CC alarm threshold
+	CCAlarmThreshold *CCAlarmThreshold `json:"CCAlarmThreshold,omitempty" name:"CCAlarmThreshold"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCCAlarmThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// CC alarm threshold
-		CCAlarmThreshold *CCAlarmThreshold `json:"CCAlarmThreshold,omitempty" name:"CCAlarmThreshold"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCCAlarmThresholdResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCAlarmThresholdResponse) ToJsonString() string {
@@ -2410,9 +2997,33 @@ func (r *DescribeCCAlarmThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCEvListRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource instance IP. When `business` is not `basic`, if `IpList` is not empty, `Id` must not be empty;
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeCCEvListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2460,35 +3071,37 @@ func (r *DescribeCCEvListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCEvListResponseParams struct {
+	// Anti-DDoS service type. `shield`: Chess Shield; `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Instance IP list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// CC attack event list
+	Data []*CCEventRecord `json:"Data,omitempty" name:"Data"`
+
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCCEvListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type. `shield`: Chess Shield; `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Instance IP list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpList []*string `json:"IpList,omitempty" name:"IpList"`
-
-		// Start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// End time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// CC attack event list
-		Data []*CCEventRecord `json:"Data,omitempty" name:"Data"`
-
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCCEvListResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCEvListResponse) ToJsonString() string {
@@ -2502,9 +3115,21 @@ func (r *DescribeCCEvListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCFrequencyRulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Layer-7 forwarding rule ID (which can be obtained from the layer-7 forwarding rule API). If a value is entered, it means to get the access frequency control rule of the forwarding rule;
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type DescribeCCFrequencyRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2536,19 +3161,21 @@ func (r *DescribeCCFrequencyRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCFrequencyRulesResponseParams struct {
+	// Access frequency control rule list
+	CCFrequencyRuleList []*CCFrequencyRule `json:"CCFrequencyRuleList,omitempty" name:"CCFrequencyRuleList"`
+
+	// Access frequency control rule status. Valid values: [on, off];
+	CCFrequencyRuleStatus *string `json:"CCFrequencyRuleStatus,omitempty" name:"CCFrequencyRuleStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCCFrequencyRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Access frequency control rule list
-		CCFrequencyRuleList []*CCFrequencyRule `json:"CCFrequencyRuleList,omitempty" name:"CCFrequencyRuleList"`
-
-		// Access frequency control rule status. Valid values: [on, off];
-		CCFrequencyRuleStatus *string `json:"CCFrequencyRuleStatus,omitempty" name:"CCFrequencyRuleStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCCFrequencyRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCFrequencyRulesResponse) ToJsonString() string {
@@ -2562,9 +3189,31 @@ func (r *DescribeCCFrequencyRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCIpAllowDenyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Blocklist or allowlist. Valid values: [white (allowlist), black (blocklist)]
+	// Note: this array can only have one value. It cannot get the blocklist and allowlist at the same time
+	Type []*string `json:"Type,omitempty" name:"Type"`
+
+	// Pagination parameter
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// HTTP or HTTPS CC protection, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)];
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
 type DescribeCCIpAllowDenyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2609,26 +3258,28 @@ func (r *DescribeCCIpAllowDenyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeCCIpAllowDenyResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeCCIpAllowDenyResponseParams struct {
+	// This field has been replaced by `RecordList` and should not be used
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// This field has been replaced by `RecordList` and should not be used
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	// Number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Returned Blocklist/allowlist record,
+	// Returned Blocklist/allowlist record,
 	// If "Key":"ip", "Value": IP;
 	// If "Key":"domain", "Value": domain name.
 	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection protocol (HTTP or HTTPS);
-		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
+	RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCCIpAllowDenyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCCIpAllowDenyResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCIpAllowDenyResponse) ToJsonString() string {
@@ -2642,9 +3293,24 @@ func (r *DescribeCCIpAllowDenyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCSelfDefinePolicyRequestParams struct {
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro, `bgp-multip`: Anti-DDoS Pro (multi-IP)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Number of entries pulled
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeCCSelfDefinePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro, `bgp-multip`: Anti-DDoS Pro (multi-IP)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2680,19 +3346,21 @@ func (r *DescribeCCSelfDefinePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCSelfDefinePolicyResponseParams struct {
+	// Total number of custom rules
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Policy list
+	Policys []*CCPolicy `json:"Policys,omitempty" name:"Policys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCCSelfDefinePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of custom rules
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Policy list
-		Policys []*CCPolicy `json:"Policys,omitempty" name:"Policys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCCSelfDefinePolicyResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCSelfDefinePolicyResponse) ToJsonString() string {
@@ -2706,9 +3374,36 @@ func (r *DescribeCCSelfDefinePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCTrendRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Metric. Valid values: [inqps (total requests peak), dropqps (attack requests peak)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Resource instance ID. If `Business` is `basic`, this field is not required (because Anti-DDoS Basic has no resource instance)
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// (Optional) Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DescribeCCTrendRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2760,41 +3455,43 @@ func (r *DescribeCCTrendRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCTrendResponseParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Metric. Valid values: [inqps (total requests peak), dropqps (attack requests peak)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Value array
+	Data []*uint64 `json:"Data,omitempty" name:"Data"`
+
+	// Number of values
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCCTrendResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Resource IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-		// Metric. Valid values: [inqps (total requests peak), dropqps (attack requests peak)]
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-		// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
-		Period *int64 `json:"Period,omitempty" name:"Period"`
-
-		// Statistics start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// Value array
-		Data []*uint64 `json:"Data,omitempty" name:"Data"`
-
-		// Number of values
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCCTrendResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCTrendResponse) ToJsonString() string {
@@ -2808,9 +3505,31 @@ func (r *DescribeCCTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCCUrlAllowRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Blocklist or allowlist. Valid value: [white (allowlist)]. Currently, only allowlist is supported.
+	// Note: this array can only have one value which can only be `white`
+	Type []*string `json:"Type,omitempty" name:"Type"`
+
+	// Pagination parameter
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// HTTP or HTTPS CC protection, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)];
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
 type DescribeCCUrlAllowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2855,26 +3574,28 @@ func (r *DescribeCCUrlAllowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeCCUrlAllowResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeCCUrlAllowResponseParams struct {
+	// This field has been replaced by `RecordList` and should not be used
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// This field has been replaced by `RecordList` and should not be used
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Returned Blocklist/allowlist record,
+	// Returned Blocklist/allowlist record,
 	// If "Key":"url", "Value": URL;
 	// If "Key":"domain", "Value": domain name.
 	// If "Key":"type", "Value" can be `white` (allowlist) or `black` (blocklist).
 	// If "Key":"protocol", "Value": CC protection type (HTTP protection or HTTPS domain name protection);
-		RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
+	RecordList []*KeyValueRecord `json:"RecordList,omitempty" name:"RecordList"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCCUrlAllowResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCCUrlAllowResponseParams `json:"Response"`
 }
 
 func (r *DescribeCCUrlAllowResponse) ToJsonString() string {
@@ -2888,9 +3609,18 @@ func (r *DescribeCCUrlAllowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAlarmThresholdRequestParams struct {
+	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	RsId *string `json:"RsId,omitempty" name:"RsId"`
+}
+
 type DescribeDDoSAlarmThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2918,16 +3648,18 @@ func (r *DescribeDDoSAlarmThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAlarmThresholdResponseParams struct {
+	// DDoS alarm threshold
+	DDoSAlarmThreshold *DDoSAlarmThreshold `json:"DDoSAlarmThreshold,omitempty" name:"DDoSAlarmThreshold"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSAlarmThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// DDoS alarm threshold
-		DDoSAlarmThreshold *DDoSAlarmThreshold `json:"DDoSAlarmThreshold,omitempty" name:"DDoSAlarmThreshold"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSAlarmThresholdResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSAlarmThresholdResponse) ToJsonString() string {
@@ -2941,9 +3673,27 @@ func (r *DescribeDDoSAlarmThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAttackIPRegionMapRequestParams struct {
+	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time. Maximum statistics time range: half a year;
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// IP attack source of specified resource, which is optional
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type DescribeDDoSAttackIPRegionMapRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -2983,19 +3733,21 @@ func (r *DescribeDDoSAttackIPRegionMapRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAttackIPRegionMapResponseParams struct {
+	// Global region distribution data
+	NationCount []*KeyValueRecord `json:"NationCount,omitempty" name:"NationCount"`
+
+	// Chinese province distribution data
+	ProvinceCount []*KeyValueRecord `json:"ProvinceCount,omitempty" name:"ProvinceCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSAttackIPRegionMapResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Global region distribution data
-		NationCount []*KeyValueRecord `json:"NationCount,omitempty" name:"NationCount"`
-
-		// Chinese province distribution data
-		ProvinceCount []*KeyValueRecord `json:"ProvinceCount,omitempty" name:"ProvinceCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSAttackIPRegionMapResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSAttackIPRegionMapResponse) ToJsonString() string {
@@ -3009,9 +3761,33 @@ func (r *DescribeDDoSAttackIPRegionMapResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAttackSourceRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// IP attack source of specified resource, which is optional
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type DescribeDDoSAttackSourceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3059,19 +3835,21 @@ func (r *DescribeDDoSAttackSourceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSAttackSourceResponseParams struct {
+	// Total number of attack sources
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Attack source list
+	AttackSourceList []*DDoSAttackSourceRecord `json:"AttackSourceList,omitempty" name:"AttackSourceList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSAttackSourceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of attack sources
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Attack source list
-		AttackSourceList []*DDoSAttackSourceRecord `json:"AttackSourceList,omitempty" name:"AttackSourceList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSAttackSourceResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSAttackSourceResponse) ToJsonString() string {
@@ -3085,9 +3863,30 @@ func (r *DescribeDDoSAttackSourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSCountRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+}
+
 type DescribeDDoSCountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3131,29 +3930,27 @@ func (r *DescribeDDoSCountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDDoSCountResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeDDoSCountResponseParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
 
-		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
-		Business *string `json:"Business,omitempty" name:"Business"`
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
 
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-		// Resource IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-		// Statistics start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-		// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-		// `Key-Value` array. Valid values of `Key`:
+	// `Key-Value` array. Valid values of `Key`:
 	// If `MetricName` is `traffic`:
 	// If `key` is `TcpKBSum`, it indicates the traffic of TCP packets in KB.
 	// If `key` is `UdpKBSum`, it indicates the traffic of UDP packets in KB.
@@ -3168,11 +3965,15 @@ type DescribeDDoSCountResponse struct {
 	// 
 	// If `MetricName` is `classnum`:
 	// The value of `key` indicates the attack event type. When the `key` is `UNKNOWNFLOOD`, it indicates  unknown attack events.
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSCountResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSCountResponse) ToJsonString() string {
@@ -3186,9 +3987,55 @@ func (r *DescribeDDoSCountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSDefendStatusRequestParams struct {
+	// Anti-DDoS service type. `basic`: Anti-DDoS Basic, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Instance ID, which is required only if `Business` is not `basic`.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Anti-DDoS Basic IP, which is required only if `Business` is Anti-DDoS Basic;
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Type of products bound to the anti-DDoS instance, which is required only if `Business` is Anti-DDoS Basic. Valid values: [public (CVM), bm (Bare metal products), eni (elastic network interface), vpngw (VPN Gateway), natgw (NAT Gateway), waf (Web Application Firewall), fpc (Finance products), gaap (GAAP), other (hosted IP)]
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// Product subtype of IP, which is required only if `Business` is Anti-DDoS Basic. Valid values: [cvm (CVM), lb (CLB), eni (ENI), vpngw (VPN), natgw (NAT), waf (WAF), fpc (finance), gaap (GAAP), other (hosted IP), eip (BM EIP)]
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Resource instance ID of IP, which is required only if `Business` is Anti-DDoS Basic. This field is required when binding a new IP. For example, if it is an ENI IP, enter `ID(eni-*)` of the ENI for `InstanceId`;
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// This field is required only if `Business` is Anti-DDoS Basic, indicating the IP region. Valid values:
+	// "bj":     North China (Beijing)
+	// "cd":     Southwest China (Chengdu)
+	// "cq":     Southwest China (Chongqing)
+	// "gz":     South China (Guangzhou)
+	// "gzopen": South China (Guangzhou Open)
+	// "hk":     Hong Kong (China)
+	// "kr":     Southeast Asia (Seoul)
+	// "sh":     East China (Shanghai)
+	// "shjr":   East China (Shanghai Finance)
+	// "szjr":   South China (Shenzhen Finance)
+	// "sg":     Southeast Asia (Singapore)
+	// "th":     Southeast Asia (Thailand)
+	// "de":     Europe (Germany)
+	// "usw":    West US (Silicon Valley)
+	// "ca":     North America (Toronto)
+	// "jp":     Japan
+	// "hzec":   Hangzhou
+	// "in":     India
+	// "use":    East US (Virginia)
+	// "ru":     Russia
+	// "tpe":    Taiwan (China)
+	// "nj":     Nanjing
+	IPRegion *string `json:"IPRegion,omitempty" name:"IPRegion"`
+}
+
 type DescribeDDoSDefendStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `basic`: Anti-DDoS Basic, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3258,25 +4105,27 @@ func (r *DescribeDDoSDefendStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSDefendStatusResponseParams struct {
+	// Protection status. 0: disabled, 1: enabled
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DefendStatus *uint64 `json:"DefendStatus,omitempty" name:"DefendStatus"`
+
+	// Expiration time of temporary protection disablement. This field is empty if the protection is in enabled status;
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	UndefendExpire *string `json:"UndefendExpire,omitempty" name:"UndefendExpire"`
+
+	// Console feature display field. 1: displays console features, 0: hides console features
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ShowFlag *uint64 `json:"ShowFlag,omitempty" name:"ShowFlag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSDefendStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Protection status. 0: disabled, 1: enabled
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DefendStatus *uint64 `json:"DefendStatus,omitempty" name:"DefendStatus"`
-
-		// Expiration time of temporary protection disablement. This field is empty if the protection is in enabled status;
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		UndefendExpire *string `json:"UndefendExpire,omitempty" name:"UndefendExpire"`
-
-		// Console feature display field. 1: displays console features, 0: hides console features
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ShowFlag *uint64 `json:"ShowFlag,omitempty" name:"ShowFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSDefendStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSDefendStatusResponse) ToJsonString() string {
@@ -3290,9 +4139,27 @@ func (r *DescribeDDoSDefendStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSEvInfoRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeDDoSEvInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3332,64 +4199,66 @@ func (r *DescribeDDoSEvInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSEvInfoResponseParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of TCP attack packets
+	TcpPacketSum *uint64 `json:"TcpPacketSum,omitempty" name:"TcpPacketSum"`
+
+	// Traffic of TCP attacks in KB
+	TcpKBSum *uint64 `json:"TcpKBSum,omitempty" name:"TcpKBSum"`
+
+	// Number of UDP attack packets
+	UdpPacketSum *uint64 `json:"UdpPacketSum,omitempty" name:"UdpPacketSum"`
+
+	// Traffic of UDP attacks in KB
+	UdpKBSum *uint64 `json:"UdpKBSum,omitempty" name:"UdpKBSum"`
+
+	// Number of ICMP attack packets
+	IcmpPacketSum *uint64 `json:"IcmpPacketSum,omitempty" name:"IcmpPacketSum"`
+
+	// Traffic of ICMP attacks in KB
+	IcmpKBSum *uint64 `json:"IcmpKBSum,omitempty" name:"IcmpKBSum"`
+
+	// Number of other attack packets
+	OtherPacketSum *uint64 `json:"OtherPacketSum,omitempty" name:"OtherPacketSum"`
+
+	// Traffic of other attacks in KB
+	OtherKBSum *uint64 `json:"OtherKBSum,omitempty" name:"OtherKBSum"`
+
+	// Total attack traffic in KB
+	TotalTraffic *uint64 `json:"TotalTraffic,omitempty" name:"TotalTraffic"`
+
+	// Attack traffic bandwidth peak
+	Mbps *uint64 `json:"Mbps,omitempty" name:"Mbps"`
+
+	// Attack packet rate peak
+	Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
+
+	// PCAP file download link
+	PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSEvInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Resource IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-		// Attack start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Attack end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// Number of TCP attack packets
-		TcpPacketSum *uint64 `json:"TcpPacketSum,omitempty" name:"TcpPacketSum"`
-
-		// Traffic of TCP attacks in KB
-		TcpKBSum *uint64 `json:"TcpKBSum,omitempty" name:"TcpKBSum"`
-
-		// Number of UDP attack packets
-		UdpPacketSum *uint64 `json:"UdpPacketSum,omitempty" name:"UdpPacketSum"`
-
-		// Traffic of UDP attacks in KB
-		UdpKBSum *uint64 `json:"UdpKBSum,omitempty" name:"UdpKBSum"`
-
-		// Number of ICMP attack packets
-		IcmpPacketSum *uint64 `json:"IcmpPacketSum,omitempty" name:"IcmpPacketSum"`
-
-		// Traffic of ICMP attacks in KB
-		IcmpKBSum *uint64 `json:"IcmpKBSum,omitempty" name:"IcmpKBSum"`
-
-		// Number of other attack packets
-		OtherPacketSum *uint64 `json:"OtherPacketSum,omitempty" name:"OtherPacketSum"`
-
-		// Traffic of other attacks in KB
-		OtherKBSum *uint64 `json:"OtherKBSum,omitempty" name:"OtherKBSum"`
-
-		// Total attack traffic in KB
-		TotalTraffic *uint64 `json:"TotalTraffic,omitempty" name:"TotalTraffic"`
-
-		// Attack traffic bandwidth peak
-		Mbps *uint64 `json:"Mbps,omitempty" name:"Mbps"`
-
-		// Attack packet rate peak
-		Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
-
-		// PCAP file download link
-		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSEvInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSEvInfoResponse) ToJsonString() string {
@@ -3403,9 +4272,36 @@ func (r *DescribeDDoSEvInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSEvListRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Resource instance ID. If `Business` is `basic`, this field is not required (because Anti-DDoS Basic has no resource instance)
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// Whether the elastic protection bandwidth is exceeded. Valid values: [yes, no]. If an empty string is entered, it means no filtering
+	OverLoad *string `json:"OverLoad,omitempty" name:"OverLoad"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDDoSEvListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3457,35 +4353,37 @@ func (r *DescribeDDoSEvListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSEvListResponseParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// DDoS attack event list
+	Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
+
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSEvListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Resource IP
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IpList []*string `json:"IpList,omitempty" name:"IpList"`
-
-		// Start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// End time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// DDoS attack event list
-		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
-
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSEvListResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSEvListResponse) ToJsonString() string {
@@ -3499,9 +4397,27 @@ func (r *DescribeDDoSEvListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSIpLogRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeDDoSIpLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3541,33 +4457,35 @@ func (r *DescribeDDoSIpLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDDoSIpLogResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeDDoSIpLogResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
 
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
 
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-		// Resource IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-		// Attack start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-		// Attack end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
+	// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
 	// If `Key` is `LogTime`, `Value` indicates the IP log time
 	// If `Key` is `LogMessage`, `Value` indicates the IP log content
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSIpLogResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSIpLogResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSIpLogResponse) ToJsonString() string {
@@ -3581,9 +4499,27 @@ func (r *DescribeDDoSIpLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetCountRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+}
+
 type DescribeDDoSNetCountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3623,26 +4559,24 @@ func (r *DescribeDDoSNetCountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDDoSNetCountResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeDDoSNetCountResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
 
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
 
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-		// Statistics start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-		// Metric. Valid values: [traffic (attack protocol traffic in KB), pkg (number of attack protocol packets), classnum (number of attack events)]
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-		// `Key-Value` array. Valid values of `Key`:
+	// `Key-Value` array. Valid values of `Key`:
 	// If `MetricName` is `traffic`:
 	// If `key` is `TcpKBSum`, it indicates the traffic of TCP packets in KB.
 	// If `key` is `UdpKBSum`, it indicates the traffic of UDP packets in KB.
@@ -3657,11 +4591,15 @@ type DescribeDDoSNetCountResponse struct {
 	// 
 	// If `MetricName` is `classnum`:
 	// The value of `key` indicates the attack event type. When the `key` is `UNKNOWNFLOOD`, it indicates  unknown attack events.
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSNetCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSNetCountResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSNetCountResponse) ToJsonString() string {
@@ -3675,9 +4613,24 @@ func (r *DescribeDDoSNetCountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetEvInfoRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeDDoSNetEvInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3713,61 +4666,63 @@ func (r *DescribeDDoSNetEvInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetEvInfoResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of TCP attack packets
+	TcpPacketSum *uint64 `json:"TcpPacketSum,omitempty" name:"TcpPacketSum"`
+
+	// Traffic of TCP attacks in KB
+	TcpKBSum *uint64 `json:"TcpKBSum,omitempty" name:"TcpKBSum"`
+
+	// Number of UDP attack packets
+	UdpPacketSum *uint64 `json:"UdpPacketSum,omitempty" name:"UdpPacketSum"`
+
+	// Traffic of UDP attacks in KB
+	UdpKBSum *uint64 `json:"UdpKBSum,omitempty" name:"UdpKBSum"`
+
+	// Number of ICMP attack packets
+	IcmpPacketSum *uint64 `json:"IcmpPacketSum,omitempty" name:"IcmpPacketSum"`
+
+	// Traffic of ICMP attacks in KB
+	IcmpKBSum *uint64 `json:"IcmpKBSum,omitempty" name:"IcmpKBSum"`
+
+	// Number of other attack packets
+	OtherPacketSum *uint64 `json:"OtherPacketSum,omitempty" name:"OtherPacketSum"`
+
+	// Traffic of other attacks in KB
+	OtherKBSum *uint64 `json:"OtherKBSum,omitempty" name:"OtherKBSum"`
+
+	// Total attack traffic in KB
+	TotalTraffic *uint64 `json:"TotalTraffic,omitempty" name:"TotalTraffic"`
+
+	// Attack traffic bandwidth peak
+	Mbps *uint64 `json:"Mbps,omitempty" name:"Mbps"`
+
+	// Attack packet rate peak
+	Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
+
+	// PCAP file download link
+	PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSNetEvInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Attack start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Attack end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// Number of TCP attack packets
-		TcpPacketSum *uint64 `json:"TcpPacketSum,omitempty" name:"TcpPacketSum"`
-
-		// Traffic of TCP attacks in KB
-		TcpKBSum *uint64 `json:"TcpKBSum,omitempty" name:"TcpKBSum"`
-
-		// Number of UDP attack packets
-		UdpPacketSum *uint64 `json:"UdpPacketSum,omitempty" name:"UdpPacketSum"`
-
-		// Traffic of UDP attacks in KB
-		UdpKBSum *uint64 `json:"UdpKBSum,omitempty" name:"UdpKBSum"`
-
-		// Number of ICMP attack packets
-		IcmpPacketSum *uint64 `json:"IcmpPacketSum,omitempty" name:"IcmpPacketSum"`
-
-		// Traffic of ICMP attacks in KB
-		IcmpKBSum *uint64 `json:"IcmpKBSum,omitempty" name:"IcmpKBSum"`
-
-		// Number of other attack packets
-		OtherPacketSum *uint64 `json:"OtherPacketSum,omitempty" name:"OtherPacketSum"`
-
-		// Traffic of other attacks in KB
-		OtherKBSum *uint64 `json:"OtherKBSum,omitempty" name:"OtherKBSum"`
-
-		// Total attack traffic in KB
-		TotalTraffic *uint64 `json:"TotalTraffic,omitempty" name:"TotalTraffic"`
-
-		// Attack traffic bandwidth peak
-		Mbps *uint64 `json:"Mbps,omitempty" name:"Mbps"`
-
-		// Attack packet rate peak
-		Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
-
-		// PCAP file download link
-		PcapUrl []*string `json:"PcapUrl,omitempty" name:"PcapUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSNetEvInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSNetEvInfoResponse) ToJsonString() string {
@@ -3781,9 +4736,30 @@ func (r *DescribeDDoSNetEvInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetEvListRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDDoSNetEvListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3827,31 +4803,33 @@ func (r *DescribeDDoSNetEvListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetEvListResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// DDoS attack event list
+	Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
+
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSNetEvListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// End time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// DDoS attack event list
-		Data []*DDoSEventRecord `json:"Data,omitempty" name:"Data"`
-
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSNetEvListResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSNetEvListResponse) ToJsonString() string {
@@ -3865,9 +4843,24 @@ func (r *DescribeDDoSNetEvListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetIpLogRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeDDoSNetIpLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3903,30 +4896,32 @@ func (r *DescribeDDoSNetIpLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDDoSNetIpLogResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeDDoSNetIpLogResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
 
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
 
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
+	// Attack start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-		// Attack start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	// Attack end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-		// Attack end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
+	// IP attack log, which is a `KeyValue` array. Valid values of `Key-Value`:
 	// If `Key` is `LogTime`, `Value` indicates the IP log time
 	// If `Key` is `LogMessage`, `Value` indicates the IP log content
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSNetIpLogResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSNetIpLogResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSNetIpLogResponse) ToJsonString() string {
@@ -3940,9 +4935,30 @@ func (r *DescribeDDoSNetIpLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetTrendRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeDDoSNetTrendRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -3986,37 +5002,39 @@ func (r *DescribeDDoSNetTrendRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSNetTrendResponseParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Value array
+	Data []*uint64 `json:"Data,omitempty" name:"Data"`
+
+	// Number of values
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSNetTrendResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-		// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
-		Period *uint64 `json:"Period,omitempty" name:"Period"`
-
-		// Statistics start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// Value array
-		Data []*uint64 `json:"Data,omitempty" name:"Data"`
-
-		// Number of values
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSNetTrendResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSNetTrendResponse) ToJsonString() string {
@@ -4030,9 +5048,18 @@ func (r *DescribeDDoSNetTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSPolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID, which is optional. If a value is entered, it indicates the advanced DDoS policy bound to the resource
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4060,16 +5087,18 @@ func (r *DescribeDDoSPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSPolicyResponseParams struct {
+	// Advanced DDoS policy list
+	DDosPolicyList []*DDosPolicy `json:"DDosPolicyList,omitempty" name:"DDosPolicyList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Advanced DDoS policy list
-		DDosPolicyList []*DDosPolicy `json:"DDosPolicyList,omitempty" name:"DDosPolicyList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSPolicyResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSPolicyResponse) ToJsonString() string {
@@ -4083,9 +5112,33 @@ func (r *DescribeDDoSPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSTrendRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Resource instance ID. If `Business` is `basic`, this field is not required (because Anti-DDoS Basic has no resource instance)
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeDDoSTrendRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4133,41 +5186,43 @@ func (r *DescribeDDoSTrendRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSTrendResponseParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Resource IP
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
+	Data []*uint64 `json:"Data,omitempty" name:"Data"`
+
+	// Number of values
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDDoSTrendResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP); `net`: Anti-DDoS Ultimate; `basic`: Anti-DDoS Basic
-		Business *string `json:"Business,omitempty" name:"Business"`
-
-		// Anti-DDoS instance ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Resource IP
-		Ip *string `json:"Ip,omitempty" name:"Ip"`
-
-		// Metric. Valid values: [bps (attack traffic bandwidth), pps (attack packet rate)]
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-		// Statistical granularity. Valid values: [300 (5-minute), 3600 (hourly), 86400 (daily)]
-		Period *int64 `json:"Period,omitempty" name:"Period"`
-
-		// Statistics start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// Value array. The unit for attack traffic bandwidth is Mbps, and that for the packet rate is pps.
-		Data []*uint64 `json:"Data,omitempty" name:"Data"`
-
-		// Number of values
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDDoSTrendResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSTrendResponse) ToJsonString() string {
@@ -4181,9 +5236,15 @@ func (r *DescribeDDoSTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDDoSUsedStatisRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+}
+
 type DescribeDDoSUsedStatisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
 	Business *string `json:"Business,omitempty" name:"Business"`
 }
@@ -4207,18 +5268,20 @@ func (r *DescribeDDoSUsedStatisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeDDoSUsedStatisResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Field value as follows:
+// Predefined struct for user
+type DescribeDDoSUsedStatisResponseParams struct {
+	// Field value as follows:
 	// Days: number of days of Anti-DDoS resource use
 	// Attacks: number of DDoS attacks
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSUsedStatisResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSUsedStatisResponseParams `json:"Response"`
 }
 
 func (r *DescribeDDoSUsedStatisResponse) ToJsonString() string {
@@ -4232,9 +5295,18 @@ func (r *DescribeDDoSUsedStatisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIPProductInfoRequestParams struct {
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// IP list
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type DescribeIPProductInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (Single IP); `bgp-multip`: Anti-DDoS Pro (Multi-IP)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4262,20 +5334,22 @@ func (r *DescribeIPProductInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeIPProductInfoResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Tencent Cloud product information list. If nothing is found, an empty array will be returned. Valid values:
+// Predefined struct for user
+type DescribeIPProductInfoResponseParams struct {
+	// Tencent Cloud product information list. If nothing is found, an empty array will be returned. Valid values:
 	// If `Key` is ProductName, `value` indicates the name of a Tencent Cloud product instance;
 	// If `Key` is `ProductInstanceId`, `value` indicates the ID of a Tencent Cloud product instance;
 	// If `Key` is `ProductType`, `value` indicates the Tencent Cloud product type (cvm: CVM, clb: CLB);
 	// If `Key` is `IP`, `value` indicates the IP of a Tencent Cloud product instance;
-		Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValueRecord `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeIPProductInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeIPProductInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeIPProductInfoResponse) ToJsonString() string {
@@ -4289,9 +5363,15 @@ func (r *DescribeIPProductInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInsurePacksRequestParams struct {
+	// Guarantee package ID, which is optional. If you need to get the guarantee package with a specified ID (such as insure-000000xe), please use this field
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+}
+
 type DescribeInsurePacksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Guarantee package ID, which is optional. If you need to get the guarantee package with a specified ID (such as insure-000000xe), please use this field
 	IdList []*string `json:"IdList,omitempty" name:"IdList"`
 }
@@ -4315,16 +5395,18 @@ func (r *DescribeInsurePacksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInsurePacksResponseParams struct {
+	// Guarantee package list
+	InsurePacks []*KeyValueRecord `json:"InsurePacks,omitempty" name:"InsurePacks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInsurePacksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Guarantee package list
-		InsurePacks []*KeyValueRecord `json:"InsurePacks,omitempty" name:"InsurePacks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInsurePacksResponseParams `json:"Response"`
 }
 
 func (r *DescribeInsurePacksResponse) ToJsonString() string {
@@ -4338,8 +5420,14 @@ func (r *DescribeInsurePacksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpBlockListRequestParams struct {
+
+}
+
 type DescribeIpBlockListRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeIpBlockListRequest) ToJsonString() string {
@@ -4354,22 +5442,25 @@ func (r *DescribeIpBlockListRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIpBlockListRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpBlockListResponseParams struct {
+	// Blocked IP list
+	List []*IpBlockData `json:"List,omitempty" name:"List"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIpBlockListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Blocked IP list
-		List []*IpBlockData `json:"List,omitempty" name:"List"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIpBlockListResponseParams `json:"Response"`
 }
 
 func (r *DescribeIpBlockListResponse) ToJsonString() string {
@@ -4383,9 +5474,30 @@ func (r *DescribeIpBlockListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpUnBlockListRequestParams struct {
+	// Start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// IP (if this field is not empty, IP filtering will be performed)
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Pagination parameter (paginated query will be performed if this field is not empty). This field will be disused in the future. Please use the `Limit` and `Offset` fields instead;
+	Paging *Paging `json:"Paging,omitempty" name:"Paging"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeIpUnBlockListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
@@ -4429,25 +5541,27 @@ func (r *DescribeIpUnBlockListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpUnBlockListResponseParams struct {
+	// Start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// IP unblocking record
+	List []*IpUnBlockData `json:"List,omitempty" name:"List"`
+
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIpUnBlockListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Start time
-		BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
-
-		// End time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// IP unblocking record
-		List []*IpUnBlockData `json:"List,omitempty" name:"List"`
-
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIpUnBlockListResponseParams `json:"Response"`
 }
 
 func (r *DescribeIpUnBlockListResponse) ToJsonString() string {
@@ -4461,9 +5575,21 @@ func (r *DescribeIpUnBlockListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeL4HealthConfigRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID array. To export the health check configurations of all rules, leave this field empty or enter an empty array;
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
 type DescribeL4HealthConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4495,16 +5621,18 @@ func (r *DescribeL4HealthConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeL4HealthConfigResponseParams struct {
+	// Layer-4 health check configuration array
+	HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeL4HealthConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Layer-4 health check configuration array
-		HealthConfig []*L4HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeL4HealthConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeL4HealthConfigResponse) ToJsonString() string {
@@ -4518,9 +5646,18 @@ func (r *DescribeL4HealthConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeL4RulesErrHealthRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeL4RulesErrHealthRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4548,28 +5685,30 @@ func (r *DescribeL4RulesErrHealthRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeL4RulesErrHealthResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeL4RulesErrHealthResponseParams struct {
+	// Total number of exceptional rules
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Total number of exceptional rules
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
+	// Exceptional rule list. Returned value description: `Key` is the rule ID, while `Value` is the exceptional IP. Multiple IPs are separated by ","
+	ErrHealths []*KeyValue `json:"ErrHealths,omitempty" name:"ErrHealths"`
 
-		// Exceptional rule list. Returned value description: `Key` is the rule ID, while `Value` is the exceptional IP. Multiple IPs are separated by ","
-		ErrHealths []*KeyValue `json:"ErrHealths,omitempty" name:"ErrHealths"`
-
-		// Exceptional rule list (which provides more error-related information). Returned value description:
+	// Exceptional rule list (which provides more error-related information). Returned value description:
 	// If `key` is `RuleId`, `Value` indicates the rule ID;
 	// If `key` is `Protocol`, `Value` indicates the forwarding protocol of a rule;
 	// If `key` is `VirtualPort`, `Value` indicates the forwarding port of a rule;
 	// If `Key` is `ErrMessage`, `Value` indicates the exception message for health check;
 	// Exception message for health check in the format of `"SourceIp:1.1.1.1|SourcePort:1234|AbnormalStatTime:1570689065|AbnormalReason:connection time out|Interval:20|CheckNum:6|FailNum:6"`. Multiple error messages for the source IP should be separated by `,`,
 	// SourceIp: real server IP, SourcePort: real server port, AbnormalStatTime: exception time, AbnormalReason: cause of exception, Interval: check frequency, CheckNum: number of checks, FailNum: number of failures;
-		ExtErrHealths []*KeyValueRecord `json:"ExtErrHealths,omitempty" name:"ExtErrHealths"`
+	ExtErrHealths []*KeyValueRecord `json:"ExtErrHealths,omitempty" name:"ExtErrHealths"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeL4RulesErrHealthResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeL4RulesErrHealthResponseParams `json:"Response"`
 }
 
 func (r *DescribeL4RulesErrHealthResponse) ToJsonString() string {
@@ -4583,9 +5722,21 @@ func (r *DescribeL4RulesErrHealthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeL7HealthConfigRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID array. To export the health check configurations of all rules, leave this field empty or enter an empty array;
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
 type DescribeL7HealthConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4617,16 +5768,18 @@ func (r *DescribeL7HealthConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeL7HealthConfigResponseParams struct {
+	// Layer-7 health check configuration array
+	HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeL7HealthConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Layer-7 health check configuration array
-		HealthConfig []*L7HealthConfig `json:"HealthConfig,omitempty" name:"HealthConfig"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeL7HealthConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeL7HealthConfigResponse) ToJsonString() string {
@@ -4640,9 +5793,15 @@ func (r *DescribeL7HealthConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePackIndexRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+}
+
 type DescribePackIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 }
@@ -4666,22 +5825,24 @@ func (r *DescribePackIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribePackIndexResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Field value as follows:
+// Predefined struct for user
+type DescribePackIndexResponseParams struct {
+	// Field value as follows:
 	// TotalPackCount: number of resources
 	// AttackPackCount: number of resources being cleansed
 	// BlockPackCount: number of blocked resources
 	// ExpiredPackCount: number of expired resources
 	// ExpireingPackCount: number of expiring resources
 	// IsolatePackCount: number of isolated resources
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePackIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePackIndexResponseParams `json:"Response"`
 }
 
 func (r *DescribePackIndexResponse) ToJsonString() string {
@@ -4695,9 +5856,27 @@ func (r *DescribePackIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePcapRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Attack event start time in the format of "2018-08-28 07:00:00"
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Attack event end time in the format of "2018-08-28 07:02:00"
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Resource IP, which is required only if `Business` is `net`;
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+}
+
 type DescribePcapRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4737,16 +5916,18 @@ func (r *DescribePcapRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePcapResponseParams struct {
+	// PCAP packet download link list, which is an empty array if there are no PCAP packets;
+	PcapUrlList []*string `json:"PcapUrlList,omitempty" name:"PcapUrlList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePcapResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// PCAP packet download link list, which is an empty array if there are no PCAP packets;
-		PcapUrlList []*string `json:"PcapUrlList,omitempty" name:"PcapUrlList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePcapResponseParams `json:"Response"`
 }
 
 func (r *DescribePcapResponse) ToJsonString() string {
@@ -4760,9 +5941,18 @@ func (r *DescribePcapResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePolicyCaseRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy scenario ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+}
+
 type DescribePolicyCaseRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4790,16 +5980,18 @@ func (r *DescribePolicyCaseRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePolicyCaseResponseParams struct {
+	// Policy scenario list
+	CaseList []*KeyValueRecord `json:"CaseList,omitempty" name:"CaseList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePolicyCaseResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy scenario list
-		CaseList []*KeyValueRecord `json:"CaseList,omitempty" name:"CaseList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePolicyCaseResponseParams `json:"Response"`
 }
 
 func (r *DescribePolicyCaseResponse) ToJsonString() string {
@@ -4813,9 +6005,18 @@ func (r *DescribePolicyCaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResIpListRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID. If this field is left empty, it means to get all resources IP of the current user
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+}
+
 type DescribeResIpListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4843,16 +6044,18 @@ func (r *DescribeResIpListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResIpListResponseParams struct {
+	// Resource IP list
+	Resource []*ResourceIp `json:"Resource,omitempty" name:"Resource"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResIpListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Resource IP list
-		Resource []*ResourceIp `json:"Resource,omitempty" name:"Resource"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResIpListResponseParams `json:"Response"`
 }
 
 func (r *DescribeResIpListResponse) ToJsonString() string {
@@ -4866,9 +6069,51 @@ func (r *DescribeResIpListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceListRequestParams struct {
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Region code search, which is optional. If no regions are to be specified, enter an empty array. If a region is to be specified, enter a region code, such as ["gz", "sh"]
+	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
+
+	// Line search. This field can be optionally entered only when getting the list of Anti-DDoS Advanced resources. Valid values: [1 (BGP line), 2 (Nanjing Telecom), 3 (Nanjing Unicom), 99 (third-party partner line)]. Please enter an empty array when getting other products;
+	Line []*uint64 `json:"Line,omitempty" name:"Line"`
+
+	// Resource ID search, which is optional. If this field is not an empty array, it means to get the resource list of a specified resource;
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+
+	// Resource name search, which is optional. If this field is not an empty string, it means to search for resources by name;
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// IP query list, which is optional. Resources will be queried by IP if the list is not empty.
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// Resource status search list, which is optional. Valid values: [0 (running), 1 (cleansing), 2 (blocking)]. No status search will be performed if an empty array is entered;
+	Status []*uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Expiring resource search, which is optional. Valid values: [0 (no search), 1 (search for expiring resources)]
+	Expire *uint64 `json:"Expire,omitempty" name:"Expire"`
+
+	// Sort by field, which is optional
+	OderBy []*OrderBy `json:"OderBy,omitempty" name:"OderBy"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// CNAME of Anti-DDoS Ultimate resource, which is optional and only valid for the Anti-DDoS Ultimate resource list;
+	CName *string `json:"CName,omitempty" name:"CName"`
+
+	// Domain name of Anti-DDoS Ultimate resource, which is optional and only valid for the Anti-DDoS Ultimate resource list;
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DescribeResourceListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -4940,14 +6185,12 @@ func (r *DescribeResourceListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeResourceListResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type DescribeResourceListResponseParams struct {
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-		// Total number of records
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Resource record list. The description of key values is as follows:
+	// Resource record list. The description of key values is as follows:
 	// "Key": "CreateTime" (Instance purchase time)
 	// "Key": "Region" (Instance region)
 	// "Key": "BoundIP" (IP bound to the single-IP instance)
@@ -4978,14 +6221,18 @@ type DescribeResourceListResponse struct {
 	// "Key": "DdosMax" (Base protection value of the Anti-DDoS Ultimate instance)
 	// "Key": "GFBandwidth" (Base business application bandwidth of the Anti-DDoS Advanced instance)
 	// "Key": "ServiceBandwidth" (Base business application bandwidth of the Anti-DDoS Ultimate instance)
-		ServicePacks []*KeyValueRecord `json:"ServicePacks,omitempty" name:"ServicePacks"`
+	ServicePacks []*KeyValueRecord `json:"ServicePacks,omitempty" name:"ServicePacks"`
 
-		// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
-		Business *string `json:"Business,omitempty" name:"Business"`
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeResourceListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeResourceListResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceListResponse) ToJsonString() string {
@@ -4999,9 +6246,18 @@ func (r *DescribeResourceListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleSetsRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID list
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+}
+
 type DescribeRuleSetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5029,27 +6285,29 @@ func (r *DescribeRuleSetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleSetsResponseParams struct {
+	// Rule record array. Valid values:
+	// If `Key` is "Id", `Value` indicates the resource ID
+	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
+	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
+	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
+	L4RuleSets []*KeyValueRecord `json:"L4RuleSets,omitempty" name:"L4RuleSets"`
+
+	// Rule record array. Valid values:
+	// If `Key` is "Id", `Value` indicates the resource ID
+	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
+	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
+	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
+	L7RuleSets []*KeyValueRecord `json:"L7RuleSets,omitempty" name:"L7RuleSets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRuleSetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule record array. Valid values:
-	// If `Key` is "Id", `Value` indicates the resource ID
-	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
-	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
-	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
-		L4RuleSets []*KeyValueRecord `json:"L4RuleSets,omitempty" name:"L4RuleSets"`
-
-		// Rule record array. Valid values:
-	// If `Key` is "Id", `Value` indicates the resource ID
-	// If `Key` is "RuleIdList", `Value` indicates the resource rule ID. Multiple rule IDs are separated by ","
-	// If `Key` is "RuleNameList", `Value` indicates the resource rule name. Multiple rule names are separated by ","
-	// If `Key` is "RuleNum", `Value` indicates the number of resource rules
-		L7RuleSets []*KeyValueRecord `json:"L7RuleSets,omitempty" name:"L7RuleSets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRuleSetsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRuleSetsResponse) ToJsonString() string {
@@ -5063,9 +6321,21 @@ func (r *DescribeRuleSetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSchedulingDomainListRequestParams struct {
+	// Number of items in a page. Returned results are not paged if you enter '0'.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the page. Value: (number of pages - 1) * items per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// (Optional) Filter by specific domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DescribeSchedulingDomainListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of items in a page. Returned results are not paged if you enter '0'.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -5097,19 +6367,21 @@ func (r *DescribeSchedulingDomainListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSchedulingDomainListResponseParams struct {
+	// Total number of scheduling domain names
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// List of scheduling domain names
+	DomainList []*SchedulingDomain `json:"DomainList,omitempty" name:"DomainList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSchedulingDomainListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of scheduling domain names
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// List of scheduling domain names
-		DomainList []*SchedulingDomain `json:"DomainList,omitempty" name:"DomainList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSchedulingDomainListResponseParams `json:"Response"`
 }
 
 func (r *DescribeSchedulingDomainListResponse) ToJsonString() string {
@@ -5123,8 +6395,14 @@ func (r *DescribeSchedulingDomainListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecIndexRequestParams struct {
+
+}
+
 type DescribeSecIndexRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeSecIndexRequest) ToJsonString() string {
@@ -5139,33 +6417,36 @@ func (r *DescribeSecIndexRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecIndexRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeSecIndexResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Field value as follows:
+// Predefined struct for user
+type DescribeSecIndexResponseParams struct {
+	// Field value as follows:
 	// AttackIpCount: number of attacked IPs
 	// AttackCount: number of attacks
 	// BlockCount: number of blockings
 	// MaxMbps: attack bandwidth peak in Mbps
 	// IpNum: IP statistics
-		Data []*KeyValue `json:"Data,omitempty" name:"Data"`
+	Data []*KeyValue `json:"Data,omitempty" name:"Data"`
 
-		// Start time of the current month
-		BeginDate *string `json:"BeginDate,omitempty" name:"BeginDate"`
+	// Start time of the current month
+	BeginDate *string `json:"BeginDate,omitempty" name:"BeginDate"`
 
-		// End time of the current month
-		EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+	// End time of the current month
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSecIndexResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecIndexResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecIndexResponse) ToJsonString() string {
@@ -5179,9 +6460,18 @@ func (r *DescribeSecIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSourceIpSegmentRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeSourceIpSegmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5209,16 +6499,18 @@ func (r *DescribeSourceIpSegmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSourceIpSegmentResponseParams struct {
+	// Intermediate IP range. Multiple values are separated by ";"
+	Data *string `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSourceIpSegmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Intermediate IP range. Multiple values are separated by ";"
-		Data *string `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSourceIpSegmentResponseParams `json:"Response"`
 }
 
 func (r *DescribeSourceIpSegmentResponse) ToJsonString() string {
@@ -5232,9 +6524,35 @@ func (r *DescribeSourceIpSegmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTransmitStatisRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Metric name. Valid values:
+	// traffic: traffic bandwidth;
+	// pkg: packet rate;
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Statistical time granularity (300: 5-minute, 3600: hourly, 86400: daily)
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time. The second part is kept at 0, and the minute part is a multiple of 5
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time. The second part is kept at 0, and the minute part is a multiple of 5
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Resource IP, which is required and only supports one IP if `Business` is `bgp-multip`. If this field is left empty, all IPs of a resource instance will be counted by default. If the resource instance has multiple IPs (such as Anti-DDoS Ultimate), the statistical method is summation;
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type DescribeTransmitStatisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5284,26 +6602,28 @@ func (r *DescribeTransmitStatisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeTransmitStatisResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// If `MetricName` is `traffic`, this field indicates the inbound traffic bandwidth in bps;
+// Predefined struct for user
+type DescribeTransmitStatisResponseParams struct {
+	// If `MetricName` is `traffic`, this field indicates the inbound traffic bandwidth in bps;
 	// If `MetricName` is `pkg`, this field indicates the inbound packet rate in pps;
-		InDataList []*float64 `json:"InDataList,omitempty" name:"InDataList"`
+	InDataList []*float64 `json:"InDataList,omitempty" name:"InDataList"`
 
-		// If `MetricName` is `traffic`, this field indicates the outbound traffic bandwidth in bps;
+	// If `MetricName` is `traffic`, this field indicates the outbound traffic bandwidth in bps;
 	// If `MetricName` is `pkg`, this field indicates the outbound packet rate in pps;
-		OutDataList []*float64 `json:"OutDataList,omitempty" name:"OutDataList"`
+	OutDataList []*float64 `json:"OutDataList,omitempty" name:"OutDataList"`
 
-		// Metric name:
+	// Metric name:
 	// traffic: traffic bandwidth;
 	// pkg: packet rate;
-		MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTransmitStatisResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTransmitStatisResponseParams `json:"Response"`
 }
 
 func (r *DescribeTransmitStatisResponse) ToJsonString() string {
@@ -5317,8 +6637,14 @@ func (r *DescribeTransmitStatisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUnBlockStatisRequestParams struct {
+
+}
+
 type DescribeUnBlockStatisRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeUnBlockStatisRequest) ToJsonString() string {
@@ -5333,31 +6659,34 @@ func (r *DescribeUnBlockStatisRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUnBlockStatisRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUnBlockStatisResponseParams struct {
+	// Total number of unblocking chances
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Number of used chances
+	Used *uint64 `json:"Used,omitempty" name:"Used"`
+
+	// Statistics start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// Statistics end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUnBlockStatisResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of unblocking chances
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Number of used chances
-		Used *uint64 `json:"Used,omitempty" name:"Used"`
-
-		// Statistics start time
-		BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
-
-		// Statistics end time
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUnBlockStatisResponseParams `json:"Response"`
 }
 
 func (r *DescribeUnBlockStatisResponse) ToJsonString() string {
@@ -5371,9 +6700,27 @@ func (r *DescribeUnBlockStatisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleL4RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID, which is optional. If this field is entered, the specified rule will be obtained
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribleL4RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5413,22 +6760,24 @@ func (r *DescribleL4RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleL4RulesResponseParams struct {
+	// Forwarding rule list
+	Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules"`
+
+	// Total number of rules
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Health check configuration list
+	Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribleL4RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Forwarding rule list
-		Rules []*L4RuleEntry `json:"Rules,omitempty" name:"Rules"`
-
-		// Total number of rules
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Health check configuration list
-		Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribleL4RulesResponseParams `json:"Response"`
 }
 
 func (r *DescribleL4RulesResponse) ToJsonString() string {
@@ -5442,9 +6791,36 @@ func (r *DescribleL4RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleL7RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID, which is optional. If this field is entered, the specified rule will be obtained
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+
+	// Number of entries per page. A value of 0 means no pagination
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page start offset, whose value is (page number - 1) * number of entries per page
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Domain name search, which is optional. Enter it if you need to search for domain names
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Forwarding protocol search, which is optional. Valid values: [http, https, http/https]
+	ProtocolList []*string `json:"ProtocolList,omitempty" name:"ProtocolList"`
+
+	// Status search, which is optional. Valid values: [0 (successfully configured rule), 1 (rule configuration taking effect), 2 (rule configuration failed), 3 (rule deletion taking effect), 5 (rule deletion failed), 6 (rule waiting for configuration), 7 (rule waiting for deletion), 8 (rule waiting for certificate configuration)]
+	StatusList []*uint64 `json:"StatusList,omitempty" name:"StatusList"`
+}
+
 type DescribleL7RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5496,22 +6872,24 @@ func (r *DescribleL7RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleL7RulesResponseParams struct {
+	// Forwarding rule list
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+
+	// Total number of rules
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Health check configuration list
+	Healths []*L7RuleHealth `json:"Healths,omitempty" name:"Healths"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribleL7RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Forwarding rule list
-		Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
-
-		// Total number of rules
-		Total *uint64 `json:"Total,omitempty" name:"Total"`
-
-		// Health check configuration list
-		Healths []*L7RuleHealth `json:"Healths,omitempty" name:"Healths"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribleL7RulesResponseParams `json:"Response"`
 }
 
 func (r *DescribleL7RulesResponse) ToJsonString() string {
@@ -5525,9 +6903,18 @@ func (r *DescribleL7RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleRegionCountRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Line search. Valid values: [1 (BGP line), 2 (Nanjing Telecom), 3 (Nanjing Unicom), 99 (third-party partner line)]. This field is valid only for Anti-DDoS Advanced and should be ignored for other product
+	LineList []*uint64 `json:"LineList,omitempty" name:"LineList"`
+}
+
 type DescribleRegionCountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5555,16 +6942,18 @@ func (r *DescribleRegionCountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribleRegionCountResponseParams struct {
+	// Number of resource instances in region
+	RegionList []*RegionInstanceCount `json:"RegionList,omitempty" name:"RegionList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribleRegionCountResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of resource instances in region
-		RegionList []*RegionInstanceCount `json:"RegionList,omitempty" name:"RegionList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribleRegionCountResponseParams `json:"Response"`
 }
 
 func (r *DescribleRegionCountResponse) ToJsonString() string {
@@ -5579,7 +6968,6 @@ func (r *DescribleRegionCountResponse) FromJsonString(s string) error {
 }
 
 type HttpStatusMap struct {
-
 	// HTTP 2xx Status code
 	Http2xx []*float64 `json:"Http2xx,omitempty" name:"Http2xx"`
 
@@ -5612,7 +7000,6 @@ type HttpStatusMap struct {
 }
 
 type IpBlackWhite struct {
-
 	// IP address
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -5621,7 +7008,6 @@ type IpBlackWhite struct {
 }
 
 type IpBlockData struct {
-
 	// IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -5639,7 +7025,6 @@ type IpBlockData struct {
 }
 
 type IpUnBlockData struct {
-
 	// IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -5654,7 +7039,6 @@ type IpUnBlockData struct {
 }
 
 type KeyValue struct {
-
 	// Field name
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -5663,13 +7047,11 @@ type KeyValue struct {
 }
 
 type KeyValueRecord struct {
-
 	// Key-Value array of a record
 	Record []*KeyValue `json:"Record,omitempty" name:"Record"`
 }
 
 type L4HealthConfig struct {
-
 	// Forwarding protocol. Valid values: [TCP, UDP]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -5696,7 +7078,6 @@ type L4HealthConfig struct {
 }
 
 type L4RuleEntry struct {
-
 	// Forwarding protocol. Valid values: [TCP, UDP]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -5732,7 +7113,6 @@ type L4RuleEntry struct {
 }
 
 type L4RuleHealth struct {
-
 	// Rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -5753,7 +7133,6 @@ type L4RuleHealth struct {
 }
 
 type L4RuleSource struct {
-
 	// Intermediate IP or domain name
 	Source *string `json:"Source,omitempty" name:"Source"`
 
@@ -5762,7 +7141,6 @@ type L4RuleSource struct {
 }
 
 type L7HealthConfig struct {
-
 	// Forwarding protocol. Valid values: [http, https, http/https]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -5792,7 +7170,6 @@ type L7HealthConfig struct {
 }
 
 type L7RuleEntry struct {
-
 	// Forwarding protocol. Valid values: [http, https]
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -5856,7 +7233,6 @@ type L7RuleEntry struct {
 }
 
 type L7RuleHealth struct {
-
 	// Rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -5885,9 +7261,24 @@ type L7RuleHealth struct {
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 }
 
+// Predefined struct for user
+type ModifyCCAlarmThresholdRequestParams struct {
+	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	RsId *string `json:"RsId,omitempty" name:"RsId"`
+
+	// Alarm threshold, which should be greater than 0 (currently scheduled value). It is set to 1000 on the backend by default
+	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
+
+	// List of IPs associated with resource. If no Anti-DDoS Pro instance is bound, pass in an empty array. For Anti-DDoS Ultimate, pass in multiple IPs
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type ModifyCCAlarmThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -5923,16 +7314,18 @@ func (r *ModifyCCAlarmThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCAlarmThresholdResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCAlarmThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCAlarmThresholdResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCAlarmThresholdResponse) ToJsonString() string {
@@ -5946,9 +7339,42 @@ func (r *ModifyCCAlarmThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCFrequencyRulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// CC access frequency control rule ID
+	CCFrequencyRuleId *string `json:"CCFrequencyRuleId,omitempty" name:"CCFrequencyRuleId"`
+
+	// Matching rule. Valid values: ["include" (prefix match), "equal" (exact match)]
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+
+	// Reference period in seconds. Valid values: [10, 30, 60]
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of access requests. Value range: [1-10000]
+	ReqNumber *uint64 `json:"ReqNumber,omitempty" name:"ReqNumber"`
+
+	// Action take. Valid values: ["alg" (CAPTCHA), "drop" (blocking)]
+	Act *string `json:"Act,omitempty" name:"Act"`
+
+	// Execution duration in seconds. Valid range: [1-900]
+	ExeDuration *uint64 `json:"ExeDuration,omitempty" name:"ExeDuration"`
+
+	// URI string, which must start with `/`, such as `/abc/a.php`. Length limit: 31. If URI is `/`, only prefix match can be selected as the matching mode;
+	Uri *string `json:"Uri,omitempty" name:"Uri"`
+
+	// `User-Agent` string. Length limit: 80
+	UserAgent *string `json:"UserAgent,omitempty" name:"UserAgent"`
+
+	// Cookie string. Length limit: 40
+	Cookie *string `json:"Cookie,omitempty" name:"Cookie"`
+}
+
 type ModifyCCFrequencyRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6008,16 +7434,18 @@ func (r *ModifyCCFrequencyRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCFrequencyRulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCFrequencyRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCFrequencyRulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCFrequencyRulesResponse) ToJsonString() string {
@@ -6031,9 +7459,24 @@ func (r *ModifyCCFrequencyRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCFrequencyRulesStatusRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Layer-7 forwarding rule ID, which can be obtained through the `DescribleL7Rules` API
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Enables or disable. Valid values: ["on", "off"]
+	Method *string `json:"Method,omitempty" name:"Method"`
+}
+
 type ModifyCCFrequencyRulesStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6069,16 +7512,18 @@ func (r *ModifyCCFrequencyRulesStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCFrequencyRulesStatusResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCFrequencyRulesStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCFrequencyRulesStatusResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCFrequencyRulesStatusResponse) ToJsonString() string {
@@ -6092,9 +7537,24 @@ func (r *ModifyCCFrequencyRulesStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCHostProtectionRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Enables/disables CC domain name protection. Valid values: [open (enable), close (disable)]
+	Method *string `json:"Method,omitempty" name:"Method"`
+}
+
 type ModifyCCHostProtectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6130,16 +7590,18 @@ func (r *ModifyCCHostProtectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCHostProtectionResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCHostProtectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCHostProtectionResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCHostProtectionResponse) ToJsonString() string {
@@ -6153,9 +7615,37 @@ func (r *ModifyCCHostProtectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCIpAllowDenyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// add: add, delete: delete
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Blocklist/allowlist type. Valid values: [white (allowlist), black (blocklist)]
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Blocklisted/whitelisted IP array
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `Domain` and `RuleId` fields are required;
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// HTTPS layer-7 forwarding rule domain name (which is optional and can be obtained from the layer-7 forwarding rule API). This field is required only if `Protocol` is `https`;
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// HTTPS layer-7 forwarding rule ID (which is optional and can be obtained from the layer-7 forwarding rule API),
+	// If `Method` is `delete`, this field can be left empty;
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type ModifyCCIpAllowDenyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6208,16 +7698,18 @@ func (r *ModifyCCIpAllowDenyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCIpAllowDenyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCIpAllowDenyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCIpAllowDenyResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCIpAllowDenyResponse) ToJsonString() string {
@@ -6231,9 +7723,27 @@ func (r *ModifyCCIpAllowDenyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCLevelRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// CC protection level. Valid values: [default (normal), loose (loose), strict (strict)];
+	Level *string `json:"Level,omitempty" name:"Level"`
+
+	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `RuleId` field is required;
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Layer-7 forwarding rule ID (which can be obtained from the layer-7 forwarding rule API);
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type ModifyCCLevelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6273,16 +7783,18 @@ func (r *ModifyCCLevelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCLevelResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCLevelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCLevelResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCLevelResponse) ToJsonString() string {
@@ -6296,9 +7808,24 @@ func (r *ModifyCCLevelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCPolicySwitchRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Policy ID
+	SetId *string `json:"SetId,omitempty" name:"SetId"`
+
+	// Status
+	Switch *uint64 `json:"Switch,omitempty" name:"Switch"`
+}
+
 type ModifyCCPolicySwitchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6334,16 +7861,18 @@ func (r *ModifyCCPolicySwitchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCPolicySwitchResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCPolicySwitchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCPolicySwitchResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCPolicySwitchResponse) ToJsonString() string {
@@ -6357,9 +7886,24 @@ func (r *ModifyCCPolicySwitchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCSelfDefinePolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Policy ID
+	SetId *string `json:"SetId,omitempty" name:"SetId"`
+
+	// Details of the CC protection policy
+	Policy *CCPolicy `json:"Policy,omitempty" name:"Policy"`
+}
+
 type ModifyCCSelfDefinePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6395,16 +7939,18 @@ func (r *ModifyCCSelfDefinePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCSelfDefinePolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCSelfDefinePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCSelfDefinePolicyResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCSelfDefinePolicyResponse) ToJsonString() string {
@@ -6418,9 +7964,59 @@ func (r *ModifyCCSelfDefinePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCThresholdRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate, `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// CC protection threshold. Valid values: (0 100 150 240 350 480 550 700 850 1000 1500 2000 3000 5000 10000 20000);
+	// If `Business` is Anti-DDoS Advanced or Anti-DDoS Ultimate, its maximum CC protection threshold is subject to the base protection bandwidth in the following way:
+	//   Base bandwidth: maximum CC protection threshold
+	//   10:  20000,
+	//   20:  40000,
+	//   30:  70000,
+	//   40:  100000,
+	//   50:  150000,
+	//   60:  200000,
+	//   80:  250000,
+	//   100: 300000,
+	Threshold *uint64 `json:"Threshold,omitempty" name:"Threshold"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `RuleId` field is required;
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// HTTPS layer-7 forwarding rule ID (which is optional and can be obtained from the layer-7 forwarding rule API);
+	// Required if `Protocol` is `https`;
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Queried IP address (only provided by Anti-DDoS Basic), such as 1.1.1.1
+	BasicIp *string `json:"BasicIp,omitempty" name:"BasicIp"`
+
+	// IP region (only provided for Anti-DDoS Basic). Valid values: region abbreviations such as gz, bj, sh, and hk
+	BasicRegion *string `json:"BasicRegion,omitempty" name:"BasicRegion"`
+
+	// Zone type (only provided for Anti-DDoS Basic). Valid values: public (public cloud zone), bm (BM zone), nat (NAT server zone), channel (internet channel).
+	BasicBizType *string `json:"BasicBizType,omitempty" name:"BasicBizType"`
+
+	// Device type (only provided for Anti-DDoS Basic). Valid values: cvm (CVM), clb (public CLB), lb (BM CLB), nat (NAT server), channel (internet channel).
+	BasicDeviceType *string `json:"BasicDeviceType,omitempty" name:"BasicDeviceType"`
+
+	// IPInstance Nat gateway (only provided for Anti-DDoS Basic), which is optional. (If the device type to be queried is a NAT server, this parameter is required, which can be obtained through the NAT resource query API)
+	BasicIpInstance *string `json:"BasicIpInstance,omitempty" name:"BasicIpInstance"`
+
+	// ISP line (only provided for Anti-DDoS Basic), which is optional. (If the device type to be queried is a NAT server, this parameter should be 5)
+	BasicIspCode *uint64 `json:"BasicIspCode,omitempty" name:"BasicIspCode"`
+
+	// This optional field must be specified when HTTPS protocol is used.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type ModifyCCThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate, `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6499,16 +8095,18 @@ func (r *ModifyCCThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCThresholdResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCThresholdResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCThresholdResponse) ToJsonString() string {
@@ -6522,9 +8120,39 @@ func (r *ModifyCCThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCUrlAllowRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// add: add, delete: delete
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Blocklist/allowlist type. Valid value: [white (allowlist)]
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// URL array. URL format:
+	// http://domain name/cgi
+	// https://domain name/cgi
+	UrlList []*string `json:"UrlList,omitempty" name:"UrlList"`
+
+	// CC protection type, which is optional. Valid values: [http (HTTP CC protection), https (HTTPS CC protection)]; if this field is left empty, HTTPS CC protection will be used by default; if `https` is entered, the `Domain` and `RuleId` fields are required;
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// HTTPS layer-7 forwarding rule domain name (which is optional and can be obtained from the layer-7 forwarding rule API). This field is required only if `Protocol` is `https`;
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// HTTPS layer-7 forwarding rule ID (which is optional and can be obtained from the layer-7 forwarding rule API). This field is required only when adding a rule and `Protocol` is `https`;
+	// If `Method` is `delete`, this field can be left empty;
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type ModifyCCUrlAllowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6579,16 +8207,18 @@ func (r *ModifyCCUrlAllowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCCUrlAllowResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCCUrlAllowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCCUrlAllowResponseParams `json:"Response"`
 }
 
 func (r *ModifyCCUrlAllowResponse) ToJsonString() string {
@@ -6602,9 +8232,24 @@ func (r *ModifyCCUrlAllowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSAIStatusRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// get (read AI protection status), set (modify AI protection status);
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// AI protection status, which is required if `Method` is `set`. Valid values: [on, off].
+	DDoSAI *string `json:"DDoSAI,omitempty" name:"DDoSAI"`
+}
+
 type ModifyDDoSAIStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6640,19 +8285,21 @@ func (r *ModifyDDoSAIStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSAIStatusResponseParams struct {
+	// AI protection status. Valid values: [on, off]
+	DDoSAI *string `json:"DDoSAI,omitempty" name:"DDoSAI"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSAIStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// AI protection status. Valid values: [on, off]
-		DDoSAI *string `json:"DDoSAI,omitempty" name:"DDoSAI"`
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSAIStatusResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSAIStatusResponse) ToJsonString() string {
@@ -6666,9 +8313,27 @@ func (r *ModifyDDoSAIStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSAlarmThresholdRequestParams struct {
+	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	RsId *string `json:"RsId,omitempty" name:"RsId"`
+
+	// Alarm threshold type. 0: not set, 1: inbound traffic, 2: cleansed traffic
+	AlarmType *uint64 `json:"AlarmType,omitempty" name:"AlarmType"`
+
+	// Alarm threshold, which should be greater than 0 (currently scheduled value)
+	AlarmThreshold *uint64 `json:"AlarmThreshold,omitempty" name:"AlarmThreshold"`
+
+	// List of IPs associated with resource. If no Anti-DDoS Pro instance is bound, pass in an empty array. For Anti-DDoS Ultimate, pass in multiple IPs
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 type ModifyDDoSAlarmThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`shield`: Chess Shield, `bgpip`: Anti-DDoS Advanced, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6708,16 +8373,18 @@ func (r *ModifyDDoSAlarmThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSAlarmThresholdResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSAlarmThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSAlarmThresholdResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSAlarmThresholdResponse) ToJsonString() string {
@@ -6731,9 +8398,61 @@ func (r *ModifyDDoSAlarmThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSDefendStatusRequestParams struct {
+	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Protection status. Valid values: [0 (disabled), 1 (enabled)]
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Disablement duration in hours. Valid values: [0, 1, 2, 3, 4, 5, 6]. If `Status` is `0` (indicating to disable), `Hour` must be greater than 0;
+	Hour *int64 `json:"Hour,omitempty" name:"Hour"`
+
+	// Resource ID, which is required if `Business` is not Anti-DDoS Basic;
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Anti-DDoS Basic IP, which is required only if `Business` is Anti-DDoS Basic;
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Product type of IP, which is required only if `Business` is Anti-DDoS Basic. Valid values: [public (CVM), bm (BM), eni (ENI), vpngw (VPN Gateway), natgw (NAT Gateway), waf (WAF), fpc (finance product), gaap (GAAP), other (hosted IP)]
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// Product subtype of IP, which is required only if `Business` is Anti-DDoS Basic. Valid values: [cvm (CVM), lb (CLB), eni (ENI), vpngw (VPN), natgw (NAT), waf (WAF), fpc (finance), gaap (GAAP), other (hosted IP), eip (BM EIP)]
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Resource instance ID of IP, which is required only if `Business` is Anti-DDoS Basic. This field is required when binding a new IP. For example, if it is an ENI IP, enter `ID(eni-*)` of the ENI for `InstanceId`;
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// This field is required only if `Business` is Anti-DDoS Basic, indicating the IP region. Valid values:
+	// "bj":     North China (Beijing)
+	// "cd":     Southwest China (Chengdu)
+	// "cq":     Southwest China (Chongqing)
+	// "gz":     South China (Guangzhou)
+	// "gzopen": South China (Guangzhou Open)
+	// "hk":     Hong Kong (China)
+	// "kr":     Southeast Asia (Seoul)
+	// "sh":     East China (Shanghai)
+	// "shjr":   East China (Shanghai Finance)
+	// "szjr":   South China (Shenzhen Finance)
+	// "sg":     Southeast Asia (Singapore)
+	// "th":     Southeast Asia (Thailand)
+	// "de":     Europe (Germany)
+	// "usw":    West US (Silicon Valley)
+	// "ca":     North America (Toronto)
+	// "jp":     Japan
+	// "hzec":   Hangzhou
+	// "in":     India
+	// "use":    East US (Virginia)
+	// "ru":     Russia
+	// "tpe":    Taiwan (China)
+	// "nj":     Nanjing
+	IPRegion *string `json:"IPRegion,omitempty" name:"IPRegion"`
+}
+
 type ModifyDDoSDefendStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6811,16 +8530,18 @@ func (r *ModifyDDoSDefendStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSDefendStatusResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSDefendStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSDefendStatusResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSDefendStatusResponse) ToJsonString() string {
@@ -6834,9 +8555,24 @@ func (r *ModifyDDoSDefendStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSLevelRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// get (read protection level), set (modify protection level);
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Protection level, which is required if `Method` is `set`. Valid values: [low,middle,high]
+	DDoSLevel *string `json:"DDoSLevel,omitempty" name:"DDoSLevel"`
+}
+
 type ModifyDDoSLevelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -6872,19 +8608,21 @@ func (r *ModifyDDoSLevelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSLevelResponseParams struct {
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Protection level. Valid values: [low,middle,high]
+	DDoSLevel *string `json:"DDoSLevel,omitempty" name:"DDoSLevel"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSLevelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Anti-DDoS instance ID
-		Id *string `json:"Id,omitempty" name:"Id"`
-
-		// Protection level. Valid values: [low,middle,high]
-		DDoSLevel *string `json:"DDoSLevel,omitempty" name:"DDoSLevel"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSLevelResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSLevelResponse) ToJsonString() string {
@@ -6898,9 +8636,84 @@ func (r *ModifyDDoSLevelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyCaseRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy scenario ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+
+	// Development platform. Valid values: [PC (PC client), MOBILE (mobile device), TV (TV), SERVER (server)]
+	PlatformTypes []*string `json:"PlatformTypes,omitempty" name:"PlatformTypes"`
+
+	// Category. Valid values: [WEB (website), GAME (game), APP (application), OTHER (other)]
+	AppType *string `json:"AppType,omitempty" name:"AppType"`
+
+	// Application protocol. Valid values: [tcp (TCP protocol), udp (UDP protocol), icmp (ICMP protocol), all (other protocols)]
+	AppProtocols []*string `json:"AppProtocols,omitempty" name:"AppProtocols"`
+
+	// TCP start port. Value range: (0, 65535]
+	TcpSportStart *string `json:"TcpSportStart,omitempty" name:"TcpSportStart"`
+
+	// TCP end port. Value range: (0, 65535). It must be greater than or equal to the TCP start port
+	TcpSportEnd *string `json:"TcpSportEnd,omitempty" name:"TcpSportEnd"`
+
+	// UDP start port. Value range: (0, 65535]
+	UdpSportStart *string `json:"UdpSportStart,omitempty" name:"UdpSportStart"`
+
+	// End UDP business port. Value range: (0, 65535). It must be greater than or equal to the start UDP business port
+	UdpSportEnd *string `json:"UdpSportEnd,omitempty" name:"UdpSportEnd"`
+
+	// Whether there are customers outside Mainland China. Valid values: [no, yes]
+	HasAbroad *string `json:"HasAbroad,omitempty" name:"HasAbroad"`
+
+	// Whether to actively initiate outbound TCP requests. Valid values: [no, yes]
+	HasInitiateTcp *string `json:"HasInitiateTcp,omitempty" name:"HasInitiateTcp"`
+
+	// Whether to actively initiate outbound UDP requests. Valid values: [no, yes]
+	HasInitiateUdp *string `json:"HasInitiateUdp,omitempty" name:"HasInitiateUdp"`
+
+	// Port that actively initiates TCP requests. Value range: (0, 65535]
+	PeerTcpPort *string `json:"PeerTcpPort,omitempty" name:"PeerTcpPort"`
+
+	// Port that actively initiates UDP requests. Value range: (0, 65535]
+	PeerUdpPort *string `json:"PeerUdpPort,omitempty" name:"PeerUdpPort"`
+
+	// Fixed feature code of TCP payload. String length limit: 512
+	TcpFootprint *string `json:"TcpFootprint,omitempty" name:"TcpFootprint"`
+
+	// Fixed feature code of UDP payload. String length limit: 512
+	UdpFootprint *string `json:"UdpFootprint,omitempty" name:"UdpFootprint"`
+
+	// Web business API URL
+	WebApiUrl []*string `json:"WebApiUrl,omitempty" name:"WebApiUrl"`
+
+	// Minimum length of TCP business packet. Value range: (0, 1500)
+	MinTcpPackageLen *string `json:"MinTcpPackageLen,omitempty" name:"MinTcpPackageLen"`
+
+	// Maximum length of TCP business packet. Value range: (0, 1500). It must be greater than or equal to the minimum length of TCP business packet
+	MaxTcpPackageLen *string `json:"MaxTcpPackageLen,omitempty" name:"MaxTcpPackageLen"`
+
+	// Minimum length of UDP business packet. Value range: (0, 1500)
+	MinUdpPackageLen *string `json:"MinUdpPackageLen,omitempty" name:"MinUdpPackageLen"`
+
+	// Maximum length of UDP business packet. Value range: (0, 1500). It must be greater than or equal to the minimum length of UDP business packet
+	MaxUdpPackageLen *string `json:"MaxUdpPackageLen,omitempty" name:"MaxUdpPackageLen"`
+
+	// Whether there are VPN businesses. Valid values: [no, yes]
+	HasVPN *string `json:"HasVPN,omitempty" name:"HasVPN"`
+
+	// TCP business port list. Individual ports and port ranges are supported, which should be in string type, such as 80,443,700-800,53,1000-3000
+	TcpPortList *string `json:"TcpPortList,omitempty" name:"TcpPortList"`
+
+	// UDP business port list. Individual ports and port ranges are supported, which should be in string type, such as 80,443,700-800,53,1000-3000
+	UdpPortList *string `json:"UdpPortList,omitempty" name:"UdpPortList"`
+}
+
 type ModifyDDoSPolicyCaseRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7016,16 +8829,18 @@ func (r *ModifyDDoSPolicyCaseRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyCaseResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSPolicyCaseResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSPolicyCaseResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSPolicyCaseResponse) ToJsonString() string {
@@ -7039,9 +8854,21 @@ func (r *ModifyDDoSPolicyCaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyNameRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type ModifyDDoSPolicyNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7073,16 +8900,18 @@ func (r *ModifyDDoSPolicyNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyNameResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSPolicyNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSPolicyNameResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSPolicyNameResponse) ToJsonString() string {
@@ -7096,9 +8925,33 @@ func (r *ModifyDDoSPolicyNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Protocol disablement, which must be entered, and the array length must be 1
+	DropOptions []*DDoSPolicyDropOption `json:"DropOptions,omitempty" name:"DropOptions"`
+
+	// Port disablement. If no ports are to be disabled, enter an empty array
+	PortLimits []*DDoSPolicyPortLimit `json:"PortLimits,omitempty" name:"PortLimits"`
+
+	// IP blocklist/allowlist. Enter an empty array if there is no IP blocklist/allowlist
+	IpAllowDenys []*IpBlackWhite `json:"IpAllowDenys,omitempty" name:"IpAllowDenys"`
+
+	// Packet filter. Enter an empty array if there are no packets to filter
+	PacketFilters []*DDoSPolicyPacketFilter `json:"PacketFilters,omitempty" name:"PacketFilters"`
+
+	// Watermarking policy parameter. Enter an empty array if the watermarking feature is not enabled. At most one watermarking policy can be passed in (that is, the size of the array cannot exceed 1)
+	WaterPrint []*WaterPrintPolicy `json:"WaterPrint,omitempty" name:"WaterPrint"`
+}
+
 type ModifyDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7146,16 +8999,18 @@ func (r *ModifyDDoSPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSPolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSPolicyResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSPolicyResponse) ToJsonString() string {
@@ -7169,9 +9024,58 @@ func (r *ModifyDDoSPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSSwitchRequestParams struct {
+	// Anti-DDoS service type. `basic`: Anti-DDoS Basic
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// `get`: read DDoS protection status, `set`: modify DDoS protection status
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Anti-DDoS Basic IP, which is required only if `Business` is Anti-DDoS Basic;
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Product type of IP, which is required only if `Business` is Anti-DDoS Basic. Valid values: [public (CVM), bm (BM), eni (ENI), vpngw (VPN Gateway), natgw (NAT Gateway), waf (WAF), fpc (finance product), gaap (GAAP), other (hosted IP)]
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// Product subtype of IP, which is required only if `Business` is Anti-DDoS Basic. Valid values: [cvm (CVM), lb (CLB), eni (ENI), vpngw (VPN), natgw (NAT), waf (WAF), fpc (finance), gaap (GAAP), other (hosted IP), eip (BM EIP)]
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Resource instance ID of IP, which is required only if `Business` is Anti-DDoS Basic. This field is required when binding a new IP. For example, if it is an ENI IP, enter `ID(eni-*)` of the ENI for `InstanceId`;
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// This field is required only if `Business` is Anti-DDoS Basic, indicating the IP region. Valid values:
+	// "bj":     North China (Beijing)
+	// "cd":     Southwest China (Chengdu)
+	// "cq":     Southwest China (Chongqing)
+	// "gz":     South China (Guangzhou)
+	// "gzopen": South China (Guangzhou Open)
+	// "hk":     Hong Kong (China)
+	// "kr":     Southeast Asia (Seoul)
+	// "sh":     East China (Shanghai)
+	// "shjr":   East China (Shanghai Finance)
+	// "szjr":   South China (Shenzhen Finance)
+	// "sg":     Southeast Asia (Singapore)
+	// "th":     Southeast Asia (Thailand)
+	// "de":     Europe (Germany)
+	// "usw":    West US (Silicon Valley)
+	// "ca":     North America (Toronto)
+	// "jp":     Japan
+	// "hzec":   Hangzhou
+	// "in":     India
+	// "use":    East US (Virginia)
+	// "ru":     Russia
+	// "tpe":    Taiwan (China)
+	// "nj":     Nanjing
+	IPRegion *string `json:"IPRegion,omitempty" name:"IPRegion"`
+
+	// Protection status value, which is optional. Valid values: [0 (disabled), 1 (enabled)]. If `Method` is `get`, this field can be left empty;
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
 type ModifyDDoSSwitchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `basic`: Anti-DDoS Basic
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7245,16 +9149,18 @@ func (r *ModifyDDoSSwitchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSSwitchResponseParams struct {
+	// Current protection status value. Valid values: [0 (disabled), 1 (enabled)]
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSSwitchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Current protection status value. Valid values: [0 (disabled), 1 (enabled)]
-		Status *uint64 `json:"Status,omitempty" name:"Status"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSSwitchResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSSwitchResponse) ToJsonString() string {
@@ -7268,9 +9174,22 @@ func (r *ModifyDDoSSwitchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSThresholdRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// DDoS cleansing threshold. Valid values: [0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000];
+	// If the value is set to 0, the default value will be used;
+	Threshold *uint64 `json:"Threshold,omitempty" name:"Threshold"`
+}
+
 type ModifyDDoSThresholdRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7303,16 +9222,18 @@ func (r *ModifyDDoSThresholdRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSThresholdResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSThresholdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSThresholdResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSThresholdResponse) ToJsonString() string {
@@ -7326,9 +9247,24 @@ func (r *ModifyDDoSThresholdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSWaterKeyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Key operation. Valid values: [add (add), delete (delete), open (open), close (close), get (get key)]
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Key ID, which can be left empty or 0 when adding a key but is required for other operations
+	KeyId *uint64 `json:"KeyId,omitempty" name:"KeyId"`
+}
+
 type ModifyDDoSWaterKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7364,16 +9300,18 @@ func (r *ModifyDDoSWaterKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDDoSWaterKeyResponseParams struct {
+	// Watermark key list
+	KeyList []*WaterPrintKey `json:"KeyList,omitempty" name:"KeyList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDDoSWaterKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Watermark key list
-		KeyList []*WaterPrintKey `json:"KeyList,omitempty" name:"KeyList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDDoSWaterKeyResponseParams `json:"Response"`
 }
 
 func (r *ModifyDDoSWaterKeyResponse) ToJsonString() string {
@@ -7387,9 +9325,21 @@ func (r *ModifyDDoSWaterKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyElasticLimitRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Elastic protection threshold. Valid values: [0 10000 20000 30000 40000 50000 60000 70000 80000 90000 100000 120000 150000 200000 250000 300000 400000 600000 800000 220000 310000 110000 270000 610000]
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type ModifyElasticLimitRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7421,16 +9371,18 @@ func (r *ModifyElasticLimitRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyElasticLimitResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyElasticLimitResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyElasticLimitResponseParams `json:"Response"`
 }
 
 func (r *ModifyElasticLimitResponse) ToJsonString() string {
@@ -7444,9 +9396,21 @@ func (r *ModifyElasticLimitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4HealthRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Health check parameter array
+	Healths []*L4RuleHealth `json:"Healths,omitempty" name:"Healths"`
+}
+
 type ModifyL4HealthRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7478,16 +9442,18 @@ func (r *ModifyL4HealthRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4HealthResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyL4HealthResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyL4HealthResponseParams `json:"Response"`
 }
 
 func (r *ModifyL4HealthResponse) ToJsonString() string {
@@ -7501,9 +9467,27 @@ func (r *ModifyL4HealthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4KeepTimeRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Session persistence status. Valid values: [0 (disabled), 1 (enabled)]
+	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+
+	// Session persistence duration in seconds
+	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
+}
+
 type ModifyL4KeepTimeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7543,16 +9527,18 @@ func (r *ModifyL4KeepTimeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4KeepTimeResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyL4KeepTimeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyL4KeepTimeResponseParams `json:"Response"`
 }
 
 func (r *ModifyL4KeepTimeResponse) ToJsonString() string {
@@ -7566,9 +9552,21 @@ func (r *ModifyL4KeepTimeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule
+	Rule *L4RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
 type ModifyL4RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7600,16 +9598,18 @@ func (r *ModifyL4RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL4RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyL4RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyL4RulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyL4RulesResponse) ToJsonString() string {
@@ -7623,9 +9623,21 @@ func (r *ModifyL4RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL7RulesRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Rule
+	Rule *L7RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
 type ModifyL7RulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7657,16 +9669,18 @@ func (r *ModifyL7RulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyL7RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyL7RulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyL7RulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyL7RulesResponse) ToJsonString() string {
@@ -7680,9 +9694,24 @@ func (r *ModifyL7RulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetReturnSwitchRequestParams struct {
+	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Switch status. 0: disabled, 1: enabled
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Switch duration in hours. Valid values: [0,1,2,3,4,5,6;]. If `status` is 1, this field is required and must be greater than 0
+	Hour *uint64 `json:"Hour,omitempty" name:"Hour"`
+}
+
 type ModifyNetReturnSwitchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`net`: Anti-DDoS Ultimate)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7718,13 +9747,15 @@ func (r *ModifyNetReturnSwitchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetReturnSwitchResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyNetReturnSwitchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyNetReturnSwitchResponseParams `json:"Response"`
 }
 
 func (r *ModifyNetReturnSwitchResponse) ToJsonString() string {
@@ -7738,9 +9769,21 @@ func (r *ModifyNetReturnSwitchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNewDomainRulesRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Domain name forwarding rule.
+	Rule *NewL7RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
 type ModifyNewDomainRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7772,16 +9815,18 @@ func (r *ModifyNewDomainRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNewDomainRulesResponseParams struct {
+	// Success code.
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyNewDomainRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code.
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyNewDomainRulesResponseParams `json:"Response"`
 }
 
 func (r *ModifyNewDomainRulesResponse) ToJsonString() string {
@@ -7795,9 +9840,21 @@ func (r *ModifyNewDomainRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNewL4RuleRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Forwarding rule.
+	Rule *L4RuleEntry `json:"Rule,omitempty" name:"Rule"`
+}
+
 type ModifyNewL4RuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced).
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7829,16 +9886,18 @@ func (r *ModifyNewL4RuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNewL4RuleResponseParams struct {
+	// Success code.
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyNewL4RuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code.
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyNewL4RuleResponseParams `json:"Response"`
 }
 
 func (r *ModifyNewL4RuleResponse) ToJsonString() string {
@@ -7852,9 +9911,24 @@ func (r *ModifyNewL4RuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResBindDDoSPolicyRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Policy ID
+	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// bind: bind policy; unbind: unbind policy
+	Method *string `json:"Method,omitempty" name:"Method"`
+}
+
 type ModifyResBindDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced; `bgp`: Anti-DDoS Pro (single IP); `bgp-multip`: Anti-DDoS Pro (multi-IP), `net`: Anti-DDoS Ultimate
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7890,16 +9964,18 @@ func (r *ModifyResBindDDoSPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResBindDDoSPolicyResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResBindDDoSPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResBindDDoSPolicyResponseParams `json:"Response"`
 }
 
 func (r *ModifyResBindDDoSPolicyResponse) ToJsonString() string {
@@ -7913,9 +9989,21 @@ func (r *ModifyResBindDDoSPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceRenewFlagRequestParams struct {
+	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `shield`: Chess Shield, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `insurance`: guarantee package, `staticpack`: non-BGP package
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Resource ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Auto-renewal flag (0: manual renewal, 1: auto-renewal, 2: no renewal upon expiration)
+	RenewFlag *uint64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
 type ModifyResourceRenewFlagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Anti-DDoS service type. `bgpip`: Anti-DDoS Advanced, `net`: Anti-DDoS Ultimate, `shield`: Chess Shield, `bgp`: Anti-DDoS Pro (single IP), `bgp-multip`: Anti-DDoS Pro (multi-IP), `insurance`: guarantee package, `staticpack`: non-BGP package
 	Business *string `json:"Business,omitempty" name:"Business"`
 
@@ -7947,16 +10035,18 @@ func (r *ModifyResourceRenewFlagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceRenewFlagResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResourceRenewFlagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success code
-		Success *SuccessCode `json:"Success,omitempty" name:"Success"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResourceRenewFlagResponseParams `json:"Response"`
 }
 
 func (r *ModifyResourceRenewFlagResponse) ToJsonString() string {
@@ -7971,7 +10061,6 @@ func (r *ModifyResourceRenewFlagResponse) FromJsonString(s string) error {
 }
 
 type NewL7RuleEntry struct {
-
 	// Forwarding protocol. Valid values: `http` and `https`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -8047,7 +10136,6 @@ type NewL7RuleEntry struct {
 }
 
 type OrderBy struct {
-
 	// Sort by field name. Valid values: [
 	// bandwidth (bandwidth),
 	// overloadCount (number of times of exceeding peak value)
@@ -8059,7 +10147,6 @@ type OrderBy struct {
 }
 
 type Paging struct {
-
 	// Starting position
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -8068,7 +10155,6 @@ type Paging struct {
 }
 
 type ProtocolPort struct {
-
 	// Protocol (TCP, UDP)
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -8077,7 +10163,6 @@ type ProtocolPort struct {
 }
 
 type RegionInstanceCount struct {
-
 	// Region code
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -8089,7 +10174,6 @@ type RegionInstanceCount struct {
 }
 
 type ResourceIp struct {
-
 	// Anti-DDoS instance ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -8098,7 +10182,6 @@ type ResourceIp struct {
 }
 
 type SchedulingDomain struct {
-
 	// Scheduling domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -8123,7 +10206,7 @@ type SchedulingDomain struct {
 	// The creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// 
+
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
 	// Status
@@ -8134,7 +10217,6 @@ type SchedulingDomain struct {
 }
 
 type SuccessCode struct {
-
 	// Success/error code
 	Code *string `json:"Code,omitempty" name:"Code"`
 
@@ -8143,7 +10225,6 @@ type SuccessCode struct {
 }
 
 type WaterPrintKey struct {
-
 	// Watermark key ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
 
@@ -8161,7 +10242,6 @@ type WaterPrintKey struct {
 }
 
 type WaterPrintPolicy struct {
-
 	// TCP port range, such as ["2000-3000","3500-4000"]
 	TcpPortList []*string `json:"TcpPortList,omitempty" name:"TcpPortList"`
 

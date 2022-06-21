@@ -21,7 +21,6 @@ import (
 )
 
 type AttributeMap struct {
-
 	// Map key, supporting [a-zA-Z0-9-\.]*
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -29,9 +28,18 @@ type AttributeMap struct {
 	Value *int64 `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type CancelMatchingRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+
+	// The MatchTicket ID of the matchmaking to cancel
+	MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`
+}
+
 type CancelMatchingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -59,16 +67,18 @@ func (r *CancelMatchingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CancelMatchingResponseParams struct {
+	// Error code
+	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CancelMatchingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Error code
-		ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CancelMatchingResponseParams `json:"Response"`
 }
 
 func (r *CancelMatchingResponse) ToJsonString() string {
@@ -82,9 +92,51 @@ func (r *CancelMatchingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMatchRequestParams struct {
+	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
+	MatchName *string `json:"MatchName,omitempty" name:"MatchName"`
+
+	// RuleCode
+	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
+
+	// Timeout period in seconds. Value range: 1 600
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
+
+	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
+	ServerType *int64 `json:"ServerType,omitempty" name:"ServerType"`
+
+	// Matchmaking description. Up to 1024 bytes are allowed.
+	MatchDesc *string `json:"MatchDesc,omitempty" name:"MatchDesc"`
+
+	// Only HTTP and HTTPS protocols are supported.
+	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+
+	// Region of the game server queue
+	ServerRegion *string `json:"ServerRegion,omitempty" name:"ServerRegion"`
+
+	// Game server queue
+	ServerQueue *string `json:"ServerQueue,omitempty" name:"ServerQueue"`
+
+	// Custom push data
+	CustomPushData *string `json:"CustomPushData,omitempty" name:"CustomPushData"`
+
+	// Game server session data
+	ServerSessionData *string `json:"ServerSessionData,omitempty" name:"ServerSessionData"`
+
+	// Game attribute. It is an array of key-value structure.
+	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties"`
+
+	// Enable or disable the log. 0: disable, 1: enable
+	LogSwitch *int64 `json:"LogSwitch,omitempty" name:"LogSwitch"`
+
+	// Tag. It is an array of key-value structure.
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateMatchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
 	MatchName *string `json:"MatchName,omitempty" name:"MatchName"`
 
@@ -156,16 +208,18 @@ func (r *CreateMatchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMatchResponseParams struct {
+	// Matchmaking information
+	MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateMatchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Matchmaking information
-		MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateMatchResponseParams `json:"Response"`
 }
 
 func (r *CreateMatchResponse) ToJsonString() string {
@@ -179,9 +233,24 @@ func (r *CreateMatchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRuleRequestParams struct {
+	// Rule name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule script. Up to 65535 bytes are allowed.
+	RuleScript *string `json:"RuleScript,omitempty" name:"RuleScript"`
+
+	// Rule description. Up to 1024 bytes are allowed.
+	RuleDesc *string `json:"RuleDesc,omitempty" name:"RuleDesc"`
+
+	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Rule name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
@@ -217,16 +286,18 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRuleResponseParams struct {
+	// Rule information
+	RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule information
-		RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRuleResponseParams `json:"Response"`
 }
 
 func (r *CreateRuleResponse) ToJsonString() string {
@@ -240,9 +311,15 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMatchRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+}
+
 type DeleteMatchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 }
@@ -266,13 +343,15 @@ func (r *DeleteMatchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMatchResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteMatchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteMatchResponseParams `json:"Response"`
 }
 
 func (r *DeleteMatchResponse) ToJsonString() string {
@@ -286,9 +365,15 @@ func (r *DeleteMatchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleRequestParams struct {
+	// RuleCode
+	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
+}
+
 type DeleteRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RuleCode
 	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
 }
@@ -312,13 +397,15 @@ func (r *DeleteRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRuleResponseParams `json:"Response"`
 }
 
 func (r *DeleteRuleResponse) ToJsonString() string {
@@ -332,9 +419,24 @@ func (r *DeleteRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDataRequestParams struct {
+	// Start time in seconds
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in seconds
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Time granularity. Valid values: 1: 1 day, 2: 1 hour, 3: 1 minute, 4: 10 minutes, 5: 30 minutes
+	TimeType *int64 `json:"TimeType,omitempty" name:"TimeType"`
+
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+}
+
 type DescribeDataRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time in seconds
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -370,21 +472,23 @@ func (r *DescribeDataRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDataResponseParams struct {
+	// Matchmaking statistics overview
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	OverviewData *ReportOverviewData `json:"OverviewData,omitempty" name:"OverviewData"`
+
+	// Trend data of the number of matchmaking requests
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TrendData *ReportTrendData `json:"TrendData,omitempty" name:"TrendData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDataResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Matchmaking statistics overview
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		OverviewData *ReportOverviewData `json:"OverviewData,omitempty" name:"OverviewData"`
-
-		// Trend data of the number of matchmaking requests
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		TrendData *ReportTrendData `json:"TrendData,omitempty" name:"TrendData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDataResponseParams `json:"Response"`
 }
 
 func (r *DescribeDataResponse) ToJsonString() string {
@@ -398,9 +502,21 @@ func (r *DescribeDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchCodesRequestParams struct {
+	// Offset, number of pages.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of MatchCodes per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query by the MatchCode value (a string).
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+}
+
 type DescribeMatchCodesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset, number of pages.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -432,21 +548,23 @@ func (r *DescribeMatchCodesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchCodesResponseParams struct {
+	// MatchCode
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitempty" name:"MatchCodes"`
+
+	// The total number of queried MatchCodes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMatchCodesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// MatchCode
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitempty" name:"MatchCodes"`
-
-		// The total number of queried MatchCodes
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMatchCodesResponseParams `json:"Response"`
 }
 
 func (r *DescribeMatchCodesResponse) ToJsonString() string {
@@ -460,9 +578,15 @@ func (r *DescribeMatchCodesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+}
+
 type DescribeMatchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 }
@@ -486,17 +610,19 @@ func (r *DescribeMatchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchResponseParams struct {
+	// Matchmaking information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMatchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Matchmaking information
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMatchResponseParams `json:"Response"`
 }
 
 func (r *DescribeMatchResponse) ToJsonString() string {
@@ -510,9 +636,27 @@ func (r *DescribeMatchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchesRequestParams struct {
+	// The current page number. If this parameter is left empty, all queried matches will be obtained.
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of matchmaking lists per page. If this parameter is left empty, all queried matches will be obtained.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
+	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
+
+	// Keyword. Enter a keyword about SearchType to query.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Tags. Enter a tag for querying.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type DescribeMatchesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The current page number. If this parameter is left empty, all queried matches will be obtained.
 	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
 
@@ -552,32 +696,34 @@ func (r *DescribeMatchesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchesResponseParams struct {
+	// Matchmaking information list
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MatchInfoList []*MatchInfo `json:"MatchInfoList,omitempty" name:"MatchInfoList"`
+
+	// Total number of results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The current page number. The first page will be returned by default if this parameter is left empty.
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of matches per page. If this parameter is left empty, 30 matches are displayed per page by default. Maximum value: 30
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
+	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
+
+	// Keyword for querying (optional)
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMatchesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Matchmaking information list
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchInfoList []*MatchInfo `json:"MatchInfoList,omitempty" name:"MatchInfoList"`
-
-		// Total number of results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The current page number. The first page will be returned by default if this parameter is left empty.
-		PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
-
-		// The number of matches per page. If this parameter is left empty, 30 matches are displayed per page by default. Maximum value: 30
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
-		SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
-
-		// Keyword for querying (optional)
-		Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMatchesResponseParams `json:"Response"`
 }
 
 func (r *DescribeMatchesResponse) ToJsonString() string {
@@ -591,9 +737,15 @@ func (r *DescribeMatchesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchingProgressRequestParams struct {
+	// List of MatchTicket IDs. It can contain up to 12 IDs.
+	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitempty" name:"MatchTicketIds"`
+}
+
 type DescribeMatchingProgressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of MatchTicket IDs. It can contain up to 12 IDs.
 	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitempty" name:"MatchTicketIds"`
 }
@@ -617,21 +769,23 @@ func (r *DescribeMatchingProgressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMatchingProgressResponseParams struct {
+	// MatchTicket list
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MatchTickets []*MatchTicket `json:"MatchTickets,omitempty" name:"MatchTickets"`
+
+	// Error code
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMatchingProgressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// MatchTicket list
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchTickets []*MatchTicket `json:"MatchTickets,omitempty" name:"MatchTickets"`
-
-		// Error code
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMatchingProgressResponseParams `json:"Response"`
 }
 
 func (r *DescribeMatchingProgressResponse) ToJsonString() string {
@@ -645,9 +799,15 @@ func (r *DescribeMatchingProgressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleRequestParams struct {
+	// RuleCode
+	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
+}
+
 type DescribeRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RuleCode
 	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
 }
@@ -671,17 +831,19 @@ func (r *DescribeRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRuleResponseParams struct {
+	// Rule information
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule information
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRuleResponseParams `json:"Response"`
 }
 
 func (r *DescribeRuleResponse) ToJsonString() string {
@@ -695,9 +857,27 @@ func (r *DescribeRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesRequestParams struct {
+	// The current page number. The first page will be returned if this parameter is left empty.
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of rules per page. If this parameter is left empty, 30 rules are displayed per page by default. Maximum value: 30
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
+	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
+
+	// Keyword. Enter a keyword about SearchType to query.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Tags. Enter a tag for querying.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type DescribeRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The current page number. The first page will be returned if this parameter is left empty.
 	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
 
@@ -737,32 +917,34 @@ func (r *DescribeRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRulesResponseParams struct {
+	// Rule information list
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitempty" name:"RuleInfoList"`
+
+	// Total number of results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The current page number
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Number of rules per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
+	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
+
+	// Keyword for querying (optional)
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule information list
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitempty" name:"RuleInfoList"`
-
-		// Total number of results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The current page number
-		PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
-
-		// Number of rules per page
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
-		SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
-
-		// Keyword for querying (optional)
-		Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeRulesResponse) ToJsonString() string {
@@ -776,9 +958,15 @@ func (r *DescribeRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTokenRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+}
+
 type DescribeTokenRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 }
@@ -802,21 +990,23 @@ func (r *DescribeTokenRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTokenResponseParams struct {
+	// The token corresponding to the current MatchCode. If the current MatchCode does not have a token, this parameter may not obtain a valid value.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	MatchToken *string `json:"MatchToken,omitempty" name:"MatchToken"`
+
+	// The time period during which GPM will continuously push the original token in seconds when the token is replaced.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitempty" name:"CompatibleSpan"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTokenResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The token corresponding to the current MatchCode. If the current MatchCode does not have a token, this parameter may not obtain a valid value.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		MatchToken *string `json:"MatchToken,omitempty" name:"MatchToken"`
-
-		// The time period during which GPM will continuously push the original token in seconds when the token is replaced.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		CompatibleSpan *uint64 `json:"CompatibleSpan,omitempty" name:"CompatibleSpan"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTokenResponseParams `json:"Response"`
 }
 
 func (r *DescribeTokenResponse) ToJsonString() string {
@@ -831,7 +1021,6 @@ func (r *DescribeTokenResponse) FromJsonString(s string) error {
 }
 
 type MTicket struct {
-
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -840,7 +1029,6 @@ type MTicket struct {
 }
 
 type MatchAttribute struct {
-
 	// Attribute name. It can contain up to 128 characters, supporting [a-zA-Z0-9-\.]*.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -861,14 +1049,12 @@ type MatchAttribute struct {
 }
 
 type MatchCodeAttr struct {
-
 	// MatchCode
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 }
 
 type MatchInfo struct {
-
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -963,7 +1149,6 @@ type MatchInfo struct {
 }
 
 type MatchTicket struct {
-
 	// MatchTicket ID. It can contain up to 128 characters, supporting [a-zA-Z0-9-\.]*.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -1000,9 +1185,54 @@ type MatchTicket struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
+// Predefined struct for user
+type ModifyMatchRequestParams struct {
+	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
+	MatchName *string `json:"MatchName,omitempty" name:"MatchName"`
+
+	// RuleCode
+	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
+
+	// Timeout period in seconds. Value range: 1 600
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
+
+	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
+	ServerType *int64 `json:"ServerType,omitempty" name:"ServerType"`
+
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+
+	// Matchmaking description. Up to 1024 bytes are allowed.
+	MatchDesc *string `json:"MatchDesc,omitempty" name:"MatchDesc"`
+
+	// Only HTTP and HTTPS protocols are supported.
+	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+
+	// Region of the game server queue
+	ServerRegion *string `json:"ServerRegion,omitempty" name:"ServerRegion"`
+
+	// Game server queue
+	ServerQueue *string `json:"ServerQueue,omitempty" name:"ServerQueue"`
+
+	// Custom push data
+	CustomPushData *string `json:"CustomPushData,omitempty" name:"CustomPushData"`
+
+	// Game server session data
+	ServerSessionData *string `json:"ServerSessionData,omitempty" name:"ServerSessionData"`
+
+	// Game attribute. It is an array of key-value structure.
+	GameProperties []*StringKV `json:"GameProperties,omitempty" name:"GameProperties"`
+
+	// Enable or disable the log. 0: disable, 1: enable
+	LogSwitch *int64 `json:"LogSwitch,omitempty" name:"LogSwitch"`
+
+	// Tag. It is an array of key-value structure.
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
+}
+
 type ModifyMatchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
 	MatchName *string `json:"MatchName,omitempty" name:"MatchName"`
 
@@ -1078,16 +1308,18 @@ func (r *ModifyMatchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyMatchResponseParams struct {
+	// Matchmaking information
+	MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyMatchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Matchmaking information
-		MatchInfo *MatchInfo `json:"MatchInfo,omitempty" name:"MatchInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyMatchResponseParams `json:"Response"`
 }
 
 func (r *ModifyMatchResponse) ToJsonString() string {
@@ -1101,9 +1333,24 @@ func (r *ModifyMatchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRuleRequestParams struct {
+	// RuleCode
+	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
+
+	// Rule name. It can only contain numbers, letters, ".", and "-".
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule description. Up to 1024 bytes are allowed.
+	RuleDesc *string `json:"RuleDesc,omitempty" name:"RuleDesc"`
+
+	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
+	Tags []*StringKV `json:"Tags,omitempty" name:"Tags"`
+}
+
 type ModifyRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RuleCode
 	RuleCode *string `json:"RuleCode,omitempty" name:"RuleCode"`
 
@@ -1139,16 +1386,18 @@ func (r *ModifyRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRuleResponseParams struct {
+	// Rule information
+	RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule information
-		RuleInfo *RuleInfo `json:"RuleInfo,omitempty" name:"RuleInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRuleResponseParams `json:"Response"`
 }
 
 func (r *ModifyRuleResponse) ToJsonString() string {
@@ -1162,9 +1411,21 @@ func (r *ModifyRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTokenRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+
+	// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced. Value range: 0 - 1800. Within the CompatibleSpan time period, user will receive the current and original token in the event notification.
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitempty" name:"CompatibleSpan"`
+
+	// Token. It can contain 0 - 64 characters, supporting [a-zA-Z0-9-_.]. If this parameter is left empty, the token will be randomly generated by GPM.
+	MatchToken *string `json:"MatchToken,omitempty" name:"MatchToken"`
+}
+
 type ModifyTokenRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -1196,20 +1457,22 @@ func (r *ModifyTokenRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTokenResponseParams struct {
+	// Token that has been set successfully.
+	MatchToken *string `json:"MatchToken,omitempty" name:"MatchToken"`
+
+	// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitempty" name:"CompatibleSpan"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTokenResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Token that has been set successfully.
-		MatchToken *string `json:"MatchToken,omitempty" name:"MatchToken"`
-
-		// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		CompatibleSpan *uint64 `json:"CompatibleSpan,omitempty" name:"CompatibleSpan"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTokenResponseParams `json:"Response"`
 }
 
 func (r *ModifyTokenResponse) ToJsonString() string {
@@ -1224,7 +1487,6 @@ func (r *ModifyTokenResponse) FromJsonString(s string) error {
 }
 
 type Player struct {
-
 	// Player ID. It can contain up to 128 characters, supporting [a-zA-Z\d-\._]*.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -1248,7 +1510,6 @@ type Player struct {
 }
 
 type RegionLatency struct {
-
 	// Region
 	// ap-beijing          North China (Beijing)
 	// ap-chengdu          Southwest China (Chengdu)
@@ -1272,7 +1533,6 @@ type RegionLatency struct {
 }
 
 type ReportOverviewData struct {
-
 	// Total count
 	TotalTimes *string `json:"TotalTimes,omitempty" name:"TotalTimes"`
 
@@ -1290,7 +1550,6 @@ type ReportOverviewData struct {
 }
 
 type ReportTrendData struct {
-
 	// Total count
 	TotalList []*string `json:"TotalList,omitempty" name:"TotalList"`
 
@@ -1311,7 +1570,6 @@ type ReportTrendData struct {
 }
 
 type RuleBriefInfo struct {
-
 	// Rule name. It supports [a-zA-Z\d-\.]*.
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
@@ -1326,7 +1584,6 @@ type RuleBriefInfo struct {
 }
 
 type RuleInfo struct {
-
 	// Rule name. It supports [a-zA-Z0-9-\.]*.
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
@@ -1368,9 +1625,24 @@ type RuleInfo struct {
 	CreateUin *string `json:"CreateUin,omitempty" name:"CreateUin"`
 }
 
+// Predefined struct for user
+type StartMatchingBackfillRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+
+	// Player information
+	Players []*Player `json:"Players,omitempty" name:"Players"`
+
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// MatchTicket ID, which can contain 1 to 128 characters. This parameter is left empty by default, and in this case, MatchTicket ID will be automatically generated by GPM.
+	MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`
+}
+
 type StartMatchingBackfillRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -1406,17 +1678,19 @@ func (r *StartMatchingBackfillRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartMatchingBackfillResponseParams struct {
+	// MatchTicket
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MatchTicket *MatchTicket `json:"MatchTicket,omitempty" name:"MatchTicket"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartMatchingBackfillResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// MatchTicket
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		MatchTicket *MatchTicket `json:"MatchTicket,omitempty" name:"MatchTicket"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartMatchingBackfillResponseParams `json:"Response"`
 }
 
 func (r *StartMatchingBackfillResponse) ToJsonString() string {
@@ -1430,9 +1704,21 @@ func (r *StartMatchingBackfillResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartMatchingRequestParams struct {
+	// MatchCode
+	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
+
+	// Player information. Up to 200 entries can be entered.
+	Players []*Player `json:"Players,omitempty" name:"Players"`
+
+	// MatchTicket ID, which can contain up to 128 characters and can only contain numbers, letters, “.”, and “-”. This parameter is left empty by default. When it is empty, the MatchTicket ID will be automatically generated by GPM.
+	MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`
+}
+
 type StartMatchingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// MatchCode
 	MatchCode *string `json:"MatchCode,omitempty" name:"MatchCode"`
 
@@ -1464,19 +1750,21 @@ func (r *StartMatchingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartMatchingResponseParams struct {
+	// Error code
+	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// MatchTicket ID. Up to 128 characters are allowed.
+	MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartMatchingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Error code
-		ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
-
-		// MatchTicket ID. Up to 128 characters are allowed.
-		MatchTicketId *string `json:"MatchTicketId,omitempty" name:"MatchTicketId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartMatchingResponseParams `json:"Response"`
 }
 
 func (r *StartMatchingResponse) ToJsonString() string {
@@ -1491,7 +1779,6 @@ func (r *StartMatchingResponse) FromJsonString(s string) error {
 }
 
 type StringKV struct {
-
 	// Key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1500,7 +1787,6 @@ type StringKV struct {
 }
 
 type Tag struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 

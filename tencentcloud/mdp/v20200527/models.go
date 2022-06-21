@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type BindNewLVBDomainWithChannelRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// The LVB domain name to bind
+	LVBDomain *string `json:"LVBDomain,omitempty" name:"LVBDomain"`
+}
+
 type BindNewLVBDomainWithChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -50,16 +59,18 @@ func (r *BindNewLVBDomainWithChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type BindNewLVBDomainWithChannelResponseParams struct {
+	// The LVB domain name bound successfully
+	LVBDomain *string `json:"LVBDomain,omitempty" name:"LVBDomain"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type BindNewLVBDomainWithChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The LVB domain name bound successfully
-		LVBDomain *string `json:"LVBDomain,omitempty" name:"LVBDomain"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *BindNewLVBDomainWithChannelResponseParams `json:"Response"`
 }
 
 func (r *BindNewLVBDomainWithChannelResponse) ToJsonString() string {
@@ -74,14 +85,12 @@ func (r *BindNewLVBDomainWithChannelResponse) FromJsonString(s string) error {
 }
 
 type CacheInfo struct {
-
 	// List of timeout parameter configuration
 	// Note: this field may return `null`, indicating that no valid value was found.
 	Info []*CacheInfoInfo `json:"Info,omitempty" name:"Info"`
 }
 
 type CacheInfoInfo struct {
-
 	// Timeout period (ms), which must be an integer multiple of 1000
 	// .m3u8/.mpd: [1000, 60000]
 	// .ts/.m4s/.mp4: [10000, 1800000]
@@ -93,7 +102,6 @@ type CacheInfoInfo struct {
 }
 
 type ChannelInfo struct {
-
 	// Channel ID.
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -111,9 +119,21 @@ type ChannelInfo struct {
 	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
 }
 
+// Predefined struct for user
+type CreateStreamPackageChannelEndpointRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Endpoint name, which must contain 1 to 32 characters and supports digits, letters, and underscores
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Authentication information
+	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
+}
+
 type CreateStreamPackageChannelEndpointRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -145,16 +165,18 @@ func (r *CreateStreamPackageChannelEndpointRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamPackageChannelEndpointResponseParams struct {
+	// Information of the created channel endpoint
+	Info *EndpointInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamPackageChannelEndpointResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of the created channel endpoint
-		Info *EndpointInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamPackageChannelEndpointResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamPackageChannelEndpointResponse) ToJsonString() string {
@@ -168,9 +190,21 @@ func (r *CreateStreamPackageChannelEndpointResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamPackageChannelRequestParams struct {
+	// Channel name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Channel protocol. Valid values: HLS, DASH
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Cache configuration
+	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
+}
+
 type CreateStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -202,16 +236,18 @@ func (r *CreateStreamPackageChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamPackageChannelResponseParams struct {
+	// Channel information
+	Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel information
-		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamPackageChannelResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamPackageChannelResponse) ToJsonString() string {
@@ -225,9 +261,18 @@ func (r *CreateStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamPackageChannelEndpointsRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// List of the URLs of the endpoints to delete
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+}
+
 type DeleteStreamPackageChannelEndpointsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -255,13 +300,15 @@ func (r *DeleteStreamPackageChannelEndpointsRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamPackageChannelEndpointsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamPackageChannelEndpointsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamPackageChannelEndpointsResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamPackageChannelEndpointsResponse) ToJsonString() string {
@@ -275,9 +322,15 @@ func (r *DeleteStreamPackageChannelEndpointsResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamPackageChannelsRequestParams struct {
+	// List of the IDs of the channels to delete
+	Ids []*string `json:"Ids,omitempty" name:"Ids"`
+}
+
 type DeleteStreamPackageChannelsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of the IDs of the channels to delete
 	Ids []*string `json:"Ids,omitempty" name:"Ids"`
 }
@@ -301,19 +354,21 @@ func (r *DeleteStreamPackageChannelsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamPackageChannelsResponseParams struct {
+	// List of the information of successfully deleted channels
+	SuccessInfos []*ChannelInfo `json:"SuccessInfos,omitempty" name:"SuccessInfos"`
+
+	// List of the information of the channels that failed to be deleted
+	FailInfos []*ChannelInfo `json:"FailInfos,omitempty" name:"FailInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamPackageChannelsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the information of successfully deleted channels
-		SuccessInfos []*ChannelInfo `json:"SuccessInfos,omitempty" name:"SuccessInfos"`
-
-		// List of the information of the channels that failed to be deleted
-		FailInfos []*ChannelInfo `json:"FailInfos,omitempty" name:"FailInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamPackageChannelsResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamPackageChannelsResponse) ToJsonString() string {
@@ -327,9 +382,15 @@ func (r *DeleteStreamPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
 type DescribeStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 }
@@ -353,16 +414,18 @@ func (r *DescribeStreamPackageChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageChannelResponseParams struct {
+	// Channel information
+	Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel information
-		Info *ChannelInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamPackageChannelResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamPackageChannelResponse) ToJsonString() string {
@@ -376,9 +439,18 @@ func (r *DescribeStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageChannelsRequestParams struct {
+	// Page number. Value range: [1, 1000]
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page. Value range: [1, 1000]
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
 type DescribeStreamPackageChannelsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Page number. Value range: [1, 1000]
 	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
 
@@ -406,29 +478,31 @@ func (r *DescribeStreamPackageChannelsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageChannelsResponseParams struct {
+	// List of channel information
+	// Note: this field may return `null`, indicating that no valid value was found.
+	Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// Page number
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Total number of entries
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Total number of pages
+	TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamPackageChannelsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of channel information
-	// Note: this field may return `null`, indicating that no valid value was found.
-		Infos []*ChannelInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// Page number
-		PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
-
-		// Number of entries per page
-		PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Total number of entries
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Total number of pages
-		TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamPackageChannelsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamPackageChannelsResponse) ToJsonString() string {
@@ -443,7 +517,6 @@ func (r *DescribeStreamPackageChannelsResponse) FromJsonString(s string) error {
 }
 
 type EndpointAuthInfo struct {
-
 	// The security group allowlist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
@@ -458,7 +531,6 @@ type EndpointAuthInfo struct {
 }
 
 type EndpointInfo struct {
-
 	// Endpoint name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -470,7 +542,6 @@ type EndpointInfo struct {
 }
 
 type InputAuthInfo struct {
-
 	// Username.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Username *string `json:"Username,omitempty" name:"Username"`
@@ -481,7 +552,6 @@ type InputAuthInfo struct {
 }
 
 type InputInfo struct {
-
 	// Channel input URL.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
@@ -490,9 +560,24 @@ type InputInfo struct {
 	AuthInfo *InputAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelEndpointRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Channel endpoint URL
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// New endpoint name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// New channel authentication information
+	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
+}
+
 type ModifyStreamPackageChannelEndpointRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -528,13 +613,15 @@ func (r *ModifyStreamPackageChannelEndpointRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelEndpointResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamPackageChannelEndpointResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamPackageChannelEndpointResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamPackageChannelEndpointResponse) ToJsonString() string {
@@ -548,9 +635,23 @@ func (r *ModifyStreamPackageChannelEndpointResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelInputAuthInfoRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Channel input URL
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Authentication configuration. Valid values: `CLOSE`, `UPDATE`
+	// `CLOSE`: disable authentication
+	// `UPDATE`: update authentication information
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+}
+
 type ModifyStreamPackageChannelInputAuthInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -584,16 +685,18 @@ func (r *ModifyStreamPackageChannelInputAuthInfoRequest) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelInputAuthInfoResponseParams struct {
+	// Channel input authentication information
+	AuthInfo *InputAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamPackageChannelInputAuthInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Channel input authentication information
-		AuthInfo *InputAuthInfo `json:"AuthInfo,omitempty" name:"AuthInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamPackageChannelInputAuthInfoResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamPackageChannelInputAuthInfoResponse) ToJsonString() string {
@@ -607,9 +710,24 @@ func (r *ModifyStreamPackageChannelInputAuthInfoResponse) FromJsonString(s strin
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelRequestParams struct {
+	// Channel ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// New channel name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// New channel protocol. Valid values: HLS, DASH
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Cache configuration
+	CacheInfo *CacheInfo `json:"CacheInfo,omitempty" name:"CacheInfo"`
+}
+
 type ModifyStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -645,13 +763,15 @@ func (r *ModifyStreamPackageChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamPackageChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamPackageChannelResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamPackageChannelResponse) ToJsonString() string {
@@ -666,7 +786,6 @@ func (r *ModifyStreamPackageChannelResponse) FromJsonString(s string) error {
 }
 
 type PointInfo struct {
-
 	// Channel input list.
 	Inputs []*InputInfo `json:"Inputs,omitempty" name:"Inputs"`
 
@@ -675,9 +794,18 @@ type PointInfo struct {
 	Endpoints []*EndpointInfo `json:"Endpoints,omitempty" name:"Endpoints"`
 }
 
+// Predefined struct for user
+type UnbindCdnDomainWithChannelRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// CDN playback domain name
+	CdnDomain *string `json:"CdnDomain,omitempty" name:"CdnDomain"`
+}
+
 type UnbindCdnDomainWithChannelRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
@@ -705,13 +833,15 @@ func (r *UnbindCdnDomainWithChannelRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnbindCdnDomainWithChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnbindCdnDomainWithChannelResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnbindCdnDomainWithChannelResponseParams `json:"Response"`
 }
 
 func (r *UnbindCdnDomainWithChannelResponse) ToJsonString() string {

@@ -21,7 +21,6 @@ import (
 )
 
 type BackingIndexMetaField struct {
-
 	// Backing index name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
@@ -44,7 +43,6 @@ type BackingIndexMetaField struct {
 }
 
 type ClusterView struct {
-
 	// Cluster health status
 	Health *float64 `json:"Health,omitempty" name:"Health"`
 
@@ -115,7 +113,6 @@ type ClusterView struct {
 }
 
 type CosBackup struct {
-
 	// Whether to enable auto-backup to COS
 	IsAutoBackup *bool `json:"IsAutoBackup,omitempty" name:"IsAutoBackup"`
 
@@ -123,9 +120,30 @@ type CosBackup struct {
 	BackupTime *string `json:"BackupTime,omitempty" name:"BackupTime"`
 }
 
+// Predefined struct for user
+type CreateIndexRequestParams struct {
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to create. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to create
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// JSON-formatted index metadata to create, such as `mappings` and `settings`
+	IndexMetaJson *string `json:"IndexMetaJson,omitempty" name:"IndexMetaJson"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
 type CreateIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -169,13 +187,15 @@ func (r *CreateIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateIndexResponseParams `json:"Response"`
 }
 
 func (r *CreateIndexResponse) ToJsonString() string {
@@ -189,9 +209,110 @@ func (r *CreateIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceRequestParams struct {
+	// Availability Zone
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance version. Valid values: `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1`, `7.10.1`
+	EsVersion *string `json:"EsVersion,omitempty" name:"EsVersion"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Access password, which must contain 8 to 16 characters, and include at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of nodes (2-50)
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Billing mode <li>POSTPAID_BY_HOUR: Pay-as-you-go hourly </li>Default value: POSTPAID_BY_HOUR
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// This parameter is not used on the global website
+	ChargePeriod *uint64 `json:"ChargePeriod,omitempty" name:"ChargePeriod"`
+
+	// This parameter is not used on the global website
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Node storage type <li>CLOUD_SSD: SSD cloud storage </li><li>CLOUD_PREMIUM: premium cloud storage </li>Default value: CLOUD_SSD
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Node disk size in GB
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// This parameter is not used on the global website
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// List of voucher IDs (only one voucher can be specified at a time currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Whether to create a dedicated primary node <li>true: yes </li><li>false: no </li>Default value: false
+	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of dedicated primary nodes (only 3 and 5 are supported. This value must be passed in if `EnableDedicatedMaster` is `true`)
+	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Dedicated primary node type, which must be passed in if `EnableDedicatedMaster` is `true` <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Dedicated primary node disk size in GB, which is optional. If passed in, it can only be 50 and cannot be customized currently
+	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
+
+	// ClusterName in the cluster configuration file, which is the instance ID by default and currently cannot be customized
+	ClusterNameInConf *string `json:"ClusterNameInConf,omitempty" name:"ClusterNameInConf"`
+
+	// Cluster deployment mode <li>0: single-AZ deployment </li><li>1: multi-AZ deployment </li>Default value: 0
+	DeployMode *uint64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Details of AZs in multi-AZ deployment mode (which is required when DeployMode is 1)
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo"`
+
+	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// Node information list, which is used to describe the specification information of various types of nodes in the cluster, such as node type, node quantity, node specification, disk type, and disk size
+	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
+
+	// Node tag information list
+	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList"`
+
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
+	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Scenario template type. 0: not enabled; 1: general; 2: log; 3: search
+	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Visual node configuration
+	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
+
+	// Valid values: `https`, `http` (default)
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
 type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Availability Zone
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -339,20 +460,22 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceResponseParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID
-		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-		// Order ID
-	// Note: This field may return `null`, indicating that no valid value was found.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateInstanceResponse) ToJsonString() string {
@@ -366,9 +489,30 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIndexRequestParams struct {
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to delete. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to delete
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Backing index name
+	BackingIndexName *string `json:"BackingIndexName,omitempty" name:"BackingIndexName"`
+}
+
 type DeleteIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -412,13 +556,15 @@ func (r *DeleteIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteIndexResponseParams `json:"Response"`
 }
 
 func (r *DeleteIndexResponse) ToJsonString() string {
@@ -432,9 +578,15 @@ func (r *DeleteIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DeleteInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -458,13 +610,15 @@ func (r *DeleteInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteInstanceResponseParams `json:"Response"`
 }
 
 func (r *DeleteInstanceResponse) ToJsonString() string {
@@ -478,9 +632,42 @@ func (r *DeleteInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexListRequestParams struct {
+	// Index type. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Index name. `null` indicates that all indexes are requested.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// The starting position of paging
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of results per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting condition field, which can be `IndexName`, `IndexStorage`, or `IndexCreateTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Filtering by index status
+	IndexStatusList []*string `json:"IndexStatusList,omitempty" name:"IndexStatusList"`
+
+	// Sorting mode, which can be `asc` and `desc`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 type DescribeIndexListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Index type. `auto`: Automated; `normal`: General.
 	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
 
@@ -540,21 +727,23 @@ func (r *DescribeIndexListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexListResponseParams struct {
+	// Index metadata field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexMetaFields []*IndexMetaField `json:"IndexMetaFields,omitempty" name:"IndexMetaFields"`
+
+	// Total number of results
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIndexListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Index metadata field
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		IndexMetaFields []*IndexMetaField `json:"IndexMetaFields,omitempty" name:"IndexMetaFields"`
-
-		// Total number of results
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIndexListResponseParams `json:"Response"`
 }
 
 func (r *DescribeIndexListResponse) ToJsonString() string {
@@ -568,9 +757,27 @@ func (r *DescribeIndexListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexMetaRequestParams struct {
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Index type. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Index name. `null` indicates that all indexes are requested.
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
 type DescribeIndexMetaRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -610,17 +817,19 @@ func (r *DescribeIndexMetaRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexMetaResponseParams struct {
+	// Index metadata field
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IndexMetaField *IndexMetaField `json:"IndexMetaField,omitempty" name:"IndexMetaField"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIndexMetaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Index metadata field
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		IndexMetaField *IndexMetaField `json:"IndexMetaField,omitempty" name:"IndexMetaField"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIndexMetaResponseParams `json:"Response"`
 }
 
 func (r *DescribeIndexMetaResponse) ToJsonString() string {
@@ -634,9 +843,42 @@ func (r *DescribeIndexMetaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceLogsRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log type. Default value: 1
+	// <li>1: primary log</li>
+	// <li>2: search slow log</li>
+	// <li>3: index slow log</li>
+	// <li>4: GC log</li>
+	LogType *uint64 `json:"LogType,omitempty" name:"LogType"`
+
+	// Search keyword, which supports LUCENE syntax, such as `level:WARN`, `ip:1.1.1.1`, and `message:test-index`
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Log start time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time in the format of YYYY-MM-DD HH:MM:SS, such as 2019-01-22 20:15:53
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination start value. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 100. Maximum value: 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Time sorting order. Default value: 0
+	// <li>0: descending</li>
+	// <li>1: ascending</li>
+	OrderByType *uint64 `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
 type DescribeInstanceLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -694,19 +936,21 @@ func (r *DescribeInstanceLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceLogsResponseParams struct {
+	// Number of returned logs
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Log details list
+	InstanceLogList []*InstanceLog `json:"InstanceLogList,omitempty" name:"InstanceLogList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of returned logs
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Log details list
-		InstanceLogList []*InstanceLog `json:"InstanceLogList,omitempty" name:"InstanceLogList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceLogsResponse) ToJsonString() string {
@@ -720,9 +964,27 @@ func (r *DescribeInstanceLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceOperationsRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2019-03-07 16:30:39"
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as "2019-03-30 20:18:03"
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination start value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeInstanceOperationsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -762,19 +1024,21 @@ func (r *DescribeInstanceOperationsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceOperationsResponseParams struct {
+	// Total number of operation records
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Operation history
+	Operations []*Operation `json:"Operations,omitempty" name:"Operations"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceOperationsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of operation records
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Operation history
-		Operations []*Operation `json:"Operations,omitempty" name:"Operations"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceOperationsResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceOperationsResponse) ToJsonString() string {
@@ -788,9 +1052,45 @@ func (r *DescribeInstanceOperationsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesRequestParams struct {
+	// AZ of the cluster instance. If this is not passed in, all AZs are used by default
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// List of cluster instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// List of cluster instance names
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
+
+	// Pagination start value. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sort by field <li>1: instance ID </li><li>2: instance name </li><li>3: AZ </li><li>4: creation time </li>If `orderKey` is not passed in, sort by creation time in descending order
+	OrderByKey *uint64 `json:"OrderByKey,omitempty" name:"OrderByKey"`
+
+	// Sorting order <li>0: ascending </li><li>1: descending </li>If orderByKey is passed in but orderByType is not, ascending order is used by default
+	OrderByType *uint64 `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Node tag information list
+	TagList []*TagInfo `json:"TagList,omitempty" name:"TagList"`
+
+	// VPC VIP list
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+
+	// List of availability zones
+	ZoneList []*string `json:"ZoneList,omitempty" name:"ZoneList"`
+
+	// Health status filter list
+	HealthStatus []*int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
+}
+
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// AZ of the cluster instance. If this is not passed in, all AZs are used by default
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -854,19 +1154,21 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesResponseParams struct {
+	// Number of returned instances
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of instance details
+	InstanceList []*InstanceInfo `json:"InstanceList,omitempty" name:"InstanceList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of returned instances
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of instance details
-		InstanceList []*InstanceInfo `json:"InstanceList,omitempty" name:"InstanceList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesResponse) ToJsonString() string {
@@ -880,9 +1182,15 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeViewsRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeViewsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -906,25 +1214,27 @@ func (r *DescribeViewsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeViewsResponseParams struct {
+	// Cluster view
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ClusterView *ClusterView `json:"ClusterView,omitempty" name:"ClusterView"`
+
+	// Node view
+	// Note: This field may return `null`, indicating that no valid value was found.
+	NodesView []*NodeView `json:"NodesView,omitempty" name:"NodesView"`
+
+	// Kibana view
+	// Note: This field may return `null`, indicating that no valid value was found.
+	KibanasView []*KibanaView `json:"KibanasView,omitempty" name:"KibanasView"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeViewsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster view
-	// Note: This field may return `null`, indicating that no valid value was found.
-		ClusterView *ClusterView `json:"ClusterView,omitempty" name:"ClusterView"`
-
-		// Node view
-	// Note: This field may return `null`, indicating that no valid value was found.
-		NodesView []*NodeView `json:"NodesView,omitempty" name:"NodesView"`
-
-		// Kibana view
-	// Note: This field may return `null`, indicating that no valid value was found.
-		KibanasView []*KibanaView `json:"KibanasView,omitempty" name:"KibanasView"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeViewsResponseParams `json:"Response"`
 }
 
 func (r *DescribeViewsResponse) ToJsonString() string {
@@ -939,7 +1249,6 @@ func (r *DescribeViewsResponse) FromJsonString(s string) error {
 }
 
 type DictInfo struct {
-
 	// Dictionary key value
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -951,7 +1260,6 @@ type DictInfo struct {
 }
 
 type EsAcl struct {
-
 	// Kibana access blocklist
 	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList"`
 
@@ -960,7 +1268,6 @@ type EsAcl struct {
 }
 
 type EsConfigSetInfo struct {
-
 	// Configuration set type, such as `LDAP` and `AD`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -969,7 +1276,6 @@ type EsConfigSetInfo struct {
 }
 
 type EsDictionaryInfo struct {
-
 	// List of non-stop words
 	MainDict []*DictInfo `json:"MainDict,omitempty" name:"MainDict"`
 
@@ -987,7 +1293,6 @@ type EsDictionaryInfo struct {
 }
 
 type EsPublicAcl struct {
-
 	// Access blocklist
 	BlackIpList []*string `json:"BlackIpList,omitempty" name:"BlackIpList"`
 
@@ -995,9 +1300,15 @@ type EsPublicAcl struct {
 	WhiteIpList []*string `json:"WhiteIpList,omitempty" name:"WhiteIpList"`
 }
 
+// Predefined struct for user
+type GetRequestTargetNodeTypesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type GetRequestTargetNodeTypesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1021,16 +1332,18 @@ func (r *GetRequestTargetNodeTypesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetRequestTargetNodeTypesResponseParams struct {
+	// A list of node types used to receive requests.
+	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetRequestTargetNodeTypesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of node types used to receive requests.
-		TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetRequestTargetNodeTypesResponseParams `json:"Response"`
 }
 
 func (r *GetRequestTargetNodeTypesResponse) ToJsonString() string {
@@ -1045,7 +1358,6 @@ func (r *GetRequestTargetNodeTypesResponse) FromJsonString(s string) error {
 }
 
 type IndexMetaField struct {
-
 	// Index type
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
@@ -1100,7 +1412,6 @@ type IndexMetaField struct {
 }
 
 type IndexOptionsField struct {
-
 	// Max age for expiry purpose
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ExpireMaxAge *string `json:"ExpireMaxAge,omitempty" name:"ExpireMaxAge"`
@@ -1131,7 +1442,6 @@ type IndexOptionsField struct {
 }
 
 type IndexPolicyField struct {
-
 	// Whether to enable the warm phase
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	WarmEnable *string `json:"WarmEnable,omitempty" name:"WarmEnable"`
@@ -1158,7 +1468,6 @@ type IndexPolicyField struct {
 }
 
 type IndexSettingsField struct {
-
 	// Number of primary shards
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	NumberOfShards *string `json:"NumberOfShards,omitempty" name:"NumberOfShards"`
@@ -1173,7 +1482,6 @@ type IndexSettingsField struct {
 }
 
 type InstanceInfo struct {
-
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1436,7 +1744,6 @@ type InstanceInfo struct {
 }
 
 type InstanceLog struct {
-
 	// Log time
 	Time *string `json:"Time,omitempty" name:"Time"`
 
@@ -1451,7 +1758,6 @@ type InstanceLog struct {
 }
 
 type KeyValue struct {
-
 	// Key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1460,7 +1766,6 @@ type KeyValue struct {
 }
 
 type KibanaNodeInfo struct {
-
 	// Kibana node specification
 	KibanaNodeType *string `json:"KibanaNodeType,omitempty" name:"KibanaNodeType"`
 
@@ -1481,7 +1786,6 @@ type KibanaNodeInfo struct {
 }
 
 type KibanaView struct {
-
 	// Kibana node IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1508,7 +1812,6 @@ type KibanaView struct {
 }
 
 type LocalDiskInfo struct {
-
 	// Local disk type <li>LOCAL_SATA: big data </li><li>NVME_SSD: high IO</li>
 	LocalDiskType *string `json:"LocalDiskType,omitempty" name:"LocalDiskType"`
 
@@ -1520,7 +1823,6 @@ type LocalDiskInfo struct {
 }
 
 type MasterNodeInfo struct {
-
 	// Whether to enable the dedicated primary node
 	EnableDedicatedMaster *bool `json:"EnableDedicatedMaster,omitempty" name:"EnableDedicatedMaster"`
 
@@ -1544,7 +1846,6 @@ type MasterNodeInfo struct {
 }
 
 type NodeInfo struct {
-
 	// Number of nodes
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
@@ -1575,7 +1876,6 @@ type NodeInfo struct {
 }
 
 type NodeView struct {
-
 	// Node ID
 	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
 
@@ -1629,7 +1929,6 @@ type NodeView struct {
 }
 
 type Operation struct {
-
 	// Unique operation ID
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
 
@@ -1653,7 +1952,6 @@ type Operation struct {
 }
 
 type OperationDetail struct {
-
 	// Original instance configuration information
 	OldInfo []*KeyValue `json:"OldInfo,omitempty" name:"OldInfo"`
 
@@ -1661,9 +1959,21 @@ type OperationDetail struct {
 	NewInfo []*KeyValue `json:"NewInfo,omitempty" name:"NewInfo"`
 }
 
+// Predefined struct for user
+type RestartInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to force restart <li>true: Yes </li><li>false: No </li>Default value: false
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// Restart mode. `0`: rolling restart; `1`: full restart
+	RestartMode *int64 `json:"RestartMode,omitempty" name:"RestartMode"`
+}
+
 type RestartInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1695,13 +2005,15 @@ func (r *RestartInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartInstanceResponseParams `json:"Response"`
 }
 
 func (r *RestartInstanceResponse) ToJsonString() string {
@@ -1715,9 +2027,15 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartKibanaRequestParams struct {
+	// ES instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type RestartKibanaRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1741,13 +2059,15 @@ func (r *RestartKibanaRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartKibanaResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartKibanaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartKibanaResponseParams `json:"Response"`
 }
 
 func (r *RestartKibanaResponse) ToJsonString() string {
@@ -1761,9 +2081,21 @@ func (r *RestartKibanaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartNodesRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Node name list
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
+
+	// Whether to force restart
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+}
+
 type RestartNodesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1795,13 +2127,15 @@ func (r *RestartNodesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartNodesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartNodesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartNodesResponseParams `json:"Response"`
 }
 
 func (r *RestartNodesResponse) ToJsonString() string {
@@ -1816,7 +2150,6 @@ func (r *RestartNodesResponse) FromJsonString(s string) error {
 }
 
 type SubTaskDetail struct {
-
 	// Subtask name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1843,7 +2176,6 @@ type SubTaskDetail struct {
 }
 
 type TagInfo struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1852,7 +2184,6 @@ type TagInfo struct {
 }
 
 type TaskDetail struct {
-
 	// Task name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1866,9 +2197,33 @@ type TaskDetail struct {
 	SubTasks []*SubTaskDetail `json:"SubTasks,omitempty" name:"SubTasks"`
 }
 
+// Predefined struct for user
+type UpdateDictionariesRequestParams struct {
+	// ES instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// COS address of the main dictionary for the IK analyzer
+	IkMainDicts []*string `json:"IkMainDicts,omitempty" name:"IkMainDicts"`
+
+	// COS address of the stopword dictionary for the IK analyzer
+	IkStopwords []*string `json:"IkStopwords,omitempty" name:"IkStopwords"`
+
+	// COS address of the synonym dictionary
+	Synonym []*string `json:"Synonym,omitempty" name:"Synonym"`
+
+	// COS address of the QQ dictionary
+	QQDict []*string `json:"QQDict,omitempty" name:"QQDict"`
+
+	// `0` (default): Install, `1`: Delete
+	UpdateType *int64 `json:"UpdateType,omitempty" name:"UpdateType"`
+
+	// Whether to force restart the cluster. The default value is `false`.
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+}
+
 type UpdateDictionariesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1916,13 +2271,15 @@ func (r *UpdateDictionariesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDictionariesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateDictionariesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateDictionariesResponseParams `json:"Response"`
 }
 
 func (r *UpdateDictionariesResponse) ToJsonString() string {
@@ -1936,9 +2293,30 @@ func (r *UpdateDictionariesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateIndexRequestParams struct {
+	// ES cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type of the index to update. `auto`: Automated; `normal`: General.
+	IndexType *string `json:"IndexType,omitempty" name:"IndexType"`
+
+	// Name of the index to update
+	IndexName *string `json:"IndexName,omitempty" name:"IndexName"`
+
+	// JSON-formatted index metadata to update, such as `mappings` and `settings`.
+	UpdateMetaJson *string `json:"UpdateMetaJson,omitempty" name:"UpdateMetaJson"`
+
+	// Username for cluster access
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Password for cluster access
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
 type UpdateIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ES cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1982,13 +2360,15 @@ func (r *UpdateIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateIndexResponseParams `json:"Response"`
 }
 
 func (r *UpdateIndexResponse) ToJsonString() string {
@@ -2002,9 +2382,108 @@ func (r *UpdateIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name, which can contain 1 to 50 English letters, Chinese characters, digits, dashes (-), or underscores (_)
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of nodes (2-50)
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// ES configuration item (JSON string)
+	EsConfig *string `json:"EsConfig,omitempty" name:"EsConfig"`
+
+	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Access control list
+	EsAcl *EsAcl `json:"EsAcl,omitempty" name:"EsAcl"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Disk size in GB
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Number of dedicated primary nodes (only 3 and 5 are supported)
+	MasterNodeNum *uint64 `json:"MasterNodeNum,omitempty" name:"MasterNodeNum"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Dedicated primary node specification <li>ES.S1.SMALL2: 1-core 2 GB</li><li>ES.S1.MEDIUM4: 2-core 4 GB</li><li>ES.S1.MEDIUM8: 2-core 8 GB</li><li>ES.S1.LARGE16: 4-core 16 GB</li><li>ES.S1.2XLARGE32: 8-core 32 GB</li><li>ES.S1.4XLARGE32: 16-core 32 GB</li><li>ES.S1.4XLARGE64: 16-core 64 GB</li>
+	MasterNodeType *string `json:"MasterNodeType,omitempty" name:"MasterNodeType"`
+
+	// This parameter has been disused. Please use `NodeInfoList`
+	// Dedicated primary node disk size in GB. This is 50 GB by default and currently cannot be customized
+	MasterNodeDiskSize *uint64 `json:"MasterNodeDiskSize,omitempty" name:"MasterNodeDiskSize"`
+
+	// Whether to force restart during configuration update <li>true: Yes </li><li>false: No </li>This needs to be set only for EsConfig. Default value: false
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// Auto-backup to COS
+	CosBackup *CosBackup `json:"CosBackup,omitempty" name:"CosBackup"`
+
+	// Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
+	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
+
+	// Public network access status
+	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
+
+	// Public network ACL
+	EsPublicAcl *EsPublicAcl `json:"EsPublicAcl,omitempty" name:"EsPublicAcl"`
+
+	// Public network access status of Kibana
+	KibanaPublicAccess *string `json:"KibanaPublicAccess,omitempty" name:"KibanaPublicAccess"`
+
+	// Private network access status of Kibana
+	KibanaPrivateAccess *string `json:"KibanaPrivateAccess,omitempty" name:"KibanaPrivateAccess"`
+
+	// Enables or disables user authentication for ES Basic Edition v6.8 and above
+	BasicSecurityType *int64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Kibana private port
+	KibanaPrivatePort *uint64 `json:"KibanaPrivatePort,omitempty" name:"KibanaPrivatePort"`
+
+	// 0: scaling in blue/green deployment mode without cluster restart (default); 1: scaling by unmounting disk with rolling cluster restart
+	ScaleType *int64 `json:"ScaleType,omitempty" name:"ScaleType"`
+
+	// Multi-AZ deployment
+	MultiZoneInfo []*ZoneDetail `json:"MultiZoneInfo,omitempty" name:"MultiZoneInfo"`
+
+	// Scenario template type. -1: not enabled; 1: general; 2: log; 3: search
+	SceneType *int64 `json:"SceneType,omitempty" name:"SceneType"`
+
+	// Kibana configuration item (JSON string)
+	KibanaConfig *string `json:"KibanaConfig,omitempty" name:"KibanaConfig"`
+
+	// Visual node configuration
+	WebNodeTypeInfo *WebNodeTypeInfo `json:"WebNodeTypeInfo,omitempty" name:"WebNodeTypeInfo"`
+
+	// Whether to switch to the new network architecture
+	SwitchPrivateLink *string `json:"SwitchPrivateLink,omitempty" name:"SwitchPrivateLink"`
+
+	// Whether to enable Cerebro
+	EnableCerebro *bool `json:"EnableCerebro,omitempty" name:"EnableCerebro"`
+
+	// Cerebro public network access status
+	CerebroPublicAccess *string `json:"CerebroPublicAccess,omitempty" name:"CerebroPublicAccess"`
+
+	// Cerebro private network access status
+	CerebroPrivateAccess *string `json:"CerebroPrivateAccess,omitempty" name:"CerebroPrivateAccess"`
+
+	// Added or modified configuration set information
+	EsConfigSet *EsConfigSetInfo `json:"EsConfigSet,omitempty" name:"EsConfigSet"`
+}
+
 type UpdateInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2150,17 +2629,19 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateInstanceResponseParams struct {
+	// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID
-	// Note: This field may return `null`, indicating that no valid value was found.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateInstanceResponseParams `json:"Response"`
 }
 
 func (r *UpdateInstanceResponse) ToJsonString() string {
@@ -2174,9 +2655,30 @@ func (r *UpdateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePluginsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of names of the plugins to be installed
+	InstallPluginList []*string `json:"InstallPluginList,omitempty" name:"InstallPluginList"`
+
+	// List of names of the plugins to be uninstalled
+	RemovePluginList []*string `json:"RemovePluginList,omitempty" name:"RemovePluginList"`
+
+	// Whether to force restart the cluster. The default value is `false`.
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// Whether to reinstall the cluster. The default value is `false`.
+	ForceUpdate *bool `json:"ForceUpdate,omitempty" name:"ForceUpdate"`
+
+	// 0: system plugin
+	PluginType *uint64 `json:"PluginType,omitempty" name:"PluginType"`
+}
+
 type UpdatePluginsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2220,13 +2722,15 @@ func (r *UpdatePluginsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePluginsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdatePluginsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdatePluginsResponseParams `json:"Response"`
 }
 
 func (r *UpdatePluginsResponse) ToJsonString() string {
@@ -2240,9 +2744,18 @@ func (r *UpdatePluginsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRequestTargetNodeTypesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// A list of node types used to receive requests.
+	TargetNodeTypes []*string `json:"TargetNodeTypes,omitempty" name:"TargetNodeTypes"`
+}
+
 type UpdateRequestTargetNodeTypesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2270,13 +2783,15 @@ func (r *UpdateRequestTargetNodeTypesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRequestTargetNodeTypesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateRequestTargetNodeTypesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateRequestTargetNodeTypesResponseParams `json:"Response"`
 }
 
 func (r *UpdateRequestTargetNodeTypesResponse) ToJsonString() string {
@@ -2290,9 +2805,33 @@ func (r *UpdateRequestTargetNodeTypesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpgradeInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Target ES version. Valid values: 6.4.3, 6.8.2, 7.5.1
+	EsVersion *string `json:"EsVersion,omitempty" name:"EsVersion"`
+
+	// Whether to check for upgrade only. Default value: false
+	CheckOnly *bool `json:"CheckOnly,omitempty" name:"CheckOnly"`
+
+	// Target X-Pack edition: <li>OSS: Open-source Edition </li><li>basic: Basic Edition </li>Currently only used for v5.6.4 to v6.x upgrade. Default value: basic
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
+	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Upgrade mode. <li>scale: blue/green deployment</li><li>restart: rolling restart</li>Default value: scale
+	UpgradeMode *string `json:"UpgradeMode,omitempty" name:"UpgradeMode"`
+
+	// Whether to back up the cluster before version upgrade (no backup by default)
+	CosBackup *bool `json:"CosBackup,omitempty" name:"CosBackup"`
+}
+
 type UpgradeInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2340,13 +2879,15 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpgradeInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpgradeInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpgradeInstanceResponseParams `json:"Response"`
 }
 
 func (r *UpgradeInstanceResponse) ToJsonString() string {
@@ -2360,9 +2901,30 @@ func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpgradeLicenseRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// License type <li>oss: Open Source Edition </li><li>basic: Basic Edition </li><li>platinum: Platinum Edition </li>Default value: Platinum
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// Whether to automatically use vouchers <li>0: No </li><li>1: Yes </li>Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// List of voucher IDs (only one voucher can be specified at a time currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Whether to enable X-Pack security authentication in Basic Edition 6.8 (and above) <li>1: disabled </li><li>2: enabled</li>
+	BasicSecurityType *uint64 `json:"BasicSecurityType,omitempty" name:"BasicSecurityType"`
+
+	// Whether to force restart <li>true: yes </li><li>false: no </li>Default value: false
+	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+}
+
 type UpgradeLicenseRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2406,17 +2968,19 @@ func (r *UpgradeLicenseRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpgradeLicenseResponseParams struct {
+	// Order ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpgradeLicenseResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID
-	// Note: This field may return `null`, indicating that no valid value was found.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpgradeLicenseResponseParams `json:"Response"`
 }
 
 func (r *UpgradeLicenseResponse) ToJsonString() string {
@@ -2431,7 +2995,6 @@ func (r *UpgradeLicenseResponse) FromJsonString(s string) error {
 }
 
 type WebNodeTypeInfo struct {
-
 	// Number of visual nodes. The value is always `1`.
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
@@ -2440,7 +3003,6 @@ type WebNodeTypeInfo struct {
 }
 
 type ZoneDetail struct {
-
 	// AZ
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 

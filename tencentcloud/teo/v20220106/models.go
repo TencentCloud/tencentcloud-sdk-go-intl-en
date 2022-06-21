@@ -20,9 +20,26 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type CreatePrefetchTaskRequestParams struct {
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of resources to be pre-warmed, for example:
+	// http://www.example.com/example.txt
+	Targets []*string `json:"Targets,omitempty" name:"Targets"`
+
+	// Specifies whether to encode the URL
+	// Note that if it’s enabled, the purging is based on the converted URLs.
+	EncodeUrl *bool `json:"EncodeUrl,omitempty" name:"EncodeUrl"`
+
+	// HTTP header information
+	Headers []*Header `json:"Headers,omitempty" name:"Headers"`
+}
+
 type CreatePrefetchTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the site
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -60,20 +77,22 @@ func (r *CreatePrefetchTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrefetchTaskResponseParams struct {
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// List of failed tasks
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePrefetchTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-		// List of failed tasks
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePrefetchTaskResponseParams `json:"Response"`
 }
 
 func (r *CreatePrefetchTaskResponse) ToJsonString() string {
@@ -87,9 +106,37 @@ func (r *CreatePrefetchTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePurgeTaskRequestParams struct {
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Type of the purging task. Values:
+	// - `purge_url`: Purge by the URL
+	// - `purge_prefix`: Purge by the prefix
+	// - `purge_host`: Purge by the Hostname
+	// - `purge_all`: Purge all cached contents
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Target resource to be purged, which depends on the `Type` field.
+	// 1. When `Type = purge_host`:
+	// Hostnames are purged, such as www.example.com and foo.bar.example.com.
+	// 2. When `Type = purge_prefix`:
+	// Prefixes are purged, such as http://www.example.com/example.
+	// 3. When `Type = purge_url`:
+	// URLs are purged, such as https://www.example.com/example.jpg.
+	// 4. When `Type = purge_all`: All types of resources are purged.
+	// `Targets` is not a required field.
+	Targets []*string `json:"Targets,omitempty" name:"Targets"`
+
+	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
+	// Note that if it’s enabled, the purging is based on the converted URLs.
+	EncodeUrl *bool `json:"EncodeUrl,omitempty" name:"EncodeUrl"`
+}
+
 type CreatePurgeTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the site
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -138,20 +185,22 @@ func (r *CreatePurgeTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePurgeTaskResponseParams struct {
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// List of failed tasks and reasons
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePurgeTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-		// List of failed tasks and reasons
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePurgeTaskResponseParams `json:"Response"`
 }
 
 func (r *CreatePurgeTaskResponse) ToJsonString() string {
@@ -165,9 +214,40 @@ func (r *CreatePurgeTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrefetchTasksRequestParams struct {
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Start time of the query
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Offset of the query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of results returned
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Statuses of tasks to be queried. Values:
+	// `processing`, `success`, `failed`, `timeout` and `invalid`
+	Statuses []*string `json:"Statuses,omitempty" name:"Statuses"`
+
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of domain names queried
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Resources queried
+	Target *string `json:"Target,omitempty" name:"Target"`
+}
+
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
@@ -224,19 +304,21 @@ func (r *DescribePrefetchTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrefetchTasksResponseParams struct {
+	// Total entries that match the specified query condition
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of tasks returned
+	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrefetchTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total entries that match the specified query condition
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of tasks returned
-		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrefetchTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribePrefetchTasksResponse) ToJsonString() string {
@@ -250,9 +332,43 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeTasksRequestParams struct {
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Type of the purging task
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Start time of the query
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Offset of the query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of results returned
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Statuses of tasks to be queried. Values:
+	// `processing`, `success`, `failed`, `timeout` and `invalid`
+	Statuses []*string `json:"Statuses,omitempty" name:"Statuses"`
+
+	// ID of the site
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of domain names queried
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Queries content
+	Target *string `json:"Target,omitempty" name:"Target"`
+}
+
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
@@ -313,19 +429,21 @@ func (r *DescribePurgeTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeTasksResponseParams struct {
+	// Total entries that match the specified query condition
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of tasks returned
+	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePurgeTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total entries that match the specified query condition
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of tasks returned
-		Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePurgeTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribePurgeTasksResponse) ToJsonString() string {
@@ -339,9 +457,21 @@ func (r *DescribePurgeTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesRequestParams struct {
+	// Pagination parameter, which specifies the offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination parameter, which specifies the number of sites returned in each page.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query condition filter, which supports complex type.
+	Filters []*ZoneFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pagination parameter, which specifies the offset.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -373,20 +503,22 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesResponseParams struct {
+	// Number of sites that match the specified conditions
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Details of sites
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Zones []*Zone `json:"Zones,omitempty" name:"Zones"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeZonesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of sites that match the specified conditions
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Details of sites
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		Zones []*Zone `json:"Zones,omitempty" name:"Zones"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeZonesResponseParams `json:"Response"`
 }
 
 func (r *DescribeZonesResponse) ToJsonString() string {
@@ -400,9 +532,30 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DownloadL7LogsRequestParams struct {
+	// Start time. It must conform to the RFC3339 standard.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time. It must conform to the RFC3339 standard.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Current page
+	PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+	// List of sites
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// List of domain names
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+}
+
 type DownloadL7LogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time. It must conform to the RFC3339 standard.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -446,33 +599,35 @@ func (r *DownloadL7LogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DownloadL7LogsResponseParams struct {
+	// Layer-7 offline log data
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Data []*L7OfflineLog `json:"Data,omitempty" name:"Data"`
+
+	// Page size
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Page number
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+	// Total number of pages
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Pages *int64 `json:"Pages,omitempty" name:"Pages"`
+
+	// Total number of entries
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TotalSize *int64 `json:"TotalSize,omitempty" name:"TotalSize"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DownloadL7LogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Layer-7 offline log data
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		Data []*L7OfflineLog `json:"Data,omitempty" name:"Data"`
-
-		// Page size
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Page number
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
-
-		// Total number of pages
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		Pages *int64 `json:"Pages,omitempty" name:"Pages"`
-
-		// Total number of entries
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		TotalSize *int64 `json:"TotalSize,omitempty" name:"TotalSize"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DownloadL7LogsResponseParams `json:"Response"`
 }
 
 func (r *DownloadL7LogsResponse) ToJsonString() string {
@@ -487,7 +642,6 @@ func (r *DownloadL7LogsResponse) FromJsonString(s string) error {
 }
 
 type FailReason struct {
-
 	// Failure reason
 	Reason *string `json:"Reason,omitempty" name:"Reason"`
 
@@ -497,7 +651,6 @@ type FailReason struct {
 }
 
 type Header struct {
-
 	// HTTP header name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -506,7 +659,6 @@ type Header struct {
 }
 
 type L7OfflineLog struct {
-
 	// Start time of the log packaging
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	LogTime *int64 `json:"LogTime,omitempty" name:"LogTime"`
@@ -529,7 +681,6 @@ type L7OfflineLog struct {
 }
 
 type Task struct {
-
 	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
@@ -550,7 +701,6 @@ type Task struct {
 }
 
 type Zone struct {
-
 	// Site ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -586,7 +736,6 @@ type Zone struct {
 }
 
 type ZoneFilter struct {
-
 	// Filters by the field name. Vaules:
 	// - `name`: Site name.
 	// - `status`: Site status.

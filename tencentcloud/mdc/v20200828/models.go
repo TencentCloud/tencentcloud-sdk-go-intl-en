@@ -21,7 +21,6 @@ import (
 )
 
 type CreateInput struct {
-
 	// Input name, which can contain 1 to 32 letters, digits, and underscores.
 	InputName *string `json:"InputName,omitempty" name:"InputName"`
 
@@ -45,7 +44,6 @@ type CreateInput struct {
 }
 
 type CreateInputRTPSettings struct {
-
 	// Default value: none. Valid values: ['none'].
 	FEC *string `json:"FEC,omitempty" name:"FEC"`
 
@@ -54,7 +52,6 @@ type CreateInputRTPSettings struct {
 }
 
 type CreateInputSRTSettings struct {
-
 	// The SRT mode. Valid values: LISTENER (default), CALLER.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
@@ -84,7 +81,6 @@ type CreateInputSRTSettings struct {
 }
 
 type CreateOutputInfo struct {
-
 	// The output name.
 	OutputName *string `json:"OutputName,omitempty" name:"OutputName"`
 
@@ -112,7 +108,6 @@ type CreateOutputInfo struct {
 }
 
 type CreateOutputInfoRTPSettings struct {
-
 	// The relay destination addresses. One or two addresses are allowed.
 	Destinations []*CreateOutputRTPSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
@@ -124,7 +119,6 @@ type CreateOutputInfoRTPSettings struct {
 }
 
 type CreateOutputRTMPSettings struct {
-
 	// The relay destination addresses. One or two addresses are allowed.
 	Destinations []*CreateOutputRtmpSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
@@ -133,7 +127,6 @@ type CreateOutputRTMPSettings struct {
 }
 
 type CreateOutputRTPSettingsDestinations struct {
-
 	// The relay destination IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -142,7 +135,6 @@ type CreateOutputRTPSettingsDestinations struct {
 }
 
 type CreateOutputRtmpSettingsDestinations struct {
-
 	// The relay URL. Format: `rtmp://domain/live`.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
@@ -151,7 +143,6 @@ type CreateOutputRtmpSettingsDestinations struct {
 }
 
 type CreateOutputSrtSettings struct {
-
 	// The relay destination address, which is required if `Mode` is `CALLER`. Only one address is allowed.
 	Destinations []*CreateOutputSrtSettingsDestinations `json:"Destinations,omitempty" name:"Destinations"`
 
@@ -181,7 +172,6 @@ type CreateOutputSrtSettings struct {
 }
 
 type CreateOutputSrtSettingsDestinations struct {
-
 	// The output IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -189,9 +179,21 @@ type CreateOutputSrtSettingsDestinations struct {
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
+// Predefined struct for user
+type CreateStreamLinkFlowRequestParams struct {
+	// Flow name
+	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
+
+	// Maximum bandwidth in bps. Valid values: `10000000`, `20000000`, `50000000`
+	MaxBandwidth *int64 `json:"MaxBandwidth,omitempty" name:"MaxBandwidth"`
+
+	// Flow input group
+	InputGroup []*CreateInput `json:"InputGroup,omitempty" name:"InputGroup"`
+}
+
 type CreateStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow name
 	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
 
@@ -223,16 +225,18 @@ func (r *CreateStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLinkFlowResponseParams struct {
+	// Information of the created flow
+	Info *DescribeFlow `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information of the created flow
-		Info *DescribeFlow `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLinkFlowResponse) ToJsonString() string {
@@ -246,9 +250,18 @@ func (r *CreateStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLinkOutputInfoRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The output configuration of the flow.
+	Output *CreateOutputInfo `json:"Output,omitempty" name:"Output"`
+}
+
 type CreateStreamLinkOutputInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -276,16 +289,18 @@ func (r *CreateStreamLinkOutputInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateStreamLinkOutputInfoResponseParams struct {
+	// The information of the created output.
+	Info *DescribeOutput `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateStreamLinkOutputInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The information of the created output.
-		Info *DescribeOutput `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateStreamLinkOutputInfoResponseParams `json:"Response"`
 }
 
 func (r *CreateStreamLinkOutputInfoResponse) ToJsonString() string {
@@ -299,9 +314,15 @@ func (r *CreateStreamLinkOutputInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLinkFlowRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+}
+
 type DeleteStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
@@ -325,13 +346,15 @@ func (r *DeleteStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLinkFlowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLinkFlowResponse) ToJsonString() string {
@@ -345,9 +368,18 @@ func (r *DeleteStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLinkOutputRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Output ID
+	OutputId *string `json:"OutputId,omitempty" name:"OutputId"`
+}
+
 type DeleteStreamLinkOutputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -375,13 +407,15 @@ func (r *DeleteStreamLinkOutputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteStreamLinkOutputResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteStreamLinkOutputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteStreamLinkOutputResponseParams `json:"Response"`
 }
 
 func (r *DeleteStreamLinkOutputResponse) ToJsonString() string {
@@ -396,7 +430,6 @@ func (r *DeleteStreamLinkOutputResponse) FromJsonString(s string) error {
 }
 
 type DescribeFlow struct {
-
 	// Flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -418,7 +451,6 @@ type DescribeFlow struct {
 }
 
 type DescribeInput struct {
-
 	// Input ID.
 	InputId *string `json:"InputId,omitempty" name:"InputId"`
 
@@ -458,7 +490,6 @@ type DescribeInput struct {
 }
 
 type DescribeInputRTMPSettings struct {
-
 	// Path for RTMP stream pushing
 	// Note: this field may return `null`, indicating that no valid value was found.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
@@ -469,7 +500,6 @@ type DescribeInputRTMPSettings struct {
 }
 
 type DescribeInputRTPSettings struct {
-
 	// Whether it is FEC.
 	FEC *string `json:"FEC,omitempty" name:"FEC"`
 
@@ -478,7 +508,6 @@ type DescribeInputRTPSettings struct {
 }
 
 type DescribeInputSRTSettings struct {
-
 	// The SRT mode.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
@@ -510,7 +539,6 @@ type DescribeInputSRTSettings struct {
 }
 
 type DescribeOutput struct {
-
 	// Output ID.
 	OutputId *string `json:"OutputId,omitempty" name:"OutputId"`
 
@@ -557,7 +585,6 @@ type DescribeOutput struct {
 }
 
 type DescribeOutputRTMPPullServerUrl struct {
-
 	// `tcUrl` of the RTMP pull URL
 	TcUrl *string `json:"TcUrl,omitempty" name:"TcUrl"`
 
@@ -566,14 +593,12 @@ type DescribeOutputRTMPPullServerUrl struct {
 }
 
 type DescribeOutputRTMPPullSettings struct {
-
 	// List of pull URLs
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ServerUrls []*DescribeOutputRTMPPullServerUrl `json:"ServerUrls,omitempty" name:"ServerUrls"`
 }
 
 type DescribeOutputRTMPSettings struct {
-
 	// Idle timeout period.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IdleTimeout *int64 `json:"IdleTimeout,omitempty" name:"IdleTimeout"`
@@ -588,7 +613,6 @@ type DescribeOutputRTMPSettings struct {
 }
 
 type DescribeOutputRTPSettings struct {
-
 	// Destination address information list of RTP push.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Destinations []*RTPAddressDestination `json:"Destinations,omitempty" name:"Destinations"`
@@ -603,7 +627,6 @@ type DescribeOutputRTPSettings struct {
 }
 
 type DescribeOutputSRTSettings struct {
-
 	// A list of the destination addresses for relay. This parameter is valid if `Mode` is `CALLER`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Destinations []*SRTAddressDestination `json:"Destinations,omitempty" name:"Destinations"`
@@ -645,9 +668,38 @@ type DescribeOutputSRTSettings struct {
 	SourceAddresses []*OutputSRTSourceAddressResp `json:"SourceAddresses,omitempty" name:"SourceAddresses"`
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowLogsRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether to query the inputs or outputs. Valid values: input, output.
+	Type []*string `json:"Type,omitempty" name:"Type"`
+
+	// Whether to query the primary or backup pipeline. Valid values: 0, 1.
+	Pipeline []*string `json:"Pipeline,omitempty" name:"Pipeline"`
+
+	// The page size. Value range: [1, 1000]. Default: 100.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Whether to sort the records by timestamp in descending or ascending order. Valid values: desc (default), asc.
+	SortType *string `json:"SortType,omitempty" name:"SortType"`
+
+	// The page number. Value range: [1, 1000]. Default: 1.
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+}
+
 type DescribeStreamLinkFlowLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -701,28 +753,30 @@ func (r *DescribeStreamLinkFlowLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowLogsResponseParams struct {
+	// A list of the logs.
+	Infos []*FlowLogInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The current page number.
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The number of records per page.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// The total number of records.
+	TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The total number of pages.
+	TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of the logs.
-		Infos []*FlowLogInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The current page number.
-		PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
-
-		// The number of records per page.
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// The total number of records.
-		TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The total number of pages.
-		TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowLogsResponse) ToJsonString() string {
@@ -736,9 +790,35 @@ func (r *DescribeStreamLinkFlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowMediaStatisticsRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Whether to query the inputs or outputs. Valid values: input, output.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The input or output ID.
+	InputOutputId *string `json:"InputOutputId,omitempty" name:"InputOutputId"`
+
+	// Whether to query the primary or backup pipeline. Valid values: 0, 1.
+	Pipeline *string `json:"Pipeline,omitempty" name:"Pipeline"`
+
+	// The query interval. Valid values: 5s, 1min, 5min, 15min.
+	Period *string `json:"Period,omitempty" name:"Period"`
+
+	// The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeStreamLinkFlowMediaStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -788,16 +868,18 @@ func (r *DescribeStreamLinkFlowMediaStatisticsRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowMediaStatisticsResponseParams struct {
+	// A list of the media data.
+	Infos []*FlowMediaInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowMediaStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of the media data.
-		Infos []*FlowMediaInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowMediaStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowMediaStatisticsResponse) ToJsonString() string {
@@ -811,9 +893,21 @@ func (r *DescribeStreamLinkFlowMediaStatisticsResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowRealtimeStatusRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The IDs of the inputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
+	InputIds []*string `json:"InputIds,omitempty" name:"InputIds"`
+
+	// The IDs of the outputs to query. If this parameter and `OutputIds` are both empty, all inputs and outputs are queried.
+	OutputIds []*string `json:"OutputIds,omitempty" name:"OutputIds"`
+}
+
 type DescribeStreamLinkFlowRealtimeStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -845,19 +939,21 @@ func (r *DescribeStreamLinkFlowRealtimeStatusRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowRealtimeStatusResponseParams struct {
+	// The timestamp (seconds) of the query.
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// A list of the real-time data.
+	Datas []*FlowRealtimeStatusItem `json:"Datas,omitempty" name:"Datas"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowRealtimeStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The timestamp (seconds) of the query.
-		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
-
-		// A list of the real-time data.
-		Datas []*FlowRealtimeStatusItem `json:"Datas,omitempty" name:"Datas"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowRealtimeStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowRealtimeStatusResponse) ToJsonString() string {
@@ -871,9 +967,15 @@ func (r *DescribeStreamLinkFlowRealtimeStatusResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+}
+
 type DescribeStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
@@ -897,16 +999,18 @@ func (r *DescribeStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowResponseParams struct {
+	// Configuration information of a flow
+	Info *DescribeFlow `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration information of a flow
-		Info *DescribeFlow `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowResponse) ToJsonString() string {
@@ -920,9 +1024,35 @@ func (r *DescribeStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowSRTStatisticsRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Whether to query the inputs or outputs. Valid values: input, output.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The input or output ID.
+	InputOutputId *string `json:"InputOutputId,omitempty" name:"InputOutputId"`
+
+	// Whether to query the primary or backup pipeline. Valid values: 0, 1.
+	Pipeline *string `json:"Pipeline,omitempty" name:"Pipeline"`
+
+	// The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The query interval. Valid values: 5s, 1min, 5min, 15min.
+	Period *string `json:"Period,omitempty" name:"Period"`
+}
+
 type DescribeStreamLinkFlowSRTStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -972,16 +1102,18 @@ func (r *DescribeStreamLinkFlowSRTStatisticsRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowSRTStatisticsResponseParams struct {
+	// A list of the SRT streaming performance data.
+	Infos []*FlowSRTInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowSRTStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of the SRT streaming performance data.
-		Infos []*FlowSRTInfo `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowSRTStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowSRTStatisticsResponse) ToJsonString() string {
@@ -995,9 +1127,35 @@ func (r *DescribeStreamLinkFlowSRTStatisticsResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowStatisticsRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Whether to query the inputs or outputs. Valid values: input, output.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The input or output ID.
+	InputOutputId *string `json:"InputOutputId,omitempty" name:"InputOutputId"`
+
+	// Whether to query the primary or backup pipeline. Valid values: 0, 1.
+	Pipeline *string `json:"Pipeline,omitempty" name:"Pipeline"`
+
+	// The query interval. Valid values: 5s, 1min, 5min, 15min.
+	Period *string `json:"Period,omitempty" name:"Period"`
+
+	// The start time for query, which is 1 hour ago by default. You can query statistics in the last 7 days.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query, which is 1 hour after the start time by default. The longest time range allowed for query is 24 hours.
+	// It must be in UTC format, such as `2020-01-01T12:00:00Z`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeStreamLinkFlowStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -1047,16 +1205,18 @@ func (r *DescribeStreamLinkFlowStatisticsRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowStatisticsResponseParams struct {
+	// A list of the media data.
+	Infos []*FlowStatisticsArray `json:"Infos,omitempty" name:"Infos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A list of the media data.
-		Infos []*FlowStatisticsArray `json:"Infos,omitempty" name:"Infos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowStatisticsResponse) ToJsonString() string {
@@ -1070,9 +1230,18 @@ func (r *DescribeStreamLinkFlowStatisticsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowsRequestParams struct {
+	// Number of the current page. Default value: `1`
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page. Default value: `10`
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
 type DescribeStreamLinkFlowsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of the current page. Default value: `1`
 	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
 
@@ -1100,28 +1269,30 @@ func (r *DescribeStreamLinkFlowsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkFlowsResponseParams struct {
+	// List of the configuration information of the flows
+	Infos []*DescribeFlow `json:"Infos,omitempty" name:"Infos"`
+
+	// Number of the current page
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Number of entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Total number of entries
+	TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Total number of pages
+	TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkFlowsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the configuration information of the flows
-		Infos []*DescribeFlow `json:"Infos,omitempty" name:"Infos"`
-
-		// Number of the current page
-		PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
-
-		// Number of entries per page
-		PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
-
-		// Total number of entries
-		TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Total number of pages
-		TotalPage *int64 `json:"TotalPage,omitempty" name:"TotalPage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkFlowsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkFlowsResponse) ToJsonString() string {
@@ -1135,8 +1306,14 @@ func (r *DescribeStreamLinkFlowsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkRegionsRequestParams struct {
+
+}
+
 type DescribeStreamLinkRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeStreamLinkRegionsRequest) ToJsonString() string {
@@ -1151,22 +1328,25 @@ func (r *DescribeStreamLinkRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLinkRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamLinkRegionsResponseParams struct {
+	// StreamLink region information
+	Info *StreamLinkRegionInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeStreamLinkRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// StreamLink region information
-		Info *StreamLinkRegionInfo `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeStreamLinkRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeStreamLinkRegionsResponse) ToJsonString() string {
@@ -1181,7 +1361,6 @@ func (r *DescribeStreamLinkRegionsResponse) FromJsonString(s string) error {
 }
 
 type FlowAudio struct {
-
 	// The frame rate.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -1193,7 +1372,6 @@ type FlowAudio struct {
 }
 
 type FlowLogInfo struct {
-
 	// The timestamp (seconds).
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
@@ -1226,7 +1404,6 @@ type FlowLogInfo struct {
 }
 
 type FlowMediaAudio struct {
-
 	// The frame rate.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -1241,7 +1418,6 @@ type FlowMediaAudio struct {
 }
 
 type FlowMediaInfo struct {
-
 	// The timestamp (seconds).
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
@@ -1262,7 +1438,6 @@ type FlowMediaInfo struct {
 }
 
 type FlowMediaVideo struct {
-
 	// The frame rate.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -1277,7 +1452,6 @@ type FlowMediaVideo struct {
 }
 
 type FlowRealtimeStatusCommon struct {
-
 	// The connection status. Valid values: Connected, Waiting, Idle.
 	State *string `json:"State,omitempty" name:"State"`
 
@@ -1295,7 +1469,6 @@ type FlowRealtimeStatusCommon struct {
 }
 
 type FlowRealtimeStatusItem struct {
-
 	// Whether it is an input or output. Valid values: Input, Output.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -1331,7 +1504,6 @@ type FlowRealtimeStatusItem struct {
 }
 
 type FlowRealtimeStatusRTMP struct {
-
 	// The video frame rate.
 	VideoFPS *int64 `json:"VideoFPS,omitempty" name:"VideoFPS"`
 
@@ -1340,13 +1512,11 @@ type FlowRealtimeStatusRTMP struct {
 }
 
 type FlowRealtimeStatusRTP struct {
-
 	// The number of packets transmitted.
 	Packets *int64 `json:"Packets,omitempty" name:"Packets"`
 }
 
 type FlowRealtimeStatusSRT struct {
-
 	// The latency (ms).
 	Latency *int64 `json:"Latency,omitempty" name:"Latency"`
 
@@ -1370,7 +1540,6 @@ type FlowRealtimeStatusSRT struct {
 }
 
 type FlowSRTInfo struct {
-
 	// The timestamp (seconds).
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
@@ -1400,7 +1569,6 @@ type FlowSRTInfo struct {
 }
 
 type FlowStatistics struct {
-
 	// The session ID.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
@@ -1418,7 +1586,6 @@ type FlowStatistics struct {
 }
 
 type FlowStatisticsArray struct {
-
 	// The timestamp.
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
@@ -1427,7 +1594,6 @@ type FlowStatisticsArray struct {
 }
 
 type FlowVideo struct {
-
 	// The frame rate.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 
@@ -1439,7 +1605,6 @@ type FlowVideo struct {
 }
 
 type InputAddress struct {
-
 	// Input address IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1448,7 +1613,6 @@ type InputAddress struct {
 }
 
 type ModifyInput struct {
-
 	// The input ID.
 	InputId *string `json:"InputId,omitempty" name:"InputId"`
 
@@ -1478,7 +1642,6 @@ type ModifyInput struct {
 }
 
 type ModifyOutputInfo struct {
-
 	// The ID of the output to modify.
 	OutputId *string `json:"OutputId,omitempty" name:"OutputId"`
 
@@ -1505,9 +1668,18 @@ type ModifyOutputInfo struct {
 	AllowIpList []*string `json:"AllowIpList,omitempty" name:"AllowIpList"`
 }
 
+// Predefined struct for user
+type ModifyStreamLinkFlowRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Name of the flow to modify
+	FlowName *string `json:"FlowName,omitempty" name:"FlowName"`
+}
+
 type ModifyStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -1535,13 +1707,15 @@ func (r *ModifyStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLinkFlowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLinkFlowResponse) ToJsonString() string {
@@ -1555,9 +1729,18 @@ func (r *ModifyStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLinkInputRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The input information to modify.
+	Input *ModifyInput `json:"Input,omitempty" name:"Input"`
+}
+
 type ModifyStreamLinkInputRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -1585,16 +1768,18 @@ func (r *ModifyStreamLinkInputRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLinkInputResponseParams struct {
+	// The input information after modification.
+	Info *DescribeInput `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLinkInputResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The input information after modification.
-		Info *DescribeInput `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLinkInputResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLinkInputResponse) ToJsonString() string {
@@ -1608,9 +1793,18 @@ func (r *ModifyStreamLinkInputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLinkOutputInfoRequestParams struct {
+	// The flow ID.
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The output configuration to modify.
+	Output *ModifyOutputInfo `json:"Output,omitempty" name:"Output"`
+}
+
 type ModifyStreamLinkOutputInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The flow ID.
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 
@@ -1638,16 +1832,18 @@ func (r *ModifyStreamLinkOutputInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamLinkOutputInfoResponseParams struct {
+	// The output configuration after modification.
+	Info *DescribeOutput `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyStreamLinkOutputInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The output configuration after modification.
-		Info *DescribeOutput `json:"Info,omitempty" name:"Info"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyStreamLinkOutputInfoResponseParams `json:"Response"`
 }
 
 func (r *ModifyStreamLinkOutputInfoResponse) ToJsonString() string {
@@ -1662,13 +1858,11 @@ func (r *ModifyStreamLinkOutputInfoResponse) FromJsonString(s string) error {
 }
 
 type OutputAddress struct {
-
 	// Output destination IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 }
 
 type OutputSRTSourceAddressResp struct {
-
 	// The listen IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1677,7 +1871,6 @@ type OutputSRTSourceAddressResp struct {
 }
 
 type RTMPAddressDestination struct {
-
 	// Destination URL of RTMP push in the format of 'rtmp://domain/live'.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
@@ -1686,7 +1879,6 @@ type RTMPAddressDestination struct {
 }
 
 type RTPAddressDestination struct {
-
 	// Push destination address IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1695,13 +1887,11 @@ type RTPAddressDestination struct {
 }
 
 type RegionInfo struct {
-
 	// Region name
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type SRTAddressDestination struct {
-
 	// Destination address IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1710,7 +1900,6 @@ type SRTAddressDestination struct {
 }
 
 type SRTSourceAddressReq struct {
-
 	// The peer IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1719,7 +1908,6 @@ type SRTSourceAddressReq struct {
 }
 
 type SRTSourceAddressResp struct {
-
 	// The peer IP.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1727,9 +1915,15 @@ type SRTSourceAddressResp struct {
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
+// Predefined struct for user
+type StartStreamLinkFlowRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+}
+
 type StartStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
@@ -1753,13 +1947,15 @@ func (r *StartStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartStreamLinkFlowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *StartStreamLinkFlowResponse) ToJsonString() string {
@@ -1773,9 +1969,15 @@ func (r *StartStreamLinkFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopStreamLinkFlowRequestParams struct {
+	// Flow ID
+	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
+}
+
 type StopStreamLinkFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow ID
 	FlowId *string `json:"FlowId,omitempty" name:"FlowId"`
 }
@@ -1799,13 +2001,15 @@ func (r *StopStreamLinkFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopStreamLinkFlowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopStreamLinkFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopStreamLinkFlowResponseParams `json:"Response"`
 }
 
 func (r *StopStreamLinkFlowResponse) ToJsonString() string {
@@ -1820,7 +2024,6 @@ func (r *StopStreamLinkFlowResponse) FromJsonString(s string) error {
 }
 
 type StreamLinkRegionInfo struct {
-
 	// List of StreamLink regions
 	Regions []*RegionInfo `json:"Regions,omitempty" name:"Regions"`
 }

@@ -21,7 +21,6 @@ import (
 )
 
 type CosToken struct {
-
 	// Unique request ID
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 
@@ -50,9 +49,27 @@ type CosToken struct {
 	FullPath *string `json:"FullPath,omitempty" name:"FullPath"`
 }
 
+// Predefined struct for user
+type CreateCosTokenRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Package name
+	PkgName *string `json:"PkgName,omitempty" name:"PkgName"`
+
+	// Operation type. 1: upload; 2: query
+	OptType *int64 `json:"OptType,omitempty" name:"OptType"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Input parameter of `deployVersion`
+	TimeVersion *string `json:"TimeVersion,omitempty" name:"TimeVersion"`
+}
+
 type CreateCosTokenRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -92,17 +109,19 @@ func (r *CreateCosTokenRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCosTokenResponseParams struct {
+	// `CosToken` object in case of success and `null` in case of failure
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *CosToken `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCosTokenResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `CosToken` object in case of success and `null` in case of failure
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *CosToken `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCosTokenResponseParams `json:"Response"`
 }
 
 func (r *CreateCosTokenResponse) ToJsonString() string {
@@ -116,9 +135,33 @@ func (r *CreateCosTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentRequestParams struct {
+	// Environment name
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// VPC name
+	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
+
+	// List of subnets
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Environment description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Kubernetes version
+	K8sVersion *string `json:"K8sVersion,omitempty" name:"K8sVersion"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Whether to enable the TSW service
+	EnableTswTraceService *bool `json:"EnableTswTraceService,omitempty" name:"EnableTswTraceService"`
+}
+
 type CreateEnvironmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment name
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
@@ -166,17 +209,19 @@ func (r *CreateEnvironmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateEnvironmentResponseParams struct {
+	// Environment ID in case of success and `null` in case of failure
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateEnvironmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Environment ID in case of success and `null` in case of failure
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateEnvironmentResponseParams `json:"Response"`
 }
 
 func (r *CreateEnvironmentResponse) ToJsonString() string {
@@ -190,9 +235,30 @@ func (r *CreateEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateResourceRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Resource type. Valid values: `CFS` (file system), `CLS` (log service), `TSE_SRE` (registry)
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Source of the resource. Values: `existing` (choose an existing resource), `creating` (create a new resource)
+	ResourceFrom *string `json:"ResourceFrom,omitempty" name:"ResourceFrom"`
+
+	// Resource extra configuration
+	ResourceConfig *string `json:"ResourceConfig,omitempty" name:"ResourceConfig"`
+}
+
 type CreateResourceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -236,17 +302,19 @@ func (r *CreateResourceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateResourceResponseParams struct {
+	// Result
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateResourceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Result
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateResourceResponseParams `json:"Response"`
 }
 
 func (r *CreateResourceResponse) ToJsonString() string {
@@ -261,7 +329,6 @@ func (r *CreateResourceResponse) FromJsonString(s string) error {
 }
 
 type CronHorizontalAutoscaler struct {
-
 	// Name of a scheduled scaling policy
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -284,7 +351,6 @@ type CronHorizontalAutoscaler struct {
 }
 
 type CronHorizontalAutoscalerSchedule struct {
-
 	// Triggering time, in the format of HH:MM
 	// Example:
 	// 00:00 (Trigger at midnight)
@@ -295,9 +361,24 @@ type CronHorizontalAutoscalerSchedule struct {
 	TargetReplicas *int64 `json:"TargetReplicas,omitempty" name:"TargetReplicas"`
 }
 
+// Predefined struct for user
+type DeleteIngressRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment namespace
+	ClusterNamespace *string `json:"ClusterNamespace,omitempty" name:"ClusterNamespace"`
+
+	// Ingress rule name
+	IngressName *string `json:"IngressName,omitempty" name:"IngressName"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type DeleteIngressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -333,16 +414,18 @@ func (r *DeleteIngressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIngressResponseParams struct {
+	// Whether deletion is successful
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteIngressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion is successful
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteIngressResponseParams `json:"Response"`
 }
 
 func (r *DeleteIngressResponse) ToJsonString() string {
@@ -356,9 +439,146 @@ func (r *DeleteIngressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeployApplicationRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Number of initialized pods
+	InitPodNum *uint64 `json:"InitPodNum,omitempty" name:"InitPodNum"`
+
+	// CPU specification
+	CpuSpec *float64 `json:"CpuSpec,omitempty" name:"CpuSpec"`
+
+	// Memory specification
+	MemorySpec *float64 `json:"MemorySpec,omitempty" name:"MemorySpec"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Image repository
+	ImgRepo *string `json:"ImgRepo,omitempty" name:"ImgRepo"`
+
+	// Version description
+	VersionDesc *string `json:"VersionDesc,omitempty" name:"VersionDesc"`
+
+	// Launch parameters
+	JvmOpts *string `json:"JvmOpts,omitempty" name:"JvmOpts"`
+
+	// Auto scaling configuration (This field is disused. Please use `HorizontalAutoscaler` to set the auto scaling policy.)
+	EsInfo *EsInfo `json:"EsInfo,omitempty" name:"EsInfo"`
+
+	// Environment variable configuration
+	EnvConf []*Pair `json:"EnvConf,omitempty" name:"EnvConf"`
+
+	// Log configuration
+	LogConfs []*string `json:"LogConfs,omitempty" name:"LogConfs"`
+
+	// Data volume configuration
+	StorageConfs []*StorageConf `json:"StorageConfs,omitempty" name:"StorageConfs"`
+
+	// Data volume mount configuration
+	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitempty" name:"StorageMountConfs"`
+
+	// Deployment type
+	// - JAR: deployment through JAR package
+	// - WAR: deployment through WAR package
+	// - IMAGE: deployment through image
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// When the deployment type is `IMAGE`, this parameter indicates the image tag
+	// When the deployment type is `JAR` or `WAR`, this parameter indicates the package version number
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// Package name, which is required when using JAR or WAR packages for deployment
+	PkgName *string `json:"PkgName,omitempty" name:"PkgName"`
+
+	// JDK version
+	// - KONA: use KONA JDK
+	// - OPEN: use open JDK
+	// - KONA: use KONA JDK
+	// - OPEN: use open JDK
+	JdkVersion *string `json:"JdkVersion,omitempty" name:"JdkVersion"`
+
+	// Security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Log output configuration
+	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitempty" name:"LogOutputConf"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Version description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Image command
+	ImageCommand *string `json:"ImageCommand,omitempty" name:"ImageCommand"`
+
+	// Image command parameters
+	ImageArgs []*string `json:"ImageArgs,omitempty" name:"ImageArgs"`
+
+	// Whether to add the registry's default configurations
+	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitempty" name:"UseRegistryDefaultConfig"`
+
+	// Mounting configurations
+	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitempty" name:"SettingConfs"`
+
+	// Application access configuration
+	Service *EksService `json:"Service,omitempty" name:"Service"`
+
+	// ID of the version that you want to roll back to
+	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+
+	// The script to run after startup
+	PostStart *string `json:"PostStart,omitempty" name:"PostStart"`
+
+	// The script to run before stop
+	PreStop *string `json:"PreStop,omitempty" name:"PreStop"`
+
+	// Configuration of aliveness probe
+	Liveness *HealthCheckConfig `json:"Liveness,omitempty" name:"Liveness"`
+
+	// Configuration of readiness probe
+	Readiness *HealthCheckConfig `json:"Readiness,omitempty" name:"Readiness"`
+
+	// Configuration of batch release policies
+	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitempty" name:"DeployStrategyConf"`
+
+	// Auto scaling policy
+	HorizontalAutoscaler []*HorizontalAutoscaler `json:"HorizontalAutoscaler,omitempty" name:"HorizontalAutoscaler"`
+
+	// Scheduled auto scaling policy
+	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
+
+	// Specifies whether to enable logging. `1`: enable; `0`: do not enable
+	LogEnable *int64 `json:"LogEnable,omitempty" name:"LogEnable"`
+
+	// Whether the configuration is modified (except for the image configuration)
+	ConfEdited *bool `json:"ConfEdited,omitempty" name:"ConfEdited"`
+
+	// Whether the application acceleration is enabled 
+	SpeedUp *bool `json:"SpeedUp,omitempty" name:"SpeedUp"`
+
+	// Whether to enable probing
+	StartupProbe *HealthCheckConfig `json:"StartupProbe,omitempty" name:"StartupProbe"`
+
+	// The version of the operating system
+	// If `openjdk` is selected, the value can be: 
+	// - ALPINE
+	// - CENTOS
+	// If `konajdk` is selected, the value can be: 
+	// - ALPINE
+	// - TENCENTOS
+	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
+
+	// Specifies whether to enable Prometheus metric
+	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
+}
+
 type DeployApplicationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -552,16 +772,18 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeployApplicationResponseParams struct {
+	// Version ID (which can be ignored for the frontend)
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeployApplicationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Version ID (which can be ignored for the frontend)
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeployApplicationResponseParams `json:"Response"`
 }
 
 func (r *DeployApplicationResponse) ToJsonString() string {
@@ -576,7 +798,6 @@ func (r *DeployApplicationResponse) FromJsonString(s string) error {
 }
 
 type DeployStrategyConf struct {
-
 	// Total batches
 	TotalBatchCount *int64 `json:"TotalBatchCount,omitempty" name:"TotalBatchCount"`
 
@@ -596,9 +817,36 @@ type DeployStrategyConf struct {
 	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
+// Predefined struct for user
+type DescribeApplicationPodsRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Number of items per page. Default value: 20
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pod status 
+	// - Running 
+	// - Pending 
+	// - Error
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitempty" name:"PodName"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type DescribeApplicationPodsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -649,16 +897,18 @@ func (r *DescribeApplicationPodsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeApplicationPodsResponseParams struct {
+	// Returned result
+	Result *DescribeRunPodPage `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeApplicationPodsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-		Result *DescribeRunPodPage `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeApplicationPodsResponseParams `json:"Response"`
 }
 
 func (r *DescribeApplicationPodsResponse) ToJsonString() string {
@@ -672,9 +922,21 @@ func (r *DescribeApplicationPodsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEnvironmentsRequestParams struct {
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Source
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type DescribeEnvironmentsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pagination limit
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -706,16 +968,18 @@ func (r *DescribeEnvironmentsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEnvironmentsResponseParams struct {
+	// Returned result
+	Result *NamespacePage `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEnvironmentsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-		Result *NamespacePage `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEnvironmentsResponseParams `json:"Response"`
 }
 
 func (r *DescribeEnvironmentsResponse) ToJsonString() string {
@@ -729,9 +993,24 @@ func (r *DescribeEnvironmentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIngressRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment namespace
+	ClusterNamespace *string `json:"ClusterNamespace,omitempty" name:"ClusterNamespace"`
+
+	// Ingress rule name
+	IngressName *string `json:"IngressName,omitempty" name:"IngressName"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type DescribeIngressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -767,16 +1046,18 @@ func (r *DescribeIngressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIngressResponseParams struct {
+	// Ingress rule configuration
+	Result *IngressInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIngressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Ingress rule configuration
-		Result *IngressInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIngressResponseParams `json:"Response"`
 }
 
 func (r *DescribeIngressResponse) ToJsonString() string {
@@ -790,9 +1071,24 @@ func (r *DescribeIngressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIngressesRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment namespace
+	ClusterNamespace *string `json:"ClusterNamespace,omitempty" name:"ClusterNamespace"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Ingress rule name list
+	IngressNames []*string `json:"IngressNames,omitempty" name:"IngressNames"`
+}
+
 type DescribeIngressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -828,17 +1124,19 @@ func (r *DescribeIngressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIngressesResponseParams struct {
+	// Ingress array
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIngressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Ingress array
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIngressesResponseParams `json:"Response"`
 }
 
 func (r *DescribeIngressesResponse) ToJsonString() string {
@@ -852,9 +1150,24 @@ func (r *DescribeIngressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRelatedIngressesRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment namespace
+	ClusterNamespace *string `json:"ClusterNamespace,omitempty" name:"ClusterNamespace"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
 type DescribeRelatedIngressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -890,17 +1203,19 @@ func (r *DescribeRelatedIngressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRelatedIngressesResponseParams struct {
+	// Ingress array
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRelatedIngressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Ingress array
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result []*IngressInfo `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRelatedIngressesResponseParams `json:"Response"`
 }
 
 func (r *DescribeRelatedIngressesResponse) ToJsonString() string {
@@ -915,7 +1230,6 @@ func (r *DescribeRelatedIngressesResponse) FromJsonString(s string) error {
 }
 
 type DescribeRunPodPage struct {
-
 	// Page offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -933,7 +1247,6 @@ type DescribeRunPodPage struct {
 }
 
 type EksService struct {
-
 	// Service name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -980,7 +1293,6 @@ type EksService struct {
 }
 
 type EnablePrometheusConf struct {
-
 	// The listening port of the applicaiton
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
@@ -989,7 +1301,6 @@ type EnablePrometheusConf struct {
 }
 
 type EsInfo struct {
-
 	// Minimum number of instances
 	MinAliveInstances *int64 `json:"MinAliveInstances,omitempty" name:"MinAliveInstances"`
 
@@ -1006,9 +1317,24 @@ type EsInfo struct {
 	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
 }
 
+// Predefined struct for user
+type GenerateApplicationPackageDownloadUrlRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Package name
+	PkgName *string `json:"PkgName,omitempty" name:"PkgName"`
+
+	// Version of the package to download
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type GenerateApplicationPackageDownloadUrlRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -1044,17 +1370,19 @@ func (r *GenerateApplicationPackageDownloadUrlRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GenerateApplicationPackageDownloadUrlResponseParams struct {
+	// Temp download URL for the package
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GenerateApplicationPackageDownloadUrlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Temp download URL for the package
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GenerateApplicationPackageDownloadUrlResponseParams `json:"Response"`
 }
 
 func (r *GenerateApplicationPackageDownloadUrlResponse) ToJsonString() string {
@@ -1069,7 +1397,6 @@ func (r *GenerateApplicationPackageDownloadUrlResponse) FromJsonString(s string)
 }
 
 type HealthCheckConfig struct {
-
 	// Health check type. Valid values: `HttpGet`, `TcpSocket`, `Exec`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -1096,7 +1423,6 @@ type HealthCheckConfig struct {
 }
 
 type HorizontalAutoscaler struct {
-
 	// Minimum number of instances
 	MinReplicas *int64 `json:"MinReplicas,omitempty" name:"MinReplicas"`
 
@@ -1111,7 +1437,6 @@ type HorizontalAutoscaler struct {
 }
 
 type IngressInfo struct {
-
 	// Environment ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -1159,7 +1484,6 @@ type IngressInfo struct {
 }
 
 type IngressRule struct {
-
 	// ingress rule value
 	Http *IngressRuleValue `json:"Http,omitempty" name:"Http"`
 
@@ -1172,7 +1496,6 @@ type IngressRule struct {
 }
 
 type IngressRuleBackend struct {
-
 	// EKS service name
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 
@@ -1181,7 +1504,6 @@ type IngressRuleBackend struct {
 }
 
 type IngressRulePath struct {
-
 	// Path information
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -1190,13 +1512,11 @@ type IngressRulePath struct {
 }
 
 type IngressRuleValue struct {
-
 	// Overall rule configuration
 	Paths []*IngressRulePath `json:"Paths,omitempty" name:"Paths"`
 }
 
 type IngressTls struct {
-
 	// Host array. An empty array indicates the default certificate for all domain names.
 	Hosts []*string `json:"Hosts,omitempty" name:"Hosts"`
 
@@ -1208,7 +1528,6 @@ type IngressTls struct {
 }
 
 type LogOutputConf struct {
-
 	// Log consumer type
 	OutputType *string `json:"OutputType,omitempty" name:"OutputType"`
 
@@ -1225,9 +1544,24 @@ type LogOutputConf struct {
 	ClsLogTopicName *string `json:"ClsLogTopicName,omitempty" name:"ClsLogTopicName"`
 }
 
+// Predefined struct for user
+type ModifyApplicationInfoRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Whether to enable the call chain. Valid values: `0`: disable; `1`: enable
+	EnableTracing *uint64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+}
+
 type ModifyApplicationInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -1263,17 +1597,19 @@ func (r *ModifyApplicationInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyApplicationInfoResponseParams struct {
+	// Success or not
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyApplicationInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Success or not
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyApplicationInfoResponseParams `json:"Response"`
 }
 
 func (r *ModifyApplicationInfoResponse) ToJsonString() string {
@@ -1287,9 +1623,30 @@ func (r *ModifyApplicationInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment name
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Environment description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// VPC name
+	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
+
+	// Subnets
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type ModifyEnvironmentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -1333,17 +1690,19 @@ func (r *ModifyEnvironmentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyEnvironmentResponseParams struct {
+	// Environment ID in case of success and `null` in case of failure
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyEnvironmentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Environment ID in case of success and `null` in case of failure
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyEnvironmentResponseParams `json:"Response"`
 }
 
 func (r *ModifyEnvironmentResponse) ToJsonString() string {
@@ -1357,9 +1716,18 @@ func (r *ModifyEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIngressRequestParams struct {
+	// Ingress rule configuration
+	Ingress *IngressInfo `json:"Ingress,omitempty" name:"Ingress"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type ModifyIngressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Ingress rule configuration
 	Ingress *IngressInfo `json:"Ingress,omitempty" name:"Ingress"`
 
@@ -1387,17 +1755,19 @@ func (r *ModifyIngressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIngressResponseParams struct {
+	// Created successfully.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyIngressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Created successfully.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyIngressResponseParams `json:"Response"`
 }
 
 func (r *ModifyIngressResponse) ToJsonString() string {
@@ -1412,7 +1782,6 @@ func (r *ModifyIngressResponse) FromJsonString(s string) error {
 }
 
 type MountedSettingConf struct {
-
 	// Configuration name
 	ConfigDataName *string `json:"ConfigDataName,omitempty" name:"ConfigDataName"`
 
@@ -1427,7 +1796,6 @@ type MountedSettingConf struct {
 }
 
 type NamespacePage struct {
-
 	// Details of the returned records
 	Records []*TemNamespaceInfo `json:"Records,omitempty" name:"Records"`
 
@@ -1442,7 +1810,6 @@ type NamespacePage struct {
 }
 
 type Pair struct {
-
 	// Key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1463,7 +1830,6 @@ type Pair struct {
 }
 
 type PortMapping struct {
-
 	// Port.
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
@@ -1474,9 +1840,33 @@ type PortMapping struct {
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
+// Predefined struct for user
+type RestartApplicationPodRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Name
+	PodName *string `json:"PodName,omitempty" name:"PodName"`
+
+	// Number of items per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pod status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
 type RestartApplicationPodRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
@@ -1524,17 +1914,19 @@ func (r *RestartApplicationPodRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartApplicationPodResponseParams struct {
+	// Returned result
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartApplicationPodResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartApplicationPodResponseParams `json:"Response"`
 }
 
 func (r *RestartApplicationPodResponse) ToJsonString() string {
@@ -1548,9 +1940,21 @@ func (r *RestartApplicationPodResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartApplicationRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Retain as default
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
 type RestartApplicationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -1582,16 +1986,18 @@ func (r *RestartApplicationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartApplicationResponseParams struct {
+	// Returned result
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartApplicationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartApplicationResponseParams `json:"Response"`
 }
 
 func (r *RestartApplicationResponse) ToJsonString() string {
@@ -1605,9 +2011,42 @@ func (r *RestartApplicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RollingUpdateApplicationByVersionRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Update version. For image-based deployment, it is the value. For deployment with JAR/WAR files, it is `Version`.
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// JAR/WAR package name. It’s only required for deployment with JAR/WAR files.
+	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+
+	// Request source. Options: `IntelliJ`, `Coding`
+	From *string `json:"From,omitempty" name:"From"`
+
+	// The deployment policy. Values: `AUTO` (automatically deploy), `BETA` (deploy a small batch first to test the result, and deploy the rest automatically) and `MANUAL` (manually deploy)
+	DeployStrategyType *string `json:"DeployStrategyType,omitempty" name:"DeployStrategyType"`
+
+	// Total number of batches
+	TotalBatchCount *int64 `json:"TotalBatchCount,omitempty" name:"TotalBatchCount"`
+
+	// Interval between the batches
+	BatchInterval *int64 `json:"BatchInterval,omitempty" name:"BatchInterval"`
+
+	// Number of instances in a beta batch
+	BetaBatchNum *int64 `json:"BetaBatchNum,omitempty" name:"BetaBatchNum"`
+
+	// Minimum number of available instances during the deployment
+	MinAvailable *int64 `json:"MinAvailable,omitempty" name:"MinAvailable"`
+}
+
 type RollingUpdateApplicationByVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -1667,16 +2106,18 @@ func (r *RollingUpdateApplicationByVersionRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RollingUpdateApplicationByVersionResponseParams struct {
+	// Version ID
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RollingUpdateApplicationByVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Version ID
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RollingUpdateApplicationByVersionResponseParams `json:"Response"`
 }
 
 func (r *RollingUpdateApplicationByVersionResponse) ToJsonString() string {
@@ -1691,7 +2132,6 @@ func (r *RollingUpdateApplicationByVersionResponse) FromJsonString(s string) err
 }
 
 type RunVersionPod struct {
-
 	// Shell address
 	Webshell *string `json:"Webshell,omitempty" name:"Webshell"`
 
@@ -1728,9 +2168,21 @@ type RunVersionPod struct {
 	ContainerState *string `json:"ContainerState,omitempty" name:"ContainerState"`
 }
 
+// Predefined struct for user
+type StopApplicationRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Retain as default
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
 type StopApplicationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -1762,16 +2214,18 @@ func (r *StopApplicationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopApplicationResponseParams struct {
+	// Returned result
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopApplicationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned result
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopApplicationResponseParams `json:"Response"`
 }
 
 func (r *StopApplicationResponse) ToJsonString() string {
@@ -1786,7 +2240,6 @@ func (r *StopApplicationResponse) FromJsonString(s string) error {
 }
 
 type StorageConf struct {
-
 	// Storage volume name
 	StorageVolName *string `json:"StorageVolName,omitempty" name:"StorageVolName"`
 
@@ -1799,7 +2252,6 @@ type StorageConf struct {
 }
 
 type StorageMountConf struct {
-
 	// Data volume name
 	VolumeName *string `json:"VolumeName,omitempty" name:"VolumeName"`
 
@@ -1808,7 +2260,6 @@ type StorageMountConf struct {
 }
 
 type TemNamespaceInfo struct {
-
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 

@@ -21,7 +21,6 @@ import (
 )
 
 type DetailResults struct {
-
 	// Result of the moderation. <br>`Normal`: normal content; `Porn`: pornographic content; `Abuse`: abusive content; **Ad**: advertising content; `Custom`: custom violating content
 	Label *string `json:"Label,omitempty" name:"Label"`
 
@@ -55,7 +54,6 @@ type DetailResults struct {
 }
 
 type Device struct {
-
 	// This field indicates the IP address of the device used by the service subscriber. <br>
 	// Note: Currently, only IPv4 addresses can be recorded.
 	IP *string `json:"IP,omitempty" name:"IP"`
@@ -81,7 +79,6 @@ type Device struct {
 }
 
 type RiskDetails struct {
-
 	// This field returns the risk categories after account information detection. Valid values: **RiskAccount** (the account is at risk), **RiskIP** (the IP address is at risk), and **RiskIMEI** (the mobile device identifier is at risk).
 	Label *string `json:"Label,omitempty" name:"Label"`
 
@@ -89,9 +86,27 @@ type RiskDetails struct {
 	Level *int64 `json:"Level,omitempty" name:"Level"`
 }
 
+// Predefined struct for user
+type TextModerationRequestParams struct {
+	// This field indicates the text content of the object to be moderated. The text needs to be encoded in utf-8 format and encrypted with Base64. It can contain up to 10,000 characters, calculated by unicode encoding.
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// This field indicates the specific policy number, which is used for the API call and can be configured in the CMS console. If it's not entered (left empty), the default moderation policy is adopted. If it's entered, the moderation policies are specified for business scenarios. <br>Note: Biztype contains 3 to 32 characters, including numbers, letters and underscores only. Different Biztypes are associated with different business scenarios and moderation policies. Ensure that you use the Biztype corresponding to the policy you want to apply.
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// This field indicates the data ID you assigned to the object to be moderated, which is convenient for you to identify and manage the file. <br>Value: this field can contain **up to 64 characters**, including uppercase and lowercase letters, numbers and four special symbols (_, -, @, #)
+	DataId *string `json:"DataId,omitempty" name:"DataId"`
+
+	// This field indicates the user information related with the object to be moderated, which can be used to identify violating users at risk.
+	User *User `json:"User,omitempty" name:"User"`
+
+	// This field indicates the device information related with the object to be moderated, which can be used to identify violating devices at risk.
+	Device *Device `json:"Device,omitempty" name:"Device"`
+}
+
 type TextModerationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// This field indicates the text content of the object to be moderated. The text needs to be encoded in utf-8 format and encrypted with Base64. It can contain up to 10,000 characters, calculated by unicode encoding.
 	Content *string `json:"Content,omitempty" name:"Content"`
 
@@ -131,49 +146,51 @@ func (r *TextModerationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TextModerationResponseParams struct {
+	// This field returns the BizType of the request parameters
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// This field returns the **negative label with the highest priority** in the moderation results (DetailResults), which indicates the moderation result recommended by the model. It is recommended that you handle different violations with the suggested values according to your business needs. <br>Returned values: **Normal**: normal content; **Porn**: pornographic content; **Abuse**: abusive content; **Ad**: advertising content; **Custom**: custom violating content, and others such as objectionable, insecure or inappropriate content.
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// This field returns the follow-up moderation suggestions. The returned value indicates the recommended operation after obtaining the moderation result. It is recommended that you handle different violations with the suggested values according to your business needs. <br>Returned values: **Block**: block; **Review**: human moderation; **Pass**: pass
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// This field returns the keywords matched with the libraries in the moderated text under the current label to mark the specific violations (for example, *Friend me*). This parameter may have multiple returned values, indicating multiple keywords are matched. If the returned value is empty and the `Score` is not empty, it means that the negative label corresponding to the moderation result is a value returned from the semantic model judgment
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
+
+	// This field returns the confidence level under the current label. Value range: 0 (**the lowest confidence level**) - 100 (**the highest confidence level**). The higher the value, the more likely the text is to belong to the category indicated by the current label. For example, *pornographic 99* indicates that the text is very likely to be pornographic, and *pornographic 0* indicates that the text is not pornographic
+	Score *int64 `json:"Score,omitempty" name:"Score"`
+
+	// This field returns the moderation results based on the text libraries. For details, see `DetailResults` in the data structure
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	DetailResults []*DetailResults `json:"DetailResults,omitempty" name:"DetailResults"`
+
+	// This field returns the detection results of violating accounts at risk, mainly including violation categories and risk levels. For details, see `RiskDetails` in the data structure
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	RiskDetails []*RiskDetails `json:"RiskDetails,omitempty" name:"RiskDetails"`
+
+	// This field returns the extra information configured according to your needs. If it's not configured, the returned value is empty by default. <br>Note: the returned information varies based on different customers or Biztypes. If you need to configure this field, please submit a ticket or contact after-sales manager
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+
+	// This field returns the `DataId` in the request parameter corresponding to the moderated object
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	DataId *string `json:"DataId,omitempty" name:"DataId"`
+
+	// The field returns the second-level labels under the current label.
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TextModerationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// This field returns the BizType of the request parameters
-		BizType *string `json:"BizType,omitempty" name:"BizType"`
-
-		// This field returns the **negative label with the highest priority** in the moderation results (DetailResults), which indicates the moderation result recommended by the model. It is recommended that you handle different violations with the suggested values according to your business needs. <br>Returned values: **Normal**: normal content; **Porn**: pornographic content; **Abuse**: abusive content; **Ad**: advertising content; **Custom**: custom violating content, and others such as objectionable, insecure or inappropriate content.
-		Label *string `json:"Label,omitempty" name:"Label"`
-
-		// This field returns the follow-up moderation suggestions. The returned value indicates the recommended operation after obtaining the moderation result. It is recommended that you handle different violations with the suggested values according to your business needs. <br>Returned values: **Block**: block; **Review**: human moderation; **Pass**: pass
-		Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
-
-		// This field returns the keywords matched with the libraries in the moderated text under the current label to mark the specific violations (for example, *Friend me*). This parameter may have multiple returned values, indicating multiple keywords are matched. If the returned value is empty and the `Score` is not empty, it means that the negative label corresponding to the moderation result is a value returned from the semantic model judgment
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
-
-		// This field returns the confidence level under the current label. Value range: 0 (**the lowest confidence level**) - 100 (**the highest confidence level**). The higher the value, the more likely the text is to belong to the category indicated by the current label. For example, *pornographic 99* indicates that the text is very likely to be pornographic, and *pornographic 0* indicates that the text is not pornographic
-		Score *int64 `json:"Score,omitempty" name:"Score"`
-
-		// This field returns the moderation results based on the text libraries. For details, see `DetailResults` in the data structure
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		DetailResults []*DetailResults `json:"DetailResults,omitempty" name:"DetailResults"`
-
-		// This field returns the detection results of violating accounts at risk, mainly including violation categories and risk levels. For details, see `RiskDetails` in the data structure
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		RiskDetails []*RiskDetails `json:"RiskDetails,omitempty" name:"RiskDetails"`
-
-		// This field returns the extra information configured according to your needs. If it's not configured, the returned value is empty by default. <br>Note: the returned information varies based on different customers or Biztypes. If you need to configure this field, please submit a ticket or contact after-sales manager
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		Extra *string `json:"Extra,omitempty" name:"Extra"`
-
-		// This field returns the `DataId` in the request parameter corresponding to the moderated object
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		DataId *string `json:"DataId,omitempty" name:"DataId"`
-
-		// The field returns the second-level labels under the current label.
-	// Note: This field may return `null`, indicating that no valid value can be found.
-		SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TextModerationResponseParams `json:"Response"`
 }
 
 func (r *TextModerationResponse) ToJsonString() string {
@@ -188,7 +205,6 @@ func (r *TextModerationResponse) FromJsonString(s string) error {
 }
 
 type User struct {
-
 	// This field indicates the service subscriber ID. This ID can be used to optimize the moderation result judgment based on the account's violation records, which is helpful for auxiliary judgment when there is a risk of suspected violations.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 

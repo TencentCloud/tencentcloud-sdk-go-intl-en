@@ -21,7 +21,6 @@ import (
 )
 
 type AccountInfo struct {
-
 	// Instance ID in the format of postgres-lnp6j617
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -41,9 +40,18 @@ type AccountInfo struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+// Predefined struct for user
+type AddDBInstanceToReadOnlyGroupRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
 type AddDBInstanceToReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -71,16 +79,18 @@ func (r *AddDBInstanceToReadOnlyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddDBInstanceToReadOnlyGroupResponseParams struct {
+	// Task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddDBInstanceToReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddDBInstanceToReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *AddDBInstanceToReadOnlyGroupResponse) ToJsonString() string {
@@ -95,7 +105,6 @@ func (r *AddDBInstanceToReadOnlyGroupResponse) FromJsonString(s string) error {
 }
 
 type AnalysisItems struct {
-
 	// The name of the database queried by the slow query statement
 	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
 
@@ -137,7 +146,6 @@ type AnalysisItems struct {
 }
 
 type BackupPlan struct {
-
 	// Backup cycle
 	BackupPeriod *string `json:"BackupPeriod,omitempty" name:"BackupPeriod"`
 
@@ -151,9 +159,66 @@ type BackupPlan struct {
 	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitempty" name:"MaxBackupStartTime"`
 }
 
+// Predefined struct for user
+type CloneDBInstanceRequestParams struct {
+	// ID of the original instance to be cloned.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Instance storage capacity in GB.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of a subnet in the VPC specified by `VpcId`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Name of the purchased instance.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Security group ID.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// This parameter is required if you purchase a multi-AZ deployed instance.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list.
+	VoucherIds *string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Campaign ID.
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Basic backup set ID.
+	BackupSetId *string `json:"BackupSetId,omitempty" name:"BackupSetId"`
+
+	// Restoration point in time.
+	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitempty" name:"RecoveryTargetTime"`
+}
+
 type CloneDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the original instance to be cloned.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -245,21 +310,23 @@ func (r *CloneDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloneDBInstanceResponseParams struct {
+	// Order ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Bill ID.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloneDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// Bill ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloneDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *CloneDBInstanceResponse) ToJsonString() string {
@@ -273,9 +340,18 @@ func (r *CloneDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseDBExtranetAccessRequestParams struct {
+	// Instance ID in the format of postgres-6r233v55
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to disable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	IsIpv6 *int64 `json:"IsIpv6,omitempty" name:"IsIpv6"`
+}
+
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6r233v55
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -303,16 +379,18 @@ func (r *CloseDBExtranetAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseDBExtranetAccessResponseParams struct {
+	// Async task flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseDBExtranetAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task flow ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseDBExtranetAccessResponseParams `json:"Response"`
 }
 
 func (r *CloseDBExtranetAccessResponse) ToJsonString() string {
@@ -326,9 +404,18 @@ func (r *CloseDBExtranetAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseServerlessDBExtranetAccessRequestParams struct {
+	// Unique ID of an instance
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance name
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+}
+
 type CloseServerlessDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an instance
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -356,13 +443,15 @@ func (r *CloseServerlessDBExtranetAccessRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseServerlessDBExtranetAccessResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseServerlessDBExtranetAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseServerlessDBExtranetAccessResponseParams `json:"Response"`
 }
 
 func (r *CloseServerlessDBExtranetAccessResponse) ToJsonString() string {
@@ -376,9 +465,27 @@ func (r *CloseServerlessDBExtranetAccessResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceNetworkAccessRequestParams struct {
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Unified VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+	IsAssignVip *bool `json:"IsAssignVip,omitempty" name:"IsAssignVip"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
 type CreateDBInstanceNetworkAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6bwgamo3.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -418,17 +525,19 @@ func (r *CreateDBInstanceNetworkAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceNetworkAccessResponseParams struct {
+	// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBInstanceNetworkAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBInstanceNetworkAccessResponseParams `json:"Response"`
 }
 
 func (r *CreateDBInstanceNetworkAccessResponse) ToJsonString() string {
@@ -442,9 +551,72 @@ func (r *CreateDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstancesRequestParams struct {
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Instance capacity size in GB.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances purchased at a time. Value range: 1-100.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance billing type.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: no.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently).
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Renewal flag. 0: normal renewal (default), 1: auto-renewal.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Activity ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Instance name (which will be supported in the future)
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no)
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// The information of tags to be associated with instances. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+}
+
 type CreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
@@ -544,22 +716,24 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstancesResponseParams struct {
+	// Order number list. Each instance corresponds to an order number.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Bill ID of frozen fees
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order number list. Each instance corresponds to an order number.
-		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
-
-		// Bill ID of frozen fees
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// ID set of instances which have been created successfully. The parameter value will be returned only when the billing mode is postpaid.
-		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *CreateDBInstancesResponse) ToJsonString() string {
@@ -573,9 +747,93 @@ func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstancesRequestParams struct {
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Instance storage capacity in GB
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// The number of instances purchased at a time. Value range: 1-10.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance character set. Valid values: `UTF8`, `LATIN1`.
+	Charset *string `json:"Charset,omitempty" name:"Charset"`
+
+	// Instance root account name
+	AdminName *string `json:"AdminName,omitempty" name:"AdminName"`
+
+	// Instance root account password
+	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of a subnet in the VPC specified by `VpcId`
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Campaign ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Instance name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// The information of tags to be associated with instances. This parameter is left empty by default.
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// Security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+
+	// Instance node information, which is required if you purchase a multi-AZ deployed instance.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+	NeedSupportTDE *uint64 `json:"NeedSupportTDE,omitempty" name:"NeedSupportTDE"`
+
+	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+	KMSKeyId *string `json:"KMSKeyId,omitempty" name:"KMSKeyId"`
+
+	// The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
+}
+
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
@@ -703,22 +961,24 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstancesResponseParams struct {
+	// Order number list. Each instance corresponds to an order number.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Bill ID of frozen fees
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order number list. Each instance corresponds to an order number.
-		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
-
-		// Bill ID of frozen fees
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
-		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstancesResponseParams `json:"Response"`
 }
 
 func (r *CreateInstancesResponse) ToJsonString() string {
@@ -732,9 +992,72 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyDBInstanceRequestParams struct {
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// PostgreSQL kernel version, which must be the same as that of the primary instance
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance storage capacity in GB
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances purchased at a time. Value range: 1–100.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// ID of the primary instance to which the read-only replica belongs
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Special offer ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Instance name (which will be supported in the future)
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitempty" name:"NeedSupportIpv6"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
+	TagList *Tag `json:"TagList,omitempty" name:"TagList"`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type CreateReadOnlyDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
@@ -834,22 +1157,24 @@ func (r *CreateReadOnlyDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyDBInstanceResponseParams struct {
+	// Order number list. Each instance corresponds to an order number.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Bill ID of frozen fees
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReadOnlyDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order number list. Each instance corresponds to an order number.
-		DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
-
-		// Bill ID of frozen fees
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// ID set of instances which have been created successfully. The parameter value will be returned only when the pay-as-you-go billing mode is used.
-		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReadOnlyDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateReadOnlyDBInstanceResponse) ToJsonString() string {
@@ -863,9 +1188,27 @@ func (r *CreateReadOnlyDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyGroupNetworkAccessRequestParams struct {
+	// RO group ID in the format of pgro-4t9c6g7k.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// Unified VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to manually assign the VIP. Valid values: `true` (manually assign), `false` (automatically assign).
+	IsAssignVip *bool `json:"IsAssignVip,omitempty" name:"IsAssignVip"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
 type CreateReadOnlyGroupNetworkAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RO group ID in the format of pgro-4t9c6g7k.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 
@@ -905,17 +1248,19 @@ func (r *CreateReadOnlyGroupNetworkAccessRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyGroupNetworkAccessResponseParams struct {
+	// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReadOnlyGroupNetworkAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReadOnlyGroupNetworkAccessResponseParams `json:"Response"`
 }
 
 func (r *CreateReadOnlyGroupNetworkAccessResponse) ToJsonString() string {
@@ -929,9 +1274,45 @@ func (r *CreateReadOnlyGroupNetworkAccessResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyGroupRequestParams struct {
+	// Primary instance ID
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
+
+	// RO group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLagEliminate *uint64 `json:"ReplayLagEliminate,omitempty" name:"ReplayLagEliminate"`
+
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLatencyEliminate *uint64 `json:"ReplayLatencyEliminate,omitempty" name:"ReplayLatencyEliminate"`
+
+	// Delay threshold in ms
+	MaxReplayLag *uint64 `json:"MaxReplayLag,omitempty" name:"MaxReplayLag"`
+
+	// Delayed log size threshold in MB
+	MaxReplayLatency *uint64 `json:"MaxReplayLatency,omitempty" name:"MaxReplayLatency"`
+
+	// The minimum number of read-only replicas that must be retained in an RO group
+	MinDelayEliminateReserve *uint64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+
+	// Security group ID
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type CreateReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Primary instance ID
 	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitempty" name:"MasterDBInstanceId"`
 
@@ -995,20 +1376,22 @@ func (r *CreateReadOnlyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateReadOnlyGroupResponseParams struct {
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// RO group ID
-		ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
-
-		// Task ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateReadOnlyGroupResponse) ToJsonString() string {
@@ -1022,9 +1405,36 @@ func (r *CreateReadOnlyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServerlessDBInstanceRequestParams struct {
+	// Availability zone ID. Only ap-shanghai-2, ap-beijing-1, and ap-guangzhou-2 are supported during the beta test.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance name. The value must be unique for the same account.
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+
+	// Kernel version of a PostgreSQL instance. Currently, only 10.4 is supported.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Database character set of a PostgreSQL instance. Currently, only UTF-8 is supported.
+	DBCharset *string `json:"DBCharset,omitempty" name:"DBCharset"`
+
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Array of tags to be bound with the instance
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
+}
+
 type CreateServerlessDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Availability zone ID. Only ap-shanghai-2, ap-beijing-1, and ap-guangzhou-2 are supported during the beta test.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -1076,16 +1486,18 @@ func (r *CreateServerlessDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServerlessDBInstanceResponseParams struct {
+	// Instance ID, such as "postgres-xxxxx". The value must be globally unique.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateServerlessDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID, such as "postgres-xxxxx". The value must be globally unique.
-		DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateServerlessDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateServerlessDBInstanceResponse) ToJsonString() string {
@@ -1100,7 +1512,6 @@ func (r *CreateServerlessDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type DBBackup struct {
-
 	// Unique backup file ID
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
@@ -1140,7 +1551,6 @@ type DBBackup struct {
 }
 
 type DBInstance struct {
-
 	// Instance region such as ap-guangzhou, which corresponds to the `Region` field of `RegionSet`
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -1264,7 +1674,6 @@ type DBInstance struct {
 }
 
 type DBInstanceNetInfo struct {
-
 	// DNS domain name
 	Address *string `json:"Address,omitempty" name:"Address"`
 
@@ -1290,7 +1699,6 @@ type DBInstanceNetInfo struct {
 }
 
 type DBNode struct {
-
 	// Node type. Valid values:
 	// `Primary`;
 	// `Standby`.
@@ -1300,9 +1708,24 @@ type DBNode struct {
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
 
+// Predefined struct for user
+type DeleteDBInstanceNetworkAccessRequestParams struct {
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
 type DeleteDBInstanceNetworkAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6bwgamo3.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1338,17 +1761,19 @@ func (r *DeleteDBInstanceNetworkAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDBInstanceNetworkAccessResponseParams struct {
+	// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDBInstanceNetworkAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDBInstanceNetworkAccessResponseParams `json:"Response"`
 }
 
 func (r *DeleteDBInstanceNetworkAccessResponse) ToJsonString() string {
@@ -1362,9 +1787,24 @@ func (r *DeleteDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReadOnlyGroupNetworkAccessRequestParams struct {
+	// RO group ID in the format of pgro-4t9c6g7k.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// Unified VPC ID. If you want to delete the classic network, set the parameter to `0`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. If you want to delete the classic network, set the parameter to `0`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Target VIP.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
 type DeleteReadOnlyGroupNetworkAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RO group ID in the format of pgro-4t9c6g7k.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 
@@ -1400,17 +1840,19 @@ func (r *DeleteReadOnlyGroupNetworkAccessRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReadOnlyGroupNetworkAccessResponseParams struct {
+	// Task ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteReadOnlyGroupNetworkAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteReadOnlyGroupNetworkAccessResponseParams `json:"Response"`
 }
 
 func (r *DeleteReadOnlyGroupNetworkAccessResponse) ToJsonString() string {
@@ -1424,9 +1866,15 @@ func (r *DeleteReadOnlyGroupNetworkAccessResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReadOnlyGroupRequestParams struct {
+	// ID of the RO group to be deleted
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
 type DeleteReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the RO group to be deleted
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 }
@@ -1450,17 +1898,19 @@ func (r *DeleteReadOnlyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteReadOnlyGroupResponseParams struct {
+	// Task ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteReadOnlyGroupResponse) ToJsonString() string {
@@ -1474,9 +1924,18 @@ func (r *DeleteReadOnlyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServerlessDBInstanceRequestParams struct {
+	// Instance name. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+
+	// Instance ID. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DeleteServerlessDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance name. Either instance name or instance ID (or both) must be passed in. If both are passed in, the instance ID will prevail.
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
@@ -1504,13 +1963,15 @@ func (r *DeleteServerlessDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServerlessDBInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServerlessDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServerlessDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *DeleteServerlessDBInstanceResponse) ToJsonString() string {
@@ -1524,9 +1985,27 @@ func (r *DeleteServerlessDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccountsRequestParams struct {
+	// Instance ID in the format of postgres-6fego161
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Number of entries returned per page. Default value: 20. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number for data return in paged query. Pagination starts from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Whether to sort by creation time or username. Valid values: `createTime` (sort by creation time), `name` (sort by username)
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Whether returns are sorted in ascending or descending order. Valid values: `desc` (descending), `asc` (ascending)
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
 type DescribeAccountsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1566,19 +2045,21 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccountsResponseParams struct {
+	// Number of date entries returned for this API call.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Account list details.
+	Details []*AccountInfo `json:"Details,omitempty" name:"Details"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAccountsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of date entries returned for this API call.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Account list details.
-		Details []*AccountInfo `json:"Details,omitempty" name:"Details"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAccountsResponseParams `json:"Response"`
 }
 
 func (r *DescribeAccountsResponse) ToJsonString() string {
@@ -1592,9 +2073,15 @@ func (r *DescribeAccountsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAvailableRecoveryTimeRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeAvailableRecoveryTimeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -1618,19 +2105,21 @@ func (r *DescribeAvailableRecoveryTimeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAvailableRecoveryTimeResponseParams struct {
+	// The earliest restoration time (UTC+8).
+	RecoveryBeginTime *string `json:"RecoveryBeginTime,omitempty" name:"RecoveryBeginTime"`
+
+	// The latest restoration time (UTC+8).
+	RecoveryEndTime *string `json:"RecoveryEndTime,omitempty" name:"RecoveryEndTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAvailableRecoveryTimeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The earliest restoration time (UTC+8).
-		RecoveryBeginTime *string `json:"RecoveryBeginTime,omitempty" name:"RecoveryBeginTime"`
-
-		// The latest restoration time (UTC+8).
-		RecoveryEndTime *string `json:"RecoveryEndTime,omitempty" name:"RecoveryEndTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAvailableRecoveryTimeResponseParams `json:"Response"`
 }
 
 func (r *DescribeAvailableRecoveryTimeResponse) ToJsonString() string {
@@ -1644,9 +2133,15 @@ func (r *DescribeAvailableRecoveryTimeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupPlansRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeBackupPlansRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -1670,16 +2165,18 @@ func (r *DescribeBackupPlansRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupPlansResponseParams struct {
+	// The set of instance backup plans
+	Plans []*BackupPlan `json:"Plans,omitempty" name:"Plans"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBackupPlansResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The set of instance backup plans
-		Plans []*BackupPlan `json:"Plans,omitempty" name:"Plans"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBackupPlansResponseParams `json:"Response"`
 }
 
 func (r *DescribeBackupPlansResponse) ToJsonString() string {
@@ -1693,9 +2190,21 @@ func (r *DescribeBackupPlansResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCloneDBInstanceSpecRequestParams struct {
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Basic backup set ID. Either this parameter or `RecoveryTargetTime` must be passed in. If both are passed in, only this parameter takes effect.
+	BackupSetId *string `json:"BackupSetId,omitempty" name:"BackupSetId"`
+
+	// Restoration time (UTC+8). Either this parameter or `BackupSetId` must be passed in.
+	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitempty" name:"RecoveryTargetTime"`
+}
+
 type DescribeCloneDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1727,19 +2236,21 @@ func (r *DescribeCloneDBInstanceSpecRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCloneDBInstanceSpecResponseParams struct {
+	// Code of the minimum specification available for purchase.
+	MinSpecCode *string `json:"MinSpecCode,omitempty" name:"MinSpecCode"`
+
+	// The minimum disk capacity in GB available for purchase.
+	MinStorage *int64 `json:"MinStorage,omitempty" name:"MinStorage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCloneDBInstanceSpecResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Code of the minimum specification available for purchase.
-		MinSpecCode *string `json:"MinSpecCode,omitempty" name:"MinSpecCode"`
-
-		// The minimum disk capacity in GB available for purchase.
-		MinStorage *int64 `json:"MinStorage,omitempty" name:"MinStorage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCloneDBInstanceSpecResponseParams `json:"Response"`
 }
 
 func (r *DescribeCloneDBInstanceSpecResponse) ToJsonString() string {
@@ -1753,9 +2264,30 @@ func (r *DescribeCloneDBInstanceSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBBackupsRequestParams struct {
+	// Instance ID in the format of postgres-4wdeb0zv.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Backup mode (1: full). Currently, only full backup is supported. The value is 1.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Query start time in the format of 2018-06-10 17:06:38, which cannot be more than 7 days ago
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time in the format of 2018-06-10 17:06:38
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Number of entries to be returned per page for backup list. Default value: 20. Minimum value: 1. Maximum value: 100. (If this parameter is left empty or 0, the default value will be used)
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number for data return in paged query. Pagination starts from 0. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDBBackupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-4wdeb0zv.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1799,19 +2331,21 @@ func (r *DescribeDBBackupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBBackupsResponseParams struct {
+	// Number of backup files in the returned backup list
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Backup list
+	BackupList []*DBBackup `json:"BackupList,omitempty" name:"BackupList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBBackupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of backup files in the returned backup list
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Backup list
-		BackupList []*DBBackup `json:"BackupList,omitempty" name:"BackupList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBBackupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBBackupsResponse) ToJsonString() string {
@@ -1825,9 +2359,33 @@ func (r *DescribeDBBackupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBErrlogsRequestParams struct {
+	// Instance ID in the format of postgres-5bq3wfjd
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Query start time in the format of 2018-01-01 00:00:00, which cannot be more than 7 days ago
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time in the format of 2018-01-01 00:00:00
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Database name
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Search keyword
+	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys"`
+
+	// Number of entries returned per page. Value range: 1-100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number for data return in paged query. Pagination starts from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDBErrlogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-5bq3wfjd
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1875,19 +2433,21 @@ func (r *DescribeDBErrlogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBErrlogsResponseParams struct {
+	// Number of date entries returned for this call
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Error log list
+	Details []*ErrLogDetail `json:"Details,omitempty" name:"Details"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBErrlogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of date entries returned for this call
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Error log list
-		Details []*ErrLogDetail `json:"Details,omitempty" name:"Details"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBErrlogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBErrlogsResponse) ToJsonString() string {
@@ -1901,9 +2461,15 @@ func (r *DescribeDBErrlogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceAttributeRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeDBInstanceAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -1927,16 +2493,18 @@ func (r *DescribeDBInstanceAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceAttributeResponseParams struct {
+	// Instance details.
+	DBInstance *DBInstance `json:"DBInstance,omitempty" name:"DBInstance"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBInstanceAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance details.
-		DBInstance *DBInstance `json:"DBInstance,omitempty" name:"DBInstance"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBInstanceAttributeResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBInstanceAttributeResponse) ToJsonString() string {
@@ -1950,9 +2518,18 @@ func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceParametersRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Name of the parameter to be queried. If `ParamName` is left empty or not passed in, the list of all parameters will be returned.
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+}
+
 type DescribeDBInstanceParametersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -1980,19 +2557,21 @@ func (r *DescribeDBInstanceParametersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceParametersResponseParams struct {
+	// Total number of the parameters in the returned list
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Details of the returned parameter list
+	Detail []*ParamInfo `json:"Detail,omitempty" name:"Detail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBInstanceParametersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of the parameters in the returned list
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Details of the returned parameter list
-		Detail []*ParamInfo `json:"Detail,omitempty" name:"Detail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBInstanceParametersResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBInstanceParametersResponse) ToJsonString() string {
@@ -2006,9 +2585,32 @@ func (r *DescribeDBInstanceParametersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstancesRequestParams struct {
+	// Filter instances using one or more criteria. Valid filter names:
+	// db-instance-id: filter by instance ID (in string format)
+	// db-instance-name: filter by instance name (in string format)
+	// db-project-id: filter by project ID (in integer format)
+	// db-pay-mode: filter by billing mode (in string format)
+	// db-tag-key: filter by tag key (in string format)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Pagination offset, starting from 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter instances using one or more criteria. Valid filter names:
 	// db-instance-id: filter by instance ID (in string format)
 	// db-instance-name: filter by instance name (in string format)
@@ -2053,19 +2655,21 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstancesResponseParams struct {
+	// Number of instances found.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Instance details set.
+	DBInstanceSet []*DBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of instances found.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Instance details set.
-		DBInstanceSet []*DBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBInstancesResponse) ToJsonString() string {
@@ -2079,9 +2683,36 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBSlowlogsRequestParams struct {
+	// Instance ID in the format of postgres-lnp6j617
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Query start time in the format of 2018-06-10 17:06:38, which cannot be more than 7 days ago
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time in the format of 2018-06-10 17:06:38
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Database name
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Metric for sorting. Valid values: `sum_calls` (total number of calls), `sum_cost_time` (total time consumed)
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. desc: descending, asc: ascending
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Number of entries returned per page. Value range: 1-100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number for data return in paged query. Pagination starts from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDBSlowlogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-lnp6j617
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -2133,19 +2764,21 @@ func (r *DescribeDBSlowlogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBSlowlogsResponseParams struct {
+	// Number of date entries returned this time
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Slow query log details
+	Detail *SlowlogDetail `json:"Detail,omitempty" name:"Detail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBSlowlogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of date entries returned this time
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Slow query log details
-		Detail *SlowlogDetail `json:"Detail,omitempty" name:"Detail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBSlowlogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBSlowlogsResponse) ToJsonString() string {
@@ -2159,9 +2792,27 @@ func (r *DescribeDBSlowlogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBXlogsRequestParams struct {
+	// Instance ID in the format of postgres-4wdeb0zv.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Query start time in the format of 2018-06-10 17:06:38, which cannot be more than 7 days ago
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time in the format of 2018-06-10 17:06:38
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Page number for data return in paged query. Pagination starts from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries returned per page in paged query. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeDBXlogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-4wdeb0zv.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -2201,19 +2852,21 @@ func (r *DescribeDBXlogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBXlogsResponseParams struct {
+	// Number of date entries returned this time.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Xlog list
+	XlogList []*Xlog `json:"XlogList,omitempty" name:"XlogList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBXlogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of date entries returned this time.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Xlog list
-		XlogList []*Xlog `json:"XlogList,omitempty" name:"XlogList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBXlogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBXlogsResponse) ToJsonString() string {
@@ -2227,9 +2880,15 @@ func (r *DescribeDBXlogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDatabasesRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeDatabasesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -2253,16 +2912,18 @@ func (r *DescribeDatabasesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDatabasesResponseParams struct {
+	// Database information
+	Items []*string `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDatabasesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Database information
-		Items []*string `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDatabasesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDatabasesResponse) ToJsonString() string {
@@ -2276,9 +2937,15 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEncryptionKeysRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeEncryptionKeysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -2302,17 +2969,19 @@ func (r *DescribeEncryptionKeysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEncryptionKeysResponseParams struct {
+	// Instance key list
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EncryptionKeys []*EncryptionKey `json:"EncryptionKeys,omitempty" name:"EncryptionKeys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEncryptionKeysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance key list
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		EncryptionKeys []*EncryptionKey `json:"EncryptionKeys,omitempty" name:"EncryptionKeys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEncryptionKeysResponseParams `json:"Response"`
 }
 
 func (r *DescribeEncryptionKeysResponse) ToJsonString() string {
@@ -2326,9 +2995,15 @@ func (r *DescribeEncryptionKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeOrdersRequestParams struct {
+	// Order name set
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+}
+
 type DescribeOrdersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Order name set
 	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 }
@@ -2352,19 +3027,21 @@ func (r *DescribeOrdersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeOrdersResponseParams struct {
+	// Number of orders
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Order array
+	Deals []*PgDeal `json:"Deals,omitempty" name:"Deals"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeOrdersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of orders
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Order array
-		Deals []*PgDeal `json:"Deals,omitempty" name:"Deals"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeOrdersResponseParams `json:"Response"`
 }
 
 func (r *DescribeOrdersResponse) ToJsonString() string {
@@ -2378,9 +3055,15 @@ func (r *DescribeOrdersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeParamsEventRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DescribeParamsEventRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -2404,19 +3087,21 @@ func (r *DescribeParamsEventRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeParamsEventResponseParams struct {
+	// Total number of modified parameters
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Details of parameter modification events
+	EventItems []*EventItem `json:"EventItems,omitempty" name:"EventItems"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeParamsEventResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of modified parameters
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Details of parameter modification events
-		EventItems []*EventItem `json:"EventItems,omitempty" name:"EventItems"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeParamsEventResponseParams `json:"Response"`
 }
 
 func (r *DescribeParamsEventResponse) ToJsonString() string {
@@ -2430,9 +3115,15 @@ func (r *DescribeParamsEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductConfigRequestParams struct {
+	// AZ name
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
 type DescribeProductConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// AZ name
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
@@ -2456,16 +3147,18 @@ func (r *DescribeProductConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProductConfigResponseParams struct {
+	// Purchasable specification list.
+	SpecInfoList []*SpecInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProductConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Purchasable specification list.
-		SpecInfoList []*SpecInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProductConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeProductConfigResponse) ToJsonString() string {
@@ -2479,9 +3172,27 @@ func (r *DescribeProductConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReadOnlyGroupsRequestParams struct {
+	// Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The number of results per page. Default value: 10.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Specify which page is displayed. Default value: 1 (the first page).
+	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// Sorting criterion. Valid values: `ROGroupId`, `CreateTime`, `Name`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `desc`, `asc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
 type DescribeReadOnlyGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -2521,16 +3232,18 @@ func (r *DescribeReadOnlyGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeReadOnlyGroupsResponseParams struct {
+	// RO group list
+	ReadOnlyGroupList []*ReadOnlyGroup `json:"ReadOnlyGroupList,omitempty" name:"ReadOnlyGroupList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeReadOnlyGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// RO group list
-		ReadOnlyGroupList []*ReadOnlyGroup `json:"ReadOnlyGroupList,omitempty" name:"ReadOnlyGroupList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeReadOnlyGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeReadOnlyGroupsResponse) ToJsonString() string {
@@ -2544,8 +3257,14 @@ func (r *DescribeReadOnlyGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsRequestParams struct {
+
+}
+
 type DescribeRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeRegionsRequest) ToJsonString() string {
@@ -2560,25 +3279,28 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsResponseParams struct {
+	// Number of returned results.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Region information set.
+	RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of returned results.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Region information set.
-		RegionSet []*RegionInfo `json:"RegionSet,omitempty" name:"RegionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRegionsResponse) ToJsonString() string {
@@ -2592,9 +3314,27 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServerlessDBInstancesRequestParams struct {
+	// Query conditions
+	Filter []*Filter `json:"Filter,omitempty" name:"Filter"`
+
+	// The number of queries
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting metric. Currently, only "CreateTime" (instance creation time) is supported.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Ascending and descending are supported.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
 type DescribeServerlessDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Query conditions
 	Filter []*Filter `json:"Filter,omitempty" name:"Filter"`
 
@@ -2634,20 +3374,22 @@ func (r *DescribeServerlessDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServerlessDBInstancesResponseParams struct {
+	// The number of query results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Query results
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DBInstanceSet []*ServerlessDBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServerlessDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of query results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Query results
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		DBInstanceSet []*ServerlessDBInstance `json:"DBInstanceSet,omitempty" name:"DBInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServerlessDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeServerlessDBInstancesResponse) ToJsonString() string {
@@ -2661,9 +3403,36 @@ func (r *DescribeServerlessDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowQueryAnalysisRequestParams struct {
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filter by database name. This parameter is optional.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Sort by field. Valid values: `CallNum`, `CostTime`, `AvgCostTime`. Default value: `CallNum`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Number of entries per page. Value range: [1,100]. Default value: `50`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Value range: [0,INF). Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeSlowQueryAnalysisRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -2715,19 +3484,21 @@ func (r *DescribeSlowQueryAnalysisRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowQueryAnalysisResponseParams struct {
+	// The total number of query results.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Detailed analysis.
+	Detail *Detail `json:"Detail,omitempty" name:"Detail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowQueryAnalysisResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of query results.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Detailed analysis.
-		Detail *Detail `json:"Detail,omitempty" name:"Detail"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowQueryAnalysisResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowQueryAnalysisResponse) ToJsonString() string {
@@ -2741,9 +3512,36 @@ func (r *DescribeSlowQueryAnalysisResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowQueryListRequestParams struct {
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Start timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss". The log is retained for seven days by default, so the start timestamp must fall within the retention period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp of the query range in the format of "YYYY-MM-DD HH:mm:ss".
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filter by database name. This parameter is optional.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// Sorting order. Valid values: `asc` (ascending), `desc` (descending). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Sort by field. Valid values: `SessionStartTime` (default), `Duration`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of entries per page. Value range: [1,100]. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Value range: [0,INF). Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeSlowQueryListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -2795,24 +3593,26 @@ func (r *DescribeSlowQueryListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowQueryListResponseParams struct {
+	// The total number of slow query statements during the specified period of time.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Analysis of the execution time of slow query statements by classifying them to different time ranges. These slow query statements fall within the query range you specified in the request parameters.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DurationAnalysis []*DurationAnalysis `json:"DurationAnalysis,omitempty" name:"DurationAnalysis"`
+
+	// The list of slow query details during the specified period of time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RawSlowQueryList []*RawSlowQuery `json:"RawSlowQueryList,omitempty" name:"RawSlowQueryList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowQueryListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of slow query statements during the specified period of time.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Analysis of the execution time of slow query statements by classifying them to different time ranges. These slow query statements fall within the query range you specified in the request parameters.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		DurationAnalysis []*DurationAnalysis `json:"DurationAnalysis,omitempty" name:"DurationAnalysis"`
-
-		// The list of slow query details during the specified period of time.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		RawSlowQueryList []*RawSlowQuery `json:"RawSlowQueryList,omitempty" name:"RawSlowQueryList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowQueryListResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowQueryListResponse) ToJsonString() string {
@@ -2826,8 +3626,14 @@ func (r *DescribeSlowQueryListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesRequestParams struct {
+
+}
+
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -2842,25 +3648,28 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZonesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeZonesResponseParams struct {
+	// Number of returned results.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// AZ information set.
+	ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeZonesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of returned results.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// AZ information set.
-		ZoneSet []*ZoneInfo `json:"ZoneSet,omitempty" name:"ZoneSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeZonesResponseParams `json:"Response"`
 }
 
 func (r *DescribeZonesResponse) ToJsonString() string {
@@ -2874,9 +3683,15 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DestroyDBInstanceRequestParams struct {
+	// The ID of the instance to be eliminated
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type DestroyDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the instance to be eliminated
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -2900,13 +3715,15 @@ func (r *DestroyDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DestroyDBInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DestroyDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DestroyDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *DestroyDBInstanceResponse) ToJsonString() string {
@@ -2921,7 +3738,6 @@ func (r *DestroyDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type Detail struct {
-
 	// The total execution time (in ms) of all slow query statements during the specified period of time
 	TotalTime *float64 `json:"TotalTime,omitempty" name:"TotalTime"`
 
@@ -2933,9 +3749,24 @@ type Detail struct {
 	AnalysisItems []*AnalysisItems `json:"AnalysisItems,omitempty" name:"AnalysisItems"`
 }
 
+// Predefined struct for user
+type DisIsolateDBInstancesRequestParams struct {
+	// Resource ID list
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+}
+
 type DisIsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Resource ID list
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
@@ -2971,13 +3802,15 @@ func (r *DisIsolateDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisIsolateDBInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisIsolateDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisIsolateDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *DisIsolateDBInstancesResponse) ToJsonString() string {
@@ -2992,7 +3825,6 @@ func (r *DisIsolateDBInstancesResponse) FromJsonString(s string) error {
 }
 
 type DurationAnalysis struct {
-
 	// Time range
 	TimeSegment *string `json:"TimeSegment,omitempty" name:"TimeSegment"`
 
@@ -3001,7 +3833,6 @@ type DurationAnalysis struct {
 }
 
 type EncryptionKey struct {
-
 	// Encrypted KeyId of KMS instance
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
@@ -3028,7 +3859,6 @@ type EncryptionKey struct {
 }
 
 type ErrLogDetail struct {
-
 	// Username
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
@@ -3043,7 +3873,6 @@ type ErrLogDetail struct {
 }
 
 type EventInfo struct {
-
 	// Parameter name
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
@@ -3078,7 +3907,6 @@ type EventInfo struct {
 }
 
 type EventItem struct {
-
 	// Parameter name
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
@@ -3093,7 +3921,6 @@ type EventItem struct {
 }
 
 type Filter struct {
-
 	// Filter name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3101,9 +3928,24 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
+// Predefined struct for user
+type InitDBInstancesRequestParams struct {
+	// Instance ID set.
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// Instance admin account username.
+	AdminName *string `json:"AdminName,omitempty" name:"AdminName"`
+
+	// Password corresponding to instance root account username.
+	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+
+	// Instance character set. Valid values: UTF8, LATIN1.
+	Charset *string `json:"Charset,omitempty" name:"Charset"`
+}
+
 type InitDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID set.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
@@ -3139,16 +3981,18 @@ func (r *InitDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InitDBInstancesResponseParams struct {
+	// Instance ID set.
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InitDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID set.
-		DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InitDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *InitDBInstancesResponse) ToJsonString() string {
@@ -3162,9 +4006,33 @@ func (r *InitDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceCreateDBInstancesRequestParams struct {
+	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
+
+	// Storage capacity size in GB.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instances. Maximum value: 100. If you need to create more instances at a time, please contact customer service.
+	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
 type InquiryPriceCreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -3212,19 +4080,21 @@ func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceCreateDBInstancesResponseParams struct {
+	// Original price in 0.01 CNY.
+	OriginalPrice *uint64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price in 0.01 CNY.
+	Price *uint64 `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceCreateDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Original price in 0.01 CNY.
-		OriginalPrice *uint64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
-		// Discounted price in 0.01 CNY.
-		Price *uint64 `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceCreateDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceCreateDBInstancesResponse) ToJsonString() string {
@@ -3238,9 +4108,18 @@ func (r *InquiryPriceCreateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewDBInstanceRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Renewal duration in months. Maximum value: 48
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
 type InquiryPriceRenewDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3268,19 +4147,21 @@ func (r *InquiryPriceRenewDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewDBInstanceResponseParams struct {
+	// Total cost before discount; for example, 24650 indicates 246.5 CNY
+	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Actual amount payable; for example, 24650 indicates 246.5 CNY
+	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceRenewDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total cost before discount; for example, 24650 indicates 246.5 CNY
-		OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
-		// Actual amount payable; for example, 24650 indicates 246.5 CNY
-		Price *int64 `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceRenewDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceRenewDBInstanceResponse) ToJsonString() string {
@@ -3294,9 +4175,24 @@ func (r *InquiryPriceRenewDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceUpgradeDBInstanceRequestParams struct {
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance ID in the format of postgres-hez4fh0v
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance billing type. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go hourly)
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
 type InquiryPriceUpgradeDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance disk size in GB
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
@@ -3332,19 +4228,21 @@ func (r *InquiryPriceUpgradeDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceUpgradeDBInstanceResponseParams struct {
+	// Total cost before discount.
+	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Actual amount payable
+	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceUpgradeDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total cost before discount.
-		OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
-		// Actual amount payable
-		Price *int64 `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceUpgradeDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceUpgradeDBInstanceResponse) ToJsonString() string {
@@ -3358,9 +4256,15 @@ func (r *InquiryPriceUpgradeDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type IsolateDBInstancesRequestParams struct {
+	// Instance ID set
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+}
+
 type IsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID set
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 }
@@ -3384,13 +4288,15 @@ func (r *IsolateDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type IsolateDBInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type IsolateDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *IsolateDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *IsolateDBInstancesResponse) ToJsonString() string {
@@ -3404,9 +4310,21 @@ func (r *IsolateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAccountRemarkRequestParams struct {
+	// Instance ID in the format of postgres-4wdeb0zv
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// New remarks corresponding to user `UserName`
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type ModifyAccountRemarkRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-4wdeb0zv
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3438,13 +4356,15 @@ func (r *ModifyAccountRemarkRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAccountRemarkResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAccountRemarkResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAccountRemarkResponseParams `json:"Response"`
 }
 
 func (r *ModifyAccountRemarkResponse) ToJsonString() string {
@@ -3458,9 +4378,27 @@ func (r *ModifyAccountRemarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyBackupPlanRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// The earliest time to start a backup
+	MinBackupStartTime *string `json:"MinBackupStartTime,omitempty" name:"MinBackupStartTime"`
+
+	// The latest time to start a backup
+	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitempty" name:"MaxBackupStartTime"`
+
+	// Backup retention period in days. Value range: 3-7
+	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitempty" name:"BaseBackupRetentionPeriod"`
+
+	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
+	BackupPeriod []*string `json:"BackupPeriod,omitempty" name:"BackupPeriod"`
+}
+
 type ModifyBackupPlanRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3500,13 +4438,15 @@ func (r *ModifyBackupPlanRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyBackupPlanResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyBackupPlanResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyBackupPlanResponseParams `json:"Response"`
 }
 
 func (r *ModifyBackupPlanResponse) ToJsonString() string {
@@ -3520,9 +4460,27 @@ func (r *ModifyBackupPlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceDeploymentRequestParams struct {
+	// Instance ID.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance node information.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
+
+	// Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
 type ModifyDBInstanceDeploymentRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3562,13 +4520,15 @@ func (r *ModifyDBInstanceDeploymentRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceDeploymentResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceDeploymentResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceDeploymentResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceDeploymentResponse) ToJsonString() string {
@@ -3582,9 +4542,18 @@ func (r *ModifyDBInstanceDeploymentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceNameRequestParams struct {
+	// Database instance ID in the format of postgres-6fego161
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// New name of database instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
 type ModifyDBInstanceNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Database instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3612,13 +4581,15 @@ func (r *ModifyDBInstanceNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceNameResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceNameResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceNameResponse) ToJsonString() string {
@@ -3632,9 +4603,18 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceParametersRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Parameters to be modified and their new values
+	ParamList []*ParamEntry `json:"ParamList,omitempty" name:"ParamList"`
+}
+
 type ModifyDBInstanceParametersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3662,13 +4642,15 @@ func (r *ModifyDBInstanceParametersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceParametersResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceParametersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceParametersResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceParametersResponse) ToJsonString() string {
@@ -3682,9 +4664,21 @@ func (r *ModifyDBInstanceParametersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceReadOnlyGroupRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// ID of the RO group to which the read-only replica belongs
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// ID of the new RO group into which the read-only replica will move
+	NewReadOnlyGroupId *string `json:"NewReadOnlyGroupId,omitempty" name:"NewReadOnlyGroupId"`
+}
+
 type ModifyDBInstanceReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3716,16 +4710,18 @@ func (r *ModifyDBInstanceReadOnlyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceReadOnlyGroupResponseParams struct {
+	// Task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceReadOnlyGroupResponse) ToJsonString() string {
@@ -3739,9 +4735,39 @@ func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSpecRequestParams struct {
+	// Instance ID in the format of postgres-6bwgamo3.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance memory size in GiB after modification.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GiB after modification.
+	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Campaign ID.
+	ActivityId *uint64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
 type ModifyDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6bwgamo3.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3797,19 +4823,21 @@ func (r *ModifyDBInstanceSpecRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSpecResponseParams struct {
+	// Order ID.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Bill ID of frozen fees.
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceSpecResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// Bill ID of frozen fees.
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceSpecResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceSpecResponse) ToJsonString() string {
@@ -3823,9 +4851,18 @@ func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstancesProjectRequestParams struct {
+	// TencentDB for PostgreSQL instance ID array
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// New project ID of TencentDB for PostgreSQL instance
+	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
 type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// TencentDB for PostgreSQL instance ID array
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
@@ -3853,16 +4890,18 @@ func (r *ModifyDBInstancesProjectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstancesProjectResponseParams struct {
+	// Number of successfully transferred instances
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstancesProjectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of successfully transferred instances
-		Count *int64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstancesProjectResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstancesProjectResponse) ToJsonString() string {
@@ -3876,9 +4915,36 @@ func (r *ModifyDBInstancesProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyReadOnlyGroupConfigRequestParams struct {
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// RO group name
+	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitempty" name:"ReadOnlyGroupName"`
+
+	// Whether to remove a read-only replica from an RO group if the delay between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLagEliminate *uint64 `json:"ReplayLagEliminate,omitempty" name:"ReplayLagEliminate"`
+
+	// Whether to remove a read-only replica from an RO group if the sync log size difference between the read-only replica and the primary instance exceeds the threshold. Valid values: `0` (no), `1` (yes).
+	ReplayLatencyEliminate *uint64 `json:"ReplayLatencyEliminate,omitempty" name:"ReplayLatencyEliminate"`
+
+	// Delayed log size threshold in MB
+	MaxReplayLatency *uint64 `json:"MaxReplayLatency,omitempty" name:"MaxReplayLatency"`
+
+	// Delay threshold in ms
+	MaxReplayLag *uint64 `json:"MaxReplayLag,omitempty" name:"MaxReplayLag"`
+
+	// Whether to enable automatic load balancing. Valid values: `0` (disable), `1` (enable).
+	Rebalance *uint64 `json:"Rebalance,omitempty" name:"Rebalance"`
+
+	// The minimum number of read-only replicas that must be retained in an RO group
+	MinDelayEliminateReserve *uint64 `json:"MinDelayEliminateReserve,omitempty" name:"MinDelayEliminateReserve"`
+}
+
 type ModifyReadOnlyGroupConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RO group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 
@@ -3930,13 +4996,15 @@ func (r *ModifyReadOnlyGroupConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyReadOnlyGroupConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyReadOnlyGroupConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyReadOnlyGroupConfigResponseParams `json:"Response"`
 }
 
 func (r *ModifyReadOnlyGroupConfigResponse) ToJsonString() string {
@@ -3950,9 +5018,18 @@ func (r *ModifyReadOnlyGroupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySwitchTimePeriodRequestParams struct {
+	// The ID of the instance waiting for a switch
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Valid value: `0` (switch immediately)
+	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+}
+
 type ModifySwitchTimePeriodRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the instance waiting for a switch
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -3980,13 +5057,15 @@ func (r *ModifySwitchTimePeriodRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySwitchTimePeriodResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySwitchTimePeriodResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySwitchTimePeriodResponseParams `json:"Response"`
 }
 
 func (r *ModifySwitchTimePeriodResponse) ToJsonString() string {
@@ -4001,7 +5080,6 @@ func (r *ModifySwitchTimePeriodResponse) FromJsonString(s string) error {
 }
 
 type NetworkAccess struct {
-
 	// Network resource ID, instance ID, or RO group ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
@@ -4036,7 +5114,6 @@ type NetworkAccess struct {
 }
 
 type NormalQueryItem struct {
-
 	// Username
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
@@ -4083,9 +5160,18 @@ type NormalQueryItem struct {
 	NormalQuery *string `json:"NormalQuery,omitempty" name:"NormalQuery"`
 }
 
+// Predefined struct for user
+type OpenDBExtranetAccessRequestParams struct {
+	// Instance ID in the format of postgres-hez4fh0v
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to enable public network access over IPv6 address. Valid values: 1 (yes), 0 (no)
+	IsIpv6 *int64 `json:"IsIpv6,omitempty" name:"IsIpv6"`
+}
+
 type OpenDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-hez4fh0v
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -4113,16 +5199,18 @@ func (r *OpenDBExtranetAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenDBExtranetAccessResponseParams struct {
+	// Async task flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenDBExtranetAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task flow ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenDBExtranetAccessResponseParams `json:"Response"`
 }
 
 func (r *OpenDBExtranetAccessResponse) ToJsonString() string {
@@ -4136,9 +5224,18 @@ func (r *OpenDBExtranetAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenServerlessDBExtranetAccessRequestParams struct {
+	// Unique ID of an instance
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance name
+	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
+}
+
 type OpenServerlessDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of an instance
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -4166,13 +5263,15 @@ func (r *OpenServerlessDBExtranetAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenServerlessDBExtranetAccessResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenServerlessDBExtranetAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenServerlessDBExtranetAccessResponseParams `json:"Response"`
 }
 
 func (r *OpenServerlessDBExtranetAccessResponse) ToJsonString() string {
@@ -4187,7 +5286,6 @@ func (r *OpenServerlessDBExtranetAccessResponse) FromJsonString(s string) error 
 }
 
 type ParamEntry struct {
-
 	// Parameter name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4196,7 +5294,6 @@ type ParamEntry struct {
 }
 
 type ParamInfo struct {
-
 	// Parameter ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ID *int64 `json:"ID,omitempty" name:"ID"`
@@ -4270,7 +5367,6 @@ type ParamInfo struct {
 }
 
 type PgDeal struct {
-
 	// Order name
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
 
@@ -4291,7 +5387,6 @@ type PgDeal struct {
 }
 
 type RawSlowQuery struct {
-
 	// Slow query statement
 	RawQuery *string `json:"RawQuery,omitempty" name:"RawQuery"`
 
@@ -4312,7 +5407,6 @@ type RawSlowQuery struct {
 }
 
 type ReadOnlyGroup struct {
-
 	// RO group identifier
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
@@ -4375,9 +5469,15 @@ type ReadOnlyGroup struct {
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitempty" name:"NetworkAccessList"`
 }
 
+// Predefined struct for user
+type RebalanceReadOnlyGroupRequestParams struct {
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
 type RebalanceReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// RO group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
 }
@@ -4401,13 +5501,15 @@ func (r *RebalanceReadOnlyGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RebalanceReadOnlyGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RebalanceReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RebalanceReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *RebalanceReadOnlyGroupResponse) ToJsonString() string {
@@ -4422,7 +5524,6 @@ func (r *RebalanceReadOnlyGroupResponse) FromJsonString(s string) error {
 }
 
 type RegionInfo struct {
-
 	// Region abbreviation
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -4440,9 +5541,18 @@ type RegionInfo struct {
 	SupportInternational *uint64 `json:"SupportInternational,omitempty" name:"SupportInternational"`
 }
 
+// Predefined struct for user
+type RemoveDBInstanceFromReadOnlyGroupRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
 type RemoveDBInstanceFromReadOnlyGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -4470,16 +5580,18 @@ func (r *RemoveDBInstanceFromReadOnlyGroupRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveDBInstanceFromReadOnlyGroupResponseParams struct {
+	// Task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveDBInstanceFromReadOnlyGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveDBInstanceFromReadOnlyGroupResponseParams `json:"Response"`
 }
 
 func (r *RemoveDBInstanceFromReadOnlyGroupResponse) ToJsonString() string {
@@ -4493,9 +5605,24 @@ func (r *RemoveDBInstanceFromReadOnlyGroupResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewInstanceRequestParams struct {
+	// Instance ID in the format of `postgres-6fego161`
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Renewal duration in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+}
+
 type RenewInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of `postgres-6fego161`
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -4531,16 +5658,18 @@ func (r *RenewInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewInstanceResponseParams struct {
+	// Order name
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RenewInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order name
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RenewInstanceResponseParams `json:"Response"`
 }
 
 func (r *RenewInstanceResponse) ToJsonString() string {
@@ -4554,9 +5683,21 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAccountPasswordRequestParams struct {
+	// Instance ID in the format of postgres-4wdeb0zv
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance account name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// New password corresponding to `UserName` account
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
 type ResetAccountPasswordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-4wdeb0zv
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
@@ -4588,13 +5729,15 @@ func (r *ResetAccountPasswordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAccountPasswordResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetAccountPasswordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetAccountPasswordResponseParams `json:"Response"`
 }
 
 func (r *ResetAccountPasswordResponse) ToJsonString() string {
@@ -4608,9 +5751,15 @@ func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartDBInstanceRequestParams struct {
+	// Instance ID in the format of postgres-6r233v55
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+}
+
 type RestartDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of postgres-6r233v55
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 }
@@ -4634,16 +5783,18 @@ func (r *RestartDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RestartDBInstanceResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RestartDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async flow ID
-		FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RestartDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *RestartDBInstanceResponse) ToJsonString() string {
@@ -4658,7 +5809,6 @@ func (r *RestartDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type ServerlessDBAccount struct {
-
 	// Username
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBUser *string `json:"DBUser,omitempty" name:"DBUser"`
@@ -4673,7 +5823,6 @@ type ServerlessDBAccount struct {
 }
 
 type ServerlessDBInstance struct {
-
 	// Instance ID, which is the unique identifier
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
@@ -4744,7 +5893,6 @@ type ServerlessDBInstance struct {
 }
 
 type ServerlessDBInstanceNetInfo struct {
-
 	// Address
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Address *string `json:"Address,omitempty" name:"Address"`
@@ -4766,9 +5914,18 @@ type ServerlessDBInstanceNetInfo struct {
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
 }
 
+// Predefined struct for user
+type SetAutoRenewFlagRequestParams struct {
+	// Instance ID array
+	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+
+	// Renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal upon expiration
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+}
+
 type SetAutoRenewFlagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID array
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
@@ -4796,16 +5953,18 @@ func (r *SetAutoRenewFlagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetAutoRenewFlagResponseParams struct {
+	// Number of successfully set instances
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetAutoRenewFlagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of successfully set instances
-		Count *int64 `json:"Count,omitempty" name:"Count"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetAutoRenewFlagResponseParams `json:"Response"`
 }
 
 func (r *SetAutoRenewFlagResponse) ToJsonString() string {
@@ -4820,7 +5979,6 @@ func (r *SetAutoRenewFlagResponse) FromJsonString(s string) error {
 }
 
 type SlowlogDetail struct {
-
 	// Total time consumed
 	TotalTime *float64 `json:"TotalTime,omitempty" name:"TotalTime"`
 
@@ -4832,7 +5990,6 @@ type SlowlogDetail struct {
 }
 
 type SpecInfo struct {
-
 	// Region abbreviation, which corresponds to the `Region` field of `RegionSet`
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -4848,7 +6005,6 @@ type SpecInfo struct {
 }
 
 type SpecItemInfo struct {
-
 	// Specification ID
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
@@ -4893,7 +6049,6 @@ type SpecItemInfo struct {
 }
 
 type Tag struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -4901,9 +6056,39 @@ type Tag struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+// Predefined struct for user
+type UpgradeDBInstanceRequestParams struct {
+	// Instance memory size in GB after upgrade
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB after upgrade
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Instance ID in the format of postgres-lnp6j617
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Whether to automatically use vouchers. 1: yes, 0: no. Default value: no
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list (only one voucher can be specified currently)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Activity ID
+	ActivityId *int64 `json:"ActivityId,omitempty" name:"ActivityId"`
+
+	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at specified time). Default value: `0`
+	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
+
+	// The earliest time to start a switch
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// The latest time to start a switch
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
 type UpgradeDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance memory size in GB after upgrade
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
@@ -4959,19 +6144,21 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpgradeDBInstanceResponseParams struct {
+	// Transaction name.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Bill ID of frozen fees
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpgradeDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Transaction name.
-		DealName *string `json:"DealName,omitempty" name:"DealName"`
-
-		// Bill ID of frozen fees
-		BillId *string `json:"BillId,omitempty" name:"BillId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpgradeDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *UpgradeDBInstanceResponse) ToJsonString() string {
@@ -4986,7 +6173,6 @@ func (r *UpgradeDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type Xlog struct {
-
 	// Unique backup file ID
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
@@ -5007,7 +6193,6 @@ type Xlog struct {
 }
 
 type ZoneInfo struct {
-
 	// AZ abbreviation
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 

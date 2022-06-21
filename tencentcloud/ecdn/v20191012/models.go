@@ -20,9 +20,51 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AddEcdnDomainRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Origin server configuration.
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+	// Domain name acceleration region. Valid values: mainland (acceleration in Mainland China), overseas (acceleration outside Mainland China), global (global acceleration).
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Project ID. Default value: 0.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// IP block/allowlist configuration.
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+	// IP access limit configuration.
+	IpFreqLimit *IpFreqLimit `json:"IpFreqLimit,omitempty" name:"IpFreqLimit"`
+
+	// Origin server response header configuration.
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+	// Node caching configuration.
+	CacheKey *CacheKey `json:"CacheKey,omitempty" name:"CacheKey"`
+
+	// Caching rule configuration.
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+	// HTTPS configuration.
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+	// Forced access protocol redirection configuration.
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+	// Tag bound to a domain name.
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
+
+	// WebSocket configuration.
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
+}
+
 type AddEcdnDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -94,13 +136,15 @@ func (r *AddEcdnDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddEcdnDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddEcdnDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddEcdnDomainResponseParams `json:"Response"`
 }
 
 func (r *AddEcdnDomainResponse) ToJsonString() string {
@@ -115,7 +159,6 @@ func (r *AddEcdnDomainResponse) FromJsonString(s string) error {
 }
 
 type AdvanceHttps struct {
-
 	// Custom TLS data switch
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CustomTlsStatus *string `json:"CustomTlsStatus,omitempty" name:"CustomTlsStatus"`
@@ -145,7 +188,6 @@ type AdvanceHttps struct {
 }
 
 type Cache struct {
-
 	// Caching configuration rule array.
 	CacheRules []*CacheRule `json:"CacheRules,omitempty" name:"CacheRules"`
 
@@ -158,13 +200,11 @@ type Cache struct {
 }
 
 type CacheKey struct {
-
 	// Whether to enable full path cache. Valid values: on, off.
 	FullUrlCache *string `json:"FullUrlCache,omitempty" name:"FullUrlCache"`
 }
 
 type CacheRule struct {
-
 	// Cache type. Valid values: all (all files), file (extension type), directory (directory), path (full path), index (homepage).
 	CacheType *string `json:"CacheType,omitempty" name:"CacheType"`
 
@@ -176,7 +216,6 @@ type CacheRule struct {
 }
 
 type ClientCert struct {
-
 	// Client certificate in PEM format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
@@ -194,9 +233,15 @@ type ClientCert struct {
 	DeployTime *string `json:"DeployTime,omitempty" name:"DeployTime"`
 }
 
+// Predefined struct for user
+type DeleteEcdnDomainRequestParams struct {
+	// Domain name to be deleted.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type DeleteEcdnDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name to be deleted.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
@@ -220,13 +265,15 @@ func (r *DeleteEcdnDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEcdnDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEcdnDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEcdnDomainResponseParams `json:"Response"`
 }
 
 func (r *DeleteEcdnDomainResponse) ToJsonString() string {
@@ -240,9 +287,24 @@ func (r *DeleteEcdnDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainsConfigRequestParams struct {
+	// Pagination offset address. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of domain names per page. Default value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query filter.
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query result sorting rule.
+	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+}
+
 type DescribeDomainsConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pagination offset address. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -278,19 +340,21 @@ func (r *DescribeDomainsConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainsConfigResponseParams struct {
+	// Domain name list.
+	Domains []*DomainDetailInfo `json:"Domains,omitempty" name:"Domains"`
+
+	// Number of matched domain names. This is used for paginated query.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDomainsConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Domain name list.
-		Domains []*DomainDetailInfo `json:"Domains,omitempty" name:"Domains"`
-
-		// Number of matched domain names. This is used for paginated query.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDomainsConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeDomainsConfigResponse) ToJsonString() string {
@@ -304,9 +368,21 @@ func (r *DescribeDomainsConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainsRequestParams struct {
+	// Pagination offset address. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of domain names per page. Default value: 100. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query filter.
+	Filters []*DomainFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeDomainsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pagination offset address. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -338,19 +414,21 @@ func (r *DescribeDomainsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDomainsResponseParams struct {
+	// Domain name information list.
+	Domains []*DomainBriefInfo `json:"Domains,omitempty" name:"Domains"`
+
+	// Total number of domain names.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDomainsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Domain name information list.
-		Domains []*DomainBriefInfo `json:"Domains,omitempty" name:"Domains"`
-
-		// Total number of domain names.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDomainsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDomainsResponse) ToJsonString() string {
@@ -364,9 +442,27 @@ func (r *DescribeDomainsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnDomainLogsRequestParams struct {
+	// Domain name to be queried.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Log start time, such as 2019-10-01 00:00:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Log end time, such as 2019-10-02 00:00:00. Only logs for the last 30 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination offset for log link list. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of log links per page. Default value: 100. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeEcdnDomainLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name to be queried.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -406,20 +502,22 @@ func (r *DescribeEcdnDomainLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnDomainLogsResponseParams struct {
+	// Log link list.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DomainLogs []*DomainLogs `json:"DomainLogs,omitempty" name:"DomainLogs"`
+
+	// Total number of log links.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEcdnDomainLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log link list.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DomainLogs []*DomainLogs `json:"DomainLogs,omitempty" name:"DomainLogs"`
-
-		// Total number of log links.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEcdnDomainLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeEcdnDomainLogsResponse) ToJsonString() string {
@@ -433,9 +531,46 @@ func (r *DescribeEcdnDomainLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnDomainStatisticsRequestParams struct {
+	// Query start time, such as 2019-12-13 00:00:00.
+	// The time span cannot exceed 90 days.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time, such as 2019-12-13 23:59:59.
+	// The time span cannot exceed 90 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric names:
+	// flux: traffic (in bytes)
+	// bandwidth: bandwidth (in bps)
+	// request: number of requests
+	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
+
+	// Specifies the list of domain names to be queried
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
+	// If no domain name is entered, the specified project will be queried; otherwise, the domain name will prevail
+	Projects []*int64 `json:"Projects,omitempty" name:"Projects"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Default value: 1000. Maximum value: 3,000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Statistical areas:
+	// mainland: Chinese mainland
+	// oversea: outside the Chinese mainland
+	// global: global
+	// Default value: global
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
 type DescribeEcdnDomainStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Query start time, such as 2019-12-13 00:00:00.
 	// The time span cannot exceed 90 days.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -497,19 +632,21 @@ func (r *DescribeEcdnDomainStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnDomainStatisticsResponseParams struct {
+	// Domain name data
+	Data []*DomainData `json:"Data,omitempty" name:"Data"`
+
+	// Quantity
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEcdnDomainStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Domain name data
-		Data []*DomainData `json:"Data,omitempty" name:"Data"`
-
-		// Quantity
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEcdnDomainStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeEcdnDomainStatisticsResponse) ToJsonString() string {
@@ -523,9 +660,51 @@ func (r *DescribeEcdnDomainStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnStatisticsRequestParams struct {
+	// Query start time, such as 2019-12-13 00:00:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time, such as 2019-12-13 23:59:59
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Specifies the query metric, which can be:
+	// flux: traffic (in bytes)
+	// bandwidth: bandwidth (in bps)
+	// request: number of requests
+	// 2xx: returns the number of 2xx status codes or details of status codes starting with 2
+	// 3xx: returns the number of 3xx status codes or details of status codes starting with 3
+	// 4xx: returns the number of 4xx status codes or details of status codes starting with 4
+	// 5xx: returns the number of 5xx status codes or details of status codes starting with 5
+	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
+
+	// Sampling interval in minutes. The available options vary for different query period. See below: 
+	// 1 day: `1`, `5`, `15`, `30`, `60`, `120`, `240`, `1440` 
+	// 2 to 3 days: `15`, `30`, `60`, `120`, `240`, `1440`
+	// 4 to 7 days: `30`, `60`, `120`, `240`, `1440`
+	// 8 to 31 days: `60`, `120`, `240`, `1440`
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Specifies the list of domain names to be queried
+	// 
+	// Up to 30 acceleration domain names can be queried at a time.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Specifies the project ID to be queried, which can be viewed [here](https://console.cloud.tencent.com/project)
+	// If no domain name is entered, the specified project will be queried; otherwise, the domain name will prevail
+	Projects []*int64 `json:"Projects,omitempty" name:"Projects"`
+
+	// Statistical areas:
+	// mainland: Chinese mainland
+	// oversea: outside the Chinese mainland
+	// global: global
+	// Default value: global
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
 type DescribeEcdnStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Query start time, such as 2019-12-13 00:00:00
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -591,16 +770,18 @@ func (r *DescribeEcdnStatisticsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEcdnStatisticsResponseParams struct {
+	// Returned data details of the specified conditional query
+	Data []*ResourceData `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEcdnStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Returned data details of the specified conditional query
-		Data []*ResourceData `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEcdnStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeEcdnStatisticsResponse) ToJsonString() string {
@@ -614,9 +795,21 @@ func (r *DescribeEcdnStatisticsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpStatusRequestParams struct {
+	// Acceleration domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Target region of the query:
+	// mainland: nodes in Mainland China
+	// overseas: nodes outside Mainland China
+	// global: global nodes
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
 type DescribeIpStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Acceleration domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -647,19 +840,21 @@ func (r *DescribeIpStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpStatusResponseParams struct {
+	// Node list
+	Ips []*IpStatus `json:"Ips,omitempty" name:"Ips"`
+
+	// Total number of nodes
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIpStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Node list
-		Ips []*IpStatus `json:"Ips,omitempty" name:"Ips"`
-
-		// Total number of nodes
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIpStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeIpStatusResponse) ToJsonString() string {
@@ -673,8 +868,14 @@ func (r *DescribeIpStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeQuotaRequestParams struct {
+
+}
+
 type DescribePurgeQuotaRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribePurgeQuotaRequest) ToJsonString() string {
@@ -689,25 +890,28 @@ func (r *DescribePurgeQuotaRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePurgeQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeQuotaResponseParams struct {
+	// URL purge usage and quota.
+	UrlPurge *Quota `json:"UrlPurge,omitempty" name:"UrlPurge"`
+
+	// Directory purge usage and quota.
+	PathPurge *Quota `json:"PathPurge,omitempty" name:"PathPurge"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePurgeQuotaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// URL purge usage and quota.
-		UrlPurge *Quota `json:"UrlPurge,omitempty" name:"UrlPurge"`
-
-		// Directory purge usage and quota.
-		PathPurge *Quota `json:"PathPurge,omitempty" name:"PathPurge"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePurgeQuotaResponseParams `json:"Response"`
 }
 
 func (r *DescribePurgeQuotaResponse) ToJsonString() string {
@@ -721,9 +925,36 @@ func (r *DescribePurgeQuotaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeTasksRequestParams struct {
+	// Purge type to be queried. url: query URL purge records; path: query directory purge records.
+	PurgeType *string `json:"PurgeType,omitempty" name:"PurgeType"`
+
+	// Start time, such as 2018-08-08 00:00:00
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as 2018-08-08 23:59:59
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task ID returned during submission. Either `TaskId` or start time must be specified for a query.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Pagination offset. Default value: 0 (starting from entry 0).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query keyword. Please enter a domain name or full URL beginning with `http(s)://`.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Specified task status to be queried. fail: failed, done: succeeded, process: purging.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Purge type to be queried. url: query URL purge records; path: query directory purge records.
 	PurgeType *string `json:"PurgeType,omitempty" name:"PurgeType"`
 
@@ -775,19 +1006,21 @@ func (r *DescribePurgeTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePurgeTasksResponseParams struct {
+	// Purge history.
+	PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs"`
+
+	// Total number of tasks, which is used for pagination.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePurgeTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Purge history.
-		PurgeLogs []*PurgeTask `json:"PurgeLogs,omitempty" name:"PurgeLogs"`
-
-		// Total number of tasks, which is used for pagination.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePurgeTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribePurgeTasksResponse) ToJsonString() string {
@@ -802,7 +1035,6 @@ func (r *DescribePurgeTasksResponse) FromJsonString(s string) error {
 }
 
 type DetailData struct {
-
 	// Data type name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -811,7 +1043,6 @@ type DetailData struct {
 }
 
 type DomainBriefInfo struct {
-
 	// Domain name ID.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
@@ -854,7 +1085,6 @@ type DomainBriefInfo struct {
 }
 
 type DomainData struct {
-
 	// Domain name
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
@@ -863,7 +1093,6 @@ type DomainData struct {
 }
 
 type DomainDetailInfo struct {
-
 	// Domain name ID.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
@@ -942,7 +1171,6 @@ type DomainDetailInfo struct {
 }
 
 type DomainFilter struct {
-
 	// Filters by the field name, which includes:
 	// - `origin`: Primary origin server.
 	// - `domain`: Domain name.
@@ -965,7 +1193,6 @@ type DomainFilter struct {
 }
 
 type DomainLogs struct {
-
 	// Log start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -977,7 +1204,6 @@ type DomainLogs struct {
 }
 
 type EcdnData struct {
-
 	// Queries the specified metric. Valid values: Bandwidth, Flux, Request, Delay, status code, LogBandwidth, LogFlux, LogRequest
 	Metrics []*string `json:"Metrics,omitempty" name:"Metrics"`
 
@@ -986,7 +1212,6 @@ type EcdnData struct {
 }
 
 type ForceRedirect struct {
-
 	// Forced access protocol redirection configuration switch. Valid values: on, off.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
@@ -1001,7 +1226,6 @@ type ForceRedirect struct {
 }
 
 type Hsts struct {
-
 	// Whether to enable. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
@@ -1015,7 +1239,6 @@ type Hsts struct {
 }
 
 type HttpHeaderPathRule struct {
-
 	// HTTP header setting method. Valid values: add (add header), set (set header), del (delete header).
 	// Request header currently does not support `set`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1039,7 +1262,6 @@ type HttpHeaderPathRule struct {
 }
 
 type Https struct {
-
 	// HTTPS configuration switch. Valid values: on, off. If the domain name with HTTPS configuration enabled is being deployed, this switch will be `off`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
@@ -1078,7 +1300,6 @@ type Https struct {
 }
 
 type IpFilter struct {
-
 	// IP blocklist/allowlist switch. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
@@ -1092,7 +1313,6 @@ type IpFilter struct {
 }
 
 type IpFreqLimit struct {
-
 	// IP access limit switch. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
@@ -1102,7 +1322,6 @@ type IpFreqLimit struct {
 }
 
 type IpStatus struct {
-
 	// Node IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -1125,7 +1344,6 @@ type IpStatus struct {
 }
 
 type Origin struct {
-
 	// Primary origin server list. IP and the domain name of the origin server cannot be entered at the same time. Configure origin server port in the format of ["origin1:port1", "origin2:port2"]. Configure origin-pull weight in the format of ["origin1::weight1", "origin2::weight2"]. Configure both port and weight in the format of ["origin1:port1:weight1", "origin2:port2:weight2"]. Valid range of weight value: 0 - 100.
 	Origins []*string `json:"Origins,omitempty" name:"Origins"`
 
@@ -1156,9 +1374,18 @@ type Origin struct {
 	AdvanceHttps *AdvanceHttps `json:"AdvanceHttps,omitempty" name:"AdvanceHttps"`
 }
 
+// Predefined struct for user
+type PurgePathCacheRequestParams struct {
+	// List of directories to be purged. The protocol header must be included.
+	Paths []*string `json:"Paths,omitempty" name:"Paths"`
+
+	// Purge type. flush: purges updated resources, delete: purges all resources.
+	FlushType *string `json:"FlushType,omitempty" name:"FlushType"`
+}
+
 type PurgePathCacheRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of directories to be purged. The protocol header must be included.
 	Paths []*string `json:"Paths,omitempty" name:"Paths"`
 
@@ -1186,16 +1413,18 @@ func (r *PurgePathCacheRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PurgePathCacheResponseParams struct {
+	// Purge task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PurgePathCacheResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Purge task ID
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PurgePathCacheResponseParams `json:"Response"`
 }
 
 func (r *PurgePathCacheResponse) ToJsonString() string {
@@ -1210,7 +1439,6 @@ func (r *PurgePathCacheResponse) FromJsonString(s string) error {
 }
 
 type PurgeTask struct {
-
 	// Purge task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -1230,9 +1458,15 @@ type PurgeTask struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+// Predefined struct for user
+type PurgeUrlsCacheRequestParams struct {
+	// List of URLs to be purged. The protocol header must be included.
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+}
+
 type PurgeUrlsCacheRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of URLs to be purged. The protocol header must be included.
 	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 }
@@ -1256,16 +1490,18 @@ func (r *PurgeUrlsCacheRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PurgeUrlsCacheResponseParams struct {
+	// Purge task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PurgeUrlsCacheResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Purge task ID
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PurgeUrlsCacheResponseParams `json:"Response"`
 }
 
 func (r *PurgeUrlsCacheResponse) ToJsonString() string {
@@ -1280,7 +1516,6 @@ func (r *PurgeUrlsCacheResponse) FromJsonString(s string) error {
 }
 
 type Quota struct {
-
 	// Quota limit for one batch submission request.
 	Batch *int64 `json:"Batch,omitempty" name:"Batch"`
 
@@ -1292,7 +1527,6 @@ type Quota struct {
 }
 
 type ResourceData struct {
-
 	// Resource name, which is categorized as follows based on different query conditions:
 	// Specific domain name: indicates the details of the specific domain name
 	// multiDomains: indicates aggregated details of multiple domain names
@@ -1305,7 +1539,6 @@ type ResourceData struct {
 }
 
 type ResponseHeader struct {
-
 	// Custom response header switch. Valid values: on, off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
@@ -1315,7 +1548,6 @@ type ResponseHeader struct {
 }
 
 type ServerCert struct {
-
 	// Server certificate ID, which is required if the certificate is a Tencent Cloud-hosted certificate.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertId *string `json:"CertId,omitempty" name:"CertId"`
@@ -1346,7 +1578,6 @@ type ServerCert struct {
 }
 
 type Sort struct {
-
 	// Sort by field. Valid values:
 	// createTime: domain name creation time
 	// certExpireTime: certificate expiration time
@@ -1356,9 +1587,15 @@ type Sort struct {
 	Sequence *string `json:"Sequence,omitempty" name:"Sequence"`
 }
 
+// Predefined struct for user
+type StartEcdnDomainRequestParams struct {
+	// Domain name to be enabled.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type StartEcdnDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name to be enabled.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
@@ -1382,13 +1619,15 @@ func (r *StartEcdnDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartEcdnDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartEcdnDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartEcdnDomainResponseParams `json:"Response"`
 }
 
 func (r *StartEcdnDomainResponse) ToJsonString() string {
@@ -1402,9 +1641,15 @@ func (r *StartEcdnDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopEcdnDomainRequestParams struct {
+	// Domain name to be disabled.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+}
+
 type StopEcdnDomainRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name to be disabled.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
@@ -1428,13 +1673,15 @@ func (r *StopEcdnDomainRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopEcdnDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopEcdnDomainResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopEcdnDomainResponseParams `json:"Response"`
 }
 
 func (r *StopEcdnDomainResponse) ToJsonString() string {
@@ -1449,7 +1696,6 @@ func (r *StopEcdnDomainResponse) FromJsonString(s string) error {
 }
 
 type Tag struct {
-
 	// Tag key.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -1460,7 +1706,6 @@ type Tag struct {
 }
 
 type TimestampData struct {
-
 	// Statistical time point in forward rounding mode
 	// Taking the 5-minute granularity as an example, 13:35:00 indicates that the statistical interval is between 13:35:00 and 13:39:59
 	Time *string `json:"Time,omitempty" name:"Time"`
@@ -1469,9 +1714,48 @@ type TimestampData struct {
 	Value []*float64 `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type UpdateDomainConfigRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Origin server configuration.
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+	// Project ID.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// IP blocklist/allowlist configuration.
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+	// IP access limit configuration.
+	IpFreqLimit *IpFreqLimit `json:"IpFreqLimit,omitempty" name:"IpFreqLimit"`
+
+	// Origin server response header configuration.
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+	// Node caching configuration.
+	CacheKey *CacheKey `json:"CacheKey,omitempty" name:"CacheKey"`
+
+	// Caching rule configuration.
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+	// HTTPS configuration.
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+	// Forced access protocol redirection configuration.
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+	// Domain name acceleration region. Valid values: mainland (acceleration in Mainland China), overseas (acceleration outside Mainland China), global (global acceleration).
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// WebSocket configuration.
+	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
+}
+
 type UpdateDomainConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -1539,13 +1823,15 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateDomainConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateDomainConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateDomainConfigResponseParams `json:"Response"`
 }
 
 func (r *UpdateDomainConfigResponse) ToJsonString() string {
@@ -1560,7 +1846,6 @@ func (r *UpdateDomainConfigResponse) FromJsonString(s string) error {
 }
 
 type WebSocket struct {
-
 	// Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
 	// 
 	// * WebSocket is now only available for beta users. To use it, please submit a ticket.

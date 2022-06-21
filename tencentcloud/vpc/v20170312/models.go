@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AcceptAttachCcnInstancesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// List of associated instances.
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+}
+
 type AcceptAttachCcnInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -50,13 +59,15 @@ func (r *AcceptAttachCcnInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AcceptAttachCcnInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AcceptAttachCcnInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AcceptAttachCcnInstancesResponseParams `json:"Response"`
 }
 
 func (r *AcceptAttachCcnInstancesResponse) ToJsonString() string {
@@ -71,7 +82,6 @@ func (r *AcceptAttachCcnInstancesResponse) FromJsonString(s string) error {
 }
 
 type AccountAttribute struct {
-
 	// Attribute name
 	AttributeName *string `json:"AttributeName,omitempty" name:"AttributeName"`
 
@@ -79,9 +89,27 @@ type AccountAttribute struct {
 	AttributeValues []*string `json:"AttributeValues,omitempty" name:"AttributeValues"`
 }
 
+// Predefined struct for user
+type AddBandwidthPackageResourcesRequestParams struct {
+	// The unique ID of the source, such as 'eip-xxxx' and 'lb-xxxx'. EIP and LB resources are currently supported.
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// The unique ID of the bandwidth package, such as 'bwp-xxxx'.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// The network type of the bandwidth package. Valid value: `BGP`, indicating that the internal resource is a BGP IP.
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// The resource type, including `Address` and `LoadBalance`.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The protocol type of the bandwidth package. Valid values: `ipv4` and `ipv6`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
 type AddBandwidthPackageResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the source, such as 'eip-xxxx' and 'lb-xxxx'. EIP and LB resources are currently supported.
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
@@ -121,13 +149,15 @@ func (r *AddBandwidthPackageResourcesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddBandwidthPackageResourcesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddBandwidthPackageResourcesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddBandwidthPackageResourcesResponseParams `json:"Response"`
 }
 
 func (r *AddBandwidthPackageResourcesResponse) ToJsonString() string {
@@ -142,7 +172,6 @@ func (r *AddBandwidthPackageResourcesResponse) FromJsonString(s string) error {
 }
 
 type Address struct {
-
 	// `EIP` `ID`, the unique ID of the `EIP`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -215,7 +244,6 @@ type Address struct {
 }
 
 type AddressChargePrepaid struct {
-
 	// Purchased usage period, in month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
@@ -224,7 +252,6 @@ type AddressChargePrepaid struct {
 }
 
 type AddressInfo struct {
-
 	// IP address
 	Address *string `json:"Address,omitempty" name:"Address"`
 
@@ -234,7 +261,6 @@ type AddressInfo struct {
 }
 
 type AddressTemplate struct {
-
 	// IP address template name.
 	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
 
@@ -252,7 +278,6 @@ type AddressTemplate struct {
 }
 
 type AddressTemplateGroup struct {
-
 	// IP address template group name.
 	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
 
@@ -270,7 +295,6 @@ type AddressTemplateGroup struct {
 }
 
 type AddressTemplateItem struct {
-
 	// Start address
 	From *string `json:"From,omitempty" name:"From"`
 
@@ -279,7 +303,6 @@ type AddressTemplateItem struct {
 }
 
 type AddressTemplateSpecification struct {
-
 	// The ID of the IP address, such as `ipm-2uw6ujo6`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -288,7 +311,6 @@ type AddressTemplateSpecification struct {
 }
 
 type AlgType struct {
-
 	// Whether FTP ALG is enabled
 	Ftp *bool `json:"Ftp,omitempty" name:"Ftp"`
 
@@ -296,9 +318,64 @@ type AlgType struct {
 	Sip *bool `json:"Sip,omitempty" name:"Sip"`
 }
 
+// Predefined struct for user
+type AllocateAddressesRequestParams struct {
+	// The number of EIPs. Default: 1.
+	AddressCount *int64 `json:"AddressCount,omitempty" name:"AddressCount"`
+
+	// The EIP line type. Default: BGP.
+	// <ul style="margin:0"><li>For a user who has activated the static single-line IP allowlist, possible values are:<ul><li>CMCC: China Mobile</li>
+	// <li>CTCC: China Telecom</li>
+	// <li>CUCC: China Unicom</li></ul>Note: Only certain regions support static single-line IP addresses.</li></ul>
+	InternetServiceProvider *string `json:"InternetServiceProvider,omitempty" name:"InternetServiceProvider"`
+
+	// The EIP billing method.
+	// <ul style="margin:0"><li>For bill-by-IP account beta users, valid values: <ul><li>BANDWIDTH_PACKAGE: paid by the [bandwidth package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1)(who must also be bandwidth package beta users)</li>
+	// <li>BANDWIDTH_POSTPAID_BY_HOUR: billed by hourly bandwidth on a pay-as-you-go basis</li>
+	// <li>BANDWIDTH_PREPAID_BY_MONTH: monthly bandwidth subscription</li>
+	// <li>TRAFFIC_POSTPAID_BY_HOUR: billed by hourly traffic on a pay-as-you-go basis</li></ul>Default value: TRAFFIC_POSTPAID_BY_HOUR</li>
+	// <li>If you are not a bill-by-IP account beta user, the EIP billing is the same as that for the instance bound to the EIP. Therefore, you do not need to pass in this parameter.</li></ul>
+	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
+
+	// The EIP outbound bandwidth cap, in Mbps.
+	// <ul style="margin:0"><li>For bill-by-IP account beta users, valid values:<ul><li>BANDWIDTH_PACKAGE: 1 Mbps to 1000 Mbps</li>
+	// <li>BANDWIDTH_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li>
+	// <li>BANDWIDTH_PREPAID_BY_MONTH: 1 Mbps to 200 Mbps</li>
+	// <li>TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps</li></ul>Default value: 1 Mbps</li>
+	// <li>If you are not a bill-by-IP account beta user, the EIP outbound bandwidth cap is subject to that of the instance bound to the EIP. Therefore, you do not need to pass in this parameter.</li></ul>
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// A required billing parameter for an EIP billed by monthly bandwidth subscription. For EIPs using other billing modes, it can be ignored.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitempty" name:"AddressChargePrepaid"`
+
+	// The EIP type. Default: `EIP`.
+	// <ul style="margin:0"><li>For AIA beta users, the value should be:<ul><li>`AnycastEIP`: an AIA IP address. For more information, see [Anycast Internet Acceleration](https://intl.cloud.tencent.com/document/product/644?from_cn_redirect=1).</li></ul>Note: Anycast EIPs are only supported in some of the regions.</li></ul>
+	// <ul style="margin:0"><li>For high-quality IP beta users, the value should be: <ul><li>`HighQualityEIP`: high-quality IP</li></ul>Note: High-quality IPs are only supported in some of the regions.</li></ul>
+	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
+
+	// Anycast publishing region
+	// <ul style="margin:0"><li>Valid for users who have activated AIA. Values:<ul><li>ANYCAST_ZONE_GLOBAL: global publishing region </li><li>ANYCAST_ZONE_OVERSEAS: overseas publishing region</li><li><b>**[Disused]**</b> ANYCAST_ZONE_A: publishing region A (updated to ANYCAST_ZONE_GLOBAL)</li><li><b>**[Disused]**</b> ANYCAST_ZONE_B: publishing region B (updated to ANYCAST_ZONE_GLOBAL)</li></ul>Default: ANYCAST_ZONE_OVERSEAS.</li></ul>
+	AnycastZone *string `json:"AnycastZone,omitempty" name:"AnycastZone"`
+
+	// <b>**[Disused]**</b>
+	// Whether the Anycast EIP can be bound to CLB instances.
+	// <ul style="margin:0"><li>Valid for users who have activated the AIA. Values:<ul><li>TRUE: the Anycast EIP can be bound to CLB instances.</li>
+	// <li>FALSE: the Anycast EIP can be bound to CVMs, NAT gateways, and HAVIPs.</li></ul>Default: FALSE.</li></ul>
+	ApplicableForCLB *bool `json:"ApplicableForCLB,omitempty" name:"ApplicableForCLB"`
+
+	// List of tags to be bound.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The unique ID of a BGP bandwidth package. If you configure this parameter and set InternetChargeType as BANDWIDTH_PACKAGE, the new EIP is added to this package and billed by the bandwidth package mode.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// EIP name, which is the custom EIP name given by the user when applying for the EIP. Default: not named
+	AddressName *string `json:"AddressName,omitempty" name:"AddressName"`
+}
+
 type AllocateAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The number of EIPs. Default: 1.
 	AddressCount *int64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
@@ -381,19 +458,21 @@ func (r *AllocateAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AllocateAddressesResponseParams struct {
+	// List of the unique IDs of the requested EIPs.
+	AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet"`
+
+	// The Async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AllocateAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the unique IDs of the requested EIPs.
-		AddressSet []*string `json:"AddressSet,omitempty" name:"AddressSet"`
-
-		// The Async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AllocateAddressesResponseParams `json:"Response"`
 }
 
 func (r *AllocateAddressesResponse) ToJsonString() string {
@@ -407,9 +486,21 @@ func (r *AllocateAddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6AddressesRequestParams struct {
+	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// A list of `IPv6` addresses. You can specify a maximum of 10 at one time. The quota is calculated together with that of `Ipv6AddressCount`, a required input parameter alternative to this one.
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
+
+	// The number of automatically assigned `IPv6` addresses. The total number of private IP addresses cannot exceed the quota. The quota is calculated together with that of `Ipv6Addresses`, a required input parameter alternative to this one.
+	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitempty" name:"Ipv6AddressCount"`
+}
+
 type AssignIpv6AddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -441,16 +532,18 @@ func (r *AssignIpv6AddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6AddressesResponseParams struct {
+	// The list of `IPv6` addresses assigned to ENIs.
+	Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssignIpv6AddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The list of `IPv6` addresses assigned to ENIs.
-		Ipv6AddressSet []*Ipv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssignIpv6AddressesResponseParams `json:"Response"`
 }
 
 func (r *AssignIpv6AddressesResponse) ToJsonString() string {
@@ -464,9 +557,15 @@ func (r *AssignIpv6AddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6CidrBlockRequestParams struct {
+	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
 type AssignIpv6CidrBlockRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 }
@@ -490,16 +589,18 @@ func (r *AssignIpv6CidrBlockRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6CidrBlockResponseParams struct {
+	// The assigned `IPv6` IP range, such as `3402:4e00:20:1000::/56`
+	Ipv6CidrBlock *string `json:"Ipv6CidrBlock,omitempty" name:"Ipv6CidrBlock"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssignIpv6CidrBlockResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The assigned `IPv6` IP range, such as `3402:4e00:20:1000::/56`
-		Ipv6CidrBlock *string `json:"Ipv6CidrBlock,omitempty" name:"Ipv6CidrBlock"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssignIpv6CidrBlockResponseParams `json:"Response"`
 }
 
 func (r *AssignIpv6CidrBlockResponse) ToJsonString() string {
@@ -513,9 +614,18 @@ func (r *AssignIpv6CidrBlockResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6SubnetCidrBlockRequestParams struct {
+	// The `ID` of the VPC where the subnet is located, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The assigned `IPv6` subnet IP range list.
+	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks"`
+}
+
 type AssignIpv6SubnetCidrBlockRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the VPC where the subnet is located, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -543,16 +653,18 @@ func (r *AssignIpv6SubnetCidrBlockRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignIpv6SubnetCidrBlockResponseParams struct {
+	// The assigned `IPv6` subnet IP range list.
+	Ipv6SubnetCidrBlockSet []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlockSet,omitempty" name:"Ipv6SubnetCidrBlockSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssignIpv6SubnetCidrBlockResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The assigned `IPv6` subnet IP range list.
-		Ipv6SubnetCidrBlockSet []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlockSet,omitempty" name:"Ipv6SubnetCidrBlockSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssignIpv6SubnetCidrBlockResponseParams `json:"Response"`
 }
 
 func (r *AssignIpv6SubnetCidrBlockResponse) ToJsonString() string {
@@ -566,9 +678,21 @@ func (r *AssignIpv6SubnetCidrBlockResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignPrivateIpAddressesRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The information on private IP addresses, of which you can specify a maximum of 10 at a time. You should provide either this parameter or SecondaryPrivateIpAddressCount, or both.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+
+	// The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
+	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+}
+
 type AssignPrivateIpAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -600,16 +724,18 @@ func (r *AssignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignPrivateIpAddressesResponseParams struct {
+	// The detailed information of the Private IP.
+	PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssignPrivateIpAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The detailed information of the Private IP.
-		PrivateIpAddressSet []*PrivateIpAddressSpecification `json:"PrivateIpAddressSet,omitempty" name:"PrivateIpAddressSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssignPrivateIpAddressesResponseParams `json:"Response"`
 }
 
 func (r *AssignPrivateIpAddressesResponse) ToJsonString() string {
@@ -624,7 +750,6 @@ func (r *AssignPrivateIpAddressesResponse) FromJsonString(s string) error {
 }
 
 type AssistantCidr struct {
-
 	// The `ID` of a `VPC` instance, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -639,9 +764,27 @@ type AssistantCidr struct {
 	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
 }
 
+// Predefined struct for user
+type AssociateAddressRequestParams struct {
+	// The unique ID of the EIP, such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
+	// The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The ID of the ENI to be bonud, such as `eni-11112222`. `NetworkInterfaceId` and `InstanceId` cannot be specified at the same time. You can query the ENI ID by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `networkInterfaceId` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The private IP to be bound. If you specify `NetworkInterfaceId`, then you must also specify `PrivateIpAddress`, indicating the EIP is bound to the specified private IP of the specified ENI. At the same time, you must ensure the specified `PrivateIpAddress` is a private IP on the `NetworkInterfaceId`. You can query the private IP of the specified ENI by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `privateIpAddress` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+
+	// Specify whether to configure direct access when binding EIPs. For details, see [EIP Direct Access](https://intl.cloud.tencent.com/document/product/213/12540). Valid values: `True` and `False` (default). This parameter can be set to `True` when binding EIPs to a CVM instance or EKS cluster. It is in a beta test. To try it out, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20CLB&level3_id=1071&queue=96&scene_code=34639&step=2).
+	EipDirectConnection *bool `json:"EipDirectConnection,omitempty" name:"EipDirectConnection"`
+}
+
 type AssociateAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -681,16 +824,18 @@ func (r *AssociateAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateAddressResponseParams struct {
+	// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssociateAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssociateAddressResponseParams `json:"Response"`
 }
 
 func (r *AssociateAddressResponse) ToJsonString() string {
@@ -704,9 +849,21 @@ func (r *AssociateAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateDirectConnectGatewayNatGatewayRequestParams struct {
+	// The direct connect gateway ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT Gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+}
+
 type AssociateDirectConnectGatewayNatGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The direct connect gateway ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -738,13 +895,15 @@ func (r *AssociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateDirectConnectGatewayNatGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssociateDirectConnectGatewayNatGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssociateDirectConnectGatewayNatGatewayResponseParams `json:"Response"`
 }
 
 func (r *AssociateDirectConnectGatewayNatGatewayResponse) ToJsonString() string {
@@ -758,9 +917,18 @@ func (r *AssociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s strin
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateNetworkInterfaceSecurityGroupsRequestParams struct {
+	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
+
+	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups. You can enter up to 100 instances for each request.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type AssociateNetworkInterfaceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
@@ -788,13 +956,15 @@ func (r *AssociateNetworkInterfaceSecurityGroupsRequest) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssociateNetworkInterfaceSecurityGroupsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssociateNetworkInterfaceSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssociateNetworkInterfaceSecurityGroupsResponseParams `json:"Response"`
 }
 
 func (r *AssociateNetworkInterfaceSecurityGroupsResponse) ToJsonString() string {
@@ -808,9 +978,21 @@ func (r *AssociateNetworkInterfaceSecurityGroupsResponse) FromJsonString(s strin
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachCcnInstancesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// List of associated network instances
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+
+	// The UIN (root account) of the CCN. By default, the current account belongs to the UIN
+	CcnUin *string `json:"CcnUin,omitempty" name:"CcnUin"`
+}
+
 type AttachCcnInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -842,13 +1024,15 @@ func (r *AttachCcnInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachCcnInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachCcnInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachCcnInstancesResponseParams `json:"Response"`
 }
 
 func (r *AttachCcnInstancesResponse) ToJsonString() string {
@@ -862,9 +1046,18 @@ func (r *AttachCcnInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachClassicLinkVpcRequestParams struct {
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CVM Instance ID
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type AttachClassicLinkVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPC instance ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -892,13 +1085,15 @@ func (r *AttachClassicLinkVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachClassicLinkVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachClassicLinkVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachClassicLinkVpcResponseParams `json:"Response"`
 }
 
 func (r *AttachClassicLinkVpcResponse) ToJsonString() string {
@@ -912,9 +1107,21 @@ func (r *AttachClassicLinkVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachNetworkInterfaceRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The ID of the CVM instance, such as `ins-r8hr2upy`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+}
+
 type AttachNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -946,13 +1153,15 @@ func (r *AttachNetworkInterfaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachNetworkInterfaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *AttachNetworkInterfaceResponse) ToJsonString() string {
@@ -966,9 +1175,21 @@ func (r *AttachNetworkInterfaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AuditCrossBorderComplianceRequestParams struct {
+	// Service provider. Valid values: `UNICOM`.
+	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
+
+	// Unique ID of compliance review request.
+	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
+
+	// Audit behavior. Valid values: `APPROVED` and `DENY`.
+	AuditBehavior *string `json:"AuditBehavior,omitempty" name:"AuditBehavior"`
+}
+
 type AuditCrossBorderComplianceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
@@ -1000,13 +1221,15 @@ func (r *AuditCrossBorderComplianceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AuditCrossBorderComplianceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AuditCrossBorderComplianceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AuditCrossBorderComplianceResponseParams `json:"Response"`
 }
 
 func (r *AuditCrossBorderComplianceResponse) ToJsonString() string {
@@ -1021,7 +1244,6 @@ func (r *AuditCrossBorderComplianceResponse) FromJsonString(s string) error {
 }
 
 type BandwidthPackage struct {
-
 	// The unique ID of the bandwidth package.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
@@ -1048,13 +1270,11 @@ type BandwidthPackage struct {
 }
 
 type BandwidthPackageBillBandwidth struct {
-
 	// Current billable usage, in Mbps
 	BandwidthUsage *uint64 `json:"BandwidthUsage,omitempty" name:"BandwidthUsage"`
 }
 
 type CCN struct {
-
 	// The unique ID of the CCN
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -1100,7 +1320,6 @@ type CCN struct {
 }
 
 type CcnAttachedInstance struct {
-
 	// The ID of a CCN instance.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -1159,7 +1378,6 @@ type CcnAttachedInstance struct {
 }
 
 type CcnBandwidthInfo struct {
-
 	// The CCN ID that the bandwidth belongs to.
 	// Note: this field may return null, indicating that no valid value was found.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
@@ -1190,7 +1408,6 @@ type CcnBandwidthInfo struct {
 }
 
 type CcnInstance struct {
-
 	// The ID of the associated instance.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1212,7 +1429,6 @@ type CcnInstance struct {
 }
 
 type CcnRegionBandwidthLimit struct {
-
 	// Region, such as `ap-guangzhou`
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -1231,7 +1447,6 @@ type CcnRegionBandwidthLimit struct {
 }
 
 type CcnRoute struct {
-
 	// The ID of the routing policy
 	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
 
@@ -1272,9 +1487,21 @@ type CcnRoute struct {
 	InstanceExtraName *string `json:"InstanceExtraName,omitempty" name:"InstanceExtraName"`
 }
 
+// Predefined struct for user
+type CheckAssistantCidrRequestParams struct {
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Load CIDR blocks to add. CIDR block set; format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
+
+	// Load CIDR blocks to delete. CIDR block set; Format: e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
+}
+
 type CheckAssistantCidrRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -1306,16 +1533,18 @@ func (r *CheckAssistantCidrRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckAssistantCidrResponseParams struct {
+	// Array of conflict resources.
+	ConflictSourceSet []*ConflictSource `json:"ConflictSourceSet,omitempty" name:"ConflictSourceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CheckAssistantCidrResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of conflict resources.
-		ConflictSourceSet []*ConflictSource `json:"ConflictSourceSet,omitempty" name:"ConflictSourceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CheckAssistantCidrResponseParams `json:"Response"`
 }
 
 func (r *CheckAssistantCidrResponse) ToJsonString() string {
@@ -1329,9 +1558,43 @@ func (r *CheckAssistantCidrResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckNetDetectStateRequestParams struct {
+	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
+
+	// The type of the next hop. Currently supported types are:
+	// VPN: VPN gateway;
+	// DIRECTCONNECT: direct connect gateway;
+	// PEERCONNECTION: peering connection;
+	// NAT: NAT gateway;
+	// NORMAL_CVM: normal CVM.
+	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
+
+	// The next-hop destination gateway. The value is related to NextHopType.
+	// If NextHopType is set to VPN, the value of this parameter is the VPN gateway ID, such as vpngw-12345678.
+	// If NextHopType is set to DIRECTCONNECT, the value of this parameter is the direct connect gateway ID, such as dcg-12345678.
+	// If NextHopType is set to PEERCONNECTION, the value of this parameter is the peering connection ID, such as pcx-12345678.
+	// If NextHopType is set to NAT, the value of this parameter is the NAT gateway ID, such as nat-12345678.
+	// If NextHopType is set to NORMAL_CVM, the value of this parameter is the IPv4 address of the CVM, such as 10.0.0.12.
+	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
+
+	// ID of a network inspector instance, e.g. netd-12345678. Enter at least one of this parameter, VpcId, SubnetId, and NetDetectName. Use NetDetectId if it is present.
+	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
+
+	// ID of a `VPC` instance, e.g. `vpc-12345678`, which is used together with SubnetId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of a subnet instance, e.g. `subnet-12345678`, which is used together with VpcId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The name of a network inspector, up to 60 bytes in length. It is used together with VpcId and NetDetectName. You should enter either this parameter or NetDetectId, or both. Use NetDetectId if it is present.
+	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
+}
+
 type CheckNetDetectStateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
 	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
@@ -1389,16 +1652,18 @@ func (r *CheckNetDetectStateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckNetDetectStateResponseParams struct {
+	// The array of network detection verification results.
+	NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CheckNetDetectStateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The array of network detection verification results.
-		NetDetectIpStateSet []*NetDetectIpState `json:"NetDetectIpStateSet,omitempty" name:"NetDetectIpStateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CheckNetDetectStateResponseParams `json:"Response"`
 }
 
 func (r *CheckNetDetectStateResponse) ToJsonString() string {
@@ -1413,7 +1678,6 @@ func (r *CheckNetDetectStateResponse) FromJsonString(s string) error {
 }
 
 type CidrForCcn struct {
-
 	// Local CIDR block, including subnet CIDR block and secondary CIDR block
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Cidr *string `json:"Cidr,omitempty" name:"Cidr"`
@@ -1424,7 +1688,6 @@ type CidrForCcn struct {
 }
 
 type ClassicLinkInstance struct {
-
 	// VPC instance ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -1432,9 +1695,27 @@ type ClassicLinkInstance struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
+// Predefined struct for user
+type CloneSecurityGroupRequestParams struct {
+	// ID of the security group to be cloned, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// The name of security group clone. You can enter any name within 60 characters. If this parameter is left empty, the security group clone will use the name of the source security group.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Description of the security group clone. You can enter up to 100 characters. If this parameter is left empty, the security group clone will use the description of the source security group.
+	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
+
+	// Project ID of the security group clone. The default is 0. You can query it on the project management page of the Tencent Cloud console.
+	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// The region of the source security group for a cross-region clone. For example, to clone the security group in Guangzhou to Shanghai, set it to `ap-guangzhou`.
+	RemoteRegion *string `json:"RemoteRegion,omitempty" name:"RemoteRegion"`
+}
+
 type CloneSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the security group to be cloned, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -1474,17 +1755,19 @@ func (r *CloneSecurityGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloneSecurityGroupResponseParams struct {
+	// Security group object
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloneSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group object
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloneSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *CloneSecurityGroupResponse) ToJsonString() string {
@@ -1499,7 +1782,6 @@ func (r *CloneSecurityGroupResponse) FromJsonString(s string) error {
 }
 
 type ConflictItem struct {
-
 	// Conflict resource ID
 	ConfilctId *string `json:"ConfilctId,omitempty" name:"ConfilctId"`
 
@@ -1508,7 +1790,6 @@ type ConflictItem struct {
 }
 
 type ConflictSource struct {
-
 	// Conflict resource ID
 	ConflictSourceId *string `json:"ConflictSourceId,omitempty" name:"ConflictSourceId"`
 
@@ -1519,9 +1800,18 @@ type ConflictSource struct {
 	ConflictItemSet []*ConflictItem `json:"ConflictItemSet,omitempty" name:"ConflictItemSet"`
 }
 
+// Predefined struct for user
+type CreateAddressTemplateGroupRequestParams struct {
+	// Name of the IP address template group
+	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
+
+	// IP address template instance ID, such as `ipm-mdunqeb6`.
+	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds"`
+}
+
 type CreateAddressTemplateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the IP address template group
 	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
 
@@ -1549,16 +1839,18 @@ func (r *CreateAddressTemplateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAddressTemplateGroupResponseParams struct {
+	// Group object of the IP address template.
+	AddressTemplateGroup *AddressTemplateGroup `json:"AddressTemplateGroup,omitempty" name:"AddressTemplateGroup"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAddressTemplateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Group object of the IP address template.
-		AddressTemplateGroup *AddressTemplateGroup `json:"AddressTemplateGroup,omitempty" name:"AddressTemplateGroup"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAddressTemplateGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateAddressTemplateGroupResponse) ToJsonString() string {
@@ -1572,9 +1864,21 @@ func (r *CreateAddressTemplateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAddressTemplateRequestParams struct {
+	// IP address template name.
+	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
+
+	// The address information can be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
+	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
+
+	// The address information can contain remarks and be presented by the IP, CIDR block or IP address range. Either Addresses or AddressesExtra is required.
+	AddressesExtra []*AddressInfo `json:"AddressesExtra,omitempty" name:"AddressesExtra"`
+}
+
 type CreateAddressTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IP address template name.
 	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
 
@@ -1606,16 +1910,18 @@ func (r *CreateAddressTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAddressTemplateResponseParams struct {
+	// The template object of the IP address.
+	AddressTemplate *AddressTemplate `json:"AddressTemplate,omitempty" name:"AddressTemplate"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAddressTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The template object of the IP address.
-		AddressTemplate *AddressTemplate `json:"AddressTemplate,omitempty" name:"AddressTemplate"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAddressTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateAddressTemplateResponse) ToJsonString() string {
@@ -1629,9 +1935,42 @@ func (r *CreateAddressTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAndAttachNetworkInterfaceRequestParams struct {
+	// The ID of the VPC instance. You can obtain the parameter value from the `VpcId` field in the returned result of the `DescribeVpcs` API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The name of the ENI. The maximum length is 60 bytes.
+	NetworkInterfaceName *string `json:"NetworkInterfaceName,omitempty" name:"NetworkInterfaceName"`
+
+	// The subnet instance ID of the ENI, such as 'subnet-0ap8nwca'.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// CVM instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+
+	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
+	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+
+	// The security group to be bound with, such as ['sg-1dd51d'].
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// The ENI description. You can enter any information within 60 characters.
+	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ENI mounting type. Valid values: `0` (standard); `1` (extension); default value: `0`
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+}
+
 type CreateAndAttachNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance. You can obtain the parameter value from the `VpcId` field in the returned result of the `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -1691,16 +2030,18 @@ func (r *CreateAndAttachNetworkInterfaceRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAndAttachNetworkInterfaceResponseParams struct {
+	// The ENI instance.
+	NetworkInterface *NetworkInterface `json:"NetworkInterface,omitempty" name:"NetworkInterface"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAndAttachNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The ENI instance.
-		NetworkInterface *NetworkInterface `json:"NetworkInterface,omitempty" name:"NetworkInterface"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAndAttachNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *CreateAndAttachNetworkInterfaceResponse) ToJsonString() string {
@@ -1714,9 +2055,38 @@ func (r *CreateAndAttachNetworkInterfaceResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBandwidthPackageRequestParams struct {
+	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
+	// `BGP` 
+	// `HIGH_QUALITY_BGP`
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
+	// <li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
+	// <li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
+	// <li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// The name of the bandwidth package.
+	BandwidthPackageName *string `json:"BandwidthPackageName,omitempty" name:"BandwidthPackageName"`
+
+	// The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
+	BandwidthPackageCount *uint64 `json:"BandwidthPackageCount,omitempty" name:"BandwidthPackageCount"`
+
+	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
+	InternetMaxBandwidth *int64 `json:"InternetMaxBandwidth,omitempty" name:"InternetMaxBandwidth"`
+
+	// The list of tags to be bound.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The protocol type of the bandwidth package. Valid values: 'ipv4' and 'ipv6'. Default value: 'ipv4'.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+}
+
 type CreateBandwidthPackageRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
 	// `BGP` 
 	// `HIGH_QUALITY_BGP`
@@ -1769,19 +2139,21 @@ func (r *CreateBandwidthPackageRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBandwidthPackageResponseParams struct {
+	// The unique ID of the bandwidth package.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// The unique ID list of the bandwidth package (effective only when you apply for more than 1 bandwidth packages).
+	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBandwidthPackageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique ID of the bandwidth package.
-		BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
-
-		// The unique ID list of the bandwidth package (effective only when you apply for more than 1 bandwidth packages).
-		BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBandwidthPackageResponseParams `json:"Response"`
 }
 
 func (r *CreateBandwidthPackageResponse) ToJsonString() string {
@@ -1795,9 +2167,30 @@ func (r *CreateBandwidthPackageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCcnRequestParams struct {
+	// The name of the CCN. The maximum length is 60 characters.
+	CcnName *string `json:"CcnName,omitempty" name:"CcnName"`
+
+	// The description of the CCN. The maximum length is 100 characters.
+	CcnDescription *string `json:"CcnDescription,omitempty" name:"CcnDescription"`
+
+	// CCN service quality, 'PT': Platinum, 'AU': Gold, 'AG': Silver. The default is 'AU'.
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
+
+	// The billing method. POSTPAID: postpaid by traffic. Default: POSTPAID.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// The bandwidth limit type. Valid values: OUTER_REGION_LIMIT: region outbound bandwidth limit; INTER_REGION_LIMIT: inter-region bandwidth limit. Default value: OUTER_REGION_LIMIT. Monthly-subscribed CCN instances only support inter-region bandwidth limit, while pay-as-you-go CCN instances support the both bandwidth limit types.
+	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateCcnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The name of the CCN. The maximum length is 60 characters.
 	CcnName *string `json:"CcnName,omitempty" name:"CcnName"`
 
@@ -1841,16 +2234,18 @@ func (r *CreateCcnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCcnResponseParams struct {
+	// The CCN object.
+	Ccn *CCN `json:"Ccn,omitempty" name:"Ccn"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCcnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The CCN object.
-		Ccn *CCN `json:"Ccn,omitempty" name:"Ccn"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCcnResponseParams `json:"Response"`
 }
 
 func (r *CreateCcnResponse) ToJsonString() string {
@@ -1864,9 +2259,21 @@ func (r *CreateCcnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCustomerGatewayRequestParams struct {
+	// Customer gateway can be named freely, but the maximum length is 60 characters.
+	CustomerGatewayName *string `json:"CustomerGatewayName,omitempty" name:"CustomerGatewayName"`
+
+	// Customer gateway public IP.
+	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateCustomerGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Customer gateway can be named freely, but the maximum length is 60 characters.
 	CustomerGatewayName *string `json:"CustomerGatewayName,omitempty" name:"CustomerGatewayName"`
 
@@ -1898,16 +2305,18 @@ func (r *CreateCustomerGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCustomerGatewayResponseParams struct {
+	// Customer gateway object
+	CustomerGateway *CustomerGateway `json:"CustomerGateway,omitempty" name:"CustomerGateway"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCustomerGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Customer gateway object
-		CustomerGateway *CustomerGateway `json:"CustomerGateway,omitempty" name:"CustomerGateway"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCustomerGatewayResponseParams `json:"Response"`
 }
 
 func (r *CreateCustomerGatewayResponse) ToJsonString() string {
@@ -1921,9 +2330,18 @@ func (r *CreateCustomerGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDefaultVpcRequestParams struct {
+	// The ID of the availability zone in which the subnet resides. This parameter can be obtained through the [`DescribeZones`](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API, such as `ap-guangzhou-1`. If it’s not specified, a random availability zone will be used.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Whether to forcibly return a default VPC
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
 type CreateDefaultVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the availability zone in which the subnet resides. This parameter can be obtained through the [`DescribeZones`](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API, such as `ap-guangzhou-1`. If it’s not specified, a random availability zone will be used.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -1951,16 +2369,18 @@ func (r *CreateDefaultVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDefaultVpcResponseParams struct {
+	// Default VPC and subnet IDs
+	Vpc *DefaultVpcSubnet `json:"Vpc,omitempty" name:"Vpc"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDefaultVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Default VPC and subnet IDs
-		Vpc *DefaultVpcSubnet `json:"Vpc,omitempty" name:"Vpc"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDefaultVpcResponseParams `json:"Response"`
 }
 
 func (r *CreateDefaultVpcResponse) ToJsonString() string {
@@ -1974,9 +2394,18 @@ func (r *CreateDefaultVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDirectConnectGatewayCcnRoutesRequestParams struct {
+	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The list of IDC IP range that must be connected
+	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes"`
+}
+
 type CreateDirectConnectGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -2004,13 +2433,15 @@ func (r *CreateDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDirectConnectGatewayCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDirectConnectGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDirectConnectGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *CreateDirectConnectGatewayCcnRoutesResponse) ToJsonString() string {
@@ -2024,9 +2455,38 @@ func (r *CreateDirectConnectGatewayCcnRoutesResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDirectConnectGatewayRequestParams struct {
+	// The name of the direct connect gateway.
+	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitempty" name:"DirectConnectGatewayName"`
+
+	// The type of the associated network. Valid values:
+	// <li>VPC</li>
+	// <li>CCN</li>
+	NetworkType *string `json:"NetworkType,omitempty" name:"NetworkType"`
+
+	// <li>When the NetworkType is VPC, this value is the VPC instance ID</li>
+	// <li>When the NetworkType is CCN, this value is the CCN instance ID</li>
+	NetworkInstanceId *string `json:"NetworkInstanceId,omitempty" name:"NetworkInstanceId"`
+
+	// The type of the gateway. Valid values:
+	// <li>NORMAL - (Default) Standard type. Note: CCN only supports the standard type</li>
+	// <li>NAT - NAT type</li>NAT gateway supports network address translation. The specified type cannot be modified. A VPC can create one NAT direct connect gateway and one non-NAT direct connect gateway
+	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
+
+	// CCN route publishing method. Valid values: `standard` and `exquisite`. This parameter is only valid for the CCN direct connect gateway.
+	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
+
+	// Availability zone where the direct connect gateway resides.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// ID of DC highly available placement group
+	HaZoneGroupId *string `json:"HaZoneGroupId,omitempty" name:"HaZoneGroupId"`
+}
+
 type CreateDirectConnectGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The name of the direct connect gateway.
 	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitempty" name:"DirectConnectGatewayName"`
 
@@ -2079,16 +2539,18 @@ func (r *CreateDirectConnectGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDirectConnectGatewayResponseParams struct {
+	// The object of the direct connect gateway.
+	DirectConnectGateway *DirectConnectGateway `json:"DirectConnectGateway,omitempty" name:"DirectConnectGateway"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDirectConnectGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The object of the direct connect gateway.
-		DirectConnectGateway *DirectConnectGateway `json:"DirectConnectGateway,omitempty" name:"DirectConnectGateway"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDirectConnectGatewayResponseParams `json:"Response"`
 }
 
 func (r *CreateDirectConnectGatewayResponse) ToJsonString() string {
@@ -2102,9 +2564,42 @@ func (r *CreateDirectConnectGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateFlowLogRequestParams struct {
+	// The name of the flow log instance.
+	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
+
+	// The type of resource associated with the flow log. Valid values: `VPC`, `SUBNET`, `NETWORKINTERFACE`, `CCN`, `NAT`, and `DCG`.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The unique ID of the resource.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Type of the flow logs to be collected. Valid values: `ACCEPT`, `REJECT` and `ALL`.
+	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The description of the flow log instance
+	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
+
+	// The storage ID of the flow log.
+	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Consumer types: `cls` and `ckafka`
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Information of the flow log consumer, which is required when the consumer type is `ckafka`.
+	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
+}
+
 type CreateFlowLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
@@ -2164,16 +2659,18 @@ func (r *CreateFlowLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateFlowLogResponseParams struct {
+	// The information of the flow log created.
+	FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateFlowLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The information of the flow log created.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateFlowLogResponseParams `json:"Response"`
 }
 
 func (r *CreateFlowLogResponse) ToJsonString() string {
@@ -2187,9 +2684,24 @@ func (r *CreateFlowLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHaVipRequestParams struct {
+	// The `ID` of the VPC to which the `HAVIP` belongs.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The `ID` of the subnet to which the `HAVIP` belongs.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The name of the `HAVIP`.
+	HaVipName *string `json:"HaVipName,omitempty" name:"HaVipName"`
+
+	// The specified virtual IP address, which must be within the IP range of the `VPC` and not in use. It will be automatically assigned if not specified.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+}
+
 type CreateHaVipRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the VPC to which the `HAVIP` belongs.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2225,16 +2737,18 @@ func (r *CreateHaVipRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateHaVipResponseParams struct {
+	// `HAVIP` object.
+	HaVip *HaVip `json:"HaVip,omitempty" name:"HaVip"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateHaVipResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `HAVIP` object.
-		HaVip *HaVip `json:"HaVip,omitempty" name:"HaVip"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateHaVipResponseParams `json:"Response"`
 }
 
 func (r *CreateHaVipResponse) ToJsonString() string {
@@ -2248,9 +2762,21 @@ func (r *CreateHaVipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateLocalGatewayRequestParams struct {
+	// Local gateway name
+	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+}
+
 type CreateLocalGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Local gateway name
 	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
 
@@ -2282,16 +2808,18 @@ func (r *CreateLocalGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateLocalGatewayResponseParams struct {
+	// Local gateway information
+	LocalGateway *LocalGateway `json:"LocalGateway,omitempty" name:"LocalGateway"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateLocalGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Local gateway information
-		LocalGateway *LocalGateway `json:"LocalGateway,omitempty" name:"LocalGateway"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateLocalGatewayResponseParams `json:"Response"`
 }
 
 func (r *CreateLocalGatewayResponse) ToJsonString() string {
@@ -2305,9 +2833,45 @@ func (r *CreateLocalGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetDetectRequestParams struct {
+	// The `ID` of a `VPC` instance, such as `vpc-12345678`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The ID of a subnet instance, such as subnet-12345678.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The name of a network detection instance. The maximum length is 60 characters.
+	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
+
+	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
+
+	// Type of the next hop. Valid values:
+	// `VPN`: VPN gateway;
+	// `DIRECTCONNECT`: direct connect gateway;
+	// `PEERCONNECTION`: peering connection;
+	// `NAT`: NAT gateway;
+	// `NORMAL_CVM`: normal CVM;
+	// `CCN`: CCN gateway.
+	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
+
+	// Next-hop destination gateway. Its value is determined by `NextHopType`.
+	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
+
+	// Network detection description.
+	NetDetectDescription *string `json:"NetDetectDescription,omitempty" name:"NetDetectDescription"`
+}
+
 type CreateNetDetectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of a `VPC` instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2367,16 +2931,18 @@ func (r *CreateNetDetectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetDetectResponseParams struct {
+	// The network detection (NetDetect) object.
+	NetDetect *NetDetect `json:"NetDetect,omitempty" name:"NetDetect"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateNetDetectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The network detection (NetDetect) object.
-		NetDetect *NetDetect `json:"NetDetect,omitempty" name:"NetDetect"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateNetDetectResponseParams `json:"Response"`
 }
 
 func (r *CreateNetDetectResponse) ToJsonString() string {
@@ -2390,9 +2956,36 @@ func (r *CreateNetDetectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetworkInterfaceRequestParams struct {
+	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The name of the ENI. The maximum length is 60 characters.
+	NetworkInterfaceName *string `json:"NetworkInterfaceName,omitempty" name:"NetworkInterfaceName"`
+
+	// The subnet instance ID of the ENI, such as `subnet-0ap8nwca`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// ENI description can be named freely, but the maximum length is 60 characters.
+	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
+
+	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
+	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+
+	// Specifies the security group to be bound with, such as ['sg-1dd51d'].
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// The information of the specified private IPs. You can specify a maximum of 10 each time.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2444,16 +3037,18 @@ func (r *CreateNetworkInterfaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateNetworkInterfaceResponseParams struct {
+	// ENI instance.
+	NetworkInterface *NetworkInterface `json:"NetworkInterface,omitempty" name:"NetworkInterface"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ENI instance.
-		NetworkInterface *NetworkInterface `json:"NetworkInterface,omitempty" name:"NetworkInterface"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *CreateNetworkInterfaceResponse) ToJsonString() string {
@@ -2467,9 +3062,21 @@ func (r *CreateNetworkInterfaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRouteTableRequestParams struct {
+	// The ID of the VPC instance to be operated on. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The route table name. The maximum length is 60 characters.
+	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateRouteTableRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance to be operated on. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2501,16 +3108,18 @@ func (r *CreateRouteTableRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRouteTableResponseParams struct {
+	// Route table object.
+	RouteTable *RouteTable `json:"RouteTable,omitempty" name:"RouteTable"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRouteTableResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Route table object.
-		RouteTable *RouteTable `json:"RouteTable,omitempty" name:"RouteTable"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRouteTableResponseParams `json:"Response"`
 }
 
 func (r *CreateRouteTableResponse) ToJsonString() string {
@@ -2524,9 +3133,18 @@ func (r *CreateRouteTableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoutesRequestParams struct {
+	// Route table instance ID.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// Routing policy object.
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
+}
+
 type CreateRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Route table instance ID.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
@@ -2554,19 +3172,21 @@ func (r *CreateRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoutesResponseParams struct {
+	// The number of newly added instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Route table object.
+	RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of newly added instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Route table object.
-		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRoutesResponseParams `json:"Response"`
 }
 
 func (r *CreateRoutesResponse) ToJsonString() string {
@@ -2580,9 +3200,18 @@ func (r *CreateRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupPoliciesRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group policy set.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+}
+
 type CreateSecurityGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -2610,13 +3239,15 @@ func (r *CreateSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupPoliciesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityGroupPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityGroupPoliciesResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityGroupPoliciesResponse) ToJsonString() string {
@@ -2630,9 +3261,24 @@ func (r *CreateSecurityGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupRequestParams struct {
+	// Security group can be named freely, but cannot exceed 60 characters.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// The remarks for the security group. The maximum length is 100 characters.
+	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
+
+	// Project ID. The default is 0. You can query it on the project management page of the Qcloud console.
+	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security group can be named freely, but cannot exceed 60 characters.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -2668,16 +3314,18 @@ func (r *CreateSecurityGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupResponseParams struct {
+	// Security group object.
+	SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group object.
-		SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityGroupResponse) ToJsonString() string {
@@ -2691,9 +3339,24 @@ func (r *CreateSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupWithPoliciesRequestParams struct {
+	// Security group can be named freely, but cannot exceed 60 characters.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// The remarks for the security group. The maximum length is 100 characters.
+	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
+
+	// The project id is 0 by default. You can query this in the project management page of the Qcloud console.
+	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Security group policy set.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+}
+
 type CreateSecurityGroupWithPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security group can be named freely, but cannot exceed 60 characters.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -2729,16 +3392,18 @@ func (r *CreateSecurityGroupWithPoliciesRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityGroupWithPoliciesResponseParams struct {
+	// Security group object.
+	SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityGroupWithPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group object.
-		SecurityGroup *SecurityGroup `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityGroupWithPoliciesResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityGroupWithPoliciesResponse) ToJsonString() string {
@@ -2752,9 +3417,18 @@ func (r *CreateSecurityGroupWithPoliciesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceTemplateGroupRequestParams struct {
+	// Group name of the protocol port template.
+	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
+
+	// Instance ID of the protocol port template, such as `ppm-4dw6agho`.
+	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds"`
+}
+
 type CreateServiceTemplateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Group name of the protocol port template.
 	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
 
@@ -2782,16 +3456,18 @@ func (r *CreateServiceTemplateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceTemplateGroupResponseParams struct {
+	// Group object of the protocol port template.
+	ServiceTemplateGroup *ServiceTemplateGroup `json:"ServiceTemplateGroup,omitempty" name:"ServiceTemplateGroup"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateServiceTemplateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Group object of the protocol port template.
-		ServiceTemplateGroup *ServiceTemplateGroup `json:"ServiceTemplateGroup,omitempty" name:"ServiceTemplateGroup"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateServiceTemplateGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateServiceTemplateGroupResponse) ToJsonString() string {
@@ -2805,9 +3481,21 @@ func (r *CreateServiceTemplateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceTemplateRequestParams struct {
+	// Template name of the protocol port
+	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
+
+	// Supported ports inlcude single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
+	Services []*string `json:"Services,omitempty" name:"Services"`
+
+	// You can add remarks. Supported ports include single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP and GRE. Either Services or ServicesExtra is required.
+	ServicesExtra []*ServicesInfo `json:"ServicesExtra,omitempty" name:"ServicesExtra"`
+}
+
 type CreateServiceTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Template name of the protocol port
 	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
 
@@ -2839,16 +3527,18 @@ func (r *CreateServiceTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceTemplateResponseParams struct {
+	// Protocol port template object.
+	ServiceTemplate *ServiceTemplate `json:"ServiceTemplate,omitempty" name:"ServiceTemplate"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateServiceTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Protocol port template object.
-		ServiceTemplate *ServiceTemplate `json:"ServiceTemplate,omitempty" name:"ServiceTemplate"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateServiceTemplateResponseParams `json:"Response"`
 }
 
 func (r *CreateServiceTemplateResponse) ToJsonString() string {
@@ -2862,9 +3552,30 @@ func (r *CreateServiceTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubnetRequestParams struct {
+	// The ID of the VPC instance to be operated on. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The subnet name. The maximum length is 60 bytes.
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// The subnet IP address range. It must be within the VPC IP address range. Subnet IP address ranges cannot overlap with each other within the same VPC.
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// The ID of the availability zone in which the subnet resides. You can set up disaster recovery across availability zones by choosing different availability zones for different subnets.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+}
+
 type CreateSubnetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance to be operated on. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2908,16 +3619,18 @@ func (r *CreateSubnetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubnetResponseParams struct {
+	// Subnet object.
+	Subnet *Subnet `json:"Subnet,omitempty" name:"Subnet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSubnetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Subnet object.
-		Subnet *Subnet `json:"Subnet,omitempty" name:"Subnet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSubnetResponseParams `json:"Response"`
 }
 
 func (r *CreateSubnetResponse) ToJsonString() string {
@@ -2931,9 +3644,24 @@ func (r *CreateSubnetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubnetsRequestParams struct {
+	// The `ID` of the `VPC` instance, such as `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The subnet object list.
+	Subnets []*SubnetInput `json:"Subnets,omitempty" name:"Subnets"`
+
+	// Bound tags. Note that the collection of tags here is shared by all subnet objects in the list. You cannot specify tags for each subnet. Example: [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the CDC instance to which the subnets will be created
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+}
+
 type CreateSubnetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the `VPC` instance, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -2969,16 +3697,18 @@ func (r *CreateSubnetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSubnetsResponseParams struct {
+	// The list of newly created subnets.
+	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSubnetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The list of newly created subnets.
-		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSubnetsResponseParams `json:"Response"`
 }
 
 func (r *CreateSubnetsResponse) ToJsonString() string {
@@ -2992,9 +3722,30 @@ func (r *CreateSubnetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointRequestParams struct {
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Endpoint name
+	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Endpoint VIP. You can apply for a specified IP.
+	EndPointVip *string `json:"EndPointVip,omitempty" name:"EndPointVip"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+}
+
 type CreateVpcEndPointRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPC instance ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -3038,16 +3789,18 @@ func (r *CreateVpcEndPointRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointResponseParams struct {
+	// Endpoint details
+	EndPoint *EndPoint `json:"EndPoint,omitempty" name:"EndPoint"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpcEndPointResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Endpoint details
-		EndPoint *EndPoint `json:"EndPoint,omitempty" name:"EndPoint"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpcEndPointResponseParams `json:"Response"`
 }
 
 func (r *CreateVpcEndPointResponse) ToJsonString() string {
@@ -3061,9 +3814,27 @@ func (r *CreateVpcEndPointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointServiceRequestParams struct {
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Endpoint service name
+	EndPointServiceName *string `json:"EndPointServiceName,omitempty" name:"EndPointServiceName"`
+
+	// Whether to automatically accept
+	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
+
+	// Real server ID, such as `lb-xxx`.
+	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
+
+	// Whether it is of the type `PassService`. Valid values: true: yes; false: no. Default value: false
+	IsPassService *bool `json:"IsPassService,omitempty" name:"IsPassService"`
+}
+
 type CreateVpcEndPointServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPC instance ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -3103,16 +3874,18 @@ func (r *CreateVpcEndPointServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointServiceResponseParams struct {
+	// Endpoint service details
+	EndPointService *EndPointService `json:"EndPointService,omitempty" name:"EndPointService"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpcEndPointServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Endpoint service details
-		EndPointService *EndPointService `json:"EndPointService,omitempty" name:"EndPointService"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpcEndPointServiceResponseParams `json:"Response"`
 }
 
 func (r *CreateVpcEndPointServiceResponse) ToJsonString() string {
@@ -3126,9 +3899,21 @@ func (r *CreateVpcEndPointServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointServiceWhiteListRequestParams struct {
+	// UIN
+	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Allowlist description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type CreateVpcEndPointServiceWhiteListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// UIN
 	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
 
@@ -3160,13 +3945,15 @@ func (r *CreateVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcEndPointServiceWhiteListResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpcEndPointServiceWhiteListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpcEndPointServiceWhiteListResponseParams `json:"Response"`
 }
 
 func (r *CreateVpcEndPointServiceWhiteListResponse) ToJsonString() string {
@@ -3180,9 +3967,30 @@ func (r *CreateVpcEndPointServiceWhiteListResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcRequestParams struct {
+	// The VPC name. The maximum length is 60 bytes.
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// Whether multicast is enabled. `true`: Enabled. `false`: Not enabled.
+	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
+
+	// DNS address. A maximum of 4 addresses is supported.
+	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers"`
+
+	// Domain name of DHCP
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The VPC name. The maximum length is 60 bytes.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
@@ -3226,16 +4034,18 @@ func (r *CreateVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpcResponseParams struct {
+	// The VPC object.
+	Vpc *Vpc `json:"Vpc,omitempty" name:"Vpc"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The VPC object.
-		Vpc *Vpc `json:"Vpc,omitempty" name:"Vpc"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpcResponseParams `json:"Response"`
 }
 
 func (r *CreateVpcResponse) ToJsonString() string {
@@ -3249,9 +4059,64 @@ func (r *CreateVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnConnectionRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
+
+	// Gateway can be named freely, but the maximum length is 60 characters.
+	VpnConnectionName *string `json:"VpnConnectionName,omitempty" name:"VpnConnectionName"`
+
+	// The pre-shared key.
+	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
+
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
+	// This parameter is optional for a CCN-based VPN tunnel.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
+	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
+
+	// Internet Key Exchange (IKE) configuration. IKE has a self-protection mechanism. The network security protocol is configured by the user.
+	IKEOptionsSpecification *IKEOptionsSpecification `json:"IKEOptionsSpecification,omitempty" name:"IKEOptionsSpecification"`
+
+	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
+	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether the tunnel health check is supported.
+	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
+
+	// Local IP address for the health check
+	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
+
+	// Peer IP address for the health check
+	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
+
+	// Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
+	RouteType *string `json:"RouteType,omitempty" name:"RouteType"`
+
+	// Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+	NegotiationType *string `json:"NegotiationType,omitempty" name:"NegotiationType"`
+
+	// Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+	DpdEnable *int64 `json:"DpdEnable,omitempty" name:"DpdEnable"`
+
+	// DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+	DpdTimeout *string `json:"DpdTimeout,omitempty" name:"DpdTimeout"`
+
+	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
+}
+
 type CreateVpnConnectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -3340,16 +4205,18 @@ func (r *CreateVpnConnectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnConnectionResponseParams struct {
+	// Tunnel instance object.
+	VpnConnection *VpnConnection `json:"VpnConnection,omitempty" name:"VpnConnection"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpnConnectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Tunnel instance object.
-		VpnConnection *VpnConnection `json:"VpnConnection,omitempty" name:"VpnConnection"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpnConnectionResponseParams `json:"Response"`
 }
 
 func (r *CreateVpnConnectionResponse) ToJsonString() string {
@@ -3363,9 +4230,42 @@ func (r *CreateVpnConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnGatewayRequestParams struct {
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The VPN gateway name. The maximum length is 60 bytes.
+	VpnGatewayName *string `json:"VpnGatewayName,omitempty" name:"VpnGatewayName"`
+
+	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// The VPN gateway billing mode. PREPAID: prepaid means monthly subscription. POSTPAID_BY_HOUR: postpaid means pay-as-you-go. Default: POSTPAID_BY_HOUR. If prepaid mode is specified, the `InstanceChargePrepaid` parameter must be entered.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Parameter settings for prepaid billing mode, also known as monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. This parameter is mandatory for prepaid instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The availability zone, such as `ap-guangzhou-2`.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPN gateway type. Values: `CCN` (CCN VPN gateway), `SSL` (SSL VPN gateway)
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Maximum number of connected clients allowed for the SSL VPN gateway. Valid values: [5, 10, 20, 50, 100]. This parameter is only required for SSL VPN gateways.
+	MaxConnection *uint64 `json:"MaxConnection,omitempty" name:"MaxConnection"`
+}
+
 type CreateVpnGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -3425,16 +4325,18 @@ func (r *CreateVpnGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnGatewayResponseParams struct {
+	// VPN gateway object.
+	VpnGateway *VpnGateway `json:"VpnGateway,omitempty" name:"VpnGateway"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpnGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// VPN gateway object.
-		VpnGateway *VpnGateway `json:"VpnGateway,omitempty" name:"VpnGateway"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpnGatewayResponseParams `json:"Response"`
 }
 
 func (r *CreateVpnGatewayResponse) ToJsonString() string {
@@ -3448,9 +4350,18 @@ func (r *CreateVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnGatewayRoutesRequestParams struct {
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Destination route list of a VPN gateway
+	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+}
+
 type CreateVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPN gateway ID
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -3478,16 +4389,18 @@ func (r *CreateVpnGatewayRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVpnGatewayRoutesResponseParams struct {
+	// Destination routes of a VPN gateway
+	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateVpnGatewayRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Destination routes of a VPN gateway
-		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateVpnGatewayRoutesResponseParams `json:"Response"`
 }
 
 func (r *CreateVpnGatewayRoutesResponse) ToJsonString() string {
@@ -3502,7 +4415,6 @@ func (r *CreateVpnGatewayRoutesResponse) FromJsonString(s string) error {
 }
 
 type CrossBorderCompliance struct {
-
 	// Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
@@ -3571,7 +4483,6 @@ type CrossBorderCompliance struct {
 }
 
 type CustomerGateway struct {
-
 	// The unique ID of the customer gateway
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
@@ -3586,7 +4497,6 @@ type CustomerGateway struct {
 }
 
 type CustomerGatewayVendor struct {
-
 	// Platform.
 	Platform *string `json:"Platform,omitempty" name:"Platform"`
 
@@ -3598,7 +4508,6 @@ type CustomerGatewayVendor struct {
 }
 
 type CvmInstance struct {
-
 	// VPC instance ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -3637,7 +4546,6 @@ type CvmInstance struct {
 }
 
 type DefaultVpcSubnet struct {
-
 	// Default VpcId
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -3645,9 +4553,15 @@ type DefaultVpcSubnet struct {
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
+// Predefined struct for user
+type DeleteAddressTemplateGroupRequestParams struct {
+	// The IP address template group instance ID, such as `ipmg-90cex8mq`.
+	AddressTemplateGroupId *string `json:"AddressTemplateGroupId,omitempty" name:"AddressTemplateGroupId"`
+}
+
 type DeleteAddressTemplateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The IP address template group instance ID, such as `ipmg-90cex8mq`.
 	AddressTemplateGroupId *string `json:"AddressTemplateGroupId,omitempty" name:"AddressTemplateGroupId"`
 }
@@ -3671,13 +4585,15 @@ func (r *DeleteAddressTemplateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAddressTemplateGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAddressTemplateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAddressTemplateGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteAddressTemplateGroupResponse) ToJsonString() string {
@@ -3691,9 +4607,15 @@ func (r *DeleteAddressTemplateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAddressTemplateRequestParams struct {
+	// The IP address template instance ID, such as `ipm-09o5m8kc`.
+	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
+}
+
 type DeleteAddressTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The IP address template instance ID, such as `ipm-09o5m8kc`.
 	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
 }
@@ -3717,13 +4639,15 @@ func (r *DeleteAddressTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAddressTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAddressTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAddressTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteAddressTemplateResponse) ToJsonString() string {
@@ -3737,9 +4661,15 @@ func (r *DeleteAddressTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteBandwidthPackageRequestParams struct {
+	// The unique ID of the bandwidth package to be deleted.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+}
+
 type DeleteBandwidthPackageRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the bandwidth package to be deleted.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
@@ -3763,13 +4693,15 @@ func (r *DeleteBandwidthPackageRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteBandwidthPackageResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteBandwidthPackageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteBandwidthPackageResponseParams `json:"Response"`
 }
 
 func (r *DeleteBandwidthPackageResponse) ToJsonString() string {
@@ -3783,9 +4715,15 @@ func (r *DeleteBandwidthPackageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCcnRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type DeleteCcnRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
@@ -3809,13 +4747,15 @@ func (r *DeleteCcnRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCcnResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCcnResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCcnResponseParams `json:"Response"`
 }
 
 func (r *DeleteCcnResponse) ToJsonString() string {
@@ -3829,9 +4769,15 @@ func (r *DeleteCcnResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCustomerGatewayRequestParams struct {
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
+}
+
 type DeleteCustomerGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 }
@@ -3855,13 +4801,15 @@ func (r *DeleteCustomerGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCustomerGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCustomerGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCustomerGatewayResponseParams `json:"Response"`
 }
 
 func (r *DeleteCustomerGatewayResponse) ToJsonString() string {
@@ -3875,9 +4823,18 @@ func (r *DeleteCustomerGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDirectConnectGatewayCcnRoutesRequestParams struct {
+	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The route ID, such as `ccnr-f49l6u0z`.
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+}
+
 type DeleteDirectConnectGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -3905,13 +4862,15 @@ func (r *DeleteDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDirectConnectGatewayCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDirectConnectGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDirectConnectGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *DeleteDirectConnectGatewayCcnRoutesResponse) ToJsonString() string {
@@ -3925,9 +4884,15 @@ func (r *DeleteDirectConnectGatewayCcnRoutesResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDirectConnectGatewayRequestParams struct {
+	// The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+}
+
 type DeleteDirectConnectGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the direct connect gateway, such as `dcg-9o233uri`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 }
@@ -3951,13 +4916,15 @@ func (r *DeleteDirectConnectGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteDirectConnectGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteDirectConnectGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteDirectConnectGatewayResponseParams `json:"Response"`
 }
 
 func (r *DeleteDirectConnectGatewayResponse) ToJsonString() string {
@@ -3971,9 +4938,18 @@ func (r *DeleteDirectConnectGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFlowLogRequestParams struct {
+	// The unique ID of the flow log.
+	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless a CCN flow log is deleted.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
 type DeleteFlowLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the flow log.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
 
@@ -4001,13 +4977,15 @@ func (r *DeleteFlowLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteFlowLogResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteFlowLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteFlowLogResponseParams `json:"Response"`
 }
 
 func (r *DeleteFlowLogResponse) ToJsonString() string {
@@ -4021,9 +4999,15 @@ func (r *DeleteFlowLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteHaVipRequestParams struct {
+	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
+	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
+}
+
 type DeleteHaVipRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
 }
@@ -4047,13 +5031,15 @@ func (r *DeleteHaVipRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteHaVipResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteHaVipResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteHaVipResponseParams `json:"Response"`
 }
 
 func (r *DeleteHaVipResponse) ToJsonString() string {
@@ -4067,9 +5053,21 @@ func (r *DeleteHaVipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteLocalGatewayRequestParams struct {
+	// Local gateway instance ID
+	LocalGatewayId *string `json:"LocalGatewayId,omitempty" name:"LocalGatewayId"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
 type DeleteLocalGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Local gateway instance ID
 	LocalGatewayId *string `json:"LocalGatewayId,omitempty" name:"LocalGatewayId"`
 
@@ -4101,13 +5099,15 @@ func (r *DeleteLocalGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteLocalGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteLocalGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteLocalGatewayResponseParams `json:"Response"`
 }
 
 func (r *DeleteLocalGatewayResponse) ToJsonString() string {
@@ -4121,9 +5121,15 @@ func (r *DeleteLocalGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteNetDetectRequestParams struct {
+	// The `ID` of a network detection instance, such as `netd-12345678`.
+	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
+}
+
 type DeleteNetDetectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of a network detection instance, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 }
@@ -4147,13 +5153,15 @@ func (r *DeleteNetDetectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteNetDetectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteNetDetectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteNetDetectResponseParams `json:"Response"`
 }
 
 func (r *DeleteNetDetectResponse) ToJsonString() string {
@@ -4167,9 +5175,15 @@ func (r *DeleteNetDetectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteNetworkInterfaceRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+}
+
 type DeleteNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 }
@@ -4193,13 +5207,15 @@ func (r *DeleteNetworkInterfaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteNetworkInterfaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *DeleteNetworkInterfaceResponse) ToJsonString() string {
@@ -4213,9 +5229,15 @@ func (r *DeleteNetworkInterfaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRouteTableRequestParams struct {
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+}
+
 type DeleteRouteTableRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The route table instance ID, such as `rtb-azd4dt1c`.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 }
@@ -4239,13 +5261,15 @@ func (r *DeleteRouteTableRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRouteTableResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRouteTableResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRouteTableResponseParams `json:"Response"`
 }
 
 func (r *DeleteRouteTableResponse) ToJsonString() string {
@@ -4259,9 +5283,18 @@ func (r *DeleteRouteTableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRoutesRequestParams struct {
+	// Route table instance ID.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// Routing policy object. Only the `RouteId` field is required when deleting a routing policy.
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
+}
+
 type DeleteRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Route table instance ID.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
@@ -4289,16 +5322,18 @@ func (r *DeleteRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRoutesResponseParams struct {
+	// Details of the routing policy that has been deleted.
+	RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Details of the routing policy that has been deleted.
-		RouteSet []*Route `json:"RouteSet,omitempty" name:"RouteSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRoutesResponseParams `json:"Response"`
 }
 
 func (r *DeleteRoutesResponse) ToJsonString() string {
@@ -4312,9 +5347,18 @@ func (r *DeleteRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityGroupPoliciesRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// The policy set of the security group. One request can only delete one or more policies in one direction. Both PolicyIndex-matching deletion and security group policy-matching deletion methods are supported. Each request can use only one matching method.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+}
+
 type DeleteSecurityGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -4342,13 +5386,15 @@ func (r *DeleteSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityGroupPoliciesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSecurityGroupPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSecurityGroupPoliciesResponseParams `json:"Response"`
 }
 
 func (r *DeleteSecurityGroupPoliciesResponse) ToJsonString() string {
@@ -4362,9 +5408,15 @@ func (r *DeleteSecurityGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityGroupRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+}
+
 type DeleteSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 }
@@ -4388,13 +5440,15 @@ func (r *DeleteSecurityGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteSecurityGroupResponse) ToJsonString() string {
@@ -4408,9 +5462,15 @@ func (r *DeleteSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceTemplateGroupRequestParams struct {
+	// The protocol port template group instance ID, such as `ppmg-n17uxvve`.
+	ServiceTemplateGroupId *string `json:"ServiceTemplateGroupId,omitempty" name:"ServiceTemplateGroupId"`
+}
+
 type DeleteServiceTemplateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The protocol port template group instance ID, such as `ppmg-n17uxvve`.
 	ServiceTemplateGroupId *string `json:"ServiceTemplateGroupId,omitempty" name:"ServiceTemplateGroupId"`
 }
@@ -4434,13 +5494,15 @@ func (r *DeleteServiceTemplateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceTemplateGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServiceTemplateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServiceTemplateGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteServiceTemplateGroupResponse) ToJsonString() string {
@@ -4454,9 +5516,15 @@ func (r *DeleteServiceTemplateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceTemplateRequestParams struct {
+	// Protocol port template instance ID, such as `ppm-e6dy460g`.
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+}
+
 type DeleteServiceTemplateRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Protocol port template instance ID, such as `ppm-e6dy460g`.
 	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
 }
@@ -4480,13 +5548,15 @@ func (r *DeleteServiceTemplateRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServiceTemplateResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServiceTemplateResponseParams `json:"Response"`
 }
 
 func (r *DeleteServiceTemplateResponse) ToJsonString() string {
@@ -4500,9 +5570,15 @@ func (r *DeleteServiceTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSubnetRequestParams struct {
+	// The ID of the subnet instance. You can obtain the parameter value from the SubnetId field in the returned result of DescribeSubnets API.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
 type DeleteSubnetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the subnet instance. You can obtain the parameter value from the SubnetId field in the returned result of DescribeSubnets API.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
@@ -4526,13 +5602,15 @@ func (r *DeleteSubnetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSubnetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSubnetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSubnetResponseParams `json:"Response"`
 }
 
 func (r *DeleteSubnetResponse) ToJsonString() string {
@@ -4546,9 +5624,15 @@ func (r *DeleteSubnetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointRequestParams struct {
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+}
+
 type DeleteVpcEndPointRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
 }
@@ -4572,13 +5656,15 @@ func (r *DeleteVpcEndPointRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpcEndPointResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpcEndPointResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpcEndPointResponse) ToJsonString() string {
@@ -4592,9 +5678,15 @@ func (r *DeleteVpcEndPointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointServiceRequestParams struct {
+	// Endpoint ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+}
+
 type DeleteVpcEndPointServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Endpoint ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 }
@@ -4618,13 +5710,15 @@ func (r *DeleteVpcEndPointServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpcEndPointServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpcEndPointServiceResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpcEndPointServiceResponse) ToJsonString() string {
@@ -4638,9 +5732,18 @@ func (r *DeleteVpcEndPointServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointServiceWhiteListRequestParams struct {
+	// Array of user UINs
+	UserUin []*string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+}
+
 type DeleteVpcEndPointServiceWhiteListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array of user UINs
 	UserUin []*string `json:"UserUin,omitempty" name:"UserUin"`
 
@@ -4668,13 +5771,15 @@ func (r *DeleteVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcEndPointServiceWhiteListResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpcEndPointServiceWhiteListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpcEndPointServiceWhiteListResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpcEndPointServiceWhiteListResponse) ToJsonString() string {
@@ -4688,9 +5793,15 @@ func (r *DeleteVpcEndPointServiceWhiteListResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcRequestParams struct {
+	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
 type DeleteVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 }
@@ -4714,13 +5825,15 @@ func (r *DeleteVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpcResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpcResponse) ToJsonString() string {
@@ -4734,9 +5847,18 @@ func (r *DeleteVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnConnectionRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
+	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
+}
+
 type DeleteVpnConnectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -4764,13 +5886,15 @@ func (r *DeleteVpnConnectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnConnectionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpnConnectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpnConnectionResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpnConnectionResponse) ToJsonString() string {
@@ -4784,9 +5908,15 @@ func (r *DeleteVpnConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnGatewayRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+}
+
 type DeleteVpnGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 }
@@ -4810,13 +5940,15 @@ func (r *DeleteVpnGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpnGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpnGatewayResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpnGatewayResponse) ToJsonString() string {
@@ -4830,9 +5962,18 @@ func (r *DeleteVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnGatewayRoutesRequestParams struct {
+	// Instance ID of the VPN gateway
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// List of route IDs
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+}
+
 type DeleteVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -4860,13 +6001,15 @@ func (r *DeleteVpnGatewayRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteVpnGatewayRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteVpnGatewayRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteVpnGatewayRoutesResponseParams `json:"Response"`
 }
 
 func (r *DeleteVpnGatewayRoutesResponse) ToJsonString() string {
@@ -4880,8 +6023,14 @@ func (r *DeleteVpnGatewayRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccountAttributesRequestParams struct {
+
+}
+
 type DescribeAccountAttributesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeAccountAttributesRequest) ToJsonString() string {
@@ -4896,22 +6045,25 @@ func (r *DescribeAccountAttributesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountAttributesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccountAttributesResponseParams struct {
+	// User account attribute object
+	AccountAttributeSet []*AccountAttribute `json:"AccountAttributeSet,omitempty" name:"AccountAttributeSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAccountAttributesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// User account attribute object
-		AccountAttributeSet []*AccountAttribute `json:"AccountAttributeSet,omitempty" name:"AccountAttributeSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAccountAttributesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAccountAttributesResponse) ToJsonString() string {
@@ -4925,8 +6077,14 @@ func (r *DescribeAccountAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressQuotaRequestParams struct {
+
+}
+
 type DescribeAddressQuotaRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeAddressQuotaRequest) ToJsonString() string {
@@ -4941,22 +6099,25 @@ func (r *DescribeAddressQuotaRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddressQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressQuotaResponseParams struct {
+	// The quota information of EIPs in an account.
+	QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAddressQuotaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The quota information of EIPs in an account.
-		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAddressQuotaResponseParams `json:"Response"`
 }
 
 func (r *DescribeAddressQuotaResponse) ToJsonString() string {
@@ -4970,9 +6131,23 @@ func (r *DescribeAddressQuotaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressTemplateGroupsRequestParams struct {
+	// Filter conditions.
+	// <li>address-template-group-name - String - (Filter condition) IP address template group name.</li>
+	// <li>address-template-group-id - String - (Filter condition) IP address template group instance ID, such as `ipmg-mdunqeb6`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAddressTemplateGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter conditions.
 	// <li>address-template-group-name - String - (Filter condition) IP address template group name.</li>
 	// <li>address-template-group-id - String - (Filter condition) IP address template group instance ID, such as `ipmg-mdunqeb6`.</li>
@@ -5006,19 +6181,21 @@ func (r *DescribeAddressTemplateGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressTemplateGroupsResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// IP address template.
+	AddressTemplateGroupSet []*AddressTemplateGroup `json:"AddressTemplateGroupSet,omitempty" name:"AddressTemplateGroupSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAddressTemplateGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// IP address template.
-		AddressTemplateGroupSet []*AddressTemplateGroup `json:"AddressTemplateGroupSet,omitempty" name:"AddressTemplateGroupSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAddressTemplateGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeAddressTemplateGroupsResponse) ToJsonString() string {
@@ -5032,9 +6209,24 @@ func (r *DescribeAddressTemplateGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressTemplatesRequestParams struct {
+	// Filters
+	// <li>address-template-name - IP address template name.</li>
+	// <li>address-template-id - IP address template ID, such as `ipm-mdunqeb6`.</li>
+	// <li>address-ip - IP address.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAddressTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filters
 	// <li>address-template-name - IP address template name.</li>
 	// <li>address-template-id - IP address template ID, such as `ipm-mdunqeb6`.</li>
@@ -5069,19 +6261,21 @@ func (r *DescribeAddressTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressTemplatesResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// IP address template.
+	AddressTemplateSet []*AddressTemplate `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAddressTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// IP address template.
-		AddressTemplateSet []*AddressTemplate `json:"AddressTemplateSet,omitempty" name:"AddressTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAddressTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAddressTemplatesResponse) ToJsonString() string {
@@ -5095,9 +6289,38 @@ func (r *DescribeAddressTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressesRequestParams struct {
+	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
+
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. Detailed filter conditions:
+	// <li> address-id - String - Optional - Filter by unique EIP ID, such as `eip-11112222`.</li>
+	// <li> address-name - String - Optional - Filter by EIP name. Fuzzy filtering is not supported.</li>
+	// <li> address-ip - String - Optional - Filter by EIP address.</li>
+	// <li> address-status - String - Optional - Filter by EIP status. Valid values: `CREATING`, `BINDING`, `BIND`, `UNBINDING`, `UNBIND`, `OFFLINING`, and `BIND_ENI`.</li>
+	// <li> instance-id - String - Optional - Filter by the ID of the instance bound to the EIP, such as `ins-11112222`.</li>
+	// <li> private-ip-address - String - Optional - Filter by the private IP address bound to the EIP.</li>
+	// <li> network-interface-id - String - Optional - Filter by ID of the ENI bound to the EIP, such as `eni-11112222`.</li>
+	// <li> is-arrears - String - Optional - Filter by the fact whether the EIP is overdue (TRUE: the EIP is overdue | FALSE: the billing status of the EIP is normal).</li>
+	// <li> address-type - String - Optional - Filter by IP type. Valid values: `WanIP`, `EIP`, `AnycastEIP`, and `HighQualityEIP`. Default value: `EIP`.</li>
+	// <li> address-isp - String - Optional - Filter by ISP type. Valid values: `BGP`, `CMCC`, `CUCC`, and `CTCC`.</li>
+	// <li> dedicated-cluster-id - String - Optional - Filter by unique CDC ID, such as `cluster-11112222`.</li>
+	// <li> tag-key - String - Optional - Filter by tag key.</li>
+	// <li> tag-value - String - Optional - Filter by tag value.</li>
+	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The list of unique IDs of EIPs in the format of `eip-11112222`. `AddressIds` and `Filters.address-id` cannot be specified at the same time.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
@@ -5147,19 +6370,21 @@ func (r *DescribeAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAddressesResponseParams struct {
+	// Number of EIPs meeting the condition.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of EIPs details.
+	AddressSet []*Address `json:"AddressSet,omitempty" name:"AddressSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of EIPs meeting the condition.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of EIPs details.
-		AddressSet []*Address `json:"AddressSet,omitempty" name:"AddressSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAddressesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAddressesResponse) ToJsonString() string {
@@ -5173,9 +6398,25 @@ func (r *DescribeAddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAssistantCidrRequestParams struct {
+	// The ID of a VPC instance set, such as `vpc-6v2ht8q5`.
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
+
+	// Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAssistantCidrRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of a VPC instance set, such as `vpc-6v2ht8q5`.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
@@ -5212,20 +6453,22 @@ func (r *DescribeAssistantCidrRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAssistantCidrResponseParams struct {
+	// A set of eligible secondary CIDR blocks
+	// Note: This field may return null, indicating that no valid value was found.
+	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
+
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAssistantCidrResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// A set of eligible secondary CIDR blocks
-	// Note: This field may return null, indicating that no valid value was found.
-		AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
-
-		// Number of eligible instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAssistantCidrResponseParams `json:"Response"`
 }
 
 func (r *DescribeAssistantCidrResponse) ToJsonString() string {
@@ -5239,9 +6482,15 @@ func (r *DescribeAssistantCidrResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageBillUsageRequestParams struct {
+	// Unique ID of the pay-as-you-go bandwidth package.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+}
+
 type DescribeBandwidthPackageBillUsageRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the pay-as-you-go bandwidth package.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
@@ -5265,16 +6514,18 @@ func (r *DescribeBandwidthPackageBillUsageRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageBillUsageResponseParams struct {
+	// Current billable usage.
+	BandwidthPackageBillBandwidthSet []*BandwidthPackageBillBandwidth `json:"BandwidthPackageBillBandwidthSet,omitempty" name:"BandwidthPackageBillBandwidthSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBandwidthPackageBillUsageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Current billable usage.
-		BandwidthPackageBillBandwidthSet []*BandwidthPackageBillBandwidth `json:"BandwidthPackageBillBandwidthSet,omitempty" name:"BandwidthPackageBillBandwidthSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBandwidthPackageBillUsageResponseParams `json:"Response"`
 }
 
 func (r *DescribeBandwidthPackageBillUsageResponse) ToJsonString() string {
@@ -5288,8 +6539,14 @@ func (r *DescribeBandwidthPackageBillUsageResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageQuotaRequestParams struct {
+
+}
+
 type DescribeBandwidthPackageQuotaRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeBandwidthPackageQuotaRequest) ToJsonString() string {
@@ -5304,22 +6561,25 @@ func (r *DescribeBandwidthPackageQuotaRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBandwidthPackageQuotaRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageQuotaResponseParams struct {
+	// The quota of the bandwidth package.
+	QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBandwidthPackageQuotaResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The quota of the bandwidth package.
-		QuotaSet []*Quota `json:"QuotaSet,omitempty" name:"QuotaSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBandwidthPackageQuotaResponseParams `json:"Response"`
 }
 
 func (r *DescribeBandwidthPackageQuotaResponse) ToJsonString() string {
@@ -5333,9 +6593,26 @@ func (r *DescribeBandwidthPackageQuotaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageResourcesRequestParams struct {
+	// Unique ID of the bandwidth package in the form of `bwp-11112222`.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`. `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li>resource-id - String - Required: no -  (Filter condition) Filters by the unique ID of resources in a bandwidth package, such as `eip-11112222`.</li>
+	// <li>resource-type - String - Required: no - (Filter condition) Filters by the type of resources in a bandwidth package. It now supports only EIP (`Address`) and load balancer (`LoadBalance`).</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeBandwidthPackageResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the bandwidth package in the form of `bwp-11112222`.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
@@ -5373,19 +6650,21 @@ func (r *DescribeBandwidthPackageResourcesRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackageResourcesResponseParams struct {
+	// The number of eligible resources in the bandwidth package.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of resources in the bandwidth package.
+	ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBandwidthPackageResourcesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of eligible resources in the bandwidth package.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of resources in the bandwidth package.
-		ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBandwidthPackageResourcesResponseParams `json:"Response"`
 }
 
 func (r *DescribeBandwidthPackageResourcesResponse) ToJsonString() string {
@@ -5399,9 +6678,34 @@ func (r *DescribeBandwidthPackageResourcesResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackagesRequestParams struct {
+	// The unique ID list of bandwidth packages.
+	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
+
+	// Each request can have up to 10 `Filters`. `BandwidthPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li> bandwidth-package_id - String - Required: No - (Filter condition) Filter by the unique ID of the bandwidth package.</li>
+	// <li> bandwidth-package-name - String - Required: No - (Filter condition) Filter by the bandwidth package name. Fuzzy filtering is not supported.</li>
+	// <li> network-type - String - Required: No - (Filter condition) Filter by the bandwidth package type. Valid values: `HIGH_QUALITY_BGP`, `BGP`, `SINGLEISP`, and `ANYCAST`.</li>
+	// <li> charge-type - String - Required: No - (Filter condition) Filter by the bandwidth package billing mode. Valid values: `TOP5_POSTPAID_BY_MONTH` and `PERCENT95_POSTPAID_BY_MONTH`.</li>
+	// <li> resource.resource-type - String - Required: No - (Filter condition) Filter by the bandwidth package resource type. Valid values: `Address` and `LoadBalance`.</li>
+	// <li> resource.resource-id - String - Required: No - (Filter condition) Filter by the bandwidth package resource ID, such as `eip-xxxx` and `lb-xxxx`.</li>
+	// <li> resource.address-ip - String - Required: No - (Filter condition) Filter by the bandwidth package resource IP.</li>
+	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li> tag-value - String - Required: No - (Filter condition) Filter by tag value.</li>
+	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset of the query results
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Max number of the bandwidth packages to be returned.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeBandwidthPackagesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID list of bandwidth packages.
 	BandwidthPackageIds []*string `json:"BandwidthPackageIds,omitempty" name:"BandwidthPackageIds"`
 
@@ -5447,19 +6751,21 @@ func (r *DescribeBandwidthPackagesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBandwidthPackagesResponseParams struct {
+	// The number of eligible bandwidth packages.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Detail information of the bandwidth package.
+	BandwidthPackageSet []*BandwidthPackage `json:"BandwidthPackageSet,omitempty" name:"BandwidthPackageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBandwidthPackagesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of eligible bandwidth packages.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Detail information of the bandwidth package.
-		BandwidthPackageSet []*BandwidthPackage `json:"BandwidthPackageSet,omitempty" name:"BandwidthPackageSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBandwidthPackagesResponseParams `json:"Response"`
 }
 
 func (r *DescribeBandwidthPackagesResponse) ToJsonString() string {
@@ -5473,9 +6779,34 @@ func (r *DescribeBandwidthPackagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnAttachedInstancesRequestParams struct {
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter conditions:
+	// <li>ccn-id - String - (Filter condition) The CCN instance ID.</li>
+	// <li>instance-type - String - (Filter condition) The associated instance type.</li>
+	// <li>instance-region - String - (Filter condition) The associated instance region.</li>
+	// <li>instance-type - String - (Filter condition) The instance ID of the associated instance.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The ID of the CCN instance
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The order field supports `CcnId`, `InstanceType`, `InstanceId`, `InstanceName`, `InstanceRegion`, `AttachedTime`, and `State`.
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Order methods. Ascending: `ASC`, Descending: `DESC`.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+}
+
 type DescribeCcnAttachedInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -5523,19 +6854,21 @@ func (r *DescribeCcnAttachedInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnAttachedInstancesResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of associated instances.
+	InstanceSet []*CcnAttachedInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCcnAttachedInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of associated instances.
-		InstanceSet []*CcnAttachedInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCcnAttachedInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCcnAttachedInstancesResponse) ToJsonString() string {
@@ -5549,9 +6882,15 @@ func (r *DescribeCcnAttachedInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnRegionBandwidthLimitsRequestParams struct {
+	// The CCN instance ID in the format of `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+}
+
 type DescribeCcnRegionBandwidthLimitsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID in the format of `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
@@ -5575,16 +6914,18 @@ func (r *DescribeCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnRegionBandwidthLimitsResponseParams struct {
+	// The outbound bandwidth caps of all regions connected with the specified CCN instance
+	CcnRegionBandwidthLimitSet []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimitSet,omitempty" name:"CcnRegionBandwidthLimitSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCcnRegionBandwidthLimitsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The outbound bandwidth caps of all regions connected with the specified CCN instance
-		CcnRegionBandwidthLimitSet []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimitSet,omitempty" name:"CcnRegionBandwidthLimitSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCcnRegionBandwidthLimitsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCcnRegionBandwidthLimitsResponse) ToJsonString() string {
@@ -5598,9 +6939,33 @@ func (r *DescribeCcnRegionBandwidthLimitsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnRoutesRequestParams struct {
+	// The CCN instance ID, such as `ccn-gree226l`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+
+	// Filter condition. `RouteIds` and `Filters` cannot be specified at the same time.
+	// <li>route-id - String - (Filter condition) Routing policy ID.</li>
+	// <li>cidr-block - String - (Filter condition) Destination.</li>
+	// <li>instance-type - String - (Filter condition) The next hop type.</li>
+	// <li>instance-region - String - (Filter condition) The next hop region.</li>
+	// <li>instance-id - String - (Filter condition) The instance ID of the next hop.</li>
+	// <li>route-table-id - String - (Filter condition) The list of route table IDs in the format of `ccntr-1234edfr`. Filters by the route table ID.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-gree226l`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -5646,19 +7011,21 @@ func (r *DescribeCcnRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnRoutesResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The CCN routing policy object.
+	RouteSet []*CcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The CCN routing policy object.
-		RouteSet []*CcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCcnRoutesResponse) ToJsonString() string {
@@ -5672,9 +7039,36 @@ func (r *DescribeCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnsRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`. Each request can have a maximum of 100 instances. `CcnIds` and `Filters` cannot be specified at the same time
+	CcnIds []*string `json:"CcnIds,omitempty" name:"CcnIds"`
+
+	// Filter conditions. `CcnIds` and `Filters` cannot be specified at the same time.
+	// <li>ccn-id - String - (Filter condition) The unique ID of the CCN, such as `vpc-f49l6u0z`.</li>
+	// <li>ccn-name - String - (Filter condition) The CCN name.</li>
+	// <li>ccn-description - String - (Filter condition) CCN description.</li>
+	// <li>state - String - (Filter condition) The instance status. 'ISOLATED': Isolated (the account is in arrears and the service is suspended.) 'AVAILABLE': Running.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key.</li>
+	// <li>`tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see this example: **Querying the list of CCNs bound to tags**.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Order fields support `CcnId`, `CcnName`, `CreateTime`, `State`, and `QosLevel`
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Order methods. Ascending: `ASC`, Descending: `DESC`.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+}
+
 type DescribeCcnsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`. Each request can have a maximum of 100 instances. `CcnIds` and `Filters` cannot be specified at the same time
 	CcnIds []*string `json:"CcnIds,omitempty" name:"CcnIds"`
 
@@ -5724,19 +7118,21 @@ func (r *DescribeCcnsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCcnsResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// CCN object.
+	CcnSet []*CCN `json:"CcnSet,omitempty" name:"CcnSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCcnsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// CCN object.
-		CcnSet []*CCN `json:"CcnSet,omitempty" name:"CcnSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCcnsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCcnsResponse) ToJsonString() string {
@@ -5750,9 +7146,23 @@ func (r *DescribeCcnsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClassicLinkInstancesRequestParams struct {
+	// Filter conditions.
+	// <li>vpc-id - String - (Filter condition) The VPC instance ID.</li>
+	// <li>vm-ip - String - (Filter condition) The IP address of the CVM on the basic network.</li>
+	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeClassicLinkInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter conditions.
 	// <li>vpc-id - String - (Filter condition) The VPC instance ID.</li>
 	// <li>vm-ip - String - (Filter condition) The IP address of the CVM on the basic network.</li>
@@ -5786,19 +7196,21 @@ func (r *DescribeClassicLinkInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClassicLinkInstancesResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Classiclink instance.
+	ClassicLinkInstanceSet []*ClassicLinkInstance `json:"ClassicLinkInstanceSet,omitempty" name:"ClassicLinkInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClassicLinkInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Classiclink instance.
-		ClassicLinkInstanceSet []*ClassicLinkInstance `json:"ClassicLinkInstanceSet,omitempty" name:"ClassicLinkInstanceSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClassicLinkInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeClassicLinkInstancesResponse) ToJsonString() string {
@@ -5812,9 +7224,66 @@ func (r *DescribeClassicLinkInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCrossBorderComplianceRequestParams struct {
+	// (Exact match) Service provider. Valid values: `UNICOM`.
+	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
+
+	// (Exact match) ID of compliance review request.
+	ComplianceId *uint64 `json:"ComplianceId,omitempty" name:"ComplianceId"`
+
+	// (Fuzzy match) Company name.
+	Company *string `json:"Company,omitempty" name:"Company"`
+
+	// (Fuzzy match) Unified Social Credit Code.
+	UniformSocialCreditCode *string `json:"UniformSocialCreditCode,omitempty" name:"UniformSocialCreditCode"`
+
+	// (Fuzzy match) Legal person.
+	LegalPerson *string `json:"LegalPerson,omitempty" name:"LegalPerson"`
+
+	// (Fuzzy match) Issuing authority.
+	IssuingAuthority *string `json:"IssuingAuthority,omitempty" name:"IssuingAuthority"`
+
+	// (Fuzzy match) Business address.
+	BusinessAddress *string `json:"BusinessAddress,omitempty" name:"BusinessAddress"`
+
+	// (Exact match) Zip code.
+	PostCode *uint64 `json:"PostCode,omitempty" name:"PostCode"`
+
+	// (Fuzzy match) Operator.
+	Manager *string `json:"Manager,omitempty" name:"Manager"`
+
+	// (Exact match) Operator ID card number.
+	ManagerId *string `json:"ManagerId,omitempty" name:"ManagerId"`
+
+	// (Fuzzy match) Operator address.
+	ManagerAddress *string `json:"ManagerAddress,omitempty" name:"ManagerAddress"`
+
+	// (Exact match) Operator phone number.
+	ManagerTelephone *string `json:"ManagerTelephone,omitempty" name:"ManagerTelephone"`
+
+	// (Exact match) Email.
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// (Exact match) Service start date, such as `2020-07-28`.
+	ServiceStartDate *string `json:"ServiceStartDate,omitempty" name:"ServiceStartDate"`
+
+	// (Exact match) Service end date, such as `2020-07-28`.
+	ServiceEndDate *string `json:"ServiceEndDate,omitempty" name:"ServiceEndDate"`
+
+	// (Exact match) Status. Valid values: `PENDING`, `APPROVED`, and `DENY`.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Quantity of returned items
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeCrossBorderComplianceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// (Exact match) Service provider. Valid values: `UNICOM`.
 	ServiceProvider *string `json:"ServiceProvider,omitempty" name:"ServiceProvider"`
 
@@ -5906,19 +7375,21 @@ func (r *DescribeCrossBorderComplianceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCrossBorderComplianceResponseParams struct {
+	// List of compliance review requests.
+	CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet"`
+
+	// Total number of compliance review requests.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCrossBorderComplianceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of compliance review requests.
-		CrossBorderComplianceSet []*CrossBorderCompliance `json:"CrossBorderComplianceSet,omitempty" name:"CrossBorderComplianceSet"`
-
-		// Total number of compliance review requests.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCrossBorderComplianceResponseParams `json:"Response"`
 }
 
 func (r *DescribeCrossBorderComplianceResponse) ToJsonString() string {
@@ -5932,8 +7403,14 @@ func (r *DescribeCrossBorderComplianceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomerGatewayVendorsRequestParams struct {
+
+}
+
 type DescribeCustomerGatewayVendorsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCustomerGatewayVendorsRequest) ToJsonString() string {
@@ -5948,22 +7425,25 @@ func (r *DescribeCustomerGatewayVendorsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerGatewayVendorsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomerGatewayVendorsResponseParams struct {
+	// Customer gateway vendor information object.
+	CustomerGatewayVendorSet []*CustomerGatewayVendor `json:"CustomerGatewayVendorSet,omitempty" name:"CustomerGatewayVendorSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCustomerGatewayVendorsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Customer gateway vendor information object.
-		CustomerGatewayVendorSet []*CustomerGatewayVendor `json:"CustomerGatewayVendorSet,omitempty" name:"CustomerGatewayVendorSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCustomerGatewayVendorsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCustomerGatewayVendorsResponse) ToJsonString() string {
@@ -5977,9 +7457,27 @@ func (r *DescribeCustomerGatewayVendorsResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomerGatewaysRequestParams struct {
+	// Customer gateway ID, such as `cgw-2wqq41m9`. Each request can have a maximum of 100 instances. `CustomerGatewayIds` and `Filters` cannot be specified at the same time.
+	CustomerGatewayIds []*string `json:"CustomerGatewayIds,omitempty" name:"CustomerGatewayIds"`
+
+	// The filter condition. For details, see the Instance Filter Conditions Table. The upper limit for `Filters` in each request is 10 and 5 for `Filter.Values`. `CustomerGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>customer-gateway-id - String - (Filter condition) The unique ID of the user gateway, such as `cgw-mgp33pll`.</li>
+	// <li>customer-gateway-name - String - (Filter condition) The name of the user gateway, such as `test-cgw`.</li>
+	// <li>ip-address - String - (Filter condition) The public IP address, such as `58.211.1.12`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeCustomerGatewaysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Customer gateway ID, such as `cgw-2wqq41m9`. Each request can have a maximum of 100 instances. `CustomerGatewayIds` and `Filters` cannot be specified at the same time.
 	CustomerGatewayIds []*string `json:"CustomerGatewayIds,omitempty" name:"CustomerGatewayIds"`
 
@@ -6018,19 +7516,21 @@ func (r *DescribeCustomerGatewaysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCustomerGatewaysResponseParams struct {
+	// Customer gateway object list
+	CustomerGatewaySet []*CustomerGateway `json:"CustomerGatewaySet,omitempty" name:"CustomerGatewaySet"`
+
+	// Number of eligible instances
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCustomerGatewaysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Customer gateway object list
-		CustomerGatewaySet []*CustomerGateway `json:"CustomerGatewaySet,omitempty" name:"CustomerGatewaySet"`
-
-		// Number of eligible instances
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCustomerGatewaysResponseParams `json:"Response"`
 }
 
 func (r *DescribeCustomerGatewaysResponse) ToJsonString() string {
@@ -6044,9 +7544,26 @@ func (r *DescribeCustomerGatewaysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDirectConnectGatewayCcnRoutesRequestParams struct {
+	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The route learning type of the CCN. Available values:
+	// <li>`BGP` - Automatic learning.</li>
+	// <li>`STATIC` - Static means user-configured. This is the default value.</li>
+	CcnRouteType *string `json:"CcnRouteType,omitempty" name:"CcnRouteType"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeDirectConnectGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -6084,19 +7601,21 @@ func (r *DescribeDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDirectConnectGatewayCcnRoutesResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The CCN route (IDC IP range) list.
+	RouteSet []*DirectConnectGatewayCcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDirectConnectGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The CCN route (IDC IP range) list.
-		RouteSet []*DirectConnectGatewayCcnRoute `json:"RouteSet,omitempty" name:"RouteSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDirectConnectGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDirectConnectGatewayCcnRoutesResponse) ToJsonString() string {
@@ -6110,9 +7629,31 @@ func (r *DescribeDirectConnectGatewayCcnRoutesResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDirectConnectGatewaysRequestParams struct {
+	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
+	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
+
+	// Filter condition. `DirectConnectGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>direct-connect-gateway-id - String - The unique ID of the direct connect gateway, such as `dcg-9o233uri`.</li>
+	// <li>direct-connect-gateway-name - String - The name of the direct connect gateway. The default is fuzzy query.</li>
+	// <li>direct-connect-gateway-ip - String - The IP of the direct connect gateway.</li>
+	// <li>gateway-type - String - The gateway type. Valid values: `NORMAL` (Standard type), `NAT` (NAT type).</li>
+	// <li>network-type- String - The network type. Valid values: `VPC` (VPC type), `CCN` (CCN type).</li>
+	// <li>ccn-id - String - The ID of the CCN where the direct connect gateway resides.</li>
+	// <li>vpc-id - String - The ID of the VPC where the direct connect gateway resides.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Max number of results returned
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeDirectConnectGatewaysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
 	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
 
@@ -6155,19 +7696,21 @@ func (r *DescribeDirectConnectGatewaysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDirectConnectGatewaysResponseParams struct {
+	// The number of eligible objects.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The object array of the direct connect gateway.
+	DirectConnectGatewaySet []*DirectConnectGateway `json:"DirectConnectGatewaySet,omitempty" name:"DirectConnectGatewaySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDirectConnectGatewaysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of eligible objects.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The object array of the direct connect gateway.
-		DirectConnectGatewaySet []*DirectConnectGateway `json:"DirectConnectGatewaySet,omitempty" name:"DirectConnectGatewaySet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDirectConnectGatewaysResponseParams `json:"Response"`
 }
 
 func (r *DescribeDirectConnectGatewaysResponse) ToJsonString() string {
@@ -6181,9 +7724,18 @@ func (r *DescribeDirectConnectGatewaysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFlowLogRequestParams struct {
+	// ID of the VPC instance
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The unique ID of the flow log.
+	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+}
+
 type DescribeFlowLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -6211,16 +7763,18 @@ func (r *DescribeFlowLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFlowLogResponseParams struct {
+	// The flow log information.
+	FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeFlowLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The flow log information.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeFlowLogResponseParams `json:"Response"`
 }
 
 func (r *DescribeFlowLogResponse) ToJsonString() string {
@@ -6234,9 +7788,53 @@ func (r *DescribeFlowLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFlowLogsRequestParams struct {
+	// ID of the VPC instance
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The unique ID of the flow log.
+	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+
+	// The name of the flow log instance.
+	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
+
+	// The resource type of the flow log. Valid values: 'VPC', 'SUBNET', and 'NETWORKINTERFACE'.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The unique ID of the resource.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Type of flow logs to be collected. Valid values: 'ACCEPT', 'REJECT' and 'ALL'.
+	TrafficType *string `json:"TrafficType,omitempty" name:"TrafficType"`
+
+	// The storage ID of the flow log.
+	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
+
+	// The storage ID status of the flow log.
+	CloudLogState *string `json:"CloudLogState,omitempty" name:"CloudLogState"`
+
+	// Order by field. Valid values: 'flowLogName' and 'createTime'. Default value: 'createTime'.
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// In ascending (`asc`) or descending (`desc`) order. Default value: 'desc'.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+
+	// The offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of rows per page. Default value: 10.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
+	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
+	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeFlowLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the VPC instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -6310,19 +7908,21 @@ func (r *DescribeFlowLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeFlowLogsResponseParams struct {
+	// The instance set of flow logs.
+	FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
+
+	// The total number of flow logs.
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeFlowLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The instance set of flow logs.
-		FlowLog []*FlowLog `json:"FlowLog,omitempty" name:"FlowLog"`
-
-		// The total number of flow logs.
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeFlowLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeFlowLogsResponse) ToJsonString() string {
@@ -6336,9 +7936,39 @@ func (r *DescribeFlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGatewayFlowMonitorDetailRequestParams struct {
+	// The point in time. This indicates details of this minute will be queried. For example, in `2019-02-28 18:15:20`, details at `18:15` will be queried.
+	TimePoint *string `json:"TimePoint,omitempty" name:"TimePoint"`
+
+	// The instance ID of the VPN gateway, such as `vpn-ltjahce6`.
+	VpnId *string `json:"VpnId,omitempty" name:"VpnId"`
+
+	// The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The instance ID of the peering connection, such as `pcx-ltjahce6`.
+	PeeringConnectionId *string `json:"PeeringConnectionId,omitempty" name:"PeeringConnectionId"`
+
+	// The instance ID of the NAT gateway, such as `nat-ltjahce6`.
+	NatId *string `json:"NatId,omitempty" name:"NatId"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The order field supports `InPkg`, `OutPkg`, `InTraffic`, and `OutTraffic`.
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Order methods. Ascending: `ASC`, Descending: `DESC`.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+}
+
 type DescribeGatewayFlowMonitorDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The point in time. This indicates details of this minute will be queried. For example, in `2019-02-28 18:15:20`, details at `18:15` will be queried.
 	TimePoint *string `json:"TimePoint,omitempty" name:"TimePoint"`
 
@@ -6394,19 +8024,21 @@ func (r *DescribeGatewayFlowMonitorDetailRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGatewayFlowMonitorDetailResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The gateway traffic monitoring details.
+	GatewayFlowMonitorDetailSet []*GatewayFlowMonitorDetail `json:"GatewayFlowMonitorDetailSet,omitempty" name:"GatewayFlowMonitorDetailSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGatewayFlowMonitorDetailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The gateway traffic monitoring details.
-		GatewayFlowMonitorDetailSet []*GatewayFlowMonitorDetail `json:"GatewayFlowMonitorDetailSet,omitempty" name:"GatewayFlowMonitorDetailSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGatewayFlowMonitorDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeGatewayFlowMonitorDetailResponse) ToJsonString() string {
@@ -6420,9 +8052,30 @@ func (r *DescribeGatewayFlowMonitorDetailResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHaVipsRequestParams struct {
+	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
+	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds"`
+
+	// Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
+	// li>havip-id - String - The unique ID of the HAVIP, such as `havip-9o233uri`.</li>
+	// <li>havip-name - String - HAVIP name.</li>
+	// <li>vpc-id - String - VPC ID of the HAVIP.</li>
+	// <li>subnet-id - String - Subnet ID of the HAVIP.</li>
+	// <li>vip - String - Virtual IP address of the HAVIP.</li>
+	// <li>address-ip - String - Bound EIP.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeHaVipsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
 	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds"`
 
@@ -6464,19 +8117,21 @@ func (r *DescribeHaVipsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHaVipsResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// `HAVIP` object array.
+	HaVipSet []*HaVip `json:"HaVipSet,omitempty" name:"HaVipSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeHaVipsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// `HAVIP` object array.
-		HaVipSet []*HaVip `json:"HaVipSet,omitempty" name:"HaVipSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeHaVipsResponseParams `json:"Response"`
 }
 
 func (r *DescribeHaVipsResponse) ToJsonString() string {
@@ -6490,9 +8145,15 @@ func (r *DescribeHaVipsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpGeolocationDatabaseUrlRequestParams struct {
+	// Protocol type for an IP location database. Valid value: `ipv4`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type DescribeIpGeolocationDatabaseUrlRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Protocol type for an IP location database. Valid value: `ipv4`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
@@ -6516,19 +8177,21 @@ func (r *DescribeIpGeolocationDatabaseUrlRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpGeolocationDatabaseUrlResponseParams struct {
+	// Download link of an IP location database
+	DownLoadUrl *string `json:"DownLoadUrl,omitempty" name:"DownLoadUrl"`
+
+	// Link expiration time in UTC format following the ISO8601 standard.
+	ExpiredAt *string `json:"ExpiredAt,omitempty" name:"ExpiredAt"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIpGeolocationDatabaseUrlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Download link of an IP location database
-		DownLoadUrl *string `json:"DownLoadUrl,omitempty" name:"DownLoadUrl"`
-
-		// Link expiration time in UTC format following the ISO8601 standard.
-		ExpiredAt *string `json:"ExpiredAt,omitempty" name:"ExpiredAt"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIpGeolocationDatabaseUrlResponseParams `json:"Response"`
 }
 
 func (r *DescribeIpGeolocationDatabaseUrlResponse) ToJsonString() string {
@@ -6542,9 +8205,18 @@ func (r *DescribeIpGeolocationDatabaseUrlResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpGeolocationInfosRequestParams struct {
+	// The list of IP addresses (only IPv4 addresses are available currently) to be queried; upper limit: 100
+	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
+
+	// Fields of the IP addresses to be queried.
+	Fields *IpField `json:"Fields,omitempty" name:"Fields"`
+}
+
 type DescribeIpGeolocationInfosRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The list of IP addresses (only IPv4 addresses are available currently) to be queried; upper limit: 100
 	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
 
@@ -6572,19 +8244,21 @@ func (r *DescribeIpGeolocationInfosRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIpGeolocationInfosResponseParams struct {
+	// IP address details
+	AddressInfo []*IpGeolocationInfo `json:"AddressInfo,omitempty" name:"AddressInfo"`
+
+	// Number of IP addresses
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIpGeolocationInfosResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// IP address details
-		AddressInfo []*IpGeolocationInfo `json:"AddressInfo,omitempty" name:"AddressInfo"`
-
-		// Number of IP addresses
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIpGeolocationInfosResponseParams `json:"Response"`
 }
 
 func (r *DescribeIpGeolocationInfosResponse) ToJsonString() string {
@@ -6598,9 +8272,22 @@ func (r *DescribeIpGeolocationInfosResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLocalGatewayRequestParams struct {
+	// Query criteria:
+	// vpc-id: filter by VPC ID; local-gateway-name: filter by local gateway name (fuzzy search is supported); local-gateway-id: filter by local gateway instance ID; cdc-id: filter by CDC instance ID.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default value: 0. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeLocalGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Query criteria:
 	// vpc-id: filter by VPC ID; local-gateway-name: filter by local gateway name (fuzzy search is supported); local-gateway-id: filter by local gateway instance ID; cdc-id: filter by CDC instance ID.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
@@ -6633,19 +8320,21 @@ func (r *DescribeLocalGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLocalGatewayResponseParams struct {
+	// Information set of local gateways
+	LocalGatewaySet []*LocalGateway `json:"LocalGatewaySet,omitempty" name:"LocalGatewaySet"`
+
+	// Total number of local gateways
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeLocalGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information set of local gateways
-		LocalGatewaySet []*LocalGateway `json:"LocalGatewaySet,omitempty" name:"LocalGatewaySet"`
-
-		// Total number of local gateways
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeLocalGatewayResponseParams `json:"Response"`
 }
 
 func (r *DescribeLocalGatewayResponse) ToJsonString() string {
@@ -6659,9 +8348,25 @@ func (r *DescribeLocalGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetDetectStatesRequestParams struct {
+	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
+
+	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
+	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned values. Default: 20. Maximum: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeNetDetectStatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The array of network detection instance `IDs`, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
@@ -6698,21 +8403,23 @@ func (r *DescribeNetDetectStatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetDetectStatesResponseParams struct {
+	// The array of network detection verification results that meet requirements.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetDetectStateSet []*NetDetectState `json:"NetDetectStateSet,omitempty" name:"NetDetectStateSet"`
+
+	// The number of network detection verification results that meet requirements.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeNetDetectStatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The array of network detection verification results that meet requirements.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		NetDetectStateSet []*NetDetectState `json:"NetDetectStateSet,omitempty" name:"NetDetectStateSet"`
-
-		// The number of network detection verification results that meet requirements.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeNetDetectStatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeNetDetectStatesResponse) ToJsonString() string {
@@ -6726,9 +8433,28 @@ func (r *DescribeNetDetectStatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetDetectsRequestParams struct {
+	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
+
+	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) The VPC instance ID, such as vpc-12345678.</li>
+	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
+	// <li>subnet-id - String - (Filter condition) The subnet instance ID, such as subnet-12345678.</li>
+	// <li>net-detect-name - String - (Filter condition) The network detection name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned values. Default: 20. Maximum: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeNetDetectsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The array of network detection instance `IDs`, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
@@ -6768,21 +8494,23 @@ func (r *DescribeNetDetectsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetDetectsResponseParams struct {
+	// The array of network detection objects that meet requirements.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetDetectSet []*NetDetect `json:"NetDetectSet,omitempty" name:"NetDetectSet"`
+
+	// The number of network detection objects that meet requirements.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeNetDetectsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The array of network detection objects that meet requirements.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		NetDetectSet []*NetDetect `json:"NetDetectSet,omitempty" name:"NetDetectSet"`
-
-		// The number of network detection objects that meet requirements.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeNetDetectsResponseParams `json:"Response"`
 }
 
 func (r *DescribeNetDetectsResponse) ToJsonString() string {
@@ -6796,9 +8524,27 @@ func (r *DescribeNetDetectsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkAclsRequestParams struct {
+	// Array of network ACL instance IDs, such as [acl-12345678]. Up to 100 instances are allowed for each request. This parameter does not support specifying `NetworkAclIds` and `Filters` at the same time.
+	NetworkAclIds []*string `json:"NetworkAclIds,omitempty" name:"NetworkAclIds"`
+
+	// Filter condition. `NetworkAclIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as vpc-12345678.</li>
+	// <li>network-acl-id - String - (Filter condition) Network ACL instance ID, such as acl-12345678.</li>
+	// <li>network-acl-name - String - (Filter condition) Network ACL instance name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Returned quantity. Default: 20. Value range: 1-100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeNetworkAclsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array of network ACL instance IDs, such as [acl-12345678]. Up to 100 instances are allowed for each request. This parameter does not support specifying `NetworkAclIds` and `Filters` at the same time.
 	NetworkAclIds []*string `json:"NetworkAclIds,omitempty" name:"NetworkAclIds"`
 
@@ -6837,19 +8583,21 @@ func (r *DescribeNetworkAclsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkAclsResponseParams struct {
+	// List of instance details.
+	NetworkAclSet []*NetworkAcl `json:"NetworkAclSet,omitempty" name:"NetworkAclSet"`
+
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeNetworkAclsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of instance details.
-		NetworkAclSet []*NetworkAcl `json:"NetworkAclSet,omitempty" name:"NetworkAclSet"`
-
-		// Number of eligible instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeNetworkAclsResponseParams `json:"Response"`
 }
 
 func (r *DescribeNetworkAclsResponse) ToJsonString() string {
@@ -6863,9 +8611,15 @@ func (r *DescribeNetworkAclsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkInterfaceLimitRequestParams struct {
+	// ID of a CVM instance or ENI to query
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeNetworkInterfaceLimitRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of a CVM instance or ENI to query
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -6889,27 +8643,29 @@ func (r *DescribeNetworkInterfaceLimitRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkInterfaceLimitResponseParams struct {
+	// Quota of ENIs mounted to a CVM instance in a standard way
+	EniQuantity *int64 `json:"EniQuantity,omitempty" name:"EniQuantity"`
+
+	// Quota of IP addresses that can be allocated to each standard-mounted ENI
+	EniPrivateIpAddressQuantity *int64 `json:"EniPrivateIpAddressQuantity,omitempty" name:"EniPrivateIpAddressQuantity"`
+
+	// Quota of ENIs mounted to a CVM instance as an extension
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ExtendEniQuantity *int64 `json:"ExtendEniQuantity,omitempty" name:"ExtendEniQuantity"`
+
+	// Quota of IP addresses that can be allocated to each extension-mounted ENI.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ExtendEniPrivateIpAddressQuantity *int64 `json:"ExtendEniPrivateIpAddressQuantity,omitempty" name:"ExtendEniPrivateIpAddressQuantity"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeNetworkInterfaceLimitResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Quota of ENIs mounted to a CVM instance in a standard way
-		EniQuantity *int64 `json:"EniQuantity,omitempty" name:"EniQuantity"`
-
-		// Quota of IP addresses that can be allocated to each standard-mounted ENI
-		EniPrivateIpAddressQuantity *int64 `json:"EniPrivateIpAddressQuantity,omitempty" name:"EniPrivateIpAddressQuantity"`
-
-		// Quota of ENIs mounted to a CVM instance as an extension
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ExtendEniQuantity *int64 `json:"ExtendEniQuantity,omitempty" name:"ExtendEniQuantity"`
-
-		// Quota of IP addresses that can be allocated to each extension-mounted ENI.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ExtendEniPrivateIpAddressQuantity *int64 `json:"ExtendEniPrivateIpAddressQuantity,omitempty" name:"ExtendEniPrivateIpAddressQuantity"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeNetworkInterfaceLimitResponseParams `json:"Response"`
 }
 
 func (r *DescribeNetworkInterfaceLimitResponse) ToJsonString() string {
@@ -6923,9 +8679,35 @@ func (r *DescribeNetworkInterfaceLimitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkInterfacesRequestParams struct {
+	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
+
+	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
+	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
+	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
+	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
+	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
+	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
+	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
+	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
+	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeNetworkInterfacesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
@@ -6972,19 +8754,21 @@ func (r *DescribeNetworkInterfacesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeNetworkInterfacesResponseParams struct {
+	// List of instance details.
+	NetworkInterfaceSet []*NetworkInterface `json:"NetworkInterfaceSet,omitempty" name:"NetworkInterfaceSet"`
+
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeNetworkInterfacesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of instance details.
-		NetworkInterfaceSet []*NetworkInterface `json:"NetworkInterfaceSet,omitempty" name:"NetworkInterfaceSet"`
-
-		// Number of eligible instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeNetworkInterfacesResponseParams `json:"Response"`
 }
 
 func (r *DescribeNetworkInterfacesResponse) ToJsonString() string {
@@ -6998,9 +8782,30 @@ func (r *DescribeNetworkInterfacesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRouteTablesRequestParams struct {
+	// Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
+	// <li>route-table-id - String - (Filter condition) Route table instance ID.</li>
+	// <li>route-table-name - String - (Filter condition) Route table name.</li>
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>association.main - String - (Filter condition) Whether it is the main route table.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filter by tag key.</li>
+	// <li>tag:tag-key - String - Required: no - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableIds []*string `json:"RouteTableIds,omitempty" name:"RouteTableIds"`
+
+	// Offset.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of request objects.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeRouteTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
 	// <li>route-table-id - String - (Filter condition) Route table instance ID.</li>
 	// <li>route-table-name - String - (Filter condition) Route table name.</li>
@@ -7042,19 +8847,21 @@ func (r *DescribeRouteTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRouteTablesResponseParams struct {
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Route table object.
+	RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRouteTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Route table object.
-		RouteTableSet []*RouteTable `json:"RouteTableSet,omitempty" name:"RouteTableSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRouteTablesResponseParams `json:"Response"`
 }
 
 func (r *DescribeRouteTablesResponse) ToJsonString() string {
@@ -7068,9 +8875,15 @@ func (r *DescribeRouteTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupAssociationStatisticsRequestParams struct {
+	// The Security instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type DescribeSecurityGroupAssociationStatisticsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The Security instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
@@ -7094,16 +8907,18 @@ func (r *DescribeSecurityGroupAssociationStatisticsRequest) FromJsonString(s str
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupAssociationStatisticsResponseParams struct {
+	// Statistics on the instances associated with a security group.
+	SecurityGroupAssociationStatisticsSet []*SecurityGroupAssociationStatistics `json:"SecurityGroupAssociationStatisticsSet,omitempty" name:"SecurityGroupAssociationStatisticsSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityGroupAssociationStatisticsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Statistics on the instances associated with a security group.
-		SecurityGroupAssociationStatisticsSet []*SecurityGroupAssociationStatistics `json:"SecurityGroupAssociationStatisticsSet,omitempty" name:"SecurityGroupAssociationStatisticsSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityGroupAssociationStatisticsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityGroupAssociationStatisticsResponse) ToJsonString() string {
@@ -7117,9 +8932,27 @@ func (r *DescribeSecurityGroupAssociationStatisticsResponse) FromJsonString(s st
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupPoliciesRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
+	// <li>security-group-id - String - Security group ID.</li>
+	// <li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+	// <li>address-module - String - IP address or address group template ID.</li>
+	// <li>service-module - String - Protocol port or port group template ID.</li>
+	// <li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+	// <li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+	// <li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
+	// <li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
+	// <li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeSecurityGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -7156,16 +8989,18 @@ func (r *DescribeSecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupPoliciesResponseParams struct {
+	// Security group policy set.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityGroupPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group policy set.
-		SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityGroupPoliciesResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityGroupPoliciesResponse) ToJsonString() string {
@@ -7179,9 +9014,15 @@ func (r *DescribeSecurityGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupReferencesRequestParams struct {
+	// A set of security group instance IDs, e.g. ['sg-12345678']
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type DescribeSecurityGroupReferencesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// A set of security group instance IDs, e.g. ['sg-12345678']
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
@@ -7205,16 +9046,18 @@ func (r *DescribeSecurityGroupReferencesRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupReferencesResponseParams struct {
+	// Referred security groups.
+	ReferredSecurityGroupSet []*ReferredSecurityGroup `json:"ReferredSecurityGroupSet,omitempty" name:"ReferredSecurityGroupSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityGroupReferencesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Referred security groups.
-		ReferredSecurityGroupSet []*ReferredSecurityGroup `json:"ReferredSecurityGroupSet,omitempty" name:"ReferredSecurityGroupSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityGroupReferencesResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityGroupReferencesResponse) ToJsonString() string {
@@ -7228,9 +9071,29 @@ func (r *DescribeSecurityGroupReferencesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupsRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through `DescribeSecurityGroups`. Each request can have a maximum of 100 instances. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Filter conditions. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
+	// <li>security-group-id - String - (Filter condition) The security group ID.</li>
+	// <li>project-id - Integer - (Filter condition) The project ID.</li>
+	// <li>security-group-name - String - (Filter condition) The security group name.</li>
+	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
+	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through `DescribeSecurityGroups`. Each request can have a maximum of 100 instances. `SecurityGroupIds` and `Filters` cannot be specified at the same time.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -7271,20 +9134,22 @@ func (r *DescribeSecurityGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupsResponseParams struct {
+	// Security group object.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
+
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security group object.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityGroupsResponse) ToJsonString() string {
@@ -7298,9 +9163,23 @@ func (r *DescribeSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceTemplateGroupsRequestParams struct {
+	// Filter conditions.
+	// <li>service-template-group-name - String - (Filter condition) Protocol port template group name.</li>
+	// <li>service-template-group-id - String - (Filter condition) Protocol port template group instance ID, such as `ppmg-e6dy460g`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeServiceTemplateGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter conditions.
 	// <li>service-template-group-name - String - (Filter condition) Protocol port template group name.</li>
 	// <li>service-template-group-id - String - (Filter condition) Protocol port template group instance ID, such as `ppmg-e6dy460g`.</li>
@@ -7334,19 +9213,21 @@ func (r *DescribeServiceTemplateGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceTemplateGroupsResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Protocol port template group.
+	ServiceTemplateGroupSet []*ServiceTemplateGroup `json:"ServiceTemplateGroupSet,omitempty" name:"ServiceTemplateGroupSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceTemplateGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Protocol port template group.
-		ServiceTemplateGroupSet []*ServiceTemplateGroup `json:"ServiceTemplateGroupSet,omitempty" name:"ServiceTemplateGroupSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceTemplateGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceTemplateGroupsResponse) ToJsonString() string {
@@ -7360,9 +9241,24 @@ func (r *DescribeServiceTemplateGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceTemplatesRequestParams struct {
+	// Filters
+	// <li>service-template-name - Protocol port template name.</li>
+	// <li>service-template-id - Protocol port template ID, such as `ppm-e6dy460g`.</li>
+	// <li>service-port-Protocol port.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeServiceTemplatesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filters
 	// <li>service-template-name - Protocol port template name.</li>
 	// <li>service-template-id - Protocol port template ID, such as `ppm-e6dy460g`.</li>
@@ -7397,19 +9293,21 @@ func (r *DescribeServiceTemplatesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeServiceTemplatesResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Protocol port template object.
+	ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeServiceTemplatesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Protocol port template object.
-		ServiceTemplateSet []*ServiceTemplate `json:"ServiceTemplateSet,omitempty" name:"ServiceTemplateSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeServiceTemplatesResponseParams `json:"Response"`
 }
 
 func (r *DescribeServiceTemplatesResponse) ToJsonString() string {
@@ -7423,9 +9321,35 @@ func (r *DescribeServiceTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSubnetsRequestParams struct {
+	// Queries the ID of the subnet instance, such as `subnet-pxir56ns`. Each request can have a maximum of 100 instances. `SubnetIds` and `Filters` cannot be specified at the same time.
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Filter condition. `SubnetIds` and `Filters` cannot be specified at the same time.
+	// <li>subnet-id - String - (Filter condition) Subnet instance name.</li>
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>cidr-block - String - (Filter condition) Subnet IP range, such as `192.168.1.0`.</li>
+	// <li>is-default - Boolean - (Filter condition) Whether it is the default subnet.</li>
+	// <li>is-remote-vpc-snat - Boolean - (Filter condition) Whether it is a VPC SNAT address pool subnet.</li>
+	// <li>subnet-name - String - (Filter condition) Subnet name.</li>
+	// <li>zone - String - (Filter condition) Availability zone.</li>
+	// <li> tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
+	// <li>tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. Use a specific tag key to replace `tag-key`. For its usage, see example 2.</li>
+	// <li>cdc-id - String - Required: No - (Filter condition) Filter by CDC ID to obtain subnets in the specified CDC.</li>
+	// <li>is-cdc-subnet - String - Required: No - (Filter condition) Whether it is a CDC subnet. Valid values: `0` (no); `1` (yes).</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeSubnetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Queries the ID of the subnet instance, such as `subnet-pxir56ns`. Each request can have a maximum of 100 instances. `SubnetIds` and `Filters` cannot be specified at the same time.
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
@@ -7472,19 +9396,21 @@ func (r *DescribeSubnetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSubnetsResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Subnet object.
+	SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSubnetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Subnet object.
-		SubnetSet []*Subnet `json:"SubnetSet,omitempty" name:"SubnetSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSubnetsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSubnetsResponse) ToJsonString() string {
@@ -7498,9 +9424,18 @@ func (r *DescribeSubnetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTaskResultRequestParams struct {
+	// Async task ID. Either TaskId or DealName must be entered.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Billing order No. Either TaskId or DealName must be entered.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+}
+
 type DescribeTaskResultRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Async task ID. Either TaskId or DealName must be entered.
 	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -7528,19 +9463,21 @@ func (r *DescribeTaskResultRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTaskResultResponseParams struct {
+	// Job ID
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The execution results, including `SUCCESS`, `FAILED`, and `RUNNING`
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTaskResultResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Job ID
-		TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The execution results, including `SUCCESS`, `FAILED`, and `RUNNING`
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTaskResultResponseParams `json:"Response"`
 }
 
 func (r *DescribeTaskResultResponse) ToJsonString() string {
@@ -7554,9 +9491,28 @@ func (r *DescribeTaskResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointRequestParams struct {
+	// Filter condition
+	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
+	// <li>end-point-name - String - (Filter condition) Endpoint instance name.</li>
+	// <li> end-point-id - String - (Filter condition) Endpoint instance ID.</li>
+	// <li> vpc-id - String - (Filter condition) VPC instance ID.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Endpoint ID list
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId"`
+}
+
 type DescribeVpcEndPointRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition
 	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
 	// <li>end-point-name - String - (Filter condition) Endpoint instance name.</li>
@@ -7596,19 +9552,21 @@ func (r *DescribeVpcEndPointRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointResponseParams struct {
+	// Endpoint
+	EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet"`
+
+	// Number of matched endpoints
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcEndPointResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Endpoint
-		EndPointSet []*EndPoint `json:"EndPointSet,omitempty" name:"EndPointSet"`
-
-		// Number of matched endpoints
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcEndPointResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcEndPointResponse) ToJsonString() string {
@@ -7622,9 +9580,27 @@ func (r *DescribeVpcEndPointResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointServiceRequestParams struct {
+	// Filter condition
+	// <li> service-id - String - (Filter condition) Unique endpoint service ID.</li>
+	// <li>service-name - String - (Filter condition) Endpoint service instance name.</li>
+	// <li>service-instance-id - String - (Filter condition) Unique real server ID in the format of `lb-xxx`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Endpoint service ID
+	EndPointServiceIds []*string `json:"EndPointServiceIds,omitempty" name:"EndPointServiceIds"`
+}
+
 type DescribeVpcEndPointServiceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition
 	// <li> service-id - String - (Filter condition) Unique endpoint service ID.</li>
 	// <li>service-name - String - (Filter condition) Endpoint service instance name.</li>
@@ -7663,19 +9639,21 @@ func (r *DescribeVpcEndPointServiceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointServiceResponseParams struct {
+	// Array of endpoint services
+	EndPointServiceSet []*EndPointService `json:"EndPointServiceSet,omitempty" name:"EndPointServiceSet"`
+
+	// Number of matched results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcEndPointServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of endpoint services
-		EndPointServiceSet []*EndPointService `json:"EndPointServiceSet,omitempty" name:"EndPointServiceSet"`
-
-		// Number of matched results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcEndPointServiceResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcEndPointServiceResponse) ToJsonString() string {
@@ -7689,9 +9667,23 @@ func (r *DescribeVpcEndPointServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointServiceWhiteListRequestParams struct {
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page; default value: 20; maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition
+	// <li> user-uin - String - (Filter condition) UIN.</li>
+	// <li> end-point-service-id - String - (Filter condition) Endpoint service ID.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeVpcEndPointServiceWhiteListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -7725,19 +9717,21 @@ func (r *DescribeVpcEndPointServiceWhiteListRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcEndPointServiceWhiteListResponseParams struct {
+	// Array of allowed endpoint services
+	VpcEndpointServiceUserSet []*VpcEndPointServiceUser `json:"VpcEndpointServiceUserSet,omitempty" name:"VpcEndpointServiceUserSet"`
+
+	// Number of matched allowlists
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcEndPointServiceWhiteListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Array of allowed endpoint services
-		VpcEndpointServiceUserSet []*VpcEndPointServiceUser `json:"VpcEndpointServiceUserSet,omitempty" name:"VpcEndpointServiceUserSet"`
-
-		// Number of matched allowlists
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcEndPointServiceWhiteListResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcEndPointServiceWhiteListResponse) ToJsonString() string {
@@ -7751,9 +9745,24 @@ func (r *DescribeVpcEndPointServiceWhiteListResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcInstancesRequestParams struct {
+	// Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>instance-type - String - (Filter condition) CVM instance ID.</li>
+	// <li>instance-name - String - (Filter condition) CVM name.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of requested objects.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpcInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time.
 	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
 	// <li>instance-type - String - (Filter condition) CVM instance ID.</li>
@@ -7788,19 +9797,21 @@ func (r *DescribeVpcInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcInstancesResponseParams struct {
+	// List of CVM instances.
+	InstanceSet []*CvmInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// The number of eligible CVM instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of CVM instances.
-		InstanceSet []*CvmInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
-
-		// The number of eligible CVM instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcInstancesResponse) ToJsonString() string {
@@ -7814,9 +9825,24 @@ func (r *DescribeVpcInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcIpv6AddressesRequestParams struct {
+	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The `IP` address list. Each request supports a maximum of `10` batch querying.
+	Ipv6Addresses []*string `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpcIpv6AddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -7852,19 +9878,21 @@ func (r *DescribeVpcIpv6AddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcIpv6AddressesResponseParams struct {
+	// The `IPv6` address list.
+	Ipv6AddressSet []*VpcIpv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
+
+	// The total number of `IPv6` addresses.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcIpv6AddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The `IPv6` address list.
-		Ipv6AddressSet []*VpcIpv6Address `json:"Ipv6AddressSet,omitempty" name:"Ipv6AddressSet"`
-
-		// The total number of `IPv6` addresses.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcIpv6AddressesResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcIpv6AddressesResponse) ToJsonString() string {
@@ -7878,9 +9906,18 @@ func (r *DescribeVpcIpv6AddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcPrivateIpAddressesRequestParams struct {
+	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The private `IP` address list. Each request supports a maximum of `10` batch querying.
+	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+}
+
 type DescribeVpcPrivateIpAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -7908,16 +9945,18 @@ func (r *DescribeVpcPrivateIpAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcPrivateIpAddressesResponseParams struct {
+	// The list of private `IP` address information.
+	VpcPrivateIpAddressSet []*VpcPrivateIpAddress `json:"VpcPrivateIpAddressSet,omitempty" name:"VpcPrivateIpAddressSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcPrivateIpAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The list of private `IP` address information.
-		VpcPrivateIpAddressSet []*VpcPrivateIpAddress `json:"VpcPrivateIpAddressSet,omitempty" name:"VpcPrivateIpAddressSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcPrivateIpAddressesResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcPrivateIpAddressesResponse) ToJsonString() string {
@@ -7931,9 +9970,15 @@ func (r *DescribeVpcPrivateIpAddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcResourceDashboardRequestParams struct {
+	// Vpc instance ID, e.g. vpc-f1xjkw1b.
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
+}
+
 type DescribeVpcResourceDashboardRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Vpc instance ID, e.g. vpc-f1xjkw1b.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 }
@@ -7957,16 +10002,18 @@ func (r *DescribeVpcResourceDashboardRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcResourceDashboardResponseParams struct {
+	// List of resource objects.
+	ResourceDashboardSet []*ResourceDashboard `json:"ResourceDashboardSet,omitempty" name:"ResourceDashboardSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcResourceDashboardResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of resource objects.
-		ResourceDashboardSet []*ResourceDashboard `json:"ResourceDashboardSet,omitempty" name:"ResourceDashboardSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcResourceDashboardResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcResourceDashboardResponse) ToJsonString() string {
@@ -7980,9 +10027,32 @@ func (r *DescribeVpcResourceDashboardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcsRequestParams struct {
+	// The VPC instance ID, such as `vpc-f49l6u0z`. Each request supports a maximum of 100 instances. `VpcIds` and `Filters` cannot be specified at the same time.
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
+
+	// Filter condition. `VpcIds` and `Filters` cannot be specified at the same time.
+	// Valid filters include:
+	// <li>`vpc-name`: VPC instance name</li>
+	// <li>`is-default`: indicates whether it is the default VPC</li>
+	// <li>`vpc-id`: VPC instance ID, such as `vpc-f49l6u0z`</li>
+	// <li>`cidr-block`: VPC CIDR block</li>
+	// <li>`tag-key`: (optional) tag key</li>
+	// <li>`tag:tag-key`: (optional) tag key-value pair. Replace the `tag-key` with a specified tag value. For its usage, refer to the Example 2.</li>
+	//   **Note:** if one filter has multiple values, the logical relationship between these values is `OR`. The logical relationship between filters is `AND`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0.
+	Offset *string `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *string `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpcsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The VPC instance ID, such as `vpc-f49l6u0z`. Each request supports a maximum of 100 instances. `VpcIds` and `Filters` cannot be specified at the same time.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
@@ -8026,19 +10096,21 @@ func (r *DescribeVpcsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcsResponseParams struct {
+	// The number of objects meeting the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The VPC object.
+	VpcSet []*Vpc `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpcsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of objects meeting the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The VPC object.
-		VpcSet []*Vpc `json:"VpcSet,omitempty" name:"VpcSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpcsResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpcsResponse) ToJsonString() string {
@@ -8052,9 +10124,29 @@ func (r *DescribeVpcsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnConnectionsRequestParams struct {
+	// The instance ID of the VPN tunnel, such as `vpnx-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
+	VpnConnectionIds []*string `json:"VpnConnectionIds,omitempty" name:"VpnConnectionIds"`
+
+	// Filter condition. In each request, the upper limit for `Filters` is 10 and 5 for `Filter.Values`. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - VPC instance ID, such as `vpc-0a36uwkr`.</li>
+	// <li>vpn-gateway-id - String - VPN gateway instance ID, such as `vpngw-p4lmqawn`.</li>
+	// <li>customer-gateway-id - String - Customer gateway instance ID, such as `cgw-l4rblw63`.</li>
+	// <li>vpn-connection-name - String - Connection name, such as `test-vpn`.</li>
+	// <li>vpn-connection-id - String - Connection instance ID, such as `vpnx-5p7vkch8"`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpnConnectionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The instance ID of the VPN tunnel, such as `vpnx-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnConnectionIds` and `Filters` cannot be specified at the same time.
 	VpnConnectionIds []*string `json:"VpnConnectionIds,omitempty" name:"VpnConnectionIds"`
 
@@ -8095,19 +10187,21 @@ func (r *DescribeVpnConnectionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnConnectionsResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// VPN tunnel instance.
+	VpnConnectionSet []*VpnConnection `json:"VpnConnectionSet,omitempty" name:"VpnConnectionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpnConnectionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// VPN tunnel instance.
-		VpnConnectionSet []*VpnConnection `json:"VpnConnectionSet,omitempty" name:"VpnConnectionSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpnConnectionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpnConnectionsResponse) ToJsonString() string {
@@ -8121,9 +10215,21 @@ func (r *DescribeVpnConnectionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewayCcnRoutesRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpnGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -8155,19 +10261,21 @@ func (r *DescribeVpnGatewayCcnRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewayCcnRoutesResponseParams struct {
+	// The CCN route (IDC IP range) list.
+	RouteSet []*VpngwCcnRoutes `json:"RouteSet,omitempty" name:"RouteSet"`
+
+	// Number of objects that meet the condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpnGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The CCN route (IDC IP range) list.
-		RouteSet []*VpngwCcnRoutes `json:"RouteSet,omitempty" name:"RouteSet"`
-
-		// Number of objects that meet the condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpnGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpnGatewayCcnRoutesResponse) ToJsonString() string {
@@ -8181,9 +10289,24 @@ func (r *DescribeVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewayRoutesRequestParams struct {
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Filter condition. Valid values: `DestinationCidr`, `InstanceId`, and `InstanceType`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: 20; maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPN gateway ID
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -8219,16 +10342,18 @@ func (r *DescribeVpnGatewayRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewayRoutesResponseParams struct {
+	// Destination routes of the VPN gateway
+	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpnGatewayRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Destination routes of the VPN gateway
-		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpnGatewayRoutesResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpnGatewayRoutesResponse) ToJsonString() string {
@@ -8242,9 +10367,31 @@ func (r *DescribeVpnGatewayRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewaysRequestParams struct {
+	// The VPN gateway instance ID, such as `vpngw-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnGatewayIds` and `Filters` cannot be specified at the same time.
+	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds"`
+
+	// Filter condition. `VpnGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>vpn-gateway-id - String - (Filter condition) VPN instance ID, such as `vpngw-5aluhh9t`.</li>
+	// <li>vpn-gateway-name - String - (Filter condition) VPN instance name.</li>
+	// <li>type - String - (Filter condition) VPN gateway type: 'IPSEC', 'SSL'.</li>
+	// <li>public-ip-address- String - (Filter condition) Public IP.</li>
+	// <li>renew-flag - String - (Filter condition) Gateway renewal type. Manual renewal: `NOTIFY_AND_MANUAL_RENEW`, Automatic renewal: `NOTIFY_AND_AUTO_RENEW`.</li>
+	// <li>zone - String - (Filter condition) The availability zone where the VPN is located, such as `ap-guangzhou-2`.</li>
+	Filters []*FilterObject `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of request objects.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeVpnGatewaysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The VPN gateway instance ID, such as `vpngw-f49l6u0z`. Each request can have a maximum of 100 instances. `VpnGatewayIds` and `Filters` cannot be specified at the same time.
 	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds"`
 
@@ -8287,19 +10434,21 @@ func (r *DescribeVpnGatewaysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpnGatewaysResponseParams struct {
+	// The number of instances meeting the filter condition.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of details of VPN gateway instances.
+	VpnGatewaySet []*VpnGateway `json:"VpnGatewaySet,omitempty" name:"VpnGatewaySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeVpnGatewaysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of instances meeting the filter condition.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of details of VPN gateway instances.
-		VpnGatewaySet []*VpnGateway `json:"VpnGatewaySet,omitempty" name:"VpnGatewaySet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeVpnGatewaysResponseParams `json:"Response"`
 }
 
 func (r *DescribeVpnGatewaysResponse) ToJsonString() string {
@@ -8313,9 +10462,18 @@ func (r *DescribeVpnGatewaysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachCcnInstancesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The list of network instances to be unbound
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+}
+
 type DetachCcnInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -8343,13 +10501,15 @@ func (r *DetachCcnInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachCcnInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachCcnInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachCcnInstancesResponseParams `json:"Response"`
 }
 
 func (r *DetachCcnInstancesResponse) ToJsonString() string {
@@ -8363,9 +10523,18 @@ func (r *DetachCcnInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachClassicLinkVpcRequestParams struct {
+	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Queries the ID of the CVM instance, such as `ins-r8hr2upy`.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type DetachClassicLinkVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -8393,13 +10562,15 @@ func (r *DetachClassicLinkVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachClassicLinkVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachClassicLinkVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachClassicLinkVpcResponseParams `json:"Response"`
 }
 
 func (r *DetachClassicLinkVpcResponse) ToJsonString() string {
@@ -8413,9 +10584,18 @@ func (r *DetachClassicLinkVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachNetworkInterfaceRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The ID of the CVM instance, such as `ins-r8hr2upy`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DetachNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -8443,13 +10623,15 @@ func (r *DetachNetworkInterfaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachNetworkInterfaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *DetachNetworkInterfaceResponse) ToJsonString() string {
@@ -8464,7 +10646,6 @@ func (r *DetachNetworkInterfaceResponse) FromJsonString(s string) error {
 }
 
 type DirectConnectGateway struct {
-
 	// Direct Connect `ID`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -8559,7 +10740,6 @@ type DirectConnectGateway struct {
 }
 
 type DirectConnectGatewayCcnRoute struct {
-
 	// Route ID.
 	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
 
@@ -8576,9 +10756,18 @@ type DirectConnectGatewayCcnRoute struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+// Predefined struct for user
+type DisableCcnRoutesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+}
+
 type DisableCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -8606,13 +10795,15 @@ func (r *DisableCcnRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *DisableCcnRoutesResponse) ToJsonString() string {
@@ -8626,9 +10817,15 @@ func (r *DisableCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableFlowLogsRequestParams struct {
+	// Flow log ID.
+	FlowLogIds []*string `json:"FlowLogIds,omitempty" name:"FlowLogIds"`
+}
+
 type DisableFlowLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow log ID.
 	FlowLogIds []*string `json:"FlowLogIds,omitempty" name:"FlowLogIds"`
 }
@@ -8652,13 +10849,15 @@ func (r *DisableFlowLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableFlowLogsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableFlowLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableFlowLogsResponseParams `json:"Response"`
 }
 
 func (r *DisableFlowLogsResponse) ToJsonString() string {
@@ -8672,9 +10871,18 @@ func (r *DisableFlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateAddressRequestParams struct {
+	// The unique ID of the EIP, such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
+	// Whether a common public IP is assigned after the EIP is unbound. Value range:<br><li>TRUE: Indicates that after the EIP is unbound, a common public IP is assigned.<br><li>FALSE: Indicates that after the EIP is unbound, a common public IP is not assigned.<br>Default value: FALSE.<br><br>The parameter can be specified only under the following conditions:<br><li>It can only be specified when you unbind an EIP from the primary private IP of the primary ENI.<br><li>After an EIP is unbound, you can assign public IPs to an account up to 10 times per day. For more information, use the [DescribeAddressQuota] (https://intl.cloud.tencent.com/document/api/213/1378?from_cn_redirect=1) API.
+	ReallocateNormalPublicIp *bool `json:"ReallocateNormalPublicIp,omitempty" name:"ReallocateNormalPublicIp"`
+}
+
 type DisassociateAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -8702,16 +10910,18 @@ func (r *DisassociateAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateAddressResponseParams struct {
+	// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisassociateAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisassociateAddressResponseParams `json:"Response"`
 }
 
 func (r *DisassociateAddressResponse) ToJsonString() string {
@@ -8725,9 +10935,21 @@ func (r *DisassociateAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateDirectConnectGatewayNatGatewayRequestParams struct {
+	// The direct connect gateway ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT Gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+}
+
 type DisassociateDirectConnectGatewayNatGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The direct connect gateway ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -8759,13 +10981,15 @@ func (r *DisassociateDirectConnectGatewayNatGatewayRequest) FromJsonString(s str
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateDirectConnectGatewayNatGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisassociateDirectConnectGatewayNatGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisassociateDirectConnectGatewayNatGatewayResponseParams `json:"Response"`
 }
 
 func (r *DisassociateDirectConnectGatewayNatGatewayResponse) ToJsonString() string {
@@ -8779,9 +11003,18 @@ func (r *DisassociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s st
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateNetworkInterfaceSecurityGroupsRequestParams struct {
+	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
+	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
+
+	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups. You can enter up to 100 instances for each request.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type DisassociateNetworkInterfaceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
@@ -8809,13 +11042,15 @@ func (r *DisassociateNetworkInterfaceSecurityGroupsRequest) FromJsonString(s str
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateNetworkInterfaceSecurityGroupsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisassociateNetworkInterfaceSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisassociateNetworkInterfaceSecurityGroupsResponseParams `json:"Response"`
 }
 
 func (r *DisassociateNetworkInterfaceSecurityGroupsResponse) ToJsonString() string {
@@ -8829,9 +11064,18 @@ func (r *DisassociateNetworkInterfaceSecurityGroupsResponse) FromJsonString(s st
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateVpcEndPointSecurityGroupsRequestParams struct {
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+}
+
 type DisassociateVpcEndPointSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array of security group IDs
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -8859,13 +11103,15 @@ func (r *DisassociateVpcEndPointSecurityGroupsRequest) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateVpcEndPointSecurityGroupsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisassociateVpcEndPointSecurityGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisassociateVpcEndPointSecurityGroupsResponseParams `json:"Response"`
 }
 
 func (r *DisassociateVpcEndPointSecurityGroupsResponse) ToJsonString() string {
@@ -8879,9 +11125,24 @@ func (r *DisassociateVpcEndPointSecurityGroupsResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DownloadCustomerGatewayConfigurationRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
+	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
+
+	// Customer gateway vendor information object, which can be obtained through DescribeCustomerGatewayVendors.
+	CustomerGatewayVendor *CustomerGatewayVendor `json:"CustomerGatewayVendor,omitempty" name:"CustomerGatewayVendor"`
+
+	// Name of the physical API for tunnel access device.
+	InterfaceName *string `json:"InterfaceName,omitempty" name:"InterfaceName"`
+}
+
 type DownloadCustomerGatewayConfigurationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -8917,16 +11178,18 @@ func (r *DownloadCustomerGatewayConfigurationRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DownloadCustomerGatewayConfigurationResponseParams struct {
+	// Configuration information in XML format.
+	CustomerGatewayConfiguration *string `json:"CustomerGatewayConfiguration,omitempty" name:"CustomerGatewayConfiguration"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DownloadCustomerGatewayConfigurationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration information in XML format.
-		CustomerGatewayConfiguration *string `json:"CustomerGatewayConfiguration,omitempty" name:"CustomerGatewayConfiguration"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DownloadCustomerGatewayConfigurationResponseParams `json:"Response"`
 }
 
 func (r *DownloadCustomerGatewayConfigurationResponse) ToJsonString() string {
@@ -8940,9 +11203,18 @@ func (r *DownloadCustomerGatewayConfigurationResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableCcnRoutesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The unique ID of the CCN routing policy, such as `ccnr-f49l6u0z`.
+	RouteIds []*string `json:"RouteIds,omitempty" name:"RouteIds"`
+}
+
 type EnableCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -8970,13 +11242,15 @@ func (r *EnableCcnRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *EnableCcnRoutesResponse) ToJsonString() string {
@@ -8990,9 +11264,15 @@ func (r *EnableCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableFlowLogsRequestParams struct {
+	// Flow log ID.
+	FlowLogIds []*string `json:"FlowLogIds,omitempty" name:"FlowLogIds"`
+}
+
 type EnableFlowLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Flow log ID.
 	FlowLogIds []*string `json:"FlowLogIds,omitempty" name:"FlowLogIds"`
 }
@@ -9016,13 +11296,15 @@ func (r *EnableFlowLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableFlowLogsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableFlowLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableFlowLogsResponseParams `json:"Response"`
 }
 
 func (r *EnableFlowLogsResponse) ToJsonString() string {
@@ -9036,9 +11318,21 @@ func (r *EnableFlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableVpcEndPointConnectRequestParams struct {
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Endpoint ID
+	EndPointId []*string `json:"EndPointId,omitempty" name:"EndPointId"`
+
+	// Whether to accept the request of connecting with an endpoint
+	AcceptFlag *bool `json:"AcceptFlag,omitempty" name:"AcceptFlag"`
+}
+
 type EnableVpcEndPointConnectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Endpoint service ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 
@@ -9070,13 +11364,15 @@ func (r *EnableVpcEndPointConnectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableVpcEndPointConnectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableVpcEndPointConnectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableVpcEndPointConnectResponseParams `json:"Response"`
 }
 
 func (r *EnableVpcEndPointConnectResponse) ToJsonString() string {
@@ -9091,7 +11387,6 @@ func (r *EnableVpcEndPointConnectResponse) FromJsonString(s string) error {
 }
 
 type EndPoint struct {
-
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
 
@@ -9134,7 +11429,6 @@ type EndPoint struct {
 }
 
 type EndPointService struct {
-
 	// Endpoint service ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 
@@ -9169,7 +11463,6 @@ type EndPointService struct {
 }
 
 type Filter struct {
-
 	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -9178,7 +11471,6 @@ type Filter struct {
 }
 
 type FilterObject struct {
-
 	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -9187,7 +11479,6 @@ type FilterObject struct {
 }
 
 type FlowLog struct {
-
 	// ID of the VPC instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -9234,7 +11525,6 @@ type FlowLog struct {
 }
 
 type FlowLogStorage struct {
-
 	// Storage instance ID, which is required when `StorageType` is `ckafka`.
 	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
 
@@ -9244,7 +11534,6 @@ type FlowLogStorage struct {
 }
 
 type GatewayFlowMonitorDetail struct {
-
 	// Origin `IP`.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
@@ -9261,9 +11550,32 @@ type GatewayFlowMonitorDetail struct {
 	OutTraffic *uint64 `json:"OutTraffic,omitempty" name:"OutTraffic"`
 }
 
+// Predefined struct for user
+type GetCcnRegionBandwidthLimitsRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The filter condition.
+	// <li>sregion - String - (Filter condition) Filter by the source region, such as 'ap-guangzhou'.</li>
+	// <li>dregion - String - (Filter condition) Filter by the destination region, such as 'ap-shanghai-bm'.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
+	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
+
+	// The offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The returned quantity.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// In ascending or descending order. Valid values: 'ASC' and 'DESC'.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+}
+
 type GetCcnRegionBandwidthLimitsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -9309,21 +11621,23 @@ func (r *GetCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetCcnRegionBandwidthLimitsResponseParams struct {
+	// The outbound bandwidth limits of regions in a CCN instance.
+	// Note: this field may return null, indicating that no valid value was found.
+	CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet"`
+
+	// The number of eligible objects.
+	// Note: this field may return null, indicating that no valid value was found.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetCcnRegionBandwidthLimitsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The outbound bandwidth limits of regions in a CCN instance.
-	// Note: this field may return null, indicating that no valid value was found.
-		CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet"`
-
-		// The number of eligible objects.
-	// Note: this field may return null, indicating that no valid value was found.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetCcnRegionBandwidthLimitsResponseParams `json:"Response"`
 }
 
 func (r *GetCcnRegionBandwidthLimitsResponse) ToJsonString() string {
@@ -9338,7 +11652,6 @@ func (r *GetCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
 }
 
 type HaVip struct {
-
 	// The `ID` of the `HAVIP`. This is the unique identifier of the `HAVIP`.
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
 
@@ -9375,9 +11688,18 @@ type HaVip struct {
 	Business *string `json:"Business,omitempty" name:"Business"`
 }
 
+// Predefined struct for user
+type HaVipAssociateAddressIpRequestParams struct {
+	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`. This must be a `HAVIP` that has not been bound to an `EIP`
+	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
+
+	// The Elastic `IP`. This must be an `EIP` that has not been bound to a `HAVIP`
+	AddressIp *string `json:"AddressIp,omitempty" name:"AddressIp"`
+}
+
 type HaVipAssociateAddressIpRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`. This must be a `HAVIP` that has not been bound to an `EIP`
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
 
@@ -9405,13 +11727,15 @@ func (r *HaVipAssociateAddressIpRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type HaVipAssociateAddressIpResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type HaVipAssociateAddressIpResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *HaVipAssociateAddressIpResponseParams `json:"Response"`
 }
 
 func (r *HaVipAssociateAddressIpResponse) ToJsonString() string {
@@ -9425,9 +11749,15 @@ func (r *HaVipAssociateAddressIpResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type HaVipDisassociateAddressIpRequestParams struct {
+	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`. This must be an `HAVIP` that has been bound to an `EIP`.
+	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
+}
+
 type HaVipDisassociateAddressIpRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`. This must be an `HAVIP` that has been bound to an `EIP`.
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
 }
@@ -9451,13 +11781,15 @@ func (r *HaVipDisassociateAddressIpRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type HaVipDisassociateAddressIpResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type HaVipDisassociateAddressIpResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *HaVipDisassociateAddressIpResponseParams `json:"Response"`
 }
 
 func (r *HaVipDisassociateAddressIpResponse) ToJsonString() string {
@@ -9472,7 +11804,6 @@ func (r *HaVipDisassociateAddressIpResponse) FromJsonString(s string) error {
 }
 
 type IKEOptionsSpecification struct {
-
 	// Encryption algorithm. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBS-192`, `AES-CBC-256`, `DES-CBC`, and `SM4`; default value: `3DES-CBC`.
 	PropoEncryAlgorithm *string `json:"PropoEncryAlgorithm,omitempty" name:"PropoEncryAlgorithm"`
 
@@ -9511,7 +11842,6 @@ type IKEOptionsSpecification struct {
 }
 
 type IPSECOptionsSpecification struct {
-
 	// Encryption algorithm. Valid values: `3DES-CBC`, `AES-CBC-128`, `AES-CBC-192`, `AES-CBC-256`, `DES-CBC`, `SM4`, and `NULL`; default value: `AES-CBC-128`.
 	EncryptAlgorithm *string `json:"EncryptAlgorithm,omitempty" name:"EncryptAlgorithm"`
 
@@ -9528,8 +11858,14 @@ type IPSECOptionsSpecification struct {
 	IPSECSaLifetimeTraffic *uint64 `json:"IPSECSaLifetimeTraffic,omitempty" name:"IPSECSaLifetimeTraffic"`
 }
 
+// Predefined struct for user
+type InquirePriceCreateDirectConnectGatewayRequestParams struct {
+
+}
+
 type InquirePriceCreateDirectConnectGatewayRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *InquirePriceCreateDirectConnectGatewayRequest) ToJsonString() string {
@@ -9544,27 +11880,30 @@ func (r *InquirePriceCreateDirectConnectGatewayRequest) FromJsonString(s string)
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDirectConnectGatewayRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateDirectConnectGatewayResponseParams struct {
+	// Standard access fee for a direct connect gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TotalCost *int64 `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Actual access fee for a direct connect gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RealTotalCost *int64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceCreateDirectConnectGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Standard access fee for a direct connect gateway
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TotalCost *int64 `json:"TotalCost,omitempty" name:"TotalCost"`
-
-		// Actual access fee for a direct connect gateway
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		RealTotalCost *int64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceCreateDirectConnectGatewayResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceCreateDirectConnectGatewayResponse) ToJsonString() string {
@@ -9578,9 +11917,18 @@ func (r *InquirePriceCreateDirectConnectGatewayResponse) FromJsonString(s string
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewVpnGatewayRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Specifies the purchased validity period, whether to enable auto-renewal. This parameter is required for monthly-subscription instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
 type InquiryPriceRenewVpnGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -9608,16 +11956,18 @@ func (r *InquiryPriceRenewVpnGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewVpnGatewayResponseParams struct {
+	// Product price.
+	Price *Price `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceRenewVpnGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Product price.
-		Price *Price `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceRenewVpnGatewayResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceRenewVpnGatewayResponse) ToJsonString() string {
@@ -9631,9 +11981,18 @@ func (r *InquiryPriceRenewVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceResetVpnGatewayInternetMaxBandwidthRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
 type InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -9661,16 +12020,18 @@ func (r *InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest) FromJsonString(
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceResetVpnGatewayInternetMaxBandwidthResponseParams struct {
+	// Product price.
+	Price *Price `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Product price.
-		Price *Price `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse) ToJsonString() string {
@@ -9685,7 +12046,6 @@ func (r *InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse) FromJsonString
 }
 
 type InstanceChargePrepaid struct {
-
 	// Purchased usage period (in month). Value range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36].
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
@@ -9694,7 +12054,6 @@ type InstanceChargePrepaid struct {
 }
 
 type InstanceStatistic struct {
-
 	// Type of instance
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
@@ -9703,7 +12062,6 @@ type InstanceStatistic struct {
 }
 
 type IpField struct {
-
 	// Country/region of the IP
 	Country *bool `json:"Country,omitempty" name:"Country"`
 
@@ -9730,7 +12088,6 @@ type IpField struct {
 }
 
 type IpGeolocationInfo struct {
-
 	// Country/region
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Country *string `json:"Country,omitempty" name:"Country"`
@@ -9769,7 +12126,6 @@ type IpGeolocationInfo struct {
 }
 
 type Ipv6Address struct {
-
 	// `IPv6` address, such as `3402:4e00:20:100:0:8cd9:2a67:71f3`
 	Address *string `json:"Address,omitempty" name:"Address"`
 
@@ -9794,7 +12150,6 @@ type Ipv6Address struct {
 }
 
 type Ipv6SubnetCidrBlock struct {
-
 	// The `ID` of the subnet instance, such as `subnet-pxir56ns`.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
@@ -9803,7 +12158,6 @@ type Ipv6SubnetCidrBlock struct {
 }
 
 type ItemPrice struct {
-
 	// The pay-as-you-go billing method. Unit: CNY.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
@@ -9818,7 +12172,6 @@ type ItemPrice struct {
 }
 
 type LocalGateway struct {
-
 	// CDC instance ID
 	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 
@@ -9838,9 +12191,24 @@ type LocalGateway struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+// Predefined struct for user
+type MigrateNetworkInterfaceRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The ID of the CVM bound to the ENI, such as `ins-r8hr2upy`.
+	SourceInstanceId *string `json:"SourceInstanceId,omitempty" name:"SourceInstanceId"`
+
+	// ID of the destination CVM instance to be migrated.
+	DestinationInstanceId *string `json:"DestinationInstanceId,omitempty" name:"DestinationInstanceId"`
+
+	// ENI mount method. Valid values: 0: standard; 1: extension; default value: 0
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+}
+
 type MigrateNetworkInterfaceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -9876,13 +12244,15 @@ func (r *MigrateNetworkInterfaceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type MigrateNetworkInterfaceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type MigrateNetworkInterfaceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *MigrateNetworkInterfaceResponseParams `json:"Response"`
 }
 
 func (r *MigrateNetworkInterfaceResponse) ToJsonString() string {
@@ -9896,9 +12266,21 @@ func (r *MigrateNetworkInterfaceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type MigratePrivateIpAddressRequestParams struct {
+	// ID of the ENI instance bound with the private IP, such as `eni-m6dyj72l`.
+	SourceNetworkInterfaceId *string `json:"SourceNetworkInterfaceId,omitempty" name:"SourceNetworkInterfaceId"`
+
+	// ID of the destination ENI instance to be migrated.
+	DestinationNetworkInterfaceId *string `json:"DestinationNetworkInterfaceId,omitempty" name:"DestinationNetworkInterfaceId"`
+
+	// The private IP to be migrated, such as 10.0.0.6.
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+}
+
 type MigratePrivateIpAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the ENI instance bound with the private IP, such as `eni-m6dyj72l`.
 	SourceNetworkInterfaceId *string `json:"SourceNetworkInterfaceId,omitempty" name:"SourceNetworkInterfaceId"`
 
@@ -9930,13 +12312,15 @@ func (r *MigratePrivateIpAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type MigratePrivateIpAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type MigratePrivateIpAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *MigratePrivateIpAddressResponseParams `json:"Response"`
 }
 
 func (r *MigratePrivateIpAddressResponse) ToJsonString() string {
@@ -9950,9 +12334,21 @@ func (r *MigratePrivateIpAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressAttributeRequestParams struct {
+	// The unique ID of the EIP, such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
+	// The EIP name after modification. The maximum length is 20 characters.
+	AddressName *string `json:"AddressName,omitempty" name:"AddressName"`
+
+	// Whether the set EIP is a direct connection EIP. TRUE: yes. FALSE: no. Note that this parameter is available only to users who have activated the EIP direct connection function.
+	EipDirectConnection *string `json:"EipDirectConnection,omitempty" name:"EipDirectConnection"`
+}
+
 type ModifyAddressAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -9984,13 +12380,15 @@ func (r *ModifyAddressAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAddressAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAddressAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyAddressAttributeResponse) ToJsonString() string {
@@ -10004,9 +12402,24 @@ func (r *ModifyAddressAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressInternetChargeTypeRequestParams struct {
+	// Unique EIP ID, such as "eip-xxxx"
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
+	// The target billing method. It can be `BANDWIDTH_PREPAID_BY_MONTH` or `TRAFFIC_POSTPAID_BY_HOUR`
+	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
+
+	// The target bandwidth value
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Billing details of monthly-subscribed network bandwidth. This parameter is required if the target billing method is `BANDWIDTH_PREPAID_BY_MONTH`.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitempty" name:"AddressChargePrepaid"`
+}
+
 type ModifyAddressInternetChargeTypeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique EIP ID, such as "eip-xxxx"
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
@@ -10042,13 +12455,15 @@ func (r *ModifyAddressInternetChargeTypeRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressInternetChargeTypeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAddressInternetChargeTypeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAddressInternetChargeTypeResponseParams `json:"Response"`
 }
 
 func (r *ModifyAddressInternetChargeTypeResponse) ToJsonString() string {
@@ -10062,9 +12477,24 @@ func (r *ModifyAddressInternetChargeTypeResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressTemplateAttributeRequestParams struct {
+	// IP address template instance ID, such as `ipm-mdunqeb6`.
+	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
+
+	// IP address template name.
+	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
+
+	// Address information, including IP, CIDR and IP address range.
+	Addresses []*string `json:"Addresses,omitempty" name:"Addresses"`
+
+	// Address information with remarks, including the IP, CIDR block or IP address range.
+	AddressesExtra []*AddressInfo `json:"AddressesExtra,omitempty" name:"AddressesExtra"`
+}
+
 type ModifyAddressTemplateAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IP address template instance ID, such as `ipm-mdunqeb6`.
 	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
 
@@ -10100,13 +12530,15 @@ func (r *ModifyAddressTemplateAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressTemplateAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAddressTemplateAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAddressTemplateAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyAddressTemplateAttributeResponse) ToJsonString() string {
@@ -10120,9 +12552,21 @@ func (r *ModifyAddressTemplateAttributeResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressTemplateGroupAttributeRequestParams struct {
+	// IP address template group instance ID, such as `ipmg-2uw6ujo6`.
+	AddressTemplateGroupId *string `json:"AddressTemplateGroupId,omitempty" name:"AddressTemplateGroupId"`
+
+	// IP address template group name.
+	AddressTemplateGroupName *string `json:"AddressTemplateGroupName,omitempty" name:"AddressTemplateGroupName"`
+
+	// IP address template instance ID, such as `ipm-mdunqeb6`.
+	AddressTemplateIds []*string `json:"AddressTemplateIds,omitempty" name:"AddressTemplateIds"`
+}
+
 type ModifyAddressTemplateGroupAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IP address template group instance ID, such as `ipmg-2uw6ujo6`.
 	AddressTemplateGroupId *string `json:"AddressTemplateGroupId,omitempty" name:"AddressTemplateGroupId"`
 
@@ -10154,13 +12598,15 @@ func (r *ModifyAddressTemplateGroupAttributeRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressTemplateGroupAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAddressTemplateGroupAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAddressTemplateGroupAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyAddressTemplateGroupAttributeResponse) ToJsonString() string {
@@ -10174,9 +12620,24 @@ func (r *ModifyAddressTemplateGroupAttributeResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressesBandwidthRequestParams struct {
+	// List of EIP IDs, such as “eip-xxxx”.
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
+
+	// Target bandwidth value adjustment
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// (Disused) The start time of the monthly bandwidth subscription
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// (Disused) The end time of the monthly bandwidth subscription
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type ModifyAddressesBandwidthRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of EIP IDs, such as “eip-xxxx”.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 
@@ -10212,16 +12673,18 @@ func (r *ModifyAddressesBandwidthRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAddressesBandwidthResponseParams struct {
+	// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAddressesBandwidthResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAddressesBandwidthResponseParams `json:"Response"`
 }
 
 func (r *ModifyAddressesBandwidthResponse) ToJsonString() string {
@@ -10235,9 +12698,24 @@ func (r *ModifyAddressesBandwidthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyBandwidthPackageAttributeRequestParams struct {
+	// The unique ID of the bandwidth package.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// The name of the bandwidth package.
+	BandwidthPackageName *string `json:"BandwidthPackageName,omitempty" name:"BandwidthPackageName"`
+
+	// The billing mode of the bandwidth package.
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
+	MigrateOnRefund *bool `json:"MigrateOnRefund,omitempty" name:"MigrateOnRefund"`
+}
+
 type ModifyBandwidthPackageAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the bandwidth package.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
@@ -10273,13 +12751,15 @@ func (r *ModifyBandwidthPackageAttributeRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyBandwidthPackageAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyBandwidthPackageAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyBandwidthPackageAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyBandwidthPackageAttributeResponse) ToJsonString() string {
@@ -10293,9 +12773,18 @@ func (r *ModifyBandwidthPackageAttributeResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnAttachedInstancesAttributeRequestParams struct {
+	// CCN instance ID in the format of `ccn-f49l6u0z`
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// List of associated network instances
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+}
+
 type ModifyCcnAttachedInstancesAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CCN instance ID in the format of `ccn-f49l6u0z`
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -10323,13 +12812,15 @@ func (r *ModifyCcnAttachedInstancesAttributeRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnAttachedInstancesAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCcnAttachedInstancesAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCcnAttachedInstancesAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCcnAttachedInstancesAttributeResponse) ToJsonString() string {
@@ -10343,9 +12834,21 @@ func (r *ModifyCcnAttachedInstancesAttributeResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnAttributeRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The name of CCN instance. Up to 60 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
+	CcnName *string `json:"CcnName,omitempty" name:"CcnName"`
+
+	// The description of CCN instance. Up to 100 characters allowed. It can contain up to 60 bytes. Either `CcnName` or `CcnDescription` must be specified.
+	CcnDescription *string `json:"CcnDescription,omitempty" name:"CcnDescription"`
+}
+
 type ModifyCcnAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -10377,13 +12880,15 @@ func (r *ModifyCcnAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCcnAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCcnAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCcnAttributeResponse) ToJsonString() string {
@@ -10397,9 +12902,18 @@ func (r *ModifyCcnAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnRegionBandwidthLimitsTypeRequestParams struct {
+	// CCN instance ID.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// CCN bandwidth limit type. INTER_REGION_LIMIT: limit between regions. OUTER_REGION_LIMIT: region egress limit.
+	BandwidthLimitType *string `json:"BandwidthLimitType,omitempty" name:"BandwidthLimitType"`
+}
+
 type ModifyCcnRegionBandwidthLimitsTypeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CCN instance ID.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -10427,13 +12941,15 @@ func (r *ModifyCcnRegionBandwidthLimitsTypeRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCcnRegionBandwidthLimitsTypeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCcnRegionBandwidthLimitsTypeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCcnRegionBandwidthLimitsTypeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCcnRegionBandwidthLimitsTypeResponse) ToJsonString() string {
@@ -10447,9 +12963,18 @@ func (r *ModifyCcnRegionBandwidthLimitsTypeResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCustomerGatewayAttributeRequestParams struct {
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
+
+	// Customer gateway can be named freely, but the maximum length is 60 characters.
+	CustomerGatewayName *string `json:"CustomerGatewayName,omitempty" name:"CustomerGatewayName"`
+}
+
 type ModifyCustomerGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
@@ -10477,13 +13002,15 @@ func (r *ModifyCustomerGatewayAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCustomerGatewayAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCustomerGatewayAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCustomerGatewayAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyCustomerGatewayAttributeResponse) ToJsonString() string {
@@ -10497,9 +13024,24 @@ func (r *ModifyCustomerGatewayAttributeResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDirectConnectGatewayAttributeRequestParams struct {
+	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The direct connect gateway name. You can enter any name within 60 characters.
+	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitempty" name:"DirectConnectGatewayName"`
+
+	// The CCN route-learning type. Valid values: `BGP` (Automatic learning), `STATIC` (Static, that is, user-configured). You can only modify `CcnRouteType` for a CCN direct connect gateway with BGP enabled.
+	CcnRouteType *string `json:"CcnRouteType,omitempty" name:"CcnRouteType"`
+
+	// CCN route publishing method. Valid values: `standard` and `exquisite`. You can only modify `ModeType` for a CCN direct connect gateway.
+	ModeType *string `json:"ModeType,omitempty" name:"ModeType"`
+}
+
 type ModifyDirectConnectGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the direct connect gateway, such as `dcg-9o233uri`.
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -10535,13 +13077,15 @@ func (r *ModifyDirectConnectGatewayAttributeRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDirectConnectGatewayAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDirectConnectGatewayAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDirectConnectGatewayAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyDirectConnectGatewayAttributeResponse) ToJsonString() string {
@@ -10555,9 +13099,24 @@ func (r *ModifyDirectConnectGatewayAttributeResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFlowLogAttributeRequestParams struct {
+	// The unique ID of the flow log.
+	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
+
+	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the attributes of a CCN flow log is modified.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The name of the flow log.
+	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
+
+	// The description of the flow log.
+	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
+}
+
 type ModifyFlowLogAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the flow log.
 	FlowLogId *string `json:"FlowLogId,omitempty" name:"FlowLogId"`
 
@@ -10593,13 +13152,15 @@ func (r *ModifyFlowLogAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyFlowLogAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyFlowLogAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyFlowLogAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyFlowLogAttributeResponse) ToJsonString() string {
@@ -10613,9 +13174,18 @@ func (r *ModifyFlowLogAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHaVipAttributeRequestParams struct {
+	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
+	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
+
+	// `HAVIP` can be named freely, but the maximum length is 60 characters.
+	HaVipName *string `json:"HaVipName,omitempty" name:"HaVipName"`
+}
+
 type ModifyHaVipAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
 
@@ -10643,13 +13213,15 @@ func (r *ModifyHaVipAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyHaVipAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyHaVipAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyHaVipAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyHaVipAttributeResponse) ToJsonString() string {
@@ -10663,9 +13235,18 @@ func (r *ModifyHaVipAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIpv6AddressesAttributeRequestParams struct {
+	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The information of the specified private `IPv6` addresses.
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
+}
+
 type ModifyIpv6AddressesAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -10693,13 +13274,15 @@ func (r *ModifyIpv6AddressesAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIpv6AddressesAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyIpv6AddressesAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyIpv6AddressesAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyIpv6AddressesAttributeResponse) ToJsonString() string {
@@ -10713,9 +13296,24 @@ func (r *ModifyIpv6AddressesAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyLocalGatewayRequestParams struct {
+	// Local gateway name
+	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
+
+	// CDC instance ID
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
+
+	// Local gateway instance ID
+	LocalGatewayId *string `json:"LocalGatewayId,omitempty" name:"LocalGatewayId"`
+
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
 type ModifyLocalGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Local gateway name
 	LocalGatewayName *string `json:"LocalGatewayName,omitempty" name:"LocalGatewayName"`
 
@@ -10751,13 +13349,15 @@ func (r *ModifyLocalGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyLocalGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyLocalGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyLocalGatewayResponseParams `json:"Response"`
 }
 
 func (r *ModifyLocalGatewayResponse) ToJsonString() string {
@@ -10771,9 +13371,42 @@ func (r *ModifyLocalGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetDetectRequestParams struct {
+	// The ID of a network detection instance, such as `netd-12345678`.
+	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
+
+	// The name of a network detection instance. The maximum length is 60 characters.
+	NetDetectName *string `json:"NetDetectName,omitempty" name:"NetDetectName"`
+
+	// The array of detection destination IPv4 addresses, which contains at most two IP addresses.
+	DetectDestinationIp []*string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
+
+	// Type of the next hop. Valid values:
+	// `VPN`: VPN gateway;
+	// `DIRECTCONNECT`: Direct connect gateway;
+	// `PEERCONNECTION`: Peering connection;
+	// `NAT`: NAT gateway;
+	// `NORMAL_CVM`: normal CVM;
+	// `CCN`: CCN gateway.
+	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
+
+	// Next-hop destination gateway. Its value is determined by `NextHopType`.
+	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
+	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
+	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
+	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
+	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
+	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
+
+	// Network detection description.
+	NetDetectDescription *string `json:"NetDetectDescription,omitempty" name:"NetDetectDescription"`
+}
+
 type ModifyNetDetectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of a network detection instance, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 
@@ -10829,13 +13462,15 @@ func (r *ModifyNetDetectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetDetectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyNetDetectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyNetDetectResponseParams `json:"Response"`
 }
 
 func (r *ModifyNetDetectResponse) ToJsonString() string {
@@ -10849,9 +13484,24 @@ func (r *ModifyNetDetectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetworkInterfaceAttributeRequestParams struct {
+	// The ID of the ENI instance, such as `eni-pxir56ns`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The name of the ENI. The maximum length is 60 characters.
+	NetworkInterfaceName *string `json:"NetworkInterfaceName,omitempty" name:"NetworkInterfaceName"`
+
+	// ENI description can be named freely, but the maximum length is 60 characters.
+	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
+
+	// The specified security groups to be bound with, such as ['sg-1dd51d'].
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type ModifyNetworkInterfaceAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-pxir56ns`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -10887,13 +13537,15 @@ func (r *ModifyNetworkInterfaceAttributeRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyNetworkInterfaceAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyNetworkInterfaceAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyNetworkInterfaceAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyNetworkInterfaceAttributeResponse) ToJsonString() string {
@@ -10907,9 +13559,18 @@ func (r *ModifyNetworkInterfaceAttributeResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateIpAddressesAttributeRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The specified private IP information.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+}
+
 type ModifyPrivateIpAddressesAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -10937,13 +13598,15 @@ func (r *ModifyPrivateIpAddressesAttributeRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateIpAddressesAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPrivateIpAddressesAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPrivateIpAddressesAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyPrivateIpAddressesAttributeResponse) ToJsonString() string {
@@ -10957,9 +13620,18 @@ func (r *ModifyPrivateIpAddressesAttributeResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRouteTableAttributeRequestParams struct {
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// Route table name.
+	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
+}
+
 type ModifyRouteTableAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The route table instance ID, such as `rtb-azd4dt1c`.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
@@ -10987,13 +13659,15 @@ func (r *ModifyRouteTableAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRouteTableAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyRouteTableAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyRouteTableAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyRouteTableAttributeResponse) ToJsonString() string {
@@ -11007,9 +13681,21 @@ func (r *ModifyRouteTableAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityGroupAttributeRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group can be named freely, but cannot exceed 60 characters.
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// The remarks for the security group. The maximum length is 100 characters.
+	GroupDescription *string `json:"GroupDescription,omitempty" name:"GroupDescription"`
+}
+
 type ModifySecurityGroupAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -11041,13 +13727,15 @@ func (r *ModifySecurityGroupAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityGroupAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySecurityGroupAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySecurityGroupAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifySecurityGroupAttributeResponse) ToJsonString() string {
@@ -11061,9 +13749,21 @@ func (r *ModifySecurityGroupAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityGroupPoliciesRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// The security group policy set. SecurityGroupPolicySet object must specify new egress and ingress policies at the same time. SecurityGroupPolicy object does not support custom index (PolicyIndex).
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// Whether the security group rule is sorted. Default value: False. If it is set to `True`, security group rules will be strictly sorted according to the sequence specified in the `SecurityGroupPolicySet` parameter. Manual entry may cause omission, so we recommend sorting security group rules in the console.
+	SortPolicys *bool `json:"SortPolicys,omitempty" name:"SortPolicys"`
+}
+
 type ModifySecurityGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -11095,13 +13795,15 @@ func (r *ModifySecurityGroupPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySecurityGroupPoliciesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySecurityGroupPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySecurityGroupPoliciesResponseParams `json:"Response"`
 }
 
 func (r *ModifySecurityGroupPoliciesResponse) ToJsonString() string {
@@ -11115,9 +13817,24 @@ func (r *ModifySecurityGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceTemplateAttributeRequestParams struct {
+	// Protocol port template instance ID, such as `ppm-529nwwj8`.
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+
+	// Protocol port template name.
+	ServiceTemplateName *string `json:"ServiceTemplateName,omitempty" name:"ServiceTemplateName"`
+
+	// It supports single port, multiple ports, consecutive ports and all ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+	Services []*string `json:"Services,omitempty" name:"Services"`
+
+	// Protocol port information with remarks. Supported ports include single port, multiple ports, consecutive ports and other ports. Supported protocols include TCP, UDP, ICMP, and GRE.
+	ServicesExtra []*ServicesInfo `json:"ServicesExtra,omitempty" name:"ServicesExtra"`
+}
+
 type ModifyServiceTemplateAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Protocol port template instance ID, such as `ppm-529nwwj8`.
 	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
 
@@ -11153,13 +13870,15 @@ func (r *ModifyServiceTemplateAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceTemplateAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyServiceTemplateAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyServiceTemplateAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyServiceTemplateAttributeResponse) ToJsonString() string {
@@ -11173,9 +13892,21 @@ func (r *ModifyServiceTemplateAttributeResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceTemplateGroupAttributeRequestParams struct {
+	// The protocol port template group instance ID, such as `ppmg-ei8hfd9a`.
+	ServiceTemplateGroupId *string `json:"ServiceTemplateGroupId,omitempty" name:"ServiceTemplateGroupId"`
+
+	// Protocol port template group name.
+	ServiceTemplateGroupName *string `json:"ServiceTemplateGroupName,omitempty" name:"ServiceTemplateGroupName"`
+
+	// Instance ID of the protocol port template, such as `ppm-4dw6agho`.
+	ServiceTemplateIds []*string `json:"ServiceTemplateIds,omitempty" name:"ServiceTemplateIds"`
+}
+
 type ModifyServiceTemplateGroupAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The protocol port template group instance ID, such as `ppmg-ei8hfd9a`.
 	ServiceTemplateGroupId *string `json:"ServiceTemplateGroupId,omitempty" name:"ServiceTemplateGroupId"`
 
@@ -11207,13 +13938,15 @@ func (r *ModifyServiceTemplateGroupAttributeRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyServiceTemplateGroupAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyServiceTemplateGroupAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyServiceTemplateGroupAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyServiceTemplateGroupAttributeResponse) ToJsonString() string {
@@ -11227,9 +13960,21 @@ func (r *ModifyServiceTemplateGroupAttributeResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySubnetAttributeRequestParams struct {
+	// Subnet instance ID, such as `subnet-pxir56ns`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The subnet name. The maximum length is 60 bytes.
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// Whether the subnet has broadcast enabled.
+	EnableBroadcast *string `json:"EnableBroadcast,omitempty" name:"EnableBroadcast"`
+}
+
 type ModifySubnetAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Subnet instance ID, such as `subnet-pxir56ns`.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
@@ -11261,13 +14006,15 @@ func (r *ModifySubnetAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySubnetAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySubnetAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySubnetAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifySubnetAttributeResponse) ToJsonString() string {
@@ -11281,9 +14028,27 @@ func (r *ModifySubnetAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcAttributeRequestParams struct {
+	// Security group can be named freely, but cannot exceed 60 characters.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC can be named freely, but the maximum length is 60 characters.
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// Whether multicast is enabled. `true`: Enabled. `false`: Off.
+	EnableMulticast *string `json:"EnableMulticast,omitempty" name:"EnableMulticast"`
+
+	// DNS address. A maximum of 4 addresses is supported. The first one is primary server by default, and the rest are secondary servers.
+	DnsServers []*string `json:"DnsServers,omitempty" name:"DnsServers"`
+
+	// Domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+}
+
 type ModifyVpcAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security group can be named freely, but cannot exceed 60 characters.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -11323,13 +14088,15 @@ func (r *ModifyVpcAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpcAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpcAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpcAttributeResponse) ToJsonString() string {
@@ -11343,9 +14110,21 @@ func (r *ModifyVpcAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointAttributeRequestParams struct {
+	// Endpoint ID
+	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
+
+	// Endpoint name
+	EndPointName *string `json:"EndPointName,omitempty" name:"EndPointName"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type ModifyVpcEndPointAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Endpoint ID
 	EndPointId *string `json:"EndPointId,omitempty" name:"EndPointId"`
 
@@ -11377,13 +14156,15 @@ func (r *ModifyVpcEndPointAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpcEndPointAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpcEndPointAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpcEndPointAttributeResponse) ToJsonString() string {
@@ -11397,9 +14178,27 @@ func (r *ModifyVpcEndPointAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointServiceAttributeRequestParams struct {
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Endpoint service name
+	EndPointServiceName *string `json:"EndPointServiceName,omitempty" name:"EndPointServiceName"`
+
+	// Whether to automatically accept VPC endpoint connection requests. Valid values: <ui><li>`true`: yes<li>`false`: no</ul>
+	AutoAcceptFlag *bool `json:"AutoAcceptFlag,omitempty" name:"AutoAcceptFlag"`
+
+	// Real server ID in the format of `lb-xxx`.
+	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
+}
+
 type ModifyVpcEndPointServiceAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Endpoint service ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
 
@@ -11439,13 +14238,15 @@ func (r *ModifyVpcEndPointServiceAttributeRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointServiceAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpcEndPointServiceAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpcEndPointServiceAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpcEndPointServiceAttributeResponse) ToJsonString() string {
@@ -11459,9 +14260,21 @@ func (r *ModifyVpcEndPointServiceAttributeResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointServiceWhiteListRequestParams struct {
+	// User UIN
+	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
+
+	// Endpoint service ID
+	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
+
+	// Allowlist description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type ModifyVpcEndPointServiceWhiteListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User UIN
 	UserUin *string `json:"UserUin,omitempty" name:"UserUin"`
 
@@ -11493,13 +14306,15 @@ func (r *ModifyVpcEndPointServiceWhiteListRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpcEndPointServiceWhiteListResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpcEndPointServiceWhiteListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpcEndPointServiceWhiteListResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpcEndPointServiceWhiteListResponse) ToJsonString() string {
@@ -11513,9 +14328,51 @@ func (r *ModifyVpcEndPointServiceWhiteListResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnConnectionAttributeRequestParams struct {
+	// The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
+	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
+
+	// VPN tunnel can be named freely, but the maximum length is 60 characters.
+	VpnConnectionName *string `json:"VpnConnectionName,omitempty" name:"VpnConnectionName"`
+
+	// The pre-shared key.
+	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
+
+	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
+	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
+
+	// IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
+	IKEOptionsSpecification *IKEOptionsSpecification `json:"IKEOptionsSpecification,omitempty" name:"IKEOptionsSpecification"`
+
+	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
+	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
+
+	// Whether to enable the tunnel health check.
+	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
+
+	// Local IP address for the tunnel health check
+	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
+
+	// Peer IP address for the tunnel health check
+	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
+
+	// Negotiation type. Valid values: `active` (default value), `passive` and `flowTrigger`.
+	NegotiationType *string `json:"NegotiationType,omitempty" name:"NegotiationType"`
+
+	// Specifies whether to enable DPD. Valid values: `0` (disable) and `1` (enable)
+	DpdEnable *int64 `json:"DpdEnable,omitempty" name:"DpdEnable"`
+
+	// DPD timeout period. Default: 30; unit: second. If the request is not responded within this period, the peer end is considered not exists. This parameter is valid when the value of `DpdEnable` is 1. 
+	DpdTimeout *string `json:"DpdTimeout,omitempty" name:"DpdTimeout"`
+
+	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
+	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
+}
+
 type ModifyVpnConnectionAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
 	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
 
@@ -11587,13 +14444,15 @@ func (r *ModifyVpnConnectionAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnConnectionAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpnConnectionAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpnConnectionAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpnConnectionAttributeResponse) ToJsonString() string {
@@ -11607,9 +14466,21 @@ func (r *ModifyVpnConnectionAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayAttributeRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The VPN gateway name. The maximum length is 60 bytes.
+	VpnGatewayName *string `json:"VpnGatewayName,omitempty" name:"VpnGatewayName"`
+
+	// VPN gateway billing mode. Currently, only the conversion of prepaid (monthly subscription) to postpaid (that is, pay-as-you-go) is supported. That is, the parameters only supports POSTPAID_BY_HOUR.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
 type ModifyVpnGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -11641,13 +14512,15 @@ func (r *ModifyVpnGatewayAttributeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpnGatewayAttributeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpnGatewayAttributeResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpnGatewayAttributeResponse) ToJsonString() string {
@@ -11661,9 +14534,18 @@ func (r *ModifyVpnGatewayAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayCcnRoutesRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The CCN route (IDC IP range) list.
+	Routes []*VpngwCcnRoutes `json:"Routes,omitempty" name:"Routes"`
+}
+
 type ModifyVpnGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -11691,13 +14573,15 @@ func (r *ModifyVpnGatewayCcnRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpnGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpnGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpnGatewayCcnRoutesResponse) ToJsonString() string {
@@ -11711,9 +14595,18 @@ func (r *ModifyVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayRoutesRequestParams struct {
+	// VPN gateway ID
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Route parameters to modify
+	Routes []*VpnGatewayRouteModify `json:"Routes,omitempty" name:"Routes"`
+}
+
 type ModifyVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// VPN gateway ID
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -11741,17 +14634,19 @@ func (r *ModifyVpnGatewayRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyVpnGatewayRoutesResponseParams struct {
+	// Route information of the VPN gateway
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyVpnGatewayRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Route information of the VPN gateway
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyVpnGatewayRoutesResponseParams `json:"Response"`
 }
 
 func (r *ModifyVpnGatewayRoutesResponse) ToJsonString() string {
@@ -11766,7 +14661,6 @@ func (r *ModifyVpnGatewayRoutesResponse) FromJsonString(s string) error {
 }
 
 type NetDetect struct {
-
 	// The ID of a VPC instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -11823,7 +14717,6 @@ type NetDetect struct {
 }
 
 type NetDetectIpState struct {
-
 	// The destination IPv4 address of network detection.
 	DetectDestinationIp *string `json:"DetectDestinationIp,omitempty" name:"DetectDestinationIp"`
 
@@ -11843,7 +14736,6 @@ type NetDetectIpState struct {
 }
 
 type NetDetectState struct {
-
 	// The ID of a network detection instance, such as netd-12345678.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 
@@ -11852,7 +14744,6 @@ type NetDetectState struct {
 }
 
 type NetworkAcl struct {
-
 	// `ID` of the `VPC` instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -11876,7 +14767,6 @@ type NetworkAcl struct {
 }
 
 type NetworkAclEntry struct {
-
 	// Modification time.
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 
@@ -11900,7 +14790,6 @@ type NetworkAclEntry struct {
 }
 
 type NetworkInterface struct {
-
 	// The ID of the ENI instance, such as `eni-f1xjkw1b`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -11969,7 +14858,6 @@ type NetworkInterface struct {
 }
 
 type NetworkInterfaceAttachment struct {
-
 	// CVM instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -11984,7 +14872,6 @@ type NetworkInterfaceAttachment struct {
 }
 
 type Price struct {
-
 	// Instance price.
 	InstancePrice *ItemPrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
 
@@ -11993,7 +14880,6 @@ type Price struct {
 }
 
 type PrivateIpAddressSpecification struct {
-
 	// Private IP address.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
@@ -12021,7 +14907,6 @@ type PrivateIpAddressSpecification struct {
 }
 
 type Quota struct {
-
 	// Quota name. Value range:<br><li>`TOTAL_EIP_QUOTA`:EIP quota under the user's current region<br><li>`DAILY_EIP_APPLY`: Number of EIP applications submitted daily under the user's current region<br><li>`DAILY_PUBLIC_IP_ASSIGN`: Number of public IP reassignments under the user's current region.
 	QuotaId *string `json:"QuotaId,omitempty" name:"QuotaId"`
 
@@ -12033,7 +14918,6 @@ type Quota struct {
 }
 
 type ReferredSecurityGroup struct {
-
 	// Security group instance ID.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -12041,9 +14925,18 @@ type ReferredSecurityGroup struct {
 	ReferredSecurityGroupIds []*string `json:"ReferredSecurityGroupIds,omitempty" name:"ReferredSecurityGroupIds"`
 }
 
+// Predefined struct for user
+type RejectAttachCcnInstancesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The list of instances whose association is rejected.
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+}
+
 type RejectAttachCcnInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -12071,13 +14964,15 @@ func (r *RejectAttachCcnInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RejectAttachCcnInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RejectAttachCcnInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RejectAttachCcnInstancesResponseParams `json:"Response"`
 }
 
 func (r *RejectAttachCcnInstancesResponse) ToJsonString() string {
@@ -12091,9 +14986,15 @@ func (r *RejectAttachCcnInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReleaseAddressesRequestParams struct {
+	// The unique ID list of the EIP. The unique ID of an EIP is as follows: `eip-11112222`.
+	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
+}
+
 type ReleaseAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID list of the EIP. The unique ID of an EIP is as follows: `eip-11112222`.
 	AddressIds []*string `json:"AddressIds,omitempty" name:"AddressIds"`
 }
@@ -12117,16 +15018,18 @@ func (r *ReleaseAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReleaseAddressesResponseParams struct {
+	// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReleaseAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReleaseAddressesResponseParams `json:"Response"`
 }
 
 func (r *ReleaseAddressesResponse) ToJsonString() string {
@@ -12140,9 +15043,21 @@ func (r *ReleaseAddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveBandwidthPackageResourcesRequestParams struct {
+	// The unique ID of the bandwidth package, such as `bwp-xxxx`.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
+
+	// The resource type. Valid values: `Address` and `LoadBalance`.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The resource IP, such as `eip-xxxx` and `lb-xxxx`.
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+}
+
 type RemoveBandwidthPackageResourcesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the bandwidth package, such as `bwp-xxxx`.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
@@ -12174,13 +15089,15 @@ func (r *RemoveBandwidthPackageResourcesRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveBandwidthPackageResourcesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveBandwidthPackageResourcesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveBandwidthPackageResourcesResponseParams `json:"Response"`
 }
 
 func (r *RemoveBandwidthPackageResourcesResponse) ToJsonString() string {
@@ -12194,9 +15111,18 @@ func (r *RemoveBandwidthPackageResourcesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewVpnGatewayRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// Billing Methods
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
 type RenewVpnGatewayRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -12224,13 +15150,15 @@ func (r *RenewVpnGatewayRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewVpnGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RenewVpnGatewayResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RenewVpnGatewayResponseParams `json:"Response"`
 }
 
 func (r *RenewVpnGatewayResponse) ToJsonString() string {
@@ -12244,9 +15172,18 @@ func (r *RenewVpnGatewayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceDirectConnectGatewayCcnRoutesRequestParams struct {
+	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// The list of IDC IP range that must be connected
+	Routes []*DirectConnectGatewayCcnRoute `json:"Routes,omitempty" name:"Routes"`
+}
+
 type ReplaceDirectConnectGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the Direct Connect gateway, such as `dcg-prpqlmg1`
 	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
 
@@ -12274,13 +15211,15 @@ func (r *ReplaceDirectConnectGatewayCcnRoutesRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceDirectConnectGatewayCcnRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReplaceDirectConnectGatewayCcnRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReplaceDirectConnectGatewayCcnRoutesResponseParams `json:"Response"`
 }
 
 func (r *ReplaceDirectConnectGatewayCcnRoutesResponse) ToJsonString() string {
@@ -12294,9 +15233,18 @@ func (r *ReplaceDirectConnectGatewayCcnRoutesResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceRouteTableAssociationRequestParams struct {
+	// Subnet instance ID, such as `subnet-3x5lf5q0`. This can be queried using the DescribeSubnets API.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+}
+
 type ReplaceRouteTableAssociationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Subnet instance ID, such as `subnet-3x5lf5q0`. This can be queried using the DescribeSubnets API.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
@@ -12324,13 +15272,15 @@ func (r *ReplaceRouteTableAssociationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceRouteTableAssociationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReplaceRouteTableAssociationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReplaceRouteTableAssociationResponseParams `json:"Response"`
 }
 
 func (r *ReplaceRouteTableAssociationResponse) ToJsonString() string {
@@ -12344,9 +15294,18 @@ func (r *ReplaceRouteTableAssociationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceRoutesRequestParams struct {
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// Routing policy object. The routing policy ID (RouteId) must be specified.
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
+}
+
 type ReplaceRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The route table instance ID, such as `rtb-azd4dt1c`.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
@@ -12374,19 +15333,21 @@ func (r *ReplaceRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceRoutesResponseParams struct {
+	// Old routing policy
+	OldRouteSet []*Route `json:"OldRouteSet,omitempty" name:"OldRouteSet"`
+
+	// New routing policy
+	NewRouteSet []*Route `json:"NewRouteSet,omitempty" name:"NewRouteSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReplaceRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Old routing policy
-		OldRouteSet []*Route `json:"OldRouteSet,omitempty" name:"OldRouteSet"`
-
-		// New routing policy
-		NewRouteSet []*Route `json:"NewRouteSet,omitempty" name:"NewRouteSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReplaceRoutesResponseParams `json:"Response"`
 }
 
 func (r *ReplaceRoutesResponse) ToJsonString() string {
@@ -12400,9 +15361,21 @@ func (r *ReplaceRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceSecurityGroupPolicyRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group policy set object.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// (Optional) The old policy set of the security group, which is used for log records.
+	OriginalSecurityGroupPolicySet *SecurityGroupPolicySet `json:"OriginalSecurityGroupPolicySet,omitempty" name:"OriginalSecurityGroupPolicySet"`
+}
+
 type ReplaceSecurityGroupPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -12434,13 +15407,15 @@ func (r *ReplaceSecurityGroupPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ReplaceSecurityGroupPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ReplaceSecurityGroupPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ReplaceSecurityGroupPolicyResponseParams `json:"Response"`
 }
 
 func (r *ReplaceSecurityGroupPolicyResponse) ToJsonString() string {
@@ -12454,9 +15429,21 @@ func (r *ReplaceSecurityGroupPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAttachCcnInstancesRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The UIN (root account) to which the CCN belongs.
+	CcnUin *string `json:"CcnUin,omitempty" name:"CcnUin"`
+
+	// The list of network instances that re-apply for association.
+	Instances []*CcnInstance `json:"Instances,omitempty" name:"Instances"`
+}
+
 type ResetAttachCcnInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -12488,13 +15475,15 @@ func (r *ResetAttachCcnInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetAttachCcnInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetAttachCcnInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetAttachCcnInstancesResponseParams `json:"Response"`
 }
 
 func (r *ResetAttachCcnInstancesResponse) ToJsonString() string {
@@ -12508,9 +15497,21 @@ func (r *ResetAttachCcnInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetRoutesRequestParams struct {
+	// The route table instance ID, such as `rtb-azd4dt1c`.
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The route table name. The maximum length is 60 characters.
+	RouteTableName *string `json:"RouteTableName,omitempty" name:"RouteTableName"`
+
+	// Routing policy.
+	Routes []*Route `json:"Routes,omitempty" name:"Routes"`
+}
+
 type ResetRoutesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The route table instance ID, such as `rtb-azd4dt1c`.
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
@@ -12542,13 +15543,15 @@ func (r *ResetRoutesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetRoutesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetRoutesResponseParams `json:"Response"`
 }
 
 func (r *ResetRoutesResponse) ToJsonString() string {
@@ -12562,9 +15565,18 @@ func (r *ResetRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetVpnConnectionRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The ID of the VPN tunnel instance, such as `vpnx-f49l6u0z`.
+	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
+}
+
 type ResetVpnConnectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -12592,13 +15604,15 @@ func (r *ResetVpnConnectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetVpnConnectionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetVpnConnectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetVpnConnectionResponseParams `json:"Response"`
 }
 
 func (r *ResetVpnConnectionResponse) ToJsonString() string {
@@ -12612,9 +15626,18 @@ func (r *ResetVpnConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetVpnGatewayInternetMaxBandwidthRequestParams struct {
+	// The ID of the VPN gateway instance.
+	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
+
+	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
 type ResetVpnGatewayInternetMaxBandwidthRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -12642,13 +15665,15 @@ func (r *ResetVpnGatewayInternetMaxBandwidthRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetVpnGatewayInternetMaxBandwidthResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetVpnGatewayInternetMaxBandwidthResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetVpnGatewayInternetMaxBandwidthResponseParams `json:"Response"`
 }
 
 func (r *ResetVpnGatewayInternetMaxBandwidthResponse) ToJsonString() string {
@@ -12663,7 +15688,6 @@ func (r *ResetVpnGatewayInternetMaxBandwidthResponse) FromJsonString(s string) e
 }
 
 type Resource struct {
-
 	// The bandwidth package resource type, including `Address`, and `LoadBalance`
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
@@ -12675,7 +15699,6 @@ type Resource struct {
 }
 
 type ResourceDashboard struct {
-
 	// VPC instance ID, such as `vpc-bq4bzxpj`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -12804,7 +15827,6 @@ type ResourceDashboard struct {
 }
 
 type Route struct {
-
 	// Destination IP range, such as 112.20.51.0/24. Values cannot be in the VPC IP range.
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
@@ -12859,7 +15881,6 @@ type Route struct {
 }
 
 type RouteTable struct {
-
 	// VPC instance ID.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -12890,7 +15911,6 @@ type RouteTable struct {
 }
 
 type RouteTableAssociation struct {
-
 	// Subnet instance ID.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
@@ -12899,7 +15919,6 @@ type RouteTableAssociation struct {
 }
 
 type SecurityGroup struct {
-
 	// The security group instance ID, such as `sg-ohuuioma`.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -12927,7 +15946,6 @@ type SecurityGroup struct {
 }
 
 type SecurityGroupAssociationStatistics struct {
-
 	// Security group instance ID.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
@@ -12954,7 +15972,6 @@ type SecurityGroupAssociationStatistics struct {
 }
 
 type SecurityGroupPolicy struct {
-
 	// The index number of security group rules, which dynamically changes with the rules. This parameter can be obtained via the `DescribeSecurityGroupPolicies` API and used with the `Version` field in the returned value of the API.
 	PolicyIndex *int64 `json:"PolicyIndex,omitempty" name:"PolicyIndex"`
 
@@ -12991,7 +16008,6 @@ type SecurityGroupPolicy struct {
 }
 
 type SecurityGroupPolicySet struct {
-
 	// The version of the security group policy. The version number is automatically increased by one each time users update the security policy, to prevent the expiration of updated routing policies. Conflict is ignored if it is left empty.
 	Version *string `json:"Version,omitempty" name:"Version"`
 
@@ -13003,7 +16019,6 @@ type SecurityGroupPolicySet struct {
 }
 
 type SecurityPolicyDatabase struct {
-
 	// Local IP range
 	LocalCidrBlock *string `json:"LocalCidrBlock,omitempty" name:"LocalCidrBlock"`
 
@@ -13012,7 +16027,6 @@ type SecurityPolicyDatabase struct {
 }
 
 type ServiceTemplate struct {
-
 	// Protocol port instance ID, such as `ppm-f5n1f8da`.
 	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
 
@@ -13030,7 +16044,6 @@ type ServiceTemplate struct {
 }
 
 type ServiceTemplateGroup struct {
-
 	// Protocol port template group instance ID, such as `ppmg-2klmrefu`.
 	ServiceTemplateGroupId *string `json:"ServiceTemplateGroupId,omitempty" name:"ServiceTemplateGroupId"`
 
@@ -13048,7 +16061,6 @@ type ServiceTemplateGroup struct {
 }
 
 type ServiceTemplateSpecification struct {
-
 	// Protocol port ID, such as `ppm-f5n1f8da`.
 	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
 
@@ -13057,7 +16069,6 @@ type ServiceTemplateSpecification struct {
 }
 
 type ServicesInfo struct {
-
 	// Protocol port
 	Service *string `json:"Service,omitempty" name:"Service"`
 
@@ -13066,9 +16077,21 @@ type ServicesInfo struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+// Predefined struct for user
+type SetCcnRegionBandwidthLimitsRequestParams struct {
+	// The CCN instance ID, such as `ccn-f49l6u0z`.
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// The outbound bandwidth cap of each CCN region.
+	CcnRegionBandwidthLimits []*CcnRegionBandwidthLimit `json:"CcnRegionBandwidthLimits,omitempty" name:"CcnRegionBandwidthLimits"`
+
+	// Whether to restore the region outbound bandwidth limit or inter-region bandwidth limit to default 1 Gbps. Valid values: `false` (no); `true` (yes). Default value: `false`. When the parameter is set to `true`, the CCN instance created will not be displayed in the console.
+	SetDefaultLimitFlag *bool `json:"SetDefaultLimitFlag,omitempty" name:"SetDefaultLimitFlag"`
+}
+
 type SetCcnRegionBandwidthLimitsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 
@@ -13100,13 +16123,15 @@ func (r *SetCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetCcnRegionBandwidthLimitsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetCcnRegionBandwidthLimitsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetCcnRegionBandwidthLimitsResponseParams `json:"Response"`
 }
 
 func (r *SetCcnRegionBandwidthLimitsResponse) ToJsonString() string {
@@ -13121,7 +16146,6 @@ func (r *SetCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
 }
 
 type Subnet struct {
-
 	// The `ID` of the `VPC` instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -13177,7 +16201,6 @@ type Subnet struct {
 }
 
 type SubnetInput struct {
-
 	// The `CIDR` of the subnet.
 	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
@@ -13192,7 +16215,6 @@ type SubnetInput struct {
 }
 
 type Tag struct {
-
 	// Tag key
 	// Note: This field may return null, indicating no valid value.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -13202,9 +16224,15 @@ type Tag struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type TransformAddressRequestParams struct {
+	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [CVM console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/33256).
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type TransformAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [CVM console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/33256).
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -13228,13 +16256,15 @@ func (r *TransformAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TransformAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TransformAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TransformAddressResponseParams `json:"Response"`
 }
 
 func (r *TransformAddressResponse) ToJsonString() string {
@@ -13248,9 +16278,18 @@ func (r *TransformAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6AddressesRequestParams struct {
+	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The list of specified `IPv6` addresses. A maximum of 10 can be specified each time.
+	Ipv6Addresses []*Ipv6Address `json:"Ipv6Addresses,omitempty" name:"Ipv6Addresses"`
+}
+
 type UnassignIpv6AddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -13278,13 +16317,15 @@ func (r *UnassignIpv6AddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6AddressesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnassignIpv6AddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnassignIpv6AddressesResponseParams `json:"Response"`
 }
 
 func (r *UnassignIpv6AddressesResponse) ToJsonString() string {
@@ -13298,9 +16339,18 @@ func (r *UnassignIpv6AddressesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6CidrBlockRequestParams struct {
+	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The `IPv6` IP range, such as `3402:4e00:20:1000::/56`
+	Ipv6CidrBlock *string `json:"Ipv6CidrBlock,omitempty" name:"Ipv6CidrBlock"`
+}
+
 type UnassignIpv6CidrBlockRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the `VPC`, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -13328,13 +16378,15 @@ func (r *UnassignIpv6CidrBlockRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6CidrBlockResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnassignIpv6CidrBlockResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnassignIpv6CidrBlockResponseParams `json:"Response"`
 }
 
 func (r *UnassignIpv6CidrBlockResponse) ToJsonString() string {
@@ -13348,9 +16400,18 @@ func (r *UnassignIpv6CidrBlockResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6SubnetCidrBlockRequestParams struct {
+	// The `ID` of the VPC where the subnet is located, such as `vpc-f49l6u0z`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The `IPv6` subnet IP range list.
+	Ipv6SubnetCidrBlocks []*Ipv6SubnetCidrBlock `json:"Ipv6SubnetCidrBlocks,omitempty" name:"Ipv6SubnetCidrBlocks"`
+}
+
 type UnassignIpv6SubnetCidrBlockRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The `ID` of the VPC where the subnet is located, such as `vpc-f49l6u0z`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -13378,13 +16439,15 @@ func (r *UnassignIpv6SubnetCidrBlockRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignIpv6SubnetCidrBlockResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnassignIpv6SubnetCidrBlockResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnassignIpv6SubnetCidrBlockResponseParams `json:"Response"`
 }
 
 func (r *UnassignIpv6SubnetCidrBlockResponse) ToJsonString() string {
@@ -13398,9 +16461,21 @@ func (r *UnassignIpv6SubnetCidrBlockResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignPrivateIpAddressesRequestParams struct {
+	// The ID of the ENI instance, such as `eni-m6dyj72l`.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
+
+	// The information of the specified private IPs. You can specify a maximum of 10 each time.
+	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
+
+	// Instance ID of the server bound with this IP. This parameter is only applicable when you need to return an IP and unbind the related servers.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type UnassignPrivateIpAddressesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 
@@ -13432,13 +16507,15 @@ func (r *UnassignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnassignPrivateIpAddressesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UnassignPrivateIpAddressesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UnassignPrivateIpAddressesResponseParams `json:"Response"`
 }
 
 func (r *UnassignPrivateIpAddressesResponse) ToJsonString() string {
@@ -13453,7 +16530,6 @@ func (r *UnassignPrivateIpAddressesResponse) FromJsonString(s string) error {
 }
 
 type Vpc struct {
-
 	// `VPC` name.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
@@ -13496,7 +16572,6 @@ type Vpc struct {
 }
 
 type VpcEndPointServiceUser struct {
-
 	// APP ID
 	Owner *uint64 `json:"Owner,omitempty" name:"Owner"`
 
@@ -13514,7 +16589,6 @@ type VpcEndPointServiceUser struct {
 }
 
 type VpcIpv6Address struct {
-
 	// `VPC` private `IPv6` address
 	Ipv6Address *string `json:"Ipv6Address,omitempty" name:"Ipv6Address"`
 
@@ -13529,7 +16603,6 @@ type VpcIpv6Address struct {
 }
 
 type VpcPrivateIpAddress struct {
-
 	// `VPC` private `IP`.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
@@ -13544,7 +16617,6 @@ type VpcPrivateIpAddress struct {
 }
 
 type VpnConnection struct {
-
 	// Tunnel instance ID.
 	VpnConnectionId *string `json:"VpnConnectionId,omitempty" name:"VpnConnectionId"`
 
@@ -13604,7 +16676,6 @@ type VpnConnection struct {
 }
 
 type VpnGateway struct {
-
 	// Gateway instance ID.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
@@ -13667,7 +16738,6 @@ type VpnGateway struct {
 }
 
 type VpnGatewayQuota struct {
-
 	// The bandwidth quota.
 	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
@@ -13679,7 +16749,6 @@ type VpnGatewayQuota struct {
 }
 
 type VpnGatewayRoute struct {
-
 	// Destination IDC IP range
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
 
@@ -13709,7 +16778,6 @@ type VpnGatewayRoute struct {
 }
 
 type VpnGatewayRouteModify struct {
-
 	// Route ID of the VPN gateway
 	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
 
@@ -13718,7 +16786,6 @@ type VpnGatewayRouteModify struct {
 }
 
 type VpngwCcnRoutes struct {
-
 	// Route ID
 	RouteId *string `json:"RouteId,omitempty" name:"RouteId"`
 

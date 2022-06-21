@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AssignProjectRequestParams struct {
+	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Unique ID of an existing project (instead of a new project).
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
 type AssignProjectRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -50,16 +59,18 @@ func (r *AssignProjectRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AssignProjectResponseParams struct {
+	// List of the returned async task IDs
+	FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AssignProjectResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the returned async task IDs
-		FlowIds []*uint64 `json:"FlowIds,omitempty" name:"FlowIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AssignProjectResponseParams `json:"Response"`
 }
 
 func (r *AssignProjectResponse) ToJsonString() string {
@@ -74,7 +85,6 @@ func (r *AssignProjectResponse) FromJsonString(s string) error {
 }
 
 type BackupDownloadTask struct {
-
 	// Task creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
@@ -108,7 +118,6 @@ type BackupDownloadTask struct {
 }
 
 type BackupDownloadTaskStatus struct {
-
 	// Shard name
 	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
 
@@ -117,7 +126,6 @@ type BackupDownloadTaskStatus struct {
 }
 
 type BackupFile struct {
-
 	// ID of the replica set/shard to which a backup file belongs
 	ReplicateSetId *string `json:"ReplicateSetId,omitempty" name:"ReplicateSetId"`
 
@@ -126,7 +134,6 @@ type BackupFile struct {
 }
 
 type BackupInfo struct {
-
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -160,7 +167,6 @@ type BackupInfo struct {
 }
 
 type ClientConnection struct {
-
 	// Client IP of a connection
 	IP *string `json:"IP,omitempty" name:"IP"`
 
@@ -171,9 +177,21 @@ type ClientConnection struct {
 	InternalService *bool `json:"InternalService,omitempty" name:"InternalService"`
 }
 
+// Predefined struct for user
+type CreateBackupDBInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Valid values: 0 (logical backup), 1 (physical backup)
+	BackupMethod *int64 `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	// Backup remarks
+	BackupRemark *string `json:"BackupRemark,omitempty" name:"BackupRemark"`
+}
+
 type CreateBackupDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -205,16 +223,18 @@ func (r *CreateBackupDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBackupDBInstanceResponseParams struct {
+	// The status of the queried backup process.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBackupDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The status of the queried backup process.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBackupDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateBackupDBInstanceResponse) ToJsonString() string {
@@ -228,9 +248,23 @@ func (r *CreateBackupDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBackupDownloadTaskRequestParams struct {
+	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The name of the backup file to be downloaded, which can be obtained by the `DescribeDBBackups` API.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// Specify the node name of a replica set instance or the shard name list of a sharded cluster instance. Only backups of the specified node or shards will be downloaded.
+	// Suppose you have a replica set instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0` to download the full backup. For a replica set instance, the parameter value must be in the format of "instance ID_0".
+	// Suppose you have a sharded cluster instance (ID: cmgo-p8vnipr5), you can use the sample code `BackupSets.0=cmgo-p8vnipr5_0&BackupSets.1=cmgo-p8vnipr5_1` to download the backup data of shard 0 and shard 1. To download the full backup, please specify all shard names.
+	BackupSets []*ReplicaSetInfo `json:"BackupSets,omitempty" name:"BackupSets"`
+}
+
 type CreateBackupDownloadTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -264,16 +298,18 @@ func (r *CreateBackupDownloadTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBackupDownloadTaskResponseParams struct {
+	// Download task status
+	Tasks []*BackupDownloadTaskStatus `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBackupDownloadTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Download task status
-		Tasks []*BackupDownloadTaskStatus `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBackupDownloadTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateBackupDownloadTaskResponse) ToJsonString() string {
@@ -287,9 +323,81 @@ func (r *CreateBackupDownloadTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceHourRequestParams struct {
+	// Instance memory size in GB
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Number of replica sets. When a replica set instance is created, this parameter must be set to 1. When a sharding instance is created, please see the parameters returned by the DescribeSpecInfo API
+	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
+	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
+
+	// Server type. HIO: high IO; HIO10G: 10-Gigabit high IO
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Number of instances. Minimum value: 1. Maximum value: 10
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance type. REPLSET: replica set; SHARD: sharding cluster
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// VPC ID. If this parameter is not set, the basic network will be selected by default
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID. If VpcId is set, then SubnetId will be required
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Project ID. If this parameter is not set, the default project will be used
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Instance tag information
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
+	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
+
+	// Parent instance ID. It is required if the `Clone` is 3 or 4.
+	Father *string `json:"Father,omitempty" name:"Father"`
+
+	// Security group.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+	RestoreTime *string `json:"RestoreTime,omitempty" name:"RestoreTime"`
+
+	// Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitempty" name:"AvailabilityZoneList"`
+
+	// The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+	// The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
+}
+
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance memory size in GB
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
@@ -401,19 +509,21 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceHourResponseParams struct {
+	// Order ID
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+	// List of IDs of created instances
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBInstanceHourResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID
-		DealId *string `json:"DealId,omitempty" name:"DealId"`
-
-		// List of IDs of created instances
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBInstanceHourResponseParams `json:"Response"`
 }
 
 func (r *CreateDBInstanceHourResponse) ToJsonString() string {
@@ -427,9 +537,90 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceRequestParams struct {
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Instance memory size in GB.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition; MONGO_42_WT: MongoDB 4.2 WiredTiger Edition.
+	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
+
+	// Number of instances. Minimum value: 1. Maximum value: 10.
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// AZ in the format of ap-guangzhou-2. If multi-AZ deployment is enabled, this parameter refers to the primary AZ and must be one of the values of `AvailabilityZoneList`.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Server type. Valid values: HIO (high IO), HIO10G (10-gigabit high IO), STDS5 (standard).
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
+	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// Project ID. If this parameter is not set, the default project will be used.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID. If this parameter is not set, the classic network will be used. Please use the `DescribeVpcs` API to query the VPC list.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Instance tag information.
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Auto-renewal flag. Valid values: 0 (auto-renewal not enabled), 1 (auto-renewal enabled). Default value: 0.
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically use a voucher. Valid values: 1 (yes), 0 (no). Default value: 0.
+	AutoVoucher *uint64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Instance type. Valid values: `1` (primary instance), `2` (temp instance), `3` (read-only instance), `4` (disaster recovery instance), `5` (cloned instance).
+	Clone *int64 `json:"Clone,omitempty" name:"Clone"`
+
+	// Primary instance ID. It is required for read-only, disaster recovery, and cloned instances.
+	Father *string `json:"Father,omitempty" name:"Father"`
+
+	// Security group.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// The point in time to which the cloned instance will be rolled back. This parameter is required for a cloned instance. The point in time in the format of 2021-08-13 16:30:00 must be within the last seven days.
+	RestoreTime *string `json:"RestoreTime,omitempty" name:"RestoreTime"`
+
+	// Instance name, which can contain up to 60 letters, digits, or symbols (_-).
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// AZ list when multi-AZ deployment is enabled. For the specific purchasable versions which support multi-AZ deployment, please see the return result of the `DescribeSpecInfo` API. Notes: 1. Nodes of a multi-AZ instance must be deployed across three AZs. 2. To ensure a successful cross-AZ switch, you should not deploy most of the nodes to the same AZ. (For example, a three-node sharded cluster instance does not support deploying two or more nodes in the same AZ.) 3. MongoDB 4.2 and later versions do not support multi-AZ deployment. 4. Read-Only and disaster recovery instances do not support multi-AZ deployment. 5. Instances in the classic network do not support multi-AZ deployment.
+	AvailabilityZoneList []*string `json:"AvailabilityZoneList,omitempty" name:"AvailabilityZoneList"`
+
+	// The number of mongos CPUs, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+	// The size of mongos memory, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API.
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
+	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
+}
+
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
 	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
@@ -553,19 +744,21 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBInstanceResponseParams struct {
+	// Order ID.
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+	// List of IDs of created instances.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID.
-		DealId *string `json:"DealId,omitempty" name:"DealId"`
-
-		// List of IDs of created instances.
-		InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateDBInstanceResponse) ToJsonString() string {
@@ -580,7 +773,6 @@ func (r *CreateDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type DBInstanceInfo struct {
-
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -589,7 +781,6 @@ type DBInstanceInfo struct {
 }
 
 type DBInstancePrice struct {
-
 	// Unit price.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
@@ -601,9 +792,15 @@ type DBInstancePrice struct {
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 }
 
+// Predefined struct for user
+type DescribeAsyncRequestInfoRequestParams struct {
+	// Async task ID, which is returned by APIs related to async tasks, such as `CreateBackupDBInstance`.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+}
+
 type DescribeAsyncRequestInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Async task ID, which is returned by APIs related to async tasks, such as `CreateBackupDBInstance`.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 }
@@ -627,16 +824,18 @@ func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAsyncRequestInfoResponseParams struct {
+	// Status. Valid values: `initial` (initializing), `running`, `paused` (paused due to failure), `undoed` (rolled back due to failure), `failed` (ended due to failure), `success`
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAsyncRequestInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Status. Valid values: `initial` (initializing), `running`, `paused` (paused due to failure), `undoed` (rolled back due to failure), `failed` (ended due to failure), `success`
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAsyncRequestInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
@@ -650,9 +849,18 @@ func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupAccessRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Name of the backup file for which to get the download permission
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+}
+
 type DescribeBackupAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -680,22 +888,24 @@ func (r *DescribeBackupAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupAccessResponseParams struct {
+	// Instance region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// The bucket where a backup file is located
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Storage information of a backup file
+	Files []*BackupFile `json:"Files,omitempty" name:"Files"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBackupAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance region
-		Region *string `json:"Region,omitempty" name:"Region"`
-
-		// The bucket where a backup file is located
-		Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
-
-		// Storage information of a backup file
-		Files []*BackupFile `json:"Files,omitempty" name:"Files"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBackupAccessResponseParams `json:"Response"`
 }
 
 func (r *DescribeBackupAccessResponse) ToJsonString() string {
@@ -709,9 +919,39 @@ func (r *DescribeBackupAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupDownloadTaskRequestParams struct {
+	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The name of a backup file with download tasks to be queried
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+
+	// The start time of the query period. Tasks whose start time and end time fall within the query period will be queried. If it is left empty, the start time can be any time earlier than the end time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of the query period. Tasks will be queried if their start and end times fall within the query period. If it is left empty, the end time can be any time later than the start time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The maximum number of results returned per page. Value range: 1-100. Default value: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset for pagination. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The field used to sort the results. Valid values: `createTime` (default), `finishTime`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sort order. Valid values: `asc`, `desc` (default).
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// The status of the tasks to be queried. Valid values: `0` (waiting for execution), `1` (downloading), `2` (downloaded), `3` (download failed), `4` (waiting for retry). If it is left empty, tasks in any status will be returned.
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
+}
+
 type DescribeBackupDownloadTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of "cmgo-p8vnipr5", which is the same as the instance ID displayed in the TencentDB console
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -767,19 +1007,21 @@ func (r *DescribeBackupDownloadTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeBackupDownloadTaskResponseParams struct {
+	// Total number of results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of download tasks
+	Tasks []*BackupDownloadTask `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeBackupDownloadTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of download tasks
-		Tasks []*BackupDownloadTask `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeBackupDownloadTaskResponseParams `json:"Response"`
 }
 
 func (r *DescribeBackupDownloadTaskResponse) ToJsonString() string {
@@ -793,9 +1035,21 @@ func (r *DescribeBackupDownloadTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClientConnectionsRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of results to be returned for a single request. Value range: 1-1,000. Default value: 1,000
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeClientConnectionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -827,19 +1081,21 @@ func (r *DescribeClientConnectionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClientConnectionsResponseParams struct {
+	// Client connection information, including client IP and number of connections
+	Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients"`
+
+	// The total number of records that meet the query condition, which can be used for paginated queries.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClientConnectionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Client connection information, including client IP and number of connections
-		Clients []*ClientConnection `json:"Clients,omitempty" name:"Clients"`
-
-		// The total number of records that meet the query condition, which can be used for paginated queries.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClientConnectionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeClientConnectionsResponse) ToJsonString() string {
@@ -853,9 +1109,24 @@ func (r *DescribeClientConnectionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBBackupsRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Backup mode. Valid values: `0` (logical backup), `1` (physical backup), `2` (both modes). Default value: `0`.
+	BackupMethod *int64 `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	// Number of entries per page. Maximum value: `100`. If this parameter is left empty, all entries will be returned.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, starting from `0`. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type DescribeDBBackupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -891,19 +1162,21 @@ func (r *DescribeDBBackupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBBackupsResponseParams struct {
+	// Backup list
+	BackupList []*BackupInfo `json:"BackupList,omitempty" name:"BackupList"`
+
+	// Total number of backups
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBBackupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Backup list
-		BackupList []*BackupInfo `json:"BackupList,omitempty" name:"BackupList"`
-
-		// Total number of backups
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBBackupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBBackupsResponse) ToJsonString() string {
@@ -917,9 +1190,15 @@ func (r *DescribeDBBackupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceDealRequestParams struct {
+	// Order ID. It is returned by the `CreateDBInstance` and other APIs.
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+}
+
 type DescribeDBInstanceDealRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Order ID. It is returned by the `CreateDBInstance` and other APIs.
 	DealId *string `json:"DealId,omitempty" name:"DealId"`
 }
@@ -943,25 +1222,27 @@ func (r *DescribeDBInstanceDealRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstanceDealResponseParams struct {
+	// Order status. Valid values: 1 (unpaid), 2 (paid), 3 (delivering), 4 (delivered), 5 (delivery failed), 6 (refunded), 7 (order closed), 8 (order closed because it failed to be paid within timeout period).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Original price of the order.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price of the order.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Operation performed by the order. Valid values: purchase, renew, upgrade, downgrade, refund.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBInstanceDealResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order status. Valid values: 1 (unpaid), 2 (paid), 3 (delivering), 4 (delivered), 5 (delivery failed), 6 (refunded), 7 (order closed), 8 (order closed because it failed to be paid within timeout period).
-		Status *int64 `json:"Status,omitempty" name:"Status"`
-
-		// Original price of the order.
-		OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
-		// Discounted price of the order.
-		DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
-
-		// Operation performed by the order. Valid values: purchase, renew, upgrade, downgrade, refund.
-		Action *string `json:"Action,omitempty" name:"Action"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBInstanceDealResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBInstanceDealResponse) ToJsonString() string {
@@ -975,9 +1256,54 @@ func (r *DescribeDBInstanceDealResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstancesRequestParams struct {
+	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Instance type. Valid values: 0 (all instances), 1 (promoted), 2 (temp), 3 (read-only), -1 (promoted + read-only + disaster recovery)
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance), -1 (all instances)
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Instance status. Valid values: `0` (to be initialized), `1` (executing task), `2` (running), `-2` (isolated monthly-subscribed instance), `-3` (isolated pay-as-you-go instance)
+	Status []*int64 `json:"Status,omitempty" name:"Status"`
+
+	// VPC ID. This parameter can be left empty for the basic network
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID of VPC. This parameter can be left empty for the basic network. If it is passed in as an input parameter, the corresponding VpcId must be set
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Billing type. Valid value: 0 (pay-as-you-go)
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Number of results to be returned for a single request. Valid values: 1-100. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sort by field of the returned result set. Currently, supported values include "ProjectId", "InstanceName", and "CreateTime". The return results are sorted in ascending order by default.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting method of the return result set. Currently, "ASC" or "DESC" is supported
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Project ID
+	ProjectIds []*uint64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
+
+	// Search keyword, which can be instance ID, instance name, or complete IP
+	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Tag information
+	Tags *TagInfo `json:"Tags,omitempty" name:"Tags"`
+}
+
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of instance IDs in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -1053,19 +1379,21 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBInstancesResponseParams struct {
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of instance details
+	InstanceDetails []*InstanceDetail `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of instance details
-		InstanceDetails []*InstanceDetail `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBInstancesResponse) ToJsonString() string {
@@ -1079,9 +1407,15 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceParamsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeInstanceParamsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1105,28 +1439,30 @@ func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceParamsResponseParams struct {
+	// The collection of enum parameters
+	InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitempty" name:"InstanceEnumParam"`
+
+	// The collection of integer parameters
+	InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitempty" name:"InstanceIntegerParam"`
+
+	// The collection of text parameters
+	InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitempty" name:"InstanceTextParam"`
+
+	// The collection of string parameters used to represent time ranges
+	InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitempty" name:"InstanceMultiParam"`
+
+	// The total number of modifiable parameters of the instance, such as 0
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceParamsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The collection of enum parameters
-		InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitempty" name:"InstanceEnumParam"`
-
-		// The collection of integer parameters
-		InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitempty" name:"InstanceIntegerParam"`
-
-		// The collection of text parameters
-		InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitempty" name:"InstanceTextParam"`
-
-		// The collection of string parameters used to represent time ranges
-		InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitempty" name:"InstanceMultiParam"`
-
-		// The total number of modifiable parameters of the instance, such as 0
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceParamsResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceParamsResponse) ToJsonString() string {
@@ -1140,9 +1476,15 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupRequestParams struct {
+	// Instance ID in the format of "cmgo-p8vnipr5"
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of "cmgo-p8vnipr5"
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1166,16 +1508,18 @@ func (r *DescribeSecurityGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityGroupResponseParams struct {
+	// Security groups associated with the instance
+	Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Security groups associated with the instance
-		Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityGroupResponse) ToJsonString() string {
@@ -1189,9 +1533,33 @@ func (r *DescribeSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogPatternsRequestParams struct {
+	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+	SlowMS *uint64 `json:"SlowMS,omitempty" name:"SlowMS"`
+
+	// Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+	Format *string `json:"Format,omitempty" name:"Format"`
+}
+
 type DescribeSlowLogPatternsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1239,19 +1607,21 @@ func (r *DescribeSlowLogPatternsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogPatternsResponseParams struct {
+	// Total number of slow logs
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Slow log statistics
+	SlowLogPatterns []*SlowLogPattern `json:"SlowLogPatterns,omitempty" name:"SlowLogPatterns"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowLogPatternsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of slow logs
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// Slow log statistics
-		SlowLogPatterns []*SlowLogPattern `json:"SlowLogPatterns,omitempty" name:"SlowLogPatterns"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowLogPatternsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowLogPatternsResponse) ToJsonString() string {
@@ -1265,9 +1635,33 @@ func (r *DescribeSlowLogPatternsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogsRequestParams struct {
+	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-01 10:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of slow log in the format of `yyyy-mm-dd hh:mm:ss`, such as 2019-06-02 12:00:00. The query time range cannot exceed 24 hours. Only slow logs for the last 7 days can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Threshold of slow log execution time in milliseconds. Minimum value: 100. Slow logs whose execution time exceeds the threshold will be returned.
+	SlowMS *uint64 `json:"SlowMS,omitempty" name:"SlowMS"`
+
+	// Offset. Minimum value: 0. Maximum value: 10000. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Minimum value: 1. Maximum value: 100. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Slow log format, which can be JSON. If this parameter is left empty, the slow log will be returned in its native format.
+	Format *string `json:"Format,omitempty" name:"Format"`
+}
+
 type DescribeSlowLogsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of `cmgo-p8vnipr5`, which is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1315,19 +1709,21 @@ func (r *DescribeSlowLogsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogsResponseParams struct {
+	// Total number of slow logs
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Slow log details
+	SlowLogs []*string `json:"SlowLogs,omitempty" name:"SlowLogs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowLogsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of slow logs
-		Count *uint64 `json:"Count,omitempty" name:"Count"`
-
-		// Slow log details
-		SlowLogs []*string `json:"SlowLogs,omitempty" name:"SlowLogs"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowLogsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowLogsResponse) ToJsonString() string {
@@ -1341,9 +1737,15 @@ func (r *DescribeSlowLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSpecInfoRequestParams struct {
+	// AZ to be queried
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
 type DescribeSpecInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// AZ to be queried
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 }
@@ -1367,16 +1769,18 @@ func (r *DescribeSpecInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSpecInfoResponseParams struct {
+	// List of purchasable instance specifications
+	SpecInfoList []*SpecificationInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSpecInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of purchasable instance specifications
-		SpecInfoList []*SpecificationInfo `json:"SpecInfoList,omitempty" name:"SpecInfoList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSpecInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeSpecInfoResponse) ToJsonString() string {
@@ -1390,9 +1794,15 @@ func (r *DescribeSpecInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type FlushInstanceRouterConfigRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type FlushInstanceRouterConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1416,13 +1826,15 @@ func (r *FlushInstanceRouterConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type FlushInstanceRouterConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type FlushInstanceRouterConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *FlushInstanceRouterConfigResponseParams `json:"Response"`
 }
 
 func (r *FlushInstanceRouterConfigResponse) ToJsonString() string {
@@ -1436,9 +1848,42 @@ func (r *FlushInstanceRouterConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateDBInstancesRequestParams struct {
+	// Instance region name in the format of ap-guangzhou-2.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Instance memory size in GB.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
+
+	// Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Number of instances. Minimum value: 1. Maximum value: 10.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
+	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+}
+
 type InquirePriceCreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance region name in the format of ap-guangzhou-2.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -1498,16 +1943,18 @@ func (r *InquirePriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceCreateDBInstancesResponseParams struct {
+	// Price.
+	Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceCreateDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Price.
-		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceCreateDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceCreateDBInstancesResponse) ToJsonString() string {
@@ -1521,9 +1968,27 @@ func (r *InquirePriceCreateDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceModifyDBInstanceSpecRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance memory size in GB after specification adjustment.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB after specification adjustment.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
+	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+}
+
 type InquirePriceModifyDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1563,16 +2028,18 @@ func (r *InquirePriceModifyDBInstanceSpecRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceModifyDBInstanceSpecResponseParams struct {
+	// Price.
+	Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceModifyDBInstanceSpecResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Price.
-		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceModifyDBInstanceSpecResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceModifyDBInstanceSpecResponse) ToJsonString() string {
@@ -1586,9 +2053,18 @@ func (r *InquirePriceModifyDBInstanceSpecResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceRenewDBInstancesRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console. This API supports operations on up to 5 instances at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
 type InquirePriceRenewDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed in the TencentDB Console. This API supports operations on up to 5 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -1616,16 +2092,18 @@ func (r *InquirePriceRenewDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquirePriceRenewDBInstancesResponseParams struct {
+	// Price.
+	Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquirePriceRenewDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Price.
-		Price *DBInstancePrice `json:"Price,omitempty" name:"Price"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquirePriceRenewDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *InquirePriceRenewDBInstancesResponse) ToJsonString() string {
@@ -1640,7 +2118,6 @@ func (r *InquirePriceRenewDBInstancesResponse) FromJsonString(s string) error {
 }
 
 type InstanceChargePrepaid struct {
-
 	// Purchased usage period (in month). Valid values: `1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36`. Default value: `1`.
 	// (This parameter is required in `InquirePriceRenewDBInstances` and `RenewDBInstances` APIs.)
 	Period *int64 `json:"Period,omitempty" name:"Period"`
@@ -1656,7 +2133,6 @@ type InstanceChargePrepaid struct {
 }
 
 type InstanceDetail struct {
-
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1773,7 +2249,6 @@ type InstanceDetail struct {
 }
 
 type InstanceEnumParam struct {
-
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
@@ -1800,7 +2275,6 @@ type InstanceEnumParam struct {
 }
 
 type InstanceIntegerParam struct {
-
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
@@ -1833,7 +2307,6 @@ type InstanceIntegerParam struct {
 }
 
 type InstanceMultiParam struct {
-
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
@@ -1860,7 +2333,6 @@ type InstanceMultiParam struct {
 }
 
 type InstanceTextParam struct {
-
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
@@ -1886,9 +2358,15 @@ type InstanceTextParam struct {
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
+// Predefined struct for user
+type IsolateDBInstanceRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type IsolateDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -1912,16 +2390,18 @@ func (r *IsolateDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type IsolateDBInstanceResponseParams struct {
+	// Async task request ID, which can be used to query the execution result of an async task.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type IsolateDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task request ID, which can be used to query the execution result of an async task.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *IsolateDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *IsolateDBInstanceResponse) ToJsonString() string {
@@ -1935,9 +2415,27 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceNetworkAddressRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Old IP retention period in minutes. The old IP will be released after the specified time, and both the old and new IPs can be accessed before the release. The value `0` indicates that the old IP will be reclaimed immediately.
+	OldIpExpiredTime *uint64 `json:"OldIpExpiredTime,omitempty" name:"OldIpExpiredTime"`
+
+	// ID of the VPC to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+	NewUniqVpcId *string `json:"NewUniqVpcId,omitempty" name:"NewUniqVpcId"`
+
+	// ID of the subnet to which the new IP belongs after the switch. When it is classic network, this field will be empty.
+	NewUniqSubnetId *string `json:"NewUniqSubnetId,omitempty" name:"NewUniqSubnetId"`
+
+	// IP information to be modified
+	NetworkAddresses []*ModifyNetworkAddress `json:"NetworkAddresses,omitempty" name:"NetworkAddresses"`
+}
+
 type ModifyDBInstanceNetworkAddressRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1977,13 +2475,15 @@ func (r *ModifyDBInstanceNetworkAddressRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceNetworkAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceNetworkAddressResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceNetworkAddressResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceNetworkAddressResponse) ToJsonString() string {
@@ -1997,9 +2497,18 @@ func (r *ModifyDBInstanceNetworkAddressResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSecurityGroupRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Target security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
 type ModifyDBInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2027,13 +2536,15 @@ func (r *ModifyDBInstanceSecurityGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSecurityGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceSecurityGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceSecurityGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupResponse) ToJsonString() string {
@@ -2047,9 +2558,33 @@ func (r *ModifyDBInstanceSecurityGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSpecRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Memory size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk size after instance configuration change in GB. Memory and disk must be upgraded or degraded simultaneously. For degradation, the new disk capacity must be greater than 1.2 times the used disk capacity
+	Volume *uint64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Oplog size after instance configuration change in GB, which ranges from 10% to 90% of the disk capacity and is 10% of the disk capacity by default
+	OplogSize *uint64 `json:"OplogSize,omitempty" name:"OplogSize"`
+
+	// Node quantity after configuration modification. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the node quantity remains unchanged.
+	NodeNum *uint64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Shard quantity after configuration modification, which can only be increased rather than decreased. The value range is subject to the response parameter of the `DescribeSpecInfo` API. If this parameter is left empty, the shard quantity remains unchanged.
+	ReplicateSetNum *uint64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// Switch time. Valid values: `0` (upon modification completion), `1` (during maintenance time). Default value: `0`. If the quantity of nodes or shards is modified, the value will be `0`.
+	InMaintenance *uint64 `json:"InMaintenance,omitempty" name:"InMaintenance"`
+}
+
 type ModifyDBInstanceSpecRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2097,16 +2632,18 @@ func (r *ModifyDBInstanceSpecRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDBInstanceSpecResponseParams struct {
+	// Order ID
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDBInstanceSpecResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Order ID
-		DealId *string `json:"DealId,omitempty" name:"DealId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDBInstanceSpecResponseParams `json:"Response"`
 }
 
 func (r *ModifyDBInstanceSpecResponse) ToJsonString() string {
@@ -2121,7 +2658,6 @@ func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
 }
 
 type ModifyNetworkAddress struct {
-
 	// New IP
 	NewIPAddress *string `json:"NewIPAddress,omitempty" name:"NewIPAddress"`
 
@@ -2129,9 +2665,15 @@ type ModifyNetworkAddress struct {
 	OldIpAddress *string `json:"OldIpAddress,omitempty" name:"OldIpAddress"`
 }
 
+// Predefined struct for user
+type OfflineIsolatedDBInstanceRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type OfflineIsolatedDBInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -2155,16 +2697,18 @@ func (r *OfflineIsolatedDBInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OfflineIsolatedDBInstanceResponseParams struct {
+	// Async task request ID, which can be used to query the execution result of an async task.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OfflineIsolatedDBInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task request ID, which can be used to query the execution result of an async task.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OfflineIsolatedDBInstanceResponseParams `json:"Response"`
 }
 
 func (r *OfflineIsolatedDBInstanceResponse) ToJsonString() string {
@@ -2178,9 +2722,18 @@ func (r *OfflineIsolatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenameInstanceRequestParams struct {
+	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Custom name of the instance, which can contain up to 60 letters, digits, or symbols (_-)
+	NewName *string `json:"NewName,omitempty" name:"NewName"`
+}
+
 type RenameInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2208,13 +2761,15 @@ func (r *RenameInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenameInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RenameInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RenameInstanceResponseParams `json:"Response"`
 }
 
 func (r *RenameInstanceResponse) ToJsonString() string {
@@ -2228,9 +2783,18 @@ func (r *RenameInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewDBInstancesRequestParams struct {
+	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 100 instances can be requested at a time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set automatic renewal, and other attributes of the monthly subscription instance. This parameter is mandatory in monthly subscription.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+}
+
 type RenewDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 100 instances can be requested at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -2258,13 +2822,15 @@ func (r *RenewDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RenewDBInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RenewDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RenewDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *RenewDBInstancesResponse) ToJsonString() string {
@@ -2279,14 +2845,25 @@ func (r *RenewDBInstancesResponse) FromJsonString(s string) error {
 }
 
 type ReplicaSetInfo struct {
-
 	// Replica set ID
 	ReplicaSetId *string `json:"ReplicaSetId,omitempty" name:"ReplicaSetId"`
 }
 
+// Predefined struct for user
+type ResetDBInstancePasswordRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance account name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// New password, which must contain at least eight characters
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
 type ResetDBInstancePasswordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2318,16 +2895,18 @@ func (r *ResetDBInstancePasswordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetDBInstancePasswordResponseParams struct {
+	// Async request ID, which is used to query the running status of the process.
+	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ResetDBInstancePasswordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async request ID, which is used to query the running status of the process.
-		AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ResetDBInstancePasswordResponseParams `json:"Response"`
 }
 
 func (r *ResetDBInstancePasswordResponse) ToJsonString() string {
@@ -2342,7 +2921,6 @@ func (r *ResetDBInstancePasswordResponse) FromJsonString(s string) error {
 }
 
 type SecurityGroup struct {
-
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -2366,7 +2944,6 @@ type SecurityGroup struct {
 }
 
 type SecurityGroupBound struct {
-
 	// Execution rule. Valid values: `ACCEPT`, `DROP`
 	Action *string `json:"Action,omitempty" name:"Action"`
 
@@ -2393,7 +2970,6 @@ type SecurityGroupBound struct {
 }
 
 type ShardInfo struct {
-
 	// Used shard capacity
 	UsedVolume *float64 `json:"UsedVolume,omitempty" name:"UsedVolume"`
 
@@ -2420,7 +2996,6 @@ type ShardInfo struct {
 }
 
 type SlowLogPattern struct {
-
 	// Slow log pattern
 	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
 
@@ -2435,7 +3010,6 @@ type SlowLogPattern struct {
 }
 
 type SpecItem struct {
-
 	// Specification information identifier
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
@@ -2501,7 +3075,6 @@ type SpecItem struct {
 }
 
 type SpecificationInfo struct {
-
 	// Region information
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -2516,7 +3089,6 @@ type SpecificationInfo struct {
 }
 
 type TagInfo struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 

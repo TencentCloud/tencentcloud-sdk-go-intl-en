@@ -21,7 +21,6 @@ import (
 )
 
 type AlarmInfo struct {
-
 	// Alarm policy name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -69,7 +68,6 @@ type AlarmInfo struct {
 }
 
 type AlarmNotice struct {
-
 	// Alarm notification template name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -101,7 +99,6 @@ type AlarmNotice struct {
 }
 
 type AlarmTarget struct {
-
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -122,7 +119,6 @@ type AlarmTarget struct {
 }
 
 type AlarmTargetInfo struct {
-
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 
@@ -149,7 +145,6 @@ type AlarmTargetInfo struct {
 }
 
 type AnalysisDimensional struct {
-
 	// Analysis name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -160,9 +155,18 @@ type AnalysisDimensional struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+// Predefined struct for user
+type ApplyConfigToMachineGroupRequestParams struct {
+	// Collection configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type ApplyConfigToMachineGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Collection configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
@@ -190,13 +194,15 @@ func (r *ApplyConfigToMachineGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ApplyConfigToMachineGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ApplyConfigToMachineGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ApplyConfigToMachineGroupResponseParams `json:"Response"`
 }
 
 func (r *ApplyConfigToMachineGroupResponse) ToJsonString() string {
@@ -211,7 +217,6 @@ func (r *ApplyConfigToMachineGroupResponse) FromJsonString(s string) error {
 }
 
 type CallBackInfo struct {
-
 	// `Body` during callback
 	Body *string `json:"Body,omitempty" name:"Body"`
 
@@ -221,7 +226,6 @@ type CallBackInfo struct {
 }
 
 type Ckafka struct {
-
 	// CKafka VIP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
@@ -241,9 +245,15 @@ type Ckafka struct {
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
+// Predefined struct for user
+type CloseKafkaConsumerRequestParams struct {
+	// CLS topic identifier
+	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+}
+
 type CloseKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// CLS topic identifier
 	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
 }
@@ -267,13 +277,15 @@ func (r *CloseKafkaConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CloseKafkaConsumerResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CloseKafkaConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CloseKafkaConsumerResponseParams `json:"Response"`
 }
 
 func (r *CloseKafkaConsumerResponse) ToJsonString() string {
@@ -288,7 +300,6 @@ func (r *CloseKafkaConsumerResponse) FromJsonString(s string) error {
 }
 
 type Column struct {
-
 	// Column name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -297,13 +308,11 @@ type Column struct {
 }
 
 type CompressInfo struct {
-
 	// Compression format. Valid values: `gzip`, `lzop`, `none` (no compression)
 	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type ConfigInfo struct {
-
 	// Collection rule configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
@@ -343,7 +352,6 @@ type ConfigInfo struct {
 }
 
 type ConsumerContent struct {
-
 	// Whether to ship tag information
 	// Note: This field may return `null`, indicating that no valid value was found.
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
@@ -358,7 +366,6 @@ type ConsumerContent struct {
 }
 
 type ContentInfo struct {
-
 	// Content format. Valid values: `json`, `csv`
 	Format *string `json:"Format,omitempty" name:"Format"`
 
@@ -375,9 +382,27 @@ type ContentInfo struct {
 	Parquet *ParquetInfo `json:"Parquet,omitempty" name:"Parquet"`
 }
 
+// Predefined struct for user
+type CreateAlarmNoticeRequestParams struct {
+	// Notification group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Notification type. Valid values:
+	// <li> `Trigger`: alarm triggered
+	// <li> `Recovery`: alarm cleared
+	// <li> `All`: alarm triggered and alarm cleared
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Notification recipient
+	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitempty" name:"NoticeReceivers"`
+
+	// API callback information (including WeCom)
+	WebCallbacks []*WebCallback `json:"WebCallbacks,omitempty" name:"WebCallbacks"`
+}
+
 type CreateAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Notification group name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -416,16 +441,18 @@ func (r *CreateAlarmNoticeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAlarmNoticeResponseParams struct {
+	// Alarm template ID
+	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAlarmNoticeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Alarm template ID
-		AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAlarmNoticeResponseParams `json:"Response"`
 }
 
 func (r *CreateAlarmNoticeResponse) ToJsonString() string {
@@ -439,9 +466,45 @@ func (r *CreateAlarmNoticeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAlarmRequestParams struct {
+	// Alarm policy name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Monitoring object list
+	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitempty" name:"AlarmTargets"`
+
+	// Monitoring task running time point
+	MonitorTime *MonitorTime `json:"MonitorTime,omitempty" name:"MonitorTime"`
+
+	// Trigger condition
+	Condition *string `json:"Condition,omitempty" name:"Condition"`
+
+	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
+	TriggerCount *int64 `json:"TriggerCount,omitempty" name:"TriggerCount"`
+
+	// Repeated alarm interval in minutes. Value range: 0–1440.
+	AlarmPeriod *int64 `json:"AlarmPeriod,omitempty" name:"AlarmPeriod"`
+
+	// List of associated alarm notification templates
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitempty" name:"AlarmNoticeIds"`
+
+	// Whether to enable the alarm policy. Default value: true
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Custom alarm content
+	MessageTemplate *string `json:"MessageTemplate,omitempty" name:"MessageTemplate"`
+
+	// Custom callback
+	CallBack *CallBackInfo `json:"CallBack,omitempty" name:"CallBack"`
+
+	// Multi-Dimensional analysis
+	Analysis []*AnalysisDimensional `json:"Analysis,omitempty" name:"Analysis"`
+}
+
 type CreateAlarmRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alarm policy name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -505,16 +568,18 @@ func (r *CreateAlarmRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAlarmResponseParams struct {
+	// Alarm policy ID.
+	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAlarmResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Alarm policy ID.
-		AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAlarmResponseParams `json:"Response"`
 }
 
 func (r *CreateAlarmResponse) ToJsonString() string {
@@ -528,9 +593,33 @@ func (r *CreateAlarmResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateConfigRequestParams struct {
+	// Collection configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Log topic ID (TopicId) of collection configuration
+	Output *string `json:"Output,omitempty" name:"Output"`
+
+	// Log collection path containing the filename
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Type of the log to be collected. Valid values: `json_log`: log in JSON format; `delimiter_log`: log in delimited format; `minimalist_log`: minimalist log; `multiline_log`: log in multi-line format; `fullregex_log`: log in full regex format. Default value: `minimalist_log`
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+	ExtractRule *ExtractRuleInfo `json:"ExtractRule,omitempty" name:"ExtractRule"`
+
+	// Collection path blocklist
+	ExcludePaths []*ExcludePathInfo `json:"ExcludePaths,omitempty" name:"ExcludePaths"`
+
+	// Custom collection rule, which is a serialized JSON string
+	UserDefineRule *string `json:"UserDefineRule,omitempty" name:"UserDefineRule"`
+}
+
 type CreateConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Collection configuration name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -578,16 +667,18 @@ func (r *CreateConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateConfigResponseParams struct {
+	// Collection configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Collection configuration ID
-		ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateConfigResponse) ToJsonString() string {
@@ -601,9 +692,24 @@ func (r *CreateConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateConsumerRequestParams struct {
+	// Log topic ID to bind
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Whether to ship log metadata. Default value: `true`
+	NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+	// Metadata to ship if `NeedContent` is `true`
+	Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+	// CKafka information
+	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+}
+
 type CreateConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID to bind
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -639,13 +745,15 @@ func (r *CreateConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateConsumerResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateConsumerResponseParams `json:"Response"`
 }
 
 func (r *CreateConsumerResponse) ToJsonString() string {
@@ -659,9 +767,33 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateExportRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Number of logs to be exported. Maximum value: 50 million
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Search statements for log export. <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statements]</a> are not supported.
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// Start time of the log to be exported, which is a timestamp in milliseconds
+	From *int64 `json:"From,omitempty" name:"From"`
+
+	// End time of the log to be exported, which is a timestamp in milliseconds
+	To *int64 `json:"To,omitempty" name:"To"`
+
+	// Exported log sorting order by time. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Exported log data format. Valid values: `json`, `csv`. Default value: `json`
+	Format *string `json:"Format,omitempty" name:"Format"`
+}
+
 type CreateExportRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -709,16 +841,18 @@ func (r *CreateExportRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateExportResponseParams struct {
+	// Log export ID.
+	ExportId *string `json:"ExportId,omitempty" name:"ExportId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateExportResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log export ID.
-		ExportId *string `json:"ExportId,omitempty" name:"ExportId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateExportResponseParams `json:"Response"`
 }
 
 func (r *CreateExportResponse) ToJsonString() string {
@@ -732,9 +866,27 @@ func (r *CreateExportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateIndexRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Index rule
+	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
+
+	// Whether to take effect. Default value: true
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
+}
+
 type CreateIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -774,13 +926,15 @@ func (r *CreateIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateIndexResponseParams `json:"Response"`
 }
 
 func (r *CreateIndexResponse) ToJsonString() string {
@@ -794,9 +948,18 @@ func (r *CreateIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateLogsetRequestParams struct {
+	// Logset name, which must be unique
+	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+
+	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateLogsetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Logset name, which must be unique
 	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
 
@@ -824,16 +987,18 @@ func (r *CreateLogsetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateLogsetResponseParams struct {
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateLogsetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Logset ID
-		LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateLogsetResponseParams `json:"Response"`
 }
 
 func (r *CreateLogsetResponse) ToJsonString() string {
@@ -847,9 +1012,33 @@ func (r *CreateLogsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMachineGroupRequestParams struct {
+	// Machine group name, which must be unique
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Type of the machine group to be created. Valid values: `ip`: use the IP string list in `Values` to create a machine group; `label`: use the tag string list in `Values` to create a machine group
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+
+	// Tag description list. This parameter is used to bind a tag to a machine group. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to enable automatic update for the machine group
+	AutoUpdate *bool `json:"AutoUpdate,omitempty" name:"AutoUpdate"`
+
+	// Update start time. We recommend you update LogListener during off-peak hours.
+	UpdateStartTime *string `json:"UpdateStartTime,omitempty" name:"UpdateStartTime"`
+
+	// Update end time. We recommend you update LogListener during off-peak hours.
+	UpdateEndTime *string `json:"UpdateEndTime,omitempty" name:"UpdateEndTime"`
+
+	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees
+	ServiceLogging *bool `json:"ServiceLogging,omitempty" name:"ServiceLogging"`
+}
+
 type CreateMachineGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Machine group name, which must be unique
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -897,16 +1086,18 @@ func (r *CreateMachineGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMachineGroupResponseParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateMachineGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Machine group ID
-		GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateMachineGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateMachineGroupResponse) ToJsonString() string {
@@ -920,9 +1111,42 @@ func (r *CreateMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateShipperRequestParams struct {
+	// ID of the log topic to which the shipping rule to be created belongs
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Destination bucket in the shipping rule to be created
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Prefix of the shipping directory in the shipping rule to be created
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// Shipping rule name
+	ShipperName *string `json:"ShipperName,omitempty" name:"ShipperName"`
+
+	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	FilterRules []*FilterRuleInfo `json:"FilterRules,omitempty" name:"FilterRules"`
+
+	// Rules for partitioning logs to be shipped. `strftime` can be used to define the presentation of time format.
+	Partition *string `json:"Partition,omitempty" name:"Partition"`
+
+	// Compression configuration of shipped log
+	Compress *CompressInfo `json:"Compress,omitempty" name:"Compress"`
+
+	// Format configuration of shipped log content
+	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+}
+
 type CreateShipperRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the log topic to which the shipping rule to be created belongs
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -982,16 +1206,18 @@ func (r *CreateShipperRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateShipperResponseParams struct {
+	// Shipping rule ID
+	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateShipperResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Shipping rule ID
-		ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateShipperResponseParams `json:"Response"`
 }
 
 func (r *CreateShipperResponse) ToJsonString() string {
@@ -1005,9 +1231,36 @@ func (r *CreateShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTopicRequestParams struct {
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Number of log topic partitions. Default value: 1. Maximum value: 10
+	PartitionCount *int64 `json:"PartitionCount,omitempty" name:"PartitionCount"`
+
+	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to enable automatic split. Default value: true
+	AutoSplit *bool `json:"AutoSplit,omitempty" name:"AutoSplit"`
+
+	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
+	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
+
+	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 
@@ -1059,16 +1312,18 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTopicResponseParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log topic ID
-		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTopicResponseParams `json:"Response"`
 }
 
 func (r *CreateTopicResponse) ToJsonString() string {
@@ -1083,7 +1338,6 @@ func (r *CreateTopicResponse) FromJsonString(s string) error {
 }
 
 type CsvInfo struct {
-
 	// Whether to print `key` on the first row of the CSV file
 	PrintKey *bool `json:"PrintKey,omitempty" name:"PrintKey"`
 
@@ -1101,9 +1355,15 @@ type CsvInfo struct {
 	NonExistingField *string `json:"NonExistingField,omitempty" name:"NonExistingField"`
 }
 
+// Predefined struct for user
+type DeleteAlarmNoticeRequestParams struct {
+	// Notification group ID
+	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
+}
+
 type DeleteAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Notification group ID
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
 }
@@ -1127,13 +1387,15 @@ func (r *DeleteAlarmNoticeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAlarmNoticeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAlarmNoticeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAlarmNoticeResponseParams `json:"Response"`
 }
 
 func (r *DeleteAlarmNoticeResponse) ToJsonString() string {
@@ -1147,9 +1409,15 @@ func (r *DeleteAlarmNoticeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAlarmRequestParams struct {
+	// Alarm policy ID.
+	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
+}
+
 type DeleteAlarmRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alarm policy ID.
 	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
 }
@@ -1173,13 +1441,15 @@ func (r *DeleteAlarmRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAlarmResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAlarmResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAlarmResponseParams `json:"Response"`
 }
 
 func (r *DeleteAlarmResponse) ToJsonString() string {
@@ -1193,9 +1463,18 @@ func (r *DeleteAlarmResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConfigFromMachineGroupRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Collection configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+}
+
 type DeleteConfigFromMachineGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Machine group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -1223,13 +1502,15 @@ func (r *DeleteConfigFromMachineGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConfigFromMachineGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteConfigFromMachineGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteConfigFromMachineGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteConfigFromMachineGroupResponse) ToJsonString() string {
@@ -1243,9 +1524,15 @@ func (r *DeleteConfigFromMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConfigRequestParams struct {
+	// Collection rule configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+}
+
 type DeleteConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Collection rule configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 }
@@ -1269,13 +1556,15 @@ func (r *DeleteConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteConfigResponseParams `json:"Response"`
 }
 
 func (r *DeleteConfigResponse) ToJsonString() string {
@@ -1289,9 +1578,15 @@ func (r *DeleteConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConsumerRequestParams struct {
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DeleteConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID bound to the task
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -1315,13 +1610,15 @@ func (r *DeleteConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConsumerResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteConsumerResponseParams `json:"Response"`
 }
 
 func (r *DeleteConsumerResponse) ToJsonString() string {
@@ -1335,9 +1632,15 @@ func (r *DeleteConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteExportRequestParams struct {
+	// Log export ID
+	ExportId *string `json:"ExportId,omitempty" name:"ExportId"`
+}
+
 type DeleteExportRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log export ID
 	ExportId *string `json:"ExportId,omitempty" name:"ExportId"`
 }
@@ -1361,13 +1664,15 @@ func (r *DeleteExportRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteExportResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteExportResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteExportResponseParams `json:"Response"`
 }
 
 func (r *DeleteExportResponse) ToJsonString() string {
@@ -1381,9 +1686,15 @@ func (r *DeleteExportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIndexRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DeleteIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -1407,13 +1718,15 @@ func (r *DeleteIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteIndexResponseParams `json:"Response"`
 }
 
 func (r *DeleteIndexResponse) ToJsonString() string {
@@ -1427,9 +1740,15 @@ func (r *DeleteIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteLogsetRequestParams struct {
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+}
+
 type DeleteLogsetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 }
@@ -1453,13 +1772,15 @@ func (r *DeleteLogsetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteLogsetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteLogsetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteLogsetResponseParams `json:"Response"`
 }
 
 func (r *DeleteLogsetResponse) ToJsonString() string {
@@ -1473,9 +1794,15 @@ func (r *DeleteLogsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMachineGroupRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DeleteMachineGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Machine group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -1499,13 +1826,15 @@ func (r *DeleteMachineGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMachineGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteMachineGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteMachineGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteMachineGroupResponse) ToJsonString() string {
@@ -1519,9 +1848,15 @@ func (r *DeleteMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteShipperRequestParams struct {
+	// Shipping rule ID
+	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+}
+
 type DeleteShipperRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Shipping rule ID
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 }
@@ -1545,13 +1880,15 @@ func (r *DeleteShipperRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteShipperResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteShipperResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteShipperResponseParams `json:"Response"`
 }
 
 func (r *DeleteShipperResponse) ToJsonString() string {
@@ -1565,9 +1902,15 @@ func (r *DeleteShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTopicRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DeleteTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -1591,13 +1934,15 @@ func (r *DeleteTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTopicResponseParams `json:"Response"`
 }
 
 func (r *DeleteTopicResponse) ToJsonString() string {
@@ -1611,9 +1956,38 @@ func (r *DeleteTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAlarmNoticesRequestParams struct {
+	// <li> name
+	// Filter by **notification group name**.
+	// Type: String
+	// Required: No
+	// <li> alarmNoticeId
+	// Filter by **notification group ID**.
+	// Type: String
+	// Required: No
+	// <li> uid
+	// Filter by **recipient ID**.
+	// Type: String
+	// Required: No
+	// <li> groupId
+	// Filter by **recipient ID**.
+	// Type: String
+	// Required: No
+	// 
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAlarmNoticesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <li> name
 	// Filter by **notification group name**.
 	// Type: String
@@ -1662,20 +2036,22 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAlarmNoticesResponseParams struct {
+	// Alarm notification template list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AlarmNotices []*AlarmNotice `json:"AlarmNotices,omitempty" name:"AlarmNotices"`
+
+	// Total number of eligible alarm notification templates
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAlarmNoticesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Alarm notification template list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AlarmNotices []*AlarmNotice `json:"AlarmNotices,omitempty" name:"AlarmNotices"`
-
-		// Total number of eligible alarm notification templates
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAlarmNoticesResponseParams `json:"Response"`
 }
 
 func (r *DescribeAlarmNoticesResponse) ToJsonString() string {
@@ -1689,9 +2065,53 @@ func (r *DescribeAlarmNoticesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAlarmsRequestParams struct {
+	// <br><li> name
+	// 
+	// Filter by **alarm policy name**
+	// Type: string
+	// 
+	// Required: no
+	// 
+	// <br><li> alarmId
+	// 
+	// Filter by **alarm policy ID**
+	// Type: string
+	// 
+	// Required: no
+	// 
+	// <br><li> topicId
+	// 
+	// Filter by **log topic ID**
+	// 
+	// Type: string
+	// 
+	// Required: no
+	// 
+	// <br><li> enable
+	// 
+	// Filter by **enablement status**
+	// 
+	// Type: string
+	// 
+	// Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an “invalid parameter” error will be returned.
+	// 
+	// Required: no
+	// 
+	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAlarmsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> name
 	// 
 	// Filter by **alarm policy name**
@@ -1755,19 +2175,21 @@ func (r *DescribeAlarmsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAlarmsResponseParams struct {
+	// Alarm policy list
+	Alarms []*AlarmInfo `json:"Alarms,omitempty" name:"Alarms"`
+
+	// Number of eligible alarm policies
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAlarmsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Alarm policy list
-		Alarms []*AlarmInfo `json:"Alarms,omitempty" name:"Alarms"`
-
-		// Number of eligible alarm policies
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAlarmsResponseParams `json:"Response"`
 }
 
 func (r *DescribeAlarmsResponse) ToJsonString() string {
@@ -1781,9 +2203,15 @@ func (r *DescribeAlarmsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConfigMachineGroupsRequestParams struct {
+	// Collection configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+}
+
 type DescribeConfigMachineGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Collection configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 }
@@ -1807,17 +2235,19 @@ func (r *DescribeConfigMachineGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConfigMachineGroupsResponseParams struct {
+	// List of machine groups bound to the collection rule configuration
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitempty" name:"MachineGroups"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeConfigMachineGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of machine groups bound to the collection rule configuration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitempty" name:"MachineGroups"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeConfigMachineGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeConfigMachineGroupsResponse) ToJsonString() string {
@@ -1831,9 +2261,43 @@ func (r *DescribeConfigMachineGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConfigsRequestParams struct {
+	// <br><li> configName
+	// 
+	// Filter by fuzzy match of **collection configuration name**
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> configId
+	// 
+	// Filter by **collection configuration ID**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> topicId
+	// 
+	// Filter by **log topic**.
+	// 
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeConfigsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> configName
 	// 
 	// Filter by fuzzy match of **collection configuration name**
@@ -1887,20 +2351,22 @@ func (r *DescribeConfigsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConfigsResponseParams struct {
+	// Collection configuration list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Configs []*ConfigInfo `json:"Configs,omitempty" name:"Configs"`
+
+	// Total number of filtered items
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeConfigsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Collection configuration list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Configs []*ConfigInfo `json:"Configs,omitempty" name:"Configs"`
-
-		// Total number of filtered items
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeConfigsResponseParams `json:"Response"`
 }
 
 func (r *DescribeConfigsResponse) ToJsonString() string {
@@ -1914,9 +2380,15 @@ func (r *DescribeConfigsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConsumerRequestParams struct {
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DescribeConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID bound to the task
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -1940,26 +2412,28 @@ func (r *DescribeConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeConsumerResponseParams struct {
+	// Whether the shipping task is effective
+	Effective *bool `json:"Effective,omitempty" name:"Effective"`
+
+	// Whether log metadata is shipped
+	NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+	// Metadata shipped if `NeedContent` is `true`
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+	// CKafka information
+	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the shipping task is effective
-		Effective *bool `json:"Effective,omitempty" name:"Effective"`
-
-		// Whether log metadata is shipped
-		NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
-
-		// Metadata shipped if `NeedContent` is `true`
-	// Note: This field may return `null`, indicating that no valid value was found.
-		Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
-
-		// CKafka information
-		Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeConsumerResponseParams `json:"Response"`
 }
 
 func (r *DescribeConsumerResponse) ToJsonString() string {
@@ -1973,9 +2447,21 @@ func (r *DescribeConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeExportsRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeExportsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -2007,19 +2493,21 @@ func (r *DescribeExportsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeExportsResponseParams struct {
+	// List of exported logs
+	Exports []*ExportInfo `json:"Exports,omitempty" name:"Exports"`
+
+	// Total number
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeExportsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of exported logs
-		Exports []*ExportInfo `json:"Exports,omitempty" name:"Exports"`
-
-		// Total number
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeExportsResponseParams `json:"Response"`
 }
 
 func (r *DescribeExportsResponse) ToJsonString() string {
@@ -2033,9 +2521,15 @@ func (r *DescribeExportsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DescribeIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -2059,34 +2553,36 @@ func (r *DescribeIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIndexResponseParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Whether it takes effect
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Index configuration information
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
+
+	// Index modification time. The default value is the index creation time.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Note: This field may return `null`, indicating that no valid value was found.
+	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Note: This field may return `null`, indicating that no valid value was found.
+	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log topic ID
-		TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-		// Whether it takes effect
-		Status *bool `json:"Status,omitempty" name:"Status"`
-
-		// Index configuration information
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
-
-		// Index modification time. The default value is the index creation time.
-		ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-
-		// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
-	// Note: This field may return `null`, indicating that no valid value was found.
-		IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
-
-		// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
-	// Note: This field may return `null`, indicating that no valid value was found.
-		MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIndexResponseParams `json:"Response"`
 }
 
 func (r *DescribeIndexResponse) ToJsonString() string {
@@ -2100,9 +2596,30 @@ func (r *DescribeIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogContextRequestParams struct {
+	// Log topic ID to be queried
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log time in the format of YYYY-mm-dd HH:MM:SS.FFF
+	BTime *string `json:"BTime,omitempty" name:"BTime"`
+
+	// Log package number
+	PkgId *string `json:"PkgId,omitempty" name:"PkgId"`
+
+	// Log number in log package
+	PkgLogId *int64 `json:"PkgLogId,omitempty" name:"PkgLogId"`
+
+	// Number of previous logs. Default value: 10
+	PrevLogs *int64 `json:"PrevLogs,omitempty" name:"PrevLogs"`
+
+	// Number of next logs. Default value: 10
+	NextLogs *int64 `json:"NextLogs,omitempty" name:"NextLogs"`
+}
+
 type DescribeLogContextRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID to be queried
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -2146,22 +2663,24 @@ func (r *DescribeLogContextRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogContextResponseParams struct {
+	// Log context information set
+	LogContextInfos []*LogContextInfo `json:"LogContextInfos,omitempty" name:"LogContextInfos"`
+
+	// Whether the previous logs have been returned
+	PrevOver *bool `json:"PrevOver,omitempty" name:"PrevOver"`
+
+	// Whether the next logs have been returned
+	NextOver *bool `json:"NextOver,omitempty" name:"NextOver"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeLogContextResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log context information set
-		LogContextInfos []*LogContextInfo `json:"LogContextInfos,omitempty" name:"LogContextInfos"`
-
-		// Whether the previous logs have been returned
-		PrevOver *bool `json:"PrevOver,omitempty" name:"PrevOver"`
-
-		// Whether the next logs have been returned
-		NextOver *bool `json:"NextOver,omitempty" name:"NextOver"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeLogContextResponseParams `json:"Response"`
 }
 
 func (r *DescribeLogContextResponse) ToJsonString() string {
@@ -2175,9 +2694,27 @@ func (r *DescribeLogContextResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogHistogramRequestParams struct {
+	// ID of the log topic to be queried
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
+	From *int64 `json:"From,omitempty" name:"From"`
+
+	// End time of the log to be queried, which is a Unix timestamp in milliseconds
+	To *int64 `json:"To,omitempty" name:"To"`
+
+	// Query statement
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// Time interval in milliseconds
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+}
+
 type DescribeLogHistogramRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the log topic to be queried
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -2217,22 +2754,24 @@ func (r *DescribeLogHistogramRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogHistogramResponseParams struct {
+	// Statistical period in milliseconds
+	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
+
+	// The number of logs that hit the keywords
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Statistical result details within the period
+	HistogramInfos []*HistogramInfo `json:"HistogramInfos,omitempty" name:"HistogramInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeLogHistogramResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Statistical period in milliseconds
-		Interval *int64 `json:"Interval,omitempty" name:"Interval"`
-
-		// The number of logs that hit the keywords
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Statistical result details within the period
-		HistogramInfos []*HistogramInfo `json:"HistogramInfos,omitempty" name:"HistogramInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeLogHistogramResponseParams `json:"Response"`
 }
 
 func (r *DescribeLogHistogramResponse) ToJsonString() string {
@@ -2246,9 +2785,51 @@ func (r *DescribeLogHistogramResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogsetsRequestParams struct {
+	// <br><li> logsetName
+	// 
+	// Filter by **logset name**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> logsetId
+	// 
+	// Filter by **logset ID**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> tagKey
+	// 
+	// Filter by **tag key**.
+	// 
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> tag:tagKey
+	// 
+	// Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeLogsetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> logsetName
 	// 
 	// Filter by **logset name**.
@@ -2310,19 +2891,21 @@ func (r *DescribeLogsetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogsetsResponseParams struct {
+	// Total number of pages
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Logset list
+	Logsets []*LogsetInfo `json:"Logsets,omitempty" name:"Logsets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeLogsetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of pages
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Logset list
-		Logsets []*LogsetInfo `json:"Logsets,omitempty" name:"Logsets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeLogsetsResponseParams `json:"Response"`
 }
 
 func (r *DescribeLogsetsResponse) ToJsonString() string {
@@ -2336,9 +2919,15 @@ func (r *DescribeLogsetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineGroupConfigsRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DescribeMachineGroupConfigsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Machine group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -2362,17 +2951,19 @@ func (r *DescribeMachineGroupConfigsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineGroupConfigsResponseParams struct {
+	// Collection rule configuration list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Configs []*ConfigInfo `json:"Configs,omitempty" name:"Configs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMachineGroupConfigsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Collection rule configuration list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Configs []*ConfigInfo `json:"Configs,omitempty" name:"Configs"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMachineGroupConfigsResponseParams `json:"Response"`
 }
 
 func (r *DescribeMachineGroupConfigsResponse) ToJsonString() string {
@@ -2386,9 +2977,51 @@ func (r *DescribeMachineGroupConfigsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineGroupsRequestParams struct {
+	// <br><li> machineGroupName
+	// 
+	// Filter by **machine group name**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> machineGroupId
+	// 
+	// Filter by **machine group ID**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> tagKey
+	// 
+	// Filter by **tag key**.
+	// 
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> tag:tagKey
+	// 
+	// Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeMachineGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> machineGroupName
 	// 
 	// Filter by **machine group name**.
@@ -2450,20 +3083,22 @@ func (r *DescribeMachineGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineGroupsResponseParams struct {
+	// Machine group information list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitempty" name:"MachineGroups"`
+
+	// Total number of pages
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMachineGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Machine group information list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitempty" name:"MachineGroups"`
-
-		// Total number of pages
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMachineGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeMachineGroupsResponse) ToJsonString() string {
@@ -2477,9 +3112,15 @@ func (r *DescribeMachineGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachinesRequestParams struct {
+	// ID of the machine group to be queried
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DescribeMachinesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the machine group to be queried
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -2503,31 +3144,33 @@ func (r *DescribeMachinesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachinesResponseParams struct {
+	// Group of machine status information
+	Machines []*MachineInfo `json:"Machines,omitempty" name:"Machines"`
+
+	// Whether to enable the automatic update feature for the machine group
+	AutoUpdate *int64 `json:"AutoUpdate,omitempty" name:"AutoUpdate"`
+
+	// Preset start time of automatic update of machine group
+	UpdateStartTime *string `json:"UpdateStartTime,omitempty" name:"UpdateStartTime"`
+
+	// Preset end time of automatic update of machine group
+	UpdateEndTime *string `json:"UpdateEndTime,omitempty" name:"UpdateEndTime"`
+
+	// Latest LogListener version available to the current user
+	LatestAgentVersion *string `json:"LatestAgentVersion,omitempty" name:"LatestAgentVersion"`
+
+	// Whether to enable the service log
+	ServiceLogging *bool `json:"ServiceLogging,omitempty" name:"ServiceLogging"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMachinesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Group of machine status information
-		Machines []*MachineInfo `json:"Machines,omitempty" name:"Machines"`
-
-		// Whether to enable the automatic update feature for the machine group
-		AutoUpdate *int64 `json:"AutoUpdate,omitempty" name:"AutoUpdate"`
-
-		// Preset start time of automatic update of machine group
-		UpdateStartTime *string `json:"UpdateStartTime,omitempty" name:"UpdateStartTime"`
-
-		// Preset end time of automatic update of machine group
-		UpdateEndTime *string `json:"UpdateEndTime,omitempty" name:"UpdateEndTime"`
-
-		// Latest LogListener version available to the current user
-		LatestAgentVersion *string `json:"LatestAgentVersion,omitempty" name:"LatestAgentVersion"`
-
-		// Whether to enable the service log
-		ServiceLogging *bool `json:"ServiceLogging,omitempty" name:"ServiceLogging"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMachinesResponseParams `json:"Response"`
 }
 
 func (r *DescribeMachinesResponse) ToJsonString() string {
@@ -2541,9 +3184,15 @@ func (r *DescribeMachinesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePartitionsRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
 type DescribePartitionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
@@ -2567,16 +3216,18 @@ func (r *DescribePartitionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePartitionsResponseParams struct {
+	// Partition list
+	Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePartitionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Partition list
-		Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePartitionsResponseParams `json:"Response"`
 }
 
 func (r *DescribePartitionsResponse) ToJsonString() string {
@@ -2590,9 +3241,21 @@ func (r *DescribePartitionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeShipperTasksRequestParams struct {
+	// Shipping rule ID
+	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+
+	// Query start timestamp in milliseconds, which can be within the last three days
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end timestamp in milliseconds
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeShipperTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Shipping rule ID
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 
@@ -2624,17 +3287,19 @@ func (r *DescribeShipperTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeShipperTasksResponseParams struct {
+	// Shipping task list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tasks []*ShipperTaskInfo `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeShipperTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Shipping task list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Tasks []*ShipperTaskInfo `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeShipperTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeShipperTasksResponse) ToJsonString() string {
@@ -2648,9 +3313,43 @@ func (r *DescribeShipperTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeShippersRequestParams struct {
+	// <br><li> shipperName
+	// 
+	// Filter by **shipping rule name**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> shipperId
+	// 
+	// Filter by **shipping rule ID**.
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// <br><li> topicId
+	// 
+	// Filter by **log topic**.
+	// 
+	// Type: String
+	// 
+	// Required: no
+	// 
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeShippersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> shipperName
 	// 
 	// Filter by **shipping rule name**.
@@ -2704,20 +3403,22 @@ func (r *DescribeShippersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeShippersResponseParams struct {
+	// Shipping rule list
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Shippers []*ShipperInfo `json:"Shippers,omitempty" name:"Shippers"`
+
+	// Total number of results obtained in this query
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeShippersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Shipping rule list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Shippers []*ShipperInfo `json:"Shippers,omitempty" name:"Shippers"`
-
-		// Total number of results obtained in this query
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeShippersResponseParams `json:"Response"`
 }
 
 func (r *DescribeShippersResponse) ToJsonString() string {
@@ -2731,9 +3432,21 @@ func (r *DescribeShippersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopicsRequestParams struct {
+	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTopicsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -2765,19 +3478,21 @@ func (r *DescribeTopicsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopicsResponseParams struct {
+	// Log topic list
+	Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics"`
+
+	// Total number
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTopicsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log topic list
-		Topics []*TopicInfo `json:"Topics,omitempty" name:"Topics"`
-
-		// Total number
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTopicsResponseParams `json:"Response"`
 }
 
 func (r *DescribeTopicsResponse) ToJsonString() string {
@@ -2792,7 +3507,6 @@ func (r *DescribeTopicsResponse) FromJsonString(s string) error {
 }
 
 type ExcludePathInfo struct {
-
 	// Type. Valid values: `File`, `Path`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -2801,7 +3515,6 @@ type ExcludePathInfo struct {
 }
 
 type ExportInfo struct {
-
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -2843,7 +3556,6 @@ type ExportInfo struct {
 }
 
 type ExtractRuleInfo struct {
-
 	// Time field key name. `time_key` and `time_format` must appear in pairs
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
@@ -2886,7 +3598,6 @@ type ExtractRuleInfo struct {
 }
 
 type Filter struct {
-
 	// Field to be filtered
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -2895,7 +3606,6 @@ type Filter struct {
 }
 
 type FilterRuleInfo struct {
-
 	// Filter rule key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -2907,7 +3617,6 @@ type FilterRuleInfo struct {
 }
 
 type FullTextInfo struct {
-
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
@@ -2919,9 +3628,33 @@ type FullTextInfo struct {
 	ContainZH *bool `json:"ContainZH,omitempty" name:"ContainZH"`
 }
 
+// Predefined struct for user
+type GetAlarmLogRequestParams struct {
+	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
+	From *int64 `json:"From,omitempty" name:"From"`
+
+	// End time of the log to be queried, which is a Unix timestamp in milliseconds
+	To *int64 `json:"To,omitempty" name:"To"`
+
+	// Query statement. Maximum length: 1024
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// Number of logs returned in a single query. Maximum value: 1000
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// This field is used to load more logs. Pass through the last `Context` value returned to get more log content.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Order of the logs sorted by time returned by the log API. Valid values: `asc`: ascending; `desc`: descending. Default value: `desc`
+	Sort *string `json:"Sort,omitempty" name:"Sort"`
+
+	// If the value is `true`, the new search method will be used, and the response parameters `AnalysisRecords` and `Columns` will be valid. If the value is `false`, the old search method will be used, and `AnalysisResults` and `ColNames` will be valid.
+	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
+}
+
 type GetAlarmLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time of the log to be queried, which is a Unix timestamp in milliseconds
 	From *int64 `json:"From,omitempty" name:"From"`
 
@@ -2969,42 +3702,44 @@ func (r *GetAlarmLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetAlarmLogResponseParams struct {
+	// `Context` for loading subsequent content
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Whether all log query results are returned
+	ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
+
+	// Whether the return is the analysis result
+	Analysis *bool `json:"Analysis,omitempty" name:"Analysis"`
+
+	// If `Analysis` is `true`, column name of the analysis result will be returned; otherwise, empty content will be returned.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
+
+	// Log query result. If `Analysis` is `True`, `null` may be returned
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Results []*LogInfo `json:"Results,omitempty" name:"Results"`
+
+	// Log analysis result. If `Analysis` is `False`, `null` may be returned
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
+
+	// New log analysis result, which will be valid if `UseNewAnalysis` is `true`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
+
+	// Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Columns []*Column `json:"Columns,omitempty" name:"Columns"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetAlarmLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `Context` for loading subsequent content
-		Context *string `json:"Context,omitempty" name:"Context"`
-
-		// Whether all log query results are returned
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// Whether the return is the analysis result
-		Analysis *bool `json:"Analysis,omitempty" name:"Analysis"`
-
-		// If `Analysis` is `true`, column name of the analysis result will be returned; otherwise, empty content will be returned.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
-
-		// Log query result. If `Analysis` is `True`, `null` may be returned
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Results []*LogInfo `json:"Results,omitempty" name:"Results"`
-
-		// Log analysis result. If `Analysis` is `False`, `null` may be returned
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
-
-		// New log analysis result, which will be valid if `UseNewAnalysis` is `true`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
-
-		// Column attribute of log analysis, which will be valid if `UseNewAnalysis` is `true`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		Columns []*Column `json:"Columns,omitempty" name:"Columns"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetAlarmLogResponseParams `json:"Response"`
 }
 
 func (r *GetAlarmLogResponse) ToJsonString() string {
@@ -3019,7 +3754,6 @@ func (r *GetAlarmLogResponse) FromJsonString(s string) error {
 }
 
 type HistogramInfo struct {
-
 	// The number of logs within the statistical period
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 
@@ -3028,7 +3762,6 @@ type HistogramInfo struct {
 }
 
 type JsonInfo struct {
-
 	// Enablement flag
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
 
@@ -3038,7 +3771,6 @@ type JsonInfo struct {
 }
 
 type KeyRegexInfo struct {
-
 	// Log key to be filtered
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -3047,7 +3779,6 @@ type KeyRegexInfo struct {
 }
 
 type KeyValueInfo struct {
-
 	// When a key value or metafield index needs to be configured for a field, the metafield `Key` does not need to be prefixed with `__TAG__.` and is consistent with the one when logs are uploaded. `__TAG__.` will be prefixed automatically for display in the console.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -3056,7 +3787,6 @@ type KeyValueInfo struct {
 }
 
 type LogContextInfo struct {
-
 	// Log source device
 	Source *string `json:"Source,omitempty" name:"Source"`
 
@@ -3081,7 +3811,6 @@ type LogContextInfo struct {
 }
 
 type LogInfo struct {
-
 	// Log time in milliseconds
 	Time *int64 `json:"Time,omitempty" name:"Time"`
 
@@ -3113,7 +3842,6 @@ type LogInfo struct {
 }
 
 type LogItem struct {
-
 	// Log key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -3122,13 +3850,11 @@ type LogItem struct {
 }
 
 type LogItems struct {
-
 	// Key-Value pair returned in analysis result
 	Data []*LogItem `json:"Data,omitempty" name:"Data"`
 }
 
 type LogsetInfo struct {
-
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 
@@ -3150,7 +3876,6 @@ type LogsetInfo struct {
 }
 
 type MachineGroupInfo struct {
-
 	// Machine group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -3185,7 +3910,6 @@ type MachineGroupInfo struct {
 }
 
 type MachineGroupTypeInfo struct {
-
 	// Machine group type. Valid values: `ip`: the IP addresses of collection machines are stored in `Values` of the machine group; `label`: the tags of the machines are stored in `Values` of the machine group
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -3194,7 +3918,6 @@ type MachineGroupTypeInfo struct {
 }
 
 type MachineInfo struct {
-
 	// Machine IP
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
@@ -3220,9 +3943,18 @@ type MachineInfo struct {
 	ErrMsg *string `json:"ErrMsg,omitempty" name:"ErrMsg"`
 }
 
+// Predefined struct for user
+type MergePartitionRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Merged `PartitionId`
+	PartitionId *int64 `json:"PartitionId,omitempty" name:"PartitionId"`
+}
+
 type MergePartitionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -3250,16 +3982,18 @@ func (r *MergePartitionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type MergePartitionResponseParams struct {
+	// Merge result set
+	Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type MergePartitionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Merge result set
-		Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *MergePartitionResponseParams `json:"Response"`
 }
 
 func (r *MergePartitionResponse) ToJsonString() string {
@@ -3273,9 +4007,30 @@ func (r *MergePartitionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAlarmNoticeRequestParams struct {
+	// Notification group ID
+	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
+
+	// Notification group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Notification type. Valid values:
+	// <li> `Trigger`: alarm triggered
+	// <li> `Recovery`: alarm cleared
+	// <li> `All`: alarm triggered and alarm cleared
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Notification recipient
+	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitempty" name:"NoticeReceivers"`
+
+	// API callback information (including WeCom)
+	WebCallbacks []*WebCallback `json:"WebCallbacks,omitempty" name:"WebCallbacks"`
+}
+
 type ModifyAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Notification group ID
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
 
@@ -3318,13 +4073,15 @@ func (r *ModifyAlarmNoticeRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAlarmNoticeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAlarmNoticeResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAlarmNoticeResponseParams `json:"Response"`
 }
 
 func (r *ModifyAlarmNoticeResponse) ToJsonString() string {
@@ -3338,9 +4095,48 @@ func (r *ModifyAlarmNoticeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAlarmRequestParams struct {
+	// Alarm policy ID
+	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
+
+	// Alarm policy name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Monitoring task running time point
+	MonitorTime *MonitorTime `json:"MonitorTime,omitempty" name:"MonitorTime"`
+
+	// Trigger condition
+	Condition *string `json:"Condition,omitempty" name:"Condition"`
+
+	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
+	TriggerCount *int64 `json:"TriggerCount,omitempty" name:"TriggerCount"`
+
+	// Repeated alarm interval in minutes. Value range: 0–1440.
+	AlarmPeriod *int64 `json:"AlarmPeriod,omitempty" name:"AlarmPeriod"`
+
+	// List of associated alarm notification templates
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitempty" name:"AlarmNoticeIds"`
+
+	// Monitoring object list
+	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitempty" name:"AlarmTargets"`
+
+	// Whether to enable the alarm policy
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Custom alarm content
+	MessageTemplate *string `json:"MessageTemplate,omitempty" name:"MessageTemplate"`
+
+	// Custom callback
+	CallBack *CallBackInfo `json:"CallBack,omitempty" name:"CallBack"`
+
+	// Multi-Dimensional analysis
+	Analysis []*AnalysisDimensional `json:"Analysis,omitempty" name:"Analysis"`
+}
+
 type ModifyAlarmRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alarm policy ID
 	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
 
@@ -3408,13 +4204,15 @@ func (r *ModifyAlarmRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAlarmResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAlarmResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAlarmResponseParams `json:"Response"`
 }
 
 func (r *ModifyAlarmResponse) ToJsonString() string {
@@ -3428,9 +4226,36 @@ func (r *ModifyAlarmResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyConfigRequestParams struct {
+	// Collection rule configuration ID
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+
+	// Collection rule configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Log collection path containing the filename
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Type of the log to be collected. Valid values: `json_log`: log in JSON format; `delimiter_log`: log in delimited format; `minimalist_log`: minimalist log; `multiline_log`: log in multi-line format; `fullregex_log`: log in full regex format. Default value: `minimalist_log`
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+	ExtractRule *ExtractRuleInfo `json:"ExtractRule,omitempty" name:"ExtractRule"`
+
+	// Collection path blocklist
+	ExcludePaths []*ExcludePathInfo `json:"ExcludePaths,omitempty" name:"ExcludePaths"`
+
+	// Log topic (TopicId) associated with collection configuration
+	Output *string `json:"Output,omitempty" name:"Output"`
+
+	// Custom parsing string, which is a serialized JSON string
+	UserDefineRule *string `json:"UserDefineRule,omitempty" name:"UserDefineRule"`
+}
+
 type ModifyConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Collection rule configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
@@ -3482,13 +4307,15 @@ func (r *ModifyConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyConfigResponseParams `json:"Response"`
 }
 
 func (r *ModifyConfigResponse) ToJsonString() string {
@@ -3502,9 +4329,27 @@ func (r *ModifyConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyConsumerRequestParams struct {
+	// Log topic ID bound to the task
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Whether the shipping task takes effect (default: no)
+	Effective *bool `json:"Effective,omitempty" name:"Effective"`
+
+	// Whether to ship metadata. Default value: `false`
+	NeedContent *bool `json:"NeedContent,omitempty" name:"NeedContent"`
+
+	// Metadata to ship if `NeedContent` is `true`
+	Content *ConsumerContent `json:"Content,omitempty" name:"Content"`
+
+	// CKafka information
+	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+}
+
 type ModifyConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID bound to the task
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -3544,13 +4389,15 @@ func (r *ModifyConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyConsumerResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyConsumerResponseParams `json:"Response"`
 }
 
 func (r *ModifyConsumerResponse) ToJsonString() string {
@@ -3564,9 +4411,27 @@ func (r *ModifyConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIndexRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// It does not take effect by default
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Index rule
+	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
+
+	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
+
+	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
+}
+
 type ModifyIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -3606,13 +4471,15 @@ func (r *ModifyIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyIndexResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyIndexResponseParams `json:"Response"`
 }
 
 func (r *ModifyIndexResponse) ToJsonString() string {
@@ -3626,9 +4493,21 @@ func (r *ModifyIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyLogsetRequestParams struct {
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Logset name
+	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
+
+	// Tag key-value pair bound to logset. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key at any time.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type ModifyLogsetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 
@@ -3660,13 +4539,15 @@ func (r *ModifyLogsetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyLogsetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyLogsetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyLogsetResponseParams `json:"Response"`
 }
 
 func (r *ModifyLogsetResponse) ToJsonString() string {
@@ -3680,9 +4561,36 @@ func (r *ModifyLogsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyMachineGroupRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Machine group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Machine group type
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to enable automatic update for the machine group
+	AutoUpdate *bool `json:"AutoUpdate,omitempty" name:"AutoUpdate"`
+
+	// Update start time. We recommend you update LogListener during off-peak hours.
+	UpdateStartTime *string `json:"UpdateStartTime,omitempty" name:"UpdateStartTime"`
+
+	// Update end time. We recommend you update LogListener during off-peak hours.
+	UpdateEndTime *string `json:"UpdateEndTime,omitempty" name:"UpdateEndTime"`
+
+	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees.
+	ServiceLogging *bool `json:"ServiceLogging,omitempty" name:"ServiceLogging"`
+}
+
 type ModifyMachineGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Machine group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -3734,13 +4642,15 @@ func (r *ModifyMachineGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyMachineGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyMachineGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyMachineGroupResponseParams `json:"Response"`
 }
 
 func (r *ModifyMachineGroupResponse) ToJsonString() string {
@@ -3754,9 +4664,45 @@ func (r *ModifyMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyShipperRequestParams struct {
+	// Shipping rule ID
+	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+
+	// New destination bucket in shipping rule
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// New destination directory prefix in shipping rule
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// Shipping rule status
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Shipping rule name
+	ShipperName *string `json:"ShipperName,omitempty" name:"ShipperName"`
+
+	// Shipping time interval in seconds. Default value: 300. Value range: 300–900
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
+	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
+
+	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	FilterRules []*FilterRuleInfo `json:"FilterRules,omitempty" name:"FilterRules"`
+
+	// Partition rule of shipped log, which can be represented in `strftime` time format
+	Partition *string `json:"Partition,omitempty" name:"Partition"`
+
+	// Compression configuration of shipped log
+	Compress *CompressInfo `json:"Compress,omitempty" name:"Compress"`
+
+	// Format configuration of shipped log content
+	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+}
+
 type ModifyShipperRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Shipping rule ID
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 
@@ -3820,13 +4766,15 @@ func (r *ModifyShipperRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyShipperResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyShipperResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyShipperResponseParams `json:"Response"`
 }
 
 func (r *ModifyShipperResponse) ToJsonString() string {
@@ -3840,9 +4788,33 @@ func (r *ModifyShipperResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTopicRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to start collection for this log topic
+	Status *bool `json:"Status,omitempty" name:"Status"`
+
+	// Whether to enable automatic split
+	AutoSplit *bool `json:"AutoSplit,omitempty" name:"AutoSplit"`
+
+	// Maximum number of partitions to split into for this topic if automatic split is enabled
+	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
+
+	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+}
+
 type ModifyTopicRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -3890,13 +4862,15 @@ func (r *ModifyTopicRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTopicResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTopicResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTopicResponseParams `json:"Response"`
 }
 
 func (r *ModifyTopicResponse) ToJsonString() string {
@@ -3911,7 +4885,6 @@ func (r *ModifyTopicResponse) FromJsonString(s string) error {
 }
 
 type MonitorTime struct {
-
 	// Valid values:
 	// <br><li> `Period`: periodic execution
 	// <br><li> `Fixed`: scheduled execution
@@ -3922,7 +4895,6 @@ type MonitorTime struct {
 }
 
 type NoticeReceiver struct {
-
 	// Recipient type. Valid values:
 	// <br><li> `Uin`: user ID
 	// <br><li> `Group`: user group ID
@@ -3949,9 +4921,15 @@ type NoticeReceiver struct {
 	Index *int64 `json:"Index,omitempty" name:"Index"`
 }
 
+// Predefined struct for user
+type OpenKafkaConsumerRequestParams struct {
+	// `TopicId` created by the CLS console
+	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+}
+
 type OpenKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `TopicId` created by the CLS console
 	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
 }
@@ -3975,16 +4953,18 @@ func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OpenKafkaConsumerResponseParams struct {
+	// `TopicId` to be consumed
+	TopicID *string `json:"TopicID,omitempty" name:"TopicID"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type OpenKafkaConsumerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `TopicId` to be consumed
-		TopicID *string `json:"TopicID,omitempty" name:"TopicID"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *OpenKafkaConsumerResponseParams `json:"Response"`
 }
 
 func (r *OpenKafkaConsumerResponse) ToJsonString() string {
@@ -3999,13 +4979,11 @@ func (r *OpenKafkaConsumerResponse) FromJsonString(s string) error {
 }
 
 type ParquetInfo struct {
-
 	// `ParquetKeyInfo` array
 	ParquetKeyInfo []*ParquetKeyInfo `json:"ParquetKeyInfo,omitempty" name:"ParquetKeyInfo"`
 }
 
 type ParquetKeyInfo struct {
-
 	// Key name
 	KeyName *string `json:"KeyName,omitempty" name:"KeyName"`
 
@@ -4018,7 +4996,6 @@ type ParquetKeyInfo struct {
 }
 
 type PartitionInfo struct {
-
 	// Partition ID
 	PartitionId *int64 `json:"PartitionId,omitempty" name:"PartitionId"`
 
@@ -4039,9 +5016,18 @@ type PartitionInfo struct {
 	LastWriteTime *string `json:"LastWriteTime,omitempty" name:"LastWriteTime"`
 }
 
+// Predefined struct for user
+type RetryShipperTaskRequestParams struct {
+	// Shipping rule ID
+	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
+
+	// Shipping task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type RetryShipperTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Shipping rule ID
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 
@@ -4069,13 +5055,15 @@ func (r *RetryShipperTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RetryShipperTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RetryShipperTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RetryShipperTaskResponseParams `json:"Response"`
 }
 
 func (r *RetryShipperTaskResponse) ToJsonString() string {
@@ -4090,7 +5078,6 @@ func (r *RetryShipperTaskResponse) FromJsonString(s string) error {
 }
 
 type RuleInfo struct {
-
 	// Full-Text index configuration
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FullText *FullTextInfo `json:"FullText,omitempty" name:"FullText"`
@@ -4105,7 +5092,6 @@ type RuleInfo struct {
 }
 
 type RuleKeyValueInfo struct {
-
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
@@ -4114,7 +5100,6 @@ type RuleKeyValueInfo struct {
 }
 
 type RuleTagInfo struct {
-
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
@@ -4122,9 +5107,48 @@ type RuleTagInfo struct {
 	KeyValues []*KeyValueInfo `json:"KeyValues,omitempty" name:"KeyValues"`
 }
 
+// Predefined struct for user
+type SearchLogRequestParams struct {
+	// ID of the log topic to be searched
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
+	From *int64 `json:"From,omitempty" name:"From"`
+
+	// End time of the log to be searched, which is a Unix timestamp in milliseconds
+	To *int64 `json:"To,omitempty" name:"To"`
+
+	// Statement for search and analysis. Maximum length: 12 KB
+	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To limit the number of analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Time order of the logs returned. Valid values: `asc` (ascending); `desc`: (descending). Default value: `desc`
+	// Notes:
+	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// * To sort the analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY Syntax</a>.
+	Sort *string `json:"Sort,omitempty" name:"Sort"`
+
+	// If the value is `true`, the new response method will be used, and the output parameters `AnalysisRecords` and `Columns` will be valid.
+	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
+	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
+	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
+}
+
 type SearchLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the log topic to be searched
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -4188,47 +5212,49 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchLogResponseParams struct {
+	// You can pass through the `Context` value (validity: 1 hour) returned by this API to continue to get more logs.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	// Whether to return all raw log query results. If not, you can use `Context` to continue to get logs.
+	// Note: This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
+
+	// Whether the returned data is the analysis (SQL) result
+	Analysis *bool `json:"Analysis,omitempty" name:"Analysis"`
+
+	// Raw logs that meet the search conditions
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Results []*LogInfo `json:"Results,omitempty" name:"Results"`
+
+	// Column names of log analysis
+	// This parameter is valid only when `UseNewAnalysis` is `false`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
+
+	// Log analysis result
+	// This parameter is valid only when `UseNewAnalysis` is `false`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
+
+	// Log analysis result
+	// This parameter is valid only when `UseNewAnalysis` is `true`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
+
+	// Column attributes of log analysis
+	// This parameter is valid only when `UseNewAnalysis` is `true`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Columns []*Column `json:"Columns,omitempty" name:"Columns"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// You can pass through the `Context` value (validity: 1 hour) returned by this API to continue to get more logs.
-		Context *string `json:"Context,omitempty" name:"Context"`
-
-		// Whether to return all raw log query results. If not, you can use `Context` to continue to get logs.
-	// Note: This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// Whether the returned data is the analysis (SQL) result
-		Analysis *bool `json:"Analysis,omitempty" name:"Analysis"`
-
-		// Raw logs that meet the search conditions
-	// Note: This field may return `null`, indicating that no valid value was found.
-		Results []*LogInfo `json:"Results,omitempty" name:"Results"`
-
-		// Column names of log analysis
-	// This parameter is valid only when `UseNewAnalysis` is `false`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		ColNames []*string `json:"ColNames,omitempty" name:"ColNames"`
-
-		// Log analysis result
-	// This parameter is valid only when `UseNewAnalysis` is `false`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		AnalysisResults []*LogItems `json:"AnalysisResults,omitempty" name:"AnalysisResults"`
-
-		// Log analysis result
-	// This parameter is valid only when `UseNewAnalysis` is `true`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		AnalysisRecords []*string `json:"AnalysisRecords,omitempty" name:"AnalysisRecords"`
-
-		// Column attributes of log analysis
-	// This parameter is valid only when `UseNewAnalysis` is `true`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-		Columns []*Column `json:"Columns,omitempty" name:"Columns"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchLogResponseParams `json:"Response"`
 }
 
 func (r *SearchLogResponse) ToJsonString() string {
@@ -4243,7 +5269,6 @@ func (r *SearchLogResponse) FromJsonString(s string) error {
 }
 
 type ShipperInfo struct {
-
 	// Shipping rule ID
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 
@@ -4288,7 +5313,6 @@ type ShipperInfo struct {
 }
 
 type ShipperTaskInfo struct {
-
 	// Shipping task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -4317,9 +5341,24 @@ type ShipperTaskInfo struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+// Predefined struct for user
+type SplitPartitionRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// ID of the partition to be split
+	PartitionId *int64 `json:"PartitionId,omitempty" name:"PartitionId"`
+
+	// Partition split hash key position, which is meaningful only if `Number=2` is set
+	SplitKey *string `json:"SplitKey,omitempty" name:"SplitKey"`
+
+	// Number of partitions to split into, which is optional. Default value: 2
+	Number *int64 `json:"Number,omitempty" name:"Number"`
+}
+
 type SplitPartitionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -4355,16 +5394,18 @@ func (r *SplitPartitionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SplitPartitionResponseParams struct {
+	// Split result set
+	Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SplitPartitionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Split result set
-		Partitions []*PartitionInfo `json:"Partitions,omitempty" name:"Partitions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SplitPartitionResponseParams `json:"Response"`
 }
 
 func (r *SplitPartitionResponse) ToJsonString() string {
@@ -4379,7 +5420,6 @@ func (r *SplitPartitionResponse) FromJsonString(s string) error {
 }
 
 type Tag struct {
-
 	// Tag key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -4388,7 +5428,6 @@ type Tag struct {
 }
 
 type TopicInfo struct {
-
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
 
@@ -4431,9 +5470,21 @@ type TopicInfo struct {
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
+// Predefined struct for user
+type UploadLogRequestParams struct {
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Topic partition where data will be written into by `HashKey` 
+	HashKey *string `json:"HashKey,omitempty" name:"HashKey"`
+
+	// Compression type
+	CompressType *string `json:"CompressType,omitempty" name:"CompressType"`
+}
+
 type UploadLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
@@ -4465,13 +5516,15 @@ func (r *UploadLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UploadLogResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UploadLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UploadLogResponseParams `json:"Response"`
 }
 
 func (r *UploadLogResponse) ToJsonString() string {
@@ -4486,7 +5539,6 @@ func (r *UploadLogResponse) FromJsonString(s string) error {
 }
 
 type ValueInfo struct {
-
 	// Field type. Valid values: `long`, `text`, `double`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -4502,7 +5554,6 @@ type ValueInfo struct {
 }
 
 type WebCallback struct {
-
 	// Callback address
 	Url *string `json:"Url,omitempty" name:"Url"`
 

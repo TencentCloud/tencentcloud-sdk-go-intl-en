@@ -21,7 +21,6 @@ import (
 )
 
 type AccessKey struct {
-
 	// Access key ID
 	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
 
@@ -32,9 +31,39 @@ type AccessKey struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+// Predefined struct for user
+type AddUserRequestParams struct {
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sub-user remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether or not the sub-user is allowed to log in to the console. 0: No; 1: Yes.
+	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// Whether or not to generate keys for sub-users. 0: No; 1: Yes.
+	UseApi *uint64 `json:"UseApi,omitempty" name:"UseApi"`
+
+	// Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// If the sub-user needs to reset their password when they next log in to the console. 0: No; 1: Yes.
+	NeedResetPassword *uint64 `json:"NeedResetPassword,omitempty" name:"NeedResetPassword"`
+
+	// Mobile number
+	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+
+	// Country/Area Code
+	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+
+	// Email
+	Email *string `json:"Email,omitempty" name:"Email"`
+}
+
 type AddUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-user username
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -90,31 +119,33 @@ func (r *AddUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddUserResponseParams struct {
+	// Sub-user UIN
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// If the combination of input parameters indicates that a random password should be generated, the generated password is returned
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Sub-user's key ID
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// Sub-user's secret key
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Sub-user UID
+	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Sub-user UIN
-		Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
-
-		// Sub-user username
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// If the combination of input parameters indicates that a random password should be generated, the generated password is returned
-		Password *string `json:"Password,omitempty" name:"Password"`
-
-		// Sub-user's key ID
-		SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
-
-		// Sub-user's secret key
-		SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
-
-		// Sub-user UID
-		Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddUserResponseParams `json:"Response"`
 }
 
 func (r *AddUserResponse) ToJsonString() string {
@@ -128,9 +159,15 @@ func (r *AddUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddUserToGroupRequestParams struct {
+	// The association between the user group ID and the sub-user UIN/UID.
+	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
+}
+
 type AddUserToGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The association between the user group ID and the sub-user UIN/UID.
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
@@ -154,13 +191,15 @@ func (r *AddUserToGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddUserToGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddUserToGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddUserToGroupResponseParams `json:"Response"`
 }
 
 func (r *AddUserToGroupResponse) ToJsonString() string {
@@ -175,7 +214,6 @@ func (r *AddUserToGroupResponse) FromJsonString(s string) error {
 }
 
 type AttachEntityOfPolicy struct {
-
 	// Entity ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
@@ -195,9 +233,18 @@ type AttachEntityOfPolicy struct {
 	AttachmentTime *string `json:"AttachmentTime,omitempty" name:"AttachmentTime"`
 }
 
+// Predefined struct for user
+type AttachGroupPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// User Group ID
+	AttachGroupId *uint64 `json:"AttachGroupId,omitempty" name:"AttachGroupId"`
+}
+
 type AttachGroupPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -225,13 +272,15 @@ func (r *AttachGroupPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachGroupPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachGroupPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachGroupPolicyResponseParams `json:"Response"`
 }
 
 func (r *AttachGroupPolicyResponse) ToJsonString() string {
@@ -246,7 +295,6 @@ func (r *AttachGroupPolicyResponse) FromJsonString(s string) error {
 }
 
 type AttachPolicyInfo struct {
-
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -288,9 +336,24 @@ type AttachPolicyInfo struct {
 	DeactivedDetail []*string `json:"DeactivedDetail,omitempty" name:"DeactivedDetail"`
 }
 
+// Predefined struct for user
+type AttachRolePolicyRequestParams struct {
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	AttachRoleId *string `json:"AttachRoleId,omitempty" name:"AttachRoleId"`
+
+	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	AttachRoleName *string `json:"AttachRoleName,omitempty" name:"AttachRoleName"`
+
+	// Policy name. Either `PolicyId` or `PolicyName` must be entered
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+}
+
 type AttachRolePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -326,13 +389,15 @@ func (r *AttachRolePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachRolePolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachRolePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachRolePolicyResponseParams `json:"Response"`
 }
 
 func (r *AttachRolePolicyResponse) ToJsonString() string {
@@ -346,9 +411,18 @@ func (r *AttachRolePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachUserPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Sub-account UIN
+	AttachUin *uint64 `json:"AttachUin,omitempty" name:"AttachUin"`
+}
+
 type AttachUserPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -376,13 +450,15 @@ func (r *AttachUserPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AttachUserPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AttachUserPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AttachUserPolicyResponseParams `json:"Response"`
 }
 
 func (r *AttachUserPolicyResponse) ToJsonString() string {
@@ -397,7 +473,6 @@ func (r *AttachUserPolicyResponse) FromJsonString(s string) error {
 }
 
 type AttachedPolicyOfRole struct {
-
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -428,7 +503,6 @@ type AttachedPolicyOfRole struct {
 }
 
 type AttachedUserPolicy struct {
-
 	// Policy ID.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -461,7 +535,6 @@ type AttachedUserPolicy struct {
 }
 
 type AttachedUserPolicyGroupInfo struct {
-
 	// Group ID.
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -469,9 +542,15 @@ type AttachedUserPolicyGroupInfo struct {
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 }
 
+// Predefined struct for user
+type ConsumeCustomMFATokenRequestParams struct {
+	// Custom multi-factor verification Token
+	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
+}
+
 type ConsumeCustomMFATokenRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom multi-factor verification Token
 	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
 }
@@ -495,13 +574,15 @@ func (r *ConsumeCustomMFATokenRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ConsumeCustomMFATokenResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ConsumeCustomMFATokenResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ConsumeCustomMFATokenResponseParams `json:"Response"`
 }
 
 func (r *ConsumeCustomMFATokenResponse) ToJsonString() string {
@@ -515,9 +596,18 @@ func (r *ConsumeCustomMFATokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGroupRequestParams struct {
+	// User Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// User Group description
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type CreateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User Group name
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
@@ -545,16 +635,18 @@ func (r *CreateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGroupResponseParams struct {
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// User Group ID
-		GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateGroupResponse) ToJsonString() string {
@@ -568,9 +660,27 @@ func (r *CreateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateOIDCConfigRequestParams struct {
+	// IdP URL.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Public key for signature, which must be Base64-encoded.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID.
+	ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type CreateOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IdP URL.
 	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
 
@@ -610,13 +720,15 @@ func (r *CreateOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateOIDCConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateOIDCConfigResponse) ToJsonString() string {
@@ -630,9 +742,21 @@ func (r *CreateOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePolicyRequestParams struct {
+	// Policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Policy document, such as `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the resources that the role is authorized to access. For more information on this parameter, please see the `RoleInfo` output parameter of the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1) API
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Policy description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type CreatePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
@@ -664,16 +788,18 @@ func (r *CreatePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePolicyResponseParams struct {
+	// ID of newly added policy
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID of newly added policy
-		PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePolicyResponseParams `json:"Response"`
 }
 
 func (r *CreatePolicyResponse) ToJsonString() string {
@@ -687,9 +813,21 @@ func (r *CreatePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePolicyVersionRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The policy document to use as the content for the new version
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Specifies whether to set this version as the default version
+	SetAsDefault *bool `json:"SetAsDefault,omitempty" name:"SetAsDefault"`
+}
+
 type CreatePolicyVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -721,17 +859,19 @@ func (r *CreatePolicyVersionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePolicyVersionResponseParams struct {
+	// Policy version ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePolicyVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy version ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePolicyVersionResponseParams `json:"Response"`
 }
 
 func (r *CreatePolicyVersionResponse) ToJsonString() string {
@@ -745,9 +885,30 @@ func (r *CreatePolicyVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoleRequestParams struct {
+	// Role name
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Policy document
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Role description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Whether login is allowed. 1: yes, 0: no
+	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// The maximum validity period of the temporary key for creating a role (range: 0-43200)
+	SessionDuration *uint64 `json:"SessionDuration,omitempty" name:"SessionDuration"`
+
+	// Tags bound to the role.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role name
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
@@ -791,17 +952,19 @@ func (r *CreateRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRoleResponseParams struct {
+	// Role ID
+	// Note: This field may return null, indicating that no valid value was found.
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role ID
-	// Note: This field may return null, indicating that no valid value was found.
-		RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRoleResponseParams `json:"Response"`
 }
 
 func (r *CreateRoleResponse) ToJsonString() string {
@@ -815,9 +978,21 @@ func (r *CreateRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSAMLProviderRequestParams struct {
+	// SAML identity provider name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// SAML identity provider description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// SAML identity provider metadata document (Base64)
+	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
+}
+
 type CreateSAMLProviderRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SAML identity provider name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -849,16 +1024,18 @@ func (r *CreateSAMLProviderRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSAMLProviderResponseParams struct {
+	// SAML identity provider resource descriptor
+	ProviderArn *string `json:"ProviderArn,omitempty" name:"ProviderArn"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSAMLProviderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SAML identity provider resource descriptor
-		ProviderArn *string `json:"ProviderArn,omitempty" name:"ProviderArn"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSAMLProviderResponseParams `json:"Response"`
 }
 
 func (r *CreateSAMLProviderResponse) ToJsonString() string {
@@ -872,9 +1049,24 @@ func (r *CreateSAMLProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceLinkedRoleRequestParams struct {
+	// Authorized service, i.e., Tencent Cloud service entity with this role attached.
+	QCSServiceName []*string `json:"QCSServiceName,omitempty" name:"QCSServiceName"`
+
+	// Custom suffix. A string you provide, which is combined with the service-provided prefix to form the complete role name.
+	CustomSuffix *string `json:"CustomSuffix,omitempty" name:"CustomSuffix"`
+
+	// Role description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Tags bound to the role.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
+}
+
 type CreateServiceLinkedRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Authorized service, i.e., Tencent Cloud service entity with this role attached.
 	QCSServiceName []*string `json:"QCSServiceName,omitempty" name:"QCSServiceName"`
 
@@ -910,16 +1102,18 @@ func (r *CreateServiceLinkedRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateServiceLinkedRoleResponseParams struct {
+	// Role ID
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateServiceLinkedRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role ID
-		RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateServiceLinkedRoleResponseParams `json:"Response"`
 }
 
 func (r *CreateServiceLinkedRoleResponse) ToJsonString() string {
@@ -933,9 +1127,40 @@ func (r *CreateServiceLinkedRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUserOIDCConfigRequestParams struct {
+	// OpenID Connect IdP URL.
+	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID registered with the OpenID Connect IdP.
+	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+	// Authorization response type, which is always `id_token`.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Authorization response mode. Valid values: form_post (recommended); fragment.
+	ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+	// Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+	MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+	// Authorization information scope. Valid values: openid (default); email; profile.
+	Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type CreateUserOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// OpenID Connect IdP URL.
 	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
 	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
@@ -992,13 +1217,15 @@ func (r *CreateUserOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUserOIDCConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUserOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUserOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateUserOIDCConfigResponse) ToJsonString() string {
@@ -1012,9 +1239,15 @@ func (r *CreateUserOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUserSAMLConfigRequestParams struct {
+	// SAML metadata document, which must be Base64 encoded.
+	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
+}
+
 type CreateUserSAMLConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SAML metadata document, which must be Base64 encoded.
 	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
 }
@@ -1038,13 +1271,15 @@ func (r *CreateUserSAMLConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateUserSAMLConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateUserSAMLConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateUserSAMLConfigResponseParams `json:"Response"`
 }
 
 func (r *CreateUserSAMLConfigResponse) ToJsonString() string {
@@ -1058,9 +1293,15 @@ func (r *CreateUserSAMLConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteGroupRequestParams struct {
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type DeleteGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User Group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -1084,13 +1325,15 @@ func (r *DeleteGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteGroupResponse) ToJsonString() string {
@@ -1104,9 +1347,15 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteOIDCConfigRequestParams struct {
+	// OIDC IdP name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type DeleteOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// OIDC IdP name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
@@ -1130,13 +1379,15 @@ func (r *DeleteOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteOIDCConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *DeleteOIDCConfigResponse) ToJsonString() string {
@@ -1150,9 +1401,15 @@ func (r *DeleteOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePolicyRequestParams struct {
+	// Array. Array elements are policy IDs. Policies can be deleted in a batch
+	PolicyId []*uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type DeletePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Array. Array elements are policy IDs. Policies can be deleted in a batch
 	PolicyId []*uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
@@ -1176,13 +1433,15 @@ func (r *DeletePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePolicyResponseParams `json:"Response"`
 }
 
 func (r *DeletePolicyResponse) ToJsonString() string {
@@ -1196,9 +1455,18 @@ func (r *DeletePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePolicyVersionRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version ID
+	VersionId []*uint64 `json:"VersionId,omitempty" name:"VersionId"`
+}
+
 type DeletePolicyVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -1226,13 +1494,15 @@ func (r *DeletePolicyVersionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeletePolicyVersionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeletePolicyVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeletePolicyVersionResponseParams `json:"Response"`
 }
 
 func (r *DeletePolicyVersionResponse) ToJsonString() string {
@@ -1246,9 +1516,18 @@ func (r *DeletePolicyVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRolePermissionsBoundaryRequestParams struct {
+	// Role ID (either it or the role name must be entered)
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name (either it or the role ID must be entered)
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type DeleteRolePermissionsBoundaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role ID (either it or the role name must be entered)
 	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
 
@@ -1276,13 +1555,15 @@ func (r *DeleteRolePermissionsBoundaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRolePermissionsBoundaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRolePermissionsBoundaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRolePermissionsBoundaryResponseParams `json:"Response"`
 }
 
 func (r *DeleteRolePermissionsBoundaryResponse) ToJsonString() string {
@@ -1296,9 +1577,18 @@ func (r *DeleteRolePermissionsBoundaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRoleRequestParams struct {
+	// Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type DeleteRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role ID, used to specify a role. Input either `RoleId` or `RoleName`
 	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
 
@@ -1326,13 +1616,15 @@ func (r *DeleteRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRoleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRoleResponseParams `json:"Response"`
 }
 
 func (r *DeleteRoleResponse) ToJsonString() string {
@@ -1346,9 +1638,15 @@ func (r *DeleteRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSAMLProviderRequestParams struct {
+	// SAML identity provider name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type DeleteSAMLProviderRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SAML identity provider name
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
@@ -1372,13 +1670,15 @@ func (r *DeleteSAMLProviderRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSAMLProviderResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSAMLProviderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSAMLProviderResponseParams `json:"Response"`
 }
 
 func (r *DeleteSAMLProviderResponse) ToJsonString() string {
@@ -1392,9 +1692,15 @@ func (r *DeleteSAMLProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceLinkedRoleRequestParams struct {
+	// Name of the service-linked role to be deleted.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type DeleteServiceLinkedRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name of the service-linked role to be deleted.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
@@ -1418,16 +1724,18 @@ func (r *DeleteServiceLinkedRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteServiceLinkedRoleResponseParams struct {
+	// Deletion task identifier, which can be used to check the status of a service-linked role deletion.
+	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteServiceLinkedRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Deletion task identifier, which can be used to check the status of a service-linked role deletion.
-		DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteServiceLinkedRoleResponseParams `json:"Response"`
 }
 
 func (r *DeleteServiceLinkedRoleResponse) ToJsonString() string {
@@ -1441,9 +1749,15 @@ func (r *DeleteServiceLinkedRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUserPermissionsBoundaryRequestParams struct {
+	// Sub-account `Uin`
+	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
 type DeleteUserPermissionsBoundaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-account `Uin`
 	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
 }
@@ -1467,13 +1781,15 @@ func (r *DeleteUserPermissionsBoundaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUserPermissionsBoundaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteUserPermissionsBoundaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteUserPermissionsBoundaryResponseParams `json:"Response"`
 }
 
 func (r *DeleteUserPermissionsBoundaryResponse) ToJsonString() string {
@@ -1487,9 +1803,18 @@ func (r *DeleteUserPermissionsBoundaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUserRequestParams struct {
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether to forcibly delete the sub-user. The default input parameter is `0`. `0`: do not delete the user if the user has undeleted API keys; `1`: first delete the API keys then delete the user if the user has undeleted API keys. To delete API keys, you need to have cam:DeleteApiKey permission, which enables you to delete both enabled and disabled API keys. If you do not have this permission, you will not be able to delete API keys and the user.
+	Force *uint64 `json:"Force,omitempty" name:"Force"`
+}
+
 type DeleteUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-user username
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1517,13 +1842,15 @@ func (r *DeleteUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteUserResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteUserResponseParams `json:"Response"`
 }
 
 func (r *DeleteUserResponse) ToJsonString() string {
@@ -1537,9 +1864,15 @@ func (r *DeleteUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeOIDCConfigRequestParams struct {
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type DescribeOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
@@ -1563,34 +1896,36 @@ func (r *DescribeOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeOIDCConfigResponseParams struct {
+	// IdP type. 11: Role IdP.
+	ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
+
+	// IdP URL.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Public key for signature.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID.
+	ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Status. 0: Not set; 2: Disabled; 11: Enabled.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// IdP type. 11: Role IdP.
-		ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
-
-		// IdP URL.
-		IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
-
-		// Public key for signature.
-		IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
-
-		// Client ID.
-		ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
-
-		// Status. 0: Not set; 2: Disabled; 11: Enabled.
-		Status *uint64 `json:"Status,omitempty" name:"Status"`
-
-		// Description.
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// Name.
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeOIDCConfigResponse) ToJsonString() string {
@@ -1604,9 +1939,21 @@ func (r *DescribeOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRoleListRequestParams struct {
+	// Page number, beginning from 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of lines per page, no greater than 200
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// A parameter used to filter the list of roles under a tag.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
+}
+
 type DescribeRoleListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Page number, beginning from 1
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
@@ -1638,20 +1985,22 @@ func (r *DescribeRoleListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRoleListResponseParams struct {
+	// Role details list
+	// Note: This field may return null, indicating that no valid value was found.
+	List []*RoleInfo `json:"List,omitempty" name:"List"`
+
+	// Total number of roles
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRoleListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role details list
-	// Note: This field may return null, indicating that no valid value was found.
-		List []*RoleInfo `json:"List,omitempty" name:"List"`
-
-		// Total number of roles
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRoleListResponseParams `json:"Response"`
 }
 
 func (r *DescribeRoleListResponse) ToJsonString() string {
@@ -1665,9 +2014,15 @@ func (r *DescribeRoleListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSafeAuthFlagCollRequestParams struct {
+	// Sub-account
+	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
+}
+
 type DescribeSafeAuthFlagCollRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-account
 	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
 }
@@ -1691,22 +2046,24 @@ func (r *DescribeSafeAuthFlagCollRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSafeAuthFlagCollResponseParams struct {
+	// Login protection settings
+	LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+	// Sensitive operation protection settings
+	ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
+
+	// Suspicious login location protection settings
+	OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSafeAuthFlagCollResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Login protection settings
-		LoginFlag *LoginActionFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
-
-		// Sensitive operation protection settings
-		ActionFlag *LoginActionFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
-
-		// Suspicious login location protection settings
-		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSafeAuthFlagCollResponseParams `json:"Response"`
 }
 
 func (r *DescribeSafeAuthFlagCollResponse) ToJsonString() string {
@@ -1720,8 +2077,14 @@ func (r *DescribeSafeAuthFlagCollResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSafeAuthFlagIntlRequestParams struct {
+
+}
+
 type DescribeSafeAuthFlagIntlRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeSafeAuthFlagIntlRequest) ToJsonString() string {
@@ -1736,28 +2099,31 @@ func (r *DescribeSafeAuthFlagIntlRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSafeAuthFlagIntlRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSafeAuthFlagIntlResponseParams struct {
+	// Login protection settings
+	LoginFlag *LoginActionFlagIntl `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+	// Sensitive operation protection settings
+	ActionFlag *LoginActionFlagIntl `json:"ActionFlag,omitempty" name:"ActionFlag"`
+
+	// Suspicious login location protection settings
+	OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSafeAuthFlagIntlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Login protection settings
-		LoginFlag *LoginActionFlagIntl `json:"LoginFlag,omitempty" name:"LoginFlag"`
-
-		// Sensitive operation protection settings
-		ActionFlag *LoginActionFlagIntl `json:"ActionFlag,omitempty" name:"ActionFlag"`
-
-		// Suspicious login location protection settings
-		OffsiteFlag *OffsiteFlag `json:"OffsiteFlag,omitempty" name:"OffsiteFlag"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSafeAuthFlagIntlResponseParams `json:"Response"`
 }
 
 func (r *DescribeSafeAuthFlagIntlResponse) ToJsonString() string {
@@ -1771,9 +2137,15 @@ func (r *DescribeSafeAuthFlagIntlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSubAccountsRequestParams struct {
+	// List of sub-user UINs. Up to 50 UINs are supported.
+	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin"`
+}
+
 type DescribeSubAccountsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of sub-user UINs. Up to 50 UINs are supported.
 	FilterSubAccountUin []*uint64 `json:"FilterSubAccountUin,omitempty" name:"FilterSubAccountUin"`
 }
@@ -1797,16 +2169,18 @@ func (r *DescribeSubAccountsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSubAccountsResponseParams struct {
+	// Sub-user list
+	SubAccounts []*SubAccountUser `json:"SubAccounts,omitempty" name:"SubAccounts"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSubAccountsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Sub-user list
-		SubAccounts []*SubAccountUser `json:"SubAccounts,omitempty" name:"SubAccounts"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSubAccountsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSubAccountsResponse) ToJsonString() string {
@@ -1820,8 +2194,14 @@ func (r *DescribeSubAccountsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserOIDCConfigRequestParams struct {
+
+}
+
 type DescribeUserOIDCConfigRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeUserOIDCConfigRequest) ToJsonString() string {
@@ -1836,52 +2216,55 @@ func (r *DescribeUserOIDCConfigRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserOIDCConfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserOIDCConfigResponseParams struct {
+	// IdP type. 12: user OIDC IdP
+	ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
+
+	// IdP URL
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Signature public key
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID
+	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Status. 0: not set; 2: disabled; 11: enabled.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Authorization endpoint
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+	// Authorization scope
+	Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+	// Authorization response type
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Authorization response mode
+	ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+	// Mapping field name
+	MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUserOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// IdP type. 12: user OIDC IdP
-		ProviderType *uint64 `json:"ProviderType,omitempty" name:"ProviderType"`
-
-		// IdP URL
-		IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
-
-		// Signature public key
-		IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
-
-		// Client ID
-		ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
-
-		// Status. 0: not set; 2: disabled; 11: enabled.
-		Status *uint64 `json:"Status,omitempty" name:"Status"`
-
-		// Authorization endpoint
-		AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
-
-		// Authorization scope
-		Scope []*string `json:"Scope,omitempty" name:"Scope"`
-
-		// Authorization response type
-		ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
-
-		// Authorization response mode
-		ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
-
-		// Mapping field name
-		MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
-
-		// Description
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUserOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeUserOIDCConfigResponse) ToJsonString() string {
@@ -1895,8 +2278,14 @@ func (r *DescribeUserOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserSAMLConfigRequestParams struct {
+
+}
+
 type DescribeUserSAMLConfigRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeUserSAMLConfigRequest) ToJsonString() string {
@@ -1911,25 +2300,28 @@ func (r *DescribeUserSAMLConfigRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserSAMLConfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserSAMLConfigResponseParams struct {
+	// SAML metadata document.
+	SAMLMetadata *string `json:"SAMLMetadata,omitempty" name:"SAMLMetadata"`
+
+	// Status. `0`: not set, `1`: enabled, `2`: disabled.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUserSAMLConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SAML metadata document.
-		SAMLMetadata *string `json:"SAMLMetadata,omitempty" name:"SAMLMetadata"`
-
-		// Status. `0`: not set, `1`: enabled, `2`: disabled.
-		Status *uint64 `json:"Status,omitempty" name:"Status"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUserSAMLConfigResponseParams `json:"Response"`
 }
 
 func (r *DescribeUserSAMLConfigResponse) ToJsonString() string {
@@ -1943,9 +2335,18 @@ func (r *DescribeUserSAMLConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachGroupPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// User Group ID
+	DetachGroupId *uint64 `json:"DetachGroupId,omitempty" name:"DetachGroupId"`
+}
+
 type DetachGroupPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -1973,13 +2374,15 @@ func (r *DetachGroupPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachGroupPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachGroupPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachGroupPolicyResponseParams `json:"Response"`
 }
 
 func (r *DetachGroupPolicyResponse) ToJsonString() string {
@@ -1993,9 +2396,24 @@ func (r *DetachGroupPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachRolePolicyRequestParams struct {
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	DetachRoleId *string `json:"DetachRoleId,omitempty" name:"DetachRoleId"`
+
+	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	DetachRoleName *string `json:"DetachRoleName,omitempty" name:"DetachRoleName"`
+
+	// Policy name. Either `PolicyId` or `PolicyName` must be entered
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+}
+
 type DetachRolePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -2031,13 +2449,15 @@ func (r *DetachRolePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachRolePolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachRolePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachRolePolicyResponseParams `json:"Response"`
 }
 
 func (r *DetachRolePolicyResponse) ToJsonString() string {
@@ -2051,9 +2471,18 @@ func (r *DetachRolePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachUserPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Sub-account UIN
+	DetachUin *uint64 `json:"DetachUin,omitempty" name:"DetachUin"`
+}
+
 type DetachUserPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -2081,13 +2510,15 @@ func (r *DetachUserPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DetachUserPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DetachUserPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DetachUserPolicyResponseParams `json:"Response"`
 }
 
 func (r *DetachUserPolicyResponse) ToJsonString() string {
@@ -2101,8 +2532,14 @@ func (r *DetachUserPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableUserSSORequestParams struct {
+
+}
+
 type DisableUserSSORequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DisableUserSSORequest) ToJsonString() string {
@@ -2117,19 +2554,22 @@ func (r *DisableUserSSORequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableUserSSORequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableUserSSOResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableUserSSOResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableUserSSOResponseParams `json:"Response"`
 }
 
 func (r *DisableUserSSOResponse) ToJsonString() string {
@@ -2143,8 +2583,14 @@ func (r *DisableUserSSOResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetAccountSummaryRequestParams struct {
+
+}
+
 type GetAccountSummaryRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *GetAccountSummaryRequest) ToJsonString() string {
@@ -2159,37 +2605,40 @@ func (r *GetAccountSummaryRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetAccountSummaryRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetAccountSummaryResponseParams struct {
+	// Number of policies
+	Policies *uint64 `json:"Policies,omitempty" name:"Policies"`
+
+	// Number of roles
+	Roles *uint64 `json:"Roles,omitempty" name:"Roles"`
+
+	// Number of identity providers
+	Idps *uint64 `json:"Idps,omitempty" name:"Idps"`
+
+	// Number of sub-accounts
+	User *uint64 `json:"User,omitempty" name:"User"`
+
+	// Number of groups
+	Group *uint64 `json:"Group,omitempty" name:"Group"`
+
+	// Total number of grouped users
+	Member *uint64 `json:"Member,omitempty" name:"Member"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetAccountSummaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of policies
-		Policies *uint64 `json:"Policies,omitempty" name:"Policies"`
-
-		// Number of roles
-		Roles *uint64 `json:"Roles,omitempty" name:"Roles"`
-
-		// Number of identity providers
-		Idps *uint64 `json:"Idps,omitempty" name:"Idps"`
-
-		// Number of sub-accounts
-		User *uint64 `json:"User,omitempty" name:"User"`
-
-		// Number of groups
-		Group *uint64 `json:"Group,omitempty" name:"Group"`
-
-		// Total number of grouped users
-		Member *uint64 `json:"Member,omitempty" name:"Member"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetAccountSummaryResponseParams `json:"Response"`
 }
 
 func (r *GetAccountSummaryResponse) ToJsonString() string {
@@ -2203,9 +2652,15 @@ func (r *GetAccountSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetCustomMFATokenInfoRequestParams struct {
+	// Custom multi-factor verification Token
+	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
+}
+
 type GetCustomMFATokenInfoRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Custom multi-factor verification Token
 	MFAToken *string `json:"MFAToken,omitempty" name:"MFAToken"`
 }
@@ -2229,16 +2684,18 @@ func (r *GetCustomMFATokenInfoRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetCustomMFATokenInfoResponseParams struct {
+	// Account ID corresponding to the custom multi-factor verification Token
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetCustomMFATokenInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Account ID corresponding to the custom multi-factor verification Token
-		Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetCustomMFATokenInfoResponseParams `json:"Response"`
 }
 
 func (r *GetCustomMFATokenInfoResponse) ToJsonString() string {
@@ -2252,9 +2709,15 @@ func (r *GetCustomMFATokenInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGroupRequestParams struct {
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
 type GetGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User Group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 }
@@ -2278,31 +2741,33 @@ func (r *GetGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGroupResponseParams struct {
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// User Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// Number of members in the User Group
+	GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
+
+	// User Group description
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Time User Group created
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// User Group member information
+	UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// User Group ID
-		GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
-
-		// User Group name
-		GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
-
-		// Number of members in the User Group
-		GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
-
-		// User Group description
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// Time User Group created
-		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-		// User Group member information
-		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetGroupResponseParams `json:"Response"`
 }
 
 func (r *GetGroupResponse) ToJsonString() string {
@@ -2316,9 +2781,15 @@ func (r *GetGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type GetPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
@@ -2342,45 +2813,47 @@ func (r *GetPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPolicyResponseParams struct {
+	// Policy name
+	// Note: This field may return null, indicating that no valid value was found.
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Policy description
+	// Note: This field may return null, indicating that no valid value was found.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// 1: Custom policy; 2: Preset policy
+	// Note: This field may return null, indicating that no valid value was found.
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// Time created
+	// Note: This field may return null, indicating that no valid value was found.
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Time of latest update
+	// Note: This field may return null, indicating that no valid value was found.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Policy document
+	// Note: This field may return null, indicating that no valid value was found.
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Remarks
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PresetAlias *string `json:"PresetAlias,omitempty" name:"PresetAlias"`
+
+	// Whether it is a service-linked policy
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsServiceLinkedRolePolicy *uint64 `json:"IsServiceLinkedRolePolicy,omitempty" name:"IsServiceLinkedRolePolicy"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy name
-	// Note: This field may return null, indicating that no valid value was found.
-		PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
-
-		// Policy description
-	// Note: This field may return null, indicating that no valid value was found.
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// 1: Custom policy; 2: Preset policy
-	// Note: This field may return null, indicating that no valid value was found.
-		Type *uint64 `json:"Type,omitempty" name:"Type"`
-
-		// Time created
-	// Note: This field may return null, indicating that no valid value was found.
-		AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
-
-		// Time of latest update
-	// Note: This field may return null, indicating that no valid value was found.
-		UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-		// Policy document
-	// Note: This field may return null, indicating that no valid value was found.
-		PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
-
-		// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PresetAlias *string `json:"PresetAlias,omitempty" name:"PresetAlias"`
-
-		// Whether it is a service-linked policy
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		IsServiceLinkedRolePolicy *uint64 `json:"IsServiceLinkedRolePolicy,omitempty" name:"IsServiceLinkedRolePolicy"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPolicyResponseParams `json:"Response"`
 }
 
 func (r *GetPolicyResponse) ToJsonString() string {
@@ -2394,9 +2867,18 @@ func (r *GetPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPolicyVersionRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version, which can be obtained through `ListPolicyVersions`.
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+}
+
 type GetPolicyVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -2424,17 +2906,19 @@ func (r *GetPolicyVersionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPolicyVersionResponseParams struct {
+	// Policy version details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PolicyVersion *PolicyVersionDetail `json:"PolicyVersion,omitempty" name:"PolicyVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetPolicyVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy version details
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PolicyVersion *PolicyVersionDetail `json:"PolicyVersion,omitempty" name:"PolicyVersion"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetPolicyVersionResponseParams `json:"Response"`
 }
 
 func (r *GetPolicyVersionResponse) ToJsonString() string {
@@ -2448,9 +2932,18 @@ func (r *GetPolicyVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetRoleRequestParams struct {
+	// Role ID, used to specify role. Input either `RoleId` or `RoleName`
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name, used to specify role. Input either `RoleId` or `RoleName`
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type GetRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role ID, used to specify role. Input either `RoleId` or `RoleName`
 	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
 
@@ -2478,16 +2971,18 @@ func (r *GetRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetRoleResponseParams struct {
+	// Role details
+	RoleInfo *RoleInfo `json:"RoleInfo,omitempty" name:"RoleInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Role details
-		RoleInfo *RoleInfo `json:"RoleInfo,omitempty" name:"RoleInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetRoleResponseParams `json:"Response"`
 }
 
 func (r *GetRoleResponse) ToJsonString() string {
@@ -2501,9 +2996,15 @@ func (r *GetRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetSAMLProviderRequestParams struct {
+	// SAML identity provider name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type GetSAMLProviderRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SAML identity provider name
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
@@ -2527,28 +3028,30 @@ func (r *GetSAMLProviderRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetSAMLProviderResponseParams struct {
+	// SAML identity provider name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// SAML identity provider description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Time SAML identity provider created
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Time SAML identity provider last modified
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// SAML identity provider metadata document
+	SAMLMetadata *string `json:"SAMLMetadata,omitempty" name:"SAMLMetadata"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetSAMLProviderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SAML identity provider name
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// SAML identity provider description
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// Time SAML identity provider created
-		CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-		// Time SAML identity provider last modified
-		ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
-
-		// SAML identity provider metadata document
-		SAMLMetadata *string `json:"SAMLMetadata,omitempty" name:"SAMLMetadata"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetSAMLProviderResponseParams `json:"Response"`
 }
 
 func (r *GetSAMLProviderResponse) ToJsonString() string {
@@ -2562,9 +3065,15 @@ func (r *GetSAMLProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetSecurityLastUsedRequestParams struct {
+	// Key ID list query. Up to 10 key IDs can be queried.
+	SecretIdList []*string `json:"SecretIdList,omitempty" name:"SecretIdList"`
+}
+
 type GetSecurityLastUsedRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Key ID list query. Up to 10 key IDs can be queried.
 	SecretIdList []*string `json:"SecretIdList,omitempty" name:"SecretIdList"`
 }
@@ -2588,16 +3097,18 @@ func (r *GetSecurityLastUsedRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetSecurityLastUsedResponseParams struct {
+	// List of key ID’s recent usage records.
+	SecretIdLastUsedRows []*SecretIdLastUsed `json:"SecretIdLastUsedRows,omitempty" name:"SecretIdLastUsedRows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetSecurityLastUsedResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of key ID’s recent usage records.
-		SecretIdLastUsedRows []*SecretIdLastUsed `json:"SecretIdLastUsedRows,omitempty" name:"SecretIdLastUsedRows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetSecurityLastUsedResponseParams `json:"Response"`
 }
 
 func (r *GetSecurityLastUsedResponse) ToJsonString() string {
@@ -2611,9 +3122,15 @@ func (r *GetSecurityLastUsedResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetServiceLinkedRoleDeletionStatusRequestParams struct {
+	// Deletion task ID
+	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
+}
+
 type GetServiceLinkedRoleDeletionStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Deletion task ID
 	DeletionTaskId *string `json:"DeletionTaskId,omitempty" name:"DeletionTaskId"`
 }
@@ -2637,27 +3154,29 @@ func (r *GetServiceLinkedRoleDeletionStatusRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetServiceLinkedRoleDeletionStatusResponseParams struct {
+	// Status: NOT_STARTED, IN_PROGRESS, SUCCEEDED, FAILED
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Reasons why the deletion failed.
+	Reason *string `json:"Reason,omitempty" name:"Reason"`
+
+	// Service type
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Service name
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetServiceLinkedRoleDeletionStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Status: NOT_STARTED, IN_PROGRESS, SUCCEEDED, FAILED
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// Reasons why the deletion failed.
-		Reason *string `json:"Reason,omitempty" name:"Reason"`
-
-		// Service type
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
-
-		// Service name
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetServiceLinkedRoleDeletionStatusResponseParams `json:"Response"`
 }
 
 func (r *GetServiceLinkedRoleDeletionStatusResponse) ToJsonString() string {
@@ -2671,8 +3190,14 @@ func (r *GetServiceLinkedRoleDeletionStatusResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetUserAppIdRequestParams struct {
+
+}
+
 type GetUserAppIdRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *GetUserAppIdRequest) ToJsonString() string {
@@ -2687,28 +3212,31 @@ func (r *GetUserAppIdRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetUserAppIdRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetUserAppIdResponseParams struct {
+	// UIN of the current account.
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// OwnerUin of the current account.
+	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
+
+	// AppId of the current account.
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetUserAppIdResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// UIN of the current account.
-		Uin *string `json:"Uin,omitempty" name:"Uin"`
-
-		// OwnerUin of the current account.
-		OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
-
-		// AppId of the current account.
-		AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetUserAppIdResponseParams `json:"Response"`
 }
 
 func (r *GetUserAppIdResponse) ToJsonString() string {
@@ -2722,9 +3250,15 @@ func (r *GetUserAppIdResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetUserRequestParams struct {
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type GetUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-user username
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
@@ -2748,38 +3282,40 @@ func (r *GetUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetUserResponseParams struct {
+	// Sub-user UIN
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sub-user UID
+	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
+
+	// Sub-user remarks
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether the sub-user can log in to the console. `0`: No; `1`: Yes.
+	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// Mobile number
+	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+
+	// Country/Area code
+	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+
+	// Email
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Sub-user UIN
-		Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
-
-		// Sub-user username
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// Sub-user UID
-		Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
-
-		// Sub-user remarks
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-		Remark *string `json:"Remark,omitempty" name:"Remark"`
-
-		// Whether the sub-user can log in to the console. `0`: No; `1`: Yes.
-		ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
-
-		// Mobile number
-		PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
-
-		// Country/Area code
-		CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
-
-		// Email
-		Email *string `json:"Email,omitempty" name:"Email"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetUserResponseParams `json:"Response"`
 }
 
 func (r *GetUserResponse) ToJsonString() string {
@@ -2794,7 +3330,6 @@ func (r *GetUserResponse) FromJsonString(s string) error {
 }
 
 type GroupIdOfUidInfo struct {
-
 	// User Group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -2806,7 +3341,6 @@ type GroupIdOfUidInfo struct {
 }
 
 type GroupInfo struct {
-
 	// User group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -2821,7 +3355,6 @@ type GroupInfo struct {
 }
 
 type GroupMemberInfo struct {
-
 	// Sub-user UID
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
@@ -2856,9 +3389,15 @@ type GroupMemberInfo struct {
 	IsReceiverOwner *uint64 `json:"IsReceiverOwner,omitempty" name:"IsReceiverOwner"`
 }
 
+// Predefined struct for user
+type ListAccessKeysRequestParams struct {
+	// `UIN` of the specified user. If this parameter is left empty, access keys of the current user will be listed by default
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
 type ListAccessKeysRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `UIN` of the specified user. If this parameter is left empty, access keys of the current user will be listed by default
 	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 }
@@ -2882,17 +3421,19 @@ func (r *ListAccessKeysRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAccessKeysResponseParams struct {
+	// Access key list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AccessKeys []*AccessKey `json:"AccessKeys,omitempty" name:"AccessKeys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAccessKeysResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Access key list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		AccessKeys []*AccessKey `json:"AccessKeys,omitempty" name:"AccessKeys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAccessKeysResponseParams `json:"Response"`
 }
 
 func (r *ListAccessKeysResponse) ToJsonString() string {
@@ -2906,9 +3447,24 @@ func (r *ListAccessKeysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedGroupPoliciesRequestParams struct {
+	// User group ID
+	TargetGroupId *uint64 `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
+
+	// Page number, which starts from 1. Default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page; 20 by default
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Search by keyword
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
 type ListAttachedGroupPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User group ID
 	TargetGroupId *uint64 `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
 
@@ -2944,19 +3500,21 @@ func (r *ListAttachedGroupPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedGroupPoliciesResponseParams struct {
+	// Total number of policies
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Policy list
+	List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAttachedGroupPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of policies
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Policy list
-		List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAttachedGroupPoliciesResponseParams `json:"Response"`
 }
 
 func (r *ListAttachedGroupPoliciesResponse) ToJsonString() string {
@@ -2970,9 +3528,30 @@ func (r *ListAttachedGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedRolePoliciesRequestParams struct {
+	// Page number, beginning from 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of lines per page, no more than 200
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Filter according to policy type. `User` indicates querying custom policies only. `QCS` indicates querying preset policies only
+	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
+
+	// Search by keyword
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
 type ListAttachedRolePoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Page number, beginning from 1
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
@@ -3016,19 +3595,21 @@ func (r *ListAttachedRolePoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedRolePoliciesResponseParams struct {
+	// List of policies associated with the role
+	List []*AttachedPolicyOfRole `json:"List,omitempty" name:"List"`
+
+	// Total number of policies associated with the role
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAttachedRolePoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of policies associated with the role
-		List []*AttachedPolicyOfRole `json:"List,omitempty" name:"List"`
-
-		// Total number of policies associated with the role
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAttachedRolePoliciesResponseParams `json:"Response"`
 }
 
 func (r *ListAttachedRolePoliciesResponse) ToJsonString() string {
@@ -3042,9 +3623,30 @@ func (r *ListAttachedRolePoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedUserAllPoliciesRequestParams struct {
+	// Target user ID.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+
+	// The number of policies displayed on each page. Value range: 1-200.
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Page number. Value range: 1-200.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// `0`: return policies that are directly associated and inherited from the user group; `1`: return policies that are directly associated; `2`: return policies inherited from the user group.
+	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+
+	// Policy type.
+	StrategyType *uint64 `json:"StrategyType,omitempty" name:"StrategyType"`
+
+	// Keyword for searching.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
 type ListAttachedUserAllPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Target user ID.
 	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 
@@ -3088,19 +3690,21 @@ func (r *ListAttachedUserAllPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedUserAllPoliciesResponseParams struct {
+	// Policy list.
+	PolicyList []*AttachedUserPolicy `json:"PolicyList,omitempty" name:"PolicyList"`
+
+	// Total number of policies.
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAttachedUserAllPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy list.
-		PolicyList []*AttachedUserPolicy `json:"PolicyList,omitempty" name:"PolicyList"`
-
-		// Total number of policies.
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAttachedUserAllPoliciesResponseParams `json:"Response"`
 }
 
 func (r *ListAttachedUserAllPoliciesResponse) ToJsonString() string {
@@ -3114,9 +3718,21 @@ func (r *ListAttachedUserAllPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedUserPoliciesRequestParams struct {
+	// Sub-account UIN
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+
+	// Page number, which starts from 1. Default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page; 20 by default
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+}
+
 type ListAttachedUserPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-account UIN
 	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
 
@@ -3148,19 +3764,21 @@ func (r *ListAttachedUserPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAttachedUserPoliciesResponseParams struct {
+	// Total number of policies
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Policy list
+	List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAttachedUserPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of policies
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Policy list
-		List []*AttachPolicyInfo `json:"List,omitempty" name:"List"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAttachedUserPoliciesResponseParams `json:"Response"`
 }
 
 func (r *ListAttachedUserPoliciesResponse) ToJsonString() string {
@@ -3174,9 +3792,18 @@ func (r *ListAttachedUserPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCollaboratorsRequestParams struct {
+	// Number of entries per page. Default value: 20
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination start value. Default value: 0
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type ListCollaboratorsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of entries per page. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -3204,19 +3831,21 @@ func (r *ListCollaboratorsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCollaboratorsResponseParams struct {
+	// Total number
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Collaborator information
+	Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListCollaboratorsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Collaborator information
-		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListCollaboratorsResponseParams `json:"Response"`
 }
 
 func (r *ListCollaboratorsResponse) ToJsonString() string {
@@ -3230,9 +3859,24 @@ func (r *ListCollaboratorsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEntitiesForPolicyRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Page number, which starts from 1. Default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page; 20 by default
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Valid values: `All`, `User`, `Group`, and `Role`. `All` means all entity types will be returned; `User` means only sub-accounts will be returned; `Group` means only User Groups will be returned; `Role` means only roles will be returned. `All` is the default value.
+	EntityFilter *string `json:"EntityFilter,omitempty" name:"EntityFilter"`
+}
+
 type ListEntitiesForPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -3268,21 +3912,23 @@ func (r *ListEntitiesForPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEntitiesForPolicyResponseParams struct {
+	// Number of entities
+	// Note: This field may return null, indicating that no valid value was found.
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Entity list
+	// Note: This field may return null, indicating that no valid value was found.
+	List []*AttachEntityOfPolicy `json:"List,omitempty" name:"List"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListEntitiesForPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of entities
-	// Note: This field may return null, indicating that no valid value was found.
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Entity list
-	// Note: This field may return null, indicating that no valid value was found.
-		List []*AttachEntityOfPolicy `json:"List,omitempty" name:"List"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListEntitiesForPolicyResponseParams `json:"Response"`
 }
 
 func (r *ListEntitiesForPolicyResponse) ToJsonString() string {
@@ -3296,9 +3942,24 @@ func (r *ListEntitiesForPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListGroupsForUserRequestParams struct {
+	// Sub-user UID
+	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
+
+	// Number of entries per page; default is 20
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Page number; default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Sub-account UIN
+	SubUin *uint64 `json:"SubUin,omitempty" name:"SubUin"`
+}
+
 type ListGroupsForUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-user UID
 	Uid *uint64 `json:"Uid,omitempty" name:"Uid"`
 
@@ -3334,19 +3995,21 @@ func (r *ListGroupsForUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListGroupsForUserResponseParams struct {
+	// Total number of User Groups to which the sub-user has been added
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// User Group information
+	GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListGroupsForUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of User Groups to which the sub-user has been added
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// User Group information
-		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListGroupsForUserResponseParams `json:"Response"`
 }
 
 func (r *ListGroupsForUserResponse) ToJsonString() string {
@@ -3360,9 +4023,21 @@ func (r *ListGroupsForUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListGroupsRequestParams struct {
+	// Page number; default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page; default is 20
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Filter by User Group name
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
 type ListGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Page number; default is 1
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
@@ -3394,19 +4069,21 @@ func (r *ListGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListGroupsResponseParams struct {
+	// Total number of User Groups
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// User group information array
+	GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of User Groups
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// User group information array
-		GroupInfo []*GroupInfo `json:"GroupInfo,omitempty" name:"GroupInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListGroupsResponseParams `json:"Response"`
 }
 
 func (r *ListGroupsResponse) ToJsonString() string {
@@ -3420,9 +4097,24 @@ func (r *ListGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListPoliciesRequestParams struct {
+	// Number of entries per page: must be greater than 0 and no greater than 200. Default is 20
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+
+	// Page number. Starts from 1 and cannot be greater than 200. Default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Valid values: `All`, `QCS`, and `Local`. `All` means all policies will be returned; `QCS` means only preset policies will be returned; `Local` means only custom policies will be returned. `All` is the default value
+	Scope *string `json:"Scope,omitempty" name:"Scope"`
+
+	// Filter by policy name
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
 type ListPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Number of entries per page: must be greater than 0 and no greater than 200. Default is 20
 	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
 
@@ -3458,14 +4150,12 @@ func (r *ListPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ListPoliciesResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
+// Predefined struct for user
+type ListPoliciesResponseParams struct {
+	// Total number of policies
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
 
-		// Total number of policies
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Policy array. Each array contains fields including `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode`. 
+	// Policy array. Each array contains fields including `policyId`, `policyName`, `addTime`, `type`, `description`, and `createMode`. 
 	// policyId: policy ID 
 	// policyName: policy name
 	// addTime: policy creation time
@@ -3475,15 +4165,19 @@ type ListPoliciesResponse struct {
 	// Attachments: number of associated users
 	// ServiceType: the product the policy is associated with
 	// IsAttached: this value should not be null when querying if a marked entity has been associated with a policy. 0 indicates that no policy has been associated, and 1 indicates that a policy has been associated
-		List []*StrategyInfo `json:"List,omitempty" name:"List"`
+	List []*StrategyInfo `json:"List,omitempty" name:"List"`
 
-		// Reserved field
+	// Reserved field
 	// Note: This field may return null, indicating that no valid value was found.
-		ServiceTypeList []*string `json:"ServiceTypeList,omitempty" name:"ServiceTypeList"`
+	ServiceTypeList []*string `json:"ServiceTypeList,omitempty" name:"ServiceTypeList"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ListPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *ListPoliciesResponseParams `json:"Response"`
 }
 
 func (r *ListPoliciesResponse) ToJsonString() string {
@@ -3497,9 +4191,15 @@ func (r *ListPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListPolicyVersionsRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type ListPolicyVersionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 }
@@ -3523,17 +4223,19 @@ func (r *ListPolicyVersionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListPolicyVersionsResponseParams struct {
+	// Policy version list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Versions []*PolicyVersionItem `json:"Versions,omitempty" name:"Versions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListPolicyVersionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy version list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Versions []*PolicyVersionItem `json:"Versions,omitempty" name:"Versions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListPolicyVersionsResponseParams `json:"Response"`
 }
 
 func (r *ListPolicyVersionsResponse) ToJsonString() string {
@@ -3547,8 +4249,14 @@ func (r *ListPolicyVersionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListSAMLProvidersRequestParams struct {
+
+}
+
 type ListSAMLProvidersRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ListSAMLProvidersRequest) ToJsonString() string {
@@ -3563,25 +4271,28 @@ func (r *ListSAMLProvidersRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSAMLProvidersRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListSAMLProvidersResponseParams struct {
+	// Total number of SAML identity providers
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of SAML identity providers
+	SAMLProviderSet []*SAMLProviderInfo `json:"SAMLProviderSet,omitempty" name:"SAMLProviderSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListSAMLProvidersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of SAML identity providers
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of SAML identity providers
-		SAMLProviderSet []*SAMLProviderInfo `json:"SAMLProviderSet,omitempty" name:"SAMLProviderSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListSAMLProvidersResponseParams `json:"Response"`
 }
 
 func (r *ListSAMLProvidersResponse) ToJsonString() string {
@@ -3595,9 +4306,21 @@ func (r *ListSAMLProvidersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListUsersForGroupRequestParams struct {
+	// User group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Page number; default is 1
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page; default is 20
+	Rp *uint64 `json:"Rp,omitempty" name:"Rp"`
+}
+
 type ListUsersForGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -3629,19 +4352,21 @@ func (r *ListUsersForGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListUsersForGroupResponseParams struct {
+	// Total number of users associated with the User Group
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// Sub-user information
+	UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListUsersForGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of users associated with the User Group
-		TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
-
-		// Sub-user information
-		UserInfo []*GroupMemberInfo `json:"UserInfo,omitempty" name:"UserInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListUsersForGroupResponseParams `json:"Response"`
 }
 
 func (r *ListUsersForGroupResponse) ToJsonString() string {
@@ -3655,8 +4380,14 @@ func (r *ListUsersForGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListUsersRequestParams struct {
+
+}
+
 type ListUsersRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ListUsersRequest) ToJsonString() string {
@@ -3671,22 +4402,25 @@ func (r *ListUsersRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListUsersRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListUsersResponseParams struct {
+	// Sub-user information
+	Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListUsersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Sub-user information
-		Data []*SubAccountInfo `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListUsersResponseParams `json:"Response"`
 }
 
 func (r *ListUsersResponse) ToJsonString() string {
@@ -3701,7 +4435,6 @@ func (r *ListUsersResponse) FromJsonString(s string) error {
 }
 
 type LoginActionFlag struct {
-
 	// Phone
 	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
 
@@ -3719,7 +4452,6 @@ type LoginActionFlag struct {
 }
 
 type LoginActionFlagIntl struct {
-
 	// Mobile number
 	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
 
@@ -3740,7 +4472,6 @@ type LoginActionFlagIntl struct {
 }
 
 type LoginActionMfaFlag struct {
-
 	// Mobile phone
 	Phone *uint64 `json:"Phone,omitempty" name:"Phone"`
 
@@ -3752,7 +4483,6 @@ type LoginActionMfaFlag struct {
 }
 
 type OffsiteFlag struct {
-
 	// Verification flag
 	VerifyFlag *uint64 `json:"VerifyFlag,omitempty" name:"VerifyFlag"`
 
@@ -3770,7 +4500,6 @@ type OffsiteFlag struct {
 }
 
 type PolicyVersionDetail struct {
-
 	// Policy version ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
@@ -3789,7 +4518,6 @@ type PolicyVersionDetail struct {
 }
 
 type PolicyVersionItem struct {
-
 	// Policy version ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
@@ -3803,9 +4531,21 @@ type PolicyVersionItem struct {
 	IsDefaultVersion *int64 `json:"IsDefaultVersion,omitempty" name:"IsDefaultVersion"`
 }
 
+// Predefined struct for user
+type PutRolePermissionsBoundaryRequestParams struct {
+	// Policy ID
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Role ID (either it or the role name must be entered)
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name (either it or the role ID must be entered)
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type PutRolePermissionsBoundaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -3837,13 +4577,15 @@ func (r *PutRolePermissionsBoundaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PutRolePermissionsBoundaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PutRolePermissionsBoundaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PutRolePermissionsBoundaryResponseParams `json:"Response"`
 }
 
 func (r *PutRolePermissionsBoundaryResponse) ToJsonString() string {
@@ -3857,9 +4599,18 @@ func (r *PutRolePermissionsBoundaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PutUserPermissionsBoundaryRequestParams struct {
+	// Sub-account `Uin`
+	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
+
+	// Policy ID
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+}
+
 type PutUserPermissionsBoundaryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-account `Uin`
 	TargetUin *int64 `json:"TargetUin,omitempty" name:"TargetUin"`
 
@@ -3887,13 +4638,15 @@ func (r *PutUserPermissionsBoundaryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PutUserPermissionsBoundaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PutUserPermissionsBoundaryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PutUserPermissionsBoundaryResponseParams `json:"Response"`
 }
 
 func (r *PutUserPermissionsBoundaryResponse) ToJsonString() string {
@@ -3907,9 +4660,15 @@ func (r *PutUserPermissionsBoundaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveUserFromGroupRequestParams struct {
+	// The user’s UIN/UID to be deleted and the array corresponding to the user group ID.
+	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
+}
+
 type RemoveUserFromGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The user’s UIN/UID to be deleted and the array corresponding to the user group ID.
 	Info []*GroupIdOfUidInfo `json:"Info,omitempty" name:"Info"`
 }
@@ -3933,13 +4692,15 @@ func (r *RemoveUserFromGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RemoveUserFromGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RemoveUserFromGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RemoveUserFromGroupResponseParams `json:"Response"`
 }
 
 func (r *RemoveUserFromGroupResponse) ToJsonString() string {
@@ -3954,7 +4715,6 @@ func (r *RemoveUserFromGroupResponse) FromJsonString(s string) error {
 }
 
 type RoleInfo struct {
-
 	// Role ID
 	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
 
@@ -3994,7 +4754,6 @@ type RoleInfo struct {
 }
 
 type RoleTags struct {
-
 	// Tag key.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -4003,7 +4762,6 @@ type RoleTags struct {
 }
 
 type SAMLProviderInfo struct {
-
 	// SAML identity provider name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4018,7 +4776,6 @@ type SAMLProviderInfo struct {
 }
 
 type SecretIdLastUsed struct {
-
 	// Key ID.
 	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
 
@@ -4027,9 +4784,18 @@ type SecretIdLastUsed struct {
 	LastUsedDate *string `json:"LastUsedDate,omitempty" name:"LastUsedDate"`
 }
 
+// Predefined struct for user
+type SetDefaultPolicyVersionRequestParams struct {
+	// Policy ID
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy version, which can be obtained through `ListPolicyVersions`.
+	VersionId *uint64 `json:"VersionId,omitempty" name:"VersionId"`
+}
+
 type SetDefaultPolicyVersionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -4057,13 +4823,15 @@ func (r *SetDefaultPolicyVersionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetDefaultPolicyVersionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetDefaultPolicyVersionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetDefaultPolicyVersionResponseParams `json:"Response"`
 }
 
 func (r *SetDefaultPolicyVersionResponse) ToJsonString() string {
@@ -4077,9 +4845,21 @@ func (r *SetDefaultPolicyVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetMfaFlagRequestParams struct {
+	// Sets user UIN
+	OpUin *uint64 `json:"OpUin,omitempty" name:"OpUin"`
+
+	// Sets login protection
+	LoginFlag *LoginActionMfaFlag `json:"LoginFlag,omitempty" name:"LoginFlag"`
+
+	// Sets operation protection
+	ActionFlag *LoginActionMfaFlag `json:"ActionFlag,omitempty" name:"ActionFlag"`
+}
+
 type SetMfaFlagRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sets user UIN
 	OpUin *uint64 `json:"OpUin,omitempty" name:"OpUin"`
 
@@ -4111,13 +4891,15 @@ func (r *SetMfaFlagRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetMfaFlagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetMfaFlagResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetMfaFlagResponseParams `json:"Response"`
 }
 
 func (r *SetMfaFlagResponse) ToJsonString() string {
@@ -4132,7 +4914,6 @@ func (r *SetMfaFlagResponse) FromJsonString(s string) error {
 }
 
 type StrategyInfo struct {
-
 	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -4189,7 +4970,6 @@ type StrategyInfo struct {
 }
 
 type SubAccountInfo struct {
-
 	// Sub-user user ID
 	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
 
@@ -4224,7 +5004,6 @@ type SubAccountInfo struct {
 }
 
 type SubAccountUser struct {
-
 	// Sub-user ID
 	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
 
@@ -4244,16 +5023,28 @@ type SubAccountUser struct {
 	// User type (1: root account; 2: sub-user; 3: WeCom sub-user; 4: collaborator; 5: message recipient)
 	UserType *uint64 `json:"UserType,omitempty" name:"UserType"`
 
-	// 
+
 	LastLoginIp *string `json:"LastLoginIp,omitempty" name:"LastLoginIp"`
 
-	// 
+
 	LastLoginTime *string `json:"LastLoginTime,omitempty" name:"LastLoginTime"`
+}
+
+// Predefined struct for user
+type TagRoleRequestParams struct {
+	// Tag.
+	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
+
+	// Role name. Specify either the role name or role ID.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Role ID. Specify either the role ID or role name.
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
 }
 
 type TagRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag.
 	Tags []*RoleTags `json:"Tags,omitempty" name:"Tags"`
 
@@ -4285,13 +5076,15 @@ func (r *TagRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TagRoleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TagRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TagRoleResponseParams `json:"Response"`
 }
 
 func (r *TagRoleResponse) ToJsonString() string {
@@ -4305,9 +5098,21 @@ func (r *TagRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UntagRoleRequestParams struct {
+	// Tag key.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Role name. Specify either the role name or role ID.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+
+	// Role ID. Specify either the role ID or role name.
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+}
+
 type UntagRoleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tag key.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
@@ -4339,13 +5144,15 @@ func (r *UntagRoleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UntagRoleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UntagRoleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UntagRoleResponseParams `json:"Response"`
 }
 
 func (r *UntagRoleResponse) ToJsonString() string {
@@ -4359,9 +5166,21 @@ func (r *UntagRoleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateAssumeRolePolicyRequestParams struct {
+	// Policy document
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type UpdateAssumeRolePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy document
 	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
 
@@ -4393,13 +5212,15 @@ func (r *UpdateAssumeRolePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateAssumeRolePolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateAssumeRolePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateAssumeRolePolicyResponseParams `json:"Response"`
 }
 
 func (r *UpdateAssumeRolePolicyResponse) ToJsonString() string {
@@ -4413,9 +5234,21 @@ func (r *UpdateAssumeRolePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateGroupRequestParams struct {
+	// User Group ID
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// User Group name
+	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+
+	// User Group description
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type UpdateGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User Group ID
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -4447,13 +5280,15 @@ func (r *UpdateGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateGroupResponseParams `json:"Response"`
 }
 
 func (r *UpdateGroupResponse) ToJsonString() string {
@@ -4467,9 +5302,27 @@ func (r *UpdateGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateOIDCConfigRequestParams struct {
+	// IdP URL.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Public key for signature, which must be Base64-encoded.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID.
+	ClientId []*string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type UpdateOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// IdP URL.
 	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
 
@@ -4509,13 +5362,15 @@ func (r *UpdateOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateOIDCConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *UpdateOIDCConfigResponse) ToJsonString() string {
@@ -4529,9 +5384,27 @@ func (r *UpdateOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePolicyRequestParams struct {
+	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// Policy name. Either `PolicyName` or `PolicyId` must be entered
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Policy description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Policy documentation, for example: `{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}`, where `principal` is used to specify the service that is authorized to use the role. For more information about this parameter, see **RoleInfo** under **Output Parameters** in the [GetRole](https://intl.cloud.tencent.com/document/product/598/36221?from_cn_redirect=1).
+	PolicyDocument *string `json:"PolicyDocument,omitempty" name:"PolicyDocument"`
+
+	// Preset policy remark
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+}
+
 type UpdatePolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
@@ -4571,17 +5444,19 @@ func (r *UpdatePolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdatePolicyResponseParams struct {
+	// Policy ID, which will be returned only if the input parameter is `PolicyName`
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdatePolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Policy ID, which will be returned only if the input parameter is `PolicyName`
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdatePolicyResponseParams `json:"Response"`
 }
 
 func (r *UpdatePolicyResponse) ToJsonString() string {
@@ -4595,9 +5470,21 @@ func (r *UpdatePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRoleConsoleLoginRequestParams struct {
+	// Whether login is allowed. 1: yes, 0: no
+	ConsoleLogin *int64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// Role ID. Use either `RoleId` or `RoleName` as the input parameter.
+	RoleId *int64 `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name. Use either `RoleId` or `RoleName` as the input parameter.
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type UpdateRoleConsoleLoginRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Whether login is allowed. 1: yes, 0: no
 	ConsoleLogin *int64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
 
@@ -4629,13 +5516,15 @@ func (r *UpdateRoleConsoleLoginRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRoleConsoleLoginResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateRoleConsoleLoginResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateRoleConsoleLoginResponseParams `json:"Response"`
 }
 
 func (r *UpdateRoleConsoleLoginResponse) ToJsonString() string {
@@ -4649,9 +5538,21 @@ func (r *UpdateRoleConsoleLoginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRoleDescriptionRequestParams struct {
+	// Role description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Role ID, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleId *string `json:"RoleId,omitempty" name:"RoleId"`
+
+	// Role name, used to specify a role. Input either `RoleId` or `RoleName`
+	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
+}
+
 type UpdateRoleDescriptionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Role description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
@@ -4683,13 +5584,15 @@ func (r *UpdateRoleDescriptionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRoleDescriptionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateRoleDescriptionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateRoleDescriptionResponseParams `json:"Response"`
 }
 
 func (r *UpdateRoleDescriptionResponse) ToJsonString() string {
@@ -4703,9 +5606,21 @@ func (r *UpdateRoleDescriptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateSAMLProviderRequestParams struct {
+	// SAML identity provider name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// SAML identity provider description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// SAML identity provider metadata document (Base64)
+	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
+}
+
 type UpdateSAMLProviderRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// SAML identity provider name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4737,13 +5652,15 @@ func (r *UpdateSAMLProviderRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateSAMLProviderResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateSAMLProviderResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateSAMLProviderResponseParams `json:"Response"`
 }
 
 func (r *UpdateSAMLProviderResponse) ToJsonString() string {
@@ -4757,9 +5674,40 @@ func (r *UpdateSAMLProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserOIDCConfigRequestParams struct {
+	// OpenID Connect IdP URL.
+	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
+	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
+
+	// Signature public key, which is used to verify the OpenID Connect IdP's ID token and must be Base64-encoded. For the security of your account, we recommend you rotate it regularly.
+	IdentityKey *string `json:"IdentityKey,omitempty" name:"IdentityKey"`
+
+	// Client ID registered with the OpenID Connect IdP.
+	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+
+	// OpenID Connect IdP authorization endpoint. It corresponds to the value of the `authorization_endpoint` field in the `Openid-configuration` provided by the enterprise IdP.
+	AuthorizationEndpoint *string `json:"AuthorizationEndpoint,omitempty" name:"AuthorizationEndpoint"`
+
+	// Authorization response type, which is always `id_token`.
+	ResponseType *string `json:"ResponseType,omitempty" name:"ResponseType"`
+
+	// Authorization response mode. Valid values: form_post (recommended); fragment.
+	ResponseMode *string `json:"ResponseMode,omitempty" name:"ResponseMode"`
+
+	// Mapping field name. It indicates which field in the `id_token` of the IdP is mapped to the username of a sub-user. It is usually the `sub` or `name` field
+	MappingFiled *string `json:"MappingFiled,omitempty" name:"MappingFiled"`
+
+	// Authorization information scope. Valid values: openid (default); email; profile.
+	Scope []*string `json:"Scope,omitempty" name:"Scope"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type UpdateUserOIDCConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// OpenID Connect IdP URL.
 	// It corresponds to the value of the `issuer` field in the `Openid-configuration` provided by the enterprise IdP.
 	IdentityUrl *string `json:"IdentityUrl,omitempty" name:"IdentityUrl"`
@@ -4816,13 +5764,15 @@ func (r *UpdateUserOIDCConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserOIDCConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateUserOIDCConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateUserOIDCConfigResponseParams `json:"Response"`
 }
 
 func (r *UpdateUserOIDCConfigResponse) ToJsonString() string {
@@ -4836,9 +5786,36 @@ func (r *UpdateUserOIDCConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserRequestParams struct {
+	// Sub-user username
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sub-user remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether or not the sub-user is allowed to log in to the console. 0: No; 1: Yes.
+	ConsoleLogin *uint64 `json:"ConsoleLogin,omitempty" name:"ConsoleLogin"`
+
+	// Sub-user's console login password. If no password rules have been set, the password must have a minimum of 8 characters containing uppercase letters, lowercase letters, digits, and special characters by default. This parameter will be valid only when the sub-user is allowed to log in to the console. If it is not specified and console login is allowed, the system will automatically generate a random 32-character password that contains uppercase letters, lowercase letters, digits, and special characters.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// If the sub-user needs to reset their password when they next log in to the console. 0: No; 1: Yes.
+	NeedResetPassword *uint64 `json:"NeedResetPassword,omitempty" name:"NeedResetPassword"`
+
+	// Mobile number
+	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+
+	// Country/Area Code
+	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+
+	// Email
+	Email *string `json:"Email,omitempty" name:"Email"`
+}
+
 type UpdateUserRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sub-user username
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4890,13 +5867,15 @@ func (r *UpdateUserRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateUserResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateUserResponseParams `json:"Response"`
 }
 
 func (r *UpdateUserResponse) ToJsonString() string {
@@ -4910,9 +5889,18 @@ func (r *UpdateUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserSAMLConfigRequestParams struct {
+	// Type of the modification operation. `enable`: enable, `disable`: disable, `updateSAML`: modify metadata document.
+	Operate *string `json:"Operate,omitempty" name:"Operate"`
+
+	// Metadata document, which must be Base64 encoded. This parameter is required only when the value of `Operate` is `updateSAML`.
+	SAMLMetadataDocument *string `json:"SAMLMetadataDocument,omitempty" name:"SAMLMetadataDocument"`
+}
+
 type UpdateUserSAMLConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Type of the modification operation. `enable`: enable, `disable`: disable, `updateSAML`: modify metadata document.
 	Operate *string `json:"Operate,omitempty" name:"Operate"`
 
@@ -4940,13 +5928,15 @@ func (r *UpdateUserSAMLConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateUserSAMLConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateUserSAMLConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateUserSAMLConfigResponseParams `json:"Response"`
 }
 
 func (r *UpdateUserSAMLConfigResponse) ToJsonString() string {

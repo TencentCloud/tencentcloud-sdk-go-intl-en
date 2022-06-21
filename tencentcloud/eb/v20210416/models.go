@@ -21,7 +21,6 @@ import (
 )
 
 type APIGWParams struct {
-
 	// HTTPS
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
@@ -29,9 +28,18 @@ type APIGWParams struct {
 	Method *string `json:"Method,omitempty" name:"Method"`
 }
 
+// Predefined struct for user
+type CheckTransformationRequestParams struct {
+	// JSON string to be processed
+	Input *string `json:"Input,omitempty" name:"Input"`
+
+	// Transformation rule list
+	Transformations []*Transformation `json:"Transformations,omitempty" name:"Transformations"`
+}
+
 type CheckTransformationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// JSON string to be processed
 	Input *string `json:"Input,omitempty" name:"Input"`
 
@@ -59,16 +67,18 @@ func (r *CheckTransformationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CheckTransformationResponseParams struct {
+	// Data processed by `Transformations`
+	Output *string `json:"Output,omitempty" name:"Output"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CheckTransformationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Data processed by `Transformations`
-		Output *string `json:"Output,omitempty" name:"Output"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CheckTransformationResponseParams `json:"Response"`
 }
 
 func (r *CheckTransformationResponse) ToJsonString() string {
@@ -83,7 +93,6 @@ func (r *CheckTransformationResponse) FromJsonString(s string) error {
 }
 
 type CkafkaDeliveryParams struct {
-
 	// ckafka topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -92,7 +101,6 @@ type CkafkaDeliveryParams struct {
 }
 
 type CkafkaParams struct {
-
 	// kafka offset
 	Offset *string `json:"Offset,omitempty" name:"Offset"`
 
@@ -101,7 +109,6 @@ type CkafkaParams struct {
 }
 
 type CkafkaTargetParams struct {
-
 	// CKafka topic to be delivered to
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
@@ -110,7 +117,6 @@ type CkafkaTargetParams struct {
 }
 
 type Connection struct {
-
 	// Status
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -143,7 +149,6 @@ type Connection struct {
 }
 
 type ConnectionDescription struct {
-
 	// Six-Segment QCS resource description. For more information, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	ResourceDescription *string `json:"ResourceDescription,omitempty" name:"ResourceDescription"`
 
@@ -156,9 +161,27 @@ type ConnectionDescription struct {
 	CkafkaParams *CkafkaParams `json:"CkafkaParams,omitempty" name:"CkafkaParams"`
 }
 
+// Predefined struct for user
+type CreateRuleRequestParams struct {
+	// See [Event Pattern](https://intl.cloud.tencent.com/document/product/1359/56084?from_cn_redirect=1)
+	EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
+
+	// Event bus ID.
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Switch.
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Event bus description, which can contain up to 200 characters of any type
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type CreateRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// See [Event Pattern](https://intl.cloud.tencent.com/document/product/1359/56084?from_cn_redirect=1)
 	EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
 
@@ -198,16 +221,18 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateRuleResponseParams struct {
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Event rule ID
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateRuleResponseParams `json:"Response"`
 }
 
 func (r *CreateRuleResponse) ToJsonString() string {
@@ -221,9 +246,24 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTargetRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Target type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Target description
+	TargetDescription *TargetDescription `json:"TargetDescription,omitempty" name:"TargetDescription"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type CreateTargetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -259,16 +299,18 @@ func (r *CreateTargetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTargetResponseParams struct {
+	// Target ID
+	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTargetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Target ID
-		TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTargetResponseParams `json:"Response"`
 }
 
 func (r *CreateTargetResponse) ToJsonString() string {
@@ -282,9 +324,21 @@ func (r *CreateTargetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTransformationRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Transformation rule list (currently, only one is supported)
+	Transformations []*Transformation `json:"Transformations,omitempty" name:"Transformations"`
+}
+
 type CreateTransformationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -316,16 +370,18 @@ func (r *CreateTransformationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTransformationResponseParams struct {
+	// Generated transformer ID
+	TransformationId *string `json:"TransformationId,omitempty" name:"TransformationId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTransformationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Generated transformer ID
-		TransformationId *string `json:"TransformationId,omitempty" name:"TransformationId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTransformationResponseParams `json:"Response"`
 }
 
 func (r *CreateTransformationResponse) ToJsonString() string {
@@ -340,7 +396,6 @@ func (r *CreateTransformationResponse) FromJsonString(s string) error {
 }
 
 type DeadLetterConfig struct {
-
 	// Three modes are supported: DLQ, drop, and ignore error, which correspond to `DLQ`, `DROP`, and `IGNORE_ERROR` respectively
 	DisposeMethod *string `json:"DisposeMethod,omitempty" name:"DisposeMethod"`
 
@@ -349,9 +404,18 @@ type DeadLetterConfig struct {
 	CkafkaDeliveryParams *CkafkaDeliveryParams `json:"CkafkaDeliveryParams,omitempty" name:"CkafkaDeliveryParams"`
 }
 
+// Predefined struct for user
+type DeleteConnectionRequestParams struct {
+	// Connector ID
+	ConnectionId *string `json:"ConnectionId,omitempty" name:"ConnectionId"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+}
+
 type DeleteConnectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connector ID
 	ConnectionId *string `json:"ConnectionId,omitempty" name:"ConnectionId"`
 
@@ -379,13 +443,15 @@ func (r *DeleteConnectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteConnectionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteConnectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteConnectionResponseParams `json:"Response"`
 }
 
 func (r *DeleteConnectionResponse) ToJsonString() string {
@@ -399,9 +465,15 @@ func (r *DeleteConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEventBusRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+}
+
 type DeleteEventBusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 }
@@ -425,13 +497,15 @@ func (r *DeleteEventBusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteEventBusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteEventBusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteEventBusResponseParams `json:"Response"`
 }
 
 func (r *DeleteEventBusResponse) ToJsonString() string {
@@ -445,9 +519,18 @@ func (r *DeleteEventBusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type DeleteRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -475,13 +558,15 @@ func (r *DeleteRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteRuleResponseParams `json:"Response"`
 }
 
 func (r *DeleteRuleResponse) ToJsonString() string {
@@ -495,9 +580,21 @@ func (r *DeleteRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTargetRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Delivery target ID
+	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type DeleteTargetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -529,13 +626,15 @@ func (r *DeleteTargetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTargetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTargetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTargetResponseParams `json:"Response"`
 }
 
 func (r *DeleteTargetResponse) ToJsonString() string {
@@ -549,9 +648,21 @@ func (r *DeleteTargetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTransformationRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Transformer ID
+	TransformationId *string `json:"TransformationId,omitempty" name:"TransformationId"`
+}
+
 type DeleteTransformationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -583,13 +694,15 @@ func (r *DeleteTransformationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTransformationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTransformationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTransformationResponseParams `json:"Response"`
 }
 
 func (r *DeleteTransformationResponse) ToJsonString() string {
@@ -604,13 +717,11 @@ func (r *DeleteTransformationResponse) FromJsonString(s string) error {
 }
 
 type EtlFilter struct {
-
 	// The syntax is the same as that of `Rule`
 	Filter *string `json:"Filter,omitempty" name:"Filter"`
 }
 
 type EventBus struct {
-
 	// Update time
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
 
@@ -631,7 +742,6 @@ type EventBus struct {
 }
 
 type Extraction struct {
-
 	// JsonPath, which will be `$.` by default if not specified
 	ExtractionInputPath *string `json:"ExtractionInputPath,omitempty" name:"ExtractionInputPath"`
 
@@ -644,7 +754,6 @@ type Extraction struct {
 }
 
 type Filter struct {
-
 	// One or more filter values.
 	Values []*string `json:"Values,omitempty" name:"Values"`
 
@@ -652,9 +761,18 @@ type Filter struct {
 	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
+// Predefined struct for user
+type GetRuleRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type GetRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -682,40 +800,42 @@ func (r *GetRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetRuleResponseParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Event rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Event rule status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Switch
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Event rule description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Event pattern
+	EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
+
+	// Creation time
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Update time
+	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Event bus ID
-		EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
-
-		// Event rule ID
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// Event rule name
-		RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
-
-		// Event rule status
-		Status *string `json:"Status,omitempty" name:"Status"`
-
-		// Switch
-		Enable *bool `json:"Enable,omitempty" name:"Enable"`
-
-		// Event rule description
-		Description *string `json:"Description,omitempty" name:"Description"`
-
-		// Event pattern
-		EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
-
-		// Creation time
-		AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
-
-		// Update time
-		ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetRuleResponseParams `json:"Response"`
 }
 
 func (r *GetRuleResponse) ToJsonString() string {
@@ -729,9 +849,21 @@ func (r *GetRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTransformationRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Transformer ID
+	TransformationId *string `json:"TransformationId,omitempty" name:"TransformationId"`
+}
+
 type GetTransformationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -763,16 +895,18 @@ func (r *GetTransformationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTransformationResponseParams struct {
+	// Transformation rule list
+	Transformations []*Transformation `json:"Transformations,omitempty" name:"Transformations"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetTransformationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Transformation rule list
-		Transformations []*Transformation `json:"Transformations,omitempty" name:"Transformations"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetTransformationResponseParams `json:"Response"`
 }
 
 func (r *GetTransformationResponse) ToJsonString() string {
@@ -786,9 +920,27 @@ func (r *GetTransformationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListConnectionsRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Indicates by which field to sort the returned results. Valid values: AddTime, ModTime
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type ListConnectionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -828,19 +980,21 @@ func (r *ListConnectionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListConnectionsResponseParams struct {
+	// Connector information
+	Connections []*Connection `json:"Connections,omitempty" name:"Connections"`
+
+	// Total number of connectors
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListConnectionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Connector information
-		Connections []*Connection `json:"Connections,omitempty" name:"Connections"`
-
-		// Total number of connectors
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListConnectionsResponseParams `json:"Response"`
 }
 
 func (r *ListConnectionsResponse) ToJsonString() string {
@@ -854,9 +1008,27 @@ func (r *ListConnectionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEventBusesRequestParams struct {
+	// Indicates by which field to sort the returned results. Valid values: AddTime (creation time), ModTime (modification time)
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC (ascending order), DESC (descending order)
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Filter. For more information, see the Instance Filter Table below. Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
 type ListEventBusesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Indicates by which field to sort the returned results. Valid values: AddTime (creation time), ModTime (modification time)
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
@@ -896,19 +1068,21 @@ func (r *ListEventBusesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListEventBusesResponseParams struct {
+	// Event bus information
+	EventBuses []*EventBus `json:"EventBuses,omitempty" name:"EventBuses"`
+
+	// Total number of event buses
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListEventBusesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Event bus information
-		EventBuses []*EventBus `json:"EventBuses,omitempty" name:"EventBuses"`
-
-		// Total number of event buses
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListEventBusesResponseParams `json:"Response"`
 }
 
 func (r *ListEventBusesResponse) ToJsonString() string {
@@ -922,9 +1096,27 @@ func (r *ListEventBusesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListRulesRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Indicates by which field to sort the returned results. Valid values: AddTime (creation time), ModTime (modification time)
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC (ascending order), DESC (descending order)
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 type ListRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -964,19 +1156,21 @@ func (r *ListRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListRulesResponseParams struct {
+	// Event rule information
+	Rules []*Rule `json:"Rules,omitempty" name:"Rules"`
+
+	// Total number of event rules
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Event rule information
-		Rules []*Rule `json:"Rules,omitempty" name:"Rules"`
-
-		// Total number of event rules
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListRulesResponseParams `json:"Response"`
 }
 
 func (r *ListRulesResponse) ToJsonString() string {
@@ -990,9 +1184,30 @@ func (r *ListRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListTargetsRequestParams struct {
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Indicates by which field to sort the returned results. Valid values: AddTime (creation time), ModTime (modification time)
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC (ascending order), DESC (descending order)
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 type ListTargetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -1036,19 +1251,21 @@ func (r *ListTargetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListTargetsResponseParams struct {
+	// Total number of targets
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Target information
+	Targets []*Target `json:"Targets,omitempty" name:"Targets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListTargetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of targets
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Target information
-		Targets []*Target `json:"Targets,omitempty" name:"Targets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListTargetsResponseParams `json:"Response"`
 }
 
 func (r *ListTargetsResponse) ToJsonString() string {
@@ -1063,7 +1280,6 @@ func (r *ListTargetsResponse) FromJsonString(s string) error {
 }
 
 type OutputStructParam struct {
-
 	// Key in the corresponding JSON output
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1075,7 +1291,6 @@ type OutputStructParam struct {
 }
 
 type RetryPolicy struct {
-
 	// Retry interval in seconds
 	RetryInterval *uint64 `json:"RetryInterval,omitempty" name:"RetryInterval"`
 
@@ -1084,7 +1299,6 @@ type RetryPolicy struct {
 }
 
 type Rule struct {
-
 	// Status
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1119,7 +1333,6 @@ type Rule struct {
 }
 
 type SCFParams struct {
-
 	// Maximum waiting time for batch delivery
 	BatchTimeout *int64 `json:"BatchTimeout,omitempty" name:"BatchTimeout"`
 
@@ -1131,7 +1344,6 @@ type SCFParams struct {
 }
 
 type Target struct {
-
 	// Target type
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -1161,7 +1373,6 @@ type Target struct {
 }
 
 type TargetBrief struct {
-
 	// Target ID
 	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
 
@@ -1170,7 +1381,6 @@ type TargetBrief struct {
 }
 
 type TargetDescription struct {
-
 	// Six-Segment QCS resource description. For more information, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	ResourceDescription *string `json:"ResourceDescription,omitempty" name:"ResourceDescription"`
 
@@ -1182,7 +1392,6 @@ type TargetDescription struct {
 }
 
 type TextParams struct {
-
 	// Comma, | , tab, space, line break, %, or #, which can contain only 1 character.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Separator *string `json:"Separator,omitempty" name:"Separator"`
@@ -1193,13 +1402,11 @@ type TextParams struct {
 }
 
 type Transform struct {
-
 	// Describes how to transform data
 	OutputStructs []*OutputStructParam `json:"OutputStructs,omitempty" name:"OutputStructs"`
 }
 
 type Transformation struct {
-
 	// Describes how to extract data
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Extraction *Extraction `json:"Extraction,omitempty" name:"Extraction"`
@@ -1213,9 +1420,27 @@ type Transformation struct {
 	Transform *Transform `json:"Transform,omitempty" name:"Transform"`
 }
 
+// Predefined struct for user
+type UpdateConnectionRequestParams struct {
+	// Connector ID
+	ConnectionId *string `json:"ConnectionId,omitempty" name:"ConnectionId"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Switch
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Connector name
+	ConnectionName *string `json:"ConnectionName,omitempty" name:"ConnectionName"`
+}
+
 type UpdateConnectionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Connector ID
 	ConnectionId *string `json:"ConnectionId,omitempty" name:"ConnectionId"`
 
@@ -1255,13 +1480,15 @@ func (r *UpdateConnectionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateConnectionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateConnectionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateConnectionResponseParams `json:"Response"`
 }
 
 func (r *UpdateConnectionResponse) ToJsonString() string {
@@ -1275,9 +1502,27 @@ func (r *UpdateConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRuleRequestParams struct {
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Switch.
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Rule description, which can contain up to 200 characters of any type.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+}
+
 type UpdateRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -1317,13 +1562,15 @@ func (r *UpdateRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateRuleResponseParams `json:"Response"`
 }
 
 func (r *UpdateRuleResponse) ToJsonString() string {
@@ -1337,9 +1584,30 @@ func (r *UpdateRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateTargetRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Delivery target ID
+	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+
+	// Enables batch delivery
+	EnableBatchDelivery *bool `json:"EnableBatchDelivery,omitempty" name:"EnableBatchDelivery"`
+
+	// Maximum waiting time for batch delivery
+	BatchTimeout *int64 `json:"BatchTimeout,omitempty" name:"BatchTimeout"`
+
+	// Maximum number of events in batch delivery
+	BatchEventCount *int64 `json:"BatchEventCount,omitempty" name:"BatchEventCount"`
+}
+
 type UpdateTargetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -1383,13 +1651,15 @@ func (r *UpdateTargetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateTargetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateTargetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateTargetResponseParams `json:"Response"`
 }
 
 func (r *UpdateTargetResponse) ToJsonString() string {
@@ -1403,9 +1673,24 @@ func (r *UpdateTargetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateTransformationRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Transformer ID
+	TransformationId *string `json:"TransformationId,omitempty" name:"TransformationId"`
+
+	// Transformation rule list (currently, only one is supported)
+	Transformations []*Transformation `json:"Transformations,omitempty" name:"Transformations"`
+}
+
 type UpdateTransformationRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
@@ -1441,13 +1726,15 @@ func (r *UpdateTransformationRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateTransformationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateTransformationResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateTransformationResponseParams `json:"Response"`
 }
 
 func (r *UpdateTransformationResponse) ToJsonString() string {

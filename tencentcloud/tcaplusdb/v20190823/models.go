@@ -21,7 +21,6 @@ import (
 )
 
 type ApplyResult struct {
-
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -42,7 +41,6 @@ type ApplyResult struct {
 }
 
 type ApplyStatus struct {
-
 	// Value format: cluster ID-application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
@@ -56,9 +54,18 @@ type ApplyStatus struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
+// Predefined struct for user
+type ClearTablesRequestParams struct {
+	// ID of the cluster instance where a table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of information of tables to be cleared
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type ClearTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster instance where a table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -86,19 +93,21 @@ func (r *ClearTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ClearTablesResponseParams struct {
+	// Number of cleared tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of table clearing results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ClearTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of cleared tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of table clearing results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ClearTablesResponseParams `json:"Response"`
 }
 
 func (r *ClearTablesResponse) ToJsonString() string {
@@ -113,7 +122,6 @@ func (r *ClearTablesResponse) FromJsonString(s string) error {
 }
 
 type ClusterInfo struct {
-
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 
@@ -217,9 +225,24 @@ type ClusterInfo struct {
 	IsReadOnlyUlogBackupExpireDay *uint64 `json:"IsReadOnlyUlogBackupExpireDay,omitempty" name:"IsReadOnlyUlogBackupExpireDay"`
 }
 
+// Predefined struct for user
+type CompareIdlFilesRequestParams struct {
+	// ID of the cluster where the table to be modified resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of tables to be modified
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Selected list of uploaded IDL files. Either this parameter or `NewIdlFiles` must be selected
+	ExistingIdlFiles []*IdlFileInfo `json:"ExistingIdlFiles,omitempty" name:"ExistingIdlFiles"`
+
+	// List of IDL files to be uploaded. Either this parameter or `ExistingIdlFiles` must be selected
+	NewIdlFiles []*IdlFileInfo `json:"NewIdlFiles,omitempty" name:"NewIdlFiles"`
+}
+
 type CompareIdlFilesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be modified resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -255,22 +278,24 @@ func (r *CompareIdlFilesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CompareIdlFilesResponseParams struct {
+	// Information list of all IDL files uploaded and verified in this request
+	IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
+
+	// Number of tables verified to be valid in this request
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Verification result parsed from the selected table after the IDL description file is read
+	TableInfos []*ParsedTableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CompareIdlFilesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information list of all IDL files uploaded and verified in this request
-		IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
-
-		// Number of tables verified to be valid in this request
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Verification result parsed from the selected table after the IDL description file is read
-		TableInfos []*ParsedTableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CompareIdlFilesResponseParams `json:"Response"`
 }
 
 func (r *CompareIdlFilesResponse) ToJsonString() string {
@@ -285,7 +310,6 @@ func (r *CompareIdlFilesResponse) FromJsonString(s string) error {
 }
 
 type CompareTablesInfo struct {
-
 	// Cluster ID of the source table
 	SrcTableClusterId *string `json:"SrcTableClusterId,omitempty" name:"SrcTableClusterId"`
 
@@ -311,9 +335,21 @@ type CompareTablesInfo struct {
 	DstTableInstanceId *string `json:"DstTableInstanceId,omitempty" name:"DstTableInstanceId"`
 }
 
+// Predefined struct for user
+type CreateBackupRequestParams struct {
+	// ID of the cluster where the table to be backed up resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Information list of tables to be backed up
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
 type CreateBackupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be backed up resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -345,21 +381,23 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateBackupResponseParams struct {
+	// List of backup creation task IDs
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TaskIds []*string `json:"TaskIds,omitempty" name:"TaskIds"`
+
+	// List of backup creation application IDs
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ApplicationIds []*string `json:"ApplicationIds,omitempty" name:"ApplicationIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateBackupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of backup creation task IDs
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		TaskIds []*string `json:"TaskIds,omitempty" name:"TaskIds"`
-
-		// List of backup creation application IDs
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		ApplicationIds []*string `json:"ApplicationIds,omitempty" name:"ApplicationIds"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateBackupResponseParams `json:"Response"`
 }
 
 func (r *CreateBackupResponse) ToJsonString() string {
@@ -373,9 +411,45 @@ func (r *CreateBackupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateClusterRequestParams struct {
+	// Cluster data description language type, such as `PROTO`, `TDR`, or `MIX`
+	IdlType *string `json:"IdlType,omitempty" name:"IdlType"`
+
+	// Cluster name, which can contain up to 32 letters and digits
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// ID of the VPC instance bound to a cluster in the format of `vpc-f49l6u0z`
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of the subnet instance bound to a cluster in the format of `subnet-pxir56ns`
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Cluster access password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Cluster tag list
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Whether to enable IPv6 address access for clusters
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+
+	// Information of the machine at the storage layer (tcapsvr) in a dedicated cluster
+	ServerList []*MachineInfo `json:"ServerList,omitempty" name:"ServerList"`
+
+	// Information of the machine at the access layer (tcaproxy) in a dedicated cluster
+	ProxyList []*MachineInfo `json:"ProxyList,omitempty" name:"ProxyList"`
+
+	// Cluster type. Valid values: `1` (standard), `2` (dedicated)
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// Authentication type. Valid values: `0` (static password), `1` (signature)
+	AuthType *int64 `json:"AuthType,omitempty" name:"AuthType"`
+}
+
 type CreateClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster data description language type, such as `PROTO`, `TDR`, or `MIX`
 	IdlType *string `json:"IdlType,omitempty" name:"IdlType"`
 
@@ -439,16 +513,18 @@ func (r *CreateClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateClusterResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateClusterResponseParams `json:"Response"`
 }
 
 func (r *CreateClusterResponse) ToJsonString() string {
@@ -462,9 +538,18 @@ func (r *CreateClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSnapshotsRequestParams struct {
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Snapshot list
+	SelectedTables []*SnapshotInfo `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type CreateSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -492,19 +577,21 @@ func (r *CreateSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSnapshotsResponseParams struct {
+	// The number of snapshots created in batches
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of snapshots created in batches
+	TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of snapshots created in batches
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of snapshots created in batches
-		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *CreateSnapshotsResponse) ToJsonString() string {
@@ -518,9 +605,24 @@ func (r *CreateSnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTableGroupRequestParams struct {
+	// ID of the cluster where a table group resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table group name, which can contain up to 32 letters and digits
+	TableGroupName *string `json:"TableGroupName,omitempty" name:"TableGroupName"`
+
+	// Table group ID, which can be customized but must be unique in one cluster. If it is not specified, the auto-increment mode will be used.
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table group tag list
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
 type CreateTableGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a table group resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -556,16 +658,18 @@ func (r *CreateTableGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTableGroupResponseParams struct {
+	// ID of table group successfully created
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTableGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID of table group successfully created
-		TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTableGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateTableGroupResponse) ToJsonString() string {
@@ -579,9 +683,24 @@ func (r *CreateTableGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTablesRequestParams struct {
+	// ID of the cluster where to create a table
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table creation IDL file list selected by user
+	IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
+
+	// Information list of tables to be created
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Table tag list
+	ResourceTags []*TagInfoUnit `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
 type CreateTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where to create a table
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -617,19 +736,21 @@ func (r *CreateTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateTablesResponseParams struct {
+	// Number of tables created in batches
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of tables created in batches
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tables created in batches
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of tables created in batches
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateTablesResponseParams `json:"Response"`
 }
 
 func (r *CreateTablesResponse) ToJsonString() string {
@@ -643,9 +764,15 @@ func (r *CreateTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteClusterRequestParams struct {
+	// ID of cluster to be deleted
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DeleteClusterRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of cluster to be deleted
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -669,16 +796,18 @@ func (r *DeleteClusterRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteClusterResponseParams struct {
+	// Task ID generated by cluster deletion
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteClusterResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID generated by cluster deletion
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteClusterResponseParams `json:"Response"`
 }
 
 func (r *DeleteClusterResponse) ToJsonString() string {
@@ -692,9 +821,18 @@ func (r *DeleteClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIdlFilesRequestParams struct {
+	// ID of the cluster where IDL resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of information of IDL files to be deleted
+	IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
+}
+
 type DeleteIdlFilesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where IDL resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -722,19 +860,21 @@ func (r *DeleteIdlFilesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteIdlFilesResponseParams struct {
+	// Number of returned results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Deletion result
+	IdlFileInfos []*IdlFileInfoWithoutContent `json:"IdlFileInfos,omitempty" name:"IdlFileInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteIdlFilesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of returned results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Deletion result
-		IdlFileInfos []*IdlFileInfoWithoutContent `json:"IdlFileInfos,omitempty" name:"IdlFileInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteIdlFilesResponseParams `json:"Response"`
 }
 
 func (r *DeleteIdlFilesResponse) ToJsonString() string {
@@ -748,9 +888,18 @@ func (r *DeleteIdlFilesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotsRequestParams struct {
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of snapshots to delete
+	SelectedTables []*SnapshotInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type DeleteSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -778,19 +927,21 @@ func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSnapshotsResponseParams struct {
+	// The number of snapshots deleted in batches
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of snapshots deleted in batches
+	TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of snapshots deleted in batches
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of snapshots deleted in batches
-		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *DeleteSnapshotsResponse) ToJsonString() string {
@@ -804,9 +955,18 @@ func (r *DeleteSnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableDataFlowRequestParams struct {
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables for which data subscription will be disabled
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type DeleteTableDataFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the tables reside
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -834,19 +994,21 @@ func (r *DeleteTableDataFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableDataFlowResponseParams struct {
+	// The number of tables for which data subscription has been disabled
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of tables for which data subscription has been disabled
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTableDataFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of tables for which data subscription has been disabled
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of tables for which data subscription has been disabled
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTableDataFlowResponseParams `json:"Response"`
 }
 
 func (r *DeleteTableDataFlowResponse) ToJsonString() string {
@@ -860,9 +1022,18 @@ func (r *DeleteTableDataFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableGroupRequestParams struct {
+	// ID of the cluster where a table group resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table group ID
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+}
+
 type DeleteTableGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a table group resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -890,16 +1061,18 @@ func (r *DeleteTableGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableGroupResponseParams struct {
+	// Task ID generated by table group deletion
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTableGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID generated by table group deletion
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTableGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteTableGroupResponse) ToJsonString() string {
@@ -913,9 +1086,18 @@ func (r *DeleteTableGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableIndexRequestParams struct {
+	// ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables whose global indexes need to be deleted
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type DeleteTableIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -943,19 +1125,21 @@ func (r *DeleteTableIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTableIndexResponseParams struct {
+	// The number of tables whose global indexes are deleted
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of global index deletion results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTableIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of tables whose global indexes are deleted
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of global index deletion results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTableIndexResponseParams `json:"Response"`
 }
 
 func (r *DeleteTableIndexResponse) ToJsonString() string {
@@ -969,9 +1153,18 @@ func (r *DeleteTableIndexResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTablesRequestParams struct {
+	// ID of the cluster where the table to be dropped resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of information of tables to be dropped
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type DeleteTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be dropped resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -999,19 +1192,21 @@ func (r *DeleteTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTablesResponseParams struct {
+	// Number of dropped tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of details of dropped tables
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of dropped tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of details of dropped tables
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTablesResponseParams `json:"Response"`
 }
 
 func (r *DeleteTablesResponse) ToJsonString() string {
@@ -1025,9 +1220,15 @@ func (r *DeleteTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClusterTagsRequestParams struct {
+	// The list of cluster IDs
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+}
+
 type DescribeClusterTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The list of cluster IDs
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 }
@@ -1051,19 +1252,21 @@ func (r *DescribeClusterTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClusterTagsResponseParams struct {
+	// The information list of cluster tags
+	Rows []*TagsInfoOfCluster `json:"Rows,omitempty" name:"Rows"`
+
+	// The number of returned results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClusterTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The information list of cluster tags
-		Rows []*TagsInfoOfCluster `json:"Rows,omitempty" name:"Rows"`
-
-		// The number of returned results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClusterTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeClusterTagsResponse) ToJsonString() string {
@@ -1077,9 +1280,27 @@ func (r *DescribeClusterTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClustersRequestParams struct {
+	// List of IDs of clusters to be queried
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// Query filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query list offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results in query list. Default value: 20
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Whether to enable IPv6 address access
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+}
+
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of IDs of clusters to be queried
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
@@ -1119,19 +1340,21 @@ func (r *DescribeClustersRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClustersResponseParams struct {
+	// Number of cluster instances
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Cluster instance list
+	Clusters []*ClusterInfo `json:"Clusters,omitempty" name:"Clusters"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClustersResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of cluster instances
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Cluster instance list
-		Clusters []*ClusterInfo `json:"Clusters,omitempty" name:"Clusters"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClustersResponseParams `json:"Response"`
 }
 
 func (r *DescribeClustersResponse) ToJsonString() string {
@@ -1145,9 +1368,27 @@ func (r *DescribeClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIdlFileInfosRequestParams struct {
+	// ID of the cluster where a file resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// ID of the table group where a file resides
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds"`
+
+	// File ID list
+	IdlFileIds []*string `json:"IdlFileIds,omitempty" name:"IdlFileIds"`
+
+	// Query list offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results in query list
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeIdlFileInfosRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a file resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1187,19 +1428,21 @@ func (r *DescribeIdlFileInfosRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeIdlFileInfosResponseParams struct {
+	// Number of files
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of file details
+	IdlFileInfos []*IdlFileInfo `json:"IdlFileInfos,omitempty" name:"IdlFileInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeIdlFileInfosResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of files
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of file details
-		IdlFileInfos []*IdlFileInfo `json:"IdlFileInfos,omitempty" name:"IdlFileInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeIdlFileInfosResponseParams `json:"Response"`
 }
 
 func (r *DescribeIdlFileInfosResponse) ToJsonString() string {
@@ -1213,9 +1456,15 @@ func (r *DescribeIdlFileInfosResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineRequestParams struct {
+	// If this parameter is not `0`, machines supporting IPv6 will be queried.
+	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
+}
+
 type DescribeMachineRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// If this parameter is not `0`, machines supporting IPv6 will be queried.
 	Ipv6Enable *int64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
@@ -1239,16 +1488,18 @@ func (r *DescribeMachineRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMachineResponseParams struct {
+	// The list of dedicated machine resources
+	PoolList []*PoolInfo `json:"PoolList,omitempty" name:"PoolList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMachineResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The list of dedicated machine resources
-		PoolList []*PoolInfo `json:"PoolList,omitempty" name:"PoolList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMachineResponseParams `json:"Response"`
 }
 
 func (r *DescribeMachineResponse) ToJsonString() string {
@@ -1262,8 +1513,14 @@ func (r *DescribeMachineResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsRequestParams struct {
+
+}
+
 type DescribeRegionsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeRegionsRequest) ToJsonString() string {
@@ -1278,25 +1535,28 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRegionsResponseParams struct {
+	// Number of queried AZs
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of AZ query results
+	RegionInfos []*RegionInfo `json:"RegionInfos,omitempty" name:"RegionInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRegionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of queried AZs
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of AZ query results
-		RegionInfos []*RegionInfo `json:"RegionInfos,omitempty" name:"RegionInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRegionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeRegionsResponse) ToJsonString() string {
@@ -1310,9 +1570,24 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsRequestParams struct {
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+}
+
 type DescribeSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1348,19 +1623,21 @@ func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSnapshotsResponseParams struct {
+	// The number of snapshots
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of snapshots
+	TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of snapshots
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of snapshots
-		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSnapshotsResponse) ToJsonString() string {
@@ -1374,9 +1651,18 @@ func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableGroupTagsRequestParams struct {
+	// The ID of the cluster where table group tags need to be queried
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of IDs of the table groups whose tags need to be queried
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds"`
+}
+
 type DescribeTableGroupTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where table group tags need to be queried
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1404,19 +1690,21 @@ func (r *DescribeTableGroupTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableGroupTagsResponseParams struct {
+	// The information list of table group tags
+	Rows []*TagsInfoOfTableGroup `json:"Rows,omitempty" name:"Rows"`
+
+	// The number of returned results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTableGroupTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The information list of table group tags
-		Rows []*TagsInfoOfTableGroup `json:"Rows,omitempty" name:"Rows"`
-
-		// The number of returned results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTableGroupTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeTableGroupTagsResponse) ToJsonString() string {
@@ -1430,9 +1718,27 @@ func (r *DescribeTableGroupTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableGroupsRequestParams struct {
+	// ID of the cluster where a table group resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table group ID list
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds"`
+
+	// Filter. Valid values: TableGroupName, TableGroupId
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query list offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results in query list
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTableGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a table group resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1472,19 +1778,21 @@ func (r *DescribeTableGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableGroupsResponseParams struct {
+	// Number of table groups
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Table group information list
+	TableGroups []*TableGroupInfo `json:"TableGroups,omitempty" name:"TableGroups"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTableGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of table groups
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Table group information list
-		TableGroups []*TableGroupInfo `json:"TableGroups,omitempty" name:"TableGroups"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTableGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeTableGroupsResponse) ToJsonString() string {
@@ -1498,9 +1806,18 @@ func (r *DescribeTableGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableTagsRequestParams struct {
+	// The ID of the cluster where a table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Table list
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type DescribeTableTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where a table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1528,19 +1845,21 @@ func (r *DescribeTableTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTableTagsResponseParams struct {
+	// The total number of returned results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The information list of table tags
+	Rows []*TagsInfoOfTable `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTableTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of returned results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The information list of table tags
-		Rows []*TagsInfoOfTable `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTableTagsResponseParams `json:"Response"`
 }
 
 func (r *DescribeTableTagsResponse) ToJsonString() string {
@@ -1554,9 +1873,27 @@ func (r *DescribeTableTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTablesInRecycleRequestParams struct {
+	// ID of the cluster where the table to be queried resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of IDs of the table groups where the table to be queried resides
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds"`
+
+	// Filter. Valid values: TableName, TableInstanceId
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query result offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned query results
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTablesInRecycleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be queried resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1596,19 +1933,21 @@ func (r *DescribeTablesInRecycleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTablesInRecycleResponseParams struct {
+	// Number of tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Table details result list
+	TableInfos []*TableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTablesInRecycleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Table details result list
-		TableInfos []*TableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTablesInRecycleResponseParams `json:"Response"`
 }
 
 func (r *DescribeTablesInRecycleResponse) ToJsonString() string {
@@ -1622,9 +1961,30 @@ func (r *DescribeTablesInRecycleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTablesRequestParams struct {
+	// ID of the cluster where the table to be queried resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of IDs of the table groups where the table to be queried resides
+	TableGroupIds []*string `json:"TableGroupIds,omitempty" name:"TableGroupIds"`
+
+	// Information list of tables to be queried
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Filter. Valid values: TableName, TableInstanceId
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query result offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned query results
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be queried resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1668,19 +2028,21 @@ func (r *DescribeTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTablesResponseParams struct {
+	// Number of tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Table details result list
+	TableInfos []*TableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Table details result list
-		TableInfos []*TableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTablesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTablesResponse) ToJsonString() string {
@@ -1694,9 +2056,27 @@ func (r *DescribeTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksRequestParams struct {
+	// List of IDs of clusters where the tasks to be queried reside
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// List of IDs of tasks to be queried
+	TaskIds []*string `json:"TaskIds,omitempty" name:"TaskIds"`
+
+	// Filter. Valid values: Content, TaskType, Operator, Time
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Query list offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results in query list
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// List of IDs of clusters where the tasks to be queried reside
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
@@ -1736,19 +2116,21 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksResponseParams struct {
+	// Number of tasks
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of details of queried tasks
+	TaskInfos []*TaskInfoNew `json:"TaskInfos,omitempty" name:"TaskInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tasks
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of details of queried tasks
-		TaskInfos []*TaskInfoNew `json:"TaskInfos,omitempty" name:"TaskInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeTasksResponse) ToJsonString() string {
@@ -1762,8 +2144,14 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUinInWhitelistRequestParams struct {
+
+}
+
 type DescribeUinInWhitelistRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeUinInWhitelistRequest) ToJsonString() string {
@@ -1778,22 +2166,25 @@ func (r *DescribeUinInWhitelistRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUinInWhitelistRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUinInWhitelistResponseParams struct {
+	// Query result. FALSE: yes, TRUE: no
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUinInWhitelistResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Query result. FALSE: yes, TRUE: no
-		Result *string `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUinInWhitelistResponseParams `json:"Response"`
 }
 
 func (r *DescribeUinInWhitelistResponse) ToJsonString() string {
@@ -1807,9 +2198,15 @@ func (r *DescribeUinInWhitelistResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableRestProxyRequestParams struct {
+	// The value is the same as `appid`.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type DisableRestProxyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value is the same as `appid`.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -1833,19 +2230,21 @@ func (r *DisableRestProxyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableRestProxyResponseParams struct {
+	// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+	RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
+
+	// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DisableRestProxyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
-		RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
-
-		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DisableRestProxyResponseParams `json:"Response"`
 }
 
 func (r *DisableRestProxyResponse) ToJsonString() string {
@@ -1859,9 +2258,15 @@ func (r *DisableRestProxyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableRestProxyRequestParams struct {
+	// The value is the same as `appid`.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
 type EnableRestProxyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The value is the same as `appid`.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
@@ -1885,19 +2290,21 @@ func (r *EnableRestProxyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EnableRestProxyResponseParams struct {
+	// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
+	RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
+
+	// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EnableRestProxyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// RestProxy status. Valid values: 0 (disabled), 1 (enabling), 2 (enabled), 3 (disabling).
-		RestProxyStatus *uint64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
-
-		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EnableRestProxyResponseParams `json:"Response"`
 }
 
 func (r *EnableRestProxyResponse) ToJsonString() string {
@@ -1912,7 +2319,6 @@ func (r *EnableRestProxyResponse) FromJsonString(s string) error {
 }
 
 type ErrorInfo struct {
-
 	// Error code
 	Code *string `json:"Code,omitempty" name:"Code"`
 
@@ -1921,7 +2327,6 @@ type ErrorInfo struct {
 }
 
 type FieldInfo struct {
-
 	// Table field name
 	FieldName *string `json:"FieldName,omitempty" name:"FieldName"`
 
@@ -1936,7 +2341,6 @@ type FieldInfo struct {
 }
 
 type Filter struct {
-
 	// Filter field name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1948,7 +2352,6 @@ type Filter struct {
 }
 
 type IdlFileInfo struct {
-
 	// Filename excluding extension
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
@@ -1971,7 +2374,6 @@ type IdlFileInfo struct {
 }
 
 type IdlFileInfoWithoutContent struct {
-
 	// Filename excluding extension
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
@@ -1997,9 +2399,33 @@ type IdlFileInfoWithoutContent struct {
 	Error *ErrorInfo `json:"Error,omitempty" name:"Error"`
 }
 
+// Predefined struct for user
+type ImportSnapshotsRequestParams struct {
+	// The ID of the cluster where the original table (from which the snapshot was created) resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The information of the snapshot to import
+	Snapshots *SnapshotInfo `json:"Snapshots,omitempty" name:"Snapshots"`
+
+	// Whether to import partial data of the snapshot. Valid values: `TRUE` (import partial data), `FALSE` (import all data).
+	ImportSpecialKey *string `json:"ImportSpecialKey,omitempty" name:"ImportSpecialKey"`
+
+	// Whether to import to the original table. Valid values: `TRUE` (import to the original table), `FALSE` (import to a new table).
+	ImportOriginTable *string `json:"ImportOriginTable,omitempty" name:"ImportOriginTable"`
+
+	// The file of the keys of the partial data
+	KeyFile *KeyFile `json:"KeyFile,omitempty" name:"KeyFile"`
+
+	// The ID of the table group where the new table resides, which is valid only when `ImportOriginTable` is set to `FALSE`
+	NewTableGroupId *string `json:"NewTableGroupId,omitempty" name:"NewTableGroupId"`
+
+	// The name of the new table, which is valid only when `ImportOriginTable` is set to `FALSE`. TcaplusDB will automatically create a table named `NewTableName` of the same structure as that of the original table.
+	NewTableName *string `json:"NewTableName,omitempty" name:"NewTableName"`
+}
+
 type ImportSnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the original table (from which the snapshot was created) resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2047,17 +2473,19 @@ func (r *ImportSnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ImportSnapshotsResponseParams struct {
+	// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ImportSnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ImportSnapshotsResponseParams `json:"Response"`
 }
 
 func (r *ImportSnapshotsResponse) ToJsonString() string {
@@ -2072,7 +2500,6 @@ func (r *ImportSnapshotsResponse) FromJsonString(s string) error {
 }
 
 type KafkaInfo struct {
-
 	// CKafka address
 	Address *string `json:"Address,omitempty" name:"Address"`
 
@@ -2093,7 +2520,6 @@ type KafkaInfo struct {
 }
 
 type KeyFile struct {
-
 	// Key file name
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
@@ -2108,7 +2534,6 @@ type KeyFile struct {
 }
 
 type MachineInfo struct {
-
 	// Machine type
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
 
@@ -2117,7 +2542,6 @@ type MachineInfo struct {
 }
 
 type MergeTableResult struct {
-
 	// Task ID
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -2134,9 +2558,18 @@ type MergeTableResult struct {
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 }
 
+// Predefined struct for user
+type MergeTablesDataRequestParams struct {
+	// Tables to be merged
+	SelectedTables []*MergeTablesInfo `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Valid values: `true` (only compare), `false` (compare and merge)
+	IsOnlyCompare *bool `json:"IsOnlyCompare,omitempty" name:"IsOnlyCompare"`
+}
+
 type MergeTablesDataRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tables to be merged
 	SelectedTables []*MergeTablesInfo `json:"SelectedTables,omitempty" name:"SelectedTables"`
 
@@ -2164,16 +2597,18 @@ func (r *MergeTablesDataRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type MergeTablesDataResponseParams struct {
+	// Table merging results
+	Results []*MergeTableResult `json:"Results,omitempty" name:"Results"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type MergeTablesDataResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Table merging results
-		Results []*MergeTableResult `json:"Results,omitempty" name:"Results"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *MergeTablesDataResponseParams `json:"Response"`
 }
 
 func (r *MergeTablesDataResponse) ToJsonString() string {
@@ -2188,7 +2623,6 @@ func (r *MergeTablesDataResponse) FromJsonString(s string) error {
 }
 
 type MergeTablesInfo struct {
-
 	// Information of tables to be merged
 	MergeTables *CompareTablesInfo `json:"MergeTables,omitempty" name:"MergeTables"`
 
@@ -2196,9 +2630,21 @@ type MergeTablesInfo struct {
 	CheckIndex *bool `json:"CheckIndex,omitempty" name:"CheckIndex"`
 }
 
+// Predefined struct for user
+type ModifyCensorshipRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Whether to enable the operation approval feature for this cluster. Valid values: `0` (disable), `1` (enable)
+	Censorship *int64 `json:"Censorship,omitempty" name:"Censorship"`
+
+	// Approver UIN list
+	Uins []*string `json:"Uins,omitempty" name:"Uins"`
+}
+
 type ModifyCensorshipRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2230,23 +2676,25 @@ func (r *ModifyCensorshipRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyCensorshipResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Approver UIN list
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Uins []*string `json:"Uins,omitempty" name:"Uins"`
+
+	// Whether the operation approval feature is enabled for this cluster. Valid values: `0` (disabled), `1` (enabled)
+	Censorship *int64 `json:"Censorship,omitempty" name:"Censorship"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyCensorshipResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// Approver UIN list
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		Uins []*string `json:"Uins,omitempty" name:"Uins"`
-
-		// Whether the operation approval feature is enabled for this cluster. Valid values: `0` (disabled), `1` (enabled)
-		Censorship *int64 `json:"Censorship,omitempty" name:"Censorship"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyCensorshipResponseParams `json:"Response"`
 }
 
 func (r *ModifyCensorshipResponse) ToJsonString() string {
@@ -2260,9 +2708,24 @@ func (r *ModifyCensorshipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterMachineRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Information of the machines at the storage layer (tcapsvr)
+	ServerList []*MachineInfo `json:"ServerList,omitempty" name:"ServerList"`
+
+	// Information of the machines at the access layer (tcaproxy)
+	ProxyList []*MachineInfo `json:"ProxyList,omitempty" name:"ProxyList"`
+
+	// Cluster type. Valid values: `1` (standard), `2` (dedicated)
+	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
+}
+
 type ModifyClusterMachineRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2298,16 +2761,18 @@ func (r *ModifyClusterMachineRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterMachineResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyClusterMachineResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Cluster ID
-		ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyClusterMachineResponseParams `json:"Response"`
 }
 
 func (r *ModifyClusterMachineResponse) ToJsonString() string {
@@ -2321,9 +2786,18 @@ func (r *ModifyClusterMachineResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterNameRequestParams struct {
+	// ID of the cluster to be renamed
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name to be changed to, which can contain up to 32 letters and digits
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+}
+
 type ModifyClusterNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster to be renamed
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2351,13 +2825,15 @@ func (r *ModifyClusterNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterNameResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyClusterNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyClusterNameResponseParams `json:"Response"`
 }
 
 func (r *ModifyClusterNameResponse) ToJsonString() string {
@@ -2371,9 +2847,27 @@ func (r *ModifyClusterNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterPasswordRequestParams struct {
+	// ID of the cluster for which to modify the password
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Old cluster password
+	OldPassword *string `json:"OldPassword,omitempty" name:"OldPassword"`
+
+	// Expected expiration time of old cluster password
+	OldPasswordExpireTime *string `json:"OldPasswordExpireTime,omitempty" name:"OldPasswordExpireTime"`
+
+	// New cluster password, which must contain lowercase letters (a-z), uppercase letters (A-Z), and digits (0-9).
+	NewPassword *string `json:"NewPassword,omitempty" name:"NewPassword"`
+
+	// Update mode. 1: updates password, 2: updates old password expiration time. Default value: 1
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
 type ModifyClusterPasswordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster for which to modify the password
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2413,13 +2907,15 @@ func (r *ModifyClusterPasswordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterPasswordResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyClusterPasswordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyClusterPasswordResponseParams `json:"Response"`
 }
 
 func (r *ModifyClusterPasswordResponse) ToJsonString() string {
@@ -2433,9 +2929,21 @@ func (r *ModifyClusterPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterTagsRequestParams struct {
+	// The ID of the cluster whose tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
+
+	// Tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags"`
+}
+
 type ModifyClusterTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster whose tags need to be modified
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2467,16 +2975,18 @@ func (r *ModifyClusterTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyClusterTagsResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyClusterTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyClusterTagsResponseParams `json:"Response"`
 }
 
 func (r *ModifyClusterTagsResponse) ToJsonString() string {
@@ -2490,9 +3000,18 @@ func (r *ModifyClusterTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotsRequestParams struct {
+	// The ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Snapshot list
+	SelectedTables []*SnapshotInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type ModifySnapshotsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2520,19 +3039,21 @@ func (r *ModifySnapshotsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySnapshotsResponseParams struct {
+	// The number of snapshots modified in batches
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of snapshots modified in batches
+	TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifySnapshotsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of snapshots modified in batches
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of snapshots modified in batches
-		TableResults []*SnapshotResult `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifySnapshotsResponseParams `json:"Response"`
 }
 
 func (r *ModifySnapshotsResponse) ToJsonString() string {
@@ -2546,9 +3067,21 @@ func (r *ModifySnapshotsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableGroupNameRequestParams struct {
+	// ID of the cluster where a table group resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// ID of the table group to be renamed
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// New table group name, which can contain letters and symbols
+	TableGroupName *string `json:"TableGroupName,omitempty" name:"TableGroupName"`
+}
+
 type ModifyTableGroupNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a table group resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2580,13 +3113,15 @@ func (r *ModifyTableGroupNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableGroupNameResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTableGroupNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTableGroupNameResponseParams `json:"Response"`
 }
 
 func (r *ModifyTableGroupNameResponse) ToJsonString() string {
@@ -2600,9 +3135,24 @@ func (r *ModifyTableGroupNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableGroupTagsRequestParams struct {
+	// The ID of the cluster where table group tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the table group whose tags need to be modified
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
+
+	// Tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags"`
+}
+
 type ModifyTableGroupTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where table group tags need to be modified
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2638,16 +3188,18 @@ func (r *ModifyTableGroupTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableGroupTagsResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTableGroupTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task ID
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTableGroupTagsResponseParams `json:"Response"`
 }
 
 func (r *ModifyTableGroupTagsResponse) ToJsonString() string {
@@ -2661,9 +3213,18 @@ func (r *ModifyTableGroupTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableMemosRequestParams struct {
+	// ID of the cluster instance where a table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of details of selected tables
+	TableMemos []*SelectedTableInfoNew `json:"TableMemos,omitempty" name:"TableMemos"`
+}
+
 type ModifyTableMemosRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster instance where a table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2691,19 +3252,21 @@ func (r *ModifyTableMemosRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableMemosResponseParams struct {
+	// Number of tables modified for remarks
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of table remarks modification results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTableMemosResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tables modified for remarks
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of table remarks modification results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTableMemosResponseParams `json:"Response"`
 }
 
 func (r *ModifyTableMemosResponse) ToJsonString() string {
@@ -2717,9 +3280,18 @@ func (r *ModifyTableMemosResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableQuotasRequestParams struct {
+	// ID of the cluster where the table to be scaled resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of quotas of tables selected for modification
+	TableQuotas []*SelectedTableInfoNew `json:"TableQuotas,omitempty" name:"TableQuotas"`
+}
+
 type ModifyTableQuotasRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be scaled resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2747,19 +3319,21 @@ func (r *ModifyTableQuotasRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableQuotasResponseParams struct {
+	// Number of scaled tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of table scaling results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTableQuotasResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of scaled tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of table scaling results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTableQuotasResponseParams `json:"Response"`
 }
 
 func (r *ModifyTableQuotasResponse) ToJsonString() string {
@@ -2773,9 +3347,24 @@ func (r *ModifyTableQuotasResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableTagsRequestParams struct {
+	// The ID of the cluster where table tags need to be modified
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables whose tags need to be modified
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// The list of tags to add or modify
+	ReplaceTags []*TagInfoUnit `json:"ReplaceTags,omitempty" name:"ReplaceTags"`
+
+	// The list of tags to delete
+	DeleteTags []*TagInfoUnit `json:"DeleteTags,omitempty" name:"DeleteTags"`
+}
+
 type ModifyTableTagsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where table tags need to be modified
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2811,19 +3400,21 @@ func (r *ModifyTableTagsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTableTagsResponseParams struct {
+	// The total number of returned results
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Returned results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTableTagsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The total number of returned results
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Returned results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTableTagsResponseParams `json:"Response"`
 }
 
 func (r *ModifyTableTagsResponse) ToJsonString() string {
@@ -2837,9 +3428,21 @@ func (r *ModifyTableTagsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTablesRequestParams struct {
+	// ID of the cluster where the table to be modified resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Selected table modification IDL files
+	IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
+
+	// List of tables to be modified
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type ModifyTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be modified resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -2871,19 +3474,21 @@ func (r *ModifyTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyTablesResponseParams struct {
+	// Number of modified tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of table modification results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of modified tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of table modification results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyTablesResponseParams `json:"Response"`
 }
 
 func (r *ModifyTablesResponse) ToJsonString() string {
@@ -2898,7 +3503,6 @@ func (r *ModifyTablesResponse) FromJsonString(s string) error {
 }
 
 type ParsedTableInfoNew struct {
-
 	// Table description language type. Valid values: PROTO, TDR
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableIdlType *string `json:"TableIdlType,omitempty" name:"TableIdlType"`
@@ -2973,7 +3577,6 @@ type ParsedTableInfoNew struct {
 }
 
 type PoolInfo struct {
-
 	// Unique ID
 	PoolUid *int64 `json:"PoolUid,omitempty" name:"PoolUid"`
 
@@ -2991,7 +3594,6 @@ type PoolInfo struct {
 }
 
 type ProxyDetailInfo struct {
-
 	// The unique ID of the access layer (tcaproxy)
 	ProxyUid *string `json:"ProxyUid,omitempty" name:"ProxyUid"`
 
@@ -3009,7 +3611,6 @@ type ProxyDetailInfo struct {
 }
 
 type ProxyMachineInfo struct {
-
 	// Unique ID
 	ProxyUid *string `json:"ProxyUid,omitempty" name:"ProxyUid"`
 
@@ -3020,9 +3621,18 @@ type ProxyMachineInfo struct {
 	AvailableCount *int64 `json:"AvailableCount,omitempty" name:"AvailableCount"`
 }
 
+// Predefined struct for user
+type RecoverRecycleTablesRequestParams struct {
+	// ID of the cluster where a table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Information of tables to be recovered
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type RecoverRecycleTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where a table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3050,19 +3660,21 @@ func (r *RecoverRecycleTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RecoverRecycleTablesResponseParams struct {
+	// Number of recovered tables
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of information of recovered tables
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RecoverRecycleTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of recovered tables
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of information of recovered tables
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RecoverRecycleTablesResponseParams `json:"Response"`
 }
 
 func (r *RecoverRecycleTablesResponse) ToJsonString() string {
@@ -3077,7 +3689,6 @@ func (r *RecoverRecycleTablesResponse) FromJsonString(s string) error {
 }
 
 type RegionInfo struct {
-
 	// Region `Ap-code`
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
 
@@ -3091,9 +3702,24 @@ type RegionInfo struct {
 	Ipv6Enable *uint64 `json:"Ipv6Enable,omitempty" name:"Ipv6Enable"`
 }
 
+// Predefined struct for user
+type RollbackTablesRequestParams struct {
+	// ID of the cluster where the table to be rolled back resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of tables to be rolled back
+	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitempty" name:"SelectedTables"`
+
+	// Time to roll back to
+	RollbackTime *string `json:"RollbackTime,omitempty" name:"RollbackTime"`
+
+	// Rollback mode. `KEYS` is supported
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
 type RollbackTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table to be rolled back resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3129,19 +3755,21 @@ func (r *RollbackTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RollbackTablesResponseParams struct {
+	// Number of table rollback task results
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Table rollback task result list
+	TableResults []*TableRollbackResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type RollbackTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of table rollback task results
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Table rollback task result list
-		TableResults []*TableRollbackResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *RollbackTablesResponseParams `json:"Response"`
 }
 
 func (r *RollbackTablesResponse) ToJsonString() string {
@@ -3156,7 +3784,6 @@ func (r *RollbackTablesResponse) FromJsonString(s string) error {
 }
 
 type SelectedTableInfoNew struct {
-
 	// ID of the table group where a table resides
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
@@ -3201,7 +3828,6 @@ type SelectedTableInfoNew struct {
 }
 
 type SelectedTableWithField struct {
-
 	// ID of the table group where the table resides
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
@@ -3228,7 +3854,6 @@ type SelectedTableWithField struct {
 }
 
 type ServerDetailInfo struct {
-
 	// The unique ID of the storage layer (tcapsvr)
 	ServerUid *string `json:"ServerUid,omitempty" name:"ServerUid"`
 
@@ -3249,7 +3874,6 @@ type ServerDetailInfo struct {
 }
 
 type ServerMachineInfo struct {
-
 	// The unique ID of the machine
 	ServerUid *string `json:"ServerUid,omitempty" name:"ServerUid"`
 
@@ -3257,9 +3881,18 @@ type ServerMachineInfo struct {
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
 }
 
+// Predefined struct for user
+type SetTableDataFlowRequestParams struct {
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables for which data subscription will be enabled
+	SelectedTables []*SelectedTableWithField `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type SetTableDataFlowRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The ID of the cluster where the tables reside
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3287,19 +3920,21 @@ func (r *SetTableDataFlowRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetTableDataFlowResponseParams struct {
+	// The number of tables for which data subscription has been enabled
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The result list of tables for which data subscription has been enabled
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetTableDataFlowResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of tables for which data subscription has been enabled
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The result list of tables for which data subscription has been enabled
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetTableDataFlowResponseParams `json:"Response"`
 }
 
 func (r *SetTableDataFlowResponse) ToJsonString() string {
@@ -3313,9 +3948,18 @@ func (r *SetTableDataFlowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetTableIndexRequestParams struct {
+	// ID of the cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The list of tables that need to create global indexes
+	SelectedTables []*SelectedTableWithField `json:"SelectedTables,omitempty" name:"SelectedTables"`
+}
+
 type SetTableIndexRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where the table resides
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3343,19 +3987,21 @@ func (r *SetTableIndexRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetTableIndexResponseParams struct {
+	// The number of tables whose global indexes are created
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of global index creation results
+	TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetTableIndexResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The number of tables whose global indexes are created
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The list of global index creation results
-		TableResults []*TableResultNew `json:"TableResults,omitempty" name:"TableResults"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetTableIndexResponseParams `json:"Response"`
 }
 
 func (r *SetTableIndexResponse) ToJsonString() string {
@@ -3370,7 +4016,6 @@ func (r *SetTableIndexResponse) FromJsonString(s string) error {
 }
 
 type SnapshotInfo struct {
-
 	// The ID of the table group where the table resides
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
@@ -3388,7 +4033,6 @@ type SnapshotInfo struct {
 }
 
 type SnapshotInfoNew struct {
-
 	// The ID of the table group where the table resides
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
@@ -3403,7 +4047,6 @@ type SnapshotInfoNew struct {
 }
 
 type SnapshotResult struct {
-
 	// The ID of the table group where the table resides
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
@@ -3446,7 +4089,6 @@ type SnapshotResult struct {
 }
 
 type TableGroupInfo struct {
-
 	// Table group ID
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
 
@@ -3464,7 +4106,6 @@ type TableGroupInfo struct {
 }
 
 type TableInfoNew struct {
-
 	// Table name
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
@@ -3579,7 +4220,6 @@ type TableInfoNew struct {
 }
 
 type TableResultNew struct {
-
 	// Table instance ID in the format of `tcaplus-3be64cbb`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
@@ -3618,7 +4258,6 @@ type TableResultNew struct {
 }
 
 type TableRollbackResultNew struct {
-
 	// Table instance ID in the format of `tcaplus-3be64cbb`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
@@ -3665,7 +4304,6 @@ type TableRollbackResultNew struct {
 }
 
 type TagInfoUnit struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -3674,7 +4312,6 @@ type TagInfoUnit struct {
 }
 
 type TagsInfoOfCluster struct {
-
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3686,7 +4323,6 @@ type TagsInfoOfCluster struct {
 }
 
 type TagsInfoOfTable struct {
-
 	// Table instance ID
 	TableInstanceId *string `json:"TableInstanceId,omitempty" name:"TableInstanceId"`
 
@@ -3704,7 +4340,6 @@ type TagsInfoOfTable struct {
 }
 
 type TagsInfoOfTableGroup struct {
-
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3719,7 +4354,6 @@ type TagsInfoOfTableGroup struct {
 }
 
 type TaskInfoNew struct {
-
 	// Task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
@@ -3751,9 +4385,15 @@ type TaskInfoNew struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+// Predefined struct for user
+type UpdateApplyRequestParams struct {
+	// Application status
+	ApplyStatus []*ApplyStatus `json:"ApplyStatus,omitempty" name:"ApplyStatus"`
+}
+
 type UpdateApplyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Application status
 	ApplyStatus []*ApplyStatus `json:"ApplyStatus,omitempty" name:"ApplyStatus"`
 }
@@ -3777,20 +4417,22 @@ func (r *UpdateApplyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateApplyResponseParams struct {
+	// List of updated applications
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	ApplyResults []*ApplyResult `json:"ApplyResults,omitempty" name:"ApplyResults"`
+
+	// Total number of updated applications
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateApplyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of updated applications
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		ApplyResults []*ApplyResult `json:"ApplyResults,omitempty" name:"ApplyResults"`
-
-		// Total number of updated applications
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateApplyResponseParams `json:"Response"`
 }
 
 func (r *UpdateApplyResponse) ToJsonString() string {
@@ -3804,9 +4446,24 @@ func (r *UpdateApplyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type VerifyIdlFilesRequestParams struct {
+	// ID of the cluster where to create a table
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// ID of the table group where to create a table
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// List of information of uploaded IDL files. Either this parameter or `NewIdlFiles` must be present
+	ExistingIdlFiles []*IdlFileInfo `json:"ExistingIdlFiles,omitempty" name:"ExistingIdlFiles"`
+
+	// List of information of IDL files to be uploaded. Either this parameter or `ExistingIdlFiles` must be present
+	NewIdlFiles []*IdlFileInfo `json:"NewIdlFiles,omitempty" name:"NewIdlFiles"`
+}
+
 type VerifyIdlFilesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the cluster where to create a table
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -3842,22 +4499,24 @@ func (r *VerifyIdlFilesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type VerifyIdlFilesResponseParams struct {
+	// Information list of all IDL files uploaded and verified in this request
+	IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
+
+	// Number of valid tables parsed by reading IDL description file, excluding tables already created
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of valid tables parsed by reading IDL description file, excluding tables already created
+	TableInfos []*ParsedTableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type VerifyIdlFilesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information list of all IDL files uploaded and verified in this request
-		IdlFiles []*IdlFileInfo `json:"IdlFiles,omitempty" name:"IdlFiles"`
-
-		// Number of valid tables parsed by reading IDL description file, excluding tables already created
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of valid tables parsed by reading IDL description file, excluding tables already created
-		TableInfos []*ParsedTableInfoNew `json:"TableInfos,omitempty" name:"TableInfos"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *VerifyIdlFilesResponseParams `json:"Response"`
 }
 
 func (r *VerifyIdlFilesResponse) ToJsonString() string {

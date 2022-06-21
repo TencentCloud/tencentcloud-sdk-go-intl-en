@@ -20,9 +20,33 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type SendEmailRequestParams struct {
+	// Sender
+	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
+
+	// Recipient
+	ToAddress *string `json:"ToAddress,omitempty" name:"ToAddress"`
+
+	// Email summary
+	Subject *string `json:"Subject,omitempty" name:"Subject"`
+
+	// Sender name
+	FromName *string `json:"FromName,omitempty" name:"FromName"`
+
+	// Reply-to address
+	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
+
+	// The body of an HTML email
+	HtmlContent *string `json:"HtmlContent,omitempty" name:"HtmlContent"`
+
+	// The body of a plain-text email
+	TextContent *string `json:"TextContent,omitempty" name:"TextContent"`
+}
+
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender
 	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
 
@@ -70,16 +94,18 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendEmailResponseParams struct {
+	// The result of creating an email task
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendEmailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The result of creating an email task
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendEmailResponseParams `json:"Response"`
 }
 
 func (r *SendEmailResponse) ToJsonString() string {
@@ -93,9 +119,30 @@ func (r *SendEmailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendTemplatedEmailRequestParams struct {
+	// Sender address.
+	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
+
+	// Recipient address. Up to 100 recipient addresses are supported. Multiple addresses should be separated by semicolons (;).
+	ToAddress *string `json:"ToAddress,omitempty" name:"ToAddress"`
+
+	// The name of the template created in advance.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Template variable value, which is a JSON string.
+	TemplateValue *string `json:"TemplateValue,omitempty" name:"TemplateValue"`
+
+	// Sender name.
+	FromName *string `json:"FromName,omitempty" name:"FromName"`
+
+	// Reply-to address.
+	ReplyAddress *string `json:"ReplyAddress,omitempty" name:"ReplyAddress"`
+}
+
 type SendTemplatedEmailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Sender address.
 	FromAddress *string `json:"FromAddress,omitempty" name:"FromAddress"`
 
@@ -139,16 +186,18 @@ func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SendTemplatedEmailResponseParams struct {
+	// The result of creating a template email task
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SendTemplatedEmailResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The result of creating a template email task
-		Result *bool `json:"Result,omitempty" name:"Result"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SendTemplatedEmailResponseParams `json:"Response"`
 }
 
 func (r *SendTemplatedEmailResponse) ToJsonString() string {

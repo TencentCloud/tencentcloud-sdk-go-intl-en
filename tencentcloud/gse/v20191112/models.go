@@ -21,7 +21,6 @@ import (
 )
 
 type CcnInfo struct {
-
 	// Account of the CCN instance owner
 	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
 
@@ -29,9 +28,72 @@ type CcnInfo struct {
 	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
 }
 
+// Predefined struct for user
+type CopyFleetRequestParams struct {
+	// Server fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Replica number. It should a value between 1 to the number of the remaining quota. It can be obtained through [Obtaining User Quota](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+	CopyNumber *int64 `json:"CopyNumber,omitempty" name:"CopyNumber"`
+
+	// Asset package ID
+	AssetId *string `json:"AssetId,omitempty" name:"AssetId"`
+
+	// Description. The length is 0-100 characters.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Network configuration
+	InboundPermissions []*InboundPermission `json:"InboundPermissions,omitempty" name:"InboundPermissions"`
+
+	// Server type. It can be obtained through [Obtaining Server Instance Type List](https://intl.cloud.tencent.com/document/product/1165/48732?from_cn_redirect=1).
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Server fleet type, which only supports “ON_DEMAND” type now.
+	FleetType *string `json:"FleetType,omitempty" name:"FleetType"`
+
+	// Server fleet name. The length is 1-50 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Protection policy. Valid values: NoProtection·(no protection), FullProtection (full protection), TimeLimitProtection (time-limited protection)
+	NewGameServerSessionProtectionPolicy *string `json:"NewGameServerSessionProtectionPolicy,omitempty" name:"NewGameServerSessionProtectionPolicy"`
+
+	// Limit policy of resource creation
+	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy `json:"ResourceCreationLimitPolicy,omitempty" name:"ResourceCreationLimitPolicy"`
+
+	// Progress configuration
+	RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty" name:"RuntimeConfiguration"`
+
+	// Timeout period of time-limited protection. Value range: 5-1440 minutes. Default value: 60 minutes. This parameter is valid only when NewGameSessionProtectionPolicy is set as TimeLimitProtection.
+	GameServerSessionProtectionTimeLimit *int64 `json:"GameServerSessionProtectionTimeLimit,omitempty" name:"GameServerSessionProtectionTimeLimit"`
+
+	// Whether to select scaling. Valid values: SCALING_SELECTED, SCALING_UNSELECTED. Default value: SCALING_UNSELECTED.
+	SelectedScalingType *string `json:"SelectedScalingType,omitempty" name:"SelectedScalingType"`
+
+	// Whether to associate the fleet with a CCN instance: CCN_SELECTED_BEFORE_CREATE (associate before creation), CCN_SELECTED_AFTER_CREATE (associated after creation), or CCN_UNSELECTED (do not associate); CCN_UNSELECTED by default
+	SelectedCcnType *string `json:"SelectedCcnType,omitempty" name:"SelectedCcnType"`
+
+	// Tag list. Up to 50 tags.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// System disk. It can be a SSD (CLOUD_SSD) with 100-500 GB capacity or a Premium Cloud Storage disk (CLOUD_PREMIUM) with 50-500 GB capacity. The increment is 1.
+	SystemDiskInfo *DiskInfo `json:"SystemDiskInfo,omitempty" name:"SystemDiskInfo"`
+
+	// Data disk. It can be SSD disks (CLOUD_SSD) with 100-32000 GB capacity or Premium Cloud Storage disks (CLOUD_PREMIUM) with 10-32000 GB capacity. The increment is 10. 
+	DataDiskInfo []*DiskInfo `json:"DataDiskInfo,omitempty" name:"DataDiskInfo"`
+
+	// Whether to select to replicate the timer policy: TIMER_SELECTED or TIMER_UNSELECTED. The default value is TIMER_UNSELECTED.
+	SelectedTimerType *string `json:"SelectedTimerType,omitempty" name:"SelectedTimerType"`
+
+	// Information of the CCN instance, including the owner account and the instance ID.
+	CcnInfos []*CcnInfo `json:"CcnInfos,omitempty" name:"CcnInfos"`
+
+	// Maximum outbound public network bandwidth of the server fleet. Value range: 1 - 200 Mbps. Default value: 100 Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
 type CopyFleetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Server fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
@@ -131,20 +193,22 @@ func (r *CopyFleetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CopyFleetResponseParams struct {
+	// Server fleet attributes
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	FleetAttributes []*FleetAttributes `json:"FleetAttributes,omitempty" name:"FleetAttributes"`
+
+	// The number of server fleets
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CopyFleetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Server fleet attributes
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		FleetAttributes []*FleetAttributes `json:"FleetAttributes,omitempty" name:"FleetAttributes"`
-
-		// The number of server fleets
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CopyFleetResponseParams `json:"Response"`
 }
 
 func (r *CopyFleetResponse) ToJsonString() string {
@@ -158,9 +222,39 @@ func (r *CopyFleetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGameServerSessionRequestParams struct {
+	// The maximum number of players, which cannot be less than 0.
+	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
+
+	// Alias ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
+	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
+
+	// Creator ID. Up to 1024 ASCII characters are allowed.
+	CreatorId *string `json:"CreatorId,omitempty" name:"CreatorId"`
+
+	// Fleet ID. You need to specify an alias ID or fleet ID for each request. If both of them are specified, the fleet ID shall prevail.
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Game attributes. Up to 16 groups of attributes are allowed.
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
+
+	// The attribute details of game server session. Up to 4096 ASCII characters are allowed.
+	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
+
+	// The custom ID of game server session. Up to 4096 ASCII characters are allowed.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Idempotency token. Up to 48 ASCII characters are allowed.
+	IdempotencyToken *string `json:"IdempotencyToken,omitempty" name:"IdempotencyToken"`
+
+	// The name of game server session. Up to 1024 ASCII characters are allowed.
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type CreateGameServerSessionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The maximum number of players, which cannot be less than 0.
 	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
 
@@ -216,17 +310,19 @@ func (r *CreateGameServerSessionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGameServerSessionResponseParams struct {
+	// Game server session
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GameServerSession *GameServerSession `json:"GameServerSession,omitempty" name:"GameServerSession"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateGameServerSessionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSession *GameServerSession `json:"GameServerSession,omitempty" name:"GameServerSession"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateGameServerSessionResponseParams `json:"Response"`
 }
 
 func (r *CreateGameServerSessionResponse) ToJsonString() string {
@@ -241,7 +337,6 @@ func (r *CreateGameServerSessionResponse) FromJsonString(s string) error {
 }
 
 type Credentials struct {
-
 	// SSH private key
 	Secret *string `json:"Secret,omitempty" name:"Secret"`
 
@@ -249,9 +344,21 @@ type Credentials struct {
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 }
 
+// Predefined struct for user
+type DeleteTimerScalingPolicyRequestParams struct {
+	// Unique ID of the policy
+	TimerId *string `json:"TimerId,omitempty" name:"TimerId"`
+
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Scheduled scaling policy name
+	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
+}
+
 type DeleteTimerScalingPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of the policy
 	TimerId *string `json:"TimerId,omitempty" name:"TimerId"`
 
@@ -283,13 +390,15 @@ func (r *DeleteTimerScalingPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteTimerScalingPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteTimerScalingPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteTimerScalingPolicyResponseParams `json:"Response"`
 }
 
 func (r *DeleteTimerScalingPolicyResponse) ToJsonString() string {
@@ -303,9 +412,30 @@ func (r *DeleteTimerScalingPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionDetailsRequestParams struct {
+	// Alias ID
+	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
+
+	// Fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Maximum number of entries in a single query
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
+	StatusFilter *string `json:"StatusFilter,omitempty" name:"StatusFilter"`
+}
+
 type DescribeGameServerSessionDetailsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alias ID
 	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
 
@@ -349,21 +479,23 @@ func (r *DescribeGameServerSessionDetailsRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionDetailsResponseParams struct {
+	// List of game server session details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GameServerSessionDetails []*GameServerSessionDetail `json:"GameServerSessionDetails,omitempty" name:"GameServerSessionDetails"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGameServerSessionDetailsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of game server session details
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessionDetails []*GameServerSessionDetail `json:"GameServerSessionDetails,omitempty" name:"GameServerSessionDetails"`
-
-		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGameServerSessionDetailsResponseParams `json:"Response"`
 }
 
 func (r *DescribeGameServerSessionDetailsResponse) ToJsonString() string {
@@ -377,9 +509,15 @@ func (r *DescribeGameServerSessionDetailsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionPlacementRequestParams struct {
+	// Unique ID of game server session placement
+	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
+}
+
 type DescribeGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of game server session placement
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 }
@@ -403,16 +541,18 @@ func (r *DescribeGameServerSessionPlacementRequest) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionPlacementResponseParams struct {
+	// Game server session placement
+	GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGameServerSessionPlacementResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session placement
-		GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGameServerSessionPlacementResponseParams `json:"Response"`
 }
 
 func (r *DescribeGameServerSessionPlacementResponse) ToJsonString() string {
@@ -426,9 +566,30 @@ func (r *DescribeGameServerSessionPlacementResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionsRequestParams struct {
+	// Alias ID
+	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
+
+	// Fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Maximum number of entries in a single query
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Game server session status. Valid values: ACTIVE, ACTIVATING, TERMINATED, TERMINATING, ERROR
+	StatusFilter *string `json:"StatusFilter,omitempty" name:"StatusFilter"`
+}
+
 type DescribeGameServerSessionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alias ID
 	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
 
@@ -472,21 +633,23 @@ func (r *DescribeGameServerSessionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeGameServerSessionsResponseParams struct {
+	// Game server session list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeGameServerSessionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
-
-		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeGameServerSessionsResponseParams `json:"Response"`
 }
 
 func (r *DescribeGameServerSessionsResponse) ToJsonString() string {
@@ -500,8 +663,14 @@ func (r *DescribeGameServerSessionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceTypesRequestParams struct {
+
+}
+
 type DescribeInstanceTypesRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeInstanceTypesRequest) ToJsonString() string {
@@ -516,22 +685,25 @@ func (r *DescribeInstanceTypesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceTypesRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstanceTypesResponseParams struct {
+	// List of server types
+	InstanceTypeList []*InstanceTypeInfo `json:"InstanceTypeList,omitempty" name:"InstanceTypeList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstanceTypesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of server types
-		InstanceTypeList []*InstanceTypeInfo `json:"InstanceTypeList,omitempty" name:"InstanceTypeList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstanceTypesResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstanceTypesResponse) ToJsonString() string {
@@ -545,9 +717,30 @@ func (r *DescribeInstanceTypesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePlayerSessionsRequestParams struct {
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Maximum number of entries in a single query
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Player ID. It should contain 1 to 1024 ASCII characters.
+	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
+
+	// Player session ID. It should contain 1 to 1024 ASCII characters.
+	PlayerSessionId *string `json:"PlayerSessionId,omitempty" name:"PlayerSessionId"`
+
+	// Player session status. Valid values: RESERVED, ACTIVE, COMPLETED, TIMEDOUT
+	PlayerSessionStatusFilter *string `json:"PlayerSessionStatusFilter,omitempty" name:"PlayerSessionStatusFilter"`
+}
+
 type DescribePlayerSessionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
@@ -591,21 +784,23 @@ func (r *DescribePlayerSessionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePlayerSessionsResponseParams struct {
+	// Player session list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePlayerSessionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Player session list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
-
-		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePlayerSessionsResponseParams `json:"Response"`
 }
 
 func (r *DescribePlayerSessionsResponse) ToJsonString() string {
@@ -619,9 +814,30 @@ func (r *DescribePlayerSessionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTimerScalingPoliciesRequestParams struct {
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Scheduled scaling policy name
+	TimerName *string `json:"TimerName,omitempty" name:"TimerName"`
+
+	// Start time of the scheduled scaling policy
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time of the scheduled scaling policy
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeTimerScalingPoliciesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the fleet to be bound with the policy
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
@@ -665,21 +881,23 @@ func (r *DescribeTimerScalingPoliciesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTimerScalingPoliciesResponseParams struct {
+	// Configuration of the scheduled scaling policy
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	TimerScalingPolicies []*TimerScalingPolicy `json:"TimerScalingPolicies,omitempty" name:"TimerScalingPolicies"`
+
+	// Total number of scheduled scaling policies
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTimerScalingPoliciesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Configuration of the scheduled scaling policy
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		TimerScalingPolicies []*TimerScalingPolicy `json:"TimerScalingPolicies,omitempty" name:"TimerScalingPolicies"`
-
-		// Total number of scheduled scaling policies
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTimerScalingPoliciesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTimerScalingPoliciesResponse) ToJsonString() string {
@@ -694,7 +912,6 @@ func (r *DescribeTimerScalingPoliciesResponse) FromJsonString(s string) error {
 }
 
 type DesiredPlayerSession struct {
-
 	// Unique player ID associated with player session
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
 
@@ -703,7 +920,6 @@ type DesiredPlayerSession struct {
 }
 
 type DiskInfo struct {
-
 	// Disk type: Premium Cloud Storage (CLOUD_PREMIUM) or SSD (CLOUD_SSD)
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
@@ -711,9 +927,21 @@ type DiskInfo struct {
 	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
 }
 
+// Predefined struct for user
+type EndGameServerSessionAndProcessRequestParams struct {
+	// Game server session ID. If a game server session ID is passed in, its corresponding processes, game server sessions, and player sessions will be terminated.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// The public IP of the CVM. You need to pass in `IpAddress` and `Port` at the same time to terminate the matched processes, game server sessions and player sessions (if any exists). It does not take effect in case only the `IpAddress` passed in.
+	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// Port number. Value range: 1025 - 60000. You need to pass in `IpAddress` and `Port` at the same time to terminate the matched processes, game server sessions (if any exists) and player sessions (if any exists). It does not take effect in case only the `IpAddress` passed in.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+}
+
 type EndGameServerSessionAndProcessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. If a game server session ID is passed in, its corresponding processes, game server sessions, and player sessions will be terminated.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
@@ -745,13 +973,15 @@ func (r *EndGameServerSessionAndProcessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type EndGameServerSessionAndProcessResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type EndGameServerSessionAndProcessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *EndGameServerSessionAndProcessResponseParams `json:"Response"`
 }
 
 func (r *EndGameServerSessionAndProcessResponse) ToJsonString() string {
@@ -766,7 +996,6 @@ func (r *EndGameServerSessionAndProcessResponse) FromJsonString(s string) error 
 }
 
 type FleetAttributes struct {
-
 	// Asset package ID
 	AssetId *string `json:"AssetId,omitempty" name:"AssetId"`
 
@@ -850,7 +1079,6 @@ type FleetAttributes struct {
 }
 
 type GameProperty struct {
-
 	// Attribute name. Up to 32 ASCII characters are allowed.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -859,7 +1087,6 @@ type GameProperty struct {
 }
 
 type GameServerSession struct {
-
 	// Game server session creation time
 	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
 
@@ -942,7 +1169,6 @@ type GameServerSession struct {
 }
 
 type GameServerSessionDetail struct {
-
 	// Game server session
 	GameServerSession *GameServerSession `json:"GameServerSession,omitempty" name:"GameServerSession"`
 
@@ -952,7 +1178,6 @@ type GameServerSessionDetail struct {
 }
 
 type GameServerSessionPlacement struct {
-
 	// Deployment ID
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 
@@ -1017,9 +1242,15 @@ type GameServerSessionPlacement struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
+// Predefined struct for user
+type GetGameServerSessionLogUrlRequestParams struct {
+	// Game server session ID. It should contain 1 to 48 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+}
+
 type GetGameServerSessionLogUrlRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. It should contain 1 to 48 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 }
@@ -1043,17 +1274,19 @@ func (r *GetGameServerSessionLogUrlRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetGameServerSessionLogUrlResponseParams struct {
+	// Log download URL. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	PreSignedUrl *string `json:"PreSignedUrl,omitempty" name:"PreSignedUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetGameServerSessionLogUrlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log download URL. It should contain 1 to 1024 ASCII characters.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		PreSignedUrl *string `json:"PreSignedUrl,omitempty" name:"PreSignedUrl"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetGameServerSessionLogUrlResponseParams `json:"Response"`
 }
 
 func (r *GetGameServerSessionLogUrlResponse) ToJsonString() string {
@@ -1067,9 +1300,18 @@ func (r *GetGameServerSessionLogUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetInstanceAccessRequestParams struct {
+	// Server fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type GetInstanceAccessRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Server fleet ID
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
@@ -1097,16 +1339,18 @@ func (r *GetInstanceAccessRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetInstanceAccessResponseParams struct {
+	// Credentials required for instance login
+	InstanceAccess *InstanceAccess `json:"InstanceAccess,omitempty" name:"InstanceAccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetInstanceAccessResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Credentials required for instance login
-		InstanceAccess *InstanceAccess `json:"InstanceAccess,omitempty" name:"InstanceAccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetInstanceAccessResponseParams `json:"Response"`
 }
 
 func (r *GetInstanceAccessResponse) ToJsonString() string {
@@ -1121,7 +1365,6 @@ func (r *GetInstanceAccessResponse) FromJsonString(s string) error {
 }
 
 type InboundPermission struct {
-
 	// Start port number. Minimum value: 1025.
 	FromPort *uint64 `json:"FromPort,omitempty" name:"FromPort"`
 
@@ -1136,7 +1379,6 @@ type InboundPermission struct {
 }
 
 type InstanceAccess struct {
-
 	// Credentials required for instance access
 	Credentials *Credentials `json:"Credentials,omitempty" name:"Credentials"`
 
@@ -1154,7 +1396,6 @@ type InstanceAccess struct {
 }
 
 type InstanceTypeInfo struct {
-
 	// Name of the server type, such as `Standard SA1`
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
@@ -1171,9 +1412,21 @@ type InstanceTypeInfo struct {
 	NetworkCard *uint64 `json:"NetworkCard,omitempty" name:"NetworkCard"`
 }
 
+// Predefined struct for user
+type JoinGameServerSessionBatchRequestParams struct {
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Player ID list. At least 1 ID and up to 25 IDs.
+	PlayerIds []*string `json:"PlayerIds,omitempty" name:"PlayerIds"`
+
+	// Player custom data
+	PlayerDataMap *PlayerDataMap `json:"PlayerDataMap,omitempty" name:"PlayerDataMap"`
+}
+
 type JoinGameServerSessionBatchRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
@@ -1205,17 +1458,19 @@ func (r *JoinGameServerSessionBatchRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type JoinGameServerSessionBatchResponseParams struct {
+	// Player session list. Up to 25 sessions.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type JoinGameServerSessionBatchResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Player session list. Up to 25 sessions.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		PlayerSessions []*PlayerSession `json:"PlayerSessions,omitempty" name:"PlayerSessions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *JoinGameServerSessionBatchResponseParams `json:"Response"`
 }
 
 func (r *JoinGameServerSessionBatchResponse) ToJsonString() string {
@@ -1229,9 +1484,21 @@ func (r *JoinGameServerSessionBatchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type JoinGameServerSessionRequestParams struct {
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// Player ID. Up to 1024 ASCII characters are allowed.
+	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
+
+	// Player custom data. Up to 2048 ASCII characters are allowed.
+	PlayerData *string `json:"PlayerData,omitempty" name:"PlayerData"`
+}
+
 type JoinGameServerSessionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
@@ -1263,17 +1530,19 @@ func (r *JoinGameServerSessionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type JoinGameServerSessionResponseParams struct {
+	// Player session
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PlayerSession *PlayerSession `json:"PlayerSession,omitempty" name:"PlayerSession"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type JoinGameServerSessionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Player session
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PlayerSession *PlayerSession `json:"PlayerSession,omitempty" name:"PlayerSession"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *JoinGameServerSessionResponseParams `json:"Response"`
 }
 
 func (r *JoinGameServerSessionResponse) ToJsonString() string {
@@ -1288,7 +1557,6 @@ func (r *JoinGameServerSessionResponse) FromJsonString(s string) error {
 }
 
 type PlacedPlayerSession struct {
-
 	// Player ID
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
 
@@ -1297,7 +1565,6 @@ type PlacedPlayerSession struct {
 }
 
 type PlayerDataMap struct {
-
 	// The key of player custom data. It should contain 1 to 1024 ASCII characters.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1306,7 +1573,6 @@ type PlayerDataMap struct {
 }
 
 type PlayerLatency struct {
-
 	// Player ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PlayerId *string `json:"PlayerId,omitempty" name:"PlayerId"`
@@ -1320,7 +1586,6 @@ type PlayerLatency struct {
 }
 
 type PlayerSession struct {
-
 	// Player session creation time
 	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
 
@@ -1359,9 +1624,15 @@ type PlayerSession struct {
 	TerminationTime *string `json:"TerminationTime,omitempty" name:"TerminationTime"`
 }
 
+// Predefined struct for user
+type PutTimerScalingPolicyRequestParams struct {
+	// Configuration of the scheduled scaling policy
+	TimerScalingPolicy *TimerScalingPolicy `json:"TimerScalingPolicy,omitempty" name:"TimerScalingPolicy"`
+}
+
 type PutTimerScalingPolicyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Configuration of the scheduled scaling policy
 	TimerScalingPolicy *TimerScalingPolicy `json:"TimerScalingPolicy,omitempty" name:"TimerScalingPolicy"`
 }
@@ -1385,13 +1656,15 @@ func (r *PutTimerScalingPolicyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type PutTimerScalingPolicyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type PutTimerScalingPolicyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *PutTimerScalingPolicyResponseParams `json:"Response"`
 }
 
 func (r *PutTimerScalingPolicyResponse) ToJsonString() string {
@@ -1406,7 +1679,6 @@ func (r *PutTimerScalingPolicyResponse) FromJsonString(s string) error {
 }
 
 type RelatedCcnInfo struct {
-
 	// Account of the CCN instance owner
 	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
 
@@ -1418,7 +1690,6 @@ type RelatedCcnInfo struct {
 }
 
 type ResourceCreationLimitPolicy struct {
-
 	// Creation quantity. Minimum value: 1. Default value: 2.
 	NewGameServerSessionsPerCreator *uint64 `json:"NewGameServerSessionsPerCreator,omitempty" name:"NewGameServerSessionsPerCreator"`
 
@@ -1427,7 +1698,6 @@ type ResourceCreationLimitPolicy struct {
 }
 
 type RuntimeConfiguration struct {
-
 	// Game session timeout. Value range: 1-600. Unit: second.
 	GameServerSessionActivationTimeoutSeconds *uint64 `json:"GameServerSessionActivationTimeoutSeconds,omitempty" name:"GameServerSessionActivationTimeoutSeconds"`
 
@@ -1438,9 +1708,72 @@ type RuntimeConfiguration struct {
 	ServerProcesses []*ServerProcesse `json:"ServerProcesses,omitempty" name:"ServerProcesses"`
 }
 
+// Predefined struct for user
+type SearchGameServerSessionsRequestParams struct {
+	// Alias ID
+	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
+
+	// Fleet ID
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Maximum number of entries in a single query
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Search filter expression. Valid values:
+	// gameServerSessionName: game session name in `String` type
+	// gameServerSessionId: game session ID in `String` type
+	// maximumSessions: maximum number of player sessions in `Number` type
+	// creationTimeMillis: creation time in milliseconds in `Number` type
+	// playerSessionCount: current number of player sessions in `Number` type
+	// hasAvailablePlayerSessions: whether there is available player session in `String` type. Valid values: true, false
+	// gameServerSessionProperties: game session attributes in `String` type
+	// 
+	// Expressions in `String` type support = and <> for judgment
+	// Expressions in `Number` type support =, <>, >, >=, <, and <= for judgment
+	// 
+	// Example:
+	// If FilterExpression takes the value:
+	// playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+	// It means searching for game sessions that have at least two players and have player sessions available.
+	// If FilterExpression takes the value:
+	// gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+	// 
+	// it means
+	// searching for game sessions that meets the following game server session attributes
+	// {
+	//     "GameProperties":[
+	//         {
+	//             "Key":"K1",
+	//             "Value":"V1"
+	//         },
+	//         {
+	//             "Key":"K2",
+	//             "Value":"V2"
+	//         },
+	//         {
+	//             "Key":"K3",
+	//             "Value":"V3"
+	//         }
+	//     ]
+	// }
+	FilterExpression *string `json:"FilterExpression,omitempty" name:"FilterExpression"`
+
+	// Sorting keyword
+	// Valid values:
+	// gameServerSessionName: game session name in `String` type
+	// gameServerSessionId: game session ID in `String` type
+	// maximumSessions: maximum number of player sessions in `Number` type
+	// creationTimeMillis: creation time in milliseconds in `Number` type
+	// playerSessionCount: current number of player sessions in `Number` type
+	SortExpression *string `json:"SortExpression,omitempty" name:"SortExpression"`
+}
+
 type SearchGameServerSessionsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Alias ID
 	AliasId *string `json:"AliasId,omitempty" name:"AliasId"`
 
@@ -1526,21 +1859,23 @@ func (r *SearchGameServerSessionsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchGameServerSessionsResponseParams struct {
+	// Game server session list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
+
+	// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
+	// Note: this field may return `null`, indicating that no valid value is obtained.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SearchGameServerSessionsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		GameServerSessions []*GameServerSession `json:"GameServerSessions,omitempty" name:"GameServerSessions"`
-
-		// Pagination offset, which is used for querying the next page. It should contain 1 to 1024 ASCII characters.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SearchGameServerSessionsResponseParams `json:"Response"`
 }
 
 func (r *SearchGameServerSessionsResponse) ToJsonString() string {
@@ -1555,7 +1890,6 @@ func (r *SearchGameServerSessionsResponse) FromJsonString(s string) error {
 }
 
 type ServerProcesse struct {
-
 	// Number of concurrent processes. Value range of total concurrent processes: 1-50.
 	ConcurrentExecutions *uint64 `json:"ConcurrentExecutions,omitempty" name:"ConcurrentExecutions"`
 
@@ -1566,9 +1900,21 @@ type ServerProcesse struct {
 	Parameters *string `json:"Parameters,omitempty" name:"Parameters"`
 }
 
+// Predefined struct for user
+type SetServerReservedRequestParams struct {
+	// ID of the fleet to be bound with the policy
+	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether the instance is retained. Valid values: 1 (retained), 0 (not retained). Default value: 0.
+	ReserveValue *int64 `json:"ReserveValue,omitempty" name:"ReserveValue"`
+}
+
 type SetServerReservedRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the fleet to be bound with the policy
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
 
@@ -1600,13 +1946,15 @@ func (r *SetServerReservedRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetServerReservedResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SetServerReservedResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SetServerReservedResponseParams `json:"Response"`
 }
 
 func (r *SetServerReservedResponse) ToJsonString() string {
@@ -1620,9 +1968,36 @@ func (r *SetServerReservedResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartGameServerSessionPlacementRequestParams struct {
+	// The unique ID of the game server session placement. It should contain up to 48 ASCII characters, supporting [a-zA-Z0-9-]+.
+	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
+
+	// Game server session queue name
+	GameServerSessionQueueName *string `json:"GameServerSessionQueueName,omitempty" name:"GameServerSessionQueueName"`
+
+	// The maximum number of players that can be connected simultaneously to the game session. It should a value between 1 to the maximum number of player sessions.
+	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
+
+	// Player game session information
+	DesiredPlayerSessions []*DesiredPlayerSession `json:"DesiredPlayerSessions,omitempty" name:"DesiredPlayerSessions"`
+
+	// Player game session attributes
+	GameProperties []*GameProperty `json:"GameProperties,omitempty" name:"GameProperties"`
+
+	// Data of game server sessions. Up to 4096 ASCII characters are allowed.
+	GameServerSessionData *string `json:"GameServerSessionData,omitempty" name:"GameServerSessionData"`
+
+	// Name of game server sessions. Up to 4096 ASCII characters are allowed.
+	GameServerSessionName *string `json:"GameServerSessionName,omitempty" name:"GameServerSessionName"`
+
+	// Player latency
+	PlayerLatencies []*PlayerLatency `json:"PlayerLatencies,omitempty" name:"PlayerLatencies"`
+}
+
 type StartGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// The unique ID of the game server session placement. It should contain up to 48 ASCII characters, supporting [a-zA-Z0-9-]+.
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 
@@ -1674,16 +2049,18 @@ func (r *StartGameServerSessionPlacementRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartGameServerSessionPlacementResponseParams struct {
+	// Game server session placement
+	GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartGameServerSessionPlacementResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session placement
-		GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartGameServerSessionPlacementResponseParams `json:"Response"`
 }
 
 func (r *StartGameServerSessionPlacementResponse) ToJsonString() string {
@@ -1697,9 +2074,15 @@ func (r *StartGameServerSessionPlacementResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopGameServerSessionPlacementRequestParams struct {
+	// Unique ID of game server session placement
+	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
+}
+
 type StopGameServerSessionPlacementRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Unique ID of game server session placement
 	PlacementId *string `json:"PlacementId,omitempty" name:"PlacementId"`
 }
@@ -1723,16 +2106,18 @@ func (r *StopGameServerSessionPlacementRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopGameServerSessionPlacementResponseParams struct {
+	// Game server session placement
+	GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopGameServerSessionPlacementResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Game server session placement
-		GameServerSessionPlacement *GameServerSessionPlacement `json:"GameServerSessionPlacement,omitempty" name:"GameServerSessionPlacement"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopGameServerSessionPlacementResponseParams `json:"Response"`
 }
 
 func (r *StopGameServerSessionPlacementResponse) ToJsonString() string {
@@ -1747,7 +2132,6 @@ func (r *StopGameServerSessionPlacementResponse) FromJsonString(s string) error 
 }
 
 type Tag struct {
-
 	// Tag key. Up to 127 bytes are allowed.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
@@ -1756,14 +2140,12 @@ type Tag struct {
 }
 
 type TargetConfiguration struct {
-
 	// Ratio of reserved server session resource 
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TargetValue *uint64 `json:"TargetValue,omitempty" name:"TargetValue"`
 }
 
 type TimerConfiguration struct {
-
 	// The recurrence pattern of auto-scaling. `0`: undefined, `1`: once, `2`: daily, `3`: monthly, `4`: weekly
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TimerType *int64 `json:"TimerType,omitempty" name:"TimerType"`
@@ -1782,7 +2164,6 @@ type TimerConfiguration struct {
 }
 
 type TimerFleetCapacity struct {
-
 	// ID of the fleet to be bound with the policy
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FleetId *string `json:"FleetId,omitempty" name:"FleetId"`
@@ -1813,7 +2194,6 @@ type TimerFleetCapacity struct {
 }
 
 type TimerScalingPolicy struct {
-
 	// Unique ID of the policy. When it’s filled in, the policy will be updated.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TimerId *string `json:"TimerId,omitempty" name:"TimerId"`
@@ -1836,7 +2216,6 @@ type TimerScalingPolicy struct {
 }
 
 type TimerValue struct {
-
 	// Execute once every X day(s)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Day *int64 `json:"Day,omitempty" name:"Day"`
@@ -1854,9 +2233,15 @@ type TimerValue struct {
 	WeekDays []*int64 `json:"WeekDays,omitempty" name:"WeekDays"`
 }
 
+// Predefined struct for user
+type UpdateBucketAccelerateOptRequestParams struct {
+	// `true`: enable global acceleration; `false`: disable global acceleration
+	Allowed *bool `json:"Allowed,omitempty" name:"Allowed"`
+}
+
 type UpdateBucketAccelerateOptRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// `true`: enable global acceleration; `false`: disable global acceleration
 	Allowed *bool `json:"Allowed,omitempty" name:"Allowed"`
 }
@@ -1880,13 +2265,15 @@ func (r *UpdateBucketAccelerateOptRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateBucketAccelerateOptResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateBucketAccelerateOptResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateBucketAccelerateOptResponseParams `json:"Response"`
 }
 
 func (r *UpdateBucketAccelerateOptResponse) ToJsonString() string {
@@ -1900,9 +2287,27 @@ func (r *UpdateBucketAccelerateOptResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateBucketCORSOptRequestParams struct {
+	// Allowed access source. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedOrigins []*string `json:"AllowedOrigins,omitempty" name:"AllowedOrigins"`
+
+	// Allowed HTTP method(s). Multiple methods are allowed, including PUT, GET, POST, and HEAD. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedMethods []*string `json:"AllowedMethods,omitempty" name:"AllowedMethods"`
+
+	// Specifies the custom HTTP request headers that the browser is allowed to include in a CORS request. Wildcard (*) is supported, indicating allowing all headers (recommended). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	AllowedHeaders []*string `json:"AllowedHeaders,omitempty" name:"AllowedHeaders"`
+
+	// Sets the validity duration for the CORS configuration (in second). For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	MaxAgeSeconds *int64 `json:"MaxAgeSeconds,omitempty" name:"MaxAgeSeconds"`
+
+	// CORS response header(s) that can be exposed to the browser, case-insensitive. If this parameter is not specified, the browser can access only simple response headers Cache-Control, Content-Type, Expires, and Last-Modified by default. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
+	ExposeHeaders []*string `json:"ExposeHeaders,omitempty" name:"ExposeHeaders"`
+}
+
 type UpdateBucketCORSOptRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Allowed access source. For details, see [COS Documentation](https://intl.cloud.tencent.com/document/product/436/8279?from_cn_redirect=1).
 	AllowedOrigins []*string `json:"AllowedOrigins,omitempty" name:"AllowedOrigins"`
 
@@ -1942,13 +2347,15 @@ func (r *UpdateBucketCORSOptRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateBucketCORSOptResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateBucketCORSOptResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateBucketCORSOptResponseParams `json:"Response"`
 }
 
 func (r *UpdateBucketCORSOptResponse) ToJsonString() string {
@@ -1962,9 +2369,27 @@ func (r *UpdateBucketCORSOptResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateGameServerSessionRequestParams struct {
+	// Game server session ID. It should contain 1 to 256 ASCII characters.
+	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
+
+	// The maximum number of players, which cannot be less than 0.
+	MaximumPlayerSessionCount *uint64 `json:"MaximumPlayerSessionCount,omitempty" name:"MaximumPlayerSessionCount"`
+
+	// Name of the game server session. It should contain 1 to 1024 ASCII characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Player session creation policy, which includes `ACCEPT_ALL` (allow all players) and `DENY_ALL` (reject all players).
+	PlayerSessionCreationPolicy *string `json:"PlayerSessionCreationPolicy,omitempty" name:"PlayerSessionCreationPolicy"`
+
+	// Protection policy, which includes `NoProtection`·(no protection), `TimeLimitProtection` (time-limited protection) and `FullProtection` (full protection)
+	ProtectionPolicy *string `json:"ProtectionPolicy,omitempty" name:"ProtectionPolicy"`
+}
+
 type UpdateGameServerSessionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
 	GameServerSessionId *string `json:"GameServerSessionId,omitempty" name:"GameServerSessionId"`
 
@@ -2004,16 +2429,18 @@ func (r *UpdateGameServerSessionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateGameServerSessionResponseParams struct {
+	// Updated game session
+	GameServerSession *GameServerSession `json:"GameServerSession,omitempty" name:"GameServerSession"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateGameServerSessionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Updated game session
-		GameServerSession *GameServerSession `json:"GameServerSession,omitempty" name:"GameServerSession"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateGameServerSessionResponseParams `json:"Response"`
 }
 
 func (r *UpdateGameServerSessionResponse) ToJsonString() string {

@@ -20,9 +20,21 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AddUserContactRequestParams struct {
+	// Recipient name, which can contain up to 20 letters, digits, spaces, and special symbols `!@#$%^&*()_+-=()` and cannot begin with an underscore.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Email address, which can contain letters, digits, underscores, and the @ symbol, cannot begin with an underscore, and must be unique.
+	ContactInfo *string `json:"ContactInfo,omitempty" name:"ContactInfo"`
+
+	// Service type, which is fixed to `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type AddUserContactRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Recipient name, which can contain up to 20 letters, digits, spaces, and special symbols `!@#$%^&*()_+-=()` and cannot begin with an underscore.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -54,16 +66,18 @@ func (r *AddUserContactRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddUserContactResponseParams struct {
+	// ID of successfully added contact.
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddUserContactResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// ID of successfully added contact.
-		Id *int64 `json:"Id,omitempty" name:"Id"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddUserContactResponseParams `json:"Response"`
 }
 
 func (r *AddUserContactResponse) ToJsonString() string {
@@ -78,7 +92,6 @@ func (r *AddUserContactResponse) FromJsonString(s string) error {
 }
 
 type ContactItem struct {
-
 	// Contact ID.
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
@@ -89,9 +102,33 @@ type ContactItem struct {
 	Mail *string `json:"Mail,omitempty" name:"Mail"`
 }
 
+// Predefined struct for user
+type CreateDBDiagReportTaskRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2020-11-08T14:00:00+08:00".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as "2020-11-09T14:00:00+08:00".
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether to send an email. Valid values: 0 (yes), 1 (no).
+	SendMailFlag *int64 `json:"SendMailFlag,omitempty" name:"SendMailFlag"`
+
+	// Array of contact IDs to receive email.
+	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
+
+	// Array of contact group IDs to receive email.
+	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type CreateDBDiagReportTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -139,17 +176,19 @@ func (r *CreateDBDiagReportTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBDiagReportTaskResponseParams struct {
+	// Async task request ID, which can be used to query the execution result of an async task.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBDiagReportTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task request ID, which can be used to query the execution result of an async task.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBDiagReportTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateDBDiagReportTaskResponse) ToJsonString() string {
@@ -163,9 +202,21 @@ func (r *CreateDBDiagReportTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBDiagReportUrlRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Health report task ID, which can be queried through `DescribeDBDiagReportTasks`.
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type CreateDBDiagReportUrlRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -197,19 +248,21 @@ func (r *CreateDBDiagReportUrlRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateDBDiagReportUrlResponseParams struct {
+	// Health report URL.
+	ReportUrl *string `json:"ReportUrl,omitempty" name:"ReportUrl"`
+
+	// Expiration timestamp of health report URL (in seconds).
+	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateDBDiagReportUrlResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Health report URL.
-		ReportUrl *string `json:"ReportUrl,omitempty" name:"ReportUrl"`
-
-		// Expiration timestamp of health report URL (in seconds).
-		ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateDBDiagReportUrlResponseParams `json:"Response"`
 }
 
 func (r *CreateDBDiagReportUrlResponse) ToJsonString() string {
@@ -223,9 +276,39 @@ func (r *CreateDBDiagReportUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateKillTaskRequestParams struct {
+	// ID of the instance associated with the session killing task.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Task duration in seconds. Pass in `-1` to stop the task manually.
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Client IP, which is a task filter.
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name, which is a task filter. Multiple database names are separated by comma.
+	DB *string `json:"DB,omitempty" name:"DB"`
+
+	// Related command, which is a task filter. Multiple commands are separated by comma.
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Task filter. Filtering by single filter prefix is supported.
+	Info *string `json:"Info,omitempty" name:"Info"`
+
+	// User type, which is a task filter.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Session duration in seconds, which is a task filter.
+	Time *int64 `json:"Time,omitempty" name:"Time"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type CreateKillTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// ID of the instance associated with the session killing task.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -281,16 +364,18 @@ func (r *CreateKillTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateKillTaskResponseParams struct {
+	// Task status. `1` is returned if the session killing task is successfully created.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateKillTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Task status. `1` is returned if the session killing task is successfully created.
-		Status *int64 `json:"Status,omitempty" name:"Status"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateKillTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateKillTaskResponse) ToJsonString() string {
@@ -304,9 +389,30 @@ func (r *CreateKillTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMailProfileRequestParams struct {
+	// Email configuration.
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+
+	// Configuration level. Valid values: User (user-level), Instance (instance-level). For database inspection emails, it should be `User`. For scheduled task emails, it should be `Instance`.
+	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+
+	// Configuration name, which needs to be unique. For database inspection emails, this name can be customized as needed. For scheduled task emails, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+
+	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
+	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID bound with the configuration, which is set when the configuration level is `Instance`. Only one instance can be bound at a time. When the configuration level is `User`, leave this parameter empty.
+	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds"`
+}
+
 type CreateMailProfileRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Email configuration.
 	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
 
@@ -350,13 +456,15 @@ func (r *CreateMailProfileRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateMailProfileResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateMailProfileResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateMailProfileResponseParams `json:"Response"`
 }
 
 func (r *CreateMailProfileResponse) ToJsonString() string {
@@ -370,9 +478,18 @@ func (r *CreateMailProfileResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxySessionKillTaskRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type CreateProxySessionKillTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -400,16 +517,18 @@ func (r *CreateProxySessionKillTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateProxySessionKillTaskResponseParams struct {
+	// Async task ID that is returned after the session killing task is created.
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateProxySessionKillTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Async task ID that is returned after the session killing task is created.
-		AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateProxySessionKillTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateProxySessionKillTaskResponse) ToJsonString() string {
@@ -423,9 +542,27 @@ func (r *CreateProxySessionKillTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSchedulerMailProfileRequestParams struct {
+	// Value range: 1–7, representing Monday to Sunday respectively.
+	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration"`
+
+	// Email configuration.
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+
+	// Configuration name, which needs to be unique. For scheduled task emails, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+
+	// ID of the instance for which to configure subscription.
+	BindInstanceId *string `json:"BindInstanceId,omitempty" name:"BindInstanceId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type CreateSchedulerMailProfileRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Value range: 1–7, representing Monday to Sunday respectively.
 	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration"`
 
@@ -465,13 +602,15 @@ func (r *CreateSchedulerMailProfileRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSchedulerMailProfileResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSchedulerMailProfileResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSchedulerMailProfileResponseParams `json:"Response"`
 }
 
 func (r *CreateSchedulerMailProfileResponse) ToJsonString() string {
@@ -485,9 +624,27 @@ func (r *CreateSchedulerMailProfileResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityAuditLogExportTaskRequestParams struct {
+	// Security audit group ID.
+	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
+
+	// Exported log start time, such as 2020-12-28 00:00:00.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Exported log end time, such as 2020-12-28 01:00:00.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Log risk level list. Valid values: 0 (no risk), 1 (low risk), 2 (medium risk), 3 (high risk).
+	DangerLevels []*int64 `json:"DangerLevels,omitempty" name:"DangerLevels"`
+}
+
 type CreateSecurityAuditLogExportTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security audit group ID.
 	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
 
@@ -527,16 +684,18 @@ func (r *CreateSecurityAuditLogExportTaskRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateSecurityAuditLogExportTaskResponseParams struct {
+	// Log export task Id.
+	AsyncRequestId *uint64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateSecurityAuditLogExportTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Log export task Id.
-		AsyncRequestId *uint64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateSecurityAuditLogExportTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateSecurityAuditLogExportTaskResponse) ToJsonString() string {
@@ -550,9 +709,21 @@ func (r *CreateSecurityAuditLogExportTaskResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityAuditLogExportTasksRequestParams struct {
+	// Security audit group ID.
+	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
+
+	// Log export task ID list. This API will ignore task IDs that do not exist or have been deleted.
+	AsyncRequestIds []*uint64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DeleteSecurityAuditLogExportTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security audit group ID.
 	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
 
@@ -584,13 +755,15 @@ func (r *DeleteSecurityAuditLogExportTasksRequest) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteSecurityAuditLogExportTasksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteSecurityAuditLogExportTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteSecurityAuditLogExportTasksResponseParams `json:"Response"`
 }
 
 func (r *DeleteSecurityAuditLogExportTasksResponse) ToJsonString() string {
@@ -604,9 +777,18 @@ func (r *DeleteSecurityAuditLogExportTasksResponse) FromJsonString(s string) err
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllUserContactRequestParams struct {
+	// Service type, which is fixed to `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Array of contact names. Fuzzy search is supported.
+	Names []*string `json:"Names,omitempty" name:"Names"`
+}
+
 type DescribeAllUserContactRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service type, which is fixed to `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
@@ -634,20 +816,22 @@ func (r *DescribeAllUserContactRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllUserContactResponseParams struct {
+	// Total number of contacts.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Contact information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAllUserContactResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of contacts.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Contact information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAllUserContactResponseParams `json:"Response"`
 }
 
 func (r *DescribeAllUserContactResponse) ToJsonString() string {
@@ -661,9 +845,18 @@ func (r *DescribeAllUserContactResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllUserGroupRequestParams struct {
+	// Service type, which is fixed to `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Array of contact group names. Fuzzy search is supported.
+	Names []*string `json:"Names,omitempty" name:"Names"`
+}
+
 type DescribeAllUserGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Service type, which is fixed to `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
@@ -691,20 +884,22 @@ func (r *DescribeAllUserGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAllUserGroupResponseParams struct {
+	// Total number of groups.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Group information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Groups []*GroupItem `json:"Groups,omitempty" name:"Groups"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAllUserGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of groups.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Group information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Groups []*GroupItem `json:"Groups,omitempty" name:"Groups"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAllUserGroupResponseParams `json:"Response"`
 }
 
 func (r *DescribeAllUserGroupResponse) ToJsonString() string {
@@ -718,9 +913,21 @@ func (r *DescribeAllUserGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagEventRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Event ID, which can be obtained through the `DescribeDBDiagHistory` API.
+	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeDBDiagEventRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -752,47 +959,49 @@ func (r *DescribeDBDiagEventRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagEventResponseParams struct {
+	// Diagnosis item.
+	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
+
+	// Diagnosis type.
+	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
+
+	// Event ID.
+	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+
+	// Diagnosis event details. If there is no additional explanation information, the output will be empty.
+	Explanation *string `json:"Explanation,omitempty" name:"Explanation"`
+
+	// Diagnosis summary.
+	Outline *string `json:"Outline,omitempty" name:"Outline"`
+
+	// Found problem.
+	Problem *string `json:"Problem,omitempty" name:"Problem"`
+
+	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
+	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Suggestions. If there are no suggestions, the output will be empty.
+	Suggestions *string `json:"Suggestions,omitempty" name:"Suggestions"`
+
+	// Reserved field.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Metric *string `json:"Metric,omitempty" name:"Metric"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBDiagEventResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Diagnosis item.
-		DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
-
-		// Diagnosis type.
-		DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
-
-		// Event ID.
-		EventId *int64 `json:"EventId,omitempty" name:"EventId"`
-
-		// Diagnosis event details. If there is no additional explanation information, the output will be empty.
-		Explanation *string `json:"Explanation,omitempty" name:"Explanation"`
-
-		// Diagnosis summary.
-		Outline *string `json:"Outline,omitempty" name:"Outline"`
-
-		// Found problem.
-		Problem *string `json:"Problem,omitempty" name:"Problem"`
-
-		// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
-		Severity *int64 `json:"Severity,omitempty" name:"Severity"`
-
-		// Start time
-		StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-		// Suggestions. If there are no suggestions, the output will be empty.
-		Suggestions *string `json:"Suggestions,omitempty" name:"Suggestions"`
-
-		// Reserved field.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Metric *string `json:"Metric,omitempty" name:"Metric"`
-
-		// End time.
-		EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBDiagEventResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBDiagEventResponse) ToJsonString() string {
@@ -806,9 +1015,30 @@ func (r *DescribeDBDiagEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagEventsRequestParams struct {
+	// Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "2021-05-27 01:00:00". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Risk level list. Valid values in descending order of severity: `1` (critical), `2` (serious), `3` (alarm), `4` (warning), `5` (healthy).
+	Severities []*int64 `json:"Severities,omitempty" name:"Severities"`
+
+	// Instance ID list.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 50.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeDBDiagEventsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time in the format of “2021-05-27 00:00:00”. The earliest time that can be queried is 30 days before the current time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -852,19 +1082,21 @@ func (r *DescribeDBDiagEventsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagEventsResponseParams struct {
+	// Total number of diagnosis events.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Diagnosis event list.
+	Items []*DiagHistoryEventItem `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBDiagEventsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of diagnosis events.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Diagnosis event list.
-		Items []*DiagHistoryEventItem `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBDiagEventsResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBDiagEventsResponse) ToJsonString() string {
@@ -878,9 +1110,24 @@ func (r *DescribeDBDiagEventsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagHistoryRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2019-09-10 12:13:14".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeDBDiagHistoryRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -916,16 +1163,18 @@ func (r *DescribeDBDiagHistoryRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagHistoryResponseParams struct {
+	// Event description.
+	Events []*DiagHistoryEventItem `json:"Events,omitempty" name:"Events"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBDiagHistoryResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Event description.
-		Events []*DiagHistoryEventItem `json:"Events,omitempty" name:"Events"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBDiagHistoryResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBDiagHistoryResponse) ToJsonString() string {
@@ -939,9 +1188,39 @@ func (r *DescribeDBDiagHistoryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagReportTasksRequestParams struct {
+	// Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the last task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Array of instance IDs, which is used to filter the task list of a specified instance.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (scheduled task), and `MANUAL` (manual trigger).
+	Sources []*string `json:"Sources,omitempty" name:"Sources"`
+
+	// Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
+	HealthLevels *string `json:"HealthLevels,omitempty" name:"HealthLevels"`
+
+	// Task status. Valid values: `created` (created), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
+	TaskStatuses *string `json:"TaskStatuses,omitempty" name:"TaskStatuses"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeDBDiagReportTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -997,19 +1276,21 @@ func (r *DescribeDBDiagReportTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBDiagReportTasksResponseParams struct {
+	// Total number of tasks.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Task list.
+	Tasks []*HealthReportTask `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBDiagReportTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of tasks.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Task list.
-		Tasks []*HealthReportTask `json:"Tasks,omitempty" name:"Tasks"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBDiagReportTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBDiagReportTasksResponse) ToJsonString() string {
@@ -1023,9 +1304,21 @@ func (r *DescribeDBDiagReportTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBSpaceStatusRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Query period in days. The end date is the current date, and the query period is 7 days by default.
+	RangeDays *int64 `json:"RangeDays,omitempty" name:"RangeDays"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeDBSpaceStatusRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1057,25 +1350,27 @@ func (r *DescribeDBSpaceStatusRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDBSpaceStatusResponseParams struct {
+	// Disk usage growth in MB.
+	Growth *int64 `json:"Growth,omitempty" name:"Growth"`
+
+	// Available disk space in MB.
+	Remain *int64 `json:"Remain,omitempty" name:"Remain"`
+
+	// Total disk space in MB.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Estimated number of available days.
+	AvailableDays *int64 `json:"AvailableDays,omitempty" name:"AvailableDays"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDBSpaceStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Disk usage growth in MB.
-		Growth *int64 `json:"Growth,omitempty" name:"Growth"`
-
-		// Available disk space in MB.
-		Remain *int64 `json:"Remain,omitempty" name:"Remain"`
-
-		// Total disk space in MB.
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// Estimated number of available days.
-		AvailableDays *int64 `json:"AvailableDays,omitempty" name:"AvailableDays"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDBSpaceStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeDBSpaceStatusResponse) ToJsonString() string {
@@ -1089,9 +1384,33 @@ func (r *DescribeDBSpaceStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiagDBInstancesRequestParams struct {
+	// Whether it is an instance supported by DBbrain. It is fixed to `true`.
+	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Pagination parameter indicating the offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination parameter. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query by instance name.
+	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
+
+	// Query by instance ID.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Query by region.
+	Regions []*string `json:"Regions,omitempty" name:"Regions"`
+}
+
 type DescribeDiagDBInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Whether it is an instance supported by DBbrain. It is fixed to `true`.
 	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
 
@@ -1139,22 +1458,24 @@ func (r *DescribeDiagDBInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDiagDBInstancesResponseParams struct {
+	// Total number of instances.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Status of all instance inspection. 0: all instance inspection enabled, 1: all instance inspection disabled.
+	DbScanStatus *int64 `json:"DbScanStatus,omitempty" name:"DbScanStatus"`
+
+	// Instance information.
+	Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDiagDBInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of instances.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Status of all instance inspection. 0: all instance inspection enabled, 1: all instance inspection disabled.
-		DbScanStatus *int64 `json:"DbScanStatus,omitempty" name:"DbScanStatus"`
-
-		// Instance information.
-		Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDiagDBInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeDiagDBInstancesResponse) ToJsonString() string {
@@ -1168,9 +1489,21 @@ func (r *DescribeDiagDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHealthScoreRequestParams struct {
+	// Instance ID for which to get the health score.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Time to get the health score in the format of `2019-09-10 12:13:14`.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeHealthScoreRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID for which to get the health score.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1202,16 +1535,18 @@ func (r *DescribeHealthScoreRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeHealthScoreResponseParams struct {
+	// Health score and deduction for exceptions.
+	Data *HealthScoreInfo `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeHealthScoreResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Health score and deduction for exceptions.
-		Data *HealthScoreInfo `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeHealthScoreResponseParams `json:"Response"`
 }
 
 func (r *DescribeHealthScoreResponse) ToJsonString() string {
@@ -1225,9 +1560,27 @@ func (r *DescribeHealthScoreResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMailProfileRequestParams struct {
+	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
+	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Pagination offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of results per page in paginated queries. Maximum value: 50.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Query by email configuration name. The name of the scheduled task email configuration should be in the format of "scheduler_"+{instanceId}.
+	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+}
+
 type DescribeMailProfileRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
 	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
 
@@ -1267,21 +1620,23 @@ func (r *DescribeMailProfileRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMailProfileResponseParams struct {
+	// Email configuration details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList"`
+
+	// Total number of the configured emails.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMailProfileResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Email configuration details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList"`
-
-		// Total number of the configured emails.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMailProfileResponseParams `json:"Response"`
 }
 
 func (r *DescribeMailProfileResponse) ToJsonString() string {
@@ -1295,9 +1650,45 @@ func (r *DescribeMailProfileResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMySqlProcessListRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Thread ID, which is used to filter the thread list.
+	ID *uint64 `json:"ID,omitempty" name:"ID"`
+
+	// Thread operation account name, which is used to filter the thread list.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Thread operation host address, which is used to filter the thread list.
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Thread operation database, which is used to filter the thread list.
+	DB *string `json:"DB,omitempty" name:"DB"`
+
+	// Thread operation status, which is used to filter the thread list.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Thread execution type, which is used to filter the thread list.
+	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Minimum operation duration of the thread in seconds, which is used to filter the list of threads whose operation duration is greater than this value.
+	Time *uint64 `json:"Time,omitempty" name:"Time"`
+
+	// Thread operation statement, which is used to filter the thread list.
+	Info *string `json:"Info,omitempty" name:"Info"`
+
+	// Number of returned results. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeMySqlProcessListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1361,16 +1752,18 @@ func (r *DescribeMySqlProcessListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMySqlProcessListResponseParams struct {
+	// List of real-time threads.
+	ProcessList []*MySqlProcess `json:"ProcessList,omitempty" name:"ProcessList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMySqlProcessListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of real-time threads.
-		ProcessList []*MySqlProcess `json:"ProcessList,omitempty" name:"ProcessList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMySqlProcessListResponseParams `json:"Response"`
 }
 
 func (r *DescribeMySqlProcessListResponse) ToJsonString() string {
@@ -1384,9 +1777,21 @@ func (r *DescribeMySqlProcessListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxySessionKillTasksRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The async session killing task ID, which is obtained after the API `CreateProxySessionKillTask` is successfully called.
+	AsyncRequestIds []*int64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeProxySessionKillTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1418,19 +1823,21 @@ func (r *DescribeProxySessionKillTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeProxySessionKillTasksResponseParams struct {
+	// Session killing task details.
+	Tasks []*TaskInfo `json:"Tasks,omitempty" name:"Tasks"`
+
+	// Total number of tasks.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeProxySessionKillTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Session killing task details.
-		Tasks []*TaskInfo `json:"Tasks,omitempty" name:"Tasks"`
-
-		// Total number of tasks.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeProxySessionKillTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeProxySessionKillTasksResponse) ToJsonString() string {
@@ -1444,9 +1851,21 @@ func (r *DescribeProxySessionKillTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityAuditLogDownloadUrlsRequestParams struct {
+	// Security audit group ID.
+	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
+
+	// Async task Id.
+	AsyncRequestId *uint64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeSecurityAuditLogDownloadUrlsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security audit group ID.
 	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
 
@@ -1478,16 +1897,18 @@ func (r *DescribeSecurityAuditLogDownloadUrlsRequest) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityAuditLogDownloadUrlsResponseParams struct {
+	// List of COS URLs of the export results. If the result set is large, it may be divided into multiple URLs for download.
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityAuditLogDownloadUrlsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of COS URLs of the export results. If the result set is large, it may be divided into multiple URLs for download.
-		Urls []*string `json:"Urls,omitempty" name:"Urls"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityAuditLogDownloadUrlsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityAuditLogDownloadUrlsResponse) ToJsonString() string {
@@ -1501,9 +1922,27 @@ func (r *DescribeSecurityAuditLogDownloadUrlsResponse) FromJsonString(s string) 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityAuditLogExportTasksRequestParams struct {
+	// Security audit group ID.
+	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// List of log export task IDs.
+	AsyncRequestIds []*uint64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeSecurityAuditLogExportTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Security audit group ID.
 	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
 
@@ -1543,19 +1982,21 @@ func (r *DescribeSecurityAuditLogExportTasksRequest) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSecurityAuditLogExportTasksResponseParams struct {
+	// List of security audit log export tasks.
+	Tasks []*SecLogExportTaskInfo `json:"Tasks,omitempty" name:"Tasks"`
+
+	// Total numbers of security audit log export tasks.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSecurityAuditLogExportTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of security audit log export tasks.
-		Tasks []*SecLogExportTaskInfo `json:"Tasks,omitempty" name:"Tasks"`
-
-		// Total numbers of security audit log export tasks.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSecurityAuditLogExportTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeSecurityAuditLogExportTasksResponse) ToJsonString() string {
@@ -1569,9 +2010,24 @@ func (r *DescribeSecurityAuditLogExportTasksResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogTimeSeriesStatsRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2019-09-10 12:13:14".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeSlowLogTimeSeriesStatsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1607,22 +2063,24 @@ func (r *DescribeSlowLogTimeSeriesStatsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogTimeSeriesStatsResponseParams struct {
+	// Time range in seconds in histogram.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of slow logs in specified time range.
+	TimeSeries []*TimeSlice `json:"TimeSeries,omitempty" name:"TimeSeries"`
+
+	// Instance CPU utilization monitoring data in specified time range.
+	SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowLogTimeSeriesStatsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Time range in seconds in histogram.
-		Period *int64 `json:"Period,omitempty" name:"Period"`
-
-		// Number of slow logs in specified time range.
-		TimeSeries []*TimeSlice `json:"TimeSeries,omitempty" name:"TimeSeries"`
-
-		// Instance CPU utilization monitoring data in specified time range.
-		SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowLogTimeSeriesStatsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowLogTimeSeriesStatsResponse) ToJsonString() string {
@@ -1636,9 +2094,39 @@ func (r *DescribeSlowLogTimeSeriesStatsResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogTopSqlsRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time, such as "2019-09-10 12:13:14".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Sorting key. Valid values: QueryTime, ExecTimes, RowsSent, LockTime, RowsExamined. Default value: QueryTime.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Sorting order. Valid values: ASC (ascending), DESC (descending). Default value: DESC.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Database name array.
+	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeSlowLogTopSqlsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1694,19 +2182,21 @@ func (r *DescribeSlowLogTopSqlsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogTopSqlsResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of top slow SQL statements
+	Rows []*SlowLogTopSqlItem `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowLogTopSqlsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible entries.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of top slow SQL statements
-		Rows []*SlowLogTopSqlItem `json:"Rows,omitempty" name:"Rows"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowLogTopSqlsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowLogTopSqlsResponse) ToJsonString() string {
@@ -1720,9 +2210,27 @@ func (r *DescribeSlowLogTopSqlsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogUserHostStatsRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// MD5 value of SOL template
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+}
+
 type DescribeSlowLogUserHostStatsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1762,19 +2270,21 @@ func (r *DescribeSlowLogUserHostStatsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeSlowLogUserHostStatsResponseParams struct {
+	// Total number of source addresses.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Detailed list of the proportion of slow logs from each source address.
+	Items []*SlowLogHost `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeSlowLogUserHostStatsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of source addresses.
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// Detailed list of the proportion of slow logs from each source address.
-		Items []*SlowLogHost `json:"Items,omitempty" name:"Items"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeSlowLogUserHostStatsResponseParams `json:"Response"`
 }
 
 func (r *DescribeSlowLogUserHostStatsResponse) ToJsonString() string {
@@ -1788,9 +2298,30 @@ func (r *DescribeSlowLogUserHostStatsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceSchemaTimeSeriesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top databases. Maximum value: 100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top databases. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`. For other database instances, the default value is `TotalLength`.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Start date, such as "2021-01-01". It can be as early as 29 days before the current date and is 6 days before the end date by default.
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// End date, such as "2021-01-01". It can be as early as 29 days before the current date and is the current date by default.
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeTopSpaceSchemaTimeSeriesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1834,16 +2365,18 @@ func (r *DescribeTopSpaceSchemaTimeSeriesRequest) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceSchemaTimeSeriesResponseParams struct {
+	// Time series list of the returned space statistics of top databases.
+	TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitempty" name:"TopSpaceSchemaTimeSeries"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTopSpaceSchemaTimeSeriesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Time series list of the returned space statistics of top databases.
-		TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitempty" name:"TopSpaceSchemaTimeSeries"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTopSpaceSchemaTimeSeriesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTopSpaceSchemaTimeSeriesResponse) ToJsonString() string {
@@ -1857,9 +2390,24 @@ func (r *DescribeTopSpaceSchemaTimeSeriesResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceSchemasRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top databases. Maximum value: 100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top databases. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`. For other database instances, the default value is `TotalLength`.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeTopSpaceSchemasRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1895,19 +2443,21 @@ func (r *DescribeTopSpaceSchemasRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceSchemasResponseParams struct {
+	// List of the returned space statistics of top databases.
+	TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitempty" name:"TopSpaceSchemas"`
+
+	// Timestamp (in seconds) of database space data collection points
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTopSpaceSchemasResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the returned space statistics of top databases.
-		TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitempty" name:"TopSpaceSchemas"`
-
-		// Timestamp (in seconds) of database space data collection points
-		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTopSpaceSchemasResponseParams `json:"Response"`
 }
 
 func (r *DescribeTopSpaceSchemasResponse) ToJsonString() string {
@@ -1921,9 +2471,30 @@ func (r *DescribeTopSpaceSchemasResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceTableTimeSeriesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top tables. Maximum value: 100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Start date, such as "2021-01-01". It can be as early as 29 days before the current date and is 6 days before the end date by default.
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// End date, such as "2021-01-01". It can be as early as 29 days before the current date and is the current date by default.
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeTopSpaceTableTimeSeriesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1967,16 +2538,18 @@ func (r *DescribeTopSpaceTableTimeSeriesRequest) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceTableTimeSeriesResponseParams struct {
+	// Time series list of the returned space statistics of top tables.
+	TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTopSpaceTableTimeSeriesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Time series list of the returned space statistics of top tables.
-		TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTopSpaceTableTimeSeriesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTopSpaceTableTimeSeriesResponse) ToJsonString() string {
@@ -1990,9 +2563,24 @@ func (r *DescribeTopSpaceTableTimeSeriesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceTablesRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned top tables. Maximum value: 100. Default value: 20.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize (only supported for TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`. For other database instances, the default value is `TotalLength`.
+	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeTopSpaceTablesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2028,19 +2616,21 @@ func (r *DescribeTopSpaceTablesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTopSpaceTablesResponseParams struct {
+	// List of the returned space statistics of top tables.
+	TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables"`
+
+	// Timestamp (in seconds) of tablespace data collection points
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTopSpaceTablesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of the returned space statistics of top tables.
-		TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables"`
-
-		// Timestamp (in seconds) of tablespace data collection points
-		Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTopSpaceTablesResponseParams `json:"Response"`
 }
 
 func (r *DescribeTopSpaceTablesResponse) ToJsonString() string {
@@ -2054,9 +2644,24 @@ func (r *DescribeTopSpaceTablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserSqlAdviceRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// SQL statement.
+	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+
+	// Database name.
+	Schema *string `json:"Schema,omitempty" name:"Schema"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL), `dbbrain-mysql` (self-built MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type DescribeUserSqlAdviceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2092,34 +2697,36 @@ func (r *DescribeUserSqlAdviceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUserSqlAdviceResponseParams struct {
+	// SQL statement optimization suggestions, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
+	Advices *string `json:"Advices,omitempty" name:"Advices"`
+
+	// Notes of SQL statement optimization suggestions, which can be parsed into String arrays. If there is no need for optimization, the output will be empty.
+	Comments *string `json:"Comments,omitempty" name:"Comments"`
+
+	// SQL statement.
+	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+
+	// Database name.
+	Schema *string `json:"Schema,omitempty" name:"Schema"`
+
+	// DDL information of related tables, which can be parsed into JSON arrays.
+	Tables *string `json:"Tables,omitempty" name:"Tables"`
+
+	// SQL execution plan, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
+	SqlPlan *string `json:"SqlPlan,omitempty" name:"SqlPlan"`
+
+	// Cost saving details after SQL statement optimization, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
+	Cost *string `json:"Cost,omitempty" name:"Cost"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUserSqlAdviceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// SQL statement optimization suggestions, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
-		Advices *string `json:"Advices,omitempty" name:"Advices"`
-
-		// Notes of SQL statement optimization suggestions, which can be parsed into String arrays. If there is no need for optimization, the output will be empty.
-		Comments *string `json:"Comments,omitempty" name:"Comments"`
-
-		// SQL statement.
-		SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
-
-		// Database name.
-		Schema *string `json:"Schema,omitempty" name:"Schema"`
-
-		// DDL information of related tables, which can be parsed into JSON arrays.
-		Tables *string `json:"Tables,omitempty" name:"Tables"`
-
-		// SQL execution plan, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
-		SqlPlan *string `json:"SqlPlan,omitempty" name:"SqlPlan"`
-
-		// Cost saving details after SQL statement optimization, which can be parsed into JSON arrays. If there is no need for optimization, the output will be empty.
-		Cost *string `json:"Cost,omitempty" name:"Cost"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUserSqlAdviceResponseParams `json:"Response"`
 }
 
 func (r *DescribeUserSqlAdviceResponse) ToJsonString() string {
@@ -2134,7 +2741,6 @@ func (r *DescribeUserSqlAdviceResponse) FromJsonString(s string) error {
 }
 
 type DiagHistoryEventItem struct {
-
 	// Diagnosis type.
 	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
 
@@ -2168,7 +2774,6 @@ type DiagHistoryEventItem struct {
 }
 
 type EventInfo struct {
-
 	// Event ID.
 	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
 
@@ -2198,7 +2803,6 @@ type EventInfo struct {
 }
 
 type GroupItem struct {
-
 	// Group ID.
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
@@ -2210,7 +2814,6 @@ type GroupItem struct {
 }
 
 type HealthReportTask struct {
-
 	// Async task request ID.
 	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
@@ -2237,7 +2840,6 @@ type HealthReportTask struct {
 }
 
 type HealthScoreInfo struct {
-
 	// Exception details.
 	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitempty" name:"IssueTypes"`
 
@@ -2252,7 +2854,6 @@ type HealthScoreInfo struct {
 }
 
 type HealthStatus struct {
-
 	// Health score out of 100 points.
 	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
 
@@ -2268,7 +2869,6 @@ type HealthStatus struct {
 }
 
 type InstanceBasicInfo struct {
-
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2289,7 +2889,6 @@ type InstanceBasicInfo struct {
 }
 
 type InstanceConfs struct {
-
 	// Whether to enable database inspection. Valid values: Yes, No.
 	DailyInspection *string `json:"DailyInspection,omitempty" name:"DailyInspection"`
 
@@ -2298,7 +2897,6 @@ type InstanceConfs struct {
 }
 
 type InstanceInfo struct {
-
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2385,7 +2983,6 @@ type InstanceInfo struct {
 }
 
 type IssueTypeInfo struct {
-
 	// Metric categories: AVAILABILITY, MAINTAINABILITY, PERFORMANCE, and RELIABILITY
 	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
 
@@ -2396,9 +2993,27 @@ type IssueTypeInfo struct {
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 }
 
+// Predefined struct for user
+type KillMySqlThreadsRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The stage of a session killing task. Valid values: Prepare (preparation stage), Commit (commit stage).
+	Stage *string `json:"Stage,omitempty" name:"Stage"`
+
+	// The ID list of MySQL sessions to be killed. This parameter is used in the “Prepare” stage.
+	Threads []*int64 `json:"Threads,omitempty" name:"Threads"`
+
+	// Execution ID. This parameter is used in the “Commit” stage.
+	SqlExecId *string `json:"SqlExecId,omitempty" name:"SqlExecId"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
 type KillMySqlThreadsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2438,20 +3053,22 @@ func (r *KillMySqlThreadsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type KillMySqlThreadsResponseParams struct {
+	// The ID list of MySQL sessions that have been killed.
+	Threads []*int64 `json:"Threads,omitempty" name:"Threads"`
+
+	// Execution ID, which is output in the “Prepare” stage and used to specify the ID of the session to be killed in the “Commit” stage.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SqlExecId *string `json:"SqlExecId,omitempty" name:"SqlExecId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type KillMySqlThreadsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The ID list of MySQL sessions that have been killed.
-		Threads []*int64 `json:"Threads,omitempty" name:"Threads"`
-
-		// Execution ID, which is output in the “Prepare” stage and used to specify the ID of the session to be killed in the “Commit” stage.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		SqlExecId *string `json:"SqlExecId,omitempty" name:"SqlExecId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *KillMySqlThreadsResponseParams `json:"Response"`
 }
 
 func (r *KillMySqlThreadsResponse) ToJsonString() string {
@@ -2466,7 +3083,6 @@ func (r *KillMySqlThreadsResponse) FromJsonString(s string) error {
 }
 
 type MailConfiguration struct {
-
 	// Whether to enable email sending. Valid values: 0 (no), 1 (yes).
 	SendMail *int64 `json:"SendMail,omitempty" name:"SendMail"`
 
@@ -2483,9 +3099,24 @@ type MailConfiguration struct {
 	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
 }
 
+// Predefined struct for user
+type ModifyDiagDBInstanceConfRequestParams struct {
+	// Instance configuration, including inspection and overview switch.
+	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
+
+	// Target regions of the request. If the value is `All`, it is applied to all regions.
+	Regions *string `json:"Regions,omitempty" name:"Regions"`
+
+	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL).
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// ID of the instance to modify.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
 type ModifyDiagDBInstanceConfRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance configuration, including inspection and overview switch.
 	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
 
@@ -2521,13 +3152,15 @@ func (r *ModifyDiagDBInstanceConfRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyDiagDBInstanceConfResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyDiagDBInstanceConfResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyDiagDBInstanceConfResponseParams `json:"Response"`
 }
 
 func (r *ModifyDiagDBInstanceConfResponse) ToJsonString() string {
@@ -2542,7 +3175,6 @@ func (r *ModifyDiagDBInstanceConfResponse) FromJsonString(s string) error {
 }
 
 type MonitorFloatMetric struct {
-
 	// Metric name.
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
@@ -2555,7 +3187,6 @@ type MonitorFloatMetric struct {
 }
 
 type MonitorFloatMetricSeriesData struct {
-
 	// Monitoring metric.
 	Series []*MonitorFloatMetric `json:"Series,omitempty" name:"Series"`
 
@@ -2564,7 +3195,6 @@ type MonitorFloatMetricSeriesData struct {
 }
 
 type MonitorMetric struct {
-
 	// Metric name.
 	Metric *string `json:"Metric,omitempty" name:"Metric"`
 
@@ -2577,7 +3207,6 @@ type MonitorMetric struct {
 }
 
 type MonitorMetricSeriesData struct {
-
 	// Monitoring metric.
 	Series []*MonitorMetric `json:"Series,omitempty" name:"Series"`
 
@@ -2586,7 +3215,6 @@ type MonitorMetricSeriesData struct {
 }
 
 type MySqlProcess struct {
-
 	// Thread ID.
 	ID *string `json:"ID,omitempty" name:"ID"`
 
@@ -2613,7 +3241,6 @@ type MySqlProcess struct {
 }
 
 type ProfileInfo struct {
-
 	// Email language, such as `en`.
 	Language *string `json:"Language,omitempty" name:"Language"`
 
@@ -2622,13 +3249,11 @@ type ProfileInfo struct {
 }
 
 type SchemaItem struct {
-
 	// Database name
 	Schema *string `json:"Schema,omitempty" name:"Schema"`
 }
 
 type SchemaSpaceData struct {
-
 	// Database name.
 	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
 
@@ -2656,7 +3281,6 @@ type SchemaSpaceData struct {
 }
 
 type SchemaSpaceTimeSeries struct {
-
 	// Database name
 	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
 
@@ -2665,7 +3289,6 @@ type SchemaSpaceTimeSeries struct {
 }
 
 type ScoreDetail struct {
-
 	// Deduction item type. Valid values: availability, maintainability, performance, and reliability.
 	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
 
@@ -2681,7 +3304,6 @@ type ScoreDetail struct {
 }
 
 type ScoreItem struct {
-
 	// Exception diagnosis item name.
 	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
 
@@ -2699,7 +3321,6 @@ type ScoreItem struct {
 }
 
 type SecLogExportTaskInfo struct {
-
 	// Async task Id.
 	AsyncRequestId *uint64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
@@ -2738,7 +3359,6 @@ type SecLogExportTaskInfo struct {
 }
 
 type SlowLogHost struct {
-
 	// Source addresses.
 	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
 
@@ -2750,7 +3370,6 @@ type SlowLogHost struct {
 }
 
 type SlowLogTopSqlItem struct {
-
 	// Total SQL lock wait time in seconds.
 	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
 
@@ -2828,7 +3447,6 @@ type SlowLogTopSqlItem struct {
 }
 
 type TableSpaceData struct {
-
 	// Table name.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
 
@@ -2861,7 +3479,6 @@ type TableSpaceData struct {
 }
 
 type TableSpaceTimeSeries struct {
-
 	// Table name.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
 
@@ -2876,7 +3493,6 @@ type TableSpaceTimeSeries struct {
 }
 
 type TaskInfo struct {
-
 	// Async task ID.
 	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
@@ -2912,7 +3528,6 @@ type TaskInfo struct {
 }
 
 type TimeSlice struct {
-
 	// Total number
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 
@@ -2921,7 +3536,6 @@ type TimeSlice struct {
 }
 
 type UserProfile struct {
-
 	// Configured ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProfileId *string `json:"ProfileId,omitempty" name:"ProfileId"`

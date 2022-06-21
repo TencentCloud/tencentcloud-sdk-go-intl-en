@@ -20,9 +20,24 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type ListUserGroupsRequestParams struct {
+	// User directory ID
+	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+
+	// Number of queried pages
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of entries per page
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// Query conditions (user group ID or user group name)
+	Condition *string `json:"Condition,omitempty" name:"Condition"`
+}
+
 type ListUserGroupsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// User directory ID
 	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
 
@@ -58,25 +73,27 @@ func (r *ListUserGroupsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListUserGroupsResponseParams struct {
+	// User group list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Content []*UserGroup `json:"Content,omitempty" name:"Content"`
+
+	// Total number
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Pagination
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListUserGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// User group list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Content []*UserGroup `json:"Content,omitempty" name:"Content"`
-
-		// Total number
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Total *int64 `json:"Total,omitempty" name:"Total"`
-
-		// Pagination
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListUserGroupsResponseParams `json:"Response"`
 }
 
 func (r *ListUserGroupsResponse) ToJsonString() string {
@@ -91,7 +108,6 @@ func (r *ListUserGroupsResponse) FromJsonString(s string) error {
 }
 
 type Pageable struct {
-
 	// Number of entries per page
 	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
 
@@ -100,7 +116,6 @@ type Pageable struct {
 }
 
 type UserGroup struct {
-
 	// User group ID
 	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
 

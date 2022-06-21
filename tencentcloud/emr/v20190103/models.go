@@ -20,9 +20,18 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AddUsersForUserManagerRequestParams struct {
+	// Cluster string ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User information list
+	UserManagerUserList []*UserInfoForUserManager `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
+}
+
 type AddUsersForUserManagerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster string ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -50,21 +59,23 @@ func (r *AddUsersForUserManagerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddUsersForUserManagerResponseParams struct {
+	// The user list that is successfully added
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SuccessUserList []*string `json:"SuccessUserList,omitempty" name:"SuccessUserList"`
+
+	// The user list that is not successfully added
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FailedUserList []*string `json:"FailedUserList,omitempty" name:"FailedUserList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type AddUsersForUserManagerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The user list that is successfully added
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		SuccessUserList []*string `json:"SuccessUserList,omitempty" name:"SuccessUserList"`
-
-		// The user list that is not successfully added
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		FailedUserList []*string `json:"FailedUserList,omitempty" name:"FailedUserList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *AddUsersForUserManagerResponseParams `json:"Response"`
 }
 
 func (r *AddUsersForUserManagerResponse) ToJsonString() string {
@@ -79,7 +90,6 @@ func (r *AddUsersForUserManagerResponse) FromJsonString(s string) error {
 }
 
 type COSSettings struct {
-
 	// COS `SecretId`
 	CosSecretId *string `json:"CosSecretId,omitempty" name:"CosSecretId"`
 
@@ -91,7 +101,6 @@ type COSSettings struct {
 }
 
 type CdbInfo struct {
-
 	// Database instance
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
@@ -154,7 +163,6 @@ type CdbInfo struct {
 }
 
 type ClusterExternalServiceInfo struct {
-
 	// Dependency. `0`: Other clusters depend on the current cluster. `1`: The current cluster depends on other clusters.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DependType *int64 `json:"DependType,omitempty" name:"DependType"`
@@ -173,7 +181,6 @@ type ClusterExternalServiceInfo struct {
 }
 
 type ClusterInstancesInfo struct {
-
 	// ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Id *int64 `json:"Id,omitempty" name:"Id"`
@@ -366,9 +373,8 @@ type ClusterInstancesInfo struct {
 	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
 }
 
-type CreateInstanceRequest struct {
-	*tchttp.BaseRequest
-
+// Predefined struct for user
+type CreateInstanceRequestParams struct {
 	// Product ID. Different product IDs represent different EMR product versions. Valid values:
 	// <li>1: EMR v1.3.1</li>
 	// <li>2: EMR v2.0.1</li>
@@ -500,7 +506,150 @@ type CreateInstanceRequest struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
 
-	// 
+
+	VersionID *int64 `json:"VersionID,omitempty" name:"VersionID"`
+
+	// `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
+	MultiZone *bool `json:"MultiZone,omitempty" name:"MultiZone"`
+
+	// Node resource specs. The actual number of AZs is set, with the first AZ as the primary AZ, the second as the backup AZ, and the third as the arbitrator AZ. If the multi-AZ mode is not enabled, set the value to `1`.
+	MultiZoneSettings []*MultiZoneSetting `json:"MultiZoneSettings,omitempty" name:"MultiZoneSettings"`
+}
+
+type CreateInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Product ID. Different product IDs represent different EMR product versions. Valid values:
+	// <li>1: EMR v1.3.1</li>
+	// <li>2: EMR v2.0.1</li>
+	// <li>4: EMR v2.1.0</li>
+	// <li>7: EMR v3.0.0</li>
+	// <li>9: EMR v2.2.0</li>
+	// <li>11: ClickHouse v1.0.0</li>
+	// <li>13: Druid v1.0.0</li>
+	// <li>15: EMR v2.2.1</li>
+	// <li>16: EMR v2.3.0</li>
+	// <li>17: ClickHouse v1.1.0</li>
+	// <li>19: EMR v2.4.0</li>
+	// <li>20: EMR v2.5.0</li>
+	// <li>22: ClickHouse v1.2.0</li>
+	// <li>24: EMR TianQiong v1.0.0</li>
+	// <li>25: EMR v3.1.0</li>
+	// <li>26: Doris v1.0.0</li>
+	// <li>27: Kafka v1.0.0</li>
+	// <li>28: EMR v3.2.0</li>
+	// <li>29: EMR v2.5.1</li>
+	// <li>30: EMR v2.6.0</li>
+	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
+	// Enter an instance value: `hive` or `flink`.
+	Software []*string `json:"Software,omitempty" name:"Software"`
+
+	// Whether to enable high node availability. Valid values:
+	// <li>0: does not enable high availability of node.</li>
+	// <li>1: enables high availability of node.</li>
+	SupportHA *uint64 `json:"SupportHA,omitempty" name:"SupportHA"`
+
+	// Instance name.
+	// <li>Length limit: 6-36 characters.</li>
+	// <li>Only letters, numbers, dashes (-), and underscores (_) are supported.</li>
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance billing mode. Valid values:
+	// <li>0: pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Purchase duration of instance, which needs to be used together with `TimeUnit`.
+	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+	// <li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Time unit of instance purchase duration. Valid values:
+	// <li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	// <li>m: month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Instance login settings. This parameter allows you to set the login password or key for your purchased node.
+	// <li>If the key is set, the password will be only used for login to the native component WebUI.</li>
+	// <li>If the key is not set, the password will be used for login to all purchased nodes and the native component WebUI.</li>
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+
+	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
+	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
+
+	// Node resource specification.
+	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+
+	// Parameter required for enabling COS access.
+	COSSettings *COSSettings `json:"COSSettings,omitempty" name:"COSSettings"`
+
+	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Security group to which an instance belongs in the format of `sg-xxxxxxxx`. This parameter can be obtained from the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808) API.
+	SgId *string `json:"SgId,omitempty" name:"SgId"`
+
+	// [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings
+	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
+
+	// Whether auto-renewal is enabled. Valid values:
+	// <li>0: auto-renewal not enabled.</li>
+	// <li>1: auto-renewal enabled.</li>
+	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// Client token.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Whether to enable public IP access for master node. Valid values:
+	// <li>NEED_MASTER_WAN: enables public IP for master node.</li>
+	// <li>NOT_NEED_MASTER_WAN: does not enable.</li>Public IP is enabled for master node by default.
+	NeedMasterWan *string `json:"NeedMasterWan,omitempty" name:"NeedMasterWan"`
+
+	// Whether to enable remote public network login, i.e., port 22. When `SgId` is not empty, this parameter does not take effect.
+	RemoteLoginAtCreate *int64 `json:"RemoteLoginAtCreate,omitempty" name:"RemoteLoginAtCreate"`
+
+	// Whether to enable secure cluster. 0: no; other values: yes.
+	CheckSecurity *int64 `json:"CheckSecurity,omitempty" name:"CheckSecurity"`
+
+	// Accesses to external file system.
+	ExtendFsField *string `json:"ExtendFsField,omitempty" name:"ExtendFsField"`
+
+	// Tag description list. This parameter is used to bind a tag to a resource instance.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// List of spread placement group IDs. Only one can be specified currently.
+	// This parameter can be obtained in the `SecurityGroupId` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1) API.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// CBS disk encryption at the cluster level. 0: not encrypted, 1: encrypted
+	CbsEncrypt *uint64 `json:"CbsEncrypt,omitempty" name:"CbsEncrypt"`
+
+	// Hive-shared metadatabase type. Valid values:
+	// <li>EMR_DEFAULT_META: the cluster creates one by default.</li>
+	// <li>EMR_EXIST_META: the cluster uses the specified EMR-MetaDB instance.</li>
+	// <li>USER_CUSTOM_META: the cluster uses a custom MetaDB instance.</li>
+	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
+
+	// EMR-MetaDB instance
+	UnifyMetaInstanceId *string `json:"UnifyMetaInstanceId,omitempty" name:"UnifyMetaInstanceId"`
+
+	// Custom MetaDB instance information
+	MetaDBInfo *CustomMetaInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
+
+	// Custom application role.
+	ApplicationRole *string `json:"ApplicationRole,omitempty" name:"ApplicationRole"`
+
+	// Scenario-based values:
+	// Hadoop-Kudu
+	// Hadoop-Zookeeper
+	// Hadoop-Presto
+	// Hadoop-Hbase
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+
+	// Shared component information
+	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
+
 	VersionID *int64 `json:"VersionID,omitempty" name:"VersionID"`
 
 	// `true` indicates that the multi-AZ deployment mode is enabled. This parameter is available only in cluster creation and cannot be changed after setting.
@@ -560,17 +709,19 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstanceResponseParams struct {
+	// Instance ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Instance ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateInstanceResponseParams `json:"Response"`
 }
 
 func (r *CreateInstanceResponse) ToJsonString() string {
@@ -585,7 +736,6 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 }
 
 type CustomMetaInfo struct {
-
 	// JDBC connection to custom MetaDB instance beginning with `jdbc:mysql://`
 	MetaDataJdbcUrl *string `json:"MetaDataJdbcUrl,omitempty" name:"MetaDataJdbcUrl"`
 
@@ -597,7 +747,6 @@ type CustomMetaInfo struct {
 }
 
 type CustomServiceDefine struct {
-
 	// Custom parameter key
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -605,9 +754,38 @@ type CustomServiceDefine struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type DescribeClusterNodesRequestParams struct {
+	// Cluster instance ID in the format of emr-xxxxxxxx
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Node flag. Valid values:
+	// <li>all: gets the information of nodes in all types except TencentDB information.</li>
+	// <li>master: gets master node information.</li>
+	// <li>core: gets core node information.</li>
+	// <li>task: gets task node information.</li>
+	// <li>common: gets common node information.</li>
+	// <li>router: gets router node information.</li>
+	// <li>db: gets TencentDB information in normal status.</li>
+	// Note: only the above values are supported for the time being. Entering other values will cause errors.
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// Page number. Default value: 0, indicating the first page.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: 100. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Resource type. Valid values: all, host, pod. Default value: all
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// Searchable field
+	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields"`
+}
+
 type DescribeClusterNodesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID in the format of emr-xxxxxxxx
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -659,28 +837,30 @@ func (r *DescribeClusterNodesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeClusterNodesResponseParams struct {
+	// Total number of queried nodes
+	TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+	// List of node details
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	NodeList []*NodeHardwareInfo `json:"NodeList,omitempty" name:"NodeList"`
+
+	// List of tag keys owned by user
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Resource type list
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeClusterNodesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of queried nodes
-		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
-
-		// List of node details
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		NodeList []*NodeHardwareInfo `json:"NodeList,omitempty" name:"NodeList"`
-
-		// List of tag keys owned by user
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
-
-		// Resource type list
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		HardwareResourceTypeList []*string `json:"HardwareResourceTypeList,omitempty" name:"HardwareResourceTypeList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeClusterNodesResponseParams `json:"Response"`
 }
 
 func (r *DescribeClusterNodesResponse) ToJsonString() string {
@@ -694,9 +874,30 @@ func (r *DescribeClusterNodesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesListRequestParams struct {
+	// Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
+	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
+
+	// Page number. Default value: `0`, indicating the first page.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: `10`; maximum value: `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Sorting field. Valid values: <li>clusterId: Sorting by instance ID. </li><li>addTime: Sorting by instance creation time.</li><li>status: Sorting by instance status code.</li>
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sort ascending or descending based on `OrderField`. Valid values:<li>0: Descending.</li><li>1: Ascending.</li>Default value: `0`.
+	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
+
+	// Custom query
+	Filters []*Filters `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeInstancesListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
 	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
 
@@ -740,19 +941,21 @@ func (r *DescribeInstancesListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesListResponseParams struct {
+	// Number of eligible instances.
+	TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+	// Cluster instance list.
+	InstancesList []*EmrListInstance `json:"InstancesList,omitempty" name:"InstancesList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
-
-		// Cluster instance list.
-		InstancesList []*EmrListInstance `json:"InstancesList,omitempty" name:"InstancesList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesListResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesListResponse) ToJsonString() string {
@@ -766,9 +969,41 @@ func (r *DescribeInstancesListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesRequestParams struct {
+	// Cluster filtering policy. Valid values:
+	// <li>clusterList: queries the list of clusters except terminated ones.</li>
+	// <li>monitorManage: queries the list of clusters except those that have been terminated, are being created, or failed to be created.</li>
+	// <li>cloudHardwareManage/componentManage: reserved fields with the same meaning as `monitorManage`.</li>
+	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
+
+	// Queries by one or more instance IDs in the format of `emr-xxxxxxxx`. For the format of this parameter, please see the `id.N` section in [API Overview](https://intl.cloud.tencent.com/document/api/213/15688). If no instance ID is entered, the list of all instances under this `APPID` will be returned.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Page number. Default value: 0, indicating the first page.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results per page. Default value: 10. Maximum value: 100
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If this value is -1, the list of all instances will be returned.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Sorting field. Valid values:
+	// <li>clusterId: sorts by cluster ID.</li>
+	// <li>addTime: sorts by instance creation time.</li>
+	// <li>status: sorts by instance status code.</li>
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sorts according to `OrderField` in ascending or descending order. Valid values:
+	// <li>0: descending order.</li>
+	// <li>1: ascending order.</li>Default value: 0.
+	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
+}
+
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster filtering policy. Valid values:
 	// <li>clusterList: queries the list of clusters except terminated ones.</li>
 	// <li>monitorManage: queries the list of clusters except those that have been terminated, are being created, or failed to be created.</li>
@@ -824,24 +1059,26 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeInstancesResponseParams struct {
+	// Number of eligible instances.
+	TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+	// List of EMR instance details.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ClusterList []*ClusterInstancesInfo `json:"ClusterList,omitempty" name:"ClusterList"`
+
+	// List of tag keys associated to an instance.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeInstancesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of eligible instances.
-		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
-
-		// List of EMR instance details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		ClusterList []*ClusterInstancesInfo `json:"ClusterList,omitempty" name:"ClusterList"`
-
-		// List of tag keys associated to an instance.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeInstancesResponseParams `json:"Response"`
 }
 
 func (r *DescribeInstancesResponse) ToJsonString() string {
@@ -855,9 +1092,15 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceScheduleRequestParams struct {
+	// EMR cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
 type DescribeResourceScheduleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// EMR cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
@@ -881,25 +1124,27 @@ func (r *DescribeResourceScheduleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeResourceScheduleResponseParams struct {
+	// Whether to enable the resource scheduling feature
+	OpenSwitch *bool `json:"OpenSwitch,omitempty" name:"OpenSwitch"`
+
+	// The resource scheduler in service
+	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Fair Scheduler information
+	FSInfo *string `json:"FSInfo,omitempty" name:"FSInfo"`
+
+	// Capacity Scheduler information
+	CSInfo *string `json:"CSInfo,omitempty" name:"CSInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeResourceScheduleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether to enable the resource scheduling feature
-		OpenSwitch *bool `json:"OpenSwitch,omitempty" name:"OpenSwitch"`
-
-		// The resource scheduler in service
-		Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
-
-		// Fair Scheduler information
-		FSInfo *string `json:"FSInfo,omitempty" name:"FSInfo"`
-
-		// Capacity Scheduler information
-		CSInfo *string `json:"CSInfo,omitempty" name:"CSInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeResourceScheduleResponseParams `json:"Response"`
 }
 
 func (r *DescribeResourceScheduleResponse) ToJsonString() string {
@@ -913,9 +1158,27 @@ func (r *DescribeResourceScheduleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsersForUserManagerRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Page number
+	PageNo *int64 `json:"PageNo,omitempty" name:"PageNo"`
+
+	// Page size
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// User list query filter
+	UserManagerFilter *UserManagerFilter `json:"UserManagerFilter,omitempty" name:"UserManagerFilter"`
+
+	// Whether the Keytab file information is required. This field is only valid for clusters with Kerberos enabled and defaults to `false`.
+	NeedKeytabInfo *bool `json:"NeedKeytabInfo,omitempty" name:"NeedKeytabInfo"`
+}
+
 type DescribeUsersForUserManagerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Cluster instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -955,20 +1218,22 @@ func (r *DescribeUsersForUserManagerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsersForUserManagerResponseParams struct {
+	// Total number
+	TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
+
+	// User information list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UserManagerUserList []*UserManagerUserBriefInfo `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeUsersForUserManagerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number
-		TotalCnt *int64 `json:"TotalCnt,omitempty" name:"TotalCnt"`
-
-		// User information list
-	// Note: This field may return null, indicating that no valid value can be obtained.
-		UserManagerUserList []*UserManagerUserBriefInfo `json:"UserManagerUserList,omitempty" name:"UserManagerUserList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeUsersForUserManagerResponseParams `json:"Response"`
 }
 
 func (r *DescribeUsersForUserManagerResponse) ToJsonString() string {
@@ -983,7 +1248,6 @@ func (r *DescribeUsersForUserManagerResponse) FromJsonString(s string) error {
 }
 
 type EmrListInstance struct {
-
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
@@ -1084,7 +1348,6 @@ type EmrListInstance struct {
 }
 
 type EmrProductConfigOutter struct {
-
 	// Software information
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SoftInfo []*string `json:"SoftInfo,omitempty" name:"SoftInfo"`
@@ -1163,7 +1426,6 @@ type EmrProductConfigOutter struct {
 }
 
 type ExternalService struct {
-
 	// Shared component type, which can be EMR or CUSTOM
 	ShareType *string `json:"ShareType,omitempty" name:"ShareType"`
 
@@ -1178,7 +1440,6 @@ type ExternalService struct {
 }
 
 type Filters struct {
-
 	// Field name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -1186,9 +1447,8 @@ type Filters struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
-type InquiryPriceCreateInstanceRequest struct {
-	*tchttp.BaseRequest
-
+// Predefined struct for user
+type InquiryPriceCreateInstanceRequestParams struct {
 	// Time unit of instance purchase duration. Valid values:
 	// <li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
 	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
@@ -1255,7 +1515,82 @@ type InquiryPriceCreateInstanceRequest struct {
 	// Shared component information
 	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
 
-	// 
+
+	VersionID *uint64 `json:"VersionID,omitempty" name:"VersionID"`
+
+	// AZ specs
+	MultiZoneSettings []*MultiZoneSetting `json:"MultiZoneSettings,omitempty" name:"MultiZoneSettings"`
+}
+
+type InquiryPriceCreateInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Time unit of instance purchase duration. Valid values:
+	// <li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Purchase duration of instance, which needs to be used together with `TimeUnit`.
+	// <li>When `TimeUnit` is `s`, this parameter can only be filled with 3600, indicating a pay-as-you-go instance.</li>
+	// <li>When `TimeUnit` is `m`, the number entered in this parameter indicates the purchase duration of the monthly-subscription instance; for example, 1 means one month</li>
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Instance billing mode. Valid values:
+	// <li>0: pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Whether to enable high availability of node. Valid values:
+	// <li>0: does not enable high availability of node.</li>
+	// <li>1: enables high availability of node.</li>
+	SupportHA *uint64 `json:"SupportHA,omitempty" name:"SupportHA"`
+
+	// List of deployed components. Different required components need to be selected for different EMR product IDs (i.e., `ProductId`; for specific meanings, please see the `ProductId` field in the input parameter):
+	// <li>When `ProductId` is 1, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 2, the required components include hadoop-2.7.3, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 4, the required components include hadoop-2.8.4, knox-1.2.0, and zookeeper-3.4.9</li>
+	// <li>When `ProductId` is 7, the required components include hadoop-3.1.2, knox-1.2.0, and zookeeper-3.4.9</li>
+	Software []*string `json:"Software,omitempty" name:"Software"`
+
+	// Node specification queried for price.
+	ResourceSpec *NewResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+
+	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Configuration information of VPC. This parameter is used to specify the VPC ID, subnet ID, etc.
+	VPCSettings *VPCSettings `json:"VPCSettings,omitempty" name:"VPCSettings"`
+
+	// Hive-shared metadatabase type. Valid values:
+	// <li>EMR_DEFAULT_META: the cluster creates one by default.</li>
+	// <li>EMR_EXIST_META: the cluster uses the specified EMR-MetaDB instance.</li>
+	// <li>USER_CUSTOM_META: the cluster uses a custom MetaDB instance.</li>
+	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
+
+	// EMR-MetaDB instance
+	UnifyMetaInstanceId *string `json:"UnifyMetaInstanceId,omitempty" name:"UnifyMetaInstanceId"`
+
+	// Custom MetaDB instance information
+	MetaDBInfo *CustomMetaInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
+
+	// Product ID. Different product IDs represent different EMR product versions. Valid values:
+	// <li>1: EMR v1.3.1.</li>
+	// <li>2: EMR v2.0.1.</li>
+	// <li>4: EMR v2.1.0.</li>
+	// <li>7: EMR v3.0.0.</li>
+	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Scenario-based values:
+	// Hadoop-Kudu
+	// Hadoop-Zookeeper
+	// Hadoop-Presto
+	// Hadoop-Hbase
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+
+	// Shared component information
+	ExternalService []*ExternalService `json:"ExternalService,omitempty" name:"ExternalService"`
+
 	VersionID *uint64 `json:"VersionID,omitempty" name:"VersionID"`
 
 	// AZ specs
@@ -1297,30 +1632,32 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type InquiryPriceCreateInstanceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Original price.
+// Predefined struct for user
+type InquiryPriceCreateInstanceResponseParams struct {
+	// Original price.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
 
-		// Discounted price.
+	// Discounted price.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
+	DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
 
-		// Time unit of instance purchase duration. Valid values:
+	// Time unit of instance purchase duration. Valid values:
 	// <li>s: seconds.</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
 
-		// Purchase duration of instance.
+	// Purchase duration of instance.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceCreateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceCreateInstanceResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceCreateInstanceResponse) ToJsonString() string {
@@ -1334,9 +1671,33 @@ func (r *InquiryPriceCreateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewInstanceRequestParams struct {
+	// How long the instance will be renewed for, which needs to be used together with `TimeUnit`.
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Instance billing mode.
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Unit of time for instance renewal.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Whether to change from pay-as-you-go billing to monthly subscription billing. `0`: no; `1`: yes
+	ModifyPayMode *int64 `json:"ModifyPayMode,omitempty" name:"ModifyPayMode"`
+}
+
 type InquiryPriceRenewInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// How long the instance will be renewed for, which needs to be used together with `TimeUnit`.
 	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
@@ -1384,29 +1745,31 @@ func (r *InquiryPriceRenewInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceRenewInstanceResponseParams struct {
+	// Original price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// Discounted price.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
+
+	// Unit of time for instance renewal.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// How long the instance will be renewed for.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquiryPriceRenewInstanceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Original price.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
-
-		// Discounted price.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
-
-		// Unit of time for instance renewal.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
-
-		// How long the instance will be renewed for.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquiryPriceRenewInstanceResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceRenewInstanceResponse) ToJsonString() string {
@@ -1420,9 +1783,33 @@ func (r *InquiryPriceRenewInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquiryPriceUpdateInstanceRequestParams struct {
+	// Time unit of scaling. Valid values:
+	// <li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Duration of scaling, which needs to be used together with `TimeUnit`.
+	// <li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Target node specification.
+	UpdateSpec *UpdateInstanceSettings `json:"UpdateSpec,omitempty" name:"UpdateSpec"`
+
+	// Instance billing mode. Valid values:
+	// <li>0: pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+}
+
 type InquiryPriceUpdateInstanceRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Time unit of scaling. Valid values:
 	// <li>s: seconds. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
 	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
@@ -1469,30 +1856,32 @@ func (r *InquiryPriceUpdateInstanceRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type InquiryPriceUpdateInstanceResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// Original price.
+// Predefined struct for user
+type InquiryPriceUpdateInstanceResponseParams struct {
+	// Original price.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
 
-		// Discounted price.
+	// Discounted price.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
+	DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
 
-		// Time unit of scaling. Valid values:
+	// Time unit of scaling. Valid values:
 	// <li>s: seconds.</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
 
-		// Duration of scaling.
+	// Duration of scaling.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceUpdateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceUpdateInstanceResponseParams `json:"Response"`
 }
 
 func (r *InquiryPriceUpdateInstanceResponse) ToJsonString() string {
@@ -1507,7 +1896,6 @@ func (r *InquiryPriceUpdateInstanceResponse) FromJsonString(s string) error {
 }
 
 type LoginSettings struct {
-
 	// Password
 	Password *string `json:"Password,omitempty" name:"Password"`
 
@@ -1515,9 +1903,21 @@ type LoginSettings struct {
 	PublicKeyId *string `json:"PublicKeyId,omitempty" name:"PublicKeyId"`
 }
 
+// Predefined struct for user
+type ModifyResourceScheduleConfigRequestParams struct {
+	// EMR cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Business identifier. `fair`: Edit fair configuration items; `fairPlan`: Edit the execution plan; `capacity`: Edit capacity configuration items.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Modified module information
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type ModifyResourceScheduleConfigRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// EMR cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1549,20 +1949,22 @@ func (r *ModifyResourceScheduleConfigRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceScheduleConfigResponseParams struct {
+	// `true`: Draft, indicating the resource pool is not refreshed.
+	IsDraft *bool `json:"IsDraft,omitempty" name:"IsDraft"`
+
+	// Verification error information. If it is not null, the verification fails and thus the configuration fails.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResourceScheduleConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// `true`: Draft, indicating the resource pool is not refreshed.
-		IsDraft *bool `json:"IsDraft,omitempty" name:"IsDraft"`
-
-		// Verification error information. If it is not null, the verification fails and thus the configuration fails.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-		ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResourceScheduleConfigResponseParams `json:"Response"`
 }
 
 func (r *ModifyResourceScheduleConfigResponse) ToJsonString() string {
@@ -1576,9 +1978,21 @@ func (r *ModifyResourceScheduleConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceSchedulerRequestParams struct {
+	// EMR cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The original scheduler: `fair`
+	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+
+	// The new scheduler: `capacity`
+	NewValue *string `json:"NewValue,omitempty" name:"NewValue"`
+}
+
 type ModifyResourceSchedulerRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// EMR cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -1610,13 +2024,15 @@ func (r *ModifyResourceSchedulerRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyResourceSchedulerResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyResourceSchedulerResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyResourceSchedulerResponseParams `json:"Response"`
 }
 
 func (r *ModifyResourceSchedulerResponse) ToJsonString() string {
@@ -1631,7 +2047,6 @@ func (r *ModifyResourceSchedulerResponse) FromJsonString(s string) error {
 }
 
 type MultiDisk struct {
-
 	// Cloud disk type
 	// <li>`CLOUD_SSD`: SSD</li>
 	// <li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
@@ -1646,7 +2061,6 @@ type MultiDisk struct {
 }
 
 type MultiDiskMC struct {
-
 	// Number of cloud disks in this type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Count *int64 `json:"Count,omitempty" name:"Count"`
@@ -1661,7 +2075,6 @@ type MultiDiskMC struct {
 }
 
 type MultiZoneSetting struct {
-
 	// "master", "standby", "third-party"
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ZoneTag *string `json:"ZoneTag,omitempty" name:"ZoneTag"`
@@ -1677,7 +2090,6 @@ type MultiZoneSetting struct {
 }
 
 type NewResourceSpec struct {
-
 	// Describes master node resource
 	MasterResourceSpec *Resource `json:"MasterResourceSpec,omitempty" name:"MasterResourceSpec"`
 
@@ -1704,7 +2116,6 @@ type NewResourceSpec struct {
 }
 
 type NodeHardwareInfo struct {
-
 	// User `APPID`
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
@@ -1883,7 +2294,6 @@ type NodeHardwareInfo struct {
 }
 
 type OutterResource struct {
-
 	// Specification
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Spec *string `json:"Spec,omitempty" name:"Spec"`
@@ -1922,7 +2332,6 @@ type OutterResource struct {
 }
 
 type Placement struct {
-
 	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
@@ -1931,7 +2340,6 @@ type Placement struct {
 }
 
 type PreExecuteFileSettings struct {
-
 	// COS path to script, which has been disused
 	Path *string `json:"Path,omitempty" name:"Path"`
 
@@ -1970,7 +2378,6 @@ type PreExecuteFileSettings struct {
 }
 
 type Resource struct {
-
 	// Node specification description, such as CVM.SA2
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Spec *string `json:"Spec,omitempty" name:"Spec"`
@@ -2031,7 +2438,6 @@ type Resource struct {
 }
 
 type SearchItem struct {
-
 	// Searchable type
 	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
 
@@ -2040,7 +2446,6 @@ type SearchItem struct {
 }
 
 type ShortNodeInfo struct {
-
 	// Node type: Master/Core/Task/Router/Common
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
@@ -2051,7 +2456,6 @@ type ShortNodeInfo struct {
 }
 
 type SubnetInfo struct {
-
 	// Subnet information (name)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
@@ -2062,7 +2466,6 @@ type SubnetInfo struct {
 }
 
 type Tag struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -2070,9 +2473,18 @@ type Tag struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+// Predefined struct for user
+type TerminateTasksRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of resource IDs of the node to be terminated. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+}
+
 type TerminateTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
@@ -2100,13 +2512,15 @@ func (r *TerminateTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type TerminateTasksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type TerminateTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *TerminateTasksResponseParams `json:"Response"`
 }
 
 func (r *TerminateTasksResponse) ToJsonString() string {
@@ -2121,7 +2535,6 @@ func (r *TerminateTasksResponse) FromJsonString(s string) error {
 }
 
 type TopologyInfo struct {
-
 	// AZ ID
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -2140,7 +2553,6 @@ type TopologyInfo struct {
 }
 
 type UpdateInstanceSettings struct {
-
 	// Memory capacity in GB
 	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
 
@@ -2155,29 +2567,26 @@ type UpdateInstanceSettings struct {
 }
 
 type UserInfoForUserManager struct {
-
 	// Username
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
 	// The group to which the user belongs
 	UserGroup *string `json:"UserGroup,omitempty" name:"UserGroup"`
 
-	// 
+
 	PassWord *string `json:"PassWord,omitempty" name:"PassWord"`
 
-	// 
+
 	ReMark *string `json:"ReMark,omitempty" name:"ReMark"`
 }
 
 type UserManagerFilter struct {
-
 	// Username
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 }
 
 type UserManagerUserBriefInfo struct {
-
 	// Username
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
@@ -2200,7 +2609,6 @@ type UserManagerUserBriefInfo struct {
 }
 
 type VPCSettings struct {
-
 	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 

@@ -21,7 +21,6 @@ import (
 )
 
 type AudioResult struct {
-
 	// This field is used to return whether the moderated content hit the moderation model. Valid values: 0 (**no**), 1 (**yes**).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HitFlag *int64 `json:"HitFlag,omitempty" name:"HitFlag"`
@@ -68,7 +67,6 @@ type AudioResult struct {
 }
 
 type AudioResultDetailLanguageResult struct {
-
 	// This field is used to return the language information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -91,7 +89,6 @@ type AudioResultDetailLanguageResult struct {
 }
 
 type AudioResultDetailMoanResult struct {
-
 	// This field is used to return the type of the content to be detected. It is fixed at **Moan** here to call the moan detection feature.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -114,7 +111,6 @@ type AudioResultDetailMoanResult struct {
 }
 
 type AudioResultDetailTextResult struct {
-
 	// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -149,7 +145,6 @@ type AudioResultDetailTextResult struct {
 }
 
 type AudioSegments struct {
-
 	// This field is used to return the start time of an audio segment in seconds. For audio on demand files, this parameter indicates the time offset of the audio from the complete audio track, such as 0 (no offset), 5 (5 seconds after the start of the audio track), and 10 (10 seconds after the start of the audio track). For live audio stream files, this parameter returns the Unix timestamp of the start of the audio segment, such as `1594650717`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OffsetTime *string `json:"OffsetTime,omitempty" name:"OffsetTime"`
@@ -160,7 +155,6 @@ type AudioSegments struct {
 }
 
 type BucketInfo struct {
-
 	// This field indicates a bucket name in Tencent Cloud COS. For more information on buckets, see [Basic Concepts](https://intl.cloud.tencent.com/document/product/436/44352?from_cn_redirect=1).
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
@@ -171,9 +165,15 @@ type BucketInfo struct {
 	Object *string `json:"Object,omitempty" name:"Object"`
 }
 
+// Predefined struct for user
+type CancelTaskRequestParams struct {
+	// This field indicates the task ID (in the `Results` parameter) returned after an audio moderation task is created. It is used to identify the moderation task to be canceled.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
 type CancelTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// This field indicates the task ID (in the `Results` parameter) returned after an audio moderation task is created. It is used to identify the moderation task to be canceled.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 }
@@ -197,13 +197,15 @@ func (r *CancelTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CancelTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CancelTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CancelTaskResponseParams `json:"Response"`
 }
 
 func (r *CancelTaskResponse) ToJsonString() string {
@@ -217,9 +219,27 @@ func (r *CancelTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAudioModerationTaskRequestParams struct {
+	// This field indicates the input audio moderation task information. For the specific input content, see the detailed description of the `TaskInput` data structure.<br>Note: you can create up to **10 tasks** at a time.
+	Tasks []*TaskInput `json:"Tasks,omitempty" name:"Tasks"`
+
+	// This field indicates the specific number of the policy, which is used for API scheduling and can be configured in the CMS console. If the `Biztype` parameter is passed in, a moderation policy will be used based on the business scenario; otherwise, the default moderation policy will be used.<br>Note: `Biztype` can contain 3–32 digits, letters, and underscores; different `Biztype` values are associated with different business scenarios and moderation policies, so you need to verify the `Biztype` before calling this API.
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
+
+	// This field indicates the input audio moderation type. Valid values: **AUDIO** (audio on demand), **LIVE_AUDIO** (audio live streaming). Default value: AUDIO.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// This field is optional and indicates the key information of the callback signature, which is used to ensure the data security. The signature algorithm is to add the `X-Signature` field to the returned HTTP header, whose value is the SHA256-encoded hex string of `seed` + `body` . After receiving the callback data, you can calculate `X-Signature` by using **sha256(seed + body)** based on the returned `body` for verification.<br>For specific use cases, see [Signature Algorithm v3](https://intl.cloud.tencent.com/document/product/1219/53263?from_cn_redirect=1).
+	Seed *string `json:"Seed,omitempty" name:"Seed"`
+
+	// This field is optional and indicates the address for receiving the moderation information callback in the default format of URL. After it is configured successfully, the non-compliant audio/video segments generated during moderation will be sent through this API. For the format of the returned callback content, see [Sample Callback Signature](https://intl.cloud.tencent.com/document/product/1219/53257?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B2-.E5.9B.9E.E8.B0.83.E7.AD.BE.E5.90.8D.E7.A4.BA.E4.BE.8B)
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+}
+
 type CreateAudioModerationTaskRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// This field indicates the input audio moderation task information. For the specific input content, see the detailed description of the `TaskInput` data structure.<br>Note: you can create up to **10 tasks** at a time.
 	Tasks []*TaskInput `json:"Tasks,omitempty" name:"Tasks"`
 
@@ -259,17 +279,19 @@ func (r *CreateAudioModerationTaskRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAudioModerationTaskResponseParams struct {
+	// This field is used to return the task creation result. For the specific output content, see the detailed description of the `TaskResult` data structure.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Results []*TaskResult `json:"Results,omitempty" name:"Results"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAudioModerationTaskResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// This field is used to return the task creation result. For the specific output content, see the detailed description of the `TaskResult` data structure.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Results []*TaskResult `json:"Results,omitempty" name:"Results"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAudioModerationTaskResponseParams `json:"Response"`
 }
 
 func (r *CreateAudioModerationTaskResponse) ToJsonString() string {
@@ -283,9 +305,19 @@ func (r *CreateAudioModerationTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTaskDetailRequestParams struct {
+	// This field indicates the task ID (in the `Results` parameter) returned after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
+	// <br>Note: the query API can query up to **20 tasks at a time**.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// This boolean field indicates whether to display all audio segments. Valid values: True (yes), False (display only audio segments that hit the moderation rule). Default value: False.
+	ShowAllSegments *bool `json:"ShowAllSegments,omitempty" name:"ShowAllSegments"`
+}
+
 type DescribeTaskDetailRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// This field indicates the task ID (in the `Results` parameter) returned after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
 	// <br>Note: the query API can query up to **20 tasks at a time**.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -314,74 +346,76 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeTaskDetailResponse struct {
-	*tchttp.BaseResponse
-	Response *struct {
-
-		// This field is used to return the task ID (in the `Results` parameter) after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
+// Predefined struct for user
+type DescribeTaskDetailResponseParams struct {
+	// This field is used to return the task ID (in the `Results` parameter) after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-		// This field is used to return the data ID parameter passed in within the `Tasks` parameter when the audio moderation API is called for easier data identification and management.
+	// This field is used to return the data ID parameter passed in within the `Tasks` parameter when the audio moderation API is called for easier data identification and management.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		DataId *string `json:"DataId,omitempty" name:"DataId"`
+	DataId *string `json:"DataId,omitempty" name:"DataId"`
 
-		// This field is used to return the `BizType` parameter passed in when the audio moderation API is called for easier data identification and management.
+	// This field is used to return the `BizType` parameter passed in when the audio moderation API is called for easier data identification and management.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		BizType *string `json:"BizType,omitempty" name:"BizType"`
+	BizType *string `json:"BizType,omitempty" name:"BizType"`
 
-		// This field is used to return the task name in the `TaskInput` parameter passed in when the audio moderation API is called for easier task identification and management.
+	// This field is used to return the task name in the `TaskInput` parameter passed in when the audio moderation API is called for easier task identification and management.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitempty" name:"Name"`
 
-		// This field is used to return the task status of the queried content.
+	// This field is used to return the task status of the queried content.
 	// <br>Valid values: **FINISH** (task completed), **PENDING** (task pending), **RUNNING** (task in progress), **ERROR** (task error), **CANCELLED** (task canceled).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitempty" name:"Status"`
 
-		// This field is used to return the audio moderation type passed in when the audio moderation API is called. Valid values: **AUDIO** (audio on demand), **LIVE_AUDIO** (audio live streaming). Default value: AUDIO.
+	// This field is used to return the audio moderation type passed in when the audio moderation API is called. Valid values: **AUDIO** (audio on demand), **LIVE_AUDIO** (audio live streaming). Default value: AUDIO.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitempty" name:"Type"`
 
-		// This field is used to return the operation suggestion for the maliciousness tag. When you get the determination result, the returned value indicates the operation suggested by the system. We recommend you handle different types of violations and suggestions according to your business needs. <br>Returned values: **Block**, **Review**, **Pass**.
+	// This field is used to return the operation suggestion for the maliciousness tag. When you get the determination result, the returned value indicates the operation suggested by the system. We recommend you handle different types of violations and suggestions according to your business needs. <br>Returned values: **Block**, **Review**, **Pass**.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-		// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
+	// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		Labels []*TaskLabel `json:"Labels,omitempty" name:"Labels"`
+	Labels []*TaskLabel `json:"Labels,omitempty" name:"Labels"`
 
-		// This field is used to return the media content information of the moderation service, mainly including the input file type and access URL.
+	// This field is used to return the media content information of the moderation service, mainly including the input file type and access URL.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		InputInfo *InputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+	InputInfo *InputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
 
-		// This field is used to return the recognized text content of an audio file. **Up to the first 1,000 characters** can be recognized.
+	// This field is used to return the recognized text content of an audio file. **Up to the first 1,000 characters** can be recognized.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		AudioText *string `json:"AudioText,omitempty" name:"AudioText"`
+	AudioText *string `json:"AudioText,omitempty" name:"AudioText"`
 
-		// This field is used to return the moderation result of an audio segment, mainly including the start time and audio moderation result.<br>For the specific output content, see the detailed description of the `AudioSegments` and `AudioResult` data structures.
+	// This field is used to return the moderation result of an audio segment, mainly including the start time and audio moderation result.<br>For the specific output content, see the detailed description of the `AudioSegments` and `AudioResult` data structures.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		AudioSegments []*AudioSegments `json:"AudioSegments,omitempty" name:"AudioSegments"`
+	AudioSegments []*AudioSegments `json:"AudioSegments,omitempty" name:"AudioSegments"`
 
-		// If the task status is `Error`, this field will return the error type; otherwise, null will be returned by default.
+	// If the task status is `Error`, this field will return the error type; otherwise, null will be returned by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorType *string `json:"ErrorType,omitempty" name:"ErrorType"`
+	ErrorType *string `json:"ErrorType,omitempty" name:"ErrorType"`
 
-		// If the task status is `Error`, this field will return the error message; otherwise, null will be returned by default.
+	// If the task status is `Error`, this field will return the error message; otherwise, null will be returned by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		ErrorDescription *string `json:"ErrorDescription,omitempty" name:"ErrorDescription"`
+	ErrorDescription *string `json:"ErrorDescription,omitempty" name:"ErrorDescription"`
 
-		// This field is used to return the creation time of the queried task in ISO 8601 format.
+	// This field is used to return the creation time of the queried task in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
 
-		// This field is used to return the last update time of the queried task in ISO 8601 format.
+	// This field is used to return the last update time of the queried task in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-		UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
 
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTaskDetailResponseParams `json:"Response"`
 }
 
 func (r *DescribeTaskDetailResponse) ToJsonString() string {
@@ -395,9 +429,27 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksRequestParams struct {
+	// This parameter indicates the number of tasks to be displayed on each page of the task list. **Default value: 10**.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// This parameter indicates the input parameter of the task filter. You can filter tasks by business type, file type, processing suggestion, and task status. For the specific parameter content, see the detailed description of the `TaskFilter` data structure.
+	Filter *TaskFilter `json:"Filter,omitempty" name:"Filter"`
+
+	// This parameter indicates the `Token` information used during pagination. It is automatically generated by the system and will be passed to the next generated page for easy and fast pagination. When you turn to the last page, this field will be empty.
+	PageToken *string `json:"PageToken,omitempty" name:"PageToken"`
+
+	// This parameter indicates the start time of the task list in ISO 8601 timestamp format. **Default value: 3 days ago**. If this parameter is passed in, tasks between this time point and `EndTime` will be filtered out.<br>Note: this parameter is used together with `Filter` to filter tasks in no particular order.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// This parameter indicates the end time of the task list in ISO 8601 timestamp format. **Default value: empty**. If this parameter is passed in, tasks between `StartTime` and this time point will be filtered out.<br>Note: this parameter is used together with `Filter` to filter tasks in no particular order.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// This parameter indicates the number of tasks to be displayed on each page of the task list. **Default value: 10**.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
@@ -437,25 +489,27 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTasksResponseParams struct {
+	// This field is used to return the total number of queried tasks in the format of `int` string.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// This field is used to return the detailed data of the tasks on the current page. For the specific output content, see the detailed description of the `TaskData` data structure.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Data []*TaskData `json:"Data,omitempty" name:"Data"`
+
+	// This field is used to return the `Token` information used during pagination. It is automatically generated by the system and will be passed to the next generated page for easy and fast pagination. When you turn to the last page, this field will be empty.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	PageToken *string `json:"PageToken,omitempty" name:"PageToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeTasksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// This field is used to return the total number of queried tasks in the format of `int` string.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Total *string `json:"Total,omitempty" name:"Total"`
-
-		// This field is used to return the detailed data of the tasks on the current page. For the specific output content, see the detailed description of the `TaskData` data structure.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		Data []*TaskData `json:"Data,omitempty" name:"Data"`
-
-		// This field is used to return the `Token` information used during pagination. It is automatically generated by the system and will be passed to the next generated page for easy and fast pagination. When you turn to the last page, this field will be empty.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-		PageToken *string `json:"PageToken,omitempty" name:"PageToken"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeTasksResponseParams `json:"Response"`
 }
 
 func (r *DescribeTasksResponse) ToJsonString() string {
@@ -470,7 +524,6 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 }
 
 type InputInfo struct {
-
 	// This field indicates the file access type. Valid values: **URL** (resource link), **COS** (Tencent Cloud COS).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -485,7 +538,6 @@ type InputInfo struct {
 }
 
 type MediaInfo struct {
-
 	// This field is used to return the codec of the media file passed in, such as WAV, MP3, AAC, FLAC, AMR, 3GP, M4A, WMA, OGG, and APE.
 	Codecs *string `json:"Codecs,omitempty" name:"Codecs"`
 
@@ -503,7 +555,6 @@ type MediaInfo struct {
 }
 
 type StorageInfo struct {
-
 	// This field indicates the file access type. Valid values: **URL** (resource link), **COS** (Tencent Cloud COS). It should correspond to the access type passed in and can be used for strict verification and quick identification of the access address. If you don't pass in this parameter, the default value will be `URL`, and the system will automatically determine the access address type.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
@@ -515,7 +566,6 @@ type StorageInfo struct {
 }
 
 type TaskData struct {
-
 	// This field is used to return the ID of the audio moderation task data for subsequent query and management of moderation tasks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DataId *string `json:"DataId,omitempty" name:"DataId"`
@@ -560,7 +610,6 @@ type TaskData struct {
 }
 
 type TaskFilter struct {
-
 	// This field is used to pass in the business type of a task as a filter. `Biztype` is the specific number of the policy, which is used for API scheduling and can be configured in the CMS console. Different `Biztype` values are associated with different business scenarios and moderation policies, so you need to verify the `Biztype` before calling this API. `Biztype` can contain 3–32 digits, letters, and underscores.<br>Note: when this parameter is not passed in, tasks will not be filtered by business type by default.
 	BizType *string `json:"BizType,omitempty" name:"BizType"`
 
@@ -575,7 +624,6 @@ type TaskFilter struct {
 }
 
 type TaskInput struct {
-
 	// This field is optional and indicates the data ID assigned by you to the object to be detected for easier file identification and management.<br>It **can contain up to 64 letters, digits, and special symbols (_-@#)**.
 	DataId *string `json:"DataId,omitempty" name:"DataId"`
 
@@ -587,7 +635,6 @@ type TaskInput struct {
 }
 
 type TaskLabel struct {
-
 	// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitempty" name:"Label"`
@@ -606,7 +653,6 @@ type TaskLabel struct {
 }
 
 type TaskResult struct {
-
 	// This field is used to return the `DataId` passed in within the `TaskInput` structure when an audio moderation task is created. It is used to identify the specific moderation task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DataId *string `json:"DataId,omitempty" name:"DataId"`

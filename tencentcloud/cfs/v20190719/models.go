@@ -21,7 +21,6 @@ import (
 )
 
 type AvailableProtoStatus struct {
-
 	// Sale status. Valid values: sale_out (sold out), saling (purchasable), no_saling (non-purchasable)
 	SaleStatus *string `json:"SaleStatus,omitempty" name:"SaleStatus"`
 
@@ -30,7 +29,6 @@ type AvailableProtoStatus struct {
 }
 
 type AvailableRegion struct {
-
 	// Region name, such as "ap-beijing"
 	Region *string `json:"Region,omitempty" name:"Region"`
 
@@ -48,7 +46,6 @@ type AvailableRegion struct {
 }
 
 type AvailableType struct {
-
 	// Protocol and sale details
 	Protocols []*AvailableProtoStatus `json:"Protocols,omitempty" name:"Protocols"`
 
@@ -60,7 +57,6 @@ type AvailableType struct {
 }
 
 type AvailableZone struct {
-
 	// AZ name
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -77,9 +73,54 @@ type AvailableZone struct {
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
+// Predefined struct for user
+type CreateCfsFileSystemRequestParams struct {
+	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Network type. Valid values: `VPC` (private network), `BASIC` (classic network), `CCN` (Cloud Connect Network). You must set this parameter to `CCN` if you use the Turbo series. Classic network will be phased out and is not recommended.
+	NetInterface *string `json:"NetInterface,omitempty" name:"NetInterface"`
+
+	// Permission group ID (required for Standard and High-Performance). For the Turbo series, set it to `pgroupbasic`.
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Storage class of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), `TP` (High-Performance Turbo)
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// VPC ID. This field is required if network type is VPC.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. This field is required if network type is VPC.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// IP address (this parameter supports only the VPC network type, and the Turbo series is not supported). If this parameter is left empty, a random IP in the subnet will be assigned.
+	MountIP *string `json:"MountIP,omitempty" name:"MountIP"`
+
+	// Custom file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// File system tag
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed. This string is valid for 2 hours.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// CCN instance ID (required if the network type is CCN)
+	CcnId *string `json:"CcnId,omitempty" name:"CcnId"`
+
+	// CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
+	Capacity *uint64 `json:"Capacity,omitempty" name:"Capacity"`
+}
+
 type CreateCfsFileSystemRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
@@ -155,37 +196,39 @@ func (r *CreateCfsFileSystemRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCfsFileSystemResponseParams struct {
+	// File system creation time
+	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+
+	// Custom file system name
+	CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// File system status. Valid values: `creating`, `create_failed`, `available`, `unserviced`, `upgrading`, `deleting`
+	LifeCycleState *string `json:"LifeCycleState,omitempty" name:"LifeCycleState"`
+
+	// Storage used by the file system, in bytes
+	SizeByte *uint64 `json:"SizeByte,omitempty" name:"SizeByte"`
+
+	// AZ ID
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Custom file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// Whether a file system is encrypted
+	Encrypted *bool `json:"Encrypted,omitempty" name:"Encrypted"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCfsFileSystemResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// File system creation time
-		CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
-
-		// Custom file system name
-		CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
-
-		// File system ID
-		FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
-
-		// File system status. Valid values: `creating`, `create_failed`, `available`, `unserviced`, `upgrading`, `deleting`
-		LifeCycleState *string `json:"LifeCycleState,omitempty" name:"LifeCycleState"`
-
-		// Storage used by the file system, in bytes
-		SizeByte *uint64 `json:"SizeByte,omitempty" name:"SizeByte"`
-
-		// AZ ID
-		ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
-
-		// Custom file system name
-		FsName *string `json:"FsName,omitempty" name:"FsName"`
-
-		// Whether a file system is encrypted
-		Encrypted *bool `json:"Encrypted,omitempty" name:"Encrypted"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCfsFileSystemResponseParams `json:"Response"`
 }
 
 func (r *CreateCfsFileSystemResponse) ToJsonString() string {
@@ -199,9 +242,18 @@ func (r *CreateCfsFileSystemResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCfsPGroupRequestParams struct {
+	// Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Permission group description, which can contain 1-255 characters
+	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
+}
+
 type CreateCfsPGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -229,28 +281,30 @@ func (r *CreateCfsPGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCfsPGroupResponseParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Permission group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Permission group description
+	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
+
+	// The number of file systems bound to this permission group
+	BindCfsNum *int64 `json:"BindCfsNum,omitempty" name:"BindCfsNum"`
+
+	// Permission group creation time
+	CDate *string `json:"CDate,omitempty" name:"CDate"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCfsPGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// Permission group name
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// Permission group description
-		DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
-
-		// The number of file systems bound to this permission group
-		BindCfsNum *int64 `json:"BindCfsNum,omitempty" name:"BindCfsNum"`
-
-		// Permission group creation time
-		CDate *string `json:"CDate,omitempty" name:"CDate"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCfsPGroupResponseParams `json:"Response"`
 }
 
 func (r *CreateCfsPGroupResponse) ToJsonString() string {
@@ -264,9 +318,27 @@ func (r *CreateCfsPGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCfsRuleRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// You can enter a single IP or IP range, such as 10.1.10.11 or 10.10.1.0/24. The default visiting address is `*`, indicating that all IPs are allowed. Please note that you need to enter the CVM instance's private IP here.
+	AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
+
+	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// Read/write permission. Valid values: RO (read-only), RW (read & write). Default value: RO
+	RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
+
+	// User permission. Valid values: all_squash, no_all_squash, root_squash, no_root_squash. Specifically, all_squash: any visiting user will be mapped to an anonymous user or user group; no_all_squash: a visiting user will be first matched with a local user, and if the match fails, it will be mapped to an anonymous user or user group; root_squash: a visiting root user will be mapped to an anonymous user or user group; no_root_squash: a visiting root user will be allowed to maintain root account permissions. Default value: root_squash.
+	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
+}
+
 type CreateCfsRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -306,31 +378,33 @@ func (r *CreateCfsRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateCfsRuleResponseParams struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Client IP
+	AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
+
+	// Read & write permissions
+	RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
+
+	// User permission
+	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
+
+	// Priority
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateCfsRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule ID
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// Client IP
-		AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
-
-		// Read & write permissions
-		RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
-
-		// User permission
-		UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
-
-		// Priority
-		Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateCfsRuleResponseParams `json:"Response"`
 }
 
 func (r *CreateCfsRuleResponse) ToJsonString() string {
@@ -344,9 +418,15 @@ func (r *CreateCfsRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsFileSystemRequestParams struct {
+	// File system ID. Note: please call the `DeleteMountTarget` API to delete the mount target first before deleting a file system; otherwise, the delete operation will fail.
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
 type DeleteCfsFileSystemRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID. Note: please call the `DeleteMountTarget` API to delete the mount target first before deleting a file system; otherwise, the delete operation will fail.
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 }
@@ -370,13 +450,15 @@ func (r *DeleteCfsFileSystemRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsFileSystemResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCfsFileSystemResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCfsFileSystemResponseParams `json:"Response"`
 }
 
 func (r *DeleteCfsFileSystemResponse) ToJsonString() string {
@@ -390,9 +472,15 @@ func (r *DeleteCfsFileSystemResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsPGroupRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+}
+
 type DeleteCfsPGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 }
@@ -416,19 +504,21 @@ func (r *DeleteCfsPGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsPGroupResponseParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// User ID
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCfsPGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// User ID
-		AppId *int64 `json:"AppId,omitempty" name:"AppId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCfsPGroupResponseParams `json:"Response"`
 }
 
 func (r *DeleteCfsPGroupResponse) ToJsonString() string {
@@ -442,9 +532,18 @@ func (r *DeleteCfsPGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsRuleRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+}
+
 type DeleteCfsRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -472,19 +571,21 @@ func (r *DeleteCfsRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteCfsRuleResponseParams struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteCfsRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Rule ID
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteCfsRuleResponseParams `json:"Response"`
 }
 
 func (r *DeleteCfsRuleResponse) ToJsonString() string {
@@ -498,9 +599,18 @@ func (r *DeleteCfsRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMountTargetRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Mount target ID
+	MountTargetId *string `json:"MountTargetId,omitempty" name:"MountTargetId"`
+}
+
 type DeleteMountTargetRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
@@ -528,13 +638,15 @@ func (r *DeleteMountTargetRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteMountTargetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteMountTargetResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteMountTargetResponseParams `json:"Response"`
 }
 
 func (r *DeleteMountTargetResponse) ToJsonString() string {
@@ -548,8 +660,14 @@ func (r *DeleteMountTargetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAvailableZoneInfoRequestParams struct {
+
+}
+
 type DescribeAvailableZoneInfoRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeAvailableZoneInfoRequest) ToJsonString() string {
@@ -564,22 +682,25 @@ func (r *DescribeAvailableZoneInfoRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableZoneInfoRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAvailableZoneInfoResponseParams struct {
+	// Information such as resource availability in each AZ and the supported storage classes and protocols
+	RegionZones []*AvailableRegion `json:"RegionZones,omitempty" name:"RegionZones"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAvailableZoneInfoResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Information such as resource availability in each AZ and the supported storage classes and protocols
-		RegionZones []*AvailableRegion `json:"RegionZones,omitempty" name:"RegionZones"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAvailableZoneInfoResponseParams `json:"Response"`
 }
 
 func (r *DescribeAvailableZoneInfoResponse) ToJsonString() string {
@@ -593,9 +714,15 @@ func (r *DescribeAvailableZoneInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsFileSystemClientsRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
 type DescribeCfsFileSystemClientsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 }
@@ -619,16 +746,18 @@ func (r *DescribeCfsFileSystemClientsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsFileSystemClientsResponseParams struct {
+	// Client list
+	ClientList []*FileSystemClient `json:"ClientList,omitempty" name:"ClientList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCfsFileSystemClientsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Client list
-		ClientList []*FileSystemClient `json:"ClientList,omitempty" name:"ClientList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCfsFileSystemClientsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCfsFileSystemClientsResponse) ToJsonString() string {
@@ -642,9 +771,21 @@ func (r *DescribeCfsFileSystemClientsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsFileSystemsRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
 type DescribeCfsFileSystemsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
@@ -676,19 +817,21 @@ func (r *DescribeCfsFileSystemsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsFileSystemsResponseParams struct {
+	// File system information
+	FileSystems []*FileSystemInfo `json:"FileSystems,omitempty" name:"FileSystems"`
+
+	// Total number of file systems
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCfsFileSystemsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// File system information
-		FileSystems []*FileSystemInfo `json:"FileSystems,omitempty" name:"FileSystems"`
-
-		// Total number of file systems
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCfsFileSystemsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCfsFileSystemsResponse) ToJsonString() string {
@@ -702,8 +845,14 @@ func (r *DescribeCfsFileSystemsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsPGroupsRequestParams struct {
+
+}
+
 type DescribeCfsPGroupsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCfsPGroupsRequest) ToJsonString() string {
@@ -718,22 +867,25 @@ func (r *DescribeCfsPGroupsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfsPGroupsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsPGroupsResponseParams struct {
+	// Permission group information list
+	PGroupList []*PGroupInfo `json:"PGroupList,omitempty" name:"PGroupList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCfsPGroupsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group information list
-		PGroupList []*PGroupInfo `json:"PGroupList,omitempty" name:"PGroupList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCfsPGroupsResponseParams `json:"Response"`
 }
 
 func (r *DescribeCfsPGroupsResponse) ToJsonString() string {
@@ -747,9 +899,15 @@ func (r *DescribeCfsPGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsRulesRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+}
+
 type DescribeCfsRulesRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 }
@@ -773,16 +931,18 @@ func (r *DescribeCfsRulesRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsRulesResponseParams struct {
+	// List of permission group rules
+	RuleList []*PGroupRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCfsRulesResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of permission group rules
-		RuleList []*PGroupRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCfsRulesResponseParams `json:"Response"`
 }
 
 func (r *DescribeCfsRulesResponse) ToJsonString() string {
@@ -796,8 +956,14 @@ func (r *DescribeCfsRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsServiceStatusRequestParams struct {
+
+}
+
 type DescribeCfsServiceStatusRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeCfsServiceStatusRequest) ToJsonString() string {
@@ -812,22 +978,25 @@ func (r *DescribeCfsServiceStatusRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfsServiceStatusRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeCfsServiceStatusResponseParams struct {
+	// Current status of the CFS service for this user. Valid values: none (not activated), creating (activating), created (activated)
+	CfsServiceStatus *string `json:"CfsServiceStatus,omitempty" name:"CfsServiceStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeCfsServiceStatusResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Current status of the CFS service for this user. Valid values: none (not activated), creating (activating), created (activated)
-		CfsServiceStatus *string `json:"CfsServiceStatus,omitempty" name:"CfsServiceStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeCfsServiceStatusResponseParams `json:"Response"`
 }
 
 func (r *DescribeCfsServiceStatusResponse) ToJsonString() string {
@@ -841,9 +1010,15 @@ func (r *DescribeCfsServiceStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMountTargetsRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
 type DescribeMountTargetsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 }
@@ -867,19 +1042,21 @@ func (r *DescribeMountTargetsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeMountTargetsResponseParams struct {
+	// Mount target details
+	MountTargets []*MountInfo `json:"MountTargets,omitempty" name:"MountTargets"`
+
+	// The number of mount targets
+	NumberOfMountTargets *int64 `json:"NumberOfMountTargets,omitempty" name:"NumberOfMountTargets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeMountTargetsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Mount target details
-		MountTargets []*MountInfo `json:"MountTargets,omitempty" name:"MountTargets"`
-
-		// The number of mount targets
-		NumberOfMountTargets *int64 `json:"NumberOfMountTargets,omitempty" name:"NumberOfMountTargets"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeMountTargetsResponseParams `json:"Response"`
 }
 
 func (r *DescribeMountTargetsResponse) ToJsonString() string {
@@ -894,7 +1071,6 @@ func (r *DescribeMountTargetsResponse) FromJsonString(s string) error {
 }
 
 type FileSystemClient struct {
-
 	// IP address of the file system
 	CfsVip *string `json:"CfsVip,omitempty" name:"CfsVip"`
 
@@ -915,7 +1091,6 @@ type FileSystemClient struct {
 }
 
 type FileSystemInfo struct {
-
 	// Creation time
 	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
 
@@ -978,7 +1153,6 @@ type FileSystemInfo struct {
 }
 
 type MountInfo struct {
-
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
@@ -1017,7 +1191,6 @@ type MountInfo struct {
 }
 
 type PGroup struct {
-
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -1026,7 +1199,6 @@ type PGroup struct {
 }
 
 type PGroupInfo struct {
-
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -1044,7 +1216,6 @@ type PGroupInfo struct {
 }
 
 type PGroupRuleInfo struct {
-
 	// Rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
@@ -1061,8 +1232,14 @@ type PGroupRuleInfo struct {
 	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
 }
 
+// Predefined struct for user
+type SignUpCfsServiceRequestParams struct {
+
+}
+
 type SignUpCfsServiceRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *SignUpCfsServiceRequest) ToJsonString() string {
@@ -1077,22 +1254,25 @@ func (r *SignUpCfsServiceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SignUpCfsServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SignUpCfsServiceResponseParams struct {
+	// Current status of the CFS service for this user. Valid values: none (not activated), creating (activating), created (activated)
+	CfsServiceStatus *string `json:"CfsServiceStatus,omitempty" name:"CfsServiceStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SignUpCfsServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Current status of the CFS service for this user. Valid values: none (not activated), creating (activating), created (activated)
-		CfsServiceStatus *string `json:"CfsServiceStatus,omitempty" name:"CfsServiceStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SignUpCfsServiceResponseParams `json:"Response"`
 }
 
 func (r *SignUpCfsServiceResponse) ToJsonString() string {
@@ -1107,7 +1287,6 @@ func (r *SignUpCfsServiceResponse) FromJsonString(s string) error {
 }
 
 type TagInfo struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -1115,9 +1294,18 @@ type TagInfo struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemNameRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Custom file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+}
+
 type UpdateCfsFileSystemNameRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
@@ -1145,22 +1333,24 @@ func (r *UpdateCfsFileSystemNameRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemNameResponseParams struct {
+	// Custom file system name
+	CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Custom file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateCfsFileSystemNameResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Custom file system name
-		CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
-
-		// File system ID
-		FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
-
-		// Custom file system name
-		FsName *string `json:"FsName,omitempty" name:"FsName"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateCfsFileSystemNameResponseParams `json:"Response"`
 }
 
 func (r *UpdateCfsFileSystemNameResponse) ToJsonString() string {
@@ -1174,9 +1364,18 @@ func (r *UpdateCfsFileSystemNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemPGroupRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
 type UpdateCfsFileSystemPGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -1204,19 +1403,21 @@ func (r *UpdateCfsFileSystemPGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemPGroupResponseParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateCfsFileSystemPGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// File system ID
-		FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateCfsFileSystemPGroupResponseParams `json:"Response"`
 }
 
 func (r *UpdateCfsFileSystemPGroupResponse) ToJsonString() string {
@@ -1230,9 +1431,18 @@ func (r *UpdateCfsFileSystemPGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemSizeLimitRequestParams struct {
+	// File system capacity limit in GB. Value range: 0-1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
+	FsLimit *uint64 `json:"FsLimit,omitempty" name:"FsLimit"`
+
+	// File system ID. Currently, only Standard file systems are supported.
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+}
+
 type UpdateCfsFileSystemSizeLimitRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// File system capacity limit in GB. Value range: 0-1,073,741,824. If 0 is entered, no limit will be imposed on the file system capacity.
 	FsLimit *uint64 `json:"FsLimit,omitempty" name:"FsLimit"`
 
@@ -1260,13 +1470,15 @@ func (r *UpdateCfsFileSystemSizeLimitRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsFileSystemSizeLimitResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateCfsFileSystemSizeLimitResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateCfsFileSystemSizeLimitResponseParams `json:"Response"`
 }
 
 func (r *UpdateCfsFileSystemSizeLimitResponse) ToJsonString() string {
@@ -1280,9 +1492,21 @@ func (r *UpdateCfsFileSystemSizeLimitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsPGroupRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Permission group name, which can contain 1-64 Chinese characters, letters, numbers, underscores, or dashes
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Permission group description, which can contain 1-255 characters
+	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
+}
+
 type UpdateCfsPGroupRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -1314,22 +1538,24 @@ func (r *UpdateCfsPGroupRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsPGroupResponseParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Permission group name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Description
+	DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateCfsPGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// Permission group name
-		Name *string `json:"Name,omitempty" name:"Name"`
-
-		// Description
-		DescInfo *string `json:"DescInfo,omitempty" name:"DescInfo"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateCfsPGroupResponseParams `json:"Response"`
 }
 
 func (r *UpdateCfsPGroupResponse) ToJsonString() string {
@@ -1343,9 +1569,30 @@ func (r *UpdateCfsPGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsRuleRequestParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// You can enter a single IP or IP range, such as 10.1.10.11 or 10.10.1.0/24. The default visiting address is `*`, indicating that all IPs are allowed. Please note that you need to enter the CVM instance's private IP here.
+	AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
+
+	// Read/write permission. Valid values: RO (read-only), RW (read & write). Default value: RO
+	RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
+
+	// User permission. Valid values: all_squash, no_all_squash, root_squash, no_root_squash. Specifically, all_squash: any visiting user will be mapped to an anonymous user or user group; no_all_squash: a visiting user will be first matched with a local user, and if the match fails, it will be mapped to an anonymous user or user group; root_squash: a visiting root user will be mapped to an anonymous user or user group; no_root_squash: a visiting root user will be allowed to maintain root account permissions. Default value: root_squash.
+	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
+
+	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+}
+
 type UpdateCfsRuleRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
@@ -1389,31 +1636,33 @@ func (r *UpdateCfsRuleRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateCfsRuleResponseParams struct {
+	// Permission group ID
+	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Client IP or IP range allowed for access
+	AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
+
+	// Read & write permission
+	RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
+
+	// User permission
+	UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
+
+	// Priority
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateCfsRuleResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Permission group ID
-		PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
-
-		// Rule ID
-		RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
-
-		// Client IP or IP range allowed for access
-		AuthClientIp *string `json:"AuthClientIp,omitempty" name:"AuthClientIp"`
-
-		// Read & write permission
-		RWPermission *string `json:"RWPermission,omitempty" name:"RWPermission"`
-
-		// User permission
-		UserPermission *string `json:"UserPermission,omitempty" name:"UserPermission"`
-
-		// Priority
-		Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateCfsRuleResponseParams `json:"Response"`
 }
 
 func (r *UpdateCfsRuleResponse) ToJsonString() string {

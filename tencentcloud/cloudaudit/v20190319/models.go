@@ -21,7 +21,6 @@ import (
 )
 
 type AttributeKeyDetail struct {
-
 	// Input box type
 	LabelType *string `json:"LabelType,omitempty" name:"LabelType"`
 
@@ -39,7 +38,6 @@ type AttributeKeyDetail struct {
 }
 
 type AuditSummary struct {
-
 	// Tracking set status. 1: enabled, 0: disabled
 	AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
 
@@ -54,7 +52,6 @@ type AuditSummary struct {
 }
 
 type CmqRegionInfo struct {
-
 	// Region description
 	CmqRegionName *string `json:"CmqRegionName,omitempty" name:"CmqRegionName"`
 
@@ -63,7 +60,6 @@ type CmqRegionInfo struct {
 }
 
 type CosRegionInfo struct {
-
 	// COS region
 	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
@@ -71,9 +67,51 @@ type CosRegionInfo struct {
 	CosRegionName *string `json:"CosRegionName,omitempty" name:"CosRegionName"`
 }
 
+// Predefined struct for user
+type CreateAuditRequestParams struct {
+	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
+
+	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
+
+	// Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+
+	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// Whether to create a COS bucket. 1: Yes; 0: No.
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
+
+	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
+	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
+
+	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
+	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
+
+	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
+	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
+
+	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
+	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
+
+	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is the account ID by default.
+	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
+
+	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
+}
+
 type CreateAuditRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
 	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
 
@@ -145,16 +183,18 @@ func (r *CreateAuditRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAuditResponseParams struct {
+	// Whether creation succeeded.
+	IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAuditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether creation succeeded.
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAuditResponseParams `json:"Response"`
 }
 
 func (r *CreateAuditResponse) ToJsonString() string {
@@ -168,8 +208,14 @@ func (r *CreateAuditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAuditTrackRequestParams struct {
+
+}
+
 type CreateAuditTrackRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *CreateAuditTrackRequest) ToJsonString() string {
@@ -184,19 +230,22 @@ func (r *CreateAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAuditTrackRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAuditTrackResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreateAuditTrackResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreateAuditTrackResponseParams `json:"Response"`
 }
 
 func (r *CreateAuditTrackResponse) ToJsonString() string {
@@ -210,9 +259,15 @@ func (r *CreateAuditTrackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAuditRequestParams struct {
+	// Tracking set name
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+}
+
 type DeleteAuditRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 }
@@ -236,16 +291,18 @@ func (r *DeleteAuditRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAuditResponseParams struct {
+	// Whether deletion succeeded
+	IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAuditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether deletion succeeded
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAuditResponseParams `json:"Response"`
 }
 
 func (r *DeleteAuditResponse) ToJsonString() string {
@@ -259,8 +316,14 @@ func (r *DeleteAuditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAuditTrackRequestParams struct {
+
+}
+
 type DeleteAuditTrackRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DeleteAuditTrackRequest) ToJsonString() string {
@@ -275,19 +338,22 @@ func (r *DeleteAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAuditTrackRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DeleteAuditTrackResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DeleteAuditTrackResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DeleteAuditTrackResponseParams `json:"Response"`
 }
 
 func (r *DeleteAuditTrackResponse) ToJsonString() string {
@@ -301,9 +367,15 @@ func (r *DeleteAuditTrackResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditRequestParams struct {
+	// Tracking set name
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+}
+
 type DescribeAuditRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 }
@@ -327,52 +399,54 @@ func (r *DescribeAuditRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditResponseParams struct {
+	// Whether to enable CMQ message notification. 1: Yes; 0: No.
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
+
+	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
+
+	// Globally unique CMK ID.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Tracking set status. 1: enabled, 0: disabled.
+	AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
+
+	// Tracking set name.
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+
+	// COS bucket region.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// Queue name.
+	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
+
+	// CMK alias.
+	KmsAlias *string `json:"KmsAlias,omitempty" name:"KmsAlias"`
+
+	// KMS region.
+	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
+
+	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when it is delivered to COS.
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+	// COS bucket name.
+	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
+
+	// Queue region.
+	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
+
+	// Log prefix.
+	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAuditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether to enable CMQ message notification. 1: Yes; 0: No.
-		IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
-
-		// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
-		ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
-
-		// Globally unique CMK ID.
-		KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
-
-		// Tracking set status. 1: enabled, 0: disabled.
-		AuditStatus *int64 `json:"AuditStatus,omitempty" name:"AuditStatus"`
-
-		// Tracking set name.
-		AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
-
-		// COS bucket region.
-		CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
-
-		// Queue name.
-		CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
-
-		// CMK alias.
-		KmsAlias *string `json:"KmsAlias,omitempty" name:"KmsAlias"`
-
-		// KMS region.
-		KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
-
-		// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when it is delivered to COS.
-		IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
-
-		// COS bucket name.
-		CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
-
-		// Queue region.
-		CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
-
-		// Log prefix.
-		LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAuditResponseParams `json:"Response"`
 }
 
 func (r *DescribeAuditResponse) ToJsonString() string {
@@ -386,8 +460,14 @@ func (r *DescribeAuditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditTracksRequestParams struct {
+
+}
+
 type DescribeAuditTracksRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeAuditTracksRequest) ToJsonString() string {
@@ -402,19 +482,22 @@ func (r *DescribeAuditTracksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditTracksRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditTracksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAuditTracksResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAuditTracksResponseParams `json:"Response"`
 }
 
 func (r *DescribeAuditTracksResponse) ToJsonString() string {
@@ -428,9 +511,30 @@ func (r *DescribeAuditTracksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEventsRequestParams struct {
+	// Start timestamp in seconds (cannot be 90 days after the current time).
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End timestamp in seconds (the time range for query is less than 30 days).
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Credential for viewing more logs.
+	NextToken *uint64 `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Max number of returned logs (up to 50).
+	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// Search criterion. Valid values: RequestId, EventName, ActionType (write/read), PrincipalId (sub-account), ResourceType, ResourceName, AccessKeyId, SensitiveAction, ApiErrorCode, and CamErrorCode.
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes"`
+
+	// Whether to return the IP location. `1`: yes, `0`: no.
+	IsReturnLocation *uint64 `json:"IsReturnLocation,omitempty" name:"IsReturnLocation"`
+}
+
 type DescribeEventsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start timestamp in seconds (cannot be 90 days after the current time).
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -474,27 +578,29 @@ func (r *DescribeEventsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeEventsResponseParams struct {
+	// Whether the logset ends.
+	ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
+
+	// Credential for viewing more logs.
+	NextToken *uint64 `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Logset.
+	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	Events []*Event `json:"Events,omitempty" name:"Events"`
+
+	// Total number of events.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeEventsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether the logset ends.
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// Credential for viewing more logs.
-		NextToken *uint64 `json:"NextToken,omitempty" name:"NextToken"`
-
-		// Logset.
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-		Events []*Event `json:"Events,omitempty" name:"Events"`
-
-		// Total number of events.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-		TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeEventsResponseParams `json:"Response"`
 }
 
 func (r *DescribeEventsResponse) ToJsonString() string {
@@ -509,7 +615,6 @@ func (r *DescribeEventsResponse) FromJsonString(s string) error {
 }
 
 type Event struct {
-
 	// Log ID
 	EventId *string `json:"EventId,omitempty" name:"EventId"`
 
@@ -564,9 +669,15 @@ type Event struct {
 	Location *string `json:"Location,omitempty" name:"Location"`
 }
 
+// Predefined struct for user
+type GetAttributeKeyRequestParams struct {
+	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
+	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
+}
+
 type GetAttributeKeyRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
@@ -590,16 +701,18 @@ func (r *GetAttributeKeyRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetAttributeKeyResponseParams struct {
+	// Valid values of `AttributeKey`
+	AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitempty" name:"AttributeKeyDetails"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type GetAttributeKeyResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Valid values of `AttributeKey`
-		AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitempty" name:"AttributeKeyDetails"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *GetAttributeKeyResponseParams `json:"Response"`
 }
 
 func (r *GetAttributeKeyResponse) ToJsonString() string {
@@ -613,8 +726,14 @@ func (r *GetAttributeKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquireAuditCreditRequestParams struct {
+
+}
+
 type InquireAuditCreditRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *InquireAuditCreditRequest) ToJsonString() string {
@@ -629,22 +748,25 @@ func (r *InquireAuditCreditRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquireAuditCreditRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type InquireAuditCreditResponseParams struct {
+	// Number of tracking sets that can be created
+	AuditAmount *int64 `json:"AuditAmount,omitempty" name:"AuditAmount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type InquireAuditCreditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of tracking sets that can be created
-		AuditAmount *int64 `json:"AuditAmount,omitempty" name:"AuditAmount"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *InquireAuditCreditResponseParams `json:"Response"`
 }
 
 func (r *InquireAuditCreditResponse) ToJsonString() string {
@@ -658,8 +780,14 @@ func (r *InquireAuditCreditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAuditsRequestParams struct {
+
+}
+
 type ListAuditsRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ListAuditsRequest) ToJsonString() string {
@@ -674,23 +802,26 @@ func (r *ListAuditsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAuditsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListAuditsResponseParams struct {
+	// Set of queried tracking set summaries
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuditSummarys []*AuditSummary `json:"AuditSummarys,omitempty" name:"AuditSummarys"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListAuditsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Set of queried tracking set summaries
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		AuditSummarys []*AuditSummary `json:"AuditSummarys,omitempty" name:"AuditSummarys"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListAuditsResponseParams `json:"Response"`
 }
 
 func (r *ListAuditsResponse) ToJsonString() string {
@@ -704,9 +835,15 @@ func (r *ListAuditsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCmqEnableRegionRequestParams struct {
+	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
+	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
+}
+
 type ListCmqEnableRegionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
@@ -730,16 +867,18 @@ func (r *ListCmqEnableRegionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCmqEnableRegionResponseParams struct {
+	// CloudAudit-enabled CMQ AZs
+	EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListCmqEnableRegionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// CloudAudit-enabled CMQ AZs
-		EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListCmqEnableRegionResponseParams `json:"Response"`
 }
 
 func (r *ListCmqEnableRegionResponse) ToJsonString() string {
@@ -753,9 +892,15 @@ func (r *ListCmqEnableRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCosEnableRegionRequestParams struct {
+	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
+	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
+}
+
 type ListCosEnableRegionRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
 	WebsiteType *string `json:"WebsiteType,omitempty" name:"WebsiteType"`
 }
@@ -779,16 +924,18 @@ func (r *ListCosEnableRegionRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ListCosEnableRegionResponseParams struct {
+	// CloudAudit-enabled COS AZs
+	EnableRegions []*CosRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ListCosEnableRegionResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// CloudAudit-enabled COS AZs
-		EnableRegions []*CosRegionInfo `json:"EnableRegions,omitempty" name:"EnableRegions"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ListCosEnableRegionResponseParams `json:"Response"`
 }
 
 func (r *ListCosEnableRegionResponse) ToJsonString() string {
@@ -802,9 +949,30 @@ func (r *ListCosEnableRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type LookUpEventsRequestParams struct {
+	// Start time
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Search criteria
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes"`
+
+	// Credential for viewing more logs
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Maximum number of logs to be returned
+	MaxResults *int64 `json:"MaxResults,omitempty" name:"MaxResults"`
+
+	// CloudAudit mode. Valid values: standard, quick. Default value: standard
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
 type LookUpEventsRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Start time
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -848,25 +1016,27 @@ func (r *LookUpEventsRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type LookUpEventsResponseParams struct {
+	// Credential for viewing more logs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
+
+	// Logset
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Events []*Event `json:"Events,omitempty" name:"Events"`
+
+	// Whether the logset ends
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type LookUpEventsResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Credential for viewing more logs
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
-
-		// Logset
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		Events []*Event `json:"Events,omitempty" name:"Events"`
-
-		// Whether the logset ends
-	// Note: This field may return null, indicating that no valid values can be obtained.
-		ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *LookUpEventsResponseParams `json:"Response"`
 }
 
 func (r *LookUpEventsResponse) ToJsonString() string {
@@ -881,7 +1051,6 @@ func (r *LookUpEventsResponse) FromJsonString(s string) error {
 }
 
 type LookupAttribute struct {
-
 	// Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	AttributeKey *string `json:"AttributeKey,omitempty" name:"AttributeKey"`
@@ -891,8 +1060,14 @@ type LookupAttribute struct {
 	AttributeValue *string `json:"AttributeValue,omitempty" name:"AttributeValue"`
 }
 
+// Predefined struct for user
+type ModifyAuditTrackRequestParams struct {
+
+}
+
 type ModifyAuditTrackRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *ModifyAuditTrackRequest) ToJsonString() string {
@@ -907,19 +1082,22 @@ func (r *ModifyAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditTrackRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyAuditTrackResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyAuditTrackResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyAuditTrackResponseParams `json:"Response"`
 }
 
 func (r *ModifyAuditTrackResponse) ToJsonString() string {
@@ -934,7 +1112,6 @@ func (r *ModifyAuditTrackResponse) FromJsonString(s string) error {
 }
 
 type Resource struct {
-
 	// Resource type
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
@@ -943,9 +1120,15 @@ type Resource struct {
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 }
 
+// Predefined struct for user
+type StartLoggingRequestParams struct {
+	// Tracking set name
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+}
+
 type StartLoggingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 }
@@ -969,16 +1152,18 @@ func (r *StartLoggingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StartLoggingResponseParams struct {
+	// Whether enablement succeeded
+	IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StartLoggingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether enablement succeeded
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StartLoggingResponseParams `json:"Response"`
 }
 
 func (r *StartLoggingResponse) ToJsonString() string {
@@ -992,9 +1177,15 @@ func (r *StartLoggingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopLoggingRequestParams struct {
+	// Tracking set name
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+}
+
 type StopLoggingRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 }
@@ -1018,16 +1209,18 @@ func (r *StopLoggingRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopLoggingResponseParams struct {
+	// Whether disablement succeeded
+	IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type StopLoggingResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether disablement succeeded
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *StopLoggingResponseParams `json:"Response"`
 }
 
 func (r *StopLoggingResponse) ToJsonString() string {
@@ -1041,9 +1234,51 @@ func (r *StopLoggingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateAuditRequestParams struct {
+	// Tracking set name
+	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
+
+	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitempty" name:"IsEnableCmqNotify"`
+
+	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitempty" name:"ReadWriteAttribute"`
+
+	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
+	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
+	CmqQueueName *string `json:"CmqQueueName,omitempty" name:"CmqQueueName"`
+
+	// Whether to create a COS bucket. 1: Yes; 0: No.
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitempty" name:"IsCreateNewBucket"`
+
+	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
+	KmsRegion *string `json:"KmsRegion,omitempty" name:"KmsRegion"`
+
+	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitempty" name:"IsEnableKmsEncry"`
+
+	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
+	CosBucketName *string `json:"CosBucketName,omitempty" name:"CosBucketName"`
+
+	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
+	CmqRegion *string `json:"CmqRegion,omitempty" name:"CmqRegion"`
+
+	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
+	LogFilePrefix *string `json:"LogFilePrefix,omitempty" name:"LogFilePrefix"`
+
+	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitempty" name:"IsCreateNewQueue"`
+}
+
 type UpdateAuditRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Tracking set name
 	AuditName *string `json:"AuditName,omitempty" name:"AuditName"`
 
@@ -1115,16 +1350,18 @@ func (r *UpdateAuditRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UpdateAuditResponseParams struct {
+	// Whether update succeeded
+	IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type UpdateAuditResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Whether update succeeded
-		IsSuccess *int64 `json:"IsSuccess,omitempty" name:"IsSuccess"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *UpdateAuditResponseParams `json:"Response"`
 }
 
 func (r *UpdateAuditResponse) ToJsonString() string {

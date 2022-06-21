@@ -21,7 +21,6 @@ import (
 )
 
 type AccountVpcInfo struct {
-
 	// VpcId: vpc-xadsafsdasd
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
@@ -39,7 +38,6 @@ type AccountVpcInfo struct {
 }
 
 type AccountVpcInfoOut struct {
-
 	// VpcId: vpc-xadsafsdasd
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
@@ -54,7 +52,6 @@ type AccountVpcInfoOut struct {
 }
 
 type AccountVpcInfoOutput struct {
-
 	// UIN of the VPC account
 	Uin *string `json:"Uin,omitempty" name:"Uin"`
 
@@ -66,7 +63,6 @@ type AccountVpcInfoOutput struct {
 }
 
 type AuditLog struct {
-
 	// Log type
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
@@ -81,7 +77,6 @@ type AuditLog struct {
 }
 
 type AuditLogInfo struct {
-
 	// Time
 	Date *string `json:"Date,omitempty" name:"Date"`
 
@@ -92,9 +87,15 @@ type AuditLogInfo struct {
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
+// Predefined struct for user
+type CreatePrivateDNSAccountRequestParams struct {
+	// Private DNS account
+	Account *PrivateDNSAccount `json:"Account,omitempty" name:"Account"`
+}
+
 type CreatePrivateDNSAccountRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private DNS account
 	Account *PrivateDNSAccount `json:"Account,omitempty" name:"Account"`
 }
@@ -118,13 +119,15 @@ func (r *CreatePrivateDNSAccountRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateDNSAccountResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePrivateDNSAccountResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePrivateDNSAccountResponseParams `json:"Response"`
 }
 
 func (r *CreatePrivateDNSAccountResponse) ToJsonString() string {
@@ -138,9 +141,33 @@ func (r *CreatePrivateDNSAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateZoneRecordRequestParams struct {
+	// Private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR"
+	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
+
+	// Subdomain, such as "www", "m", and "@"
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com., and MX: mail.qcloud.com.
+	RecordValue *string `json:"RecordValue,omitempty" name:"RecordValue"`
+
+	// Record weight. Value range: 1–100
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+
+	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50
+	MX *int64 `json:"MX,omitempty" name:"MX"`
+
+	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1–86400s. Default value: 600
+	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
+}
+
 type CreatePrivateZoneRecordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private domain ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -188,16 +215,18 @@ func (r *CreatePrivateZoneRecordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateZoneRecordResponseParams struct {
+	// Record ID
+	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePrivateZoneRecordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Record ID
-		RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePrivateZoneRecordResponseParams `json:"Response"`
 }
 
 func (r *CreatePrivateZoneRecordResponse) ToJsonString() string {
@@ -211,9 +240,33 @@ func (r *CreatePrivateZoneRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateZoneRequestParams struct {
+	// Domain name, which must be in the format of standard TLD
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Tags the private domain when it is created
+	TagSet []*TagInfo `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Associates the private domain to a VPC when it is created
+	VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED
+	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
+
+	// Associates the private domain to a VPC when it is created
+	Vpcs []*VpcInfo `json:"Vpcs,omitempty" name:"Vpcs"`
+
+	// List of authorized accounts' VPCs to associate with the private domain
+	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
+}
+
 type CreatePrivateZoneRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Domain name, which must be in the format of standard TLD
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -261,19 +314,21 @@ func (r *CreatePrivateZoneRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrivateZoneResponseParams struct {
+	// Private domain ID, such as zone-xxxxxx
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Private domain
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type CreatePrivateZoneResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Private domain ID, such as zone-xxxxxx
-		ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-		// Private domain
-		Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *CreatePrivateZoneResponseParams `json:"Response"`
 }
 
 func (r *CreatePrivateZoneResponse) ToJsonString() string {
@@ -288,7 +343,6 @@ func (r *CreatePrivateZoneResponse) FromJsonString(s string) error {
 }
 
 type DatePoint struct {
-
 	// Time
 	Date *string `json:"Date,omitempty" name:"Date"`
 
@@ -296,9 +350,24 @@ type DatePoint struct {
 	Value *int64 `json:"Value,omitempty" name:"Value"`
 }
 
+// Predefined struct for user
+type DescribeAccountVpcListRequestParams struct {
+	// UIN of account
+	AccountUin *string `json:"AccountUin,omitempty" name:"AccountUin"`
+
+	// Pagination offset, starting from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Maximum value: `100`. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter parameters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribeAccountVpcListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// UIN of account
 	AccountUin *string `json:"AccountUin,omitempty" name:"AccountUin"`
 
@@ -334,19 +403,21 @@ func (r *DescribeAccountVpcListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAccountVpcListResponseParams struct {
+	// Number of VPCs
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// VPC list
+	VpcSet []*AccountVpcInfoOut `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAccountVpcListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of VPCs
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// VPC list
-		VpcSet []*AccountVpcInfoOut `json:"VpcSet,omitempty" name:"VpcSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAccountVpcListResponseParams `json:"Response"`
 }
 
 func (r *DescribeAccountVpcListResponse) ToJsonString() string {
@@ -360,9 +431,27 @@ func (r *DescribeAccountVpcListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditLogRequestParams struct {
+	// Request volume statistics start time
+	TimeRangeBegin *string `json:"TimeRangeBegin,omitempty" name:"TimeRangeBegin"`
+
+	// Filter parameter. Valid values: ZoneId (private domain ID), Domain (private domain), OperatorUin (operator account ID)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Request volume statistics end time
+	TimeRangeEnd *string `json:"TimeRangeEnd,omitempty" name:"TimeRangeEnd"`
+
+	// Pagination offset, starting from 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Maximum value: 100. Default value: 20
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
 type DescribeAuditLogRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Request volume statistics start time
 	TimeRangeBegin *string `json:"TimeRangeBegin,omitempty" name:"TimeRangeBegin"`
 
@@ -402,16 +491,18 @@ func (r *DescribeAuditLogRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeAuditLogResponseParams struct {
+	// List of operation logs
+	Data []*AuditLog `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeAuditLogResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// List of operation logs
-		Data []*AuditLog `json:"Data,omitempty" name:"Data"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeAuditLogResponseParams `json:"Response"`
 }
 
 func (r *DescribeAuditLogResponse) ToJsonString() string {
@@ -425,8 +516,14 @@ func (r *DescribeAuditLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDashboardRequestParams struct {
+
+}
+
 type DescribeDashboardRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeDashboardRequest) ToJsonString() string {
@@ -441,31 +538,34 @@ func (r *DescribeDashboardRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDashboardRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDashboardResponseParams struct {
+	// Total number of private domain DNS records
+	ZoneTotal *int64 `json:"ZoneTotal,omitempty" name:"ZoneTotal"`
+
+	// Number of VPCs associated with private domain
+	ZoneVpcCount *int64 `json:"ZoneVpcCount,omitempty" name:"ZoneVpcCount"`
+
+	// Total number of historical requests
+	RequestTotalCount *int64 `json:"RequestTotalCount,omitempty" name:"RequestTotalCount"`
+
+	// Traffic package usage
+	FlowUsage []*FlowUsage `json:"FlowUsage,omitempty" name:"FlowUsage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeDashboardResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Total number of private domain DNS records
-		ZoneTotal *int64 `json:"ZoneTotal,omitempty" name:"ZoneTotal"`
-
-		// Number of VPCs associated with private domain
-		ZoneVpcCount *int64 `json:"ZoneVpcCount,omitempty" name:"ZoneVpcCount"`
-
-		// Total number of historical requests
-		RequestTotalCount *int64 `json:"RequestTotalCount,omitempty" name:"RequestTotalCount"`
-
-		// Traffic package usage
-		FlowUsage []*FlowUsage `json:"FlowUsage,omitempty" name:"FlowUsage"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeDashboardResponseParams `json:"Response"`
 }
 
 func (r *DescribeDashboardResponse) ToJsonString() string {
@@ -479,9 +579,21 @@ func (r *DescribeDashboardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateDNSAccountListRequestParams struct {
+	// Pagination offset, starting from `0`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries per page. Maximum value: `100`. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter parameters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
 type DescribePrivateDNSAccountListRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Pagination offset, starting from `0`
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
@@ -513,19 +625,21 @@ func (r *DescribePrivateDNSAccountListRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateDNSAccountListResponseParams struct {
+	// Number of Private DNS accounts
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of Private DNS accounts
+	AccountSet []*PrivateDNSAccount `json:"AccountSet,omitempty" name:"AccountSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrivateDNSAccountListResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Number of Private DNS accounts
-		TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-		// List of Private DNS accounts
-		AccountSet []*PrivateDNSAccount `json:"AccountSet,omitempty" name:"AccountSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrivateDNSAccountListResponseParams `json:"Response"`
 }
 
 func (r *DescribePrivateDNSAccountListResponse) ToJsonString() string {
@@ -539,8 +653,14 @@ func (r *DescribePrivateDNSAccountListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateZoneServiceRequestParams struct {
+
+}
+
 type DescribePrivateZoneServiceRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribePrivateZoneServiceRequest) ToJsonString() string {
@@ -555,22 +675,25 @@ func (r *DescribePrivateZoneServiceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrivateZoneServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribePrivateZoneServiceResponseParams struct {
+	// Private DNS service activation status. Valid values: ENABLED, DISABLED
+	ServiceStatus *string `json:"ServiceStatus,omitempty" name:"ServiceStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribePrivateZoneServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Private DNS service activation status. Valid values: ENABLED, DISABLED
-		ServiceStatus *string `json:"ServiceStatus,omitempty" name:"ServiceStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribePrivateZoneServiceResponseParams `json:"Response"`
 }
 
 func (r *DescribePrivateZoneServiceResponse) ToJsonString() string {
@@ -584,8 +707,14 @@ func (r *DescribePrivateZoneServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeQuotaUsageRequestParams struct {
+
+}
+
 type DescribeQuotaUsageRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *DescribeQuotaUsageRequest) ToJsonString() string {
@@ -600,22 +729,25 @@ func (r *DescribeQuotaUsageRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQuotaUsageRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeQuotaUsageResponseParams struct {
+	// TLD quota usage
+	TldQuota *TldQuota `json:"TldQuota,omitempty" name:"TldQuota"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeQuotaUsageResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// TLD quota usage
-		TldQuota *TldQuota `json:"TldQuota,omitempty" name:"TldQuota"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeQuotaUsageResponseParams `json:"Response"`
 }
 
 func (r *DescribeQuotaUsageResponse) ToJsonString() string {
@@ -629,9 +761,21 @@ func (r *DescribeQuotaUsageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRequestDataRequestParams struct {
+	// Request volume statistics start time in the format of 2020-11-22 00:00:00
+	TimeRangeBegin *string `json:"TimeRangeBegin,omitempty" name:"TimeRangeBegin"`
+
+	// Filter parameter:
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Request volume statistics end time in the format of 2020-11-22 23:59:59
+	TimeRangeEnd *string `json:"TimeRangeEnd,omitempty" name:"TimeRangeEnd"`
+}
+
 type DescribeRequestDataRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Request volume statistics start time in the format of 2020-11-22 00:00:00
 	TimeRangeBegin *string `json:"TimeRangeBegin,omitempty" name:"TimeRangeBegin"`
 
@@ -663,19 +807,21 @@ func (r *DescribeRequestDataRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeRequestDataResponseParams struct {
+	// Request volume statistics table
+	Data []*MetricData `json:"Data,omitempty" name:"Data"`
+
+	// Request volume unit time. Valid values: Day, Hour
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type DescribeRequestDataResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Request volume statistics table
-		Data []*MetricData `json:"Data,omitempty" name:"Data"`
-
-		// Request volume unit time. Valid values: Day, Hour
-		Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *DescribeRequestDataResponseParams `json:"Response"`
 }
 
 func (r *DescribeRequestDataResponse) ToJsonString() string {
@@ -690,7 +836,6 @@ func (r *DescribeRequestDataResponse) FromJsonString(s string) error {
 }
 
 type Filter struct {
-
 	// Parameter name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -699,7 +844,6 @@ type Filter struct {
 }
 
 type FlowUsage struct {
-
 	// Traffic package type, Valid values: ZONE (private domain); TRAFFIC (DNS traffic package)
 	FlowType *string `json:"FlowType,omitempty" name:"FlowType"`
 
@@ -711,7 +855,6 @@ type FlowUsage struct {
 }
 
 type MetricData struct {
-
 	// Resource description
 	Resource *string `json:"Resource,omitempty" name:"Resource"`
 
@@ -722,9 +865,36 @@ type MetricData struct {
 	DataSet []*DatePoint `json:"DataSet,omitempty" name:"DataSet"`
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneRecordRequestParams struct {
+	// Private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Record ID
+	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
+
+	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR"
+	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
+
+	// Subdomain, such as "www", "m", and "@"
+	SubDomain *string `json:"SubDomain,omitempty" name:"SubDomain"`
+
+	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com., and MX: mail.qcloud.com.
+	RecordValue *string `json:"RecordValue,omitempty" name:"RecordValue"`
+
+	// Record weight. Value range: 1–100
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+
+	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50
+	MX *int64 `json:"MX,omitempty" name:"MX"`
+
+	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1–86400s. Default value: 600
+	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
+}
+
 type ModifyPrivateZoneRecordRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private domain ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -776,13 +946,15 @@ func (r *ModifyPrivateZoneRecordRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneRecordResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPrivateZoneRecordResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPrivateZoneRecordResponseParams `json:"Response"`
 }
 
 func (r *ModifyPrivateZoneRecordResponse) ToJsonString() string {
@@ -796,9 +968,21 @@ func (r *ModifyPrivateZoneRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneRequestParams struct {
+	// Private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED
+	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
+}
+
 type ModifyPrivateZoneRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private domain ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -830,13 +1014,15 @@ func (r *ModifyPrivateZoneRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPrivateZoneResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPrivateZoneResponseParams `json:"Response"`
 }
 
 func (r *ModifyPrivateZoneResponse) ToJsonString() string {
@@ -850,9 +1036,21 @@ func (r *ModifyPrivateZoneResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneVpcRequestParams struct {
+	// Private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of all VPCs associated with private domain
+	VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// List of authorized accounts' VPCs to associate with the private domain
+	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
+}
+
 type ModifyPrivateZoneVpcRequest struct {
 	*tchttp.BaseRequest
-
+	
 	// Private domain ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
@@ -884,22 +1082,24 @@ func (r *ModifyPrivateZoneVpcRequest) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrivateZoneVpcResponseParams struct {
+	// Private domain ID, such as zone-xxxxxx
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of VPCs associated with domain
+	VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
+
+	// List of authorized accounts' VPCs associated with the private domain
+	AccountVpcSet []*AccountVpcInfoOutput `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type ModifyPrivateZoneVpcResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Private domain ID, such as zone-xxxxxx
-		ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-		// List of VPCs associated with domain
-		VpcSet []*VpcInfo `json:"VpcSet,omitempty" name:"VpcSet"`
-
-		// List of authorized accounts' VPCs associated with the private domain
-		AccountVpcSet []*AccountVpcInfoOutput `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *ModifyPrivateZoneVpcResponseParams `json:"Response"`
 }
 
 func (r *ModifyPrivateZoneVpcResponse) ToJsonString() string {
@@ -914,7 +1114,6 @@ func (r *ModifyPrivateZoneVpcResponse) FromJsonString(s string) error {
 }
 
 type PrivateDNSAccount struct {
-
 	// Root account UIN
 	Uin *string `json:"Uin,omitempty" name:"Uin"`
 
@@ -925,8 +1124,14 @@ type PrivateDNSAccount struct {
 	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
 }
 
+// Predefined struct for user
+type SubscribePrivateZoneServiceRequestParams struct {
+
+}
+
 type SubscribePrivateZoneServiceRequest struct {
 	*tchttp.BaseRequest
+	
 }
 
 func (r *SubscribePrivateZoneServiceRequest) ToJsonString() string {
@@ -941,22 +1146,25 @@ func (r *SubscribePrivateZoneServiceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SubscribePrivateZoneServiceRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SubscribePrivateZoneServiceResponseParams struct {
+	// Private DNS service activation status
+	ServiceStatus *string `json:"ServiceStatus,omitempty" name:"ServiceStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
 type SubscribePrivateZoneServiceResponse struct {
 	*tchttp.BaseResponse
-	Response *struct {
-
-		// Private DNS service activation status
-		ServiceStatus *string `json:"ServiceStatus,omitempty" name:"ServiceStatus"`
-
-		// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-		RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-	} `json:"Response"`
+	Response *SubscribePrivateZoneServiceResponseParams `json:"Response"`
 }
 
 func (r *SubscribePrivateZoneServiceResponse) ToJsonString() string {
@@ -971,7 +1179,6 @@ func (r *SubscribePrivateZoneServiceResponse) FromJsonString(s string) error {
 }
 
 type TagInfo struct {
-
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
@@ -980,7 +1187,6 @@ type TagInfo struct {
 }
 
 type TldQuota struct {
-
 	// Total quota
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 
@@ -995,7 +1201,6 @@ type TldQuota struct {
 }
 
 type VpcInfo struct {
-
 	// VpcId: vpc-xadsafsdasd
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
