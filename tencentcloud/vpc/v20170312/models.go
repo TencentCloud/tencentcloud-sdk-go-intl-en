@@ -918,6 +918,162 @@ func (r *AssociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s strin
 }
 
 // Predefined struct for user
+type AssociateNatGatewayAddressRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
+	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
+
+	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+
+	// The availability zone of the EIP, which is passed in when the EIP is automatically assigned.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
+	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
+
+	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
+
+
+	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
+}
+
+type AssociateNatGatewayAddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
+	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
+
+	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+
+	// The availability zone of the EIP, which is passed in when the EIP is automatically assigned.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
+	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
+
+	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
+
+	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
+}
+
+func (r *AssociateNatGatewayAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateNatGatewayAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "AddressCount")
+	delete(f, "PublicIpAddresses")
+	delete(f, "Zone")
+	delete(f, "StockPublicIpAddressesBandwidthOut")
+	delete(f, "PublicIpAddressesBandwidthOut")
+	delete(f, "PublicIpFromSameZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateNatGatewayAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateNatGatewayAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AssociateNatGatewayAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *AssociateNatGatewayAddressResponseParams `json:"Response"`
+}
+
+func (r *AssociateNatGatewayAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateNatGatewayAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateNetworkAclSubnetsRequestParams struct {
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678]
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+type AssociateNetworkAclSubnetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678]
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+func (r *AssociateNetworkAclSubnetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "SubnetIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateNetworkAclSubnetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateNetworkAclSubnetsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AssociateNetworkAclSubnetsResponse struct {
+	*tchttp.BaseResponse
+	Response *AssociateNetworkAclSubnetsResponseParams `json:"Response"`
+}
+
+func (r *AssociateNetworkAclSubnetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateNetworkAclSubnetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type AssociateNetworkInterfaceSecurityGroupsRequestParams struct {
 	// ENI instance ID, e.g. eni-pxir56ns. You can enter up to 100 instances for each request.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
@@ -2056,6 +2212,71 @@ func (r *CreateAndAttachNetworkInterfaceResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type CreateAssistantCidrRequestParams struct {
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
+}
+
+type CreateAssistantCidrRequest struct {
+	*tchttp.BaseRequest
+	
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
+}
+
+func (r *CreateAssistantCidrRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAssistantCidrRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "CidrBlocks")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssistantCidrRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAssistantCidrResponseParams struct {
+	// A set of secondary CIDR blocks.
+	// Note: This field may return null, indicating that no valid value was found.
+	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAssistantCidrResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAssistantCidrResponseParams `json:"Response"`
+}
+
+func (r *CreateAssistantCidrResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAssistantCidrResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateBandwidthPackageRequestParams struct {
 	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
 	// `BGP` 
@@ -2834,6 +3055,264 @@ func (r *CreateLocalGatewayResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateNatGatewayDestinationIpPortTranslationNatRuleRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rules of the NAT gateway.
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
+}
+
+type CreateNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rules of the NAT gateway.
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
+}
+
+func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "DestinationIpPortTranslationNatRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNatGatewayDestinationIpPortTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNatGatewayDestinationIpPortTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNatGatewayRequestParams struct {
+	// NAT gateway name
+	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
+
+	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100Mbps`.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// The concurrent connection cap of the NAT gateway. Supported parameter values: `1000000, 3000000, 10000000`. The default value is `100000`.
+	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
+
+	// The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
+
+	// The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+
+	// The availability zone, such as `ap-guangzhou-1`.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Subnet of the NAT gateway
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
+	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
+
+	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
+
+
+	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
+}
+
+type CreateNatGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// NAT gateway name
+	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
+
+	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100Mbps`.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// The concurrent connection cap of the NAT gateway. Supported parameter values: `1000000, 3000000, 10000000`. The default value is `100000`.
+	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
+
+	// The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
+
+	// The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+
+	// The availability zone, such as `ap-guangzhou-1`.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Subnet of the NAT gateway
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
+	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
+
+	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
+
+	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
+}
+
+func (r *CreateNatGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayName")
+	delete(f, "VpcId")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "MaxConcurrentConnection")
+	delete(f, "AddressCount")
+	delete(f, "PublicIpAddresses")
+	delete(f, "Zone")
+	delete(f, "Tags")
+	delete(f, "SubnetId")
+	delete(f, "StockPublicIpAddressesBandwidthOut")
+	delete(f, "PublicIpAddressesBandwidthOut")
+	delete(f, "PublicIpFromSameZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNatGatewayResponseParams struct {
+	// NAT gateway object array.
+	NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
+
+	// The number of NAT gateway objects meeting the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNatGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNatGatewayResponseParams `json:"Response"`
+}
+
+func (r *CreateNatGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNatGatewaySourceIpTranslationNatRuleRequestParams struct {
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRules []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRules,omitempty" name:"SourceIpTranslationNatRules"`
+}
+
+type CreateNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRules []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRules,omitempty" name:"SourceIpTranslationNatRules"`
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "SourceIpTranslationNatRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNatGatewaySourceIpTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNatGatewaySourceIpTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateNetDetectRequestParams struct {
 	// The `ID` of a `VPC` instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
@@ -2953,6 +3432,70 @@ func (r *CreateNetDetectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateNetDetectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNetworkAclRequestParams struct {
+	// ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+type CreateNetworkAclRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+func (r *CreateNetworkAclRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkAclRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "NetworkAclName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkAclRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNetworkAclResponseParams struct {
+	// Network ACL instance
+	NetworkAcl *NetworkAcl `json:"NetworkAcl,omitempty" name:"NetworkAcl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNetworkAclResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNetworkAclResponseParams `json:"Response"`
+}
+
+func (r *CreateNetworkAclResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkAclResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4662,6 +5205,67 @@ func (r *DeleteAddressTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteAssistantCidrRequestParams struct {
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
+}
+
+type DeleteAssistantCidrRequest struct {
+	*tchttp.BaseRequest
+	
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
+}
+
+func (r *DeleteAssistantCidrRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAssistantCidrRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "CidrBlocks")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAssistantCidrRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAssistantCidrResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAssistantCidrResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAssistantCidrResponseParams `json:"Response"`
+}
+
+func (r *DeleteAssistantCidrResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAssistantCidrResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteBandwidthPackageRequestParams struct {
 	// The unique ID of the bandwidth package to be deleted.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
@@ -5122,6 +5726,182 @@ func (r *DeleteLocalGatewayResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteNatGatewayDestinationIpPortTranslationNatRuleRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rules of the NAT gateway.
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
+}
+
+type DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rules of the NAT gateway.
+	DestinationIpPortTranslationNatRules []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRules,omitempty" name:"DestinationIpPortTranslationNatRules"`
+}
+
+func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "DestinationIpPortTranslationNatRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNatGatewayDestinationIpPortTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNatGatewayRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+}
+
+type DeleteNatGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+}
+
+func (r *DeleteNatGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNatGatewayResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteNatGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNatGatewayResponseParams `json:"Response"`
+}
+
+func (r *DeleteNatGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNatGatewaySourceIpTranslationNatRuleRequestParams struct {
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The list of SNAT rule IDs of a NAT Gateway, such as `snat-df43254`
+	NatGatewaySnatIds []*string `json:"NatGatewaySnatIds,omitempty" name:"NatGatewaySnatIds"`
+}
+
+type DeleteNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT Gateway, such as `nat-df45454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The list of SNAT rule IDs of a NAT Gateway, such as `snat-df43254`
+	NatGatewaySnatIds []*string `json:"NatGatewaySnatIds,omitempty" name:"NatGatewaySnatIds"`
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "NatGatewaySnatIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNatGatewaySourceIpTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNatGatewaySourceIpTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteNetDetectRequestParams struct {
 	// The `ID` of a network detection instance, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
@@ -5172,6 +5952,60 @@ func (r *DeleteNetDetectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteNetDetectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkAclRequestParams struct {
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+}
+
+type DeleteNetworkAclRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+}
+
+func (r *DeleteNetworkAclRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkAclRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetworkAclRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkAclResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteNetworkAclResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNetworkAclResponseParams `json:"Response"`
+}
+
+func (r *DeleteNetworkAclResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkAclResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8053,6 +8887,93 @@ func (r *DescribeGatewayFlowMonitorDetailResponse) FromJsonString(s string) erro
 }
 
 // Predefined struct for user
+type DescribeGatewayFlowQosRequestParams struct {
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+
+	// CVM private IP addresses with limited bandwidth.
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeGatewayFlowQosRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+
+	// CVM private IP addresses with limited bandwidth.
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeGatewayFlowQosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatewayFlowQosRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "IpAddresses")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatewayFlowQosRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGatewayFlowQosResponseParams struct {
+	// List of instance details.
+	GatewayQosSet []*GatewayQos `json:"GatewayQosSet,omitempty" name:"GatewayQosSet"`
+
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGatewayFlowQosResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGatewayFlowQosResponseParams `json:"Response"`
+}
+
+func (r *DescribeGatewayFlowQosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatewayFlowQosResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeHaVipsRequestParams struct {
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
 	HaVipIds []*string `json:"HaVipIds,omitempty" name:"HaVipIds"`
@@ -8345,6 +9266,280 @@ func (r *DescribeLocalGatewayResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLocalGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequestParams struct {
+	// NAT gateway ID.
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
+
+	// Filter conditions:
+	// `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li> nat-gateway-id, the NAT gateway ID, such as `nat-0yi4hekt`.</li>
+	// <li> vpc-id, the VPC ID, such as `vpc-0yi4hekt`.</li>
+	// <li> public-ip-address, the EIP, such as `139.199.232.238`.</li>
+	// <li>public-port, the public network port.</li>
+	// <li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
+	// <li>private-port, the private network port.</li>
+	// <li>description, the rule description.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// NAT gateway ID.
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
+
+	// Filter conditions:
+	// `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li> nat-gateway-id, the NAT gateway ID, such as `nat-0yi4hekt`.</li>
+	// <li> vpc-id, the VPC ID, such as `vpc-0yi4hekt`.</li>
+	// <li> public-ip-address, the EIP, such as `139.199.232.238`.</li>
+	// <li>public-port, the public network port.</li>
+	// <li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
+	// <li>private-port, the private network port.</li>
+	// <li>description, the rule description.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewayDestinationIpPortTranslationNatRulesResponseParams struct {
+	// The object array of port forwarding rules for the NAT gateway.
+	NatGatewayDestinationIpPortTranslationNatRuleSet []*NatGatewayDestinationIpPortTranslationNatRule `json:"NatGatewayDestinationIpPortTranslationNatRuleSet,omitempty" name:"NatGatewayDestinationIpPortTranslationNatRuleSet"`
+
+	// The number of object arrays of NAT port forwarding rules meeting the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewaySourceIpTranslationNatRulesRequestParams struct {
+	// The unique ID of the NAT Gateway, such as `nat-123xx454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Filter conditions:
+	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
+	// <li>description, the rule description</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default is 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeNatGatewaySourceIpTranslationNatRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the NAT Gateway, such as `nat-123xx454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Filter conditions:
+	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
+	// <li>description, the rule description</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. Default is 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewaySourceIpTranslationNatRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewaySourceIpTranslationNatRulesResponseParams struct {
+	// Object array of the SNAT rule for a NAT Gateway.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
+
+	// The number of object arrays of eligible forwarding rules for a NAT Gateway
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNatGatewaySourceIpTranslationNatRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNatGatewaySourceIpTranslationNatRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewaySourceIpTranslationNatRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewaysRequestParams struct {
+	// The unified ID of the NAT gateways, such as `nat-123xx454`.
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
+
+	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
+	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
+	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
+	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeNatGatewaysRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unified ID of the NAT gateways, such as `nat-123xx454`.
+	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
+
+	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
+	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
+	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
+	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Offset. The default value is 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of values to be returned. The default value is 20. Maximum is 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNatGatewaysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewaysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewaysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewaysResponseParams struct {
+	// NAT gateway object array.
+	NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
+
+	// The number of NAT gateway object sets meeting the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNatGatewaysResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNatGatewaysResponseParams `json:"Response"`
+}
+
+func (r *DescribeNatGatewaysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewaysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10028,6 +11223,66 @@ func (r *DescribeVpcResourceDashboardResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeVpcTaskResultRequestParams struct {
+	// `RequestId` returned by an async task
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type DescribeVpcTaskResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// `RequestId` returned by an async task
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeVpcTaskResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcTaskResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcTaskResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVpcTaskResultResponseParams struct {
+	// Execution result of an async task Valid values: `SUCCESS`: the task has been successfully executed; `FAILED`: the job execution failed; `RUNNING`: the job is executing.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Output of the async task execution result
+	Output *string `json:"Output,omitempty" name:"Output"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeVpcTaskResultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVpcTaskResultResponseParams `json:"Response"`
+}
+
+func (r *DescribeVpcTaskResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcTaskResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeVpcsRequestParams struct {
 	// The VPC instance ID, such as `vpc-f49l6u0z`. Each request supports a maximum of 100 instances. `VpcIds` and `Filters` cannot be specified at the same time.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
@@ -10462,6 +11717,26 @@ func (r *DescribeVpnGatewaysResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DestinationIpPortTranslationNatRule struct {
+	// Network protocol. Available choices: `TCP`, `UDP`.
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// EIP.
+	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
+
+	// Public port.
+	PublicPort *uint64 `json:"PublicPort,omitempty" name:"PublicPort"`
+
+	// Private network address.
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+
+	// Private network port.
+	PrivatePort *uint64 `json:"PrivatePort,omitempty" name:"PrivatePort"`
+
+	// NAT gateway forwarding rule description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 // Predefined struct for user
 type DetachCcnInstancesRequestParams struct {
 	// The CCN instance ID, such as `ccn-f49l6u0z`.
@@ -10872,6 +12147,66 @@ func (r *DisableFlowLogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DisableGatewayFlowMonitorRequestParams struct {
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+}
+
+type DisableGatewayFlowMonitorRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+}
+
+func (r *DisableGatewayFlowMonitorRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableGatewayFlowMonitorRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableGatewayFlowMonitorRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableGatewayFlowMonitorResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DisableGatewayFlowMonitorResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableGatewayFlowMonitorResponseParams `json:"Response"`
+}
+
+func (r *DisableGatewayFlowMonitorResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableGatewayFlowMonitorResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisassociateAddressRequestParams struct {
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
@@ -11000,6 +12335,128 @@ func (r *DisassociateDirectConnectGatewayNatGatewayResponse) ToJsonString() stri
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DisassociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateNatGatewayAddressRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Array of the EIPs to be unbound from the NAT gateway.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+}
+
+type DisassociateNatGatewayAddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Array of the EIPs to be unbound from the NAT gateway.
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+}
+
+func (r *DisassociateNatGatewayAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateNatGatewayAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "PublicIpAddresses")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateNatGatewayAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateNatGatewayAddressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DisassociateNatGatewayAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *DisassociateNatGatewayAddressResponseParams `json:"Response"`
+}
+
+func (r *DisassociateNatGatewayAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateNatGatewayAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateNetworkAclSubnetsRequestParams struct {
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678].
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+type DisassociateNetworkAclSubnetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Array of subnet instance IDs. Example: [subnet-12345678].
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+func (r *DisassociateNetworkAclSubnetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateNetworkAclSubnetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "SubnetIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateNetworkAclSubnetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateNetworkAclSubnetsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DisassociateNetworkAclSubnetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DisassociateNetworkAclSubnetsResponseParams `json:"Response"`
+}
+
+func (r *DisassociateNetworkAclSubnetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateNetworkAclSubnetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11319,6 +12776,66 @@ func (r *EnableFlowLogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type EnableGatewayFlowMonitorRequestParams struct {
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+}
+
+type EnableGatewayFlowMonitorRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+}
+
+func (r *EnableGatewayFlowMonitorRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGatewayFlowMonitorRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableGatewayFlowMonitorRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableGatewayFlowMonitorResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableGatewayFlowMonitorResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableGatewayFlowMonitorResponseParams `json:"Response"`
+}
+
+func (r *EnableGatewayFlowMonitorResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGatewayFlowMonitorResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type EnableVpcEndPointConnectRequestParams struct {
 	// Endpoint service ID
 	EndPointServiceId *string `json:"EndPointServiceId,omitempty" name:"EndPointServiceId"`
@@ -11548,6 +13065,20 @@ type GatewayFlowMonitorDetail struct {
 
 	// Outbound traffic, in Byte.
 	OutTraffic *uint64 `json:"OutTraffic,omitempty" name:"OutTraffic"`
+}
+
+type GatewayQos struct {
+	// VPC instance ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// CVM Private IP.
+	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// Bandwidth limit value.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// The creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 // Predefined struct for user
@@ -12699,6 +14230,78 @@ func (r *ModifyAddressesBandwidthResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyAssistantCidrRequestParams struct {
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
+
+	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
+}
+
+type ModifyAssistantCidrRequest struct {
+	*tchttp.BaseRequest
+	
+	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
+
+	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
+}
+
+func (r *ModifyAssistantCidrRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAssistantCidrRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "NewCidrBlocks")
+	delete(f, "OldCidrBlocks")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAssistantCidrRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAssistantCidrResponseParams struct {
+	// A set of secondary CIDR blocks.
+	// Note: This field may return null, indicating that no valid value was found.
+	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAssistantCidrResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAssistantCidrResponseParams `json:"Response"`
+}
+
+func (r *ModifyAssistantCidrResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAssistantCidrResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyBandwidthPackageAttributeRequestParams struct {
 	// The unique ID of the bandwidth package.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
@@ -13175,6 +14778,80 @@ func (r *ModifyFlowLogAttributeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyGatewayFlowQosRequestParams struct {
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+
+	// Bandwidth limit value.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// CVM private IP addresses with limited bandwidth.
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+}
+
+type ModifyGatewayFlowQosRequest struct {
+	*tchttp.BaseRequest
+	
+	// Gateway instance ID, which currently supports these types:
+	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
+	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
+	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+
+	// Bandwidth limit value.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// CVM private IP addresses with limited bandwidth.
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+}
+
+func (r *ModifyGatewayFlowQosRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGatewayFlowQosRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GatewayId")
+	delete(f, "Bandwidth")
+	delete(f, "IpAddresses")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGatewayFlowQosRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGatewayFlowQosResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyGatewayFlowQosResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyGatewayFlowQosResponseParams `json:"Response"`
+}
+
+func (r *ModifyGatewayFlowQosResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGatewayFlowQosResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyHaVipAttributeRequestParams struct {
 	// The unique `ID` of the `HAVIP`, such as `havip-9o233uri`.
 	HaVipId *string `json:"HaVipId,omitempty" name:"HaVipId"`
@@ -13372,6 +15049,217 @@ func (r *ModifyLocalGatewayResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyNatGatewayAttributeRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The NAT gateway name, such as `test_nat`.
+	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
+
+	// The maximum outbound bandwidth of the NAT gateway. Unit: Mbps.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Whether to modify the security group bound to the NAT Gateway
+	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
+
+	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+type ModifyNatGatewayAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The NAT gateway name, such as `test_nat`.
+	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
+
+	// The maximum outbound bandwidth of the NAT gateway. Unit: Mbps.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Whether to modify the security group bound to the NAT Gateway
+	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
+
+	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *ModifyNatGatewayAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewayAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "NatGatewayName")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "ModifySecurityGroup")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewayAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatGatewayAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNatGatewayAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNatGatewayAttributeResponseParams `json:"Response"`
+}
+
+func (r *ModifyNatGatewayAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewayAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatGatewayDestinationIpPortTranslationNatRuleRequestParams struct {
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rule of the source NAT gateway.
+	SourceNatRule *DestinationIpPortTranslationNatRule `json:"SourceNatRule,omitempty" name:"SourceNatRule"`
+
+	// The port forwarding rule of the destination NAT gateway.
+	DestinationNatRule *DestinationIpPortTranslationNatRule `json:"DestinationNatRule,omitempty" name:"DestinationNatRule"`
+}
+
+type ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT gateway, such as `nat-df45454`.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The port forwarding rule of the source NAT gateway.
+	SourceNatRule *DestinationIpPortTranslationNatRule `json:"SourceNatRule,omitempty" name:"SourceNatRule"`
+
+	// The port forwarding rule of the destination NAT gateway.
+	DestinationNatRule *DestinationIpPortTranslationNatRule `json:"DestinationNatRule,omitempty" name:"DestinationNatRule"`
+}
+
+func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "SourceNatRule")
+	delete(f, "DestinationNatRule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatGatewayDestinationIpPortTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatGatewaySourceIpTranslationNatRuleRequestParams struct {
+	// The ID of the NAT Gateway, such as `nat-df453454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRule *SourceIpTranslationNatRule `json:"SourceIpTranslationNatRule,omitempty" name:"SourceIpTranslationNatRule"`
+}
+
+type ModifyNatGatewaySourceIpTranslationNatRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the NAT Gateway, such as `nat-df453454`
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// The SNAT forwarding rule of the NAT Gateway
+	SourceIpTranslationNatRule *SourceIpTranslationNatRule `json:"SourceIpTranslationNatRule,omitempty" name:"SourceIpTranslationNatRule"`
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "SourceIpTranslationNatRule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatGatewaySourceIpTranslationNatRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatGatewaySourceIpTranslationNatRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNatGatewaySourceIpTranslationNatRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNatGatewaySourceIpTranslationNatRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyNetDetectRequestParams struct {
 	// The ID of a network detection instance, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
@@ -13481,6 +15369,128 @@ func (r *ModifyNetDetectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyNetDetectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclAttributeRequestParams struct {
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+type ModifyNetworkAclAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Name of the network ACL. The maximum length is 60 bytes.
+	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+}
+
+func (r *ModifyNetworkAclAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "NetworkAclName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkAclAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkAclAttributeResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkAclAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclEntriesRequestParams struct {
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL rule set.
+	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
+}
+
+type ModifyNetworkAclEntriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID. Example: acl-12345678.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL rule set.
+	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
+}
+
+func (r *ModifyNetworkAclEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclEntriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "NetworkAclEntrySet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclEntriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclEntriesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkAclEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkAclEntriesResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkAclEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclEntriesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14660,6 +16670,111 @@ func (r *ModifyVpnGatewayRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type NatGateway struct {
+	// NAT gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// NAT gateway name.
+	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
+
+	// NAT gateway creation time.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// The status of the NAT gateway.
+	//  'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
+	// ‘FAILED’: Failed.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// The maximum outbound bandwidth of the gateway. Unit: Mbps.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// The concurrent connections cap of the gateway.
+	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
+
+	// The public IP object array of the bound NAT gateway.
+	PublicIpAddressSet []*NatGatewayAddress `json:"PublicIpAddressSet,omitempty" name:"PublicIpAddressSet"`
+
+	// The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Account is in arrears and the service is suspended.
+	NetworkState *string `json:"NetworkState,omitempty" name:"NetworkState"`
+
+	// The port forwarding rules of the NAT gateway.
+	DestinationIpPortTranslationNatRuleSet []*DestinationIpPortTranslationNatRule `json:"DestinationIpPortTranslationNatRuleSet,omitempty" name:"DestinationIpPortTranslationNatRuleSet"`
+
+	// VPC instance ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The availability zone in which the NAT gateway is located.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// IDs of direct connect gateway associated.
+	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Tag key-value pair.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// The list of the security groups bound to the NAT Gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
+
+	// SNAT forwarding rule of the NAT Gateway.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
+
+	// Whether the NAT Gateway is dedicated.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	IsExclusive *bool `json:"IsExclusive,omitempty" name:"IsExclusive"`
+
+	// Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	ExclusiveGatewayBandwidth *uint64 `json:"ExclusiveGatewayBandwidth,omitempty" name:"ExclusiveGatewayBandwidth"`
+}
+
+type NatGatewayAddress struct {
+	// The unique ID of the Elastic IP (EIP), such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
+	// The public IP address, such as `123.121.34.33`.
+	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
+
+	// The block status of the resource. `true` indicates the EIP is blocked. `false` indicates that the EIP is not blocked.
+	IsBlocked *bool `json:"IsBlocked,omitempty" name:"IsBlocked"`
+}
+
+type NatGatewayDestinationIpPortTranslationNatRule struct {
+	// Network protocol. Available choices: `TCP`, `UDP`.
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// EIP.
+	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
+
+	// Public port.
+	PublicPort *uint64 `json:"PublicPort,omitempty" name:"PublicPort"`
+
+	// Private network address.
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+
+	// Private network port.
+	PrivatePort *uint64 `json:"PrivatePort,omitempty" name:"PrivatePort"`
+
+	// NAT gateway forwarding rule description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// NAT gateway ID.
+	// Note: This field may return null, indicating no valid value.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// VPC ID.
+	// Note: This field may return null, indicating no valid value.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The creation time of the NAT gateway forwarding rule.
+	// Note: This field may return null, indicating no valid value.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+}
+
 type NetDetect struct {
 	// The ID of a VPC instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
@@ -14789,6 +16904,14 @@ type NetworkAclEntry struct {
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
+type NetworkAclEntrySet struct {
+	// Inbound rules.
+	Ingress []*NetworkAclEntry `json:"Ingress,omitempty" name:"Ingress"`
+
+	// Outbound rules.
+	Egress []*NetworkAclEntry `json:"Egress,omitempty" name:"Egress"`
+}
+
 type NetworkInterface struct {
 	// The ID of the ENI instance, such as `eni-f1xjkw1b`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
@@ -14869,6 +16992,67 @@ type NetworkInterfaceAttachment struct {
 
 	// Binding time
 	AttachTime *string `json:"AttachTime,omitempty" name:"AttachTime"`
+}
+
+// Predefined struct for user
+type NotifyRoutesRequestParams struct {
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
+}
+
+type NotifyRoutesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
+}
+
+func (r *NotifyRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *NotifyRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RouteTableId")
+	delete(f, "RouteItemIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "NotifyRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type NotifyRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type NotifyRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *NotifyRoutesResponseParams `json:"Response"`
+}
+
+func (r *NotifyRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *NotifyRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Price struct {
@@ -15494,6 +17678,67 @@ func (r *ResetAttachCcnInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ResetAttachCcnInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetNatGatewayConnectionRequestParams struct {
+	// NAT gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Concurrent connections cap of the NAT gateway, such as 1000000, 3000000, 10000000.
+	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
+}
+
+type ResetNatGatewayConnectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// NAT gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Concurrent connections cap of the NAT gateway, such as 1000000, 3000000, 10000000.
+	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
+}
+
+func (r *ResetNatGatewayConnectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetNatGatewayConnectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "MaxConcurrentConnection")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetNatGatewayConnectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetNatGatewayConnectionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ResetNatGatewayConnectionResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetNatGatewayConnectionResponseParams `json:"Response"`
+}
+
+func (r *ResetNatGatewayConnectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetNatGatewayConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -16145,6 +18390,39 @@ func (r *SetCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SourceIpTranslationNatRule struct {
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Source IP/IP range
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+
+	// Elastic IP address pool
+	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// SNAT rule ID
+	NatGatewaySnatId *string `json:"NatGatewaySnatId,omitempty" name:"NatGatewaySnatId"`
+
+	// NAT Gateway ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// VPC ID
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Creation time of a SNAT rule for a NAT Gateway
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+}
+
 type Subnet struct {
 	// The `ID` of the `VPC` instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
@@ -16793,4 +19071,65 @@ type VpngwCcnRoutes struct {
 	// ENABLE: enable the route
 	// DISABLE: do not enable the route
 	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+// Predefined struct for user
+type WithdrawNotifyRoutesRequestParams struct {
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
+}
+
+type WithdrawNotifyRoutesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the route table
+	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
+
+	// The unique ID of the routing policy
+	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
+}
+
+func (r *WithdrawNotifyRoutesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *WithdrawNotifyRoutesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RouteTableId")
+	delete(f, "RouteItemIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "WithdrawNotifyRoutesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type WithdrawNotifyRoutesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type WithdrawNotifyRoutesResponse struct {
+	*tchttp.BaseResponse
+	Response *WithdrawNotifyRoutesResponseParams `json:"Response"`
+}
+
+func (r *WithdrawNotifyRoutesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *WithdrawNotifyRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }

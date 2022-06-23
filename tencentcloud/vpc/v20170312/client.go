@@ -136,6 +136,7 @@ func NewAddBandwidthPackageResourcesResponse() (response *AddBandwidthPackageRes
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RESOURCEALREADYEXISTED = "InvalidParameterValue.ResourceAlreadyExisted"
@@ -158,6 +159,7 @@ func (c *Client) AddBandwidthPackageResources(request *AddBandwidthPackageResour
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RESOURCEALREADYEXISTED = "InvalidParameterValue.ResourceAlreadyExisted"
@@ -234,6 +236,7 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
 //  LIMITEXCEEDED_BANDWIDTHPACKAGEQUOTA = "LimitExceeded.BandwidthPackageQuota"
 //  LIMITEXCEEDED_MONTHLYADDRESSRECOVERYQUOTA = "LimitExceeded.MonthlyAddressRecoveryQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION_INVALIDACCOUNT = "UnauthorizedOperation.InvalidAccount"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
@@ -277,6 +280,7 @@ func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response 
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
 //  LIMITEXCEEDED_BANDWIDTHPACKAGEQUOTA = "LimitExceeded.BandwidthPackageQuota"
 //  LIMITEXCEEDED_MONTHLYADDRESSRECOVERYQUOTA = "LimitExceeded.MonthlyAddressRecoveryQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION_INVALIDACCOUNT = "UnauthorizedOperation.InvalidAccount"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
@@ -800,6 +804,132 @@ func (c *Client) AssociateDirectConnectGatewayNatGatewayWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewAssociateDirectConnectGatewayNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateNatGatewayAddressRequest() (request *AssociateNatGatewayAddressRequest) {
+    request = &AssociateNatGatewayAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNatGatewayAddress")
+    
+    
+    return
+}
+
+func NewAssociateNatGatewayAddressResponse() (response *AssociateNatGatewayAddressResponse) {
+    response = &AssociateNatGatewayAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AssociateNatGatewayAddress
+// This API is used to bind an EIP to NAT Gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) AssociateNatGatewayAddress(request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
+    return c.AssociateNatGatewayAddressWithContext(context.Background(), request)
+}
+
+// AssociateNatGatewayAddress
+// This API is used to bind an EIP to NAT Gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) AssociateNatGatewayAddressWithContext(ctx context.Context, request *AssociateNatGatewayAddressRequest) (response *AssociateNatGatewayAddressResponse, err error) {
+    if request == nil {
+        request = NewAssociateNatGatewayAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateNatGatewayAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAssociateNatGatewayAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateNetworkAclSubnetsRequest() (request *AssociateNetworkAclSubnetsRequest) {
+    request = &AssociateNetworkAclSubnetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateNetworkAclSubnets")
+    
+    
+    return
+}
+
+func NewAssociateNetworkAclSubnetsResponse() (response *AssociateNetworkAclSubnetsResponse) {
+    response = &AssociateNetworkAclSubnetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AssociateNetworkAclSubnets
+// This API is used to associate a network ACL with subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
+func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
+    return c.AssociateNetworkAclSubnetsWithContext(context.Background(), request)
+}
+
+// AssociateNetworkAclSubnets
+// This API is used to associate a network ACL with subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
+func (c *Client) AssociateNetworkAclSubnetsWithContext(ctx context.Context, request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
+    if request == nil {
+        request = NewAssociateNetworkAclSubnetsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateNetworkAclSubnets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAssociateNetworkAclSubnetsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1581,6 +1711,69 @@ func (c *Client) CreateAndAttachNetworkInterfaceWithContext(ctx context.Context,
     return
 }
 
+func NewCreateAssistantCidrRequest() (request *CreateAssistantCidrRequest) {
+    request = &CreateAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateAssistantCidr")
+    
+    
+    return
+}
+
+func NewCreateAssistantCidrResponse() (response *CreateAssistantCidrResponse) {
+    response = &CreateAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateAssistantCidr
+// This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETOVERLAPASSISTCIDR = "InvalidParameterValue.SubnetOverlapAssistCidr"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateAssistantCidr(request *CreateAssistantCidrRequest) (response *CreateAssistantCidrResponse, err error) {
+    return c.CreateAssistantCidrWithContext(context.Background(), request)
+}
+
+// CreateAssistantCidr
+// This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETOVERLAPASSISTCIDR = "InvalidParameterValue.SubnetOverlapAssistCidr"
+//  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateAssistantCidrWithContext(ctx context.Context, request *CreateAssistantCidrRequest) (response *CreateAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewCreateAssistantCidrRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAssistantCidr require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateBandwidthPackageRequest() (request *CreateBandwidthPackageRequest) {
     request = &CreateBandwidthPackageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1886,6 +2079,7 @@ func NewCreateDirectConnectGatewayResponse() (response *CreateDirectConnectGatew
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CCNROUTETABLENOTEXIST = "UnsupportedOperation.CcnRouteTableNotExist"
 //  UNSUPPORTEDOPERATION_UNABLECROSSBORDER = "UnsupportedOperation.UnableCrossBorder"
 func (c *Client) CreateDirectConnectGateway(request *CreateDirectConnectGatewayRequest) (response *CreateDirectConnectGatewayResponse, err error) {
@@ -1900,6 +2094,7 @@ func (c *Client) CreateDirectConnectGateway(request *CreateDirectConnectGatewayR
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CCNROUTETABLENOTEXIST = "UnsupportedOperation.CcnRouteTableNotExist"
 //  UNSUPPORTEDOPERATION_UNABLECROSSBORDER = "UnsupportedOperation.UnableCrossBorder"
 func (c *Client) CreateDirectConnectGatewayWithContext(ctx context.Context, request *CreateDirectConnectGatewayRequest) (response *CreateDirectConnectGatewayResponse, err error) {
@@ -2158,6 +2353,271 @@ func (c *Client) CreateLocalGatewayWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateNatGatewayRequest() (request *CreateNatGatewayRequest) {
+    request = &CreateNatGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGateway")
+    
+    
+    return
+}
+
+func NewCreateNatGatewayResponse() (response *CreateNatGatewayResponse) {
+    response = &CreateNatGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNatGateway
+// This API is used to create a NAT Gateway.
+//
+// Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) CreateNatGateway(request *CreateNatGatewayRequest) (response *CreateNatGatewayResponse, err error) {
+    return c.CreateNatGatewayWithContext(context.Background(), request)
+}
+
+// CreateNatGateway
+// This API is used to create a NAT Gateway.
+//
+// Before taking actions on a NAT Gateway, ensure that it has been successfully created, namely, the `State` field in the response of the `DescribeNatGateway` API is `AVAILABLE`.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) CreateNatGatewayWithContext(ctx context.Context, request *CreateNatGatewayRequest) (response *CreateNatGatewayResponse, err error) {
+    if request == nil {
+        request = NewCreateNatGatewayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNatGateway require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) {
+    request = &CreateNatGatewayDestinationIpPortTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGatewayDestinationIpPortTranslationNatRule")
+    
+    
+    return
+}
+
+func NewCreateNatGatewayDestinationIpPortTranslationNatRuleResponse() (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse) {
+    response = &CreateNatGatewayDestinationIpPortTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNatGatewayDestinationIpPortTranslationNatRule
+// This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    return c.CreateNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// CreateNatGatewayDestinationIpPortTranslationNatRule
+// This API (CreateNatGatewayDestinationIpPortTranslationNatRule) is used to create a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSSTATE = "InvalidAddressState"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EIPBRANDWIDTHOUTINVALID = "InvalidParameterValue.EIPBrandWidthOutInvalid"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  INVALIDVPCID_MALFORMED = "InvalidVpcId.Malformed"
+//  INVALIDVPCID_NOTFOUND = "InvalidVpcId.NotFound"
+//  LIMITEXCEEDED_ADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.AddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_DAILYALLOCATEADDRESSQUOTALIMITEXCEEDED = "LimitExceeded.DailyAllocateAddressQuotaLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYLIMITEXCEEDED = "LimitExceeded.NatGatewayLimitExceeded"
+//  LIMITEXCEEDED_NATGATEWAYPERVPCLIMITEXCEEDED = "LimitExceeded.NatGatewayPerVpcLimitExceeded"
+//  LIMITEXCEEDED_PUBLICIPADDRESSPERNATGATEWAYLIMITEXCEEDED = "LimitExceeded.PublicIpAddressPerNatGatewayLimitExceeded"
+//  RESOURCEINUSE_ADDRESS = "ResourceInUse.Address"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOREALNAMEAUTHENTICATION = "UnauthorizedOperation.NoRealNameAuthentication"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSUFFICIENTFUNDS = "UnsupportedOperation.InsufficientFunds"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTBGPIP = "UnsupportedOperation.PublicIpAddressIsNotBGPIp"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSISNOTEXISTED = "UnsupportedOperation.PublicIpAddressIsNotExisted"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSNOTBILLEDBYTRAFFIC = "UnsupportedOperation.PublicIpAddressNotBilledByTraffic"
+func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateNatGatewayDestinationIpPortTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNatGatewayDestinationIpPortTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNatGatewayDestinationIpPortTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateNatGatewaySourceIpTranslationNatRuleRequest() (request *CreateNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &CreateNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNatGatewaySourceIpTranslationNatRule")
+    
+    
+    return
+}
+
+func NewCreateNatGatewaySourceIpTranslationNatRuleResponse() (response *CreateNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &CreateNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNatGatewaySourceIpTranslationNatRule
+// This API is used to create a SNAT rule for the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION_NATGATEWAYRULEPIPEXISTS = "UnsupportedOperation.NatGatewayRulePipExists"
+//  UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
+func (c *Client) CreateNatGatewaySourceIpTranslationNatRule(request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    return c.CreateNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// CreateNatGatewaySourceIpTranslationNatRule
+// This API is used to create a SNAT rule for the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NATSNATRULEEXISTS = "InvalidParameterValue.NatSnatRuleExists"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION_NATGATEWAYRULEPIPEXISTS = "UnsupportedOperation.NatGatewayRulePipExists"
+//  UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
+func (c *Client) CreateNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *CreateNatGatewaySourceIpTranslationNatRuleRequest) (response *CreateNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNatGatewaySourceIpTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNatGatewaySourceIpTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateNetDetectRequest() (request *CreateNetDetectRequest) {
     request = &CreateNetDetectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2231,6 +2691,111 @@ func (c *Client) CreateNetDetectWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreateNetDetectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateNetworkAclRequest() (request *CreateNetworkAclRequest) {
+    request = &CreateNetworkAclRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "CreateNetworkAcl")
+    
+    
+    return
+}
+
+func NewCreateNetworkAclResponse() (response *CreateNetworkAclResponse) {
+    response = &CreateNetworkAclResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNetworkAcl
+// This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
+//
+// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
+func (c *Client) CreateNetworkAcl(request *CreateNetworkAclRequest) (response *CreateNetworkAclResponse, err error) {
+    return c.CreateNetworkAclWithContext(context.Background(), request)
+}
+
+// CreateNetworkAcl
+// This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
+//
+// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
+func (c *Client) CreateNetworkAclWithContext(ctx context.Context, request *CreateNetworkAclRequest) (response *CreateNetworkAclResponse, err error) {
+    if request == nil {
+        request = NewCreateNetworkAclRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNetworkAcl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNetworkAclResponse()
     err = c.Send(request, response)
     return
 }
@@ -2512,10 +3077,30 @@ func NewCreateSecurityGroupResponse() (response *CreateSecurityGroupResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (response *CreateSecurityGroupResponse, err error) {
     return c.CreateSecurityGroupWithContext(context.Background(), request)
 }
@@ -2533,10 +3118,30 @@ func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (respo
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSecurityGroupWithContext(ctx context.Context, request *CreateSecurityGroupRequest) (response *CreateSecurityGroupResponse, err error) {
     if request == nil {
         request = NewCreateSecurityGroupRequest()
@@ -2939,13 +3544,35 @@ func NewCreateSubnetResponse() (response *CreateSubnetResponse) {
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
 //  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSubnet(request *CreateSubnetRequest) (response *CreateSubnetResponse, err error) {
     return c.CreateSubnetWithContext(context.Background(), request)
 }
@@ -2973,13 +3600,35 @@ func (c *Client) CreateSubnet(request *CreateSubnetRequest) (response *CreateSub
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
 //  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSubnetWithContext(ctx context.Context, request *CreateSubnetRequest) (response *CreateSubnetResponse, err error) {
     if request == nil {
         request = NewCreateSubnetRequest()
@@ -3034,13 +3683,35 @@ func NewCreateSubnetsResponse() (response *CreateSubnetsResponse) {
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
 //  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSubnets(request *CreateSubnetsRequest) (response *CreateSubnetsResponse, err error) {
     return c.CreateSubnetsWithContext(context.Background(), request)
 }
@@ -3066,13 +3737,35 @@ func (c *Client) CreateSubnets(request *CreateSubnetsRequest) (response *CreateS
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
 //  INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
+//  INVALIDPARAMETERVALUE_TAGDUPLICATERESOURCETYPE = "InvalidParameterValue.TagDuplicateResourceType"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEY = "InvalidParameterValue.TagInvalidKey"
+//  INVALIDPARAMETERVALUE_TAGINVALIDKEYLEN = "InvalidParameterValue.TagInvalidKeyLen"
+//  INVALIDPARAMETERVALUE_TAGINVALIDVAL = "InvalidParameterValue.TagInvalidVal"
+//  INVALIDPARAMETERVALUE_TAGKEYNOTEXISTS = "InvalidParameterValue.TagKeyNotExists"
+//  INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
+//  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
+//  INVALIDPARAMETERVALUE_TAGNOTSUPPORTTAG = "InvalidParameterValue.TagNotSupportTag"
+//  INVALIDPARAMETERVALUE_TAGRESOURCEFORMATERROR = "InvalidParameterValue.TagResourceFormatError"
+//  INVALIDPARAMETERVALUE_TAGTIMESTAMPEXCEEDED = "InvalidParameterValue.TagTimestampExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALNOTEXISTS = "InvalidParameterValue.TagValNotExists"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONECONFLICT = "InvalidParameterValue.ZoneConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAGKEYEXCEEDED = "LimitExceeded.TagKeyExceeded"
+//  LIMITEXCEEDED_TAGKEYPERRESOURCEEXCEEDED = "LimitExceeded.TagKeyPerResourceExceeded"
+//  LIMITEXCEEDED_TAGNOTENOUGHQUOTA = "LimitExceeded.TagNotEnoughQuota"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
+//  LIMITEXCEEDED_TAGQUOTAEXCEEDED = "LimitExceeded.TagQuotaExceeded"
+//  LIMITEXCEEDED_TAGTAGSEXCEEDED = "LimitExceeded.TagTagsExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
+//  UNSUPPORTEDOPERATION_TAGALLOCATE = "UnsupportedOperation.TagAllocate"
+//  UNSUPPORTEDOPERATION_TAGFREE = "UnsupportedOperation.TagFree"
+//  UNSUPPORTEDOPERATION_TAGNOTPERMIT = "UnsupportedOperation.TagNotPermit"
+//  UNSUPPORTEDOPERATION_TAGSYSTEMRESERVEDTAGKEY = "UnsupportedOperation.TagSystemReservedTagKey"
 func (c *Client) CreateSubnetsWithContext(ctx context.Context, request *CreateSubnetsRequest) (response *CreateSubnetsResponse, err error) {
     if request == nil {
         request = NewCreateSubnetsRequest()
@@ -3658,6 +4351,63 @@ func (c *Client) DeleteAddressTemplateGroupWithContext(ctx context.Context, requ
     return
 }
 
+func NewDeleteAssistantCidrRequest() (request *DeleteAssistantCidrRequest) {
+    request = &DeleteAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteAssistantCidr")
+    
+    
+    return
+}
+
+func NewDeleteAssistantCidrResponse() (response *DeleteAssistantCidrResponse) {
+    response = &DeleteAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteAssistantCidr
+// This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteAssistantCidr(request *DeleteAssistantCidrRequest) (response *DeleteAssistantCidrResponse, err error) {
+    return c.DeleteAssistantCidrWithContext(context.Background(), request)
+}
+
+// DeleteAssistantCidr
+// This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteAssistantCidrWithContext(ctx context.Context, request *DeleteAssistantCidrRequest) (response *DeleteAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewDeleteAssistantCidrRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAssistantCidr require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAssistantCidrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBandwidthPackageRequest() (request *DeleteBandwidthPackageRequest) {
     request = &DeleteBandwidthPackageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4116,6 +4866,169 @@ func (c *Client) DeleteLocalGatewayWithContext(ctx context.Context, request *Del
     return
 }
 
+func NewDeleteNatGatewayRequest() (request *DeleteNatGatewayRequest) {
+    request = &DeleteNatGatewayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGateway")
+    
+    
+    return
+}
+
+func NewDeleteNatGatewayResponse() (response *DeleteNatGatewayResponse) {
+    response = &DeleteNatGatewayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteNatGateway
+// This API (DeleteNatGateway) is used to delete a NAT gateway.
+//
+// After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteNatGateway(request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
+    return c.DeleteNatGatewayWithContext(context.Background(), request)
+}
+
+// DeleteNatGateway
+// This API (DeleteNatGateway) is used to delete a NAT gateway.
+//
+// After the deletion of a NAT gateway, the system will automatically delete the routing entry that contains the NAT gateway from the route table. It will also unbind the Elastic IP.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteNatGatewayWithContext(ctx context.Context, request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
+    if request == nil {
+        request = NewDeleteNatGatewayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNatGateway require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) {
+    request = &DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewayDestinationIpPortTranslationNatRule")
+    
+    
+    return
+}
+
+func NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse() (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse) {
+    response = &DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteNatGatewayDestinationIpPortTranslationNatRule
+// This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRule(request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    return c.DeleteNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// DeleteNatGatewayDestinationIpPortTranslationNatRule
+// This API (DeleteNatGatewayDestinationIpPortTranslationNatRule) is used to delete a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNatGatewayDestinationIpPortTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNatGatewayDestinationIpPortTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNatGatewaySourceIpTranslationNatRuleRequest() (request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &DeleteNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNatGatewaySourceIpTranslationNatRule")
+    
+    
+    return
+}
+
+func NewDeleteNatGatewaySourceIpTranslationNatRuleResponse() (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &DeleteNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteNatGatewaySourceIpTranslationNatRule
+// This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
+func (c *Client) DeleteNatGatewaySourceIpTranslationNatRule(request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    return c.DeleteNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// DeleteNatGatewaySourceIpTranslationNatRule
+// This API is used to delete a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
+func (c *Client) DeleteNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *DeleteNatGatewaySourceIpTranslationNatRuleRequest) (response *DeleteNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNatGatewaySourceIpTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNatGatewaySourceIpTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteNetDetectRequest() (request *DeleteNetDetectRequest) {
     request = &DeleteNetDetectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4163,6 +5076,57 @@ func (c *Client) DeleteNetDetectWithContext(ctx context.Context, request *Delete
     request.SetContext(ctx)
     
     response = NewDeleteNetDetectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNetworkAclRequest() (request *DeleteNetworkAclRequest) {
+    request = &DeleteNetworkAclRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteNetworkAcl")
+    
+    
+    return
+}
+
+func NewDeleteNetworkAclResponse() (response *DeleteNetworkAclResponse) {
+    response = &DeleteNetworkAclResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteNetworkAcl
+// This API is used to delete a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteNetworkAcl(request *DeleteNetworkAclRequest) (response *DeleteNetworkAclResponse, err error) {
+    return c.DeleteNetworkAclWithContext(context.Background(), request)
+}
+
+// DeleteNetworkAcl
+// This API is used to delete a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteNetworkAclWithContext(ctx context.Context, request *DeleteNetworkAclRequest) (response *DeleteNetworkAclResponse, err error) {
+    if request == nil {
+        request = NewDeleteNetworkAclRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNetworkAcl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNetworkAclResponse()
     err = c.Send(request, response)
     return
 }
@@ -4261,6 +5225,9 @@ func NewDeleteRouteTableResponse() (response *DeleteRouteTableResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DELDEFAULTROUTE = "UnsupportedOperation.DelDefaultRoute"
+//  UNSUPPORTEDOPERATION_DELROUTEWITHSUBNET = "UnsupportedOperation.DelRouteWithSubnet"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDELETEDEFAULTROUTETABLE = "UnsupportedOperation.NotSupportDeleteDefaultRouteTable"
 func (c *Client) DeleteRouteTable(request *DeleteRouteTableRequest) (response *DeleteRouteTableResponse, err error) {
     return c.DeleteRouteTableWithContext(context.Background(), request)
 }
@@ -4271,6 +5238,9 @@ func (c *Client) DeleteRouteTable(request *DeleteRouteTableRequest) (response *D
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DELDEFAULTROUTE = "UnsupportedOperation.DelDefaultRoute"
+//  UNSUPPORTEDOPERATION_DELROUTEWITHSUBNET = "UnsupportedOperation.DelRouteWithSubnet"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDELETEDEFAULTROUTETABLE = "UnsupportedOperation.NotSupportDeleteDefaultRouteTable"
 func (c *Client) DeleteRouteTableWithContext(ctx context.Context, request *DeleteRouteTableRequest) (response *DeleteRouteTableResponse, err error) {
     if request == nil {
         request = NewDeleteRouteTableRequest()
@@ -5843,6 +6813,7 @@ func NewDescribeCrossBorderComplianceResponse() (response *DescribeCrossBorderCo
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeCrossBorderCompliance(request *DescribeCrossBorderComplianceRequest) (response *DescribeCrossBorderComplianceResponse, err error) {
     return c.DescribeCrossBorderComplianceWithContext(context.Background(), request)
@@ -5855,6 +6826,7 @@ func (c *Client) DescribeCrossBorderCompliance(request *DescribeCrossBorderCompl
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeCrossBorderComplianceWithContext(ctx context.Context, request *DescribeCrossBorderComplianceRequest) (response *DescribeCrossBorderComplianceResponse, err error) {
     if request == nil {
@@ -5894,6 +6866,7 @@ func NewDescribeCustomerGatewayVendorsResponse() (response *DescribeCustomerGate
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeCustomerGatewayVendors(request *DescribeCustomerGatewayVendorsRequest) (response *DescribeCustomerGatewayVendorsResponse, err error) {
     return c.DescribeCustomerGatewayVendorsWithContext(context.Background(), request)
@@ -5904,6 +6877,7 @@ func (c *Client) DescribeCustomerGatewayVendors(request *DescribeCustomerGateway
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 func (c *Client) DescribeCustomerGatewayVendorsWithContext(ctx context.Context, request *DescribeCustomerGatewayVendorsRequest) (response *DescribeCustomerGatewayVendorsResponse, err error) {
     if request == nil {
@@ -6239,6 +7213,59 @@ func (c *Client) DescribeGatewayFlowMonitorDetailWithContext(ctx context.Context
     return
 }
 
+func NewDescribeGatewayFlowQosRequest() (request *DescribeGatewayFlowQosRequest) {
+    request = &DescribeGatewayFlowQosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeGatewayFlowQos")
+    
+    
+    return
+}
+
+func NewDescribeGatewayFlowQosResponse() (response *DescribeGatewayFlowQosResponse) {
+    response = &DescribeGatewayFlowQosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGatewayFlowQos
+// This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) DescribeGatewayFlowQos(request *DescribeGatewayFlowQosRequest) (response *DescribeGatewayFlowQosResponse, err error) {
+    return c.DescribeGatewayFlowQosWithContext(context.Background(), request)
+}
+
+// DescribeGatewayFlowQos
+// This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) DescribeGatewayFlowQosWithContext(ctx context.Context, request *DescribeGatewayFlowQosRequest) (response *DescribeGatewayFlowQosResponse, err error) {
+    if request == nil {
+        request = NewDescribeGatewayFlowQosRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGatewayFlowQos require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGatewayFlowQosResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeHaVipsRequest() (request *DescribeHaVipsRequest) {
     request = &DescribeHaVipsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6463,6 +7490,185 @@ func (c *Client) DescribeLocalGatewayWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeLocalGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest() (request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) {
+    request = &DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewayDestinationIpPortTranslationNatRules")
+    
+    
+    return
+}
+
+func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse() (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) {
+    response = &DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNatGatewayDestinationIpPortTranslationNatRules
+// This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
+    return c.DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(context.Background(), request)
+}
+
+// DescribeNatGatewayDestinationIpPortTranslationNatRules
+// This API (DescribeNatGatewayDestinationIpPortTranslationNatRules) is used to query the array of objects of the port forwarding rules for a NAT gateway.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatGatewayDestinationIpPortTranslationNatRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatGatewaySourceIpTranslationNatRulesRequest() (request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) {
+    request = &DescribeNatGatewaySourceIpTranslationNatRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewaySourceIpTranslationNatRules")
+    
+    
+    return
+}
+
+func NewDescribeNatGatewaySourceIpTranslationNatRulesResponse() (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse) {
+    response = &DescribeNatGatewaySourceIpTranslationNatRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNatGatewaySourceIpTranslationNatRules
+// This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
+    return c.DescribeNatGatewaySourceIpTranslationNatRulesWithContext(context.Background(), request)
+}
+
+// DescribeNatGatewaySourceIpTranslationNatRules
+// This API is used to query the object arrays of SNAT forwarding rules of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeNatGatewaySourceIpTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewaySourceIpTranslationNatRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatGatewaySourceIpTranslationNatRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatGatewaySourceIpTranslationNatRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatGatewaysRequest() (request *DescribeNatGatewaysRequest) {
+    request = &DescribeNatGatewaysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGateways")
+    
+    
+    return
+}
+
+func NewDescribeNatGatewaysResponse() (response *DescribeNatGatewaysResponse) {
+    response = &DescribeNatGatewaysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNatGateways
+// This API (DescribeNatGateways) is used to query NAT gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNatGateways(request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
+    return c.DescribeNatGatewaysWithContext(context.Background(), request)
+}
+
+// DescribeNatGateways
+// This API (DescribeNatGateways) is used to query NAT gateways.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNatGatewaysWithContext(ctx context.Context, request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewaysRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatGateways require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatGatewaysResponse()
     err = c.Send(request, response)
     return
 }
@@ -7648,6 +8854,59 @@ func (c *Client) DescribeVpcResourceDashboardWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeVpcTaskResultRequest() (request *DescribeVpcTaskResultRequest) {
+    request = &DescribeVpcTaskResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeVpcTaskResult")
+    
+    
+    return
+}
+
+func NewDescribeVpcTaskResultResponse() (response *DescribeVpcTaskResultResponse) {
+    response = &DescribeVpcTaskResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeVpcTaskResult
+// This API is used to query the execution result of a VPC task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeVpcTaskResult(request *DescribeVpcTaskResultRequest) (response *DescribeVpcTaskResultResponse, err error) {
+    return c.DescribeVpcTaskResultWithContext(context.Background(), request)
+}
+
+// DescribeVpcTaskResult
+// This API is used to query the execution result of a VPC task.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeVpcTaskResultWithContext(ctx context.Context, request *DescribeVpcTaskResultRequest) (response *DescribeVpcTaskResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcTaskResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVpcTaskResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVpcTaskResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVpcsRequest() (request *DescribeVpcsRequest) {
     request = &DescribeVpcsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8226,6 +9485,57 @@ func (c *Client) DisableFlowLogsWithContext(ctx context.Context, request *Disabl
     return
 }
 
+func NewDisableGatewayFlowMonitorRequest() (request *DisableGatewayFlowMonitorRequest) {
+    request = &DisableGatewayFlowMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisableGatewayFlowMonitor")
+    
+    
+    return
+}
+
+func NewDisableGatewayFlowMonitorResponse() (response *DisableGatewayFlowMonitorResponse) {
+    response = &DisableGatewayFlowMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisableGatewayFlowMonitor
+// This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) DisableGatewayFlowMonitor(request *DisableGatewayFlowMonitorRequest) (response *DisableGatewayFlowMonitorResponse, err error) {
+    return c.DisableGatewayFlowMonitorWithContext(context.Background(), request)
+}
+
+// DisableGatewayFlowMonitor
+// This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) DisableGatewayFlowMonitorWithContext(ctx context.Context, request *DisableGatewayFlowMonitorRequest) (response *DisableGatewayFlowMonitorResponse, err error) {
+    if request == nil {
+        request = NewDisableGatewayFlowMonitorRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableGatewayFlowMonitor require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableGatewayFlowMonitorResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateAddressRequest() (request *DisassociateAddressRequest) {
     request = &DisassociateAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8370,6 +9680,112 @@ func (c *Client) DisassociateDirectConnectGatewayNatGatewayWithContext(ctx conte
     request.SetContext(ctx)
     
     response = NewDisassociateDirectConnectGatewayNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisassociateNatGatewayAddressRequest() (request *DisassociateNatGatewayAddressRequest) {
+    request = &DisassociateNatGatewayAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNatGatewayAddress")
+    
+    
+    return
+}
+
+func NewDisassociateNatGatewayAddressResponse() (response *DisassociateNatGatewayAddressResponse) {
+    response = &DisassociateNatGatewayAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisassociateNatGatewayAddress
+// This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSDISASSOCIATE = "UnsupportedOperation.PublicIpAddressDisassociate"
+func (c *Client) DisassociateNatGatewayAddress(request *DisassociateNatGatewayAddressRequest) (response *DisassociateNatGatewayAddressResponse, err error) {
+    return c.DisassociateNatGatewayAddressWithContext(context.Background(), request)
+}
+
+// DisassociateNatGatewayAddress
+// This API (DisassociateNatGatewayAddress) is used to unbind an EIP from a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_PUBLICIPADDRESSDISASSOCIATE = "UnsupportedOperation.PublicIpAddressDisassociate"
+func (c *Client) DisassociateNatGatewayAddressWithContext(ctx context.Context, request *DisassociateNatGatewayAddressRequest) (response *DisassociateNatGatewayAddressResponse, err error) {
+    if request == nil {
+        request = NewDisassociateNatGatewayAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisassociateNatGatewayAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisassociateNatGatewayAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisassociateNetworkAclSubnetsRequest() (request *DisassociateNetworkAclSubnetsRequest) {
+    request = &DisassociateNetworkAclSubnetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateNetworkAclSubnets")
+    
+    
+    return
+}
+
+func NewDisassociateNetworkAclSubnetsResponse() (response *DisassociateNetworkAclSubnetsResponse) {
+    response = &DisassociateNetworkAclSubnetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisassociateNetworkAclSubnets
+// This API is used to disassociate a network ACL from subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
+func (c *Client) DisassociateNetworkAclSubnets(request *DisassociateNetworkAclSubnetsRequest) (response *DisassociateNetworkAclSubnetsResponse, err error) {
+    return c.DisassociateNetworkAclSubnetsWithContext(context.Background(), request)
+}
+
+// DisassociateNetworkAclSubnets
+// This API is used to disassociate a network ACL from subnets in a VPC instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
+func (c *Client) DisassociateNetworkAclSubnetsWithContext(ctx context.Context, request *DisassociateNetworkAclSubnetsRequest) (response *DisassociateNetworkAclSubnetsResponse, err error) {
+    if request == nil {
+        request = NewDisassociateNetworkAclSubnetsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisassociateNetworkAclSubnets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisassociateNetworkAclSubnetsResponse()
     err = c.Send(request, response)
     return
 }
@@ -8633,6 +10049,57 @@ func (c *Client) EnableFlowLogsWithContext(ctx context.Context, request *EnableF
     return
 }
 
+func NewEnableGatewayFlowMonitorRequest() (request *EnableGatewayFlowMonitorRequest) {
+    request = &EnableGatewayFlowMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "EnableGatewayFlowMonitor")
+    
+    
+    return
+}
+
+func NewEnableGatewayFlowMonitorResponse() (response *EnableGatewayFlowMonitorResponse) {
+    response = &EnableGatewayFlowMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EnableGatewayFlowMonitor
+// This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorRequest) (response *EnableGatewayFlowMonitorResponse, err error) {
+    return c.EnableGatewayFlowMonitorWithContext(context.Background(), request)
+}
+
+// EnableGatewayFlowMonitor
+// This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) EnableGatewayFlowMonitorWithContext(ctx context.Context, request *EnableGatewayFlowMonitorRequest) (response *EnableGatewayFlowMonitorResponse, err error) {
+    if request == nil {
+        request = NewEnableGatewayFlowMonitorRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableGatewayFlowMonitor require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableGatewayFlowMonitorResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableVpcEndPointConnectRequest() (request *EnableVpcEndPointConnectRequest) {
     request = &EnableVpcEndPointConnectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8708,6 +10175,7 @@ func NewGetCcnRegionBandwidthLimitsResponse() (response *GetCcnRegionBandwidthLi
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetCcnRegionBandwidthLimits(request *GetCcnRegionBandwidthLimitsRequest) (response *GetCcnRegionBandwidthLimitsResponse, err error) {
@@ -8719,6 +10187,7 @@ func (c *Client) GetCcnRegionBandwidthLimits(request *GetCcnRegionBandwidthLimit
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetCcnRegionBandwidthLimitsWithContext(ctx context.Context, request *GetCcnRegionBandwidthLimitsRequest) (response *GetCcnRegionBandwidthLimitsResponse, err error) {
@@ -9244,6 +10713,7 @@ func NewModifyAddressInternetChargeTypeResponse() (response *ModifyAddressIntern
 //  LIMITEXCEEDED_MODIFYADDRESSINTERNETCHARGETYPEQUOTA = "LimitExceeded.ModifyAddressInternetChargeTypeQuota"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
 //  UNSUPPORTEDOPERATION_NATNOTSUPPORTED = "UnsupportedOperation.NatNotSupported"
 func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
     return c.ModifyAddressInternetChargeTypeWithContext(context.Background(), request)
@@ -9273,6 +10743,7 @@ func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetC
 //  LIMITEXCEEDED_MODIFYADDRESSINTERNETCHARGETYPEQUOTA = "LimitExceeded.ModifyAddressInternetChargeTypeQuota"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
 //  UNSUPPORTEDOPERATION_NATNOTSUPPORTED = "UnsupportedOperation.NatNotSupported"
 func (c *Client) ModifyAddressInternetChargeTypeWithContext(ctx context.Context, request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
     if request == nil {
@@ -9483,6 +10954,73 @@ func (c *Client) ModifyAddressesBandwidthWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyAddressesBandwidthResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAssistantCidrRequest() (request *ModifyAssistantCidrRequest) {
+    request = &ModifyAssistantCidrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyAssistantCidr")
+    
+    
+    return
+}
+
+func NewModifyAssistantCidrResponse() (response *ModifyAssistantCidrResponse) {
+    response = &ModifyAssistantCidrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyAssistantCidr
+// This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETOVERLAPASSISTCIDR = "InvalidParameterValue.SubnetOverlapAssistCidr"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyAssistantCidr(request *ModifyAssistantCidrRequest) (response *ModifyAssistantCidrResponse, err error) {
+    return c.ModifyAssistantCidrWithContext(context.Background(), request)
+}
+
+// ModifyAssistantCidr
+// This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+//  INVALIDPARAMETERVALUE_SUBNETOVERLAPASSISTCIDR = "InvalidParameterValue.SubnetOverlapAssistCidr"
+//  INVALIDPARAMETERVALUE_VPCCIDRCONFLICT = "InvalidParameterValue.VpcCidrConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyAssistantCidrWithContext(ctx context.Context, request *ModifyAssistantCidrRequest) (response *ModifyAssistantCidrResponse, err error) {
+    if request == nil {
+        request = NewModifyAssistantCidrRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAssistantCidr require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAssistantCidrResponse()
     err = c.Send(request, response)
     return
 }
@@ -9862,6 +11400,57 @@ func (c *Client) ModifyFlowLogAttributeWithContext(ctx context.Context, request 
     return
 }
 
+func NewModifyGatewayFlowQosRequest() (request *ModifyGatewayFlowQosRequest) {
+    request = &ModifyGatewayFlowQosRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyGatewayFlowQos")
+    
+    
+    return
+}
+
+func NewModifyGatewayFlowQosResponse() (response *ModifyGatewayFlowQosResponse) {
+    response = &ModifyGatewayFlowQosResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyGatewayFlowQos
+// This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) ModifyGatewayFlowQos(request *ModifyGatewayFlowQosRequest) (response *ModifyGatewayFlowQosResponse, err error) {
+    return c.ModifyGatewayFlowQosWithContext(context.Background(), request)
+}
+
+// ModifyGatewayFlowQos
+// This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) ModifyGatewayFlowQosWithContext(ctx context.Context, request *ModifyGatewayFlowQosRequest) (response *ModifyGatewayFlowQosResponse, err error) {
+    if request == nil {
+        request = NewModifyGatewayFlowQosRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyGatewayFlowQos require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyGatewayFlowQosResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyHaVipAttributeRequest() (request *ModifyHaVipAttributeRequest) {
     request = &ModifyHaVipAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10027,6 +11616,175 @@ func (c *Client) ModifyLocalGatewayWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyNatGatewayAttributeRequest() (request *ModifyNatGatewayAttributeRequest) {
+    request = &ModifyNatGatewayAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayAttribute")
+    
+    
+    return
+}
+
+func NewModifyNatGatewayAttributeResponse() (response *ModifyNatGatewayAttributeResponse) {
+    response = &ModifyNatGatewayAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNatGatewayAttribute
+// This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatGatewayAttribute(request *ModifyNatGatewayAttributeRequest) (response *ModifyNatGatewayAttributeResponse, err error) {
+    return c.ModifyNatGatewayAttributeWithContext(context.Background(), request)
+}
+
+// ModifyNatGatewayAttribute
+// This API (ModifyNatGatewayAttribute) is used to modify the attributes of a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatGatewayAttributeWithContext(ctx context.Context, request *ModifyNatGatewayAttributeRequest) (response *ModifyNatGatewayAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyNatGatewayAttributeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNatGatewayAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNatGatewayAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest() (request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) {
+    request = &ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewayDestinationIpPortTranslationNatRule")
+    
+    
+    return
+}
+
+func NewModifyNatGatewayDestinationIpPortTranslationNatRuleResponse() (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse) {
+    response = &ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNatGatewayDestinationIpPortTranslationNatRule
+// This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRule(request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    return c.ModifyNatGatewayDestinationIpPortTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// ModifyNatGatewayDestinationIpPortTranslationNatRule
+// This API (ModifyNatGatewayDestinationIpPortTranslationNatRule) is used to modify a port forwarding rule for a NAT gateway.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyNatGatewayDestinationIpPortTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNatGatewayDestinationIpPortTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNatGatewayDestinationIpPortTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNatGatewaySourceIpTranslationNatRuleRequest() (request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) {
+    request = &ModifyNatGatewaySourceIpTranslationNatRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNatGatewaySourceIpTranslationNatRule")
+    
+    
+    return
+}
+
+func NewModifyNatGatewaySourceIpTranslationNatRuleResponse() (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse) {
+    response = &ModifyNatGatewaySourceIpTranslationNatRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNatGatewaySourceIpTranslationNatRule
+// This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
+func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    return c.ModifyNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
+}
+
+// ModifyNatGatewaySourceIpTranslationNatRule
+// This API is used to modify a SNAT forwarding rule of the NAT Gateway.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
+func (c *Client) ModifyNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyNatGatewaySourceIpTranslationNatRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNatGatewaySourceIpTranslationNatRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNatGatewaySourceIpTranslationNatRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNetDetectRequest() (request *ModifyNetDetectRequest) {
     request = &ModifyNetDetectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10090,6 +11848,120 @@ func (c *Client) ModifyNetDetectWithContext(ctx context.Context, request *Modify
     request.SetContext(ctx)
     
     response = NewModifyNetDetectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNetworkAclAttributeRequest() (request *ModifyNetworkAclAttributeRequest) {
+    request = &ModifyNetworkAclAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclAttribute")
+    
+    
+    return
+}
+
+func NewModifyNetworkAclAttributeResponse() (response *ModifyNetworkAclAttributeResponse) {
+    response = &ModifyNetworkAclAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNetworkAclAttribute
+// This API is used to modify the attributes of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyNetworkAclAttribute(request *ModifyNetworkAclAttributeRequest) (response *ModifyNetworkAclAttributeResponse, err error) {
+    return c.ModifyNetworkAclAttributeWithContext(context.Background(), request)
+}
+
+// ModifyNetworkAclAttribute
+// This API is used to modify the attributes of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyNetworkAclAttributeWithContext(ctx context.Context, request *ModifyNetworkAclAttributeRequest) (response *ModifyNetworkAclAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyNetworkAclAttributeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNetworkAclAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNetworkAclAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNetworkAclEntriesRequest() (request *ModifyNetworkAclEntriesRequest) {
+    request = &ModifyNetworkAclEntriesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyNetworkAclEntries")
+    
+    
+    return
+}
+
+func NewModifyNetworkAclEntriesResponse() (response *ModifyNetworkAclEntriesResponse) {
+    response = &ModifyNetworkAclEntriesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNetworkAclEntries
+// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
+func (c *Client) ModifyNetworkAclEntries(request *ModifyNetworkAclEntriesRequest) (response *ModifyNetworkAclEntriesResponse, err error) {
+    return c.ModifyNetworkAclEntriesWithContext(context.Background(), request)
+}
+
+// ModifyNetworkAclEntries
+// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
+func (c *Client) ModifyNetworkAclEntriesWithContext(ctx context.Context, request *ModifyNetworkAclEntriesRequest) (response *ModifyNetworkAclEntriesResponse, err error) {
+    if request == nil {
+        request = NewModifyNetworkAclEntriesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNetworkAclEntries require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNetworkAclEntriesResponse()
     err = c.Send(request, response)
     return
 }
@@ -11022,6 +12894,71 @@ func (c *Client) ModifyVpnGatewayRoutesWithContext(ctx context.Context, request 
     return
 }
 
+func NewNotifyRoutesRequest() (request *NotifyRoutesRequest) {
+    request = &NotifyRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "NotifyRoutes")
+    
+    
+    return
+}
+
+func NewNotifyRoutesResponse() (response *NotifyRoutesResponse) {
+    response = &NotifyRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// NotifyRoutes
+// This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUSNOTIFYCCN = "UnsupportedOperation.InvalidStatusNotifyCcn"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
+func (c *Client) NotifyRoutes(request *NotifyRoutesRequest) (response *NotifyRoutesResponse, err error) {
+    return c.NotifyRoutesWithContext(context.Background(), request)
+}
+
+// NotifyRoutes
+// This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
+//  UNSUPPORTEDOPERATION_INVALIDSTATUSNOTIFYCCN = "UnsupportedOperation.InvalidStatusNotifyCcn"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
+func (c *Client) NotifyRoutesWithContext(ctx context.Context, request *NotifyRoutesRequest) (response *NotifyRoutesResponse, err error) {
+    if request == nil {
+        request = NewNotifyRoutesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("NotifyRoutes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewNotifyRoutesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRejectAttachCcnInstancesRequest() (request *RejectAttachCcnInstancesRequest) {
     request = &RejectAttachCcnInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11463,6 +13400,7 @@ func NewReplaceSecurityGroupPolicyResponse() (response *ReplaceSecurityGroupPoli
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -11483,6 +13421,7 @@ func (c *Client) ReplaceSecurityGroupPolicy(request *ReplaceSecurityGroupPolicyR
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -11551,6 +13490,57 @@ func (c *Client) ResetAttachCcnInstancesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewResetAttachCcnInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetNatGatewayConnectionRequest() (request *ResetNatGatewayConnectionRequest) {
+    request = &ResetNatGatewayConnectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "ResetNatGatewayConnection")
+    
+    
+    return
+}
+
+func NewResetNatGatewayConnectionResponse() (response *ResetNatGatewayConnectionResponse) {
+    response = &ResetNatGatewayConnectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ResetNatGatewayConnection
+// This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
+func (c *Client) ResetNatGatewayConnection(request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
+    return c.ResetNatGatewayConnectionWithContext(context.Background(), request)
+}
+
+// ResetNatGatewayConnection
+// This API (ResetNatGatewayConnection) is used to adjust concurrent connection cap for the NAT gateway.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
+func (c *Client) ResetNatGatewayConnectionWithContext(ctx context.Context, request *ResetNatGatewayConnectionRequest) (response *ResetNatGatewayConnectionResponse, err error) {
+    if request == nil {
+        request = NewResetNatGatewayConnectionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetNatGatewayConnection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetNatGatewayConnectionResponse()
     err = c.Send(request, response)
     return
 }
@@ -12086,6 +14076,67 @@ func (c *Client) UnassignPrivateIpAddressesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewUnassignPrivateIpAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewWithdrawNotifyRoutesRequest() (request *WithdrawNotifyRoutesRequest) {
+    request = &WithdrawNotifyRoutesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "WithdrawNotifyRoutes")
+    
+    
+    return
+}
+
+func NewWithdrawNotifyRoutesResponse() (response *WithdrawNotifyRoutesResponse) {
+    response = &WithdrawNotifyRoutesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// WithdrawNotifyRoutes
+// This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
+func (c *Client) WithdrawNotifyRoutes(request *WithdrawNotifyRoutesRequest) (response *WithdrawNotifyRoutesResponse, err error) {
+    return c.WithdrawNotifyRoutesWithContext(context.Background(), request)
+}
+
+// WithdrawNotifyRoutes
+// This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
+//  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
+//  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
+//  UNSUPPORTEDOPERATION_SYSTEMROUTE = "UnsupportedOperation.SystemRoute"
+func (c *Client) WithdrawNotifyRoutesWithContext(ctx context.Context, request *WithdrawNotifyRoutesRequest) (response *WithdrawNotifyRoutesResponse, err error) {
+    if request == nil {
+        request = NewWithdrawNotifyRoutesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("WithdrawNotifyRoutes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewWithdrawNotifyRoutesResponse()
     err = c.Send(request, response)
     return
 }
