@@ -927,6 +927,91 @@ func (r *GetEmailTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type GetSendEmailStatusRequestParams struct {
+	// Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+	RequestDate *string `json:"RequestDate,omitempty" name:"RequestDate"`
+
+	// Offset. Default value: `0`
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of pulled entries. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// `MessageId` field returned by the `SendMail` API
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Recipient email address
+	ToEmailAddress *string `json:"ToEmailAddress,omitempty" name:"ToEmailAddress"`
+}
+
+type GetSendEmailStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+	RequestDate *string `json:"RequestDate,omitempty" name:"RequestDate"`
+
+	// Offset. Default value: `0`
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of pulled entries. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// `MessageId` field returned by the `SendMail` API
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Recipient email address
+	ToEmailAddress *string `json:"ToEmailAddress,omitempty" name:"ToEmailAddress"`
+}
+
+func (r *GetSendEmailStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSendEmailStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RequestDate")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "MessageId")
+	delete(f, "ToEmailAddress")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetSendEmailStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetSendEmailStatusResponseParams struct {
+	// Email sending status list
+	EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitempty" name:"EmailStatusList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetSendEmailStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *GetSendEmailStatusResponseParams `json:"Response"`
+}
+
+func (r *GetSendEmailStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSendEmailStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetStatisticsReportRequestParams struct {
 	// Start date.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
@@ -1584,6 +1669,71 @@ func (r *SendEmailResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SendEmailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SendEmailStatus struct {
+	// `MessageId` field returned by the `SendEmail` API
+	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
+
+	// Recipient email address
+	ToEmailAddress *string `json:"ToEmailAddress,omitempty" name:"ToEmailAddress"`
+
+	// Sender email address
+	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
+
+	// Tencent Cloud processing status:
+	// 0: successful.
+	// 1001: internal system exception.
+	// 1002: internal system exception.
+	// 1003: internal system exception.
+	// 1003: internal system exception.
+	// 1004: email sending timeout.
+	// 1005: internal system exception.
+	// 1006: you have sent too many emails to the same address in a short period.
+	// 1007: the email address is in the blocklist.
+	// 1009: internal system exception.
+	// 1010: daily email sending limit exceeded.
+	// 1011: no permission to send custom content. Use a template.
+	// 2001: no results found.
+	// 3007: invalid template ID or unavailable template.
+	// 3008: template status exception.
+	// 3009: no permission to use this template.
+	// 3010: the format of the `TemplateData` field is incorrect. 
+	// 3014: unable to send the email because the sender domain is not verified.
+	// 3020: the recipient email address is in the blocklist.
+	// 3024: failed to pre-check the email address format.
+	// 3030: email sending is restricted temporarily due to high bounce rate.
+	// 3033: the account has insufficient balance or overdue payment.
+	SendStatus *int64 `json:"SendStatus,omitempty" name:"SendStatus"`
+
+	// Recipient processing status:
+	// 0: Tencent Cloud has accepted the request and added it to the send queue.
+	// 1: the email is delivered successfully, `DeliverTime` indicates the time when the email is delivered successfully.
+	// 2: the email is discarded. `DeliverMessage` indicates the reason for discarding.
+	// 3: the recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
+	// 8: the email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
+	DeliverStatus *int64 `json:"DeliverStatus,omitempty" name:"DeliverStatus"`
+
+	// Description of the recipient processing status
+	DeliverMessage *string `json:"DeliverMessage,omitempty" name:"DeliverMessage"`
+
+	// Timestamp when the request arrives at Tencent Cloud
+	RequestTime *int64 `json:"RequestTime,omitempty" name:"RequestTime"`
+
+	// Timestamp when Tencent Cloud delivers the email
+	DeliverTime *int64 `json:"DeliverTime,omitempty" name:"DeliverTime"`
+
+	// Whether the recipient has opened the email
+	UserOpened *bool `json:"UserOpened,omitempty" name:"UserOpened"`
+
+	// Whether the recipient has clicked the links in the email
+	UserClicked *bool `json:"UserClicked,omitempty" name:"UserClicked"`
+
+	// Whether the recipient has unsubscribed from emails sent by the sender
+	UserUnsubscribed *bool `json:"UserUnsubscribed,omitempty" name:"UserUnsubscribed"`
+
+	// Whether the recipient has reported the sender
+	UserComplainted *bool `json:"UserComplainted,omitempty" name:"UserComplainted"`
 }
 
 type SendTaskData struct {

@@ -45,6 +45,71 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
+    request = &CreateApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "CreateApplication")
+    
+    
+    return
+}
+
+func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
+    response = &CreateApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateApplication
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICENAME = "InvalidParameterValue.InvalidServiceName"
+//  INVALIDPARAMETERVALUE_PUBLICREPOTYPEPARAMETERERROR = "InvalidParameterValue.PublicRepoTypeParameterError"
+//  INVALIDPARAMETERVALUE_SERVICELOWERCASE = "InvalidParameterValue.ServiceLowerCase"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INVALIDPARAMETERVALUE_SERVICEREACHMAXIMUM = "InvalidParameterValue.ServiceReachMaximum"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  UNSUPPORTEDOPERATION_UNSUPPORTACTION = "UnsupportedOperation.UnsupportAction"
+func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
+    return c.CreateApplicationWithContext(context.Background(), request)
+}
+
+// CreateApplication
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICENAME = "InvalidParameterValue.InvalidServiceName"
+//  INVALIDPARAMETERVALUE_PUBLICREPOTYPEPARAMETERERROR = "InvalidParameterValue.PublicRepoTypeParameterError"
+//  INVALIDPARAMETERVALUE_SERVICELOWERCASE = "InvalidParameterValue.ServiceLowerCase"
+//  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
+//  INVALIDPARAMETERVALUE_SERVICEREACHMAXIMUM = "InvalidParameterValue.ServiceReachMaximum"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  UNSUPPORTEDOPERATION_UNSUPPORTACTION = "UnsupportedOperation.UnsupportAction"
+func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCosTokenRequest() (request *CreateCosTokenRequest) {
     request = &CreateCosTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -170,6 +235,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 // This API is used to bind a cloud resource.
 //
 // error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 //  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
@@ -182,6 +248,7 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
 // This API is used to bind a cloud resource.
 //
 // error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 //  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
@@ -198,6 +265,89 @@ func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateR
     request.SetContext(ctx)
     
     response = NewCreateResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApplicationRequest() (request *DeleteApplicationRequest) {
+    request = &DeleteApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "DeleteApplication")
+    
+    
+    return
+}
+
+func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
+    response = &DeleteApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteApplication
+// This API is used to delete an application.
+//
+//   - Stop the application if it’s running
+//
+//   - Delete resources associated with this application
+//
+//   - Delele the application
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCEINUSE_RESOURCEALREADYLOCKED = "ResourceInUse.ResourceAlreadyLocked"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    return c.DeleteApplicationWithContext(context.Background(), request)
+}
+
+// DeleteApplication
+// This API is used to delete an application.
+//
+//   - Stop the application if it’s running
+//
+//   - Delete resources associated with this application
+//
+//   - Delele the application
+//
+// error code that may be returned:
+//  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  INVALIDPARAMETERVALUE_SERVICEFOUNDRUNNINGVERSION = "InvalidParameterValue.ServiceFoundRunningVersion"
+//  INVALIDPARAMETERVALUE_VERSIONROUTERATENOTZERO = "InvalidParameterValue.VersionRouteRateNotZero"
+//  RESOURCEINUSE_RESOURCEALREADYLOCKED = "ResourceInUse.ResourceAlreadyLocked"
+//  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
+//  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+//  RESOURCENOTFOUND_VERSIONSERVICENOTFOUND = "ResourceNotFound.VersionServiceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationResponse()
     err = c.Send(request, response)
     return
 }
@@ -283,6 +433,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -306,6 +457,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
+//  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -667,6 +819,7 @@ func NewModifyApplicationInfoResponse() (response *ModifyApplicationInfoResponse
 // This API is used to modify the basic information of an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyApplicationInfo(request *ModifyApplicationInfoRequest) (response *ModifyApplicationInfoResponse, err error) {
     return c.ModifyApplicationInfoWithContext(context.Background(), request)
@@ -676,6 +829,7 @@ func (c *Client) ModifyApplicationInfo(request *ModifyApplicationInfoRequest) (r
 // This API is used to modify the basic information of an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 func (c *Client) ModifyApplicationInfoWithContext(ctx context.Context, request *ModifyApplicationInfoRequest) (response *ModifyApplicationInfoResponse, err error) {
     if request == nil {
@@ -979,6 +1133,7 @@ func NewStopApplicationResponse() (response *StopApplicationResponse) {
 // This API is used to stop an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_STOPAPPLICATIONERROR = "InternalError.StopApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) StopApplication(request *StopApplicationRequest) (response *StopApplicationResponse, err error) {
@@ -989,6 +1144,7 @@ func (c *Client) StopApplication(request *StopApplicationRequest) (response *Sto
 // This API is used to stop an application.
 //
 // error code that may be returned:
+//  INTERNALERROR_STOPAPPLICATIONERROR = "InternalError.StopApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 func (c *Client) StopApplicationWithContext(ctx context.Context, request *StopApplicationRequest) (response *StopApplicationResponse, err error) {

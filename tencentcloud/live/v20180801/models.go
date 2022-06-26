@@ -5160,6 +5160,93 @@ func (r *DescribeLiveStreamStateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeLiveTimeShiftBillInfoListRequestParams struct {
+	// The start time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+	// 
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+	// 
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domains to query. If you leave this empty, the time shifting billing data of all push domains will be returned.
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
+}
+
+type DescribeLiveTimeShiftBillInfoListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+	// 
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time for query. You can query data from the past three months. The longest time period that can be queried is one month.
+	// 
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domains to query. If you leave this empty, the time shifting billing data of all push domains will be returned.
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
+}
+
+func (r *DescribeLiveTimeShiftBillInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveTimeShiftBillInfoListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PushDomains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLiveTimeShiftBillInfoListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLiveTimeShiftBillInfoListResponseParams struct {
+	// The time shifting billing data.
+	DataInfoList []*TimeShiftBillData `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLiveTimeShiftBillInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLiveTimeShiftBillInfoListResponseParams `json:"Response"`
+}
+
+func (r *DescribeLiveTimeShiftBillInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveTimeShiftBillInfoListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLiveTranscodeDetailInfoRequestParams struct {
 	// Push domain name.
 	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
@@ -8928,6 +9015,23 @@ type TemplateInfo struct {
 	// Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+}
+
+type TimeShiftBillData struct {
+	// The push domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The time-shift video length (minutes).
+	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The time-shift days.
+	StoragePeriod *float64 `json:"StoragePeriod,omitempty" name:"StoragePeriod"`
+
+	// The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+
+	TotalDuration *float64 `json:"TotalDuration,omitempty" name:"TotalDuration"`
 }
 
 type TimeValue struct {

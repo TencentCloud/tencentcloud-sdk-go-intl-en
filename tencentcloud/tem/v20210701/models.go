@@ -50,6 +50,150 @@ type CosToken struct {
 }
 
 // Predefined struct for user
+type CreateApplicationRequestParams struct {
+	// Application name
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Whether to use the default image service. 1: yes; 0: no
+	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitempty" name:"UseDefaultImageService"`
+
+	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
+
+	// Instance ID of Enterprise Edition image service
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Address of the bound image server
+	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
+
+	// Name of the bound image repository
+	RepoName *string `json:"RepoName,omitempty" name:"RepoName"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Application subnet
+	SubnetList []*string `json:"SubnetList,omitempty" name:"SubnetList"`
+
+	// Programming language 
+	// - JAVA
+	// - OTHER
+	CodingLanguage *string `json:"CodingLanguage,omitempty" name:"CodingLanguage"`
+
+	// Deployment mode 
+	// - IMAGE
+	// - JAR
+	// - WAR
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Whether to enable the call chain feature
+	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+}
+
+type CreateApplicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application name
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Whether to use the default image service. 1: yes; 0: no
+	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitempty" name:"UseDefaultImageService"`
+
+	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
+
+	// Instance ID of Enterprise Edition image service
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Address of the bound image server
+	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
+
+	// Name of the bound image repository
+	RepoName *string `json:"RepoName,omitempty" name:"RepoName"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Application subnet
+	SubnetList []*string `json:"SubnetList,omitempty" name:"SubnetList"`
+
+	// Programming language 
+	// - JAVA
+	// - OTHER
+	CodingLanguage *string `json:"CodingLanguage,omitempty" name:"CodingLanguage"`
+
+	// Deployment mode 
+	// - IMAGE
+	// - JAR
+	// - WAR
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Whether to enable the call chain feature
+	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+}
+
+func (r *CreateApplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationName")
+	delete(f, "Description")
+	delete(f, "UseDefaultImageService")
+	delete(f, "RepoType")
+	delete(f, "InstanceId")
+	delete(f, "RepoServer")
+	delete(f, "RepoName")
+	delete(f, "SourceChannel")
+	delete(f, "SubnetList")
+	delete(f, "CodingLanguage")
+	delete(f, "DeployMode")
+	delete(f, "EnableTracing")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationResponseParams struct {
+	// Service code
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateApplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateApplicationResponseParams `json:"Response"`
+}
+
+func (r *CreateApplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateCosTokenRequestParams struct {
 	// Application ID
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
@@ -359,6 +503,84 @@ type CronHorizontalAutoscalerSchedule struct {
 	// Number of target pods (less than 50)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TargetReplicas *int64 `json:"TargetReplicas,omitempty" name:"TargetReplicas"`
+}
+
+// Predefined struct for user
+type DeleteApplicationRequestParams struct {
+	// Service ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Retain as default
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Whether to delete this application automatically when there is no running version.
+	DeleteApplicationIfNoRunningVersion *bool `json:"DeleteApplicationIfNoRunningVersion,omitempty" name:"DeleteApplicationIfNoRunningVersion"`
+}
+
+type DeleteApplicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Retain as default
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Whether to delete this application automatically when there is no running version.
+	DeleteApplicationIfNoRunningVersion *bool `json:"DeleteApplicationIfNoRunningVersion,omitempty" name:"DeleteApplicationIfNoRunningVersion"`
+}
+
+func (r *DeleteApplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "DeleteApplicationIfNoRunningVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationResponseParams struct {
+	// Returned result
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteApplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteApplicationResponseParams `json:"Response"`
+}
+
+func (r *DeleteApplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

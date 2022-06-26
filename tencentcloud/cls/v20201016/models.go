@@ -356,13 +356,17 @@ type ConsumerContent struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
 
-	// List of metadata to ship. Currently, only __SOURCE__, __FILENAME__, and __TIMESTAMP__ are supported.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// List of metadata to ship. Only \_\_SOURCE\_\_, \_\_FILENAME\_\_, and \_\_TIMESTAMP\_\_ are supported.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
 
 	// This parameter is required if `EnableTag` is `true`, and is used to specify whether the tag information is JSON tiled. Valid values: `true` (not tiled); `false` (tiled)
 	// Note: This field may return `null`, indicating that no valid value was found.
 	TagJsonNotTiled *bool `json:"TagJsonNotTiled,omitempty" name:"TagJsonNotTiled"`
+
+	// Shipping timestamp precision in seconds (default) or milliseconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimestampAccuracy *int64 `json:"TimestampAccuracy,omitempty" name:"TimestampAccuracy"`
 }
 
 type ContentInfo struct {
@@ -3620,7 +3624,9 @@ type FullTextInfo struct {
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
-	// Full-Text index delimiter. Each character in the string represents a delimiter.
+	// Separator of the full-text index. Each character represents a separator;
+	// Supports only English punctuation marks and (\n\t\r);
+	// We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\) as separators;
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether Chinese characters are contained
@@ -5542,7 +5548,10 @@ type ValueInfo struct {
 	// Field type. Valid values: `long`, `text`, `double`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Field delimiter, which is meaningful only if the field type is `text`. Each character in the entered string represents a delimiter.
+	// Separator of fields. Each character represents a separator;
+	// Supports only English punctuation marks and (\n\t\r);
+	// `long` and `double` fields need to be null;
+	// We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\\) as separators for `text` fields;
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether the analysis feature is enabled for the field
