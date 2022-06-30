@@ -1856,6 +1856,14 @@ type CreateLiveTranscodeTemplateRequestParams struct {
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+
+	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMType *string `json:"DRMType,omitempty" name:"DRMType"`
+
+	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMTracks *string `json:"DRMTracks,omitempty" name:"DRMTracks"`
 }
 
 type CreateLiveTranscodeTemplateRequest struct {
@@ -1946,6 +1954,14 @@ type CreateLiveTranscodeTemplateRequest struct {
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+
+	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMType *string `json:"DRMType,omitempty" name:"DRMType"`
+
+	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMTracks *string `json:"DRMTracks,omitempty" name:"DRMTracks"`
 }
 
 func (r *CreateLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -1980,6 +1996,8 @@ func (r *CreateLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AiTransCode")
 	delete(f, "AdaptBitratePercent")
 	delete(f, "ShortEdgeAsHeight")
+	delete(f, "DRMType")
+	delete(f, "DRMTracks")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLiveTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -8122,6 +8140,14 @@ type ModifyLiveTranscodeTemplateRequestParams struct {
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+
+	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMType *string `json:"DRMType,omitempty" name:"DRMType"`
+
+	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMTracks *string `json:"DRMTracks,omitempty" name:"DRMTracks"`
 }
 
 type ModifyLiveTranscodeTemplateRequest struct {
@@ -8203,6 +8229,14 @@ type ModifyLiveTranscodeTemplateRequest struct {
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+
+	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMType *string `json:"DRMType,omitempty" name:"DRMType"`
+
+	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
+	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
+	DRMTracks *string `json:"DRMTracks,omitempty" name:"DRMTracks"`
 }
 
 func (r *ModifyLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -8236,6 +8270,8 @@ func (r *ModifyLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "FpsToOrig")
 	delete(f, "AdaptBitratePercent")
 	delete(f, "ShortEdgeAsHeight")
+	delete(f, "DRMType")
+	delete(f, "DRMTracks")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -9015,6 +9051,14 @@ type TemplateInfo struct {
 	// Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitempty" name:"ShortEdgeAsHeight"`
+
+	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DRMType *string `json:"DRMType,omitempty" name:"DRMType"`
+
+	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. Separate multiple tracks with “|”. You can choose only one video track (SD, HD, UHD1, or UHD2).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DRMTracks *string `json:"DRMTracks,omitempty" name:"DRMTracks"`
 }
 
 type TimeShiftBillData struct {
@@ -9030,7 +9074,7 @@ type TimeShiftBillData struct {
 	// The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
 	Time *string `json:"Time,omitempty" name:"Time"`
 
-
+	// The total time-shift duration (minutes).
 	TotalDuration *float64 `json:"TotalDuration,omitempty" name:"TotalDuration"`
 }
 

@@ -922,7 +922,7 @@ type AssociateNatGatewayAddressRequestParams struct {
 	// The ID of the NAT gateway, such as `nat-df45454`.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
+	// The number of EIPs you want to apply for. Either `AddressCount` or `PublicAddresses` must be passed in.
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
 	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
@@ -934,10 +934,10 @@ type AssociateNatGatewayAddressRequestParams struct {
 	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
 	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
 
-	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	// The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
 	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
 
-
+	// Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
 	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
 }
 
@@ -947,7 +947,7 @@ type AssociateNatGatewayAddressRequest struct {
 	// The ID of the NAT gateway, such as `nat-df45454`.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// The number of EIPs you want to apply for. The system will create the same number of EIPs as you require. Either `AddressCount` or `PublicAddresses` must be passed in.
+	// The number of EIPs you want to apply for. Either `AddressCount` or `PublicAddresses` must be passed in.
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
 	// Array of the EIPs bound to the NAT gateway. Either `AddressCount` or `PublicAddresses` must be passed in.
@@ -959,9 +959,10 @@ type AssociateNatGatewayAddressRequest struct {
 	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
 	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
 
-	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	// The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
 	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
 
+	// Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
 	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
 }
 
@@ -3120,25 +3121,25 @@ type CreateNatGatewayRequestParams struct {
 	// NAT gateway name
 	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
 
-	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100Mbps`.
+	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100`.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// The concurrent connection cap of the NAT gateway. Supported parameter values: `1000000, 3000000, 10000000`. The default value is `100000`.
+	// The concurrent connection cap of the NAT gateway. Values: `1000000, 3000000, 10000000`. The default value is `1000000`.
 	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
 
-	// The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+	// The number of EIPs that you want to apply for. Either `AddressCount` or `PublicIpAddresses` must be passed in.
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
-	// The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+	// The EIP array bound to the NAT gateway. Either AddressCount or PublicIpAddresses must be passed in.
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// The availability zone, such as `ap-guangzhou-1`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Subnet of the NAT gateway
@@ -3147,10 +3148,10 @@ type CreateNatGatewayRequestParams struct {
 	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
 	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
 
-	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	// The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
 	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
 
-
+	// Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
 	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
 }
 
@@ -3160,25 +3161,25 @@ type CreateNatGatewayRequest struct {
 	// NAT gateway name
 	NatGatewayName *string `json:"NatGatewayName,omitempty" name:"NatGatewayName"`
 
-	// The ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of DescribeVpcs API.
+	// The ID of the VPC instance, which can be obtained from the `VpcId` field in response of the `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100Mbps`.
+	// The maximum outbound bandwidth of the NAT gateway (unit: Mbps). Supported parameter values: `20, 50, 100, 200, 500, 1000, 2000, 5000`. Default: `100`.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// The concurrent connection cap of the NAT gateway. Supported parameter values: `1000000, 3000000, 10000000`. The default value is `100000`.
+	// The concurrent connection cap of the NAT gateway. Values: `1000000, 3000000, 10000000`. The default value is `1000000`.
 	MaxConcurrentConnection *uint64 `json:"MaxConcurrentConnection,omitempty" name:"MaxConcurrentConnection"`
 
-	// The number of EIPs that needs to be applied for. The system will create N number of EIPs according to your requirements. Either AddressCount or PublicAddresses must be passed in.
+	// The number of EIPs that you want to apply for. Either `AddressCount` or `PublicIpAddresses` must be passed in.
 	AddressCount *uint64 `json:"AddressCount,omitempty" name:"AddressCount"`
 
-	// The EIP array bound to the NAT gateway. Either AddressCount or PublicAddresses must be passed in.
+	// The EIP array bound to the NAT gateway. Either AddressCount or PublicIpAddresses must be passed in.
 	PublicIpAddresses []*string `json:"PublicIpAddresses,omitempty" name:"PublicIpAddresses"`
 
 	// The availability zone, such as `ap-guangzhou-1`.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Subnet of the NAT gateway
@@ -3187,9 +3188,10 @@ type CreateNatGatewayRequest struct {
 	// The bandwidth size (in Mbps) of the EIP bound to the NAT gateway, which defaults to the maximum value applicable for the current user type.
 	StockPublicIpAddressesBandwidthOut *uint64 `json:"StockPublicIpAddressesBandwidthOut,omitempty" name:"StockPublicIpAddressesBandwidthOut"`
 
-	// The requested size of the public network IP bandwidth (in Mbps), which defaults to the maximum value applicable for the current user type.
+	// The size of the public network IP bandwidth to be applied for (in Mbps), which defaults to the maximum value applicable for the current user type.
 	PublicIpAddressesBandwidthOut *uint64 `json:"PublicIpAddressesBandwidthOut,omitempty" name:"PublicIpAddressesBandwidthOut"`
 
+	// Whether the public IP and the NAT gateway must be in the same availability zone. Valid values: `true` and `false`. This parameter is valid only when `Zone` is specified.
 	PublicIpFromSameZone *bool `json:"PublicIpFromSameZone,omitempty" name:"PublicIpFromSameZone"`
 }
 
@@ -3228,7 +3230,7 @@ type CreateNatGatewayResponseParams struct {
 	// NAT gateway object array.
 	NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
 
-	// The number of NAT gateway objects meeting the conditions.
+	// The number of eligible NAT gateway objects.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3524,6 +3526,9 @@ type CreateNetworkInterfaceRequestParams struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+	TrunkingFlag *string `json:"TrunkingFlag,omitempty" name:"TrunkingFlag"`
 }
 
 type CreateNetworkInterfaceRequest struct {
@@ -3552,6 +3557,9 @@ type CreateNetworkInterfaceRequest struct {
 
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+	TrunkingFlag *string `json:"TrunkingFlag,omitempty" name:"TrunkingFlag"`
 }
 
 func (r *CreateNetworkInterfaceRequest) ToJsonString() string {
@@ -3574,6 +3582,7 @@ func (r *CreateNetworkInterfaceRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroupIds")
 	delete(f, "PrivateIpAddresses")
 	delete(f, "Tags")
+	delete(f, "TrunkingFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkInterfaceRequest has unknown keys!", "")
 	}
@@ -9274,21 +9283,21 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequestParams struct 
 	// NAT gateway ID.
 	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
-	// Filter conditions:
+	// Filters:
 	// `NatGatewayIds` and `Filters` cannot be specified at the same time.
-	// <li> nat-gateway-id, the NAT gateway ID, such as `nat-0yi4hekt`.</li>
-	// <li> vpc-id, the VPC ID, such as `vpc-0yi4hekt`.</li>
-	// <li> public-ip-address, the EIP, such as `139.199.232.238`.</li>
-	// <li>public-port, the public network port.</li>
-	// <li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
-	// <li>private-port, the private network port.</li>
-	// <li>description, the rule description.</li>
+	// <li> `nat-gateway-id`: The NAT gateway ID, such as `nat-0yi4hekt`.</li>
+	// <li> `vpc-id`: The VPC ID, such as `vpc-0yi4hekt`.</li>
+	// <li> `public-ip-address`: The EIP, such as `139.199.232.238`.</li>
+	// <li>`public-port`: The public network port.</li>
+	// <li>`private-ip-address`: The private IP, such as `10.0.0.1`.</li>
+	// <li>`private-port`. The private network port.</li>
+	// <li>`description`. The rule description.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. The default value is 0.
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of values to be returned. The default value is 20. Maximum is 100.
+	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -9298,21 +9307,21 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest struct {
 	// NAT gateway ID.
 	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
-	// Filter conditions:
+	// Filters:
 	// `NatGatewayIds` and `Filters` cannot be specified at the same time.
-	// <li> nat-gateway-id, the NAT gateway ID, such as `nat-0yi4hekt`.</li>
-	// <li> vpc-id, the VPC ID, such as `vpc-0yi4hekt`.</li>
-	// <li> public-ip-address, the EIP, such as `139.199.232.238`.</li>
-	// <li>public-port, the public network port.</li>
-	// <li>private-ip-address, the private IP, such as `10.0.0.1`.</li>
-	// <li>private-port, the private network port.</li>
-	// <li>description, the rule description.</li>
+	// <li> `nat-gateway-id`: The NAT gateway ID, such as `nat-0yi4hekt`.</li>
+	// <li> `vpc-id`: The VPC ID, such as `vpc-0yi4hekt`.</li>
+	// <li> `public-ip-address`: The EIP, such as `139.199.232.238`.</li>
+	// <li>`public-port`: The public network port.</li>
+	// <li>`private-ip-address`: The private IP, such as `10.0.0.1`.</li>
+	// <li>`private-port`. The private network port.</li>
+	// <li>`description`. The rule description.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. The default value is 0.
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of values to be returned. The default value is 20. Maximum is 100.
+	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -9343,7 +9352,7 @@ type DescribeNatGatewayDestinationIpPortTranslationNatRulesResponseParams struct
 	// The object array of port forwarding rules for the NAT gateway.
 	NatGatewayDestinationIpPortTranslationNatRuleSet []*NatGatewayDestinationIpPortTranslationNatRule `json:"NatGatewayDestinationIpPortTranslationNatRuleSet,omitempty" name:"NatGatewayDestinationIpPortTranslationNatRuleSet"`
 
-	// The number of object arrays of NAT port forwarding rules meeting the conditions.
+	// The number of eligible object arrays of NAT port forwarding rules.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9367,17 +9376,98 @@ func (r *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse) FromJso
 }
 
 // Predefined struct for user
+type DescribeNatGatewayDirectConnectGatewayRouteRequestParams struct {
+	// Unique ID of the NAT gateway
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Unique ID of VPC
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Valid range: 0-200
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Greater than 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeNatGatewayDirectConnectGatewayRouteRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID of the NAT gateway
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Unique ID of VPC
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Valid range: 0-200
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Greater than 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeNatGatewayDirectConnectGatewayRouteRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewayDirectConnectGatewayRouteRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NatGatewayId")
+	delete(f, "VpcId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatGatewayDirectConnectGatewayRouteRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatGatewayDirectConnectGatewayRouteResponseParams struct {
+	// Route data
+	NatDirectConnectGatewayRouteSet []*NatDirectConnectGatewayRoute `json:"NatDirectConnectGatewayRouteSet,omitempty" name:"NatDirectConnectGatewayRouteSet"`
+
+	// Total number of routes
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNatGatewayDirectConnectGatewayRouteResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNatGatewayDirectConnectGatewayRouteResponseParams `json:"Response"`
+}
+
+func (r *DescribeNatGatewayDirectConnectGatewayRouteResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatGatewayDirectConnectGatewayRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeNatGatewaySourceIpTranslationNatRulesRequestParams struct {
 	// The unique ID of the NAT Gateway, such as `nat-123xx454`.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// Filter conditions:
-	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
-	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
-	// <li>description, the rule description</li>
+	// Filter:
+	// <li>`resource-id`: The subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+	// <li>`public-ip-address`: The EIP, such as `139.199.232.238`</li>
+	// <li>`description` The rule description</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. Default is 0.
+	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -9390,13 +9480,13 @@ type DescribeNatGatewaySourceIpTranslationNatRulesRequest struct {
 	// The unique ID of the NAT Gateway, such as `nat-123xx454`.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// Filter conditions:
-	// <li> resource-id, the subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
-	// <li> public-ip-address, the EIP, such as `139.199.232.238`</li>
-	// <li>description, the rule description</li>
+	// Filter:
+	// <li>`resource-id`: The subnet ID (such as `subnet-0yi4hekt`) or CVM ID</li>
+	// <li>`public-ip-address`: The EIP, such as `139.199.232.238`</li>
+	// <li>`description` The rule description</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. Default is 0.
+	// Offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -9427,11 +9517,11 @@ func (r *DescribeNatGatewaySourceIpTranslationNatRulesRequest) FromJsonString(s 
 
 // Predefined struct for user
 type DescribeNatGatewaySourceIpTranslationNatRulesResponseParams struct {
-	// Object array of the SNAT rule for a NAT Gateway.
+	// Array of objects of a NAT gateway's SNAT rules.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
 
-	// The number of object arrays of eligible forwarding rules for a NAT Gateway
+	// The number of eligible object arrays of a NAT gateway's forwarding rules.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9459,17 +9549,17 @@ type DescribeNatGatewaysRequestParams struct {
 	// The unified ID of the NAT gateways, such as `nat-123xx454`.
 	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
-	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
-	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
-	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
-	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
-	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
+	// Filters. `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>nat-gateway-id - String - (Filter) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
+	// <li>vpc-id - String - (Filter) The unique ID of the VPC, such as `vpc-123xx454`.</li>
+	// <li>nat-gateway-name - String - (Filter) The ID of the protocol port template instance, such as `test_nat`.</li>
+	// <li>tag-key - String - (Filter) The tag key, such as `test-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. The default value is 0.
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of values to be returned. The default value is 20. Maximum is 100.
+	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -9479,17 +9569,17 @@ type DescribeNatGatewaysRequest struct {
 	// The unified ID of the NAT gateways, such as `nat-123xx454`.
 	NatGatewayIds []*string `json:"NatGatewayIds,omitempty" name:"NatGatewayIds"`
 
-	// Filter condition. `NatGatewayIds` and `Filters` cannot be specified at the same time.
-	// <li>nat-gateway-id - String - (Filter condition) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
-	// <li>vpc-id - String - (Filter condition) The unique ID of the VPC, such as `vpc-123xx454`.</li>
-	// <li>nat-gateway-name - String - (Filter condition) The name of the protocol port template instance, such as `test_nat`.</li>
-	// <li>tag-key - String - (Filter condition) The tag key, such as `test-key`.</li>
+	// Filters. `NatGatewayIds` and `Filters` cannot be specified at the same time.
+	// <li>nat-gateway-id - String - (Filter) The ID of the protocol port template instance, such as `nat-123xx454`.</li>
+	// <li>vpc-id - String - (Filter) The unique ID of the VPC, such as `vpc-123xx454`.</li>
+	// <li>nat-gateway-name - String - (Filter) The ID of the protocol port template instance, such as `test_nat`.</li>
+	// <li>tag-key - String - (Filter) The tag key, such as `test-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Offset. The default value is 0.
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of values to be returned. The default value is 20. Maximum is 100.
+	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -9520,7 +9610,7 @@ type DescribeNatGatewaysResponseParams struct {
 	// NAT gateway object array.
 	NatGatewaySet []*NatGateway `json:"NatGatewaySet,omitempty" name:"NatGatewaySet"`
 
-	// The number of NAT gateway object sets meeting the conditions.
+	// The number of eligible NAT gateway objects.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9854,6 +9944,14 @@ type DescribeNetworkInterfaceLimitResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ExtendEniPrivateIpAddressQuantity *int64 `json:"ExtendEniPrivateIpAddressQuantity,omitempty" name:"ExtendEniPrivateIpAddressQuantity"`
 
+	// The quota of relayed ENIs
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubEniQuantity *int64 `json:"SubEniQuantity,omitempty" name:"SubEniQuantity"`
+
+	// The quota of IPs that can be assigned to each relayed ENI.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubEniPrivateIpAddressQuantity *int64 `json:"SubEniPrivateIpAddressQuantity,omitempty" name:"SubEniPrivateIpAddressQuantity"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -9879,18 +9977,20 @@ type DescribeNetworkInterfacesRequestParams struct {
 	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
-	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
-	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
-	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
-	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
-	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
-	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
-	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+	// Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	// <li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
+	// <li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
+	// <li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
+	// <li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+	// <li>`network-interface-name` - String - ENI instance name.</li>
+	// <li>`network-interface-description` - String - ENI instance description.</li>
+	// <li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
+	// <li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
+	// <li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
+	// <li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
+	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
+	// <li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -9906,18 +10006,20 @@ type DescribeNetworkInterfacesRequest struct {
 	// Queries the ID of the ENI instance, such as `eni-pxir56ns`. Each request can have a maximum of 100 instances. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
-	// Filter condition. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-	// <li>vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>subnet-id - String - (Filter condition) Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-	// <li>network-interface-id - String - (Filter condition) ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>attachment.instance-id - String - (Filter condition) CVM instance ID, such as `ins-3nqpdn3i`.</li>
-	// <li>groups.security-group-id - String - (Filter condition) Instance ID of the security group, such as `sg-f9ekbxeq`.</li>
-	// <li>network-interface-name - String - (Filter condition) ENI instance name.</li>
-	// <li>network-interface-description - String - (Filter condition) ENI instance description.</li>
-	// <li>address-ip - String - (Filter condition) Private IPv4 address.</li>
-	// <li>tag-key - String - Required: no - (Filter condition) Filters by tag key. For more information, see Example 2.</li>
-	// <li> `tag:tag-key` - String - Required: no - (Filter condition) Filters by tag key pair. For this parameter, `tag-key` will be replaced with a specific tag key. For more information, see Example 3.</li>
-	// <li>is-primary - Boolean - Required: no - (Filter condition) Filters based on whether it is a primary ENI. If the value is ‘true’, filter only the primary ENI. If the value is ‘false’, filter only the secondary ENI. If the secondary filter parameter is provided, filter the both.</li>
+	// Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
+	// <li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
+	// <li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
+	// <li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
+	// <li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
+	// <li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+	// <li>`network-interface-name` - String - ENI instance name.</li>
+	// <li>`network-interface-description` - String - ENI instance description.</li>
+	// <li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
+	// <li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
+	// <li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
+	// <li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
+	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
+	// <li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -11718,13 +11820,13 @@ func (r *DescribeVpnGatewaysResponse) FromJsonString(s string) error {
 }
 
 type DestinationIpPortTranslationNatRule struct {
-	// Network protocol. Available choices: `TCP`, `UDP`.
+	// Network protocol. Valid values: `TCP`, `UDP`.
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
 
 	// EIP.
 	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
 
-	// Public port.
+	// Public network port.
 	PublicPort *uint64 `json:"PublicPort,omitempty" name:"PublicPort"`
 
 	// Private network address.
@@ -11733,7 +11835,7 @@ type DestinationIpPortTranslationNatRule struct {
 	// Private network port.
 	PrivatePort *uint64 `json:"PrivatePort,omitempty" name:"PrivatePort"`
 
-	// NAT gateway forwarding rule description.
+	// Description of NAT gateway forwarding rules.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
@@ -12029,6 +12131,14 @@ type DirectConnectGatewayCcnRoute struct {
 
 	// Last updated time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type DirectConnectSubnet struct {
+	// The direct connect gateway ID.
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitempty" name:"DirectConnectGatewayId"`
+
+	// IDC subnet IP range
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 }
 
 // Predefined struct for user
@@ -15059,7 +15169,7 @@ type ModifyNatGatewayAttributeRequestParams struct {
 	// The maximum outbound bandwidth of the NAT gateway. Unit: Mbps.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// Whether to modify the security group bound to the NAT Gateway
+	// Whether to modify the security group bound to the NAT gateway
 	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
 
 	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
@@ -15078,7 +15188,7 @@ type ModifyNatGatewayAttributeRequest struct {
 	// The maximum outbound bandwidth of the NAT gateway. Unit: Mbps.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// Whether to modify the security group bound to the NAT Gateway
+	// Whether to modify the security group bound to the NAT gateway
 	ModifySecurityGroup *bool `json:"ModifySecurityGroup,omitempty" name:"ModifySecurityGroup"`
 
 	// The final security groups bound to the NAT Gateway, such as `['sg-1n232323', 'sg-o4242424']`. An empty list indicates that all the security groups have been deleted.
@@ -15507,6 +15617,9 @@ type ModifyNetworkInterfaceAttributeRequestParams struct {
 
 	// The specified security groups to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+	TrunkingFlag *string `json:"TrunkingFlag,omitempty" name:"TrunkingFlag"`
 }
 
 type ModifyNetworkInterfaceAttributeRequest struct {
@@ -15523,6 +15636,9 @@ type ModifyNetworkInterfaceAttributeRequest struct {
 
 	// The specified security groups to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Configuration of the ENI trunking mode. Valid values: `Enable` and `Disable`. Default value: `Disable`.
+	TrunkingFlag *string `json:"TrunkingFlag,omitempty" name:"TrunkingFlag"`
 }
 
 func (r *ModifyNetworkInterfaceAttributeRequest) ToJsonString() string {
@@ -15541,6 +15657,7 @@ func (r *ModifyNetworkInterfaceAttributeRequest) FromJsonString(s string) error 
 	delete(f, "NetworkInterfaceName")
 	delete(f, "NetworkInterfaceDescription")
 	delete(f, "SecurityGroupIds")
+	delete(f, "TrunkingFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkInterfaceAttributeRequest has unknown keys!", "")
 	}
@@ -16670,6 +16787,24 @@ func (r *ModifyVpnGatewayRoutesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type NatDirectConnectGatewayRoute struct {
+	// The `IPv4` `CIDR` of the subnet.
+	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
+
+	// The type of the next-hop gateway. Supported types:
+	// `DIRECTCONNECT`: Direct connect gateway
+	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
+
+	// ID of the next-hop gateway
+	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
+
+	// The creation time of the route
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The update time of the route
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
 type NatGateway struct {
 	// NAT gateway ID.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
@@ -16681,8 +16816,8 @@ type NatGateway struct {
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// The status of the NAT gateway.
-	//  'PENDING': Creating, 'DELETING': Deleting, 'AVAILABLE': Operating, 'UPDATING': Upgrading,
-	// ‘FAILED’: Failed.
+	//  `PENDING`: Being created, `DELETING`: Being deleted, `AVAILABLE`: Running, `UPDATING`: Being upgraded,
+	// `FAILED`: Failed.
 	State *string `json:"State,omitempty" name:"State"`
 
 	// The maximum outbound bandwidth of the gateway. Unit: Mbps.
@@ -16694,7 +16829,7 @@ type NatGateway struct {
 	// The public IP object array of the bound NAT gateway.
 	PublicIpAddressSet []*NatGatewayAddress `json:"PublicIpAddressSet,omitempty" name:"PublicIpAddressSet"`
 
-	// The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Account is in arrears and the service is suspended.
+	// The NAT gateway status. `AVAILABLE`: Operating, `UNAVAILABLE`: Unavailable, `INSUFFICIENT`: Service suspended due to account overdue.
 	NetworkState *string `json:"NetworkState,omitempty" name:"NetworkState"`
 
 	// The port forwarding rules of the NAT gateway.
@@ -16706,29 +16841,31 @@ type NatGateway struct {
 	// The availability zone in which the NAT gateway is located.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// IDs of direct connect gateway associated.
+	// ID of the direct connect gateway bound.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DirectConnectGatewayIds []*string `json:"DirectConnectGatewayIds,omitempty" name:"DirectConnectGatewayIds"`
 
 	// Subnet ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Tag key-value pair.
+	// Tag key-value pairs.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 
 	// The list of the security groups bound to the NAT Gateway
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SecurityGroupSet []*string `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
 
-	// SNAT forwarding rule of the NAT Gateway.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// SNAT forwarding rule of the NAT gateway.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SourceIpTranslationNatRuleSet []*SourceIpTranslationNatRule `json:"SourceIpTranslationNatRuleSet,omitempty" name:"SourceIpTranslationNatRuleSet"`
 
-	// Whether the NAT Gateway is dedicated.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Whether the NAT gateway is dedicated.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsExclusive *bool `json:"IsExclusive,omitempty" name:"IsExclusive"`
 
 	// Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ExclusiveGatewayBandwidth *uint64 `json:"ExclusiveGatewayBandwidth,omitempty" name:"ExclusiveGatewayBandwidth"`
 }
 
@@ -16753,25 +16890,25 @@ type NatGatewayDestinationIpPortTranslationNatRule struct {
 	// Public port.
 	PublicPort *uint64 `json:"PublicPort,omitempty" name:"PublicPort"`
 
-	// Private network address.
+	// Private IP.
 	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
 
-	// Private network port.
+	// Private port.
 	PrivatePort *uint64 `json:"PrivatePort,omitempty" name:"PrivatePort"`
 
 	// NAT gateway forwarding rule description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// NAT gateway ID.
-	// Note: This field may return null, indicating no valid value.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// VPC ID.
-	// Note: This field may return null, indicating no valid value.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The creation time of the NAT gateway forwarding rule.
-	// Note: This field may return null, indicating no valid value.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 
@@ -17107,6 +17244,77 @@ type ReferredSecurityGroup struct {
 
 	// IDs of all referred security group instances.
 	ReferredSecurityGroupIds []*string `json:"ReferredSecurityGroupIds,omitempty" name:"ReferredSecurityGroupIds"`
+}
+
+// Predefined struct for user
+type RefreshDirectConnectGatewayRouteToNatGatewayRequestParams struct {
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Whether it is pre-refresh. Valid values: `True` (yes) and `False` (no)
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+}
+
+type RefreshDirectConnectGatewayRouteToNatGatewayRequest struct {
+	*tchttp.BaseRequest
+	
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The NAT gateway ID.
+	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
+
+	// Whether it is pre-refresh. Valid values: `True` (yes) and `False` (no)
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+}
+
+func (r *RefreshDirectConnectGatewayRouteToNatGatewayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshDirectConnectGatewayRouteToNatGatewayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "NatGatewayId")
+	delete(f, "DryRun")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RefreshDirectConnectGatewayRouteToNatGatewayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RefreshDirectConnectGatewayRouteToNatGatewayResponseParams struct {
+	// IDC subnet information
+	DirectConnectSubnetSet []*DirectConnectSubnet `json:"DirectConnectSubnetSet,omitempty" name:"DirectConnectSubnetSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RefreshDirectConnectGatewayRouteToNatGatewayResponse struct {
+	*tchttp.BaseResponse
+	Response *RefreshDirectConnectGatewayRouteToNatGatewayResponseParams `json:"Response"`
+}
+
+func (r *RefreshDirectConnectGatewayRouteToNatGatewayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshDirectConnectGatewayRouteToNatGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -17683,7 +17891,7 @@ func (r *ResetAttachCcnInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResetNatGatewayConnectionRequestParams struct {
-	// NAT gateway ID.
+	// The NAT gateway ID.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// Concurrent connections cap of the NAT gateway, such as 1000000, 3000000, 10000000.
@@ -17693,7 +17901,7 @@ type ResetNatGatewayConnectionRequestParams struct {
 type ResetNatGatewayConnectionRequest struct {
 	*tchttp.BaseRequest
 	
-	// NAT gateway ID.
+	// The NAT gateway ID.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
 	// Concurrent connections cap of the NAT gateway, such as 1000000, 3000000, 10000000.
@@ -18395,7 +18603,7 @@ type SourceIpTranslationNatRule struct {
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Resource type. Valid values: SUBNET, NETWORKINTERFACE
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// Source IP/IP range
@@ -18410,16 +18618,16 @@ type SourceIpTranslationNatRule struct {
 	// SNAT rule ID
 	NatGatewaySnatId *string `json:"NatGatewaySnatId,omitempty" name:"NatGatewaySnatId"`
 
-	// NAT Gateway ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// NAT gateway ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	NatGatewayId *string `json:"NatGatewayId,omitempty" name:"NatGatewayId"`
 
-	// VPC ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// VPC ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Creation time of a SNAT rule for a NAT Gateway
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// The creation time of a NAT gateway's SNAT rule.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 

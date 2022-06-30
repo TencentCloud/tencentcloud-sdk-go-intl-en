@@ -254,6 +254,13 @@ type BGPIPInstance struct {
 	// Whether it’s an IPv6 address. `1`: Yes; `0`: No.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	V6Flag *uint64 `json:"V6Flag,omitempty" name:"V6Flag"`
+
+	// Whether it’s an Anti-DDoS Advanced instance from Tencent Cloud channels. `1`: Yes; `0`: No.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	BGPIPChannelFlag *uint64 `json:"BGPIPChannelFlag,omitempty" name:"BGPIPChannelFlag"`
+
+
+	TagInfoList []*TagInfo `json:"TagInfoList,omitempty" name:"TagInfoList"`
 }
 
 type BGPIPInstanceSpecification struct {
@@ -3812,6 +3819,15 @@ type DescribeListBGPIPInstancesRequestParams struct {
 
 	// Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
+
+	// Filters by the instance CNAME
+	FilterCname *string `json:"FilterCname,omitempty" name:"FilterCname"`
+
+	// Filters by the instance ID
+	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
+
+
+	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
 
 type DescribeListBGPIPInstancesRequest struct {
@@ -3855,6 +3871,14 @@ type DescribeListBGPIPInstancesRequest struct {
 
 	// Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
+
+	// Filters by the instance CNAME
+	FilterCname *string `json:"FilterCname,omitempty" name:"FilterCname"`
+
+	// Filters by the instance ID
+	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
+
+	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
 
 func (r *DescribeListBGPIPInstancesRequest) ToJsonString() string {
@@ -3880,6 +3904,9 @@ func (r *DescribeListBGPIPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterEipEipAddressStatus")
 	delete(f, "FilterDamDDoSStatus")
 	delete(f, "FilterStatus")
+	delete(f, "FilterCname")
+	delete(f, "FilterInstanceIdList")
+	delete(f, "FilterTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPIPInstancesRequest has unknown keys!", "")
 	}
@@ -4373,6 +4400,9 @@ type DescribeListIPAlarmConfigRequestParams struct {
 
 	// IP filter
 	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
+
+	// CNAME of the Anti-DDoS Advanced instance
+	FilterCname *string `json:"FilterCname,omitempty" name:"FilterCname"`
 }
 
 type DescribeListIPAlarmConfigRequest struct {
@@ -4395,6 +4425,9 @@ type DescribeListIPAlarmConfigRequest struct {
 
 	// IP filter
 	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
+
+	// CNAME of the Anti-DDoS Advanced instance
+	FilterCname *string `json:"FilterCname,omitempty" name:"FilterCname"`
 }
 
 func (r *DescribeListIPAlarmConfigRequest) ToJsonString() string {
@@ -4414,6 +4447,7 @@ func (r *DescribeListIPAlarmConfigRequest) FromJsonString(s string) error {
 	delete(f, "FilterInstanceId")
 	delete(f, "FilterAlarmType")
 	delete(f, "FilterIp")
+	delete(f, "FilterCname")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListIPAlarmConfigRequest has unknown keys!", "")
 	}
@@ -4918,6 +4952,94 @@ func (r *DescribeListWaterPrintConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeOverviewDDoSEventListRequestParams struct {
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filters by the attack status. `start`: The attack is ongoing; `end`: The attack ends.
+	AttackStatus *string `json:"AttackStatus,omitempty" name:"AttackStatus"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Total number of records
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeOverviewDDoSEventListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Filters by the attack status. `start`: The attack is ongoing; `end`: The attack ends.
+	AttackStatus *string `json:"AttackStatus,omitempty" name:"AttackStatus"`
+
+	// The offset value
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Total number of records
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeOverviewDDoSEventListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOverviewDDoSEventListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "AttackStatus")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOverviewDDoSEventListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOverviewDDoSEventListResponseParams struct {
+	// Total number of records
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Event list
+	EventList []*OverviewDDoSEvent `json:"EventList,omitempty" name:"EventList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeOverviewDDoSEventListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOverviewDDoSEventListResponseParams `json:"Response"`
+}
+
+func (r *DescribeOverviewDDoSEventListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOverviewDDoSEventListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisassociateDDoSEipAddressRequestParams struct {
 	// Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -5075,6 +5197,12 @@ type IPLineInfo struct {
 
 
 	Eip *string `json:"Eip,omitempty" name:"Eip"`
+
+	// CNAME of the instance
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+
+	// Flag of the instance. `0`: Anti-DDoS Pro instance; `1`: Anti-DDoS Advanced instance; `2`: Non-Anti-DDoS Advanced instance.
+	ResourceFlag *int64 `json:"ResourceFlag,omitempty" name:"ResourceFlag"`
 }
 
 type InsL7Rules struct {
@@ -5152,8 +5280,11 @@ type Layer4Rule struct {
 	// List of real servers
 	RealServers []*SourceServer `json:"RealServers,omitempty" name:"RealServers"`
 
-	// Anti-DDoS instance configured
+	// Information of the Anti-DDoS instance
 	InstanceDetails []*InstanceRelation `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
+
+	// Information of the Anti-DDoS instance configured
+	InstanceDetailRule []*RuleInstanceRelation `json:"InstanceDetailRule,omitempty" name:"InstanceDetailRule"`
 }
 
 type Layer7Rule struct {
@@ -5166,8 +5297,11 @@ type Layer7Rule struct {
 	// List of real servers
 	RealServers []*SourceServer `json:"RealServers,omitempty" name:"RealServers"`
 
-	// Anti-DDoS instance configured
+	// Information of the Anti-DDoS instance
 	InstanceDetails []*InstanceRelation `json:"InstanceDetails,omitempty" name:"InstanceDetails"`
+
+	// Information of the Anti-DDoS instance configured
+	InstanceDetailRule []*RuleInstanceRelation `json:"InstanceDetailRule,omitempty" name:"InstanceDetailRule"`
 }
 
 type ListenerCcThreholdConfig struct {
@@ -5192,7 +5326,7 @@ type ModifyCCPrecisionPolicyRequestParams struct {
 	// Policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Action of limiting request frequency. Valid values: `alg` (limit request frequency via verification codes) and `drop`(drop requests).
+	// Specifies the action. `alg`: Verify the access request via CAPTCHA; `drop`: Drop the access request.
 	PolicyAction *string `json:"PolicyAction,omitempty" name:"PolicyAction"`
 
 	// Policy records
@@ -5208,7 +5342,7 @@ type ModifyCCPrecisionPolicyRequest struct {
 	// Policy ID
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Action of limiting request frequency. Valid values: `alg` (limit request frequency via verification codes) and `drop`(drop requests).
+	// Specifies the action. `alg`: Verify the access request via CAPTCHA; `drop`: Drop the access request.
 	PolicyAction *string `json:"PolicyAction,omitempty" name:"PolicyAction"`
 
 	// Policy records
@@ -5730,6 +5864,41 @@ type NewL7RuleEntry struct {
 	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
 }
 
+type OverviewDDoSEvent struct {
+	// Event ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// IP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Attack type
+	AttackType *string `json:"AttackType,omitempty" name:"AttackType"`
+
+	// Attack status. `0`: The attack is ongoing; `1`: The attack ends.
+	AttackStatus *uint64 `json:"AttackStatus,omitempty" name:"AttackStatus"`
+
+	// Attack traffic, in Mbps
+	Mbps *uint64 `json:"Mbps,omitempty" name:"Mbps"`
+
+	// Attack packets, in PPS
+	Pps *uint64 `json:"Pps,omitempty" name:"Pps"`
+
+	// Anti-DDoS service type. `bgp-multip`: Anti-DDoS Pro; `bgpip`: Anti-DDoS Advanced; `basic`: Anti-DDoS Basic.
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Anti-DDoS instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Anti-DDoS instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
 type PackInfo struct {
 	// Package type. Valid values:
 	// `staticpack`: non-BGP package
@@ -5943,6 +6112,17 @@ type RegionInfo struct {
 	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
+type RuleInstanceRelation struct {
+	// Instance IP
+	EipList []*string `json:"EipList,omitempty" name:"EipList"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance CNAME
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+}
+
 type SchedulingDomainInfo struct {
 	// Scheduling domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
@@ -6088,6 +6268,22 @@ func (r *SwitchWaterPrintConfigResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SwitchWaterPrintConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TagFilter struct {
+
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+
+	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TagInfo struct {
+
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type WaterPrintConfig struct {
