@@ -45,151 +45,117 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewAddCdnDomainRequest() (request *AddCdnDomainRequest) {
-    request = &AddCdnDomainRequest{
+func NewAddCLSTopicDomainsRequest() (request *AddCLSTopicDomainsRequest) {
+    request = &AddCLSTopicDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("cdn", APIVersion, "AddCdnDomain")
+    request.Init().WithApiInfo("cdn", APIVersion, "AddCLSTopicDomains")
     
     
     return
 }
 
-func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
-    response = &AddCdnDomainResponse{
+func NewAddCLSTopicDomainsResponse() (response *AddCLSTopicDomainsResponse) {
+    response = &AddCLSTopicDomainsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// AddCdnDomain
-// This API is used to add a CDN acceleration domain name.
+// AddCLSTopicDomains
+// This API is used to add one or more domains to a specified log topic.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CAMRESOURCEBELONGTODIFFERENTUSER = "InvalidParameter.CamResourceBelongToDifferentUser"
-//  INVALIDPARAMETER_CAMRESOURCESIXSTAGEERROR = "InvalidParameter.CamResourceSixStageError"
-//  INVALIDPARAMETER_CAMTAGKEYALREADYATTACHED = "InvalidParameter.CamTagKeyAlreadyAttached"
-//  INVALIDPARAMETER_CAMTAGKEYILLEGAL = "InvalidParameter.CamTagKeyIllegal"
-//  INVALIDPARAMETER_CAMTAGKEYNOTEXIST = "InvalidParameter.CamTagKeyNotExist"
-//  INVALIDPARAMETER_CAMTAGVALUEILLEGAL = "InvalidParameter.CamTagValueIllegal"
-//  INVALIDPARAMETER_CDNCERTINFONOTFOUND = "InvalidParameter.CdnCertInfoNotFound"
-//  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
-//  INVALIDPARAMETER_CDNCONFIGINVALIDTAG = "InvalidParameter.CdnConfigInvalidTag"
-//  INVALIDPARAMETER_CDNCONFIGTAGREQUIRED = "InvalidParameter.CdnConfigTagRequired"
-//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
-//  INVALIDPARAMETER_CDNHOSTISCOSDEFAULTACCESS = "InvalidParameter.CdnHostIsCosDefaultAccess"
-//  INVALIDPARAMETER_CDNHOSTTOOLONGHOST = "InvalidParameter.CdnHostTooLongHost"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER_CDNCLSDUPLICATETOPIC = "InvalidParameter.CdnClsDuplicateTopic"
+//  INVALIDPARAMETER_CDNCLSTOPICNAMEINVALID = "InvalidParameter.CdnClsTopicNameInvalid"
+//  INVALIDPARAMETER_CDNCLSTOPICNOTEXIST = "InvalidParameter.CdnClsTopicNotExist"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  LIMITEXCEEDED_CAMRESOURCEARRAYTOOLONG = "LimitExceeded.CamResourceArrayTooLong"
-//  LIMITEXCEEDED_CAMRESOURCETOOMANYTAGKEY = "LimitExceeded.CamResourceTooManyTagKey"
-//  LIMITEXCEEDED_CAMTAGKEYTOOLONG = "LimitExceeded.CamTagKeyTooLong"
-//  LIMITEXCEEDED_CAMTAGKEYTOOMANYTAGVALUE = "LimitExceeded.CamTagKeyTooManyTagValue"
-//  LIMITEXCEEDED_CAMUSERTOOMANYTAGKEY = "LimitExceeded.CamUserTooManyTagKey"
-//  LIMITEXCEEDED_CDNCONFIGTOOMANYCACHERULES = "LimitExceeded.CdnConfigTooManyCacheRules"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
-//  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
-//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
-//  RESOURCENOTFOUND_CAMTAGKEYNOTEXIST = "ResourceNotFound.CamTagKeyNotExist"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINDSA = "ResourceUnavailable.CdnHostExistsInDsa"
-//  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINTCB = "ResourceUnavailable.CdnHostExistsInTcb"
-//  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
-//  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
-//  RESOURCEUNAVAILABLE_HOSTEXISTINVOD = "ResourceUnavailable.HostExistInVod"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
-//  UNAUTHORIZEDOPERATION_CDNHOSTEXISTSININTERNAL = "UnauthorizedOperation.CdnHostExistsInInternal"
-//  UNAUTHORIZEDOPERATION_CDNHOSTINICPBLACKLIST = "UnauthorizedOperation.CdnHostInIcpBlacklist"
-//  UNAUTHORIZEDOPERATION_CDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.CdnHostIsOwnedByOther"
-//  UNAUTHORIZEDOPERATION_CDNHOSTISUSEDBYOTHER = "UnauthorizedOperation.CdnHostIsUsedByOther"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISISOLATED = "UnauthorizedOperation.CdnUserIsIsolated"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
+//  INVALIDPARAMETER_CLSINDEXCONFLICT = "InvalidParameter.ClsIndexConflict"
+//  INVALIDPARAMETER_CLSINDEXRULEEMPTY = "InvalidParameter.ClsIndexRuleEmpty"
+//  INVALIDPARAMETER_CLSINVALIDCONTENT = "InvalidParameter.ClsInvalidContent"
+//  INVALIDPARAMETER_CLSINVALIDCONTENTTYPE = "InvalidParameter.ClsInvalidContentType"
+//  INVALIDPARAMETER_CLSINVALIDPARAM = "InvalidParameter.ClsInvalidParam"
+//  INVALIDPARAMETER_CLSLOGSETCONFLICT = "InvalidParameter.ClsLogsetConflict"
+//  INVALIDPARAMETER_CLSLOGSETEMPTY = "InvalidParameter.ClsLogsetEmpty"
+//  INVALIDPARAMETER_CLSLOGSETNOTEMPTY = "InvalidParameter.ClsLogsetNotEmpty"
+//  INVALIDPARAMETER_CLSMISSINGAUTHORIZATION = "InvalidParameter.ClsMissingAuthorization"
+//  INVALIDPARAMETER_CLSMISSINGCONTENT = "InvalidParameter.ClsMissingContent"
+//  INVALIDPARAMETER_CLSSYNTAXERROR = "InvalidParameter.ClsSyntaxError"
+//  INVALIDPARAMETER_CLSTOPICCLOSED = "InvalidParameter.ClsTopicClosed"
+//  INVALIDPARAMETER_CLSTOPICCONFLICT = "InvalidParameter.ClsTopicConflict"
+//  LIMITEXCEEDED_CDNCLSTOOMANYTOPICS = "LimitExceeded.CdnClsTooManyTopics"
+//  LIMITEXCEEDED_CLSLOGSIZEEXCEED = "LimitExceeded.ClsLogSizeExceed"
+//  LIMITEXCEEDED_CLSLOGSETEXCEED = "LimitExceeded.ClsLogsetExceed"
+//  LIMITEXCEEDED_CLSTOPICEXCEED = "LimitExceeded.ClsTopicExceed"
+//  RESOURCENOTFOUND_CLSINDEXNOTEXIST = "ResourceNotFound.ClsIndexNotExist"
+//  RESOURCENOTFOUND_CLSLOGSETNOTEXIST = "ResourceNotFound.ClsLogsetNotExist"
+//  RESOURCENOTFOUND_CLSTOPICNOTEXIST = "ResourceNotFound.ClsTopicNotExist"
+//  UNAUTHORIZEDOPERATION_CDNCLSNOTREGISTERED = "UnauthorizedOperation.CdnClsNotRegistered"
+//  UNAUTHORIZEDOPERATION_CLSINVALIDAUTHORIZATION = "UnauthorizedOperation.ClsInvalidAuthorization"
+//  UNAUTHORIZEDOPERATION_CLSSERVICENOTACTIVATED = "UnauthorizedOperation.ClsServiceNotActivated"
+//  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-//  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
-func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDomainResponse, err error) {
-    return c.AddCdnDomainWithContext(context.Background(), request)
+//  UNSUPPORTEDOPERATION_CLSNOTALLOWED = "UnsupportedOperation.ClsNotAllowed"
+func (c *Client) AddCLSTopicDomains(request *AddCLSTopicDomainsRequest) (response *AddCLSTopicDomainsResponse, err error) {
+    return c.AddCLSTopicDomainsWithContext(context.Background(), request)
 }
 
-// AddCdnDomain
-// This API is used to add a CDN acceleration domain name.
+// AddCLSTopicDomains
+// This API is used to add one or more domains to a specified log topic.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CAMRESOURCEBELONGTODIFFERENTUSER = "InvalidParameter.CamResourceBelongToDifferentUser"
-//  INVALIDPARAMETER_CAMRESOURCESIXSTAGEERROR = "InvalidParameter.CamResourceSixStageError"
-//  INVALIDPARAMETER_CAMTAGKEYALREADYATTACHED = "InvalidParameter.CamTagKeyAlreadyAttached"
-//  INVALIDPARAMETER_CAMTAGKEYILLEGAL = "InvalidParameter.CamTagKeyIllegal"
-//  INVALIDPARAMETER_CAMTAGKEYNOTEXIST = "InvalidParameter.CamTagKeyNotExist"
-//  INVALIDPARAMETER_CAMTAGVALUEILLEGAL = "InvalidParameter.CamTagValueIllegal"
-//  INVALIDPARAMETER_CDNCERTINFONOTFOUND = "InvalidParameter.CdnCertInfoNotFound"
-//  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
-//  INVALIDPARAMETER_CDNCONFIGINVALIDTAG = "InvalidParameter.CdnConfigInvalidTag"
-//  INVALIDPARAMETER_CDNCONFIGTAGREQUIRED = "InvalidParameter.CdnConfigTagRequired"
-//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
-//  INVALIDPARAMETER_CDNHOSTISCOSDEFAULTACCESS = "InvalidParameter.CdnHostIsCosDefaultAccess"
-//  INVALIDPARAMETER_CDNHOSTTOOLONGHOST = "InvalidParameter.CdnHostTooLongHost"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER_CDNCLSDUPLICATETOPIC = "InvalidParameter.CdnClsDuplicateTopic"
+//  INVALIDPARAMETER_CDNCLSTOPICNAMEINVALID = "InvalidParameter.CdnClsTopicNameInvalid"
+//  INVALIDPARAMETER_CDNCLSTOPICNOTEXIST = "InvalidParameter.CdnClsTopicNotExist"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  LIMITEXCEEDED_CAMRESOURCEARRAYTOOLONG = "LimitExceeded.CamResourceArrayTooLong"
-//  LIMITEXCEEDED_CAMRESOURCETOOMANYTAGKEY = "LimitExceeded.CamResourceTooManyTagKey"
-//  LIMITEXCEEDED_CAMTAGKEYTOOLONG = "LimitExceeded.CamTagKeyTooLong"
-//  LIMITEXCEEDED_CAMTAGKEYTOOMANYTAGVALUE = "LimitExceeded.CamTagKeyTooManyTagValue"
-//  LIMITEXCEEDED_CAMUSERTOOMANYTAGKEY = "LimitExceeded.CamUserTooManyTagKey"
-//  LIMITEXCEEDED_CDNCONFIGTOOMANYCACHERULES = "LimitExceeded.CdnConfigTooManyCacheRules"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
-//  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
-//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
-//  RESOURCENOTFOUND_CAMTAGKEYNOTEXIST = "ResourceNotFound.CamTagKeyNotExist"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINDSA = "ResourceUnavailable.CdnHostExistsInDsa"
-//  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINTCB = "ResourceUnavailable.CdnHostExistsInTcb"
-//  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
-//  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
-//  RESOURCEUNAVAILABLE_HOSTEXISTINVOD = "ResourceUnavailable.HostExistInVod"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
-//  UNAUTHORIZEDOPERATION_CDNHOSTEXISTSININTERNAL = "UnauthorizedOperation.CdnHostExistsInInternal"
-//  UNAUTHORIZEDOPERATION_CDNHOSTINICPBLACKLIST = "UnauthorizedOperation.CdnHostInIcpBlacklist"
-//  UNAUTHORIZEDOPERATION_CDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.CdnHostIsOwnedByOther"
-//  UNAUTHORIZEDOPERATION_CDNHOSTISUSEDBYOTHER = "UnauthorizedOperation.CdnHostIsUsedByOther"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISISOLATED = "UnauthorizedOperation.CdnUserIsIsolated"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPNOAUTH = "UnauthorizedOperation.OpNoAuth"
+//  INVALIDPARAMETER_CLSINDEXCONFLICT = "InvalidParameter.ClsIndexConflict"
+//  INVALIDPARAMETER_CLSINDEXRULEEMPTY = "InvalidParameter.ClsIndexRuleEmpty"
+//  INVALIDPARAMETER_CLSINVALIDCONTENT = "InvalidParameter.ClsInvalidContent"
+//  INVALIDPARAMETER_CLSINVALIDCONTENTTYPE = "InvalidParameter.ClsInvalidContentType"
+//  INVALIDPARAMETER_CLSINVALIDPARAM = "InvalidParameter.ClsInvalidParam"
+//  INVALIDPARAMETER_CLSLOGSETCONFLICT = "InvalidParameter.ClsLogsetConflict"
+//  INVALIDPARAMETER_CLSLOGSETEMPTY = "InvalidParameter.ClsLogsetEmpty"
+//  INVALIDPARAMETER_CLSLOGSETNOTEMPTY = "InvalidParameter.ClsLogsetNotEmpty"
+//  INVALIDPARAMETER_CLSMISSINGAUTHORIZATION = "InvalidParameter.ClsMissingAuthorization"
+//  INVALIDPARAMETER_CLSMISSINGCONTENT = "InvalidParameter.ClsMissingContent"
+//  INVALIDPARAMETER_CLSSYNTAXERROR = "InvalidParameter.ClsSyntaxError"
+//  INVALIDPARAMETER_CLSTOPICCLOSED = "InvalidParameter.ClsTopicClosed"
+//  INVALIDPARAMETER_CLSTOPICCONFLICT = "InvalidParameter.ClsTopicConflict"
+//  LIMITEXCEEDED_CDNCLSTOOMANYTOPICS = "LimitExceeded.CdnClsTooManyTopics"
+//  LIMITEXCEEDED_CLSLOGSIZEEXCEED = "LimitExceeded.ClsLogSizeExceed"
+//  LIMITEXCEEDED_CLSLOGSETEXCEED = "LimitExceeded.ClsLogsetExceed"
+//  LIMITEXCEEDED_CLSTOPICEXCEED = "LimitExceeded.ClsTopicExceed"
+//  RESOURCENOTFOUND_CLSINDEXNOTEXIST = "ResourceNotFound.ClsIndexNotExist"
+//  RESOURCENOTFOUND_CLSLOGSETNOTEXIST = "ResourceNotFound.ClsLogsetNotExist"
+//  RESOURCENOTFOUND_CLSTOPICNOTEXIST = "ResourceNotFound.ClsTopicNotExist"
+//  UNAUTHORIZEDOPERATION_CDNCLSNOTREGISTERED = "UnauthorizedOperation.CdnClsNotRegistered"
+//  UNAUTHORIZEDOPERATION_CLSINVALIDAUTHORIZATION = "UnauthorizedOperation.ClsInvalidAuthorization"
+//  UNAUTHORIZEDOPERATION_CLSSERVICENOTACTIVATED = "UnauthorizedOperation.ClsServiceNotActivated"
+//  UNAUTHORIZEDOPERATION_CLSUNAUTHORIZED = "UnauthorizedOperation.ClsUnauthorized"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-//  UNSUPPORTEDOPERATION_OPNOAUTH = "UnsupportedOperation.OpNoAuth"
-func (c *Client) AddCdnDomainWithContext(ctx context.Context, request *AddCdnDomainRequest) (response *AddCdnDomainResponse, err error) {
+//  UNSUPPORTEDOPERATION_CLSNOTALLOWED = "UnsupportedOperation.ClsNotAllowed"
+func (c *Client) AddCLSTopicDomainsWithContext(ctx context.Context, request *AddCLSTopicDomainsRequest) (response *AddCLSTopicDomainsResponse, err error) {
     if request == nil {
-        request = NewAddCdnDomainRequest()
+        request = NewAddCLSTopicDomainsRequest()
     }
     
     if c.GetCredential() == nil {
-        return nil, errors.New("AddCdnDomain require credential")
+        return nil, errors.New("AddCLSTopicDomains require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewAddCdnDomainResponse()
+    response = NewAddCLSTopicDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -586,6 +552,7 @@ func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_COSTDATASYSTEMERROR = "InternalError.CostDataSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -621,6 +588,7 @@ func (c *Client) DescribeBillingData(request *DescribeBillingDataRequest) (respo
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNQUERYSYSTEMERROR = "InternalError.CdnQuerySystemError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_COSTDATASYSTEMERROR = "InternalError.CostDataSystemError"
 //  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
@@ -677,7 +645,7 @@ func NewDescribeCdnDataResponse() (response *DescribeCdnDataResponse) {
 }
 
 // DescribeCdnData
-// This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+// This API is used to query CDN real-time access monitoring data and supports the following metrics:
 //
 // 
 //
@@ -745,7 +713,7 @@ func (c *Client) DescribeCdnData(request *DescribeCdnDataRequest) (response *Des
 }
 
 // DescribeCdnData
-// This API (DescribeCdnData) is used to query CDN real-time access monitoring data and supports the following metrics:
+// This API is used to query CDN real-time access monitoring data and supports the following metrics:
 //
 // 
 //
@@ -1589,7 +1557,7 @@ func NewDescribeOriginDataResponse() (response *DescribeOriginDataResponse) {
 }
 
 // DescribeOriginData
-// This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+// This API is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
 //
 // 
 //
@@ -1649,7 +1617,7 @@ func (c *Client) DescribeOriginData(request *DescribeOriginDataRequest) (respons
 }
 
 // DescribeOriginData
-// This API (DescribeOriginData) is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
+// This API is used to query CDN real-time origin-pull monitoring data and supports the following metrics:
 //
 // 
 //
