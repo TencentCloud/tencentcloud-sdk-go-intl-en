@@ -53,6 +53,9 @@ const (
 	// Failed to get room information.
 	INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
 
+	// Parameter error.
+	INVALIDPARAMETER = "InvalidParameter"
+
 	// Parameter value is out of range.
 	INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
 
@@ -67,6 +70,9 @@ const (
 
 	// Invalid RoomId.
 	INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+
+	// Missing parameter.
+	MISSINGPARAMETER = "MissingParameter"
 
 	// `AccessKey` parameter missing.
 	MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"

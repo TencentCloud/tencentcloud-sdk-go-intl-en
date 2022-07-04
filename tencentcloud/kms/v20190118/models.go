@@ -418,6 +418,9 @@ type CreateKeyRequestParams struct {
 
 	// Tag list
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 type CreateKeyRequest struct {
@@ -437,6 +440,9 @@ type CreateKeyRequest struct {
 
 	// Tag list
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 func (r *CreateKeyRequest) ToJsonString() string {
@@ -456,6 +462,7 @@ func (r *CreateKeyRequest) FromJsonString(s string) error {
 	delete(f, "KeyUsage")
 	delete(f, "Type")
 	delete(f, "Tags")
+	delete(f, "HsmClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKeyRequest has unknown keys!", "")
 	}
@@ -487,6 +494,10 @@ type CreateKeyResponseParams struct {
 
 	// Tag operation return information
 	TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -609,7 +620,7 @@ type DecryptRequestParams struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
@@ -625,7 +636,7 @@ type DecryptRequest struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
@@ -1925,7 +1936,7 @@ type GenerateDataKeyRequestParams struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
@@ -1947,7 +1958,7 @@ type GenerateDataKeyRequest struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2(C1C3C2)`, `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used with `EncryptionPublicKey` for encryption. If it is left empty, a SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitempty" name:"EncryptionAlgorithm"`
 }
 
@@ -2371,6 +2382,14 @@ type GetServiceStatusResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ProResourceId *string `json:"ProResourceId,omitempty" name:"ProResourceId"`
 
+	// Whether to activate Managed KMS
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ExclusiveVSMEnabled *bool `json:"ExclusiveVSMEnabled,omitempty" name:"ExclusiveVSMEnabled"`
+
+	// Whether to activate Exclusive KMS
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ExclusiveHSMEnabled *bool `json:"ExclusiveHSMEnabled,omitempty" name:"ExclusiveHSMEnabled"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2518,6 +2537,10 @@ type KeyMetadata struct {
 
 	// Resource ID in the format of `creatorUin/$creatorUin/$keyId`.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 // Predefined struct for user
@@ -2608,6 +2631,9 @@ type ListKeyDetailRequestParams struct {
 
 	// Tag filter condition
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 type ListKeyDetailRequest struct {
@@ -2639,6 +2665,9 @@ type ListKeyDetailRequest struct {
 
 	// Tag filter condition
 	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 func (r *ListKeyDetailRequest) ToJsonString() string {
@@ -2662,6 +2691,7 @@ func (r *ListKeyDetailRequest) FromJsonString(s string) error {
 	delete(f, "Origin")
 	delete(f, "KeyUsage")
 	delete(f, "TagFilters")
+	delete(f, "HsmClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListKeyDetailRequest has unknown keys!", "")
 	}
@@ -2707,6 +2737,9 @@ type ListKeysRequestParams struct {
 
 	// Filter by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service
 	Role *uint64 `json:"Role,omitempty" name:"Role"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 type ListKeysRequest struct {
@@ -2720,6 +2753,9 @@ type ListKeysRequest struct {
 
 	// Filter by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service
 	Role *uint64 `json:"Role,omitempty" name:"Role"`
+
+	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	HsmClusterId *string `json:"HsmClusterId,omitempty" name:"HsmClusterId"`
 }
 
 func (r *ListKeysRequest) ToJsonString() string {
@@ -2737,6 +2773,7 @@ func (r *ListKeysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Role")
+	delete(f, "HsmClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListKeysRequest has unknown keys!", "")
 	}

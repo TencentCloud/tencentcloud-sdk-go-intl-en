@@ -20,6 +20,31 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AgentParams struct {
+	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The signature (similar to a login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
+
+	// The timeout period (seconds) for relaying to stop automatically after all the users whose streams are mixed leave the room. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
+	MaxIdleTime *uint64 `json:"MaxIdleTime,omitempty" name:"MaxIdleTime"`
+}
+
+type AudioEncode struct {
+	// The audio sample rate (Hz). Valid values: 48000, 44100, 32000, 24000, 16000, 8000.
+	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
+
+	// The number of sound channels. Valid values: 1 (mono), 2 (dual).
+	Channel *uint64 `json:"Channel,omitempty" name:"Channel"`
+
+	// The audio bitrate (Kbps). Value range: 8-500.
+	BitRate *uint64 `json:"BitRate,omitempty" name:"BitRate"`
+
+	// The audio codec. Valid values: 0 (LC-AAC), 1 (HE-AAC), 2 (HE-AACv2). The default value is 0. If this parameter is set to 2, `Channel` must be 2. If it is set to 1 or 2, `SampleRate` can only be 48000, 44100, 32000, 24000, or 16000.
+	Codec *uint64 `json:"Codec,omitempty" name:"Codec"`
+}
+
 type AudioParams struct {
 	// The audio sample rate.
 	// 1: 48000 Hz (default)
@@ -453,6 +478,131 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MaxVideoUser struct {
+	// The stream information.
+	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitempty" name:"UserMediaStream"`
+}
+
+type McuAudioParams struct {
+	// The audio encoding parameters.
+	AudioEncode *AudioEncode `json:"AudioEncode,omitempty" name:"AudioEncode"`
+
+	// The users whose audios are mixed. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, TRTC will not change the users whose audios are mixed; if you pass in an empty string, the audios of all anchors will be mixed.
+	SubscribeAudioList []*McuUserInfoParams `json:"SubscribeAudioList,omitempty" name:"SubscribeAudioList"`
+}
+
+type McuLayout struct {
+	// The information of the stream that is displayed. If you do not pass this parameter, TRTC will display the videos of anchors in the room according to their room entry sequence.
+	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitempty" name:"UserMediaStream"`
+
+	// The video width (pixels). If you do not pass this parameter, 0 will be used.
+	ImageWidth *uint64 `json:"ImageWidth,omitempty" name:"ImageWidth"`
+
+	// The video height (pixels). If you do not pass this parameter, 0 will be used.
+	ImageHeight *uint64 `json:"ImageHeight,omitempty" name:"ImageHeight"`
+
+	// The horizontal offset (pixels) of the video. The sum of `LocationX` and `ImageWidth` cannot exceed the width of the canvas. If you do not pass this parameter, 0 will be used.
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// The vertical offset of the video. The sum of `LocationY` and `ImageHeight` cannot exceed the height of the canvas. If you do not pass this parameter, 0 will be used.
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// The image layer of the video. If you do not pass this parameter, 0 will be used.
+	ZOrder *uint64 `json:"ZOrder,omitempty" name:"ZOrder"`
+
+	// The rendering mode of the video. 0 (the video is scaled and the excess parts are cropped), 1 (the video is scaled), 2 (the video is scaled and the blank spaces are filled with black bars). If you do not pass this parameter, 0 will be used.
+	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
+
+	// The background color of the video. Below are the values for some common colors:
+	// Red: 0xcc0033
+	// Yellow: 0xcc9900
+	// Green: 0xcccc33
+	// Blue: 0x99CCFF
+	// Black: 0x000000
+	// White: 0xFFFFFF
+	// Grey: 0x999999
+	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
+
+	// The URL of the background image for the video. This parameter allows you to specify an image to display when the user’s camera is turned off or before the user enters the room. If the dimensions of the image specified are different from those of the video window, the image will be stretched to fit the space. This parameter has a higher priority than `BackGroundColor`.
+	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitempty" name:"BackgroundImageUrl"`
+}
+
+type McuLayoutParams struct {
+	// The layout mode. Valid values: 1 (floating), 2 (screen sharing), 3 (grid), 4 (custom). Floating, screen sharing, and grid are dynamic layouts. Custom layouts are static layouts.
+	MixLayoutMode *uint64 `json:"MixLayoutMode,omitempty" name:"MixLayoutMode"`
+
+	// Whether to display users who publish only audio. 0: Yes; 1: No. This parameter is valid only if dynamic layouts are used. If you do not pass this parameter, 0 will be used.
+	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitempty" name:"PureAudioHoldPlaceMode"`
+
+	// The details of a custom layout.
+	MixLayoutList []*McuLayout `json:"MixLayoutList,omitempty" name:"MixLayoutList"`
+
+	// The information of the large video in screen sharing or floating layout mode.
+	MaxVideoUser *MaxVideoUser `json:"MaxVideoUser,omitempty" name:"MaxVideoUser"`
+}
+
+type McuPublishCdnParam struct {
+	// The URLs of the CDNs to relay to.
+	PublishCdnUrl *string `json:"PublishCdnUrl,omitempty" name:"PublishCdnUrl"`
+
+	// Whether to relay to Tencent Cloud’s CDN. 0 (default): No; 1: Yes. An optimized route will be assigned if you relay to Tencent Cloud’s CDN.
+	IsTencentCdn *uint64 `json:"IsTencentCdn,omitempty" name:"IsTencentCdn"`
+}
+
+type McuUserInfoParams struct {
+	// The user information.
+	UserInfo *MixUserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+}
+
+type McuVideoParams struct {
+	// The video encoding parameters.
+	VideoEncode *VideoEncode `json:"VideoEncode,omitempty" name:"VideoEncode"`
+
+	// The layout parameters.
+	LayoutParams *McuLayoutParams `json:"LayoutParams,omitempty" name:"LayoutParams"`
+
+	// The canvas color. Below are the values for some common colors:
+	// Red: 0xcc0033
+	// Yellow: 0xcc9900
+	// Green: 0xcccc33
+	// Blue: 0x99CCFF
+	// Black: 0x000000
+	// White: 0xFFFFFF
+	// Grey: 0x999999
+	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
+
+	// The URL of the background image for the canvas. This parameter has a higher priority than `BackGroundColor`.
+	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitempty" name:"BackgroundImageUrl"`
+
+	// The watermark information for the mixed stream.
+	WaterMarkList []*McuWaterMarkParams `json:"WaterMarkList,omitempty" name:"WaterMarkList"`
+}
+
+type McuWaterMarkImage struct {
+	// The URL of the watermark image, which must be in PNG, JPG, or JPEG format and cannot exceed 5 MB.
+	WaterMarkUrl *string `json:"WaterMarkUrl,omitempty" name:"WaterMarkUrl"`
+
+	// The watermark width (pixels).
+	WaterMarkWidth *uint64 `json:"WaterMarkWidth,omitempty" name:"WaterMarkWidth"`
+
+	// The watermark height (pixels).
+	WaterMarkHeight *uint64 `json:"WaterMarkHeight,omitempty" name:"WaterMarkHeight"`
+
+	// The horizontal offset (pixels) of the watermark.
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// The vertical offset (pixels) of the watermark.
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// The image layer of the watermark. If you do not pass this parameter, 0 will be used.
+	ZOrder *uint64 `json:"ZOrder,omitempty" name:"ZOrder"`
+}
+
+type McuWaterMarkParams struct {
+	// The information of the watermark image.
+	WaterMarkImage *McuWaterMarkImage `json:"WaterMarkImage,omitempty" name:"WaterMarkImage"`
+}
+
 type MixLayout struct {
 	// The Y axis of the window’s top-left corner. Value range: [0, 1920]. The value cannot be larger than the canvas height.
 	Top *uint64 `json:"Top,omitempty" name:"Top"`
@@ -546,6 +696,17 @@ type MixTranscodeParams struct {
 
 	// The audio transcoding parameters for recording. If you set this parameter, you must specify all its fields. If you do not set it, the default will be used.
 	AudioParams *AudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
+}
+
+type MixUserInfo struct {
+	// User ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// If a dynamic layout is used, the value of this parameter should be the ID of the main room. If a custom layout is used, the value of this parameter should be the same as the room ID in `MixLayoutList`.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The type of the `RoomId` parameter. 0: integer; 1: string.
+	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
 }
 
 // Predefined struct for user
@@ -784,6 +945,188 @@ func (r *RemoveUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SingleSubscribeParams struct {
+	// The stream information.
+	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitempty" name:"UserMediaStream"`
+}
+
+// Predefined struct for user
+type StartPublishCdnStreamRequestParams struct {
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The ID of the room whose streams are relayed (the main room).
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The type of the `RoomId` parameter, which must be the same as the ID type of the room whose streams are relayed. 0: integer; 1: string.
+	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
+
+	// The information of the relaying robot in the room.
+	AgentParams *AgentParams `json:"AgentParams,omitempty" name:"AgentParams"`
+
+	// Whether to transcode the streams. 0: No; 1: Yes.
+	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
+
+	// The audio encoding parameters for relaying.
+	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
+
+	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
+	VideoParams *McuVideoParams `json:"VideoParams,omitempty" name:"VideoParams"`
+
+	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
+	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
+
+	// The CDN information.
+	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+}
+
+type StartPublishCdnStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The ID of the room whose streams are relayed (the main room).
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The type of the `RoomId` parameter, which must be the same as the ID type of the room whose streams are relayed. 0: integer; 1: string.
+	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
+
+	// The information of the relaying robot in the room.
+	AgentParams *AgentParams `json:"AgentParams,omitempty" name:"AgentParams"`
+
+	// Whether to transcode the streams. 0: No; 1: Yes.
+	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
+
+	// The audio encoding parameters for relaying.
+	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
+
+	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
+	VideoParams *McuVideoParams `json:"VideoParams,omitempty" name:"VideoParams"`
+
+	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
+	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
+
+	// The CDN information.
+	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+}
+
+func (r *StartPublishCdnStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishCdnStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "RoomIdType")
+	delete(f, "AgentParams")
+	delete(f, "WithTranscoding")
+	delete(f, "AudioParams")
+	delete(f, "VideoParams")
+	delete(f, "SingleSubscribeParams")
+	delete(f, "PublishCdnParams")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishCdnStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartPublishCdnStreamResponseParams struct {
+	// The task ID, which is generated by the Tencent Cloud server. You need to pass in the task ID when making a request to update or stop a relaying task.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartPublishCdnStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *StartPublishCdnStreamResponseParams `json:"Response"`
+}
+
+func (r *StartPublishCdnStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishCdnStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopPublishCdnStreamRequestParams struct {
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type StopPublishCdnStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *StopPublishCdnStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopPublishCdnStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopPublishCdnStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopPublishCdnStreamResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StopPublishCdnStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *StopPublishCdnStreamResponseParams `json:"Response"`
+}
+
+func (r *StopPublishCdnStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopPublishCdnStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type StorageFile struct {
 	// The user whose stream is recorded into the file. In the mixed-stream recording mode, this parameter will be empty.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -847,6 +1190,137 @@ type TencentVod struct {
 
 	// The upload context, which is passed through after upload is completed.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+}
+
+// Predefined struct for user
+type UpdatePublishCdnStreamRequestParams struct {
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
+	SequenceNumber *uint64 `json:"SequenceNumber,omitempty" name:"SequenceNumber"`
+
+	// Whether to transcode the streams. 0: No; 1: Yes.
+	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
+
+	// Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
+	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
+
+	// Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
+	VideoParams *McuVideoParams `json:"VideoParams,omitempty" name:"VideoParams"`
+
+	// Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
+	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
+
+	// Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
+	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+}
+
+type UpdatePublishCdnStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The sequence of a request. This parameter ensures the requests to change the parameters of the same relaying task are in the correct order. It increases each time a new request is made.
+	SequenceNumber *uint64 `json:"SequenceNumber,omitempty" name:"SequenceNumber"`
+
+	// Whether to transcode the streams. 0: No; 1: Yes.
+	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
+
+	// Pass this parameter to change the users whose audios are mixed. If you do not pass this parameter, no changes will be made.
+	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
+
+	// Pass this parameter to change video parameters other than the codec, including the video layout, background image, background color, and watermark information. This parameter is valid only if streams are transcoded. If you do not pass it, no changes will be made.
+	VideoParams *McuVideoParams `json:"VideoParams,omitempty" name:"VideoParams"`
+
+	// Pass this parameter to change the single stream that is relayed. This parameter is valid only if streams are not transcoded. If you do not pass this parameter, no changes will be made.
+	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
+
+	// Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
+	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+}
+
+func (r *UpdatePublishCdnStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePublishCdnStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "SequenceNumber")
+	delete(f, "WithTranscoding")
+	delete(f, "AudioParams")
+	delete(f, "VideoParams")
+	delete(f, "SingleSubscribeParams")
+	delete(f, "PublishCdnParams")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePublishCdnStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdatePublishCdnStreamResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdatePublishCdnStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdatePublishCdnStreamResponseParams `json:"Response"`
+}
+
+func (r *UpdatePublishCdnStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePublishCdnStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UserMediaStream struct {
+	// The user information.
+	UserInfo *MixUserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+
+	// The stream type. 0: Camera; 1: Screen sharing. If you do not pass this parameter, 0 will be used.
+	StreamType *uint64 `json:"StreamType,omitempty" name:"StreamType"`
+}
+
+type VideoEncode struct {
+	// The width of the output stream (pixels). This parameter is required if audio and video are relayed. Value range: [0, 1920].
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The height of the output stream (pixels). This parameter is required if audio and video are relayed. Value range: [0, 1080].
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// The frame rate (fps) of the output stream. This parameter is required if audio and video are relayed. Value range: [0, 60].
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+
+	// The bitrate (Kbps) of the output stream. This parameter is required if audio and video are relayed. Value range: [0, 10000].
+	BitRate *uint64 `json:"BitRate,omitempty" name:"BitRate"`
+
+	// The GOP (seconds) of the output stream. This parameter is required if audio and video are relayed. Value range: [1, 5].
+	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 }
 
 type VideoParams struct {

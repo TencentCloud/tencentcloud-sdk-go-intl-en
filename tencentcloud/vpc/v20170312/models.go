@@ -2817,6 +2817,9 @@ type CreateFlowLogRequestParams struct {
 
 	// Information of the flow log consumer, which is required when the consumer type is `ckafka`.
 	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
+
+	// The region corresponding to the flow log storage ID. If not passed in, this field defaults to the current region.
+	CloudLogRegion *string `json:"CloudLogRegion,omitempty" name:"CloudLogRegion"`
 }
 
 type CreateFlowLogRequest struct {
@@ -2851,6 +2854,9 @@ type CreateFlowLogRequest struct {
 
 	// Information of the flow log consumer, which is required when the consumer type is `ckafka`.
 	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
+
+	// The region corresponding to the flow log storage ID. If not passed in, this field defaults to the current region.
+	CloudLogRegion *string `json:"CloudLogRegion,omitempty" name:"CloudLogRegion"`
 }
 
 func (r *CreateFlowLogRequest) ToJsonString() string {
@@ -2875,6 +2881,7 @@ func (r *CreateFlowLogRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "StorageType")
 	delete(f, "FlowLogStorage")
+	delete(f, "CloudLogRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFlowLogRequest has unknown keys!", "")
 	}
@@ -7154,10 +7161,10 @@ type DescribeAddressesRequestParams struct {
 	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	// The Offset. The default value is 0. For more information about `Offset`, see the relevant section in the API documentation.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API documentation.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -7184,10 +7191,10 @@ type DescribeAddressesRequest struct {
 	// <li> tag:tag-key - String - Optional - Filter by tag key-value pair. Use a specific tag key to replace `tag-key`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information on `Offset`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	// The Offset. The default value is 0. For more information about `Offset`, see the relevant section in the API documentation.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of returned results. The default value is 20. The maximum is 100. For more information on `Limit`, see the relevant sections in API [Overview](https://intl.cloud.tencent.com/document/product/11646).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API documentation.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -8673,6 +8680,9 @@ type DescribeFlowLogsRequestParams struct {
 	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
 	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
 	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The region corresponding to the flow log storage ID.
+	CloudLogRegion *string `json:"CloudLogRegion,omitempty" name:"CloudLogRegion"`
 }
 
 type DescribeFlowLogsRequest struct {
@@ -8718,6 +8728,9 @@ type DescribeFlowLogsRequest struct {
 	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
 	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
 	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The region corresponding to the flow log storage ID.
+	CloudLogRegion *string `json:"CloudLogRegion,omitempty" name:"CloudLogRegion"`
 }
 
 func (r *DescribeFlowLogsRequest) ToJsonString() string {
@@ -8745,6 +8758,7 @@ func (r *DescribeFlowLogsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "CloudLogRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFlowLogsRequest has unknown keys!", "")
 	}
@@ -13149,6 +13163,10 @@ type FlowLog struct {
 	// Information of the consumer, which is returned when the consumer type is `ckafka`.
 	// Note: this field may return `null`, indicating that no valid value can be found.
 	FlowLogStorage *FlowLogStorage `json:"FlowLogStorage,omitempty" name:"FlowLogStorage"`
+
+	// The region corresponding to the flow log storage ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CloudLogRegion *string `json:"CloudLogRegion,omitempty" name:"CloudLogRegion"`
 }
 
 type FlowLogStorage struct {

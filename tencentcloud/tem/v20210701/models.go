@@ -767,10 +767,10 @@ type DeployApplicationRequestParams struct {
 	// Configuration of batch release policies
 	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitempty" name:"DeployStrategyConf"`
 
-	// Auto scaling policy
+	// Auto scaling policy. (Disused. Please use APIs for auto scaling policy combinations)
 	HorizontalAutoscaler []*HorizontalAutoscaler `json:"HorizontalAutoscaler,omitempty" name:"HorizontalAutoscaler"`
 
-	// Scheduled auto scaling policy
+	// Scheduled scaling policy (Disused. Please use APIs for auto scaling policy combinations)
 	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
 
 	// Specifies whether to enable logging. `1`: enable; `0`: do not enable
@@ -796,6 +796,9 @@ type DeployApplicationRequestParams struct {
 
 	// Specifies whether to enable Prometheus metric
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
+
+	// `1`: Enable APM collection; `0`: Disable APM collection
+	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 }
 
 type DeployApplicationRequest struct {
@@ -905,10 +908,10 @@ type DeployApplicationRequest struct {
 	// Configuration of batch release policies
 	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitempty" name:"DeployStrategyConf"`
 
-	// Auto scaling policy
+	// Auto scaling policy. (Disused. Please use APIs for auto scaling policy combinations)
 	HorizontalAutoscaler []*HorizontalAutoscaler `json:"HorizontalAutoscaler,omitempty" name:"HorizontalAutoscaler"`
 
-	// Scheduled auto scaling policy
+	// Scheduled scaling policy (Disused. Please use APIs for auto scaling policy combinations)
 	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
 
 	// Specifies whether to enable logging. `1`: enable; `0`: do not enable
@@ -934,6 +937,9 @@ type DeployApplicationRequest struct {
 
 	// Specifies whether to enable Prometheus metric
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
+
+	// `1`: Enable APM collection; `0`: Disable APM collection
+	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 }
 
 func (r *DeployApplicationRequest) ToJsonString() string {
@@ -988,6 +994,7 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	delete(f, "StartupProbe")
 	delete(f, "OsFlavour")
 	delete(f, "EnablePrometheusConf")
+	delete(f, "EnableTracing")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployApplicationRequest has unknown keys!", "")
 	}
@@ -1645,10 +1652,10 @@ type HealthCheckConfig struct {
 }
 
 type HorizontalAutoscaler struct {
-	// Minimum number of instances
+	// (Optional) Minimum number of instances
 	MinReplicas *int64 `json:"MinReplicas,omitempty" name:"MinReplicas"`
 
-	// Maximum number of instances
+	// (Optional) Maximum number of instances
 	MaxReplicas *int64 `json:"MaxReplicas,omitempty" name:"MaxReplicas"`
 
 	// Metrics (CPU or memory)
@@ -1656,6 +1663,9 @@ type HorizontalAutoscaler struct {
 
 	// Threshold (percentage)
 	Threshold *int64 `json:"Threshold,omitempty" name:"Threshold"`
+
+	// Whether it is enabled
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
 }
 
 type IngressInfo struct {

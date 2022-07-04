@@ -32,6 +32,9 @@ const (
 	// Encryption failed.
 	FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 
+	// 
+	FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
@@ -58,6 +61,9 @@ const (
 
 	// Incorrect ciphertext format
 	INVALIDPARAMETERVALUE_INVALIDCIPHERTEXT = "InvalidParameterValue.InvalidCiphertext"
+
+	// Invalid HSM cluster ID.
+	INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 
 	// Invalid `KeyId`.
 	INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"

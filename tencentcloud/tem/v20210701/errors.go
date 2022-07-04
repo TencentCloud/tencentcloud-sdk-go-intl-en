@@ -20,7 +20,7 @@ const (
 	// Request timed out
 	INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 
-	// 
+	// Exception occurs while adding the subnet/virtual node
 	INTERNALERROR_ADDNEWNODEERROR = "InternalError.AddNewNodeError"
 
 	// Failed to create the APM resource
@@ -35,7 +35,7 @@ const (
 	// The server is busy. Retry later.
 	INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 
-	// 
+	// Failed to delete the ingress
 	INTERNALERROR_DELETEINGRESSERROR = "InternalError.DeleteIngressError"
 
 	// Failed to delete the application
@@ -50,7 +50,7 @@ const (
 	// Failed to query the list of ingress associated with the service.
 	INTERNALERROR_DESCRIBESERVICEINGRESSERROR = "InternalError.DescribeServiceIngressError"
 
-	// 
+	// Failed to query the service list
 	INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
 
 	// Failed to restart
@@ -95,7 +95,7 @@ const (
 	// This application name already exists.
 	INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 
-	// 
+	// Failed to create the instance. The upper limit is reached.
 	INVALIDPARAMETERVALUE_SERVICEPODREACHMAXIMUM = "InvalidParameterValue.ServicePodReachMaximum"
 
 	// 
@@ -122,7 +122,7 @@ const (
 	// The service ID cannot be empty.
 	MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
 
-	// 
+	// The image repository is not ready.
 	MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
 
 	// 

@@ -430,10 +430,12 @@ func NewCreateKeyResponse() (response *CreateKeyResponse) {
 // Create a master key CMK (Custom Master Key) for user management data keys
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
 //  INVALIDPARAMETERVALUE_INVALIDALIAS = "InvalidParameterValue.InvalidAlias"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
 //  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
@@ -450,10 +452,12 @@ func (c *Client) CreateKey(request *CreateKeyRequest) (response *CreateKeyRespon
 // Create a master key CMK (Custom Master Key) for user management data keys
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ALIASALREADYEXISTS = "InvalidParameterValue.AliasAlreadyExists"
 //  INVALIDPARAMETERVALUE_INVALIDALIAS = "InvalidParameterValue.InvalidAlias"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDKEYUSAGE = "InvalidParameterValue.InvalidKeyUsage"
 //  INVALIDPARAMETERVALUE_INVALIDTYPE = "InvalidParameterValue.InvalidType"
 //  INVALIDPARAMETERVALUE_TAGKEYSDUPLICATED = "InvalidParameterValue.TagKeysDuplicated"
@@ -909,6 +913,7 @@ func NewDescribeWhiteBoxDeviceFingerprintsResponse() (response *DescribeWhiteBox
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWhiteBoxDeviceFingerprints(request *DescribeWhiteBoxDeviceFingerprintsRequest) (response *DescribeWhiteBoxDeviceFingerprintsResponse, err error) {
     return c.DescribeWhiteBoxDeviceFingerprintsWithContext(context.Background(), request)
@@ -921,6 +926,7 @@ func (c *Client) DescribeWhiteBoxDeviceFingerprints(request *DescribeWhiteBoxDev
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeWhiteBoxDeviceFingerprintsWithContext(ctx context.Context, request *DescribeWhiteBoxDeviceFingerprintsRequest) (response *DescribeWhiteBoxDeviceFingerprintsResponse, err error) {
     if request == nil {
@@ -2208,6 +2214,7 @@ func NewImportKeyMaterialResponse() (response *ImportKeyMaterialResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DECRYPTMATERIALERROR = "InvalidParameter.DecryptMaterialError"
+//  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  INVALIDPARAMETERVALUE_MATERIALNOTMATCH = "InvalidParameterValue.MaterialNotMatch"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
@@ -2227,6 +2234,7 @@ func (c *Client) ImportKeyMaterial(request *ImportKeyMaterialRequest) (response 
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DECRYPTMATERIALERROR = "InvalidParameter.DecryptMaterialError"
+//  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  INVALIDPARAMETERVALUE_MATERIALNOTMATCH = "InvalidParameterValue.MaterialNotMatch"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
@@ -2321,6 +2329,7 @@ func NewListKeyDetailResponse() (response *ListKeyDetailResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListKeyDetail(request *ListKeyDetailRequest) (response *ListKeyDetailResponse, err error) {
     return c.ListKeyDetailWithContext(context.Background(), request)
@@ -2332,6 +2341,7 @@ func (c *Client) ListKeyDetail(request *ListKeyDetailRequest) (response *ListKey
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListKeyDetailWithContext(ctx context.Context, request *ListKeyDetailRequest) (response *ListKeyDetailResponse, err error) {
     if request == nil {
@@ -2372,6 +2382,7 @@ func NewListKeysResponse() (response *ListKeysResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListKeys(request *ListKeysRequest) (response *ListKeysResponse, err error) {
     return c.ListKeysWithContext(context.Background(), request)
@@ -2383,6 +2394,7 @@ func (c *Client) ListKeys(request *ListKeysRequest) (response *ListKeysResponse,
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) ListKeysWithContext(ctx context.Context, request *ListKeysRequest) (response *ListKeysResponse, err error) {
     if request == nil {
