@@ -187,6 +187,83 @@ func (c *Client) AddBandwidthPackageResourcesWithContext(ctx context.Context, re
     return
 }
 
+func NewAdjustPublicAddressRequest() (request *AdjustPublicAddressRequest) {
+    request = &AdjustPublicAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vpc", APIVersion, "AdjustPublicAddress")
+    
+    
+    return
+}
+
+func NewAdjustPublicAddressResponse() (response *AdjustPublicAddressResponse) {
+    response = &AdjustPublicAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AdjustPublicAddress
+// This API is used to change the IP address. It supports changing the common public IPs and EIPs billed by monthly subscribed bandwidth of a CVM instance.
+//
+// error code that may be returned:
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSATTACKED = "InvalidParameterValue.AddressAttacked"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTAVAILABLE = "InvalidParameterValue.AddressIpNotAvailable"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
+//  INVALIDPARAMETERVALUE_RESOURCENOTSUPPORT = "InvalidParameterValue.ResourceNotSupport"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  LIMITEXCEEDED_CHANGEADDRESSQUOTA = "LimitExceeded.ChangeAddressQuota"
+//  LIMITEXCEEDED_DAILYCHANGEADDRESSQUOTA = "LimitExceeded.DailyChangeAddressQuota"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+//  UNSUPPORTEDOPERATION_ISPNOTSUPPORTED = "UnsupportedOperation.IspNotSupported"
+func (c *Client) AdjustPublicAddress(request *AdjustPublicAddressRequest) (response *AdjustPublicAddressResponse, err error) {
+    return c.AdjustPublicAddressWithContext(context.Background(), request)
+}
+
+// AdjustPublicAddress
+// This API is used to change the IP address. It supports changing the common public IPs and EIPs billed by monthly subscribed bandwidth of a CVM instance.
+//
+// error code that may be returned:
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSATTACKED = "InvalidParameterValue.AddressAttacked"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTAVAILABLE = "InvalidParameterValue.AddressIpNotAvailable"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INSTANCENOWANIP = "InvalidParameterValue.InstanceNoWanIP"
+//  INVALIDPARAMETERVALUE_RESOURCENOTSUPPORT = "InvalidParameterValue.ResourceNotSupport"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  LIMITEXCEEDED_CHANGEADDRESSQUOTA = "LimitExceeded.ChangeAddressQuota"
+//  LIMITEXCEEDED_DAILYCHANGEADDRESSQUOTA = "LimitExceeded.DailyChangeAddressQuota"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+//  UNSUPPORTEDOPERATION_ISPNOTSUPPORTED = "UnsupportedOperation.IspNotSupported"
+func (c *Client) AdjustPublicAddressWithContext(ctx context.Context, request *AdjustPublicAddressRequest) (response *AdjustPublicAddressResponse, err error) {
+    if request == nil {
+        request = NewAdjustPublicAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AdjustPublicAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAdjustPublicAddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAllocateAddressesRequest() (request *AllocateAddressesRequest) {
     request = &AllocateAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1729,7 +1806,7 @@ func NewCreateAssistantCidrResponse() (response *CreateAssistantCidrResponse) {
 }
 
 // CreateAssistantCidr
-// This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to batch create secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1746,7 +1823,7 @@ func (c *Client) CreateAssistantCidr(request *CreateAssistantCidrRequest) (respo
 }
 
 // CreateAssistantCidr
-// This API (CreateAssistantCidr) is used to batch create secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to batch create secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2935,7 +3012,7 @@ func NewCreateNetworkAclResponse() (response *CreateNetworkAclResponse) {
 // CreateNetworkAcl
 // This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
 //
-// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` to set rules for the new network ACL as needed.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2974,7 +3051,7 @@ func (c *Client) CreateNetworkAcl(request *CreateNetworkAclRequest) (response *C
 // CreateNetworkAcl
 // This API is used to create a <a href="https://intl.cloud.tencent.com/document/product/215/20088?from_cn_redirect=1">network ACL</a>.
 //
-// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` after creation to set rules for the network ACL as needed.
+// * The inbound and outbound rules for a new network ACL are "Deny All" by default. You need to call `ModifyNetworkAclEntries` to set rules for the new network ACL as needed.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -4693,7 +4770,7 @@ func NewDeleteAssistantCidrResponse() (response *DeleteAssistantCidrResponse) {
 }
 
 // DeleteAssistantCidr
-// This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to delete secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4707,7 +4784,7 @@ func (c *Client) DeleteAssistantCidr(request *DeleteAssistantCidrRequest) (respo
 }
 
 // DeleteAssistantCidr
-// This API (DeleteAssistantCidr) is used to delete secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to delete secondary CIDR blocks. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -7551,7 +7628,7 @@ func NewDescribeGatewayFlowQosResponse() (response *DescribeGatewayFlowQosRespon
 }
 
 // DescribeGatewayFlowQos
-// This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+// This API is used to query the inbound IP bandwidth limit of a gateway.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -7563,7 +7640,7 @@ func (c *Client) DescribeGatewayFlowQos(request *DescribeGatewayFlowQosRequest) 
 }
 
 // DescribeGatewayFlowQos
-// This API (DescribeGatewayFlowQos) is used to query the QoS bandwidth limit of inbound IP flow in a gateway.
+// This API is used to query the inbound IP bandwidth limit of a gateway.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -9878,7 +9955,7 @@ func NewDisableGatewayFlowMonitorResponse() (response *DisableGatewayFlowMonitor
 }
 
 // DisableGatewayFlowMonitor
-// This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+// This API is used to disable gateway traffic monitor.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -9889,7 +9966,7 @@ func (c *Client) DisableGatewayFlowMonitor(request *DisableGatewayFlowMonitorReq
 }
 
 // DisableGatewayFlowMonitor
-// This API (DisableGatewayFlowMonitor) is used to disable gateway flow monitor.
+// This API is used to disable gateway traffic monitor.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -10442,7 +10519,7 @@ func NewEnableGatewayFlowMonitorResponse() (response *EnableGatewayFlowMonitorRe
 }
 
 // EnableGatewayFlowMonitor
-// This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+// This API is used to enable gateway traffic monitor.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -10453,7 +10530,7 @@ func (c *Client) EnableGatewayFlowMonitor(request *EnableGatewayFlowMonitorReque
 }
 
 // EnableGatewayFlowMonitor
-// This API (EnableGatewayFlowMonitor) is used to enable gateway flow monitor.
+// This API is used to enable gateway traffic monitor.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -11353,7 +11430,7 @@ func NewModifyAssistantCidrResponse() (response *ModifyAssistantCidrResponse) {
 }
 
 // ModifyAssistantCidr
-// This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to modify (add or delete) secondary CIDR blocks in batch. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -11372,7 +11449,7 @@ func (c *Client) ModifyAssistantCidr(request *ModifyAssistantCidrRequest) (respo
 }
 
 // ModifyAssistantCidr
-// This API (ModifyAssistantCidr) is used to batch modify (e.g. add and delete) secondary CIDR blocks. (To use this API that is in Beta, please submit a ticket.)
+// This API is used to modify (add or delete) secondary CIDR blocks in batch. This API is in beta test. To use it, please submit a ticket.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -11795,7 +11872,7 @@ func NewModifyGatewayFlowQosResponse() (response *ModifyGatewayFlowQosResponse) 
 }
 
 // ModifyGatewayFlowQos
-// This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+// This API is used to adjust the bandwidth limit of a gateway.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -11806,7 +11883,7 @@ func (c *Client) ModifyGatewayFlowQos(request *ModifyGatewayFlowQosRequest) (res
 }
 
 // ModifyGatewayFlowQos
-// This API (ModifyGatewayFlowQos) is used to adjust the QoS bandwidth limit in a gateway.
+// This API is used to adjust the bandwidth limit of a gateway.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -12300,7 +12377,11 @@ func NewModifyNetworkAclEntriesResponse() (response *ModifyNetworkAclEntriesResp
 }
 
 // ModifyNetworkAclEntries
-// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL. In `NetworkAclEntrySet` parameters,
+//
+// * Passing in the new inbound/outbound rules will reset the original rules.
+//
+// * Passing in the inbound rules will only reset the original inbound rules and not affect the original outbound rules, and vice versa.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
@@ -12316,7 +12397,11 @@ func (c *Client) ModifyNetworkAclEntries(request *ModifyNetworkAclEntriesRequest
 }
 
 // ModifyNetworkAclEntries
-// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL.
+// This API is used to modify (add or delete) the inbound and outbound rules of a network ACL. In `NetworkAclEntrySet` parameters,
+//
+// * Passing in the new inbound/outbound rules will reset the original rules.
+//
+// * Passing in the inbound rules will only reset the original inbound rules and not affect the original outbound rules, and vice versa.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
@@ -13295,7 +13380,7 @@ func NewNotifyRoutesResponse() (response *NotifyRoutesResponse) {
 }
 
 // NotifyRoutes
-// This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+// This API is used to publish a route to CCN. This can also be done by clicking "Publish to CCN" in the operation column on the page of route table list.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -13313,7 +13398,7 @@ func (c *Client) NotifyRoutes(request *NotifyRoutesRequest) (response *NotifyRou
 }
 
 // NotifyRoutes
-// This API is used to publish a route to CCN. This can also be done by clicking the **Publish to CCN** button on the route table page.
+// This API is used to publish a route to CCN. This can also be done by clicking "Publish to CCN" in the operation column on the page of route table list.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -14534,7 +14619,7 @@ func NewWithdrawNotifyRoutesResponse() (response *WithdrawNotifyRoutesResponse) 
 }
 
 // WithdrawNotifyRoutes
-// This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+// This API is used to withdraw a route from CCN. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -14550,7 +14635,7 @@ func (c *Client) WithdrawNotifyRoutes(request *WithdrawNotifyRoutesRequest) (res
 }
 
 // WithdrawNotifyRoutes
-// This API is used to withdraw a route from CCN. This can also be done by clicking the **Withdraw from CCN** button on the route table page.
+// This API is used to withdraw a route from CCN. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

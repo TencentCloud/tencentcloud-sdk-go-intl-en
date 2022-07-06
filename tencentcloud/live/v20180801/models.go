@@ -1101,6 +1101,304 @@ func (r *CreateLiveCertResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateLivePullStreamTaskRequestParams struct {
+	// The source type. Valid values:
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// The source URL(s).
+	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+	// Supported file formats: FLV, MP4, HLS.
+	// Supported protocols: HTTP, HTTPS, RTMP, RTMPS, RTSP, SRT.
+	// Notes:
+	// 1. We recommend you use FLV files as the source. Poorly interleaved MP4 files may result in playback stuttering. You can also re-interleave your MP4 files before adding them as the source.
+	// 2. Do not use private network domains or malicious URLs. CSS will block accounts that do.
+	// 3. To avoid push and playback issues, make sure the source files are properly interleaved.
+	// 4. Supported video coding formats: H.264, H.265.
+	// 5. Supported audio coding format: AAC.
+	// 6. Use small video files, preferably not longer than one hour. Large files may take a long time to load or resume after pause. Relay may fail if the time consumed exceeds 15 seconds.
+	SourceUrls []*string `json:"SourceUrls,omitempty" name:"SourceUrls"`
+
+	// The push domain name.
+	// The pulled stream is pushed to this domain.
+	// Use a push domain you have added in the CSS console.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The application to push to.
+	// The pulled stream is pushed to this application.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The stream name.
+	// The pulled stream is pushed under this name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The start time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. Notes:
+	// 1. The end time must be later than the start time.
+	// 2. The end time and start time must be later than the current time.
+	// 3. The end time and start time must be less than seven days apart.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The push parameter.
+	// This is a custom parameter carried during push.
+	// Example:
+	// bak=1&test=2
+	PushArgs *string `json:"PushArgs,omitempty" name:"PushArgs"`
+
+	// The events to listen for. If you do not pass this parameter, all events will be listened for.
+	// TaskStart: Callback for starting a task
+	// TaskExit: Callback for ending a task
+	// VodSourceFileStart: Callback for starting to pull from video files
+	// VodSourceFileFinish: Callback for stopping pulling from video files
+	// ResetTaskConfig: Callback for modifying a task
+	// 
+	// `TaskAlarm` indicates a warning event. `AlarmType` examples:
+	// PullFileUnstable: Pull from video files is unstable.
+	// PushStreamUnstable: Push is unstable.
+	// PullFileFailed: Error pulling from video files.
+	// PushStreamFailed: Push error.
+	// FileEndEarly: The video file ended prematurely.
+	CallbackEvents []*string `json:"CallbackEvents,omitempty" name:"CallbackEvents"`
+
+	// The number of times to loop video files. Default value: -1.
+	// -1: Loop indefinitely
+	// 0: Do not loop
+	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+	// This parameter is valid only when the source is video files.
+	VodLoopTimes *string `json:"VodLoopTimes,omitempty" name:"VodLoopTimes"`
+
+	// The behavior after the source video files (`SourceUrls`) are changed.
+	// ImmediateNewSource: Play the new videos immediately
+	// ContinueBreakPoint: Play the new videos after the current video is finished playing (the remaining videos in the old playlist will not be played).
+	// 
+	// This parameter is valid only if the source before the change is video files.
+	VodRefreshType *string `json:"VodRefreshType,omitempty" name:"VodRefreshType"`
+
+	// A custom callback URL.
+	// Callbacks about pull and relay events will be sent to this URL.
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+
+	// Other parameters.
+	// For example, you can use `ignore_region` to ignore the region passed in and assign a region based on load distribution.
+	ExtraCmd *string `json:"ExtraCmd,omitempty" name:"ExtraCmd"`
+
+	// The remarks for a task, not longer than 512 bytes.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The complete destination URL.
+	// If you specify this parameter, make sure you pass in an empty string for `DomainName`, `AppName`, and `StreamName`.
+	// 
+	// Note: Make sure that the expiration time of the signature is later than the task end time.
+	ToUrl *string `json:"ToUrl,omitempty" name:"ToUrl"`
+
+	// The backup source type.
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	// Notes:
+	// 1. Backup sources are supported only if the primary source type is live streaming.
+	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
+
+	// The URL of the backup source.
+	// You can specify only one backup source URL.
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+}
+
+type CreateLivePullStreamTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The source type. Valid values:
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// The source URL(s).
+	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+	// Supported file formats: FLV, MP4, HLS.
+	// Supported protocols: HTTP, HTTPS, RTMP, RTMPS, RTSP, SRT.
+	// Notes:
+	// 1. We recommend you use FLV files as the source. Poorly interleaved MP4 files may result in playback stuttering. You can also re-interleave your MP4 files before adding them as the source.
+	// 2. Do not use private network domains or malicious URLs. CSS will block accounts that do.
+	// 3. To avoid push and playback issues, make sure the source files are properly interleaved.
+	// 4. Supported video coding formats: H.264, H.265.
+	// 5. Supported audio coding format: AAC.
+	// 6. Use small video files, preferably not longer than one hour. Large files may take a long time to load or resume after pause. Relay may fail if the time consumed exceeds 15 seconds.
+	SourceUrls []*string `json:"SourceUrls,omitempty" name:"SourceUrls"`
+
+	// The push domain name.
+	// The pulled stream is pushed to this domain.
+	// Use a push domain you have added in the CSS console.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The application to push to.
+	// The pulled stream is pushed to this application.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The stream name.
+	// The pulled stream is pushed under this name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The start time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. Notes:
+	// 1. The end time must be later than the start time.
+	// 2. The end time and start time must be later than the current time.
+	// 3. The end time and start time must be less than seven days apart.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The push parameter.
+	// This is a custom parameter carried during push.
+	// Example:
+	// bak=1&test=2
+	PushArgs *string `json:"PushArgs,omitempty" name:"PushArgs"`
+
+	// The events to listen for. If you do not pass this parameter, all events will be listened for.
+	// TaskStart: Callback for starting a task
+	// TaskExit: Callback for ending a task
+	// VodSourceFileStart: Callback for starting to pull from video files
+	// VodSourceFileFinish: Callback for stopping pulling from video files
+	// ResetTaskConfig: Callback for modifying a task
+	// 
+	// `TaskAlarm` indicates a warning event. `AlarmType` examples:
+	// PullFileUnstable: Pull from video files is unstable.
+	// PushStreamUnstable: Push is unstable.
+	// PullFileFailed: Error pulling from video files.
+	// PushStreamFailed: Push error.
+	// FileEndEarly: The video file ended prematurely.
+	CallbackEvents []*string `json:"CallbackEvents,omitempty" name:"CallbackEvents"`
+
+	// The number of times to loop video files. Default value: -1.
+	// -1: Loop indefinitely
+	// 0: Do not loop
+	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+	// This parameter is valid only when the source is video files.
+	VodLoopTimes *string `json:"VodLoopTimes,omitempty" name:"VodLoopTimes"`
+
+	// The behavior after the source video files (`SourceUrls`) are changed.
+	// ImmediateNewSource: Play the new videos immediately
+	// ContinueBreakPoint: Play the new videos after the current video is finished playing (the remaining videos in the old playlist will not be played).
+	// 
+	// This parameter is valid only if the source before the change is video files.
+	VodRefreshType *string `json:"VodRefreshType,omitempty" name:"VodRefreshType"`
+
+	// A custom callback URL.
+	// Callbacks about pull and relay events will be sent to this URL.
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+
+	// Other parameters.
+	// For example, you can use `ignore_region` to ignore the region passed in and assign a region based on load distribution.
+	ExtraCmd *string `json:"ExtraCmd,omitempty" name:"ExtraCmd"`
+
+	// The remarks for a task, not longer than 512 bytes.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The complete destination URL.
+	// If you specify this parameter, make sure you pass in an empty string for `DomainName`, `AppName`, and `StreamName`.
+	// 
+	// Note: Make sure that the expiration time of the signature is later than the task end time.
+	ToUrl *string `json:"ToUrl,omitempty" name:"ToUrl"`
+
+	// The backup source type.
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	// Notes:
+	// 1. Backup sources are supported only if the primary source type is live streaming.
+	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
+
+	// The URL of the backup source.
+	// You can specify only one backup source URL.
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+}
+
+func (r *CreateLivePullStreamTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLivePullStreamTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SourceType")
+	delete(f, "SourceUrls")
+	delete(f, "DomainName")
+	delete(f, "AppName")
+	delete(f, "StreamName")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Operator")
+	delete(f, "PushArgs")
+	delete(f, "CallbackEvents")
+	delete(f, "VodLoopTimes")
+	delete(f, "VodRefreshType")
+	delete(f, "CallbackUrl")
+	delete(f, "ExtraCmd")
+	delete(f, "Comment")
+	delete(f, "ToUrl")
+	delete(f, "BackupSourceType")
+	delete(f, "BackupSourceUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLivePullStreamTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateLivePullStreamTaskResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateLivePullStreamTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateLivePullStreamTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateLivePullStreamTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLivePullStreamTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateLiveRecordRequestParams struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
@@ -2492,6 +2790,67 @@ func (r *DeleteLiveDomainResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteLiveDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLivePullStreamTaskRequestParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
+type DeleteLivePullStreamTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
+func (r *DeleteLivePullStreamTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLivePullStreamTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLivePullStreamTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLivePullStreamTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteLivePullStreamTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteLivePullStreamTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteLivePullStreamTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLivePullStreamTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4208,6 +4567,98 @@ func (r *DescribeLivePlayAuthKeyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLivePlayAuthKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLivePullStreamTasksRequestParams struct {
+	// The task ID. 
+	// A task ID is returned by the `CreateLivePullStreamTask` API.
+	// If you do not pass this parameter, all tasks will be returned, sorted by last updated time in descending order.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The number of page to start from. Default value: 1.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The maximum number of records per page. Default value: 10.
+	// Valid values: Any integer between 1 and 20.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+type DescribeLivePullStreamTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task ID. 
+	// A task ID is returned by the `CreateLivePullStreamTask` API.
+	// If you do not pass this parameter, all tasks will be returned, sorted by last updated time in descending order.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The number of page to start from. Default value: 1.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The maximum number of records per page. Default value: 10.
+	// Valid values: Any integer between 1 and 20.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeLivePullStreamTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLivePullStreamTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLivePullStreamTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLivePullStreamTasksResponseParams struct {
+	// The information of stream pulling tasks.
+	TaskInfos []*PullStreamTaskInfo `json:"TaskInfos,omitempty" name:"TaskInfos"`
+
+	// The page number.
+	PageNum *uint64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// The number of records per page.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// The total number of records.
+	TotalNum *uint64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The total number of pages.
+	TotalPage *uint64 `json:"TotalPage,omitempty" name:"TotalPage"`
+
+	// The maximum number of tasks allowed.
+	LimitTaskNum *uint64 `json:"LimitTaskNum,omitempty" name:"LimitTaskNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLivePullStreamTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLivePullStreamTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeLivePullStreamTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLivePullStreamTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7708,6 +8159,230 @@ func (r *ModifyLivePlayDomainResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyLivePullStreamTaskRequestParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The source URL(s).
+	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+	SourceUrls []*string `json:"SourceUrls,omitempty" name:"SourceUrls"`
+
+	// The start time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. Notes:
+	// 1. The end time must be later than the start time.
+	// 2. The end time and start time must be later than the current time.
+	// 3. The end time and start time must be less than seven days apart.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The number of times to loop video files.
+	// -1: Loop indefinitely
+	// 0: Do not loop
+	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+	// This parameter is valid only if the source is video files.
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitempty" name:"VodLoopTimes"`
+
+	// The behavior after the source video files (`SourceUrls`) are changed.
+	// ImmediateNewSource: Play the new videos immediately
+	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
+	// This parameter is valid only if the source is video files.
+	VodRefreshType *string `json:"VodRefreshType,omitempty" name:"VodRefreshType"`
+
+	// Whether to enable or pause the task. Valid values:
+	// enable
+	// pause
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The events to listen for. If you do not pass this parameter, all events will be listened for.
+	// TaskStart: Callback for starting a task
+	// TaskExit: Callback for ending a task
+	// VodSourceFileStart: Callback for starting to pull from video files
+	// VodSourceFileFinish: Callback for stopping pulling from video files
+	// ResetTaskConfig: Callback for modifying a task
+	CallbackEvents []*string `json:"CallbackEvents,omitempty" name:"CallbackEvents"`
+
+	// A custom callback URL.
+	// Callbacks will be sent to this URL.
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+
+	// The index of the video to start from.
+	// The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
+	FileIndex *int64 `json:"FileIndex,omitempty" name:"FileIndex"`
+
+	// The playback offset (seconds).
+	// Notes:
+	// 1. This parameter should be used together with `FileIndex`.
+	OffsetTime *int64 `json:"OffsetTime,omitempty" name:"OffsetTime"`
+
+	// The remarks for the task.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The backup source type.
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	// Notes:
+	// 1. Backup sources are supported only if the primary source type is live streaming.
+	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
+
+	// The URL of the backup source.
+	// You can specify only one backup source URL.
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+}
+
+type ModifyLivePullStreamTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The operator.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The source URL(s).
+	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
+	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
+	SourceUrls []*string `json:"SourceUrls,omitempty" name:"SourceUrls"`
+
+	// The start time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. Notes:
+	// 1. The end time must be later than the start time.
+	// 2. The end time and start time must be later than the current time.
+	// 3. The end time and start time must be less than seven days apart.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The number of times to loop video files.
+	// -1: Loop indefinitely
+	// 0: Do not loop
+	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+	// This parameter is valid only if the source is video files.
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitempty" name:"VodLoopTimes"`
+
+	// The behavior after the source video files (`SourceUrls`) are changed.
+	// ImmediateNewSource: Play the new videos immediately
+	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
+	// This parameter is valid only if the source is video files.
+	VodRefreshType *string `json:"VodRefreshType,omitempty" name:"VodRefreshType"`
+
+	// Whether to enable or pause the task. Valid values:
+	// enable
+	// pause
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The events to listen for. If you do not pass this parameter, all events will be listened for.
+	// TaskStart: Callback for starting a task
+	// TaskExit: Callback for ending a task
+	// VodSourceFileStart: Callback for starting to pull from video files
+	// VodSourceFileFinish: Callback for stopping pulling from video files
+	// ResetTaskConfig: Callback for modifying a task
+	CallbackEvents []*string `json:"CallbackEvents,omitempty" name:"CallbackEvents"`
+
+	// A custom callback URL.
+	// Callbacks will be sent to this URL.
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+
+	// The index of the video to start from.
+	// The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
+	FileIndex *int64 `json:"FileIndex,omitempty" name:"FileIndex"`
+
+	// The playback offset (seconds).
+	// Notes:
+	// 1. This parameter should be used together with `FileIndex`.
+	OffsetTime *int64 `json:"OffsetTime,omitempty" name:"OffsetTime"`
+
+	// The remarks for the task.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The backup source type.
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	// Notes:
+	// 1. Backup sources are supported only if the primary source type is live streaming.
+	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
+
+	// The URL of the backup source.
+	// You can specify only one backup source URL.
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+}
+
+func (r *ModifyLivePullStreamTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLivePullStreamTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Operator")
+	delete(f, "SourceUrls")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "VodLoopTimes")
+	delete(f, "VodRefreshType")
+	delete(f, "Status")
+	delete(f, "CallbackEvents")
+	delete(f, "CallbackUrl")
+	delete(f, "FileIndex")
+	delete(f, "OffsetTime")
+	delete(f, "Comment")
+	delete(f, "BackupSourceType")
+	delete(f, "BackupSourceUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLivePullStreamTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLivePullStreamTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyLivePullStreamTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLivePullStreamTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyLivePullStreamTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLivePullStreamTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyLivePushAuthKeyRequestParams struct {
 	// Push domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -8390,6 +9065,123 @@ type PublishTime struct {
 	PublishTime *string `json:"PublishTime,omitempty" name:"PublishTime"`
 }
 
+type PullStreamTaskInfo struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The source type. Valid values:
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// The source URL(s).
+	// If `SourceType` is `PullLiveToLive`, there can be only one source URL.
+	// If `SourceType` is `PullVodToLive`, there can be at most 10 source URLs.
+	SourceUrls []*string `json:"SourceUrls,omitempty" name:"SourceUrls"`
+
+	// The push domain name.
+	// The pulled stream is pushed to this domain.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The application to push to.
+	// The pulled stream is pushed to this application.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The stream name.
+	// The pulled stream is pushed under this name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The push parameter.
+	// A custom push parameter.
+	PushArgs *string `json:"PushArgs,omitempty" name:"PushArgs"`
+
+	// The start time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. Notes:
+	// 1. The end time must be later than the start time.
+	// 2. The end time and start time must be later than the current time.
+	// 3. The end time and start time must be less than seven days apart.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The region of the source (please choose the nearest region).
+	// ap-beijing: North China (Beijing)
+	// ap-shanghai: East China (Shanghai)
+	// ap-guangzhou: South China (Guangzhou)
+	// ap-mumbai: India
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// The number of times to loop video files.
+	// -1: Loop indefinitely
+	// 0: Do not loop
+	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
+	// This parameter is valid only if the source is video files.
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitempty" name:"VodLoopTimes"`
+
+	// The behavior after the source video files (`SourceUrls`) are changed.
+	// ImmediateNewSource: Play the new videos immediately
+	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
+	// 
+	// This parameter is valid only if the source is video files.
+	VodRefreshType *string `json:"VodRefreshType,omitempty" name:"VodRefreshType"`
+
+	// The task creation time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The last updated time.
+	// It must be in UTC format.
+	// Example: 2019-01-08T10:00:00Z.
+	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The task creator.
+	CreateBy *string `json:"CreateBy,omitempty" name:"CreateBy"`
+
+	// The operator of the last update.
+	UpdateBy *string `json:"UpdateBy,omitempty" name:"UpdateBy"`
+
+	// The callback URL.
+	CallbackUrl *string `json:"CallbackUrl,omitempty" name:"CallbackUrl"`
+
+	// The events to listen for.
+	// TaskStart: Callback for starting a task
+	// TaskExit: Callback for ending a task
+	// VodSourceFileStart: Callback for starting to pull from video files
+	// VodSourceFileFinish: Callback for stopping pulling from video files
+	// ResetTaskConfig: Callback for modifying a task
+	CallbackEvents []*string `json:"CallbackEvents,omitempty" name:"CallbackEvents"`
+
+	// Note: This parameter is not returned currently.
+	// The information of the last callback.
+	CallbackInfo *string `json:"CallbackInfo,omitempty" name:"CallbackInfo"`
+
+	// Note: This parameter is not returned currently.
+	// Error message.
+	ErrorInfo *string `json:"ErrorInfo,omitempty" name:"ErrorInfo"`
+
+	// The task status.
+	// enable: Enabled
+	// pause: Paused
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Note: This parameter is returned only if one task is queried.
+	// The latest pull information.
+	// The information includes the source URL, offset, and report time.
+	RecentPullInfo *RecentPullInfo `json:"RecentPullInfo,omitempty" name:"RecentPullInfo"`
+
+	// The remarks for the task.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type PushAuthKeyInfo struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -8460,6 +9252,22 @@ type PushDataInfo struct {
 
 	// Frame rate in `metadata`.
 	MetaFps *uint64 `json:"MetaFps,omitempty" name:"MetaFps"`
+}
+
+type RecentPullInfo struct {
+	// The URL of the file currently pulled.
+	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
+
+	// The offset of the file currently pulled.
+	OffsetTime *uint64 `json:"OffsetTime,omitempty" name:"OffsetTime"`
+
+	// The time when the offset is reported, in UTC format.
+	// Example: 2020-07-23T03:20:39Z
+	// Note: Beijing time is 8 hours ahead of UTC.
+	ReportTime *string `json:"ReportTime,omitempty" name:"ReportTime"`
+
+	// The number of times looped.
+	LoopedTimes *int64 `json:"LoopedTimes,omitempty" name:"LoopedTimes"`
 }
 
 type RecordParam struct {

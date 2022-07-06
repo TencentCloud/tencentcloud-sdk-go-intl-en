@@ -304,6 +304,9 @@ type CreateReplicationInstanceRequestParams struct {
 
 	// Region name of the replication instance
 	ReplicationRegionName *string `json:"ReplicationRegionName,omitempty" name:"ReplicationRegionName"`
+
+	// Whether to sync TCR cloud tags to the COS Bucket
+	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
 }
 
 type CreateReplicationInstanceRequest struct {
@@ -317,6 +320,9 @@ type CreateReplicationInstanceRequest struct {
 
 	// Region name of the replication instance
 	ReplicationRegionName *string `json:"ReplicationRegionName,omitempty" name:"ReplicationRegionName"`
+
+	// Whether to sync TCR cloud tags to the COS Bucket
+	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
 }
 
 func (r *CreateReplicationInstanceRequest) ToJsonString() string {
@@ -334,6 +340,7 @@ func (r *CreateReplicationInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RegistryId")
 	delete(f, "ReplicationRegionId")
 	delete(f, "ReplicationRegionName")
+	delete(f, "SyncTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReplicationInstanceRequest has unknown keys!", "")
 	}

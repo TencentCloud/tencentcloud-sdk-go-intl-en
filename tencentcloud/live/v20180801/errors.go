@@ -302,6 +302,9 @@ const (
 	// Invalid output bitrate.
 	INVALIDPARAMETER_INVALIDBITRATE = "InvalidParameter.InvalidBitrate"
 
+	// Invalid callback URL.
+	INVALIDPARAMETER_INVALIDCALLBACKURL = "InvalidParameter.InvalidCallbackUrl"
+
 	// The cropped area overflows the original image.
 	INVALIDPARAMETER_INVALIDCROPPARAM = "InvalidParameter.InvalidCropParam"
 
@@ -320,8 +323,20 @@ const (
 	// Invalid corner radius of the rounded rectangle.
 	INVALIDPARAMETER_INVALIDROUNDRECTRADIUS = "InvalidParameter.InvalidRoundRectRadius"
 
+	// Invalid source URL.
+	INVALIDPARAMETER_INVALIDSOURCEURL = "InvalidParameter.InvalidSourceUrl"
+
+	// The time period of the task exceeded the limit.
+	INVALIDPARAMETER_INVALIDTASKTIME = "InvalidParameter.InvalidTaskTime"
+
+	// Invalid destination URL.
+	INVALIDPARAMETER_INVALIDTOURL = "InvalidParameter.InvalidToUrl"
+
 	// Incorrect `VodFileName`.
 	INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
+
+	// 
+	INVALIDPARAMETER_INVALIDWATERMARK = "InvalidParameter.InvalidWatermark"
 
 	// It is not allowed to add a Mini Program domain name deleted in the same month.
 	INVALIDPARAMETER_MPHOSTDELETE = "InvalidParameter.MpHostDelete"
@@ -335,8 +350,17 @@ const (
 	// The output stream of the same session has changed.
 	INVALIDPARAMETER_SESSIONOUTPUTSTREAMCHANGED = "InvalidParameter.SessionOutputStreamChanged"
 
+	// The task does not exist.
+	INVALIDPARAMETER_TASKNOTEXIST = "InvalidParameter.TaskNotExist"
+
+	// The number of tasks reached the limit.
+	INVALIDPARAMETER_TASKNUMMORETHANLIMIT = "InvalidParameter.TaskNumMoreThanLimit"
+
 	// The template does not match the number of input streams.
 	INVALIDPARAMETER_TEMPLATENOTMATCHINPUTNUM = "InvalidParameter.TemplateNotMatchInputNum"
+
+	// No permission to access the external URL.
+	INVALIDPARAMETER_TOURLNOPERMISSION = "InvalidParameter.ToUrlNoPermission"
 
 	// Failed to resolve the domain name.
 	INVALIDPARAMETER_URLNOTSAFE = "InvalidParameter.UrlNotSafe"
@@ -380,6 +404,12 @@ const (
 	// The domain name does not exist or is not matched.
 	RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 
+	// 
+	RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+
+	// 
+	RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+
 	// This API is not supported for the user.
 	RESOURCENOTFOUND_INVALIDUSER = "ResourceNotFound.InvalidUser"
 
@@ -394,6 +424,9 @@ const (
 
 	// The `TaskId` does not exist.
 	RESOURCENOTFOUND_TASKID = "ResourceNotFound.TaskId"
+
+	// 
+	RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
 
 	// The LVB service has not been activated.
 	RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"

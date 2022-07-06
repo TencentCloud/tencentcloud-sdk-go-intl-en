@@ -310,6 +310,70 @@ type AddressTemplateSpecification struct {
 	AddressGroupId *string `json:"AddressGroupId,omitempty" name:"AddressGroupId"`
 }
 
+// Predefined struct for user
+type AdjustPublicAddressRequestParams struct {
+	// The unique ID of the CVM instance, such as `ins-11112222`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique ID of the EIP, such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+}
+
+type AdjustPublicAddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the CVM instance, such as `ins-11112222`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique ID of the EIP, such as `eip-11112222`.
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+}
+
+func (r *AdjustPublicAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AdjustPublicAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AddressId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AdjustPublicAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AdjustPublicAddressResponseParams struct {
+	// The async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AdjustPublicAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *AdjustPublicAddressResponseParams `json:"Response"`
+}
+
+func (r *AdjustPublicAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AdjustPublicAddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AlgType struct {
 	// Whether FTP ALG is enabled
 	Ftp *bool `json:"Ftp,omitempty" name:"Ftp"`
@@ -1015,20 +1079,20 @@ func (r *AssociateNatGatewayAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AssociateNetworkAclSubnetsRequestParams struct {
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Array of subnet instance IDs. Example: [subnet-12345678]
+	// Array of subnet instance IDs, such as [subnet-12345678]
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
 type AssociateNetworkAclSubnetsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Array of subnet instance IDs. Example: [subnet-12345678]
+	// Array of subnet instance IDs, such as [subnet-12345678]
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
@@ -2214,20 +2278,20 @@ func (r *CreateAndAttachNetworkInterfaceResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateAssistantCidrRequestParams struct {
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
 	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
 type CreateAssistantCidrRequest struct {
 	*tchttp.BaseRequest
 	
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
 	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
@@ -2253,8 +2317,8 @@ func (r *CreateAssistantCidrRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAssistantCidrResponseParams struct {
-	// A set of secondary CIDR blocks.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Array of secondary CIDR blocks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3446,20 +3510,20 @@ func (r *CreateNetDetectResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateNetworkAclRequestParams struct {
-	// ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+	// VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Name of the network ACL. The maximum length is 60 bytes.
+	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
 }
 
 type CreateNetworkAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the VPC instance. You can obtain the parameter value from the VpcId field in the returned result of the DescribeVpcs API.
+	// VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Name of the network ACL. The maximum length is 60 bytes.
+	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
 }
 
@@ -5222,20 +5286,20 @@ func (r *DeleteAddressTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAssistantCidrRequestParams struct {
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
 	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
 type DeleteAssistantCidrRequest struct {
 	*tchttp.BaseRequest
 	
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// CIDR set, e.g. ["10.0.0.0/16", "172.16.0.0/16"]
+	// Array of CIDR blocks, such as ["10.0.0.0/16", "172.16.0.0/16"]
 	CidrBlocks []*string `json:"CidrBlocks,omitempty" name:"CidrBlocks"`
 }
 
@@ -5973,14 +6037,14 @@ func (r *DeleteNetDetectResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteNetworkAclRequestParams struct {
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 }
 
 type DeleteNetworkAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 }
 
@@ -8911,10 +8975,10 @@ func (r *DescribeGatewayFlowMonitorDetailResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeGatewayFlowQosRequestParams struct {
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -8930,10 +8994,10 @@ type DescribeGatewayFlowQosRequestParams struct {
 type DescribeGatewayFlowQosRequest struct {
 	*tchttp.BaseRequest
 	
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -8970,7 +9034,7 @@ func (r *DescribeGatewayFlowQosRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGatewayFlowQosResponseParams struct {
-	// List of instance details.
+	// List of instance details
 	GatewayQosSet []*GatewayQos `json:"GatewayQosSet,omitempty" name:"GatewayQosSet"`
 
 	// Number of eligible instances.
@@ -11372,7 +11436,7 @@ func (r *DescribeVpcTaskResultRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVpcTaskResultResponseParams struct {
-	// Execution result of an async task Valid values: `SUCCESS`: the task has been successfully executed; `FAILED`: the job execution failed; `RUNNING`: the job is executing.
+	// The execution results of an async task. Valid values: `SUCCESS`(task executed successfully), `FAILED` (task execution failed), and `RUNNING` (task in progress). 
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Output of the async task execution result
@@ -12272,20 +12336,20 @@ func (r *DisableFlowLogsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisableGatewayFlowMonitorRequestParams struct {
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 }
 
 type DisableGatewayFlowMonitorRequest struct {
 	*tchttp.BaseRequest
 	
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 }
 
@@ -12525,20 +12589,20 @@ func (r *DisassociateNatGatewayAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisassociateNetworkAclSubnetsRequestParams struct {
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Array of subnet instance IDs. Example: [subnet-12345678].
+	// Array of subnet instance IDs, such as [subnet-12345678].
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
 type DisassociateNetworkAclSubnetsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Array of subnet instance IDs. Example: [subnet-12345678].
+	// Array of subnet instance IDs, such as [subnet-12345678].
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 }
 
@@ -12901,20 +12965,20 @@ func (r *EnableFlowLogsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableGatewayFlowMonitorRequestParams struct {
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 }
 
 type EnableGatewayFlowMonitorRequest struct {
 	*tchttp.BaseRequest
 	
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 }
 
@@ -13205,7 +13269,7 @@ type GatewayQos struct {
 	// Bandwidth limit value.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
-	// The creation time.
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
@@ -14359,26 +14423,26 @@ func (r *ModifyAddressesBandwidthResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAssistantCidrRequestParams struct {
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
 	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
 
-	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` or `OldCidrBlocks` must be specified.
 	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
 }
 
 type ModifyAssistantCidrRequest struct {
 	*tchttp.BaseRequest
 	
-	// `VPC` instance `ID`, e.g. `vpc-6v2ht8q5`.
+	// `VPC` instance `ID`, such as `vpc-6v2ht8q5`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	// Array of the secondary CIDR blocks to be added, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
 	NewCidrBlocks []*string `json:"NewCidrBlocks,omitempty" name:"NewCidrBlocks"`
 
-	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. Either or both of `NewCidrBlocks` and `OldCidrBlocks` must be specified.
+	// Array of the secondary CIDR blocks to be deleted, such as ["10.0.0.0/16", "172.16.0.0/16"]. At least one of `NewCidrBlocks` or `OldCidrBlocks` must be specified.
 	OldCidrBlocks []*string `json:"OldCidrBlocks,omitempty" name:"OldCidrBlocks"`
 }
 
@@ -14405,8 +14469,8 @@ func (r *ModifyAssistantCidrRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAssistantCidrResponseParams struct {
-	// A set of secondary CIDR blocks.
-	// Note: This field may return null, indicating that no valid value was found.
+	// Array of secondary CIDR blocks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AssistantCidrSet []*AssistantCidr `json:"AssistantCidrSet,omitempty" name:"AssistantCidrSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -14907,13 +14971,13 @@ func (r *ModifyFlowLogAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyGatewayFlowQosRequestParams struct {
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
-	// Bandwidth limit value.
+	// Bandwidth limit value in Mbps. Valid values: >0: Set the limit to the specified value. 0: Block all traffic. -1: No bandwidth limit.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -14923,13 +14987,13 @@ type ModifyGatewayFlowQosRequestParams struct {
 type ModifyGatewayFlowQosRequest struct {
 	*tchttp.BaseRequest
 	
-	// Gateway instance ID, which currently supports these types:
-	// ID of Direct Connect gateway instance, e.g. `dcg-ltjahce6`;
-	// ID of NAT gateway instance, e.g. `nat-ltjahce6`;
-	// ID of VPN gateway instance, e.g. `vpn-ltjahce6`.
+	// Gateway instance ID. Supported types:
+	// Direct connect gateway instance, such as `dcg-ltjahce6`;
+	// NAT gateway instance, such as `nat-ltjahce6`;
+	// VPN gateway instance, such as `vpn-ltjahce6`.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
-	// Bandwidth limit value.
+	// Bandwidth limit value in Mbps. Valid values: >0: Set the limit to the specified value. 0: Block all traffic. -1: No bandwidth limit.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
 	// CVM private IP addresses with limited bandwidth.
@@ -15502,20 +15566,20 @@ func (r *ModifyNetDetectResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyNetworkAclAttributeRequestParams struct {
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Name of the network ACL. The maximum length is 60 bytes.
+	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
 }
 
 type ModifyNetworkAclAttributeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Name of the network ACL. The maximum length is 60 bytes.
+	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
 }
 
@@ -15563,20 +15627,20 @@ func (r *ModifyNetworkAclAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyNetworkAclEntriesRequestParams struct {
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Network ACL rule set.
+	// Network ACL rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
 	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
 }
 
 type ModifyNetworkAclEntriesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network ACL instance ID. Example: acl-12345678.
+	// Network ACL instance ID, such as `acl-12345678`.
 	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
 
-	// Network ACL rule set.
+	// Network ACL rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
 	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
 }
 
@@ -17154,7 +17218,7 @@ type NotifyRoutesRequestParams struct {
 	// The unique ID of the route table
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
-	// The unique ID of the routing policy
+	// The unique ID of the route
 	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
 }
 
@@ -17164,7 +17228,7 @@ type NotifyRoutesRequest struct {
 	// The unique ID of the route table
 	RouteTableId *string `json:"RouteTableId,omitempty" name:"RouteTableId"`
 
-	// The unique ID of the routing policy
+	// The unique ID of the route
 	RouteItemIds []*string `json:"RouteItemIds,omitempty" name:"RouteItemIds"`
 }
 

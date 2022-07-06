@@ -69,6 +69,7 @@ func NewAllocateWanAddressResponse() (response *AllocateWanAddressResponse) {
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCEUNAVAILABLE_INSTANCEUNLOCKEDERROR = "ResourceUnavailable.InstanceUnLockedError"
 func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
     return c.AllocateWanAddressWithContext(context.Background(), request)
 }
@@ -80,6 +81,7 @@ func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (respons
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCEUNAVAILABLE_INSTANCEUNLOCKEDERROR = "ResourceUnavailable.InstanceUnLockedError"
 func (c *Client) AllocateWanAddressWithContext(ctx context.Context, request *AllocateWanAddressRequest) (response *AllocateWanAddressResponse, err error) {
     if request == nil {
         request = NewAllocateWanAddressRequest()
@@ -185,7 +187,7 @@ func NewAssociateSecurityGroupsResponse() (response *AssociateSecurityGroupsResp
 }
 
 // AssociateSecurityGroups
-// This API is used to associate a security group with instances in batches.
+// This API is used to bind a security group to instances in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -199,7 +201,7 @@ func (c *Client) AssociateSecurityGroups(request *AssociateSecurityGroupsRequest
 }
 
 // AssociateSecurityGroups
-// This API is used to associate a security group with instances in batches.
+// This API is used to bind a security group to instances in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -307,7 +309,7 @@ func NewCleanUpInstanceResponse() (response *CleanUpInstanceResponse) {
 }
 
 // CleanUpInstance
-// This API is used to deactivate an instance in the recycle bin immediately.
+// This API is used to eliminate an instance in the recycle bin immediately.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -320,7 +322,7 @@ func (c *Client) CleanUpInstance(request *CleanUpInstanceRequest) (response *Cle
 }
 
 // CleanUpInstance
-// This API is used to deactivate an instance in the recycle bin immediately.
+// This API is used to eliminate an instance in the recycle bin immediately.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -474,7 +476,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 }
 
 // CreateInstances
-// This API is used to create Redis instances.
+// This API is used to create a Redis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -512,7 +514,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 }
 
 // CreateInstances
-// This API is used to create Redis instances.
+// This API is used to create a Redis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -803,7 +805,7 @@ func NewDescribeBackupUrlResponse() (response *DescribeBackupUrlResponse) {
 }
 
 // DescribeBackupUrl
-// This API is used to query the download address of a backup RDB (it is during beta test and can be used only after you apply for the eligibility).
+// This API is used to query the download address of a backup RDB (it is in beta test and can be used only after you apply for the eligibility).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -822,7 +824,7 @@ func (c *Client) DescribeBackupUrl(request *DescribeBackupUrlRequest) (response 
 }
 
 // DescribeBackupUrl
-// This API is used to query the download address of a backup RDB (it is during beta test and can be used only after you apply for the eligibility).
+// This API is used to query the download address of a backup RDB (it is in beta test and can be used only after you apply for the eligibility).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -870,7 +872,7 @@ func NewDescribeCommonDBInstancesResponse() (response *DescribeCommonDBInstances
 }
 
 // DescribeCommonDBInstances
-// (Disused) Queries the list of instances
+// This API has been disused. It was used to query the list of Redis instance information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -885,7 +887,7 @@ func (c *Client) DescribeCommonDBInstances(request *DescribeCommonDBInstancesReq
 }
 
 // DescribeCommonDBInstances
-// (Disused) Queries the list of instances
+// This API has been disused. It was used to query the list of Redis instance information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1836,7 +1838,7 @@ func NewDescribeInstanceShardsResponse() (response *DescribeInstanceShardsRespon
 }
 
 // DescribeInstanceShards
-// This API is used to get the information of cluster edition instance shards.
+// This API is used to get the information of Cluster Edition instance shards.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1847,7 +1849,7 @@ func (c *Client) DescribeInstanceShards(request *DescribeInstanceShardsRequest) 
 }
 
 // DescribeInstanceShards
-// This API is used to get the information of cluster edition instance shards.
+// This API is used to get the information of Cluster Edition instance shards.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1887,7 +1889,7 @@ func NewDescribeInstanceZoneInfoResponse() (response *DescribeInstanceZoneInfoRe
 }
 
 // DescribeInstanceZoneInfo
-// This API is used to query Redis node information.
+// This API is used to query the Redis node details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1904,7 +1906,7 @@ func (c *Client) DescribeInstanceZoneInfo(request *DescribeInstanceZoneInfoReque
 }
 
 // DescribeInstanceZoneInfo
-// This API is used to query Redis node information.
+// This API is used to query the Redis node details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2066,7 +2068,7 @@ func NewDescribeParamTemplateInfoResponse() (response *DescribeParamTemplateInfo
 }
 
 // DescribeParamTemplateInfo
-// This API is used to query parameter template details.
+// This API is used to query the parameter template details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2081,7 +2083,7 @@ func (c *Client) DescribeParamTemplateInfo(request *DescribeParamTemplateInfoReq
 }
 
 // DescribeParamTemplateInfo
-// This API is used to query parameter template details.
+// This API is used to query the parameter template details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2357,7 +2359,7 @@ func NewDescribeProxySlowLogResponse() (response *DescribeProxySlowLogResponse) 
 }
 
 // DescribeProxySlowLog
-// This API is used to query proxy slow logs.
+// This API is used to query the slow queries of the proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -2372,7 +2374,7 @@ func (c *Client) DescribeProxySlowLog(request *DescribeProxySlowLogRequest) (res
 }
 
 // DescribeProxySlowLog
-// This API is used to query proxy slow logs.
+// This API is used to query the slow queries of the proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -2524,7 +2526,7 @@ func NewDescribeTaskInfoResponse() (response *DescribeTaskInfoResponse) {
 }
 
 // DescribeTaskInfo
-// This API is used to query a task result.
+// This API is used to query the task result.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2535,7 +2537,7 @@ func (c *Client) DescribeTaskInfo(request *DescribeTaskInfoRequest) (response *D
 }
 
 // DescribeTaskInfo
-// This API is used to query a task result.
+// This API is used to query the task result.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2553,59 +2555,6 @@ func (c *Client) DescribeTaskInfoWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeTaskInfoResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeTaskListRequest() (request *DescribeTaskListRequest) {
-    request = &DescribeTaskListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("redis", APIVersion, "DescribeTaskList")
-    
-    
-    return
-}
-
-func NewDescribeTaskListResponse() (response *DescribeTaskListResponse) {
-    response = &DescribeTaskListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeTaskList
-// This API is used to query the list of tasks.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-func (c *Client) DescribeTaskList(request *DescribeTaskListRequest) (response *DescribeTaskListResponse, err error) {
-    return c.DescribeTaskListWithContext(context.Background(), request)
-}
-
-// DescribeTaskList
-// This API is used to query the list of tasks.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-func (c *Client) DescribeTaskListWithContext(ctx context.Context, request *DescribeTaskListRequest) (response *DescribeTaskListResponse, err error) {
-    if request == nil {
-        request = NewDescribeTaskListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeTaskList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeTaskListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2628,7 +2577,7 @@ func NewDescribeTendisSlowLogResponse() (response *DescribeTendisSlowLogResponse
 }
 
 // DescribeTendisSlowLog
-// This API is used to query slow queries of a TencentDB for Tendis instance.
+// This API is used to query slow queries of a Tendis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -2638,7 +2587,7 @@ func (c *Client) DescribeTendisSlowLog(request *DescribeTendisSlowLogRequest) (r
 }
 
 // DescribeTendisSlowLog
-// This API is used to query slow queries of a TencentDB for Tendis instance.
+// This API is used to query slow queries of a Tendis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -2872,7 +2821,7 @@ func NewDisassociateSecurityGroupsResponse() (response *DisassociateSecurityGrou
 }
 
 // DisassociateSecurityGroups
-// This API is used to unassociate security groups from instances in batches.
+// This API is used to unbind a security group from instances in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -2881,12 +2830,14 @@ func NewDisassociateSecurityGroupsResponse() (response *DisassociateSecurityGrou
 //  FAILEDOPERATION_DISASSOCIATESECURITYGROUPSFAILED = "FailedOperation.DisassociateSecurityGroupsFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DisassociateSecurityGroups(request *DisassociateSecurityGroupsRequest) (response *DisassociateSecurityGroupsResponse, err error) {
     return c.DisassociateSecurityGroupsWithContext(context.Background(), request)
 }
 
 // DisassociateSecurityGroups
-// This API is used to unassociate security groups from instances in batches.
+// This API is used to unbind a security group from instances in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -2895,6 +2846,8 @@ func (c *Client) DisassociateSecurityGroups(request *DisassociateSecurityGroupsR
 //  FAILEDOPERATION_DISASSOCIATESECURITYGROUPSFAILED = "FailedOperation.DisassociateSecurityGroupsFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DisassociateSecurityGroupsWithContext(ctx context.Context, request *DisassociateSecurityGroupsRequest) (response *DisassociateSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDisassociateSecurityGroupsRequest()
@@ -3086,79 +3039,6 @@ func (c *Client) InquiryPriceUpgradeInstanceWithContext(ctx context.Context, req
     return
 }
 
-func NewKillMasterGroupRequest() (request *KillMasterGroupRequest) {
-    request = &KillMasterGroupRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("redis", APIVersion, "KillMasterGroup")
-    
-    
-    return
-}
-
-func NewKillMasterGroupResponse() (response *KillMasterGroupResponse) {
-    response = &KillMasterGroupResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// KillMasterGroup
-// This API is used to perform a failure simulation.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
-//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
-//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
-//  INVALIDPARAMETERVALUE_PASSWORDERROR = "InvalidParameterValue.PasswordError"
-//  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
-//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
-//  RESOURCEUNAVAILABLE_INSTANCENOTSUPPORTOPERATION = "ResourceUnavailable.InstanceNotSupportOperation"
-//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
-func (c *Client) KillMasterGroup(request *KillMasterGroupRequest) (response *KillMasterGroupResponse, err error) {
-    return c.KillMasterGroupWithContext(context.Background(), request)
-}
-
-// KillMasterGroup
-// This API is used to perform a failure simulation.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
-//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
-//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
-//  INVALIDPARAMETERVALUE_PASSWORDERROR = "InvalidParameterValue.PasswordError"
-//  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
-//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
-//  RESOURCEUNAVAILABLE_INSTANCENOTSUPPORTOPERATION = "ResourceUnavailable.InstanceNotSupportOperation"
-//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
-func (c *Client) KillMasterGroupWithContext(ctx context.Context, request *KillMasterGroupRequest) (response *KillMasterGroupResponse, err error) {
-    if request == nil {
-        request = NewKillMasterGroupRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("KillMasterGroup require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewKillMasterGroupResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewManualBackupInstanceRequest() (request *ManualBackupInstanceRequest) {
     request = &ManualBackupInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3307,7 +3187,7 @@ func NewModifyAutoBackupConfigResponse() (response *ModifyAutoBackupConfigRespon
 }
 
 // ModifyAutoBackupConfig
-// This API is used to set an auto-backup schedule.
+// This API is used to configure automatic backup.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -3324,7 +3204,7 @@ func (c *Client) ModifyAutoBackupConfig(request *ModifyAutoBackupConfigRequest) 
 }
 
 // ModifyAutoBackupConfig
-// This API is used to set an auto-backup schedule.
+// This API is used to configure automatic backup.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
@@ -3370,7 +3250,7 @@ func NewModifyDBInstanceSecurityGroupsResponse() (response *ModifyDBInstanceSecu
 }
 
 // ModifyDBInstanceSecurityGroups
-// This API is used to modify the security groups associated with an instance.
+// This API is used to modify the security groups bound to an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -3388,7 +3268,7 @@ func (c *Client) ModifyDBInstanceSecurityGroups(request *ModifyDBInstanceSecurit
 }
 
 // ModifyDBInstanceSecurityGroups
-// This API is used to modify the security groups associated with an instance.
+// This API is used to modify the security groups bound to an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ADDINSTANCEINFOFAILED = "FailedOperation.AddInstanceInfoFailed"
@@ -3681,7 +3561,7 @@ func NewModifyMaintenanceWindowResponse() (response *ModifyMaintenanceWindowResp
 }
 
 // ModifyMaintenanceWindow
-// This API is used to modify instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance window cannot be modified.
+// This API is used to modify the instance maintenance time. The maintenance time specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance time cannot be modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3695,7 +3575,7 @@ func (c *Client) ModifyMaintenanceWindow(request *ModifyMaintenanceWindowRequest
 }
 
 // ModifyMaintenanceWindow
-// This API is used to modify instance maintenance window. The maintenance window specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance window cannot be modified.
+// This API is used to modify the instance maintenance time. The maintenance time specifies a time period during which compatible version upgrade, architecture upgrade, backend maintenance, and other operations can be performed to avoid affecting business. Note: if the compatible version upgrade or architecture upgrade task has been initiated for an instance, its maintenance time cannot be modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -4459,6 +4339,7 @@ func NewUpgradeVersionToMultiAvailabilityZonesResponse() (response *UpgradeVersi
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
 func (c *Client) UpgradeVersionToMultiAvailabilityZones(request *UpgradeVersionToMultiAvailabilityZonesRequest) (response *UpgradeVersionToMultiAvailabilityZonesResponse, err error) {
     return c.UpgradeVersionToMultiAvailabilityZonesWithContext(context.Background(), request)
 }
@@ -4471,6 +4352,7 @@ func (c *Client) UpgradeVersionToMultiAvailabilityZones(request *UpgradeVersionT
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
 func (c *Client) UpgradeVersionToMultiAvailabilityZonesWithContext(ctx context.Context, request *UpgradeVersionToMultiAvailabilityZonesRequest) (response *UpgradeVersionToMultiAvailabilityZonesResponse, err error) {
     if request == nil {
         request = NewUpgradeVersionToMultiAvailabilityZonesRequest()
