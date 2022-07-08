@@ -3635,6 +3635,142 @@ func (r *DescribeTaskInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTaskListRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset, which is an integral multiple of `Limit` (rounded down automatically).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Project ID
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
+
+	// Task type
+	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes"`
+
+	// Start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task status
+	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Task status
+	Result []*int64 `json:"Result,omitempty" name:"Result"`
+
+	// Operator UIN
+	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
+
+
+	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
+}
+
+type DescribeTaskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset, which is an integral multiple of `Limit` (rounded down automatically).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Project ID
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
+
+	// Task type
+	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes"`
+
+	// Start time
+	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task status
+	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Task status
+	Result []*int64 `json:"Result,omitempty" name:"Result"`
+
+	// Operator UIN
+	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
+
+	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
+}
+
+func (r *DescribeTaskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "InstanceName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "ProjectIds")
+	delete(f, "TaskTypes")
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "TaskStatus")
+	delete(f, "Result")
+	delete(f, "OperatorUin")
+	delete(f, "OperateUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTaskListResponseParams struct {
+	// Total number of tasks
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Task details
+	Tasks []*TaskInfoDetail `json:"Tasks,omitempty" name:"Tasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTaskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTaskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeTaskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTendisSlowLogRequestParams struct {
 	// Instance ID in the format of crs-ngvou0i1
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4800,6 +4936,89 @@ type Instances struct {
 
 	// Update time
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+// Predefined struct for user
+type KillMasterGroupRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
+	// 2. It cannot start with a slash (/).
+	// 3. It must contain characters in at least two of the following types:
+	//     a. Lowercase letters (a–z)
+	//     b. Uppercase letters (A–Z)
+	//     c. Digits (0–9)
+	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Node information of a single-AZ deployed instance
+	ShardIds []*int64 `json:"ShardIds,omitempty" name:"ShardIds"`
+}
+
+type KillMasterGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
+	// 2. It cannot start with a slash (/).
+	// 3. It must contain characters in at least two of the following types:
+	//     a. Lowercase letters (a–z)
+	//     b. Uppercase letters (A–Z)
+	//     c. Digits (0–9)
+	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Node information of a single-AZ deployed instance
+	ShardIds []*int64 `json:"ShardIds,omitempty" name:"ShardIds"`
+}
+
+func (r *KillMasterGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMasterGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Password")
+	delete(f, "ShardIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillMasterGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type KillMasterGroupResponseParams struct {
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type KillMasterGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *KillMasterGroupResponseParams `json:"Response"`
+}
+
+func (r *KillMasterGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillMasterGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -6446,6 +6665,44 @@ func (r *SwitchInstanceVipResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SwitchInstanceVipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TaskInfoDetail struct {
+	// Task ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Task type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Instance name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Project ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Task progress
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Progress *float64 `json:"Progress,omitempty" name:"Progress"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Task status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *int64 `json:"Result,omitempty" name:"Result"`
 }
 
 type TendisNodes struct {

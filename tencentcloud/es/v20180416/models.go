@@ -1509,14 +1509,14 @@ type InstanceInfo struct {
 	// Instance status. 0: processing; 1: normal; -1: stopped; -2: terminating; -3: terminated
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
+	// This parameter is not used on the global website
+	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
+
 	// Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 
 	// This parameter is not used on the global website
 	ChargePeriod *uint64 `json:"ChargePeriod,omitempty" name:"ChargePeriod"`
-
-	// This parameter is not used on the global website
-	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
 	// Node specification <li>ES.S1.SMALL2: 1-core 2 GB </li><li>ES.S1.MEDIUM4: 2-core 4 GB </li><li>ES.S1.MEDIUM8: 2-core 8 GB </li><li>ES.S1.LARGE16: 4-core 16 GB </li><li>ES.S1.2XLARGE32: 8-core 32 GB </li><li>ES.S1.4XLARGE32: 16-core 32 GB </li><li>ES.S1.4XLARGE64: 16-core 64 GB </li>
 	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
@@ -1741,6 +1741,10 @@ type InstanceInfo struct {
 	// Private domain of the HTTPS cluster
 	// Note: This field may return `null`, indicating that no valid value was found.
 	EsPrivateDomain *string `json:"EsPrivateDomain,omitempty" name:"EsPrivateDomain"`
+
+	// Configuration set info of the cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EsConfigSets []*EsConfigSetInfo `json:"EsConfigSets,omitempty" name:"EsConfigSets"`
 }
 
 type InstanceLog struct {

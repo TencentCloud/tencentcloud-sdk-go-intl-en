@@ -45,6 +45,63 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCheckRuleRequest() (request *CheckRuleRequest) {
+    request = &CheckRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("eb", APIVersion, "CheckRule")
+    
+    
+    return
+}
+
+func NewCheckRuleResponse() (response *CheckRuleResponse) {
+    response = &CheckRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckRule
+// This API is used to check a rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORFILTER = "FailedOperation.ErrorFilter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERRULE = "InvalidParameterValue.InvalidFilterRule"
+//  INVALIDPARAMETERVALUE_INVALIDPATTERN = "InvalidParameterValue.InvalidPattern"
+func (c *Client) CheckRule(request *CheckRuleRequest) (response *CheckRuleResponse, err error) {
+    return c.CheckRuleWithContext(context.Background(), request)
+}
+
+// CheckRule
+// This API is used to check a rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORFILTER = "FailedOperation.ErrorFilter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERRULE = "InvalidParameterValue.InvalidFilterRule"
+//  INVALIDPARAMETERVALUE_INVALIDPATTERN = "InvalidParameterValue.InvalidPattern"
+func (c *Client) CheckRuleWithContext(ctx context.Context, request *CheckRuleRequest) (response *CheckRuleResponse, err error) {
+    if request == nil {
+        request = NewCheckRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckTransformationRequest() (request *CheckTransformationRequest) {
     request = &CheckTransformationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -64,12 +121,28 @@ func NewCheckTransformationResponse() (response *CheckTransformationResponse) {
 
 // CheckTransformation
 // This API is used to test rules and data on the ETL configuration page.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORFILTER = "FailedOperation.ErrorFilter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERRULE = "InvalidParameterValue.InvalidFilterRule"
+//  INVALIDPARAMETERVALUE_INVALIDPATTERN = "InvalidParameterValue.InvalidPattern"
 func (c *Client) CheckTransformation(request *CheckTransformationRequest) (response *CheckTransformationResponse, err error) {
     return c.CheckTransformationWithContext(context.Background(), request)
 }
 
 // CheckTransformation
 // This API is used to test rules and data on the ETL configuration page.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORFILTER = "FailedOperation.ErrorFilter"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERRULE = "InvalidParameterValue.InvalidFilterRule"
+//  INVALIDPARAMETERVALUE_INVALIDPATTERN = "InvalidParameterValue.InvalidPattern"
 func (c *Client) CheckTransformationWithContext(ctx context.Context, request *CheckTransformationRequest) (response *CheckTransformationResponse, err error) {
     if request == nil {
         request = NewCheckTransformationRequest()
@@ -82,6 +155,166 @@ func (c *Client) CheckTransformationWithContext(ctx context.Context, request *Ch
     request.SetContext(ctx)
     
     response = NewCheckTransformationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateConnectionRequest() (request *CreateConnectionRequest) {
+    request = &CreateConnectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("eb", APIVersion, "CreateConnection")
+    
+    
+    return
+}
+
+func NewCreateConnectionResponse() (response *CreateConnectionResponse) {
+    response = &CreateConnectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateConnection
+// This API is used to create an event connector.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_CONNECTIONDESCRIPTION = "InvalidParameterValue.ConnectionDescription"
+//  INVALIDPARAMETERVALUE_CONNECTIONNAME = "InvalidParameterValue.ConnectionName"
+//  INVALIDPARAMETERVALUE_DTSPARAMS = "InvalidParameterValue.DTSParams"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_CONNECTION = "LimitExceeded.Connection"
+//  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
+//  RESOURCEUNAVAILABLE_CONNECTION = "ResourceUnavailable.Connection"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+func (c *Client) CreateConnection(request *CreateConnectionRequest) (response *CreateConnectionResponse, err error) {
+    return c.CreateConnectionWithContext(context.Background(), request)
+}
+
+// CreateConnection
+// This API is used to create an event connector.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETERVALUE_CONNECTIONDESCRIPTION = "InvalidParameterValue.ConnectionDescription"
+//  INVALIDPARAMETERVALUE_CONNECTIONNAME = "InvalidParameterValue.ConnectionName"
+//  INVALIDPARAMETERVALUE_DTSPARAMS = "InvalidParameterValue.DTSParams"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_INVALIDAPIREQUESTCONFIG = "InvalidParameterValue.InvalidApiRequestConfig"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_CONNECTION = "LimitExceeded.Connection"
+//  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
+//  RESOURCEUNAVAILABLE_CONNECTION = "ResourceUnavailable.Connection"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+func (c *Client) CreateConnectionWithContext(ctx context.Context, request *CreateConnectionRequest) (response *CreateConnectionResponse, err error) {
+    if request == nil {
+        request = NewCreateConnectionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConnection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateConnectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEventBusRequest() (request *CreateEventBusRequest) {
+    request = &CreateEventBusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("eb", APIVersion, "CreateEventBus")
+    
+    
+    return
+}
+
+func NewCreateEventBusResponse() (response *CreateEventBusResponse) {
+    response = &CreateEventBusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateEventBus
+// This API is used to create an event bus.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
+//  INVALIDPARAMETERVALUE_LINKMODE = "InvalidParameterValue.LinkMode"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
+//  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
+//  RESOURCEINUSE_DEFAULTEVENTBUS = "ResourceInUse.DefaultEventBus"
+//  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+func (c *Client) CreateEventBus(request *CreateEventBusRequest) (response *CreateEventBusResponse, err error) {
+    return c.CreateEventBusWithContext(context.Background(), request)
+}
+
+// CreateEventBus
+// This API is used to create an event bus.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
+//  INVALIDPARAMETERVALUE_LINKMODE = "InvalidParameterValue.LinkMode"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
+//  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
+//  RESOURCEINUSE_DEFAULTEVENTBUS = "ResourceInUse.DefaultEventBus"
+//  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
+//  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+func (c *Client) CreateEventBusWithContext(ctx context.Context, request *CreateEventBusRequest) (response *CreateEventBusResponse, err error) {
+    if request == nil {
+        request = NewCreateEventBusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEventBus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEventBusResponse()
     err = c.Send(request, response)
     return
 }
@@ -590,6 +823,55 @@ func (c *Client) DeleteTransformationWithContext(ctx context.Context, request *D
     return
 }
 
+func NewGetEventBusRequest() (request *GetEventBusRequest) {
+    request = &GetEventBusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("eb", APIVersion, "GetEventBus")
+    
+    
+    return
+}
+
+func NewGetEventBusResponse() (response *GetEventBusResponse) {
+    response = &GetEventBusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetEventBus
+// This API is used to get the details of an event bus.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+func (c *Client) GetEventBus(request *GetEventBusRequest) (response *GetEventBusResponse, err error) {
+    return c.GetEventBusWithContext(context.Background(), request)
+}
+
+// GetEventBus
+// This API is used to get the details of an event bus.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+func (c *Client) GetEventBusWithContext(ctx context.Context, request *GetEventBusRequest) (response *GetEventBusResponse, err error) {
+    if request == nil {
+        request = NewGetEventBusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetEventBus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetEventBusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetRuleRequest() (request *GetRuleRequest) {
     request = &GetRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -836,6 +1118,7 @@ func NewListRulesResponse() (response *ListRulesResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesResponse, err error) {
@@ -847,6 +1130,7 @@ func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesRespon
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRulesWithContext(ctx context.Context, request *ListRulesRequest) (response *ListRulesResponse, err error) {
@@ -950,6 +1234,7 @@ func NewUpdateConnectionResponse() (response *UpdateConnectionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UPDATECONNECTION = "FailedOperation.UpdateConnection"
+//  INVALIDPARAMETER_ENABLEAPIGATEWAY = "InvalidParameter.EnableAPIGateway"
 //  INVALIDPARAMETERVALUE_CONNECTIONID = "InvalidParameterValue.ConnectionId"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
@@ -963,6 +1248,7 @@ func (c *Client) UpdateConnection(request *UpdateConnectionRequest) (response *U
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UPDATECONNECTION = "FailedOperation.UpdateConnection"
+//  INVALIDPARAMETER_ENABLEAPIGATEWAY = "InvalidParameter.EnableAPIGateway"
 //  INVALIDPARAMETERVALUE_CONNECTIONID = "InvalidParameterValue.ConnectionId"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
@@ -979,6 +1265,65 @@ func (c *Client) UpdateConnectionWithContext(ctx context.Context, request *Updat
     request.SetContext(ctx)
     
     response = NewUpdateConnectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateEventBusRequest() (request *UpdateEventBusRequest) {
+    request = &UpdateEventBusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("eb", APIVersion, "UpdateEventBus")
+    
+    
+    return
+}
+
+func NewUpdateEventBusResponse() (response *UpdateEventBusResponse) {
+    response = &UpdateEventBusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateEventBus
+// This API is used to update an event bus.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
+//  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+func (c *Client) UpdateEventBus(request *UpdateEventBusRequest) (response *UpdateEventBusResponse, err error) {
+    return c.UpdateEventBusWithContext(context.Background(), request)
+}
+
+// UpdateEventBus
+// This API is used to update an event bus.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
+//  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
+//  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
+//  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+func (c *Client) UpdateEventBusWithContext(ctx context.Context, request *UpdateEventBusRequest) (response *UpdateEventBusResponse, err error) {
+    if request == nil {
+        request = NewUpdateEventBusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateEventBus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateEventBusResponse()
     err = c.Send(request, response)
     return
 }

@@ -29,6 +29,57 @@ type APIGWParams struct {
 }
 
 // Predefined struct for user
+type CheckRuleRequestParams struct {
+
+}
+
+type CheckRuleRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *CheckRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CheckRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckRuleResponseParams `json:"Response"`
+}
+
+func (r *CheckRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CheckTransformationRequestParams struct {
 	// JSON string to be processed
 	Input *string `json:"Input,omitempty" name:"Input"`
@@ -159,6 +210,162 @@ type ConnectionDescription struct {
 	// CKafka parameters
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CkafkaParams *CkafkaParams `json:"CkafkaParams,omitempty" name:"CkafkaParams"`
+}
+
+// Predefined struct for user
+type CreateConnectionRequestParams struct {
+	// Connector description
+	ConnectionDescription *ConnectionDescription `json:"ConnectionDescription,omitempty" name:"ConnectionDescription"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Connector name
+	ConnectionName *string `json:"ConnectionName,omitempty" name:"ConnectionName"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Switch
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Type
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type CreateConnectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Connector description
+	ConnectionDescription *ConnectionDescription `json:"ConnectionDescription,omitempty" name:"ConnectionDescription"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Connector name
+	ConnectionName *string `json:"ConnectionName,omitempty" name:"ConnectionName"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Switch
+	Enable *bool `json:"Enable,omitempty" name:"Enable"`
+
+	// Type
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *CreateConnectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConnectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConnectionDescription")
+	delete(f, "EventBusId")
+	delete(f, "ConnectionName")
+	delete(f, "Description")
+	delete(f, "Enable")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConnectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConnectionResponseParams struct {
+	// Connector ID
+	ConnectionId *string `json:"ConnectionId,omitempty" name:"ConnectionId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateConnectionResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConnectionResponseParams `json:"Response"`
+}
+
+func (r *CreateConnectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConnectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEventBusRequestParams struct {
+	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+
+	// Event bus description, which can contain up to 200 characters of any type
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type CreateEventBusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+
+	// Event bus description, which can contain up to 200 characters of any type
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateEventBusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEventBusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventBusName")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEventBusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEventBusResponseParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateEventBusResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEventBusResponseParams `json:"Response"`
+}
+
+func (r *CreateEventBusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEventBusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -759,6 +966,84 @@ type Filter struct {
 
 	// Filter name.
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+// Predefined struct for user
+type GetEventBusRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+}
+
+type GetEventBusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+}
+
+func (r *GetEventBusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetEventBusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventBusId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetEventBusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetEventBusResponseParams struct {
+	// Update time
+	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
+
+	// Event bus description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Log topic ID
+	ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
+
+	// Creation time
+	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
+
+	// Logset ID
+	ClsLogsetId *string `json:"ClsLogsetId,omitempty" name:"ClsLogsetId"`
+
+	// Event bus name
+	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// (Disused) Event bus type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetEventBusResponse struct {
+	*tchttp.BaseResponse
+	Response *GetEventBusResponseParams `json:"Response"`
+}
+
+func (r *GetEventBusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetEventBusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1499,6 +1784,74 @@ func (r *UpdateConnectionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateConnectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateEventBusRequestParams struct {
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event bus description, which can contain up to 200 characters of any type
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+}
+
+type UpdateEventBusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
+
+	// Event bus description, which can contain up to 200 characters of any type
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+}
+
+func (r *UpdateEventBusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEventBusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventBusId")
+	delete(f, "Description")
+	delete(f, "EventBusName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateEventBusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateEventBusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateEventBusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateEventBusResponseParams `json:"Response"`
+}
+
+func (r *UpdateEventBusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEventBusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
