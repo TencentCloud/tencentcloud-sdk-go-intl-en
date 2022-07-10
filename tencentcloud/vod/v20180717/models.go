@@ -151,6 +151,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
+	// Digital watermark.
+	TraceWatermark *TraceWatermarkInput `json:"TraceWatermark,omitempty" name:"TraceWatermark"`
+
 	// List of subtitle IDs (maximum: 16)
 	SubtitleSet []*string `json:"SubtitleSet,omitempty" name:"SubtitleSet"`
 }
@@ -1702,6 +1705,9 @@ type ApplyUploadRequestParams struct {
 	// Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	MediaType *string `json:"MediaType,omitempty" name:"MediaType"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
@@ -1729,9 +1735,6 @@ type ApplyUploadRequestParams struct {
 
 	// Reserved parameter for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ApplyUploadRequest struct {
@@ -1740,6 +1743,9 @@ type ApplyUploadRequest struct {
 	// Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	MediaType *string `json:"MediaType,omitempty" name:"MediaType"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
@@ -1767,9 +1773,6 @@ type ApplyUploadRequest struct {
 
 	// Reserved parameter for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ApplyUploadRequest) ToJsonString() string {
@@ -1785,6 +1788,7 @@ func (r *ApplyUploadRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "MediaType")
+	delete(f, "SubAppId")
 	delete(f, "MediaName")
 	delete(f, "CoverType")
 	delete(f, "Procedure")
@@ -1794,7 +1798,6 @@ func (r *ApplyUploadRequest) FromJsonString(s string) error {
 	delete(f, "SourceContext")
 	delete(f, "SessionContext")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyUploadRequest has unknown keys!", "")
 	}
@@ -1903,7 +1906,7 @@ type AttachMediaSubtitlesRequestParams struct {
 	// Unique IDs of the subtitles
 	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -1924,7 +1927,7 @@ type AttachMediaSubtitlesRequest struct {
 	// Unique IDs of the subtitles
 	SubtitleIds []*string `json:"SubtitleIds,omitempty" name:"SubtitleIds"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access the resources in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -1974,22 +1977,23 @@ func (r *AttachMediaSubtitlesResponse) FromJsonString(s string) error {
 }
 
 type AudioTemplateInfo struct {
-	// Audio stream encoder.
-	// When the outer `Container` parameter is `mp3`, the valid value is:
-	// <li>libmp3lame.</li>
-	// When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
-	// <li>flac.</li>
-	// When the outer `Container` parameter is `m4a`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame;</li>
-	// <li>ac3.</li>
-	// When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-	// <li>libfdk_aac: more suitable for mp4;</li>
-	// <li>libmp3lame: More suitable for flv;</li>
-	// <li>mp2.</li>
-	// When the outer `Container` parameter is `hls`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame.</li>
+	// The audio codec.
+	// If `Container` parameter is `mp3`, the valid value is:
+	// <li>libmp3lame</li>
+	// If `Container` is `ogg` or `flac`, the valid value is:
+	// <li>flac</li>
+	// If `Container` is `m4a`, the valid values are:
+	// <li>libfdk_aac</li>
+	// <li>libmp3lame</li>
+	// <li>ac3</li>
+	// If `Container` is `mp4` or `flv`, the valid values are:
+	// <li>libfdk_aac: more suitable for mp4</li>
+	// <li>libmp3lame: More suitable for flv</li>
+	// <li>mp2</li>
+	// If `Container` is `hls`, the valid values are:
+	// <li>libfdk_aac</li>
+	// If `Format` is `HLS` or `MPEG-DASH`, the valid values are:
+	// <li>libfdk_aac</li>
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].
@@ -2013,22 +2017,23 @@ type AudioTemplateInfo struct {
 }
 
 type AudioTemplateInfoForUpdate struct {
-	// Audio stream encoder.
-	// When the outer `Container` parameter is `mp3`, the valid value is:
-	// <li>libmp3lame.</li>
-	// When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
-	// <li>flac.</li>
-	// When the outer `Container` parameter is `m4a`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame;</li>
-	// <li>ac3.</li>
-	// When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-	// <li>libfdk_aac: more suitable for mp4;</li>
-	// <li>libmp3lame: More suitable for flv;</li>
-	// <li>mp2.</li>
-	// When the outer `Container` parameter is `hls`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame.</li>
+	// The audio codec.
+	// If `Container` parameter is `mp3`, the valid value is:
+	// <li>libmp3lame</li>
+	// If `Container` is `ogg` or `flac`, the valid value is:
+	// <li>flac</li>
+	// If `Container` is `m4a`, the valid values are:
+	// <li>libfdk_aac</li>
+	// <li>libmp3lame</li>
+	// <li>ac3</li>
+	// If `Container` is `mp4` or `flv`, the valid values are:
+	// <li>libfdk_aac: more suitable for mp4</li>
+	// <li>libmp3lame: More suitable for flv</li>
+	// <li>mp2</li>
+	// If `Container` is `hls`, the valid values are:
+	// <li>libfdk_aac</li>
+	// If `Format` is `HLS` or `MPEG-DASH`, the valid values are:
+	// <li>libfdk_aac</li>
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256]. If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
@@ -2180,7 +2185,7 @@ type CommitUploadRequestParams struct {
 	// VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
 	VodSessionKey *string `json:"VodSessionKey,omitempty" name:"VodSessionKey"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2190,7 +2195,7 @@ type CommitUploadRequest struct {
 	// VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
 	VodSessionKey *string `json:"VodSessionKey,omitempty" name:"VodSessionKey"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2219,12 +2224,10 @@ type CommitUploadResponseParams struct {
 	// Unique ID of media file.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// Media playback address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The media playback URL.
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
 
-	// Media cover address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The thumbnail URL.
 	CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2293,6 +2296,9 @@ type ComposeMediaRequestParams struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitempty" name:"Output"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Canvas used for composing video file.
 	Canvas *Canvas `json:"Canvas,omitempty" name:"Canvas"`
 
@@ -2301,9 +2307,6 @@ type ComposeMediaRequestParams struct {
 
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ComposeMediaRequest struct {
@@ -2315,6 +2318,9 @@ type ComposeMediaRequest struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitempty" name:"Output"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Canvas used for composing video file.
 	Canvas *Canvas `json:"Canvas,omitempty" name:"Canvas"`
 
@@ -2323,9 +2329,6 @@ type ComposeMediaRequest struct {
 
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ComposeMediaRequest) ToJsonString() string {
@@ -2342,10 +2345,10 @@ func (r *ComposeMediaRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Tracks")
 	delete(f, "Output")
+	delete(f, "SubAppId")
 	delete(f, "Canvas")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ComposeMediaRequest has unknown keys!", "")
 	}
@@ -2554,58 +2557,6 @@ func (r *ConfirmEventsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type ContentReviewOcrResult struct {
-	// The confidence score for the OCR-based recognition result. Value range: 0-100.
-	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
-
-	// The suggestion for handling the suspicious content detected based on OCR. Valid values:
-	// <li>pass/li>
-	// <li>review</li>
-	// <li>block</li>
-	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
-
-	// The list of suspicious keywords detected based on OCR.
-	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
-
-	// The coordinates (pixel) of the top-left and bottom-right corners of the frame where a suspicious keyword appears. Format: [x1, y1, x2, y2].
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
-}
-
-type ContentReviewResult struct {
-	// The result type. Valid values:
-	// <li>Porn.Image: Recognition of pornographic content in the image</li>
-	// <li>Terrorism.Image: Recognition of terrorism content in the image</li>
-	// <li>Political.Image: Recognition of politically sensitive content in the image</li>
-	// <li>Porn.Ocr: OCR-based recognition of pornographic content in the image</li>
-	// <li>Terrorism.Ocr: OCR-based recognition of terrorism content in the image</li>
-	// <li>Political.Ocr: OCR-based recognition of politically sensitive content in the image</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The pornographic content detected in the image. This parameter is valid if `Type` is `Porn.Image`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	PornImageResult *PornImageResult `json:"PornImageResult,omitempty" name:"PornImageResult"`
-
-	// The terrorism content detected in the image. This parameter is valid if `Type` is `Terrorism.Image`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	TerrorismImageResult *TerrorismImageResult `json:"TerrorismImageResult,omitempty" name:"TerrorismImageResult"`
-
-	// The politically sensitive content detected in the image. This parameter is valid if `Type` is `Political.Image`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	PoliticalImageResult *PoliticalImageResult `json:"PoliticalImageResult,omitempty" name:"PoliticalImageResult"`
-
-	// The pornographic content detected in the image based on OCR. This parameter is valid if `Type` is `Porn.Ocr`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	PornOcrResult *ContentReviewOcrResult `json:"PornOcrResult,omitempty" name:"PornOcrResult"`
-
-	// The terrorism content detected in the image based on OCR. This parameter is valid if `Type` is `Terrorism.Ocr`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	TerrorismOcrResult *ContentReviewOcrResult `json:"TerrorismOcrResult,omitempty" name:"TerrorismOcrResult"`
-
-	// The politically sensitive content detected in the image based on OCR. This parameter is valid if `Type` is `Political.Ocr`.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	PoliticalOcrResult *ContentReviewOcrResult `json:"PoliticalOcrResult,omitempty" name:"PoliticalOcrResult"`
-}
-
 type ContentReviewTemplateItem struct {
 	// Unique ID of an intelligent recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
@@ -2693,6 +2644,9 @@ type CoverConfigureInfoForUpdate struct {
 
 // Predefined struct for user
 type CreateAIAnalysisTemplateRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content analysis template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2713,14 +2667,14 @@ type CreateAIAnalysisTemplateRequestParams struct {
 
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfo `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateAIAnalysisTemplateRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content analysis template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2741,9 +2695,6 @@ type CreateAIAnalysisTemplateRequest struct {
 
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfo `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateAIAnalysisTemplateRequest) ToJsonString() string {
@@ -2758,6 +2709,7 @@ func (r *CreateAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "ClassificationConfigure")
@@ -2765,7 +2717,6 @@ func (r *CreateAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	delete(f, "CoverConfigure")
 	delete(f, "FrameTagConfigure")
 	delete(f, "HighlightConfigure")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAIAnalysisTemplateRequest has unknown keys!", "")
 	}
@@ -2799,6 +2750,9 @@ func (r *CreateAIAnalysisTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAIRecognitionTemplateRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content recognition template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2831,14 +2785,14 @@ type CreateAIRecognitionTemplateRequestParams struct {
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content recognition template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -2871,9 +2825,6 @@ type CreateAIRecognitionTemplateRequest struct {
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateAIRecognitionTemplateRequest) ToJsonString() string {
@@ -2888,6 +2839,7 @@ func (r *CreateAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "HeadTailConfigure")
@@ -2899,7 +2851,6 @@ func (r *CreateAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AsrWordsConfigure")
 	delete(f, "ObjectConfigure")
 	delete(f, "ScreenshotInterval")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAIRecognitionTemplateRequest has unknown keys!", "")
 	}
@@ -2933,13 +2884,17 @@ func (r *CreateAIRecognitionTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
-	// Adaptive bitstream format. Valid values:
-	// <li>HLS.</li>
+	// The adaptive bitrate streaming format. Valid values:
+	// <li>HLS</li>
+	// <li>MPEG-DASH</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output.
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -2965,21 +2920,22 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Adaptive bitstream format. Valid values:
-	// <li>HLS.</li>
+	// The adaptive bitrate streaming format. Valid values:
+	// <li>HLS</li>
+	// <li>MPEG-DASH</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Parameter information of output substream for adaptive bitrate streaming. Up to 10 substreams can be output.
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -3005,9 +2961,6 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -3024,12 +2977,12 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	}
 	delete(f, "Format")
 	delete(f, "StreamInfos")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "DrmType")
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -3066,6 +3019,9 @@ type CreateAnimatedGraphicsTemplateRequestParams struct {
 	// Video frame rate in Hz. Value range: [1, 30].
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
 	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
 	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
@@ -3099,9 +3055,6 @@ type CreateAnimatedGraphicsTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateAnimatedGraphicsTemplateRequest struct {
@@ -3110,6 +3063,9 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 	// Video frame rate in Hz. Value range: [1, 30].
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
 	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
 	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
@@ -3143,9 +3099,6 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateAnimatedGraphicsTemplateRequest) ToJsonString() string {
@@ -3161,6 +3114,7 @@ func (r *CreateAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Fps")
+	delete(f, "SubAppId")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
@@ -3168,7 +3122,6 @@ func (r *CreateAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Quality")
 	delete(f, "Name")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAnimatedGraphicsTemplateRequest has unknown keys!", "")
 	}
@@ -3208,7 +3161,7 @@ type CreateClassRequestParams struct {
 	// Category name. Length limit: 1-64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3221,7 +3174,7 @@ type CreateClassRequest struct {
 	// Category name. Length limit: 1-64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3278,6 +3231,9 @@ type CreateContentReviewTemplateRequestParams struct {
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3303,9 +3259,6 @@ type CreateContentReviewTemplateRequestParams struct {
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateContentReviewTemplateRequest struct {
@@ -3316,6 +3269,9 @@ type CreateContentReviewTemplateRequest struct {
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3341,9 +3297,6 @@ type CreateContentReviewTemplateRequest struct {
 
 	// Frame capturing interval in seconds. If this parameter is left empty, 1 second will be used by default. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateContentReviewTemplateRequest) ToJsonString() string {
@@ -3359,6 +3312,7 @@ func (r *CreateContentReviewTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ReviewWallSwitch")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "PornConfigure")
@@ -3367,7 +3321,6 @@ func (r *CreateContentReviewTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ProhibitedConfigure")
 	delete(f, "UserDefineConfigure")
 	delete(f, "ScreenshotInterval")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateContentReviewTemplateRequest has unknown keys!", "")
 	}
@@ -3452,6 +3405,9 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3485,9 +3441,6 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateImageSpriteTemplateRequest struct {
@@ -3509,6 +3462,9 @@ type CreateImageSpriteTemplateRequest struct {
 	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitempty" name:"ColumnCount"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3542,9 +3498,6 @@ type CreateImageSpriteTemplateRequest struct {
 	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateImageSpriteTemplateRequest) ToJsonString() string {
@@ -3563,13 +3516,13 @@ func (r *CreateImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "SampleInterval")
 	delete(f, "RowCount")
 	delete(f, "ColumnCount")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "FillType")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -3612,6 +3565,9 @@ type CreatePersonSampleRequestParams struct {
 	// 3. All: equivalent to 1+2.
 	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Description of a sample. Length limit: 1024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
@@ -3623,9 +3579,6 @@ type CreatePersonSampleRequestParams struct {
 	// <li>Array length limit: 20 tags</li>
 	// <li>Length limit of a tag: 128 characters</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreatePersonSampleRequest struct {
@@ -3640,6 +3593,9 @@ type CreatePersonSampleRequest struct {
 	// 3. All: equivalent to 1+2.
 	Usages []*string `json:"Usages,omitempty" name:"Usages"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Description of a sample. Length limit: 1024 characters.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
@@ -3651,9 +3607,6 @@ type CreatePersonSampleRequest struct {
 	// <li>Array length limit: 20 tags</li>
 	// <li>Length limit of a tag: 128 characters</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreatePersonSampleRequest) ToJsonString() string {
@@ -3670,10 +3623,10 @@ func (r *CreatePersonSampleRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Name")
 	delete(f, "Usages")
+	delete(f, "SubAppId")
 	delete(f, "Description")
 	delete(f, "FaceContents")
 	delete(f, "Tags")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePersonSampleRequest has unknown keys!", "")
 	}
@@ -3816,6 +3769,9 @@ type CreateSampleSnapshotTemplateRequestParams struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3846,9 +3802,6 @@ type CreateSampleSnapshotTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -3872,6 +3825,9 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -3902,9 +3858,6 @@ type CreateSampleSnapshotTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -3929,13 +3882,13 @@ func (r *CreateSampleSnapshotTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SampleType")
 	delete(f, "SampleInterval")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
 	delete(f, "Format")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	delete(f, "FillType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSampleSnapshotTemplateRequest has unknown keys!", "")
@@ -3970,6 +3923,9 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4000,9 +3956,6 @@ type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -4016,6 +3969,9 @@ type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
 type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4046,9 +4002,6 @@ type CreateSnapshotByTimeOffsetTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -4071,13 +4024,13 @@ func (r *CreateSnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
 	delete(f, "Format")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	delete(f, "FillType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSnapshotByTimeOffsetTemplateRequest has unknown keys!", "")
@@ -4115,7 +4068,7 @@ type CreateStorageRegionRequestParams struct {
 	// The region to enable storage in, which must be a storage region supported by VOD.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4125,7 +4078,7 @@ type CreateStorageRegionRequest struct {
 	// The region to enable storage in, which must be a storage region supported by VOD.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4240,6 +4193,9 @@ type CreateSuperPlayerConfigRequestParams struct {
 	// Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of audio/video played. Valid values:
 	// <li>AdaptiveDynamicStreaming</li>
 	// <li>Transcode</li>
@@ -4292,9 +4248,6 @@ type CreateSuperPlayerConfigRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateSuperPlayerConfigRequest struct {
@@ -4303,6 +4256,9 @@ type CreateSuperPlayerConfigRequest struct {
 	// Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of audio/video played. Valid values:
 	// <li>AdaptiveDynamicStreaming</li>
 	// <li>Transcode</li>
@@ -4355,9 +4311,6 @@ type CreateSuperPlayerConfigRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateSuperPlayerConfigRequest) ToJsonString() string {
@@ -4373,6 +4326,7 @@ func (r *CreateSuperPlayerConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "SubAppId")
 	delete(f, "AudioVideoType")
 	delete(f, "DrmSwitch")
 	delete(f, "AdaptiveDynamicStreamingDefinition")
@@ -4383,7 +4337,6 @@ func (r *CreateSuperPlayerConfigRequest) FromJsonString(s string) error {
 	delete(f, "Domain")
 	delete(f, "Scheme")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSuperPlayerConfigRequest has unknown keys!", "")
 	}
@@ -4417,6 +4370,9 @@ type CreateTranscodeTemplateRequestParams struct {
 	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Transcoding template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4443,9 +4399,6 @@ type CreateTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateTranscodeTemplateRequest struct {
@@ -4454,6 +4407,9 @@ type CreateTranscodeTemplateRequest struct {
 	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Transcoding template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4480,9 +4436,6 @@ type CreateTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateTranscodeTemplateRequest) ToJsonString() string {
@@ -4498,6 +4451,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Container")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "RemoveVideo")
@@ -4505,7 +4459,6 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -4542,15 +4495,15 @@ type CreateVodDomainRequestParams struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
 	// <li>`Global`</li>
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitempty" name:"AccelerateArea"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateVodDomainRequest struct {
@@ -4559,15 +4512,15 @@ type CreateVodDomainRequest struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
 	// <li>`Global`</li>
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitempty" name:"AccelerateArea"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateVodDomainRequest) ToJsonString() string {
@@ -4583,8 +4536,8 @@ func (r *CreateVodDomainRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Domain")
-	delete(f, "AccelerateArea")
 	delete(f, "SubAppId")
+	delete(f, "AccelerateArea")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVodDomainRequest has unknown keys!", "")
 	}
@@ -4621,6 +4574,9 @@ type CreateWatermarkTemplateRequestParams struct {
 	// <li>svg: SVG watermark.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Watermarking template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4655,9 +4611,6 @@ type CreateWatermarkTemplateRequestParams struct {
 
 	// SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
 	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type CreateWatermarkTemplateRequest struct {
@@ -4669,6 +4622,9 @@ type CreateWatermarkTemplateRequest struct {
 	// <li>svg: SVG watermark.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Watermarking template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -4703,9 +4659,6 @@ type CreateWatermarkTemplateRequest struct {
 
 	// SVG watermarking template. This field is required when `Type` is `svg` and is invalid when `Type` is `image` or `text`.
 	SvgTemplate *SvgWatermarkInput `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateWatermarkTemplateRequest) ToJsonString() string {
@@ -4721,6 +4674,7 @@ func (r *CreateWatermarkTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Type")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "CoordinateOrigin")
@@ -4729,7 +4683,6 @@ func (r *CreateWatermarkTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ImageTemplate")
 	delete(f, "TextTemplate")
 	delete(f, "SvgTemplate")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateWatermarkTemplateRequest has unknown keys!", "")
 	}
@@ -4780,7 +4733,7 @@ type CreateWordSamplesRequestParams struct {
 	// Keyword. Array length limit: 100.
 	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4801,7 +4754,7 @@ type CreateWordSamplesRequest struct {
 	// Keyword. Array length limit: 100.
 	Words []*AiSampleWordInfo `json:"Words,omitempty" name:"Words"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4853,7 +4806,7 @@ type DeleteAIAnalysisTemplateRequestParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4863,7 +4816,7 @@ type DeleteAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4914,7 +4867,7 @@ type DeleteAIRecognitionTemplateRequestParams struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4924,7 +4877,7 @@ type DeleteAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4975,7 +4928,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -4985,7 +4938,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5036,7 +4989,7 @@ type DeleteAnimatedGraphicsTemplateRequestParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5046,7 +4999,7 @@ type DeleteAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5097,7 +5050,7 @@ type DeleteClassRequestParams struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5107,7 +5060,7 @@ type DeleteClassRequest struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5158,7 +5111,7 @@ type DeleteContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5168,7 +5121,7 @@ type DeleteContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5219,7 +5172,7 @@ type DeleteImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5229,7 +5182,7 @@ type DeleteImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5280,11 +5233,11 @@ type DeleteMediaRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
 	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DeleteMediaRequest struct {
@@ -5293,11 +5246,11 @@ type DeleteMediaRequest struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
 	DeleteParts []*MediaDeleteItem `json:"DeleteParts,omitempty" name:"DeleteParts"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DeleteMediaRequest) ToJsonString() string {
@@ -5313,8 +5266,8 @@ func (r *DeleteMediaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileId")
-	delete(f, "DeleteParts")
 	delete(f, "SubAppId")
+	delete(f, "DeleteParts")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMediaRequest has unknown keys!", "")
 	}
@@ -5348,7 +5301,7 @@ type DeletePersonSampleRequestParams struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5358,7 +5311,7 @@ type DeletePersonSampleRequest struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5409,7 +5362,7 @@ type DeleteProcedureTemplateRequestParams struct {
 	// Task flow name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5419,7 +5372,7 @@ type DeleteProcedureTemplateRequest struct {
 	// Task flow name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5470,7 +5423,7 @@ type DeleteSampleSnapshotTemplateRequestParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5480,7 +5433,7 @@ type DeleteSampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5531,7 +5484,7 @@ type DeleteSnapshotByTimeOffsetTemplateRequestParams struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5541,7 +5494,7 @@ type DeleteSnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5592,7 +5545,7 @@ type DeleteSuperPlayerConfigRequestParams struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5602,7 +5555,7 @@ type DeleteSuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5653,7 +5606,7 @@ type DeleteTranscodeTemplateRequestParams struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5663,7 +5616,7 @@ type DeleteTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5714,7 +5667,7 @@ type DeleteVodDomainRequestParams struct {
 	// Domain name to delete from VOD
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5724,7 +5677,7 @@ type DeleteVodDomainRequest struct {
 	// Domain name to delete from VOD
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5775,7 +5728,7 @@ type DeleteWatermarkTemplateRequestParams struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5785,7 +5738,7 @@ type DeleteWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5836,7 +5789,7 @@ type DeleteWordSamplesRequestParams struct {
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5846,7 +5799,7 @@ type DeleteWordSamplesRequest struct {
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -5894,6 +5847,9 @@ func (r *DeleteWordSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIAnalysisTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -5902,14 +5858,14 @@ type DescribeAIAnalysisTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -5918,9 +5874,6 @@ type DescribeAIAnalysisTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeAIAnalysisTemplatesRequest) ToJsonString() string {
@@ -5935,10 +5888,10 @@ func (r *DescribeAIAnalysisTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIAnalysisTemplatesRequest has unknown keys!", "")
 	}
@@ -5975,6 +5928,9 @@ func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIRecognitionTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -5983,14 +5939,14 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -5999,9 +5955,6 @@ type DescribeAIRecognitionTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeAIRecognitionTemplatesRequest) ToJsonString() string {
@@ -6016,10 +5969,10 @@ func (r *DescribeAIRecognitionTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIRecognitionTemplatesRequest has unknown keys!", "")
 	}
@@ -6056,6 +6009,9 @@ func (r *DescribeAIRecognitionTemplatesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6069,14 +6025,14 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6090,9 +6046,6 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) ToJsonString() string {
@@ -6107,11 +6060,11 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) FromJsonString(s stri
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAdaptiveDynamicStreamingTemplatesRequest has unknown keys!", "")
 	}
@@ -6148,14 +6101,14 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s str
 
 // Predefined struct for user
 type DescribeAllClassRequestParams struct {
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeAllClassRequest struct {
 	*tchttp.BaseRequest
 	
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6206,6 +6159,9 @@ func (r *DescribeAllClassResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAnimatedGraphicsTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6219,14 +6175,14 @@ type DescribeAnimatedGraphicsTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeAnimatedGraphicsTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6240,9 +6196,6 @@ type DescribeAnimatedGraphicsTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeAnimatedGraphicsTemplatesRequest) ToJsonString() string {
@@ -6257,11 +6210,11 @@ func (r *DescribeAnimatedGraphicsTemplatesRequest) FromJsonString(s string) erro
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAnimatedGraphicsTemplatesRequest has unknown keys!", "")
 	}
@@ -6310,6 +6263,9 @@ type DescribeCDNStatDetailsRequestParams struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
 
@@ -6379,9 +6335,6 @@ type DescribeCDNStatDetailsRequestParams struct {
 	// <li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned. If the query period is larger than 24 hours, only data at 1-day granularity can be queried.</li>
 	// If the difference between `StartTime` and `EndTime` is larger than 24 hours, the default value of `DataInterval` is 1440.
 	DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeCDNStatDetailsRequest struct {
@@ -6399,6 +6352,9 @@ type DescribeCDNStatDetailsRequest struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
 
@@ -6468,9 +6424,6 @@ type DescribeCDNStatDetailsRequest struct {
 	// <li>1440: 1-day granularity. The data at 1-day granularity in the query period will be returned. If the query period is larger than 24 hours, only data at 1-day granularity can be queried.</li>
 	// If the difference between `StartTime` and `EndTime` is larger than 24 hours, the default value of `DataInterval` is 1440.
 	DataInterval *uint64 `json:"DataInterval,omitempty" name:"DataInterval"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeCDNStatDetailsRequest) ToJsonString() string {
@@ -6488,12 +6441,12 @@ func (r *DescribeCDNStatDetailsRequest) FromJsonString(s string) error {
 	delete(f, "Metric")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
+	delete(f, "SubAppId")
 	delete(f, "DomainNames")
 	delete(f, "Area")
 	delete(f, "Districts")
 	delete(f, "Isps")
 	delete(f, "DataInterval")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCDNStatDetailsRequest has unknown keys!", "")
 	}
@@ -6541,6 +6494,10 @@ type DescribeCDNUsageDataRequestParams struct {
 	// <li>Bandwidth: bandwidth in bps.</li>
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin (only 1-day granularity is supported).</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Time granularity of usage data in minutes. Valid values:
 	// <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
 	// <li>60: 1-hour granularity. The data at 1-hour granularity in the query period will be returned.</li>
@@ -6550,10 +6507,6 @@ type DescribeCDNUsageDataRequestParams struct {
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. You can specify multiple domain names and query their combined usage data. The usage data of all domain names will be returned by default.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeCDNUsageDataRequest struct {
@@ -6570,6 +6523,10 @@ type DescribeCDNUsageDataRequest struct {
 	// <li>Bandwidth: bandwidth in bps.</li>
 	DataType *string `json:"DataType,omitempty" name:"DataType"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin (only 1-day granularity is supported).</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Time granularity of usage data in minutes. Valid values:
 	// <li>5: 5-minute granularity. The data at 5-minute granularity in the query period will be returned.</li>
 	// <li>60: 1-hour granularity. The data at 1-hour granularity in the query period will be returned.</li>
@@ -6579,10 +6536,6 @@ type DescribeCDNUsageDataRequest struct {
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. You can specify multiple domain names and query their combined usage data. The usage data of all domain names will be returned by default.
 	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin. In this case, only 1-day granularity is supported.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeCDNUsageDataRequest) ToJsonString() string {
@@ -6600,9 +6553,9 @@ func (r *DescribeCDNUsageDataRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "DataType")
+	delete(f, "SubAppId")
 	delete(f, "DataInterval")
 	delete(f, "DomainNames")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCDNUsageDataRequest has unknown keys!", "")
 	}
@@ -6648,14 +6601,14 @@ type DescribeCdnLogsRequestParams struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeCdnLogsRequest struct {
@@ -6670,14 +6623,14 @@ type DescribeCdnLogsRequest struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeCdnLogsRequest) ToJsonString() string {
@@ -6695,9 +6648,9 @@ func (r *DescribeCdnLogsRequest) FromJsonString(s string) error {
 	delete(f, "DomainName")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
+	delete(f, "SubAppId")
 	delete(f, "Limit")
 	delete(f, "Offset")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCdnLogsRequest has unknown keys!", "")
 	}
@@ -6740,6 +6693,9 @@ func (r *DescribeCdnLogsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6748,14 +6704,14 @@ type DescribeContentReviewTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6764,9 +6720,6 @@ type DescribeContentReviewTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeContentReviewTemplatesRequest) ToJsonString() string {
@@ -6781,10 +6734,10 @@ func (r *DescribeContentReviewTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeContentReviewTemplatesRequest has unknown keys!", "")
 	}
@@ -6827,7 +6780,7 @@ type DescribeDailyPlayStatFileListRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6840,7 +6793,7 @@ type DescribeDailyPlayStatFileListRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6898,7 +6851,7 @@ type DescribeImageReviewUsageDataRequestParams struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6911,7 +6864,7 @@ type DescribeImageReviewUsageDataRequest struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -6963,6 +6916,9 @@ func (r *DescribeImageReviewUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageSpriteTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6976,14 +6932,14 @@ type DescribeImageSpriteTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -6997,9 +6953,6 @@ type DescribeImageSpriteTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeImageSpriteTemplatesRequest) ToJsonString() string {
@@ -7014,11 +6967,11 @@ func (r *DescribeImageSpriteTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageSpriteTemplatesRequest has unknown keys!", "")
 	}
@@ -7238,14 +7191,14 @@ type DescribeMediaPlayStatDetailsRequestParams struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Granularity. Valid values:
 	// <li>Hour</li>
 	// <li>Day</li>
 	// The default value depends on the time period queried. If the time period is shorter than one day, the default value is `Hour`; if the time period is one day or longer, the default value is `Day`.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeMediaPlayStatDetailsRequest struct {
@@ -7260,14 +7213,14 @@ type DescribeMediaPlayStatDetailsRequest struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Granularity. Valid values:
 	// <li>Hour</li>
 	// <li>Day</li>
 	// The default value depends on the time period queried. If the time period is shorter than one day, the default value is `Hour`; if the time period is one day or longer, the default value is `Day`.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeMediaPlayStatDetailsRequest) ToJsonString() string {
@@ -7285,8 +7238,8 @@ func (r *DescribeMediaPlayStatDetailsRequest) FromJsonString(s string) error {
 	delete(f, "FileId")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
-	delete(f, "Interval")
 	delete(f, "SubAppId")
+	delete(f, "Interval")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaPlayStatDetailsRequest has unknown keys!", "")
 	}
@@ -7414,6 +7367,9 @@ func (r *DescribeMediaProcessUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePersonSamplesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of samples to pull. Valid values:
 	// <li>UserDefine: custom sample library</li>
 	// <li>Default: default sample library</li>
@@ -7436,14 +7392,14 @@ type DescribePersonSamplesRequestParams struct {
 
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of samples to pull. Valid values:
 	// <li>UserDefine: custom sample library</li>
 	// <li>Default: default sample library</li>
@@ -7466,9 +7422,6 @@ type DescribePersonSamplesRequest struct {
 
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribePersonSamplesRequest) ToJsonString() string {
@@ -7483,13 +7436,13 @@ func (r *DescribePersonSamplesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Type")
 	delete(f, "PersonIds")
 	delete(f, "Names")
 	delete(f, "Tags")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePersonSamplesRequest has unknown keys!", "")
 	}
@@ -7624,7 +7577,7 @@ type DescribeReviewDetailsRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7637,7 +7590,7 @@ type DescribeReviewDetailsRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7695,6 +7648,9 @@ func (r *DescribeReviewDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSampleSnapshotTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -7708,14 +7664,14 @@ type DescribeSampleSnapshotTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -7729,9 +7685,6 @@ type DescribeSampleSnapshotTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeSampleSnapshotTemplatesRequest) ToJsonString() string {
@@ -7746,11 +7699,11 @@ func (r *DescribeSampleSnapshotTemplatesRequest) FromJsonString(s string) error 
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSampleSnapshotTemplatesRequest has unknown keys!", "")
 	}
@@ -7787,6 +7740,9 @@ func (r *DescribeSampleSnapshotTemplatesResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -7800,14 +7756,14 @@ type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -7821,9 +7777,6 @@ type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeSnapshotByTimeOffsetTemplatesRequest) ToJsonString() string {
@@ -7838,11 +7791,11 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesRequest) FromJsonString(s string) 
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotByTimeOffsetTemplatesRequest has unknown keys!", "")
 	}
@@ -7879,14 +7832,14 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
 
 // Predefined struct for user
 type DescribeStorageDataRequestParams struct {
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeStorageDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -7917,11 +7870,17 @@ type DescribeStorageDataResponseParams struct {
 	// Total current storage capacity in bytes.
 	TotalStorage *uint64 `json:"TotalStorage,omitempty" name:"TotalStorage"`
 
+	// Current Standard storage capacity in bytes.
+	StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
+
 	// Current Standard_IA storage capacity in bytes.
 	InfrequentStorage *uint64 `json:"InfrequentStorage,omitempty" name:"InfrequentStorage"`
 
-	// Current Standard storage capacity in bytes.
-	StandardStorage *uint64 `json:"StandardStorage,omitempty" name:"StandardStorage"`
+	// The current ARCHIVE storage usage in bytes.
+	ArchiveStorage *uint64 `json:"ArchiveStorage,omitempty" name:"ArchiveStorage"`
+
+	// The current DEEP ARCHIVE storage usage in bytes.
+	DeepArchiveStorage *uint64 `json:"DeepArchiveStorage,omitempty" name:"DeepArchiveStorage"`
 
 	// Storage usage by billing region.
 	StorageStat []*StorageStatData `json:"StorageStat,omitempty" name:"StorageStat"`
@@ -7954,6 +7913,10 @@ type DescribeStorageDetailsRequestParams struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Time granularity. Valid values:
 	// <li>Minute: 5-minute granularity</li>
 	// <li>Day: 1-day granularity</li>
@@ -7976,10 +7939,6 @@ type DescribeStorageDetailsRequestParams struct {
 	// <li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
 	// Default value: `TotalStorage`
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Storage region to query. Valid values:
 	// <li>Chinese Mainland</li>
@@ -7997,6 +7956,10 @@ type DescribeStorageDetailsRequest struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Time granularity. Valid values:
 	// <li>Minute: 5-minute granularity</li>
 	// <li>Day: 1-day granularity</li>
@@ -8019,10 +7982,6 @@ type DescribeStorageDetailsRequest struct {
 	// <li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
 	// Default value: `TotalStorage`
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	// When the value of this field is 1, the total usage of all subapplications (including primary application) are queried by an admin.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Storage region to query. Valid values:
 	// <li>Chinese Mainland</li>
@@ -8045,9 +8004,9 @@ func (r *DescribeStorageDetailsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "StartTime")
 	delete(f, "EndTime")
+	delete(f, "SubAppId")
 	delete(f, "Interval")
 	delete(f, "StorageType")
-	delete(f, "SubAppId")
 	delete(f, "Area")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStorageDetailsRequest has unknown keys!", "")
@@ -8082,14 +8041,14 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStorageRegionsRequestParams struct {
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeStorageRegionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8454,6 +8413,9 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTasksRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -8476,14 +8438,14 @@ type DescribeTasksRequestParams struct {
 
 	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
 	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -8506,9 +8468,6 @@ type DescribeTasksRequest struct {
 
 	// Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.
 	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeTasksRequest) ToJsonString() string {
@@ -8523,6 +8482,7 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Status")
 	delete(f, "FileId")
 	delete(f, "CreateTime")
@@ -8530,7 +8490,6 @@ func (r *DescribeTasksRequest) FromJsonString(s string) error {
 	delete(f, "Sort")
 	delete(f, "Limit")
 	delete(f, "ScrollToken")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTasksRequest has unknown keys!", "")
 	}
@@ -8567,6 +8526,9 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTranscodeTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of transcoding templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -8590,14 +8552,14 @@ type DescribeTranscodeTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Unique ID filter of transcoding templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
 
@@ -8621,9 +8583,6 @@ type DescribeTranscodeTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -8638,13 +8597,13 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Definitions")
 	delete(f, "Type")
 	delete(f, "ContainerType")
 	delete(f, "TEHDType")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -8765,8 +8724,8 @@ func (r *DescribeVodDomainsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWatermarkTemplatesRequestParams struct {
-	// Unique ID filter of watermarking templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
 	// <li>image: image watermark;</li>
@@ -8776,20 +8735,20 @@ type DescribeWatermarkTemplatesRequestParams struct {
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
+	// Unique ID filter of watermarking templates. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
 	// Number of returned entries
 	// <li>Default value: 10;</li>
 	// <li>Maximum value: 100.</li>
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID filter of watermarking templates. Array length limit: 100.
-	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
 	// <li>image: image watermark;</li>
@@ -8799,13 +8758,13 @@ type DescribeWatermarkTemplatesRequest struct {
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
+	// Unique ID filter of watermarking templates. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
 	// Number of returned entries
 	// <li>Default value: 10;</li>
 	// <li>Maximum value: 100.</li>
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeWatermarkTemplatesRequest) ToJsonString() string {
@@ -8820,11 +8779,11 @@ func (r *DescribeWatermarkTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "Definitions")
+	delete(f, "SubAppId")
 	delete(f, "Type")
 	delete(f, "Offset")
+	delete(f, "Definitions")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWatermarkTemplatesRequest has unknown keys!", "")
 	}
@@ -8862,6 +8821,9 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWordSamplesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
 	// 2. Recognition.Asr: ASR-based content recognition
@@ -8884,14 +8846,14 @@ type DescribeWordSamplesRequestParams struct {
 
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
 	// 2. Recognition.Asr: ASR-based content recognition
@@ -8914,9 +8876,6 @@ type DescribeWordSamplesRequest struct {
 
 	// Number of entries to be returned. Default value: 100. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeWordSamplesRequest) ToJsonString() string {
@@ -8931,12 +8890,12 @@ func (r *DescribeWordSamplesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Usages")
 	delete(f, "Keywords")
 	delete(f, "Tags")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWordSamplesRequest has unknown keys!", "")
 	}
@@ -9243,6 +9202,9 @@ type ExecuteFunctionRequestParams struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitempty" name:"FunctionArg"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
@@ -9251,9 +9213,6 @@ type ExecuteFunctionRequestParams struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ExecuteFunctionRequest struct {
@@ -9265,6 +9224,9 @@ type ExecuteFunctionRequest struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitempty" name:"FunctionArg"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
@@ -9273,9 +9235,6 @@ type ExecuteFunctionRequest struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ExecuteFunctionRequest) ToJsonString() string {
@@ -9292,10 +9251,10 @@ func (r *ExecuteFunctionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FunctionName")
 	delete(f, "FunctionArg")
+	delete(f, "SubAppId")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExecuteFunctionRequest has unknown keys!", "")
 	}
@@ -9422,7 +9381,7 @@ type ForbidMediaDistributionRequestParams struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9435,7 +9394,7 @@ type ForbidMediaDistributionRequest struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9547,12 +9506,6 @@ type HighlightsConfigureInfoForUpdate struct {
 	// <li>ON: enable an intelligent highlight generating task;</li>
 	// <li>OFF: disable an intelligent highlight generating task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
-}
-
-type ImageContentReviewInput struct {
-	// The ID of the image recognition template to use. Valid values:
-	// <li>10: All recognition types enabled</li>
-	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type ImageReviewUsageDataItem struct {
@@ -9731,6 +9684,9 @@ type LiveRealTimeClipRequestParams struct {
 	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
 
@@ -9748,9 +9704,6 @@ type LiveRealTimeClipRequestParams struct {
 
 	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type LiveRealTimeClipRequest struct {
@@ -9765,6 +9718,9 @@ type LiveRealTimeClipRequest struct {
 	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
 
@@ -9782,9 +9738,6 @@ type LiveRealTimeClipRequest struct {
 
 	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *LiveRealTimeClipRequest) ToJsonString() string {
@@ -9802,13 +9755,13 @@ func (r *LiveRealTimeClipRequest) FromJsonString(s string) error {
 	delete(f, "StreamId")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
+	delete(f, "SubAppId")
 	delete(f, "IsPersistence")
 	delete(f, "ExpireTime")
 	delete(f, "Procedure")
 	delete(f, "MetaDataRequired")
 	delete(f, "Host")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LiveRealTimeClipRequest has unknown keys!", "")
 	}
@@ -9861,7 +9814,7 @@ type ManageTaskRequestParams struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -9875,7 +9828,7 @@ type ManageTaskRequest struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -10946,29 +10899,29 @@ type MediaTranscodeItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Total size of a media file in bytes (which is the sum of size of m3u8 and ts files if the video is in HLS format).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The file size (bytes).
+	// <li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
 	Size *int64 `json:"Size,omitempty" name:"Size"`
 
 	// Video duration in seconds.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
 
-	// Container, such as m4a and mp4.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	Container *string `json:"Container,omitempty" name:"Container"`
-
 	// MD5 value of video.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Md5 *string `json:"Md5,omitempty" name:"Md5"`
 
-	// Audio stream information.
+	// Container, such as m4a and mp4.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
+	Container *string `json:"Container,omitempty" name:"Container"`
 
 	// Video stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitempty" name:"VideoStreamSet"`
+
+	// Audio stream information.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
 }
 
 type MediaTransitionItem struct {
@@ -11007,6 +10960,9 @@ type ModifyAIAnalysisTemplateRequestParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content analysis template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11027,9 +10983,6 @@ type ModifyAIAnalysisTemplateRequestParams struct {
 
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfoForUpdate `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyAIAnalysisTemplateRequest struct {
@@ -11038,6 +10991,9 @@ type ModifyAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content analysis template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11058,9 +11014,6 @@ type ModifyAIAnalysisTemplateRequest struct {
 
 	// Control parameter of an intelligent highlight generating task.
 	HighlightConfigure *HighlightsConfigureInfoForUpdate `json:"HighlightConfigure,omitempty" name:"HighlightConfigure"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyAIAnalysisTemplateRequest) ToJsonString() string {
@@ -11076,6 +11029,7 @@ func (r *ModifyAIAnalysisTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "ClassificationConfigure")
@@ -11083,7 +11037,6 @@ func (r *ModifyAIAnalysisTemplateRequest) FromJsonString(s string) error {
 	delete(f, "CoverConfigure")
 	delete(f, "FrameTagConfigure")
 	delete(f, "HighlightConfigure")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAIAnalysisTemplateRequest has unknown keys!", "")
 	}
@@ -11117,6 +11070,9 @@ type ModifyAIRecognitionTemplateRequestParams struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content recognition template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11149,9 +11105,6 @@ type ModifyAIRecognitionTemplateRequestParams struct {
 
 	// Frame capturing interval in seconds. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyAIRecognitionTemplateRequest struct {
@@ -11160,6 +11113,9 @@ type ModifyAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Video content recognition template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11192,9 +11148,6 @@ type ModifyAIRecognitionTemplateRequest struct {
 
 	// Frame capturing interval in seconds. Minimum value: 0.5 seconds.
 	ScreenshotInterval *float64 `json:"ScreenshotInterval,omitempty" name:"ScreenshotInterval"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyAIRecognitionTemplateRequest) ToJsonString() string {
@@ -11210,6 +11163,7 @@ func (r *ModifyAIRecognitionTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "HeadTailConfigure")
@@ -11221,7 +11175,6 @@ func (r *ModifyAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AsrWordsConfigure")
 	delete(f, "ObjectConfigure")
 	delete(f, "ScreenshotInterval")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAIRecognitionTemplateRequest has unknown keys!", "")
 	}
@@ -11255,11 +11208,15 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Adaptive bitstream format. Valid values:
-	// <li>HLS.</li>
+	// The adaptive bitrate streaming format. Valid values:
+	// <li>HLS</li>
+	// <li>MPEG-DASH</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
@@ -11278,9 +11235,6 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
@@ -11289,11 +11243,15 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Adaptive bitstream format. Valid values:
-	// <li>HLS.</li>
+	// The adaptive bitrate streaming format. Valid values:
+	// <li>HLS</li>
+	// <li>MPEG-DASH</li>
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
@@ -11312,9 +11270,6 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -11330,13 +11285,13 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Format")
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "StreamInfos")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -11370,6 +11325,9 @@ type ModifyAnimatedGraphicsTemplateRequestParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an animated image generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11406,9 +11364,6 @@ type ModifyAnimatedGraphicsTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyAnimatedGraphicsTemplateRequest struct {
@@ -11417,6 +11372,9 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an animated image generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11453,9 +11411,6 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyAnimatedGraphicsTemplateRequest) ToJsonString() string {
@@ -11471,6 +11426,7 @@ func (r *ModifyAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
@@ -11479,7 +11435,6 @@ func (r *ModifyAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Fps")
 	delete(f, "Quality")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAnimatedGraphicsTemplateRequest has unknown keys!", "")
 	}
@@ -11516,7 +11471,7 @@ type ModifyClassRequestParams struct {
 	// Category name, which can contain 1–64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -11529,7 +11484,7 @@ type ModifyClassRequest struct {
 	// Category name, which can contain 1–64 characters.
 	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -11581,6 +11536,9 @@ type ModifyContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11611,9 +11569,6 @@ type ModifyContentReviewTemplateRequestParams struct {
 	// <li>ON: yes</li>
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyContentReviewTemplateRequest struct {
@@ -11622,6 +11577,9 @@ type ModifyContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11652,9 +11610,6 @@ type ModifyContentReviewTemplateRequest struct {
 	// <li>ON: yes</li>
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitempty" name:"ReviewWallSwitch"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyContentReviewTemplateRequest) ToJsonString() string {
@@ -11670,6 +11625,7 @@ func (r *ModifyContentReviewTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "TerrorismConfigure")
@@ -11679,7 +11635,6 @@ func (r *ModifyContentReviewTemplateRequest) FromJsonString(s string) error {
 	delete(f, "UserDefineConfigure")
 	delete(f, "ScreenshotInterval")
 	delete(f, "ReviewWallSwitch")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyContentReviewTemplateRequest has unknown keys!", "")
 	}
@@ -11713,7 +11668,7 @@ type ModifyDefaultStorageRegionRequestParams struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -11723,7 +11678,7 @@ type ModifyDefaultStorageRegionRequest struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -11774,6 +11729,9 @@ type ModifyImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11813,9 +11771,6 @@ type ModifyImageSpriteTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyImageSpriteTemplateRequest struct {
@@ -11824,6 +11779,9 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of an image sprite generating template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11863,9 +11821,6 @@ type ModifyImageSpriteTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyImageSpriteTemplateRequest) ToJsonString() string {
@@ -11881,6 +11836,7 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
@@ -11891,7 +11847,6 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ColumnCount")
 	delete(f, "FillType")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -11925,6 +11880,9 @@ type ModifyMediaInfoRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Media filename, which can contain up to 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -11969,9 +11927,6 @@ type ModifyMediaInfoRequestParams struct {
 	// The value `1` indicates to delete all subtitle information of the media file. Other values are meaningless.
 	// `ClearSubtitles` and `AddSubtitles` cannot co-exist in the same request.
 	ClearSubtitles *int64 `json:"ClearSubtitles,omitempty" name:"ClearSubtitles"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyMediaInfoRequest struct {
@@ -11980,6 +11935,9 @@ type ModifyMediaInfoRequest struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Media filename, which can contain up to 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12024,9 +11982,6 @@ type ModifyMediaInfoRequest struct {
 	// The value `1` indicates to delete all subtitle information of the media file. Other values are meaningless.
 	// `ClearSubtitles` and `AddSubtitles` cannot co-exist in the same request.
 	ClearSubtitles *int64 `json:"ClearSubtitles,omitempty" name:"ClearSubtitles"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyMediaInfoRequest) ToJsonString() string {
@@ -12042,6 +11997,7 @@ func (r *ModifyMediaInfoRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileId")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Description")
 	delete(f, "ClassId")
@@ -12056,7 +12012,6 @@ func (r *ModifyMediaInfoRequest) FromJsonString(s string) error {
 	delete(f, "AddSubtitles")
 	delete(f, "DeleteSubtitleIds")
 	delete(f, "ClearSubtitles")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMediaInfoRequest has unknown keys!", "")
 	}
@@ -12104,7 +12059,7 @@ type ModifyMediaStorageClassRequestParams struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -12131,7 +12086,7 @@ type ModifyMediaStorageClassRequest struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitempty" name:"StorageClass"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -12194,6 +12149,9 @@ type ModifyPersonSampleRequestParams struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name. Length limit: 128 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12211,9 +12169,6 @@ type ModifyPersonSampleRequestParams struct {
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyPersonSampleRequest struct {
@@ -12222,6 +12177,9 @@ type ModifyPersonSampleRequest struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name. Length limit: 128 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12239,9 +12197,6 @@ type ModifyPersonSampleRequest struct {
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyPersonSampleRequest) ToJsonString() string {
@@ -12257,12 +12212,12 @@ func (r *ModifyPersonSampleRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "PersonId")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Description")
 	delete(f, "Usages")
 	delete(f, "FaceOperationInfo")
 	delete(f, "TagOperationInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPersonSampleRequest has unknown keys!", "")
 	}
@@ -12303,6 +12258,9 @@ type ModifySampleSnapshotTemplateRequestParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12343,9 +12301,6 @@ type ModifySampleSnapshotTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -12362,6 +12317,9 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12402,9 +12360,6 @@ type ModifySampleSnapshotTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -12428,6 +12383,7 @@ func (r *ModifySampleSnapshotTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
@@ -12436,7 +12392,6 @@ func (r *ModifySampleSnapshotTemplateRequest) FromJsonString(s string) error {
 	delete(f, "SampleInterval")
 	delete(f, "Format")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	delete(f, "FillType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySampleSnapshotTemplateRequest has unknown keys!", "")
@@ -12471,6 +12426,9 @@ type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12501,9 +12459,6 @@ type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -12520,6 +12475,9 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -12550,9 +12508,6 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// ID of a [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
 	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
@@ -12576,13 +12531,13 @@ func (r *ModifySnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
 	delete(f, "Format")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	delete(f, "FillType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapshotByTimeOffsetTemplateRequest has unknown keys!", "")
@@ -12614,7 +12569,7 @@ func (r *ModifySnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type ModifySubAppIdInfoRequestParams struct {
-	// Subapplication ID.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -12627,7 +12582,7 @@ type ModifySubAppIdInfoRequestParams struct {
 type ModifySubAppIdInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Subapplication ID.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -12682,7 +12637,7 @@ func (r *ModifySubAppIdInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySubAppIdStatusRequestParams struct {
-	// Subapplication ID.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
@@ -12696,7 +12651,7 @@ type ModifySubAppIdStatusRequestParams struct {
 type ModifySubAppIdStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Subapplication ID.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
@@ -12901,6 +12856,9 @@ type ModifyTranscodeTemplateRequestParams struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
@@ -12928,9 +12886,6 @@ type ModifyTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyTranscodeTemplateRequest struct {
@@ -12939,6 +12894,9 @@ type ModifyTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Container. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
 	Container *string `json:"Container,omitempty" name:"Container"`
 
@@ -12966,9 +12924,6 @@ type ModifyTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyTranscodeTemplateRequest) ToJsonString() string {
@@ -12984,6 +12939,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Container")
 	delete(f, "Name")
 	delete(f, "Comment")
@@ -12992,7 +12948,6 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -13037,7 +12992,7 @@ type ModifyVodDomainAccelerateConfigRequestParams struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -13058,7 +13013,7 @@ type ModifyVodDomainAccelerateConfigRequest struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -13111,14 +13066,14 @@ type ModifyVodDomainConfigRequestParams struct {
 	// Domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
 	RefererAuthPolicy *RefererAuthPolicy `json:"RefererAuthPolicy,omitempty" name:"RefererAuthPolicy"`
 
 	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
 	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyVodDomainConfigRequest struct {
@@ -13127,14 +13082,14 @@ type ModifyVodDomainConfigRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
 	RefererAuthPolicy *RefererAuthPolicy `json:"RefererAuthPolicy,omitempty" name:"RefererAuthPolicy"`
 
 	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
 	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
-
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyVodDomainConfigRequest) ToJsonString() string {
@@ -13150,9 +13105,9 @@ func (r *ModifyVodDomainConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Domain")
+	delete(f, "SubAppId")
 	delete(f, "RefererAuthPolicy")
 	delete(f, "UrlSignatureAuthPolicy")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVodDomainConfigRequest has unknown keys!", "")
 	}
@@ -13186,6 +13141,9 @@ type ModifyWatermarkTemplateRequestParams struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Watermarking template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -13217,9 +13175,6 @@ type ModifyWatermarkTemplateRequestParams struct {
 
 	// SVG watermarking template. This field is only valid for SVG watermarking templates.
 	SvgTemplate *SvgWatermarkInputForUpdate `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyWatermarkTemplateRequest struct {
@@ -13228,6 +13183,9 @@ type ModifyWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Watermarking template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
@@ -13259,9 +13217,6 @@ type ModifyWatermarkTemplateRequest struct {
 
 	// SVG watermarking template. This field is only valid for SVG watermarking templates.
 	SvgTemplate *SvgWatermarkInputForUpdate `json:"SvgTemplate,omitempty" name:"SvgTemplate"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyWatermarkTemplateRequest) ToJsonString() string {
@@ -13277,6 +13232,7 @@ func (r *ModifyWatermarkTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Definition")
+	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "CoordinateOrigin")
@@ -13285,7 +13241,6 @@ func (r *ModifyWatermarkTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ImageTemplate")
 	delete(f, "TextTemplate")
 	delete(f, "SvgTemplate")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyWatermarkTemplateRequest has unknown keys!", "")
 	}
@@ -13323,6 +13278,9 @@ type ModifyWordSampleRequestParams struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
 	// 2. Recognition.Asr: ASR-based content recognition
@@ -13336,9 +13294,6 @@ type ModifyWordSampleRequestParams struct {
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifyWordSampleRequest struct {
@@ -13347,6 +13302,9 @@ type ModifyWordSampleRequest struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// <b>Keyword usage. Valid values:</b>
 	// 1. Recognition.Ocr: OCR-based content recognition
 	// 2. Recognition.Asr: ASR-based content recognition
@@ -13360,9 +13318,6 @@ type ModifyWordSampleRequest struct {
 
 	// Tag operation information.
 	TagOperationInfo *AiSampleTagOperation `json:"TagOperationInfo,omitempty" name:"TagOperationInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifyWordSampleRequest) ToJsonString() string {
@@ -13378,9 +13333,9 @@ func (r *ModifyWordSampleRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Keyword")
+	delete(f, "SubAppId")
 	delete(f, "Usages")
 	delete(f, "TagOperationInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyWordSampleRequest has unknown keys!", "")
 	}
@@ -13746,23 +13701,6 @@ type PoliticalConfigureInfoForUpdate struct {
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
-type PoliticalImageResult struct {
-	// The confidence score for the politically sensitive content recognition result. Value range: 0-100.
-	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
-
-	// The suggestion for handling the detected politically sensitive content. Valid values:
-	// <li>pass/li>
-	// <li>review</li>
-	// <li>block</li>
-	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
-
-	// The name of the politically sensitive content or banned icon detected.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// The coordinates (pixel) of the top-left and bottom-right corners of the frame where politically sensitive content or a banned icon appears. Format: [x1, y1, x2, y2].
-	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
-}
-
 type PoliticalImgReviewTemplateInfo struct {
 	// Whether to enable recognition of politically sensitive content in images. Valid values:
 	// <li>ON</li>
@@ -13886,24 +13824,6 @@ type PornConfigureInfoForUpdate struct {
 
 	// Parameters for OCR-based recognition of pornographic content
 	OcrReviewInfo *PornOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
-}
-
-type PornImageResult struct {
-	// The confidence score for the pornographic content recognition result. Value range: 0-100.
-	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
-
-	// The suggestion for handling the detected pornographic content. Valid values:
-	// <li>pass/li>
-	// <li>review</li>
-	// <li>block</li>
-	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
-
-	// The label for the detected pornographic content. Valid values:
-	// <li>porn</li>
-	// <li>sexy</li>
-	// <li>vulgar</li>
-	// <li>intimacy</li>
-	Label *string `json:"Label,omitempty" name:"Label"`
 }
 
 type PornImgReviewTemplateInfo struct {
@@ -14084,90 +14004,15 @@ type ProcedureTemplate struct {
 }
 
 // Predefined struct for user
-type ProcessImageRequestParams struct {
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// Operation. `ContentReview` is the only valid value currently.
-	Operation *string `json:"Operation,omitempty" name:"Operation"`
-
-	// Image recognition parameters. This parameter is valid if `Operation` is `ContentReview`.
-	ContentReviewInput *ImageContentReviewInput `json:"ContentReviewInput,omitempty" name:"ContentReviewInput"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-}
-
-type ProcessImageRequest struct {
-	*tchttp.BaseRequest
-	
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// Operation. `ContentReview` is the only valid value currently.
-	Operation *string `json:"Operation,omitempty" name:"Operation"`
-
-	// Image recognition parameters. This parameter is valid if `Operation` is `ContentReview`.
-	ContentReviewInput *ImageContentReviewInput `json:"ContentReviewInput,omitempty" name:"ContentReviewInput"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-}
-
-func (r *ProcessImageRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessImageRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FileId")
-	delete(f, "Operation")
-	delete(f, "ContentReviewInput")
-	delete(f, "SubAppId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessImageRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ProcessImageResponseParams struct {
-	// The image recognition result.
-	ContentReviewResultSet []*ContentReviewResult `json:"ContentReviewResultSet,omitempty" name:"ContentReviewResultSet"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ProcessImageResponse struct {
-	*tchttp.BaseResponse
-	Response *ProcessImageResponseParams `json:"Response"`
-}
-
-func (r *ProcessImageResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessImageResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ProcessMediaByProcedureRequestParams struct {
 	// Media file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitempty" name:"ProcedureName"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
@@ -14183,9 +14028,6 @@ type ProcessMediaByProcedureRequestParams struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ProcessMediaByProcedureRequest struct {
@@ -14197,6 +14039,9 @@ type ProcessMediaByProcedureRequest struct {
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitempty" name:"ProcedureName"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
@@ -14211,9 +14056,6 @@ type ProcessMediaByProcedureRequest struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ProcessMediaByProcedureRequest) ToJsonString() string {
@@ -14230,12 +14072,12 @@ func (r *ProcessMediaByProcedureRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FileId")
 	delete(f, "ProcedureName")
+	delete(f, "SubAppId")
 	delete(f, "TasksPriority")
 	delete(f, "TasksNotifyMode")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaByProcedureRequest has unknown keys!", "")
 	}
@@ -14392,6 +14234,9 @@ type ProcessMediaRequestParams struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
@@ -14418,9 +14263,6 @@ type ProcessMediaRequestParams struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ProcessMediaRequest struct {
@@ -14429,6 +14271,9 @@ type ProcessMediaRequest struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
@@ -14455,9 +14300,6 @@ type ProcessMediaRequest struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -14473,6 +14315,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileId")
+	delete(f, "SubAppId")
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
@@ -14482,7 +14325,6 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -14651,9 +14493,12 @@ func (r *PullEventsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PullUploadRequestParams struct {
-	// URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-	// For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+	// The URL of the media to pull, which can be in HLS format, but not DASH format.
+	// For more information about supported extensions, see [Media types](https://intl.cloud.tencent.com/document/product/266/9760#media-types). Please make sure the URL is accessible.
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
@@ -14683,9 +14528,6 @@ type PullUploadRequestParams struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
@@ -14694,9 +14536,12 @@ type PullUploadRequestParams struct {
 type PullUploadRequest struct {
 	*tchttp.BaseRequest
 	
-	// URL of the media to be pulled. Supported media format: HLS; unsupported media format: DASH.
-	// For more information about supported extensions, please see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+	// The URL of the media to pull, which can be in HLS format, but not DASH format.
+	// For more information about supported extensions, see [Media types](https://intl.cloud.tencent.com/document/product/266/9760#media-types). Please make sure the URL is accessible.
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
@@ -14726,9 +14571,6 @@ type PullUploadRequest struct {
 
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// Source context, which is used to pass through the user request information. The [upload callback](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) API will return the value of this field. It can contain up to 250 characters.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
@@ -14747,6 +14589,7 @@ func (r *PullUploadRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "MediaUrl")
+	delete(f, "SubAppId")
 	delete(f, "MediaName")
 	delete(f, "CoverUrl")
 	delete(f, "Procedure")
@@ -14756,7 +14599,6 @@ func (r *PullUploadRequest) FromJsonString(s string) error {
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
 	delete(f, "SourceContext")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PullUploadRequest has unknown keys!", "")
@@ -14835,7 +14677,7 @@ type PushUrlCacheRequestParams struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -14845,7 +14687,7 @@ type PushUrlCacheRequest struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitempty" name:"Urls"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -14911,6 +14753,67 @@ type RefererAuthPolicy struct {
 	// <li>`No`</li>
 	// When `Status` is set to `Enabled`, `BlankRefererAllowed` must be specified.
 	BlankRefererAllowed *string `json:"BlankRefererAllowed,omitempty" name:"BlankRefererAllowed"`
+}
+
+// Predefined struct for user
+type RefreshUrlCacheRequestParams struct {
+	// The URLs to purge. You can specify up to 20 URLs per request.
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type RefreshUrlCacheRequest struct {
+	*tchttp.BaseRequest
+	
+	// The URLs to purge. You can specify up to 20 URLs per request.
+	Urls []*string `json:"Urls,omitempty" name:"Urls"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *RefreshUrlCacheRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshUrlCacheRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Urls")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RefreshUrlCacheRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RefreshUrlCacheResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RefreshUrlCacheResponse struct {
+	*tchttp.BaseResponse
+	Response *RefreshUrlCacheResponseParams `json:"Response"`
+}
+
+func (r *RefreshUrlCacheResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RefreshUrlCacheResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -15025,6 +14928,93 @@ type ResourceTag struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+// Predefined struct for user
+type RestoreMediaRequestParams struct {
+	// The IDs of media files.
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
+
+	// The number of days during which the restored files will remain available.
+	RestoreDay *uint64 `json:"RestoreDay,omitempty" name:"RestoreDay"`
+
+	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Expedited: The files are made available in five minutes.</li>
+	// <li>Standard: The files are made available in five hours.</li>
+	// <li>Bulk: The files are made available in 12 hours.</li>
+	// If the current storage class is DEEP ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Standard: The files are made available in 24 hours.</li>
+	// <li>Bulk: The files are made available in 48 hours.</li>
+	RestoreTier *string `json:"RestoreTier,omitempty" name:"RestoreTier"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type RestoreMediaRequest struct {
+	*tchttp.BaseRequest
+	
+	// The IDs of media files.
+	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
+
+	// The number of days during which the restored files will remain available.
+	RestoreDay *uint64 `json:"RestoreDay,omitempty" name:"RestoreDay"`
+
+	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Expedited: The files are made available in five minutes.</li>
+	// <li>Standard: The files are made available in five hours.</li>
+	// <li>Bulk: The files are made available in 12 hours.</li>
+	// If the current storage class is DEEP ARCHIVE, the valid values for this parameter are as follows:
+	// <li>Standard: The files are made available in 24 hours.</li>
+	// <li>Bulk: The files are made available in 48 hours.</li>
+	RestoreTier *string `json:"RestoreTier,omitempty" name:"RestoreTier"`
+
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *RestoreMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestoreMediaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileIds")
+	delete(f, "RestoreDay")
+	delete(f, "RestoreTier")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreMediaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RestoreMediaResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RestoreMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *RestoreMediaResponseParams `json:"Response"`
+}
+
+func (r *RestoreMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestoreMediaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RestoreMediaTask struct {
 	// File ID
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
@@ -15049,77 +15039,6 @@ type RestoreMediaTask struct {
 
 	// This field has been disused.
 	Message *string `json:"Message,omitempty" name:"Message"`
-}
-
-// Predefined struct for user
-type ReviewImageRequestParams struct {
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// The ID of the image recognition template. Currently, this can only be `10`.
-	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-}
-
-type ReviewImageRequest struct {
-	*tchttp.BaseRequest
-	
-	// The unique ID of the media file. For this API to work, the file must be an image.
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// The ID of the image recognition template. Currently, this can only be `10`.
-	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-}
-
-func (r *ReviewImageRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReviewImageRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FileId")
-	delete(f, "Definition")
-	delete(f, "SubAppId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReviewImageRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ReviewImageResponseParams struct {
-	// The image recognition result.
-	ReviewResultSet []*ContentReviewResult `json:"ReviewResultSet,omitempty" name:"ReviewResultSet"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ReviewImageResponse struct {
-	*tchttp.BaseResponse
-	Response *ReviewImageResponseParams `json:"Response"`
-}
-
-func (r *ReviewImageResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReviewImageResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type SampleSnapshotTaskInput struct {
@@ -15194,6 +15113,9 @@ type SampleSnapshotTemplate struct {
 
 // Predefined struct for user
 type SearchMediaRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// File ID set. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
 	// <li>ID length limit: 40 characters.</li>
@@ -15218,8 +15140,8 @@ type SearchMediaRequestParams struct {
 	// <li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds"`
 
-	// Tag set, which matches any element in the set.
-	// <li>Tag length limit: 8 characters.</li>
+	// The tag set. A file is considered a match if it has any of the tags in the tag set.
+	// <li>Tag length limit: 16 characters.</li>
 	// <li>Array length limit: 10.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
@@ -15279,9 +15201,6 @@ type SearchMediaRequestParams struct {
 	// <li>Length limit for a single region: 20 characters</li>
 	// <li>Array length limit: 20</li>
 	StorageRegions []*string `json:"StorageRegions,omitempty" name:"StorageRegions"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// An array of storage classes. Valid values:
 	// <li>STANDARD</li>
@@ -15324,6 +15243,9 @@ type SearchMediaRequestParams struct {
 type SearchMediaRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// File ID set. Any element in the set can be matched.
 	// <li>Array length limit: 10.</li>
 	// <li>ID length limit: 40 characters.</li>
@@ -15348,8 +15270,8 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds"`
 
-	// Tag set, which matches any element in the set.
-	// <li>Tag length limit: 8 characters.</li>
+	// The tag set. A file is considered a match if it has any of the tags in the tag set.
+	// <li>Tag length limit: 16 characters.</li>
 	// <li>Array length limit: 10.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
@@ -15409,9 +15331,6 @@ type SearchMediaRequest struct {
 	// <li>Length limit for a single region: 20 characters</li>
 	// <li>Array length limit: 20</li>
 	StorageRegions []*string `json:"StorageRegions,omitempty" name:"StorageRegions"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// An array of storage classes. Valid values:
 	// <li>STANDARD</li>
@@ -15463,6 +15382,7 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "FileIds")
 	delete(f, "Names")
 	delete(f, "NamePrefixes")
@@ -15480,7 +15400,6 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Filters")
 	delete(f, "StorageRegions")
-	delete(f, "SubAppId")
 	delete(f, "StorageClasses")
 	delete(f, "Text")
 	delete(f, "SourceType")
@@ -15542,6 +15461,9 @@ type SimpleHlsClipRequestParams struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -15550,9 +15472,6 @@ type SimpleHlsClipRequestParams struct {
 
 	// Whether to store the video clip persistently. 0: no (default), 1: yes.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type SimpleHlsClipRequest struct {
@@ -15561,6 +15480,9 @@ type SimpleHlsClipRequest struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 
@@ -15569,9 +15491,6 @@ type SimpleHlsClipRequest struct {
 
 	// Whether to store the video clip persistently. 0: no (default), 1: yes.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *SimpleHlsClipRequest) ToJsonString() string {
@@ -15587,10 +15506,10 @@ func (r *SimpleHlsClipRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Url")
+	delete(f, "SubAppId")
 	delete(f, "StartTimeOffset")
 	delete(f, "EndTimeOffset")
 	delete(f, "IsPersistence")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SimpleHlsClipRequest has unknown keys!", "")
 	}
@@ -16194,27 +16113,6 @@ type TerrorismConfigureInfoForUpdate struct {
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
-type TerrorismImageResult struct {
-	// The confidence score for the terrorism content recognition result. Value range: 0-100.
-	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
-
-	// The suggestion for handling the detected terrorism content. Valid values:
-	// <li>pass/li>
-	// <li>review</li>
-	// <li>block</li>
-	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
-
-	// The label for the detected terrorism content. Valid values:
-	// <li>guns</li>
-	// <li>crowd</li>
-	// <li>police</li>
-	// <li>bloody</li>
-	// <li>banners</li>
-	// <li>explosion</li>
-	// <li>scenario (terrorist scenes) </li>
-	Label *string `json:"Label,omitempty" name:"Label"`
-}
-
 type TerrorismImgReviewTemplateInfo struct {
 	// Whether to enable recognition of terrorism content in images. Valid values:
 	// <li>ON</li>
@@ -16338,6 +16236,11 @@ type TimeRange struct {
 	Before *string `json:"Before,omitempty" name:"Before"`
 }
 
+type TraceWatermarkInput struct {
+	// The watermark template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
 type TranscodePlayInfo2017 struct {
 	// Playback address.
 	Url *string `json:"Url,omitempty" name:"Url"`
@@ -16398,23 +16301,26 @@ type TranscodeTaskInput struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitempty" name:"WatermarkSet"`
 
-	// List of blurs. Up to 10 ones can be supported.
-	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet"`
+	// Digital watermark.
+	TraceWatermark *TraceWatermarkInput `json:"TraceWatermark,omitempty" name:"TraceWatermark"`
 
 	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
 	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitempty" name:"HeadTailSet"`
 
-	// Start time offset of a transcoded video, in seconds.
-	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
-	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
-	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
-	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+	// List of blurs. Up to 10 ones can be supported.
+	MosaicSet []*MosaicInput `json:"MosaicSet,omitempty" name:"MosaicSet"`
 
 	// End time offset of a transcoded video, in seconds.
 	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
 	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
 	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// Start time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
 }
 
 type TranscodeTemplate struct {

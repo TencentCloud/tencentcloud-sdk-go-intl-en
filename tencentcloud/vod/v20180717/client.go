@@ -6461,6 +6461,7 @@ func NewParseStreamingManifestResponse() (response *ParseStreamingManifestRespon
 // This API is used to parse the index file content and return the list of segment files to be uploaded when an HLS video is uploaded. A segment file path must be a relative path of the current directory or subdirectory instead of a URL or absolute path.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MEDIAMANIFESTCONTENT = "InvalidParameterValue.MediaManifestContent"
@@ -6473,6 +6474,7 @@ func (c *Client) ParseStreamingManifest(request *ParseStreamingManifestRequest) 
 // This API is used to parse the index file content and return the list of segment files to be uploaded when an HLS video is uploaded. A segment file path must be a relative path of the current directory or subdirectory instead of a URL or absolute path.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MEDIAMANIFESTCONTENT = "InvalidParameterValue.MediaManifestContent"
@@ -6489,95 +6491,6 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewParseStreamingManifestResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewProcessImageRequest() (request *ProcessImageRequest) {
-    request = &ProcessImageRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("vod", APIVersion, "ProcessImage")
-    
-    
-    return
-}
-
-func NewProcessImageResponse() (response *ProcessImageResponse) {
-    response = &ProcessImageResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ProcessImage
-// This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
-//
-// 
-//
-// This API is used to initiate an image processing task. Image processing operations include the following:
-//
-// 
-//
-// 1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
-//
-// 
-//
-// ><li>File size: < 5 MB</li>
-//
-// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-//
-// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ProcessImage(request *ProcessImageRequest) (response *ProcessImageResponse, err error) {
-    return c.ProcessImageWithContext(context.Background(), request)
-}
-
-// ProcessImage
-// This API is <font color='red'>no longer used</font>. To initiate image recognition tasks, please use [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
-//
-// 
-//
-// This API is used to initiate an image processing task. Image processing operations include the following:
-//
-// 
-//
-// 1. Intelligent recognition of pornographic, terroristic, and politically sensitive content
-//
-// 
-//
-// ><li>File size: < 5 MB</li>
-//
-// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-//
-// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ProcessImageWithContext(ctx context.Context, request *ProcessImageRequest) (response *ProcessImageResponse, err error) {
-    if request == nil {
-        request = NewProcessImageRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ProcessImage require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewProcessImageResponse()
     err = c.Send(request, response)
     return
 }
@@ -6626,6 +6539,18 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 //
 // If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
+// 
+//
+// A digital watermark has the following restrictions:
+//
+// <li>Digital watermarks can only be image watermarks.</li>
+//
+// <li>Digital watermarks must be looped.</li>
+//
+// <li>If you use digital watermarks, the output video must be in HLS format.</li>
+//
+// <li>Digital watermarks can only be displayed in the upper half of a video.</li>
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
@@ -6672,6 +6597,18 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 // 
 //
 // If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+//
+// 
+//
+// A digital watermark has the following restrictions:
+//
+// <li>Digital watermarks can only be image watermarks.</li>
+//
+// <li>Digital watermarks must be looped.</li>
+//
+// <li>If you use digital watermarks, the output video must be in HLS format.</li>
+//
+// <li>Digital watermarks can only be displayed in the upper half of a video.</li>
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7043,9 +6980,12 @@ func NewPushUrlCacheResponse() (response *PushUrlCacheResponse) {
 //
 // 3. Up to 20 URLs can be specified in one request.
 //
+// 4. By default, the maximum number of URLs that can be refreshed per day is 10,000.
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PushUrlCache(request *PushUrlCacheRequest) (response *PushUrlCacheResponse, err error) {
     return c.PushUrlCacheWithContext(context.Background(), request)
@@ -7058,9 +6998,12 @@ func (c *Client) PushUrlCache(request *PushUrlCacheRequest) (response *PushUrlCa
 //
 // 3. Up to 20 URLs can be specified in one request.
 //
+// 4. By default, the maximum number of URLs that can be refreshed per day is 10,000.
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) PushUrlCacheWithContext(ctx context.Context, request *PushUrlCacheRequest) (response *PushUrlCacheResponse, err error) {
     if request == nil {
@@ -7074,6 +7017,73 @@ func (c *Client) PushUrlCacheWithContext(ctx context.Context, request *PushUrlCa
     request.SetContext(ctx)
     
     response = NewPushUrlCacheResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRefreshUrlCacheRequest() (request *RefreshUrlCacheRequest) {
+    request = &RefreshUrlCacheRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("vod", APIVersion, "RefreshUrlCache")
+    
+    
+    return
+}
+
+func NewRefreshUrlCacheResponse() (response *RefreshUrlCacheResponse) {
+    response = &RefreshUrlCacheResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RefreshUrlCache
+// 1. This API is used to purge URLs.
+//
+// 2. The URL domain names must have already been registered with VOD.
+//
+// 3. Up to 20 URLs can be specified in one request.
+//
+// 4. By default, the maximum number of URLs allowed for purge per day is 100,000.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) RefreshUrlCache(request *RefreshUrlCacheRequest) (response *RefreshUrlCacheResponse, err error) {
+    return c.RefreshUrlCacheWithContext(context.Background(), request)
+}
+
+// RefreshUrlCache
+// 1. This API is used to purge URLs.
+//
+// 2. The URL domain names must have already been registered with VOD.
+//
+// 3. Up to 20 URLs can be specified in one request.
+//
+// 4. By default, the maximum number of URLs allowed for purge per day is 100,000.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) RefreshUrlCacheWithContext(ctx context.Context, request *RefreshUrlCacheRequest) (response *RefreshUrlCacheResponse, err error) {
+    if request == nil {
+        request = NewRefreshUrlCacheRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RefreshUrlCache require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRefreshUrlCacheResponse()
     err = c.Send(request, response)
     return
 }
@@ -7137,75 +7147,79 @@ func (c *Client) ResetProcedureTemplateWithContext(ctx context.Context, request 
     return
 }
 
-func NewReviewImageRequest() (request *ReviewImageRequest) {
-    request = &ReviewImageRequest{
+func NewRestoreMediaRequest() (request *RestoreMediaRequest) {
+    request = &RestoreMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
-    request.Init().WithApiInfo("vod", APIVersion, "ReviewImage")
+    request.Init().WithApiInfo("vod", APIVersion, "RestoreMedia")
     
     
     return
 }
 
-func NewReviewImageResponse() (response *ReviewImageResponse) {
-    response = &ReviewImageResponse{
+func NewRestoreMediaResponse() (response *RestoreMediaResponse) {
+    response = &RestoreMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ReviewImage
-// This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
-//
-// 
-//
-// ><li>File size: < 5 MB</li>
-//
-// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-//
-// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+// RestoreMedia
+// This API is used to restore files from ARCHIVE or DEEP ARCHIVE. Files stored in ARCHIVE or DEEP ARCHIVE must be restored before they can be accessed. Restored files are available for a limited period of time.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_NOTRESTORABLE = "InvalidParameterValue.NotRestorable"
+//  INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
+//  INVALIDPARAMETERVALUE_RESTOREDAY = "InvalidParameterValue.RestoreDay"
+//  INVALIDPARAMETERVALUE_RESTORETIER = "InvalidParameterValue.RestoreTier"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDRESTORETIER = "InvalidParameterValue.UnsupportedRestoreTier"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ReviewImage(request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
-    return c.ReviewImageWithContext(context.Background(), request)
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RestoreMedia(request *RestoreMediaRequest) (response *RestoreMediaResponse, err error) {
+    return c.RestoreMediaWithContext(context.Background(), request)
 }
 
-// ReviewImage
-// This API is used to initiate an image recognition task to identify pornographic, terroristic, and politically sensitive content in images saved in VOD.
-//
-// 
-//
-// ><li>File size: < 5 MB</li>
-//
-// ><li>Resolution: Preferably higher than 256 x 256. Resolution lower than this may compromise the recognition performance.</li>
-//
-// ><li>Supported image formats: PNG, JPG, JPEG, BMP, GIF, WEBP</li>
+// RestoreMedia
+// This API is used to restore files from ARCHIVE or DEEP ARCHIVE. Files stored in ARCHIVE or DEEP ARCHIVE must be restored before they can be accessed. Restored files are available for a limited period of time.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  INVALIDPARAMETERVALUE_FILEIDS = "InvalidParameterValue.FileIds"
+//  INVALIDPARAMETERVALUE_NOTRESTORABLE = "InvalidParameterValue.NotRestorable"
+//  INVALIDPARAMETERVALUE_ORIGINALSTORAGECLASS = "InvalidParameterValue.OriginalStorageClass"
+//  INVALIDPARAMETERVALUE_RESTOREDAY = "InvalidParameterValue.RestoreDay"
+//  INVALIDPARAMETERVALUE_RESTORETIER = "InvalidParameterValue.RestoreTier"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDRESTORETIER = "InvalidParameterValue.UnsupportedRestoreTier"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ReviewImageWithContext(ctx context.Context, request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
+//  RESOURCENOTFOUND_FILENOTEXIST = "ResourceNotFound.FileNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RestoreMediaWithContext(ctx context.Context, request *RestoreMediaRequest) (response *RestoreMediaResponse, err error) {
     if request == nil {
-        request = NewReviewImageRequest()
+        request = NewRestoreMediaRequest()
     }
     
     if c.GetCredential() == nil {
-        return nil, errors.New("ReviewImage require credential")
+        return nil, errors.New("RestoreMedia require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewReviewImageResponse()
+    response = NewRestoreMediaResponse()
     err = c.Send(request, response)
     return
 }

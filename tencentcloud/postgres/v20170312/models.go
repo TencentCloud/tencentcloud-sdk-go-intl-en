@@ -571,7 +571,7 @@ type CreateDBInstancesRequestParams struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing type.
@@ -607,10 +607,10 @@ type CreateDBInstancesRequestParams struct {
 	// Security group ID
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+	// PostgreSQL major version. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 }
 
@@ -635,7 +635,7 @@ type CreateDBInstancesRequest struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// PostgreSQL version number. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created.
+	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Instance billing type.
@@ -671,10 +671,10 @@ type CreateDBInstancesRequest struct {
 	// Security group ID
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// PostgreSQL major version number. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created.
+	// PostgreSQL major version. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
 	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
 
-	// PostgreSQL kernel version number. If it is specified, an instance running kernel `DBKernelVersion` will be created.
+	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
 	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
 }
 
@@ -827,7 +827,7 @@ type CreateInstancesRequestParams struct {
 	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
 	KMSKeyId *string `json:"KMSKeyId,omitempty" name:"KMSKeyId"`
 
-	// The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
 	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
 }
 
@@ -912,7 +912,7 @@ type CreateInstancesRequest struct {
 	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
 	KMSKeyId *string `json:"KMSKeyId,omitempty" name:"KMSKeyId"`
 
-	// The region where the KMS service is enabled. When “KMSRegion” is left empty, the “KMS” of the local domain will be enabled by default. If the local domain is not supported, you need to select another region supported by KMS.
+	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
 	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
 }
 
@@ -1990,10 +1990,10 @@ type DescribeAccountsRequestParams struct {
 	// Instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
-	// Number of entries returned per page. Default value: 20. Value range: 1-100.
+	// Number of entries returned per page. Default value: 10. Value range: 1–100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number for data return in paged query. Pagination starts from 0
+	// Data offset, which starts from 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Whether to sort by creation time or username. Valid values: `createTime` (sort by creation time), `name` (sort by username)
@@ -2009,10 +2009,10 @@ type DescribeAccountsRequest struct {
 	// Instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
 
-	// Number of entries returned per page. Default value: 20. Value range: 1-100.
+	// Number of entries returned per page. Default value: 10. Value range: 1–100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page number for data return in paged query. Pagination starts from 0
+	// Data offset, which starts from 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Whether to sort by creation time or username. Valid values: `createTime` (sort by creation time), `name` (sort by username)
@@ -2598,11 +2598,11 @@ type DescribeDBInstancesRequestParams struct {
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
+	// Data offset, which starts from 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
 	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
-
-	// Pagination offset, starting from 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
@@ -2622,11 +2622,11 @@ type DescribeDBInstancesRequest struct {
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
+	// Data offset, which starts from 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
 	// Sorting metric, such as instance name or creation time. Valid values: DBInstanceId, CreateTime, Name, EndTime
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
-
-	// Pagination offset, starting from 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Sorting order. Valid values: `asc` (ascending), `desc` (descending)
 	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
@@ -2646,8 +2646,8 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Filters")
 	delete(f, "Limit")
-	delete(f, "OrderBy")
 	delete(f, "Offset")
+	delete(f, "OrderBy")
 	delete(f, "OrderByType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
@@ -3751,7 +3751,7 @@ type Detail struct {
 
 // Predefined struct for user
 type DisIsolateDBInstancesRequestParams struct {
-	// Resource ID list
+	// List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
 	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
@@ -3767,7 +3767,7 @@ type DisIsolateDBInstancesRequestParams struct {
 type DisIsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Resource ID list
+	// List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
 	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
@@ -4088,6 +4088,9 @@ type InquiryPriceCreateDBInstancesResponseParams struct {
 	// Discounted price in 0.01 CNY.
 	Price *uint64 `json:"Price,omitempty" name:"Price"`
 
+	// Currency, such as USD for US dollar.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4154,6 +4157,9 @@ type InquiryPriceRenewDBInstanceResponseParams struct {
 
 	// Actual amount payable; for example, 24650 indicates 246.5 CNY
 	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// Currency, such as USD for US dollar.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4236,6 +4242,9 @@ type InquiryPriceUpgradeDBInstanceResponseParams struct {
 	// Actual amount payable
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
+	// Currency, such as USD for US dollar.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4258,14 +4267,14 @@ func (r *InquiryPriceUpgradeDBInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IsolateDBInstancesRequestParams struct {
-	// Instance ID set
+	// List of instance IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 }
 
 type IsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID set
+	// List of instance IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 }
 
@@ -4468,13 +4477,13 @@ type ModifyDBInstanceDeploymentRequestParams struct {
 	// Instance node information.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 
-	// Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	// Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
 	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
-	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
 
-	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
@@ -4487,13 +4496,13 @@ type ModifyDBInstanceDeploymentRequest struct {
 	// Instance node information.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitempty" name:"DBNodeSet"`
 
-	// Switch time. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	// Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
 	SwitchTag *int64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
-	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
 
-	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
@@ -4755,13 +4764,13 @@ type ModifyDBInstanceSpecRequestParams struct {
 	// Campaign ID.
 	ActivityId *uint64 `json:"ActivityId,omitempty" name:"ActivityId"`
 
-	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	// Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
 	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
-	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
 
-	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
@@ -4786,13 +4795,13 @@ type ModifyDBInstanceSpecRequest struct {
 	// Campaign ID.
 	ActivityId *uint64 `json:"ActivityId,omitempty" name:"ActivityId"`
 
-	// Switch time after instance configurations are modified. Valid values: `0` (switch immediately), `1` (switch at a specified time). Default value: `0`.
+	// Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
 	SwitchTag *uint64 `json:"SwitchTag,omitempty" name:"SwitchTag"`
 
-	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00".
+	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
 
-	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00".
+	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
 	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
 }
 
@@ -4853,20 +4862,20 @@ func (r *ModifyDBInstanceSpecResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstancesProjectRequestParams struct {
-	// TencentDB for PostgreSQL instance ID array
+	// List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
-	// New project ID of TencentDB for PostgreSQL instance
+	// ID of the new project
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB for PostgreSQL instance ID array
+	// List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
-	// New project ID of TencentDB for PostgreSQL instance
+	// ID of the new project
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
@@ -5916,7 +5925,7 @@ type ServerlessDBInstanceNetInfo struct {
 
 // Predefined struct for user
 type SetAutoRenewFlagRequestParams struct {
-	// Instance ID array
+	// List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
 	// Renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal upon expiration
@@ -5926,7 +5935,7 @@ type SetAutoRenewFlagRequestParams struct {
 type SetAutoRenewFlagRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID array
+	// List of instance IDs. Note that currently you cannot manipulate multiple instances at the same time. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
 
 	// Renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal upon expiration
