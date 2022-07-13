@@ -2362,6 +2362,7 @@ func NewDescribeProxySlowLogResponse() (response *DescribeProxySlowLogResponse) 
 // This API is used to query the slow queries of the proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
@@ -2377,6 +2378,7 @@ func (c *Client) DescribeProxySlowLog(request *DescribeProxySlowLogRequest) (res
 // This API is used to query the slow queries of the proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"

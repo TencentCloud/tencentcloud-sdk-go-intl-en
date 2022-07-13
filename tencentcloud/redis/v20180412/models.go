@@ -3666,10 +3666,10 @@ type DescribeTaskListRequestParams struct {
 	// Task status
 	Result []*int64 `json:"Result,omitempty" name:"Result"`
 
-	// Operator UIN
+	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
 	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
 
-
+	// Operator Uin
 	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
 }
 
@@ -3706,9 +3706,10 @@ type DescribeTaskListRequest struct {
 	// Task status
 	Result []*int64 `json:"Result,omitempty" name:"Result"`
 
-	// Operator UIN
+	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
 	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
 
+	// Operator Uin
 	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
 }
 
