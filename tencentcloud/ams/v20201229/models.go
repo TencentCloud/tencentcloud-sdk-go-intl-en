@@ -64,6 +64,10 @@ type AudioResult struct {
 	// This field is used to return a subtag under the current tag (Lable).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// List of audio recognition results 
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RecognitionResults []*RecognitionResult `json:"RecognitionResults,omitempty" name:"RecognitionResults"`
 }
 
 type AudioResultDetailLanguageResult struct {
@@ -377,8 +381,8 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Label of the malicious content detected. <br>Values: **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Labels []*TaskLabel `json:"Labels,omitempty" name:"Labels"`
 
 	// This field is used to return the media content information of the moderation service, mainly including the input file type and access URL.
@@ -408,6 +412,10 @@ type DescribeTaskDetailResponseParams struct {
 	// This field is used to return the last update time of the queried task in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+
+	// If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -554,6 +562,16 @@ type MediaInfo struct {
 	Thumbnail *string `json:"Thumbnail,omitempty" name:"Thumbnail"`
 }
 
+type RecognitionResult struct {
+	// Values: `Teenager`, `Gender`
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// List of recognized category labels
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type StorageInfo struct {
 	// This field indicates the file access type. Valid values: **URL** (resource link), **COS** (Tencent Cloud COS). It should correspond to the access type passed in and can be used for strict verification and quick identification of the access address. If you don't pass in this parameter, the default value will be `URL`, and the system will automatically determine the access address type.
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -563,6 +581,26 @@ type StorageInfo struct {
 
 	// This field indicates the Tencent Cloud bucket information for file access.<br>Note: when `Type` is `COS`, this field will not be empty. You must pass in either this parameter or the `Url` parameter.
 	BucketInfo *BucketInfo `json:"BucketInfo,omitempty" name:"BucketInfo"`
+}
+
+type Tag struct {
+	// The value of this parameter varies by `Label`.
+	// When `Label` is `Teenager`, `Name` can be `Teenager`. 
+	// When `Label` is `Gender`, `Name` can be `Male` and `Female`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Confidence score. Value: 1 to 100. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Score *int64 `json:"Score,omitempty" name:"Score"`
+
+	// Start time for the recognition (ms)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	StartTime *float64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for the recognition (ms)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EndTime *float64 `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type TaskData struct {

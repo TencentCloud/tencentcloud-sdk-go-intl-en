@@ -1152,6 +1152,70 @@ func (r *DescribeApplicationPodsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApplicationsStatusRequestParams struct {
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
+type DescribeApplicationsStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
+func (r *DescribeApplicationsStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationsStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SourceChannel")
+	delete(f, "EnvironmentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationsStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationsStatusResponseParams struct {
+	// Returned result.
+	Result []*ServiceVersionBrief `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationsStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationsStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationsStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationsStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEnvironmentsRequestParams struct {
 	// Pagination limit
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
@@ -2398,6 +2462,59 @@ type RunVersionPod struct {
 	// Container status
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ContainerState *string `json:"ContainerState,omitempty" name:"ContainerState"`
+}
+
+type ServiceVersionBrief struct {
+	// Version name
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// Status of version
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// (Disused) Whether to enable elastic scaling
+	EnableEs *int64 `json:"EnableEs,omitempty" name:"EnableEs"`
+
+	// Number of current instances
+	CurrentInstances *int64 `json:"CurrentInstances,omitempty" name:"CurrentInstances"`
+
+	// Version ID
+	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+
+	// (Disused) Log output configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitempty" name:"LogOutputConf"`
+
+	// Expected number of instances
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpectedInstances *int64 `json:"ExpectedInstances,omitempty" name:"ExpectedInstances"`
+
+	// Deployment mode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Task ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BuildTaskId *string `json:"BuildTaskId,omitempty" name:"BuildTaskId"`
+
+	// Environment ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Application ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Application name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Whether the application is being deployed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnderDeploying *bool `json:"UnderDeploying,omitempty" name:"UnderDeploying"`
 }
 
 // Predefined struct for user

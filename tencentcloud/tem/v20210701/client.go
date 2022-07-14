@@ -240,6 +240,7 @@ func NewCreateResourceResponse() (response *CreateResourceResponse) {
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 //  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
 //  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) CreateResource(request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     return c.CreateResourceWithContext(context.Background(), request)
 }
@@ -253,6 +254,7 @@ func (c *Client) CreateResource(request *CreateResourceRequest) (response *Creat
 //  INVALIDPARAMETERVALUE_NAMESPACERESOURCEREACHMAXIMUM = "InvalidParameterValue.NamespaceResourceReachMaximum"
 //  RESOURCEINUSE_RESOURCEALREADYUSED = "ResourceInUse.ResourceAlreadyUsed"
 //  RESOURCENOTFOUND_NAMESPACENOTFOUND = "ResourceNotFound.NamespaceNotFound"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) CreateResourceWithContext(ctx context.Context, request *CreateResourceRequest) (response *CreateResourceResponse, err error) {
     if request == nil {
         request = NewCreateResourceRequest()
@@ -531,6 +533,55 @@ func (c *Client) DescribeApplicationPodsWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeApplicationPodsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationsStatusRequest() (request *DescribeApplicationsStatusRequest) {
+    request = &DescribeApplicationsStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("tem", APIVersion, "DescribeApplicationsStatus")
+    
+    
+    return
+}
+
+func NewDescribeApplicationsStatusResponse() (response *DescribeApplicationsStatusResponse) {
+    response = &DescribeApplicationsStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeApplicationsStatus
+// This API is used to query the status of all applications in an envrionment.
+//
+// error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+func (c *Client) DescribeApplicationsStatus(request *DescribeApplicationsStatusRequest) (response *DescribeApplicationsStatusResponse, err error) {
+    return c.DescribeApplicationsStatusWithContext(context.Background(), request)
+}
+
+// DescribeApplicationsStatus
+// This API is used to query the status of all applications in an envrionment.
+//
+// error code that may be returned:
+//  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
+func (c *Client) DescribeApplicationsStatusWithContext(ctx context.Context, request *DescribeApplicationsStatusRequest) (response *DescribeApplicationsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationsStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationsStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationsStatusResponse()
     err = c.Send(request, response)
     return
 }

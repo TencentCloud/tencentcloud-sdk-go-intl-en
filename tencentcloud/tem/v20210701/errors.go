@@ -56,7 +56,7 @@ const (
 	// Failed to restart
 	INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
 
-	// 
+	// Failed to stop an application
 	INTERNALERROR_STOPAPPLICATIONERROR = "InternalError.StopApplicationError"
 
 	// Failed to update the ingress
