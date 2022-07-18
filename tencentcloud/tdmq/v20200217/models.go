@@ -93,7 +93,7 @@ func (r *AcknowledgeMessageResponse) FromJsonString(s string) error {
 }
 
 type BindCluster struct {
-	// Physical cluster name
+	// Name of a physical cluster.
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 }
 
@@ -593,47 +593,47 @@ type CmqTransactionPolicy struct {
 
 type Consumer struct {
 	// The time when the consumer started connecting.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConnectedSince *string `json:"ConnectedSince,omitempty" name:"ConnectedSince"`
 
 	// Consumer address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerAddr *string `json:"ConsumerAddr,omitempty" name:"ConsumerAddr"`
 
 	// Consumer name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerName *string `json:"ConsumerName,omitempty" name:"ConsumerName"`
 
 	// Consumer version.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClientVersion *string `json:"ClientVersion,omitempty" name:"ClientVersion"`
 
 	// Serial number of the topic partition connected to the consumer.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
 }
 
 type ConsumersSchedule struct {
-	// Current partition ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// ID of the current partition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
-	// Number of messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NumberOfEntries *uint64 `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
 
-	// Number of retained messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of heaped messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgBacklog *uint64 `json:"MsgBacklog,omitempty" name:"MsgBacklog"`
 
-	// Sum of the numbers of messages delivered by the consumer per second.
+	// The total number of messages delivered by the consumer per second.
 	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
 
-	// Number of bytes of messages consumed by the consumer per second.
+	// The size (in bytes) of messages consumed by the consumer per second.
 	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
 
 	// Percentage of messages discarded due to timeout.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateExpired *string `json:"MsgRateExpired,omitempty" name:"MsgRateExpired"`
 }
 
@@ -772,7 +772,7 @@ type CreateCmqQueueRequestParams struct {
 	// Tag array.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	// Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
@@ -827,7 +827,7 @@ type CreateCmqQueueRequest struct {
 	// Tag array.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	// Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
@@ -1094,7 +1094,7 @@ type CreateEnvironmentRequestParams struct {
 	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Unconsumed message expiration time in seconds. Minimum value: 60; maximum value: 1296000 (15 days).
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -1113,7 +1113,7 @@ type CreateEnvironmentRequest struct {
 	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Unconsumed message expiration time in seconds. Minimum value: 60; maximum value: 1296000 (15 days).
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -1775,17 +1775,18 @@ type CreateTopicRequestParams struct {
 	// Topic name, which can contain up to 64 letters, digits, hyphens, and underscores.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic (up to 128).
+	// The value “1” indicates a non-partitioned topic (a topic with no partitions) will be created. A value between 1 (exclusive) and 128 (inclusive) indicates the partition count of a partitioned topic.
 	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
 	// Remarks (up to 128 characters).
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue.
+	// This input parameter will be disused soon. You can use `PulsarTopicType` instead.
+	// 0: General message;
+	// 1: Globally sequential message;
+	// 2: Partitionally sequential message;
+	// 3: Retry letter topic;
+	// 4: Dead letter topic.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
 	// Pulsar cluster ID
@@ -1808,17 +1809,18 @@ type CreateTopicRequest struct {
 	// Topic name, which can contain up to 64 letters, digits, hyphens, and underscores.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic (up to 128).
+	// The value “1” indicates a non-partitioned topic (a topic with no partitions) will be created. A value between 1 (exclusive) and 128 (inclusive) indicates the partition count of a partitioned topic.
 	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
 	// Remarks (up to 128 characters).
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue.
+	// This input parameter will be disused soon. You can use `PulsarTopicType` instead.
+	// 0: General message;
+	// 1: Globally sequential message;
+	// 2: Partitionally sequential message;
+	// 3: Retry letter topic;
+	// 4: Dead letter topic.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
 	// Pulsar cluster ID
@@ -1865,20 +1867,19 @@ type CreateTopicResponseParams struct {
 	// Topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// 0: non-partitioned topic; other values: number of partitions in the partitioned topic.
+	// Valid value: 0 or 1. Non-partitioned topic: No partitions. A value greater than 1: The partition count of a partitioned topic. `0` is returned for existing non-partitioned topics, and `1` is returned for incremental non-partitioned topics.
 	Partitions *uint64 `json:"Partitions,omitempty" name:"Partitions"`
 
 	// Remarks (up to 128 characters).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 0: General message;
+	// 1: Globally sequential message;
+	// 2: Partitionally sequential message;
+	// 3: Retry letter topic;
+	// 4: Dead letter topic.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2576,7 +2577,7 @@ func (r *DeleteRolesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteSubscriptionsRequestParams struct {
-	// Set of subscriptions. Up to 20 subscriptions can be deleted at a time.
+	// Subscription set. Up to 20 subscriptions can be deleted at a time.
 	SubscriptionTopicSets []*SubscriptionTopic `json:"SubscriptionTopicSets,omitempty" name:"SubscriptionTopicSets"`
 
 	// Pulsar cluster ID.
@@ -2585,14 +2586,14 @@ type DeleteSubscriptionsRequestParams struct {
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Whether to force deletion. Default value: false
+	// Whether to forcibly delete a subscription. Default value: `false`.
 	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
 type DeleteSubscriptionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Set of subscriptions. Up to 20 subscriptions can be deleted at a time.
+	// Subscription set. Up to 20 subscriptions can be deleted at a time.
 	SubscriptionTopicSets []*SubscriptionTopic `json:"SubscriptionTopicSets,omitempty" name:"SubscriptionTopicSets"`
 
 	// Pulsar cluster ID.
@@ -2601,7 +2602,7 @@ type DeleteSubscriptionsRequest struct {
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Whether to force deletion. Default value: false
+	// Whether to forcibly delete a subscription. Default value: `false`.
 	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
@@ -2654,7 +2655,7 @@ func (r *DeleteSubscriptionsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteTopicsRequestParams struct {
-	// Set of topics. Up to 20 topics can be deleted at a time.
+	// Topic set. Up to 20 topics can be deleted at a time.
 	TopicSets []*TopicRecord `json:"TopicSets,omitempty" name:"TopicSets"`
 
 	// Pulsar cluster ID.
@@ -2663,14 +2664,14 @@ type DeleteTopicsRequestParams struct {
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Whether to force deletion. Default value: false
+	// Whether to forcibly delete a topic. Default value: `false`.
 	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
 type DeleteTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Set of topics. Up to 20 topics can be deleted at a time.
+	// Topic set. Up to 20 topics can be deleted at a time.
 	TopicSets []*TopicRecord `json:"TopicSets,omitempty" name:"TopicSets"`
 
 	// Pulsar cluster ID.
@@ -2679,7 +2680,7 @@ type DeleteTopicsRequest struct {
 	// Environment (namespace) name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Whether to force deletion. Default value: false
+	// Whether to forcibly delete a topic. Default value: `false`.
 	Force *bool `json:"Force,omitempty" name:"Force"`
 }
 
@@ -2761,7 +2762,7 @@ func (r *DescribeBindClustersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBindClustersResponseParams struct {
-	// Number of dedicated clusters
+	// The number of dedicated clusters
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// List of dedicated clusters
@@ -2920,38 +2921,38 @@ func (r *DescribeClusterDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeClustersRequestParams struct {
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Start offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter by list of cluster IDs
+	// Filter by cluster ID.
 	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
 
-	// Whether to filter by tag
+	// Whether to filter by tag.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Start offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter by list of cluster IDs
+	// Filter by cluster ID.
 	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
 
-	// Whether to filter by tag
+	// Whether to filter by tag.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -2980,10 +2981,10 @@ func (r *DescribeClustersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeClustersResponseParams struct {
-	// Number of clusters
+	// The number of clusters.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// List of cluster information
+	// Cluster information list
 	ClusterSet []*Cluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3146,44 +3147,44 @@ func (r *DescribeCmqQueueDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCmqQueuesRequestParams struct {
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+	// Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	// The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter by `QueueName`
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
-	// List of CMQ queue names
+	// Filter by CMQ queue name.
 	QueueNameList []*string `json:"QueueNameList,omitempty" name:"QueueNameList"`
 
-	// For filtering by tag, this must be configured to `true`.
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeCmqQueuesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+	// Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	// The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter by `QueueName`
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
-	// List of CMQ queue names
+	// Filter by CMQ queue name.
 	QueueNameList []*string `json:"QueueNameList,omitempty" name:"QueueNameList"`
 
-	// For filtering by tag, this must be configured to `true`.
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3213,11 +3214,11 @@ func (r *DescribeCmqQueuesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCmqQueuesResponseParams struct {
-	// Quantity
+	// The number of queues.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// List of queues
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Queue list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	QueueList []*CmqQueue `json:"QueueList,omitempty" name:"QueueList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3381,44 +3382,44 @@ func (r *DescribeCmqTopicDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCmqTopicsRequestParams struct {
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+	// Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	// The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Fuzzy search by `TopicName`
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Filter by list of CMQ topic names
+	// Filter by CMQ topic name.
 	TopicNameList []*string `json:"TopicNameList,omitempty" name:"TopicNameList"`
 
-	// For filtering by tag, this must be configured to `true`.
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeCmqTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Starting position of the list of queues to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
+	// Starting position of a queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` must be specified. If this parameter is left empty, 0 will be used by default.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
+	// The number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Fuzzy search by `TopicName`
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Filter by list of CMQ topic names
+	// Filter by CMQ topic name.
 	TopicNameList []*string `json:"TopicNameList,omitempty" name:"TopicNameList"`
 
-	// For filtering by tag, this must be configured to `true`.
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
-	// Filter. Currently, you can filter only by tag.
+	// Filter. Currently, you can filter by tag. The tag name must be prefixed with “tag:”, such as “tag: owner”, “tag: environment”, or “tag: business”.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3448,11 +3449,11 @@ func (r *DescribeCmqTopicsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCmqTopicsResponseParams struct {
-	// List of topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Topic list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicList []*CmqTopic `json:"TopicList,omitempty" name:"TopicList"`
 
-	// Total number of topics
+	// The total number of topics.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3562,50 +3563,50 @@ func (r *DescribeEnvironmentAttributesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEnvironmentRolesRequestParams struct {
-	// Environment (namespace) name (required).
+	// Environment/namespace name (required).
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pulsar cluster ID (required)
+	// Pulsar cluster ID (required).
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Role name
+	// Role name.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
 	// * RoleName
 	// Filter by role name for exact query.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeEnvironmentRolesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Environment (namespace) name (required).
+	// Environment/namespace name (required).
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pulsar cluster ID (required)
+	// Pulsar cluster ID (required).
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Role name
+	// Role name.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 
 	// * RoleName
 	// Filter by role name for exact query.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3635,10 +3636,10 @@ func (r *DescribeEnvironmentRolesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEnvironmentRolesResponseParams struct {
-	// Number of records.
+	// The number of records.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Set of namespace roles.
+	// Namespace role set.
 	EnvironmentRoleSets []*EnvironmentRole `json:"EnvironmentRoleSets,omitempty" name:"EnvironmentRoleSets"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3666,10 +3667,10 @@ type DescribeEnvironmentsRequestParams struct {
 	// Fuzzy search by namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Pulsar cluster ID
@@ -3678,7 +3679,7 @@ type DescribeEnvironmentsRequestParams struct {
 	// * EnvironmentId
 	// Filter by namespace for exact query.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3688,10 +3689,10 @@ type DescribeEnvironmentsRequest struct {
 	// Fuzzy search by namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Pulsar cluster ID
@@ -3700,7 +3701,7 @@ type DescribeEnvironmentsRequest struct {
 	// * EnvironmentId
 	// Filter by namespace for exact query.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3729,10 +3730,10 @@ func (r *DescribeEnvironmentsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEnvironmentsResponseParams struct {
-	// Number of namespaces.
+	// The number of namespaces.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Array set of namespaces.
+	// Array of namespace sets.
 	EnvironmentSet []*Environment `json:"EnvironmentSet,omitempty" name:"EnvironmentSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4008,22 +4009,22 @@ func (r *DescribeRocketMQClusterResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQClustersRequestParams struct {
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Search by cluster ID
+	// Search by cluster ID.
 	IdKeyword *string `json:"IdKeyword,omitempty" name:"IdKeyword"`
 
-	// Search by cluster name
+	// Search by cluster name.
 	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
 
-	// Filter by list of cluster IDs
+	// Filter by cluster ID.
 	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
 
-	// For filtering by tag, this must be configured to `true`
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
 	// Filter. Currently, you can filter only by tag.
@@ -4033,22 +4034,22 @@ type DescribeRocketMQClustersRequestParams struct {
 type DescribeRocketMQClustersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Search by cluster ID
+	// Search by cluster ID.
 	IdKeyword *string `json:"IdKeyword,omitempty" name:"IdKeyword"`
 
-	// Search by cluster name
+	// Search by cluster name.
 	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
 
-	// Filter by list of cluster IDs
+	// Filter by cluster ID.
 	ClusterIdList []*string `json:"ClusterIdList,omitempty" name:"ClusterIdList"`
 
-	// For filtering by tag, this must be configured to `true`
+	// For filtering by tag, this parameter must be set to `true`.
 	IsTagFilter *bool `json:"IsTagFilter,omitempty" name:"IsTagFilter"`
 
 	// Filter. Currently, you can filter only by tag.
@@ -4082,11 +4083,11 @@ func (r *DescribeRocketMQClustersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQClustersResponseParams struct {
-	// Cluster information
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Cluster information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterList []*RocketMQClusterDetail `json:"ClusterList,omitempty" name:"ClusterList"`
 
-	// Total number
+	// The total number of returned results.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4111,16 +4112,16 @@ func (r *DescribeRocketMQClustersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQGroupsRequestParams struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Namespace
+	// Namespace.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Topic name, which can be used to query all subscription groups under the topic
@@ -4129,29 +4130,29 @@ type DescribeRocketMQGroupsRequestParams struct {
 	// Consumer group query by consumer group name. Fuzzy query is supported
 	FilterGroup *string `json:"FilterGroup,omitempty" name:"FilterGroup"`
 
-	// Sort by specified field. Valid values: tps, accumulative.
+	// Sort by specified field. Valid values: `tps`, `accumulative`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
 
-	// Sort in ascending or descending order. Valid values: asc, desc.
+	// Sort in ascending or descending order. Valid values: `asc`, `desc`.
 	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
 
-	// Subscription group name. After it is specified, only the information of the corresponding subscription group will be returned.
+	// Subscription group name. After it is specified, the information of only this subscription group will be returned.
 	FilterOneGroup *string `json:"FilterOneGroup,omitempty" name:"FilterOneGroup"`
 }
 
 type DescribeRocketMQGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Namespace
+	// Namespace.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Topic name, which can be used to query all subscription groups under the topic
@@ -4160,13 +4161,13 @@ type DescribeRocketMQGroupsRequest struct {
 	// Consumer group query by consumer group name. Fuzzy query is supported
 	FilterGroup *string `json:"FilterGroup,omitempty" name:"FilterGroup"`
 
-	// Sort by specified field. Valid values: tps, accumulative.
+	// Sort by specified field. Valid values: `tps`, `accumulative`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
 
-	// Sort in ascending or descending order. Valid values: asc, desc.
+	// Sort in ascending or descending order. Valid values: `asc`, `desc`.
 	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
 
-	// Subscription group name. After it is specified, only the information of the corresponding subscription group will be returned.
+	// Subscription group name. After it is specified, the information of only this subscription group will be returned.
 	FilterOneGroup *string `json:"FilterOneGroup,omitempty" name:"FilterOneGroup"`
 }
 
@@ -4199,7 +4200,7 @@ func (r *DescribeRocketMQGroupsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQGroupsResponseParams struct {
-	// Total number
+	// The total number of subscription groups.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// List of subscription groups
@@ -4227,32 +4228,32 @@ func (r *DescribeRocketMQGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQNamespacesRequestParams struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Search by name
+	// Search by name.
 	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
 }
 
 type DescribeRocketMQNamespacesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Offset
+	// Offset.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number
+	// The max number of returned results.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Search by name
+	// Search by name.
 	NameKeyword *string `json:"NameKeyword,omitempty" name:"NameKeyword"`
 }
 
@@ -4283,7 +4284,7 @@ type DescribeRocketMQNamespacesResponseParams struct {
 	// List of namespaces
 	Namespaces []*RocketMQNamespace `json:"Namespaces,omitempty" name:"Namespaces"`
 
-	// Total number
+	// The total number of returned results.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4308,19 +4309,19 @@ func (r *DescribeRocketMQNamespacesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQTopicsRequestParams struct {
-	// Query offset
+	// Offset for query.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Query limit
+	// Query limit.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Namespace
+	// Namespace.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Filter by topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction.
+	// Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
 	FilterType []*string `json:"FilterType,omitempty" name:"FilterType"`
 
 	// Search by topic name. Fuzzy query is supported.
@@ -4330,19 +4331,19 @@ type DescribeRocketMQTopicsRequestParams struct {
 type DescribeRocketMQTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Query offset
+	// Offset for query.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Query limit
+	// Query limit.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Namespace
+	// Namespace.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Filter by topic type. Valid values: Normal, GlobalOrder, PartitionedOrder, Transaction.
+	// Filter by topic type. Valid values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`.
 	FilterType []*string `json:"FilterType,omitempty" name:"FilterType"`
 
 	// Search by topic name. Fuzzy query is supported.
@@ -4375,7 +4376,7 @@ func (r *DescribeRocketMQTopicsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRocketMQTopicsResponseParams struct {
-	// Total number of records
+	// The total number of query records.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// List of topic information
@@ -4503,10 +4504,10 @@ type DescribeSubscriptionsRequestParams struct {
 	// Topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Fuzzy match by subscriber name.
@@ -4528,10 +4529,10 @@ type DescribeSubscriptionsRequest struct {
 	// Topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Fuzzy match by subscriber name.
@@ -4571,10 +4572,10 @@ func (r *DescribeSubscriptionsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSubscriptionsResponseParams struct {
-	// Array set of subscribers.
+	// Array of subscriber sets.
 	SubscriptionSets []*Subscription `json:"SubscriptionSets,omitempty" name:"SubscriptionSets"`
 
-	// Quantity.
+	// The total number of returned results.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4605,29 +4606,32 @@ type DescribeTopicsRequestParams struct {
 	// Fuzzy match by topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Topic type description:
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
+	// 0: Non-persistent and non-partitioned topic;
+	// 1: Non-persistent and partitioned topic;
+	// 2: Persistent and non-partitioned topic;
+	// 3: Persistent and partitioned topic.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
-	// Pulsar cluster ID
+	// Pulsar cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// * TopicName
 	// Query by topic name for exact search.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Topic creator:
+	// 1: User
+	// 2: System
+	TopicCreator *uint64 `json:"TopicCreator,omitempty" name:"TopicCreator"`
 }
 
 type DescribeTopicsRequest struct {
@@ -4639,29 +4643,32 @@ type DescribeTopicsRequest struct {
 	// Fuzzy match by topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Offset. If this parameter is left empty, 0 will be used by default.
+	// Offset, which defaults to 0 if left empty.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20.
+	// The number of results to be returned, which defaults to 10 if left empty. The maximum value is 20.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Topic type description:
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
+	// 0: Non-persistent and non-partitioned topic;
+	// 1: Non-persistent and partitioned topic;
+	// 2: Persistent and non-partitioned topic;
+	// 3: Persistent and partitioned topic.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
-	// Pulsar cluster ID
+	// Pulsar cluster ID.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
 	// * TopicName
 	// Query by topic name for exact search.
 	// Type: String
-	// Required: no
+	// Required: No
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Topic creator:
+	// 1: User
+	// 2: System
+	TopicCreator *uint64 `json:"TopicCreator,omitempty" name:"TopicCreator"`
 }
 
 func (r *DescribeTopicsRequest) ToJsonString() string {
@@ -4683,6 +4690,7 @@ func (r *DescribeTopicsRequest) FromJsonString(s string) error {
 	delete(f, "TopicType")
 	delete(f, "ClusterId")
 	delete(f, "Filters")
+	delete(f, "TopicCreator")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicsRequest has unknown keys!", "")
 	}
@@ -4691,10 +4699,10 @@ func (r *DescribeTopicsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicsResponseParams struct {
-	// Array set of topics.
+	// Array of topic sets.
 	TopicSets []*Topic `json:"TopicSets,omitempty" name:"TopicSets"`
 
-	// Number of topics.
+	// The number of topics.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4718,33 +4726,33 @@ func (r *DescribeTopicsResponse) FromJsonString(s string) error {
 }
 
 type Environment struct {
-	// Namespace name
+	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Remarks
+	// Description.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds (i.e., 15 days)
+	// Retention period for unconsumed messages in seconds. Maximum value: 1,296,000 seconds (15 days).
 	MsgTTL *int64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
-	// Creation time
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Modification time
+	// Last modified.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Namespace ID
+	// Namespace ID.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Namespace name
+	// Namespace name.
 	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
 
-	// Number of topics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of topics.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
 
-	// Message retention policy
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Message retention policy.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
 }
 
@@ -4777,16 +4785,16 @@ type Filter struct {
 }
 
 type FilterSubscription struct {
-	// Whether to display only subscriptions that include real consumers.
+	// Whether to only display subscriptions that include real consumers.
 	ConsumerHasCount *bool `json:"ConsumerHasCount,omitempty" name:"ConsumerHasCount"`
 
-	// Whether to display only subscriptions with retained messages.
+	// Whether to only display subscriptions with heaped messages.
 	ConsumerHasBacklog *bool `json:"ConsumerHasBacklog,omitempty" name:"ConsumerHasBacklog"`
 
-	// Whether to display only subscriptions with messages discarded after expiration.
+	// Whether to only display subscriptions with messages discarded after expiration.
 	ConsumerHasExpired *bool `json:"ConsumerHasExpired,omitempty" name:"ConsumerHasExpired"`
 
-	// Filter by subscription name for exact search.
+	// Filter by subscription name for exact query.
 	SubscriptionNames []*string `json:"SubscriptionNames,omitempty" name:"SubscriptionNames"`
 }
 
@@ -4915,7 +4923,7 @@ type ModifyCmqQueueAttributeRequestParams struct {
 	// Whether to enable transaction. 1: yes; 0: no
 	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
 
-	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	// Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
@@ -4967,7 +4975,7 @@ type ModifyCmqQueueAttributeRequest struct {
 	// Whether to enable transaction. 1: yes; 0: no
 	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
 
-	// Queue storage space configured for message rewind. Value range: 1,024-10,240 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
+	// Queue storage space configured for message rewind. Value range: 10,240-512,000 MB (if message rewind is enabled). The value “0” indicates that message rewind is not enabled.
 	RetentionSizeInMB *uint64 `json:"RetentionSizeInMB,omitempty" name:"RetentionSizeInMB"`
 }
 
@@ -5200,7 +5208,7 @@ type ModifyEnvironmentAttributesRequestParams struct {
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -5219,7 +5227,7 @@ type ModifyEnvironmentAttributesRequest struct {
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// TTL for unconsumed messages in seconds. Maximum value: 1296000 seconds.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -5851,55 +5859,55 @@ func (r *ModifyTopicResponse) FromJsonString(s string) error {
 
 type PartitionsTopic struct {
 	// Average size of the messages published in the last interval in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AverageMsgSize *string `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
 
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of consumers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
 
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of recorded messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastConfirmedEntry *string `json:"LastConfirmedEntry,omitempty" name:"LastConfirmedEntry"`
 
 	// Time when the last ledger was created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastLedgerCreatedTimestamp *string `json:"LastLedgerCreatedTimestamp,omitempty" name:"LastLedgerCreatedTimestamp"`
 
-	// Number of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of messages published by local and replicated publishers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateIn *string `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
 
-	// Sum of the numbers of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of messages delivered by local and replicated consumers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
 
-	// Number of bytes of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size (in bytes) of messages published by local and replicated publishers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgThroughputIn *string `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
 
-	// Number of bytes of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size (in bytes) of messages delivered by local and replicated consumers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
 
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of recorded messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NumberOfEntries *string `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
 
 	// Subpartition ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Partitions *int64 `json:"Partitions,omitempty" name:"Partitions"`
 
-	// Number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of producers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProducerCount *string `json:"ProducerCount,omitempty" name:"ProducerCount"`
 
-	// Total amount of all stored messages in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Total size of all stored messages in bytes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalSize *string `json:"TotalSize,omitempty" name:"TotalSize"`
 
 	// Topic type description.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 }
 
@@ -5908,10 +5916,10 @@ type PublishCmqMsgRequestParams struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Message content
+	// Message content. The total message size is up to 1,024 KB.
 	MsgContent *string `json:"MsgContent,omitempty" name:"MsgContent"`
 
-	// Message tag
+	// Message tag. You can pass in multiple tags or a single route. Each tag or route can contain up to 64 characters.
 	MsgTag []*string `json:"MsgTag,omitempty" name:"MsgTag"`
 }
 
@@ -5921,10 +5929,10 @@ type PublishCmqMsgRequest struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Message content
+	// Message content. The total message size is up to 1,024 KB.
 	MsgContent *string `json:"MsgContent,omitempty" name:"MsgContent"`
 
-	// Message tag
+	// Message tag. You can pass in multiple tags or a single route. Each tag or route can contain up to 64 characters.
 	MsgTag []*string `json:"MsgTag,omitempty" name:"MsgTag"`
 }
 
@@ -6028,6 +6036,15 @@ type ReceiveMessageRequestParams struct {
 
 	// Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
 	SubInitialPosition *string `json:"SubInitialPosition,omitempty" name:"SubInitialPosition"`
+
+	// This parameter is used to specify the maximum number of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	MaxNumMessages *int64 `json:"MaxNumMessages,omitempty" name:"MaxNumMessages"`
+
+	// This parameter is used to specify the maximum body size (in bytes) of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	MaxNumBytes *int64 `json:"MaxNumBytes,omitempty" name:"MaxNumBytes"`
+
+	// This parameter is used to specify the maximum wait timeout (in milliseconds) for receiving a batch of messages for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 }
 
 type ReceiveMessageRequest struct {
@@ -6044,6 +6061,15 @@ type ReceiveMessageRequest struct {
 
 	// Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
 	SubInitialPosition *string `json:"SubInitialPosition,omitempty" name:"SubInitialPosition"`
+
+	// This parameter is used to specify the maximum number of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	MaxNumMessages *int64 `json:"MaxNumMessages,omitempty" name:"MaxNumMessages"`
+
+	// This parameter is used to specify the maximum body size (in bytes) of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	MaxNumBytes *int64 `json:"MaxNumBytes,omitempty" name:"MaxNumBytes"`
+
+	// This parameter is used to specify the maximum wait timeout (in milliseconds) for receiving a batch of messages for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
+	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 }
 
 func (r *ReceiveMessageRequest) ToJsonString() string {
@@ -6062,6 +6088,9 @@ func (r *ReceiveMessageRequest) FromJsonString(s string) error {
 	delete(f, "SubscriptionName")
 	delete(f, "ReceiverQueueSize")
 	delete(f, "SubInitialPosition")
+	delete(f, "MaxNumMessages")
+	delete(f, "MaxNumBytes")
+	delete(f, "Timeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReceiveMessageRequest has unknown keys!", "")
 	}
@@ -6086,6 +6115,14 @@ type ReceiveMessageResponseParams struct {
 	// Returned subscriber name, which will be used when an acknowledgment consumer is created.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubName *string `json:"SubName,omitempty" name:"SubName"`
+
+	// MessageIDs returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MessageIDList *string `json:"MessageIDList,omitempty" name:"MessageIDList"`
+
+	// Message contents returned by `BatchReceivePolicy` at a time, which are separated by “###”.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MessagesPayload *string `json:"MessagesPayload,omitempty" name:"MessagesPayload"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6381,14 +6418,14 @@ type RocketMQClusterConfig struct {
 }
 
 type RocketMQClusterDetail struct {
-	// Cluster's basic information
+	// Basic cluster information.
 	Info *RocketMQClusterInfo `json:"Info,omitempty" name:"Info"`
 
-	// Cluster configuration information
+	// Cluster configuration information.
 	Config *RocketMQClusterConfig `json:"Config,omitempty" name:"Config"`
 
-	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Cluster status. 0: Creating; 1: Normal; 2: Terminating; 3: Deleted; 4. Isolated; 5. Creation failed; 6: Deletion failed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -6435,79 +6472,87 @@ type RocketMQClusterRecentStats struct {
 }
 
 type RocketMQGroup struct {
-	// Consumer group name
+	// Consumer group name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Number of online consumers
+	// The number of online consumers.
 	ConsumerNum *uint64 `json:"ConsumerNum,omitempty" name:"ConsumerNum"`
 
-	// Consumption TPS
+	// Consumption TPS.
 	TPS *uint64 `json:"TPS,omitempty" name:"TPS"`
 
-	// Total number of retained messages
+	// The total number of heaped messages.
 	TotalAccumulative *int64 `json:"TotalAccumulative,omitempty" name:"TotalAccumulative"`
 
-	// 0: cluster consumption mode; 1: broadcast consumption mode; -1: unknown
+	// 0: Cluster consumption mode; 1: Broadcast consumption mode; -1: Unknown.
 	ConsumptionMode *int64 `json:"ConsumptionMode,omitempty" name:"ConsumptionMode"`
 
-	// Whether to allow consumption
+	// Whether to allow consumption.
 	ReadEnabled *bool `json:"ReadEnabled,omitempty" name:"ReadEnabled"`
 
-	// Number of partitions in the retry letter topic
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of partitions in a retry topic.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RetryPartitionNum *uint64 `json:"RetryPartitionNum,omitempty" name:"RetryPartitionNum"`
 
-	// Creation time in milliseconds
+	// Creation time in milliseconds.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Modification time in milliseconds
+	// Modification time in milliseconds.
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Client protocol
+	// Client protocol.
 	ClientProtocol *string `json:"ClientProtocol,omitempty" name:"ClientProtocol"`
 
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Consumer type. Enumerated values: ACTIVELY, PASSIVELY
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Consumer type. Enumerated values: `ACTIVELY` or `PASSIVELY`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerType *string `json:"ConsumerType,omitempty" name:"ConsumerType"`
 
-	// Whether to enable broadcast consumption
+	// Whether to enable broadcast consumption.
 	BroadcastEnabled *bool `json:"BroadcastEnabled,omitempty" name:"BroadcastEnabled"`
 }
 
 type RocketMQNamespace struct {
-	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
+	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
 	// Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
-	// Retention period for persisted messages in milliseconds
+	// Retention period for persistently stored messages in milliseconds.
 	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
 
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Public network access point address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PublicEndpoint *string `json:"PublicEndpoint,omitempty" name:"PublicEndpoint"`
+
+	// VPC access point address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcEndpoint *string `json:"VpcEndpoint,omitempty" name:"VpcEndpoint"`
 }
 
 type RocketMQTopic struct {
-	// Topic name
+	// Topic name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Number of read/write partitions
+	// The number of read/write partitions.
 	PartitionNum *uint64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
 
-	// Creation time in milliseconds
+	// Creation time in milliseconds.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Creation time in milliseconds
+	// Creation time in milliseconds.
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -6908,75 +6953,75 @@ type Subscription struct {
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
 	// The time when the consumer started connecting.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ConnectedSince *string `json:"ConnectedSince,omitempty" name:"ConnectedSince"`
 
 	// Consumer address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerAddr *string `json:"ConsumerAddr,omitempty" name:"ConsumerAddr"`
 
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of consumers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
 
 	// Consumer name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerName *string `json:"ConsumerName,omitempty" name:"ConsumerName"`
 
-	// Number of retained messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of heaped messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgBacklog *string `json:"MsgBacklog,omitempty" name:"MsgBacklog"`
 
-	// Proportion of messages under this subscription that were discarded but not sent after TTL.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Percentage of messages under this subscription that were discarded but not sent after TTL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateExpired *string `json:"MsgRateExpired,omitempty" name:"MsgRateExpired"`
 
-	// Sum of the numbers of messages delivered by the consumer per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of messages delivered by the consumer per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
 
-	// Number of bytes of messages consumed by the consumer per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size (in bytes) of messages consumed by the consumer per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
 
 	// Subscription name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
 
 	// Set of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerSets []*Consumer `json:"ConsumerSets,omitempty" name:"ConsumerSets"`
 
-	// Whether it is online.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether the consumer is online.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsOnline *bool `json:"IsOnline,omitempty" name:"IsOnline"`
 
 	// Set of consumption progress information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumersScheduleSets []*ConsumersSchedule `json:"ConsumersScheduleSets,omitempty" name:"ConsumersScheduleSets"`
 
 	// Remarks.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
 	// Creation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Last modified.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Subscription type. Valid values: `Exclusive`, `Shared`, `Failover`, and `Key_Shared`. An empty string or `NULL`: Unknown.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
 	// Whether messages are blocked as the limit of unacknowledged messages has been reached.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BlockedSubscriptionOnUnackedMsgs *bool `json:"BlockedSubscriptionOnUnackedMsgs,omitempty" name:"BlockedSubscriptionOnUnackedMsgs"`
 
-	// Maximum number of unacknowledged messages.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// The maximum number of unacknowledged messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxUnackedMsgNum *int64 `json:"MaxUnackedMsgNum,omitempty" name:"MaxUnackedMsgNum"`
 }
 
@@ -7001,100 +7046,100 @@ type Tag struct {
 
 type Topic struct {
 	// Average size of the messages published in the last interval in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AverageMsgSize *string `json:"AverageMsgSize,omitempty" name:"AverageMsgSize"`
 
-	// Number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of consumers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerCount *string `json:"ConsumerCount,omitempty" name:"ConsumerCount"`
 
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of recorded messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastConfirmedEntry *string `json:"LastConfirmedEntry,omitempty" name:"LastConfirmedEntry"`
 
 	// Time when the last ledger was created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastLedgerCreatedTimestamp *string `json:"LastLedgerCreatedTimestamp,omitempty" name:"LastLedgerCreatedTimestamp"`
 
-	// Number of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of messages published by local and replicated publishers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateIn *string `json:"MsgRateIn,omitempty" name:"MsgRateIn"`
 
-	// Sum of the numbers of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of messages delivered by local and replicated consumers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgRateOut *string `json:"MsgRateOut,omitempty" name:"MsgRateOut"`
 
-	// Number of bytes of messages published by local and replicated publishers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size (in bytes) of messages published by local and replicated publishers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgThroughputIn *string `json:"MsgThroughputIn,omitempty" name:"MsgThroughputIn"`
 
-	// Number of bytes of messages delivered by local and replicated consumers per second.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size (in bytes) of messages delivered by local and replicated consumers per second.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MsgThroughputOut *string `json:"MsgThroughputOut,omitempty" name:"MsgThroughputOut"`
 
-	// Total number of recorded messages.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The total number of recorded messages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NumberOfEntries *string `json:"NumberOfEntries,omitempty" name:"NumberOfEntries"`
 
-	// Number of partitions ≤ 0: there are no subpartitions in the topic.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Partition count ≤ 0: there are no subpartitions in the topic.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Partitions *int64 `json:"Partitions,omitempty" name:"Partitions"`
 
-	// Number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The number of producers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProducerCount *string `json:"ProducerCount,omitempty" name:"ProducerCount"`
 
-	// Total amount of all stored messages in bytes.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The size of all stored messages in bytes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalSize *string `json:"TotalSize,omitempty" name:"TotalSize"`
 
 	// Subpartitions in a partitioned topic.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubTopicSets []*PartitionsTopic `json:"SubTopicSets,omitempty" name:"SubTopicSets"`
 
 	// Topic type description:
-	// 0: general message;
-	// 1: globally sequential message;
-	// 2: partitionally sequential message;
-	// 3: retry letter queue;
-	// 4: dead letter queue;
-	// 5: transaction message.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 0: General message;
+	// 1: Globally sequential message;
+	// 2: Partitionally sequential message;
+	// 3: Retry letter topic;
+	// 4: Dead letter topic;
+	// 5: Transaction message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicType *uint64 `json:"TopicType,omitempty" name:"TopicType"`
 
 	// Environment (namespace) name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
 	// Topic name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
 	// Remarks (up to 128 characters).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
 	// Creation time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Last modified.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-	// Maximum number of producers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The maximum number of producers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProducerLimit *string `json:"ProducerLimit,omitempty" name:"ProducerLimit"`
 
-	// Maximum number of consumers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The maximum number of consumers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConsumerLimit *string `json:"ConsumerLimit,omitempty" name:"ConsumerLimit"`
 
 	// `0`: Non-persistent and non-partitioned
 	// `1`: Non-persistent and partitioned
 	// `2`: Persistent and non-partitioned
 	// `3`: Persistent and partitioned
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PulsarTopicType *int64 `json:"PulsarTopicType,omitempty" name:"PulsarTopicType"`
 }
 

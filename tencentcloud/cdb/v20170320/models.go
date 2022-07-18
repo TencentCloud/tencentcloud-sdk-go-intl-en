@@ -1367,7 +1367,7 @@ type CreateDBInstanceHourRequestParams struct {
 	// This field is meaningless when purchasing pay-as-you-go instances.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Instance name.
+	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, their instance name is db1, db2 respectively.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Instance tag information.
@@ -1482,7 +1482,7 @@ type CreateDBInstanceHourRequest struct {
 	// This field is meaningless when purchasing pay-as-you-go instances.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Instance name.
+	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, their instance name is db1, db2 respectively.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Instance tag information.
@@ -7775,7 +7775,7 @@ type ModifyLocalBinlogConfigRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Retention period of local binlog. Value range: [72,168].
+	// Retention period of local binlog. Value range: [120,168].
 	SaveHours *int64 `json:"SaveHours,omitempty" name:"SaveHours"`
 
 	// Space utilization of local binlog. Value range: [30,50].
@@ -7788,7 +7788,7 @@ type ModifyLocalBinlogConfigRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Retention period of local binlog. Value range: [72,168].
+	// Retention period of local binlog. Value range: [120,168].
 	SaveHours *int64 `json:"SaveHours,omitempty" name:"SaveHours"`
 
 	// Space utilization of local binlog. Value range: [30,50].
@@ -8125,6 +8125,98 @@ func (r *OfflineIsolatedInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *OfflineIsolatedInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenAuditServiceRequestParams struct {
+	// TencentDB for MySQL instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Retention period of audit logs. Valid values:
+	// 7: seven days (a week);
+	// 30: 30 days (a month);
+	// 180: 180 days (six months);
+	// 365: 365 days (a year);
+	// 1095: 1095 days (three years);
+	// 1825: 1825 days (five years).
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Retention period of high-frequency audit logs. Valid values:
+	// 7: seven days (a week);
+	// 30: 30 days (a month);
+	// 180: 180 days (six months);
+	// 365: 365 days (a year);
+	// 1095: 1095 days (three years);
+	// 1825: 1825 days (five years).
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+}
+
+type OpenAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// TencentDB for MySQL instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Retention period of audit logs. Valid values:
+	// 7: seven days (a week);
+	// 30: 30 days (a month);
+	// 180: 180 days (six months);
+	// 365: 365 days (a year);
+	// 1095: 1095 days (three years);
+	// 1825: 1825 days (five years).
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Retention period of high-frequency audit logs. Valid values:
+	// 7: seven days (a week);
+	// 30: 30 days (a month);
+	// 180: 180 days (six months);
+	// 365: 365 days (a year);
+	// 1095: 1095 days (three years);
+	// 1825: 1825 days (five years).
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+}
+
+func (r *OpenAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	delete(f, "HighLogExpireDay")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenAuditServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *OpenAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

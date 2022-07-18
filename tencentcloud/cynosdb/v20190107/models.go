@@ -42,7 +42,7 @@ type ActivateInstanceRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Array of instance IDs
+	// List of instance IDs in the format of `cynosdbmysql-ins-n7ocdslw` as displayed in the TDSQL-C for MySQL console. You can use the instance list querying API to query the ID, i.e., the `InstanceId` value in the output parameters.
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 }
 
@@ -52,7 +52,7 @@ type ActivateInstanceRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Array of instance IDs
+	// List of instance IDs in the format of `cynosdbmysql-ins-n7ocdslw` as displayed in the TDSQL-C for MySQL console. You can use the instance list querying API to query the ID, i.e., the `InstanceId` value in the output parameters.
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 }
 
@@ -109,25 +109,25 @@ type AddInstancesRequestParams struct {
 	// Number of CPU cores
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Memory
+	// Memory in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Number of added read-only instances
+	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which is used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created.
+	// Instance group ID, which is used when you add an instance to an existing RO group. If this parameter is left empty, an RO group will be created. We recommend you not pass in this value on the current version.
 	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID
+	// VPC ID. This parameter has been disused.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// Subnet ID. If `VpcId` is set, `SubnetId` is required. This parameter has been disused.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Port used when adding RO group
+	// The port used when adding an RO group. Value range: [0,65535).
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Instance name
+	// Instance name. String length range: [0,64).
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
@@ -137,7 +137,7 @@ type AddInstancesRequestParams struct {
 	// <li> MYSQL </li>
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
-	// Order source
+	// Order source. String length range: [0,64).
 	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
@@ -153,25 +153,25 @@ type AddInstancesRequest struct {
 	// Number of CPU cores
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Memory
+	// Memory in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Number of added read-only instances
+	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which is used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created.
+	// Instance group ID, which is used when you add an instance to an existing RO group. If this parameter is left empty, an RO group will be created. We recommend you not pass in this value on the current version.
 	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID
+	// VPC ID. This parameter has been disused.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// Subnet ID. If `VpcId` is set, `SubnetId` is required. This parameter has been disused.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Port used when adding RO group
+	// The port used when adding an RO group. Value range: [0,65535).
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Instance name
+	// Instance name. String length range: [0,64).
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
@@ -181,7 +181,7 @@ type AddInstancesRequest struct {
 	// <li> MYSQL </li>
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
-	// Order source
+	// Order source. String length range: [0,64).
 	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
@@ -302,6 +302,23 @@ type BillingResourceInfo struct {
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
+type BinlogItem struct {
+	// Binlog filename
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File size in bytes
+	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+
+	// Transaction start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Transaction end time
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// Binlog file ID
+	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+}
+
 type ClusterInstanceDetail struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -386,6 +403,388 @@ func (r *CreateAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClustersRequestParams struct {
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Database type. Valid values: 
+	// <li> MYSQL </li>
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Database version. Valid values: 
+	// <li> Valid values for `MYSQL`: 5.7 </li>
+	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
+	// Number of CPU cores of a non-serverless instance
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
+	// Memory of a non-serverless instance in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// This parameter has been deprecated.
+	// Storage capacity in GB.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
+	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+
+	// Port. Default value: 5432
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. Default value: 0
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Number of purchased items. Currently, only 1 can be passed in. If this parameter is left empty, 1 will be used by default.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Rollback type:
+	// noneRollback: no rollback
+	// snapRollback: rollback by snapshot
+	// timeRollback: rollback by time point
+	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
+
+	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
+	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
+
+	// Pass in the source cluster ID during rollback to find the source `poolId`
+	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
+
+	// Specified time for time point rollback or snapshot time for snapshot rollback
+	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+
+	// This parameter has been deprecated.
+	// Specified allowed time range for time point rollback
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+
+	// The maximum storage of a non-serverless instance in GB
+	// If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
+	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+
+	// Number of instances
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Purchase duration of monthly subscription plan
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Purchase duration unit of monthly subscription plan
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Whether auto-renewal is enabled for monthly subscription plan
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
+	HaCount *int64 `json:"HaCount,omitempty" name:"HaCount"`
+
+	// Order source
+	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+
+	// Array of tags to be bound to the created cluster
+	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Database type
+	// Valid values when `DbType` is `MYSQL` (default value: NORMAL):
+	// <li>NORMAL</li>
+	// <li>SERVERLESS</li>
+	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+
+	// This parameter is required if `DbMode` is `SERVERLESS`
+	// Minimum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+
+	// This parameter is required if `DbMode` is `SERVERLESS`:
+	// Maximum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+
+	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
+	// <li>yes</li>
+	// <li>no</li>
+	// Default value: yes
+	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
+
+	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
+	// Default value: 600
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
+
+	// The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
+	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
+	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Array of alarm policy IDs
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitempty" name:"AlarmPolicyIds"`
+
+	// Array of parameters
+	ClusterParams []*ParamItem `json:"ClusterParams,omitempty" name:"ClusterParams"`
+
+	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+}
+
+type CreateClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Database type. Valid values: 
+	// <li> MYSQL </li>
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Database version. Valid values: 
+	// <li> Valid values for `MYSQL`: 5.7 </li>
+	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
+	// Number of CPU cores of a non-serverless instance
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// It is required when `DbMode` is set to `NORMAL` or left empty.
+	// Memory of a non-serverless instance in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// This parameter has been deprecated.
+	// Storage capacity in GB.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
+	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+
+	// Port. Default value: 5432
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. Default value: 0
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Number of purchased items. Currently, only 1 can be passed in. If this parameter is left empty, 1 will be used by default.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Rollback type:
+	// noneRollback: no rollback
+	// snapRollback: rollback by snapshot
+	// timeRollback: rollback by time point
+	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
+
+	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
+	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
+
+	// Pass in the source cluster ID during rollback to find the source `poolId`
+	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
+
+	// Specified time for time point rollback or snapshot time for snapshot rollback
+	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+
+	// This parameter has been deprecated.
+	// Specified allowed time range for time point rollback
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+
+	// The maximum storage of a non-serverless instance in GB
+	// If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
+	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+
+	// Number of instances
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Purchase duration of monthly subscription plan
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Purchase duration unit of monthly subscription plan
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Whether auto-renewal is enabled for monthly subscription plan
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
+	HaCount *int64 `json:"HaCount,omitempty" name:"HaCount"`
+
+	// Order source
+	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+
+	// Array of tags to be bound to the created cluster
+	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Database type
+	// Valid values when `DbType` is `MYSQL` (default value: NORMAL):
+	// <li>NORMAL</li>
+	// <li>SERVERLESS</li>
+	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+
+	// This parameter is required if `DbMode` is `SERVERLESS`
+	// Minimum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+
+	// This parameter is required if `DbMode` is `SERVERLESS`:
+	// Maximum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+
+	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
+	// <li>yes</li>
+	// <li>no</li>
+	// Default value: yes
+	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
+
+	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
+	// Default value: 600
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
+
+	// The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
+	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
+	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Array of alarm policy IDs
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitempty" name:"AlarmPolicyIds"`
+
+	// Array of parameters
+	ClusterParams []*ParamItem `json:"ClusterParams,omitempty" name:"ClusterParams"`
+
+	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+}
+
+func (r *CreateClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "DbType")
+	delete(f, "DbVersion")
+	delete(f, "ProjectId")
+	delete(f, "Cpu")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "ClusterName")
+	delete(f, "AdminPassword")
+	delete(f, "Port")
+	delete(f, "PayMode")
+	delete(f, "Count")
+	delete(f, "RollbackStrategy")
+	delete(f, "RollbackId")
+	delete(f, "OriginalClusterId")
+	delete(f, "ExpectTime")
+	delete(f, "ExpectTimeThresh")
+	delete(f, "StorageLimit")
+	delete(f, "InstanceCount")
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	delete(f, "AutoRenewFlag")
+	delete(f, "AutoVoucher")
+	delete(f, "HaCount")
+	delete(f, "OrderSource")
+	delete(f, "ResourceTags")
+	delete(f, "DbMode")
+	delete(f, "MinCpu")
+	delete(f, "MaxCpu")
+	delete(f, "AutoPause")
+	delete(f, "AutoPauseDelay")
+	delete(f, "StoragePayMode")
+	delete(f, "SecurityGroupIds")
+	delete(f, "AlarmPolicyIds")
+	delete(f, "ClusterParams")
+	delete(f, "DealMode")
+	delete(f, "ParamTemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClustersResponseParams struct {
+	// Freezing transaction ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	TranId *string `json:"TranId,omitempty" name:"TranId"`
+
+	// Order ID
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// List of resource IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+
+	// List of cluster IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// Big order ID.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateClustersResponseParams `json:"Response"`
+}
+
+func (r *CreateClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1011,6 +1410,70 @@ func (r *DescribeBackupConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBackupDownloadUrlRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup ID
+	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+}
+
+type DescribeBackupDownloadUrlRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup ID
+	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+}
+
+func (r *DescribeBackupDownloadUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BackupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupDownloadUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupDownloadUrlResponseParams struct {
+	// Backup download address
+	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupDownloadUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupDownloadUrlResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupDownloadUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBackupListRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -1090,6 +1553,216 @@ func (r *DescribeBackupListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBackupListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogDownloadUrlRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Binlog file ID
+	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+}
+
+type DescribeBinlogDownloadUrlRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Binlog file ID
+	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+}
+
+func (r *DescribeBinlogDownloadUrlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogDownloadUrlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BinlogId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBinlogDownloadUrlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogDownloadUrlResponseParams struct {
+	// Download address
+	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBinlogDownloadUrlResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBinlogDownloadUrlResponseParams `json:"Response"`
+}
+
+func (r *DescribeBinlogDownloadUrlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogDownloadUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogSaveDaysRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeBinlogSaveDaysRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeBinlogSaveDaysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogSaveDaysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBinlogSaveDaysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogSaveDaysResponseParams struct {
+	// Binlog retention period in days
+	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitempty" name:"BinlogSaveDays"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBinlogSaveDaysResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBinlogSaveDaysResponseParams `json:"Response"`
+}
+
+func (r *DescribeBinlogSaveDaysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogSaveDaysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogsRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeBinlogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeBinlogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBinlogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogsResponseParams struct {
+	// Total number of records
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Binlog list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Binlogs []*BinlogItem `json:"Binlogs,omitempty" name:"Binlogs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBinlogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBinlogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeBinlogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1212,7 +1885,7 @@ func (r *DescribeClusterInstanceGrpsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeClustersRequestParams struct {
-	// Engine type. Valid values: MYSQL, POSTGRESQL
+	// Engine type. Currently, `MYSQL` is supported.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
@@ -1238,7 +1911,7 @@ type DescribeClustersRequestParams struct {
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Engine type. Valid values: MYSQL, POSTGRESQL
+	// Engine type. Currently, `MYSQL` is supported.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
@@ -1428,6 +2101,129 @@ func (r *DescribeInstanceDetailResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeInstanceSlowQueriesRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Transaction start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Transaction end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Username
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Client host
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: asc, desc.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+type DescribeInstanceSlowQueriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Transaction start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Transaction end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Username
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Client host
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: asc, desc.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeInstanceSlowQueriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceSlowQueriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Username")
+	delete(f, "Host")
+	delete(f, "Database")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceSlowQueriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceSlowQueriesResponseParams struct {
+	// Total number
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Slow query record
+	SlowQueries []*SlowQueriesItem `json:"SlowQueries,omitempty" name:"SlowQueries"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeInstanceSlowQueriesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceSlowQueriesResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceSlowQueriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceSlowQueriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeInstanceSpecsRequestParams struct {
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
@@ -1507,7 +2303,7 @@ type DescribeInstancesRequestParams struct {
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
 	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
 
-	// Engine type. Valid values: MYSQL, POSTGRESQL
+	// Engine type. Currently, `MYSQL` is supported.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Instance status. Valid values:
@@ -1546,7 +2342,7 @@ type DescribeInstancesRequest struct {
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
 	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
 
-	// Engine type. Valid values: MYSQL, POSTGRESQL
+	// Engine type. Currently, `MYSQL` is supported.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Instance status. Valid values:
@@ -1934,6 +2730,119 @@ func (r *DescribeRollbackTimeValidityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ExportInstanceSlowQueriesRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Transaction start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Transaction end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Username
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Client host
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// File type. Valid values: csv, original.
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+}
+
+type ExportInstanceSlowQueriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Transaction start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Transaction end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Maximum number
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Username
+	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// Client host
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// File type. Valid values: csv, original.
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+}
+
+func (r *ExportInstanceSlowQueriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportInstanceSlowQueriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Username")
+	delete(f, "Host")
+	delete(f, "Database")
+	delete(f, "FileType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExportInstanceSlowQueriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExportInstanceSlowQueriesResponseParams struct {
+	// Slow query export content
+	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ExportInstanceSlowQueriesResponse struct {
+	*tchttp.BaseResponse
+	Response *ExportInstanceSlowQueriesResponseParams `json:"Response"`
+}
+
+func (r *ExportInstanceSlowQueriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportInstanceSlowQueriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InstanceSpec struct {
 	// Number of instance CPU cores
 	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
@@ -1953,8 +2862,7 @@ type IsolateClusterRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 }
 
@@ -1964,8 +2872,7 @@ type IsolateClusterRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 }
 
@@ -2027,8 +2934,7 @@ type IsolateInstanceRequestParams struct {
 	// Instance ID array
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 }
 
@@ -2041,8 +2947,7 @@ type IsolateInstanceRequest struct {
 	// Instance ID array
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 }
 
@@ -2107,13 +3012,13 @@ type ModifyBackupConfigRequestParams struct {
 	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
 
-	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800
+	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration *uint64 `json:"ReserveDuration,omitempty" name:"ReserveDuration"`
 
-	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup
+	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
 	BackupFreq []*string `json:"BackupFreq,omitempty" name:"BackupFreq"`
 
-	// Backup mode. logic: logic backup; snapshot: snapshot backup
+	// Backup mode. logic: logic backup; snapshot: snapshot backup. This parameter cannot be modified currently and doesn't need to be entered.
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 }
 
@@ -2129,13 +3034,13 @@ type ModifyBackupConfigRequest struct {
 	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
 
-	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800
+	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
 	ReserveDuration *uint64 `json:"ReserveDuration,omitempty" name:"ReserveDuration"`
 
-	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup
+	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
 	BackupFreq []*string `json:"BackupFreq,omitempty" name:"BackupFreq"`
 
-	// Backup mode. logic: logic backup; snapshot: snapshot backup
+	// Backup mode. logic: logic backup; snapshot: snapshot backup. This parameter cannot be modified currently and doesn't need to be entered.
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 }
 
@@ -2182,6 +3087,74 @@ func (r *ModifyBackupConfigResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyBackupConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBackupNameRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup file ID
+	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Backup name, which can contain up to 60 characters.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+}
+
+type ModifyBackupNameRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup file ID
+	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Backup name, which can contain up to 60 characters.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+}
+
+func (r *ModifyBackupNameRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupNameRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BackupId")
+	delete(f, "BackupName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupNameRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBackupNameResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyBackupNameResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBackupNameResponseParams `json:"Response"`
+}
+
+func (r *ModifyBackupNameResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupNameResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2251,7 +3224,7 @@ type ModifyClusterParamRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// The list of parameters to be modified
+	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`.
 	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
@@ -2264,7 +3237,7 @@ type ModifyClusterParamRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// The list of parameters to be modified
+	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`.
 	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
@@ -2322,7 +3295,7 @@ type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Instance group ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List of IDs of the security groups to be modified, which is an array of one or more security group IDs.
+	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// AZ
@@ -2335,7 +3308,7 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	// Instance group ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List of IDs of the security groups to be modified, which is an array of one or more security group IDs.
+	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// AZ
@@ -2457,7 +3430,7 @@ type ModifyMaintainPeriodConfigRequestParams struct {
 	// Maintenance duration in seconds. For example, one hour is represented by 3600
 	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
 
-	// Maintenance days of the week
+	// Maintenance days of the week. Valid values: [Mon, Tue, Wed, Thu, Fri, Sat, Sun].
 	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
 }
 
@@ -2473,7 +3446,7 @@ type ModifyMaintainPeriodConfigRequest struct {
 	// Maintenance duration in seconds. For example, one hour is represented by 3600
 	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
 
-	// Maintenance days of the week
+	// Maintenance days of the week. Valid values: [Mon, Tue, Wed, Thu, Fri, Sat, Sun].
 	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
 }
 
@@ -2900,7 +3873,7 @@ type SetRenewFlagRequestParams struct {
 	// ID of the instance to be manipulated
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
-	// Auto-Renewal flag
+	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 }
 
@@ -2910,7 +3883,7 @@ type SetRenewFlagRequest struct {
 	// ID of the instance to be manipulated
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
-	// Auto-Renewal flag
+	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 }
 
@@ -2959,6 +3932,41 @@ func (r *SetRenewFlagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SlowQueriesItem struct {
+	// Execution timestamp
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Execution duration in seconds
+	QueryTime *float64 `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// SQL statement
+	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+
+	// Client host
+	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
+
+	// Username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Lock duration in seconds
+	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
+
+	// Number of scanned rows
+	RowsExamined *int64 `json:"RowsExamined,omitempty" name:"RowsExamined"`
+
+	// Number of returned rows
+	RowsSent *int64 `json:"RowsSent,omitempty" name:"RowsSent"`
+
+	// SQL template
+	SqlTemplate *string `json:"SqlTemplate,omitempty" name:"SqlTemplate"`
+
+	// MD5 value of the SQL statement
+	SqlMd5 *string `json:"SqlMd5,omitempty" name:"SqlMd5"`
+}
+
 type Tag struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -2975,20 +3983,19 @@ type UpgradeInstanceRequestParams struct {
 	// Database CPU
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Database memory
+	// Database memory in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
 	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
 
-	// Storage upper limit. 0 indicates to use the standard configuration
+	// This parameter has been disused.
 	StorageLimit *uint64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
@@ -3004,20 +4011,19 @@ type UpgradeInstanceRequest struct {
 	// Database CPU
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Database memory
+	// Database memory in GB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
 	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
 
-	// Storage upper limit. 0 indicates to use the standard configuration
+	// This parameter has been disused.
 	StorageLimit *uint64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// This parameter has been disused.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)

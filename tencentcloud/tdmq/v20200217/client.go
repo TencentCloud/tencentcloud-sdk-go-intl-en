@@ -236,6 +236,7 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 //  RESOURCEINUSE_CLUSTER = "ResourceInUse.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     return c.CreateClusterWithContext(context.Background(), request)
 }
@@ -253,6 +254,7 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
 //  RESOURCEINUSE_CLUSTER = "ResourceInUse.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     if request == nil {
         request = NewCreateClusterRequest()
@@ -360,6 +362,7 @@ func NewCreateCmqSubscribeResponse() (response *CreateCmqSubscribeResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATESUBSCRIPTION = "FailedOperation.CreateSubscription"
 //  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqSubscribe(request *CreateCmqSubscribeRequest) (response *CreateCmqSubscribeResponse, err error) {
     return c.CreateCmqSubscribeWithContext(context.Background(), request)
 }
@@ -371,6 +374,7 @@ func (c *Client) CreateCmqSubscribe(request *CreateCmqSubscribeRequest) (respons
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATESUBSCRIPTION = "FailedOperation.CreateSubscription"
 //  RESOURCEINUSE_SUBSCRIPTION = "ResourceInUse.Subscription"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqSubscribeWithContext(ctx context.Context, request *CreateCmqSubscribeRequest) (response *CreateCmqSubscribeResponse, err error) {
     if request == nil {
         request = NewCreateCmqSubscribeRequest()
@@ -418,6 +422,7 @@ func NewCreateCmqTopicResponse() (response *CreateCmqTopicResponse) {
 //  RESOURCEINUSE_TOPIC = "ResourceInUse.Topic"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqTopic(request *CreateCmqTopicRequest) (response *CreateCmqTopicResponse, err error) {
     return c.CreateCmqTopicWithContext(context.Background(), request)
 }
@@ -436,6 +441,7 @@ func (c *Client) CreateCmqTopic(request *CreateCmqTopicRequest) (response *Creat
 //  RESOURCEINUSE_TOPIC = "ResourceInUse.Topic"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqTopicWithContext(ctx context.Context, request *CreateCmqTopicRequest) (response *CreateCmqTopicResponse, err error) {
     if request == nil {
         request = NewCreateCmqTopicRequest()
@@ -1189,6 +1195,7 @@ func NewDeleteCmqSubscribeResponse() (response *DeleteCmqSubscribeResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
 //  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) DeleteCmqSubscribe(request *DeleteCmqSubscribeRequest) (response *DeleteCmqSubscribeResponse, err error) {
     return c.DeleteCmqSubscribeWithContext(context.Background(), request)
 }
@@ -1200,6 +1207,7 @@ func (c *Client) DeleteCmqSubscribe(request *DeleteCmqSubscribeRequest) (respons
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETESUBSCRIPTIONS = "FailedOperation.DeleteSubscriptions"
 //  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) DeleteCmqSubscribeWithContext(ctx context.Context, request *DeleteCmqSubscribeRequest) (response *DeleteCmqSubscribeResponse, err error) {
     if request == nil {
         request = NewDeleteCmqSubscribeRequest()
@@ -3113,6 +3121,7 @@ func NewModifyCmqQueueAttributeResponse() (response *ModifyCmqQueueAttributeResp
 //  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     return c.ModifyCmqQueueAttributeWithContext(context.Background(), request)
@@ -3126,6 +3135,7 @@ func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest
 //  FAILEDOPERATION_SETRETENTIONPOLICY = "FailedOperation.SetRetentionPolicy"
 //  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 func (c *Client) ModifyCmqQueueAttributeWithContext(ctx context.Context, request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     if request == nil {
@@ -3784,7 +3794,45 @@ func NewReceiveMessageResponse() (response *ReceiveMessageResponse) {
 }
 
 // ReceiveMessage
-// This API is used to receive messages sent to the specified topic.
+// This API is used to receive messages sent to a specified topic. If this API is called when there are no messages in the topic, the `ReceiveTimeout` exception will be reported.
+//
+// 
+//
+// Instructions on how to use `BatchReceivePolicy`:
+//
+// 
+//
+// `BatchReceive` has the three parameters:
+//
+// 
+//
+// ● `MaxNumMessages`: The maximum number of messages returned by `Receive` when `BatchReceive` is used.
+//
+// ● `MaxNumBytes`: The maximum size (in bytes) of the message returned by `Receive` when `BatchReceive` is used.
+//
+// ● `Timeout`: The maximum timeout period (in milliseconds) of calling `Receive` when `BatchReceive` is used.
+//
+// 
+//
+// By default, if you don’t specify any of the three parameters, the `BatchReceive` feature is disabled; if one of the three parameter values is above zero, `BatchReceive` is enabled. `BatchReceive` will be disabled when any of the three parameter values reaches the threshold you specify.
+//
+// 
+//
+// Note: The values of both `MaxNumMessages` and `MaxNumBytes` are subject to the value of `ReceiveQueueSize`. If the values of `ReceiveQueueSize` and `MaxNumMessages` are 5 and 10, respectively, you can receive up to five rather than 10 messages when `BatchReceive` is used.
+//
+// 
+//
+// 
+//
+// 
+//
+// The API configured with `BatchReceivePolicy` returns multiple messages at a time.
+//
+// 
+//
+// 1. These messages are separated by “###”. After receiving them, you can separate them with split tools in different languages.
+//
+// 2. MessageIDs are separated by “###”. After receiving the messages, you can separate the MessageIDs with split tools in different languages, so that you can obtain the `MessageID` field information required for calling the `AcknowledgeMessage` API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPRODUCERERROR = "FailedOperation.CreateProducerError"
@@ -3803,7 +3851,45 @@ func (c *Client) ReceiveMessage(request *ReceiveMessageRequest) (response *Recei
 }
 
 // ReceiveMessage
-// This API is used to receive messages sent to the specified topic.
+// This API is used to receive messages sent to a specified topic. If this API is called when there are no messages in the topic, the `ReceiveTimeout` exception will be reported.
+//
+// 
+//
+// Instructions on how to use `BatchReceivePolicy`:
+//
+// 
+//
+// `BatchReceive` has the three parameters:
+//
+// 
+//
+// ● `MaxNumMessages`: The maximum number of messages returned by `Receive` when `BatchReceive` is used.
+//
+// ● `MaxNumBytes`: The maximum size (in bytes) of the message returned by `Receive` when `BatchReceive` is used.
+//
+// ● `Timeout`: The maximum timeout period (in milliseconds) of calling `Receive` when `BatchReceive` is used.
+//
+// 
+//
+// By default, if you don’t specify any of the three parameters, the `BatchReceive` feature is disabled; if one of the three parameter values is above zero, `BatchReceive` is enabled. `BatchReceive` will be disabled when any of the three parameter values reaches the threshold you specify.
+//
+// 
+//
+// Note: The values of both `MaxNumMessages` and `MaxNumBytes` are subject to the value of `ReceiveQueueSize`. If the values of `ReceiveQueueSize` and `MaxNumMessages` are 5 and 10, respectively, you can receive up to five rather than 10 messages when `BatchReceive` is used.
+//
+// 
+//
+// 
+//
+// 
+//
+// The API configured with `BatchReceivePolicy` returns multiple messages at a time.
+//
+// 
+//
+// 1. These messages are separated by “###”. After receiving them, you can separate them with split tools in different languages.
+//
+// 2. MessageIDs are separated by “###”. After receiving the messages, you can separate the MessageIDs with split tools in different languages, so that you can obtain the `MessageID` field information required for calling the `AcknowledgeMessage` API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPRODUCERERROR = "FailedOperation.CreateProducerError"

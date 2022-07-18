@@ -228,6 +228,7 @@ func NewBalanceRoGroupLoadResponse() (response *BalanceRoGroupLoadResponse) {
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -242,6 +243,7 @@ func (c *Client) BalanceRoGroupLoad(request *BalanceRoGroupLoadRequest) (respons
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -644,11 +646,13 @@ func NewCreateDBImportJobResponse() (response *CreateDBImportJobResponse) {
 //  CDBERROR = "CdbError"
 //  CDBERROR_IMPORTERROR = "CdbError.ImportError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
 func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response *CreateDBImportJobResponse, err error) {
@@ -666,11 +670,13 @@ func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response 
 //  CDBERROR = "CdbError"
 //  CDBERROR_IMPORTERROR = "CdbError.ImportError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
 func (c *Client) CreateDBImportJobWithContext(ctx context.Context, request *CreateDBImportJobRequest) (response *CreateDBImportJobResponse, err error) {
@@ -1113,6 +1119,7 @@ func NewDeleteParamTemplateResponse() (response *DeleteParamTemplateResponse) {
 // This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteParamTemplate(request *DeleteParamTemplateRequest) (response *DeleteParamTemplateResponse, err error) {
@@ -1123,6 +1130,7 @@ func (c *Client) DeleteParamTemplate(request *DeleteParamTemplateRequest) (respo
 // This API is used to delete a parameter template. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteParamTemplateWithContext(ctx context.Context, request *DeleteParamTemplateRequest) (response *DeleteParamTemplateResponse, err error) {
@@ -1162,6 +1170,7 @@ func NewDeleteTimeWindowResponse() (response *DeleteTimeWindowResponse) {
 // This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 func (c *Client) DeleteTimeWindow(request *DeleteTimeWindowRequest) (response *DeleteTimeWindowResponse, err error) {
@@ -1172,6 +1181,7 @@ func (c *Client) DeleteTimeWindow(request *DeleteTimeWindowRequest) (response *D
 // This API (DeleteTimeWindow) is used to delete a maintenance time window for a TencentDB instance. After it is deleted, the default maintenance time window will be 03:00-04:00, i.e., switch to a new instance will be performed during 03:00-04:00 by default.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 func (c *Client) DeleteTimeWindowWithContext(ctx context.Context, request *DeleteTimeWindowRequest) (response *DeleteTimeWindowResponse, err error) {
@@ -1609,6 +1619,7 @@ func NewDescribeBackupOverviewResponse() (response *DescribeBackupOverviewRespon
 // This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -1620,6 +1631,7 @@ func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) 
 // This API is used to query the backup overview of a user. It will return the user's current total number of backups, total capacity used by backups, capacity in the free tier, and paid capacity (all capacity values are in bytes).
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -1782,6 +1794,7 @@ func NewDescribeBinlogBackupOverviewResponse() (response *DescribeBinlogBackupOv
 // This API is used to query the log backup overview of a user in the current region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
@@ -1793,6 +1806,7 @@ func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverv
 // This API is used to query the log backup overview of a user in the current region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
@@ -1892,7 +1906,9 @@ func NewDescribeCDBProxyResponse() (response *DescribeCDBProxyResponse) {
 // This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeCDBProxy(request *DescribeCDBProxyRequest) (response *DescribeCDBProxyResponse, err error) {
     return c.DescribeCDBProxyWithContext(context.Background(), request)
 }
@@ -1901,7 +1917,9 @@ func (c *Client) DescribeCDBProxy(request *DescribeCDBProxyRequest) (response *D
 // This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeCDBProxyWithContext(ctx context.Context, request *DescribeCDBProxyRequest) (response *DescribeCDBProxyResponse, err error) {
     if request == nil {
         request = NewDescribeCDBProxyRequest()
@@ -2226,6 +2244,7 @@ func NewDescribeDBInstanceInfoResponse() (response *DescribeDBInstanceInfoRespon
 // This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
@@ -2237,6 +2256,7 @@ func (c *Client) DescribeDBInstanceInfo(request *DescribeDBInstanceInfoRequest) 
 // This API is used to query the basic information of an instance (instance ID, instance name, and whether encryption is enabled).
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
@@ -2277,6 +2297,7 @@ func NewDescribeDBInstanceRebootTimeResponse() (response *DescribeDBInstanceRebo
 // This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeDBInstanceRebootTime(request *DescribeDBInstanceRebootTimeRequest) (response *DescribeDBInstanceRebootTimeResponse, err error) {
     return c.DescribeDBInstanceRebootTimeWithContext(context.Background(), request)
@@ -2286,6 +2307,7 @@ func (c *Client) DescribeDBInstanceRebootTime(request *DescribeDBInstanceRebootT
 // This API (DescribeDBInstanceRebootTime) is used to query the estimated time needed for a TencentDB instance to restart.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeDBInstanceRebootTimeWithContext(ctx context.Context, request *DescribeDBInstanceRebootTimeRequest) (response *DescribeDBInstanceRebootTimeResponse, err error) {
     if request == nil {
@@ -2582,6 +2604,7 @@ func NewDescribeDataBackupOverviewResponse() (response *DescribeDataBackupOvervi
 // This API is used to query the data backup overview of a user in the current region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
@@ -2592,6 +2615,7 @@ func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewR
 // This API is used to query the data backup overview of a user in the current region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDataBackupOverviewWithContext(ctx context.Context, request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
@@ -3064,6 +3088,7 @@ func NewDescribeParamTemplateInfoResponse() (response *DescribeParamTemplateInfo
 // This API is used to query parameter template details. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
@@ -3076,6 +3101,7 @@ func (c *Client) DescribeParamTemplateInfo(request *DescribeParamTemplateInfoReq
 // This API is used to query parameter template details. The common request parameter `Region` can only be set to `ap-guangzhou`.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
@@ -3120,6 +3146,7 @@ func NewDescribeParamTemplatesResponse() (response *DescribeParamTemplatesRespon
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
     return c.DescribeParamTemplatesWithContext(context.Background(), request)
@@ -3132,6 +3159,7 @@ func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) 
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeParamTemplatesWithContext(ctx context.Context, request *DescribeParamTemplatesRequest) (response *DescribeParamTemplatesResponse, err error) {
     if request == nil {
@@ -3384,6 +3412,7 @@ func NewDescribeRoMinScaleResponse() (response *DescribeRoMinScaleResponse) {
 // This API is used to query the minimum specification of a read-only instance that can be purchased or upgraded to.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3397,6 +3426,7 @@ func (c *Client) DescribeRoMinScale(request *DescribeRoMinScaleRequest) (respons
 // This API is used to query the minimum specification of a read-only instance that can be purchased or upgraded to.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3439,6 +3469,7 @@ func NewDescribeRollbackRangeTimeResponse() (response *DescribeRollbackRangeTime
 // This API (DescribeRollbackRangeTime) is used to query the time range available for instance rollback.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3452,6 +3483,7 @@ func (c *Client) DescribeRollbackRangeTime(request *DescribeRollbackRangeTimeReq
 // This API (DescribeRollbackRangeTime) is used to query the time range available for instance rollback.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4145,6 +4177,7 @@ func NewInitDBInstancesResponse() (response *InitDBInstancesResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *InitDBInstancesResponse, err error) {
     return c.InitDBInstancesWithContext(context.Background(), request)
@@ -4157,6 +4190,7 @@ func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *Ini
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 func (c *Client) InitDBInstancesWithContext(ctx context.Context, request *InitDBInstancesRequest) (response *InitDBInstancesResponse, err error) {
     if request == nil {
@@ -4279,6 +4313,7 @@ func NewModifyAccountDescriptionResponse() (response *ModifyAccountDescriptionRe
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
@@ -4315,6 +4350,7 @@ func (c *Client) ModifyAccountDescription(request *ModifyAccountDescriptionReque
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONLENGTHERROR = "InvalidParameterValue.AccountDescriptionLengthError"
@@ -4375,6 +4411,7 @@ func NewModifyAccountMaxUserConnectionsResponse() (response *ModifyAccountMaxUse
 //  FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
 func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
     return c.ModifyAccountMaxUserConnectionsWithContext(context.Background(), request)
 }
@@ -4387,6 +4424,7 @@ func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserCo
 //  FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
 func (c *Client) ModifyAccountMaxUserConnectionsWithContext(ctx context.Context, request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
     if request == nil {
         request = NewModifyAccountMaxUserConnectionsRequest()
@@ -4434,6 +4472,7 @@ func NewModifyAccountPasswordResponse() (response *ModifyAccountPasswordResponse
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
@@ -4450,6 +4489,7 @@ func NewModifyAccountPasswordResponse() (response *ModifyAccountPasswordResponse
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
 //  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
 //  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
@@ -4472,6 +4512,7 @@ func (c *Client) ModifyAccountPassword(request *ModifyAccountPasswordRequest) (r
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
 //  INTERNALERROR_REGEXPCOMPILEERROR = "InternalError.RegexpCompileError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
@@ -4488,6 +4529,7 @@ func (c *Client) ModifyAccountPassword(request *ModifyAccountPasswordRequest) (r
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
 //  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
 //  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
@@ -4648,6 +4690,7 @@ func NewModifyAutoRenewFlagResponse() (response *ModifyAutoRenewFlagResponse) {
 // This API is used to modify the auto-renewal flag of a TencentDB instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -4660,6 +4703,7 @@ func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (respo
 // This API is used to modify the auto-renewal flag of a TencentDB instance.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -4702,6 +4746,7 @@ func NewModifyBackupConfigResponse() (response *ModifyBackupConfigResponse) {
 //
 // error code that may be returned:
 //  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4716,6 +4761,7 @@ func (c *Client) ModifyBackupConfig(request *ModifyBackupConfigRequest) (respons
 //
 // error code that may be returned:
 //  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5003,6 +5049,7 @@ func NewModifyDBInstanceNameResponse() (response *ModifyDBInstanceNameResponse) 
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (response *ModifyDBInstanceNameResponse, err error) {
@@ -5015,6 +5062,7 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyDBInstanceNameWithContext(ctx context.Context, request *ModifyDBInstanceNameRequest) (response *ModifyDBInstanceNameResponse, err error) {
@@ -5054,7 +5102,9 @@ func NewModifyDBInstanceProjectResponse() (response *ModifyDBInstanceProjectResp
 // This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -5066,7 +5116,9 @@ func (c *Client) ModifyDBInstanceProject(request *ModifyDBInstanceProjectRequest
 // This API (ModifyDBInstanceProject) is used to modify the project to which a TencentDB instance belongs.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -5240,6 +5292,7 @@ func NewModifyInstanceTagResponse() (response *ModifyInstanceTagResponse) {
 //  INTERNALERROR_COSERROR = "InternalError.CosError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -5262,6 +5315,7 @@ func (c *Client) ModifyInstanceTag(request *ModifyInstanceTagRequest) (response 
 //  INTERNALERROR_COSERROR = "InternalError.CosError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -5304,6 +5358,8 @@ func NewModifyLocalBinlogConfigResponse() (response *ModifyLocalBinlogConfigResp
 // This API is used to modify the retention policy of local binlog of an instance.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyLocalBinlogConfig(request *ModifyLocalBinlogConfigRequest) (response *ModifyLocalBinlogConfigResponse, err error) {
     return c.ModifyLocalBinlogConfigWithContext(context.Background(), request)
@@ -5313,6 +5369,8 @@ func (c *Client) ModifyLocalBinlogConfig(request *ModifyLocalBinlogConfigRequest
 // This API is used to modify the retention policy of local binlog of an instance.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) ModifyLocalBinlogConfigWithContext(ctx context.Context, request *ModifyLocalBinlogConfigRequest) (response *ModifyLocalBinlogConfigResponse, err error) {
     if request == nil {
@@ -5411,6 +5469,7 @@ func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -5419,6 +5478,7 @@ func NewModifyRoGroupInfoResponse() (response *ModifyRoGroupInfoResponse) {
 //  OPERATIONDENIED_CONFLICTROSTATUS = "OperationDenied.ConflictRoStatus"
 //  OPERATIONDENIED_CONFLICTSTATUS = "OperationDenied.ConflictStatus"
 //  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  OPERATIONDENIED_INSTANCELOCKERCONFLICT = "OperationDenied.InstanceLockerConflict"
 func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
     return c.ModifyRoGroupInfoWithContext(context.Background(), request)
 }
@@ -5432,6 +5492,7 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -5440,6 +5501,7 @@ func (c *Client) ModifyRoGroupInfo(request *ModifyRoGroupInfoRequest) (response 
 //  OPERATIONDENIED_CONFLICTROSTATUS = "OperationDenied.ConflictRoStatus"
 //  OPERATIONDENIED_CONFLICTSTATUS = "OperationDenied.ConflictStatus"
 //  OPERATIONDENIED_DELAYREPLICATIONRUNNING = "OperationDenied.DelayReplicationRunning"
+//  OPERATIONDENIED_INSTANCELOCKERCONFLICT = "OperationDenied.InstanceLockerConflict"
 func (c *Client) ModifyRoGroupInfoWithContext(ctx context.Context, request *ModifyRoGroupInfoRequest) (response *ModifyRoGroupInfoResponse, err error) {
     if request == nil {
         request = NewModifyRoGroupInfoRequest()
@@ -5480,6 +5542,7 @@ func NewModifyTimeWindowResponse() (response *ModifyTimeWindowResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5494,6 +5557,7 @@ func (c *Client) ModifyTimeWindow(request *ModifyTimeWindowRequest) (response *M
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5580,6 +5644,61 @@ func (c *Client) OfflineIsolatedInstancesWithContext(ctx context.Context, reques
     return
 }
 
+func NewOpenAuditServiceRequest() (request *OpenAuditServiceRequest) {
+    request = &OpenAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("cdb", APIVersion, "OpenAuditService")
+    
+    
+    return
+}
+
+func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
+    response = &OpenAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// OpenAuditService
+// This API is used to enable the audit service.
+//
+// error code that may be returned:
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    return c.OpenAuditServiceWithContext(context.Background(), request)
+}
+
+// OpenAuditService
+// This API is used to enable the audit service.
+//
+// error code that may be returned:
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_UNSUPPORTOPENAUDITERROR = "OperationDenied.UnsupportOpenAuditError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) OpenAuditServiceWithContext(ctx context.Context, request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenAuditServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenDBInstanceGTIDRequest() (request *OpenDBInstanceGTIDRequest) {
     request = &OpenDBInstanceGTIDRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5604,6 +5723,7 @@ func NewOpenDBInstanceGTIDResponse() (response *OpenDBInstanceGTIDResponse) {
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) OpenDBInstanceGTID(request *OpenDBInstanceGTIDRequest) (response *OpenDBInstanceGTIDResponse, err error) {
     return c.OpenDBInstanceGTIDWithContext(context.Background(), request)
 }
@@ -5615,6 +5735,7 @@ func (c *Client) OpenDBInstanceGTID(request *OpenDBInstanceGTIDRequest) (respons
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) OpenDBInstanceGTIDWithContext(ctx context.Context, request *OpenDBInstanceGTIDRequest) (response *OpenDBInstanceGTIDResponse, err error) {
     if request == nil {
         request = NewOpenDBInstanceGTIDRequest()
@@ -5877,6 +5998,7 @@ func NewResetRootAccountResponse() (response *ResetRootAccountResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) ResetRootAccount(request *ResetRootAccountRequest) (response *ResetRootAccountResponse, err error) {
@@ -5888,6 +6010,7 @@ func (c *Client) ResetRootAccount(request *ResetRootAccountRequest) (response *R
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTNOROOTERROR = "InvalidParameterValue.VerifyAccountNoRootError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) ResetRootAccountWithContext(ctx context.Context, request *ResetRootAccountRequest) (response *ResetRootAccountResponse, err error) {
@@ -6004,6 +6127,7 @@ func NewStartBatchRollbackResponse() (response *StartBatchRollbackResponse) {
 // This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_TASKERROR = "CdbError.TaskError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -6020,6 +6144,7 @@ func (c *Client) StartBatchRollback(request *StartBatchRollbackRequest) (respons
 // This API (StartBatchRollback) is used to roll back the tables of a TencentDB instance in batches.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_TASKERROR = "CdbError.TaskError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -6068,6 +6193,7 @@ func NewStartReplicationResponse() (response *StartReplicationResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) StartReplication(request *StartReplicationRequest) (response *StartReplicationResponse, err error) {
@@ -6081,6 +6207,7 @@ func (c *Client) StartReplication(request *StartReplicationRequest) (response *S
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) StartReplicationWithContext(ctx context.Context, request *StartReplicationRequest) (response *StartReplicationResponse, err error) {
@@ -6124,6 +6251,7 @@ func NewStopDBImportJobResponse() (response *StopDBImportJobResponse) {
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDASYNCREQUESTID = "InvalidParameter.InvalidAsyncRequestId"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) StopDBImportJob(request *StopDBImportJobRequest) (response *StopDBImportJobResponse, err error) {
     return c.StopDBImportJobWithContext(context.Background(), request)
 }
@@ -6136,6 +6264,7 @@ func (c *Client) StopDBImportJob(request *StopDBImportJobRequest) (response *Sto
 //  INTERNALERROR_TASKFRAMEERROR = "InternalError.TaskFrameError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDASYNCREQUESTID = "InvalidParameter.InvalidAsyncRequestId"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) StopDBImportJobWithContext(ctx context.Context, request *StopDBImportJobRequest) (response *StopDBImportJobResponse, err error) {
     if request == nil {
         request = NewStopDBImportJobRequest()
@@ -6177,6 +6306,7 @@ func NewStopReplicationResponse() (response *StopReplicationResponse) {
 //  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) StopReplication(request *StopReplicationRequest) (response *StopReplicationResponse, err error) {
@@ -6191,6 +6321,7 @@ func (c *Client) StopReplication(request *StopReplicationRequest) (response *Sto
 //  FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_INSTANCETASKRUNNING = "OperationDenied.InstanceTaskRunning"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) StopReplicationWithContext(ctx context.Context, request *StopReplicationRequest) (response *StopReplicationResponse, err error) {
@@ -6230,6 +6361,7 @@ func NewStopRollbackResponse() (response *StopRollbackResponse) {
 // This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  CDBERROR_TASKERROR = "CdbError.TaskError"
@@ -6245,6 +6377,7 @@ func (c *Client) StopRollback(request *StopRollbackRequest) (response *StopRollb
 // This API is used to cancel a rollback task in progress, and returns an async task ID. You can use the `DescribeAsyncRequestInfo` API to query the result of cancellation.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  CDBERROR_TASKERROR = "CdbError.TaskError"
@@ -6456,6 +6589,7 @@ func NewSwitchForUpgradeResponse() (response *SwitchForUpgradeResponse) {
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) SwitchForUpgrade(request *SwitchForUpgradeRequest) (response *SwitchForUpgradeResponse, err error) {
     return c.SwitchForUpgradeWithContext(context.Background(), request)
 }
@@ -6468,6 +6602,7 @@ func (c *Client) SwitchForUpgrade(request *SwitchForUpgradeRequest) (response *S
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) SwitchForUpgradeWithContext(ctx context.Context, request *SwitchForUpgradeRequest) (response *SwitchForUpgradeResponse, err error) {
     if request == nil {
         request = NewSwitchForUpgradeRequest()
@@ -6505,6 +6640,7 @@ func NewUpgradeCDBProxyResponse() (response *UpgradeCDBProxyResponse) {
 // This API is used to upgrade the configuration of database proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
 //  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) UpgradeCDBProxy(request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
     return c.UpgradeCDBProxyWithContext(context.Background(), request)
@@ -6514,6 +6650,7 @@ func (c *Client) UpgradeCDBProxy(request *UpgradeCDBProxyRequest) (response *Upg
 // This API is used to upgrade the configuration of database proxy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
 //  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 func (c *Client) UpgradeCDBProxyWithContext(ctx context.Context, request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
     if request == nil {
