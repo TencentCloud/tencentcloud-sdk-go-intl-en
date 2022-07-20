@@ -1877,6 +1877,14 @@ type NodeInfo struct {
 
 	// Whether to encrypt node disk. 0: no (default); 1: yes.
 	DiskEncrypt *uint64 `json:"DiskEncrypt,omitempty" name:"DiskEncrypt"`
+
+	// CPU number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CpuNum *uint64 `json:"CpuNum,omitempty" name:"CpuNum"`
+
+	// Memory size in GB
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
 }
 
 type NodeView struct {
