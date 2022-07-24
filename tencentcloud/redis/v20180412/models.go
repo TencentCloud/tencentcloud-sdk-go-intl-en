@@ -2663,7 +2663,7 @@ func (r *DescribeInstanceZoneInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// Size of the instance list. If no value is specified for this parameter, it will be 20 by default. If the specified value is greater than the `DescribeInstancesPageLimit` configuration item in the specific configuration file `etc/conf/component.properties` (which is 1,000 by default if the configuration cannot be read), then the configuration item shall prevail.
+	// Number of returned results. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
@@ -2734,12 +2734,15 @@ type DescribeInstancesRequestParams struct {
 
 	// Filters resources by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
+	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Size of the instance list. If no value is specified for this parameter, it will be 20 by default. If the specified value is greater than the `DescribeInstancesPageLimit` configuration item in the specific configuration file `etc/conf/component.properties` (which is 1,000 by default if the configuration cannot be read), then the configuration item shall prevail.
+	// Number of returned results. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
@@ -2810,6 +2813,9 @@ type DescribeInstancesRequest struct {
 
 	// Filters resources by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
+
+	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
+	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2848,6 +2854,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "MonitorVersion")
 	delete(f, "InstanceTags")
 	delete(f, "TagKeys")
+	delete(f, "ProductVersions")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}

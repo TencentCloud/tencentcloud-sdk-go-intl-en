@@ -1518,6 +1518,63 @@ func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, r
     return
 }
 
+func NewDestroyDBInstanceRequest() (request *DestroyDBInstanceRequest) {
+    request = &DestroyDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("mariadb", APIVersion, "DestroyDBInstance")
+    
+    
+    return
+}
+
+func NewDestroyDBInstanceResponse() (response *DestroyDBInstanceResponse) {
+    response = &DestroyDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DestroyDBInstance
+// This API is used to terminate an isolated monthly subscribed instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+func (c *Client) DestroyDBInstance(request *DestroyDBInstanceRequest) (response *DestroyDBInstanceResponse, err error) {
+    return c.DestroyDBInstanceWithContext(context.Background(), request)
+}
+
+// DestroyDBInstance
+// This API is used to terminate an isolated monthly subscribed instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+func (c *Client) DestroyDBInstanceWithContext(ctx context.Context, request *DestroyDBInstanceRequest) (response *DestroyDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewDestroyDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DestroyDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDestroyDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDestroyHourDBInstanceRequest() (request *DestroyHourDBInstanceRequest) {
     request = &DestroyHourDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},

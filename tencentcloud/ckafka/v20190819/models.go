@@ -1745,12 +1745,15 @@ func (r *DescribeAppInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCkafkaZoneRequestParams struct {
-
+	// Cloud Dedicated Cluster (CDC) business parameter.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type DescribeCkafkaZoneRequest struct {
 	*tchttp.BaseRequest
 	
+	// Cloud Dedicated Cluster (CDC) business parameter.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 func (r *DescribeCkafkaZoneRequest) ToJsonString() string {
@@ -1765,7 +1768,7 @@ func (r *DescribeCkafkaZoneRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "CdcId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCkafkaZoneRequest has unknown keys!", "")
 	}
@@ -2404,6 +2407,9 @@ type DescribeRegionRequestParams struct {
 
 	// Business field, which can be ignored.
 	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// CDC business field, which can be ignored.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 type DescribeRegionRequest struct {
@@ -2417,6 +2423,9 @@ type DescribeRegionRequest struct {
 
 	// Business field, which can be ignored.
 	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// CDC business field, which can be ignored.
+	CdcId *string `json:"CdcId,omitempty" name:"CdcId"`
 }
 
 func (r *DescribeRegionRequest) ToJsonString() string {
@@ -2434,6 +2443,7 @@ func (r *DescribeRegionRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Business")
+	delete(f, "CdcId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRegionRequest has unknown keys!", "")
 	}
@@ -3472,6 +3482,13 @@ type InstanceDetail struct {
 	// Public network bandwidth.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
+
+	// Instance type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+
+	Features []*string `json:"Features,omitempty" name:"Features"`
 }
 
 type InstanceDetailResponse struct {
@@ -4189,7 +4206,7 @@ type SendMessageRequestParams struct {
 	// Datahub access ID.
 	DataHubId *string `json:"DataHubId,omitempty" name:"DataHubId"`
 
-	// Message content that is sent.
+	// Content of the message that has been sent. Up to 500 messages can be sent in a single request.
 	Message []*BatchContent `json:"Message,omitempty" name:"Message"`
 }
 
@@ -4199,7 +4216,7 @@ type SendMessageRequest struct {
 	// Datahub access ID.
 	DataHubId *string `json:"DataHubId,omitempty" name:"DataHubId"`
 
-	// Message content that is sent.
+	// Content of the message that has been sent. Up to 500 messages can be sent in a single request.
 	Message []*BatchContent `json:"Message,omitempty" name:"Message"`
 }
 

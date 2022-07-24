@@ -4358,9 +4358,6 @@ func NewUpgradeProxyVersionResponse() (response *UpgradeProxyVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
     return c.UpgradeProxyVersionWithContext(context.Background(), request)
 }
@@ -4370,9 +4367,6 @@ func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) UpgradeProxyVersionWithContext(ctx context.Context, request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeProxyVersionRequest()
@@ -4411,9 +4405,6 @@ func NewUpgradeSmallVersionResponse() (response *UpgradeSmallVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     return c.UpgradeSmallVersionWithContext(context.Background(), request)
 }
@@ -4423,9 +4414,6 @@ func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 func (c *Client) UpgradeSmallVersionWithContext(ctx context.Context, request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeSmallVersionRequest()

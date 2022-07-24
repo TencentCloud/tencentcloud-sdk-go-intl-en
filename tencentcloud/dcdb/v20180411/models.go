@@ -499,6 +499,12 @@ type CreateAccountRequestParams struct {
 	// If the secondary delay exceeds the set value of this parameter, the secondary will be deemed to have failed.
 	// It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
+
+	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
+	SlaveConst *int64 `json:"SlaveConst,omitempty" name:"SlaveConst"`
+
+	// Maximum number of connections. If left empty or `0` is passed in, the connections will be unlimited. This parameter configuration is not supported for kernel version 10.1.
+	MaxUserConnections *uint64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 type CreateAccountRequest struct {
@@ -525,6 +531,12 @@ type CreateAccountRequest struct {
 	// If the secondary delay exceeds the set value of this parameter, the secondary will be deemed to have failed.
 	// It is recommended that this parameter be set to a value greater than 10. This parameter takes effect when `ReadOnly` is 1 or 2.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
+
+	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
+	SlaveConst *int64 `json:"SlaveConst,omitempty" name:"SlaveConst"`
+
+	// Maximum number of connections. If left empty or `0` is passed in, the connections will be unlimited. This parameter configuration is not supported for kernel version 10.1.
+	MaxUserConnections *uint64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 func (r *CreateAccountRequest) ToJsonString() string {
@@ -546,6 +558,8 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 	delete(f, "ReadOnly")
 	delete(f, "Description")
 	delete(f, "DelayThresh")
+	delete(f, "SlaveConst")
+	delete(f, "MaxUserConnections")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccountRequest has unknown keys!", "")
 	}
@@ -828,6 +842,9 @@ type DBAccount struct {
 	// If the replica delay exceeds the set value of this parameter, the replica will be considered to have failed.
 	// Set this parameter to a value above 10. This parameter takes effect when `ReadOnly` is 1 or 2.
 	DelayThresh *int64 `json:"DelayThresh,omitempty" name:"DelayThresh"`
+
+	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
+	SlaveConst *int64 `json:"SlaveConst,omitempty" name:"SlaveConst"`
 }
 
 type DBParamValue struct {
