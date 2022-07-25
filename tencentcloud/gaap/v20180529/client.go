@@ -70,12 +70,15 @@ func NewAddRealServersResponse() (response *AddRealServersResponse) {
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATERS = "InvalidParameterValue.DuplicateRS"
 //  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
@@ -92,12 +95,15 @@ func (c *Client) AddRealServers(request *AddRealServersRequest) (response *AddRe
 //  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATERS = "InvalidParameterValue.DuplicateRS"
 //  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
@@ -531,7 +537,7 @@ func NewCloseSecurityPolicyResponse() (response *CloseSecurityPolicyResponse) {
 }
 
 // CloseSecurityPolicy
-// This API is used to disable security policies.
+// This API is used to disable a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -554,7 +560,7 @@ func (c *Client) CloseSecurityPolicy(request *CloseSecurityPolicyRequest) (respo
 }
 
 // CloseSecurityPolicy
-// This API is used to disable security policies.
+// This API is used to disable a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1099,6 +1105,8 @@ func NewCreateProxyResponse() (response *CreateProxyResponse) {
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_PROXYSELLOUT = "FailedOperation.ProxySellOut"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  FAILEDOPERATION_USERNOTAUTHENTICATED = "FailedOperation.UserNotAuthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1110,6 +1118,7 @@ func NewCreateProxyResponse() (response *CreateProxyResponse) {
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
 //  INVALIDPARAMETERVALUE_PROXYANDGROUPFEATURECONFLICT = "InvalidParameterValue.ProxyAndGroupFeatureConflict"
 //  INVALIDPARAMETERVALUE_PROXYANDREGIONFEATURECONFLICT = "InvalidParameterValue.ProxyAndRegionFeatureConflict"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
@@ -1132,6 +1141,8 @@ func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxy
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_LIMITNUMOFLISTENER = "FailedOperation.LimitNumofListener"
 //  FAILEDOPERATION_PROXYSELLOUT = "FailedOperation.ProxySellOut"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  FAILEDOPERATION_USERNOTAUTHENTICATED = "FailedOperation.UserNotAuthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1143,6 +1154,7 @@ func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxy
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTBELONG = "InvalidParameterValue.ProjectIdNotBelong"
 //  INVALIDPARAMETERVALUE_PROXYANDGROUPFEATURECONFLICT = "InvalidParameterValue.ProxyAndGroupFeatureConflict"
 //  INVALIDPARAMETERVALUE_PROXYANDREGIONFEATURECONFLICT = "InvalidParameterValue.ProxyAndRegionFeatureConflict"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
@@ -1191,11 +1203,14 @@ func NewCreateProxyGroupResponse() (response *CreateProxyGroupResponse) {
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LIMITNUMOFPROXIESINGROUP = "FailedOperation.LimitNumofProxiesInGroup"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FEATURECONFLICT = "InvalidParameterValue.FeatureConflict"
 //  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
@@ -1215,11 +1230,14 @@ func (c *Client) CreateProxyGroup(request *CreateProxyGroupRequest) (response *C
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LIMITNUMOFPROXIESINGROUP = "FailedOperation.LimitNumofProxiesInGroup"
+//  FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FEATURECONFLICT = "InvalidParameterValue.FeatureConflict"
 //  INVALIDPARAMETERVALUE_INVALIDTAGS = "InvalidParameterValue.InvalidTags"
+//  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
@@ -1744,7 +1762,7 @@ func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
 }
 
 // DeleteCertificate
-// This API (DeleteCertificate) is used to delete certificates.
+// This API is used to delete a certificate.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1765,7 +1783,7 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
 }
 
 // DeleteCertificate
-// This API (DeleteCertificate) is used to delete certificates.
+// This API is used to delete a certificate.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2051,6 +2069,7 @@ func NewDeleteProxyGroupResponse() (response *DeleteProxyGroupResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEPROXYGROUPPROXYREMAINED = "FailedOperation.DeleteProxyGroupProxyRemained"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2074,6 +2093,7 @@ func (c *Client) DeleteProxyGroup(request *DeleteProxyGroupRequest) (response *D
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEPROXYGROUPPROXYREMAINED = "FailedOperation.DeleteProxyGroupProxyRemained"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2196,7 +2216,7 @@ func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) 
 }
 
 // DeleteSecurityPolicy
-// This API is used to delete security policies.
+// This API is used to delete a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2218,7 +2238,7 @@ func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (res
 }
 
 // DeleteSecurityPolicy
-// This API is used to delete security policies.
+// This API is used to delete a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4841,6 +4861,7 @@ func NewDestroyProxiesResponse() (response *DestroyProxiesResponse) {
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -4869,6 +4890,7 @@ func (c *Client) DestroyProxies(request *DestroyProxiesRequest) (response *Destr
 //  FAILEDOPERATION_DUPLICATEDREQUEST = "FailedOperation.DuplicatedRequest"
 //  FAILEDOPERATION_NONSTANDARDPROXY = "FailedOperation.NonStandardProxy"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6283,7 +6305,7 @@ func NewOpenSecurityPolicyResponse() (response *OpenSecurityPolicyResponse) {
 }
 
 // OpenSecurityPolicy
-// This API is used to enable security policies.
+// This API is used to enable a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -6306,7 +6328,7 @@ func (c *Client) OpenSecurityPolicy(request *OpenSecurityPolicyRequest) (respons
 }
 
 // OpenSecurityPolicy
-// This API is used to enable security policies.
+// This API is used to enable a security policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -6366,6 +6388,7 @@ func NewRemoveRealServersResponse() (response *RemoveRealServersResponse) {
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6387,6 +6410,7 @@ func (c *Client) RemoveRealServers(request *RemoveRealServersRequest) (response 
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REALSERVERALREADYBOUND = "FailedOperation.RealServerAlreadyBound"
+//  FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

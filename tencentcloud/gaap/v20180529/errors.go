@@ -143,6 +143,12 @@ const (
 	// Rule already exists.
 	FAILEDOPERATION_RULEALREADYEXISTED = "FailedOperation.RuleAlreadyExisted"
 
+	// 
+	FAILEDOPERATION_TAGRESOURCESFAILED = "FailedOperation.TagResourcesFailed"
+
+	// Failed to unbind the tag.
+	FAILEDOPERATION_UNTAGRESOURCESFAILED = "FailedOperation.UnTagResourcesFailed"
+
 	// Unverified user.
 	FAILEDOPERATION_USERNOTAUTHENTICATED = "FailedOperation.UserNotAuthenticated"
 
@@ -223,6 +229,9 @@ const (
 
 	// The quota limit should not be exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
+
+	// 
+	LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"

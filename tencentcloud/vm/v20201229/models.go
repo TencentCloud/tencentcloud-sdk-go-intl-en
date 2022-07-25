@@ -69,6 +69,10 @@ type AudioResult struct {
 	// This field is used to return a subtag under the current tag (Lable).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// List of recognized category labels
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RecognitionResults []*RecognitionResult `json:"RecognitionResults,omitempty" name:"RecognitionResults"`
 }
 
 type AudioResultDetailLanguageResult struct {
@@ -382,16 +386,16 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// This field is used to return the video moderation type passed in when the video moderation API is called. Valid values: **VIDEO** (video on demand), **LIVE_VIDEO** (video live streaming). Default value: VIDEO.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// This field is used to return the type of video for moderation. Valid values: `VIDEO` (video on demand), `LIVE_VIDEO` (video live streaming). Default value: `VIDEO`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// This field is used to return the operation suggestion for the maliciousness tag. When you get the determination result, the returned value indicates the operation suggested by the system. We recommend you handle different types of violations and suggestions according to your business needs. <br>Returned values: **Block**, **Review**, **Pass**.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// This field is used to return the maliciousness tag in the detection result.<br>Returned values: **Normal**: normal; **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// This field is used to return the maliciousness tag in the detection result.<br>Values: `Normal`: normal; `Porn`: pornographic; `Abuse`: abusive; `Ad`: advertising; `Custom`: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Labels []*TaskLabel `json:"Labels,omitempty" name:"Labels"`
 
 	// This field is used to return the details of the input media file, including encoding/decoding formats and segment length. For details, see the description of the `MediaInfo` data structure.
@@ -427,6 +431,10 @@ type DescribeTaskDetailResponseParams struct {
 	// If the task status is `Error`, this field will return the error message; otherwise, null will be returned by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ErrorDescription *string `json:"ErrorDescription,omitempty" name:"ErrorDescription"`
+
+	// If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Label *string `json:"Label,omitempty" name:"Label"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -708,6 +716,16 @@ type MediaInfo struct {
 	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
 }
 
+type RecognitionResult struct {
+	// Values: `Teenager`, `Gender`
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// List of recognized category labels
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
 type StorageInfo struct {
 	// This field indicates the file access type. Valid values: **URL** (resource link), **COS** (Tencent Cloud COS). It should correspond to the access type passed in and can be used for strict verification and quick identification of the access address. If you don't pass in this parameter, the default value will be `URL`, and the system will automatically determine the access address type.
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -717,6 +735,26 @@ type StorageInfo struct {
 
 	// This field indicates the Tencent Cloud bucket information for file access.<br>Note: when `Type` is `COS`, this field will not be empty. You must pass in either this parameter or the `Url` parameter.
 	BucketInfo *BucketInfo `json:"BucketInfo,omitempty" name:"BucketInfo"`
+}
+
+type Tag struct {
+	// The value of this parameter varies by `Label`.
+	// When `Label` is `Teenager`, `Name` can be `Teenager`. 
+	// When `Label` is `Gender`, `Name` can be `Male` and `Female`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Confidence rate. Value: 1 to 100. 
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Score *int64 `json:"Score,omitempty" name:"Score"`
+
+	// Start time for the recognition (ms)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	StartTime *float64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for the recognition (ms)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EndTime *float64 `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type TaskData struct {

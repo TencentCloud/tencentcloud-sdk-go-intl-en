@@ -419,6 +419,67 @@ type AlarmPolicyTriggerTask struct {
 	TaskConfig *string `json:"TaskConfig,omitempty" name:"TaskConfig"`
 }
 
+// Predefined struct for user
+type BindPrometheusManagedGrafanaRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Grafana instance ID
+	GrafanaId *string `json:"GrafanaId,omitempty" name:"GrafanaId"`
+}
+
+type BindPrometheusManagedGrafanaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Grafana instance ID
+	GrafanaId *string `json:"GrafanaId,omitempty" name:"GrafanaId"`
+}
+
+func (r *BindPrometheusManagedGrafanaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindPrometheusManagedGrafanaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GrafanaId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindPrometheusManagedGrafanaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindPrometheusManagedGrafanaResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type BindPrometheusManagedGrafanaResponse struct {
+	*tchttp.BaseResponse
+	Response *BindPrometheusManagedGrafanaResponseParams `json:"Response"`
+}
+
+func (r *BindPrometheusManagedGrafanaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindPrometheusManagedGrafanaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type BindingPolicyObjectDimension struct {
 	// Region name.
 	Region *string `json:"Region,omitempty" name:"Region"`
@@ -856,6 +917,219 @@ func (r *CreateAlarmPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateAlertRuleRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule expression
+	Expr *string `json:"Expr,omitempty" name:"Expr"`
+
+	// List of alert notification template IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule alert duration
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// List of tags
+	Labels []*PrometheusRuleKV `json:"Labels,omitempty" name:"Labels"`
+
+	// List of annotations.
+	// 
+	// Alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively.
+	Annotations []*PrometheusRuleKV `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type CreateAlertRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule expression
+	Expr *string `json:"Expr,omitempty" name:"Expr"`
+
+	// List of alert notification template IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule alert duration
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// List of tags
+	Labels []*PrometheusRuleKV `json:"Labels,omitempty" name:"Labels"`
+
+	// List of annotations.
+	// 
+	// Alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively.
+	Annotations []*PrometheusRuleKV `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *CreateAlertRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAlertRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RuleName")
+	delete(f, "Expr")
+	delete(f, "Receivers")
+	delete(f, "RuleState")
+	delete(f, "Duration")
+	delete(f, "Labels")
+	delete(f, "Annotations")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlertRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAlertRuleResponseParams struct {
+	// Rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAlertRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAlertRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateAlertRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAlertRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateExporterIntegrationRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Integrated configuration
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type CreateExporterIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Integrated configuration
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *CreateExporterIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateExporterIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Kind")
+	delete(f, "Content")
+	delete(f, "KubeType")
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateExporterIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateExporterIntegrationResponseParams struct {
+
+	Names []*string `json:"Names,omitempty" name:"Names"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateExporterIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateExporterIntegrationResponseParams `json:"Response"`
+}
+
+func (r *CreateExporterIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateExporterIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreatePolicyGroupCondition struct {
 	// Metric ID.
 	MetricId *int64 `json:"MetricId,omitempty" name:"MetricId"`
@@ -1030,6 +1304,420 @@ func (r *CreatePolicyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreatePrometheusAgentRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type CreatePrometheusAgentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *CreatePrometheusAgentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusAgentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrometheusAgentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePrometheusAgentResponseParams struct {
+
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreatePrometheusAgentResponse struct {
+	*tchttp.BaseResponse
+	Response *CreatePrometheusAgentResponseParams `json:"Response"`
+}
+
+func (r *CreatePrometheusAgentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusAgentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePrometheusMultiTenantInstancePostPayModeRequestParams struct {
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Data retention period in days. Valid values: 15, 30, 45.
+	DataRetentionTime *int64 `json:"DataRetentionTime,omitempty" name:"DataRetentionTime"`
+
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance tag
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// The Grafana instance to be associated
+	GrafanaInstanceId *string `json:"GrafanaInstanceId,omitempty" name:"GrafanaInstanceId"`
+}
+
+type CreatePrometheusMultiTenantInstancePostPayModeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Data retention period in days. Valid values: 15, 30, 45.
+	DataRetentionTime *int64 `json:"DataRetentionTime,omitempty" name:"DataRetentionTime"`
+
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance tag
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// The Grafana instance to be associated
+	GrafanaInstanceId *string `json:"GrafanaInstanceId,omitempty" name:"GrafanaInstanceId"`
+}
+
+func (r *CreatePrometheusMultiTenantInstancePostPayModeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusMultiTenantInstancePostPayModeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "DataRetentionTime")
+	delete(f, "Zone")
+	delete(f, "TagSpecification")
+	delete(f, "GrafanaInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrometheusMultiTenantInstancePostPayModeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePrometheusMultiTenantInstancePostPayModeResponseParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreatePrometheusMultiTenantInstancePostPayModeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreatePrometheusMultiTenantInstancePostPayModeResponseParams `json:"Response"`
+}
+
+func (r *CreatePrometheusMultiTenantInstancePostPayModeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusMultiTenantInstancePostPayModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePrometheusScrapeJobRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Task content
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+type CreatePrometheusScrapeJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Task content
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+func (r *CreatePrometheusScrapeJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusScrapeJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentId")
+	delete(f, "Config")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrometheusScrapeJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePrometheusScrapeJobResponseParams struct {
+
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreatePrometheusScrapeJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreatePrometheusScrapeJobResponseParams `json:"Response"`
+}
+
+func (r *CreatePrometheusScrapeJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePrometheusScrapeJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleRequestParams struct {
+	// Recording rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Recording rule group content in YAML format
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+type CreateRecordingRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Recording rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Recording rule group content in YAML format
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+func (r *CreateRecordingRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Group")
+	delete(f, "InstanceId")
+	delete(f, "RuleState")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRecordingRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleResponseParams struct {
+	// Rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateRecordingRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRecordingRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateRecordingRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateServiceDiscoveryRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// <li>TKE: ID of the integrated TKE cluster</li>
+	KubeClusterId *string `json:"KubeClusterId,omitempty" name:"KubeClusterId"`
+
+	// Kubernetes cluster type:
+	// <li> 1 = TKE </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Scrape configuration type. Valid values:
+	// <li> 1 = ServiceMonitor</li>
+	// <li> 2 = PodMonitor</li>
+	// <li> 3 = JobMonitor</li>
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Scrape configuration information
+	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
+}
+
+type CreateServiceDiscoveryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// <li>TKE: ID of the integrated TKE cluster</li>
+	KubeClusterId *string `json:"KubeClusterId,omitempty" name:"KubeClusterId"`
+
+	// Kubernetes cluster type:
+	// <li> 1 = TKE </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Scrape configuration type. Valid values:
+	// <li> 1 = ServiceMonitor</li>
+	// <li> 2 = PodMonitor</li>
+	// <li> 3 = JobMonitor</li>
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Scrape configuration information
+	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
+}
+
+func (r *CreateServiceDiscoveryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateServiceDiscoveryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KubeClusterId")
+	delete(f, "KubeType")
+	delete(f, "Type")
+	delete(f, "Yaml")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceDiscoveryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateServiceDiscoveryResponseParams struct {
+	// The scrape configuration information returned after successful creation
+	ServiceDiscovery *ServiceDiscoveryItem `json:"ServiceDiscovery,omitempty" name:"ServiceDiscovery"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateServiceDiscoveryResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateServiceDiscoveryResponseParams `json:"Response"`
+}
+
+func (r *CreateServiceDiscoveryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateServiceDiscoveryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DataPoint struct {
 	// Combination of instance object dimensions
 	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions"`
@@ -1164,6 +1852,155 @@ func (r *DeleteAlarmPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteAlertRulesRequestParams struct {
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DeleteAlertRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteAlertRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAlertRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleIds")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAlertRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAlertRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAlertRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAlertRulesResponseParams `json:"Response"`
+}
+
+func (r *DeleteAlertRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAlertRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteExporterIntegrationRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type DeleteExporterIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DeleteExporterIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteExporterIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KubeType")
+	delete(f, "ClusterId")
+	delete(f, "Kind")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteExporterIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteExporterIntegrationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteExporterIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteExporterIntegrationResponseParams `json:"Response"`
+}
+
+func (r *DeleteExporterIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteExporterIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeletePolicyGroupRequestParams struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
@@ -1221,6 +2058,135 @@ func (r *DeletePolicyGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeletePolicyGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeletePrometheusScrapeJobsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// List of task IDs
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+}
+
+type DeletePrometheusScrapeJobsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// List of task IDs
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+}
+
+func (r *DeletePrometheusScrapeJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePrometheusScrapeJobsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentId")
+	delete(f, "JobIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeletePrometheusScrapeJobsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeletePrometheusScrapeJobsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeletePrometheusScrapeJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeletePrometheusScrapeJobsResponseParams `json:"Response"`
+}
+
+func (r *DeletePrometheusScrapeJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeletePrometheusScrapeJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRulesRequestParams struct {
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DeleteRecordingRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteRecordingRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleIds")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRecordingRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRecordingRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRecordingRulesResponseParams `json:"Response"`
+}
+
+func (r *DeleteRecordingRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1488,7 +2454,7 @@ type DescribeAlarmHistoriesRequestParams struct {
 	// End time, which is the current timestamp and the time when the alarm `FirstOccurTime` first occurs. An alarm record can be searched only if its `FirstOccurTime` is earlier than the `EndTime`.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Filter by monitoring type. Valid value: `MT_QCE` (Tencent Cloud service monitoring). If this parameter is left empty, all types will be queried by default.
+	// Filter by monitor type. Valid values: "MT_QCE" (Tencent Cloud service monitoring), "MT_TAW" (application performance monitoring), "MT_RUM" (frontend performance monitoring), "MT_PROBE" (cloud automated testing). If this parameter is left empty, all types will be queried by default.
 	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 	// Filter by alarm object. Fuzzy search with string is supported
@@ -1546,7 +2512,7 @@ type DescribeAlarmHistoriesRequest struct {
 	// End time, which is the current timestamp and the time when the alarm `FirstOccurTime` first occurs. An alarm record can be searched only if its `FirstOccurTime` is earlier than the `EndTime`.
 	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Filter by monitoring type. Valid value: `MT_QCE` (Tencent Cloud service monitoring). If this parameter is left empty, all types will be queried by default.
+	// Filter by monitor type. Valid values: "MT_QCE" (Tencent Cloud service monitoring), "MT_TAW" (application performance monitoring), "MT_RUM" (frontend performance monitoring), "MT_PROBE" (cloud automated testing). If this parameter is left empty, all types will be queried by default.
 	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
 	// Filter by alarm object. Fuzzy search with string is supported
@@ -2246,6 +3212,113 @@ func (r *DescribeAlarmPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAlertRulesRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type DescribeAlertRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *DescribeAlertRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAlertRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "RuleId")
+	delete(f, "RuleState")
+	delete(f, "RuleName")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlertRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAlertRulesResponseParams struct {
+	// Number of alerting rules
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Alerting rule details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlertRuleSet []*PrometheusRuleSet `json:"AlertRuleSet,omitempty" name:"AlertRuleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAlertRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAlertRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAlertRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAlertRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAllNamespacesRequestParams struct {
 	// Filter by use case. Currently, the only valid value is `ST_ALARM` (alarm type).
 	SceneType *string `json:"SceneType,omitempty" name:"SceneType"`
@@ -2889,6 +3962,97 @@ func (r *DescribeConditionsTemplateListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConditionsTemplateListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExporterIntegrationsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type DescribeExporterIntegrationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DescribeExporterIntegrationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExporterIntegrationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KubeType")
+	delete(f, "ClusterId")
+	delete(f, "Kind")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeExporterIntegrationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeExporterIntegrationsResponseParams struct {
+	// List of integration configurations
+	IntegrationSet []*IntegrationConfiguration `json:"IntegrationSet,omitempty" name:"IntegrationSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeExporterIntegrationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeExporterIntegrationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeExporterIntegrationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeExporterIntegrationsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3999,6 +5163,508 @@ func (r *DescribeProductEventListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePrometheusAgentsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of agent IDs
+	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribePrometheusAgentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of agent IDs
+	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribePrometheusAgentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusAgentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Name")
+	delete(f, "AgentIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusAgentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusAgentsResponseParams struct {
+	// List of agents
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AgentSet []*PrometheusAgent `json:"AgentSet,omitempty" name:"AgentSet"`
+
+	// Total number of agents
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePrometheusAgentsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrometheusAgentsResponseParams `json:"Response"`
+}
+
+func (r *DescribePrometheusAgentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusAgentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusInstancesRequestParams struct {
+	// Queries by instance ID or IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Filter by instance status
+	// <ul>
+	// <li>1: Creating</li>
+	// <li>2: Running</li>
+	// <li>3: Abnormal</li>
+	// <li>4: Rebooting</li>
+	// <li>5: Terminating</li>
+	// <li>6: Service suspended</li>
+	// <li>8: Suspending service for overdue payment</li>
+	// <li>9: Service suspended for overdue payment</li>
+	// </ul>
+	InstanceStatus []*int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Filter by instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Filter by AZ in the format of `ap-guangzhou-1`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key.
+	TagFilters []*PrometheusTag `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// Filter by instance IPv4 address
+	IPv4Address []*string `json:"IPv4Address,omitempty" name:"IPv4Address"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter by billing mode
+	// <li>2: Monthly subscription</li>
+	// <li>3: Pay-as-you-go</li>
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
+type DescribePrometheusInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Queries by instance ID or IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Filter by instance status
+	// <ul>
+	// <li>1: Creating</li>
+	// <li>2: Running</li>
+	// <li>3: Abnormal</li>
+	// <li>4: Rebooting</li>
+	// <li>5: Terminating</li>
+	// <li>6: Service suspended</li>
+	// <li>8: Suspending service for overdue payment</li>
+	// <li>9: Service suspended for overdue payment</li>
+	// </ul>
+	InstanceStatus []*int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Filter by instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Filter by AZ in the format of `ap-guangzhou-1`
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key.
+	TagFilters []*PrometheusTag `json:"TagFilters,omitempty" name:"TagFilters"`
+
+	// Filter by instance IPv4 address
+	IPv4Address []*string `json:"IPv4Address,omitempty" name:"IPv4Address"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter by billing mode
+	// <li>2: Monthly subscription</li>
+	// <li>3: Pay-as-you-go</li>
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+}
+
+func (r *DescribePrometheusInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "InstanceStatus")
+	delete(f, "InstanceName")
+	delete(f, "Zones")
+	delete(f, "TagFilters")
+	delete(f, "IPv4Address")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "InstanceChargeType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusInstancesResponseParams struct {
+	// List of instance details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceSet []*PrometheusInstancesItem `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// Number of eligible instances.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePrometheusInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrometheusInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribePrometheusInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusScrapeJobsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of task IDs
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribePrometheusScrapeJobsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of task IDs
+	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribePrometheusScrapeJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusScrapeJobsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentId")
+	delete(f, "Name")
+	delete(f, "JobIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusScrapeJobsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusScrapeJobsResponseParams struct {
+	// List of tasks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScrapeJobSet []*PrometheusScrapeJob `json:"ScrapeJobSet,omitempty" name:"ScrapeJobSet"`
+
+	// Total number of tasks
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePrometheusScrapeJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrometheusScrapeJobsResponseParams `json:"Response"`
+}
+
+func (r *DescribePrometheusScrapeJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusScrapeJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRulesRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type DescribeRecordingRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DescribeRecordingRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "RuleId")
+	delete(f, "RuleState")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordingRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRulesResponseParams struct {
+	// Number of rule groups
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Rule group details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordingRuleSet []*RecordingRuleSet `json:"RecordingRuleSet,omitempty" name:"RecordingRuleSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordingRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordingRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordingRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeServiceDiscoveryRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// <li>TKE: ID of the integrated TKE cluster</li>
+	KubeClusterId *string `json:"KubeClusterId,omitempty" name:"KubeClusterId"`
+
+	// Kubernetes cluster type:
+	// <li> 1 = TKE </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+}
+
+type DescribeServiceDiscoveryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// <li>TKE: ID of the integrated TKE cluster</li>
+	KubeClusterId *string `json:"KubeClusterId,omitempty" name:"KubeClusterId"`
+
+	// Kubernetes cluster type:
+	// <li> 1 = TKE </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+}
+
+func (r *DescribeServiceDiscoveryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeServiceDiscoveryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KubeClusterId")
+	delete(f, "KubeType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceDiscoveryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeServiceDiscoveryResponseParams struct {
+	// List of returned scrape configurations
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceDiscoverySet []*ServiceDiscoveryItem `json:"ServiceDiscoverySet,omitempty" name:"ServiceDiscoverySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeServiceDiscoveryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeServiceDiscoveryResponseParams `json:"Response"`
+}
+
+func (r *DescribeServiceDiscoveryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeServiceDiscoveryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeStatisticDataRequestParams struct {
 	// Module, whose value is fixed at `monitor`
 	Module *string `json:"Module,omitempty" name:"Module"`
@@ -4120,6 +5786,60 @@ func (r *DescribeStatisticDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeStatisticDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyPrometheusInstanceRequestParams struct {
+	// Instance ID. The instance must be terminated first.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DestroyPrometheusInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. The instance must be terminated first.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DestroyPrometheusInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyPrometheusInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DestroyPrometheusInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyPrometheusInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DestroyPrometheusInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *DestroyPrometheusInstanceResponseParams `json:"Response"`
+}
+
+func (r *DestroyPrometheusInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyPrometheusInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4259,6 +5979,70 @@ func (r *GetMonitorDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetPrometheusAgentManagementCommandRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+}
+
+type GetPrometheusAgentManagementCommandRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+}
+
+func (r *GetPrometheusAgentManagementCommandRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetPrometheusAgentManagementCommandRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetPrometheusAgentManagementCommandRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetPrometheusAgentManagementCommandResponseParams struct {
+	// Agent management command
+	Command *ManagementCommand `json:"Command,omitempty" name:"Command"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetPrometheusAgentManagementCommandResponse struct {
+	*tchttp.BaseResponse
+	Response *GetPrometheusAgentManagementCommandResponseParams `json:"Response"`
+}
+
+func (r *GetPrometheusAgentManagementCommandResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetPrometheusAgentManagementCommandResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Instance struct {
 	// Combination of instance dimensions
 	Dimensions []*Dimension `json:"Dimensions,omitempty" name:"Dimensions"`
@@ -4280,6 +6064,51 @@ type InstanceGroups struct {
 
 	// Instance group name
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type IntegrationConfiguration struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance type
+	Category *string `json:"Category,omitempty" name:"Category"`
+
+	// Instance description
+	InstanceDesc *string `json:"InstanceDesc,omitempty" name:"InstanceDesc"`
+
+	// Dashboard URL
+	GrafanaDashboardURL *string `json:"GrafanaDashboardURL,omitempty" name:"GrafanaDashboardURL"`
+}
+
+type ManagementCommand struct {
+	// Agent installation command
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Install *string `json:"Install,omitempty" name:"Install"`
+
+	// Agent restart command
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Restart *string `json:"Restart,omitempty" name:"Restart"`
+
+	// Agent stop command
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Stop *string `json:"Stop,omitempty" name:"Stop"`
+
+	// Agent status detection command
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StatusCheck *string `json:"StatusCheck,omitempty" name:"StatusCheck"`
+
+	// Agent log detection command
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogCheck *string `json:"LogCheck,omitempty" name:"LogCheck"`
 }
 
 type Metric struct {
@@ -5108,6 +6937,74 @@ func (r *ModifyPolicyGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyPrometheusInstanceAttributesRequestParams struct {
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Storage period. Valid values: 15, 30, 45. This parameter is not applicable to monthly subscribed instances.
+	DataRetentionTime *int64 `json:"DataRetentionTime,omitempty" name:"DataRetentionTime"`
+}
+
+type ModifyPrometheusInstanceAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Storage period. Valid values: 15, 30, 45. This parameter is not applicable to monthly subscribed instances.
+	DataRetentionTime *int64 `json:"DataRetentionTime,omitempty" name:"DataRetentionTime"`
+}
+
+func (r *ModifyPrometheusInstanceAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPrometheusInstanceAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "InstanceId")
+	delete(f, "DataRetentionTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPrometheusInstanceAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyPrometheusInstanceAttributesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyPrometheusInstanceAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyPrometheusInstanceAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyPrometheusInstanceAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPrometheusInstanceAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MonitorTypeNamespace struct {
 	// Monitor type
 	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
@@ -5229,6 +7126,282 @@ type PolicyGroupReceiverInfo struct {
 	// UID of the alarm call recipient.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	UIDList []*int64 `json:"UIDList,omitempty" name:"UIDList"`
+}
+
+type PrometheusAgent struct {
+	// Agent name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ipv4 *string `json:"Ipv4,omitempty" name:"Ipv4"`
+
+	// Heartbeat time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HeartbeatTime *string `json:"HeartbeatTime,omitempty" name:"HeartbeatTime"`
+
+	// Last error
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastError *string `json:"LastError,omitempty" name:"LastError"`
+
+	// Agent version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AgentVersion *string `json:"AgentVersion,omitempty" name:"AgentVersion"`
+
+	// Agent status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+type PrometheusInstanceGrantInfo struct {
+	// Whether there is permission to operate on the billing information. Valid values: 1 (yes), 2 (no).
+	HasChargeOperation *int64 `json:"HasChargeOperation,omitempty" name:"HasChargeOperation"`
+
+	// Whether there is permission to display the VPC information. Valid values: 1 (yes), 2 (no).
+	HasVpcDisplay *int64 `json:"HasVpcDisplay,omitempty" name:"HasVpcDisplay"`
+
+	// Whether there is permission to change the Grafana status. Valid values: 1 (yes), 2 (no).
+	HasGrafanaStatusChange *int64 `json:"HasGrafanaStatusChange,omitempty" name:"HasGrafanaStatusChange"`
+
+	// Whether there is permission to manage agents. Valid values: 1 (yes), 2 (no).
+	HasAgentManage *int64 `json:"HasAgentManage,omitempty" name:"HasAgentManage"`
+
+	// Whether there is permission to manage TKE integrations. Valid values: 1 (yes), 2 (no).
+	HasTkeManage *int64 `json:"HasTkeManage,omitempty" name:"HasTkeManage"`
+
+	// Whether there is permission to display the API information. Valid values: 1 (yes), 2 (no).
+	HasApiOperation *int64 `json:"HasApiOperation,omitempty" name:"HasApiOperation"`
+}
+
+type PrometheusInstancesItem struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance billing mode. Valid values:
+	// <ul>
+	// <li>2: Monthly subscription</li>
+	// <li>3: Pay-as-you-go</li>
+	// </ul>
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Storage period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataRetentionTime *int64 `json:"DataRetentionTime,omitempty" name:"DataRetentionTime"`
+
+	// Instance status. Valid values:
+	// <ul>
+	// <li>1: Creating</li>
+	// <li>2: Running</li>
+	// <li>3: Abnormal</li>
+	// <li>4: Rebooting</li>
+	// <li>5: Terminating</li>
+	// <li>6: Service suspended</li>
+	// <li>8: Suspending service for overdue payment</li>
+	// <li>9: Service suspended for overdue payment</li>
+	// </ul>
+	InstanceStatus *int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Grafana dashboard URL
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GrafanaURL *string `json:"GrafanaURL,omitempty" name:"GrafanaURL"`
+
+	// Creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Whether Grafana is enabled
+	// <li>0: Disabled</li>
+	// <li>1: Enabled</li>
+	EnableGrafana *int64 `json:"EnableGrafana,omitempty" name:"EnableGrafana"`
+
+	// Instance IPv4 address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IPv4Address *string `json:"IPv4Address,omitempty" name:"IPv4Address"`
+
+	// List of tags associated with the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// Expiration time of the purchased instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Billing status
+	// <ul>
+	// <li>1: Normal</li>
+	// <li>2: Expired</li>
+	// <li>3: Terminated</li>
+	// <li>4: Assigning</li>
+	// <li>5: Assignment failed</li>
+	// </ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChargeStatus *int64 `json:"ChargeStatus,omitempty" name:"ChargeStatus"`
+
+	// Specification name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+
+	// Auto-renewal flag
+	// <ul>
+	// <li>0: Auto-renewal not enabled</li>
+	// <li>1: Auto-renewal enabled</li>
+	// <li>2: Auto-renewal prohibited</li>
+	// <li>-1: Invalid</ii>
+	// </ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Expiring soon
+	// <ul>
+	// <li>0: No</li>
+	// <li>1: Yes</li>
+	// </ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsNearExpire *int64 `json:"IsNearExpire,omitempty" name:"IsNearExpire"`
+
+	// The token required for data writing
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthToken *string `json:"AuthToken,omitempty" name:"AuthToken"`
+
+	// Prometheus remote write address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RemoteWrite *string `json:"RemoteWrite,omitempty" name:"RemoteWrite"`
+
+	// Prometheus HTTP API root address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApiRootPath *string `json:"ApiRootPath,omitempty" name:"ApiRootPath"`
+
+	// Proxy address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProxyAddress *string `json:"ProxyAddress,omitempty" name:"ProxyAddress"`
+
+	// Grafana status
+	// <ul>
+	// <li>1: Creating</li>
+	// <li>2: Running</li>
+	// <li>3: Abnormal</li>
+	// <li>4: Restarting</li>
+	// <li>5: Terminating</li>
+	// <li>6: Service suspended</li>
+	// <li>7: Deleted</li>
+	// </ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GrafanaStatus *int64 `json:"GrafanaStatus,omitempty" name:"GrafanaStatus"`
+
+	// Grafana IP allowlist, where IPs are separated by comma.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GrafanaIpWhiteList *string `json:"GrafanaIpWhiteList,omitempty" name:"GrafanaIpWhiteList"`
+
+	// Instance authorization information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Grant *PrometheusInstanceGrantInfo `json:"Grant,omitempty" name:"Grant"`
+
+	// ID of the bound Grafana instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GrafanaInstanceId *string `json:"GrafanaInstanceId,omitempty" name:"GrafanaInstanceId"`
+}
+
+type PrometheusRuleKV struct {
+	// Key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type PrometheusRuleSet struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Rule status code
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule category
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// List of rule tags
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*PrometheusRuleKV `json:"Labels,omitempty" name:"Labels"`
+
+	// List of rule annotations
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Annotations []*PrometheusRuleKV `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Rule expression
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Expr *string `json:"Expr,omitempty" name:"Expr"`
+
+	// Rule alert duration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// List of alert recipient groups
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Rule status. Valid values:
+	// <li>unknown: Unknown</li>
+	// <li>pending: Loading</li>
+	// <li>ok: Running</li>
+	// <li>err: Error</li>
+	Health *string `json:"Health,omitempty" name:"Health"`
+
+	// Rule creation time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Rule update time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+}
+
+type PrometheusScrapeJob struct {
+	// Task name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+type PrometheusTag struct {
+	// Tag key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
@@ -5353,6 +7526,29 @@ type ReceiverInfo struct {
 	ReceiveLanguage *string `json:"ReceiveLanguage,omitempty" name:"ReceiveLanguage"`
 }
 
+type RecordingRuleSet struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Rule group
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Number of rules
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Rule creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Rule update time
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+}
+
 // Predefined struct for user
 type SendCustomAlarmMsgRequestParams struct {
 	// API component name. The value for the current API is monitor.
@@ -5419,6 +7615,32 @@ func (r *SendCustomAlarmMsgResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SendCustomAlarmMsgResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ServiceDiscoveryItem struct {
+	// Scrape configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Namespace of the scrape configuration
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// Scrape configuration type: ServiceMonitor/PodMonitor
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Namespace selection method
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NamespaceSelector *string `json:"NamespaceSelector,omitempty" name:"NamespaceSelector"`
+
+	// Label selection method
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Selector *string `json:"Selector,omitempty" name:"Selector"`
+
+	// `Endpoints` information (PodMonitor does not have this parameter)
+	Endpoints *string `json:"Endpoints,omitempty" name:"Endpoints"`
+
+	// Scrape configuration information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
 }
 
 // Predefined struct for user
@@ -5548,6 +7770,60 @@ type TemplateGroup struct {
 
 	// Whether the logical relationship between rules is AND.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
+}
+
+// Predefined struct for user
+type TerminatePrometheusInstancesRequestParams struct {
+	// List of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+type TerminatePrometheusInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *TerminatePrometheusInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminatePrometheusInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminatePrometheusInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TerminatePrometheusInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TerminatePrometheusInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *TerminatePrometheusInstancesResponseParams `json:"Response"`
+}
+
+func (r *TerminatePrometheusInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminatePrometheusInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type URLNotice struct {
@@ -5723,6 +7999,792 @@ func (r *UnBindingPolicyObjectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UnBindingPolicyObjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindPrometheusManagedGrafanaRequestParams struct {
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Grafana instance ID
+	GrafanaId *string `json:"GrafanaId,omitempty" name:"GrafanaId"`
+}
+
+type UnbindPrometheusManagedGrafanaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Grafana instance ID
+	GrafanaId *string `json:"GrafanaId,omitempty" name:"GrafanaId"`
+}
+
+func (r *UnbindPrometheusManagedGrafanaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindPrometheusManagedGrafanaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GrafanaId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindPrometheusManagedGrafanaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindPrometheusManagedGrafanaResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UnbindPrometheusManagedGrafanaResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindPrometheusManagedGrafanaResponseParams `json:"Response"`
+}
+
+func (r *UnbindPrometheusManagedGrafanaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindPrometheusManagedGrafanaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UninstallGrafanaDashboardRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus integration code, indicating to delete the corresponding dashboard. Valid values:
+	// <li>spring_mvc</li>
+	// <li>mysql</li>
+	// <li>go</li>
+	// <li>redis</li>
+	// <li>jvm</li>
+	// <li>pgsql</li>
+	// <li>mongo</li>
+	// <li>kafka</li>
+	// <li>es</li>
+	// <li>flink</li>
+	// <li>blackbox</li>
+	// <li>consule</li>
+	// <li>memcached</li>
+	// <li>zk</li>
+	// <li>tps</li>
+	// <li>istio</li>
+	// <li>etcd</li>
+	IntegrationCodes []*string `json:"IntegrationCodes,omitempty" name:"IntegrationCodes"`
+}
+
+type UninstallGrafanaDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus integration code, indicating to delete the corresponding dashboard. Valid values:
+	// <li>spring_mvc</li>
+	// <li>mysql</li>
+	// <li>go</li>
+	// <li>redis</li>
+	// <li>jvm</li>
+	// <li>pgsql</li>
+	// <li>mongo</li>
+	// <li>kafka</li>
+	// <li>es</li>
+	// <li>flink</li>
+	// <li>blackbox</li>
+	// <li>consule</li>
+	// <li>memcached</li>
+	// <li>zk</li>
+	// <li>tps</li>
+	// <li>istio</li>
+	// <li>etcd</li>
+	IntegrationCodes []*string `json:"IntegrationCodes,omitempty" name:"IntegrationCodes"`
+}
+
+func (r *UninstallGrafanaDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallGrafanaDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IntegrationCodes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UninstallGrafanaDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UninstallGrafanaDashboardResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UninstallGrafanaDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *UninstallGrafanaDashboardResponseParams `json:"Response"`
+}
+
+func (r *UninstallGrafanaDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallGrafanaDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAlertRuleRequestParams struct {
+	// Prometheus alerting rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Alerting rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Alerting rule expression
+	Expr *string `json:"Expr,omitempty" name:"Expr"`
+
+	// Alerting rule duration
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// List of alerting rule recipient groups
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// List of alerting rule tags
+	Labels []*PrometheusRuleKV `json:"Labels,omitempty" name:"Labels"`
+
+	// List of alerting rule annotations.
+	// 
+	// Alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively.
+	Annotations []*PrometheusRuleKV `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type UpdateAlertRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Prometheus alerting rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+
+	// Alerting rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Alerting rule expression
+	Expr *string `json:"Expr,omitempty" name:"Expr"`
+
+	// Alerting rule duration
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// List of alerting rule recipient groups
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// List of alerting rule tags
+	Labels []*PrometheusRuleKV `json:"Labels,omitempty" name:"Labels"`
+
+	// List of alerting rule annotations.
+	// 
+	// Alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively.
+	Annotations []*PrometheusRuleKV `json:"Annotations,omitempty" name:"Annotations"`
+
+	// Alerting rule template category
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *UpdateAlertRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAlertRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "InstanceId")
+	delete(f, "RuleState")
+	delete(f, "RuleName")
+	delete(f, "Expr")
+	delete(f, "Duration")
+	delete(f, "Receivers")
+	delete(f, "Labels")
+	delete(f, "Annotations")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAlertRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAlertRuleResponseParams struct {
+	// Rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateAlertRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAlertRuleResponseParams `json:"Response"`
+}
+
+func (r *UpdateAlertRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAlertRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAlertRuleStateRequestParams struct {
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+type UpdateAlertRuleStateRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of rule IDs
+	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Rule status code. Valid values:
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+func (r *UpdateAlertRuleStateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAlertRuleStateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleIds")
+	delete(f, "InstanceId")
+	delete(f, "RuleState")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAlertRuleStateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAlertRuleStateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateAlertRuleStateResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAlertRuleStateResponseParams `json:"Response"`
+}
+
+func (r *UpdateAlertRuleStateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAlertRuleStateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateExporterIntegrationRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Configuration content
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+type UpdateExporterIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Kubernetes cluster type. Valid values:
+	// <li> 1 = TKE </li>
+	// <li> 2 = EKS </li>
+	// <li> 3 = MEKS </li>
+	KubeType *int64 `json:"KubeType,omitempty" name:"KubeType"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Configuration content
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+func (r *UpdateExporterIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateExporterIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KubeType")
+	delete(f, "ClusterId")
+	delete(f, "Kind")
+	delete(f, "Content")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateExporterIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateExporterIntegrationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateExporterIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateExporterIntegrationResponseParams `json:"Response"`
+}
+
+func (r *UpdateExporterIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateExporterIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdatePrometheusAgentStatusRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of agent IDs
+	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
+
+	// Status to update
+	// <li> 1 = enabled </li>
+	// <li> 2 = disabled </li>
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+type UpdatePrometheusAgentStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of agent IDs
+	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
+
+	// Status to update
+	// <li> 1 = enabled </li>
+	// <li> 2 = disabled </li>
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *UpdatePrometheusAgentStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePrometheusAgentStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentIds")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePrometheusAgentStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdatePrometheusAgentStatusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdatePrometheusAgentStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdatePrometheusAgentStatusResponseParams `json:"Response"`
+}
+
+func (r *UpdatePrometheusAgentStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePrometheusAgentStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdatePrometheusScrapeJobRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Scrape task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Scrape task configuration
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+type UpdatePrometheusScrapeJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Agent ID
+	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
+
+	// Scrape task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// Scrape task configuration
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+func (r *UpdatePrometheusScrapeJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePrometheusScrapeJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AgentId")
+	delete(f, "JobId")
+	delete(f, "Config")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePrometheusScrapeJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdatePrometheusScrapeJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdatePrometheusScrapeJobResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdatePrometheusScrapeJobResponseParams `json:"Response"`
+}
+
+func (r *UpdatePrometheusScrapeJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdatePrometheusScrapeJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateRecordingRuleRequestParams struct {
+	// Recording rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Recording rule group content, which is in YAML format and is Base64-encoded.
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus recording rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+type UpdateRecordingRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Recording rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Recording rule group content, which is in YAML format and is Base64-encoded.
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Prometheus instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus recording rule ID
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// Rule status code. Valid values:
+	// <li>1=RuleDeleted</li>
+	// <li>2=RuleEnabled</li>
+	// <li>3=RuleDisabled</li>
+	// Default value: 2 (enabled).
+	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
+}
+
+func (r *UpdateRecordingRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRecordingRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Group")
+	delete(f, "InstanceId")
+	delete(f, "RuleId")
+	delete(f, "RuleState")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateRecordingRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateRecordingRuleResponseParams struct {
+	// Rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateRecordingRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateRecordingRuleResponseParams `json:"Response"`
+}
+
+func (r *UpdateRecordingRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRecordingRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeGrafanaDashboardRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus integration code, indicating to upgrade to the corresponding dashboard. Valid values:
+	// <li>spring_mvc</li>
+	// <li>mysql</li>
+	// <li>go</li>
+	// <li>redis</li>
+	// <li>jvm</li>
+	// <li>pgsql</li>
+	// <li>mongo</li>
+	// <li>kafka</li>
+	// <li>es</li>
+	// <li>flink</li>
+	// <li>blackbox</li>
+	// <li>consule</li>
+	// <li>memcached</li>
+	// <li>zk</li>
+	// <li>tps</li>
+	// <li>istio</li>
+	// <li>etcd</li>
+	IntegrationCodes []*string `json:"IntegrationCodes,omitempty" name:"IntegrationCodes"`
+}
+
+type UpgradeGrafanaDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Prometheus integration code, indicating to upgrade to the corresponding dashboard. Valid values:
+	// <li>spring_mvc</li>
+	// <li>mysql</li>
+	// <li>go</li>
+	// <li>redis</li>
+	// <li>jvm</li>
+	// <li>pgsql</li>
+	// <li>mongo</li>
+	// <li>kafka</li>
+	// <li>es</li>
+	// <li>flink</li>
+	// <li>blackbox</li>
+	// <li>consule</li>
+	// <li>memcached</li>
+	// <li>zk</li>
+	// <li>tps</li>
+	// <li>istio</li>
+	// <li>etcd</li>
+	IntegrationCodes []*string `json:"IntegrationCodes,omitempty" name:"IntegrationCodes"`
+}
+
+func (r *UpgradeGrafanaDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeGrafanaDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IntegrationCodes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeGrafanaDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeGrafanaDashboardResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeGrafanaDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeGrafanaDashboardResponseParams `json:"Response"`
+}
+
+func (r *UpgradeGrafanaDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeGrafanaDashboardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

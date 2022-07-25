@@ -45,6 +45,47 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBindPrometheusManagedGrafanaRequest() (request *BindPrometheusManagedGrafanaRequest) {
+    request = &BindPrometheusManagedGrafanaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "BindPrometheusManagedGrafana")
+    
+    
+    return
+}
+
+func NewBindPrometheusManagedGrafanaResponse() (response *BindPrometheusManagedGrafanaResponse) {
+    response = &BindPrometheusManagedGrafanaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BindPrometheusManagedGrafana
+// This API is used to bind a Grafana instance.
+func (c *Client) BindPrometheusManagedGrafana(request *BindPrometheusManagedGrafanaRequest) (response *BindPrometheusManagedGrafanaResponse, err error) {
+    return c.BindPrometheusManagedGrafanaWithContext(context.Background(), request)
+}
+
+// BindPrometheusManagedGrafana
+// This API is used to bind a Grafana instance.
+func (c *Client) BindPrometheusManagedGrafanaWithContext(ctx context.Context, request *BindPrometheusManagedGrafanaRequest) (response *BindPrometheusManagedGrafanaResponse, err error) {
+    if request == nil {
+        request = NewBindPrometheusManagedGrafanaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindPrometheusManagedGrafana require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindPrometheusManagedGrafanaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindingPolicyObjectRequest() (request *BindingPolicyObjectRequest) {
     request = &BindingPolicyObjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -212,6 +253,150 @@ func (c *Client) CreateAlarmPolicyWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateAlertRuleRequest() (request *CreateAlertRuleRequest) {
+    request = &CreateAlertRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreateAlertRule")
+    
+    
+    return
+}
+
+func NewCreateAlertRuleResponse() (response *CreateAlertRuleResponse) {
+    response = &CreateAlertRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateAlertRule
+// This API is used to create a Prometheus alerting rule.
+//
+// 
+//
+// Note that alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively. For more information, see [Alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateAlertRule(request *CreateAlertRuleRequest) (response *CreateAlertRuleResponse, err error) {
+    return c.CreateAlertRuleWithContext(context.Background(), request)
+}
+
+// CreateAlertRule
+// This API is used to create a Prometheus alerting rule.
+//
+// 
+//
+// Note that alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively. For more information, see [Alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateAlertRuleWithContext(ctx context.Context, request *CreateAlertRuleRequest) (response *CreateAlertRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateAlertRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlertRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAlertRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateExporterIntegrationRequest() (request *CreateExporterIntegrationRequest) {
+    request = &CreateExporterIntegrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreateExporterIntegration")
+    
+    
+    return
+}
+
+func NewCreateExporterIntegrationResponse() (response *CreateExporterIntegrationResponse) {
+    response = &CreateExporterIntegrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateExporterIntegration
+// This API is used to create an exporter integration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+func (c *Client) CreateExporterIntegration(request *CreateExporterIntegrationRequest) (response *CreateExporterIntegrationResponse, err error) {
+    return c.CreateExporterIntegrationWithContext(context.Background(), request)
+}
+
+// CreateExporterIntegration
+// This API is used to create an exporter integration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+func (c *Client) CreateExporterIntegrationWithContext(ctx context.Context, request *CreateExporterIntegrationRequest) (response *CreateExporterIntegrationResponse, err error) {
+    if request == nil {
+        request = NewCreateExporterIntegrationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateExporterIntegration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateExporterIntegrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePolicyGroupRequest() (request *CreatePolicyGroupRequest) {
     request = &CreatePolicyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -279,6 +464,355 @@ func (c *Client) CreatePolicyGroupWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreatePolicyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePrometheusAgentRequest() (request *CreatePrometheusAgentRequest) {
+    request = &CreatePrometheusAgentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusAgent")
+    
+    
+    return
+}
+
+func NewCreatePrometheusAgentResponse() (response *CreatePrometheusAgentResponse) {
+    response = &CreatePrometheusAgentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrometheusAgent
+// This API is used to create a Prometheus CVM agent.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreatePrometheusAgent(request *CreatePrometheusAgentRequest) (response *CreatePrometheusAgentResponse, err error) {
+    return c.CreatePrometheusAgentWithContext(context.Background(), request)
+}
+
+// CreatePrometheusAgent
+// This API is used to create a Prometheus CVM agent.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreatePrometheusAgentWithContext(ctx context.Context, request *CreatePrometheusAgentRequest) (response *CreatePrometheusAgentResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusAgentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusAgent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusAgentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePrometheusMultiTenantInstancePostPayModeRequest() (request *CreatePrometheusMultiTenantInstancePostPayModeRequest) {
+    request = &CreatePrometheusMultiTenantInstancePostPayModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusMultiTenantInstancePostPayMode")
+    
+    
+    return
+}
+
+func NewCreatePrometheusMultiTenantInstancePostPayModeResponse() (response *CreatePrometheusMultiTenantInstancePostPayModeResponse) {
+    response = &CreatePrometheusMultiTenantInstancePostPayModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrometheusMultiTenantInstancePostPayMode
+// This API is used to create a pay-as-you-go Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_CREATEINSTANCE = "FailedOperation.CreateInstance"
+//  FAILEDOPERATION_CREATEINSTANCELIMITED = "FailedOperation.CreateInstanceLimited"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreatePrometheusMultiTenantInstancePostPayMode(request *CreatePrometheusMultiTenantInstancePostPayModeRequest) (response *CreatePrometheusMultiTenantInstancePostPayModeResponse, err error) {
+    return c.CreatePrometheusMultiTenantInstancePostPayModeWithContext(context.Background(), request)
+}
+
+// CreatePrometheusMultiTenantInstancePostPayMode
+// This API is used to create a pay-as-you-go Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_CREATEINSTANCE = "FailedOperation.CreateInstance"
+//  FAILEDOPERATION_CREATEINSTANCELIMITED = "FailedOperation.CreateInstanceLimited"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreatePrometheusMultiTenantInstancePostPayModeWithContext(ctx context.Context, request *CreatePrometheusMultiTenantInstancePostPayModeRequest) (response *CreatePrometheusMultiTenantInstancePostPayModeResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusMultiTenantInstancePostPayModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusMultiTenantInstancePostPayMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusMultiTenantInstancePostPayModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePrometheusScrapeJobRequest() (request *CreatePrometheusScrapeJobRequest) {
+    request = &CreatePrometheusScrapeJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusScrapeJob")
+    
+    
+    return
+}
+
+func NewCreatePrometheusScrapeJobResponse() (response *CreatePrometheusScrapeJobResponse) {
+    response = &CreatePrometheusScrapeJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrometheusScrapeJob
+// This API is used to create a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreatePrometheusScrapeJob(request *CreatePrometheusScrapeJobRequest) (response *CreatePrometheusScrapeJobResponse, err error) {
+    return c.CreatePrometheusScrapeJobWithContext(context.Background(), request)
+}
+
+// CreatePrometheusScrapeJob
+// This API is used to create a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreatePrometheusScrapeJobWithContext(ctx context.Context, request *CreatePrometheusScrapeJobRequest) (response *CreatePrometheusScrapeJobResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusScrapeJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusScrapeJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusScrapeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRecordingRuleRequest() (request *CreateRecordingRuleRequest) {
+    request = &CreateRecordingRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreateRecordingRule")
+    
+    
+    return
+}
+
+func NewCreateRecordingRuleResponse() (response *CreateRecordingRuleResponse) {
+    response = &CreateRecordingRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRecordingRule
+// This API is used to create a Prometheus recording rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRecordingRule(request *CreateRecordingRuleRequest) (response *CreateRecordingRuleResponse, err error) {
+    return c.CreateRecordingRuleWithContext(context.Background(), request)
+}
+
+// CreateRecordingRule
+// This API is used to create a Prometheus recording rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRecordingRuleWithContext(ctx context.Context, request *CreateRecordingRuleRequest) (response *CreateRecordingRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateRecordingRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRecordingRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRecordingRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateServiceDiscoveryRequest() (request *CreateServiceDiscoveryRequest) {
+    request = &CreateServiceDiscoveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "CreateServiceDiscovery")
+    
+    
+    return
+}
+
+func NewCreateServiceDiscoveryResponse() (response *CreateServiceDiscoveryResponse) {
+    response = &CreateServiceDiscoveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateServiceDiscovery
+// This API is used to create a Prometheus scrape configuration in TKE.
+//
+// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
+//
+// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTVERSIONNOTSUPPORTED = "FailedOperation.AgentVersionNotSupported"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKECLIENTAUTHFAIL = "FailedOperation.TKEClientAuthFail"
+//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateServiceDiscovery(request *CreateServiceDiscoveryRequest) (response *CreateServiceDiscoveryResponse, err error) {
+    return c.CreateServiceDiscoveryWithContext(context.Background(), request)
+}
+
+// CreateServiceDiscovery
+// This API is used to create a Prometheus scrape configuration in TKE.
+//
+// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
+//
+// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTVERSIONNOTSUPPORTED = "FailedOperation.AgentVersionNotSupported"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKECLIENTAUTHFAIL = "FailedOperation.TKEClientAuthFail"
+//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateServiceDiscoveryWithContext(ctx context.Context, request *CreateServiceDiscoveryRequest) (response *CreateServiceDiscoveryResponse, err error) {
+    if request == nil {
+        request = NewCreateServiceDiscoveryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateServiceDiscovery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateServiceDiscoveryResponse()
     err = c.Send(request, response)
     return
 }
@@ -389,6 +923,148 @@ func (c *Client) DeleteAlarmPolicyWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteAlarmPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAlertRulesRequest() (request *DeleteAlertRulesRequest) {
+    request = &DeleteAlertRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DeleteAlertRules")
+    
+    
+    return
+}
+
+func NewDeleteAlertRulesResponse() (response *DeleteAlertRulesResponse) {
+    response = &DeleteAlertRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteAlertRules
+// This API is used to batch delete Prometheus alerting rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteAlertRules(request *DeleteAlertRulesRequest) (response *DeleteAlertRulesResponse, err error) {
+    return c.DeleteAlertRulesWithContext(context.Background(), request)
+}
+
+// DeleteAlertRules
+// This API is used to batch delete Prometheus alerting rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteAlertRulesWithContext(ctx context.Context, request *DeleteAlertRulesRequest) (response *DeleteAlertRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteAlertRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlertRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAlertRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteExporterIntegrationRequest() (request *DeleteExporterIntegrationRequest) {
+    request = &DeleteExporterIntegrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DeleteExporterIntegration")
+    
+    
+    return
+}
+
+func NewDeleteExporterIntegrationResponse() (response *DeleteExporterIntegrationResponse) {
+    response = &DeleteExporterIntegrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteExporterIntegration
+// This API is used to delete an exporter integration.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteExporterIntegration(request *DeleteExporterIntegrationRequest) (response *DeleteExporterIntegrationResponse, err error) {
+    return c.DeleteExporterIntegrationWithContext(context.Background(), request)
+}
+
+// DeleteExporterIntegration
+// This API is used to delete an exporter integration.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteExporterIntegrationWithContext(ctx context.Context, request *DeleteExporterIntegrationRequest) (response *DeleteExporterIntegrationResponse, err error) {
+    if request == nil {
+        request = NewDeleteExporterIntegrationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteExporterIntegration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteExporterIntegrationResponse()
     err = c.Send(request, response)
     return
 }
@@ -506,6 +1182,144 @@ func (c *Client) DeletePolicyGroupWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeletePolicyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePrometheusScrapeJobsRequest() (request *DeletePrometheusScrapeJobsRequest) {
+    request = &DeletePrometheusScrapeJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusScrapeJobs")
+    
+    
+    return
+}
+
+func NewDeletePrometheusScrapeJobsResponse() (response *DeletePrometheusScrapeJobsResponse) {
+    response = &DeletePrometheusScrapeJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeletePrometheusScrapeJobs
+// This API is used to delete a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeletePrometheusScrapeJobs(request *DeletePrometheusScrapeJobsRequest) (response *DeletePrometheusScrapeJobsResponse, err error) {
+    return c.DeletePrometheusScrapeJobsWithContext(context.Background(), request)
+}
+
+// DeletePrometheusScrapeJobs
+// This API is used to delete a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeletePrometheusScrapeJobsWithContext(ctx context.Context, request *DeletePrometheusScrapeJobsRequest) (response *DeletePrometheusScrapeJobsResponse, err error) {
+    if request == nil {
+        request = NewDeletePrometheusScrapeJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusScrapeJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrometheusScrapeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRecordingRulesRequest() (request *DeleteRecordingRulesRequest) {
+    request = &DeleteRecordingRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DeleteRecordingRules")
+    
+    
+    return
+}
+
+func NewDeleteRecordingRulesResponse() (response *DeleteRecordingRulesResponse) {
+    response = &DeleteRecordingRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRecordingRules
+// This API is used to batch delete Prometheus recording rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteRecordingRules(request *DeleteRecordingRulesRequest) (response *DeleteRecordingRulesResponse, err error) {
+    return c.DeleteRecordingRulesWithContext(context.Background(), request)
+}
+
+// DeleteRecordingRules
+// This API is used to batch delete Prometheus recording rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteRecordingRulesWithContext(ctx context.Context, request *DeleteRecordingRulesRequest) (response *DeleteRecordingRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordingRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRecordingRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRecordingRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1009,6 +1823,75 @@ func (c *Client) DescribeAlarmPolicyWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeAlertRulesRequest() (request *DescribeAlertRulesRequest) {
+    request = &DescribeAlertRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlertRules")
+    
+    
+    return
+}
+
+func NewDescribeAlertRulesResponse() (response *DescribeAlertRulesResponse) {
+    response = &DescribeAlertRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAlertRules
+// This API is used to query a Prometheus alerting rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAlertRules(request *DescribeAlertRulesRequest) (response *DescribeAlertRulesResponse, err error) {
+    return c.DescribeAlertRulesWithContext(context.Background(), request)
+}
+
+// DescribeAlertRules
+// This API is used to query a Prometheus alerting rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAlertRulesWithContext(ctx context.Context, request *DescribeAlertRulesRequest) (response *DescribeAlertRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlertRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlertRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAlertRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAllNamespacesRequest() (request *DescribeAllNamespacesRequest) {
     request = &DescribeAllNamespacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1394,6 +2277,75 @@ func (c *Client) DescribeConditionsTemplateListWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeConditionsTemplateListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeExporterIntegrationsRequest() (request *DescribeExporterIntegrationsRequest) {
+    request = &DescribeExporterIntegrationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeExporterIntegrations")
+    
+    
+    return
+}
+
+func NewDescribeExporterIntegrationsResponse() (response *DescribeExporterIntegrationsResponse) {
+    response = &DescribeExporterIntegrationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeExporterIntegrations
+// This API is used to query the list of exporter integrations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTNOTALLOWED = "FailedOperation.AgentNotAllowed"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeExporterIntegrations(request *DescribeExporterIntegrationsRequest) (response *DescribeExporterIntegrationsResponse, err error) {
+    return c.DescribeExporterIntegrationsWithContext(context.Background(), request)
+}
+
+// DescribeExporterIntegrations
+// This API is used to query the list of exporter integrations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTNOTALLOWED = "FailedOperation.AgentNotAllowed"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeExporterIntegrationsWithContext(ctx context.Context, request *DescribeExporterIntegrationsRequest) (response *DescribeExporterIntegrationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeExporterIntegrationsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExporterIntegrations require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeExporterIntegrationsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1857,6 +2809,353 @@ func (c *Client) DescribeProductEventListWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribePrometheusAgentsRequest() (request *DescribePrometheusAgentsRequest) {
+    request = &DescribePrometheusAgentsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusAgents")
+    
+    
+    return
+}
+
+func NewDescribePrometheusAgentsResponse() (response *DescribePrometheusAgentsResponse) {
+    response = &DescribePrometheusAgentsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusAgents
+// This API is used to list Prometheus CVM agents.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusAgents(request *DescribePrometheusAgentsRequest) (response *DescribePrometheusAgentsResponse, err error) {
+    return c.DescribePrometheusAgentsWithContext(context.Background(), request)
+}
+
+// DescribePrometheusAgents
+// This API is used to list Prometheus CVM agents.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusAgentsWithContext(ctx context.Context, request *DescribePrometheusAgentsRequest) (response *DescribePrometheusAgentsResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusAgentsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusAgents require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusAgentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusInstancesRequest() (request *DescribePrometheusInstancesRequest) {
+    request = &DescribePrometheusInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstances")
+    
+    
+    return
+}
+
+func NewDescribePrometheusInstancesResponse() (response *DescribePrometheusInstancesResponse) {
+    response = &DescribePrometheusInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusInstances
+// This API is used to query the details of one or multiple instances.
+//
+// <ul>
+//
+// <li>You can query the details of an instance by its ID, name, or status.</li>
+//
+// <li>If this parameter is empty, the information of a certain number of instances under the current account will be returned. The number is specified by `Limit` and is 20 by default.</li>
+//
+// </ul>
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribePrometheusInstances(request *DescribePrometheusInstancesRequest) (response *DescribePrometheusInstancesResponse, err error) {
+    return c.DescribePrometheusInstancesWithContext(context.Background(), request)
+}
+
+// DescribePrometheusInstances
+// This API is used to query the details of one or multiple instances.
+//
+// <ul>
+//
+// <li>You can query the details of an instance by its ID, name, or status.</li>
+//
+// <li>If this parameter is empty, the information of a certain number of instances under the current account will be returned. The number is specified by `Limit` and is 20 by default.</li>
+//
+// </ul>
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribePrometheusInstancesWithContext(ctx context.Context, request *DescribePrometheusInstancesRequest) (response *DescribePrometheusInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusScrapeJobsRequest() (request *DescribePrometheusScrapeJobsRequest) {
+    request = &DescribePrometheusScrapeJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusScrapeJobs")
+    
+    
+    return
+}
+
+func NewDescribePrometheusScrapeJobsResponse() (response *DescribePrometheusScrapeJobsResponse) {
+    response = &DescribePrometheusScrapeJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusScrapeJobs
+// This API is used to list Prometheus scrape tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusScrapeJobs(request *DescribePrometheusScrapeJobsRequest) (response *DescribePrometheusScrapeJobsResponse, err error) {
+    return c.DescribePrometheusScrapeJobsWithContext(context.Background(), request)
+}
+
+// DescribePrometheusScrapeJobs
+// This API is used to list Prometheus scrape tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusScrapeJobsWithContext(ctx context.Context, request *DescribePrometheusScrapeJobsRequest) (response *DescribePrometheusScrapeJobsResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusScrapeJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusScrapeJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusScrapeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordingRulesRequest() (request *DescribeRecordingRulesRequest) {
+    request = &DescribeRecordingRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeRecordingRules")
+    
+    
+    return
+}
+
+func NewDescribeRecordingRulesResponse() (response *DescribeRecordingRulesResponse) {
+    response = &DescribeRecordingRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRecordingRules
+// This API is used to query Prometheus recording rules by filter.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeRecordingRules(request *DescribeRecordingRulesRequest) (response *DescribeRecordingRulesResponse, err error) {
+    return c.DescribeRecordingRulesWithContext(context.Background(), request)
+}
+
+// DescribeRecordingRules
+// This API is used to query Prometheus recording rules by filter.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeRecordingRulesWithContext(ctx context.Context, request *DescribeRecordingRulesRequest) (response *DescribeRecordingRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordingRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordingRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordingRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeServiceDiscoveryRequest() (request *DescribeServiceDiscoveryRequest) {
+    request = &DescribeServiceDiscoveryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeServiceDiscovery")
+    
+    
+    return
+}
+
+func NewDescribeServiceDiscoveryResponse() (response *DescribeServiceDiscoveryResponse) {
+    response = &DescribeServiceDiscoveryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeServiceDiscovery
+// This API is used to list Prometheus scrape configurations in TKE.
+//
+// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
+//
+// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeServiceDiscovery(request *DescribeServiceDiscoveryRequest) (response *DescribeServiceDiscoveryResponse, err error) {
+    return c.DescribeServiceDiscoveryWithContext(context.Background(), request)
+}
+
+// DescribeServiceDiscovery
+// This API is used to list Prometheus scrape configurations in TKE.
+//
+// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
+//
+// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeServiceDiscoveryWithContext(ctx context.Context, request *DescribeServiceDiscoveryRequest) (response *DescribeServiceDiscoveryResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceDiscoveryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeServiceDiscovery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceDiscoveryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStatisticDataRequest() (request *DescribeStatisticDataRequest) {
     request = &DescribeStatisticDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1992,6 +3291,69 @@ func (c *Client) DescribeStatisticDataWithContext(ctx context.Context, request *
     return
 }
 
+func NewDestroyPrometheusInstanceRequest() (request *DestroyPrometheusInstanceRequest) {
+    request = &DestroyPrometheusInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "DestroyPrometheusInstance")
+    
+    
+    return
+}
+
+func NewDestroyPrometheusInstanceResponse() (response *DestroyPrometheusInstanceResponse) {
+    response = &DestroyPrometheusInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DestroyPrometheusInstance
+// This API is used to delete the data of a Prometheus instance. The specified instance must be terminated first.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTSNOTINUNINSTALLSTAGE = "FailedOperation.AgentsNotInUninstallStage"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DestroyPrometheusInstance(request *DestroyPrometheusInstanceRequest) (response *DestroyPrometheusInstanceResponse, err error) {
+    return c.DestroyPrometheusInstanceWithContext(context.Background(), request)
+}
+
+// DestroyPrometheusInstance
+// This API is used to delete the data of a Prometheus instance. The specified instance must be terminated first.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTSNOTINUNINSTALLSTAGE = "FailedOperation.AgentsNotInUninstallStage"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DestroyPrometheusInstanceWithContext(ctx context.Context, request *DestroyPrometheusInstanceRequest) (response *DestroyPrometheusInstanceResponse, err error) {
+    if request == nil {
+        request = NewDestroyPrometheusInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DestroyPrometheusInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDestroyPrometheusInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetMonitorDataRequest() (request *GetMonitorDataRequest) {
     request = &GetMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2051,6 +3413,69 @@ func (c *Client) GetMonitorDataWithContext(ctx context.Context, request *GetMoni
     request.SetContext(ctx)
     
     response = NewGetMonitorDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetPrometheusAgentManagementCommandRequest() (request *GetPrometheusAgentManagementCommandRequest) {
+    request = &GetPrometheusAgentManagementCommandRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "GetPrometheusAgentManagementCommand")
+    
+    
+    return
+}
+
+func NewGetPrometheusAgentManagementCommandResponse() (response *GetPrometheusAgentManagementCommandResponse) {
+    response = &GetPrometheusAgentManagementCommandResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetPrometheusAgentManagementCommand
+// This API is used to get the command line for Prometheus agent management.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetPrometheusAgentManagementCommand(request *GetPrometheusAgentManagementCommandRequest) (response *GetPrometheusAgentManagementCommandResponse, err error) {
+    return c.GetPrometheusAgentManagementCommandWithContext(context.Background(), request)
+}
+
+// GetPrometheusAgentManagementCommand
+// This API is used to get the command line for Prometheus agent management.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetPrometheusAgentManagementCommandWithContext(ctx context.Context, request *GetPrometheusAgentManagementCommandRequest) (response *GetPrometheusAgentManagementCommandResponse, err error) {
+    if request == nil {
+        request = NewGetPrometheusAgentManagementCommandRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetPrometheusAgentManagementCommand require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetPrometheusAgentManagementCommandResponse()
     err = c.Send(request, response)
     return
 }
@@ -2537,6 +3962,69 @@ func (c *Client) ModifyPolicyGroupWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyPrometheusInstanceAttributesRequest() (request *ModifyPrometheusInstanceAttributesRequest) {
+    request = &ModifyPrometheusInstanceAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "ModifyPrometheusInstanceAttributes")
+    
+    
+    return
+}
+
+func NewModifyPrometheusInstanceAttributesResponse() (response *ModifyPrometheusInstanceAttributesResponse) {
+    response = &ModifyPrometheusInstanceAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyPrometheusInstanceAttributes
+// This API is used to modify the attributes of a Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyPrometheusInstanceAttributes(request *ModifyPrometheusInstanceAttributesRequest) (response *ModifyPrometheusInstanceAttributesResponse, err error) {
+    return c.ModifyPrometheusInstanceAttributesWithContext(context.Background(), request)
+}
+
+// ModifyPrometheusInstanceAttributes
+// This API is used to modify the attributes of a Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyPrometheusInstanceAttributesWithContext(ctx context.Context, request *ModifyPrometheusInstanceAttributesRequest) (response *ModifyPrometheusInstanceAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyPrometheusInstanceAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrometheusInstanceAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPrometheusInstanceAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPutMonitorDataRequest() (request *PutMonitorDataRequest) {
     request = &PutMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2758,6 +4246,69 @@ func (c *Client) SetDefaultAlarmPolicyWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewSetDefaultAlarmPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTerminatePrometheusInstancesRequest() (request *TerminatePrometheusInstancesRequest) {
+    request = &TerminatePrometheusInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "TerminatePrometheusInstances")
+    
+    
+    return
+}
+
+func NewTerminatePrometheusInstancesResponse() (response *TerminatePrometheusInstancesResponse) {
+    response = &TerminatePrometheusInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// TerminatePrometheusInstances
+// This API is used to terminate a pay-as-you-go Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTSNOTINUNINSTALLSTAGE = "FailedOperation.AgentsNotInUninstallStage"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) TerminatePrometheusInstances(request *TerminatePrometheusInstancesRequest) (response *TerminatePrometheusInstancesResponse, err error) {
+    return c.TerminatePrometheusInstancesWithContext(context.Background(), request)
+}
+
+// TerminatePrometheusInstances
+// This API is used to terminate a pay-as-you-go Prometheus instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTSNOTINUNINSTALLSTAGE = "FailedOperation.AgentsNotInUninstallStage"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) TerminatePrometheusInstancesWithContext(ctx context.Context, request *TerminatePrometheusInstancesRequest) (response *TerminatePrometheusInstancesResponse, err error) {
+    if request == nil {
+        request = NewTerminatePrometheusInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminatePrometheusInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTerminatePrometheusInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2996,6 +4547,595 @@ func (c *Client) UnBindingPolicyObjectWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewUnBindingPolicyObjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindPrometheusManagedGrafanaRequest() (request *UnbindPrometheusManagedGrafanaRequest) {
+    request = &UnbindPrometheusManagedGrafanaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UnbindPrometheusManagedGrafana")
+    
+    
+    return
+}
+
+func NewUnbindPrometheusManagedGrafanaResponse() (response *UnbindPrometheusManagedGrafanaResponse) {
+    response = &UnbindPrometheusManagedGrafanaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UnbindPrometheusManagedGrafana
+// This API is used to unbind a Grafana instance from an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+func (c *Client) UnbindPrometheusManagedGrafana(request *UnbindPrometheusManagedGrafanaRequest) (response *UnbindPrometheusManagedGrafanaResponse, err error) {
+    return c.UnbindPrometheusManagedGrafanaWithContext(context.Background(), request)
+}
+
+// UnbindPrometheusManagedGrafana
+// This API is used to unbind a Grafana instance from an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+func (c *Client) UnbindPrometheusManagedGrafanaWithContext(ctx context.Context, request *UnbindPrometheusManagedGrafanaRequest) (response *UnbindPrometheusManagedGrafanaResponse, err error) {
+    if request == nil {
+        request = NewUnbindPrometheusManagedGrafanaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindPrometheusManagedGrafana require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindPrometheusManagedGrafanaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUninstallGrafanaDashboardRequest() (request *UninstallGrafanaDashboardRequest) {
+    request = &UninstallGrafanaDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UninstallGrafanaDashboard")
+    
+    
+    return
+}
+
+func NewUninstallGrafanaDashboardResponse() (response *UninstallGrafanaDashboardResponse) {
+    response = &UninstallGrafanaDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UninstallGrafanaDashboard
+// This API is used to delete a Grafana dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+func (c *Client) UninstallGrafanaDashboard(request *UninstallGrafanaDashboardRequest) (response *UninstallGrafanaDashboardResponse, err error) {
+    return c.UninstallGrafanaDashboardWithContext(context.Background(), request)
+}
+
+// UninstallGrafanaDashboard
+// This API is used to delete a Grafana dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+func (c *Client) UninstallGrafanaDashboardWithContext(ctx context.Context, request *UninstallGrafanaDashboardRequest) (response *UninstallGrafanaDashboardResponse, err error) {
+    if request == nil {
+        request = NewUninstallGrafanaDashboardRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UninstallGrafanaDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUninstallGrafanaDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAlertRuleRequest() (request *UpdateAlertRuleRequest) {
+    request = &UpdateAlertRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdateAlertRule")
+    
+    
+    return
+}
+
+func NewUpdateAlertRuleResponse() (response *UpdateAlertRuleResponse) {
+    response = &UpdateAlertRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateAlertRule
+// This API is used to update a Prometheus alerting rule.
+//
+// 
+//
+// Note that alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively. For more information, see [Alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateAlertRule(request *UpdateAlertRuleRequest) (response *UpdateAlertRuleResponse, err error) {
+    return c.UpdateAlertRuleWithContext(context.Background(), request)
+}
+
+// UpdateAlertRule
+// This API is used to update a Prometheus alerting rule.
+//
+// 
+//
+// Note that alert object and alert message are special fields of Prometheus Rule Annotations, which need to be passed in through `annotations` and correspond to `summary` and `description` keys respectively. For more information, see [Alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateAlertRuleWithContext(ctx context.Context, request *UpdateAlertRuleRequest) (response *UpdateAlertRuleResponse, err error) {
+    if request == nil {
+        request = NewUpdateAlertRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAlertRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAlertRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAlertRuleStateRequest() (request *UpdateAlertRuleStateRequest) {
+    request = &UpdateAlertRuleStateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdateAlertRuleState")
+    
+    
+    return
+}
+
+func NewUpdateAlertRuleStateResponse() (response *UpdateAlertRuleStateResponse) {
+    response = &UpdateAlertRuleStateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateAlertRuleState
+// This API is used to update the status of a Prometheus alerting rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateAlertRuleState(request *UpdateAlertRuleStateRequest) (response *UpdateAlertRuleStateResponse, err error) {
+    return c.UpdateAlertRuleStateWithContext(context.Background(), request)
+}
+
+// UpdateAlertRuleState
+// This API is used to update the status of a Prometheus alerting rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateAlertRuleStateWithContext(ctx context.Context, request *UpdateAlertRuleStateRequest) (response *UpdateAlertRuleStateResponse, err error) {
+    if request == nil {
+        request = NewUpdateAlertRuleStateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAlertRuleState require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAlertRuleStateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateExporterIntegrationRequest() (request *UpdateExporterIntegrationRequest) {
+    request = &UpdateExporterIntegrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdateExporterIntegration")
+    
+    
+    return
+}
+
+func NewUpdateExporterIntegrationResponse() (response *UpdateExporterIntegrationResponse) {
+    response = &UpdateExporterIntegrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateExporterIntegration
+// This API is used to update the exporter integration configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTNOTALLOWED = "FailedOperation.AgentNotAllowed"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateExporterIntegration(request *UpdateExporterIntegrationRequest) (response *UpdateExporterIntegrationResponse, err error) {
+    return c.UpdateExporterIntegrationWithContext(context.Background(), request)
+}
+
+// UpdateExporterIntegration
+// This API is used to update the exporter integration configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_AGENTNOTALLOWED = "FailedOperation.AgentNotAllowed"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  FAILEDOPERATION_RESOURCEOPERATING = "FailedOperation.ResourceOperating"
+//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateExporterIntegrationWithContext(ctx context.Context, request *UpdateExporterIntegrationRequest) (response *UpdateExporterIntegrationResponse, err error) {
+    if request == nil {
+        request = NewUpdateExporterIntegrationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateExporterIntegration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateExporterIntegrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePrometheusAgentStatusRequest() (request *UpdatePrometheusAgentStatusRequest) {
+    request = &UpdatePrometheusAgentStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusAgentStatus")
+    
+    
+    return
+}
+
+func NewUpdatePrometheusAgentStatusResponse() (response *UpdatePrometheusAgentStatusResponse) {
+    response = &UpdatePrometheusAgentStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdatePrometheusAgentStatus
+// This API is used to update the status of a Prometheus CVM agent.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdatePrometheusAgentStatus(request *UpdatePrometheusAgentStatusRequest) (response *UpdatePrometheusAgentStatusResponse, err error) {
+    return c.UpdatePrometheusAgentStatusWithContext(context.Background(), request)
+}
+
+// UpdatePrometheusAgentStatus
+// This API is used to update the status of a Prometheus CVM agent.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdatePrometheusAgentStatusWithContext(ctx context.Context, request *UpdatePrometheusAgentStatusRequest) (response *UpdatePrometheusAgentStatusResponse, err error) {
+    if request == nil {
+        request = NewUpdatePrometheusAgentStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePrometheusAgentStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePrometheusAgentStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePrometheusScrapeJobRequest() (request *UpdatePrometheusScrapeJobRequest) {
+    request = &UpdatePrometheusScrapeJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusScrapeJob")
+    
+    
+    return
+}
+
+func NewUpdatePrometheusScrapeJobResponse() (response *UpdatePrometheusScrapeJobResponse) {
+    response = &UpdatePrometheusScrapeJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdatePrometheusScrapeJob
+// This API is used to update a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdatePrometheusScrapeJob(request *UpdatePrometheusScrapeJobRequest) (response *UpdatePrometheusScrapeJobResponse, err error) {
+    return c.UpdatePrometheusScrapeJobWithContext(context.Background(), request)
+}
+
+// UpdatePrometheusScrapeJob
+// This API is used to update a Prometheus scrape task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdatePrometheusScrapeJobWithContext(ctx context.Context, request *UpdatePrometheusScrapeJobRequest) (response *UpdatePrometheusScrapeJobResponse, err error) {
+    if request == nil {
+        request = NewUpdatePrometheusScrapeJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePrometheusScrapeJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePrometheusScrapeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateRecordingRuleRequest() (request *UpdateRecordingRuleRequest) {
+    request = &UpdateRecordingRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdateRecordingRule")
+    
+    
+    return
+}
+
+func NewUpdateRecordingRuleResponse() (response *UpdateRecordingRuleResponse) {
+    response = &UpdateRecordingRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateRecordingRule
+// This API is used to update a Prometheus recording rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateRecordingRule(request *UpdateRecordingRuleRequest) (response *UpdateRecordingRuleResponse, err error) {
+    return c.UpdateRecordingRuleWithContext(context.Background(), request)
+}
+
+// UpdateRecordingRule
+// This API is used to update a Prometheus recording rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpdateRecordingRuleWithContext(ctx context.Context, request *UpdateRecordingRuleRequest) (response *UpdateRecordingRuleResponse, err error) {
+    if request == nil {
+        request = NewUpdateRecordingRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateRecordingRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateRecordingRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeGrafanaDashboardRequest() (request *UpgradeGrafanaDashboardRequest) {
+    request = &UpgradeGrafanaDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("monitor", APIVersion, "UpgradeGrafanaDashboard")
+    
+    
+    return
+}
+
+func NewUpgradeGrafanaDashboardResponse() (response *UpgradeGrafanaDashboardResponse) {
+    response = &UpgradeGrafanaDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeGrafanaDashboard
+// This API is used to update a Grafana dashboard.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpgradeGrafanaDashboard(request *UpgradeGrafanaDashboardRequest) (response *UpgradeGrafanaDashboardResponse, err error) {
+    return c.UpgradeGrafanaDashboardWithContext(context.Background(), request)
+}
+
+// UpgradeGrafanaDashboard
+// This API is used to update a Grafana dashboard.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
+//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UpgradeGrafanaDashboardWithContext(ctx context.Context, request *UpgradeGrafanaDashboardRequest) (response *UpgradeGrafanaDashboardResponse, err error) {
+    if request == nil {
+        request = NewUpgradeGrafanaDashboardRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeGrafanaDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeGrafanaDashboardResponse()
     err = c.Send(request, response)
     return
 }
